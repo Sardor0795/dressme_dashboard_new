@@ -1,12 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-lone-blocks */
+
+import { BrowserRouter } from "react-router-dom";
+import RouterList from "./root/RouterList";
+import NavbarDashboard from "./components/Navbar/NavbarDashboard";
 
 function App() {
-  return (
-    <div className="App">
-     <h1>Hello World</h1>
-    </div>
-  );
+  return <NavbarDashboard />;
 }
 
 export default App;
