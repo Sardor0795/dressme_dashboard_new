@@ -2,6 +2,7 @@ import React from "react";
 import { ProductImg } from "../../assets";
 import { SearchIcon, StarIcon } from "../../assets/icons";
 import { DatePicker, Space } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { RangePicker } = DatePicker;
 export default function Reviews() {
@@ -56,6 +57,11 @@ export default function Reviews() {
       link: "Подробнее",
     },
   ];
+  const navigate = useNavigate();
+  const goDetail = (id) => {
+    navigate(`/review-details/:${id}`);
+  };
+
   return (
     <div className="w-full h-full px-10 py-1 border border-red-500">
       <div className="w-full py-4 border-b border-lightBorderColor flex items-center justify-between">
@@ -120,7 +126,7 @@ export default function Reviews() {
                 </li>
                 <li className="w-[20%] h-full flex items-center ">
                   <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
-                    Nike store official Dealer
+                    {data?.text}
                   </span>
                 </li>
                 <li className="w-[15%] h-full flex items-center  flex items-center">
@@ -132,65 +138,21 @@ export default function Reviews() {
                 </li>
                 <li className="w-[15%] h-full flex items-center ">
                   <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
-                    19 февраля 2023 г.
+                    {data?.dateSend}
                   </span>
                 </li>
                 <li className="w-[30%] h-full flex items-center justify-end pr-[50px]">
-                  <button className="text-textBlueColor border-b border-textBlueColor  text-base not-italic font-AeonikProMedium">
-                    Подробнее
+                  <button
+                    onClick={() => goDetail(data?.id)}
+                    className="text-textBlueColor border-b border-textBlueColor  text-base not-italic font-AeonikProMedium"
+                  >
+                    {data?.link}
                   </button>
                 </li>
               </ul>
             );
           })}
         </div>
-        {/* <table className="w-full ">
-          <thead className="w-full">
-            <tr key="" className="w-full ">
-              <th>
-                <span>Изображение</span>
-              </th>
-              <th>
-                <span>Наименование товара</span>
-              </th>
-              <th className="">
-                <span>Отзывы</span>
-              </th>
-              <th>
-                <span>Дата</span>
-              </th>
-              <th className=" flex justify-end items-center">
-                <div className="w-[350px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-[12px]">
-                  <input
-                    type="text"
-                    className="w-full h-full  outline-0	"
-                    placeholder="Поиск"
-                  />
-                  <button>
-                    <SearchIcon />
-                  </button>
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr key="">
-              <td className="">
-                <img src={ProductImg} alt="" />
-              </td>
-              <td>Nike store official Dealer</td>
-              <td className="flex items-center">
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-                <StarIcon />
-              </td>
-              <td>19 февраля 2023 г.</td>
-              <td className="text-end">Подробнее</td>
-            </tr>
-          </tbody>
-        </table> */}
       </div>
       Reviews
     </div>

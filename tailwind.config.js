@@ -32,6 +32,7 @@ module.exports = {
         // Reviews
         tableTextTitle: "#3F6175",
         tableTextTitle2: "#2C2C2C",
+        ProductReplyBg: "#F4F6FB",
       },
       fontFamily: {
         // 500
