@@ -6,6 +6,7 @@ import Shops from "../components/Shops/Shops";
 import Error from "../components/Error/Error";
 import NavbarDashboard from "../components/Navbar/NavbarDashboard";
 import NavbarForSetting from "../components/Navbar/NavbarForSetting";
+import ReviewDetail from "../components/Reviews/ReviewDetails/ReviewDetail";
 
 export default function RouterList() {
   return (
@@ -15,7 +16,7 @@ export default function RouterList() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/products" element={<Products />} />
         <Route path="/shops" element={<Shops />} />
-
+        <Route path="/review-details/:id" element={<ReviewDetail />} />
         <Route path="/" element={<Navigate to={"/reviews"} />} />
         <Route path="*" element={<Error />} />
       </Routes>
