@@ -8,16 +8,16 @@ export default function ReviewDetail() {
   const id = useParams();
   console.log(id, "id");
   return (
-    <div className="border border-green-500 px-10">
+    <div className=" px-10">
       <div className="w-full">
         <FilterSearch />
       </div>
-      <div className="relative w-full flex gap-x-[70px]">
+      <div className="relative w-full flex gap-x-[70px] mt-6">
         <section className="w-[30%] ">
           <DetailCarousel />
           {/* <ProductCarousel /> */}
         </section>
-        <div className="w-[calc(70%-70px)] border border-green-500">
+        <div className="w-[calc(70%-70px)] ">
           <CommentUsers />
         </div>
       </div>

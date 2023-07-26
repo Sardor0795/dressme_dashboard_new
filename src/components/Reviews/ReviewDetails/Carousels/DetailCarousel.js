@@ -159,12 +159,16 @@ const DetailCarousel = () => {
   };
 
   return (
-    <div className="w-full h-fit border border-red-500">
+    <div className="w-full h-fit">
+      <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
+        <div className="h-5 w-[4px] bg-textBlueColor"></div>
+        <p>Nike store official Dealer</p>
+      </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px] ">
         <div className="w-full flex flex-col">
-          <div>
+          <div className="">
             <Slider
-              className="w-full h-full rounded-lg"
+              className="w-full h-full rounded-lg "
               asNavFor={nav2}
               ref={slider1}
               {...settings}
