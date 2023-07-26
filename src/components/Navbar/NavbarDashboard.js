@@ -3,8 +3,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import RouterList from "../../root/RouterList";
 import { star } from "../../assets";
 import {
+  ClothesIcons,
   NavbarMarketIcon,
-  NavbarProductIcon,
   NavbarReviewIcon,
 } from "../../assets/icons";
 
@@ -44,13 +44,13 @@ export default function NavbarDashboard() {
                 color: isActive ? "#007DCA" : "#000",
                 background: isActive ? "#f2f2f2" : "#fcfcfc",
               })}
-              to={"/products"}
+              to={"/shops"}
             >
               <span>
-                <NavbarProductIcon colors={""} />
+                <NavbarMarketIcon colors={""} />
               </span>
               <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                Продукты
+                Магазины
               </span>
             </NavLink>
             <NavLink
@@ -61,13 +61,13 @@ export default function NavbarDashboard() {
                 color: isActive ? "#007DCA" : "#000",
                 background: isActive ? "#f2f2f2" : "#fcfcfc",
               })}
-              to={"/shops"}
+              to={"/products"}
             >
               <span>
-                <NavbarMarketIcon colors={""} />
+                <ClothesIcons colors={""} />
               </span>
               <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                Магазины
+                Одежда
               </span>
             </NavLink>
           </div>
