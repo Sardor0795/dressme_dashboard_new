@@ -59,7 +59,10 @@ export default function CommentUsers() {
     },
   ]);
   return (
-    <div className="w-full h-full border border-black flex flex-col gap-y-[15px]">
+    <div className="w-full h-full  flex flex-col gap-y-[15px]">
+      <div className="pb-1 justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
+        <p> Отзывы клиентов</p>
+      </div>
       {userInfo.map((data) => {
         return (
           <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px]">

@@ -228,6 +228,24 @@ const ClothesIcons = () => {
     </svg>
   );
 };
+const CheckTrue = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="9"
+      viewBox="0 0 8 9"
+      fill="none"
+    >
+      <path
+        d="M1 5.58824L3.11765 7L7 1"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};
 
 export {
   ProfileIcon,
@@ -239,4 +257,5 @@ export {
   StarOutlineIcon,
   SearchIcon,
   ClothesIcons,
+  CheckTrue,
 };
