@@ -152,7 +152,7 @@ export default function Reviews() {
   );
 
   return (
-    <div className="w-full h-full px-10 py-1 border border-red-500">
+    <div className="w-full h-full px-10 py-1">
       <div className="w-full py-4 border-b border-lightBorderColor flex items-center justify-between">
         <section className="">
           <p className="text-black text-2xl not-italic font-AeonikProMedium">
