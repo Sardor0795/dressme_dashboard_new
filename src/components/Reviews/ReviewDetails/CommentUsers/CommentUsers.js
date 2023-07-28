@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { StarOutlineIcon } from "../../../../assets/icons";
+import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
 
 export default function CommentUsers() {
+
+  const [sendAnswer, setSendAnswer] = useState(false)
+
   const [userInfo, setuserInfo] = useState([
     {
       id: 1,
@@ -129,11 +132,31 @@ export default function CommentUsers() {
                   ) : null}
                   {item?.subjectReply.length !== 0 ? null : (
                     <div className="w-full h-fit mt-[5px] flex justify-end">
-                      <button className="w-[132px] h-[32px] bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-[4px]">
-                        <span className="text-sm not-italic font-AeonikProMedium">
+                      {sendAnswer ? (
+                        <div className="w-full flex items-center justify-between">
+                          <textarea name="answer" id="answer" className="w-4/5 border rounded p-3" placeholder="Add your answer..."></textarea>
+                          <button className="w-[132px] h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg">
+                            <span className="text-sm not-italic font-AeonikProMedium">
+                            Отправить
+                            </span>
+                          </button>
+                          <button
+                            onClick={() => setSendAnswer(false)}
+                            className="w-11 h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border rounded-lg">  
+                            <CloseAnswer />
+                          </button>                        
+                        </div>
+                      )
+                      : (
+                        <button 
+                          onClick={() => setSendAnswer(true)}
+                          className="w-[132px] h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg">
+                          <span className="text-sm not-italic font-AeonikProMedium">
                           Ответить
-                        </span>
-                      </button>
+                          </span>
+                        </button>
+                      )
+                    }
                     </div>
                   )}
                 </>

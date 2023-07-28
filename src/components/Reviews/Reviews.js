@@ -240,7 +240,7 @@ export default function Reviews() {
                     {data?.text}
                   </span>
                 </li>
-                <li className="w-[15%] h-full flex items-center  flex items-center">
+                <li className="w-[15%] h-full flex items-center">
                   <StarIcon />
                   <StarIcon />
                   <StarIcon />
