@@ -28,3 +28,7 @@ body {
 .ant-picker-range-separator {
   display: none;
 }
+
+.mobileDate .ant-space  {
+  width: 200px;
+}

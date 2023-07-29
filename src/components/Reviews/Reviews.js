@@ -152,44 +152,54 @@ export default function Reviews() {
   );
 
   return (
-    <div className="w-full h-full px-10 py-1">
-      <div className="w-full py-4 border-b border-lightBorderColor flex items-center justify-between">
-        <section className="">
+    <div className="w-full h-full px-4 md:px-10 py-1">
+      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
+        <div className="flex items-center justify-between">
+          <section className="hidden md:block">
+            <p className="text-black text-2xl not-italic font-AeonikProMedium">
+              С возвращением, Абдулазиз!
+            </p>
+          </section>
+          <section className="mobileDate flex items-center gap-x-[30px]">
+            <Popover
+              open={state?.openwear}
+              onOpenChange={handleOpenChangeWear}
+              className="hidden md:flex items-center justify-between w-[244px] h-10 overflow-hidden cursor-pointer border border-lightBorderColor px-[10px] rounded-[12px] "
+              trigger="click"
+              options={["Hide"]}
+              placement="bottom"
+              content={contentWear}
+            >
+              <p className="text-textLightColor text-sm not-italic font-AeonikProMedium">
+                Фильтр рейтинг
+              </p>
+              <span>
+                <BiChevronDown
+                  size={20}
+                  style={{ color: "#c2c2c2" }}
+                  className={`${
+                    state?.openwear ? "rotate-[-180deg]" : ""
+                  } duration-200`}
+                />
+              </span>
+            </Popover>
+            <Space direction="vertical" size={12}>
+              <RangePicker />
+            </Space>
+          </section>
+          <button className="block md:hidden bg-textBlueColor text-white px-[15px] py-[10px] rounded-xl">
+            Выберите дату
+          </button>
+        </div>
+        <section className="flex md:hidden pt-6">
           <p className="text-black text-2xl not-italic font-AeonikProMedium">
             С возвращением, Абдулазиз!
           </p>
         </section>
-        <section className="flex items-center gap-x-[30px]">
-          <Popover
-            open={state?.openwear}
-            onOpenChange={handleOpenChangeWear}
-            className="w-[244px] h-10 overflow-hidden cursor-pointer border border-lightBorderColor flex items-center justify-between px-[10px] rounded-[12px] "
-            trigger="click"
-            options={["Hide"]}
-            placement="bottom"
-            content={contentWear}
-          >
-            <p className="text-textLightColor text-sm not-italic font-AeonikProMedium">
-              Фильтр рейтинг
-            </p>
-            <span>
-              <BiChevronDown
-                size={20}
-                style={{ color: "#c2c2c2" }}
-                className={`${
-                  state?.openwear ? "rotate-[-180deg]" : ""
-                } duration-200`}
-              />
-            </span>
-          </Popover>
-          <Space direction="vertical" size={12}>
-            <RangePicker />
-          </Space>
-        </section>
       </div>
       {/* Table */}
-      <div className="w-full h-fit mt-7">
-        <div className="w-full h-[60px]">
+      <div className="w-full h-fit md:mt-7">
+        <div className="w-full mb-[10px] hidden md:block">
           <ul className="w-full h-full  flex items-center justify-between ">
             <li className="w-[20%] pl-5 ">
               <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
@@ -201,17 +211,17 @@ export default function Reviews() {
                 Наименование товара
               </span>
             </li>
-            <li className="w-[15%] ">
+            <li className="w-[20%] ">
               <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                 Отзывы
               </span>
             </li>
-            <li className="w-[15%] ">
+            <li className="w-[20%] ">
               <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                 Дата
               </span>
             </li>
-            <li className="w-[30%] flex items-center justify-end ">
+            <li className="w-[20%] flex items-center justify-end ">
               <div className="max-w-[350px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-[12px]">
                 <input
                   type="text"
@@ -226,46 +236,53 @@ export default function Reviews() {
           </ul>
         </div>
         {/* table product */}
-        <div className="w-full h-full overflow-hidden border border-lightBorderColor bg-lightBgColor rounded-[12px]">
+        <div className="w-full h-full overflow-hidden  border-lightBorderColor md:bg-lightBgColor">
           {productList.map((data) => {
             return (
-              <ul className="w-full h-[95px] overflow-hidden border-b  border-borderColor flex items-center justify-between ">
-                <li className="w-[20%] pl-5 h-full flex items-center ">
+              <ul className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none bg-lightBgColor">
+                <li className="w-[20%] md:pl-5 h-fit flex items-center ">
                   <figure>
                     <img src={ProductImg} alt="" />
                   </figure>
                 </li>
-                <li className="w-[20%] h-full flex items-center ">
-                  <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
-                    {data?.text}
-                  </span>
-                </li>
-                <li className="w-[15%] h-full flex items-center">
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                </li>
-                <li className="w-[15%] h-full flex items-center ">
-                  <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
-                    {data?.dateSend}
-                  </span>
-                </li>
-                <li className="w-[30%] h-full flex items-center justify-end pr-[50px]">
-                  <button
-                    onClick={() => goDetail(data?.id)}
-                    className="text-textBlueColor border-b border-textBlueColor  text-base not-italic font-AeonikProMedium"
-                  >
-                    {data?.link}
-                  </button>
-                </li>
+                <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
+                  <li className="md:w-[25%] h-full flex items-center">
+                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">Имя товара</span>
+                    <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
+                      {data?.text}
+                    </span>
+                  </li>
+                  <li className="md:w-[25%] h-full flex items-center">
+                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">Отзывы</span>
+                    <div className="flex items-center">
+                    <StarIcon className=""/>
+                    <StarIcon />
+                    <StarIcon />
+                    <StarIcon />
+                    <StarIcon />
+                    </div>
+                  </li>
+                  <li className="md:w-[20%] h-full flex items-center ">
+                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">Дата</span>
+                    <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
+                      {data?.dateSend}
+                    </span>
+                  </li>
+                  <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
+                    <button
+                      onClick={() => goDetail(data?.id)}
+                      className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
+                    >
+                      {data?.link}
+                    </button>
+                  </li>
+                </div>
               </ul>
             );
           })}
         </div>
       </div>
-      Reviews
+      <div className="hidden md:block">Reviews</div>
     </div>
   );
 }
