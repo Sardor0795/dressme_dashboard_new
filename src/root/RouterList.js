@@ -9,7 +9,7 @@ import Reviews from "../components/Reviews/Reviews";
 
 export default function RouterList() {
   return (
-    <div className="">
+    <div>
       <NavbarForSetting />
       <Routes>
         <Route path="/reviews" element={<Reviews />} />
