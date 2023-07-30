@@ -164,7 +164,7 @@ const DetailCarousel = () => {
         <div className="h-5 w-[4px] bg-textBlueColor"></div>
         <p>Nike store official Dealer</p>
       </div>
-      <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px] ">
+      <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
         <div className="w-full flex flex-col">
           <div className="">
             <Slider
@@ -176,21 +176,8 @@ const DetailCarousel = () => {
               {imgGroup?.map((data) => {
                 return (
                   <article key={data?.id}>
-                    <figure className="relative w-full h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
-                      <img className="w-full h-fit" src={data?.img} alt="" />
-                      {/* <figcaption className="flex md:hidden w-full absolute items-center justify-between px-4 opacity-80 text-sm font-AeonikProMedium left-0 right-0 bottom-4 ">
-                        <span className="bg-bgCard pt-1 gap-x-[3px] rounded-[40%] px-3 py-1 flex items-center leading-5 tracking-wider  ">
-                          <p> {data.id}</p>/<p>{imgGroup.length}</p>
-                        </span>
-                        <span className="w-fit flex items-center p-2 gap-x-2 rounded-lg bg-bgCard border border-searchBgColor">
-                          <p className="flex items-center ">
-                            <VideoStoreIcons />
-                          </p>
-                          <p className="flex items-center not-italic font-AeonikProRegular text-sm leading-4 text-black">
-                            Видео
-                          </p>
-                        </span>
-                      </figcaption> */}
+                    <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+                      <img className="h-full md:w-full md:h-fit" src={data?.img} alt="" />
                     </figure>
                   </article>
                 );
@@ -206,16 +193,17 @@ const DetailCarousel = () => {
               focusOnSelect={true}
               vertical={false}
               {...settings1}
-              className="flex flex-row flex-wrap pt-0 rounded-lg"
+              className="flex flex-row flex-wrap pt-0 rounded-lg gap-x-[5px] md:gap-x-0"
             >
               {imgGroup?.map((data) => {
                 return (
                   <figure
                     key={data?.id}
-                    className="!w-[72px] cursor-pointer !h-[96px] border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center"
+                    className="!w-[70px] !h-[70px] md:!w-[72px] md:!h-[96px] cursor-pointer border border-searchBgColor bg-btnBgColor rounded-lg flex gap-x-[5px]"
                   >
                     <img
-                      className="w-full h-full rounded-lg"
+                      className="w-full h-full p-[5px] md:p-0
+                       md:w-full md:h-full flex items-center justify-center rounded-lg"
                       src={data?.img}
                       alt=""
                     />
