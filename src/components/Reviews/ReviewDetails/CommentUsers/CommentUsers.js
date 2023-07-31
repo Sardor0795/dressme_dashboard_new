@@ -85,7 +85,7 @@ export default function CommentUsers() {
       </div>
       {userInfo.map((data) => {
         return (
-          <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px]">
+          <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
@@ -127,20 +127,22 @@ export default function CommentUsers() {
               return (
                 <>
                   {item?.subjectReply.length !== 0 ? (
-                    <div className="w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px]">
-                      <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-[5px] gap-x-[15px]">
-                        <div>
-                          <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
-                            {item?.subjectBrand}
-                          </p>
-                          <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
-                            {item?.subjectReply}
-                          </p>
-                        </div>
-                        <div className="flex items-start mt-[2px]">
-                          <span className="text-textLightColor text-[11px] md:text-base font-AeonikProRegular leading-normal">
-                            {item?.replyDate}
-                          </span>
+                    <div>
+                      <div className="w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] ">
+                        <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-[5px] gap-x-[15px]">
+                          <div>
+                            <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
+                              {item?.subjectBrand}
+                            </p>
+                            <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
+                              {item?.subjectReply}
+                            </p>
+                          </div>
+                          <div className="flex items-start mt-[2px]">
+                            <span className="text-textLightColor text-[11px] md:text-base font-AeonikProRegular leading-normal">
+                              {item?.replyDate}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>

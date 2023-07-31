@@ -187,7 +187,7 @@ export default function Reviews() {
               <RangePicker />
             </Space>
           </section>
-          <button className="block md:hidden bg-textBlueColor text-white px-[15px] py-[10px] rounded-xl">
+          <button className="block md:hidden bg-textBlueColor text-white px-[15px] py-[10px] rounded-lg">
             Выберите дату
           </button>
         </div>

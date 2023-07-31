@@ -32,3 +32,11 @@ body {
 .mobileDate .ant-space  {
   width: 200px;
 }
+
+.ant-picker-panels {
+  display: grid !important;
+}
+
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-picker {
+  padding: 10px 10px 10px;
+}
