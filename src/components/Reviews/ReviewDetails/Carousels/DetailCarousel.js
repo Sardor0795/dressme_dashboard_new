@@ -155,6 +155,13 @@ const DetailCarousel = () => {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 360,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
     ],
   };
 

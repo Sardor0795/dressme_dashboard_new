@@ -33,6 +33,7 @@ module.exports = {
         tableTextTitle: "#3F6175",
         tableTextTitle2: "#2C2C2C",
         ProductReplyBg: "#F4F6FB",
+        mobileTextColor: "#505050;"
       },
       fontFamily: {
         // 500

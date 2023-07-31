@@ -231,7 +231,7 @@ export default function Reviews() {
                 <button>
                   <SearchIcon />
                 </button>
-              </div>{" "}
+              </div>
             </li>
           </ul>
         </div>
