@@ -154,7 +154,7 @@ export default function Reviews() {
   return (
     <div className="w-full h-full px-4 md:px-10 py-1">
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
-        <div className="flex items-center justify-between">
+        <div className="flex justify-end items-center md:justify-between">
           <section className="hidden md:block">
             <p className="text-black text-2xl not-italic font-AeonikProMedium">
               С возвращением, Абдулазиз!
@@ -164,7 +164,7 @@ export default function Reviews() {
             <Popover
               open={state?.openwear}
               onOpenChange={handleOpenChangeWear}
-              className="hidden md:flex items-center justify-between w-[244px] h-10 overflow-hidden cursor-pointer border border-lightBorderColor px-[10px] rounded-[12px] "
+              className="hidden md:flex items-center justify-between w-[244px] h-10 overflow-hidden cursor-pointer border border-lightBorderColor px-[10px] rounded-lg "
               trigger="click"
               options={["Hide"]}
               placement="bottom"
@@ -187,9 +187,6 @@ export default function Reviews() {
               <RangePicker />
             </Space>
           </section>
-          <button className="block md:hidden bg-textBlueColor text-white px-[15px] py-[10px] rounded-lg">
-            Выберите дату
-          </button>
         </div>
         <section className="flex md:hidden pt-6">
           <p className="text-black text-2xl not-italic font-AeonikProMedium">
@@ -222,7 +219,7 @@ export default function Reviews() {
               </span>
             </li>
             <li className="w-[20%] flex items-center justify-end ">
-              <div className="max-w-[350px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-[12px]">
+              <div className="max-w-[350px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
                 <input
                   type="text"
                   className="w-full h-full  outline-0	"
