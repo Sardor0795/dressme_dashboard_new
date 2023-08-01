@@ -236,10 +236,10 @@ export default function Reviews() {
           </ul>
         </div>
         {/* table product */}
-        <div className="w-full h-full overflow-hidden  border-lightBorderColor md:bg-lightBgColor">
+        <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto">
           {productList.map((data) => {
             return (
-              <ul className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none bg-lightBgColor">
+              <ul className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor">
                 <li className="w-[20%] md:pl-5 h-fit flex items-center ">
                   <figure>
                     <img src={ProductImg} alt="" />

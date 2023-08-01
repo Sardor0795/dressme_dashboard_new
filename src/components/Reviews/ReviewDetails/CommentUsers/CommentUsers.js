@@ -90,6 +90,7 @@ export default function CommentUsers() {
           <MobileStar />
         </button>
       </div>
+      
       {!starReviews ? (
         <div className="w-full flex md:hidden items-center justify-between mb-4">
           <div className="flex items-center ">
