@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { CloseAnswer, MobileStar, SearchIcon, StarOutlineIcon } from "../../../../assets/icons";
+import { CloseAnswer, MobileStar, SearchIcon, StarIcon, StarOutlineIcon } from "../../../../assets/icons";
 
 export default function CommentUsers() {
 
   const [sendAnswer, setSendAnswer] = useState(false)
+  const [starReviews, setStarReviews] = useState(true)
+  const [searchReviews, setSearchReviews] = useState(true)
 
   const [userInfo, setuserInfo] = useState([
     {
@@ -61,12 +63,14 @@ export default function CommentUsers() {
       ],
     },
   ]);
+
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor">(12 отзывы) </span>
       </div>
+      
       <div className="flex md:hidden gap-x-[14px] mb-4">
         <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
           <input
@@ -75,14 +79,53 @@ export default function CommentUsers() {
             placeholder="Поиск"
           />
           <span> <SearchIcon /> </span>
-        </div>
-        <button className="w-[30%] h-9 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]">
-          <span className="text-[10px] ls:text-[12px] not-italic font-AeonikProMedium mr-[5px]">
-          Отправить
+        </div> 
+        <button 
+          onClick={() => setStarReviews(false)}
+          className="w-[30%] h-9 active:scale-95 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]"
+        >
+          <span className="text-[10px] ls:text-[11px] flex-none not-italic font-AeonikProMedium mr-[5px]">
+          По отзывам
           </span>
           <MobileStar />
         </button>
       </div>
+      {!starReviews ? (
+        <div className="w-full flex md:hidden items-center justify-between mb-4">
+          <div className="flex items-center ">
+            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px]">1</span>
+              <StarIcon />
+            </button>
+            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px]">2</span>
+              <StarIcon />
+            </button>
+            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px]">3</span>
+              <StarIcon />
+            </button>
+            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px]">4</span>
+              <StarIcon />
+            </button>
+            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg">
+              <span className="mr-[5px]">5</span>
+              <StarIcon />
+            </button>
+          </div>
+          <button 
+             onClick={() => setStarReviews(true)}
+            className="w-9 h-9 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
+          >
+            <CloseAnswer colors="#007DCA"/>
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+      
+      
       {userInfo.map((data) => {
         return (
           <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
@@ -161,7 +204,7 @@ export default function CommentUsers() {
                             </button>
                             <button
                               onClick={() => setSendAnswer(false)}
-                              className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border rounded-lg">  
+                              className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg">  
                               <CloseAnswer />
                             </button>      
                           </div>                  
