@@ -143,7 +143,7 @@ const DetailCarousel = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 6,
           slidesToScroll: 1,
         },
       },
@@ -151,14 +151,14 @@ const DetailCarousel = () => {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 6,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 360,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 5,
           slidesToScroll: 1,
         },
       },
@@ -173,7 +173,7 @@ const DetailCarousel = () => {
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
         <div className="w-full flex flex-col">
-          <div className="">
+          <div className="w-full flex items-center">
             <Slider
               className="w-full h-full rounded-lg "
               asNavFor={nav2}
@@ -191,7 +191,7 @@ const DetailCarousel = () => {
               })}
             </Slider>
           </div>
-          <div>
+          <div className="w-full items-center justify-between mt-1">
             <Slider
               asNavFor={nav1}
               ref={slider2}
@@ -200,17 +200,17 @@ const DetailCarousel = () => {
               focusOnSelect={true}
               vertical={false}
               {...settings1}
-              className="flex flex-row flex-wrap pt-0 rounded-lg gap-x-[5px] md:gap-x-0"
+              className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
             >
               {imgGroup?.map((data) => {
                 return (
                   <figure
                     key={data?.id}
-                    className="!w-[70px] !h-[70px] md:!w-[72px] md:!h-[96px] cursor-pointer border border-searchBgColor bg-btnBgColor rounded-lg flex gap-x-[5px]"
+                    className="!w-fit !h-[70px] md:!w-[72px] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
                   >
                     <img
-                      className="w-full h-full p-[5px] md:p-0
-                       md:w-full md:h-full flex items-center justify-center rounded-lg"
+                      className="w-fit h-full md:p-0
+                       md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
                       src={data?.img}
                       alt=""
                     />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CloseAnswer, MobileStar, SearchIcon, SendIcon, StarOutlineIcon } from "../../../../assets/icons";
+import { CloseAnswer, MobileStar, SearchIcon, StarOutlineIcon } from "../../../../assets/icons";
 
 export default function CommentUsers() {
 
@@ -68,7 +68,7 @@ export default function CommentUsers() {
         <span className="block md:hidden text-xs text-mobileTextColor">(12 отзывы) </span>
       </div>
       <div className="flex md:hidden gap-x-[14px] mb-4">
-        <div className="w-[70%] h-[31px] overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded">
+        <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
           <input
             type="text"
             className="w-full h-full text-[13px] outline-0	"
@@ -76,7 +76,7 @@ export default function CommentUsers() {
           />
           <span> <SearchIcon /> </span>
         </div>
-        <button className="w-[30%] h-[31px] bg-textBlueColor flex items-center justify-center text-white rounded px-[8px] ls:px-[10px]">
+        <button className="w-[30%] h-9 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]">
           <span className="text-[10px] ls:text-[12px] not-italic font-AeonikProMedium mr-[5px]">
           Отправить
           </span>
@@ -129,7 +129,7 @@ export default function CommentUsers() {
                   {item?.subjectReply.length !== 0 ? (
                     <div>
                       <div className="w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] ">
-                        <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-[5px] gap-x-[15px]">
+                        <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                           <div>
                             <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
                               {item?.subjectBrand}
@@ -150,25 +150,26 @@ export default function CommentUsers() {
                   {item?.subjectReply.length !== 0 ? null : (
                     <div className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end">
                       {sendAnswer ? (
-                        <div className="w-full flex items-center justify-between">
-                          <textarea name="answer" id="answer" className="w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded p-3 md:mr-[20px] xxl:mr-[30px]" placeholder="Add your answer..."></textarea>
-                          <button className="w-[132px] py-2 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg md:mr-[10px]">
-                            <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                            Отправить
-                            </span>
-                            {/* <SendIcon /> */}
-                          </button>
-                          <button
-                            onClick={() => setSendAnswer(false)}
-                            className="w-11 h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border rounded-lg">  
-                            <CloseAnswer />
-                          </button>                        
+                        <div className="w-full flex flex-col md:flex-row items-center justify-between">
+                          <textarea name="answer" id="answer" className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]" placeholder="Add your answer..."></textarea>
+                          <div className="flex items-center ml-auto mt-3 md:mt-0">
+                            <button className="w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]">
+                              <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
+                              Отправить
+                              </span>
+                              {/* <SendIcon /> */}
+                            </button>
+                            <button
+                              onClick={() => setSendAnswer(false)}
+                              className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border rounded-lg">  
+                              <CloseAnswer />
+                            </button>      
+                          </div>                  
                         </div>
-                      )
-                      : (
+                      ) : (
                         <button 
                           onClick={() => setSendAnswer(true)}
-                          className="w-full md:w-[132px] py-2 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg">
+                          className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg">
                           <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
                           Ответить
                           </span>
