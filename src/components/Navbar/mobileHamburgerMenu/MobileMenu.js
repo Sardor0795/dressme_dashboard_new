@@ -25,11 +25,12 @@ export default function MobileHumburgerMenu() {
             open={isModalOpen} 
             onOk={handleOk}
             onCancel={handleCancel}
-            // closeIcon={false}
+            closeIcon={false}
             footer={null}
         >
             <div className="w-full flex flex-wrap gap-y-5">
                 <NavLink
+                    onClick={() => setIsModalOpen(false)}
                     className={
                     "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start"
                     }
@@ -47,6 +48,7 @@ export default function MobileHumburgerMenu() {
                     </span>
                 </NavLink>
                 <NavLink
+                     onClick={() => setIsModalOpen(false)}
                     className={
                     "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
                     }
@@ -64,6 +66,7 @@ export default function MobileHumburgerMenu() {
                     </span>
                 </NavLink>
                 <NavLink
+                    onClick={() => setIsModalOpen(false)}
                     className={
                     "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
                     }
