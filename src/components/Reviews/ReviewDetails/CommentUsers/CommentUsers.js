@@ -94,24 +94,24 @@ export default function CommentUsers() {
       {!starReviews ? (
         <div className="w-full flex md:hidden items-center justify-between mb-4">
           <div className="flex items-center ">
-            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
-              <span className="mr-[5px]">1</span>
+            <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px] group-focus:text-white">1</span>
               <StarIcon />
             </button>
-            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
-              <span className="mr-[5px]">2</span>
+            <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px] group-focus:text-white">2</span>
               <StarIcon />
             </button>
-            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
-              <span className="mr-[5px]">3</span>
+            <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px] group-focus:text-white">3</span>
               <StarIcon />
             </button>
-            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
-              <span className="mr-[5px]">4</span>
+            <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
+              <span className="mr-[5px] group-focus:text-white">4</span>
               <StarIcon />
             </button>
-            <button className="w-[55px] h-9 flex items-center justify-center border border-borderColor rounded-lg">
-              <span className="mr-[5px]">5</span>
+            <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg">
+              <span className="mr-[5px] group-focus:text-white">5</span>
               <StarIcon />
             </button>
           </div>
