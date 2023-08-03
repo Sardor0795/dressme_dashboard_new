@@ -36,6 +36,7 @@ module.exports = {
         mobileTextColor: "#303030",
         borderColor2:"#c5c5c5",
         bgColor:"#fdfdfd",
+        btnLightBlueColor:"#e6f2f9",
       },
       fontFamily: {
         // 500
