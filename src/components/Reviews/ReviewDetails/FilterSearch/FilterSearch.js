@@ -57,6 +57,7 @@ export default function FilterSearch() {
         {filterStar.map((data) => {
           return (
             <div
+              key={data?.id}
               onClick={() => handleFilterStar(data?.id)}
               className="w-full h-5 flex items-center cursor-pointer"
             >
