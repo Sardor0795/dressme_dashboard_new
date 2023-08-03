@@ -11,6 +11,36 @@ export default function Shops() {
     console.log("search:", value);
   };
 
+  const [genderCategory, setGenderCategory] = useState([
+    {
+      id: 1,
+      action: true,
+      gender: "Мужской",
+    },
+    {
+      id: 2,
+      action: false,
+      gender: "Женский",
+   
+    },
+    {
+      id: 3,
+      action: false,
+      gender: "Унисекс",
+    },
+  ]);
+
+  const handleGenderCheck = (value) => {
+    setGenderCategory((data) => {
+      return data.map((e) => {
+        if (e.id == value) {
+          return { ...e, action: true };
+        } else return { ...e, action: false };
+      });
+    });
+  };
+
+
   return (
     <div className="w-full px-4 md:px-[100px] mt-6 md:mt-12">
       <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
@@ -34,7 +64,7 @@ export default function Shops() {
       </div>
       <form
         action="#"
-        className="w-full flex flex-col items-center justify-between mb-10"
+        className="w-full flex flex-col items-center justify-between mb-10 md:mb-24"
       >
         <div className="w-full flex flex-col md:flex-row items-center justify-between mb-10 md:mb-[60px] gap-x-10">
           <div className="w-full md:w-3/5 mb-[26px] md:mb-0">
@@ -54,23 +84,32 @@ export default function Shops() {
               />
             </div>
             <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
-              <label
-                htmlFor="shopName"
-                className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
-              >
-                Пол
-              </label>
-              <div className="w-[65%] md:w-[80%] md:border border-borderColor2 outline-none rounded-lg text-base gap-x-1 md:gap-x-0 flex items-center justify-between">
-                <button className="w-1/3 text-xs md:text-base font-AeonikProRegular border rounded-lg px-2 py-[10px] md:px-[15px] md:py-3">
-                  Мужской
-                </button>
-                <button className="w-1/3 text-xs md:text-base font-AeonikProRegular border rounded-lg px-2 py-[10px] md:px-[15px] md:py-3">
-                  Женский
-                </button>
-                <button className="w-1/3 text-xs md:text-base font-AeonikProRegular border rounded-lg px-2 py-[10px] md:px-[15px] md:py-3">
-                  Унисекс
-                </button>
-              </div>
+                <label
+                    htmlFor="shopName"
+                    className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                >
+                    Пол
+                </label>
+                <div  className="w-[65%] md:w-[80%] md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
+                    {genderCategory.map((data) => {
+                        return(
+                            <button type="button" 
+                                key={data.id} 
+                                onClick={() => handleGenderCheck(data.id)}
+                                className={`w-1/3 md:w-full flex items-center justify-center border md:border-0 text-xs md:text-base font-AeonikProRegular md:my-[3px] md:mx-[3px] md:px-[12px] py-[8px] md:py-[10px] rounded-lg
+                                ${
+                                    data.action
+                                      ?"w-full h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                      : ""
+                                  }    
+                                `}
+                            >
+                                {data.gender}
+                            </button>                            
+                            )
+                        })
+                    }
+                </div>
             </div>
             <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
               <label
@@ -148,12 +187,12 @@ export default function Shops() {
                 Метод доставки
               </label>
               <div className="w-[65%] md:w-[80%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                <button className="group w-[28%] md:w-1/4 active:scale-95 focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
+                <button type="button" className="group w-[28%] md:w-1/4 active:scale-95 focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
                   <span className="group-focus:text-white text-xs md:text-base">
                     Такси
                   </span>
                 </button>
-                <button className="group w-[72%] md:w-3/4 active:scale-95 group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
+                <button type="button" className="group w-[72%] md:w-3/4 active:scale-95 group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
                   <span className="group-focus:text-white text-xs md:text-base">
                     Собственная доставка
                   </span>
