@@ -7,6 +7,7 @@ import NavbarForSetting from "../components/Navbar/NavbarForSetting";
 import ReviewDetail from "../components/Reviews/ReviewDetails/ReviewDetail";
 import Reviews from "../components/Reviews/Reviews";
 import AddShop from "../components/AddShop/Shops";
+import ProductsPageTwo from "../components/Products/AddingProductPageOne/ProductsPageTwo";
 
 export default function RouterList() {
   return (
@@ -15,6 +16,7 @@ export default function RouterList() {
       <Routes>
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products_nextpage" element={<ProductsPageTwo />} />
         <Route path="/shops" element={<Shops />} />
         <Route path="/addshop" element={<AddShop />} />
         <Route path="/review-details/:id" element={<ReviewDetail />} />
