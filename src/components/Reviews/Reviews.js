@@ -100,6 +100,7 @@ export default function Reviews() {
         {filterStar.map((data) => {
           return (
             <div
+              key={data?.id}
               onClick={() => handleFilterStar(data?.id)}
               className="w-full h-5 flex items-center cursor-pointer"
             >
@@ -236,7 +237,10 @@ export default function Reviews() {
         <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto">
           {productList.map((data) => {
             return (
-              <ul className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor">
+              <ul
+                key={data?.id}
+                className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
+              >
                 <li className="w-[20%] md:pl-5 h-fit flex items-center ">
                   <figure>
                     <img src={ProductImg} alt="" />
@@ -244,23 +248,29 @@ export default function Reviews() {
                 </li>
                 <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
                   <li className="md:w-[25%] h-full flex items-center">
-                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">Имя товара</span>
+                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
+                      Имя товара
+                    </span>
                     <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
                       {data?.text}
                     </span>
                   </li>
                   <li className="md:w-[25%] h-full flex items-center">
-                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">Отзывы</span>
+                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
+                      Отзывы
+                    </span>
                     <div className="flex items-center">
-                    <StarIcon className=""/>
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
-                    <StarIcon />
+                      <StarIcon className="" />
+                      <StarIcon />
+                      <StarIcon />
+                      <StarIcon />
+                      <StarIcon />
                     </div>
                   </li>
                   <li className="md:w-[20%] h-full flex items-center ">
-                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">Дата</span>
+                    <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
+                      Дата
+                    </span>
                     <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
                       {data?.dateSend}
                     </span>
