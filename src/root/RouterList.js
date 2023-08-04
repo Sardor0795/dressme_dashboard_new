@@ -7,7 +7,7 @@ import NavbarForSetting from "../components/Navbar/NavbarForSetting";
 import ReviewDetail from "../components/Reviews/ReviewDetails/ReviewDetail";
 import Reviews from "../components/Reviews/Reviews";
 import AddShop from "../components/AddShop/Shops";
-import ProductsPageTwo from "../components/Products/AddingProductPageOne/ProductsPageTwo";
+import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
 
 export default function RouterList() {
   return (
