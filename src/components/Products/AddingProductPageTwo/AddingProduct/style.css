@@ -27,7 +27,7 @@
   width: fit-content;
   /* font-family: Aeonik Pro; */
   line-height: normal;
-  background-image: url("../../../assets/asterisc.png");
+  background-image: url("../../../../assets/asterisc.png");
   background-position: center right;
   padding-right: 15px;
   margin-bottom: 5px;
@@ -223,7 +223,7 @@
   border-radius: 50%;
   background-color: #fff;
   margin-left: 10px;
-  background-image: url("../../../assets/x_icon.png");
+  background-image: url("../../../../assets/x_icon.png");
   background-repeat: no-repeat;
   background-position: center center;
 }
