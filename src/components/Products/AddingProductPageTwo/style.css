@@ -7,6 +7,16 @@
   max-width: 490px;
   width: 100%;
 }
+@media (max-width: 768px) {
+  .section1 {
+    max-width: 100%;
+    border: none;
+    padding: 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f2f2f2;
+    border-radius: 0;
+  }
+}
 .inputTitle {
   color: #303030;
   font-family: Aeonik Pro;
@@ -37,11 +47,13 @@
   flex-grow: 1;
   margin-right: 10px;
 }
+@media (max-width: 370px) {
+  .input {
+    width: 30px;
+  }
+}
 .input:focus {
   outline: none;
-}
-.input:focus~button {
-    color: red;
 }
 .inputBtn {
   color: #858585;
@@ -78,7 +90,6 @@
 /* Indicators ------------------ */
 
 .indicators {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -117,7 +128,15 @@
   display: flex;
   flex-direction: column;
 }
-
+@media (max-width: 768px) {
+  .section2 {
+    max-width: 100%;
+    border: none;
+    padding: 0;
+    padding-bottom: 30px;
+    border-radius: 0;
+  }
+}
 .notRecquired {
   color: #a1a1a1;
   font-family: Aeonik Pro;
@@ -130,13 +149,15 @@
 .btn {
   color: #fff;
   font-family: Aeonik Pro;
-  font-size: 18px;
+  /* font-size: 18px; */
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  padding: 12px 50px;
+  padding: 12px;
   border-radius: 6px;
   background: #007dca;
+  max-width: 130px;
+  width: 100%;
 }
 .btn:active {
   transform: translateY(2px);
@@ -150,3 +171,66 @@
   border-bottom: 1px solid #007dca;
   margin-left: 10px;
 }
+
+/* Mobile Indicators */
+
+.sideLine {
+  height: 1px;
+  background-color: #e5e5e5;
+  flex-grow: 1;
+}
+.middleLine {
+  height: 1px;
+  background-color: #007dca;
+  width: 50px;
+}
+.mDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #007dca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.dotInner {
+  width: 8px;
+  display: inline-block;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #007dca;
+}
+/* badge */
+.badge {
+  color: #fff;
+  font-family: Aeonik Pro;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 4px;
+  background: #007dca;
+  width: fit-content;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+}
+.x_btn {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-left: 10px;
+  background-image: url("../../../assets/x_icon.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.x_btn:active {
+  transform: translateY(2px);
+}
+
+/* .inputContainer:hover {
+  border-color: black;
+} */
