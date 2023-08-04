@@ -1,0 +1,123 @@
+.wrapperHeight {
+  height: calc(100vh - 80px);
+}
+
+.section1 {
+  border: 1px solid #f2f2f2;
+  max-width: 490px;
+}
+.inputTitle {
+  color: #303030;
+  font-family: Aeonik Pro;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: fit-content;
+  /* font-family: Aeonik Pro; */
+  line-height: normal;
+  background-image: url("../../../assets/asterisc.png");
+  background-position: center right;
+  padding-right: 15px;
+  margin-bottom: 5px;
+}
+.inputTitle.notImg {
+    background-image: none;
+}
+.inputContainer {
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+}
+.inputContainer.errored {
+  border-color: #ffb8b8;
+  background-color: #fff6f6;
+}
+.input {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+.input:focus {
+  outline: none;
+}
+.inputBtn {
+  color: #858585;
+  font-family: Aeonik Pro;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 4px;
+  background: #f0f0f0;
+}
+.inputBtn:active {
+  transform: translateY(2px);
+}
+.textArea {
+  display: block;
+  width: 100%;
+  color: #666;
+  font-family: Aeonik Pro;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  resize: none;
+  line-height: 120%; /* 16.8px */
+  background-color: transparent;
+  flex-grow: 1;
+}
+.height {
+  min-height: 120px;
+}
+.column {
+  flex-direction: column;
+}
+/* Indicators ------------------ */
+
+.indicators {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dot {
+  color: #007dca;
+  font-family: Aeonik Pro;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1e88e5;
+}
+.dot.active {
+  background-color: #1e88e5;
+  color: #fff;
+}
+.line {
+  width: 2px;
+  background-color: #f2f2f2;
+}
+.line.active-bg {
+  background-color: #1e88e5;
+}
+
+/* Section 2 */
+
+.section2 {
+  border: 1px solid #f2f2f2;
+}
+
+.notRecquired {
+  color: #a1a1a1;
+  font-family: Aeonik Pro;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 5px;
+}
