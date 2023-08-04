@@ -1,5 +1,5 @@
 import React from "react";
-import ProductsPageOne from "./AddingProductPageTwo/ProductsPageOne";
+import ProductsPageOne from "./AddingProductPageOne/ProductsPageOne";
 
 export default function Products() {
   return (
