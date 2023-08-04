@@ -1,5 +1,15 @@
-import React from "react";
+import React, { createContext, useState } from "react";
+export const dressMainData = createContext();
 
-export default function ContextTeam() {
-  return <div>ContextTeam</div>;
+export default function ContextTeam({ children }) {
+
+  const [dressInfo, setDressInfo] =useState({
+
+  })
+
+  return (
+    <dressMainData.Provider value={[dressInfo, setDressInfo]}>
+      {children}
+    </dressMainData.Provider>
+  );
 }
