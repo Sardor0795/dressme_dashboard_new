@@ -337,6 +337,48 @@ const BgSelectSkin = () => {
     </svg>
   )
 }
+const InputCheck = () => {
+  <svg 
+    width="16" 
+    height="16" 
+    viewBox="0 0 16 16" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg">
+    <g id="vuesax/linear/tick-circle">
+      <g id="tick-circle">
+        <path 
+          id="Vector" 
+          d="M8.00016 14.6666C11.6668 14.6666 14.6668 11.6666 14.6668 7.99992C14.6668 4.33325 11.6668 1.33325 8.00016 1.33325C4.3335 1.33325 1.3335 4.33325 1.3335 7.99992C1.3335 11.6666 4.3335 14.6666 8.00016 14.6666Z" 
+          stroke="white" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"/>
+          <path 
+            id="Vector_2" 
+            d="M5.1665 7.99995L7.05317 9.88661L10.8332 6.11328" 
+            stroke="white" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"/>
+      </g>
+    </g>
+  </svg>
+}
+
+const StarLabel = () => {
+  return(
+    <svg 
+      width="10" 
+      height="9" 
+      viewBox="0 0 10 9" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg">
+      <path 
+        d="M9.312 3.56L6.456 4.616L8.424 6.848L7.032 8.048L5.112 5.528L3.216 8.024L1.848 6.824L3.816 4.592L0.984 3.536L1.704 1.856L4.32 3.104L4.248 0.175999H6.024L5.952 3.128L8.592 1.856L9.312 3.56Z" 
+        fill="#FA4F4F"/>
+    </svg>
+  )
+}
 
 export {
   ProfileIcon,
@@ -355,4 +397,6 @@ export {
   SendIcon,
   BackIcon,
   BgSelectSkin,
+  InputCheck,
+  StarLabel,
 };
