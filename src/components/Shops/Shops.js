@@ -42,7 +42,7 @@ export default function Shops() {
 
 
   return (
-    <div className="w-full px-4 md:px-[100px] mt-6 md:mt-12">
+    <div className="w-full px-4 md:px-[200px] mt-6 md:mt-12">
       <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
         Создать магазин
       </div>
