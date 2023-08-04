@@ -5,6 +5,7 @@
 .section1 {
   border: 1px solid #f2f2f2;
   max-width: 490px;
+  width: 100%;
 }
 .inputTitle {
   color: #303030;
@@ -22,7 +23,7 @@
   margin-bottom: 5px;
 }
 .inputTitle.notImg {
-    background-image: none;
+  background-image: none;
 }
 .inputContainer {
   border-radius: 8px;
@@ -38,6 +39,9 @@
 }
 .input:focus {
   outline: none;
+}
+.input:focus~button {
+    color: red;
 }
 .inputBtn {
   color: #858585;
@@ -110,6 +114,8 @@
 
 .section2 {
   border: 1px solid #f2f2f2;
+  display: flex;
+  flex-direction: column;
 }
 
 .notRecquired {
@@ -120,4 +126,27 @@
   font-weight: 400;
   line-height: normal;
   margin-left: 5px;
+}
+.btn {
+  color: #fff;
+  font-family: Aeonik Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 12px 50px;
+  border-radius: 6px;
+  background: #007dca;
+}
+.btn:active {
+  transform: translateY(2px);
+}
+.link {
+  color: #007dca;
+  font-family: Aeonik Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  border-bottom: 1px solid #007dca;
+  margin-left: 10px;
 }
