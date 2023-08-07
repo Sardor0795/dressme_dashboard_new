@@ -5,7 +5,7 @@ import AddingProduct from './AddingProduct/AddingProduct'
 export default function ProductsPageOne() {
 
   return (
-    <div className='w-full'>
+    <div className='w-full max-w-[1540px] mx-auto'>
         <div className='w-full'>
           <ProductsPageTop />
         </div>
