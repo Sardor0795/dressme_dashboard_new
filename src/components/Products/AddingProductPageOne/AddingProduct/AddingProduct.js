@@ -498,9 +498,9 @@ const AddingProduct = () => {
                         {/* 6 */}
                         <div className='w-full flex items-center justify-between'>
                             <Popover
-                                open={state?.openhat}
+                                // open={state?.openhat}
                                 // onOpenChange={handleOpenChangeHat}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white"
+                                className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottomLeft"
@@ -511,7 +511,7 @@ const AddingProduct = () => {
                             <Popover
                                 // open={state?.openOutwear}
                                 // onOpenChange={handleOpenChangeOutwear}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white  "
+                                className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottomLeft"
@@ -522,7 +522,7 @@ const AddingProduct = () => {
                             <Popover
                                 // open={state?.openOutwaer}
                                 // onOpenChange={handleOpenChangeOutwear}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor  border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white  "
+                                className="group px-[15px] h-[38px] rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottomLeft"
@@ -533,7 +533,7 @@ const AddingProduct = () => {
                             <Popover
                                 // open={state?.openwear}
                                 // onOpenChange={handleOpenChangeWear}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor  border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  focus:bg-textBlueColor focus:text-white "
+                                className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottom"
@@ -544,7 +544,7 @@ const AddingProduct = () => {
                             <Popover
                                 // open={state?.openwear}
                                 // onOpenChange={handleOpenChangeWear}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor  border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white  "
+                                className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottom"
@@ -556,7 +556,7 @@ const AddingProduct = () => {
                     </div>
                     <div className='w-[40%] border border-borderColor h-[510px]'></div>
                 </div>
-                <Link to='/products_nextpage' className='absolute right-3 bottom-3 px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg'>Продолжить</Link>
+                <Link to='/products_nextpage' className='absolute active:scale-95 right-3 bottom-3 px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg'>Продолжить</Link>
             </form>
         </div>
     )
