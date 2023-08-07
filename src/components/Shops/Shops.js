@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BgSelectSkin } from "../../assets/icons";
-import { Select } from "antd";
 
 export default function Shops() {
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-  const onSearch = (value) => {
-    console.log("search:", value);
-  };
 
   const [genderCategory, setGenderCategory] = useState([
     {
@@ -42,7 +35,7 @@ export default function Shops() {
 
 
   return (
-    <div className="w-full px-4 md:px-[200px] mt-6 md:mt-12">
+    <div className="w-full px-4 md:px-[250px] mt-6 md:mt-12">
       <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
         Создать магазин
       </div>
@@ -96,7 +89,7 @@ export default function Shops() {
                             <button type="button" 
                                 key={data.id} 
                                 onClick={() => handleGenderCheck(data.id)}
-                                className={`w-1/3 md:w-full flex items-center justify-center border md:border-0 text-xs md:text-base font-AeonikProRegular md:my-[3px] md:mx-[3px] md:px-[12px] py-[8px] md:py-[10px] rounded-lg
+                                className={`w-1/3 md:w-full flex items-center justify-center active:scale-95  border md:border-0 text-xs md:text-base font-AeonikProRegular md:my-[3px] md:mx-[3px] md:px-[12px] py-[8px] md:py-[10px] rounded-lg
                                 ${
                                     data.action
                                       ?" h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
@@ -110,74 +103,6 @@ export default function Shops() {
                         })
                     }
                 </div>
-            </div>
-            <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
-              <label
-                htmlFor="shopName"
-                className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
-              >
-                Город
-              </label>
-              <Select
-                className="rounded-lg w-[65%] md:w-[80%] h-11 md:h-10"
-                showSearch
-                placeholder="Выберите город"
-                optionFilterProp="children"
-                onChange={onChange}
-                onSearch={onSearch}
-                size="large"
-                filterOption={(input, option) =>
-                  (option?.label ?? "")
-                    .toLowerCase()
-                    .includes(input.toLowerCase())
-                }
-                options={[
-                  {
-                    value: "Tashkent",
-                    label: "Tashkent",
-                  },
-                  {
-                    value: "Samarkand",
-                    label: "Samarkand",
-                  },
-                  {
-                    value: "Bukhara",
-                    label: "Bukhara",
-                  },
-                  {
-                    value: "Andijan",
-                    label: "Andijan",
-                  },
-                  {
-                    value: "Qarshi",
-                    label: "Qarshi",
-                  },
-                  {
-                    value: "Nukus",
-                    label: "Nukus",
-                  },
-                  {
-                    value: "Navoi",
-                    label: "Navoi",
-                  },
-                  {
-                    value: "Termez",
-                    label: "Termez",
-                  },
-                  {
-                    value: "Namangan",
-                    label: "Namangan",
-                  },
-                  {
-                    value: "Fergana",
-                    label: "Fergana",
-                  },
-                  {
-                    value: "Karakalpakstan",
-                    label: "Karakalpakstan",
-                  },
-                ]}
-              />
             </div>
             <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] ">
               <label
@@ -200,7 +125,7 @@ export default function Shops() {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-2/5">
+          <div className="w-full md:w-2/5 md:flex items-start">
             <div className="block md:hidden mb-3">
               <span className="text-sm mr-2 font-AeonikProRegular">
                 Описание магазина
@@ -212,7 +137,7 @@ export default function Shops() {
             <textarea
               name="storeDescription"
               id="storeDescription"
-              className="w-full h-[100px] text-[11px] md:text-[13px] md:h-[255px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 md:resize-none"
+              className="w-full h-[100px] text-[11px] md:text-[13px] md:h-[192px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 md:resize-none"
               placeholder="Пишите здесь..."
             ></textarea>
           </div>
@@ -222,7 +147,7 @@ export default function Shops() {
           className="inline-block px-[100px] py-[15px] bg-textBlueColor text-white rounded-lg active:scale-95"
           to={"/addshop"}
         >
-          Зарегистрироваться
+          Создать магазин
         </Link>
       </form>
     </div>
