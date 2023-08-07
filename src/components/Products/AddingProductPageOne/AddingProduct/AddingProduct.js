@@ -14,77 +14,145 @@ const AddingProduct = () => {
     };
 
     const [state, setState] = useState({
-        openhat: false,
+        // openhat: true,
+        // openOutwear: true,
     });
 
     // Hats
-    const [ selectHat, setselectHat ] = useState("");
-    const handleHatValue = (value) => {
-        setselectHat(value);
-        setState({ ...state, openhat: false });
-    };
-    const handleOpenChangeHat = (newOpen) => {
-        setState({ ...state, openhat: newOpen });
-    };
-    const hatList = [
-        // { id: 1, type: "All Clothing types" },
-        // { id: 2, type: "Headwear" },
-        // { id: 3, type: "Outwear" },
-        // { id: 4, type: "Underwear" },
-        // { id: 5, type: "Legwear" },
-        // { id: 6, type: "Accessory" },
-    ];
     const contentHat = (
-        <div className="w-[170px] h-fit m-0 p-0">
-            {hatList.map((data) => {
-            return (
-                <p
-                key={data?.id}
-                onClick={() => {
-                    handleHatValue(data?.type);
-                }}
-                className={`w-full h-[42px] flex items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor `}
-                >
-                {data?.type}
-                </p>
-            );
-            })}
+        <div className="w-[375px] h-fit">
+            <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
+                <div className='w-full flex  gap-x-10 px-3 pt-5'>
+                    <div className='w-1/2 flex flex-col'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Обхват головы <span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
+                        <div className='flex items-center justify-between gap-x-[25px]'>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] border border-borderColor px-5 py-[10px] rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none' />
+                                <div className='mt-[5px] text-textLightColor text-xs font-AeonikProMedium'>Мин</div>
+                            </div>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
+                                <div className='mt-[5px] text-textLightColor text-xs font-AeonikProMedium'>Макс</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-1/2 flex flex-col items-center'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Количество <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                        </p>
+                        <div className='flex items-start justify-between '>
+                            <input type="number" className='w-[60px] border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
+                        </div>
+                    </div>
+                </div>
+                <button className='w-full flex items-end justify-end text-textBlueColor font-AeonikProMedium pr-1'>готово</button>
+            </action>
         </div>
     );
     
-
-    // Outerwear
-    const [ selectOutwear, setselectOutwaer ] = useState("");
-    const handleOutwearValue = (value) => {
-        setselectOutwaer(value);
-        setState({ ...state, openOutwear: false });
-    };
-    const handleOpenChangeOutwear = (newOpen) => {
-        setState({ ...state, openOutwaer: newOpen });
-    };
-    const outWearList = [
-        // { id: 1, type: "All Clothing types" },
-        // { id: 2, type: "Headwear" },
-        // { id: 3, type: "Outwear" },
-        // { id: 4, type: "Underwear" },
-        // { id: 5, type: "Legwear" },
-        // { id: 6, type: "Accessory" },
-    ];
+    // Outerwear    
     const contentOutwear = (
-        <div className="w-[170px] h-fit m-0 p-0">
-            {outWearList.map((data) => {
-            return (
-                <p
-                key={data?.id}
-                onClick={() => {
-                    handleOutwearValue(data?.type);
-                }}
-                className={`w-full h-[42px] flex items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor `}
-                >
-                {data?.type}
-                </p>
-            );
-            })}
+        <div className="w-[611px] h-fit">
+            <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
+                <div className='w-full flex  gap-x-10 px-3 pt-5'>
+                    <div className='w-[32%] flex flex-col'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер Груди <span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
+                        <div className='flex items-center justify-between gap-x-[25px]'>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
+                            </div>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-[32%] flex flex-col'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер</p>
+                        <div className='flex items-center justify-between gap-x-[25px]'>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
+                            </div>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-[36%] flex flex-col '>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
+                        Буквенный Размер 
+                        </p>
+                        <div className='w-full flex items-start justify-between mb-[10px]'>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="xxs" name="size" value="xxs" checked />
+                                <label for="xxs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XXS</label>
+                            </div>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="xs" name="size" value="xs" />
+                                <label for="xs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XS</label>
+                            </div>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="s" name="size" value="s" />
+                                <label for="s" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>S</label>
+                            </div>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="M" name="size" value="M" />
+                                <label for="M" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>M</label>
+                            </div>
+                        </div>
+                        <div className='w-full flex items-start justify-between '>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="L" name="size" value="L" checked />
+                                <label for="L" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>L</label>
+                            </div>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="XL" name="size" value="XL" />
+                                <label for="XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XL</label>
+                            </div>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="2XL" name="size" value="2XL" />
+                                <label for="2XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>2XL</label>
+                            </div>
+                            <div className='w-1/4 flex items-center mr-[10px]'>
+                                <input type="radio" id="3XL" name="size" value="3XL" />
+                                <label for="3XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>3XL</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='w-full flex  gap-x-10 px-3 pt-5'>
+                    <div className='w-[32%] flex flex-col'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер Груди <span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
+                        <div className='flex items-center justify-between gap-x-[25px]'>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
+                            </div>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-[32%] flex flex-col'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер</p>
+                        <div className='flex items-center justify-between gap-x-[25px]'>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин'/>
+                            </div>
+                            <div className='flex flex-col'>
+                                <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='w-[36%] flex flex-col '>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Количество 
+                        </p>
+                        <div className='flex items-start justify-between '>
+                            <input type="number" className='w-[60px] h-[38px] border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
+                        </div>
+                    </div>
+                </div>
+                <button className='w-full flex items-end justify-end text-textBlueColor font-AeonikProMedium pr-1'>готово</button>
+            </action>
         </div>
     );
 
@@ -106,7 +174,7 @@ const AddingProduct = () => {
 
 
     return (
-        <div className='relative w-full flex items-center justify-between my-[50px]'>
+        <div className='relative w-full flex items-center justify-between my-[50px] focus:bg-textBlueColor'>
             
             <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
                 <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">1</div>
@@ -431,22 +499,22 @@ const AddingProduct = () => {
                         <div className='w-full flex items-center justify-between'>
                             <Popover
                                 open={state?.openhat}
-                                onOpenChange={handleOpenChangeHat}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointerx active:scale-95 focus:bg-textBlueColor focus:text-white"
+                                // onOpenChange={handleOpenChangeHat}
+                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white"
                                 trigger="click"
                                 options={["Hide"]}
-                                placement="bottom"
+                                placement="bottomLeft"
                                 content={contentHat}
                             >
-                                <span className='group-focus:text-white'>Головные уборы</span>
+                                Головные уборы
                             </Popover>
                             <Popover
-                                open={state?.openOutwear}
-                                onOpenChange={handleOpenChangeOutwear}
-                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor  border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white  "
+                                // open={state?.openOutwear}
+                                // onOpenChange={handleOpenChangeOutwear}
+                                className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white  "
                                 trigger="click"
                                 options={["Hide"]}
-                                placement="bottom"
+                                placement="bottomLeft"
                                 content={contentOutwear}
                             >
                                 Верхняя одежда
@@ -457,7 +525,7 @@ const AddingProduct = () => {
                                 className="group px-[15px] h-[38px] rounded-lg bg-btnBgColor  border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white  "
                                 trigger="click"
                                 options={["Hide"]}
-                                placement="bottom"
+                                placement="bottomLeft"
                                 // content={contentWear}
                             >
                                 Нижняя одежда
