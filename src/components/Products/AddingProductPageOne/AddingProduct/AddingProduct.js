@@ -20,12 +20,16 @@ const AddingProduct = () => {
 
     // Hats
     const contentHat = (
-        <div className="w-[375px] h-fit">
+        <div className="w-[390px] h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-1/2 flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Обхват головы <span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]' >
+                            Обхват головы 
+                            <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center '>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none' />
                                 <div className='mt-[5px] text-textLightColor text-xs font-AeonikProMedium'>Мин</div>
@@ -39,7 +43,9 @@ const AddingProduct = () => {
                     </div>
                     <div className='w-1/2 flex flex-col items-center'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
-                            Количество <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            Количество 
+                            <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='flex items-start justify-between '>
                             <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
@@ -53,95 +59,108 @@ const AddingProduct = () => {
     
     // Outerwear    
     const contentOutwear = (
-        <div className="w-[611px] h-fit">
+        <div className="w-[620px] h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Обхват Груди <span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Обхват Груди 
+                            <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
                             </div>
-                            <span className='rotate-90 text-borderColor ml-[10px] mr-[9px]'>|</span>
+                            <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
                             </div>
                         </div>
                     </div>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер</p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Размер
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
                             </div>
-                            <span className='rotate-90 text-borderColor ml-[10px] mr-[9px]'>|</span>
+                            <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
                             </div>
                         </div>
                     </div>
-                    <div className='w-[36%] flex flex-col '>
+                    <div className='w-[36%] flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
-                        Буквенный Размер 
+                            Буквенный Размер 
+                            <span className='ml-[5px]'><StarLabel/></span>
                         </p>
-                        <div className='w-full flex items-start justify-between mb-[10px]'>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="xxs" name="size" value="xxs" checked />
-                                <label htmlFor="xxs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XXS</label>
+                        <div className='w-full flex items-start mb-[10px]'>
+                            <div className='flex justify-center items-center'>
+                                <input type="radio" id="xxs_outwear" name="size_Outwear" value="XXS" className='w-[18px] h-[18px]' />
+                                <label htmlFor="xxs_outwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>XXS</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="xs" name="size" value="xs" />
-                                <label htmlFor="xs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XS</label>
+                            <div className='flex justify-center items-center'>
+                                <input type="radio" id="xs_outwear" name="size_Outwear" value="XS" className='w-[18px] h-[18px]' />
+                                <label htmlFor="xs_outwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>XS</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="s" name="size" value="s" />
-                                <label htmlFor="s" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>S</label>
-                            </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="M" name="size" value="M" />
-                                <label htmlFor="M" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>M</label>
-                            </div>
+                            <div className='flex justify-center items-center ml-[1px]'>
+                                <input type="radio" id="s_outwear" name="size_Outwear" value="S" className='w-[18px] h-[18px]' />
+                                <label htmlFor="s_outwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>S</label>
+                              </div>
+                            <div className='flex justify-center items-center ml-[17px]'>
+                                <input type="radio" id="m_outwear" name="size_Outwear" value="M" className='w-[18px] h-[18px]' />
+                                <label htmlFor="m_outwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer'>M</label>
+                            </div>  
                         </div>
-                        <div className='w-full flex items-start justify-between '>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="L" name="size" value="L" checked />
-                                <label htmlFor="L" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>L</label>
+                        <div className='w-full flex items-start'>
+                            <div className='flex items-center justify-center mr-[18px]'>
+                                <input type="radio" id="l_outwear" name="size_Outwear" value="L" className='w-[18px] h-[18px]' />
+                                <label htmlFor="l_outwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer'>L</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="XL" name="size" value="XL" />
-                                <label htmlFor="XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XL</label>
+                            <div className='flex items-center justify-center mr-[2px]'>
+                                <input type="radio" id="xl_outwear" name="size_Outwear" value="XL" className='w-[18px] h-[18px]' />
+                                <label htmlFor="xl_outwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer'>XL</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="2XL" name="size" value="2XL" />
-                                <label htmlFor="2XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>2XL</label>
+                            <div className='flex items-center justify-center'>
+                                <input type="radio" id="two_xl_outwear" name="size_Outwear" value="2XL" className='w-[18px] h-[18px]' />
+                                <label htmlFor="two_xl_outwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>2XL</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="3XL" name="size" value="3XL" />
-                                <label htmlFor="3XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>3XL</label>
-                            </div>
-                        </div>
+                            <div className='flex items-center justify-center'>
+                                <input type="radio" id="three_xl_outwear" name="size_Outwear" value="3XL" className='w-[18px] h-[18px] ' />
+                                <label htmlFor="three_xl_outwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer'>3XL</label>
+                        </div></div>
                     </div>
                 </div>
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Обхват Талии<span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Обхват Талии<span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
                             </div>
-                            <span className='rotate-90 text-borderColor ml-[10px] mr-[9px]'>|</span>
+                            <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
                             </div>
                         </div>
                     </div>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Обхват Бедер</p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Обхват Бедер
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин'/>
                             </div>
-                            <span className='rotate-90 text-borderColor ml-[10px] mr-[9px]'>|</span>
+                            <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
                             </div>
@@ -150,6 +169,7 @@ const AddingProduct = () => {
                     <div className='w-[36%] flex flex-col '>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Количество 
+                            <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='flex items-start justify-between '>
                             <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
@@ -162,80 +182,90 @@ const AddingProduct = () => {
     );
 
     // Underwear
-    const underWear = (
-        <div className="w-[611px] h-fit">
+    const contentUnderWear = (
+        <div className="w-fit h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер Талии<span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Размер Талии
+                            <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
                             </div>
-                            <span className='rotate-90 text-borderColor ml-[10px] mr-[9px]'>|</span>
+                            <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
                             </div>
                         </div>
                     </div>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер</p>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Размер
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
                         <div className='flex items-center justify-between gap-x-1'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
                             </div>
                         </div>
                     </div>
-                    <div className='w-[36%] flex flex-col '>
+                    <div className='w-[36%] flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
                         Буквенный Размер 
+                        <span className='ml-[5px]'><StarLabel/></span>
                         </p>
-                        <div className='w-full flex items-start justify-between mb-[10px]'>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="xxs" name="size" value="xxs" checked />
-                                <label htmlFor="xxs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XXS</label>
+                        <div className='w-full flex items-start mb-[10px]'>
+                            <div className='flex justify-center items-center'>
+                                <input type="radio" id="xxs_underwear" name="size_Underwear" value="XXS" className='w-[18px] h-[18px]' />
+                                <label htmlFor="xxs_underwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>XXS</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="xs" name="size" value="xs" />
-                                <label htmlFor="xs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XS</label>
+                            <div className='flex justify-center items-center'>
+                                <input type="radio" id="xs_underwear" name="size_Underwear" value="XS" className='w-[18px] h-[18px]' />
+                                <label htmlFor="xs_underwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>XS</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="s" name="size" value="s" />
-                                <label htmlFor="s" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>S</label>
-                            </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="M" name="size" value="M" />
-                                <label htmlFor="M" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>M</label>
-                            </div>
+                            <div className='flex justify-center items-center ml-[1px]'>
+                                <input type="radio" id="s_underwear" name="size_Underwear" value="S" className='w-[18px] h-[18px]' />
+                                <label htmlFor="s_underwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>S</label>
+                              </div>
+                            <div className='flex justify-center items-center ml-[17px]'>
+                                <input type="radio" id="m_underwear" name="size_Underwear" value="M" className='w-[18px] h-[18px]' />
+                                <label htmlFor="m_underwear"  className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer'>M</label>
+                            </div>  
                         </div>
-                        <div className='w-full flex items-start justify-between '>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="L" name="size" value="L" checked />
-                                <label htmlFor="L" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>L</label>
+                        <div className='w-full flex items-start'>
+                            <div className='flex items-center justify-center mr-[18px]'>
+                                <input type="radio" id="l_underwear" name="size_Underwear" value="L" className='w-[18px] h-[18px]' />
+                                <label htmlFor="l_underwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer'>L</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="XL" name="size" value="XL" />
-                                <label htmlFor="XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XL</label>
+                            <div className='flex items-center justify-center mr-[2px]'>
+                                <input type="radio" id="xl_underwear" name="size_Underwear" value="XL" className='w-[18px] h-[18px]' />
+                                <label htmlFor="xl_underwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer'>XL</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="2XL" name="size" value="2XL" />
-                                <label htmlFor="2XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>2XL</label>
+                            <div className='flex items-center justify-center'>
+                                <input type="radio" id="two_xl_underwear" name="size_Underwear" value="2XL" className='w-[18px] h-[18px]' />
+                                <label htmlFor="two_xl_underwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer'>2XL</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="3XL" name="size" value="3XL" />
-                                <label htmlFor="3XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>3XL</label>
-                            </div>
-                        </div>
+                            <div className='flex items-center justify-center'>
+                                <input type="radio" id="three_xl_underwear" name="size_Underwear" value="3XL" className='w-[18px] h-[18px] '/>
+                                <label htmlFor="three_xl_underwear" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer'>3XL</label>
+                        </div></div>
                     </div>
                 </div>
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-[28%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер Бедер</p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Размер Бедер
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
+                        <div className='flex items-center'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин'/>
                             </div>
-                            <span className='rotate-90 text-borderColor ml-[10px] mr-[9px]'>|</span>
+                            <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
                             </div>
@@ -244,6 +274,7 @@ const AddingProduct = () => {
                     <div className='w-[72%] flex flex-col '>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Количество 
+                            <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='flex items-start justify-between '>
                             <input type="number" className='w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
@@ -256,12 +287,15 @@ const AddingProduct = () => {
     )
    
     // Shoes
-    const shoes = (
-        <div className="w-[360px] h-fit">
+    const contentShoes = (
+        <div className="w-fit h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex gap-x-10 px-3 pt-5'>
                     <div className='w-[50%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер</p>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Размер
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
                         <div className='flex items-center justify-between gap-x-1'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
@@ -269,7 +303,11 @@ const AddingProduct = () => {
                         </div>
                     </div>
                     <div className='w-[50%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Длина Стопы<span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Длина Стопы
+                            <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
                         <div className='flex items-center gap-x-1'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
@@ -287,13 +325,16 @@ const AddingProduct = () => {
         </div>
     )
    
-    // Shoes
-    const accessories = (
-        <div className="w-[390px] h-fit">
-            <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
+    // Accessories
+    const contentAccessories = (
+        <div className="w-fit h-fit">
+            <action className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-[20%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Размер <span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Размер <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                        </p>
                         <div className='flex items-center justify-between gap-x-1'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none'  />
@@ -304,48 +345,53 @@ const AddingProduct = () => {
                     <div className='w-[80%] flex flex-col '>
                         <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
                         Буквенный Размер 
+                        <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='w-full flex items-start justify-between mb-[10px]'>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="xxs" name="size" value="xxs" checked />
-                                <label htmlFor="xxs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XXS</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="xxs_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="XXS" />
+                                <label htmlFor="xxs_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XXS</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="xs" name="size" value="xs" />
-                                <label htmlFor="xs" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XS</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="xs_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="XS" />
+                                <label htmlFor="xs_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>XS</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="s" name="size" value="s" />
-                                <label htmlFor="s" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>S</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="s_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="S" />
+                                <label htmlFor="s_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>S</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="M" name="size" value="M" />
-                                <label htmlFor="M" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>M</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="m_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="M" />
+                                <label htmlFor="m_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>M</label>
                             </div>
                         </div>
                         <div className='w-full flex items-start justify-between '>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="L" name="size" value="L" checked />
-                                <label htmlFor="L" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>L</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="l_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="L" />
+                                <label htmlFor="l_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>L</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="XL" name="size" value="XL" />
-                                <label htmlFor="XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>XL</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="xl_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="XL" />
+                                <label htmlFor="xl_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>XL</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="2XL" name="size" value="2XL" />
-                                <label htmlFor="2XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>2XL</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="two_xl_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="2XL" />
+                                <label htmlFor="two_xl_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>2XL</label>
                             </div>
-                            <div className='w-1/4 flex items-center mr-[10px]'>
-                                <input type="radio" id="3XL" name="size" value="3XL" />
-                                <label htmlFor="3XL" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor'>3XL</label>
+                            <div className='w-1/4 flex items-center'>
+                                <input type="radio" id="three_xl_accessories" name="size_Accessories" className='w-[18px] h-[18px]' value="3XL" />
+                                <label htmlFor="three_xl_accessories" className='text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor cursor-pointer'>3XL</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
                     <div className='w-[20%] flex flex-col'>
-                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>Длина<span className='text-sm text-textLightColor ml-[6px]'>(см)</span></p>
+                        <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
+                            Длина
+                            <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
+                            <span className='ml-[5px]'><StarLabel/></span>
+                            </p>
                         <div className='flex items-center justify-between'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-full text-start border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
@@ -403,7 +449,7 @@ const AddingProduct = () => {
                     <div className='w-full md:w-[65%]'>
                         {/* 1 */}
                         <div className='w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]'>
-                            <div className='w-1/2 flex  flex-col items-start'>
+                            <div className='w-1/2 flex flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
                                     <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Раздел одежды</label>
                                     <span className='ml-[5px]'><StarLabel/></span>
@@ -826,7 +872,7 @@ const AddingProduct = () => {
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottom"
-                                content={underWear}
+                                content={contentUnderWear}
                             >
                                 Нижняя одежда
                             </Popover>
@@ -837,7 +883,7 @@ const AddingProduct = () => {
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottom"
-                                content={shoes}
+                                content={contentShoes}
                             >
                             Обувь
                             </Popover>
@@ -848,7 +894,7 @@ const AddingProduct = () => {
                                 trigger="click"
                                 options={["Hide"]}
                                 placement="bottomRight"
-                                content={accessories}
+                                content={contentAccessories}
                             >
                                 Аксессуары
                             </Popover> 
@@ -861,23 +907,23 @@ const AddingProduct = () => {
                             <label htmlFor="" className='text-base font-AeonikProRegular'>Фото</label>
                             <span className='ml-[5px]'><StarLabel/></span>
                         </div>
-                        <div className='w-full h-[400px] bg-green-50 flex items-center justify-center border border-dashed rounded-lg'>
+                        <div className='w-full h-[400px] bg-photoBg flex items-center justify-center border border-dashed rounded-lg'>
                             <Link to='#' className='text-textBlueColor border-b border-textBlueColor font-AeonikProMedium'>Выберите фото</Link>
                         </div>
                         <div className='w-full flex items-center justify-between gap-x-[10px] mt-[10px]'>
                             <div className='w-1/3 flex flex-col items-center justify-center mb-[21px]'>
-                                <Link to='#' className='w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-green-50'>
+                                <Link to='#' className='w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg'>
                                     <DownloadIcon />
                                 </Link>
                             </div>
                             <div className='w-1/3 flex flex-col items-center justify-center'>
-                                <Link to='#' className=' w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-green-50'>
+                                <Link to='#' className=' w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg'>
                                     <DownloadIcon />
                                 </Link>
                                 <div className='text-[11px] text-textLightColor mt-[5px]'>(не обезательно)</div>
                             </div>
                             <div className='w-1/3 flex flex-col items-center justify-center '>
-                                <Link to='#' className=' w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-green-50'>
+                                <Link to='#' className=' w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg'>
                                     <DownloadIcon />
                                 </Link>
                                 <div className='text-[11px] text-textLightColor mt-[5px]'>(не обезательно)</div>

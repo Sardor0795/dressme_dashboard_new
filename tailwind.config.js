@@ -37,6 +37,7 @@ module.exports = {
         borderColor2:"#c5c5c5",
         bgColor:"#fdfdfd",
         btnLightBlueColor:"#e6f2f9",
+        photoBg:"#fbfdff",
       },
       fontFamily: {
         // 500
