@@ -390,7 +390,7 @@ const AddingProduct = () => {
                             <div className='w-1/2 flex  flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
                                     <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Артикул</label>
-                                    <span className='font-AeonikProMedium text-[13px] text-textLightColor ml-[5px]'>(не обезательно)</span>
+                                    <span className='font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]'>(не обезательно)</span>
                                 </div>
                                 <input type='text' className='w-full flex items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none' />
                             
