@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { BgSelectSkin } from "../../assets/icons";
+import { BgSelectSkin, CopyIcon } from "../../assets/icons";
 
 export default function Shops() {
 
@@ -59,88 +59,117 @@ export default function Shops() {
         action="#"
         className="w-full flex flex-col items-center justify-between mb-10 md:mb-24"
       >
-        <div className="w-full flex flex-col md:flex-row items-center justify-between mb-10 md:mb-[60px] gap-x-10">
-          <div className="w-full md:w-3/5 mb-[26px] md:mb-0">
-            <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
-              <label
-                htmlFor="shopName"
-                className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
-              >
-                Название магазина
-              </label>
-              <input
-                type="text"
-                name="shopName"
-                id="shopName"
-                placeholder="Введите название магазина"
-                className="w-[65%] md:w-[80%] border border-borderColor2 outline-none px-[15px] py-3 md:py-3 rounded-lg text-xs md:text-base font-AeonikProRegular"
-              />
-            </div>
-            <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
-                <label
-                    htmlFor="shopName"
-                    className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
-                >
-                    Пол
-                </label>
-                <div  className="w-[65%] md:w-[80%] md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                    {genderCategory.map((data) => {
-                        return(
-                            <button type="button" 
-                                key={data.id} 
-                                onClick={() => handleGenderCheck(data.id)}
-                                className={`w-1/3 md:w-full flex items-center justify-center active:scale-95  border md:border-0 text-xs md:text-base font-AeonikProRegular md:my-[3px] md:mx-[3px] md:px-[12px] py-[8px] md:py-[10px] rounded-lg
-                                ${
-                                    data.action
-                                      ?" h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                                      : ""
-                                  }    
-                                `}
-                            >
-                                {data.gender}
-                            </button>                            
-                            )
-                        })
-                    }
+        <div className="w-full flex flex-col md:flex-row items-start justify-between mb-10 md:mb-[60px] gap-x-10">
+            <div className="w-full md:w-3/5 mb-[26px] md:mb-0 md:mt-7">
+                <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
+                    <label
+                        htmlFor="shopName"
+                        className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                    >
+                        Название магазина
+                    </label>
+                    <input
+                        type="text"
+                        name="shopName"
+                        id="shopName"
+                        placeholder="Введите название магазина"
+                        className="w-[65%] md:w-[80%] border border-borderColor2 outline-none px-[15px] py-3 md:py-3 rounded-lg text-xs md:text-base font-AeonikProRegular"
+                    />
+                </div>
+                <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
+                    <label
+                        htmlFor="shopName"
+                        className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                    >
+                        Пол
+                    </label>
+                    <div  className="w-[65%] md:w-[80%] md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
+                        {genderCategory.map((data) => {
+                            return(
+                                <button type="button" 
+                                    key={data.id} 
+                                    onClick={() => handleGenderCheck(data.id)}
+                                    className={`w-1/3 md:w-full flex items-center justify-center active:scale-95  border md:border-0 text-xs md:text-base font-AeonikProRegular md:my-[3px] md:mx-[3px] md:px-[12px] py-[8px] md:py-[10px] rounded-lg
+                                    ${
+                                        data.action
+                                        ?" h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                        : ""
+                                    }    
+                                    `}
+                                >
+                                    {data.gender}
+                                </button>                            
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+                <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] ">
+                    <label
+                        htmlFor="shopName"
+                        className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                    >
+                        Метод доставки
+                    </label>
+                    <div className="w-[65%] md:w-[80%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+                        <button type="button" className="group w-[28%] md:w-1/4 active:scale-95 focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
+                        <span className="group-focus:text-white text-xs md:text-base">
+                            Такси
+                        </span>
+                        </button>
+                        <button type="button" className="group w-[72%] md:w-3/4 active:scale-95 group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
+                        <span className="group-focus:text-white text-xs md:text-base">
+                            Собственная доставка
+                        </span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] ">
-              <label
-                htmlFor="shopName"
-                className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
-              >
-                Метод доставки
-              </label>
-              <div className="w-[65%] md:w-[80%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                <button type="button" className="group w-[28%] md:w-1/4 active:scale-95 focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
-                  <span className="group-focus:text-white text-xs md:text-base">
-                    Такси
-                  </span>
-                </button>
-                <button type="button" className="group w-[72%] md:w-3/4 active:scale-95 group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
-                  <span className="group-focus:text-white text-xs md:text-base">
-                    Собственная доставка
-                  </span>
-                </button>
-              </div>
+            <div className="w-full md:w-2/5 md:flex flex-col items-start">
+                <div className="w-full relative mb-[6px]">
+                    <div className="block mb-3 md:mb-1">
+                        <span className="text-sm md:text-base mr-2 font-AeonikProRegular">
+                            Описание магазина на русском
+                        </span>
+                        <span className="text-xs md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-borderGrayColor">
+                            (не обезательно)
+                        </span>
+                    </div>
+                    <textarea
+                    name="storeDescription"
+                    id="storeDescription"
+                    className=" w-full h-[100px] text-[11px] md:text-[13px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 resize-none"
+                    placeholder="Пишите здесь..."
+                    >
+                    </textarea>
+                    <span className="absolute cursor-pointer right-[6px] bottom-[12px]">
+                        <CopyIcon/>
+                    </span>
+                </div>
+                <div className="w-full relative">
+                    <div className="block mb-3 md:mb-1">
+                        <span className="text-sm md:text-base mr-2 font-AeonikProRegular">
+                            Описание магазина на узбекском
+                        </span>
+                        <span className="text-xs md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-borderGrayColor">
+                            (не обезательно)
+                        </span>
+                    </div>
+                    <textarea
+                        name="storeDescription"
+                        id="storeDescription"
+                        className=" w-full h-[100px] text-[11px] md:text-[13px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 resize-none"
+                        placeholder="Пишите здесь..."
+                    >
+                    </textarea>
+                    <span className="absolute cursor-pointer right-[6px] bottom-[12px]">
+                        <CopyIcon/>
+                    </span>
+                </div>
+                <div className="w-full flex items-end justify-end mt-2">
+                    <p className="text-sm md:text-base font-AeonikProMedium text-mobileTextColor">Воспользоваться <Link to="https://translate.google.com/" className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium ml-3">Google переводчиком</Link></p>
+                </div>
             </div>
-          </div>
-          <div className="w-full md:w-2/5 md:flex items-start">
-            <div className="block md:hidden mb-3">
-              <span className="text-sm mr-2 font-AeonikProRegular">
-                Описание магазина
-              </span>
-              <span className="text-xs font-AeonikProRegular text-borderGrayColor">
-                (не обезательно)
-              </span>
-            </div>
-            <textarea
-              name="storeDescription"
-              id="storeDescription"
-              className="w-full h-[100px] text-[11px] md:text-[13px] md:h-[192px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 md:resize-none"
-              placeholder="Пишите здесь..."
-            ></textarea>
-          </div>
         </div>
 
         <Link

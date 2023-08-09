@@ -801,10 +801,10 @@ const AddingProduct = () => {
                             <div className='w-1/2 flex flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
                                     <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Категория одежды</label>
-                                    <span className='ml-[5px]'><StarLabel/></span>
+                                    <span className='ml-[5px]'></span>
                                 </div>
                                 <Select
-                                    className="rounded-lg w-full h-11 md:h-10"
+                                    className="hidden md:flex rounded-lg w-full h-11 md:h-10"
                                     showSearch
                                     placeholder="Выбрать"
                                     optionFilterProp="children"
@@ -831,13 +831,19 @@ const AddingProduct = () => {
                                     },
                                     ]}
                                 />
+                                <button className='w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[39px] p-2'>
+                                    <span className='text-borderColor font-AeonikProRegular text-[11px] '>Выбрать</span>
+                                    <span className=''>
+                                        <ArrowRightIcon />
+                                    </span>
+                                </button>
                             </div>
                             <div className='w-1/2 flex flex-col items-start'>
-                                    <div className='flex items-center justify-center mb-[5px]'>
-                                        <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Вес (грамм)</label>
-                                        <span className='ml-[5px]'><StarLabel/></span>
-                                    </div>
-                                    <input type='number' className='w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='(не обезательно)' />
+                                <div className='flex items-center justify-center mb-[5px]'>
+                                    <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Вес (грамм)</label>
+                                    <span className='ml-[5px]'><StarLabel/></span>
+                                </div>
+                                <input type='number' className='w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='(не обезательно)' />
                             </div>
                         </div>
 
