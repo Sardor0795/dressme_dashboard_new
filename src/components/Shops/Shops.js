@@ -132,7 +132,7 @@ export default function Shops() {
                             Описание магазина на русском
                         </span>
                         <span className="text-xs md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-borderGrayColor">
-                            (не обезательно)
+                            (необязательно)
                         </span>
                     </div>
                     <textarea
@@ -152,7 +152,7 @@ export default function Shops() {
                             Описание магазина на узбекском
                         </span>
                         <span className="text-xs md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-borderGrayColor">
-                            (не обезательно)
+                            (необязательно)
                         </span>
                     </div>
                     <textarea
@@ -167,7 +167,7 @@ export default function Shops() {
                     </span>
                 </div>
                 <div className="w-full flex items-end justify-end mt-2">
-                    <p className="text-sm md:text-base font-AeonikProMedium text-mobileTextColor">Воспользоваться <Link to="https://translate.google.com/" className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium ml-3">Google переводчиком</Link></p>
+                    <p className="text-sm md:text-base font-AeonikProMedium text-mobileTextColor">Воспользоваться <Link to="https://translate.google.com/?sl=ru&tl=uz&op=translate" className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium ml-3">Google переводчиком</Link></p>
                 </div>
             </div>
         </div>
