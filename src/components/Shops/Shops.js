@@ -142,7 +142,7 @@ export default function Shops() {
                     placeholder="Пишите здесь..."
                     >
                     </textarea>
-                    <span className="absolute cursor-pointer right-[6px] bottom-[12px]">
+                    <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
                         <CopyIcon/>
                     </span>
                 </div>
@@ -162,7 +162,7 @@ export default function Shops() {
                         placeholder="Пишите здесь..."
                     >
                     </textarea>
-                    <span className="absolute cursor-pointer right-[6px] bottom-[12px]">
+                    <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
                         <CopyIcon/>
                     </span>
                 </div>
