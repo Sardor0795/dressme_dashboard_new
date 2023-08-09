@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { BgSelectSkin, CopyIcon } from "../../assets/icons";
+import { BgSelectSkin, CopyIcon, StarLabel } from "../../assets/icons";
 
 export default function Shops() {
 
@@ -52,6 +52,7 @@ export default function Shops() {
             className="text-[11px] md:text-sm font-AeonikProMedium text-textBlueColor p-3"
           >
             выберите Логотип
+            <span className="absolute top-[47px] left-[67px] md:left-[95px] md:top-[70px]"><StarLabel /> </span>
           </Link>
         </div>
       </div>
@@ -64,26 +65,29 @@ export default function Shops() {
                 <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
                     <label
                         htmlFor="shopName"
-                        className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                        className="w-[40%] md:w-[30%] flex items-center text-xs md:text-base text-mobileTextColor font-AeonikProRegular
+                        "
                     >
                         Название магазина
+                        <span className="ml-[5px]"><StarLabel /> </span>
                     </label>
                     <input
                         type="text"
                         name="shopName"
                         id="shopName"
                         placeholder="Введите название магазина"
-                        className="w-[65%] md:w-[80%] border border-borderColor2 outline-none px-[15px] py-3 md:py-3 rounded-lg text-xs md:text-base font-AeonikProRegular"
+                        className="w-[60%] md:w-[70%] border border-borderColor2 outline-none px-[15px] py-3 md:py-3 rounded-lg text-xs md:text-base font-AeonikProRegular"
                     />
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] mb-5">
                     <label
                         htmlFor="shopName"
-                        className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                        className="w-[40%] md:w-[30%] flex items-center text-xs md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
                     >
                         Пол
+                        <span className="ml-[5px]"><StarLabel /> </span>
                     </label>
-                    <div  className="w-[65%] md:w-[80%] md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
+                    <div  className="w-[60%] md:w-[70%] md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                         {genderCategory.map((data) => {
                             return(
                                 <button type="button" 
@@ -107,11 +111,12 @@ export default function Shops() {
                 <div className="w-full flex items-center justify-between gap-x-[15px] md:gap-x-[30px] ">
                     <label
                         htmlFor="shopName"
-                        className="w-[35%] md:w-[20%] text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
+                        className="w-[40%] md:w-[30%] flex items-center text-xs md:text-base text-mobileTextColor font-AeonikProRegular"
                     >
                         Метод доставки
+                        <span className="ml-[5px]"><StarLabel /></span>
                     </label>
-                    <div className="w-[65%] md:w-[80%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+                    <div className="w-[60%] md:w-[70%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                         <button type="button" className="group w-[28%] md:w-1/4 active:scale-95 focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg py-2 md:px-[15px] md:py-3">
                         <span className="group-focus:text-white text-xs md:text-base">
                             Такси

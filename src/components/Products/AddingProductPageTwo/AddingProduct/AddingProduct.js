@@ -34,7 +34,7 @@ export default function AddingProduct() {
             <div className="section1 border-b pb-[30px] md:rounded-lg md:p-5 w-full md:max-w-[490px] md:border border-[#f2f2f2] ">
               <div className="mb-[10px]">
                 <div className="flex items-center mb-[5px]">
-                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                     Название на русском
                   </div>
                   <span className="ml-[5px]">
@@ -53,7 +53,7 @@ export default function AddingProduct() {
               </div>
               <div className="mb-[10px]">
                 <div className="flex items-center mb-[5px]">
-                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                     Название на узбекском
                   </div>
                   <span className="ml-[5px]">
@@ -72,7 +72,7 @@ export default function AddingProduct() {
               </div>
               <div className="mb-[10px]">
                 <div className="flex items-center mb-[5px]">
-                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                     Описание на русском
                   </div>
                   <span className="ml-[5px]">
@@ -94,7 +94,7 @@ export default function AddingProduct() {
               </div>
               <div>
                 <div className="flex items-center mb-[5px]">
-                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                     Описание на узбекском
                   </div>
                   <span className="ml-[5px]">
@@ -123,7 +123,7 @@ export default function AddingProduct() {
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
                 <div className="flex-1 mb-[10px]">
                   <div className="flex items-center mb-[5px]">
-                    <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                    <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                       Качество на русском
                     </div>
                     <span className="ml-[5px]">
@@ -134,7 +134,7 @@ export default function AddingProduct() {
                 </div>
                 <div className="flex-1 mb-[10px]">
                   <div className="flex items-center mb-[5px]">
-                    <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                    <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                       Качество на узбекском
                     </div>
                     <span className="ml-[5px]">
@@ -146,10 +146,10 @@ export default function AddingProduct() {
               </div>
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
                 <div className="flex-1 mb-[17px] md:mb-[10px]">
-                  <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProMedium">
+                  <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
                     Состав на русском{" "}
-                    <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProMedium">
-                      (не обезательно)
+                    <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
+                      (необязательно)
                     </span>
                   </div>
                   <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
@@ -162,7 +162,7 @@ export default function AddingProduct() {
                     </button>
                   </div>
                   <div className="mt-[10px]">
-                    <div className="flex items-center text-white w-fit px-2 py-[5px] text-[16px] rounded-[4px] font-AeonikProRegular bg-[#007dca]">
+                    <div className="flex items-center text-white w-fit px-2 py-[5px] text-[16px] rounded-md font-AeonikProRegular bg-[#007dca]">
                       хлопок{" "}
                       <button className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
                         <XIcon />
@@ -171,10 +171,10 @@ export default function AddingProduct() {
                   </div>
                 </div>
                 <div className="flex-1 mb-[10px]">
-                  <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProMedium">
+                  <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
                     Состав на узбекском{" "}
-                    <span className="notRecquired font-AeonikProMedium">
-                      (не обезательно)
+                    <span className="notRecquired font-AeonikProRegular text-sm text-textLightColor">
+                      (необязательно)
                     </span>
                   </div>
                   <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
@@ -190,8 +190,8 @@ export default function AddingProduct() {
               </div>
               <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
                 <div className="flex-1 mb-[10px]">
-                  <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium">
-                    Бренд <span className="notRecquired">(не обезательно)</span>
+                  <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
+                    Бренд <span className="notRecquired text-sm text-textLightColor font-AeonikProRegular">(необязательно)</span>
                   </div>
                   <Select
                     className="font-AeonikProMedium"
@@ -215,11 +215,11 @@ export default function AddingProduct() {
               <div className="flex justify-center md:justify-end gap-[20px] mt-auto">
                 <Link
                   to="/products"
-                  className="text-white text-center text-base md:text-lg p-[12px] active:translate-y-[2px] rounded-md bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                  className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
                 >
                   Назад
                 </Link>
-                <Link className="text-white text-center p-[12px] text-base md:text-lg active:translate-y-[2px] rounded-md bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
+                <Link className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
                   Добавить
                 </Link>
               </div>
