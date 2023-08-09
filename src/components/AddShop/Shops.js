@@ -5,19 +5,10 @@ import { Select } from "antd";
 
 export default function AddShop() {
   return (
-    <div className="w-full px-4 md:px-[100px] mt-6 md:mt-12">
+    <div className="w-full max-w-[920px] mx-auto px-4 md:px-[100px] mt-6 md:mt-12">
       <div className="my-4">
         <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
           Добавить локацию магазина
-        </div>
-
-        <div className="flex justify-end my-4">
-          <a
-            className="text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor mr-[5px]"
-            href="#"
-          >
-            Выбрать магазин
-          </a>
         </div>
 
         <div className="map">

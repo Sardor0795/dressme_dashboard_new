@@ -36,8 +36,8 @@ export default function AddingProduct() {
                     className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                     type="text"
                   />
-                  <button className="text-[#858585] text-xs rounded-[4px] bg-[#f0f0f0] active:translate-y-[2px] p-[5px] font-AeonikProMedium">
-                    Копировать
+                  <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
+
                   </button>
                 </div>
               </div>
@@ -50,8 +50,8 @@ export default function AddingProduct() {
                     className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                     type="text"
                   />
-                  <button className="text-[#858585] text-xs rounded-[4px] bg-[#f0f0f0] active:translate-y-[2px] p-[5px] font-AeonikProMedium">
-                    Копировать
+                  <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
+
                   </button>
                 </div>
               </div>
@@ -66,8 +66,8 @@ export default function AddingProduct() {
                     id=""
                   ></textarea>
                   <div className="flex justify-end w-full">
-                    <button className="text-[#858585] text-xs rounded-[4px] bg-[#f0f0f0] active:translate-y-[2px] p-[5px] font-AeonikProMedium">
-                      Копировать
+                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
+
                     </button>
                   </div>
                 </div>
@@ -83,8 +83,8 @@ export default function AddingProduct() {
                     id=""
                   ></textarea>
                   <div className="hidden justify-end w-full">
-                    <button className="text-[#858585] text-xs rounded-[4px] bg-[#f0f0f0] active:translate-y-[2px] p-[5px] font-AeonikProMedium">
-                      Копировать
+                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
+
                     </button>
                   </div>
                 </div>
@@ -121,8 +121,8 @@ export default function AddingProduct() {
                       className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
                     />
-                    <button className="text-[#858585] text-xs rounded-[4px] bg-[#f0f0f0] active:translate-y-[2px] p-[5px] font-AeonikProMedium">
-                      Копировать
+                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
+
                     </button>
                   </div>
                   <div className="mt-[10px]">
@@ -144,8 +144,8 @@ export default function AddingProduct() {
                       className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
                     />
-                    <button className="text-[#858585] text-xs rounded-[4px] bg-[#f0f0f0] active:translate-y-[2px] p-[5px] font-AeonikProMedium">
-                      Копировать
+                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
+                      
                     </button>
                   </div>
                 </div>
