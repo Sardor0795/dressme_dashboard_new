@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
+import { CopyIcon, StarLabel, XIcon } from "../../../../assets/icons";
 
 export default function AddingProduct() {
   return (
@@ -18,7 +19,11 @@ export default function AddingProduct() {
       <div className="flex-1">
         <div>
           <div className="flex md:hidden mb-[15px] justify-end">
-            <Link className="text-[#007DCA] text-[14px] border-b border-[#007dca] leading-none font-AeonikProRegular">
+            <Link
+              to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
+              target="_blank"
+              className="text-[#007DCA] text-[14px] border-b border-[#007dca] leading-none font-AeonikProRegular"
+            >
               Google переводчиком
             </Link>
           </div>
@@ -27,64 +32,85 @@ export default function AddingProduct() {
             action="#"
           >
             <div className="section1 border-b pb-[30px] md:rounded-lg md:p-5 w-full md:max-w-[490px] md:border border-[#f2f2f2] ">
-              <div className="inputWrapper mb-[10px]">
-                <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium bg-[url('/src/assets/asterisc.png')] bg-right bg-no-repeat">
-                  Название на русском
+              <div className="mb-[10px]">
+                <div className="flex items-center mb-[5px]">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                    Название на русском
+                  </div>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
                 </div>
                 <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
                   <input
                     className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                     type="text"
                   />
-                  <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
-
+                  <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
+                    <CopyIcon />
                   </button>
                 </div>
               </div>
-              <div className="inputWrapper mb-[10px]">
-                <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium bg-[url('/src/assets/asterisc.png')] bg-right bg-no-repeat">
-                  Название на узбекском
+              <div className="mb-[10px]">
+                <div className="flex items-center mb-[5px]">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                    Название на узбекском
+                  </div>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
                 </div>
                 <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
                   <input
                     className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                     type="text"
                   />
-                  <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
-
+                  <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
+                    <CopyIcon />
                   </button>
                 </div>
               </div>
-              <div className="inputWrapper mb-[10px]">
-                <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium bg-[url('/src/assets/asterisc.png')] bg-right bg-no-repeat">
-                  Название на узбекском
+              <div className="mb-[10px]">
+                <div className="flex items-center mb-[5px]">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                    Описание на русском
+                  </div>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
                 </div>
-                <div className="rounded-lg border border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
+                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
                   <textarea
-                    className="block w-full text-[#666] text-sm resize-none bg-transparent flex-1 mb-[10px] outline-none font-AeonikProRegular"
+                    className="block w-full h-full text-[#666] text-sm resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                     name=""
                     id=""
                   ></textarea>
                   <div className="flex justify-end w-full">
-                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
-
+                    <button className="absolute bottom-[6px] right-[6px] overscroll-y-none w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
+                      <CopyIcon />
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="inputWrapper">
-                <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium bg-[url('/src/assets/asterisc.png')] bg-right bg-no-repeat">
-                  Описание на узбекском
+              <div>
+                <div className="flex items-center mb-[5px]">
+                  <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                    Описание на узбекском
+                  </div>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
                 </div>
-                <div className="rounded-lg  border border-[#ffb8b8] bg-[#fff6f6] flex column h-[120px]  py-[10px] px-[5px]">
+                {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
+                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
                   <textarea
-                    className="block w-full text-[#666] text-sm resize-none bg-transparent flex-1 mb-[10px] outline-none font-AeonikProRegular"
+                    className="block w-full h-full text-[#666] text-sm resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                     name=""
                     id=""
                   ></textarea>
-                  <div className="hidden justify-end w-full">
-                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
-
+                  <div className="flex justify-end w-full">
+                    <button className="absolute bottom-[6px] right-[6px] overscroll-y-none w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
+                      <CopyIcon />
                     </button>
                   </div>
                 </div>
@@ -95,21 +121,31 @@ export default function AddingProduct() {
 
             <div className="w-full pb-[30px] md:border border-[#f2f2f2] flex flex-col md:rounded-lg md:p-5 flex-1">
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
-                <div className="inputWrapper flex-1 mb-[10px]">
-                  <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium bg-[url('/src/assets/asterisc.png')] bg-right bg-no-repeat">
-                    Качество на русском
+                <div className="flex-1 mb-[10px]">
+                  <div className="flex items-center mb-[5px]">
+                    <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                      Качество на русском
+                    </div>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
                   </div>
                   <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
                 </div>
-                <div className="inputWrapper flex-1 mb-[10px]">
-                  <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium bg-[url('/src/assets/asterisc.png')] bg-right bg-no-repeat">
-                    Качество на узбекском
+                <div className="flex-1 mb-[10px]">
+                  <div className="flex items-center mb-[5px]">
+                    <div className="text-[#303030] w-fit text-base font-AeonikProMedium">
+                      Качество на узбекском
+                    </div>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
                   </div>
                   <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
                 </div>
               </div>
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
-                <div className="inputWrapper flex-1 mb-[17px] md:mb-[10px]">
+                <div className="flex-1 mb-[17px] md:mb-[10px]">
                   <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProMedium">
                     Состав на русском{" "}
                     <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProMedium">
@@ -121,18 +157,20 @@ export default function AddingProduct() {
                       className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
                     />
-                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
-
+                    <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
+                      <CopyIcon />
                     </button>
                   </div>
                   <div className="mt-[10px]">
                     <div className="flex items-center text-white w-fit px-2 py-[5px] text-[16px] rounded-[4px] font-AeonikProRegular bg-[#007dca]">
                       хлопок{" "}
-                      <button className="bg-[url('/src/assets/x_icon.png')] bg-center active:translate-y-[2px] bg-no-repeat  w-4 h-4 rounded-full bg-white ml-[10px]"></button>
+                      <button className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                        <XIcon />
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div className="inputWrapper flex-1 mb-[10px]">
+                <div className="flex-1 mb-[10px]">
                   <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProMedium">
                     Состав на узбекском{" "}
                     <span className="notRecquired font-AeonikProMedium">
@@ -144,14 +182,14 @@ export default function AddingProduct() {
                       className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
                     />
-                    <button className="bg-[url('/src/assets/copy_icon.png')] w-[22px] h-[22px] rounded-[4px]  active:translate-y-[2px] p-[5px]">
-                      
+                    <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
+                      <CopyIcon />
                     </button>
                   </div>
                 </div>
               </div>
               <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
-                <div className="inputWrapper flex-1 mb-[10px]">
+                <div className="flex-1 mb-[10px]">
                   <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProMedium">
                     Бренд <span className="notRecquired">(не обезательно)</span>
                   </div>
@@ -161,7 +199,7 @@ export default function AddingProduct() {
                     style={{ width: "100%" }}
                   />
                 </div>
-                <div className="inputWrapper flex-1 mb-[10px]"></div>
+                <div className="flex-1 mb-[10px]"></div>
               </div>
 
               <div className="flex md:hidden items-center justify-center mb-[40px]">
@@ -175,18 +213,25 @@ export default function AddingProduct() {
               </div>
 
               <div className="flex justify-center md:justify-end gap-[20px] mt-auto">
-                <button className="text-white p-[12px] active:translate-y-[2px] rounded-md bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
+                <Link
+                  to="/products"
+                  className="text-white text-center text-base md:text-lg p-[12px] active:translate-y-[2px] rounded-md bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                >
                   Назад
-                </button>
-                <button className="text-white p-[12px] active:translate-y-[2px] rounded-md bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
+                </Link>
+                <Link className="text-white text-center p-[12px] text-base md:text-lg active:translate-y-[2px] rounded-md bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
                   Добавить
-                </button>
+                </Link>
               </div>
             </div>
           </form>
           <div className="hidden md:block mt-[30px] font-AeonikProRegular">
             Воспользоваться
-            <Link className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular">
+            <Link
+              to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
+              target="_blank"
+              className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+            >
               Google переводчиком
             </Link>
           </div>
