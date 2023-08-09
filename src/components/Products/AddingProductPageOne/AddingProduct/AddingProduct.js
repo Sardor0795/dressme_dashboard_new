@@ -20,10 +20,10 @@ const AddingProduct = () => {
 
     // Hats
     const contentHat = (
-        <div className="w-[390px] h-fit">
+        <div className="w-[366px] h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
-                    <div className='w-1/2 flex flex-col'>
+                    <div className='w-fit flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]' >
                             Обхват головы 
                             <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
@@ -41,7 +41,7 @@ const AddingProduct = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='w-1/2 flex flex-col items-center'>
+                    <div className='w-fit flex flex-col items-center'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Количество 
                             <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
@@ -182,10 +182,10 @@ const AddingProduct = () => {
 
     // Underwear
     const contentUnderWear = (
-        <div className="w-fit h-fit">
+        <div className="w-[614px] h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex  gap-x-10 px-3 pt-5'>
-                    <div className='w-[28%] flex flex-col'>
+                    <div className='w-fit flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Размер Талии
                             <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
@@ -201,7 +201,7 @@ const AddingProduct = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='w-[28%] flex flex-col'>
+                    <div className='w-fit flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Размер
                             <span className='ml-[5px]'><StarLabel/></span>
@@ -218,7 +218,7 @@ const AddingProduct = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='w-[36%] flex flex-col'>
+                    <div className='w-fit flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
                         Буквенный Размер 
                         </p>
@@ -308,21 +308,21 @@ const AddingProduct = () => {
    
     // Shoes
     const contentShoes = (
-        <div className="w-fit h-fit">
+        <div className="w-[288px] h-fit">
             <action className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`} >
                 <div className='w-full flex gap-x-10 px-3 pt-5'>
-                    <div className='w-[50%] flex flex-col'>
+                    <div className='w-fit flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Размер
                             <span className='ml-[5px]'><StarLabel/></span>
                         </p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <div className='w-[65px] flex items-center justify-between gap-x-1'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
                             </div>
                         </div>
                     </div>
-                    <div className='w-[50%] flex flex-col'>
+                    <div className='w-fit flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Длина Стопы
                             <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
@@ -354,7 +354,7 @@ const AddingProduct = () => {
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Размер <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
                         </p>
-                        <div className='flex items-center justify-between gap-x-1'>
+                        <div className='w-[83px] flex items-center justify-between gap-x-1'>
                             <div className='flex flex-col'>
                                 <input type="number" className='w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none'  />
                             </div>
@@ -485,18 +485,7 @@ const AddingProduct = () => {
                                         .includes(input.toLowerCase())
                                     }
                                     options={[
-                                    {
-                                        value: "Tashkent",
-                                        label: "Tashkent",
-                                    },
-                                    {
-                                        value: "Samarkand",
-                                        label: "Samarkand",
-                                    },
-                                    {
-                                        value: "Bukhara",
-                                        label: "Bukhara",
-                                    },
+                                        // no data
                                     ]}
                                 />
                             </div>
@@ -519,18 +508,7 @@ const AddingProduct = () => {
                                         .includes(input.toLowerCase())
                                     }
                                     options={[
-                                    {
-                                        value: "Tashkent",
-                                        label: "Tashkent",
-                                    },
-                                    {
-                                        value: "Samarkand",
-                                        label: "Samarkand",
-                                    },
-                                    {
-                                        value: "Bukhara",
-                                        label: "Bukhara",
-                                    },
+                                    // no data
                                     ]}
                                 />
                             </div>
@@ -557,18 +535,7 @@ const AddingProduct = () => {
                                         .includes(input.toLowerCase())
                                     }
                                     options={[
-                                    {
-                                        value: "Tashkent",
-                                        label: "Tashkent",
-                                    },
-                                    {
-                                        value: "Samarkand",
-                                        label: "Samarkand",
-                                    },
-                                    {
-                                        value: "Bukhara",
-                                        label: "Bukhara",
-                                    },
+                                    // no data
                                     ]}
                                 />
                             </div>
@@ -611,7 +578,10 @@ const AddingProduct = () => {
                         <div className='w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]'>
                             <div className='w-1/2 flex  flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
-                                    <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Пол</label>
+                                    <label htmlFor="" className='flex items-center text-[13px] md:text-base font-AeonikProRegular'>
+                                        Пол
+                                        <span className='ml-[5px]'><StarLabel/></span>
+                                    </label>
                                 </div>
                                 <Select
                                     className="rounded-lg w-full h-11 md:h-10"
@@ -627,25 +597,14 @@ const AddingProduct = () => {
                                         .includes(input.toLowerCase())
                                     }
                                     options={[
-                                    {
-                                        value: "Tashkent",
-                                        label: "Tashkent",
-                                    },
-                                    {
-                                        value: "Samarkand",
-                                        label: "Samarkand",
-                                    },
-                                    {
-                                        value: "Bukhara",
-                                        label: "Bukhara",
-                                    },
+                                        // no data    
                                     ]}
                                 />
                             </div>
                             <div className='w-1/2 flex  flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
                                     <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Артикул</label>
-                                    <span className='font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]'>(не обезательно)</span>
+                                    <span className='font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]'>(необязательно)</span>
                                 </div>
                                 <input type='text' className='w-full flex items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none' />
                             
@@ -680,7 +639,7 @@ const AddingProduct = () => {
                                         <span className='ml-[5px]'><StarLabel/></span>
                                     </div>
                                     <div className='w-full h-[42px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs'>
-                                        <input type='number' className='w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none'/>
+                                        <input type='number' placeholder='0' className='w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none'/>
                                         <span className='text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular'>сум</span>
                                     </div>
                                 </div>
@@ -688,7 +647,7 @@ const AddingProduct = () => {
                             <div className='w-1/2 flex flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
                                     <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Скидка</label>
-                                    <span className='font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]'>(не обезательно)</span>
+                                    <span className='font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]'>(необязательно)</span>
                                 </div>
                                 <div className='w-full flex items-center justify-center'>
                                     <div className='w-full flex items-center gap-x-1'>
@@ -696,7 +655,8 @@ const AddingProduct = () => {
                                             <div className='w-full flex items-center justify-center border border-borderColor rounded-lg px-[10px] py-[8px]'>
                                                 <input
                                                     type='number'
-                                                    className='w-[70%] font-AeonikProMedium text-center outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none'
+                                                    placeholder='0'
+                                                    className='w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none'
                                                 />
                                                 <span className='text-textLightColor ml-2'>%</span>
                                             </div>
@@ -704,7 +664,10 @@ const AddingProduct = () => {
                                         <span className='rotate-90 text-borderColor ml-[6px] mr-1 md:ml-3 md:mr-[9px]'>|</span>
                                         <div className='w-[60%] md:w-[75%] flex items-center'>
                                             <div className='w-full h-[42px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs'>
-                                                <input type='number' className='w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none'/>
+                                                <input 
+                                                    type='number' 
+                                                    placeholder='0'
+                                                    className='w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none'/>
                                                 <span className='text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular'>сум</span>
                                             </div>
                                         </div>
@@ -753,18 +716,7 @@ const AddingProduct = () => {
                                         .includes(input.toLowerCase())
                                     }
                                     options={[
-                                    {
-                                        value: "Tashkent",
-                                        label: "Tashkent",
-                                    },
-                                    {
-                                        value: "Samarkand",
-                                        label: "Samarkand",
-                                    },
-                                    {
-                                        value: "Bukhara",
-                                        label: "Bukhara",
-                                    },
+                                        // no data
                                     ]}
                                 />
                             </div>
@@ -788,27 +740,15 @@ const AddingProduct = () => {
                                             .includes(input.toLowerCase())
                                         }
                                         options={[
-                                        {
-                                            value: "Tashkent",
-                                            label: "Tashkent",
-                                        },
-                                        {
-                                            value: "Samarkand",
-                                            label: "Samarkand",
-                                        },
-                                        {
-                                            value: "Bukhara",
-                                            label: "Bukhara",
-                                        },
+                                            // no data
                                         ]}
                                     />
                                 </div>
                                 <div className='w-1/2 hidden md:flex flex-col items-start'>
                                     <div className='flex items-center justify-center mb-[5px]'>
                                         <label htmlFor="" className='text-base font-AeonikProRegular'>Вес (грамм)</label>
-                                        <span className='ml-[5px]'><StarLabel/></span>
                                     </div>
-                                    <input type='number' className='w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='(не обезательно)' />
+                                    <input type='number' className='w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='(необязательно)' />
                                 </div>
                             </div>
                         </div>
@@ -834,18 +774,7 @@ const AddingProduct = () => {
                                         .includes(input.toLowerCase())
                                     }
                                     options={[
-                                    {
-                                        value: "Tashkent",
-                                        label: "Tashkent",
-                                    },
-                                    {
-                                        value: "Samarkand",
-                                        label: "Samarkand",
-                                    },
-                                    {
-                                        value: "Bukhara",
-                                        label: "Bukhara",
-                                    },
+                                    // no data
                                     ]}
                                 />
                                 <button className='w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[39px] p-2'>
@@ -858,9 +787,8 @@ const AddingProduct = () => {
                             <div className='w-1/2 flex flex-col items-start'>
                                 <div className='flex items-center justify-center mb-[5px]'>
                                     <label htmlFor="" className='text-[13px] md:text-base font-AeonikProRegular'>Вес (грамм)</label>
-                                    <span className='ml-[5px]'><StarLabel/></span>
                                 </div>
-                                <input type='number' className='w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='(не обезательно)' />
+                                <input type='number' className='w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' placeholder='(необязательно)' />
                             </div>
                         </div>
 
@@ -943,13 +871,13 @@ const AddingProduct = () => {
                                 <Link to='#' className=' w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg'>
                                     <DownloadIcon />
                                 </Link>
-                                <div className='text-[11px] text-textLightColor mt-[5px]'>(не обезательно)</div>
+                                <div className='text-[11px] text-textLightColor mt-[5px]'>(необязательно)</div>
                             </div>
                             <div className='w-1/3 flex flex-col items-center justify-center '>
                                 <Link to='#' className=' w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg'>
                                     <DownloadIcon />
                                 </Link>
-                                <div className='text-[11px] text-textLightColor mt-[5px]'>(не обезательно)</div>
+                                <div className='text-[11px] text-textLightColor mt-[5px]'>(необязательно)</div>
                             </div>
                         </div>
                     </div>
@@ -964,7 +892,7 @@ const AddingProduct = () => {
                     <div className="h-[1px] bg-borderColor flex-grow"></div>
                 </div>
                 
-                <Link to='/products_nextpage' className='w-full flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium'>Продолжить</Link>
+                <Link to='/products_nextpage' className='w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium'>Продолжить</Link>
                 
             </form>
         </div>
