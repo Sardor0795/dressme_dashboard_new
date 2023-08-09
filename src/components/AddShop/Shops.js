@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { BgSelectSkin } from "../../assets/icons";
+import { BgSelectSkin, StarLabel } from "../../assets/icons";
 import { Select } from "antd";
 
 export default function AddShop() {
@@ -22,22 +22,25 @@ export default function AddShop() {
         <div className="flex mt-[10px] gap-[25px] mb-[25px]">
           <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
             <Link to="#" className="flex items-center justify-center">
-              <span className="text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor mr-[5px]">
+              <span className="leading-none text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                 Фото локации
               </span>
-            </Link>
-          </div>
-          <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
-            <Link to="#" className="flex items-center justify-center">
-              <span className="text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor mr-[5px]">
-              Второе фото локации ?
+              <span className="ml-[5px]">
+                <StarLabel />
               </span>
             </Link>
           </div>
           <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
             <Link to="#" className="flex items-center justify-center">
-              <span className="text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor mr-[5px]">
-              Третье фото локации ?
+              <span className="leading-none text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                Второе фото локации ?
+              </span>
+            </Link>
+          </div>
+          <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
+            <Link to="#" className="flex items-center justify-center">
+              <span className="leading-none text-sm font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                Третье фото локации ?
               </span>
             </Link>
           </div>
