@@ -154,7 +154,6 @@ const AddingProduct = () => {
                     <div className='w-[28%] flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Обхват Бедер
-                            <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='flex items-center'>
                             <div className='flex flex-col'>
@@ -208,15 +207,20 @@ const AddingProduct = () => {
                             <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='flex items-center justify-between gap-x-1'>
-                            <div className='flex flex-col'>
-                                <input type="number" className='w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' />
+                            <div className='flex items-center'>
+                                <div className='flex flex-col'>
+                                    <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Мин' />
+                                </div>
+                                <span className='rotate-90 text-borderColor mx-[9px]'>|</span>
+                                <div className='flex flex-col'>
+                                    <input type="number" className='w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none' placeholder='Макс' />
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className='w-[36%] flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
                         Буквенный Размер 
-                        <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='w-full flex items-start mb-[10px]'>
                             <div className='flex justify-center items-center'>
@@ -333,7 +337,6 @@ const AddingProduct = () => {
                     <div className='w-[20%] flex flex-col'>
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Размер <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
-                            <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='flex items-center justify-between gap-x-1'>
                             <div className='flex flex-col'>
@@ -345,7 +348,6 @@ const AddingProduct = () => {
                     <div className='w-[80%] flex flex-col '>
                         <p className='flex items-center text-base text-mobileTextColor mb-[15px]'>
                         Буквенный Размер 
-                        <span className='ml-[5px]'><StarLabel/></span>
                         </p>
                         <div className='w-full flex items-start justify-between mb-[10px]'>
                             <div className='w-1/4 flex items-center'>
@@ -390,7 +392,6 @@ const AddingProduct = () => {
                         <p className='flex items-center text-base text-mobileTextColor mb-[10px]'>
                             Длина
                             <span className='text-sm text-textLightColor ml-[6px]'>(см)</span>
-                            <span className='ml-[5px]'><StarLabel/></span>
                             </p>
                         <div className='flex items-center justify-between'>
                             <div className='flex flex-col'>
