@@ -16,7 +16,8 @@ export default function RouterList() {
       <Routes>
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products_nextpage" element={<ProductsPageTwo />} />
+        <Route path="/products/add" element={<ProductsPageTwo />} />
+        {/* <Route path="/products_nextpage" element={<ProductsPageTwo />} /> */}
         <Route path="/shops" element={<Shops />} />
         <Route path="/addshop" element={<AddShop />} />
         <Route path="/review-details/:id" element={<ReviewDetail />} />

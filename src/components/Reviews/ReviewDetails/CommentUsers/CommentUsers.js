@@ -1,76 +1,82 @@
 import React, { useState } from "react";
-import { CloseAnswer, MobileStar, SearchIcon, StarIcon, StarOutlineIcon } from "../../../../assets/icons";
+import {
+  CloseAnswer,
+  MobileStar,
+  SearchIcon,
+  StarIcon,
+  StarOutlineIcon,
+} from "../../../../assets/icons";
 
 export default function CommentUsers() {
-
-  const [sendAnswer, setSendAnswer] = useState(false)
-  const [starReviews, setStarReviews] = useState(true)
-  const [searchReviews, setSearchReviews] = useState(true)
-
-  const [userInfo, setuserInfo] = useState([
-    {
-      id: 1,
-      userName: "Umar",
-      userImg:
-        "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-      starCount: 5,
-      date: "19 февраля 2023 г.",
-      userFeedback:
-        "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-      wearSubject: [
-        {
-          id: 1,
-          subjectBrand: "Ответ Nike Store Official Dealer",
-          subjectReply: "Спасибо вам за оценку!",
-          replyDate: "26 февраля 2023 г.",
-        },
-      ],
-    },
-    {
-      id: 2,
-      userName: "Firdavsbek",
-      userImg:
-        "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-      starCount: 4,
-      date: "19 февраля 2023 г.",
-      userFeedback:
-        "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-      wearSubject: [
-        {
-          id: 1,
-          subjectBrand: "",
-          subjectReply: "",
-          replyDate: "",
-        },
-      ],
-    },
-    {
-      id: 3,
-      userName: "Shohjahon",
-      userImg:
-        "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-      starCount: 5,
-      date: "19 февраля 2023 г.",
-      userFeedback:
-        "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-      wearSubject: [
-        {
-          id: 1,
-          subjectBrand: "Ответ Nike Store Official Dealer",
-          subjectReply: "Спасибо вам за оценку!",
-          replyDate: "26 февраля 2023 г.",
-        },
-      ],
-    },
-  ]);
-
+  const [state, setState] = useState({
+    sendAnswer: false,
+    startReviews: true,
+    userInfo: [
+      {
+        id: 1,
+        userName: "Umar",
+        userImg:
+          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+        starCount: 5,
+        date: "19 февраля 2023 г.",
+        userFeedback:
+          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+        wearSubject: [
+          {
+            id: 1,
+            subjectBrand: "Ответ Nike Store Official Dealer",
+            subjectReply: "Спасибо вам за оценку!",
+            replyDate: "26 февраля 2023 г.",
+          },
+        ],
+      },
+      {
+        id: 2,
+        userName: "Firdavsbek",
+        userImg:
+          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+        starCount: 4,
+        date: "19 февраля 2023 г.",
+        userFeedback:
+          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+        wearSubject: [
+          {
+            id: 1,
+            subjectBrand: "",
+            subjectReply: "",
+            replyDate: "",
+          },
+        ],
+      },
+      {
+        id: 3,
+        userName: "Shohjahon",
+        userImg:
+          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+        starCount: 5,
+        date: "19 февраля 2023 г.",
+        userFeedback:
+          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+        wearSubject: [
+          {
+            id: 1,
+            subjectBrand: "Ответ Nike Store Official Dealer",
+            subjectReply: "Спасибо вам за оценку!",
+            replyDate: "26 февраля 2023 г.",
+          },
+        ],
+      },
+    ],
+  });
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
-        <span className="block md:hidden text-xs text-mobileTextColor">(12 отзывы) </span>
+        <span className="block md:hidden text-xs text-mobileTextColor">
+          (12 отзывы){" "}
+        </span>
       </div>
-      
+
       <div className="flex md:hidden gap-x-[14px] mb-4">
         <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
           <input
@@ -78,20 +84,23 @@ export default function CommentUsers() {
             className="w-full h-full text-[13px] outline-0	"
             placeholder="Поиск"
           />
-          <span> <SearchIcon /> </span>
-        </div> 
-        <button 
-          onClick={() => setStarReviews(false)}
+          <span>
+            {" "}
+            <SearchIcon />{" "}
+          </span>
+        </div>
+        <button
+          onClick={() => setState({ ...state, startReviews: false })}
           className="w-[30%] h-9 active:scale-95 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]"
         >
           <span className="text-[10px] ls:text-[11px] flex-none not-italic font-AeonikProMedium mr-[5px]">
-          По отзывам
+            По отзывам
           </span>
           <MobileStar />
         </button>
       </div>
-      
-      {!starReviews ? (
+
+      {!state.startReviews ? (
         <div className="w-full flex md:hidden items-center justify-between mb-4">
           <div className="flex items-center ">
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
@@ -115,19 +124,18 @@ export default function CommentUsers() {
               <StarIcon />
             </button>
           </div>
-          <button 
-             onClick={() => setStarReviews(true)}
+          <button
+            onClick={() => setState({ ...state, startReviews: true })}
             className="w-9 h-9 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
           >
-            <CloseAnswer colors="#007DCA"/>
+            <CloseAnswer colors="#007DCA" />
           </button>
         </div>
       ) : (
         ""
       )}
-      
-      
-      {userInfo.map((data) => {
+
+      {state.userInfo.map((data) => {
         return (
           <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
             {/* userImg and Date */}
@@ -193,33 +201,43 @@ export default function CommentUsers() {
                   ) : null}
                   {item?.subjectReply.length !== 0 ? null : (
                     <div className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end">
-                      {sendAnswer ? (
+                      {state?.sendAnswer ? (
                         <div className="w-full flex flex-col md:flex-row items-center justify-between">
-                          <textarea name="answer" id="answer" className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]" placeholder="Add your answer..."></textarea>
+                          <textarea
+                            name="answer"
+                            id="answer"
+                            className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]"
+                            placeholder="Add your answer..."
+                          ></textarea>
                           <div className="flex items-center ml-auto mt-3 md:mt-0">
                             <button className="w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]">
                               <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                              Отправить
+                                Отправить
                               </span>
                               {/* <SendIcon /> */}
                             </button>
                             <button
-                              onClick={() => setSendAnswer(false)}
-                              className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg">  
+                              onClick={() =>
+                                setState({ ...state, sendAnswer: false })
+                              }
+                              className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
+                            >
                               <CloseAnswer />
-                            </button>      
-                          </div>                  
+                            </button>
+                          </div>
                         </div>
                       ) : (
-                        <button 
-                          onClick={() => setSendAnswer(true)}
-                          className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg">
+                        <button
+                          onClick={() =>
+                            setState({ ...state, sendAnswer: true })
+                          }
+                          className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
+                        >
                           <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                          Ответить
+                            Ответить
                           </span>
                         </button>
-                      )
-                    }
+                      )}
                     </div>
                   )}
                 </>
