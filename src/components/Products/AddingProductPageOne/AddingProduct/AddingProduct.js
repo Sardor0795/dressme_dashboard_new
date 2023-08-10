@@ -1041,7 +1041,7 @@ const AddingProduct = () => {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <button className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
+                                <button type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
                                     <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
                                     <ArrowRightIcon />
                                 </button>
@@ -1076,7 +1076,7 @@ const AddingProduct = () => {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <button className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
+                                <button type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
                                     <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
                                     <ArrowRightIcon />
                                 </button>
@@ -1116,7 +1116,7 @@ const AddingProduct = () => {
                                     <StarLabel />
                                 </span>
                                 </div>
-                                <button className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
+                                <button type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
                                     <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
                                     <ArrowRightIcon />
                                 </button>
@@ -1153,6 +1153,7 @@ const AddingProduct = () => {
                                     </span>
                                 </div>
                                 <button 
+                                    type="button"
                                     onClick={() => setOpenColors(true)}
                                     className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
                                     <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
@@ -1196,7 +1197,7 @@ const AddingProduct = () => {
                                         </span>
                                     </label>
                                 </div>
-                                <button className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
+                                <button type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
                                     <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
                                     <ArrowRightIcon />
                                 </button>
@@ -1369,6 +1370,7 @@ const AddingProduct = () => {
                                     ]
                                 }/>
                                 <button 
+                                    type="button"
                                     onClick={() => setOpenCategories(true)}
                                     className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3">
                                     <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
@@ -1421,7 +1423,7 @@ const AddingProduct = () => {
                                         <StarLabel />
                                         </span>
                                     </div>
-                                    <button className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3">
+                                    <button type="button" className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3">
                                         <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
                                             Выбрать
                                         </span>
@@ -1492,7 +1494,7 @@ const AddingProduct = () => {
                                     </span>
                                     <input
                                         type="number"
-                                        className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                                         placeholder="Макс"
                                     />
                                 </div>
