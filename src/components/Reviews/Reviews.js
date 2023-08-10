@@ -69,8 +69,6 @@ export default function Reviews() {
   };
   const [state, setState] = useState({
     openwear: false,
-    openPrice: false,
-    textToColor: false,
   });
 
   const handleOpenChangeWear = (newOpen) => {

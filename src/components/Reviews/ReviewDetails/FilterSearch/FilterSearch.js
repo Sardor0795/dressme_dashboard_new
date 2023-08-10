@@ -11,8 +11,6 @@ import { BiChevronDown } from "react-icons/bi";
 export default function FilterSearch() {
   const [state, setState] = useState({
     openwear: false,
-    openPrice: false,
-    textToColor: false,
   });
 
   // ----------------Wear state management----------------------------
