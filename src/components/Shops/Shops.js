@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BgSelectSkin, CopyIcon, StarLabel } from "../../assets/icons";
+import AddBtn from "../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 
 export default function Shops() {
 
@@ -148,7 +149,7 @@ export default function Shops() {
                     >
                     </textarea>
                     <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
-                        <CopyIcon/>
+                        <AddBtn/>
                     </span>
                 </div>
                 <div className="w-full relative">
@@ -168,7 +169,7 @@ export default function Shops() {
                     >
                     </textarea>
                     <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
-                        <CopyIcon/>
+                        <AddBtn/>
                     </span>
                 </div>
                 <div className="w-full flex items-end justify-end mt-2">
