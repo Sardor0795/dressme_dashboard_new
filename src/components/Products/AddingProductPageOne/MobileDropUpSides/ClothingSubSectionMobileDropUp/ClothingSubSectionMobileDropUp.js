@@ -4,20 +4,19 @@ import { CloseAnswer, SearchIcon } from "../../../../../assets/icons";
 const ClothingSubSectionPage = ({ onClick, title }) => {
 
   const clothingSubSectionList = [
-    { id: 1, name:"Повседневный" },
-    { id: 2, name:"Студенческий" },
-    { id: 3, name:"Бизнес" },
-    { id: 4, name:"Классический" },
-    { id: 6, name:"Спортивный" },
-    { id: 7, name:"Традиционный" },
-    { id: 8, name:"Мусульманский" },
-    { id: 9, name:"Военный" },
-    { id: 10, name:"Комиксный" },
-    { id: 11, name:"Путешествие" },
-    { id: 12, name:"Детский" },
-    { id: 13, name:"Домашний" },
-    { id: 14, name:"Музыкальный" },
-    { id: 15, name:"Медицинский" },
+    { id: 1, name:"Тренировка" },
+    { id: 2, name:"Плавание" },
+    { id: 3, name:"Футбол" },
+    { id: 4, name:"Волейбол" },
+    { id: 6, name:"Баскетбол" },
+    { id: 7, name:"Бокс/MMA" },
+    { id: 8, name:"Каратэ" },
+    { id: 9, name:"Борьба" },
+    { id: 10, name:"Дзюдо" },
+    { id: 11, name:"Кунг-фу" },
+    { id: 12, name:"Теннис" },
+    { id: 13, name:"Настольный Теннис" },
+    { id: 14, name:"Бадминтон" },
   ];
   
   return (
