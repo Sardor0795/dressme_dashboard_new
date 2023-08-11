@@ -8,6 +8,8 @@ import ReviewDetail from "../components/Reviews/ReviewDetails/ReviewDetail";
 import Reviews from "../components/Reviews/Reviews";
 import AddShop from "../components/AddShop/Shops";
 import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
+import MarketStore from "../components/MarketStore";
+import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
 
 export default function RouterList() {
   return (
@@ -18,8 +20,10 @@ export default function RouterList() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/add" element={<ProductsPageTwo />} />
         {/* <Route path="/products_nextpage" element={<ProductsPageTwo />} /> */}
-        <Route path="/shops" element={<Shops />} />
-        <Route path="/addshop" element={<AddShop />} />
+        <Route path="/store" element={<MarketStore />} />
+        <Route path="/store/location-add" element={<AddLocation />} />
+
+        {/* <Route path="/addshop" element={<AddShop />} /> */}
         <Route path="/review-details/:id" element={<ReviewDetail />} />
         <Route path="/" element={<Navigate to={"/reviews"} />} />
         <Route path="*" element={<Error />} />
