@@ -20,6 +20,6 @@ export default function MarketStore() {
   const [marketList, setMarketList] = useState([]);
 
   return (
-    <div>{addStore ? <MyMarket /> : <AddStore onClick={toggleAdd} />}</div>
+    <div>{!addStore ? <MyMarket /> : <AddStore onClick={toggleAdd} />}</div>
   );
 }
