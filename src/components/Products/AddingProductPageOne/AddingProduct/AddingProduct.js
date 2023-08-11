@@ -1,23 +1,30 @@
-import { Popover, Select } from "antd";
+import { Popover, Select, Switch } from "antd";
 import React, { useEffect, useState } from "react";
-import {
-  ArrowRightIcon,
-  DownloadIcon,
-  InputCheck,
-  StarLabel,
-} from "../../../../assets/icons";
-import { BiChevronDown } from "react-icons/bi";
+import { ArrowRightIcon, DownloadIcon, InputCheck, StarLabel, } from "../../../../assets/icons";
 import { Link, NavLink } from "react-router-dom";
 import ColorsAnimationPage from "../ColorsAnimationPage/ColorsAnimationPage";
 import CategoriesAnimationPage from "../CategoriesAnimationPage/CategoriesAnimationPage";
+import ClothingTypesAnimationPage from "../ClothingTypesAnimationPage/ClothingTypesAnimationPage";
 
 const AddingProduct = () => {
   
     const [openColors, setOpenColors] = useState(false) // Colors
     const [openCategories, setOpenCategories] = useState(false) // Categories
+    const [openClothingSection, setOpenClothingSection] = useState(false)
     
     const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
     const toggleCategories = React.useCallback(() => setOpenCategories(false), []); // Categories
+    const toggleClothingSection = React.useCallback(() => setOpenClothingSection(false), []); // Clothing Section
+
+
+    // For Clothing Section
+    useEffect(()=> {
+        if(openClothingSection){
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [openClothingSection])
 
     // For Colors
     useEffect(() => {
@@ -44,6 +51,9 @@ const AddingProduct = () => {
     const onSearch = (value) => {
         console.log("search:", value);
     };
+    const onChangeSwitch = (checked) => {
+        console.log(`switch to ${checked}`);
+    };
 
     const [state, setState] = useState({
         // openhat: true,
@@ -52,56 +62,68 @@ const AddingProduct = () => {
 
     // Hats
     const contentHat = (
-        <div className="w-[366px] h-fit">
+        <div className="w-[520px] h-fit">
         <action
             className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
         >
-            <div className="w-full flex  gap-x-10 px-3 pt-5">
-            <div className="w-fit flex flex-col">
-                <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-                Обхват головы
-                <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                <span className="ml-[5px]">
-                    <StarLabel />
-                </span>
-                </p>
-                <div className="flex items-center ">
-                <div className="flex flex-col">
-                    <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    />
-                    <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
-                    Мин
+            <div className="w-full flex justify-center  gap-x-10 px-3 pt-5">
+                <div className="w-fit flex flex-col">
+                    <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+                    Обхват головы
+                    <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                    <span className="ml-[5px]">
+                        <StarLabel />
+                    </span>
+                    </p>
+                    <div className="flex items-center ">
+                    <div className="flex flex-col">
+                        <input
+                        type="number"
+                        className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        />
+                        <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
+                        Мин
+                        </div>
+                    </div>
+                    <span className="rotate-90 text-borderColor mx-3 mb-5">|</span>
+                    <div className="flex flex-col">
+                        <input
+                        type="number"
+                        className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        />
+                        <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
+                        Макс
+                        </div>
+                    </div>
                     </div>
                 </div>
-                <span className="rotate-90 text-borderColor mx-3 mb-5">|</span>
-                <div className="flex flex-col">
-                    <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    />
-                    <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
-                    Макс
+                <div className="w-fit flex flex-col">
+                    <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+                    One Size
+                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                        <span className="ml-[5px]">
+                            <StarLabel />
+                        </span>
+                    </p>
+                    <div className="flex items-center justify-center">
+                        <Switch defaultChecked onChange={onChangeSwitch} />
                     </div>
                 </div>
+                <div className="w-fit flex flex-col items-center">
+                    <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+                    Количество
+                    <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                    <span className="ml-[5px]">
+                        <StarLabel />
+                    </span>
+                    </p>
+                    <div className="flex items-start justify-between ">
+                    <input
+                        type="number"
+                        className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    />
+                    </div>
                 </div>
-            </div>
-            <div className="w-fit flex flex-col items-center">
-                <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-                Количество
-                <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                <span className="ml-[5px]">
-                    <StarLabel />
-                </span>
-                </p>
-                <div className="flex items-start justify-between ">
-                <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                />
-                </div>
-            </div>
             </div>
             <button className="w-full flex items-end justify-end text-textBlueColor font-AeonikProMedium pr-1">
             готово
@@ -109,7 +131,6 @@ const AddingProduct = () => {
         </action>
         </div>
     );
-
     // Outerwear
     const contentOutwear = (
         <div className="w-[620px] h-fit">
@@ -371,7 +392,6 @@ const AddingProduct = () => {
         </action>
         </div>
     );
-
     // Underwear
     const contentUnderWear = (
         <div className="w-[614px] h-fit">
@@ -633,7 +653,6 @@ const AddingProduct = () => {
         </action>
         </div>
     );
-
     // Shoes
     const contentShoes = (
         <div className="w-[288px] h-fit">
@@ -692,7 +711,6 @@ const AddingProduct = () => {
         </action>
         </div>
     );
-
     // Accessories
     const contentAccessories = (
         <div className="w-fit h-fit">
@@ -891,7 +909,6 @@ const AddingProduct = () => {
         </action>
         </div>
     );
-
     const changeColor = [
         { id: 1, data: 1, icons: InputCheck, action: false, colors: "bg-black" },
         { id: 2, data: 2, icons: InputCheck, action: false, colors: "bg-white" },
@@ -968,14 +985,31 @@ const AddingProduct = () => {
                 <div className="line flex-1"></div>
             </div>
             
+            {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
+            <div>
+                <section
+                    onClick={() => setOpenClothingSection(false)}
+                    className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
+                    openClothingSection ? "" : "hidden"
+                    }`}
+                ></section>
+                <section
+                    className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+                    openClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                    }`}
+                >
+                    <ClothingTypesAnimationPage onClick={toggleClothingSection} />
+                </section>
+            </div>
+
             {/* Colors Bottom Mobile Modal Animation Section */}
             <div className="">
-                <div
+                <section
                     onClick={() => setOpenColors(false)}
                     className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
                     openColors ? "" : "hidden"
                     }`}
-                ></div>
+                ></section>
                 <section
                     className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
                     openColors ? "bottom-0" : "bottom-[-800px] z-0"
@@ -987,12 +1021,12 @@ const AddingProduct = () => {
             
             {/* Categories Mobile Bottom Modal Animation Section */}
             <div className="">
-                <div
+                <section
                     onClick={() => setOpenCategories(false)}
                     className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
                     openCategories ? "" : "hidden"
                     }`}
-                ></div>
+                ></section>
                 <section
                     className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
                     openCategories ? "bottom-0" : "bottom-[-800px] z-0"
@@ -1015,13 +1049,13 @@ const AddingProduct = () => {
                         <div className="w-full h-[95px] flex items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
                             <Link to='#'> <DownloadIcon /> </Link>
                         </div>
-                        <div className="w-full h-[95px] flex items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
-                            <Link to='#'> <DownloadIcon /> </Link>
-                            <span></span>
+                        <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
+                            <Link to='#' className="mt-7"> <DownloadIcon /> </Link>
+                            <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">необязательно</span>
                         </div>
-                        <div className="w-full h-[95px] flex items-center justify-center rounded-lg border border-dashed border-borderColor">
-                            <Link to='#'> <DownloadIcon /> </Link>
-                            <span></span>
+                        <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor">
+                            <Link to='#' className="mt-7"> <DownloadIcon /> </Link>
+                            <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">необязательно</span>
                         </div>
                     </div>
                 </div>
@@ -1041,8 +1075,12 @@ const AddingProduct = () => {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <button type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
-                                    <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
+                                <button 
+                                    onClick={()=> setOpenClothingSection(true)}
+                                    type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
+                                    <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                        Выбрать
+                                    </label>
                                     <ArrowRightIcon />
                                 </button>
                                 <Select
