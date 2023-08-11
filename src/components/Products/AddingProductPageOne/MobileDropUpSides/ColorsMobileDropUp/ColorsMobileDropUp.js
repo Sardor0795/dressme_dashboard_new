@@ -1,7 +1,7 @@
 import React from "react";
 import { CloseAnswer } from "../../../../../assets/icons";
 
-const ColorsAnimationPage = ({ onClick, title }) => {
+const ColorsMobileDropUp = ({ onClick, title }) => {
   
   const colorsList = [
     { id: 1, color: "bg-black", },
@@ -46,4 +46,4 @@ const ColorsAnimationPage = ({ onClick, title }) => {
   );
 };
 
-export default React.memo(ColorsAnimationPage);
+export default React.memo(ColorsMobileDropUp);

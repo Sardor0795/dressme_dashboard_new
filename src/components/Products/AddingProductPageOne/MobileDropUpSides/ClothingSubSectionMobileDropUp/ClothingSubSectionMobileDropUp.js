@@ -23,7 +23,7 @@ const ClothingSubSectionPage = ({ onClick, title }) => {
   return (
     <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
       <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-        <p className="text-xl font-AeonikProMedium">Раздел одежды</p>
+        <p className="text-xl font-AeonikProMedium">Выберите подраздел одежды</p>
         <button onClick={onClick}>
           <CloseAnswer colors={"#000"}/>
         </button>

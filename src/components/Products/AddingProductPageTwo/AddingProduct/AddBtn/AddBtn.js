@@ -20,7 +20,7 @@ export default function AddBtn() {
     >
       {pressed ? (
         <span className="ml-[-18px] text-xs font-AeonikProRegular bg-white flex items-center justify-center h-full">
-          Copied
+          Скопировано
         </span>
       ) : (
         <CopyIcon />

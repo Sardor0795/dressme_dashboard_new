@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CloseAnswer } from "../../../../../assets/icons";
 
-const CategoriesAnimationPage = ({ onClick, title }) => {
+const CategoriesMobileDropUp = ({ onClick, title }) => {
   const navigate = useNavigate();
   const goDetail = (id) => {
     navigate(`/product/:${id}`);
@@ -44,4 +44,4 @@ const CategoriesAnimationPage = ({ onClick, title }) => {
   );
 };
 
-export default React.memo(CategoriesAnimationPage);
+export default React.memo(CategoriesMobileDropUp);
