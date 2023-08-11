@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { CopyIcon, StarLabel, XIcon } from "../../../../assets/icons";
+import AddBtn from "./AddBtn/AddBtn";
 
 export default function AddingProduct() {
   return (
@@ -41,14 +42,12 @@ export default function AddingProduct() {
                     <StarLabel />
                   </span>
                 </div>
-                <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
+                <div className="justify-between rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
                   <input
-                    className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                    className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
                     type="text"
                   />
-                  <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
-                    <CopyIcon />
-                  </button>
+                  <AddBtn />
                 </div>
               </div>
               <div className="mb-[10px]">
@@ -62,12 +61,10 @@ export default function AddingProduct() {
                 </div>
                 <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
                   <input
-                    className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                    className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                     type="text"
                   />
-                  <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
-                    <CopyIcon />
-                  </button>
+                  <AddBtn />
                 </div>
               </div>
               <div className="mb-[10px]">
@@ -85,10 +82,8 @@ export default function AddingProduct() {
                     name=""
                     id=""
                   ></textarea>
-                  <div className="flex justify-end w-full">
-                    <button className="absolute bottom-[6px] right-[6px] overscroll-y-none w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
-                      <CopyIcon />
-                    </button>
+                  <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
+                    <AddBtn />
                   </div>
                 </div>
               </div>
@@ -108,10 +103,8 @@ export default function AddingProduct() {
                     name=""
                     id=""
                   ></textarea>
-                  <div className="flex justify-end w-full">
-                    <button className="absolute bottom-[6px] right-[6px] overscroll-y-none w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
-                      <CopyIcon />
-                    </button>
+                  <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
+                    <AddBtn />
                   </div>
                 </div>
               </div>
@@ -154,19 +147,17 @@ export default function AddingProduct() {
                   </div>
                   <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
                     <input
-                      className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                      className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
                     />
-                    <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
-                      <CopyIcon />
-                    </button>
+                    <AddBtn />
                   </div>
                   <div className="mt-[10px]">
                     <div className="flex items-center text-white w-fit px-2 py-[5px] text-[16px] rounded-md font-AeonikProRegular bg-[#007dca]">
                       хлопок{" "}
-                      <button className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                      <Link className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
                         <XIcon />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -179,19 +170,20 @@ export default function AddingProduct() {
                   </div>
                   <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
                     <input
-                      className="flex-1 mr-[10px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                      className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
                     />
-                    <button className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex">
-                      <CopyIcon />
-                    </button>
+                    <AddBtn />
                   </div>
                 </div>
               </div>
               <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
                 <div className="flex-1 mb-[10px]">
                   <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
-                    Бренд <span className="notRecquired text-sm text-textLightColor font-AeonikProRegular">(необязательно)</span>
+                    Бренд{" "}
+                    <span className="notRecquired text-sm text-textLightColor font-AeonikProRegular">
+                      (необязательно)
+                    </span>
                   </div>
                   <Select
                     className="font-AeonikProMedium"
