@@ -2,22 +2,25 @@ import { Popover, Select, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { ArrowRightIcon, DownloadIcon, InputCheck, StarLabel, } from "../../../../assets/icons";
 import { Link, NavLink } from "react-router-dom";
-import ColorsAnimationPage from "../ColorsAnimationPage/ColorsAnimationPage";
-import CategoriesAnimationPage from "../CategoriesAnimationPage/CategoriesAnimationPage";
-import ClothingTypesAnimationPage from "../ClothingTypesAnimationPage/ClothingTypesAnimationPage";
+import ColorsAnimationPage from "../MobileDropUpSides/ColorsAnimationPage/ColorsAnimationPage";
+import CategoriesAnimationPage from "../MobileDropUpSides/CategoriesAnimationPage/CategoriesAnimationPage";
+import ClothingTypesAnimationPage from "../MobileDropUpSides/ClothingTypesAnimationPage/ClothingTypesAnimationPage";
+import ClothingSubSectionPage from "../MobileDropUpSides/ClothingSubSectionPage/ClothingSubSectionPage";
 
 const AddingProduct = () => {
   
     const [openColors, setOpenColors] = useState(false) // Colors
     const [openCategories, setOpenCategories] = useState(false) // Categories
-    const [openClothingSection, setOpenClothingSection] = useState(false)
+    const [openClothingSection, setOpenClothingSection] = useState(false) // Clothing Types Section
+    const [openClothingSubSection, setOpenClothingSubSection] = useState(false) // Clothing Types Section
     
     const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
     const toggleCategories = React.useCallback(() => setOpenCategories(false), []); // Categories
-    const toggleClothingSection = React.useCallback(() => setOpenClothingSection(false), []); // Clothing Section
+    const toggleClothingSection = React.useCallback(() => setOpenClothingSection(false), []); // Clothing Types Section
+    const toggleClothingSubSection = React.useCallback(() => setOpenClothingSubSection(false), []); // Clothing SubSection
 
 
-    // For Clothing Section
+    // For Clothing Types Section
     useEffect(()=> {
         if(openClothingSection){
             document.body.style.overflow = "hidden";
@@ -25,6 +28,15 @@ const AddingProduct = () => {
             document.body.style.overflow = "auto";
         }
     }, [openClothingSection])
+
+    // For Clothing SubSection Section
+    useEffect(()=> {
+        if(openClothingSubSection){
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+    }, [openClothingSubSection])
 
     // For Colors
     useEffect(() => {
@@ -1002,6 +1014,23 @@ const AddingProduct = () => {
                 </section>
             </div>
 
+            {/* Open Clothing Types SubSection Bottom Mobile Modal Animation Section */}
+            <div>
+                <section
+                    onClick={() => setOpenClothingSubSection(false)}
+                    className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
+                    openClothingSubSection ? "" : "hidden"
+                    }`}
+                ></section>
+                <section
+                    className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+                    openClothingSubSection ? "bottom-0" : "bottom-[-800px] z-0"
+                    }`}
+                >
+                    <ClothingSubSectionPage onClick={toggleClothingSubSection} />
+                </section>
+            </div>
+
             {/* Colors Bottom Mobile Modal Animation Section */}
             <div className="">
                 <section
@@ -1114,7 +1143,9 @@ const AddingProduct = () => {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <button type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
+                                <button 
+                                    onClick={()=> setOpenClothingSubSection(true)}
+                                    type="button" className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3">
                                     <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">Выбрать</label>
                                     <ArrowRightIcon />
                                 </button>
