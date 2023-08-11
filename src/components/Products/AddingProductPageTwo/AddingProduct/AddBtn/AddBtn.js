@@ -15,11 +15,11 @@ export default function AddBtn() {
 
   return (
     <Link
-      className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex items-center"
+      className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex items-center justify-end"
       onClick={onClick}
     >
       {pressed ? (
-        <span className="ml-[-18px] text-xs font-AeonikProRegular bg-white flex items-center justify-center h-full">
+        <span className="text-xs font-AeonikProRegular bg-white flex items-center justify-center h-full">
           Скопировано
         </span>
       ) : (
