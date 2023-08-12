@@ -692,6 +692,14 @@ const FemaleIcon = ({ width }) => {
   );
 };
 
+const LineIcon = () => {
+  return(
+    <svg width="10" height="1" viewBox="0 0 10 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line y1="0.5" x2="10" y2="0.5" stroke="#E5E5E5"/>
+    </svg>
+  )
+}
+
 export {
   ProfileIcon,
   NavbarReviewIcon,
@@ -723,4 +731,5 @@ export {
   BgNoImgIcon,
   MaleIcon,
   FemaleIcon,
+  LineIcon,
 };
