@@ -16,10 +16,6 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
     {id:5, category:"Нижняя одежда"},
   ];
 
-  const sizeList = [
-    {id:1, size:''}
-  ]
-
   return (
     <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
       <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4 mb-6">
