@@ -10,7 +10,6 @@ import AddShop from "../components/AddShop/Shops";
 import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
 import MarketStore from "../components/MarketStore";
 import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
-import MarketEdit from "../components/MarketStore/Market_Edit/MarketEdit";
 
 export default function RouterList() {
   return (
@@ -20,14 +19,10 @@ export default function RouterList() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/add" element={<ProductsPageTwo />} />
-        {/* ---------------------Store------------------------- */}
+        {/* <Route path="/products_nextpage" element={<ProductsPageTwo />} /> */}
         <Route path="/store" element={<MarketStore />} />
         <Route path="/store/location-add" element={<AddLocation />} />
-        {/* <Route path="/store/list" element={<AddLocation />} /> */}
-        <Route path="/store/list/:id" element={<MarketEdit />} />
 
-        {/* ---------------------Store------------------------- */}
-        {/* <Route path="/products_nextpage" element={<ProductsPageTwo />} /> */}
         {/* <Route path="/addshop" element={<AddShop />} /> */}
         <Route path="/review-details/:id" element={<ReviewDetail />} />
         <Route path="/" element={<Navigate to={"/reviews"} />} />

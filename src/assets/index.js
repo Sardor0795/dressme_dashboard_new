@@ -1,9 +1,6 @@
-export { default as star } from "./store/star.svg";
+export { default as star } from "./imgs/star.svg";
 export { default as ProductImg } from "./imgs/ProductImg.svg";
 export { default as HamburgerMenu } from "./imgs/menu.svg";
-export { default as nike } from "./store/nike.svg";
-export { default as man } from "./store/man.svg";
-export { default as woman } from "./store/woman.svg";
-export { default as deliveryIcon } from "./store/delivery.svg";
-export { default as adidas } from "./store/adidas.svg";
-export { default as backImg } from "./store/backImg.svg";
+export { default as nike } from "./imgs/nike.svg";
+export { default as man } from "./imgs/man.svg";
+export { default as woman } from "./imgs/woman.svg";
