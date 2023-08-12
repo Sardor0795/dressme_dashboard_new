@@ -88,7 +88,7 @@ export default function Sidebar() {
           to={"/store-location"}
         >
           <span>
-            <LocationIcon />
+            <LocationIcon colors="#2c2c2c" />
           </span>
           <span className=" text-lg not-italic font-AeonikProMedium leading-5">
             Локации
