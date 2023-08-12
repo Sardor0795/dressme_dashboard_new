@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Products from "../components/Products/Products";
 // import Shops from "../components/Shops/Shops";
@@ -16,6 +16,7 @@ import AddStore from "../components/MarketStore/AddMarket/AddStore/AddStore";
 import MyMarket from "../components/MarketStore/MyMarket/MyMarket";
 
 export default function RouterList() {
+  const [isItMarket, setIsItMarket] = useState(false);
   return (
     <div>
       <NavbarForSetting />
@@ -23,14 +24,23 @@ export default function RouterList() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/add" element={<ProductsPageTwo />} />
-        {/* ---------------------Store------------------------- */}
-        <Route path="/store" element={<MarketStore />} />
-        <Route path="/store/location-add" element={<AddLocation />} />
-        <Route path="/store/market-add" element={<AddStore />} />
-        <Route path="/store/market-list" element={<MyMarket />} />
 
-        {/* <Route path="/store/list" element={<AddLocation />} /> */}
-        <Route path="/store/list/:id" element={<MarketEdit />} />
+        {/* ---------------------Store------------------------- */}
+        <Route path="/store" element={<MarketStore />}>
+          {/* <Route path="/store" element={<MarketStore />} /> */}
+          {isItMarket ? (
+            <Route index element={<AddStore />} />
+          ) : (
+            <Route index element={<MyMarket />} />
+          )}
+
+          <Route path="/store/market-add" element={<AddStore />} />
+          <Route path="/store/market-list" element={<MyMarket />} />
+          <Route path="/store/location-add" element={<AddLocation />} />
+
+          {/* <Route path="/store/list" element={<AddLocation />} /> */}
+          <Route path="/store/list/:id" element={<MarketEdit />} />
+        </Route>
 
         {/* ---------------------Store------------------------- */}
 

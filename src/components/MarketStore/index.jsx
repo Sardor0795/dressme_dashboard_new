@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddStore from "./AddMarket/AddStore/AddStore";
 import MyMarket from "./MyMarket/MyMarket";
+import { Outlet } from "react-router-dom";
 
 export default function MarketStore() {
   const [marketAdded, setMarketAdded] = useState(null);
@@ -20,6 +21,9 @@ export default function MarketStore() {
   const [marketList, setMarketList] = useState([]);
 
   return (
-    <div>{!addStore ? <MyMarket /> : <AddStore onClick={toggleAdd} />}</div>
+    <div>
+      <Outlet />
+    </div>
+    // <div>{!addStore ? <MyMarket /> : <AddStore onClick={toggleAdd} />}</div>
   );
 }

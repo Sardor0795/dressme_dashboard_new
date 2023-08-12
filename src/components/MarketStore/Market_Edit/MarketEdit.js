@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { BgSelectSkin, CopyIcon, StarLabel } from "../../../assets/icons";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  BgSelectSkin,
+  CopyIcon,
+  LocationIcon,
+  StarLabel,
+} from "../../../assets/icons";
 import { adidas, backImg } from "../../../assets";
 // import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 // import { StarLabel } from "../../../assets/icons";
@@ -15,9 +20,24 @@ function MarketEdit() {
       content: "Сохранить",
     });
   };
+  const success2 = () => {
+    messageApi.open({
+      type: "success",
+      content: "Удалить",
+    });
+  };
+  // const warning = () => {
+  //   messageApi.open({
+  //     type: "warning",
+  //     content: "Delete",
+  //   });
+  // };
   const navigate = useNavigate();
   const goStore = (id) => {
     navigate(`/store`);
+  };
+  const goLocation = (id) => {
+    navigate(`/store-location`);
   };
   const [genderCategory, setGenderCategory] = useState([
     {
@@ -58,10 +78,46 @@ function MarketEdit() {
       <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
         Магазины{" "}
       </div>
-      <div className="relative w-full h-[200px] md:h-[360px] flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
+      <div className="w-full flex items-center justify-end ">
+        <div className="flex items-center gap-x-[15px]">
+          <NavLink
+            to="/store/location-add"
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"
+          >
+            Добавить локацию
+          </NavLink>
+          <span className="w-[2px] h-[14px] bg-borderColor"></span>
+          <NavLink
+            to="/store/market-add"
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"
+          >
+            Создать новый магазин
+          </NavLink>
+          <span className="w-[2px] h-[14px] bg-borderColor"></span>
+          <button
+            onClick={success2}
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"
+          >
+            Удалить
+          </button>
+        </div>
+      </div>
+      <div className="relative w-full h-[200px] md:h-[360px] flex items-center  justify-center rounded-lg ">
         <img src={backImg} className="w-full h-full" alt="" />
         <div className="absolute -bottom-11 md:bottom-[-60px] z-[20] bg-white overflow-hidden left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
           <img src={adidas} className="w-full h-full " alt="" />
+        </div>
+      </div>
+      <div className="w-full flex items-center justify-end mb-[69px] md:mb-20 mt-4">
+        <div className="flex items-center">
+          <button onClick={goLocation} className="flex items-end gap-x-2">
+            <span>
+              <LocationIcon colors="#007dca" />
+            </span>
+            <span className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium">
+              Все локации
+            </span>
+          </button>
         </div>
       </div>
       <form
