@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
   ClothesIcons,
+  LocationIcon,
   NavbarMarketIcon,
   NavbarReviewIcon,
 } from "../../assets/icons";
@@ -87,7 +88,7 @@ export default function Sidebar() {
           to={"/clothes"}
         >
           <span>
-            <ClothesIcons colors={""} />
+            <LocationIcon />
           </span>
           <span className=" text-lg not-italic font-AeonikProMedium leading-5">
             Локации
