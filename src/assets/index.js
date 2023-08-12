@@ -4,3 +4,6 @@ export { default as HamburgerMenu } from "./imgs/menu.svg";
 export { default as nike } from "./imgs/nike.svg";
 export { default as man } from "./imgs/man.svg";
 export { default as woman } from "./imgs/woman.svg";
+export { default as deliveryIcon } from "./store/delivery.svg";
+export { default as adidas } from "./store/adidas.svg";
+export { default as backImg } from "./store/backImg.svg";

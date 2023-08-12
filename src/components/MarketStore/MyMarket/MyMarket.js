@@ -36,7 +36,7 @@ export default function MyMarket() {
           </div>
         </div>
       </div>
-      <div className="h-fit py-7 border border-red-500 w-full flex items-center justify-end">
+      <div className="h-fit py-7  w-full flex items-center justify-end">
         <button className="w-fit h-[42px] rounded-lg flex items-center px-[10px] bg-weatherWinterColor text-white text-base not-italic font-AeonikProMedium">
           Создать новый магазин
         </button>
