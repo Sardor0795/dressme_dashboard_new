@@ -34,10 +34,15 @@ module.exports = {
         tableTextTitle2: "#2c2c2c",
         ProductReplyBg: "#f4f6fb",
         mobileTextColor: "#303030",
-        borderColor2:"#c5c5c5",
-        bgColor:"#fdfdfd",
-        btnLightBlueColor:"#e6f2f9",
-        photoBg:"#fbfdff",
+        borderColor2: "#c5c5c5",
+        bgColor: "#fdfdfd",
+        // AddLocation
+        btnLightBlueColor: "#e6f2f9",
+        photoBg: "#fbfdff",
+        addLocationTextcolor: "#F4A622",
+        addLocBorderRight: "#E8E8E8",
+        deleteColor: "#FF2B2B",
+        checkboxBorder: "#D2D2D2",
       },
       fontFamily: {
         // 500

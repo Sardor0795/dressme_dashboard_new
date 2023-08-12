@@ -76,6 +76,23 @@ export default function Sidebar() {
             Одежда
           </span>
         </NavLink>
+        <NavLink
+          className={
+            "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+          }
+          style={({ isActive }) => ({
+            color: isActive ? "#007DCA" : "#000",
+            background: isActive ? "#f2f2f2" : "#fcfcfc",
+          })}
+          to={"/clothes"}
+        >
+          <span>
+            <ClothesIcons colors={""} />
+          </span>
+          <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+            Локации
+          </span>
+        </NavLink>
       </div>
     </div>
   );
