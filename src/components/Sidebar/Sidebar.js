@@ -85,7 +85,7 @@ export default function Sidebar() {
             color: isActive ? "#007DCA" : "#000",
             background: isActive ? "#f2f2f2" : "#fcfcfc",
           })}
-          to={"/clothes"}
+          to={"/store-location"}
         >
           <span>
             <LocationIcon />
