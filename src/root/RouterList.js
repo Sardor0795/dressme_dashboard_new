@@ -10,6 +10,7 @@ import AddShop from "../components/AddShop/Shops";
 import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
 import MarketStore from "../components/MarketStore";
 import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
+import Clothes from "../components/Clothes/Clothes";
 
 export default function RouterList() {
   return (
@@ -22,6 +23,7 @@ export default function RouterList() {
         {/* <Route path="/products_nextpage" element={<ProductsPageTwo />} /> */}
         <Route path="/store" element={<MarketStore />} />
         <Route path="/store/location-add" element={<AddLocation />} />
+        <Route path="/clothes" element={<Clothes />} />
 
         {/* <Route path="/addshop" element={<AddShop />} /> */}
         <Route path="/review-details/:id" element={<ReviewDetail />} />
