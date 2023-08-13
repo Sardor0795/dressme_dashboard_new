@@ -15,7 +15,6 @@ export default function ReviewDetail() {
       <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
         <section className="w-full md:w-[30%]">
           <DetailCarousel />
-          {/* <ProductCarousel /> */}
         </section>
         <div className="w-full md:w-[calc(70%-70px)] ">
           <CommentUsers />

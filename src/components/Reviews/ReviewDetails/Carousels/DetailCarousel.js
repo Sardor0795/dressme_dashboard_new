@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
-// import { VideoStoreIcons } from "../../../../../../AssetsMain/icons";
 
 const DetailCarousel = () => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());

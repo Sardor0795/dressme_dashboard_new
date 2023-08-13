@@ -19,17 +19,12 @@ export default function FilterSearch() {
     setState({ ...state, openwear: newOpen });
   };
 
-  const handleWearValue = (value) => {
-    setState({ ...state, openwear: false });
-  };
+  // const handleWearValue = (value) => {
+  //   setState({ ...state, openwear: false });
+  // };
 
   // const filterStar = [
-  //   { id: 1, type: "All Clothing types" },
-  //   { id: 2, type: "Headwear" },
-  //   { id: 3, type: "Outwear" },
-  //   { id: 4, type: "Underwear" },
-  //   { id: 5, type: "Legwear" },
-  //   { id: 6, type: "Accessory" },
+    //  data
   // ];
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
