@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CloseAnswer, SearchIcon } from "../../../../../assets/icons";
 
 const ClothingTypesAnimationPage = ({ onClick, title }) => {
+
+  const [cancelButton, setCancelButton] = useState(true)
 
   const clothingTypesList = [
     { id: 1, name:"Повседневный" },
@@ -28,7 +30,6 @@ const ClothingTypesAnimationPage = ({ onClick, title }) => {
           <CloseAnswer colors={"#000"}/>
         </button>
       </section>
-      
       <section className="w-full h-[445px] px-4 flex flex-col items-center">
         <action className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
             <form className='w-full flex flex-col items-center'>
@@ -49,8 +50,10 @@ const ClothingTypesAnimationPage = ({ onClick, title }) => {
           </form>
         </action>
         <action className="w-full flex items-center justify-between gap-x-3 mb-10">
-          <button className="w-[45%] h-[38px] text-base font-AeonikProMedium focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md text-textBlueColor">Отмена</button>
-          <button className="w-[55%] h-[38px] text-base font-AeonikProMedium focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md text-textBlueColor">Готово</button>
+          <button 
+            onClick={()=> setCancelButton(false)} 
+            className="w-[45%] h-[38px] text-base font-AeonikProMedium bg-white text-textBlueColor border border-textBlueColor rounded-md">Отмена</button>
+          <button className="w-[55%] h-[38px] text-base font-AeonikProMedium bg-textBlueColor text-white border border-textBlueColor rounded-md opacity-60 focus:opacity-100">Готово</button>
         </action>
       </section>
     </div>
