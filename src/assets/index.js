@@ -7,3 +7,6 @@ export { default as woman } from "./imgs/woman.svg";
 export { default as deliveryIcon } from "./store/delivery.svg";
 export { default as adidas } from "./store/adidas.svg";
 export { default as backImg } from "./store/backImg.svg";
+export { default as wearImg } from "./location/wearImg.svg";
+export { default as Aligarx } from "./location/aligarxImg.svg";
+export { default as mapImg } from "./location/mapimg.svg";

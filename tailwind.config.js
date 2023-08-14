@@ -36,6 +36,7 @@ module.exports = {
         mobileTextColor: "#303030",
         borderColor2: "#c5c5c5",
         bgColor: "#fdfdfd",
+        LocationSelectBg: "#f7f7f7",
         // AddLocation
         btnLightBlueColor: "#e6f2f9",
         photoBg: "#fbfdff",
