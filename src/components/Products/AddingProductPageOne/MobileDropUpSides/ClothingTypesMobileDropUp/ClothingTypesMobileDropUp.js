@@ -3,8 +3,6 @@ import { CloseAnswer, SearchIcon } from "../../../../../assets/icons";
 
 const ClothingTypesAnimationPage = ({ onClick, title }) => {
 
-  const [cancelButton, setCancelButton] = useState(true)
-
   const clothingTypesList = [
     { id: 1, name:"Повседневный" },
     { id: 2, name:"Студенческий" },
@@ -51,9 +49,9 @@ const ClothingTypesAnimationPage = ({ onClick, title }) => {
         </action>
         <action className="w-full flex items-center justify-between gap-x-3 mb-10">
           <button 
-            onClick={()=> setCancelButton(false)} 
-            className="w-[45%] h-[38px] text-base font-AeonikProMedium bg-white text-textBlueColor border border-textBlueColor rounded-md">Отмена</button>
-          <button className="w-[55%] h-[38px] text-base font-AeonikProMedium bg-textBlueColor text-white border border-textBlueColor rounded-md opacity-60 focus:opacity-100">Готово</button>
+            onClick={onClick} 
+            className="w-[45%] h-[38px] text-base font-AeonikProMedium bg-white text-textBlueColor border border-textBlueColor rounded-md active:scale-95">Отмена</button>
+          <button className="w-[55%] h-[38px] text-base font-AeonikProMedium bg-textBlueColor text-white border border-textBlueColor rounded-md active:scale-95">Готово</button>
         </action>
       </section>
     </div>

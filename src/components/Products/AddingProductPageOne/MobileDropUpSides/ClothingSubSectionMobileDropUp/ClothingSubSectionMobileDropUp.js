@@ -48,8 +48,10 @@ const ClothingSubSectionPage = ({ onClick, title }) => {
           </form>
         </action>
         <action className="w-full flex items-center justify-between gap-x-3 mb-10">
-          <button className="w-[45%] h-[38px] text-base font-AeonikProMedium focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md text-textBlueColor">Отмена</button>
-          <button className="w-[55%] h-[38px] text-base font-AeonikProMedium focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md text-textBlueColor">Готово</button>
+          <button 
+            onClick={onClick}
+            className="w-[45%] h-[38px] text-base font-AeonikProMedium bg-white border border-textBlueColor rounded-md text-textBlueColor active:scale-95">Отмена</button>
+          <button className="w-[55%] h-[38px] text-base font-AeonikProMedium bg-textBlueColor text-white border border-textBlueColor rounded-md active:scale-95">Готово</button>
         </action>
       </section>
     </div>
