@@ -1,13 +1,9 @@
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { CloseAnswer, LineIcon } from "../../../../../assets/icons";
 
 const CategoriesMobileDropUp = ({ onClick, title }) => {
-  const navigate = useNavigate();
-  const goDetail = (id) => {
-    navigate(`/product/:${id}`);
-  };
+  
   const categoriesList = [
     {id:1, category:"Головные уборы"},
     {id:2, category:"Верхняя одежда"},
@@ -223,10 +219,12 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
             </div>
           </div>
         </action>
-          <div className="w-full flex items-center justify-between gap-x-3 my-10">
-            <button className="w-[45%] h-[38px] text-base font-AeonikProMedium border border-textBlueColor rounded-md text-textBlueColor">Отмена</button>
-            <button className="w-[55%] h-[38px] text-base font-AeonikProMedium bg-textBlueColor text-white  focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md ">Готово</button>
-          </div>
+        <action 
+          onClick={onClick}
+          className="w-full flex items-center justify-between gap-x-3 my-10">
+          <button className="w-[45%] h-[38px] text-base font-AeonikProMedium border border-textBlueColor rounded-md text-textBlueColor active:scale-95">Отмена</button>
+          <button className="w-[55%] h-[38px] active:scale-95 text-base font-AeonikProMedium bg-textBlueColor text-white  focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md ">Готово</button>
+        </action>
       </section>
     </div>
   );
