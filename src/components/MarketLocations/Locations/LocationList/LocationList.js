@@ -64,7 +64,10 @@ export default function LocationList() {
   ];
   const navigate = useNavigate();
   const goMapCity = (id) => {
-    navigate(`/locations-store/:${id}`);
+    navigate(`/locations-store/city/:${id}`);
+  };
+  const goMapWear = (id) => {
+    navigate(`/locations-store/wears/:${id}`);
   };
   return (
     <div className="w-full h-full">
@@ -134,7 +137,7 @@ export default function LocationList() {
                   </li>
                   <li className="md:w-[20%] h-full flex items-center justify-center text-center">
                     <button
-                      onClick={() => goMapCity(data?.city)}
+                      onClick={() => goMapWear(data?.city)}
                       className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                     >
                       {data?.wearLink}

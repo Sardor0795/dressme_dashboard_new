@@ -44,6 +44,7 @@ module.exports = {
         addLocBorderRight: "#E8E8E8",
         deleteColor: "#FF2B2B",
         checkboxBorder: "#D2D2D2",
+        addWearColorText: "#23B632",
       },
       fontFamily: {
         // 500
