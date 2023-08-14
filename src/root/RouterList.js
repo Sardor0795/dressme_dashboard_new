@@ -18,6 +18,7 @@ import MarketLocations from "../components/MarketLocations";
 import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
 import NoLocations from "../components/MarketLocations/NoLocations/NoLocations";
 import LocationMapCity from "../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity";
+import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
 
 export default function RouterList() {
   const [isItMarket, setIsItMarket] = useState(false);
@@ -50,7 +51,14 @@ export default function RouterList() {
           ) : (
             <Route index element={<NoLocations />} />
           )}
-          <Route path="/locations-store/:id" element={<LocationMapCity />} />
+          <Route
+            path="/locations-store/city/:id"
+            element={<LocationMapCity />}
+          />
+          <Route
+            path="/locations-store/wears/:id"
+            element={<LocationClothesCity />}
+          />
         </Route>
 
         {/* <Route path="/store-location" element={<Clothes />} /> */}
