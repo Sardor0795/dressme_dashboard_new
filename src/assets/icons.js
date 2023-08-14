@@ -693,13 +693,64 @@ const FemaleIcon = ({ width }) => {
 };
 
 const LineIcon = () => {
-  return(
-    <svg width="10" height="1" viewBox="0 0 10 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line y1="0.5" x2="10" y2="0.5" stroke="#E5E5E5"/>
+  return (
+    <svg
+      width="10"
+      height="1"
+      viewBox="0 0 10 1"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line y1="0.5" x2="10" y2="0.5" stroke="#E5E5E5" />
     </svg>
-  )
-}
-
+  );
+};
+const MenuCloseIcons = ({ colors }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18.3596 18.36L5.63965 5.64001"
+        stroke={colors}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="bevel"
+      />
+      <path
+        d="M18.3596 5.64001L5.63965 18.36"
+        stroke={colors}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="bevel"
+      />
+    </svg>
+  );
+};
+const ArrowTopIcons = ({ colors }) => {
+  return (
+    <svg
+      width="10"
+      height="6"
+      viewBox="0 0 10 6"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0.77661 4.62647L4.25394 1.14913C4.66461 0.738465 5.33661 0.738465 5.74728 1.14913L9.22461 4.62646"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 export {
   ProfileIcon,
   NavbarReviewIcon,
@@ -732,4 +783,6 @@ export {
   MaleIcon,
   FemaleIcon,
   LineIcon,
+  MenuCloseIcons,
+  ArrowTopIcons,
 };

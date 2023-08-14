@@ -37,7 +37,7 @@ function MarketEdit() {
     navigate(`/store`);
   };
   const goLocation = (id) => {
-    navigate(`/store-location`);
+    navigate(`/locations-store`);
   };
   const [genderCategory, setGenderCategory] = useState([
     {
