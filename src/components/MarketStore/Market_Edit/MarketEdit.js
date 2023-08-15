@@ -79,7 +79,7 @@ function MarketEdit() {
         Магазины{" "}
       </div>
       <div className="w-full flex items-center justify-end ">
-        <div className="flex items-center gap-x-[15px]">
+        <div className="flex items-center gap-x-[15px] mb-3">
           <NavLink
             to="/store/location-add"
             className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"

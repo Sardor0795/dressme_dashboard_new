@@ -78,7 +78,7 @@ function AddLocation () {
           Добавить локацию магазина
         </div>
 
-        <div className="relative w-full border rounded-lg">
+        <div className="relative w-full border rounded-lg overflow-hidden">
           
           <YMaps>
             <Map

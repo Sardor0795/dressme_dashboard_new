@@ -10,7 +10,7 @@ export default function NoLocationProduct() {
         <div className="w-full h-fit">
           <section className="flex items-center  gap-x-4 py-10">
             <p className="text-black text-2xl not-italic font-AeonikProMedium">
-              Yunusobod
+              Юнусабад
             </p>
             <button
               onClick={() => setIsWear(false)}
@@ -25,7 +25,7 @@ export default function NoLocationProduct() {
             </button>
           </section>
           <section className="w-full h-[80px] border border-borderColor rounded-lg flex items-center pl-6">
-            <span className="text-red-500 text-2xl not-italic font-AeonikProRegular">
+            <span className="text-red-500 text-lg not-italic font-AeonikProRegular">
               У вас пока нет одежд в этой локации !
             </span>
           </section>
