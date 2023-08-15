@@ -1,10 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { StarLabel, TelIcon } from "../../../../assets/icons";
-import { YMaps, Map, GeolocationControl, ZoomControl } from "react-yandex-maps";
+import { CloseAnswer, SearchIcon, StarLabel, TelIcon, YandexFullScreenMapIcon, YandexMazimizeMapIcon } from "../../../../assets/icons";
+import { YMaps, Map, GeolocationControl, ZoomControl} from "react-yandex-maps";
+
+const mapOptions = {
+  modules: ["geocode", "SuggestView"],
+  defaultOptions: { suppressMapOpenBlock: true },
+  width: 920,
+  height: 400,
+};
+
+const initialState = {
+  title: "",
+  center: [41.311753, 69.241822],
+  zoom: 12,
+};
 
 
-function AddLocation() {
+function AddLocation () {
+  
+  const [state, setState] = useState({ ...initialState });
+  const [mapConstructor, setMapConstructor] = useState(null);
+  const mapRef = useRef(null);
+  const searchRef = useRef(null);
+
+  // submits
+  const handleSubmit = () => {
+    console.log({ title: state.title, center: mapRef.current.getCenter() });
+  };
+
+  // reset state & search
+  const handleReset = () => {
+    setState({ ...initialState });
+    searchRef.current.value = "";
+    mapRef.current.setCenter(initialState.center);
+    mapRef.current.setZoom(initialState.zoom);
+  };
+
+  // search popup
+  useEffect(() => {
+    if (mapConstructor) {
+      new mapConstructor.SuggestView(searchRef.current).events.add("select", function (e) {
+        const selectedName = e.get("item").value;
+        mapConstructor.geocode(selectedName).then((result) => {
+          const newCoords = result.geoObjects.get(0).geometry.getCoordinates();
+          setState((prevState) => ({ ...prevState, center: newCoords }));
+        });
+      });
+    }
+  }, [mapConstructor]);
+
+  // change title
+  const handleBoundsChange = (e) => {
+    const newCoords = mapRef.current.getCenter();
+    mapConstructor.geocode(newCoords).then((res) => {
+      const nearest = res.geoObjects.get(0);
+      const foundAddress = nearest.properties.get("text");
+      const [centerX, centerY] = nearest.geometry.getCoordinates();
+      const [initialCenterX, initialCenterY] = initialState.center;
+      if (centerX !== initialCenterX && centerY !== initialCenterY) {
+        setState((prevState) => ({ ...prevState, title: foundAddress }));
+      }
+    });
+  };
+  
+  
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -12,36 +72,65 @@ function AddLocation() {
   }, []);
 
   return (
-    <div className="w-full max-w-[1120px] mx-auto mt-6 md:mt-12">
+    <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12">
       <div className="my-4">
         <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
           Добавить локацию магазина
         </div>
 
-        <div className="w-full">
-          <YMaps query={{ apikey: "8b56a857-f05f-4dc6-a91b-bc58f302ff21" }}>
+        <div className="relative w-full border rounded-lg">
+          
+          <YMaps>
             <Map
-              defaultState={{ center: [41.311753, 69.241822], zoom: 13 }} 
-              width="100%"
-              height="400px"
-              modules={["control.FullscreenControl"]}
-            >
-              <GeolocationControl
-              options={{
-                float: "right",
-                position: { bottom: 200, right: 10 },
-              }}
-            />
+            {...mapOptions}
+            state={state}
+            onLoad={setMapConstructor}
+            onBoundsChange={handleBoundsChange}
+            instanceRef={mapRef}
+          > 
+
+            <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
+              <div className="w-full flex items-center">
+                <div className="w-[489px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
+                  <input ref={searchRef} placeholder="Введите адрес" disabled={!mapConstructor} className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg" />
+                  {/* <div title={state.title} gutterBottom={false}>
+                    {state.title}
+                  </div> */}
+                  <div onClick={handleReset} className="cursor-pointer">
+                    <SearchIcon />
+                  </div>
+                </div>
+              </div>
+              <button 
+                type="button"
+                onClick={handleSubmit} 
+                disabled={Boolean(!state.title.length)} 
+                className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+              >
+                Подтвердить
+              </button>
+            </div>
+
             <ZoomControl
               options={{
                 float: "right",
-                position: { bottom: 145, right: 10, size: "small" },
+                position: { bottom: 170, right: 8, size: "small" },
                 size: "small",
               }}
             />
 
-           </Map>
-          </YMaps>
+            <GeolocationControl
+              options={{
+                float: "right",
+                width: "34",
+                height: "34",
+                position: { bottom: 130, right: 8 },
+              }}
+            />
+            
+          </Map>
+
+          </YMaps>           
         </div>
 
         
@@ -165,3 +254,54 @@ function AddLocation() {
   );
 }
 export default React.memo(AddLocation);
+
+
+
+
+
+
+
+  // <Map
+  //     defaultState={{ center: [41.311753, 69.241822], zoom: 13 }} 
+  //     width="100%"
+  //     height="400px"
+  //     modules={["control.FullscreenControl"]}
+  //   >
+  //     {/* <div
+  //         onClick={handleFullScreen}
+  //         className={`absolute right-3 cursor-pointer z-[51] w-10 h-10 rounded-lg bg-white ss:flex items-center justify-center block md:hidden 
+  //           ${ !dressInfo?.yandexFullScreen
+  //             ? "bottom-[128px] md:bottom-[87px]"
+  //             : "bottom-[65px] md:bottom-[87px]"
+  //           }`
+  //         }
+  //     >
+  //       {dressInfo?.yandexFullScreen ? (
+  //         <span>
+  //           <YandexFullScreenMapIcon />
+  //         </span>
+  //       ) : (
+  //         <span>
+  //           <YandexMazimizeMapIcon/>
+  //         </span>
+  //       )}
+  //     </div> */}
+      
+  //     <GeolocationControl
+  //     options={{
+  //       float: "right",
+  //       width: "34",
+  //       height: "34",
+  //       position: { bottom: 24, right: 8 },
+  //     }}
+  //     />
+  //     <ZoomControl
+  //       options={{
+  //         float: "right",
+  //         // width: "34",
+  //         // height: "34",
+  //         position: { bottom: 170, right: 8, size: "small" },
+  //         size: "small",
+  //       }}
+  //     />
+  // </Map>
