@@ -52,20 +52,20 @@ const MarketList = () => {
               </div>
             </div>
             <div className="flex items-center gap-x-1">
-              <button className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
+              <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
                 <img src={man} alt="" />
-              </button>
-              <button className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
+              </div>
+              <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
                 <img src={woman} alt="" />
-              </button>
+              </div>
             </div>
             <div>
-              <button className="h-12 px-5 active:scale-95  active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-3">
+              <div className="h-12 px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-3">
                 <img src={deliveryIcon} alt="" />
                 <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
                   Собственная доставка
                 </span>
-              </button>
+              </div>
             </div>
             <div className="flex items-center gap-x-[50px]">
               <NavLink

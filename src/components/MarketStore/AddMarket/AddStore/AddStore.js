@@ -106,14 +106,14 @@ function AddStore({ onClick }) {
                                     key={data.id}
                                     onClick={() => handleGenderCheck(data.id)}
                                     className={`w-1/3 md:w-full flex items-center justify-center active:scale-95  border md:border-0 text-xs md:text-base font-AeonikProRegular md:my-[3px] md:mx-[3px] md:px-[12px] py-[8px] md:py-[10px] rounded-lg
-                                                    ${
-                                                    data.action
-                                                        ? " h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                                                        : ""
-                                                    }    
-                                                    `}
+                                        ${
+                                        data.action
+                                            ? " h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                            : ""
+                                        }`
+                                    }
                                     >
-                                    {data.gender}
+                                        {data.gender}
                                     </button>
                                 );
                                 })}
