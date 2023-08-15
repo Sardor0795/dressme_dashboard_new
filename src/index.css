@@ -58,3 +58,11 @@ body {
   height: 48px;
   font-size: 16px;
 }
+
+.ymaps-2-1-79-map-copyrights-promo {
+  display: none;
+}
+
+.ymaps-2-1-79-map:nth-child(2) {
+  display: none;
+}
