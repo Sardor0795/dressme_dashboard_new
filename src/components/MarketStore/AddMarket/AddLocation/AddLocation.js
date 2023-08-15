@@ -17,7 +17,6 @@ const initialState = {
   zoom: 12,
 };
 
-
 function AddLocation () {
   
   const [state, setState] = useState({ ...initialState });
