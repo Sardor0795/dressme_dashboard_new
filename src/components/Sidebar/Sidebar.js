@@ -68,13 +68,13 @@ export default function Sidebar() {
             color: isActive ? "#007DCA" : "#000",
             background: isActive ? "#f2f2f2" : "#fcfcfc",
           })}
-          to={"/products"}
+          to={"/locations-store"}
         >
           <span>
-            <ClothesIcons colors={""} />
+            <LocationIcon colors="#2c2c2c" />
           </span>
           <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-            Одежда
+            Локации
           </span>
         </NavLink>
         <NavLink
@@ -85,13 +85,13 @@ export default function Sidebar() {
             color: isActive ? "#007DCA" : "#000",
             background: isActive ? "#f2f2f2" : "#fcfcfc",
           })}
-          to={"/locations-store"}
+          to={"/products"}
         >
           <span>
-            <LocationIcon colors="#2c2c2c" />
+            <ClothesIcons colors={""} />
           </span>
           <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-            Локации
+            Одежда
           </span>
         </NavLink>
       </div>
