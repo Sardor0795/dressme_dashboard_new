@@ -16,6 +16,7 @@ module.exports = {
         textBlackColor: "#000000",
         textBlueColor: "#007dca",
         textRedColor: "#d50000",
+        yandexNavbar: " rgba(255, 255, 255, 0.8)",
 
         //Weather Colors
         weatherSpringColor: "#008f0e",
