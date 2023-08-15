@@ -8,6 +8,7 @@ import {
   FemaleIcon,
   MaleIcon,
 } from "../../../../assets/icons";
+import { useState } from "react";
 
 export default function LocationClothesCity() {
   const { id } = useParams();
@@ -20,21 +21,24 @@ export default function LocationClothesCity() {
     { id: 5, name: "wear", isCheck: false },
     { id: 6, name: "wear", isCheck: false },
   ];
+
+  const [allChecked, setallChecked] = useState(false);
+
   return (
     <div>
       <div className="flex justify-end items-center md:justify-between max-w-[1540px] mx-auto pb-6 mt-10">
-        <section className="hidden md:block md:flex gap-x-4">
+        <section className="hidden md:flex gap-x-4">
           <p className="text-black text-2xl not-italic font-AeonikProMedium">
             {NewId}
           </p>
-          <p className="flex items-center gap-x-[4px]">
+          <Link className="active:translate-y-[2px] flex items-center gap-x-[4px]">
             <span>
               <AddIconsCircle />
             </span>
             <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
               Добавить одежду
             </span>
-          </p>
+          </Link>
         </section>
         <div className="w-fit flex items-center">
           <div className="mr-6 font-AeonikProRegular text-lg text-mobileTextColor">
@@ -57,20 +61,50 @@ export default function LocationClothesCity() {
 
       <div className="max-w-[1572px] mx-auto font-AeonikProRegular text-[16px]">
         <div className="mb-[10px] flex items-center text-tableTextTitle">
-          <div className="w-[24px] h-[24px] border border-checkboxBorder bg-white rounded mr-[8px]"></div>
+          <div
+            onClick={() => setallChecked(!allChecked)}
+            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
+              allChecked
+                ? "bg-[#007DCA] border-[#007DCA]"
+                : "bg-white border-checkboxBorder"
+            } flex items-center justify-center rounded mr-[8px]`}
+          >
+            <span
+              className={`${
+                allChecked ? "flex items-center justify-center" : "hidden"
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="11"
+                height="13"
+                viewBox="0 0 11 13"
+                fill="none"
+              >
+                <path
+                  d="M1 9.5L5.88235 11L10 1"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+          </div>
 
-          <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor px-[30px] py-[8px] flex justify-between items-center gap-x-[5px] w-full">
-            <div>Фото</div>
-            <div>Наименование товара</div>
-            <div>Артикул</div>
-            <div>Тип</div>
-            <div>Цвет</div>
-            <div>Сезон</div>
-            <div>Пол</div>
-            <div>Цена товара</div>
-            <div className="w-[50px]"></div>
-            <div className="text-right w-[60px]">Добавить</div>
-            <div className="text-right w-[60px]">Удалить</div>
+          <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
+            <div className="mr-[75px]">Фото</div>
+            <div className="flex w-full">
+              <div className="w-[16%]">Наименование товара</div>
+              <div className="w-[10%]">Артикул</div>
+              <div className="w-[10%]">Тип</div>
+              <div className="w-[10%]">Цвет</div>
+              <div className="w-[10%]">Сезон</div>
+              <div className="w-[11%]">Пол</div>
+              <div className="w-[10%]">Цена товара</div>
+              <div className="w-[15%]"></div>
+              <div className="w-[9%] text-center">Добавить</div>
+              <div className="w-[9%] text-center">Удалить</div>
+            </div>
           </div>
         </div>
 
@@ -78,51 +112,55 @@ export default function LocationClothesCity() {
           {arr.map((data) => {
             return (
               <div className="flex items-center w-full">
-                <button className="w-[24px] h-[24px] cursor-pointer border border-checkboxBorder bg-white rounded mr-[8px]"></button>
-                <div className="border-lightBorderColor border rounded-[12px] bg-white px-[30px] py-[8px] flex justify-between items-center gap-x-[5px] w-full">
-                  <div className="flex items-center justify-center w-[60px] h-[60px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
+                <button className="min-w-[24px] min-h-[24px] cursor-pointer border border-checkboxBorder bg-white rounded mr-[8px]"></button>
+                <div className="border-lightBorderColor border rounded-[12px] bg-white pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
+                  <div className="mr-[55px] flex items-center justify-center min-w-[60px] min-h-[60px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
                     <BgNoImgIcon />
                   </div>
-                  <div className="max-w-[169px] text-weatherWinterColor">
-                    Спортивная мужская кроссовка Nike RUN
-                  </div>
-                  <div className="text-tableTextTitle2">BAA-00004</div>
-                  <div className="text-tableTextTitle2">Футболка</div>
-                  <div>
-                    <div className="rounded-lg border border-lightBorderColor flex items-center py-[3px] px-[5px]">
-                      <span className="mr-[5px]">
-                        <ColorsIcon />
+                  <div className="flex w-full items-center">
+                    <div className="w-[16%] text-weatherWinterColor">
+                      Спортивная мужская кроссовка Nike RUN
+                    </div>
+                    <div className="text-tableTextTitle2 w-[10%]">
+                      BAA-00004
+                    </div>
+                    <div className="text-tableTextTitle2 w-[10%]">Футболка</div>
+                    <div className="w-[10%] flex items-center">
+                      <div className="rounded-lg border border-lightBorderColor flex items-center py-[3px] px-[5px]">
+                        <span className="mr-[5px]">
+                          <ColorsIcon />
+                        </span>
+                        5
+                      </div>
+                    </div>
+                    <div className="w-[10%]">
+                      <div className="bg-[url('/src/assets/seasons.png')] w-[100px] h-[40px]"></div>
+                    </div>
+                    <div className="w-[11%]">
+                      <div className="flex items-center">
+                        <div className="flex items-center justify-center w-[40px] h-[40px] border border-lightBorderColor rounded-[12px] bg-lightBgColor mr-1">
+                          <MaleIcon />
+                        </div>
+                        <div className="flex items-center justify-center w-[40px] h-[40px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
+                          <FemaleIcon />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-[10%]">452 000 сумара</div>
+                    <Link className="text-[18px] text-weatherWinterColor w-[15%] text-center">
+                      Подробнее
+                    </Link>
+                    <button className="active:translate-y-[2px] w-[9%] flex justify-center">
+                      <span>
+                        <AddLocationIcon width={30} />
                       </span>
-                      5
-                    </div>
+                    </button>
+                    <button className="active:translate-y-[2px] w-[9%] flex justify-center">
+                      <span>
+                        <DeleteIcon width={30} />
+                      </span>
+                    </button>
                   </div>
-                  <div>
-                    <div className="bg-[url('/src/assets/seasons.png')] w-[100px] h-[40px]"></div>
-                  </div>
-                  <div>
-                    <div className="flex items-center">
-                      <div className="flex items-center justify-center w-[40px] h-[40px] border border-lightBorderColor rounded-[12px] bg-lightBgColor mr-1">
-                        <MaleIcon />
-                      </div>
-                      <div className="flex items-center justify-center w-[40px] h-[40px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
-                        <FemaleIcon />
-                      </div>
-                    </div>
-                  </div>
-                  <div>452 000 сумара</div>
-                  <Link className="text-[18px] text-weatherWinterColor w-[150px]">
-                    Подробнее
-                  </Link>
-                  <button className="active:translate-y-[2px]">
-                    <span>
-                      <AddLocationIcon width={30} />
-                    </span>
-                  </button>
-                  <button className="active:translate-y-[2px]">
-                    <span>
-                      <DeleteIcon width={30} />
-                    </span>
-                  </button>
                 </div>
               </div>
             );
