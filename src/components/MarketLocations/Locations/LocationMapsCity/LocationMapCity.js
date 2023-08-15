@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import {
-  ArrowTopIcons,
-  BgSelectSkin,
-  StarLabel,
-  TelIcon,
-} from "../../../../assets/icons";
-import { Select } from "antd";
+import { ArrowTopIcons, StarLabel, TelIcon } from "../../../../assets/icons";
 import { Aligarx, mapImg } from "../../../../assets";
-import { Button, message, Space } from "antd";
+import { message,} from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
 
 function LocationMapCity() {

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BgSelectSkin, StarLabel, TelIcon } from "../../../../assets/icons";
-import { Select } from "antd";
+import { StarLabel, TelIcon } from "../../../../assets/icons";
+import { YMaps, Map, GeolocationControl, ZoomControl } from "react-yandex-maps";
+
 
 function AddLocation() {
   useEffect(() => {
@@ -11,14 +12,39 @@ function AddLocation() {
   }, []);
 
   return (
-    <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12">
+    <div className="w-full max-w-[1120px] mx-auto mt-6 md:mt-12">
       <div className="my-4">
         <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
           Добавить локацию магазина
         </div>
 
-        <div className="map h-[480px] bg-slate-400"></div>
+        <div className="w-full">
+          <YMaps query={{ apikey: "8b56a857-f05f-4dc6-a91b-bc58f302ff21" }}>
+            <Map
+              defaultState={{ center: [41.311753, 69.241822], zoom: 14 }} 
+              width="100%"
+              height="400px"
+              modules={["control.FullscreenControl"]}
+            >
+              <GeolocationControl
+              options={{
+                float: "right",
+                position: { bottom: 220, right: 10 },
+              }}
+            />
+            <ZoomControl
+              options={{
+                float: "right",
+                position: { bottom: 270, right: 10, size: "small" },
+                size: "small",
+              }}
+            />{" "}
 
+           </Map>
+          </YMaps>
+        </div>
+
+        
         <div className="flex mt-[10px] gap-[25px] mb-[25px]">
           <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <Link to="#" className="flex items-center justify-center">
