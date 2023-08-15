@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
-  BgSelectSkin,
-  CopyIcon,
   LocationIcon,
   StarLabel,
 } from "../../../assets/icons";
 import { adidas, backImg } from "../../../assets";
-// import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
-// import { StarLabel } from "../../../assets/icons";
-import { Button, message, Space } from "antd";
+import {  message, } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
 
 function MarketEdit() {
