@@ -21,7 +21,7 @@ function AddLocation() {
         <div className="w-full">
           <YMaps query={{ apikey: "8b56a857-f05f-4dc6-a91b-bc58f302ff21" }}>
             <Map
-              defaultState={{ center: [41.311753, 69.241822], zoom: 14 }} 
+              defaultState={{ center: [41.311753, 69.241822], zoom: 13 }} 
               width="100%"
               height="400px"
               modules={["control.FullscreenControl"]}
@@ -29,16 +29,16 @@ function AddLocation() {
               <GeolocationControl
               options={{
                 float: "right",
-                position: { bottom: 220, right: 10 },
+                position: { bottom: 200, right: 10 },
               }}
             />
             <ZoomControl
               options={{
                 float: "right",
-                position: { bottom: 270, right: 10, size: "small" },
+                position: { bottom: 145, right: 10, size: "small" },
                 size: "small",
               }}
-            />{" "}
+            />
 
            </Map>
           </YMaps>
