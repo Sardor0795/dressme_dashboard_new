@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { BgSelectSkin, CopyIcon, StarLabel } from "../../../../assets/icons";
+import { Link, useNavigate } from "react-router-dom";
+import { BgSelectSkin, StarLabel } from "../../../../assets/icons";
 import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function AddStore({ onClick }) {
+
+    const navigate = useNavigate();
   
     const [genderCategory, setGenderCategory] = useState([
         {
@@ -40,9 +43,19 @@ function AddStore({ onClick }) {
     }, []);
 
     return (
-        <div className="w-full px-4 md:px-[102px] mt-6 md:mt-12">
+        <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
             <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
                 Создать магазин
+            </div>
+            <div className="mb-3">
+                <button
+                    onClick={() => {
+                    navigate(-1);
+                }}
+                className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+                >
+                <AiOutlineLeft />
+                </button>
             </div>
             <div className="relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
                 <Link to="#" className="flex items-center justify-center">

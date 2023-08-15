@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CloseAnswer, SearchIcon, StarLabel, TelIcon, YandexFullScreenMapIcon, YandexMazimizeMapIcon } from "../../../../assets/icons";
 import { YMaps, Map, GeolocationControl, ZoomControl} from "react-yandex-maps";
+import { AiOutlineLeft } from "react-icons/ai";
 
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
@@ -23,6 +24,7 @@ function AddLocation () {
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
+  const navigate = useNavigate();
 
   // submits
   const handleSubmit = () => {
@@ -77,7 +79,16 @@ function AddLocation () {
         <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
           Добавить локацию магазина
         </div>
-
+        <div className="mb-3">
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+        >
+          <AiOutlineLeft />
+        </button>
+        </div>
         <div className="relative w-full border rounded-lg overflow-hidden">
           
           <YMaps>
