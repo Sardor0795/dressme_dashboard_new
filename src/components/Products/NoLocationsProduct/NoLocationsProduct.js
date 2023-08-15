@@ -32,7 +32,10 @@ export default function NoLocationProduct() {
         </div>
       ) : (
         <div className="flex items-center h-full justify-center">
-          <Link className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline">
+          <Link
+            to="/products/location"
+            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+          >
             Сначала добавьте локацию !
           </Link>
         </div>

@@ -21,6 +21,7 @@ import LocationMapCity from "../components/MarketLocations/Locations/LocationMap
 import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
 import NoLocationProduct from "../components/Products/NoLocationsProduct/NoLocationsProduct";
 import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
+import ProductLocationsList from "../components/Products/ProductLocationsList/ProductLocationsList";
 
 export default function RouterList() {
   const [isItMarket, setIsItMarket] = useState(false);
@@ -32,7 +33,6 @@ export default function RouterList() {
       <Routes>
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/add" element={<ProductsPageTwo />} />
 
         {/* ---------------------<Store>------------------------- */}
         <Route path="/store" element={<MarketStore />}>
@@ -72,6 +72,9 @@ export default function RouterList() {
           ) : (
             <Route index element={<NoLocationProduct />} />
           )}
+          <Route path="/products/location" element={<ProductLocationsList />} />
+          <Route path="/products/add-wear" element={<ProductsPageOne />} />
+          <Route path="/products/add-detail" element={<ProductsPageTwo />} />
         </Route>
 
         {/* <Route path="/store-location" element={<Clothes />} /> */}

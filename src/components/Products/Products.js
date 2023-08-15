@@ -1,5 +1,4 @@
 import React from "react";
-import ProductsPageOne from "./AddingProductPageOne/ProductsPageOne";
 import { Outlet } from "react-router-dom";
 import { Space, DatePicker } from "antd";
 import { SearchIcon } from "../../assets/icons";
