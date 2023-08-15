@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { CloseAnswer, SearchIcon, StarLabel, TelIcon, YandexFullScreenMapIcon, YandexMazimizeMapIcon } from "../../../../assets/icons";
+import {  SearchIcon, StarLabel, TelIcon, YandexFullScreenMapIcon, YandexMazimizeMapIcon } from "../../../../assets/icons";
 import { YMaps, Map, GeolocationControl, ZoomControl} from "react-yandex-maps";
 import { AiOutlineLeft } from "react-icons/ai";
 
