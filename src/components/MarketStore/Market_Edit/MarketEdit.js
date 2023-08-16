@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
-  BgSelectSkin,
-  CopyIcon,
   LocationIcon,
   StarLabel,
 } from "../../../assets/icons";
 import { adidas, backImg } from "../../../assets";
-// import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
-// import { StarLabel } from "../../../assets/icons";
-import { Button, message, Space } from "antd";
+import {  message, } from "antd";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function MarketEdit() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -74,11 +71,19 @@ function MarketEdit() {
   }, []);
 
   return (
-    <div className="w-full px-4 md:px-[250px] mt-6 md:mt-12">
+    <div className="w-full mx-auto md:max-w-[1120px] px-4 mt-6 md:mt-12">
       <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
         Магазины{" "}
       </div>
-      <div className="w-full flex items-center justify-end ">
+      <div className="w-full flex items-center justify-between mb-3">
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+        >
+          <AiOutlineLeft />
+        </button>
         <div className="flex items-center gap-x-[15px]">
           <NavLink
             to="/store/location-add"
@@ -102,7 +107,7 @@ function MarketEdit() {
           </button>
         </div>
       </div>
-      <div className="relative w-full h-[200px] md:h-[360px] flex items-center  justify-center rounded-lg ">
+      <div className="relative w-full h-[200px] md:h-fit flex items-center  justify-center rounded-lg ">
         <img src={backImg} className="w-full h-full" alt="" />
         <div className="absolute -bottom-11 md:bottom-[-60px] z-[20] bg-white overflow-hidden left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
           <img src={adidas} className="w-full h-full " alt="" />
