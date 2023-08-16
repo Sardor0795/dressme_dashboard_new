@@ -17,6 +17,7 @@ export default function LocationClothesCity() {
   const [data, setData] = useState([
     {
       id: 1,
+      index: 1,
       name: "wear",
       isCheck: false,
       bgColor: "bg-[#4FB459]",
@@ -24,6 +25,7 @@ export default function LocationClothesCity() {
     },
     {
       id: 2,
+      index: 2,
       name: "wear",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
@@ -31,6 +33,7 @@ export default function LocationClothesCity() {
     },
     {
       id: 3,
+      index: 3,
       name: "wear",
       isCheck: false,
       bgColor: "bg-[#FF4747]",
@@ -38,6 +41,7 @@ export default function LocationClothesCity() {
     },
     {
       id: 4,
+      index: 1,
       name: "wear",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
@@ -45,6 +49,7 @@ export default function LocationClothesCity() {
     },
     {
       id: 5,
+      index: 2,
       name: "wear",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
@@ -52,6 +57,7 @@ export default function LocationClothesCity() {
     },
     {
       id: 6,
+      index: 3,
       name: "wear",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",

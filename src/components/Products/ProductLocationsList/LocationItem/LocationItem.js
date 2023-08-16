@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import StoreListModal from "./StoreListModal";
 import {
   AddLocationIcon,
   BgNoImgIcon,
-  ColorsIcon,
   DeleteIcon,
-  FemaleIcon,
-  MaleIcon,
 } from "../../../../assets/icons";
 
 export default function LocationItem({ data, click, index }) {
@@ -55,7 +52,7 @@ export default function LocationItem({ data, click, index }) {
         </span>
       </div>
       <div className="border-lightBorderColor border rounded-[12px] bg-white pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
-        <div className="w-[40px]">{data?.id}</div>
+        <div className="w-[40px]">{data?.index}</div>
         <div className="mr-[55px] flex items-center justify-center min-w-[60px] min-h-[60px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
           <BgNoImgIcon />
         </div>

@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import StoreListModal from "./StoreListModal";
 import {
   AddLocationIcon,
   BgNoImgIcon,
-  ColorsIcon,
   DeleteIcon,
-  FemaleIcon,
-  MaleIcon,
 } from "../../../../../assets/icons";
-import StoreListModal from "./StoreListModal";
 
-export default function LocationItem({ data, click }) {
+export default function LocationItem({ data, click, index }) {
   const [openStoreList, setOpenStoreList] = useState(false);
 
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
@@ -59,33 +57,22 @@ export default function LocationItem({ data, click }) {
           <BgNoImgIcon />
         </div>
         <div className="flex w-full items-center">
-          <div className="w-[17%] text-weatherWinterColor">
-            Спортивная мужская кроссовка Nike RUN
+          <div className="w-[18%] text-weatherWinterColor">
+            <span className="max-w-[169px] inline-block">
+              Спортивная мужская кроссовка Nike RUN
+            </span>
           </div>
-          <div className="text-tableTextTitle2 w-[10%]">BAA-00004</div>
-          <div className="text-tableTextTitle2 w-[9%]">Футболка</div>
-          <div className="w-[8%] flex items-center">
-            <div className="rounded-lg border border-lightBorderColor flex items-center py-[3px] px-[5px]">
-              <span className="mr-[5px]">
-                <ColorsIcon />
-              </span>
-              5
+          <div className="text-tableTextTitle2 w-[12%]">BAA-00004</div>
+          <div className="text-tableTextTitle2 w-[11%]">Футболка</div>
+          <div className="w-[10%]">15-08-2023</div>
+          <div className="w-[14%]">
+            <div
+              className={`w-fit text-white text-base font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
+            >
+              {data?.state}
             </div>
           </div>
-          <div className="w-[12%]">
-            <div className="bg-[url('/src/assets/seasons.png')] w-[100px] h-[40px]"></div>
-          </div>
-          <div className="w-[11%]">
-            <div className="flex items-center">
-              <div className="flex items-center justify-center w-[40px] h-[40px] border border-lightBorderColor rounded-[12px] bg-lightBgColor mr-1">
-                <MaleIcon />
-              </div>
-              <div className="flex items-center justify-center w-[40px] h-[40px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
-                <FemaleIcon />
-              </div>
-            </div>
-          </div>
-          <div className="w-[10%]">452 000 сумара</div>
+          <div className="w-[12%]">452 000 сумара</div>
           <button
             onClick={() => goProductDetailEdit(data?.id)}
             className="text-[18px] text-weatherWinterColor w-[15%] text-center"
@@ -93,16 +80,34 @@ export default function LocationItem({ data, click }) {
             Подробнее
           </button>
           <button
-            onClick={() => setOpenStoreList(true)}
-            className="active:translate-y-[2px] w-[9%] flex justify-center"
+            onClick={
+              data?.state === "Одобренный" ? () => setOpenStoreList(true) : null
+            }
+            className={`${
+              data?.state === "Одобренный"
+                ? "active:translate-y-[2px]"
+                : "cursor-not-allowed"
+            }  w-[9%] flex justify-center`}
           >
             <span>
-              <AddLocationIcon width={30} />
+              <AddLocationIcon
+                color={data?.state !== "Одобренный" ? "disabled" : null}
+                width={30}
+              />
             </span>
           </button>
-          <button className="active:translate-y-[2px] w-[9%] flex justify-center">
+          <button
+            className={`${
+              data?.state === "Одобренный"
+                ? "active:translate-y-[2px]"
+                : "cursor-not-allowed"
+            }  w-[9%] flex justify-center`}
+          >
             <span>
-              <DeleteIcon width={30} />
+              <DeleteIcon
+                color={data?.state !== "Одобренный" ? "disabled" : null}
+                width={30}
+              />
             </span>
           </button>
         </div>

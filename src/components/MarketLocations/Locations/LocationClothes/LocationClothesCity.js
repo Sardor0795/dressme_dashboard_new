@@ -1,23 +1,68 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import { useEffect, useState } from "react";
+import LocationItem from "./LocationItem/LocationItem";
 import {
   AddIconsCircle,
   AddLocationIcon,
   DeleteIcon,
 } from "../../../../assets/icons";
-import { useEffect, useState } from "react";
-import LocationItem from "./LocationItem/LocationItem";
 
 export default function LocationClothesCity() {
-  const { id } = useParams();
-  const NewId = id.replace(":", "");
+  // const { id } = useParams();
+  // const NewId = id.replace(":", "");
+
+  let NewId = "Hadra";
 
   const [data, setData] = useState([
-    { id: 1, name: "wear", isCheck: false },
-    { id: 2, name: "wear", isCheck: false },
-    { id: 3, name: "wear", isCheck: false },
-    { id: 4, name: "wear", isCheck: false },
-    { id: 5, name: "wear", isCheck: false },
-    { id: 6, name: "wear", isCheck: false },
+    {
+      id: 1,
+      index: 1,
+      name: "wear",
+      isCheck: false,
+      bgColor: "bg-[#4FB459]",
+      state: "Одобренный",
+    },
+    {
+      id: 2,
+      index: 2,
+      name: "wear",
+      isCheck: false,
+      bgColor: "bg-[#F1C116]",
+      state: "Ожидающий",
+    },
+    {
+      id: 3,
+      index: 3,
+      name: "wear",
+      isCheck: false,
+      bgColor: "bg-[#FF4747]",
+      state: "Отказанный",
+    },
+    {
+      id: 4,
+      index: 1,
+      name: "wear",
+      isCheck: false,
+      bgColor: "bg-[#AA3FFF]",
+      state: "Замечание",
+    },
+    {
+      id: 5,
+      index: 2,
+      name: "wear",
+      isCheck: false,
+      bgColor: "bg-[#F1C116]",
+      state: "Ожидающий",
+    },
+    {
+      id: 6,
+      index: 3,
+      name: "wear",
+      isCheck: false,
+      bgColor: "bg-[#AA3FFF]",
+      state: "Замечание",
+    },
   ]);
 
   const [someChecked, setSomeChecked] = useState(false);
@@ -55,12 +100,15 @@ export default function LocationClothesCity() {
 
   return (
     <div>
-      <div className="flex justify-end items-center md:justify-between max-w-[1540px] mx-auto pb-6 mt-10">
+      <div className="mt-[35px] flex justify-end items-center md:justify-between mx-auto pb-6">
         <section className="hidden md:flex gap-x-4">
           <p className="text-black text-2xl not-italic font-AeonikProMedium">
-            {NewId}
+            Юнусабад (3)
           </p>
-          <Link className="active:translate-y-[2px] flex items-center gap-x-[4px]">
+          <Link
+            to="/products/add-wear"
+            className="active:translate-y-[2px] flex items-center gap-x-[4px]"
+          >
             <span>
               <AddIconsCircle />
             </span>
@@ -100,7 +148,7 @@ export default function LocationClothesCity() {
         </div>
       </div>
 
-      <div className="max-w-[1572px] mx-auto font-AeonikProRegular text-[16px]">
+      <div className="mx-auto font-AeonikProRegular text-[16px]">
         <div className="mb-[10px] flex items-center text-tableTextTitle">
           <div
             onClick={() => {
@@ -139,13 +187,12 @@ export default function LocationClothesCity() {
             <div className="w-[45px]">No:</div>
             <div className="mr-[75px]">Фото</div>
             <div className="flex w-full">
-              <div className="w-[17%]">Наименование товара</div>
-              <div className="w-[10%]">Артикул</div>
-              <div className="w-[9%]">Тип</div>
-              <div className="w-[8%]">Цвет</div>
-              <div className="w-[12%]">Сезон</div>
-              <div className="w-[11%]">Пол</div>
-              <div className="w-[10%]">Цена товара</div>
+              <div className="w-[18%]">Наименование товара</div>
+              <div className="w-[12%]">Артикул</div>
+              <div className="w-[11%]">Тип</div>
+              <div className="w-[10%]">Дата</div>
+              <div className="w-[14%]">Статус</div>
+              <div className="w-[12%]">Цена товара</div>
               <div className="w-[15%]"></div>
               <div className="w-[9%] text-center">Добавить</div>
               <div className="w-[9%] text-center">Удалить</div>
@@ -154,7 +201,7 @@ export default function LocationClothesCity() {
         </div>
 
         <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-          {data.map((data) => {
+          {data.map((data, i) => {
             return <LocationItem data={data} click={onCheck} />;
           })}
         </div>
