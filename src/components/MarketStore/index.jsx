@@ -47,7 +47,7 @@ export default function MarketStore() {
             </form>
             <section className="mobileDate flex items-center gap-x-[30px]">
               <Space direction="vertical" size={12}>
-                <RangePicker />
+                <RangePicker placeholder={["от", "до"]} />
               </Space>
             </section>
           </section>
