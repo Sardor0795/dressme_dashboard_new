@@ -12,10 +12,12 @@ export default function ReviewDetail() {
       <div className="hidden md:blok w-full">
         <FilterSearch />
       </div>
+
       <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
         <section className="w-full md:w-[30%]">
           <DetailCarousel />
         </section>
+
         <div className="w-full md:w-[calc(70%-70px)] ">
           <CommentUsers />
         </div>
