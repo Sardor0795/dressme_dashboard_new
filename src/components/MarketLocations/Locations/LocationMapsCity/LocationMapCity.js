@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import { ArrowTopIcons, SearchIcon, StarLabel, TelIcon } from "../../../../assets/icons";
+import { ArrowTopIcons, MapLocationIcon, SearchIcon, StarLabel, TelIcon } from "../../../../assets/icons";
 import { Aligarx } from "../../../../assets";
 import { message,} from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -12,6 +12,7 @@ const mapOptions = {
   width: 920,
   height: 400,
 };
+
 
 const initialState = {
   title: "",
@@ -77,11 +78,13 @@ function LocationMapCity() {
       content: "Удалить",
     });
   };
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
+  
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
       <div className="my-4">
@@ -127,7 +130,7 @@ function LocationMapCity() {
           </div>
         </div>
         
-        <div className="relative w-full border rounded-lg overflow-hidden">  
+        <div className="relative w-full flex items-center justify-center border rounded-lg overflow-hidden">  
           <YMaps>
             <Map
             {...mapOptions}
@@ -157,6 +160,8 @@ function LocationMapCity() {
                 Подтвердить
               </button>
             </div>
+
+            {/* <div className="absolute left-[50%] top-[50%] mx-auto z-50"><MapLocationIcon /></div> */}
 
             <ZoomControl
               options={{
