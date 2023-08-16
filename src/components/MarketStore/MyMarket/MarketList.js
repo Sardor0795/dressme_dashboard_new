@@ -21,9 +21,10 @@ const MarketList = () => {
         return (
           <div
             key={data?.id}
-            className="w-full h-[100px] border border-borderColor pl-[55px] pr-10  rounded-lg flex justify-between items-center"
+            className="w-full h-[100px] border border-borderColor pr-10  rounded-lg flex justify-between items-center"
           >
             <div className="flex items-center  w-fit ">
+              <div className="flex items-center justify-center pr-7 pl-5 text-xl font-AeonikProRegular">{data.id}</div>
               <figure className="w-[80px] md:w-[120px] h-[80px] md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
                 <img src={nike} alt="" />
               </figure>
@@ -69,7 +70,7 @@ const MarketList = () => {
             </div>
             <div className="flex items-center gap-x-[50px]">
               <NavLink
-                to={"/store-location"}
+                to={"/locations-store"}
                 className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"
               >
                 Локации
