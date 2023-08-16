@@ -54,16 +54,17 @@ export default function LocationItem({ data, click }) {
         </span>
       </div>
       <div className="border-lightBorderColor border rounded-[12px] bg-white pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
+        <div className="w-[40px]">{data?.id}</div>
         <div className="mr-[55px] flex items-center justify-center min-w-[60px] min-h-[60px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
           <BgNoImgIcon />
         </div>
         <div className="flex w-full items-center">
-          <div className="w-[16%] text-weatherWinterColor">
+          <div className="w-[17%] text-weatherWinterColor">
             Спортивная мужская кроссовка Nike RUN
           </div>
           <div className="text-tableTextTitle2 w-[10%]">BAA-00004</div>
-          <div className="text-tableTextTitle2 w-[10%]">Футболка</div>
-          <div className="w-[10%] flex items-center">
+          <div className="text-tableTextTitle2 w-[9%]">Футболка</div>
+          <div className="w-[8%] flex items-center">
             <div className="rounded-lg border border-lightBorderColor flex items-center py-[3px] px-[5px]">
               <span className="mr-[5px]">
                 <ColorsIcon />
@@ -71,7 +72,7 @@ export default function LocationItem({ data, click }) {
               5
             </div>
           </div>
-          <div className="w-[10%]">
+          <div className="w-[12%]">
             <div className="bg-[url('/src/assets/seasons.png')] w-[100px] h-[40px]"></div>
           </div>
           <div className="w-[11%]">

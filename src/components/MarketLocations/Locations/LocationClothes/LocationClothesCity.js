@@ -136,13 +136,14 @@ export default function LocationClothesCity() {
           </div>
 
           <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
+            <div className="w-[45px]">No:</div>
             <div className="mr-[75px]">Фото</div>
             <div className="flex w-full">
-              <div className="w-[16%]">Наименование товара</div>
+              <div className="w-[17%]">Наименование товара</div>
               <div className="w-[10%]">Артикул</div>
-              <div className="w-[10%]">Тип</div>
-              <div className="w-[10%]">Цвет</div>
-              <div className="w-[10%]">Сезон</div>
+              <div className="w-[9%]">Тип</div>
+              <div className="w-[8%]">Цвет</div>
+              <div className="w-[12%]">Сезон</div>
               <div className="w-[11%]">Пол</div>
               <div className="w-[10%]">Цена товара</div>
               <div className="w-[15%]"></div>
