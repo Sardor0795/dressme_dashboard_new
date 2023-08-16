@@ -33,8 +33,8 @@ export default function MarketStore() {
               Все магазины{" "}
             </p>
           </section>
-          <div className="w-fit flex items-center gap-x-[15px]">
-            <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+          <section className="w-fit flex items-center gap-x-[15px]">
+            <form className=" md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
               <input
                 type="text"
                 name="s"
@@ -50,7 +50,7 @@ export default function MarketStore() {
                 <RangePicker />
               </Space>
             </section>
-          </div>
+          </section>
         </div>
       </div>
       <Outlet />
