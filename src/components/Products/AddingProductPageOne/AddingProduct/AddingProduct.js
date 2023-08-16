@@ -1511,7 +1511,9 @@ const AddingProduct = () => {
                   >
                     Категория одежды
                   </label>
-                  <span className="ml-[5px]"></span>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
                 </div>
                 <Select
                   className="hidden md:flex rounded-lg w-full h-11 md:h-10"
