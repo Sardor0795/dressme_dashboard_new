@@ -254,6 +254,7 @@ function MarketEdit() {
               <p className="text-sm md:text-base font-AeonikProMedium text-mobileTextColor">
                 Воспользоваться{" "}
                 <Link
+                  target={"_blank"}
                   to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                   className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium ml-3"
                 >
