@@ -71,13 +71,23 @@ export default function LocationList() {
   };
   return (
     <div className="w-full h-full">
+      <div className="mt-[16px]">
+        <p className="text-black text-2xl not-italic font-AeonikProMedium my-4">
+          Nike (6)
+        </p>
+      </div>
       {/* Table */}
-      <div className="w-full h-fit md:mt-7">
+      <div className="w-full h-fit">
         <div className="w-full mb-[10px] hidden md:block">
-          <ul className="w-full h-full  flex items-center justify-between ">
-            <li className="w-[200px] pl-4 ">
+          <ul className="w-full h-full  flex items-center justify-between bg-lightBgColor border md:rounded-xl">
+            <li className="w-[70px] pl-4 ">
               <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
-                Nike
+                No:
+              </span>
+            </li>
+            <li className="w-[200px] pl-4 mr-[60px]">
+              <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
+                Фото
               </span>
             </li>
             <div className="w-[calc(100%-230px)]  flex items-center justify-between">
@@ -107,14 +117,17 @@ export default function LocationList() {
           </ul>
         </div>
         {/* table product */}
-        <div className="w-full h-full  flex flex-col gap-y-[10px]  md:rounded-xl overflow-auto">
+        <div className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl border">
           {productList.map((data) => {
             return (
               <ul
                 key={data?.id}
-                className="w-full  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden border md: flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl bg-lightBgColor"
+                className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden  md: flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor"
               >
-                <li className="w-[200px] h-[100px] pl-4 h-fit flex items-center ">
+                <li className="w-[70px]  pl-4 flex items-center ">
+                  {data?.id}
+                </li>
+                <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px]">
                   <figure className="w-full h-full rounded-lg overflow-hidden">
                     <img className="w-[100%] h-[100%]" src={wearImg} alt="" />
                   </figure>
