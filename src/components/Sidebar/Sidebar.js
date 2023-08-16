@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   ClothesIcons,
@@ -7,8 +7,11 @@ import {
   NavbarReviewIcon,
 } from "../../assets/icons";
 import { useLocation } from "react-router-dom";
+import { dressMainData } from "../../hook/ContextTeam";
 
 export default function Sidebar() {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
 
@@ -94,6 +97,23 @@ export default function Sidebar() {
             Одежда
           </span>
         </NavLink>
+        <div>
+          {dressInfo.isItPorduct ? (
+            <button
+              onClick={() => setDressInfo({ ...dressInfo, isItPorduct: false })}
+              className="w-full py-3 px-5 mx-auto mt-10 rounded-lg flex items-center justify-center bg-green-400"
+            >
+              has Product
+            </button>
+          ) : (
+            <button
+              onClick={() => setDressInfo({ ...dressInfo, isItPorduct: true })}
+              className="w-full py-3 px-5 mx-auto mt-10 rounded-lg flex items-center justify-center bg-red-400"
+            >
+              no Product
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

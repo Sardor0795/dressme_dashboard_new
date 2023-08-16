@@ -3,14 +3,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import ContextTeam from "./hook/ContextTeam";
 // import "antd/dist/antd.css";
 // import "antd/dist/antd.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ContextTeam>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ContextTeam>
   </React.StrictMode>
 );

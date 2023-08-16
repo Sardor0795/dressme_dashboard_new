@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AddLocationIcon,
   BgNoImgIcon,
@@ -7,10 +8,20 @@ import {
   FemaleIcon,
   MaleIcon,
 } from "../../../../../assets/icons";
+import StoreListModal from "./StoreListModal";
 
 export default function LocationItem({ data, click }) {
+  const [openStoreList, setOpenStoreList] = useState(false);
+
+  const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
+
+  const navigate = useNavigate();
+  const goProductDetailEdit = (id) => {
+    navigate(`/locations-store/edit-detail/:${id}`);
+  };
   return (
     <div className="flex items-center w-full">
+      {openStoreList && <StoreListModal onClick={storeToggle} />}
       <div
         onClick={() => {
           click(data?.id);
@@ -74,10 +85,16 @@ export default function LocationItem({ data, click }) {
             </div>
           </div>
           <div className="w-[10%]">452 000 сумара</div>
-          <Link className="text-[18px] text-weatherWinterColor w-[15%] text-center">
+          <button
+            onClick={() => goProductDetailEdit(data?.id)}
+            className="text-[18px] text-weatherWinterColor w-[15%] text-center"
+          >
             Подробнее
-          </Link>
-          <button className="active:translate-y-[2px] w-[9%] flex justify-center">
+          </button>
+          <button
+            onClick={() => setOpenStoreList(true)}
+            className="active:translate-y-[2px] w-[9%] flex justify-center"
+          >
             <span>
               <AddLocationIcon width={30} />
             </span>
