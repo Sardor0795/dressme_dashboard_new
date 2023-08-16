@@ -6,7 +6,7 @@ import {
   AddLocationIcon,
   BgNoImgIcon,
   DeleteIcon,
-} from "../../../../../assets/icons";
+} from "../../../../assets/icons";
 
 export default function LocationItem({ data, click, index }) {
   const [openStoreList, setOpenStoreList] = useState(false);
@@ -52,7 +52,7 @@ export default function LocationItem({ data, click, index }) {
         </span>
       </div>
       <div className="border-lightBorderColor border rounded-[12px] bg-white pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
-        <div className="w-[40px]">{data?.id}</div>
+        <div className="w-[40px]">{data?.index}</div>
         <div className="mr-[55px] flex items-center justify-center min-w-[60px] min-h-[60px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
           <BgNoImgIcon />
         </div>
@@ -80,34 +80,16 @@ export default function LocationItem({ data, click, index }) {
             Подробнее
           </button>
           <button
-            onClick={
-              data?.state === "Одобренный" ? () => setOpenStoreList(true) : null
-            }
-            className={`${
-              data?.state === "Одобренный"
-                ? "active:translate-y-[2px]"
-                : "cursor-not-allowed"
-            }  w-[9%] flex justify-center`}
+            onClick={() => setOpenStoreList(true)}
+            className="active:translate-y-[2px] w-[9%] flex justify-center"
           >
             <span>
-              <AddLocationIcon
-                color={data?.state !== "Одобренный" ? "disabled" : null}
-                width={30}
-              />
+              <AddLocationIcon width={30} />
             </span>
           </button>
-          <button
-            className={`${
-              data?.state === "Одобренный"
-                ? "active:translate-y-[2px]"
-                : "cursor-not-allowed"
-            }  w-[9%] flex justify-center`}
-          >
+          <button className="active:translate-y-[2px] w-[9%] flex justify-center">
             <span>
-              <DeleteIcon
-                color={data?.state !== "Одобренный" ? "disabled" : null}
-                width={30}
-              />
+              <DeleteIcon width={30} />
             </span>
           </button>
         </div>
