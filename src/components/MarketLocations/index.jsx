@@ -12,7 +12,7 @@ export default function MarketLocations() {
         <div className="flex justify-end items-center md:justify-between">
           <section className="hidden md:block">
             <p className="text-black text-2xl not-italic font-AeonikProMedium">
-              Все магазины{" "}
+              Все локации
             </p>
           </section>
           <div className="w-fit flex items-center gap-x-[15px]">
