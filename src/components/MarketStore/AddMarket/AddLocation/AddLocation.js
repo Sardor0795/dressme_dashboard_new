@@ -17,7 +17,7 @@ const initialState = {
   zoom: 12,
 };
 
-function AddLocation () {
+export default function AddLocation () {
   
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
@@ -92,23 +92,20 @@ function AddLocation () {
           
           <YMaps>
             <Map
-            {...mapOptions}
-            state={state}
-            onLoad={setMapConstructor}
-            onBoundsChange={handleBoundsChange}
-            instanceRef={mapRef}
-          > 
+              {...mapOptions}
+              state={state}
+              onLoad={setMapConstructor}
+              onBoundsChange={handleBoundsChange}
+              instanceRef={mapRef}
+            >
 
             <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
               <div className="w-full flex items-center">
                 <div className="w-[489px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
                   <input ref={searchRef} placeholder="Введите адрес" disabled={!mapConstructor} className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg" />
-                  {/* <div title={state.title} gutterBottom={false}>
-                    {state.title}
-                  </div> */}
-                  <div onClick={handleReset} className="cursor-pointer">
+                  {/* <div onClick={handleReset} className="cursor-pointer">
                     <SearchIcon />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <button 
@@ -263,55 +260,4 @@ function AddLocation () {
     </div>
   );
 }
-export default React.memo(AddLocation);
-
-
-
-
-
-
-
-  // <Map
-  //     defaultState={{ center: [41.311753, 69.241822], zoom: 13 }} 
-  //     width="100%"
-  //     height="400px"
-  //     modules={["control.FullscreenControl"]}
-  //   >
-  //     {/* <div
-  //         onClick={handleFullScreen}
-  //         className={`absolute right-3 cursor-pointer z-[51] w-10 h-10 rounded-lg bg-white ss:flex items-center justify-center block md:hidden 
-  //           ${ !dressInfo?.yandexFullScreen
-  //             ? "bottom-[128px] md:bottom-[87px]"
-  //             : "bottom-[65px] md:bottom-[87px]"
-  //           }`
-  //         }
-  //     >
-  //       {dressInfo?.yandexFullScreen ? (
-  //         <span>
-  //           <YandexFullScreenMapIcon />
-  //         </span>
-  //       ) : (
-  //         <span>
-  //           <YandexMazimizeMapIcon/>
-  //         </span>
-  //       )}
-  //     </div> */}
-      
-  //     <GeolocationControl
-  //     options={{
-  //       float: "right",
-  //       width: "34",
-  //       height: "34",
-  //       position: { bottom: 24, right: 8 },
-  //     }}
-  //     />
-  //     <ZoomControl
-  //       options={{
-  //         float: "right",
-  //         // width: "34",
-  //         // height: "34",
-  //         position: { bottom: 170, right: 8, size: "small" },
-  //         size: "small",
-  //       }}
-  //     />
-  // </Map>
+// export default React.memo(AddLocation);
