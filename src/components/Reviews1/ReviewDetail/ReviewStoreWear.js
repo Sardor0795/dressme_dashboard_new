@@ -1,11 +1,39 @@
 import React, { useState } from "react";
 import ReviewStore from "./ReviewStore/ReviewStore";
 import ReviewWear from "./ReviewWear/ReviewWear";
-
+import { Space, DatePicker } from "antd";
+import {
+  CheckTrue,
+  SearchIcon,
+  StarIcon,
+  StarOutlineIcon,
+} from "../../../assets/icons";
+const { RangePicker } = DatePicker;
 export default function ReviewStoreWear() {
   const [storeOrWear, setStoreOrWear] = useState(true);
+
   return (
     <div className="w-full h-fit">
+      {/* filter */}
+      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
+        <div className="flex  items-center justify-between">
+          <div className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+            <input
+              type="text"
+              className="w-full h-full  outline-0	"
+              placeholder="Поиск"
+            />
+            <button>
+              <SearchIcon />
+            </button>
+          </div>
+          <div>
+            <Space direction="vertical" size={12}>
+              <RangePicker placeholder={["от", "до"]} />
+            </Space>
+          </div>
+        </div>
+      </div>
       <div className="my-[30px] w-full flex justify-center items-center">
         <div className="w-fit h-[44px] bg-lightBorderColor flex items-center justify-center rounded-lg overflow-hidden">
           <button
@@ -21,7 +49,9 @@ export default function ReviewStoreWear() {
           <button
             onClick={() => setStoreOrWear(false)}
             className={`w-[260px] ${
-              !storeOrWear ? "text-textBlueColor border rounded-lg border-textBlueColor" : "text-black"
+              !storeOrWear
+                ? "text-textBlueColor border rounded-lg border-textBlueColor"
+                : "text-black"
             } h-full flex items-center justify-center text-base not-italic font-AeonikProMedium`}
           >
             Одежда (6)
