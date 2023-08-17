@@ -7,7 +7,7 @@ import {
   StarOutlineIcon,
 } from "../../../../assets/icons";
 
-export default function CommentUser() {
+const CommentTitle = () => {
   const [state, setState] = useState({
     sendAnswer: false,
     startReviews: true,
@@ -248,4 +248,5 @@ export default function CommentUser() {
       })}
     </div>
   );
-}
+};
+export { CommentTitle };
