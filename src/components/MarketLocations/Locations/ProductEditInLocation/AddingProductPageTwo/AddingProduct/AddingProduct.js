@@ -1,7 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Select } from "antd";
-import { CopyIcon, StarLabel, XIcon } from "../../../../../../assets/icons";
+import {
+  ArrowRightIcon,
+  CopyIcon,
+  StarLabel,
+  XIcon,
+} from "../../../../../../assets/icons";
 import AddBtn from "./AddBtn/AddBtn";
 import { message } from "antd";
 
@@ -14,6 +19,16 @@ export default function AddingProduct() {
       type: "success",
       content: "Сохранить",
     });
+  };
+
+  const onChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+  const onSearch = (value) => {
+    console.log("search:", value);
+  };
+  const onChangeSwitch = (checked) => {
+    console.log(`switch to ${checked}`);
   };
   return (
     <div className="flex py-[40px] md:py-[50px] px-[40px]">
@@ -57,6 +72,7 @@ export default function AddingProduct() {
                   <input
                     className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
                     type="text"
+                    value="Очень красивая одежда"
                   />
                   <AddBtn />
                 </div>
@@ -74,6 +90,7 @@ export default function AddingProduct() {
                   <input
                     className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                     type="text"
+                    value="Juda yaxshi kiyim"
                   />
                   <AddBtn />
                 </div>
@@ -91,6 +108,7 @@ export default function AddingProduct() {
                   <textarea
                     className="block w-full h-full text-[#666] text-sm resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                     name=""
+                    value="Очень красивая одежда"
                     id=""
                   ></textarea>
                   <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
@@ -112,6 +130,7 @@ export default function AddingProduct() {
                   <textarea
                     className="block w-full h-full text-[#666] text-sm resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                     name=""
+                    value="Juda yaxshi kiyim"
                     id=""
                   ></textarea>
                   <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
@@ -134,7 +153,38 @@ export default function AddingProduct() {
                       <StarLabel />
                     </span>
                   </div>
-                  <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
+                  <Select
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={[
+                      {
+                        value: "Брюки",
+                        label: "Брюки",
+                      },
+                      {
+                        value: "Джинсы",
+                        label: "Джинсы",
+                      },
+                      {
+                        value: "Штаны",
+                        label: "Штаны",
+                      },
+                      {
+                        value: "Шорты",
+                        label: "Шорты",
+                      },
+                    ]}
+                  />
                 </div>
                 <div className="flex-1 mb-[10px]">
                   <div className="flex items-center mb-[5px]">
@@ -145,7 +195,38 @@ export default function AddingProduct() {
                       <StarLabel />
                     </span>
                   </div>
-                  <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
+                  <Select
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={[
+                      {
+                        value: "Брюки",
+                        label: "Брюки",
+                      },
+                      {
+                        value: "Джинсы",
+                        label: "Джинсы",
+                      },
+                      {
+                        value: "Штаны",
+                        label: "Штаны",
+                      },
+                      {
+                        value: "Шорты",
+                        label: "Шорты",
+                      },
+                    ]}
+                  />{" "}
                 </div>
               </div>
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
@@ -160,6 +241,7 @@ export default function AddingProduct() {
                     <input
                       className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
+                      value="Очень красивая одежда"
                     />
                     <AddBtn />
                   </div>
@@ -183,6 +265,7 @@ export default function AddingProduct() {
                     <input
                       className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
+                      value="Juda yaxshi kiyim"
                     />
                     <AddBtn />
                   </div>
@@ -197,10 +280,37 @@ export default function AddingProduct() {
                     </span>
                   </div>
                   <Select
-                    className="font-AeonikProMedium"
-                    placeholder={"Выбрать"}
-                    style={{ width: "100%" }}
-                  />
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={[
+                      {
+                        value: "Брюки",
+                        label: "Брюки",
+                      },
+                      {
+                        value: "Джинсы",
+                        label: "Джинсы",
+                      },
+                      {
+                        value: "Штаны",
+                        label: "Штаны",
+                      },
+                      {
+                        value: "Шорты",
+                        label: "Шорты",
+                      },
+                    ]}
+                  />{" "}
                 </div>
                 <div className="flex-1 mb-[10px]"></div>
               </div>

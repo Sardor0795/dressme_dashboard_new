@@ -1,6 +1,8 @@
 import { Popover, Select, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import {
+  AddIconsCircle,
+  AddIconsCircle1,
   ArrowRightIcon,
   DownloadIcon,
   InputCheck,
@@ -14,6 +16,7 @@ import ColorsMobileDropUp from "../MobileDropUpSides/ColorsMobileDropUp/ColorsMo
 import GenderTypeDropUp from "../MobileDropUpSides/GenderTypeDropUp/GenderTypeDropUp";
 import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
+import { ProductCarouselEdit } from "../MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -1171,7 +1174,7 @@ const AddingProduct = () => {
                     htmlFor=""
                     className="text-[13px] md:text-base font-AeonikProRegular"
                   >
-                    Раздел одежды
+                    Раздел одежды{" "}
                   </label>
                   <span className="ml-[5px]">
                     <StarLabel />
@@ -1200,11 +1203,24 @@ const AddingProduct = () => {
                       .toLowerCase()
                       .includes(input.toLowerCase())
                   }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
+                  options={[
+                    {
+                      value: "Брюки",
+                      label: "Брюки",
+                    },
+                    {
+                      value: "Джинсы",
+                      label: "Джинсы",
+                    },
+                    {
+                      value: "Штаны",
+                      label: "Штаны",
+                    },
+                    {
+                      value: "Шорты",
+                      label: "Шорты",
+                    },
+                  ]}
                 />
               </div>
               <div className="w-1/2 flex  flex-col items-start">
@@ -1288,11 +1304,24 @@ const AddingProduct = () => {
                       .toLowerCase()
                       .includes(input.toLowerCase())
                   }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
+                  options={[
+                    {
+                      value: "Брюки",
+                      label: "Брюки",
+                    },
+                    {
+                      value: "Джинсы",
+                      label: "Джинсы",
+                    },
+                    {
+                      value: "Штаны",
+                      label: "Штаны",
+                    },
+                    {
+                      value: "Шорты",
+                      label: "Шорты",
+                    },
+                  ]}
                 />
               </div>
               <div className="w-1/2 flex  flex-col items-start">
@@ -1317,26 +1346,11 @@ const AddingProduct = () => {
                   </label>
                   <ArrowRightIcon />
                 </button>
-                <div className="w-full hidden md:flex items-center justify-between border rounded-lg md:py-[9px] px-[12px]">
-                  {changeColor?.map((data) => {
-                    return (
-                      <div key={data?.id} className="hidden md:block">
-                        <label
-                          key={data?.id}
-                          className={`${data.colors} rounded-full border border-${data.colors} w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
-                        >
-                          {/* <img src={data.icons} alt="" /> */}
-                        </label>
-                        <input
-                          type="radio"
-                          id={data?.id}
-                          name="checkStatus"
-                          value={data?.id}
-                          className={"hidden w-full h-full"}
-                        />
-                      </div>
-                    );
-                  })}
+                <div className="w-fit hidden md:flex gap-x-4 items-center justify-between border rounded-lg h-[42px] px-[12px]">
+                  <button className="w-[22px] h-[22px] rounded-full bg-black"></button>
+                  <button>
+                    <AddIconsCircle1 />
+                  </button>
                 </div>
               </div>
             </div>
@@ -1378,11 +1392,24 @@ const AddingProduct = () => {
                       .toLowerCase()
                       .includes(input.toLowerCase())
                   }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
+                  options={[
+                    {
+                      value: "Брюки",
+                      label: "Брюки",
+                    },
+                    {
+                      value: "Джинсы",
+                      label: "Джинсы",
+                    },
+                    {
+                      value: "Штаны",
+                      label: "Штаны",
+                    },
+                    {
+                      value: "Шорты",
+                      label: "Шорты",
+                    },
+                  ]}
                 />
               </div>
               <div className="w-1/2 flex  flex-col items-start">
@@ -1399,6 +1426,7 @@ const AddingProduct = () => {
                 </div>
                 <input
                   type="text"
+                  value="33"
                   className="w-full h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
                   placeholder="0"
                 />
@@ -1407,8 +1435,8 @@ const AddingProduct = () => {
 
             {/* 4 */}
             <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
-              <div className="w-1/2 flex items-center gap-x-[25px]">
-                <div className="w-[45%] hidden md:flex flex-col items-start">
+              <div className="w-1/2 flex items-center justify-between gap-x-[25px]">
+                <div className="w-[43%] hidden md:flex flex-col items-start">
                   <div className="flex items-center justify-center mb-[5px]">
                     <label
                       htmlFor=""
@@ -1423,20 +1451,20 @@ const AddingProduct = () => {
                   <div className="w-full flex items-center">
                     <input
                       type="number"
-                      className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      value="12"
+                      className="w-[50%] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Мин"
                     />
-                    <span className="rotate-90 text-borderColor ml-3 mr-[9px]">
-                      |
-                    </span>
+                    <span className="w-3 border-b text-borderColor mx-[4px]"></span>
                     <input
                       type="number"
-                      className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      value="100"
+                      className="w-[50%] h-[42px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Макс"
                     />
                   </div>
                 </div>
-                <div className="w-full md:w-[55%]">
+                <div className="w-full md:w-[50%]">
                   <div className="flex items-center mb-[5px]">
                     <label
                       htmlFor=""
@@ -1452,6 +1480,7 @@ const AddingProduct = () => {
                     <input
                       type="number"
                       placeholder="0"
+                      value="270000"
                       className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -1479,6 +1508,7 @@ const AddingProduct = () => {
                         <input
                           type="number"
                           placeholder="0"
+                          value="40"
                           className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         <span className="text-textLightColor ml-2">%</span>
@@ -1492,6 +1522,7 @@ const AddingProduct = () => {
                         <input
                           type="number"
                           placeholder="0"
+                          value="200000"
                           className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -1531,11 +1562,24 @@ const AddingProduct = () => {
                       .toLowerCase()
                       .includes(input.toLowerCase())
                   }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
+                  options={[
+                    {
+                      value: "Брюки",
+                      label: "Брюки",
+                    },
+                    {
+                      value: "Джинсы",
+                      label: "Джинсы",
+                    },
+                    {
+                      value: "Штаны",
+                      label: "Штаны",
+                    },
+                    {
+                      value: "Шорты",
+                      label: "Шорты",
+                    },
+                  ]}
                 />
                 <button
                   type="button"
@@ -1572,11 +1616,24 @@ const AddingProduct = () => {
                       .toLowerCase()
                       .includes(input.toLowerCase())
                   }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
+                  options={[
+                    {
+                      value: "Брюки",
+                      label: "Брюки",
+                    },
+                    {
+                      value: "Джинсы",
+                      label: "Джинсы",
+                    },
+                    {
+                      value: "Штаны",
+                      label: "Штаны",
+                    },
+                    {
+                      value: "Шорты",
+                      label: "Шорты",
+                    },
+                  ]}
                 />
               </div>
               <div className="w-1/2 flex items-start gap-x-[10px]">
@@ -1617,11 +1674,24 @@ const AddingProduct = () => {
                         .toLowerCase()
                         .includes(input.toLowerCase())
                     }
-                    options={
-                      [
-                        // no data
-                      ]
-                    }
+                    options={[
+                      {
+                        value: "Брюки",
+                        label: "Брюки",
+                      },
+                      {
+                        value: "Джинсы",
+                        label: "Джинсы",
+                      },
+                      {
+                        value: "Штаны",
+                        label: "Штаны",
+                      },
+                      {
+                        value: "Шорты",
+                        label: "Шорты",
+                      },
+                    ]}
                   />
                 </div>
                 <div className="w-1/2 hidden md:flex flex-col items-start">
@@ -1635,6 +1705,7 @@ const AddingProduct = () => {
                   </div>
                   <input
                     type="number"
+                    defaultValue={"80"}
                     className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                     placeholder="(необязательно)"
                   />
@@ -1750,54 +1821,7 @@ const AddingProduct = () => {
           </div>
 
           <div className="w-[35%] h-[510px] hidden md:block">
-            <div className="flex items-center justify-start mb-[5px]">
-              <label htmlFor="" className="text-base font-AeonikProRegular">
-                Фото
-              </label>
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </div>
-            <div className="w-full h-[400px] bg-photoBg flex items-center justify-center border border-dashed rounded-lg">
-              <Link
-                to="#"
-                className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium"
-              >
-                Выберите фото
-              </Link>
-            </div>
-            <div className="w-full flex items-center justify-between gap-x-[10px] mt-[10px]">
-              <div className="w-1/3 flex flex-col items-center justify-center mb-[21px]">
-                <Link
-                  to="#"
-                  className="w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
-                >
-                  <DownloadIcon />
-                </Link>
-              </div>
-              <div className="w-1/3 flex flex-col items-center justify-center">
-                <Link
-                  to="#"
-                  className=" w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
-                >
-                  <DownloadIcon />
-                </Link>
-                <div className="text-[11px] text-textLightColor mt-[5px]">
-                  (необязательно)
-                </div>
-              </div>
-              <div className="w-1/3 flex flex-col items-center justify-center ">
-                <Link
-                  to="#"
-                  className=" w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
-                >
-                  <DownloadIcon />
-                </Link>
-                <div className="text-[11px] text-textLightColor mt-[5px]">
-                  (необязательно)
-                </div>
-              </div>
-            </div>
+            <ProductCarouselEdit />
           </div>
         </div>
         <div className="flex md:hidden items-center justify-center mb-[40px]">

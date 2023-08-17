@@ -75,7 +75,7 @@ export default function LocationItem({ data, click, index }) {
           <div className="w-[12%]">452 000 сумара</div>
           <button
             onClick={() => goProductDetailEdit(data?.id)}
-            className="text-[18px] text-weatherWinterColor w-[15%] text-center"
+            className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium w-[15%] "
           >
             Подробнее
           </button>
