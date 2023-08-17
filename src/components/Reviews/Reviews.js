@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { ProductImg } from "../../../../assets";
+import { ProductImg } from "../../assets";
 import {
   CheckTrue,
   SearchIcon,
   StarIcon,
   StarOutlineIcon,
-} from "../../../../assets/icons";
+} from "../../assets/icons";
 import { DatePicker, Space, Popover } from "antd";
 import { useNavigate } from "react-router-dom";
 import { BiChevronDown } from "react-icons/bi";
 
 const { RangePicker } = DatePicker;
-export default function ReviewWear() {
+export default function Reviews() {
   const productList = [
     {
       id: 1,
@@ -152,6 +152,31 @@ export default function ReviewWear() {
 
   return (
     <div className="w-full h-full px-4 md:px-10 py-1">
+      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
+        <div className="flex  items-center justify-between">
+          <div className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+            <input
+              type="text"
+              className="w-full h-full  outline-0	"
+              placeholder="Поиск"
+            />
+            <button>
+              <SearchIcon />
+            </button>
+          </div>
+          <div>
+            {" "}
+            <Space direction="vertical" size={12}>
+              <RangePicker />
+            </Space>
+          </div>
+        </div>
+        <section className="flex md:hidden pt-6">
+          <p className="text-black text-2xl not-italic font-AeonikProMedium">
+            С возвращением, Абдулазиз!
+          </p>
+        </section>
+      </div>
       {/* Table */}
       <div className="w-full h-fit md:mt-7">
         <div className="w-full mb-[10px] hidden md:block">
