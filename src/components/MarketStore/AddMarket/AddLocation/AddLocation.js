@@ -79,17 +79,18 @@ export default function AddLocation () {
           Добавить локацию магазина
         </div>
         <div className="mb-3">
-        <button
-          onClick={() => {
-            navigate(-1);
-          }}
-          className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-        >
-          <AiOutlineLeft />
-        </button>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          >
+            <AiOutlineLeft />
+          </button>
         </div>
-        <div className="relative w-full border rounded-lg overflow-hidden">
-          
+
+
+        <div className="relative w-full border rounded-lg overflow-hidden">      
           <YMaps>
             <Map
               {...mapOptions}
@@ -103,16 +104,16 @@ export default function AddLocation () {
               <div className="w-full flex items-center">
                 <div className="w-[489px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
                   <input ref={searchRef} placeholder="Введите адрес" disabled={!mapConstructor} className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg" />
-                  {/* <div onClick={handleReset} className="cursor-pointer">
+                  <div onClick={handleReset} className="cursor-pointer">
                     <SearchIcon />
-                  </div> */}
+                  </div>
                 </div>
               </div>
               <button 
                 type="button"
+                className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
                 onClick={handleSubmit} 
                 disabled={Boolean(!state.title.length)} 
-                className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
               >
                 Подтвердить
               </button>
