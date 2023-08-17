@@ -7,7 +7,7 @@ import {
   StarOutlineIcon,
 } from "../../../../assets/icons";
 
-export default function CommentUsers() {
+export default function CommentUser() {
   const [state, setState] = useState({
     sendAnswer: false,
     startReviews: true,

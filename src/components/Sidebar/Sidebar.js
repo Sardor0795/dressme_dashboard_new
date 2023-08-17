@@ -39,7 +39,7 @@ export default function Sidebar() {
             color: isActive ? "#007DCA" : "#000",
             background: isActive ? "#f2f2f2" : "#fcfcfc",
           })}
-          to={"/reviews"}
+          to={"/reviews1"}
         >
           <span>
             <NavbarReviewIcon colors={""} />

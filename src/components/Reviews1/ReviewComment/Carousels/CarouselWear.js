@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
 
-const DetailCarousel = () => {
+const CarouselWear = () => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
   function getCurrentDimension() {
@@ -183,7 +183,11 @@ const DetailCarousel = () => {
                 return (
                   <article key={data?.id}>
                     <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
-                      <img className="h-full md:w-full md:h-fit" src={data?.img} alt="" />
+                      <img
+                        className="h-full md:w-full md:h-fit"
+                        src={data?.img}
+                        alt=""
+                      />
                     </figure>
                   </article>
                 );
@@ -223,4 +227,4 @@ const DetailCarousel = () => {
     </div>
   );
 };
-export { DetailCarousel };
+export { CarouselWear };
