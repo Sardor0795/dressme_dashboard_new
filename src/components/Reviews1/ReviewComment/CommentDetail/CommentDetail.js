@@ -5,7 +5,7 @@ export default function CommentDetail() {
   return (
     <div className="w-full h-full ">
       <div className="h-11"></div>
-      <div className="h-full  w-full ">
+      <div className="h-full w-full ">
         <div className="w-full h-[120px]  flex items-center gap-x-5">
           <button className="h-[120px] w-[120px] flex items-center justify-center rounded-[20px] border border-lightBorderColor">
             <img src={nike} alt="" />
