@@ -22,7 +22,7 @@ export default function Reviews1() {
           <div>
             {" "}
             <Space direction="vertical" size={12}>
-              <RangePicker />
+              <RangePicker placeholder={["от", "до"]} />
             </Space>
           </div>
         </div>
