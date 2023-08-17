@@ -14,7 +14,7 @@ const ReviewStore = () => {
   ];
   const navigate = useNavigate();
   const goDetail = (id) => {
-    navigate(`/review/comment/:${id}`);
+    navigate(`/reviews/review/comment/:${id}`);
   };
 
   return (

@@ -20,7 +20,6 @@ export default function Reviews1() {
             </button>
           </div>
           <div>
-            {" "}
             <Space direction="vertical" size={12}>
               <RangePicker placeholder={["от", "до"]} />
             </Space>
@@ -28,7 +27,6 @@ export default function Reviews1() {
         </div>
       </div>
       <div>
-        {" "}
         <Outlet />
       </div>{" "}
     </div>
