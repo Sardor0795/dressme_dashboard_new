@@ -1,16 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Products from "../components/Products/Products";
-// import Shops from "../components/Shops/Shops";
 import Error from "../components/Error/Error";
 import NavbarForSetting from "../components/Navbar/NavbarForSetting";
 import ReviewDetail from "../components/Reviews/ReviewDetails/ReviewDetail";
-import Reviews from "../components/Reviews/Reviews";
-// import AddShop from "../components/AddShop/Shops";
 import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
 import MarketStore from "../components/MarketStore";
 import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
-import Clothes from "../components/Clothes/Clothes";
 import MarketEdit from "../components/MarketStore/Market_Edit/MarketEdit";
 import AddStore from "../components/MarketStore/AddMarket/AddStore/AddStore";
 import MyMarket from "../components/MarketStore/MyMarket/MyMarket";
@@ -25,6 +21,9 @@ import ProductLocationsList from "../components/Products/ProductLocationsList/Pr
 import { dressMainData } from "../hook/ContextTeam";
 import ProductEditDetailLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation";
 import ProductEditTitleLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation";
+import Reviews1 from "../components/Reviews1";
+import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
+import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
 
 export default function RouterList() {
   const [isItMarket, setIsItMarket] = useState(false);
@@ -36,8 +35,12 @@ export default function RouterList() {
     <div>
       <NavbarForSetting />
       <Routes>
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/products" element={<Products />} />
+        {/* ---------------------<Store>------------------------- */}
+        <Route path="/reviews" element={<Reviews1 />}>
+          <Route index element={<ReviewStoreWear />} />
+          <Route path={"review/store-wear"} element={<ReviewStoreWear />} />
+          <Route path={"review/comment/:id"} element={<ReviewComment />} />
+        </Route>
 
         {/* ---------------------<Store>------------------------- */}
         <Route path="/store" element={<MarketStore />}>
