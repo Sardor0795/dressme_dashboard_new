@@ -67,7 +67,7 @@ export default function LocationItem({ data, click, index }) {
           <div className="w-[10%]">15-08-2023</div>
           <div className="w-[14%]">
             <div
-              className={`w-fit text-white text-base font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
+              className={`w-[113px] text-center text-white text-base font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
             >
               {data?.state}
             </div>
@@ -79,35 +79,17 @@ export default function LocationItem({ data, click, index }) {
           >
             Подробнее
           </button>
-          <button
-            onClick={
-              data?.state === "Одобренный" ? () => setOpenStoreList(true) : null
-            }
-            className={`${
-              data?.state === "Одобренный"
-                ? "active:translate-y-[2px]"
-                : "cursor-not-allowed"
-            }  w-[9%] flex justify-center`}
-          >
-            <span>
-              <AddLocationIcon
-                color={data?.state !== "Одобренный" ? "disabled" : null}
-                width={30}
-              />
+          <button className="w-[9%] flex justify-center cursor-auto">
+            <span
+              onClick={() => setOpenStoreList(true)}
+              className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+            >
+              <AddLocationIcon width={30} />
             </span>
           </button>
-          <button
-            className={`${
-              data?.state === "Одобренный"
-                ? "active:translate-y-[2px]"
-                : "cursor-not-allowed"
-            }  w-[9%] flex justify-center`}
-          >
-            <span>
-              <DeleteIcon
-                color={data?.state !== "Одобренный" ? "disabled" : null}
-                width={30}
-              />
+          <button className="w-[9%] flex justify-center cursor-auto">
+            <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+              <DeleteIcon width={30} />
             </span>
           </button>
         </div>

@@ -107,26 +107,7 @@ export default function LocationClothesCity() {
         <p className="text-textBlueColor text-2xl not-italic font-AeonikProMedium">
           Nike Store Official Dealer
         </p>
-      </div>
-
-      <div className="flex justify-end items-center md:justify-between mx-auto pb-6">
-        <section className="hidden md:flex gap-x-4">
-          <p className="text-black text-2xl not-italic font-AeonikProMedium">
-            Юнусабад (3)
-          </p>
-          <Link
-            to="/products/add-wear"
-            className="active:translate-y-[2px] flex items-center gap-x-[4px]"
-          >
-            <span>
-              <AddIconsCircle />
-            </span>
-            <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
-              Добавить одежду
-            </span>
-          </Link>
-        </section>
-        <div className="w-fit flex items-center">
+        <div className="w-fit flex items-center absolute right-0">
           <div className="mr-6 font-AeonikProRegular text-lg text-mobileTextColor">
             Выбранные
           </div>
@@ -157,8 +138,53 @@ export default function LocationClothesCity() {
         </div>
       </div>
 
-      <div className="mx-auto font-AeonikProRegular text-[16px]">
-        <div className="mb-[10px] flex items-center text-tableTextTitle">
+      <div className="flex justify-end items-center md:justify-between mx-auto pb-6">
+        <section className="hidden md:flex items-center">
+          <div
+            className="cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder
+                 bg-white flex items-center justify-center rounded mr-[8px]"
+          >
+            <span
+              className={`${
+                allChecked ? "flex items-center justify-center" : "hidden"
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="11"
+                height="13"
+                viewBox="0 0 11 13"
+                fill="none"
+              >
+                <path
+                  d="M1 9.5L5.88235 11L10 1"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+          </div>
+          <p className="text-black text-2xl not-italic font-AeonikProMedium mr-[20px]">
+            Юнусабад (3)
+          </p>
+          <Link
+            to="/products/add-wear"
+            className="active:translate-y-[2px] flex items-center gap-x-[4px]"
+          >
+            <span>
+              <AddIconsCircle />
+            </span>
+            <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
+              Добавить одежду
+            </span>
+          </Link>
+        </section>
+
+        <div className="flex">
+          <span className="mr-[10px] text-base font-AeonikProMedium text-mobileTextColor">
+            Выбрать все
+          </span>
           <div
             onClick={() => {
               onCheck(checkIndicator);
@@ -191,6 +217,12 @@ export default function LocationClothesCity() {
               </svg>
             </span>
           </div>
+        </div>
+      </div>
+
+      <div className="mx-auto font-AeonikProRegular text-[16px]">
+        <div className="mb-[10px] flex items-center text-tableTextTitle">
+          <div className="min-w-[24px] min-h-[24px] bg-white  mr-[8px]"></div>
 
           <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
             <div className="w-[45px]">No:</div>
@@ -217,8 +249,35 @@ export default function LocationClothesCity() {
                   <LocationItem data={data} click={onCheck} />
 
                   <div className="flex items-center justify-start my-[30px] w-full">
-                    <section className="hidden md:flex gap-x-4">
-                      <p className="text-black text-2xl not-italic font-AeonikProMedium">
+                    <section className="hidden md:flex items-center">
+                      <div
+                        className="cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder
+                 bg-white flex items-center justify-center rounded mr-[8px]"
+                      >
+                        <span
+                          className={`${
+                            allChecked
+                              ? "flex items-center justify-center"
+                              : "hidden"
+                          }`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="11"
+                            height="13"
+                            viewBox="0 0 11 13"
+                            fill="none"
+                          >
+                            <path
+                              d="M1 9.5L5.88235 11L10 1"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <p className="text-black mr-5 text-2xl not-italic font-AeonikProMedium">
                         Мирзо улугбек (3)
                       </p>
                       <Link
