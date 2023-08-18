@@ -26,7 +26,7 @@ export default function Products() {
             Одежда{" "}
           </p>
         </section>
-        <div className="w-fit flex items-center gap-x-[15px]">
+        <section className="w-fit flex items-center gap-x-[15px]">
           <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
             <input
               type="text"
@@ -43,7 +43,7 @@ export default function Products() {
               <RangePicker placeholder={["от", "до"]} />
             </Space>
           </section>
-        </div>
+        </section>
       </div>
       <Outlet />{" "}
     </main>
