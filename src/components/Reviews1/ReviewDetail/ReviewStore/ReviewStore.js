@@ -14,7 +14,7 @@ const ReviewStore = () => {
   ];
   const navigate = useNavigate();
   const goDetail = (id) => {
-    navigate(`/store/list/:${id}`);
+    navigate(`/reviews/review/comment-store/${id}`);
   };
 
   return (
@@ -73,12 +73,6 @@ const ReviewStore = () => {
               </div>
             </div>
             <div className="flex items-center gap-x-[50px]">
-              <NavLink
-                to={"/locations-store"}
-                className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"
-              >
-                Локации
-              </NavLink>
               <p
                 onClick={() => goDetail(data?.id)}
                 className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"

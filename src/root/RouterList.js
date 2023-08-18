@@ -24,6 +24,7 @@ import ProductEditTitleLocation from "../components/MarketLocations/Locations/Pr
 import Reviews1 from "../components/Reviews1";
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
+import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
 
 export default function RouterList() {
   const [isItMarket, setIsItMarket] = useState(false);
@@ -39,7 +40,14 @@ export default function RouterList() {
         <Route path="/reviews" element={<Reviews1 />}>
           <Route index element={<ReviewStoreWear />} />
           <Route path={"review/store-wear"} element={<ReviewStoreWear />} />
-          <Route path={"review/comment/:id"} element={<ReviewComment />} />
+          <Route
+            path={"review/comment-store/:id"}
+            element={<ReviewComment />}
+          />
+          <Route
+            path={"review/comment-wear/:id"}
+            element={<ReviewWearComment />}
+          />
         </Route>
 
         {/* ---------------------<Store>------------------------- */}

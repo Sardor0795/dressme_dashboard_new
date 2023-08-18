@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReviewStore from "./ReviewStore/ReviewStore";
 import ReviewWear from "./ReviewWear/ReviewWear";
 import { Space, DatePicker } from "antd";
@@ -8,9 +8,12 @@ import {
   StarIcon,
   StarOutlineIcon,
 } from "../../../assets/icons";
+import { dressMainData } from "../../../hook/ContextTeam";
+import NoReviewProduct from "../NoReview/NoReview";
 const { RangePicker } = DatePicker;
 export default function ReviewStoreWear() {
   const [storeOrWear, setStoreOrWear] = useState(true);
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   return (
     <div className="w-full h-fit">
@@ -37,6 +40,16 @@ export default function ReviewStoreWear() {
       <div className="my-[30px] w-full flex justify-center items-center">
         <div className="w-fit h-[44px] bg-lightBorderColor flex items-center justify-center rounded-lg overflow-hidden">
           <button
+            onClick={() => setStoreOrWear(false)}
+            className={`w-[260px] ${
+              !storeOrWear
+                ? "text-textBlueColor border rounded-lg border-textBlueColor"
+                : "text-black"
+            } h-full flex items-center justify-center text-base not-italic font-AeonikProMedium`}
+          >
+            Одежда (6)
+          </button>{" "}
+          <button
             onClick={() => setStoreOrWear(true)}
             className={`w-[260px] ${
               storeOrWear
@@ -46,19 +59,19 @@ export default function ReviewStoreWear() {
           >
             Магазины (2)
           </button>
-          <button
-            onClick={() => setStoreOrWear(false)}
-            className={`w-[260px] ${
-              !storeOrWear
-                ? "text-textBlueColor border rounded-lg border-textBlueColor"
-                : "text-black"
-            } h-full flex items-center justify-center text-base not-italic font-AeonikProMedium`}
-          >
-            Одежда (6)
-          </button>
         </div>
       </div>
-      <div>{storeOrWear ? <ReviewStore /> : <ReviewWear />}</div>
+      <div>
+        {dressInfo?.isItPorduct ? (
+          storeOrWear ? (
+            <ReviewStore />
+          ) : (
+            <ReviewWear />
+          )
+        ) : (
+          <NoReviewProduct />
+        )}
+      </div>
     </div>
   );
 }

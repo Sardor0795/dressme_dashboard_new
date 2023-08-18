@@ -65,7 +65,7 @@ export default function ReviewWear() {
   ];
   const navigate = useNavigate();
   const goDetail = (id) => {
-    navigate(`/reviews/review/comment/${id}`);
+    navigate(`/reviews/review/comment-wear/${id}`);
   };
   const [state, setState] = useState({
     openwear: false,
