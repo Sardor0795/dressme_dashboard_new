@@ -13,13 +13,8 @@ export default function StoreListModal({ onClick }) {
       ></div>
       <div className="flex items-center min-h-screen justify-center">
         <div className="relative w-[440px] py-[5px] min-h-[350px] rounded-[20px] bg-white overflow-hidden">
-          <div className="absolute top-4 right-4 ">
-            <button type="button" onClick={onClick}>
-              <MenuCloseIcons colors={"#A5A5A5"} />
-            </button>
-          </div>
-          <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
-            <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+          <div className="w-full h-fit flex items-center justify-center p-5 border-b border-borderColor2">
+            <p className="text-tableTextTitle2 text-left w-full text-2xl not-italic font-AeonikProRegular">
               Выберите регион
             </p>
           </div>
