@@ -389,6 +389,32 @@ const InputCheck = () => {
     </g>
   </svg>;
 };
+const InputCheckedTrueIcons = ({ colors }) => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.99998 14.6667H9.99998C13.3333 14.6667 14.6666 13.3333 14.6666 10V6C14.6666 2.66667 13.3333 1.33334 9.99998 1.33334H5.99998C2.66665 1.33334 1.33331 2.66667 1.33331 6V10C1.33331 13.3333 2.66665 14.6667 5.99998 14.6667Z"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.16669 7.99999L7.05335 9.88666L10.8334 6.11333"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 const StarLabel = () => {
   return (
     <svg
@@ -887,6 +913,7 @@ export {
   BackIcon,
   BgSelectSkin,
   InputCheck,
+  InputCheckedTrueIcons,
   StarLabel,
   DownloadIcon,
   ArrowRightIcon,
