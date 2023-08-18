@@ -1,15 +1,28 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Space, DatePicker } from "antd";
 import { SearchIcon } from "../../assets/icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 const { RangePicker } = DatePicker;
+
 export default function Products() {
+
+  const navigate = useNavigate();
+  
   return (
     <main className="products w-full px-4 md:px-10 md:py-5">
       <div className="flex justify-end items-center md:justify-between border-b border-borderColor py-4">
-        <section className="hidden md:block">
-          <p className="text-black text-2xl not-italic font-AeonikProMedium">
+        <section className="hidden md:flex">
+          <button button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+            >
+              <AiOutlineLeft />
+          </button>
+          <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
             Одежда{" "}
           </p>
         </section>
