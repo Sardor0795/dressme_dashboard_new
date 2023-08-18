@@ -6,6 +6,7 @@ import {
   ArrowRightIcon,
   DownloadIcon,
   InputCheck,
+  InputCheckedTrueIcons,
   StarLabel,
 } from "../../../../../../assets/icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -17,6 +18,8 @@ import GenderTypeDropUp from "../MobileDropUpSides/GenderTypeDropUp/GenderTypeDr
 import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
 import { ProductCarouselEdit } from "../MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
+import { GrClose } from "react-icons/gr";
+import WearCollection from "../WearCollection/WearCollection";
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -26,6 +29,9 @@ const AddingProduct = () => {
   const [openWeather, setOpenWeather] = useState(false); // Weather
   const [openGender, setOpenGender] = useState(false); // Genders
   const [openTypes, setOpenTypes] = useState(false); // Type
+  const [selectColorToggleMobile, setSelectColorToggleMobile] = useState(false); // Type
+
+  const [wearCollection, setWearCollection] = useState(false);
 
   const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
   const toggleCategories = React.useCallback(
@@ -43,6 +49,10 @@ const AddingProduct = () => {
   const toggleWeather = React.useCallback(() => setOpenWeather(false), []); // Clothing SubSection
   const toggleGender = React.useCallback(() => setOpenGender(false), []); // Genders
   const toggleTypes = React.useCallback(() => setOpenTypes(false), []); // Type
+  const toggleWearCollection = React.useCallback(
+    () => setWearCollection(false),
+    []
+  ); // Type
 
   // For Drop UP
   useEffect(() => {
@@ -928,68 +938,92 @@ const AddingProduct = () => {
       </action>
     </div>
   );
-  const changeColor = [
-    { id: 1, data: 1, icons: InputCheck, action: false, colors: "bg-black" },
-    { id: 2, data: 2, icons: InputCheck, action: false, colors: "bg-white" },
-    { id: 3, data: 3, icons: InputCheck, action: false, colors: "bg-zinc-500" },
+  const [colorGroup, setColorGroup] = useState([
+    { id: 1, ColorId: 1, icons: InputCheck, action: false, colors: "bg-black" },
+    { id: 2, ColorId: 2, icons: InputCheck, action: false, colors: "bg-white" },
+    {
+      id: 3,
+      ColorId: 3,
+      icons: InputCheck,
+      action: false,
+      colors: "bg-zinc-500",
+    },
     {
       id: 4,
-      data: 4,
+      ColorId: 4,
       icons: InputCheck,
       action: false,
       colors: "bg-purple-500",
     },
-    { id: 5, data: 5, icons: InputCheck, action: false, colors: "bg-sky-600" },
+    {
+      id: 5,
+      ColorId: 5,
+      icons: InputCheck,
+      action: false,
+      colors: "bg-sky-600",
+    },
     {
       id: 6,
-      data: 6,
+      ColorId: 6,
       icons: InputCheck,
       action: false,
       colors: "bg-amber-400 ",
     },
     {
       id: 7,
-      data: 7,
+      ColorId: 7,
       icons: InputCheck,
       action: false,
       colors: "bg-green-700 ",
     },
     {
       id: 8,
-      data: 8,
+      ColorId: 8,
       icons: InputCheck,
       action: false,
       colors: "bg-amber-600 ",
     },
     {
       id: 9,
-      data: 9,
+      ColorId: 9,
       icons: InputCheck,
       action: false,
       colors: "bg-red-700  ",
     },
     {
       id: 10,
-      data: 10,
+      ColorId: 10,
       icons: InputCheck,
       action: false,
       colors: "bg-purple-800 ",
     },
     {
       id: 11,
-      data: 11,
+      ColorId: 11,
       icons: InputCheck,
       action: false,
       colors: "bg-blue-900 ",
     },
     {
       id: 12,
-      data: 12,
+      ColorId: 12,
       icons: InputCheck,
       action: false,
       colors: "bg-yellow-900 ",
     },
-  ];
+  ]);
+  const HandleIconsColor = (colorId, id) => {
+    // setIconsColor(color);
+    setColorGroup((current) => {
+      return current.map((data) => {
+        if (data?.id == id) {
+          return { ...data, action: true };
+        } else {
+          return { ...data };
+        }
+      });
+    });
+  };
 
   return (
     <div className="relative w-full flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
@@ -1347,10 +1381,99 @@ const AddingProduct = () => {
                   <ArrowRightIcon />
                 </button>
                 <div className="w-fit hidden md:flex gap-x-4 items-center justify-between border rounded-lg h-[42px] px-[12px]">
-                  <button className="w-[22px] h-[22px] rounded-full bg-black"></button>
-                  <button>
+                  <div className="w-fit whitespace-nowrap overflow-hidden flex items-center gap-x-4 ">
+                    {colorGroup.map((data) => {
+                      return (
+                        <>
+                          {data?.action && (
+                            <button
+                              className={`w-[22px] h-[22px] rounded-full ${data?.colors}`}
+                            ></button>
+                          )}
+                        </>
+                      );
+                    })}
+                  </div>
+                  <button
+                    onClick={() => setSelectColorToggleMobile(true)}
+                    type="button"
+                  >
                     <AddIconsCircle1 />
                   </button>
+                </div>
+                {/* ----Colors Modal---------- */}
+                <div className="w-full">
+                  <section
+                    className={`h-fit top-30  left-[16px] fixed  bg-white shadow-lg  duration-200 z-50 ${
+                      selectColorToggleMobile ? "w-[92%]" : "w-0"
+                    }`}
+                  >
+                    {selectColorToggleMobile && (
+                      <div className="fixed inset-0 z-10 ">
+                        <div
+                          className="fixed inset-0 w-full h-full bg-black opacity-40"
+                          onClick={() => setSelectColorToggleMobile(false)}
+                        ></div>
+                        <div className="flex items-center min-h-screen px-4 py-8">
+                          <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
+                            <div className={`flex items-center justify-end`}>
+                              {/* {toggleAction && (
+                              <button
+                                onClick={unCheckedAll}
+                                className="flex items-center active:scale-95  active:opacity-70 justify-center border border-searchBgColor rounded-lg px-4 py-1"
+                              >
+                                Отключить
+                              </button>
+                            )} */}
+                              <button
+                                className="py-2"
+                                type=""
+                                onClick={() =>
+                                  setSelectColorToggleMobile(false)
+                                }
+                              >
+                                <GrClose size={22} />
+                              </button>
+                            </div>
+                            <div className="py-2 gap-x-2 gap-y-4 flex flex-wrap items-center">
+                              {colorGroup?.map((data) => {
+                                return (
+                                  <div
+                                    key={data?.id}
+                                    onClick={() =>
+                                      HandleIconsColor(
+                                        data?.colors,
+                                        data?.ColorId
+                                      )
+                                    }
+                                    className={`rounded-full flex items-center justify-center mr-2 w-6 h-6 ${
+                                      data?.colors
+                                    } cursor-pointer ${
+                                      data?.id == 2
+                                        ? "border border-setTexOpacity"
+                                        : ""
+                                    } `}
+                                  >
+                                    {data?.action && data?.id === 2 ? (
+                                      <span>
+                                        <InputCheckedTrueIcons
+                                          colors={"#000"}
+                                        />
+                                      </span>
+                                    ) : null}
+
+                                    {data?.action && data?.id !== 2 ? (
+                                      <InputCheckedTrueIcons colors={"#fff"} />
+                                    ) : null}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </section>
                 </div>
               </div>
             </div>
@@ -1819,9 +1942,27 @@ const AddingProduct = () => {
               </Popover>
             </div>
           </div>
-
-          <div className="w-[35%] h-[510px] hidden md:block">
-            <ProductCarouselEdit />
+          {/* carousel item */}
+          <div className="w-fit h-[510px] hidden md:block md:flex flex-col gap-y-[120px]">
+            <div className="">
+              <ProductCarouselEdit />
+            </div>
+            <div className="w-full flex items-center justify-end">
+              <button
+                onClick={() => setWearCollection(true)}
+                type="button"
+                className="text-weatherWinterColor hover:underline text-base not-italic font-AeonikProRegular"
+              >
+                Все фото
+              </button>
+            </div>
+            {/* ----------------wear collection------------ */}
+            <div>
+              {" "}
+              {wearCollection && (
+                <WearCollection onClick={toggleWearCollection} />
+              )}
+            </div>{" "}
           </div>
         </div>
         <div className="flex md:hidden items-center justify-center mb-[40px]">
@@ -1833,13 +1974,21 @@ const AddingProduct = () => {
           <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]"></div>
           <div className="h-[1px] bg-borderColor flex-grow"></div>
         </div>
-
-        <button
-          onClick={() => goProductTitleEdit(3)}
-          className="w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
-        >
-          Продолжить
-        </button>
+        <div className="w-full h-fit flex gap-x-[30px]  md:w-fit md:absolute md:right-3 md:bottom-3">
+          <button
+            type="button"
+            className="w-full h-[42px] md:h-[45px] flex items-center justify-center  active:scale-95  md:px-[50px] py-3 border border-textBlueColor bg-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+          >
+            Сохранить
+          </button>
+          <button
+            type="button"
+            onClick={() => goProductTitleEdit(3)}
+            className="w-full h-[42px] md:h-[45px] flex items-center justify-center  active:scale-95  md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
+          >
+            Продолжить
+          </button>
+        </div>
       </form>
     </div>
   );
