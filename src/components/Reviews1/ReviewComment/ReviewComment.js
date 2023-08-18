@@ -10,10 +10,14 @@ import {
 } from "../../../assets/icons";
 import { Popover } from "antd";
 import { BiChevronDown } from "react-icons/bi";
+import { AiOutlineLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 export default function ReviewComment() {
+  
   const [state, setState] = useState({
     openwear: false,
   });
+  const navigate = useNavigate();
 
   // ----------------Wear state management----------------------------
 
@@ -21,13 +25,7 @@ export default function ReviewComment() {
     setState({ ...state, openwear: newOpen });
   };
 
-  // const handleWearValue = (value) => {
-  //   setState({ ...state, openwear: false });
-  // };
-
-  // const filterStar = [
-  //  data
-  // ];
+  
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
     { id: 2, checked: false, starValue: 4, starFree: 1, valueCount: 70 },
@@ -106,10 +104,17 @@ export default function ReviewComment() {
   return (
     <div>
       <div className="w-full border-b border-lightBorderColor flex justify-between py-6">
-        <div className="w-fit  flex items-center">
+        <div className="w-fit flex items-center">
+        <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          >
+            <AiOutlineLeft />
+          </button>
           <span
-            className="text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium
-"
+            className="text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium ml-[30px]"
           >
             Подробнее о товаре
           </span>

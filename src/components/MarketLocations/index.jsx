@@ -1,17 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { SearchIcon } from "../../assets/icons";
-import { DatePicker, Space, Popover } from "antd";
+import { DatePicker, Space } from "antd";
 
 const { RangePicker } = DatePicker;
 
 export default function MarketLocations() {
+
   return (
     <div className="px-10 py-1">
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
         <div className="flex justify-end items-center md:justify-between">
-          <section className="hidden md:block">
-            <p className="text-black text-2xl not-italic font-AeonikProMedium">
+          <section className="hidden md:flex">
+            <p className="text-black text-2xl not-italic font-AeonikProMedium ml-3">
               Все локации
             </p>
           </section>
