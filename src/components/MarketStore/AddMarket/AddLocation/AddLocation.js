@@ -235,7 +235,7 @@ export default function AddLocation() {
           <div className="flex-1">
             <div className="text-base flex items-center mb-[10px]">
               Номер администратора
-              <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+              <span className="ml-[5px]"><StarLabel /></span>
             </div>
             <div className="flex items-center border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
               <span className="h-full flex items-center px-[12px] border-r border-lightBorderColor">
@@ -273,7 +273,7 @@ export default function AddLocation() {
             <div className="w-full" onClick={() => setOpenStoreList(true)}>
               <div className="text-base flex items-center mb-[10px]">
                 Выберите регион
-                <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+                <span className="ml-[5px]"><StarLabel /></span>
               </div>
               <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
                 <span className="text-[#8C8C8C] font-AeonikProRegular text-[13px]">
