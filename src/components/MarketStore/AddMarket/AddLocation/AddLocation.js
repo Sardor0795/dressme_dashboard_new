@@ -1,8 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {  SearchIcon, StarLabel, TelIcon, YandexFullScreenMapIcon, YandexMazimizeMapIcon } from "../../../../assets/icons";
-import { YMaps, Map, GeolocationControl, ZoomControl} from "react-yandex-maps";
+import {
+  ArrowTopIcons,
+  SearchIcon,
+  StarLabel,
+  TelIcon,
+  YandexFullScreenMapIcon,
+  YandexMazimizeMapIcon,
+} from "../../../../assets/icons";
+import { YMaps, Map, GeolocationControl, ZoomControl } from "react-yandex-maps";
 import { AiOutlineLeft } from "react-icons/ai";
+import StoreListModal from "./Modal/StoreListModal";
 
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
@@ -17,13 +25,16 @@ const initialState = {
   zoom: 12,
 };
 
-export default function AddLocation () {
-  
+export default function AddLocation() {
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+
+  const [openStoreList, setOpenStoreList] = useState(false);
+
+  const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
   // submits
   const handleSubmit = () => {
@@ -41,13 +52,18 @@ export default function AddLocation () {
   // search popup
   useEffect(() => {
     if (mapConstructor) {
-      new mapConstructor.SuggestView(searchRef.current).events.add("select", function (e) {
-        const selectedName = e.get("item").value;
-        mapConstructor.geocode(selectedName).then((result) => {
-          const newCoords = result.geoObjects.get(0).geometry.getCoordinates();
-          setState((prevState) => ({ ...prevState, center: newCoords }));
-        });
-      });
+      new mapConstructor.SuggestView(searchRef.current).events.add(
+        "select",
+        function (e) {
+          const selectedName = e.get("item").value;
+          mapConstructor.geocode(selectedName).then((result) => {
+            const newCoords = result.geoObjects
+              .get(0)
+              .geometry.getCoordinates();
+            setState((prevState) => ({ ...prevState, center: newCoords }));
+          });
+        }
+      );
     }
   }, [mapConstructor]);
 
@@ -64,8 +80,7 @@ export default function AddLocation () {
       }
     });
   };
-  
-  
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -74,6 +89,7 @@ export default function AddLocation () {
 
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12">
+      {openStoreList && <StoreListModal onClick={storeToggle} />}
       <div className="my-4">
         <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
           Добавить локацию магазина
@@ -89,8 +105,7 @@ export default function AddLocation () {
           </button>
         </div>
 
-
-        <div className="relative w-full border rounded-lg overflow-hidden">      
+        <div className="relative w-full border rounded-lg overflow-hidden">
           <YMaps>
             <Map
               {...mapOptions}
@@ -99,49 +114,50 @@ export default function AddLocation () {
               onBoundsChange={handleBoundsChange}
               instanceRef={mapRef}
             >
-
-            <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
-              <div className="w-full flex items-center">
-                <div className="w-[489px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
-                  <input ref={searchRef} placeholder="Введите адрес" disabled={!mapConstructor} className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg" />
-                  <div onClick={handleReset} className="cursor-pointer">
-                    <SearchIcon />
+              <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
+                <div className="w-full flex items-center">
+                  <div className="w-[489px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
+                    <input
+                      ref={searchRef}
+                      placeholder="Введите адрес"
+                      disabled={!mapConstructor}
+                      className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg"
+                    />
+                    <div onClick={handleReset} className="cursor-pointer">
+                      <SearchIcon />
+                    </div>
                   </div>
                 </div>
+                <button
+                  type="button"
+                  className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                  onClick={handleSubmit}
+                  disabled={Boolean(!state.title.length)}
+                >
+                  Подтвердить
+                </button>
               </div>
-              <button 
-                type="button"
-                className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
-                onClick={handleSubmit} 
-                disabled={Boolean(!state.title.length)} 
-              >
-                Подтвердить
-              </button>
-            </div>
 
-            <ZoomControl
-              options={{
-                float: "right",
-                position: { bottom: 170, right: 8, size: "small" },
-                size: "small",
-              }}
-            />
+              <ZoomControl
+                options={{
+                  float: "right",
+                  position: { bottom: 170, right: 8, size: "small" },
+                  size: "small",
+                }}
+              />
 
-            <GeolocationControl
-              options={{
-                float: "right",
-                width: "34",
-                height: "34",
-                position: { bottom: 130, right: 8 },
-              }}
-            />
-            
-          </Map>
-
-          </YMaps>           
+              <GeolocationControl
+                options={{
+                  float: "right",
+                  width: "34",
+                  height: "34",
+                  position: { bottom: 130, right: 8 },
+                }}
+              />
+            </Map>
+          </YMaps>
         </div>
 
-        
         <div className="flex mt-[10px] gap-[25px] mb-[25px]">
           <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <Link to="#" className="flex items-center justify-center">
@@ -179,6 +195,7 @@ export default function AddLocation () {
             </div>
             <input
               type="text"
+              placeholder="Имя администратора"
               className="border border-borderColor p-3 rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium"
             />
           </div>
@@ -202,12 +219,14 @@ export default function AddLocation () {
             от
             <input
               type="text"
-              className="mr-5 ml-[5px] border border-borderColor p-3 rounded-lg w-full max-w-[63px] text-base font-AeonikProMedium"
+              placeholder="9:00"
+              className="mr-5 ml-[5px] border border-borderColor p-3 rounded-lg w-full max-w-[68px] text-base font-AeonikProMedium text-center"
             />
             до
             <input
               type="text"
-              className="ml-[5px] border border-borderColor p-3 rounded-lg w-full max-w-[63px] text-base font-AeonikProMedium"
+              placeholder="21:00"
+              className="text-center ml-[5px] border border-borderColor p-3 rounded-lg w-full max-w-[68px] text-base font-AeonikProMedium"
             />
           </div>
         </div>
@@ -216,13 +235,17 @@ export default function AddLocation () {
           <div className="flex-1">
             <div className="text-base flex items-center mb-[10px]">
               Номер администратора
-              <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+              <span className="ml-[5px]"><StarLabel /></span>
             </div>
             <div className="flex items-center border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
               <span className="h-full flex items-center px-[12px] border-r border-lightBorderColor">
                 +998
               </span>
-              <input type="tel" className="pl-3 outline-none " />
+              <input
+                type="tel"
+                placeholder="(97) 740-23-99"
+                className="pl-3 outline-none "
+              />
               <span className="mr-12">
                 <TelIcon />
               </span>
@@ -246,7 +269,22 @@ export default function AddLocation () {
               </span>
             </div>
           </div>
-          <div className="flex-1"></div>
+          <div className="flex-1">
+            <div className="w-full" onClick={() => setOpenStoreList(true)}>
+              <div className="text-base flex items-center mb-[10px]">
+                Выберите регион
+                <span className="ml-[5px]"><StarLabel /></span>
+              </div>
+              <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
+                <span className="text-[#8C8C8C] font-AeonikProRegular text-[13px]">
+                  Выберите регион
+                </span>
+                <span className="rotate-[90deg]">
+                  <ArrowTopIcons colors={"#A4A4A4"} />
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="flex justify-center">

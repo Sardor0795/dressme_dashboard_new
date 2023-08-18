@@ -7,7 +7,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 function AddStore({ onClick }) {
 
     const navigate = useNavigate();
-  
+
     const [genderCategory, setGenderCategory] = useState([
         {
         id: 1,
@@ -35,7 +35,7 @@ function AddStore({ onClick }) {
             })
         })
     };
- 
+
     useEffect(() => {
         window.scrollTo({
         top: 0,
@@ -205,6 +205,7 @@ function AddStore({ onClick }) {
                         <p className="text-sm md:text-base font-AeonikProMedium text-mobileTextColor">
                             Воспользоваться{" "}
                             <Link
+                            target="_blank"
                             to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                             className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium ml-3"
                             >
