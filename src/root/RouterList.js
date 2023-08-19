@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Products from "../components/Products/Products";
 import Error from "../components/Error/Error";
 import NavbarForSetting from "../components/Navbar/NavbarForSetting";
@@ -25,17 +25,24 @@ import Reviews1 from "../components/Reviews1";
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
+import AthunticationUser from "../components/Authentication";
 
 export default function RouterList() {
-  const [isItMarket, setIsItMarket] = useState(false);
-  const [isLocations, setIsLocations] = useState(false);
-  const [isLocationProduct, setIsLocationProduct] = useState(false);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const location = useLocation();
+  const [locationWindow, setLocationWindow] = useState("");
 
+  useEffect(() => {
+    setLocationWindow(location.pathname);
+  }, [location.pathname, dressInfo?.isAuthen]);
   return (
     <div>
-      <NavbarForSetting />
+      {/* <NavbarForSetting /> */}
+
       <Routes>
+        {/* ---------------------<Authentification>------------------------- */}
+
+        <Route path={"/profile"} element={<AthunticationUser />} />
         {/* ---------------------<Store>------------------------- */}
         <Route path="/reviews" element={<Reviews1 />}>
           <Route index element={<ReviewStoreWear />} />
@@ -103,7 +110,22 @@ export default function RouterList() {
 
         {/* <Route path="/store-location" element={<Clothes />} /> */}
         <Route path="/review-details/:id" element={<ReviewDetail />} />
-        <Route path="/" element={<Navigate to={"/reviews"} />} />
+
+        {!dressInfo?.isAuthen ? (
+          locationWindow !== "/profile" ? (
+            <Route path="/" element={<Navigate to={"/profile"} />} />
+          ) : (
+            <Route path="/" element={<Navigate to={"/profile"} />} />
+          )
+        ) : (
+          <Route path="/" element={<Navigate to={"/reviews"} />} />
+        )}
+
+        {/* {dressInfo?.isAuthen ? (
+          <Route path="/" element={<Navigate to={"/reviews"} />} />
+        ) : (
+          <Route path="/" element={<Navigate to={"/profile"} />} />
+        )} */}
         <Route path="*" element={<Error />} />
       </Routes>
     </div>
