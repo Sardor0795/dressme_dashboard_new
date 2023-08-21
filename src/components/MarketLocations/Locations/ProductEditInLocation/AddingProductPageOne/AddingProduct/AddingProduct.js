@@ -1930,7 +1930,7 @@ const AddingProduct = () => {
             </div>
           </div>
           {/* carousel item */}
-          <div className="w-fit h-[510px] hidden md:block md:flex flex-col gap-y-[120px]">
+          <div className="w-fit h-[510px] hidden md:flex flex-col gap-y-[120px]">
             <div className="">
               <ProductCarouselEdit />
             </div>
