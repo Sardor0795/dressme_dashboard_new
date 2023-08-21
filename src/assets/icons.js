@@ -997,6 +997,24 @@ const MapLocationIcon = () => {
     </svg>
   );
 };
+const CheckIcons = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="11"
+      height="13"
+      viewBox="0 0 11 13"
+      fill="none"
+    >
+      <path
+        d="M1 9.5L5.88235 11L10 1"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};
 
 export {
   ProfileIcon,
@@ -1042,4 +1060,5 @@ export {
   YandexFullScreenMapIcon,
   YandexMazimizeMapIcon,
   MapLocationIcon,
+  CheckIcons,
 };
