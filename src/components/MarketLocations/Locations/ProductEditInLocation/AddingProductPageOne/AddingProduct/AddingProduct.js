@@ -30,7 +30,7 @@ const AddingProduct = () => {
   const [openGender, setOpenGender] = useState(false); // Genders
   const [openTypes, setOpenTypes] = useState(false); // Type
   const [selectColorToggleMobile, setSelectColorToggleMobile] = useState(false); // Type
-
+  const [categoryWear, setCategoryWear] = useState(true);
   const [wearCollection, setWearCollection] = useState(false);
 
   const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
@@ -939,7 +939,7 @@ const AddingProduct = () => {
     </div>
   );
   const [colorGroup, setColorGroup] = useState([
-    { id: 1, ColorId: 1, icons: InputCheck, action: false, colors: "bg-black" },
+    { id: 1, ColorId: 1, icons: InputCheck, action: true, colors: "bg-black" },
     { id: 2, ColorId: 2, icons: InputCheck, action: false, colors: "bg-white" },
     {
       id: 3,
@@ -1025,6 +1025,7 @@ const AddingProduct = () => {
     });
   };
 
+  console.log(categoryWear, "categoryWear");
   return (
     <div className="relative w-full flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
       <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
@@ -1712,52 +1713,34 @@ const AddingProduct = () => {
                   <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
                     Выбрать
                   </span>
-                  <span className="">
+                  <span className="rotate-[180deg]">
                     <ArrowRightIcon />
                   </span>
                 </button>
               </div>
               <div className="w-1/2 hidden md:flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label htmlFor="" className="text-base font-AeonikProRegular">
-                    Категория одежды
-                  </label>
+                <div className="flex items-center justify-between mb-[5px]">
+                  <span> Категория одежды</span>
                   <span className="ml-[5px]">
                     <StarLabel />
                   </span>
                 </div>
-                <Select
-                  className="rounded-lg w-full h-11 md:h-10"
-                  showSearch
-                  placeholder="Выбрать"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={[
-                    {
-                      value: "Брюки",
-                      label: "Брюки",
-                    },
-                    {
-                      value: "Джинсы",
-                      label: "Джинсы",
-                    },
-                    {
-                      value: "Штаны",
-                      label: "Штаны",
-                    },
-                    {
-                      value: "Шорты",
-                      label: "Шорты",
-                    },
-                  ]}
-                />
+                <button
+                  onClick={() => setCategoryWear(!categoryWear)}
+                  type="button"
+                  className="w-full h-[40px] rounded-lg flex items-center justify-between px-3 border border-borderColor overflow-hidden"
+                >
+                  <span className="text-gray-500 text-sm not-italic font-AeonikProRegular ">
+                    Выбрать
+                  </span>
+                  <span
+                    className={` ${
+                      categoryWear ? "rotate-[270deg]" : "rotate-[90deg]"
+                    }`}
+                  >
+                    <ArrowRightIcon />
+                  </span>
+                </button>
               </div>
               <div className="w-1/2 flex items-start gap-x-[10px]">
                 <div className="w-full md:w-1/2 flex flex-col items-start">
@@ -1884,11 +1867,15 @@ const AddingProduct = () => {
             </div>
 
             {/* 6 */}
-            <div className="w-full hidden md:flex items-center justify-between">
+            <div
+              className={`w-full items-center justify-between  ${
+                categoryWear ? "md:flex hidden " : "hidden "
+              }`}
+            >
               <Popover
                 // open={state?.openhat}
                 // onOpenChange={handleOpenChangeHat}
-                className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
+                className="px-[15px] h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
                 trigger="click"
                 options={["Hide"]}
                 placement="bottomLeft"
@@ -1899,7 +1886,7 @@ const AddingProduct = () => {
               <Popover
                 // open={state?.openOutwear}
                 // onOpenChange={handleOpenChangeOutwear}
-                className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
+                className="group px-[15px] h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
                 trigger="click"
                 options={["Hide"]}
                 placement="bottomLeft"
@@ -1910,7 +1897,7 @@ const AddingProduct = () => {
               <Popover
                 // open={state?.openOutwaer}
                 // onOpenChange={handleOpenChangeOutwear}
-                className="group px-[15px] h-[38px] rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                className="group px-[15px] h-[38px] whitespace-nowrap rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
                 trigger="click"
                 options={["Hide"]}
                 placement="bottom"
@@ -1921,7 +1908,7 @@ const AddingProduct = () => {
               <Popover
                 // open={state?.openwear}
                 // onOpenChange={handleOpenChangeWear}
-                className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                className="px-[15px] h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
                 trigger="click"
                 options={["Hide"]}
                 placement="bottom"
@@ -1932,7 +1919,7 @@ const AddingProduct = () => {
               <Popover
                 // open={state?.openwear}
                 // onOpenChange={handleOpenChangeWear}
-                className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                className="group px-[15px] h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
                 trigger="click"
                 options={["Hide"]}
                 placement="bottomRight"
