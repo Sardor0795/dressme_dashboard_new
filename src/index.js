@@ -9,12 +9,9 @@ import ContextTeam from "./hook/ContextTeam";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ContextTeam>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ContextTeam>
-  </React.StrictMode>
-
+  <ContextTeam>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ContextTeam>
 );

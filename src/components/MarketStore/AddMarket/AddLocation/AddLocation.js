@@ -11,6 +11,7 @@ import {
 import { YMaps, Map, GeolocationControl, ZoomControl } from "react-yandex-maps";
 import { AiOutlineLeft } from "react-icons/ai";
 import StoreListModal from "./Modal/StoreListModal";
+import YandexMaps from "./YandexMaps";
 
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
@@ -35,19 +36,6 @@ export default function AddLocation() {
   const [openStoreList, setOpenStoreList] = useState(false);
 
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
-
-  // submits
-  const handleSubmit = () => {
-    console.log({ title: state.title, center: mapRef.current.getCenter() });
-  };
-
-  // reset state & search
-  const handleReset = () => {
-    setState({ ...initialState });
-    searchRef.current.value = "";
-    mapRef.current.setCenter(initialState.center);
-    mapRef.current.setZoom(initialState.zoom);
-  };
 
   // search popup
   useEffect(() => {
@@ -104,8 +92,11 @@ export default function AddLocation() {
             <AiOutlineLeft />
           </button>
         </div>
+        <div className="h-[400px]">
+          <YandexMaps />
+        </div>
 
-        <div className="relative w-full border rounded-lg overflow-hidden">
+        {/* <div className="relative w-full border rounded-lg overflow-hidden">
           <YMaps>
             <Map
               {...mapOptions}
@@ -156,7 +147,7 @@ export default function AddLocation() {
               />
             </Map>
           </YMaps>
-        </div>
+        </div> */}
 
         <div className="flex mt-[10px] gap-[25px] mb-[25px]">
           <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
@@ -235,7 +226,9 @@ export default function AddLocation() {
           <div className="flex-1">
             <div className="text-base flex items-center mb-[10px]">
               Номер администратора
-              <span className="ml-[5px]"><StarLabel /></span>
+              <span className="ml-[5px]">
+                <StarLabel />
+              </span>
             </div>
             <div className="flex items-center border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
               <span className="h-full flex items-center px-[12px] border-r border-lightBorderColor">
@@ -273,7 +266,9 @@ export default function AddLocation() {
             <div className="w-full" onClick={() => setOpenStoreList(true)}>
               <div className="text-base flex items-center mb-[10px]">
                 Выберите регион
-                <span className="ml-[5px]"><StarLabel /></span>
+                <span className="ml-[5px]">
+                  <StarLabel />
+                </span>
               </div>
               <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
                 <span className="text-[#8C8C8C] font-AeonikProRegular text-[13px]">
