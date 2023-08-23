@@ -67,9 +67,12 @@ export default function ReviewWearComment() {
                   {data?.starValue}
                 </span>
                 <span className="flex items-center ml-[5px] gap-x-[2px]">
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
+                  <StarIcon 
+                  />
+                  <StarIcon 
+                  />
+                  <StarIcon 
+                  />
                 </span>
                 <span className="flex items-center  gap-x-[2px]">
                   <StarOutlineIcon />

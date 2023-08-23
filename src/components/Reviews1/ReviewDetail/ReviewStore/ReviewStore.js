@@ -1,6 +1,6 @@
 import React from "react";
 import { deliveryIcon, man, nike, woman } from "../../../../assets";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { StarIcon } from "../../../../assets/icons";
 
 const ReviewStore = () => {
@@ -94,7 +94,8 @@ const ReviewStore = () => {
                 </p>
               </section>
             </action>
-            <action className="w-full flex md:hidden items-center gap-x-1 mt-3">
+            <action 
+              className="w-full flex md:hidden items-center gap-x-1 mt-3">
               <div className="w-9 h-9 rounded-lg border border-borderColor bg-lightBgColor flex items-center justify-center">
                 <img src={man} alt="" />
               </div>
@@ -108,7 +109,9 @@ const ReviewStore = () => {
                 </span>
               </div>
             </action>
-            <button className="w-full active:scale-95 block md:hidden h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium">
+            <button 
+              onClick={() => goDetail(data?.id)}
+              className="w-full md:hidden flex items-center justify-center active:scale-95 h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium">
               Подробнее
             </button>
           </div>
