@@ -105,23 +105,23 @@ const CommentTitle = () => {
           <div className="flex items-center ">
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">1</span>
-              <StarIcon />
+              <StarIcon width={14} height={14} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">2</span>
-              <StarIcon />
+              <StarIcon width={14} height={14} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">3</span>
-              <StarIcon />
+              <StarIcon width={14} height={14} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">4</span>
-              <StarIcon />
+              <StarIcon width={14} height={14} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg">
               <span className="mr-[5px] group-focus:text-white">5</span>
-              <StarIcon />
+              <StarIcon width={14} height={14} />
             </button>
           </div>
           <button
