@@ -1,73 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  ArrowTopIcons,
-  SearchIcon,
-  StarLabel,
-  TelIcon,
-  YandexFullScreenMapIcon,
-  YandexMazimizeMapIcon,
-} from "../../../../assets/icons";
-import { YMaps, Map, GeolocationControl, ZoomControl } from "react-yandex-maps";
+import { ArrowTopIcons, StarLabel, TelIcon } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import StoreListModal from "./Modal/StoreListModal";
 import YandexMaps from "./YandexMaps";
 
-const mapOptions = {
-  modules: ["geocode", "SuggestView"],
-  defaultOptions: { suppressMapOpenBlock: true },
-  width: 920,
-  height: 400,
-};
-
-const initialState = {
-  title: "",
-  center: [41.311753, 69.241822],
-  zoom: 12,
-};
-
 export default function AddLocation() {
-  const [state, setState] = useState({ ...initialState });
-  const [mapConstructor, setMapConstructor] = useState(null);
-  const mapRef = useRef(null);
-  const searchRef = useRef(null);
   const navigate = useNavigate();
 
   const [openStoreList, setOpenStoreList] = useState(false);
 
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
-
-  // search popup
-  useEffect(() => {
-    if (mapConstructor) {
-      new mapConstructor.SuggestView(searchRef.current).events.add(
-        "select",
-        function (e) {
-          const selectedName = e.get("item").value;
-          mapConstructor.geocode(selectedName).then((result) => {
-            const newCoords = result.geoObjects
-              .get(0)
-              .geometry.getCoordinates();
-            setState((prevState) => ({ ...prevState, center: newCoords }));
-          });
-        }
-      );
-    }
-  }, [mapConstructor]);
-
-  // change title
-  const handleBoundsChange = (e) => {
-    const newCoords = mapRef.current.getCenter();
-    mapConstructor.geocode(newCoords).then((res) => {
-      const nearest = res.geoObjects.get(0);
-      const foundAddress = nearest.properties.get("text");
-      const [centerX, centerY] = nearest.geometry.getCoordinates();
-      const [initialCenterX, initialCenterY] = initialState.center;
-      if (centerX !== initialCenterX && centerY !== initialCenterY) {
-        setState((prevState) => ({ ...prevState, title: foundAddress }));
-      }
-    });
-  };
 
   useEffect(() => {
     window.scrollTo({
@@ -95,59 +38,6 @@ export default function AddLocation() {
         <div className="h-[400px]">
           <YandexMaps />
         </div>
-
-        {/* <div className="relative w-full border rounded-lg overflow-hidden">
-          <YMaps>
-            <Map
-              {...mapOptions}
-              state={state}
-              onLoad={setMapConstructor}
-              onBoundsChange={handleBoundsChange}
-              instanceRef={mapRef}
-            >
-              <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
-                <div className="w-full flex items-center">
-                  <div className="w-[489px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
-                    <input
-                      ref={searchRef}
-                      placeholder="Введите адрес"
-                      disabled={!mapConstructor}
-                      className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg"
-                    />
-                    <div onClick={handleReset} className="cursor-pointer">
-                      <SearchIcon />
-                    </div>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
-                  onClick={handleSubmit}
-                  disabled={Boolean(!state.title.length)}
-                >
-                  Подтвердить
-                </button>
-              </div>
-
-              <ZoomControl
-                options={{
-                  float: "right",
-                  position: { bottom: 170, right: 8, size: "small" },
-                  size: "small",
-                }}
-              />
-
-              <GeolocationControl
-                options={{
-                  float: "right",
-                  width: "34",
-                  height: "34",
-                  position: { bottom: 130, right: 8 },
-                }}
-              />
-            </Map>
-          </YMaps>
-        </div> */}
 
         <div className="flex mt-[10px] gap-[25px] mb-[25px]">
           <div className="relative w-full h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
