@@ -16,68 +16,78 @@ const MarketList = () => {
   };
 
   return (
-    <div className="w-full h-fit  flex flex-col gap-y-[30px]">
+    <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
       {data.map((data) => {
         return (
           <div
             key={data?.id}
-            className="w-full h-[100px] border border-borderColor pr-10  rounded-lg flex justify-between items-center"
+            className="w-full md:h-[100px] h-fit border border-borderColor md:pr-10  p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
           >
-            <div className="flex items-center  w-fit ">
-              <div className="flex items-center justify-center pr-7 pl-5 text-xl font-AeonikProRegular">{data.id}</div>
-              <figure className="w-[80px] md:w-[120px] h-[80px] md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
-                <img src={nike} alt="" />
-              </figure>
-              <div className="flex flex-col ml-8">
-                <p className="text-xl font-AeonikProMedium mb-3">
-                  Nike Store Official Dealer
-                </p>
-                <div className="">
-                  <div className="flex items-center ">
-                    <div className="flex items-center  mr-[6px]">
-                      <StarIcon />
-                    </div>
-                    <div className="not-italic font-AeonikProRegular text-[10px] ls:text-xs leading-4 text-right text-gray-500 md:ml-1 flex items-center text-sm">
-                      <p className="font-AeonikProMedium text-black mr-1">
-                        5.0
-                      </p>
-                      <p className="text-setTexOpacity font-AeonikProRegular">
-                        (859 votes) <span className="ml-[10px]">|</span>{" "}
-                      </p>
-                      <p className="font-AeonikProRegular ml-[10px] text-setTexOpacity">
-                        4937 orders
-                      </p>
+            <div className="w-full md:w-fit flex items-center md:flex-row flex-col justify-center md:justify-start  md:border-0 border-b border-borderColor">
+              <div className="w-full md:w-fit flex items-center justify-between  md:pr-7 md:pl-5 text-xl font-AeonikProRegular ">
+                <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
+                <span className="text-checkboxBorder md:text-black">
+                  {" "}
+                  0{data.id}
+                </span>
+                <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
+              </div>
+              <div className="w-full md:w-fit flex items-center justify-between my-[15px] md:my-0 ">
+                <figure className="w-[80px] md:w-[120px] h-[80px] md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
+                  <img src={nike} alt="" />
+                </figure>
+                <div className="flex flex-col ll:ml-8">
+                  <p className="text-[13px] ls:text-[14px] xs:text-xl  xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
+                    Nike Store Official Dealer
+                  </p>
+                  <div className="">
+                    <div className="flex items-center ">
+                      <div className="flex items-center  mr-[6px]">
+                        <StarIcon />
+                      </div>
+                      <div className="not-italic font-AeonikProRegular  text-[10px] ls:text-xs leading-4 text-right text-gray-500 md:ml-1 flex items-center text-sm">
+                        <p className="font-AeonikProRegular text-[12px] md:text-[14px] ls:font-AeonikProMedium text-black mr-1">
+                          5.0
+                        </p>
+                        <p className="text-setTexOpacity font-AeonikProRegular text-[10px] ls:text-[12px] md:text-[14px] ">
+                          (859 votes){" "}
+                          <span className="ml-[5px] ll:ml-[10px]">|</span>{" "}
+                        </p>
+                        <p className="font-AeonikProRegular ml-[5px] ll:ml-[10px]  text-[10px] ls:text-[12px] md:text-[14px]  text-setTexOpacity">
+                          4937 orders
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-x-1">
-              <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
-                <img src={man} alt="" />
+            <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[130px] mt-3 md:mt-0">
+              <div className="flex items-center gap-x-1 ">
+                <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                  <img src={man} alt="" />
+                </div>
+                <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                  <img src={woman} alt="" />
+                </div>
               </div>
-              <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
-                <img src={woman} alt="" />
-              </div>
-            </div>
-            <div>
-              <div className="h-12 px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-3">
+              <div className="h-[36px] ll:h-12 px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
-                <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
+                <span className="text-tableTextTitle2 text-[12px] ll:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
                   Собственная доставка
                 </span>
               </div>
             </div>
-            <div className="flex items-center gap-x-[50px]">
+            <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[50px]  mt-6 md:mt-0">
               <NavLink
                 to={"/locations-store"}
-                className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"
+                className="md:text-textBlueColor cursor-pointer  md:text-base text-[13px] not-italic md:font-AeonikProMedium font-AeonikProRegular md:hover:underline md:px-0 px-[25px] ll:px-[54px] md:py-0 py-2 md:rounded-0 rounded-lg md:bg-white bg-locationBg text-locationText"
               >
                 Локации
               </NavLink>
               <p
                 onClick={() => goDetail(data?.id)}
-                className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"
+                className="text-textBlueColor cursor-pointer  md:text-base text-[13px] not-italic md:font-AeonikProMedium font-AeonikProRegular md:hover:underline md:px-0 px-[25px] ll:px-[54px] md:py-0 py-2 md:rounded-0 rounded-lg md:bg-white bg-Editbg"
               >
                 Подробнее
               </p>

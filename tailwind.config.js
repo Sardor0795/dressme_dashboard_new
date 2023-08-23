@@ -46,6 +46,10 @@ module.exports = {
         deleteColor: "#FF2B2B",
         checkboxBorder: "#D2D2D2",
         addWearColorText: "#23B632",
+        // magazine Mobile device
+        locationBg: "#FBEAD7",
+        locationText: "#D89412",
+        Editbg: "#E8F5FD",
       },
       fontFamily: {
         // 500
