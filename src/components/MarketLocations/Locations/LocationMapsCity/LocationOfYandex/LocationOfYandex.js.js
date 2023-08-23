@@ -1,22 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
-import "../../../../index.css";
-import {
-  YMaps,
-  Map,
-  ZoomControl,
-  GeolocationControl,
-  Placemark,
-  Clusterer,
-} from "react-yandex-maps";
+import "../../../../../index.css";
+import { YMaps, Map, ZoomControl, GeolocationControl } from "react-yandex-maps";
 import {
   MapLocationIcon,
   MenuCloseIcons,
   SearchIcon,
   StarIcon,
   marketIcons,
-} from "../../../../assets/icons";
-import { MdLocationOn } from "react-icons/md";
-import "./yandexMaps1.css";
+} from "../../../../../assets/icons";
+import "./LocationOfYandex.css";
 import { GrClose } from "react-icons/gr";
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
@@ -29,7 +21,7 @@ const initialState = {
   zoom: 12,
 };
 
-export default function YandexMaps() {
+export default function LocationOfYandex() {
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
