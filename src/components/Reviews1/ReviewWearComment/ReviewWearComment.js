@@ -105,7 +105,7 @@ export default function ReviewWearComment() {
   );
   return (
     <div className="">
-      <div className="w-full border-b border-lightBorderColor flex justify-between py-6">
+      <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-fit flex items-center">
           <button
             onClick={() => {
@@ -115,11 +115,11 @@ export default function ReviewWearComment() {
           >
             <AiOutlineLeft />
           </button>
-          <span className="text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium ml-[30px]">
+          <span className="hidden md:block text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium ml-[30px]">
             Подробнее о товаре
           </span>
         </div>
-        <div className="w-fit flex gap-x-[30px]  ">
+        <div className="w-fit hidden md:flex gap-x-[30px]">
           <Popover
             open={state?.openwear}
             onOpenChange={handleOpenChangeWear}
