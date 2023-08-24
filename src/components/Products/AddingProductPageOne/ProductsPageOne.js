@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import ProductsPageTop from "./ProductsPageTop/ProductsPageTop";
 import AddingProduct from "./AddingProduct/AddingProduct";
 
 export default function ProductsPageOne() {

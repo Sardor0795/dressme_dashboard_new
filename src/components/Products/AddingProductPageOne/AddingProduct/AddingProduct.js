@@ -141,6 +141,96 @@ const AddingProduct = () => {
             </div>
           </div>
         </div>
+        <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
+            <div className="w-1/2 flex items-center gap-x-[25px]">
+              <div className="w-[45%] hidden md:flex flex-col items-start">
+                <div className="flex items-center justify-center mb-[5px]">
+                  <label
+                    htmlFor=""
+                    className="text-[13px] md:text-base font-AeonikProRegular"
+                  >
+                    Возраст
+                  </label>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
+                </div>
+                <div className="w-full flex items-center">
+                  <input
+                    type="number"
+                    className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                    placeholder=""
+                  />
+                </div>
+              </div>
+              <div className="w-full md:w-[55%]">
+                <div className="flex items-center mb-[5px]">
+                  <label
+                    htmlFor=""
+                    className="text-[13px] md:text-base font-AeonikProRegular"
+                  >
+                    Цена
+                  </label>
+                  <span className="ml-[5px]">
+                    <StarLabel />
+                  </span>
+                </div>
+                <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                  <input
+                    type="number"
+                    placeholder="0"
+                    className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                  <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                    сум
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="w-1/2 flex flex-col items-start">
+              <div className="flex items-center justify-center mb-[5px]">
+                <label
+                  htmlFor=""
+                  className="text-[13px] md:text-base font-AeonikProRegular"
+                >
+                  Скидка
+                </label>
+                <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
+                  (необязательно)
+                </span>
+              </div>
+              <div className="w-full flex items-center justify-center">
+                <div className="w-full flex items-center gap-x-1">
+                  <div className="w-[40%] md:w-[25%] flex items-start">
+                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] py-[8px]">
+                      <input
+                        type="number"
+                        placeholder="0"
+                        className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                      <span className="text-textLightColor ml-2">%</span>
+                    </div>
+                  </div>
+                  <span className="rotate-90 text-borderColor ml-[7px] mr-1 md:ml-3 md:mr-[9px]">
+                    |
+                  </span>
+                  <div className="w-[60%] md:w-[75%] flex items-center">
+                    <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                      <input
+                        type="number"
+                        placeholder="0"
+                        className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                      <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                        сум
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
         <button className="w-full flex items-end justify-end text-textBlueColor font-AeonikProMedium pr-1">
           готово
         </button>
@@ -1402,105 +1492,7 @@ const AddingProduct = () => {
               </div>
             </div>
 
-            {/* 4 */}
-            <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
-              <div className="w-1/2 flex items-center gap-x-[25px]">
-                <div className="w-[45%] hidden md:flex flex-col items-start">
-                  <div className="flex items-center justify-center mb-[5px]">
-                    <label
-                      htmlFor=""
-                      className="text-[13px] md:text-base font-AeonikProRegular"
-                    >
-                      Возраст
-                    </label>
-                    <span className="ml-[5px]">
-                      <StarLabel />
-                    </span>
-                  </div>
-                  <div className="w-full flex items-center">
-                    <input
-                      type="number"
-                      className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                      placeholder="Мин"
-                    />
-                    <span className="rotate-90 text-borderColor ml-3 mr-[9px]">
-                      |
-                    </span>
-                    <input
-                      type="number"
-                      className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      placeholder="Макс"
-                    />
-                  </div>
-                </div>
-                <div className="w-full md:w-[55%]">
-                  <div className="flex items-center mb-[5px]">
-                    <label
-                      htmlFor=""
-                      className="text-[13px] md:text-base font-AeonikProRegular"
-                    >
-                      Цена
-                    </label>
-                    <span className="ml-[5px]">
-                      <StarLabel />
-                    </span>
-                  </div>
-                  <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                    <input
-                      type="number"
-                      placeholder="0"
-                      className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
-                    />
-                    <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                      сум
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="w-1/2 flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Скидка
-                  </label>
-                  <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                    (необязательно)
-                  </span>
-                </div>
-                <div className="w-full flex items-center justify-center">
-                  <div className="w-full flex items-center gap-x-1">
-                    <div className="w-[40%] md:w-[25%] flex items-start">
-                      <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] py-[8px]">
-                        <input
-                          type="number"
-                          placeholder="0"
-                          className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                        />
-                        <span className="text-textLightColor ml-2">%</span>
-                      </div>
-                    </div>
-                    <span className="rotate-90 text-borderColor ml-[7px] mr-1 md:ml-3 md:mr-[9px]">
-                      |
-                    </span>
-                    <div className="w-[60%] md:w-[75%] flex items-center">
-                      <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                        <input
-                          type="number"
-                          placeholder="0"
-                          className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
-                        />
-                        <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                          сум
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+          
             {/* 5 */}
             <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
               <div className="w-1/2 flex md:hidden flex-col items-start">
