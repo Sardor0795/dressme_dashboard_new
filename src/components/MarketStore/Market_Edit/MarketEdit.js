@@ -75,12 +75,12 @@ function MarketEdit() {
         </span>{" "}
         <span className="md:block hidden">Магазины </span>
       </div>
-      <div className="w-full flex items-center justify-end md:justify-between mb-3 md:pb-0 pb-[11px] md:border-0 border-b border-borderColor">
+      <div className="w-full flex items-center justify-between mb-3 md:pb-0 pb-[11px] md:border-0 border-b border-borderColor">
         <button
           onClick={() => {
             navigate(-1);
           }}
-          className="w-8 h-8 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          className="md:w-8 md:h-8 w-6 h-6  flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
         >
           <AiOutlineLeft />
         </button>
@@ -173,10 +173,10 @@ function MarketEdit() {
                       type="button"
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
-                      className={`w-1/3 md:w-full flex items-center justify-center active:scale-95  border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
+                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
                                                     ${
                                                       data.action
-                                                        ? " h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                                        ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
                                                         : ""
                                                     }    
                                                     `}

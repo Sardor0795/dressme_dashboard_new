@@ -3,6 +3,8 @@ import { DatePicker, Space } from "antd";
 import { SearchIcon } from "../../../assets/icons";
 import MarketList from "./MarketList";
 import { Link } from "react-router-dom";
+import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+
 const { RangePicker } = DatePicker;
 
 export default function MyMarket() {
@@ -14,6 +16,9 @@ export default function MyMarket() {
   return (
     <div className="w-full h-full  py-1">
       <div className="w-full pt-6 pb-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block ">
+        <div>
+          <MobileHumburgerMenu />
+        </div>
         <div className="w-full flex items-center justify-center md:hidden">
           <span className="text-2xl not-italic font-AeonikProMedium">
             Все магазины
