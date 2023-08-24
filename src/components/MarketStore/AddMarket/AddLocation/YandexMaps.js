@@ -5,7 +5,7 @@ import {
   Map,
   ZoomControl,
   GeolocationControl,
-  Placemark,
+  FullscreenControl,
   Clusterer,
 } from "react-yandex-maps";
 import {
@@ -18,6 +18,8 @@ import {
 import { MdLocationOn } from "react-icons/md";
 import "./yandexMaps1.css";
 import { GrClose } from "react-icons/gr";
+import { clsx } from "clsx";
+
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
   defaultOptions: { suppressMapOpenBlock: true },
@@ -44,7 +46,7 @@ export default function YandexMaps() {
   const handleReset = () => {
     setState({ ...initialState });
     // searchRef.current.value = "";
-    mapRef.current.setCenter(initialState.center);
+    // mapRef.current.setCenter(initialState.center);
     mapRef.current.setZoom(initialState.zoom);
   };
 
@@ -100,31 +102,35 @@ export default function YandexMaps() {
             <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
               <div className="w-full flex items-center">
                 <div className="min-w-[500px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
-                  {!state.title && (
-                    <input
-                      ref={searchRef}
-                      placeholder="Введите адрес"
-                      disabled={!mapConstructor}
-                      // disabled={true}
-                      className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg"
-                    />
-                  )}
-                  {state.title && (
-                    <div className="w-full gap-x-3 flex items-center justify-between h-full mr-3 rounded-lg  ">
-                      <div
-                        className="w-full whitespace-nowrap	"
-                        title={state.title}
-                      >
-                        {state.title}
-                      </div>
-                      <div
-                        onClick={handleReset}
-                        className=" cursor-pointer flex items-center justify-center "
-                      >
-                        <GrClose />
-                      </div>
+                  {/* {!state.title && ( */}
+                  <input
+                    ref={searchRef}
+                    placeholder="Введите адрес"
+                    disabled={!mapConstructor}
+                    className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg"
+                  />
+                  {/* )} */}
+                  {/* {state.title && ( */}
+                  <div
+                    className={clsx(["titleBox"], {
+                      ["titleBox_show"]: Boolean(state.title.length),
+                    })}
+                  >
+                    {/* <div className="w-full gap-x-3 flex items-center justify-between h-full mr-3 rounded-lg  "> */}
+                    <div
+                      className="w-full whitespace-nowrap	"
+                      title={state.title}
+                    >
+                      {state.title}
                     </div>
-                  )}
+                    <div
+                      onClick={handleReset}
+                      className=" cursor-pointer flex items-center justify-center "
+                    >
+                      <GrClose />
+                    </div>
+                  </div>
+                  {/* )} */}
                 </div>
               </div>
               <button
@@ -155,14 +161,22 @@ export default function YandexMaps() {
             <ZoomControl
               options={{
                 float: "right",
-                position: { bottom: 270, right: 10, size: "small" },
+                position: { bottom: 200, right: 10, size: "small" },
                 size: "small",
               }}
             />{" "}
             <GeolocationControl
               options={{
                 float: "right",
-                position: { bottom: 220, right: 10 },
+                position: { bottom: 60, right: 10 },
+                size: "small",
+              }}
+            />
+            <FullscreenControl
+              options={{
+                float: "right",
+                position: { bottom: 100, right: 10 },
+                size: "small",
               }}
             />
           </Map>
