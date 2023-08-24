@@ -21,12 +21,6 @@
   width: 100%;
   padding: 10px;
 }
-.titleBox_show {
-  position: relative;
-  z-index: 9999;
-  top: 0px;
-  display: flex;
-}
 
 .titleBox {
   display: none;
@@ -38,6 +32,15 @@
   right: 0;
   padding: 10px;
   background: "#ccc";
+}
+.titleBox.titleBox_show {
+  position: absolute;
+  width: 100%;
+  z-index: 9999;
+  top: 0px;
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
 }
 .titleBox span {
   flex-grow: 1;
