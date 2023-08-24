@@ -30,7 +30,7 @@ export default function AddLocation() {
             onClick={() => {
               navigate(-1);
             }}
-            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+            className="md:w-8 md:h-8 w-6 h-6  flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
           >
             <AiOutlineLeft />
           </button>

@@ -51,7 +51,7 @@ function AddStore({ onClick }) {
           onClick={() => {
             navigate(-1);
           }}
-          className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          className="md:w-8 md:h-8 w-6 h-6  flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
         >
           <AiOutlineLeft />
         </button>
@@ -71,13 +71,12 @@ function AddStore({ onClick }) {
             >
               выберите облошка
               <input
-                type="text"
                 className="hidden"
                 value={uploadImg}
                 onChange={(e) => setUploadImg(e.target.value)}
                 id="DataImg"
                 type="file"
-                accept=" image/* "
+                accept=" image/*"
               />
             </label>
             <BgSelectSkin />
