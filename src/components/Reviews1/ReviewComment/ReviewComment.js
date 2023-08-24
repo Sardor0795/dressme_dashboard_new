@@ -101,11 +101,12 @@ export default function ReviewComment() {
       </div>
     </div>
   );
+  
   return (
     <div>
-      <div className="w-full border-b border-lightBorderColor flex justify-between py-6">
+      <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-fit flex items-center">
-        <button
+          <button
             onClick={() => {
               navigate(-1);
             }}
@@ -114,12 +115,12 @@ export default function ReviewComment() {
             <AiOutlineLeft />
           </button>
           <span
-            className="text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium ml-[30px]"
+            className="hidden md:block text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium ml-[30px]"
           >
             Подробнее о товаре
           </span>
         </div>
-        <div className="w-fit flex gap-x-[30px]  ">
+        <div className="w-fit hidden md:flex gap-x-[30px]  ">
           <Popover
             open={state?.openwear}
             onOpenChange={handleOpenChangeWear}
@@ -154,7 +155,7 @@ export default function ReviewComment() {
           </div>
         </div>
       </div>
-      <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
+      <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-3 md:mt-6">
         <div className="w-full md:w-[35%]">
           <CommentDetail />
         </div>

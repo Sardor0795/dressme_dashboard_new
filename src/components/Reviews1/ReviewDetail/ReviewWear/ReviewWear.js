@@ -151,7 +151,7 @@ export default function ReviewWear() {
   );
 
   return (
-    <div className="w-full h-full px-4 md:px-10 py-1">
+    <div className="w-full h-full md:px-10 py-1">
       {/* Table */}
       <div className="w-full h-fit md:mt-7">
         <div className="w-full mb-[10px] hidden md:block">
