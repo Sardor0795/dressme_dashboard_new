@@ -78,6 +78,24 @@ export default function MobileHumburgerMenu() {
               color: isActive ? "#007DCA" : "#000",
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
+            to={"/locations-store"}
+          >
+            <span>
+              <ClothesIcons colors={""} />
+            </span>
+            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+              Локации
+            </span>
+          </NavLink>
+          <NavLink
+            onClick={() => setIsModalOpen(false)}
+            className={
+              "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+            }
+            style={({ isActive }) => ({
+              color: isActive ? "#007DCA" : "#000",
+              background: isActive ? "#f2f2f2" : "#fcfcfc",
+            })}
             to={"/products"}
           >
             <span>

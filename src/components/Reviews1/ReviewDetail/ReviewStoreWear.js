@@ -10,6 +10,7 @@ import {
 } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import NoReviewProduct from "../NoReview/NoReview";
+import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 const { RangePicker } = DatePicker;
 export default function ReviewStoreWear() {
   const [storeOrWear, setStoreOrWear] = useState(false);
@@ -18,8 +19,11 @@ export default function ReviewStoreWear() {
   return (
     <div className="w-full h-fit">
       {/* filter */}
-      <div className="w-full hidden md:block pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor">
-        <div className="flex items-center justify-between">
+      <div className="w-full block pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor">
+        
+        <MobileHumburgerMenu />
+        
+        <div className="hidden md:flex items-center justify-between">
           <div className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
             <input
               type="text"
@@ -36,8 +40,9 @@ export default function ReviewStoreWear() {
             </Space>
           </div>
         </div>
+      
       </div>
-      <div className="my-[30px] w-full flex justify-center items-center">
+      <div className="mb-[30px] md:my-[30px] w-full flex justify-center items-center">
         <div className="w-full md:w-fit h-[44px] bg-lightBorderColor flex items-center justify-center rounded-lg overflow-hidden">
         <button
             onClick={() => setStoreOrWear(false)}
