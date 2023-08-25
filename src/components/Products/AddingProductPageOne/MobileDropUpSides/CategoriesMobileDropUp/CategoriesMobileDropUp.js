@@ -1,6 +1,6 @@
 
 import React from "react";
-import { CloseAnswer, LineIcon } from "../../../../../assets/icons";
+import { CloseAnswer, LineIcon, StarLabel } from "../../../../../assets/icons";
 
 const CategoriesMobileDropUp = ({ onClick, title }) => {
   
@@ -31,6 +31,50 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
           })}
         </action>
         <action className="w-full h-[400px] overflow-auto flex flex-col items-center  px-4 border border-borderColor rounded-xl p-5">
+          {/* 1 */}
+          <div className="w-full flex items-center justify-between mb-[15px] gap-x-[10px]">
+            <div className="w-[40%] flex flex-col">
+              <div className="flex items-center text-sm font-AeonikProMedium text-mobileTextColor">
+                Цена
+                <span className="ml-[5px]">
+                  <StarLabel />
+                </span>
+              </div>
+              <div className="w-full flex items-center mt-[7px]">
+                <div className="w-full flex flex-col">
+                    <input
+                      type="number"
+                      className="w-full h-[38px] border border-borderColor px-[15px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      placeholder="0"
+                    />
+                </div>
+              </div>
+            </div>
+            <div className="w-[60%] flex flex-col">
+              <div className="text-sm font-AeonikProMedium text-mobileTextColor">
+                Скидка
+                <span className="text-[10px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(не обезательно)</span>
+              </div>
+              <div className="w-full flex items-center mt-[7px]">
+                <div className="flex flex-col">
+                    <input
+                      type="number"
+                      className="w-[60px] h-[38px] border border-borderColor px-[12px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      placeholder="0"
+                    />
+                </div>
+                <span className="mx-[5px]"><LineIcon /></span>
+                <div className="flex flex-col">
+                  <input
+                    type="number"
+                    className="w-fit h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    placeholder="Макс"
+                  />
+                  <span className="">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
           {/* 1 */}
           <div className="w-full flex items-center justify-between mb-[15px]">
             <div className="w-fit flex flex-col">
