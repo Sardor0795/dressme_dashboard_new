@@ -35,7 +35,7 @@ export default function AddLocation() {
             <AiOutlineLeft />
           </button>
         </div>
-        <div className="h-[400px]">
+        <div>
           <YandexMaps />
         </div>
 
