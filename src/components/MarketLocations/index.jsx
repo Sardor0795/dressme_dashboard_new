@@ -7,7 +7,7 @@ const { RangePicker } = DatePicker;
 
 export default function MarketLocations() {
   return (
-    <div className="px-10 py-1">
+    <div className="px-[16px] md:px-10 py-1">
       <Outlet />
     </div>
   );
