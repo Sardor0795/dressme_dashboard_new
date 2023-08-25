@@ -1843,7 +1843,7 @@ const AddingProduct = () => {
         action="#"
         className="md:relative w-full md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
       >
-        <div className="flex items-center justify-center text-xl font-AeonikProMedium mt-6 mb-[34px]">Добавить продукт</div>
+        <div className="flex items-center justify-center text-xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду </div>
         {/* Photo Section For Mobile */}
         <div className="w-full flex md:hidden mb-6 gap-x-[15px]">
           <div className="w-3/4 flex items-center justify-center rounded-lg border border-dashed border-borderColor bg-photoBg">

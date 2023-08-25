@@ -56,22 +56,25 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
                 <span className="text-[10px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(не обезательно)</span>
               </div>
               <div className="w-full flex items-center mt-[7px]">
-                <div className="flex flex-col">
+                <div className="w-full flex items-center">
+                  <div className="w-[35%] h-[38px] flex items-center justify-between border border-borderColor pl-3 py-3 rounded-lg">
                     <input
                       type="number"
-                      className="w-[60px] h-[38px] border border-borderColor px-[12px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      className="w-[50%] text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
                       placeholder="0"
                     />
-                </div>
-                <span className="mx-[5px]"><LineIcon /></span>
-                <div className="flex flex-col">
+                    <span className="w-[40%] text-[13px] text-[#b5b5b5] pt-1 font-AeonikProRegular">%</span>
+                  </div>
+                  <span className="mx-[5px]"><LineIcon /></span>
+                  <div className="w-[65%] h-[38px] px-3 flex items-center justify-between border border-borderColor rounded-lg text-[11px] ">
                   <input
-                    type="number"
-                    className="w-fit h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    placeholder="Макс"
-                  />
-                  <span className="">%</span>
-                </div>
+                      type="number"
+                      className="w-[62%] text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      placeholder="0"
+                    />
+                    <span className="w-[30%] text-xs text-[#b5b5b5] font-AeonikProRegular">сум</span>
+                  </div>
+                </div>                
               </div>
             </div>
           </div>
@@ -180,7 +183,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
               </p>
               <div className="w-full flex items-center mt-[7px]">
-                <div className="w-full flex items-start flex-wrap gap-x-[15px] gap-y-3 mb-[10px]">
+                <div className="w-full flex items-start flex-wrap gap-x-[9px] gap-y-3 mb-[10px]">
                     <div className="flex justify-center items-center">
                         <input type="radio" id="xxs_outwear" name="size_Outwear" value="XXS" className="w-[18px] h-[18px]"/>
                         <label
@@ -244,6 +247,68 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
                         className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer">
                           3XL
                       </label>
+                    </div>
+
+                    <div className="flex justify-center items-center">
+                        <input type="radio" id="four_xl_outwear" name="size_Outwear" value="4XL" className="w-[18px] h-[18px]"/>
+                        <label
+                          htmlFor="four_xl_outwear"
+                          className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer">
+                          4XL
+                        </label>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <input type="radio" id="five_xl_outwear" name="size_Outwear" value="5XL" className="w-[18px] h-[18px]"/>
+                        <label
+                          htmlFor="five_xl_outwear"
+                          className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer">
+                          5XL
+                        </label>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <input type="radio" id="six_xl_outwear" name="size_Outwear" value="6XL" className="w-[18px] h-[18px]" />
+                        <label
+                        htmlFor="six_xl_outwear"
+                        className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer" >
+                        6XL
+                        </label>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <input type="radio" id="seven_xl_outwear" name="size_Outwear" value="7XL" className="w-[18px] h-[18px]" />
+                        <label
+                        htmlFor="seven_xl_outwear"
+                        className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer" >
+                        7XL
+                        </label>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <input type="radio" id="eight_xl_outwear" name="size_Outwear" value="8XL" className="w-[18px] h-[18px]" />
+                        <label
+                          htmlFor="eight_xl_outwear"
+                          className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer">
+                          8XL
+                        </label>
+                    </div>
+                    <div className="flex items-center justify-center">
+                        <input type="radio" id="nine_xl_outwear" name="size_Outwear" value="9XL" className="w-[18px] h-[18px]" />
+                        <label
+                        htmlFor="nine_xl_outwear"
+                        className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer" >
+                          9XL
+                        </label>
+                    </div>
+                    <div className="flex items-center justify-center">
+                        <input type="radio" id="ten_xl_outwear" name="size_Outwear" value="10XL" className="w-[18px] h-[18px]" />
+                        <label
+                        htmlFor="ten_xl_outwear"
+                        className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer" >
+                          10XL
+                        </label>
+                    </div>
+                    <div className="flex items-center justify-center">
+                    <button className="flex items-start justify-start text-[13px] font-AeonikProMedium ml-[4px] text-textBlueColor mt-[3px]">
+                      Меньше
+                    </button>
                     </div>
                 </div>
               </div>
