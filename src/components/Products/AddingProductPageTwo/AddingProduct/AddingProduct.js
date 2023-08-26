@@ -6,7 +6,7 @@ import AddBtn from "./AddBtn/AddBtn";
 
 export default function AddingProduct() {
   return (
-    <div className="flex py-[40px] md:py-[50px] px-[40px]">
+    <div className="flex py-[40px] md:py-[50px]">
       <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
         <div className="text-[#007dca] text-2xl w-[45px] h-[45px] rounded-full flex items-center justify-center border-2 border-[#1e88e5] mb-[5px] font-AeonikProRegular">
           1
@@ -19,7 +19,7 @@ export default function AddingProduct() {
       </div>
       <div className="flex-1">
         <div>
-          <div className="flex md:hidden mb-[15px] justify-end">
+          <div className="flex md:hidden mb-4 justify-end">
             <Link
               to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
               target="_blank"
