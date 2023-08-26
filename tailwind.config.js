@@ -50,6 +50,8 @@ module.exports = {
         locationBg: "#FBEAD7",
         locationText: "#D89412",
         Editbg: "#E8F5FD",
+
+        redText: "#FF4343",
       },
       fontFamily: {
         // 500

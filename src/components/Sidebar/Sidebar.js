@@ -15,7 +15,6 @@ import { dressMainData } from "../../hook/ContextTeam";
 
 export default function Sidebar() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
 
@@ -45,69 +44,111 @@ export default function Sidebar() {
               {" "}
               <NavLink
                 className={
-                  "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
+                  "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                 }
                 style={({ isActive }) => ({
-                  color: isActive ? "#007DCA" : "#000",
                   background: isActive ? "#f2f2f2" : "#fcfcfc",
                 })}
                 to={"/reviews"}
               >
-                <span>
-                  <NavbarReviewIcon colors="#2c2c2c" />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Отзывы
-                </span>
+                {({ isActive }) =>
+                  isActive ? (
+                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                      <NavbarReviewIcon colors={"#007dca"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Отзывы
+                      </p>
+                    </figure>
+                  ) : (
+                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                      <NavbarReviewIcon colors={"#2c2c2c"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Отзывы
+                      </p>
+                    </figure>
+                  )
+                }
               </NavLink>
               <NavLink
-                className={`w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg`}
+                className={
+                  "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
+                }
                 style={({ isActive }) => ({
-                  color: isActive ? "#007DCA" : "#000",
                   background: isActive ? "#f2f2f2" : "#fcfcfc",
                 })}
                 to={"/store"}
               >
-                <span>
-                  <NavbarMarketIcon colors={"#2c2c2c"} />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Магазины
-                </span>
+                {({ isActive }) =>
+                  isActive ? (
+                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                      <NavbarMarketIcon colors={"#007dca"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Магазины
+                      </p>
+                    </figure>
+                  ) : (
+                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                      <NavbarMarketIcon colors={"#2c2c2c"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Магазины
+                      </p>
+                    </figure>
+                  )
+                }
               </NavLink>
               <NavLink
                 className={
-                  "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+                  "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                 }
                 style={({ isActive }) => ({
-                  color: isActive ? "#007DCA" : "#000",
                   background: isActive ? "#f2f2f2" : "#fcfcfc",
                 })}
                 to={"/locations-store"}
               >
-                <span>
-                  <LocationIcon colors="#2c2c2c" />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Локации
-                </span>
+                {({ isActive }) =>
+                  isActive ? (
+                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                      <LocationIcon colors={"#007dca"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Локации
+                      </p>
+                    </figure>
+                  ) : (
+                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                      <LocationIcon colors={"#2c2c2c"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Локации
+                      </p>
+                    </figure>
+                  )
+                }
               </NavLink>
               <NavLink
                 className={
-                  "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+                  "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                 }
                 style={({ isActive }) => ({
-                  color: isActive ? "#007DCA" : "#000",
                   background: isActive ? "#f2f2f2" : "#fcfcfc",
                 })}
                 to={"/products"}
               >
-                <span>
-                  <ClothesIcons colors={"#2c2c2c"} />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Одежда
-                </span>
+                {({ isActive }) =>
+                  isActive ? (
+                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                      <ClothesIcons colors={"#007dca"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Одежда
+                      </p>
+                    </figure>
+                  ) : (
+                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                      <ClothesIcons colors={"#2c2c2c"} />
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                        Одежда
+                      </p>
+                    </figure>
+                  )
+                }
               </NavLink>
             </div>
           ) : (
@@ -207,23 +248,39 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
-        <div className="w-full px-4 flex flex-col gap-y-1">
+        <div className="w-full px-2  flex flex-col gap-y-1">
           <NavLink
-            to="/profile"
+            className={
+              "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
+            }
             style={({ isActive }) => ({
-              color: isActive ? "#007DCA" : "#000",
-              // background: isActive ? "#f2f2f2" : "#fcfcfc",
+              background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
-            className="w-full h-fit cursor-pointer py-3   flex items-center gap-x-4"
+            to="/profile"
           >
-            <UserIcon />{" "}
-            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-              Профиль
-            </span>
+            {({ isActive }) =>
+              isActive ? (
+                <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                  <UserIcon colors={"#007dca"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Профиль
+                  </p>
+                </figure>
+              ) : (
+                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                  <UserIcon colors={"#2c2c2c"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Профиль
+                  </p>
+                </figure>
+              )
+            }
           </NavLink>
-          <button className="w-full h-fit cursor-pointer py-3   flex items-center gap-x-4">
-            <UserExitIcon />{" "}
-            <span className="text-gray-900 text-lg not-italic font-AeonikProMedium leading-5">
+          <button className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
+            <UserExitIcon colors={"#000"} />{" "}
+            <span
+              className={` text-black group-hover:text-redText text-lg not-italic font-AeonikProMedium leading-5`}
+            >
               Выйти
             </span>
           </button>
