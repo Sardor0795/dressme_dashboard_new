@@ -1,9 +1,12 @@
 import { Button, Modal } from "antd";
 import {
   ClothesIcons,
+  LocationIcon,
   MobileNavMenu,
   NavbarMarketIcon,
   NavbarReviewIcon,
+  UserExitIcon,
+  UserIcon,
 } from "../../../assets/icons";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -34,76 +37,152 @@ export default function MobileHumburgerMenu() {
       >
         <div className="w-full flex flex-wrap gap-y-5">
           <NavLink
-            onClick={() => setIsModalOpen(false)}
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
             }
             style={({ isActive }) => ({
-              color: isActive ? "#007DCA" : "#000",
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
             to={"/reviews"}
+            onClick={() => setIsModalOpen(false)}
           >
-            <span>
-              <NavbarReviewIcon colors={""} />
-            </span>
-            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-              Отзывы
-            </span>
+            {({ isActive }) =>
+              isActive ? (
+                <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                  <NavbarReviewIcon colors={"#007dca"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Отзывы
+                  </p>
+                </figure>
+              ) : (
+                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                  <NavbarReviewIcon colors={"#2c2c2c"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Отзывы
+                  </p>
+                </figure>
+              )
+            }
           </NavLink>
           <NavLink
-            onClick={() => setIsModalOpen(false)}
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
             }
             style={({ isActive }) => ({
-              color: isActive ? "#007DCA" : "#000",
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
             to={"/store"}
-          >
-            <span>
-              <NavbarMarketIcon colors={""} />
-            </span>
-            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-              Магазины
-            </span>
-          </NavLink>
-          <NavLink
             onClick={() => setIsModalOpen(false)}
+          >
+            {({ isActive }) =>
+              isActive ? (
+                <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                  <NavbarMarketIcon colors={"#007dca"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Магазины
+                  </p>
+                </figure>
+              ) : (
+                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                  <NavbarMarketIcon colors={"#2c2c2c"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Магазины
+                  </p>
+                </figure>
+              )
+            }
+          </NavLink>
+
+          <NavLink
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
             }
             style={({ isActive }) => ({
-              color: isActive ? "#007DCA" : "#000",
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
             to={"/locations-store"}
+            onClick={() => setIsModalOpen(false)}
           >
-            <span>
-              <ClothesIcons colors={""} />
-            </span>
-            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-              Локации
-            </span>
+            {({ isActive }) =>
+              isActive ? (
+                <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                  <LocationIcon colors={"#007dca"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Локации
+                  </p>
+                </figure>
+              ) : (
+                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                  <LocationIcon colors={"#2c2c2c"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Локации
+                  </p>
+                </figure>
+              )
+            }
           </NavLink>
           <NavLink
-            onClick={() => setIsModalOpen(false)}
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize bg-lightBorderColor rounded-lg"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
             }
             style={({ isActive }) => ({
-              color: isActive ? "#007DCA" : "#000",
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
             to={"/products"}
+            onClick={() => setIsModalOpen(false)}
           >
-            <span>
-              <ClothesIcons colors={""} />
+            {({ isActive }) =>
+              isActive ? (
+                <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                  <ClothesIcons colors={"#007dca"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Одежда
+                  </p>
+                </figure>
+              ) : (
+                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                  <ClothesIcons colors={"#2c2c2c"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Одежда
+                  </p>
+                </figure>
+              )
+            }
+          </NavLink>
+        </div>
+        <div className=" flex items-center justify-between border-t border-borderColor w-full mt-2 pt-1">
+          <button className="w-fit mt-2 group h-fit cursor-pointer py-3   rounded-lg  flex items-center gap-x-4">
+            <UserExitIcon colors={"#FF4343"} />{" "}
+            <span
+              className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
+            >
+              Выйти
             </span>
-            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-              Одежда
-            </span>
+          </button>
+          <NavLink
+            className={"w-fit mt-2 flex items-center justify-start capitalize"}
+            style={({ isActive }) => ({
+              background: isActive ? "#f2f2f2" : "#fcfcfc",
+            })}
+            to="/profile"
+          >
+            {({ isActive }) =>
+              isActive ? (
+                <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                  <UserIcon colors={"#007dca"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Профиль
+                  </p>
+                </figure>
+              ) : (
+                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                  <UserIcon colors={"#2c2c2c"} />
+                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                    Профиль
+                  </p>
+                </figure>
+              )
+            }
           </NavLink>
         </div>
       </Modal>

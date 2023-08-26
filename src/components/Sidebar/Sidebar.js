@@ -277,9 +277,9 @@ export default function Sidebar() {
             }
           </NavLink>
           <button className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
-            <UserExitIcon colors={"#000"} />{" "}
+            <UserExitIcon colors={"#FF4343"} />{" "}
             <span
-              className={` text-black group-hover:text-redText text-lg not-italic font-AeonikProMedium leading-5`}
+              className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
             >
               Выйти
             </span>
