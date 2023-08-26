@@ -1,10 +1,12 @@
-import { Popover, Select, Switch } from "antd";
+import { DatePicker, Popover, Select, Space, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   ArrowRightIcon,
+  CalendarIcons,
   DownloadIcon,
   InputCheck,
   LoaderIcon,
+  SearchIcon,
   StarLabel,
 } from "../../../../assets/icons";
 import { Link, NavLink } from "react-router-dom";
@@ -15,6 +17,9 @@ import ColorsMobileDropUp from "../MobileDropUpSides/ColorsMobileDropUp/ColorsMo
 import GenderTypeDropUp from "../MobileDropUpSides/GenderTypeDropUp/GenderTypeDropUp";
 import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
+import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
+
+const {RangePicker} = DatePicker;
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -1707,7 +1712,48 @@ const AddingProduct = () => {
   ];
 
   return (
-    <div className="relative w-full flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
+    <div className="relative w-full block md:flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
+      
+      <div className="w-full py-6 border-lightBorderColor block md:hidden">
+        <div className="w-full flex items-center justify-center">
+          <button className="absolute left-0 ">
+            <MobileHumburgerMenu />
+          </button>
+          <span className="text-2xl not-italic font-AeonikProMedium">
+            Добавить одежду
+          </span>
+        </div>
+        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
+          <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+            <label
+              htmlFor="searchStore"
+              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+            >
+              <input
+                type="text"
+                name="s"
+                id="searchStore"
+                className="w-full h-full   outline-0 	pl-[10px]"
+                placeholder="Поиск"
+              />
+              <span className="pr-[10px]">
+                <SearchIcon />
+              </span>
+            </label>
+            <section className=" flex items-center gap-x-[30px] ">
+              <span>
+                <CalendarIcons />
+              </span>
+              <span className="hidden md:flex items-center">
+                <Space direction="vertical" size={12}>
+                  <RangePicker className="" placeholder={["от", "до"]} />
+                </Space>
+              </span>
+            </section>
+          </section>
+        </div>
+      </div>
+      
       <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
           1
@@ -1841,9 +1887,9 @@ const AddingProduct = () => {
 
       <form
         action="#"
-        className="md:relative w-full md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
+        className="md:relative w-full md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px]  md:pb-[250px]"
       >
-        <div className="flex items-center justify-center text-xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду </div>
+        <div className="hidden md:flex items-center justify-center text-2xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду </div>
         {/* Photo Section For Mobile */}
         <div className="w-full flex md:hidden mb-6 gap-x-[15px]">
           <div className="w-3/4 flex items-center justify-center rounded-lg border border-dashed border-borderColor bg-photoBg">
@@ -1881,7 +1927,7 @@ const AddingProduct = () => {
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-between md:gap-x-[30px]">
+        <div className="w-full flex items-start justify-between md:gap-x-[30px]">
           <div className="w-full md:w-[65%]">
             {/* 1 */}
             <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
