@@ -228,7 +228,7 @@ const StarOutlineIcon = () => {
     </svg>
   );
 };
-const StarIcon = ({width,height}) => {
+const StarIcon = ({ width, height }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1016,19 +1016,150 @@ const CheckIcons = () => {
   );
 };
 const LoaderIcon = () => {
-  return(
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1046 10.8954 22 12 22Z" fill="white"/>
-      <path d="M12 6C13.1046 6 14 5.10457 14 4C14 2.89543 13.1046 2 12 2C10.8954 2 10 2.89543 10 4C10 5.10457 10.8954 6 12 6Z" fill="white"/>
-      <path d="M6.34277 19.657C7.44734 19.657 8.34277 18.7616 8.34277 17.657C8.34277 16.5524 7.44734 15.657 6.34277 15.657C5.2382 15.657 4.34277 16.5524 4.34277 17.657C4.34277 18.7616 5.2382 19.657 6.34277 19.657Z" fill="white"/>
-      <path d="M17.6572 8.34302C18.7618 8.34302 19.6572 7.44759 19.6572 6.34302C19.6572 5.23845 18.7618 4.34302 17.6572 4.34302C16.5527 4.34302 15.6572 5.23845 15.6572 6.34302C15.6572 7.44759 16.5527 8.34302 17.6572 8.34302Z" fill="white"/>
-      <path d="M4.00002 14.001C5.10514 14.001 6.00102 13.1051 6.00102 12C6.00102 10.8949 5.10514 9.99902 4.00002 9.99902C2.8949 9.99902 1.99902 10.8949 1.99902 12C1.99902 13.1051 2.8949 14.001 4.00002 14.001Z" fill="white"/>
-      <path d="M20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z" fill="white"/>
-      <path d="M6.34277 8.34399C7.44734 8.34399 8.34277 7.44856 8.34277 6.34399C8.34277 5.23942 7.44734 4.34399 6.34277 4.34399C5.2382 4.34399 4.34277 5.23942 4.34277 6.34399C4.34277 7.44856 5.2382 8.34399 6.34277 8.34399Z" fill="white"/>
-      <path d="M17.6572 19.658C18.7618 19.658 19.6572 18.7625 19.6572 17.658C19.6572 16.5534 18.7618 15.658 17.6572 15.658C16.5527 15.658 15.6572 16.5534 15.6572 17.658C15.6572 18.7625 16.5527 19.658 17.6572 19.658Z" fill="white"/>
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1046 10.8954 22 12 22Z"
+        fill="white"
+      />
+      <path
+        d="M12 6C13.1046 6 14 5.10457 14 4C14 2.89543 13.1046 2 12 2C10.8954 2 10 2.89543 10 4C10 5.10457 10.8954 6 12 6Z"
+        fill="white"
+      />
+      <path
+        d="M6.34277 19.657C7.44734 19.657 8.34277 18.7616 8.34277 17.657C8.34277 16.5524 7.44734 15.657 6.34277 15.657C5.2382 15.657 4.34277 16.5524 4.34277 17.657C4.34277 18.7616 5.2382 19.657 6.34277 19.657Z"
+        fill="white"
+      />
+      <path
+        d="M17.6572 8.34302C18.7618 8.34302 19.6572 7.44759 19.6572 6.34302C19.6572 5.23845 18.7618 4.34302 17.6572 4.34302C16.5527 4.34302 15.6572 5.23845 15.6572 6.34302C15.6572 7.44759 16.5527 8.34302 17.6572 8.34302Z"
+        fill="white"
+      />
+      <path
+        d="M4.00002 14.001C5.10514 14.001 6.00102 13.1051 6.00102 12C6.00102 10.8949 5.10514 9.99902 4.00002 9.99902C2.8949 9.99902 1.99902 10.8949 1.99902 12C1.99902 13.1051 2.8949 14.001 4.00002 14.001Z"
+        fill="white"
+      />
+      <path
+        d="M20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z"
+        fill="white"
+      />
+      <path
+        d="M6.34277 8.34399C7.44734 8.34399 8.34277 7.44856 8.34277 6.34399C8.34277 5.23942 7.44734 4.34399 6.34277 4.34399C5.2382 4.34399 4.34277 5.23942 4.34277 6.34399C4.34277 7.44856 5.2382 8.34399 6.34277 8.34399Z"
+        fill="white"
+      />
+      <path
+        d="M17.6572 19.658C18.7618 19.658 19.6572 18.7625 19.6572 17.658C19.6572 16.5534 18.7618 15.658 17.6572 15.658C16.5527 15.658 15.6572 16.5534 15.6572 17.658C15.6572 18.7625 16.5527 19.658 17.6572 19.658Z"
+        fill="white"
+      />
     </svg>
-  )
-}
+  );
+};
+const CalendarIcons = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M8 2V5"
+        stroke="black"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16 2V5"
+        stroke="black"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M3.5 9.08984H20.5"
+        stroke="black"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+        stroke="black"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M15.6947 13.7002H15.7037"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M15.6947 16.7002H15.7037"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11.9955 13.7002H12.0045"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11.9955 16.7002H12.0045"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8.29431 13.7002H8.30329"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8.29431 16.7002H8.30329"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+const GoBackIcons = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      fill="none"
+    >
+      <path
+        d="M23.3333 11.6668L15 20.0002L23.3333 28.3335"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
 
 export {
   ProfileIcon,
@@ -1075,5 +1206,7 @@ export {
   YandexMazimizeMapIcon,
   MapLocationIcon,
   CheckIcons,
-  LoaderIcon
+  LoaderIcon,
+  CalendarIcons,
+  GoBackIcons,
 };
