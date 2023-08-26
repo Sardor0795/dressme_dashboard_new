@@ -846,12 +846,12 @@ const ArrowTopIcons = ({ colors }) => {
     </svg>
   );
 };
-const AddIconsCircle = ({ colors }) => {
+const AddIconsCircle = ({ colors, size }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
+      width={size ? size : 18}
+      height={size ? size : 18}
       viewBox="0 0 18 18"
       fill="none"
     >
