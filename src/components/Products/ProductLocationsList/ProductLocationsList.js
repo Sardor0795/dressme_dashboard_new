@@ -194,22 +194,6 @@ export default function LocationClothesCity() {
     }
   }, [arrayAllChecked]);
 
-  // Checks whether an element is even
-  // useEffect(() => {
-  //   if (city1all && city2all) {
-  //     setArrayAllChecked(false);
-  //   } else {
-  //     setArrayAllChecked(true);
-  //   }
-  //   // const even = (element) => element.isCheck == true;
-  //   // setSomeCheckedCity1(city1.some(even));
-  //   // setSomeCheckedCity2(city2.some(even));
-  // }, [arrayAllChecked]);
-
-  // Checks whether an element is even
-  // const even = (element) => element.isCheck == true;
-  // setSomeChecked(city1.some(even));
-  // setSomeChecked(city1.some(even));
 
   const navigate = useNavigate();
 
@@ -252,19 +236,19 @@ export default function LocationClothesCity() {
       </div>
       <div>
         {/* Up Title */}
-        <div className="flex items-center justify-center py-7 relative w-full">
-          <p className="text-xl font-AeonikProMedium absolute left-0">
+        <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
+          <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
             Общее количество: 6
           </p>
-          <p className="text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+          <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
             Nike Store Official Dealer
           </p>
-          <div className="w-fit flex items-center absolute right-0">
-            <div className="mr-6 font-AeonikProRegular text-lg text-mobileTextColor">
-              Выбранные
+          <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
+            <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
+              Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
             <button
-              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-lg text-addLocationTextcolor  ${
+              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  ${
                 someChecked
                   ? "opacity-100 active:translate-y-[2px]"
                   : "opacity-30 cursor-not-allowed"
@@ -276,7 +260,7 @@ export default function LocationClothesCity() {
               Добавить в локацию
             </button>
             <button
-              className={`pl-3 flex items-center font-AeonikProRegular text-lg text-deleteColor ${
+              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor ${
                 someChecked
                   ? "opacity-100 active:translate-y-[2px]"
                   : "opacity-30 cursor-not-allowed"
