@@ -25,9 +25,14 @@ const mapOptions = {
   defaultOptions: { suppressMapOpenBlock: true },
 };
 
+const geolocationOptions = {
+  defaultOptions: { maxWidth: 128 },
+  defaultData: { content: "Determine" },
+};
+
 const initialState = {
   title: "",
-  center: [41.311753, 69.241822],
+  center: [41.311151, 69.279737],
   zoom: 12,
 };
 
@@ -36,6 +41,7 @@ export default function YandexMaps() {
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
+  const [fullScreenMaps, setFullScreenMaps] = useState(false);
 
   // submits
   const handleSubmit = () => {
@@ -45,7 +51,8 @@ export default function YandexMaps() {
   // reset state & search
   const handleReset = () => {
     setState({ ...initialState });
-    // searchRef.current.value = "";
+    // setState({ ...initialState, title: "" });
+    searchRef.current.value = "";
     // mapRef.current.setCenter(initialState.center);
     mapRef.current.setZoom(initialState.zoom);
   };
@@ -81,65 +88,63 @@ export default function YandexMaps() {
       }
     });
   };
-  // setAttribute
   return (
-    <div className="w-full h-[400px]">
+    <div className={`w-full `}>
       <div className={"mapRoot"}>
         <YMaps
           query={{
-            apikey: "29294198-6cdc-4996-a870-01e89b830f3e",
+            apikey: "8b56a857-f05f-4dc6-a91b-bc58f302ff21",
             lang: "uz",
           }}
         >
           <Map
-            className="mapsuz"
+            className={` overflow-hidden w-full h-full`}
             {...mapOptions}
             state={state}
             onLoad={setMapConstructor}
             onBoundsChange={handleBoundsChange}
             instanceRef={mapRef}
           >
-            <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
-              <div className="w-full flex items-center">
-                <div className="min-w-[500px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
-                  {/* {!state.title && ( */}
-                  <input
-                    ref={searchRef}
-                    placeholder="Введите адрес"
-                    disabled={!mapConstructor}
-                    className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg"
-                  />
-                  {/* )} */}
-                  {/* {state.title && ( */}
-                  <div
-                    className={clsx(["titleBox"], {
-                      ["titleBox_show"]: Boolean(state.title.length),
-                    })}
-                  >
-                    {/* <div className="w-full gap-x-3 flex items-center justify-between h-full mr-3 rounded-lg  "> */}
-                    <div
-                      className="w-full whitespace-nowrap	"
-                      title={state.title}
-                    >
-                      {state.title}
-                    </div>
-                    <div
-                      onClick={handleReset}
-                      className=" cursor-pointer flex items-center justify-center "
-                    >
-                      <GrClose />
-                    </div>
-                  </div>
-                  {/* )} */}
+            <div className="h-fit p-[10px] absolute top-2 z-40 gap-x-5 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
+              <div className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-3 rounded-lg">
+                <input
+                  ref={searchRef}
+                  placeholder="Введите адрес"
+                  name="s"
+                  disabled={!mapConstructor}
+                  className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
+                />
+
+                <div
+                  className={clsx(["titleBox"], {
+                    ["titleBox_show"]: Boolean(state.title.length),
+                  })}
+                >
+                  {state.title}
                 </div>
+                {state?.title.length ? (
+                  <button
+                    onClick={handleReset}
+                    className="cursor-pointer flex items-center h-10 justify-center "
+                  >
+                    <GrClose />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="cursor-pointer flex items-center h-10 justify-center "
+                  >
+                    <SearchIcon />
+                  </button>
+                )}
               </div>
               <button
                 type="button"
-                className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                className="border cursor-pointer  px-[35px] h-10 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
                 onClick={handleSubmit}
                 disabled={Boolean(!state.title.length)}
               >
-                Подтвердить
+                Подтверждено
               </button>
             </div>
             {/* <div
@@ -169,13 +174,6 @@ export default function YandexMaps() {
               options={{
                 float: "right",
                 position: { bottom: 60, right: 10 },
-                size: "small",
-              }}
-            />
-            <FullscreenControl
-              options={{
-                float: "right",
-                position: { bottom: 100, right: 10 },
                 size: "small",
               }}
             />

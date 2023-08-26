@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BgSelectSkin, StarLabel } from "../../../../assets/icons";
+import { BgSelectSkin, GoBackIcons, StarLabel } from "../../../../assets/icons";
 import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 import { AiOutlineLeft } from "react-icons/ai";
 
@@ -43,7 +43,18 @@ function AddStore({ onClick }) {
 
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
-      <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
+      <div className="md:hidden flex ">
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="  md:hidden flex items-center cursor-pointer justify-center "
+        >
+          <GoBackIcons />
+        </button>
+      </div>{" "}
+      <div className="text-center text-tableTextTitle2 text-xl mb-3 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
+        {/* <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium"> */}
         Создать магазин
       </div>
       <div className="mb-3">
@@ -51,7 +62,7 @@ function AddStore({ onClick }) {
           onClick={() => {
             navigate(-1);
           }}
-          className="md:w-8 md:h-8 w-6 h-6  flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
         >
           <AiOutlineLeft />
         </button>

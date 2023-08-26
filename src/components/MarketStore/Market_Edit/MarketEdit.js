@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { LocationIcon, StarLabel } from "../../../assets/icons";
+import { GoBackIcons, LocationIcon, StarLabel } from "../../../assets/icons";
 import { adidas, backImg } from "../../../assets";
 import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -69,18 +69,30 @@ function MarketEdit() {
 
   return (
     <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12 ">
-      <div className="text-center mb-6 md:mb-[22px] text-5 md:text-[35px] font-AeonikProMedium">
-        <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
-          Создать магазин
-        </span>{" "}
-        <span className="md:block hidden">Магазины </span>
+      <div className="text-center mb-3 md:mb-[22px] text-5 md:text-[35px] font-AeonikProMedium">
+        <div className="mt-3 md:hidden flex">
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="  md:hidden flex items-center cursor-pointer justify-center "
+          >
+            <GoBackIcons />
+          </button>
+        </div>{" "}
+        <div>
+          <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
+            Создать магазин
+          </span>{" "}
+          <span className="md:block hidden">Магазины </span>
+        </div>
       </div>
-      <div className="w-full flex items-center justify-between mb-3 md:pb-0 pb-[11px] md:border-0 border-b border-borderColor">
+      <div className="w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
         <button
           onClick={() => {
             navigate(-1);
           }}
-          className="md:w-8 md:h-8 w-6 h-6  flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
         >
           <AiOutlineLeft />
         </button>

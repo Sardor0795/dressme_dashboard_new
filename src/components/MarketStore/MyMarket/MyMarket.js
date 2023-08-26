@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { DatePicker, Space } from "antd";
-import { SearchIcon } from "../../../assets/icons";
+import { CalendarIcons, SearchIcon } from "../../../assets/icons";
 import MarketList from "./MarketList";
 import { Link } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
@@ -16,42 +16,46 @@ export default function MyMarket() {
   return (
     <div className="w-full h-full  py-1">
       <div className="w-full pt-6 pb-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block ">
-        <div>
-          <MobileHumburgerMenu />
-        </div>
         <div className="w-full flex items-center justify-center md:hidden">
+          <button className="absolute left-4 ">
+            <MobileHumburgerMenu />
+          </button>
           <span className="text-2xl not-italic font-AeonikProMedium">
             Все магазины
           </span>
         </div>
-        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-10 pt-4">
+        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
           <section className="hidden md:block">
             <p className="text-black text-2xl not-italic font-AeonikProMedium">
               Все магазины{" "}
             </p>
           </section>
-          <Link
-            to="/"
-            className="md:hidden text-weatherWinterColor text-xs not-italic font-AeonikProMedium"
-          >
-            Создать новый магазин
-          </Link>
-          <section className="w-fit flex items-center gap-x-[15px]">
-            <form className=" md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+
+          <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+            <label
+              htmlFor="searchStore"
+              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+            >
               <input
                 type="text"
                 name="s"
-                className="w-full h-full  outline-0 sm:block hidden	"
+                id="searchStore"
+                className="w-full h-full   outline-0 	pl-[10px]"
                 placeholder="Поиск"
               />
-              <button>
+              <span className="pr-[10px]">
                 <SearchIcon />
-              </button>
-            </form>
-            <section className="mobileDate md:flex items-center gap-x-[30px] hidden">
-              <Space direction="vertical" size={12}>
-                <RangePicker placeholder={["от", "до"]} />
-              </Space>
+              </span>
+            </label>
+            <section className=" flex items-center gap-x-[30px] ">
+              <span>
+                <CalendarIcons />
+              </span>
+              <span className="hidden md:flex items-center">
+                <Space direction="vertical" size={12}>
+                  <RangePicker className="" placeholder={["от", "до"]} />
+                </Space>
+              </span>
             </section>
           </section>
         </div>
