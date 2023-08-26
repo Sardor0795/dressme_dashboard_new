@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { ProductImg } from "../../assets";
 import {
+  CalendarIcons,
   CheckTrue,
   SearchIcon,
   StarIcon,
@@ -72,15 +73,45 @@ export default function LocationList() {
   };
   return (
     <div className="w-full h-full">
-      <div className=" md:hidden py-6">
-        <div className="mb-[24px]">
+      <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
+        <div>
           <MobileHumburgerMenu />
         </div>
 
         <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
           Все локации
         </p>
+
+        <div className="w-[30px]"></div>
       </div>
+
+      <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+        <label
+          htmlFor="searchStore"
+          className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+        >
+          <input
+            type="text"
+            name="s"
+            id="searchStore"
+            className="w-full h-full   outline-0 	pl-[10px]"
+            placeholder="Поиск"
+          />
+          <span className="pr-[10px]">
+            <SearchIcon />
+          </span>
+        </label>
+        <section className=" flex items-center gap-x-[30px] ">
+          <span>
+            <CalendarIcons />
+          </span>
+          <span className="hidden md:flex items-center">
+            <Space direction="vertical" size={12}>
+              <RangePicker className="" placeholder={["от", "до"]} />
+            </Space>
+          </span>
+        </section>
+      </section>
 
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
         <div className="flex justify-end items-center md:justify-between">
