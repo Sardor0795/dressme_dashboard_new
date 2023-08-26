@@ -5,6 +5,7 @@ import LocationItem from "./LocationItem/LocationItem";
 import {
   AddIconsCircle,
   AddLocationIcon,
+  CalendarIcons,
   DeleteIcon,
   SearchIcon,
 } from "../../../../assets/icons";
@@ -106,8 +107,8 @@ export default function LocationClothesCity() {
   return (
     <div>
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
-        <div className="flex justify-end items-center md:justify-between">
-          <section className="hidden md:flex">
+        <div className="block md:flex justify-start items-center md:justify-between">
+          <section className="flex">
             <button
               button
               onClick={() => {
@@ -117,11 +118,40 @@ export default function LocationClothesCity() {
             >
               <AiOutlineLeft />
             </button>
-            <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
-              Одежда{" "}
+            <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px] hidden md:block">
+              Одежда
             </p>
           </section>
-          <div className="w-fit flex items-center gap-x-[15px]">
+
+          <section className="mt-[25px] pt-[25px] border-t border-[#F2F2F2] w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+            <label
+              htmlFor="searchStore"
+              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+            >
+              <input
+                type="text"
+                name="s"
+                id="searchStore"
+                className="w-full h-full   outline-0 	pl-[10px]"
+                placeholder="Поиск"
+              />
+              <span className="pr-[10px]">
+                <SearchIcon />
+              </span>
+            </label>
+            <section className=" flex items-center gap-x-[30px] ">
+              <span>
+                <CalendarIcons />
+              </span>
+              <span className="hidden md:flex items-center">
+                <Space direction="vertical" size={12}>
+                  <RangePicker className="" placeholder={["от", "до"]} />
+                </Space>
+              </span>
+            </section>
+          </section>
+
+          <div className="w-fit  items-center gap-x-[15px] hidden md:flex">
             <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
               <input
                 type="text"
@@ -141,7 +171,8 @@ export default function LocationClothesCity() {
           </div>
         </div>
       </div>
-      <div className="mt-[35px] flex justify-end items-center md:justify-between mx-auto pb-6">
+
+      <div className="mt-[10px] md:mt-[35px] flex justify-end items-center md:justify-between mx-auto pb-6">
         <section className="hidden md:flex gap-x-4">
           <p className="text-black text-2xl not-italic font-AeonikProMedium">
             Юнусабад (3)
@@ -158,31 +189,37 @@ export default function LocationClothesCity() {
             </span>
           </Link>
         </section>
-        <div className="w-fit flex items-center">
-          <div className="mr-6 font-AeonikProRegular text-lg text-mobileTextColor">
+        <div className="w-full md:w-fit flex items-center border-b md:border-b-0 border-[#F2F2F2] pb-[25px] md:pb-0">
+          <div className="mr-auto md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
             Выбранные
           </div>
           <button
-            className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-lg text-addLocationTextcolor  ${
+            className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  ${
               someChecked
                 ? "opacity-100 active:translate-y-[2px]"
                 : "opacity-30 cursor-not-allowed"
             }`}
           >
-            <span className="mr-[5px]">
+            <span className="mr-[5px] hidden md:block">
               <AddLocationIcon width={20} />
+            </span>
+            <span className="mr-[5px] block md:hidden">
+              <AddLocationIcon width={16} />
             </span>
             Добавить в локацию
           </button>
           <button
-            className={`pl-3 flex items-center font-AeonikProRegular text-lg text-deleteColor ${
+            className={`pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor ${
               someChecked
                 ? "opacity-100 active:translate-y-[2px]"
                 : "opacity-30 cursor-not-allowed"
             }`}
           >
-            <span className="mr-[5px]">
+            <span className="mr-[5px] hidden md:block">
               <DeleteIcon width={20} />
+            </span>
+            <span className="mr-[5px] block md:hidden">
+              <DeleteIcon width={16} />
             </span>
             Удалить
           </button>
@@ -200,7 +237,7 @@ export default function LocationClothesCity() {
               allChecked
                 ? "bg-[#007DCA] border-[#007DCA]"
                 : "bg-white border-checkboxBorder"
-            } flex items-center justify-center rounded mr-[8px]`}
+            } hidden md:flex items-center justify-center rounded mr-[8px]`}
           >
             <span
               className={`${
@@ -224,7 +261,64 @@ export default function LocationClothesCity() {
             </span>
           </div>
 
-          <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
+          <div className="w-full">
+            <div className="flex md:hidden justify-end w-full mb-[25px]">
+              Выбрать все
+              <div
+                onClick={() => {
+                  onCheck(checkIndicator);
+                  setAllChecked(!allChecked);
+                }}
+                className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
+                  allChecked
+                    ? "bg-[#007DCA] border-[#007DCA]"
+                    : "bg-white border-checkboxBorder"
+                } flex items-center justify-center rounded ml-[8px]`}
+              >
+                <span
+                  className={`${
+                    allChecked ? "flex items-center justify-center" : "hidden"
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="13"
+                    viewBox="0 0 11 13"
+                    fill="none"
+                  >
+                    <path
+                      d="M1 9.5L5.88235 11L10 1"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <div className="w-full">
+              <section className="flex md:hidden gap-x-4">
+                <p className="text-black text-[18px] not-italic font-AeonikProMedium mr-auto">
+                  Юнусабад (6)
+                </p>
+                <Link
+                  to="/products/add-wear"
+                  className="active:translate-y-[2px] flex items-center gap-x-[4px]"
+                >
+                  <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
+                    Добавить одежду
+                  </span>
+                  <span>
+                    <AddIconsCircle size={16} />
+                  </span>
+                </Link>
+              </section>
+            </div>
+          </div>
+
+          <div className="hidden border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] w-full">
             <div className="w-[45px]">No:</div>
             <div className="mr-[75px]">Фото</div>
             <div className="flex w-full">
