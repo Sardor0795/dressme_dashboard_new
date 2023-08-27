@@ -8,7 +8,7 @@ import {
 } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import StoreListModal from "./Modal/StoreListModal";
-import YandexMaps from "./YandexMaps";
+import YandexMapStore from "./YandexMaps";
 
 export default function AddLocation() {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ export default function AddLocation() {
         <div className="text-center mb-3 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
           Добавить локацию магазина
         </div>
-        <div className="mb-3 hidden md:flex">
+        {/* <div className="mb-3 hidden md:flex">
           <button
             onClick={() => {
               navigate(-1);
@@ -49,9 +49,9 @@ export default function AddLocation() {
           >
             <AiOutlineLeft />
           </button>
-        </div>
+        </div> */}
         <div>
-          <YandexMaps />
+          <YandexMapStore />
         </div>
         <div className="flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
           <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">

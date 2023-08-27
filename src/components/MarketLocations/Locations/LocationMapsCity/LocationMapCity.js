@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
+  GoBackIcons,
   SearchIcon,
   StarLabel,
   TelIcon,
@@ -35,194 +36,192 @@ function LocationMapCity() {
 
   return (
     <div className="w-full">
-      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
-        <div className="flex justify-end items-center md:justify-between">
-          <section className="hidden md:flex">
-            <p className="text-black text-2xl not-italic font-AeonikProMedium ml-3">
-              Все локации
-            </p>
-          </section>
-          <div className="w-fit flex items-center gap-x-[15px]">
-            <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
-              <input
-                type="text"
-                name="s"
-                className="w-full h-full  outline-0	"
-                placeholder="Поиск"
-              />
-              <button>
-                <SearchIcon />
-              </button>
-            </form>
-            <section className="mobileDate flex items-center gap-x-[30px]">
-              <Space direction="vertical" size={12}>
-                <RangePicker placeholder={["от", "до"]} />
-              </Space>
-            </section>
-          </div>
-        </div>
-      </div>
       <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
         <div className="my-4">
+          <div className=" md:hidden flex">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="  md:hidden flex items-center cursor-pointer justify-center "
+            >
+              <GoBackIcons />
+            </button>
+          </div>{" "}
           <div className="text-center  text-5 md:text-[35px] font-AeonikProMedium">
             {NewId}
           </div>
-          <div className="flex items-center justify-between mb-3 mt-2">
-            <div>
-              <button
-                onClick={() => {
-                  navigate(-1);
-                }}
-                className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+          <div className="w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+            >
+              <AiOutlineLeft />
+            </button>
+            <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
+              <NavLink
+                to="/store/location-add"
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
-                <AiOutlineLeft />
+                Изменить магазин{" "}
+              </NavLink>
+              <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
+              <NavLink
+                to="/store/market-add"
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+              >
+                Одежда{" "}
+              </NavLink>
+              <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
+              <button
+                onClick={success2}
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+              >
+                Удалить
               </button>
-            </div>
-            <div className="flex items-end ">
-              {" "}
-              <div className="flex items-center gap-x-[15px] pt-3">
-                <NavLink
-                  to="/#"
-                  className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"
-                >
-                  Изменить магазин{" "}
-                </NavLink>
-                <span className="w-[2px] h-[14px] bg-borderColor"></span>
-                <NavLink
-                  to="/#"
-                  className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"
-                >
-                  Одежда{" "}
-                </NavLink>
-                <span className="w-[2px] h-[14px] bg-borderColor"></span>
-                <button
-                  onClick={success2}
-                  className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-sm not-italic font-AeonikProMedium"
-                >
-                  Удалить
-                </button>
-                {contextHolder}
-              </div>
             </div>
           </div>
           <div className="h-[400px]">
             <LocationOfYandex />
           </div>
-
-          <div className="flex mt-[10px] gap-[25px] mb-[25px]">
-            <div className="relative w-full h-fit flex flex-col items-center justify-center rounded-lg">
-              <div className="w-full h-[130px]">
-                <img className="w-full h-full" src={Aligarx} alt="" />
-              </div>
-              <div className="w-full mt-6">
-                <div className="text-base flex items-center mb-[10px]">
-                  Имя администратора
+          <div className="flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
+            <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={Aligarx}
+                alt=""
+              />
+            </div>
+            <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={Aligarx}
+                alt=""
+              />
+            </div>
+            <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={Aligarx}
+                alt=""
+              />
+            </div>
+          </div>
+          <div className="w-full  ">
+            <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
+              <label className="w-full md:w-[31%] xs:w-[48%]   ">
+                <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
+                  Имя администратора{" "}
                   <span className="ml-[5px]">
                     <StarLabel />
                   </span>
                 </div>
-                <input
-                  type="text"
-                  value={"Samandar"}
-                  className="border border-borderColor p-3 rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium"
-                />
-              </div>
-              <div className="w-full mt-8">
-                <div className="text-base flex items-center mb-[10px]">
-                  Номер администратора
-                  <span className="ml-[5px]">{/* <StarLabel /> */}</span>
-                </div>
-                <div className="flex items-center border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
-                  <span className="h-full flex items-center px-[12px] border-r border-lightBorderColor">
-                    +998
-                  </span>
+                <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full w-full md:max-w-[287px] text-base font-AeonikProMedium">
                   <input
-                    type="tel"
-                    value={"(97) 214-34-56"}
-                    className="pl-3 outline-none "
+                    type="text"
+                    name="fname"
+                    value={"Samandar"}
+                    placeholder=" Имя администратора"
+                    className="w-full outline-none text-[12px] md:text-[14px] font-AeonikProRegular px-2"
                   />
-                  <span className="mr-12">
-                    <TelIcon />
-                  </span>
                 </div>
-              </div>
-            </div>
-            <div className="relative w-full h-fit flex flex-col items-center justify-center rounded-lg">
-              <div className="w-full h-[130px]">
-                <img className="w-full h-full" src={Aligarx} alt="" />
-              </div>
-              <div className="w-full mt-6">
-                <div className="text-base flex items-center mb-[10px]">
+              </label>
+              <label className="w-full md:w-[31%] xs:w-[48%]  ">
+                <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
                   Имя второго администратора{" "}
-                </div>
-                <input
-                  type="text"
-                  value={"Samandar"}
-                  className="border border-borderColor p-3 rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium"
-                />
-              </div>
-              <div className="w-full mt-8">
-                <div className="text-base flex items-center mb-[10px]">
-                  Номер второго администратора{" "}
-                  <span className="ml-[5px]">{/* <StarLabel /> */}</span>
-                </div>
-                <div className="flex items-center border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
-                  <span className="h-full flex items-center px-[12px] border-r border-lightBorderColor">
-                    +998
+                  <span className="ml-[5px]">
+                    <StarLabel />
                   </span>
+                </div>
+                <div className="w-full flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:max-w-[287px] text-base font-AeonikProMedium">
                   <input
-                    type="tel"
-                    value={"(97) 214-34-56"}
-                    className="pl-3 outline-none "
+                    type="text"
+                    name="fname"
+                    value={"Samandar"}
+                    placeholder=" (не обезательно)"
+                    className="w-full outline-none text-[12px] md:text-[14px] font-AeonikProRegular px-2 "
                   />
-                  <span className="mr-12">
-                    <TelIcon />
-                  </span>
                 </div>
-              </div>
-            </div>
-            <div className="relative w-full h-fit flex flex-col items-center justify-center rounded-lg">
-              <div className="w-full h-[130px]">
-                <img className="w-full h-full" src={Aligarx} alt="" />
-              </div>
-              <div className="w-full mt-6">
-                <div className="text-base flex items-center mb-[10px]">
+              </label>
+              <div className="w-full md:w-[31%] xs:w-[48%]  ">
+                <div className="text-[12px] md:text-base flex items-center mb-[10px]">
                   Рабочее время
                   <span className="ml-[5px]">
                     <StarLabel />
                   </span>
                 </div>
-                от
-                <input
-                  type="text"
-                  value={"09:00"}
-                  className="mr-5 ml-[5px] border border-borderColor p-3 rounded-lg w-full max-w-[80px] text-base font-AeonikProMedium"
-                />
-                до
-                <input
-                  type="text"
-                  value={"20:00"}
-                  className="ml-[5px] border border-borderColor p-3 rounded-lg w-full max-w-[80px] text-base font-AeonikProMedium"
-                />
+                <div className="flex flex-wraps">
+                  {" "}
+                  от
+                  <input
+                    type="text"
+                    value={"09:00"}
+                    className="mr-3 ml-[5px] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg w-[60px] md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                  />
+                  до
+                  <input
+                    type="text"
+                    value={"20:00"}
+                    className=" ml-[5px] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg w-[60px] md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                  />
+                </div>
               </div>
-              <div className="w-full mt-8">
-                <div className="text-base flex items-center mb-[10px]">
-                  Выберите регион{" "}
+              <label className="w-full md:w-[31%] xs:w-[48%]   ">
+                <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+                  Номер администратора
                   <span className="ml-[5px]">{/* <StarLabel /> */}</span>
                 </div>
-                <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[45px] rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
-                  <span>Tashkent, yunusobod</span>
-                  <span className="rotate-[90deg]">
-                    <ArrowTopIcons colors={"#A4A4A4"} />
+                <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full w-full md:max-w-[287px] text-base font-AeonikProMedium">
+                  <span className="h-full text-[12px] md:text-base  flex items-center px-[12px] border-r border-lightBorderColor">
+                    +998
                   </span>
+                  <input
+                    type="phone"
+                    value={"(97) 214-34-56"}
+                    className="pl-3 outline-none text-[12px] md:text-[14px] font-AeonikProRegular  "
+                  />
+                </div>
+              </label>
+              <label className="w-full md:w-[31%] xs:w-[48%]  ">
+                <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+                  Номер второго администратора{" "}
+                  <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+                </div>
+                <div className="flex items-center border border-borderColor  h-[32px] md:h-[45px]  rounded md:rounded-lg w-full w-full md:max-w-[287px] text-base font-AeonikProMedium">
+                  <span className="h-full text-[12px] md:text-base  flex items-center px-[12px] border-r border-lightBorderColor">
+                    +998
+                  </span>
+                  <input
+                    value={"(97) 214-34-56"}
+                    className="pl-3 outline-none text-[12px] md:text-[14px] font-AeonikProRegular  "
+                  />
+                </div>
+              </label>
+              <div className="w-full md:w-[31%] xs:w-[48%]   ">
+                <div className="w-full">
+                  <div className="text-[12px] md:text-[14px] font-AeonikProRegular flex items-center mb-[10px]">
+                    Выберите регион
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full w-full md:max-w-[287px] text-base font-AeonikProMedium">
+                    <span className="text-[#8C8C8C] font-AeonikProRegular text-[12px] md:text-[14px] font-AeonikProRegular ">
+                      Выберите регион
+                    </span>
+                    <span className="rotate-[90deg]">
+                      <ArrowTopIcons colors={"#A4A4A4"} />
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-[50px]">
             <Link
-              className="inline-block px-[100px] py-[15px] bg-textBlueColor text-white rounded-lg active:scale-95"
+              className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
               // to={"/store"}
             >
               Добавить

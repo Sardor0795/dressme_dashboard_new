@@ -21,12 +21,6 @@
   width: 100%;
   padding: 10px;
 }
-.titleBox_show {
-  position: relative;
-  z-index: 9999;
-  top: 0px;
-  display: flex;
-}
 
 .titleBox {
   display: none;
@@ -36,9 +30,16 @@
   left: 0;
   bottom: 0;
   right: 0;
-  padding: 10px;
   background: "#ccc";
+  border: 1px solid red;
 }
+.titleBox.titleBox_show {
+  position: relative;
+  z-index: 9999;
+  top: 0px;
+  display: flex;
+}
+
 .titleBox span {
   flex-grow: 1;
   white-space: nowrap;
@@ -70,4 +71,13 @@
   z-index: 1200;
   font-size: 35px !important;
   cursor: grab;
+}
+@media (max-width: 550px) {
+  .titleBox.titleBox_show {
+    overflow-x: auto;
+    width: 90%;
+  }
+  .titleBox span {
+    font-size: 12px;
+  }
 }

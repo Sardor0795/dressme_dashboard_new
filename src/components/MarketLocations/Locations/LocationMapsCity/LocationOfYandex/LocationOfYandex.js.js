@@ -1,27 +1,28 @@
 import React, { useRef, useState, useEffect } from "react";
-import "../../../../../index.css";
+// import "../../../../index.css";
 import { YMaps, Map, ZoomControl, GeolocationControl } from "react-yandex-maps";
-import {
-  MapLocationIcon,
-  MenuCloseIcons,
-  SearchIcon,
-  StarIcon,
-  marketIcons,
-} from "../../../../../assets/icons";
-import "./LocationOfYandex.css";
+import { MapLocationIcon, SearchIcon } from "../../../../../assets/icons";
 import { GrClose } from "react-icons/gr";
+import { clsx } from "clsx";
+import "./LocationOfYandex.css";
+
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
   defaultOptions: { suppressMapOpenBlock: true },
 };
 
+const geolocationOptions = {
+  defaultOptions: { maxWidth: 128 },
+  defaultData: { content: "Determine" },
+};
+
 const initialState = {
   title: "",
-  center: [41.311753, 69.241822],
+  center: [41.311151, 69.279737],
   zoom: 12,
 };
 
-export default function LocationOfYandex() {
+export default function YandexMapStore() {
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
@@ -35,8 +36,9 @@ export default function LocationOfYandex() {
   // reset state & search
   const handleReset = () => {
     setState({ ...initialState });
+    // setState({ ...initialState, title: "" });
     // searchRef.current.value = "";
-    mapRef.current.setCenter(initialState.center);
+    // mapRef.current.setCenter(initialState.center);
     mapRef.current.setZoom(initialState.zoom);
   };
 
@@ -71,62 +73,80 @@ export default function LocationOfYandex() {
       }
     });
   };
-  // setAttribute
   return (
-    <div className="w-full h-[400px]">
+    <div className={`w-full `}>
       <div className={"mapRoot"}>
         <YMaps
           query={{
-            apikey: "29294198-6cdc-4996-a870-01e89b830f3e",
+            apikey: "8b56a857-f05f-4dc6-a91b-bc58f302ff21",
             lang: "uz",
           }}
         >
           <Map
-            className="mapsuz"
+            className={` overflow-hidden w-full h-full`}
             {...mapOptions}
             state={state}
             onLoad={setMapConstructor}
             onBoundsChange={handleBoundsChange}
             instanceRef={mapRef}
           >
-            <div className="h-[66px] absolute top-2 z-40 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
-              <div className="w-full flex items-center">
-                <div className="min-w-[500px] flex items-center justify-between bg-white border border-borderColor p-3 rounded-lg">
-                  {!state.title && (
-                    <input
-                      ref={searchRef}
-                      placeholder="Введите адрес"
-                      disabled={!mapConstructor}
-                      // disabled={true}
-                      className="w-full outline-none text-sm font-AeonikProMedium mr-3 rounded-lg"
-                    />
-                  )}
-                  {state.title && (
-                    <div className="w-full gap-x-3 flex items-center justify-between h-full mr-3 rounded-lg  ">
-                      <div
-                        className="w-full whitespace-nowrap	"
-                        title={state.title}
-                      >
-                        {state.title}
-                      </div>
-                      <div
-                        onClick={handleReset}
-                        className=" cursor-pointer flex items-center justify-center "
-                      >
-                        <GrClose />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <button
-                type="button"
-                className="border cursor-pointer active:scale-95 px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
-                onClick={handleSubmit}
-                disabled={Boolean(!state.title.length)}
+            <div className="h-fit p-[10px] absolute top-2 z-40 gap-x-5 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
+              <label
+                htmlFor="ForSearch"
+                className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-3 rounded-lg"
               >
-                Подтвердить
-              </button>
+                {!Boolean(state.title.length) && (
+                  <input
+                    ref={searchRef}
+                    placeholder="Введите адрес"
+                    name="s"
+                    id="ForSearch"
+                    disabled={!mapConstructor}
+                    className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
+                  />
+                )}
+                <div
+                  className={clsx(["titleBox"], {
+                    ["titleBox_show"]: Boolean(state.title.length),
+                  })}
+                >
+                  <span className="whitespace-nowrap ">{state.title} </span>
+                </div>
+                {state?.title.length ? (
+                  <button
+                    onClick={handleReset}
+                    className="cursor-pointer flex items-center h-10 justify-center "
+                  >
+                    <GrClose />
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="cursor-pointer flex items-center h-10 justify-center "
+                  >
+                    <SearchIcon />
+                  </button>
+                )}
+              </label>
+              {state?.title.length ? (
+                <button
+                  type="button"
+                  className="border cursor-pointer active:scale-95 px-3 md:px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                  onClick={handleSubmit}
+                  disabled={Boolean(!state.title.length)}
+                >
+                  <span className="md:flex hidden">Подтверждено</span>
+                  <span className="md:hidden flex">OK</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="px-3 md:px-[35px] py-3 bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
+                >
+                  <span className="md:flex hidden">Подтверждено</span>
+                  <span className="md:hidden flex">OK</span>{" "}
+                </button>
+              )}
             </div>
             {/* <div
               className={
@@ -147,14 +167,15 @@ export default function LocationOfYandex() {
             <ZoomControl
               options={{
                 float: "right",
-                position: { bottom: 270, right: 10, size: "small" },
+                position: { bottom: 200, right: 10, size: "small" },
                 size: "small",
               }}
             />{" "}
             <GeolocationControl
               options={{
                 float: "right",
-                position: { bottom: 220, right: 10 },
+                position: { bottom: 60, right: 10 },
+                size: "small",
               }}
             />
           </Map>
