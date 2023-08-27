@@ -154,8 +154,8 @@ export default function LocationList() {
       {/* Table */}
       <div className="w-full h-fit">
         <div className="w-full mb-[10px] hidden md:block">
-          <ul className="w-full h-full  flex items-center justify-between bg-lightBgColor border md:rounded-xl">
-            <li className="w-[70px] pl-4 ">
+          <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
+            <li className="w-[70px] pl-4">
               <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
                 No:
               </span>
