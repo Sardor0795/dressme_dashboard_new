@@ -5,6 +5,7 @@ import LocationItem from "./LocationItem/LocationItem";
 import {
   AddIconsCircle,
   AddLocationIcon,
+  CalendarIcons,
   CheckIcons,
   DeleteIcon,
   SearchIcon,
@@ -13,8 +14,10 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Space, DatePicker } from "antd";
 // import { SearchIcon } from "../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
+import { wearImg } from "../../../assets";
 
 const { RangePicker } = DatePicker;
+
 export default function LocationClothesCity() {
   const [city1, setCity1] = useState([
     {
@@ -112,6 +115,13 @@ export default function LocationClothesCity() {
 
   const [someChecked, setSomeChecked] = useState(false);
 
+  const goMapCity = (id) => {
+    navigate(`/locations-store/city/:${id}`);
+  };
+  const goMapWear = (id) => {
+    navigate(`/locations-store/wears/:${id}`);
+  };
+
   // ---------------------------------------
   // Alohida alohida checked qilish
   const onCheck1 = (id) => {
@@ -199,9 +209,9 @@ export default function LocationClothesCity() {
 
   return (
     <div>
-      {/* navbar */}
-      <div className="flex justify-end items-center md:justify-between border-b border-borderColor py-4">
-        <section className="hidden md:flex">
+      {/* Navbar */}
+      <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
+        <section className="flex">
           <button
             button
             onClick={() => {
@@ -211,11 +221,11 @@ export default function LocationClothesCity() {
           >
             <AiOutlineLeft />
           </button>
-          <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
+          <p className="hidden md:block text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
             Одежда{" "}
           </p>
         </section>
-        <section className="w-fit flex items-center gap-x-[15px]">
+        <section className="w-fit hidden md:flex items-center gap-x-[15px]">
           <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
             <input
               type="text"
@@ -234,6 +244,38 @@ export default function LocationClothesCity() {
           </section>
         </section>
       </div>
+      
+      {/* Search Section For Mobile */}
+      <div className="flex md:hidden items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
+        <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+          <label
+            htmlFor="searchStore"
+            className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+          >
+            <input
+              type="text"
+              name="s"
+              id="searchStore"
+              className="w-full h-full   outline-0 	pl-[10px]"
+              placeholder="Поиск"
+            />
+            <span className="pr-[10px]">
+              <SearchIcon />
+            </span>
+          </label>
+          <section className=" flex items-center gap-x-[30px] ">
+            <span>
+              <CalendarIcons />
+            </span>
+            <span className="hidden md:flex items-center">
+              <Space direction="vertical" size={12}>
+                <RangePicker className="" placeholder={["от", "до"]} />
+              </Space>
+            </span>
+          </section>
+        </section>
+      </div>
+      
       <div>
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
@@ -310,19 +352,22 @@ export default function LocationClothesCity() {
             </Link>
           </section>
 
-          <div className="flex">
+          <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
+            <p className="flex md:hidden text-sm font-AeonikProMedium">
+              Общее количество: 6
+            </p> 
             <div
               onClick={() => {
                 setArrayAllChecked(!arrayAllChecked);
               }}
               className=" cursor-pointer bg-white flex items-center gap-x-2"
             >
-              <span className="mr-[10px] select-none text-base font-AeonikProMedium text-mobileTextColor">
+              <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
                 Выбрать все
               </span>
               <button
                 type="button"
-                className={`flex items-center rounded  justify-center min-w-[24px] min-h-[24px]  ${
+                className={`flex items-center rounded  justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${
                   arrayAllChecked
                     ? "bg-[#007DCA] border-[#007DCA]"
                     : "bg-white border border-checkboxBorder"
@@ -333,10 +378,14 @@ export default function LocationClothesCity() {
             </div>
           </div>
         </div>
+        <div className="block md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6">
+          Nike Store Official Dealer
+        </div>
 
         <div className="mx-auto font-AeonikProRegular text-[16px]">
-          <div className="mb-[10px] flex items-center text-tableTextTitle">
-            <div className="min-w-[24px] min-h-[24px] bg-white  mr-[8px]"></div>
+          
+          <div className="mb-[10px] hidden md:flex items-center text-tableTextTitle">
+            <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
 
             <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
               <div className="w-[45px]">No:</div>
@@ -354,12 +403,14 @@ export default function LocationClothesCity() {
               </div>
             </div>
           </div>
+
           {/* City 1 */}
           <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
             {city1.map((data, i) => {
               return <LocationItem data={data} click={onCheck1} />;
             })}
           </div>
+          
           {/* City 2 */}
           <div className=" mt-10">
             <div className="flex items-center justify-start my-[30px] w-full">
