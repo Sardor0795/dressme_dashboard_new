@@ -115,13 +115,6 @@ export default function LocationClothesCity() {
 
   const [someChecked, setSomeChecked] = useState(false);
 
-  const goMapCity = (id) => {
-    navigate(`/locations-store/city/:${id}`);
-  };
-  const goMapWear = (id) => {
-    navigate(`/locations-store/wears/:${id}`);
-  };
-
   // ---------------------------------------
   // Alohida alohida checked qilish
   const onCheck1 = (id) => {
