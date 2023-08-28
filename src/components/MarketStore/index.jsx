@@ -14,7 +14,7 @@ export default function MarketStore() {
   }, []);
 
   return (
-    <div className="px-4 md:px-10 py-1">
+    <div className=" md:px-10 py-1">
       <Outlet />
     </div>
     // <div>{!addStore ? <MyMarket /> : <AddStore onClick={toggleAdd} />}</div>

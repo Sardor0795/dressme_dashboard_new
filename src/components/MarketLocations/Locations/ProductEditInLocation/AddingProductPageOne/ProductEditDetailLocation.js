@@ -16,7 +16,7 @@ export default function ProductEditDetailLocation() {
 
   return (
     <div>
-      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
+      <div className="w-full pt-6 pb-4 px-4 md:px-0 md:py-4 md:border-b border-lightBorderColor block">
         <div className="flex justify-end items-center md:justify-between">
           <section className="hidden md:flex">
             <button

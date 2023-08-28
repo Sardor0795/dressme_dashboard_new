@@ -48,10 +48,10 @@ function LocationMapCity() {
               <GoBackIcons />
             </button>
           </div>{" "}
-          <div className="text-center  text-5 md:text-[35px] font-AeonikProMedium">
+          <div className="text-center  text-5 md:text-[35px] font-AeonikProMedium  px-4 md:px-0 ">
             {NewId}
           </div>
-          <div className="w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
+          <div className=" px-4 md:px-0  w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
             <button
               onClick={() => {
                 navigate(-1);
@@ -86,7 +86,7 @@ function LocationMapCity() {
           <div className="h-[400px]">
             <LocationOfYandex />
           </div>
-          <div className="flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
+          <div className=" px-4 md:px-0  flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
               <img
                 className="w-full h-full object-cover rounded-lg"
@@ -109,7 +109,7 @@ function LocationMapCity() {
               />
             </div>
           </div>
-          <div className="w-full  ">
+          <div className="w-full  px-4 md:px-0  ">
             <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
               <label className="w-full md:w-[31%] xs:w-[48%]   ">
                 <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
@@ -152,19 +152,19 @@ function LocationMapCity() {
                     <StarLabel />
                   </span>
                 </div>
-                <div className="flex flex-wraps">
+                <div className="flex flex-wrap items-center">
                   {" "}
                   от
                   <input
                     type="text"
                     value={"09:00"}
-                    className="mr-3 ml-[5px] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg w-[60px] md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="mr-3 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                   />
                   до
                   <input
                     type="text"
                     value={"20:00"}
-                    className=" ml-[5px] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg w-[60px] md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className=" ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                   />
                 </div>
               </div>
@@ -219,7 +219,7 @@ function LocationMapCity() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center mt-[50px]">
+          <div className="flex justify-center mt-[50px]  px-4 md:px-0 ">
             <Link
               className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
               // to={"/store"}

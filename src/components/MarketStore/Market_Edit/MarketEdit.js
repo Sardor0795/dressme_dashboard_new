@@ -68,7 +68,7 @@ function MarketEdit() {
   }, []);
 
   return (
-    <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12 ">
+    <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12  px-4 md:px-0">
       <div className="text-center mb-3 md:mb-[22px] text-5 md:text-[35px] font-AeonikProMedium">
         <div className="mt-3 md:hidden flex">
           <button
@@ -142,10 +142,7 @@ function MarketEdit() {
         </div>
       </div>
       {/* Form */}
-      <form
-        action="#"
-        className="w-full flex flex-col items-center justify-between  "
-      >
+      <form className="w-full flex flex-col items-center justify-between  ">
         <div className="w-full flex flex-col md:flex-row items-start justify-between mb-10 md:mb-[60px] gap-x-10">
           <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7">
             <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] mb-5">
@@ -227,58 +224,6 @@ function MarketEdit() {
                   </span>
                 </button>
               </div>
-            </div>
-          </div>
-          <div className="w-full md:w-2/5 md:flex flex-col items-start">
-            <div className="w-full relative mb-[6px]">
-              <div className="block mb-[5px] md:mb-1">
-                <span className="text-[12px] md:text-base mr-2 font-AeonikProRegular">
-                  Описание магазина на русском
-                </span>
-                <span className="text-[10px] ls:text-[12px]  md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-textLightColor">
-                  (не обязательно)
-                </span>
-              </div>
-              <textarea
-                name="storeDescription"
-                id="storeDescription"
-                className=" w-full h-[100px] text-[11px] md:text-[13px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 resize-none"
-                placeholder="Пишите здесь..."
-              ></textarea>
-              <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
-                {/* <AddBtn /> */}
-              </span>
-            </div>
-            <div className="w-full relative">
-              <div className="block mb-[5px] md:mb-1">
-                <span className="text-[12px] md:text-base mr-2 font-AeonikProRegular">
-                  Описание магазина на узбекском
-                </span>
-                <span className="text-[10px] ls:text-[12px]  md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-textLightColor">
-                  (не обязательно)
-                </span>
-              </div>
-              <textarea
-                name="storeDescription"
-                id="storeDescription"
-                className=" w-full h-[100px] text-[11px] md:text-[13px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 resize-none"
-                placeholder="Пишите здесь..."
-              ></textarea>
-              <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
-                {/* <AddBtn /> */}
-              </span>
-            </div>
-            <div className="w-full flex items-end justify-end mt-2">
-              <p className="text-sm md:text-base font-AeonikProRegular md:font-AeonikProMedium text-mobileTextColor">
-                Воспользоваться{" "}
-                <Link
-                  target={"_blank"}
-                  to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
-                  className="text-textBlueColor border-b border-textBlueColor font-AeonikProRegular md:font-AeonikProMedium ml-3"
-                >
-                  Google переводчиком
-                </Link>
-              </p>
             </div>
           </div>
         </div>
