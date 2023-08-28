@@ -30,14 +30,17 @@ export default function Sidebar() {
     >
       <div className="flex flex-wrap content-between w-full h-full pb-10">
         <div className="w-full pt-5  px-2 flex flex-wrap gap-y-[44px]">
-          <div className="w-full h-fit  flex items-center gap-x-4 pl-2 cursor-pointer">
+          <NavLink
+            to={"/sign-up"}
+            className="w-full h-fit  flex items-center gap-x-4 pl-2 cursor-pointer"
+          >
             <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white flex items-center justify-center cursor-pointer">
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black text-xl not-italic font-AeonikProRegular">
               Самандар
             </span>
-          </div>
+          </NavLink>
           {/* Links */}
           {dressInfo?.isAuthen ? (
             <div className="w-full flex flex-wrap gap-y-2">
@@ -256,7 +259,7 @@ export default function Sidebar() {
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
-            to="/profile"
+            to="/edit-profile"
           >
             {({ isActive }) =>
               isActive ? (
