@@ -25,7 +25,8 @@ import Reviews1 from "../components/Reviews1";
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
-import AthunticationUser from "../components/Authentication";
+import { SignUp } from "../components/Authentication/Sign_Up/SignUp";
+import { ProfilePage } from "../components/Authentication/ProfilePage/ProfilePage";
 
 export default function RouterList() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -42,7 +43,8 @@ export default function RouterList() {
       <Routes>
         {/* ---------------------<Authentification>------------------------- */}
 
-        <Route path={"/profile"} element={<AthunticationUser />} />
+        <Route path={"/sign-up"} element={<SignUp />} />
+        <Route path={"/edit-profile"} element={<ProfilePage />} />
         {/* ---------------------<Store>------------------------- */}
         <Route path="/reviews" element={<Reviews1 />}>
           <Route index element={<ReviewStoreWear />} />

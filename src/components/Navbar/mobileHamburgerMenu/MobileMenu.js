@@ -151,7 +151,10 @@ export default function MobileHumburgerMenu() {
           </NavLink>
         </div>
         <div className=" flex items-center justify-between border-t border-borderColor w-full mt-2 pt-1">
-          <button className="w-fit mt-2 group h-fit cursor-pointer py-3   rounded-lg  flex items-center gap-x-4">
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="w-fit mt-2 group h-fit cursor-pointer py-3   rounded-lg  flex items-center gap-x-4"
+          >
             <UserExitIcon colors={"#FF4343"} />{" "}
             <span
               className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
@@ -160,11 +163,12 @@ export default function MobileHumburgerMenu() {
             </span>
           </button>
           <NavLink
+            onClick={() => setIsModalOpen(false)}
             className={"w-fit mt-2 flex items-center justify-start capitalize"}
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
             })}
-            to="/profile"
+            to="/edit-profile"
           >
             {({ isActive }) =>
               isActive ? (
