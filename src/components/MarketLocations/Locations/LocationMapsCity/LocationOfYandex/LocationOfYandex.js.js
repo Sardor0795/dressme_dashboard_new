@@ -1,7 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 // import "../../../../index.css";
-import { YMaps, Map, ZoomControl, GeolocationControl } from "react-yandex-maps";
-import { MapLocationIcon, SearchIcon } from "../../../../../assets/icons";
+import {
+  YMaps,
+  Map,
+  ZoomControl,
+  GeolocationControl,
+  FullscreenControl,
+  Clusterer,
+} from "react-yandex-maps";
+import {
+  MapLocationIcon,
+  MenuCloseIcons,
+  SearchIcon,
+  StarIcon,
+  marketIcons,
+} from "../../../../../assets/icons";
+import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { clsx } from "clsx";
 import "./LocationOfYandex.css";
@@ -22,7 +36,8 @@ const initialState = {
   zoom: 12,
 };
 
-export default function YandexMapStore() {
+export default function LocationOfYandex() {
+  const [isSendedLocation, setIsSendedLocation] = useState(true);
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
@@ -30,6 +45,7 @@ export default function YandexMapStore() {
 
   // submits
   const handleSubmit = () => {
+    setIsSendedLocation(false);
     console.log({ title: state.title, center: mapRef.current.getCenter() });
   };
 
@@ -37,7 +53,7 @@ export default function YandexMapStore() {
   const handleReset = () => {
     setState({ ...initialState });
     // setState({ ...initialState, title: "" });
-    // searchRef.current.value = "";
+    searchRef.current.value = "";
     // mapRef.current.setCenter(initialState.center);
     mapRef.current.setZoom(initialState.zoom);
   };
@@ -90,18 +106,18 @@ export default function YandexMapStore() {
             onBoundsChange={handleBoundsChange}
             instanceRef={mapRef}
           >
-            <div className="h-fit p-[10px] absolute top-2 z-40 gap-x-5 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
+            <div className="h-fit p-1 md:p-[10px] absolute top-2 z-40 gap-x-5 mx-1 md:mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-1 md:px-3 rounded-lg">
               <label
                 htmlFor="ForSearch"
-                className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-3 rounded-lg"
+                className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-1 md:px-3 rounded-lg"
               >
                 {!Boolean(state.title.length) && (
                   <input
                     ref={searchRef}
                     placeholder="Введите адрес"
-                    name="s"
+                    // name="s"
                     id="ForSearch"
-                    disabled={!mapConstructor}
+                    // disabled={!mapConstructor}
                     className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
                   />
                 )}
@@ -131,17 +147,26 @@ export default function YandexMapStore() {
               {state?.title.length ? (
                 <button
                   type="button"
-                  className="border cursor-pointer active:scale-95 px-3 md:px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                  className="w-[40px] md:w-[150px] h-10 border cursor-pointer active:scale-95 px-3  flex items-center justify-center bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
                   onClick={handleSubmit}
                   disabled={Boolean(!state.title.length)}
                 >
-                  <span className="md:flex hidden">Подтверждено</span>
-                  <span className="md:hidden flex">OK</span>
+                  {isSendedLocation ? (
+                    <>
+                      {" "}
+                      <span className="md:flex hidden">Подтверждено</span>
+                      <span className="md:hidden flex">OK</span>
+                    </>
+                  ) : (
+                    <span>
+                      <BiCheckDouble size={30} />
+                    </span>
+                  )}
                 </button>
               ) : (
                 <button
                   type="button"
-                  className="px-3 md:px-[35px] py-3 bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
+                  className="w-[40px] md:w-[150px] h-10 px-3  flex items-center justify-center bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
                 >
                   <span className="md:flex hidden">Подтверждено</span>
                   <span className="md:hidden flex">OK</span>{" "}

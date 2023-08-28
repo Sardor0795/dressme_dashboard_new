@@ -14,7 +14,7 @@ export default function MyMarket() {
     });
   }, []);
   return (
-    <div className="w-full h-full  py-1">
+    <div className="w-full h-full  py-1 px-4 md:px-0">
       <div className="w-full pt-6 pb-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="w-full flex items-center justify-center md:hidden">
           <button className="absolute left-4 ">

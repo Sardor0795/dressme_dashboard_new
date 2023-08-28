@@ -10,6 +10,7 @@ import { dressMainData } from "../../../hook/ContextTeam";
 import { NavLink } from "react-router-dom";
 import ModalEditCity from "./ModalEditCity/ModalEditCity";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import EditPassword from "./EditPassword/EditPassword";
 
 const ProfilePage = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -40,8 +41,12 @@ const ProfilePage = () => {
   let data3 = arr3.join("");
   const sendMessagePhoneNumber = data3 + data2;
   const [openRegionModal, setOpenRegionModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   // -------------------------------------
   const toggle = React.useCallback(() => setOpenRegionModal(false), []);
+  // -------------------------------------
+  // -------------------------------------
+  const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   // -------------------------------------
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[70px] items-center justify-center px-4 md:px-0">
@@ -52,9 +57,12 @@ const ProfilePage = () => {
         </span>{" "}
       </div>{" "}
       <div
-        onClick={() => setOpenRegionModal(false)}
+        onClick={() => {
+          setOpenRegionModal(false);
+          setOpenEditModal(false);
+        }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-          openRegionModal ? "" : "hidden"
+          openRegionModal || openEditModal ? "" : "hidden"
         }`}
       ></div>
       <section
@@ -63,6 +71,13 @@ const ProfilePage = () => {
         }`}
       >
         <ModalEditCity onClick={toggle} />
+      </section>
+      <section
+        className={`fixed z-[113]   duration-300 overflow-hidden ${
+          openEditModal ? "" : "hidden z-0"
+        }`}
+      >
+        <EditPassword onClick={togglePassword} />
       </section>
       {dressInfo?.ConfirmAuthen && (
         <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
@@ -264,14 +279,14 @@ const ProfilePage = () => {
         {/* Edit Password */}
         <div>
           <span>
-            <NavLink
+            <button
+              onClick={() => setOpenEditModal(true)}
               className={
                 "text-textBlueColor text-base not-italic font-AeonikProRegular hover:underline"
               }
-              to={"/#"}
             >
               Изменить пароль
-            </NavLink>
+            </button>
           </span>
         </div>
 

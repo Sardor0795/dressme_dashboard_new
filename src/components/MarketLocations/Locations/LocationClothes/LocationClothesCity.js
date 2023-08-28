@@ -105,8 +105,8 @@ export default function LocationClothesCity() {
   }, [data]);
 
   return (
-    <div>
-      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block">
+    <div className=" px-4 md:px-0 ">
+      <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="block md:flex justify-start items-center md:justify-between">
           <section className="flex">
             <button

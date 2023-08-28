@@ -31,7 +31,6 @@
   bottom: 0;
   right: 0;
   background: "#ccc";
-  border: 1px solid red;
 }
 .titleBox.titleBox_show {
   position: relative;

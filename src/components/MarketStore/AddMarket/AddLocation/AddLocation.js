@@ -37,23 +37,13 @@ export default function AddLocation() {
             <GoBackIcons />
           </button>
         </div>{" "}
-        <div className="text-center mb-3 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium">
+        <div className="text-center mb-3 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium  px-4 md:px-0">
           Добавить локацию магазина
         </div>
-        {/* <div className="mb-3 hidden md:flex">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="md:w-8 md:h-8 w-6 h-6  flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-          >
-            <AiOutlineLeft />
-          </button>
-        </div> */}
         <div>
           <YandexMapStore />
         </div>
-        <div className="flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
+        <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
           <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <Link to="#" className="flex items-center justify-center">
               <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
@@ -79,16 +69,16 @@ export default function AddLocation() {
             </Link>
           </div>
         </div>
-        <div className="w-full  ">
+        <div className="w-full  px-4 md:px-0 ">
           <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
             <label className="w-full md:w-[31%] xs:w-[48%]   ">
-              <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
+              <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя администратора{" "}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
+              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
@@ -98,13 +88,13 @@ export default function AddLocation() {
               </div>
             </label>
             <label className="w-full md:w-[31%] xs:w-[48%]  ">
-              <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
+              <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя второго администратора{" "}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
+              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
@@ -114,76 +104,76 @@ export default function AddLocation() {
               </div>
             </label>
             <div className="w-full md:w-[31%] xs:w-[48%]  ">
-              <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Рабочее время
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex flex-wraps">
+              <div className="w-full flex  items-center">
                 {" "}
                 от
                 <input
                   type="text"
                   value={"09:00"}
-                  className="mr-5 ml-[5px] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:max-w-[80px] text-[12px]md:text-[14px] font-AeonikProRegular "
+                  className="mr-5 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                 />
                 до
                 <input
                   type="text"
                   value={"20:00"}
-                  className="ml-[5px] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:max-w-[80px] text-[12px]md:text-[14px] font-AeonikProRegular "
+                  className="ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                 />
               </div>
             </div>
             <label className="w-full md:w-[31%] xs:w-[48%]   ">
-              <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер администратора
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
               </div>
-              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
+              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
                 <span className="h-full text-[12px] md:text-base  flex items-center px-[12px] border-r border-lightBorderColor">
                   +998
                 </span>
                 <input
                   type="phone"
                   value={"(97) 214-34-56"}
-                  className="pl-3 outline-none text-[12px] md:text-[14px] font-AeonikProRegular  "
+                  className="w-full pl-3 outline-none text-[12px] md:text-[14px] font-AeonikProRegular  "
                 />
-                <span className="mr-12">
+                <span className="mr-[12px]">
                   <TelIcon />
                 </span>
               </div>
             </label>
             <label className="w-full md:w-[31%] xs:w-[48%]  ">
-              <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер второго администратора{" "}
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
               </div>
-              <div className="flex items-center border border-borderColor  h-[32px] md:h-[45px]  rounded md:rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
+              <div className="flex items-center border border-borderColor  h-[32px] md:h-[45px]  rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
                 <span className="h-full text-[12px] md:text-base  flex items-center px-[12px] border-r border-lightBorderColor">
                   +998
                 </span>
                 <input
                   type="phone"
-                  value={"(не обезательно)"}
-                  className="pl-3 outline-none text-[12px] md:text-[14px] font-AeonikProRegular  "
+                  placeholder={"(не обезательно)"}
+                  className="w-full pl-3 outline-none text-[12px] md:text-[14px] font-AeonikProRegular placeholder-text-[#8C8C8C] "
                 />
-                <span className="mr-12">
+                <span className="mr-[12px]">
                   <TelIcon />
                 </span>
               </div>
             </label>
             <div className="w-full md:w-[31%] xs:w-[48%]   ">
               <div className="w-full" onClick={() => setOpenStoreList(true)}>
-                <div className="text-[12px] md:text-[14px] font-AeonikProRegular flex items-center mb-[10px]">
+                <div className="text-[12px] text-[12px] md:text-base font-AeonikProRegular flex items-center mb-1 md:mb-[10px]">
                   Выберите регион
                   <span className="ml-[5px]">
                     <StarLabel />
                   </span>
                 </div>
-                <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full max-w-[287px] text-base font-AeonikProMedium">
-                  <span className="text-[#8C8C8C] font-AeonikProRegular md:text-[14px] font-AeonikProRegular ">
+                <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
+                  <span className="text-[#8C8C8C] text-[12px] md:text-base font-AeonikProRegular ">
                     Выберите регион
                   </span>
                   <span className="rotate-[90deg]">
@@ -194,7 +184,7 @@ export default function AddLocation() {
             </div>
           </div>
         </div>
-        <div className="flex justify-center mt-[50px]">
+        <div className="flex justify-center mt-[50px]  px-4 md:px-0">
           <Link
             className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
             // to={"/store"}
