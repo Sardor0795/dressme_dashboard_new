@@ -29,7 +29,7 @@ body {
   display: none;
 }
 
-.mobileDate .ant-space  {
+.mobileDate .ant-space {
   width: 250px;
 }
 
@@ -40,21 +40,31 @@ body {
 :where(.css-dev-only-do-not-override-1jr9qlj).ant-picker {
   padding: 8px 10px 8px;
   border-radius: 8px;
-  border:1px solid #f2f2f2
+  border: 1px solid #f2f2f2;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-select:not(
+    .ant-select-disabled
+  ):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
+  .ant-select-selector {
   border-color: #303030;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
   width: 100%;
   height: 48px;
   padding: 8px 10px;
   line-height: 10px;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector
+  .ant-select-selection-search-input {
   height: 48px;
   font-size: 16px;
 }

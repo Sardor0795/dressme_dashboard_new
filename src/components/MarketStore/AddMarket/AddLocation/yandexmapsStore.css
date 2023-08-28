@@ -24,17 +24,22 @@
 
 .titleBox {
   display: none;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background: "#ccc";
-  width: 100%;
-  height: 40px;
+  border: 1px solid red;
 }
 .titleBox.titleBox_show {
+  position: relative;
+  z-index: 9999;
+  top: 0px;
   display: flex;
-  height: fit-content;
-  background-color: white;
-  border-radius: 8px;
-  border: 1px solid green;
 }
+
 .titleBox span {
   flex-grow: 1;
   white-space: nowrap;
@@ -50,21 +55,29 @@
 
 .mapRoot {
   position: relative;
+  height: 400px;
   background-color: white;
-  z-index: 50;
-  height: 100%;
+  z-index: 9999;
 }
-
+.mapsuz {
+  height: 400px;
+  overflow: hidden;
+}
 .placemark {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -100%);
-  z-index: 88888;
+  z-index: 1200;
   font-size: 35px !important;
   cursor: grab;
 }
-.ymaps-2-1-79-map {
-  width: 100%;
-  height: 100%;
+@media (max-width: 550px) {
+  .titleBox.titleBox_show {
+    overflow-x: auto;
+    width: 90%;
+  }
+  .titleBox span {
+    font-size: 12px;
+  }
 }

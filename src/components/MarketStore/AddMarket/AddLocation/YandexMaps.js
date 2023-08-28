@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import "../../../../index.css";
+// import "../../../../index.css";
 import {
   YMaps,
   Map,
@@ -16,9 +16,9 @@ import {
   marketIcons,
 } from "../../../../assets/icons";
 import { MdLocationOn } from "react-icons/md";
-import "./yandexMaps1.css";
 import { GrClose } from "react-icons/gr";
 import { clsx } from "clsx";
+import "./yandexmapsStore.css";
 
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
@@ -36,12 +36,11 @@ const initialState = {
   zoom: 12,
 };
 
-export default function YandexMaps() {
+export default function YandexMapStore() {
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
-  const [fullScreenMaps, setFullScreenMaps] = useState(false);
 
   // submits
   const handleSubmit = () => {
@@ -52,7 +51,7 @@ export default function YandexMaps() {
   const handleReset = () => {
     setState({ ...initialState });
     // setState({ ...initialState, title: "" });
-    searchRef.current.value = "";
+    // searchRef.current.value = "";
     // mapRef.current.setCenter(initialState.center);
     mapRef.current.setZoom(initialState.zoom);
   };
@@ -106,21 +105,26 @@ export default function YandexMaps() {
             instanceRef={mapRef}
           >
             <div className="h-fit p-[10px] absolute top-2 z-40 gap-x-5 mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-3 rounded-lg">
-              <div className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-3 rounded-lg">
-                <input
-                  ref={searchRef}
-                  placeholder="Введите адрес"
-                  name="s"
-                  disabled={!mapConstructor}
-                  className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
-                />
-
+              <label
+                htmlFor="ForSearch"
+                className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-3 rounded-lg"
+              >
+                {!Boolean(state.title.length) && (
+                  <input
+                    ref={searchRef}
+                    placeholder="Введите адрес"
+                    name="s"
+                    id="ForSearch"
+                    disabled={!mapConstructor}
+                    className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
+                  />
+                )}
                 <div
                   className={clsx(["titleBox"], {
                     ["titleBox_show"]: Boolean(state.title.length),
                   })}
                 >
-                  {state.title}
+                  <span className="whitespace-nowrap ">{state.title} </span>
                 </div>
                 {state?.title.length ? (
                   <button
@@ -137,15 +141,26 @@ export default function YandexMaps() {
                     <SearchIcon />
                   </button>
                 )}
-              </div>
-              <button
-                type="button"
-                className="border cursor-pointer  px-[35px] h-10 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
-                onClick={handleSubmit}
-                disabled={Boolean(!state.title.length)}
-              >
-                Подтверждено
-              </button>
+              </label>
+              {state?.title.length ? (
+                <button
+                  type="button"
+                  className="border cursor-pointer active:scale-95 px-3 md:px-[35px] py-3 bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                  onClick={handleSubmit}
+                  disabled={Boolean(!state.title.length)}
+                >
+                  <span className="md:flex hidden">Подтверждено</span>
+                  <span className="md:hidden flex">OK</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="px-3 md:px-[35px] py-3 bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
+                >
+                  <span className="md:flex hidden">Подтверждено</span>
+                  <span className="md:hidden flex">OK</span>{" "}
+                </button>
+              )}
             </div>
             {/* <div
               className={
