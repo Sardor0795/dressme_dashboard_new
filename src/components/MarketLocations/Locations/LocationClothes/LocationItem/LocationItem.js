@@ -115,11 +115,11 @@ export default function LocationItem({ data, click, index }) {
           </figure>
         </div>
 
-        <div className="mb-[25px]">
+        <div className="mb-[10px]">
           <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[12px] items-center mb-[8px]">
-            <div className="pr-[10px] w-[20%]">Регион</div>
-            <div className="pr-[10px] w-[50%]">Адрес</div>
-            <div className="w-[30%]">Рабочее время</div>
+            <div className="pr-[10px] w-[40%]">Имя товара</div>
+            <div className="pr-[10px] w-[30%]">Статус</div>
+            <div className="w-[30%]">Цена товара</div>
           </div>
 
           <div className="px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">

@@ -261,7 +261,7 @@ export default function LocationClothesCity() {
             </span>
           </div>
 
-          <div className="w-full">
+          <div className="w-full md:hidden">
             <div className="flex md:hidden justify-end w-full mb-[25px]">
               Выбрать все
               <div
@@ -298,7 +298,7 @@ export default function LocationClothesCity() {
               </div>
             </div>
 
-            <div className="w-full">
+            <div className="w-full md:hidden">
               <section className="flex md:hidden gap-x-4">
                 <p className="text-black text-[18px] not-italic font-AeonikProMedium mr-auto">
                   Юнусабад (6)
