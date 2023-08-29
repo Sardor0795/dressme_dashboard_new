@@ -28,7 +28,7 @@ const MarketList = () => {
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
                 <span className="text-checkboxBorder md:text-black">
                   {" "}
-                  0{data.id}
+                  {data.id}
                 </span>
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
               </div>

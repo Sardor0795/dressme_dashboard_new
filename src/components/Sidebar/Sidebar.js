@@ -138,14 +138,20 @@ export default function Sidebar() {
                 {({ isActive }) =>
                   isActive ? (
                     <figure className="flex h-full gap-x-[15px] items-center justify-center pl-1">
-                      <ClothesIcons colors={"#007dca"} />
+                      <ClothesIcons
+                        colors={"#007dca"}
+                        className="ml-[2px] border border-red-500"
+                      />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
                         Одежда
                       </p>
                     </figure>
                   ) : (
-                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
-                      <ClothesIcons colors={"#2c2c2c"} />
+                    <figure className=" flex h-full gap-x-[15px] items-center justify-center pl-1">
+                      <ClothesIcons
+                        colors={"#2c2c2c"}
+                        className="ml-[2px] border border-red-500"
+                      />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
                         Одежда
                       </p>
