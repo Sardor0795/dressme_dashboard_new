@@ -24,50 +24,56 @@ export default function LocationClothesCity() {
     {
       id: 1,
       index: 1,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#4FB459]",
       state: "Одобренный",
+      money: "16000",
     },
     {
       id: 2,
       index: 2,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
+      money: "16000",
     },
     {
       id: 3,
       index: 3,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#FF4747]",
       state: "Отказанный",
+      money: "16000",
     },
     {
       id: 4,
       index: 1,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
+      money: "16000",
     },
     {
       id: 5,
       index: 2,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
+      money: "16000",
     },
     {
       id: 6,
       index: 3,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
+      money: "16000",
     },
   ]);
 
@@ -262,14 +268,14 @@ export default function LocationClothesCity() {
           </div>
 
           <div className="w-full md:hidden">
-            <div className="flex md:hidden justify-end w-full mb-[25px]">
+            <div className="flex md:hidden justify-end items-center w-full mb-[25px]">
               Выбрать все
               <div
                 onClick={() => {
                   onCheck(checkIndicator);
                   setAllChecked(!allChecked);
                 }}
-                className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
+                className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
                   allChecked
                     ? "bg-[#007DCA] border-[#007DCA]"
                     : "bg-white border-checkboxBorder"
@@ -282,8 +288,8 @@ export default function LocationClothesCity() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="13"
+                    width="8"
+                    height="10"
                     viewBox="0 0 11 13"
                     fill="none"
                   >
