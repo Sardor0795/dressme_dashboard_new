@@ -939,77 +939,101 @@ const AddingProduct = () => {
     </div>
   );
   const [colorGroup, setColorGroup] = useState([
-    { id: 1, ColorId: 1, icons: InputCheck, action: true, colors: "bg-black" },
-    { id: 2, ColorId: 2, icons: InputCheck, action: false, colors: "bg-white" },
+    {
+      colorName: "Black",
+      id: 1,
+      ColorId: 1,
+      icons: InputCheck,
+      action: true,
+      colors: "black",
+    },
+    {
+      colorName: "Белый",
+      id: 2,
+      ColorId: 2,
+      icons: InputCheck,
+      action: false,
+      colors: "white",
+    },
     {
       id: 3,
       ColorId: 3,
       icons: InputCheck,
+      colorName: "Серый",
       action: false,
-      colors: "bg-zinc-500",
+      colors: "zinc-500",
     },
     {
       id: 4,
       ColorId: 4,
       icons: InputCheck,
+      colorName: "Фиолетовый",
       action: false,
-      colors: "bg-purple-500",
+      colors: "purple-500",
     },
     {
       id: 5,
       ColorId: 5,
       icons: InputCheck,
+      colorName: "Голубой",
       action: false,
-      colors: "bg-sky-600",
+      colors: "sky-600",
     },
     {
       id: 6,
       ColorId: 6,
       icons: InputCheck,
+      colorName: "Желтый",
       action: false,
-      colors: "bg-amber-400 ",
+      colors: "amber-400 ",
     },
     {
       id: 7,
       ColorId: 7,
       icons: InputCheck,
+      colorName: "Зеленый",
       action: false,
-      colors: "bg-green-700 ",
+      colors: "green-700 ",
     },
     {
       id: 8,
       ColorId: 8,
       icons: InputCheck,
+      colorName: "Amber",
       action: false,
-      colors: "bg-amber-600 ",
+      colors: "amber-600 ",
     },
     {
       id: 9,
       ColorId: 9,
       icons: InputCheck,
+      colorName: "Красный",
       action: false,
-      colors: "bg-red-700  ",
+      colors: "red-700  ",
     },
     {
       id: 10,
       ColorId: 10,
       icons: InputCheck,
+      colorName: "Фиолетовый",
       action: false,
-      colors: "bg-purple-800 ",
+      colors: "purple-800 ",
     },
     {
       id: 11,
       ColorId: 11,
       icons: InputCheck,
+      colorName: "Blue",
       action: false,
-      colors: "bg-blue-900 ",
+      colors: "blue-900 ",
     },
     {
       id: 12,
       ColorId: 12,
       icons: InputCheck,
+      colorName: "Brown",
       action: false,
-      colors: "bg-yellow-900 ",
+      colors: "yellow-900 ",
     },
   ]);
   const HandleIconsColor = (colorId, id) => {
@@ -1025,7 +1049,6 @@ const AddingProduct = () => {
     });
   };
 
-  console.log(categoryWear, "categoryWear");
   return (
     <div className="relative w-full flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
       <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
@@ -1388,7 +1411,7 @@ const AddingProduct = () => {
                         <>
                           {data?.action && (
                             <button
-                              className={`w-[22px] h-[22px] rounded-full ${data?.colors}`}
+                              className={`w-[22px] h-[22px] rounded-full bg-${data?.colors}`}
                             ></button>
                           )}
                         </>
@@ -1416,18 +1439,15 @@ const AddingProduct = () => {
                           onClick={() => setSelectColorToggleMobile(false)}
                         ></div>
                         <div className="flex items-center min-h-screen px-4 py-8">
-                          <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
-                            <div className={`flex items-center justify-end`}>
-                              {/* {toggleAction && (
+                          <div className="relative w-full max-w-lg p-[30px] mx-auto bg-white rounded-md shadow-lg">
+                            <div
+                              className={`flex items-center justify-between`}
+                            >
+                              <span className="text-gray-800 text-2xl not-italic font-AeonikProMedium   ">
+                                Выберите цвет
+                              </span>
                               <button
-                                onClick={unCheckedAll}
-                                className="flex items-center active:scale-95  active:opacity-70 justify-center border border-searchBgColor rounded-lg px-4 py-1"
-                              >
-                                Отключить
-                              </button>
-                            )} */}
-                              <button
-                                className="py-2"
+                                className="mr-[-18px] mt-[-18px]"
                                 type=""
                                 onClick={() =>
                                   setSelectColorToggleMobile(false)
@@ -1447,26 +1467,61 @@ const AddingProduct = () => {
                                         data?.ColorId
                                       )
                                     }
-                                    className={`rounded-full flex items-center justify-center mr-2 w-6 h-6 ${
-                                      data?.colors
-                                    } cursor-pointer ${
-                                      data?.id == 2
-                                        ? "border border-setTexOpacity"
-                                        : ""
-                                    } `}
                                   >
-                                    {data?.action && data?.id === 2 ? (
-                                      <span>
-                                        <InputCheckedTrueIcons
-                                          colors={"#000"}
-                                        />
-                                      </span>
-                                    ) : null}
+                                    <button
+                                      type="button"
+                                      className={`w-[65px] border cursor-pointer h-10 rounded-lg flex items-center justify-center bg-${data?.colors} `}
+                                    >
+                                      {data?.action && data?.id === 2 ? (
+                                        <span>
+                                          <InputCheckedTrueIcons
+                                            colors={"#000"}
+                                          />
+                                        </span>
+                                      ) : null}
 
-                                    {data?.action && data?.id !== 2 ? (
-                                      <InputCheckedTrueIcons colors={"#fff"} />
-                                    ) : null}
+                                      {data?.action && data?.id !== 2 ? (
+                                        <InputCheckedTrueIcons
+                                          colors={"#fff"}
+                                        />
+                                      ) : null}
+                                    </button>
+                                    <div className="w-[60px] overflow-hidden">
+                                      <span
+                                        className={` whitespace-nowrap text-[12px] not-italic font-AeonikProRegular text-${data?.colors}`}
+                                      >
+                                        {data?.colorName}
+                                      </span>
+                                    </div>
                                   </div>
+                                  // <div
+                                  //   key={data?.id}
+                                  //   onClick={() =>
+                                  //     HandleIconsColor(
+                                  //       data?.colors,
+                                  //       data?.ColorId
+                                  //     )
+                                  //   }
+                                  //   className={`rounded-full flex items-center justify-center mr-2 w-6 h-6 ${
+                                  //     data?.colors
+                                  //   } cursor-pointer ${
+                                  //     data?.id == 2
+                                  //       ? "border border-setTexOpacity"
+                                  //       : ""
+                                  //   } `}
+                                  // >
+                                  //   {data?.action && data?.id === 2 ? (
+                                  //     <span>
+                                  //       <InputCheckedTrueIcons
+                                  //         colors={"#000"}
+                                  //       />
+                                  //     </span>
+                                  //   ) : null}
+
+                                  //   {data?.action && data?.id !== 2 ? (
+                                  //     <InputCheckedTrueIcons colors={"#fff"} />
+                                  //   ) : null}
+                                  // </div>
                                 );
                               })}
                             </div>
@@ -1964,14 +2019,14 @@ const AddingProduct = () => {
         <div className="w-full h-fit flex gap-x-[30px]  md:w-fit md:absolute md:right-3 md:bottom-3">
           <button
             type="button"
-            className="w-full h-[42px] md:h-[45px] flex items-center justify-center  active:scale-95  md:px-[50px] py-3 border border-textBlueColor bg-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+            className="w-full h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  md:px-[50px] py-3 border border-textBlueColor hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
           >
             Сохранить
           </button>
           <button
             type="button"
             onClick={() => goProductTitleEdit(3)}
-            className="w-full h-[42px] md:h-[45px] flex items-center justify-center  active:scale-95  md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
+            className="w-full h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  md:px-[50px] py-3 border border-textBlueColor hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
           >
             Продолжить
           </button>
