@@ -267,8 +267,14 @@ export default function LocationClothesCity() {
             </span>
           </div>
 
+
+          <div className="w-full flex md:hidden ">
+
+            <div className="flex md:hidden justify-end w-full mb-[25px]">
+
           <div className="w-full md:hidden">
             <div className="flex md:hidden justify-end items-center w-full mb-[25px]">
+
               Выбрать все
               <div
                 onClick={() => {
@@ -324,7 +330,7 @@ export default function LocationClothesCity() {
             </div>
           </div>
 
-          <div className="hidden border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] w-full">
+          <div className="hidden w-full border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] ">
             <div className="w-[45px]">No:</div>
             <div className="mr-[75px]">Фото</div>
             <div className="flex w-full">
