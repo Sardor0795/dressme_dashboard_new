@@ -40,6 +40,7 @@ export default function YandexMapStore() {
   const [isSendedLocation, setIsSendedLocation] = useState(true);
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
+
   const mapRef = useRef(null);
   const searchRef = useRef(null);
 
@@ -50,13 +51,18 @@ export default function YandexMapStore() {
   };
 
   // reset state & search
-  const handleReset = () => {
-    setState({ ...initialState });
-    // setState({ ...initialState, title: "" });
+  function handleReset() {
+    // setState({ ...initialState });
+    setState({ ...initialState, title: "" });
+    // setState({ title: "" });
     searchRef.current.value = "";
     // mapRef.current.setCenter(initialState.center);
-    mapRef.current.setZoom(initialState.zoom);
-  };
+    // mapRef.current.setZoom(initialState.zoom);
+  }
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   // search popup
   useEffect(() => {
@@ -89,6 +95,7 @@ export default function YandexMapStore() {
       }
     });
   };
+
   return (
     <div className={`w-full `}>
       <div className={"mapRoot"}>
@@ -111,29 +118,38 @@ export default function YandexMapStore() {
                 htmlFor="ForSearch"
                 className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-1 md:px-3 rounded-lg"
               >
-                {!Boolean(state.title.length) && (
-                  <input
-                    ref={searchRef}
-                    placeholder="Введите адрес"
-                    // name="s"
-                    id="ForSearch"
-                    // disabled={!mapConstructor}
-                    className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
-                  />
-                )}
+                <input
+                  ref={searchRef}
+                  placeholder="Введите адрес"
+                  // name="s"
+                  id="ForSearch"
+                  // disabled={!mapConstructor}
+                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
+                    !Boolean(state.title.length) ? "" : "hidden"
+                  }`}
+                />
+
                 <div
                   className={clsx(["titleBox"], {
                     ["titleBox_show"]: Boolean(state.title.length),
                   })}
                 >
-                  <span className="whitespace-nowrap ">{state.title} </span>
+                  <span className="whitespace-nowrap "> {state.title} </span>
                 </div>
+
+                {/* <div
+                  className={`titleBox ${
+                    state.title.length ? "titleBox_show" : ""
+                  }`}
+                >
+                  <span className="whitespace-nowrap ">{state.title} </span>
+                </div> */}
                 {state?.title.length ? (
                   <button
                     onClick={handleReset}
                     className="cursor-pointer flex items-center h-10 justify-center "
                   >
-                    <GrClose />
+                    <GrClose className="pointer-events-none" />
                   </button>
                 ) : (
                   <button
