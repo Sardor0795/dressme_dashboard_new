@@ -5,6 +5,7 @@ import StoreListModal from "./StoreListModal";
 import {
   AddLocationIcon,
   BgNoImgIcon,
+  CheckIcons,
   DeleteIcon,
 } from "../../../../../assets/icons";
 import { wearImg } from "../../../../../assets";
@@ -12,12 +13,22 @@ import { wearImg } from "../../../../../assets";
 export default function LocationItem({ data, click, index }) {
   const [openStoreList, setOpenStoreList] = useState(false);
 
+  const [toggleMobileMenu, setToggleMobileMenu] = useState(true);
+
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
   const navigate = useNavigate();
   const goProductDetailEdit = (id) => {
     navigate(`/locations-store/edit-detail/:${id}`);
   };
+
+  const goMapCity = (id) => {
+    navigate(`/locations-store/city/:${id}`);
+  };
+  const goMapWear = (id) => {
+    navigate(`/locations-store/wears/:${id}`);
+  };
+
   return (
     <div className="flex items-center w-full">
       {openStoreList && <StoreListModal onClick={storeToggle} />}
@@ -115,83 +126,98 @@ export default function LocationItem({ data, click, index }) {
           </figure>
         </div>
 
-        <div className="mb-[10px]">
-          <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[12px] items-center mb-[8px]">
-            <div className="pr-[10px] w-[40%]">Имя товара</div>
-            <div className="pr-[10px] w-[30%]">Статус</div>
-            <div className="w-[30%]">Цена товара</div>
+        <div className="mb-3">
+          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+            <div className="w-[40%] flex items-center">Имя товара</div>
+            <div className="w-[30%] flex items-center">Статус</div>
+            <div className="w-[30%] flex items-center">Цена товара</div>
           </div>
 
-          <div className="px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-            <div className="pr-[10px] w-[20%]"> {data?.city}</div>
-            <div className="pr-[10px] w-[50%]">{data?.address}</div>
-            <div className="w-[30%]"> {data?.time} </div>
+          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+            <div className="w-[40%] text-[#007DCA]"> {data?.name}</div>
+            <div
+              className={`w-[30%] font-AeonikProRegular leading-none flex items-center justify-center text-white ${data.bgColor} rounded-lg px-[5px] py-[4px]`}
+            >
+              {data?.state}
+            </div>
+            <div className="w-[30%]"> {data?.money} сум </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <button className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300">
-            <span className="mr-[5px]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-              >
-                <g clip-path="url(#clip0_1350_8602)">
-                  <path
-                    d="M12.3335 5.66683V12.3335M12.3335 12.3335V14.6668H3.66683V12.3335M12.3335 12.3335H14.6668V5.66683C14.6668 4.66683 14.0002 3.50016 13.0002 2.66683C12.0002 1.8335 10.0002 1.3335 10.0002 1.3335H6.00016C6.00016 1.3335 4.00016 1.8335 3.00016 2.66683C2.00016 3.50016 1.3335 4.66683 1.3335 5.66683V12.3335H3.66683M3.66683 12.3335V5.66683"
-                    stroke="#ED7925"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M10 1.3335C10 1.86393 9.78929 2.37264 9.41421 2.74771C9.03914 3.12278 8.53043 3.3335 8 3.3335C7.46957 3.3335 6.96086 3.12278 6.58579 2.74771C6.21071 2.37264 6 1.86393 6 1.3335"
-                    stroke="#ED7925"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_1350_8602">
-                    <rect width="16" height="16" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </span>
-            {data?.wearLink}
+        <div className={`mb-3 overflow-hidden ${toggleMobileMenu ? "hidden" : "block"}`}>
+          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+            <div className="w-[23%] flex items-center">Артикул</div>
+            <div className="w-[25%] flex items-center">Тип</div>
+            <div className="w-[25%] flex items-center">Дата</div>
+            <div className="w-[27%] flex items-center">Цена товара</div>
+          </div>
+
+          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+            <div className="w-[23%]">BAA-00004</div>
+            <div className="w-[25%] flex items-center justify-center rounded-lg px-[5px] py-[4px]">
+              Футболка
+            </div>
+            <div className="w-[25%]"> 15-08-2023 </div>
+            <div className="w-[27%]"> {data?.money} сум </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between pt-3">
+          <button
+            onClick={() => goMapWear(data?.city)}
+            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+          >
+            Добавить в локацию
           </button>
-          <button className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300">
-            {data?.showMore}
-            <span className="ml-[5px]">
+          <button
+            onClick={() => goMapCity(data?.city)}
+            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+          >
+            Подробнее
+          </button>
+        </div>
+
+        <div className="w-full flex items-center justify-between mt-[18px]">
+          <div
+            onClick={() => {
+              click(data?.id);
+            }}
+            className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
+              data?.isCheck
+                ? "bg-[#007DCA] border-[#007DCA]"
+                : "bg-white border-checkboxBorder"
+            } flex items-center justify-center rounded mr-[8px]`}
+          >
+            <span
+              className={`${
+                data?.isCheck ? "flex items-center justify-center" : "hidden"
+              }`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="8"
-                viewBox="0 0 16 8"
+                width="8"
+                height="10"
+                viewBox="0 0 11 13"
                 fill="none"
               >
-                <g clip-path="url(#clip0_1350_8461)">
-                  <path
-                    d="M5.80625 4.7502H1.25C1.0375 4.7502 0.859253 4.6782 0.715253 4.5342C0.571253 4.3902 0.499503 4.2122 0.500003 4.0002C0.500003 3.7877 0.572003 3.60945 0.716003 3.46545C0.860003 3.32145 1.038 3.2497 1.25 3.2502H5.80625L4.0625 1.4877C3.925 1.3502 3.853 1.1782 3.8465 0.971695C3.84 0.765195 3.912 0.587195 4.0625 0.437695C4.2 0.300195 4.375 0.231445 4.5875 0.231445C4.8 0.231445 4.975 0.300195 5.1125 0.437695L8.15 3.4752C8.3 3.6252 8.375 3.8002 8.375 4.0002C8.375 4.2002 8.3 4.3752 8.15 4.5252L5.1125 7.5627C4.975 7.70019 4.803 7.7722 4.5965 7.7787C4.39 7.78519 4.212 7.71319 4.0625 7.5627C3.925 7.4252 3.85625 7.25019 3.85625 7.03769C3.85625 6.82519 3.925 6.6502 4.0625 6.5127L5.80625 4.7502ZM9.5 7.7502C9.2875 7.7502 9.1095 7.67819 8.966 7.53419C8.8225 7.39019 8.7505 7.21219 8.75 7.0002C8.75 6.78769 8.822 6.60945 8.966 6.46545C9.11 6.32145 9.288 6.24969 9.5 6.2502H14.75C14.9625 6.2502 15.1408 6.3222 15.2848 6.4662C15.4288 6.6102 15.5005 6.7882 15.5 7.0002C15.5 7.2127 15.428 7.39094 15.284 7.53494C15.14 7.67894 14.962 7.7507 14.75 7.7502H9.5ZM9.5 1.7502C9.2875 1.7502 9.1095 1.6782 8.966 1.5342C8.8225 1.3902 8.7505 1.2122 8.75 1.0002C8.75 0.787695 8.822 0.609446 8.966 0.465446C9.11 0.321446 9.288 0.249695 9.5 0.250195H14.75C14.9625 0.250195 15.1408 0.322195 15.2848 0.466195C15.4288 0.610195 15.5005 0.788195 15.5 1.0002C15.5 1.2127 15.428 1.39095 15.284 1.53495C15.14 1.67895 14.962 1.7507 14.75 1.7502H9.5ZM11.75 4.7502C11.5375 4.7502 11.3593 4.6782 11.2153 4.5342C11.0713 4.3902 10.9995 4.2122 11 4.0002C11 3.7877 11.072 3.60945 11.216 3.46545C11.36 3.32145 11.538 3.2497 11.75 3.2502H14.75C14.9625 3.2502 15.1408 3.3222 15.2848 3.4662C15.4288 3.6102 15.5005 3.7882 15.5 4.0002C15.5 4.2127 15.428 4.39095 15.284 4.53495C15.14 4.67895 14.962 4.7507 14.75 4.7502H11.75Z"
-                    fill="#007DCA"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_1350_8461">
-                    <rect
-                      width="15"
-                      height="7.54765"
-                      fill="white"
-                      transform="translate(0.5 0.231445)"
-                    />
-                  </clipPath>
-                </defs>
+                <path
+                  d="M1 9.5L5.88235 11L10 1"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
               </svg>
             </span>
+          </div>
+          <button
+            to="#"
+            onClick={() => setToggleMobileMenu(!toggleMobileMenu)}
+            className="text-textBlueColor text-[13px] font-AeonikProMedium"
+          >
+            {toggleMobileMenu ? "Больше..." : "Меньше..."}
+          </button>
+          <button className="text-red-600 text-[11px] font-AeonikProMedium">
+            Удалить
           </button>
         </div>
       </div>
