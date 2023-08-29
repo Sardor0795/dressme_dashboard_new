@@ -22,6 +22,7 @@ import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu"
 const {RangePicker} = DatePicker;
 
 const AddingProduct = () => {
+  
   const [openColors, setOpenColors] = useState(false); // Colors
   const [openCategories, setOpenCategories] = useState(false); // Categories
   const [openClothingSection, setOpenClothingSection] = useState(false); // Clothing Types
@@ -46,6 +47,24 @@ const AddingProduct = () => {
   const toggleWeather = React.useCallback(() => setOpenWeather(false), []); // Clothing SubSection
   const toggleGender = React.useCallback(() => setOpenGender(false), []); // Genders
   const toggleTypes = React.useCallback(() => setOpenTypes(false), []); // Type
+
+  const [state, setState] = useState({
+    buttonReviews: false,
+    openDropModalButton:true,
+  })
+  // const [openDropModalButton,setOpenDropModalButton] = useState(false)
+
+  useEffect(() => {
+    if (state?.openDropModalButton) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [state?.openDropModalButton]);
+
+  const toggleDropModalButton = () => {
+    setState({ ...state, openDropModalButton: !state.openDropModalButton });
+  };
 
   // For Drop UP
   useEffect(() => {
@@ -1712,7 +1731,7 @@ const AddingProduct = () => {
   ];
 
   return (
-    <div className="relative w-full block md:flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
+    <div className="relative w-full block md:flex items-center justify-between mb-[50px] focus:bg-textBlueColor">
       
       <div className="w-full py-6 border-lightBorderColor block md:hidden">
         <div className="w-full flex items-center justify-center">
@@ -1723,38 +1742,9 @@ const AddingProduct = () => {
             Добавить одежду
           </span>
         </div>
-        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
-          <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
-            <label
-              htmlFor="searchStore"
-              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
-            >
-              <input
-                type="text"
-                name="s"
-                id="searchStore"
-                className="w-full h-full   outline-0 	pl-[10px]"
-                placeholder="Поиск"
-              />
-              <span className="pr-[10px]">
-                <SearchIcon />
-              </span>
-            </label>
-            <section className=" flex items-center gap-x-[30px] ">
-              <span>
-                <CalendarIcons />
-              </span>
-              <span className="hidden md:flex items-center">
-                <Space direction="vertical" size={12}>
-                  <RangePicker className="" placeholder={["от", "до"]} />
-                </Space>
-              </span>
-            </section>
-          </section>
-        </div>
       </div>
       
-      <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
+      <div className="absolute top-[85px] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
           1
         </div>
@@ -1887,261 +1877,378 @@ const AddingProduct = () => {
 
       <form
         action="#"
-        className="md:relative w-full md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px]  md:pb-[250px]"
+        className="w-full md:mx-[180px] md:mb-[50px]"
       >
-        <div className="hidden md:flex items-center justify-center text-2xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду </div>
-        {/* Photo Section For Mobile */}
-        <div className="w-full flex md:hidden mb-6 gap-x-[15px]">
-          <div className="w-3/4 flex items-center justify-center rounded-lg border border-dashed border-borderColor bg-photoBg">
-            <Link
-              to="#"
-              className=" text-xs font-AeonikProMedium text-textBlueColor border-b border-textBlueColor"
-            >
-              Выберите фото
-            </Link>
-          </div>
-          <div className="w-1/4 flex flex-col">
-            <div className="w-full h-[95px] flex items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
-              <Link to="#">
-                {" "}
-                <DownloadIcon />{" "}
-              </Link>
-            </div>
-            <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
-              <Link to="#" className="mt-7">
-                {" "}
-                <DownloadIcon />{" "}
-              </Link>
-              <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">
-                (необязательно)
-              </span>
-            </div>
-            <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor">
-              <Link to="#" className="mt-7">
-                {" "}
-                <DownloadIcon />{" "}
-              </Link>
-              <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">
-                (необязательно)
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="w-full flex items-start justify-between md:gap-x-[30px]">
-          <div className="w-full md:w-[65%]">
-            {/* 1 */}
-            <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
-              <div className="w-1/2 flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Раздел одежды
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <button
-                  onClick={() => setOpenClothingSection(true)}
-                  type="button"
-                  className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
-                >
-                  <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                    Выбрать
-                  </label>
-                  <ArrowRightIcon />
-                </button>
-                <Select
-                  className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                  showSearch
-                  placeholder="Выбрать"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
-                />
-              </div>
-              <div className="w-1/2 flex  flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Подраздел одежды{" "}
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <button
-                  onClick={() => setOpenClothingSubSection(true)}
-                  type="button"
-                  className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
-                >
-                  <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                    Выбрать
-                  </label>
-                  <ArrowRightIcon />
-                </button>
-                <Select
-                  className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                  showSearch
-                  placeholder="Выбрать"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
-                />
-              </div>
-            </div>
+        <div className="hidden md:flex items-center justify-center text-2xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду</div>
+        
+        <div className="md:relative md:border border-borderColor rounded-xl md:px-[30px] md:pt-[50px]  md:pb-[250px]">
 
-            {/* 2 */}
-            <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
-              <div className="w-1/2 flex  flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Сезон одежды
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <button
-                  onClick={() => setOpenWeather(true)}
-                  type="button"
-                  className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
-                >
-                  <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                    Выбрать
-                  </label>
-                  <ArrowRightIcon />
-                </button>
-                <Select
-                  className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                  showSearch
-                  placeholder="Выбрать"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
-                />
+          {/* Photo Section For Mobile */}
+          <div className="w-full flex md:hidden mb-6 gap-x-[15px]">
+            <div className="w-3/4 flex items-center justify-center rounded-lg border border-dashed border-borderColor bg-photoBg">
+              <Link
+                to="#"
+                className=" text-xs font-AeonikProMedium text-textBlueColor border-b border-textBlueColor"
+              >
+                Выберите фото
+              </Link>
+            </div>
+            <div className="w-1/4 flex flex-col">
+              <div className="w-full h-[95px] flex items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
+                <Link to="#">
+                  {" "}
+                  <DownloadIcon />{" "}
+                </Link>
               </div>
-              <div className="w-1/2 flex  flex-col items-start">
-                <div className="flex items-center justify-between mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Цвет
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setOpenColors(true)}
-                  className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
-                >
-                  <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                    Выбрать
-                  </label>
-                  <ArrowRightIcon />
-                </button>
-                <div className="w-full hidden md:flex items-center justify-between border rounded-lg md:py-[9px] px-[12px]">
-                  {changeColor?.map((data) => {
-                    return (
-                      <div key={data?.id} className="hidden md:block">
-                        <label
-                          key={data?.id}
-                          className={`${data.colors} rounded-full border border-${data.colors} w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
-                        >
-                          {/* <img src={data.icons} alt="" /> */}
-                        </label>
-                        <input
-                          type="radio"
-                          id={data?.id}
-                          name="checkStatus"
-                          value={data?.id}
-                          className={"hidden w-full h-full"}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
+                <Link to="#" className="mt-7">
+                  {" "}
+                  <DownloadIcon />{" "}
+                </Link>
+                <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">
+                  (необязательно)
+                </span>
+              </div>
+              <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor">
+                <Link to="#" className="mt-7">
+                  {" "}
+                  <DownloadIcon />{" "}
+                </Link>
+                <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">
+                  (необязательно)
+                </span>
               </div>
             </div>
-
-            {/* 3 */}
-            <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
-              <div className="w-1/2 flex flex-col items-start">
-                <div className="w-full mb-[5px]">
-                  <div className="flex items-center justify-between ">
+          </div>
+          
+          {/* Add Product Parts Section */}
+          <div className="w-full flex items-start justify-between md:gap-x-[30px]">
+            <div className="w-full md:w-[65%]">
+              {/* 1 */}
+              <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
+                <div className="w-1/2 flex flex-col items-start">
+                  <div className="flex items-center justify-center mb-[5px]">
                     <label
                       htmlFor=""
-                      className="flex items-center text-[13px] md:text-base font-AeonikProRegular"
+                      className="text-[13px] md:text-base font-AeonikProRegular"
                     >
-                      Пол
-                      <span className="ml-[5px]">
-                        <StarLabel />
-                      </span>
+                      Раздел одежды
                     </label>
-                    <label
-                      className="hidden md:flex items-center text-[13px] md:text-base font-AeonikProRegular"
-                    >
-                      Возрастная категория
-                      <span className="ml-[5px]">
-                        <StarLabel />
-                      </span>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setOpenClothingSection(true)}
+                    type="button"
+                    className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                  >
+                    <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                      Выбрать
                     </label>
-                  </div> 
+                    <ArrowRightIcon />
+                  </button>
+                  <Select
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      [
+                        // no data
+                      ]
+                    }
+                  />
                 </div>
-                <div className="w-full flex items-center ">
-                  <div className="w-full md:w-[45%]">
-                    <button
-                      onClick={() => setOpenGender(true)}
-                      type="button"
-                      className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                <div className="w-1/2 flex  flex-col items-start">
+                  <div className="flex items-center justify-center mb-[5px]">
+                    <label
+                      htmlFor=""
+                      className="text-[13px] md:text-base font-AeonikProRegular"
                     >
-                      <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                        Выбрать
+                      Подраздел одежды{" "}
+                    </label>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setOpenClothingSubSection(true)}
+                    type="button"
+                    className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                  >
+                    <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                      Выбрать
+                    </label>
+                    <ArrowRightIcon />
+                  </button>
+                  <Select
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      [
+                        // no data
+                      ]
+                    }
+                  />
+                </div>
+              </div>
+
+              {/* 2 */}
+              <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
+                <div className="w-1/2 flex  flex-col items-start">
+                  <div className="flex items-center justify-center mb-[5px]">
+                    <label
+                      htmlFor=""
+                      className="text-[13px] md:text-base font-AeonikProRegular"
+                    >
+                      Сезон одежды
+                    </label>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setOpenWeather(true)}
+                    type="button"
+                    className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                  >
+                    <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                      Выбрать
+                    </label>
+                    <ArrowRightIcon />
+                  </button>
+                  <Select
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      [
+                        // no data
+                      ]
+                    }
+                  />
+                </div>
+                <div className="w-1/2 flex  flex-col items-start">
+                  <div className="flex items-center justify-between mb-[5px]">
+                    <label
+                      htmlFor=""
+                      className="text-[13px] md:text-base font-AeonikProRegular"
+                    >
+                      Цвет
+                    </label>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setOpenColors(true)}
+                    className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                  >
+                    <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                      Выбрать
+                    </label>
+                    <ArrowRightIcon />
+                  </button>
+                  <div className="w-full hidden md:flex items-center justify-between border rounded-lg md:py-[9px] px-[12px]">
+                    {changeColor?.map((data) => {
+                      return (
+                        <div key={data?.id} className="hidden md:block">
+                          <label
+                            key={data?.id}
+                            className={`${data.colors} rounded-full border border-${data.colors} w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
+                          >
+                            {/* <img src={data.icons} alt="" /> */}
+                          </label>
+                          <input
+                            type="radio"
+                            id={data?.id}
+                            name="checkStatus"
+                            value={data?.id}
+                            className={"hidden w-full h-full"}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 */}
+              <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
+                <div className="w-1/2 flex flex-col items-start">
+                  <div className="w-full mb-[5px]">
+                    <div className="flex items-center justify-between ">
+                      <label
+                        htmlFor=""
+                        className="flex items-center text-[13px] md:text-base font-AeonikProRegular"
+                      >
+                        Пол
+                        <span className="ml-[5px]">
+                          <StarLabel />
+                        </span>
                       </label>
-                      <ArrowRightIcon />
+                      <label
+                        className="hidden md:flex items-center text-[13px] md:text-base font-AeonikProRegular"
+                      >
+                        Возрастная категория
+                        <span className="ml-[5px]">
+                          <StarLabel />
+                        </span>
+                      </label>
+                    </div> 
+                  </div>
+                  <div className="w-full flex items-center ">
+                    <div className="w-full md:w-[45%]">
+                      <button
+                        onClick={() => setOpenGender(true)}
+                        type="button"
+                        className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                      >
+                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          Выбрать
+                        </label>
+                        <ArrowRightIcon />
+                      </button>
+                      <Select
+                        className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                        showSearch
+                        placeholder="Выбрать"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        onSearch={onSearch}
+                        size="large"
+                        filterOption={(input, option) =>
+                          (option?.label ?? "")
+                            .toLowerCase()
+                            .includes(input.toLowerCase())
+                        }
+                        options={
+                          [
+                            // no data
+                          ]
+                        }
+                      />
+                    </div>
+                    <div className="w-[60%] hidden md:flex items-center justify-center">
+                      <div className="flex flex-col">
+                        <input
+                          type="number"
+                          className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          placeholder="Мин"
+                      />
+                      </div>
+                      <span className="rotate-90 h-full text-borderColor mx-3">|</span>
+                      <div className="flex flex-col">
+                        <input
+                          type="number"
+                          className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          placeholder="Мах"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-1/2 flex flex-col items-start">
+                  <div className="flex items-center justify-center mb-[5px]">
+                    <label
+                      htmlFor=""
+                      className="text-[13px] md:text-base font-AeonikProRegular"
+                    >
+                      Артикул
+                    </label>
+                    <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
+                      (необязательно)
+                    </span>
+                  </div>
+                  <div className="w-full flex items-center justify-between">
+                    <input
+                      type="text"
+                      className="w-[80%] h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
+                      placeholder="0"
+                    />
+                    <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
+                        <LoaderIcon />
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              {/* 4 */}
+              <div className="w-full hidden md:flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
+                <div className="w-1/2 hidden md:flex flex-col items-start">
+                  <div className="flex items-center justify-center mb-[5px]">
+                    <label htmlFor="" className="text-base font-AeonikProRegular">
+                      Категория одежды
+                    </label>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
+                  </div>
+                  <button 
+                    onClick={toggleDropModalButton}
+                    type="button" className={`w-full overflow-hidden h-[42px] flex items-center justify-between border border-borderColor rounded-lg p-3 `}>
+                    <span className="text-[#a1a1a1]">Выбрать</span>
+                      {!state.openDropModalButton ? (
+                        <span className="-rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
+                      ):(
+                        <span className="rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
+                      )
+                    }
+                    
+                  </button>
+                </div>
+                <div className="w-1/2 flex items-start gap-x-[10px]">
+                  <div className="w-full md:w-1/2 flex flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        className="text-[13px] md:text-base font-AeonikProRegular"
+                      >
+                        Тип{" "}
+                      </label>
+                      <span className="ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setOpenTypes(true)}
+                      type="button"
+                      className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
+                    >
+                      <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
+                        Выбрать
+                      </span>
+                      <span className="">
+                        <ArrowRightIcon />
+                      </span>
                     </button>
                     <Select
                       className="hidden md:block rounded-lg w-full h-11 md:h-10"
@@ -2163,250 +2270,206 @@ const AddingProduct = () => {
                       }
                     />
                   </div>
-                  <div className="w-[60%] hidden md:flex items-center justify-center">
-                    <div className="flex flex-col">
-                      <input
-                        type="number"
-                        className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                        placeholder="Мин"
-                     />
+                  <div className="w-1/2 hidden md:flex flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        className="text-base font-AeonikProRegular"
+                      >
+                        Вес (грамм)
+                      </label>
                     </div>
-                    <span className="rotate-90 h-full text-borderColor mx-3">|</span>
-                    <div className="flex flex-col">
-                      <input
-                        type="number"
-                        className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                        placeholder="Мах"
-                      />
-                    </div>
+                    <input
+                      type="number"
+                      className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      placeholder="(необязательно)"
+                    />
                   </div>
                 </div>
               </div>
-              <div className="w-1/2 flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Артикул
-                  </label>
-                  <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                    (необязательно)
-                  </span>
-                </div>
-                <div className="w-full flex items-center justify-between">
-                  <input
-                    type="text"
-                    className="w-[80%] h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
-                    placeholder="0"
-                  />
-                  <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
-                      <LoaderIcon />
-                  </div>
-                </div>
-              </div>
-            </div>
-         
-            {/* 4 */}
-            <div className="w-full hidden md:flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
-              {/* <div className="w-1/2 flex md:hidden flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
-                  >
-                    Категория одежды
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <Select
-                  className="hidden md:flex rounded-lg w-full h-11 md:h-10"
-                  showSearch
-                  placeholder="Выбрать"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
-                />
-              </div> */}
-              <div className="w-1/2 hidden md:flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label htmlFor="" className="text-base font-AeonikProRegular">
-                    Категория одежды
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <Select
-                  className="rounded-lg w-full h-11 md:h-10"
-                  showSearch
-                  placeholder="Выбрать"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={
-                    [
-                      // no data
-                    ]
-                  }
-                />
-              </div>
-              <div className="w-1/2 flex items-start gap-x-[10px]">
-                <div className="w-full md:w-1/2 flex flex-col items-start">
-                  <div className="flex items-center justify-center mb-[5px]">
-                    <label
-                      className="text-[13px] md:text-base font-AeonikProRegular"
-                    >
-                      Тип{" "}
-                    </label>
-                    <span className="ml-[5px]">
-                      <StarLabel />
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => setOpenTypes(true)}
-                    type="button"
-                    className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
-                  >
-                    <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
-                      Выбрать
-                    </span>
-                    <span className="">
-                      <ArrowRightIcon />
-                    </span>
-                  </button>
-                  <Select
-                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                    showSearch
-                    placeholder="Выбрать"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onSearch={onSearch}
-                    size="large"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "")
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                    }
-                    options={
-                      [
-                        // no data
-                      ]
-                    }
-                  />
-                </div>
-                <div className="w-1/2 hidden md:flex flex-col items-start">
-                  <div className="flex items-center justify-center mb-[5px]">
-                    <label
-                      className="text-base font-AeonikProRegular"
-                    >
-                      Вес (грамм)
-                    </label>
-                  </div>
-                  <input
-                    type="number"
-                    className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                    placeholder="(необязательно)"
-                  />
-                </div>
-              </div>
-            </div>
 
-            {/* 4 Buttons For Mobile */}
-            <div className="w-full flex md:hidden items-center justify-between mb-[15px] gap-x-[11px]">
-              <div className="w-1/2 flex items-start gap-x-[10px]">
-                <div className="w-full md:w-1/2 flex flex-col items-start">
-                  <div className="flex items-center justify-center mb-[5px]">
-                    <label
-                      className="text-[13px] md:text-base font-AeonikProRegular"
+              {/* 4 Buttons For Mobile */}
+              <div className="w-full flex md:hidden items-center justify-between mb-[15px] gap-x-[11px]">
+                <div className="w-1/2 flex items-start gap-x-[10px]">
+                  <div className="w-full md:w-1/2 flex flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        className="text-[13px] md:text-base font-AeonikProRegular"
+                      >
+                        Тип{" "}
+                      </label>
+                      <span className="ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setOpenTypes(true)}
+                      type="button"
+                      className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
                     >
-                      Тип{" "}
-                    </label>
-                    <span className="ml-[5px]">
-                      <StarLabel />
-                    </span>
+                      <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
+                        Выбрать
+                      </span>
+                      <span className="">
+                        <ArrowRightIcon />
+                      </span>
+                    </button>
+                    <Select
+                      className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                      showSearch
+                      placeholder="Выбрать"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onSearch={onSearch}
+                      size="large"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      options={
+                        [
+                          // no data
+                        ]
+                      }
+                    />
                   </div>
-                  <button
-                    onClick={() => setOpenTypes(true)}
-                    type="button"
-                    className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
-                  >
-                    <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
-                      Выбрать
-                    </span>
-                    <span className="">
-                      <ArrowRightIcon />
-                    </span>
-                  </button>
-                  <Select
-                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                    showSearch
-                    placeholder="Выбрать"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onSearch={onSearch}
-                    size="large"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "")
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                    }
-                    options={
-                      [
-                        // no data
-                      ]
-                    }
-                  />
+                  <div className="w-1/2 hidden md:flex flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        className="text-base font-AeonikProRegular"
+                      >
+                        Вес (грамм)
+                      </label>
+                    </div>
+                    <input
+                      type="number"
+                      className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      placeholder="(необязательно)"
+                    />
+                  </div>
                 </div>
-                <div className="w-1/2 hidden md:flex flex-col items-start">
-                  <div className="flex items-center justify-center mb-[5px]">
-                    <label
-                      className="text-base font-AeonikProRegular"
+                <div className="w-1/2 flex items-start gap-x-[10px]">
+                  <div className="w-full md:w-1/2 flex flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        className="text-[13px] md:text-base font-AeonikProRegular"
+                      >
+                        Страна размера
+                      </label>
+                      <span className="ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setOpenTypes(true)}
+                      type="button"
+                      className="w-full flex items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
                     >
-                      Вес (грамм)
-                    </label>
+                      <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
+                        Выбрать
+                      </span>
+                      <span className="">
+                        <ArrowRightIcon />
+                      </span>
+                    </button>
                   </div>
-                  <input
-                    type="number"
-                    className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                    placeholder="(необязательно)"
-                  />
+                  <div className="w-1/2 hidden md:flex flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        className="text-base font-AeonikProRegular"
+                      >
+                        Вес (грамм)
+                      </label>
+                    </div>
+                    <input
+                      type="number"
+                      className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      placeholder="(необязательно)"
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="w-1/2 flex items-start gap-x-[10px]">
-                <div className="w-full md:w-1/2 flex flex-col items-start">
+              
+              {/* 5 */}
+              {!state.openDropModalButton ? (
+              <div className="w-full hidden md:flex items-center justify-between">
+                <Popover
+                  // open={state?.openhat}
+                  // onOpenChange={handleOpenChangeHat}
+                  className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
+                  trigger="click"
+                  options={["Hide"]}
+                  placement="bottomLeft"
+                  content={contentHat}
+                >
+                  Головные уборы
+                </Popover>
+                <Popover
+                  // open={state?.openOutwear}
+                  // onOpenChange={handleOpenChangeOutwear}
+                  className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
+                  trigger="click"
+                  options={["Hide"]}
+                  placement="bottomLeft"
+                  content={contentOutwear}
+                >
+                  Верхняя одежда
+                </Popover>
+                <Popover
+                  // open={state?.openOutwaer}
+                  // onOpenChange={handleOpenChangeOutwear}
+                  className="group px-[15px] h-[38px] rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                  trigger="click"
+                  options={["Hide"]}
+                  placement="bottom"
+                  content={contentUnderWear}
+                >
+                  Нижняя одежда
+                </Popover>
+                <Popover
+                  // open={state?.openwear}
+                  // onOpenChange={handleOpenChangeWear}
+                  className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                  trigger="click"
+                  options={["Hide"]}
+                  placement="bottom"
+                  content={contentShoes}
+                >
+                  Обувь
+                </Popover>
+                <Popover
+                  // open={state?.openwear}
+                  // onOpenChange={handleOpenChangeWear}
+                  className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                  trigger="click"
+                  options={["Hide"]}
+                  placement="bottomRight"
+                  content={contentAccessories}
+                >
+                  Аксессуары
+                </Popover>
+              </div>
+              ) : (
+                ""
+              )}
+
+              {/* 5 Bottom Buttons For Mobile */}
+              <div className="w-full flex md:hidden flex-row gap-x-[11px] mb-[30px] ">
+                <div className="w-1/2 flex flex-col items-start">
                   <div className="flex items-center justify-center mb-[5px]">
                     <label
+                      htmlFor=""
                       className="text-[13px] md:text-base font-AeonikProRegular"
                     >
-                      Страна размера
+                      Категория одежды
                     </label>
                     <span className="ml-[5px]">
                       <StarLabel />
                     </span>
                   </div>
                   <button
-                    onClick={() => setOpenTypes(true)}
                     type="button"
+                    onClick={() => setOpenCategories(true)}
                     className="w-full flex items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
                   >
                     <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
@@ -2417,207 +2480,105 @@ const AddingProduct = () => {
                     </span>
                   </button>
                 </div>
-                <div className="w-1/2 hidden md:flex flex-col items-start">
+                <div className="w-1/2 flex md:hidden flex-col items-start">
                   <div className="flex items-center justify-center mb-[5px]">
                     <label
-                      className="text-base font-AeonikProRegular"
+                      htmlFor=""
+                      className="text-[13px] md:text-base font-AeonikProRegular"
                     >
-                      Вес (грамм)
+                      Возрастная категория
                     </label>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
                   </div>
-                  <input
-                    type="number"
-                    className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                    placeholder="(необязательно)"
-                  />
+                  <div className="w-full flex items-center">
+                    <input
+                      type="number"
+                      className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      placeholder="Мин"
+                    />
+                    <span className="rotate-90 text-borderColor ml-3 mr-[9px]">
+                      |
+                    </span>
+                    <input
+                      type="number"
+                      className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      placeholder="Макс"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* 5 */}
-            <div className="w-full hidden md:flex items-center justify-between">
-              <Popover
-                // open={state?.openhat}
-                // onOpenChange={handleOpenChangeHat}
-                className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottomLeft"
-                content={contentHat}
-              >
-                Головные уборы
-              </Popover>
-              <Popover
-                // open={state?.openOutwear}
-                // onOpenChange={handleOpenChangeOutwear}
-                className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottomLeft"
-                content={contentOutwear}
-              >
-                Верхняя одежда
-              </Popover>
-              <Popover
-                // open={state?.openOutwaer}
-                // onOpenChange={handleOpenChangeOutwear}
-                className="group px-[15px] h-[38px] rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottom"
-                content={contentUnderWear}
-              >
-                Нижняя одежда
-              </Popover>
-              <Popover
-                // open={state?.openwear}
-                // onOpenChange={handleOpenChangeWear}
-                className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottom"
-                content={contentShoes}
-              >
-                Обувь
-              </Popover>
-              <Popover
-                // open={state?.openwear}
-                // onOpenChange={handleOpenChangeWear}
-                className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottomRight"
-                content={contentAccessories}
-              >
-                Аксессуары
-              </Popover>
-            </div>
-
-            {/* 5 Bottom Buttons For Mobile */}
-            <div className="w-full flex md:hidden flex-row gap-x-[11px] mb-[30px] ">
-              <div className="w-1/2 flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+            <div className="w-[35%] h-[510px] hidden md:block">
+              <div className="flex items-center justify-start mb-[5px]">
+                <label htmlFor="" className="text-base font-AeonikProRegular">
+                  Фото
+                </label>
+                <span className="ml-[5px]">
+                  <StarLabel />
+                </span>
+              </div>
+              <div className="w-full h-[400px] bg-photoBg flex items-center justify-center border border-dashed rounded-lg">
+                <Link
+                  to="#"
+                  className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium"
+                >
+                  Выберите фото
+                </Link>
+              </div>
+              <div className="w-full flex items-center justify-between gap-x-[10px] mt-[10px]">
+                <div className="w-1/3 flex flex-col items-center justify-center mb-[21px]">
+                  <Link
+                    to="#"
+                    className="w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
                   >
-                    Категория одежды
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
+                    <DownloadIcon />
+                  </Link>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setOpenCategories(true)}
-                  className="w-full flex items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
-                >
-                  <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
-                    Выбрать
-                  </span>
-                  <span className="">
-                    <ArrowRightIcon />
-                  </span>
-                </button>
-              </div>
-              <div className="w-1/2 flex md:hidden flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                <div className="w-1/3 flex flex-col items-center justify-center">
+                  <Link
+                    to="#"
+                    className=" w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
                   >
-                    Возрастная категория
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
+                    <DownloadIcon />
+                  </Link>
+                  <div className="text-[11px] text-textLightColor mt-[5px]">
+                    (необязательно)
+                  </div>
                 </div>
-                <div className="w-full flex items-center">
-                  <input
-                    type="number"
-                    className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                    placeholder="Мин"
-                  />
-                  <span className="rotate-90 text-borderColor ml-3 mr-[9px]">
-                    |
-                  </span>
-                  <input
-                    type="number"
-                    className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                    placeholder="Макс"
-                  />
+                <div className="w-1/3 flex flex-col items-center justify-center ">
+                  <Link
+                    to="#"
+                    className=" w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
+                  >
+                    <DownloadIcon />
+                  </Link>
+                  <div className="text-[11px] text-textLightColor mt-[5px]">
+                    (необязательно)
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex md:hidden items-center justify-center mb-[40px]">
+            <div className="w-1/3 h-[1px] bg-borderColor"></div>
+            <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]">
+              <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
+            </div>
+            <div className="h-[1px] bg-textBlueColor w-[50px]"></div>
+            <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]"></div>
+            <div className="h-[1px] bg-borderColor flex-grow"></div>
           </div>
 
-          <div className="w-[35%] h-[510px] hidden md:block">
-            <div className="flex items-center justify-start mb-[5px]">
-              <label htmlFor="" className="text-base font-AeonikProRegular">
-                Фото
-              </label>
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </div>
-            <div className="w-full h-[400px] bg-photoBg flex items-center justify-center border border-dashed rounded-lg">
-              <Link
-                to="#"
-                className="text-textBlueColor border-b border-textBlueColor font-AeonikProMedium"
-              >
-                Выберите фото
-              </Link>
-            </div>
-            <div className="w-full flex items-center justify-between gap-x-[10px] mt-[10px]">
-              <div className="w-1/3 flex flex-col items-center justify-center mb-[21px]">
-                <Link
-                  to="#"
-                  className="w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
-                >
-                  <DownloadIcon />
-                </Link>
-              </div>
-              <div className="w-1/3 flex flex-col items-center justify-center">
-                <Link
-                  to="#"
-                  className=" w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
-                >
-                  <DownloadIcon />
-                </Link>
-                <div className="text-[11px] text-textLightColor mt-[5px]">
-                  (необязательно)
-                </div>
-              </div>
-              <div className="w-1/3 flex flex-col items-center justify-center ">
-                <Link
-                  to="#"
-                  className=" w-full h-[73px] flex items-center justify-center rounded-lg border border-dashed bg-photoBg"
-                >
-                  <DownloadIcon />
-                </Link>
-                <div className="text-[11px] text-textLightColor mt-[5px]">
-                  (необязательно)
-                </div>
-              </div>
-            </div>
-          </div>
+          <NavLink
+            to="/products/add-detail"
+            className="w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
+          >
+            Продолжить
+          </NavLink>
         </div>
-        <div className="flex md:hidden items-center justify-center mb-[40px]">
-          <div className="w-1/3 h-[1px] bg-borderColor"></div>
-          <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]">
-            <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
-          </div>
-          <div className="h-[1px] bg-textBlueColor w-[50px]"></div>
-          <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]"></div>
-          <div className="h-[1px] bg-borderColor flex-grow"></div>
-        </div>
-
-        <NavLink
-          to="/products/add-detail"
-          className="w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
-        >
-          Продолжить
-        </NavLink>
       </form>
     </div>
   );
