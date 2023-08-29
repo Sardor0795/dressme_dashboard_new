@@ -10,3 +10,9 @@ export { default as backImg } from "./store/backImg.svg";
 export { default as wearImg } from "./location/wearImg.svg";
 export { default as Aligarx } from "./location/aligarxImg.svg";
 export { default as mapImg } from "./location/mapimg.svg";
+
+// /LocationImg group-----------------------
+export { default as img1 } from "./imgs/img1.svg";
+export { default as img2 } from "./imgs/img2.svg";
+export { default as img3 } from "./imgs/img3.svg";
+export { default as img4 } from "./imgs/img4.svg";
