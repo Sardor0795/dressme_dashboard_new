@@ -1,54 +1,30 @@
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import { GrClose, GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { img1, img2, img3, img4 } from "../../../../../../../assets";
 
 export default function CarouselItem() {
   const [imgGroup] = useState([
     {
       id: 1,
       action: true,
-      img: "https://images.uzum.uz/ch15okj57mg9720fq5h0/original.jpg",
+      img: img4,
     },
     {
       id: 2,
       action: false,
-      img: "https://images.uzum.uz/cgcp9n7g49devoab8a50/t_product_240_high.jpg",
+      img: img2,
     },
     {
       id: 3,
       action: false,
-      img: "https://images.uzum.uz/ch15okng49devoaengt0/original.jpg",
+      img: img3,
     },
     {
       id: 4,
       action: false,
-      img: "https://images.uzum.uz/ch15okvhj8j9g69e280g/original.jpg",
+      img: img1,
     },
-    // {
-    //   id: 5,
-    //   action: false,
-    //   img: "https://images.uzum.uz/cgcphi7hgiov1qif46p0/original.jpg",
-    // },
-    // {
-    //   id: 6,
-    //   action: false,
-    //   img: "https://images.uzum.uz/ch0g2rr57mg9720fmb9g/t_product_240_high.jpg",
-    // },
-    // {
-    //   id: 7,
-    //   action: false,
-    //   img: "https://images.uzum.uz/ch0g2rvhj8j9g69dv4v0/original.jpg",
-    // },
-    // {
-    //   id: 8,
-    //   action: false,
-    //   img: "https://images.uzum.uz/ch0g2rvhj8j9g69dv4vg/original.jpg",
-    // },
-    // {
-    //   id: 9,
-    //   action: false,
-    //   img: "https://images.uzum.uz/cgl7vevhj8j9g69br4e0/original.jpg",
-    // },
   ]);
 
   const [nav1, setNav1] = useState();

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
 import { StarLabel } from "../../../../../../../assets/icons";
+import { img1, img2, img3, img4 } from "../../../../../../../assets";
 
 const ProductCarouselEdit = () => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
@@ -26,47 +27,22 @@ const ProductCarouselEdit = () => {
     {
       id: 1,
       action: true,
-      img: "https://images.uzum.uz/ch15okj57mg9720fq5h0/original.jpg",
+      img: img4,
     },
     {
       id: 2,
       action: false,
-      img: "https://images.uzum.uz/cgcp9n7g49devoab8a50/t_product_240_high.jpg",
+      img: img2,
     },
     {
       id: 3,
       action: false,
-      img: "https://images.uzum.uz/ch15okng49devoaengt0/original.jpg",
+      img: img3,
     },
     {
       id: 4,
       action: false,
-      img: "https://images.uzum.uz/ch15okvhj8j9g69e280g/original.jpg",
-    },
-    {
-      id: 5,
-      action: false,
-      img: "https://images.uzum.uz/cgcphi7hgiov1qif46p0/original.jpg",
-    },
-    {
-      id: 6,
-      action: false,
-      img: "https://images.uzum.uz/ch0g2rr57mg9720fmb9g/t_product_240_high.jpg",
-    },
-    {
-      id: 7,
-      action: false,
-      img: "https://images.uzum.uz/ch0g2rvhj8j9g69dv4v0/original.jpg",
-    },
-    {
-      id: 8,
-      action: false,
-      img: "https://images.uzum.uz/ch0g2rvhj8j9g69dv4vg/original.jpg",
-    },
-    {
-      id: 9,
-      action: false,
-      img: "https://images.uzum.uz/cgl7vevhj8j9g69br4e0/original.jpg",
+      img: img1,
     },
   ]);
   const [nav1, setNav1] = useState();
@@ -186,7 +162,7 @@ const ProductCarouselEdit = () => {
                 return (
                   <article key={data?.id} object-fit>
                     <img
-                      className="w-[350px] h-[377px] "
+                      className="w-[350px] h-[377px] object-top	object-cover"
                       src={data?.img}
                       alt=""
                     />
@@ -213,7 +189,7 @@ const ProductCarouselEdit = () => {
                     className="!w-[95%] !h-[70px] md:!w-[95%] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
                   >
                     <img
-                      className="w-fit h-full md:p-0
+                      className="w-fit h-full md:p-0 object-top	object-cover
                        md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
                       src={data?.img}
                       alt=""
