@@ -11,69 +11,59 @@ import {
 } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 
-import { DatePicker, Space, Popover } from "antd";
+import { DatePicker, Space } from "antd";
 const { RangePicker } = DatePicker;
 export default function LocationClothesCity() {
-  // const { id } = useParams();
-  // const NewId = id.replace(":", "");
   const navigate = useNavigate();
-
-  let NewId = "Hadra";
 
   const [data, setData] = useState([
     {
       id: 1,
       index: 1,
-      name: "Кроссовка Nike RUN",
+      name: "wear",
       isCheck: false,
       bgColor: "bg-[#4FB459]",
       state: "Одобренный",
-      money: "16000",
     },
     {
       id: 2,
       index: 2,
-      name: "Кроссовка Nike RUN",
+      name: "wear",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
-      money: "16000",
     },
     {
       id: 3,
       index: 3,
-      name: "Кроссовка Nike RUN",
+      name: "wear",
       isCheck: false,
       bgColor: "bg-[#FF4747]",
       state: "Отказанный",
-      money: "16000",
     },
     {
       id: 4,
       index: 1,
-      name: "Кроссовка Nike RUN",
+      name: "wear",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
-      money: "16000",
     },
     {
       id: 5,
       index: 2,
-      name: "Кроссовка Nike RUN",
+      name: "wear",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
-      money: "16000",
     },
     {
       id: 6,
       index: 3,
-      name: "Кроссовка Nike RUN",
+      name: "wear",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
-      money: "16000",
     },
   ]);
 
@@ -267,21 +257,15 @@ export default function LocationClothesCity() {
             </span>
           </div>
 
-
-          <div className="w-full flex md:hidden ">
-
+          <div className="w-full">
             <div className="flex md:hidden justify-end w-full mb-[25px]">
-
-          <div className="w-full md:hidden">
-            <div className="flex md:hidden justify-end items-center w-full mb-[25px]">
-
               Выбрать все
               <div
                 onClick={() => {
                   onCheck(checkIndicator);
                   setAllChecked(!allChecked);
                 }}
-                className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
+                className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
                   allChecked
                     ? "bg-[#007DCA] border-[#007DCA]"
                     : "bg-white border-checkboxBorder"
@@ -294,8 +278,8 @@ export default function LocationClothesCity() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="8"
-                    height="10"
+                    width="11"
+                    height="13"
                     viewBox="0 0 11 13"
                     fill="none"
                   >
@@ -310,7 +294,7 @@ export default function LocationClothesCity() {
               </div>
             </div>
 
-            <div className="w-full md:hidden">
+            <div className="w-full">
               <section className="flex md:hidden gap-x-4">
                 <p className="text-black text-[18px] not-italic font-AeonikProMedium mr-auto">
                   Юнусабад (6)
@@ -330,7 +314,7 @@ export default function LocationClothesCity() {
             </div>
           </div>
 
-          <div className="hidden w-full border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] ">
+          <div className="hidden border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] w-full">
             <div className="w-[45px]">No:</div>
             <div className="mr-[75px]">Фото</div>
             <div className="flex w-full">
