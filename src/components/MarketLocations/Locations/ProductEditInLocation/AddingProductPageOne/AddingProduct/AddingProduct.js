@@ -1,5 +1,5 @@
 import { Popover, Select, Switch } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AddIconsCircle,
   AddIconsCircle1,
@@ -18,9 +18,11 @@ import GenderTypeDropUp from "../MobileDropUpSides/GenderTypeDropUp/GenderTypeDr
 import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
 import { ProductCarouselEdit } from "../MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
-import { GrClose } from "react-icons/gr";
+import { GrClose, GrFormNext, GrFormPrevious } from "react-icons/gr";
 import WearCollection from "../WearCollection/WearCollection";
 import AllSizeModalEdit from "./AllSizeModalEdit/AllSizeModalEdit";
+import { img1, img2, img3, img4 } from "../../../../../../assets";
+import Slider from "react-slick";
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -468,6 +470,126 @@ const AddingProduct = () => {
     });
   };
 
+  // --------------Carousel--------------
+
+  const [imgGroup] = useState([
+    {
+      id: 1,
+      action: true,
+      img: img4,
+    },
+    {
+      id: 2,
+      action: false,
+      img: img2,
+    },
+    {
+      id: 3,
+      action: false,
+      img: img3,
+    },
+    {
+      id: 4,
+      action: false,
+      img: img1,
+    },
+  ]);
+
+  const [nav1, setNav1] = useState();
+  const [nav2, setNav2] = useState();
+  const slider1 = useRef(null);
+  const slider2 = useRef(null);
+
+  useEffect(() => {
+    setNav1(slider1.current);
+    setNav2(slider2.current);
+  }, []);
+
+  const NextArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  right-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="next">
+          <GrFormNext size={20} />
+        </button>
+      </main>
+    );
+  };
+  const PrevArrow = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  left-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="prev">
+          <GrFormPrevious size={20} />
+        </button>
+      </main>
+    );
+  };
+  let settings = {
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    infinite: true,
+    dots: false,
+    speed: 500,
+  };
+  let settings1 = {
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 560,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+
+      {
+        breakpoint: 390,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 360,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
       <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
@@ -592,41 +714,60 @@ const AddingProduct = () => {
       // className="md:relative w-full  md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
       >
         {/* Photo Section For Mobile */}
-        <div className="w-full flex md:hidden mb-6 gap-x-[15px]">
-          <div className="w-3/4 flex items-center justify-center rounded-lg border border-dashed border-borderColor bg-photoBg">
-            <Link
-              to="#"
-              className=" text-xs font-AeonikProMedium text-textBlueColor border-b border-textBlueColor"
-            >
-              Выберите фото
-            </Link>
+        <div className="w-full flex md:hidden justify-center mb-6 gap-x-[15px] ">
+          <div className="w-fit h-full flex gap-x-2 ">
+            <div className="w-[300px] h-[350px] flex items-center  ">
+              <Slider
+                className="w-full h-full rounded-lg "
+                asNavFor={nav2}
+                ref={slider1}
+                {...settings}
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <article key={data?.id} object-fit>
+                      <img
+                        className="w-full  h-[350px] object-cover object-top	 rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </article>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-[90px] items-center justify-between   ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                // slidesToShow={5}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={true}
+                {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap rounded-lg "
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[100%] cursor-pointer bg-btnBgColor rounded-lg "
+                    >
+                      <img
+                        className=" h-[106px]  md:p-0 object-top	object-cover 
+                                w-full  flex items-center justify-center border border-searchBgColor rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>
+
           </div>
-          <div className="w-1/4 flex flex-col">
-            <div className="w-full h-[95px] flex items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
-              <Link to="#">
-                {" "}
-                <DownloadIcon />{" "}
-              </Link>
-            </div>
-            <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor mb-2">
-              <Link to="#" className="mt-7">
-                {" "}
-                <DownloadIcon />{" "}
-              </Link>
-              <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">
-                (необязательно)
-              </span>
-            </div>
-            <div className="w-full h-[95px] flex flex-col items-center justify-center rounded-lg border border-dashed border-borderColor">
-              <Link to="#" className="mt-7">
-                {" "}
-                <DownloadIcon />{" "}
-              </Link>
-              <span className="text-textLightColor font-AeonikProRegular text-[9px] mt-[15px]">
-                (необязательно)
-              </span>
-            </div>
-          </div>
+
+
         </div>
         <div className="w-full flex items-center justify-between md:gap-x-[30px]">
           <div className="w-full md:w-[65%]">
@@ -1176,7 +1317,7 @@ const AddingProduct = () => {
                   </span>
                 </button>
               </div>
-              <div className="w-1/2 hidden md:flex flex-col items-start">
+              <div className="w-1/2 hidden md:flex flex-col items-start bg-red-500 border border-red-500 ">
                 <div className="flex items-center justify-between mb-[5px]">
                   <span> Категория одежды</span>
                   <span className="ml-[5px]">
@@ -1450,3 +1591,4 @@ const AddingProduct = () => {
 };
 
 export default AddingProduct;
+// w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]
