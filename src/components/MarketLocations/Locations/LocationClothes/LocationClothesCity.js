@@ -20,50 +20,56 @@ export default function LocationClothesCity() {
     {
       id: 1,
       index: 1,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#4FB459]",
       state: "Одобренный",
+      money: '96000'
     },
     {
       id: 2,
       index: 2,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
+      money: '96000'
     },
     {
       id: 3,
       index: 3,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#FF4747]",
       state: "Отказанный",
+      money: '96000'
     },
     {
       id: 4,
       index: 1,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
+      money: '96000'
     },
     {
       id: 5,
       index: 2,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
+      money: '96000'
     },
     {
       id: 6,
       index: 3,
-      name: "wear",
+      name: "Кроссовка Nike RUN",
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
+      money: '96000'
     },
   ]);
 
@@ -186,35 +192,35 @@ export default function LocationClothesCity() {
           </Link>
         </section>
         <div className="w-full md:w-fit flex items-center border-b md:border-b-0 border-[#F2F2F2] pb-[25px] md:pb-0">
-          <div className="mr-auto md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
+          <div className="mr-auto md:mr-6 font-AeonikProRegular text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-mobileTextColor">
             Выбранные
           </div>
           <button
-            className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  ${
+            className={`w-fit pr-1 ll:pr-3 border-r-[2px] border-addLocBorderRight flex items-center justify-center font-AeonikProRegular text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-addLocationTextcolor  ${
               someChecked
                 ? "opacity-100 active:translate-y-[2px]"
                 : "opacity-30 cursor-not-allowed"
             }`}
           >
-            <span className="mr-[5px] hidden md:block">
+            <span className="mr-[3px] ll:mr-[5px] hidden md:block">
               <AddLocationIcon width={20} />
             </span>
-            <span className="mr-[5px] block md:hidden">
+            <span className="mr-[3px] ll:mr-[5px] block md:hidden">
               <AddLocationIcon width={16} />
             </span>
             Добавить в локацию
           </button>
           <button
-            className={`pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor ${
+            className={`pl-1 ll:pl-3 flex items-center font-AeonikProRegular text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-deleteColor ${
               someChecked
                 ? "opacity-100 active:translate-y-[2px]"
                 : "opacity-30 cursor-not-allowed"
             }`}
           >
-            <span className="mr-[5px] hidden md:block">
+            <span className="mr-[3px] ll:mr-[5px] hidden md:block">
               <DeleteIcon width={20} />
             </span>
-            <span className="mr-[5px] block md:hidden">
+            <span className="mr-[3px] ll:mr-[5px] block md:hidden">
               <DeleteIcon width={16} />
             </span>
             Удалить
@@ -258,14 +264,14 @@ export default function LocationClothesCity() {
           </div>
 
           <div className="w-full">
-            <div className="flex md:hidden justify-end w-full mb-[25px]">
+            <div className="flex items-center md:hidden justify-end w-full mb-[25px]">
               Выбрать все
               <div
                 onClick={() => {
                   onCheck(checkIndicator);
                   setAllChecked(!allChecked);
                 }}
-                className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
+                className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
                   allChecked
                     ? "bg-[#007DCA] border-[#007DCA]"
                     : "bg-white border-checkboxBorder"
@@ -278,8 +284,8 @@ export default function LocationClothesCity() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="13"
+                    width="8"
+                    height="10"
                     viewBox="0 0 11 13"
                     fill="none"
                   >

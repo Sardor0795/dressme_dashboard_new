@@ -154,7 +154,7 @@ export default function LocationItem({ data, click, index }) {
 
           <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
             <div className="w-[23%]">BAA-00004</div>
-            <div className="w-[25%] flex items-center justify-center rounded-lg px-[5px] py-[4px]">
+            <div className="w-[25%]">
               Футболка
             </div>
             <div className="w-[25%]"> 15-08-2023 </div>
