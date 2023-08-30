@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
 import { ColourCard } from "../../../../../../../assets";
 
-export default function AllSizeModalEdit({ onClick }) {
+export default function AllSizeModalEdit({ onClick, modalOpenColor }) {
   const [decraseList, setDecraseList] = useState(false);
   const [wearSizeList, setWearSizeList] = useState([
     { id: 1, action: false, name: "XXS" },
@@ -20,7 +20,7 @@ export default function AllSizeModalEdit({ onClick }) {
   return (
     <div className="w-[670px] h-fit bg-white rounded-lg bg-white py-5 px-4">
       <div className="w-full flex items-center justify-between pl-7">
-        <button className="flex items-center gap-x-1 border border-borderColor p-1 rounded-lg">
+        <button type="button" onClick={modalOpenColor} className="flex items-center gap-x-1 border border-borderColor p-1 rounded-lg">
           <img src={ColourCard} alt="" />
           <span className="text-black text-sm not-italic font-AeonikProRegular">
             Фильт цвет
@@ -51,7 +51,7 @@ export default function AllSizeModalEdit({ onClick }) {
                 Добавить выбранные к цвету
               </span>
             </div>
-            <div className="w-full border border-borderColor border-r-black border-r-8	 rounded-lg p-3 ">
+            <div className="w-full border border-borderColor  rounded-lg p-3 ">
               <action
                 className={`w-full h-fit flex   justify-between not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center `}
               >

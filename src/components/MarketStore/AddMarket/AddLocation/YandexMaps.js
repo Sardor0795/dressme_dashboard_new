@@ -95,7 +95,7 @@ export default function YandexMapStore() {
   };
 
   return (
-    <div className={`w-full `}>
+    <div className={`w-full border border-borderColor rounded overflow-hidden`}>
       <div className={"mapRoot"}>
         <YMaps
           query={{

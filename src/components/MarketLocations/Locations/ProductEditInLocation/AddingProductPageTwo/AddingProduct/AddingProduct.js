@@ -31,7 +31,7 @@ export default function AddingProduct() {
     console.log(`switch to ${checked}`);
   };
   return (
-    <div className="flex py-[40px] md:py-[50px] px-[40px]">
+    <div className="flex  py-6 ll:py-[40px] md:py-[50px] md:px-[40px] px-[16px]">
       {contextHolder}
       <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
         <div className="text-[#007dca] text-2xl w-[45px] h-[45px] rounded-full flex items-center justify-center border-2 border-[#1e88e5] mb-[5px] font-AeonikProRegular">
