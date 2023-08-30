@@ -73,7 +73,7 @@ const ProfilePage = () => {
         <ModalEditCity onClick={toggle} />
       </section>
       <section
-        className={`fixed z-[113]   duration-300 overflow-hidden ${
+        className={`fixed w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
           openEditModal ? "" : "hidden z-0"
         }`}
       >

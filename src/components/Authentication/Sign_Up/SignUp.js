@@ -11,6 +11,8 @@ import { NavLink } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import ModalOfMenu from "./ModalOfMenu/ModalOfMenu";
 
+import EditPassword from "./EditPassword/EditPassword";
+
 const SignUp = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
@@ -43,14 +45,33 @@ const SignUp = () => {
   // -------------------------------------
   const toggle = React.useCallback(() => setOpenRegionModal(false), []);
   // -------------------------------------
+
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   return (
-    <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[70px] items-center justify-center px-4 md:px-0">
+    <div className="relative w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[70px] items-center justify-center px-4 md:px-0">
+      <div
+        onClick={() => {
+          setOpenRegionModal(false);
+          setOpenEditModal(false);
+        }}
+        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
+          openRegionModal || openEditModal ? "" : "hidden"
+        }`}
+      ></div>
       <div className="w-full flex items-center justify-start md:hidden mt-4">
         <span>
           {" "}
           <MobileHumburgerMenu />
         </span>{" "}
       </div>{" "}
+      <section
+        className={`fixed w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
+          openEditModal ? "" : "hidden z-0"
+        }`}
+      >
+        <EditPassword onClick={togglePassword} />
+      </section>
       <div
         onClick={() => setOpenRegionModal(false)}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
@@ -264,14 +285,14 @@ const SignUp = () => {
         {/* Edit Password */}
         <div>
           <span>
-            <NavLink
+            <button
+              onClick={() => setOpenEditModal(true)}
               className={
                 "text-textBlueColor text-base not-italic font-AeonikProRegular hover:underline"
               }
-              to={"/#"}
             >
               Изменить пароль
-            </NavLink>
+            </button>
           </span>
         </div>
 
