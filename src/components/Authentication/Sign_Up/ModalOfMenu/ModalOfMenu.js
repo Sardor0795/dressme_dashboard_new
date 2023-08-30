@@ -7,7 +7,7 @@ import {
   SearchIcon,
 } from "../../../../assets/icons";
 
-export default function ModalOfMenu({ onClick }) {
+export default function ModalEditCity({ onClick }) {
   const [cityList, setCityList] = useState([
     {
       id: 1,
@@ -67,7 +67,7 @@ export default function ModalOfMenu({ onClick }) {
     });
   };
   return (
-    <div className="w-[455px] p-5 border border-borderColor rounded-[12px] h-fit bg-white">
+    <div className="w-full md:w-[455px] p-5 border border-borderColor rounded-t-lg md:rounded-lg h-fit bg-white">
       <div className="flex items-center justify-between">
         <span className="text-black text-2xl not-italic font-AeonikProRegular">
           Выберите регион

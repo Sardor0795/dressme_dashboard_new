@@ -66,7 +66,7 @@ const ProfilePage = () => {
         }`}
       ></div>
       <section
-        className={`fixed z-[113]   duration-300 overflow-hidden ${
+        className={`fixed z-[113] w-full md:w-auto bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
           openRegionModal ? "" : "hidden z-0"
         }`}
       >
