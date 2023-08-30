@@ -220,12 +220,12 @@ export default function LocationClothesCity() {
           </p>
         </section>
         <section className="w-full flex md:hidden">
-          <div className="w-full flex flex-col">
+          <div className="w-full flex items-center">
             <button
               onClick={() => {
                 navigate(-1);
               }}
-              className="flex items-center justify-start cursor-pointer "
+              className="absolute flex items-center justify-start cursor-pointer "
             >
               <GoBackIcons />
             </button>
