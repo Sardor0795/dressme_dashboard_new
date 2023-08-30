@@ -224,8 +224,8 @@ export default function WearCollection({ onClick }) {
                 </button>
               </div>
 
-              <div className="w-full flex items-center  overflow-hidden gap-x-1 overflow-x-scroll	">
-                <div className="!w-[400px] h-full flex flex-col border border-green-500 bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+              <div className="w-full flex items-center  overflow-auto gap-x-1 overflow-auto	">
+                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
                   <div className="w-full h-full flex items-center">
                     <Slider
                       className="w-full h-full rounded-lg "
@@ -293,7 +293,7 @@ export default function WearCollection({ onClick }) {
                     </div>
                   </div>
                 </div>
-                <div className="!w-[400px] h-full flex flex-col border border-green-500 bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
                   <div className="w-full h-full flex items-center">
                     <Slider
                       className="w-full h-full rounded-lg "
@@ -361,7 +361,7 @@ export default function WearCollection({ onClick }) {
                     </div>
                   </div>
                 </div>
-                <div className="!w-[400px] h-full flex flex-col border border-green-500 bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
                   <div className="w-full h-full flex items-center">
                     <Slider
                       className="w-full h-full rounded-lg "
@@ -429,7 +429,7 @@ export default function WearCollection({ onClick }) {
                     </div>
                   </div>
                 </div>
-                <div className="!w-[400px] h-full flex flex-col border border-green-500 bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
                   <div className="w-full h-full flex items-center">
                     <Slider
                       className="w-full h-full rounded-lg "
