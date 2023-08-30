@@ -24,7 +24,7 @@ export default function LocationClothesCity() {
       isCheck: false,
       bgColor: "bg-[#4FB459]",
       state: "Одобренный",
-      money: '96000'
+      money: "96000",
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ export default function LocationClothesCity() {
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
-      money: '96000'
+      money: "96000",
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ export default function LocationClothesCity() {
       isCheck: false,
       bgColor: "bg-[#FF4747]",
       state: "Отказанный",
-      money: '96000'
+      money: "96000",
     },
     {
       id: 4,
@@ -51,7 +51,7 @@ export default function LocationClothesCity() {
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
-      money: '96000'
+      money: "96000",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ export default function LocationClothesCity() {
       isCheck: false,
       bgColor: "bg-[#F1C116]",
       state: "Ожидающий",
-      money: '96000'
+      money: "96000",
     },
     {
       id: 6,
@@ -69,7 +69,7 @@ export default function LocationClothesCity() {
       isCheck: false,
       bgColor: "bg-[#AA3FFF]",
       state: "Замечание",
-      money: '96000'
+      money: "96000",
     },
   ]);
 
@@ -263,7 +263,7 @@ export default function LocationClothesCity() {
             </span>
           </div>
 
-          <div className="w-full">
+          <div className="w-full block  md:hidden ">
             <div className="flex items-center md:hidden justify-end w-full mb-[25px]">
               Выбрать все
               <div
@@ -300,7 +300,7 @@ export default function LocationClothesCity() {
               </div>
             </div>
 
-            <div className="w-full">
+            <div className="w-full ">
               <section className="flex md:hidden gap-x-4">
                 <p className="text-black text-[18px] not-italic font-AeonikProMedium mr-auto">
                   Юнусабад (6)

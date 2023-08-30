@@ -21,6 +21,7 @@ import { ProductCarouselEdit } from "../MobileDropUpSides/ProductCarouselEdit/Pr
 import { GrClose } from "react-icons/gr";
 import WearCollection from "../WearCollection/WearCollection";
 import AllSizeModalEdit from "./AllSizeModalEdit/AllSizeModalEdit";
+import NewAddSizeModalEdit from "./NewAddSizeModalEdit/NewAddSizeModalEdit";
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -94,10 +95,16 @@ const AddingProduct = () => {
   const goProductTitleEdit = (id) => {
     navigate(`/locations-store/edit-title/:${id}`);
   };
-
+  // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
   const toggleAllSizeModalShow = React.useCallback(
     () => setAllSizeModalShow(false),
+    []
+  );
+  // allSizeModalShow
+  const [newAddSizeModalShow, setNewAddSizeModalShow] = useState(false);
+  const toggleNewAddSizeModalShow = React.useCallback(
+    () => setNewAddSizeModalShow(false),
     []
   );
   const [decraseList, setDecraseList] = useState(false);
@@ -716,7 +723,7 @@ const AddingProduct = () => {
         if (data?.id == id) {
           return { ...data, action: true };
         } else {
-          return { ...data };
+          return { ...data, action: false };
         }
       });
     });
@@ -1130,7 +1137,7 @@ const AddingProduct = () => {
                                 <GrClose size={22} />
                               </button>
                             </div>
-                            <div className="py-2 gap-x-2 gap-y-4 flex flex-wrap items-center">
+                            <div className="py-2 gap-x-2 flex flex-wrap items-center">
                               {colorGroup?.map((data) => {
                                 return (
                                   <div
@@ -1160,13 +1167,11 @@ const AddingProduct = () => {
                                         />
                                       ) : null}
                                     </button>
-                                    <div className="w-[60px] overflow-hidden">
-                                      <span
-                                        className={` whitespace-nowrap text-[12px] not-italic font-AeonikProRegular text-${data?.colors}`}
-                                      >
-                                        {data?.colorName}
-                                      </span>
-                                    </div>
+                                    <span
+                                      className={` w-[60px] break-all	h-10  flex justify-center text-[12px] not-italic font-AeonikProRegular text-${data?.colors}`}
+                                    >
+                                      {data?.colorName}
+                                    </span>
                                   </div>
                                   // <div
                                   //   key={data?.id}
@@ -1635,17 +1640,30 @@ const AddingProduct = () => {
                   <AllSizeModalEdit onClick={toggleAllSizeModalShow} />
                 )}{" "}
               </section>
-              <Popover
-                // open={state?.openOutwaer}
-                // onOpenChange={handleOpenChangeOutwear}
-                className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottom"
-                content={contentUnderWear}
+              {/* NewLine */}
+              <button
+                type="button"
+                onClick={() => setNewAddSizeModalShow(true)}
+                className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
               >
                 Добавить размер{" "}
-              </Popover>
+              </button>
+
+              <div
+                onClick={() => setNewAddSizeModalShow(false)}
+                className={`fixed inset-0 z-[112]  w-full h-[100vh] bg-black opacity-50 ${
+                  newAddSizeModalShow ? "" : "hidden"
+                }`}
+              ></div>
+              <section
+                className={`fixed z-[113] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${
+                  newAddSizeModalShow ? "" : "hidden"
+                }`}
+              >
+                {newAddSizeModalShow && (
+                  <NewAddSizeModalEdit onClick={toggleNewAddSizeModalShow} />
+                )}{" "}
+              </section>
             </div>
           </div>
           {/* carousel item */}
