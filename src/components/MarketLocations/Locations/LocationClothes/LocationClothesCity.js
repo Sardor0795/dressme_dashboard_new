@@ -111,15 +111,11 @@ export default function LocationClothesCity() {
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="block md:flex justify-start items-center md:justify-between">
           <section className="flex">
-            <button
-              button
-              onClick={() => {
-                navigate(-1);
-              }}
+            <Link to='/locations-store'
               className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
             >
               <AiOutlineLeft />
-            </button>
+            </Link>
             <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px] hidden md:block">
               Одежда
             </p>
@@ -186,7 +182,7 @@ export default function LocationClothesCity() {
             <span>
               <AddIconsCircle />
             </span>
-            <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
+            <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
               Добавить одежду
             </span>
           </Link>

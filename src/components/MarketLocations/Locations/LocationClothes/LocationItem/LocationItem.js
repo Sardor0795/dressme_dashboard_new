@@ -70,7 +70,7 @@ export default function LocationItem({ data, click, index }) {
         <div className="mr-[55px] flex items-center justify-center min-w-[60px] min-h-[60px] border border-lightBorderColor rounded-[12px] bg-lightBgColor">
           <BgNoImgIcon />
         </div>
-        <div className="flex w-full items-center">
+        <div className="flex w-full items-center text-[13px]">
           <div className="w-[18%] text-weatherWinterColor">
             <span className="max-w-[169px] inline-block">
               Спортивная мужская кроссовка Nike RUN
@@ -81,7 +81,7 @@ export default function LocationItem({ data, click, index }) {
           <div className="w-[10%]">15-08-2023</div>
           <div className="w-[14%]">
             <div
-              className={`w-[113px] text-center text-white text-base font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
+              className={`w-[113px] text-center text-white font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
             >
               {data?.state}
             </div>
@@ -111,7 +111,7 @@ export default function LocationItem({ data, click, index }) {
 
       {/* Mobile */}
 
-      <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+      <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full text-[13px]">
         <div className="mb-2">
           <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
             <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
@@ -127,13 +127,13 @@ export default function LocationItem({ data, click, index }) {
         </div>
 
         <div className="mb-3">
-          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[13px] gap-x-[10px] mb-[8px]">
             <div className="w-[40%] flex items-center">Имя товара</div>
             <div className="w-[30%] flex items-center">Статус</div>
             <div className="w-[30%] flex items-center">Цена товара</div>
           </div>
 
-          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
             <div className="w-[40%] text-[#007DCA]"> {data?.name}</div>
             <div
               className={`w-[30%] font-AeonikProRegular leading-none flex items-center justify-center text-white ${data.bgColor} rounded-lg px-[5px] py-[4px]`}
@@ -144,34 +144,36 @@ export default function LocationItem({ data, click, index }) {
           </div>
         </div>
 
-        <div className={`mb-3 overflow-hidden ${toggleMobileMenu ? "hidden" : "block"}`}>
-          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-            <div className="w-[23%] flex items-center">Артикул</div>
-            <div className="w-[25%] flex items-center">Тип</div>
+        <div
+          className={`mb-3 overflow-hidden ${
+            toggleMobileMenu ? "hidden" : "block"
+          }`}
+        >
+          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[13px] gap-x-[10px] mb-[8px]">
+            <div className="w-[21%] flex items-center">Артикул</div>
+            <div className="w-[24%] flex items-center">Тип</div>
             <div className="w-[25%] flex items-center">Дата</div>
-            <div className="w-[27%] flex items-center">Цена товара</div>
+            <div className="w-[30%] flex items-center">Цена товара</div>
           </div>
 
-          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-            <div className="w-[23%]">BAA-00004</div>
-            <div className="w-[25%]">
-              Футболка
-            </div>
+          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
+            <div className="w-[21%]">BAA-00004</div>
+            <div className="w-[24%]">Футболка</div>
             <div className="w-[25%]"> 15-08-2023 </div>
-            <div className="w-[27%]"> {data?.money} сум </div>
+            <div className="w-[30%]"> {data?.money} сум </div>
           </div>
         </div>
 
         <div className="flex items-center justify-between pt-3">
           <button
             onClick={() => goMapWear(data?.city)}
-            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
           >
             Добавить в локацию
           </button>
           <button
             onClick={() => goMapCity(data?.city)}
-            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
           >
             Подробнее
           </button>
@@ -179,44 +181,50 @@ export default function LocationItem({ data, click, index }) {
 
         <div className="w-full flex items-center justify-between mt-[18px]">
           <div
+            className="flex items-center text-[13px] leading-none"
             onClick={() => {
               click(data?.id);
             }}
-            className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
-              data?.isCheck
-                ? "bg-[#007DCA] border-[#007DCA]"
-                : "bg-white border-checkboxBorder"
-            } flex items-center justify-center rounded mr-[8px]`}
           >
-            <span
-              className={`${
-                data?.isCheck ? "flex items-center justify-center" : "hidden"
-              }`}
+            <div
+              className={`cursor-pointer min-w-[18px] min-h-[18px] border text-[#8C8C8C] border-checkboxBorder ${
+                data?.isCheck
+                  ? "bg-[#007DCA] border-[#007DCA]"
+                  : "bg-white border-checkboxBorder"
+              } flex items-center justify-center rounded mr-[5px]`}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="8"
-                height="10"
-                viewBox="0 0 11 13"
-                fill="none"
+              <span
+                className={`${
+                  data?.isCheck ? "flex items-center justify-center" : "hidden"
+                }`}
               >
-                <path
-                  d="M1 9.5L5.88235 11L10 1"
-                  stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="8"
+                  height="10"
+                  viewBox="0 0 11 13"
+                  fill="none"
+                >
+                  <path
+                    d="M1 9.5L5.88235 11L10 1"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </span>
+            </div>
+            Выбрать
           </div>
+
           <button
             to="#"
             onClick={() => setToggleMobileMenu(!toggleMobileMenu)}
-            className="text-textBlueColor text-[13px] font-AeonikProMedium"
+            className="text-textBlueColor text-[14px] font-AeonikProMedium"
           >
             {toggleMobileMenu ? "Больше..." : "Меньше..."}
           </button>
-          <button className="text-red-600 text-[11px] font-AeonikProMedium">
+          <button className="text-red-600 text-[13px] font-AeonikProMedium active:translate-y-[2px]">
             Удалить
           </button>
         </div>
