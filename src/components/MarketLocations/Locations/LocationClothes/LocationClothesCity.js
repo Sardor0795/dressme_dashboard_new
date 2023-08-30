@@ -111,7 +111,8 @@ export default function LocationClothesCity() {
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="block md:flex justify-start items-center md:justify-between">
           <section className="flex">
-            <Link to='/locations-store'
+            <Link
+              to="/locations-store"
               className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
             >
               <AiOutlineLeft />
@@ -188,14 +189,14 @@ export default function LocationClothesCity() {
           </Link>
         </section>
         <div className="w-full md:w-fit flex items-center border-b md:border-b-0 border-[#F2F2F2] pb-[25px] md:pb-0">
-          <div className="mr-auto md:mr-6 font-AeonikProRegular text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-mobileTextColor">
-            Выбранные
+          <div className="mr-auto md:mr-6 font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-mobileTextColor">
+            Выбранные:
           </div>
           <button
-            className={`w-fit pr-1 ll:pr-3 border-r-[2px] border-addLocBorderRight flex items-center justify-center font-AeonikProRegular text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-addLocationTextcolor  ${
+            className={`w-fit pr-1 ll:pr-3 border-r-[2px] border-addLocBorderRight flex items-center justify-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg ${
               someChecked
-                ? "opacity-100 active:translate-y-[2px]"
-                : "opacity-30 cursor-not-allowed"
+                ? "text-addLocationTextcolor active:translate-y-[2px]"
+                : "text-[#D2D2D2] cursor-not-allowed"
             }`}
           >
             <span className="mr-[3px] ll:mr-[5px] hidden md:block">
@@ -207,10 +208,10 @@ export default function LocationClothesCity() {
             Добавить в локацию
           </button>
           <button
-            className={`pl-1 ll:pl-3 flex items-center font-AeonikProRegular text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-deleteColor ${
+            className={`pl-1 ll:pl-3 flex items-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg  ${
               someChecked
-                ? "opacity-100 active:translate-y-[2px]"
-                : "opacity-30 cursor-not-allowed"
+                ? "text-deleteColor active:translate-y-[2px]"
+                : "text-[#D2D2D2] cursor-not-allowed"
             }`}
           >
             <span className="mr-[3px] ll:mr-[5px] hidden md:block">
