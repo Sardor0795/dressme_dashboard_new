@@ -21,7 +21,6 @@ import { ProductCarouselEdit } from "../MobileDropUpSides/ProductCarouselEdit/Pr
 import { GrClose } from "react-icons/gr";
 import WearCollection from "../WearCollection/WearCollection";
 import AllSizeModalEdit from "./AllSizeModalEdit/AllSizeModalEdit";
-import NewAddSizeModalEdit from "./NewAddSizeModalEdit/NewAddSizeModalEdit";
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -56,6 +55,7 @@ const AddingProduct = () => {
     []
   );
   // Type
+
 
   // For Drop UP
   useEffect(() => {
@@ -101,12 +101,12 @@ const AddingProduct = () => {
     () => setAllSizeModalShow(false),
     []
   );
-  // allSizeModalShow
-  const [newAddSizeModalShow, setNewAddSizeModalShow] = useState(false);
-  const toggleNewAddSizeModalShow = React.useCallback(
-    () => setNewAddSizeModalShow(false),
+  // ModalColorGroup
+  const toggleColorGroup = React.useCallback(
+    () => setSelectColorToggleMobile(!selectColorToggleMobile),
     []
   );
+
   const [decraseList, setDecraseList] = useState(false);
   const [wearSizeList, setWearSizeList] = useState([
     { id: 1, action: false, name: "XXS" },
@@ -356,267 +356,6 @@ const AddingProduct = () => {
       </div>
     </div>
   );
-  // Underwear
-  const contentUnderWear = (
-    <div className="w-[614px] h-fit">
-      <action
-        className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
-      >
-        <div className="w-full flex  gap-x-10 px-3 pt-5">
-          <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Размер Талии
-              <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </p>
-            <div className="flex items-center">
-              <div className="flex flex-col">
-                <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                  placeholder="Мин"
-                />
-              </div>
-              <span className="rotate-90 text-borderColor mx-[9px]">|</span>
-              <div className="flex flex-col">
-                <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                  placeholder="Макс"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Размер
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </p>
-            <div className="flex items-center justify-between gap-x-1">
-              <div className="flex items-center">
-                <div className="flex flex-col">
-                  <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    placeholder="Мин"
-                  />
-                </div>
-                <span className="rotate-90 text-borderColor mx-[9px]">|</span>
-                <div className="flex flex-col">
-                  <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    placeholder="Макс"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
-              Буквенный Размер
-            </p>
-            <div className="w-full flex items-start mb-[10px]">
-              <div className="flex justify-center items-center">
-                <input
-                  type="radio"
-                  id="xxs_underwear"
-                  name="size_Underwear"
-                  value="XXS"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="xxs_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer"
-                >
-                  XXS
-                </label>
-              </div>
-              <div className="flex justify-center items-center">
-                <input
-                  type="radio"
-                  id="xs_underwear"
-                  name="size_Underwear"
-                  value="XS"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="xs_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer"
-                >
-                  XS
-                </label>
-              </div>
-              <div className="flex justify-center items-center ml-[1px]">
-                <input
-                  type="radio"
-                  id="s_underwear"
-                  name="size_Underwear"
-                  value="S"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="s_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer"
-                >
-                  S
-                </label>
-              </div>
-              <div className="flex justify-center items-center ml-[17px]">
-                <input
-                  type="radio"
-                  id="m_underwear"
-                  name="size_Underwear"
-                  value="M"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="m_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer"
-                >
-                  M
-                </label>
-              </div>
-            </div>
-            <div className="w-full flex items-start">
-              <div className="flex items-center justify-center mr-[18px]">
-                <input
-                  type="radio"
-                  id="l_underwear"
-                  name="size_Underwear"
-                  value="L"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="l_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer"
-                >
-                  L
-                </label>
-              </div>
-              <div className="flex items-center justify-center mr-[2px]">
-                <input
-                  type="radio"
-                  id="xl_underwear"
-                  name="size_Underwear"
-                  value="XL"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="xl_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor pr-[10px] mt-[2px] cursor-pointer"
-                >
-                  XL
-                </label>
-              </div>
-              <div className="flex items-center justify-center">
-                <input
-                  type="radio"
-                  id="two_xl_underwear"
-                  name="size_Underwear"
-                  value="2XL"
-                  className="w-[18px] h-[18px]"
-                />
-                <label
-                  htmlFor="two_xl_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mr-[10px] mt-[2px] cursor-pointer"
-                >
-                  2XL
-                </label>
-              </div>
-              <div className="flex items-center justify-center">
-                <input
-                  type="radio"
-                  id="three_xl_underwear"
-                  name="size_Underwear"
-                  value="3XL"
-                  className="w-[18px] h-[18px] "
-                />
-                <label
-                  htmlFor="three_xl_underwear"
-                  className="text-[14px] ml-[5px] font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer"
-                >
-                  3XL
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="w-full flex  gap-x-10 px-3 pt-5">
-          <div className="w-[28%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Размер Бедер
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </p>
-            <div className="flex items-center">
-              <div className="flex flex-col">
-                <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                  placeholder="Мин"
-                />
-              </div>
-              <span className="rotate-90 text-borderColor mx-[9px]">|</span>
-              <div className="flex flex-col">
-                <input
-                  type="number"
-                  className="w-[60px] h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                  placeholder="Макс"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="w-[28%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Рост
-            </p>
-            <div className="flex items-center justify-between gap-x-1">
-              <div className="flex items-center">
-                <div className="flex flex-col">
-                  <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    placeholder="Мин"
-                  />
-                </div>
-                <span className="rotate-90 text-borderColor mx-[9px]">|</span>
-                <div className="flex flex-col">
-                  <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-                    placeholder="Макс"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-[36%] flex flex-col ">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Количество
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </p>
-            <div className="flex items-start justify-between ">
-              <input
-                type="number"
-                className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
-              />
-            </div>
-          </div>
-        </div>
-        <button className="w-full flex items-end justify-end text-textBlueColor font-AeonikProMedium pr-1">
-          готово
-        </button>
-      </action>
-    </div>
-  );
 
   const [colorGroup, setColorGroup] = useState([
     {
@@ -730,7 +469,7 @@ const AddingProduct = () => {
   };
 
   return (
-    <div className="relative w-full flex items-center justify-between mb-[50px] md:my-[50px] focus:bg-textBlueColor">
+    <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
       <div className="absolute top-[0] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
           1
@@ -746,14 +485,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenClothingSection(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openClothingSection ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openClothingSection ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <ClothingTypesAnimationPage onClick={toggleClothingSection} />
         </section>
@@ -763,14 +500,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenClothingSubSection(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openClothingSubSection ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openClothingSubSection ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openClothingSubSection ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openClothingSubSection ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <ClothingSubSectionPage onClick={toggleClothingSubSection} />
         </section>
@@ -780,14 +515,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenWeather(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openWeather ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openWeather ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openWeather ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openWeather ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <WeatherMobileDropUp onClick={toggleWeather} />
         </section>
@@ -797,14 +530,12 @@ const AddingProduct = () => {
       <div className="">
         <section
           onClick={() => setOpenColors(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openColors ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColors ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openColors ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openColors ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <ColorsMobileDropUp onClick={toggleColors} />
         </section>
@@ -814,14 +545,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenGender(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openGender ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openGender ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openGender ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openGender ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <GenderTypeDropUp onClick={toggleGender} />
         </section>
@@ -831,14 +560,12 @@ const AddingProduct = () => {
       <div className="">
         <section
           onClick={() => setOpenCategories(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openCategories ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openCategories ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openCategories ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openCategories ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <CategoriesMobileDropUp onClick={toggleCategories} />
         </section>
@@ -848,14 +575,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenTypes(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openTypes ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openTypes ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openTypes ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openTypes ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <TypesDropUp onClick={toggleTypes} />
         </section>
@@ -864,7 +589,7 @@ const AddingProduct = () => {
       <form
         action="#"
         className="md:relative w-full   rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
-        // className="md:relative w-full  md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
+      // className="md:relative w-full  md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
       >
         {/* Photo Section For Mobile */}
         <div className="w-full flex md:hidden mb-6 gap-x-[15px]">
@@ -1109,9 +834,8 @@ const AddingProduct = () => {
                 {/* ----Colors Modal---------- */}
                 <div className="w-full">
                   <section
-                    className={`h-fit top-30  left-[16px] fixed  bg-white shadow-lg  duration-200 z-50 ${
-                      selectColorToggleMobile ? "w-[92%]" : "w-0"
-                    }`}
+                    className={`h-fit top-30  left-[16px] fixed  bg-white shadow-lg  duration-200 z-50 ${selectColorToggleMobile ? "w-[92%]" : "w-0"
+                      }`}
                   >
                     {selectColorToggleMobile && (
                       <div className="fixed inset-0 z-10 ">
@@ -1468,9 +1192,8 @@ const AddingProduct = () => {
                     Выбрать
                   </span>
                   <span
-                    className={` ${
-                      categoryWear ? "rotate-[270deg]" : "rotate-[90deg]"
-                    }`}
+                    className={` ${categoryWear ? "rotate-[270deg]" : "rotate-[90deg]"
+                      }`}
                   >
                     <ArrowRightIcon />
                   </span>
@@ -1602,21 +1325,52 @@ const AddingProduct = () => {
 
             {/* 6 */}
             <div
-              className={`w-full items-center gap-x-6  ${
-                categoryWear ? "md:flex hidden " : "hidden "
-              }`}
+              className={`w-full items-center gap-x-6  ${categoryWear ? "md:flex hidden " : "hidden "
+                }`}
             >
-              <Popover
-                // open={state?.openhat}
-                // onOpenChange={handleOpenChangeHat}
+              <div className="w-[170px] flex items-center text-redText justify-center h-[38px] overflow-hidden border border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300">
+                <Select
+                  className="hidden md:block text-center rounded-lg w-full h-11 md:h-10 text-redText"
+                  placeholder="Верхняя одежда"
+                  optionFilterProp="children"
+                  onChange={onChange}
+                  onSearch={onSearch}
+                  size="large"
+                  suffixIcon={null}
+                  filterOption={(input, option) =>
+                    (option?.label ?? "")
+                      .toLowerCase()
+                      .includes(input.toLowerCase())
+                  }
+                  options={[
+                    {
+                      value: "Брюки",
+                      label: "Брюки",
+                    },
+                    {
+                      value: "Джинсы",
+                      label: "Джинсы",
+                    },
+                    {
+                      value: "Штаны",
+                      label: "Штаны",
+                    },
+                    {
+                      value: "Шорты",
+                      label: "Шорты",
+                    },
+                  ]}
+                />
+              </div>
+              {/* <Popover
                 className="w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
                 trigger="click"
                 options={["Hide"]}
                 placement="bottomLeft"
                 content={contentOutwear}
               >
-                Верхняя одежда{" "}
-              </Popover>
+                Верхняя одежда
+              </Popover> */}
               <button
                 type="button"
                 onClick={() => setAllSizeModalShow(true)}
@@ -1627,43 +1381,28 @@ const AddingProduct = () => {
 
               <div
                 onClick={() => setAllSizeModalShow(false)}
-                className={`fixed inset-0 z-[112]  w-full h-[100vh] bg-black opacity-50 ${
-                  allSizeModalShow ? "" : "hidden"
-                }`}
+                className={`fixed inset-0 z-[115]  w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
+                  }`}
               ></div>
               <section
-                className={`fixed z-[113] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${
-                  allSizeModalShow ? "" : "hidden"
-                }`}
+                className={`fixed z-[120] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                  }`}
               >
                 {allSizeModalShow && (
-                  <AllSizeModalEdit onClick={toggleAllSizeModalShow} />
+                  <AllSizeModalEdit onClick={toggleAllSizeModalShow} modalOpenColor={toggleColorGroup} />
                 )}{" "}
               </section>
               {/* NewLine */}
-              <button
-                type="button"
-                onClick={() => setNewAddSizeModalShow(true)}
-                className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+
+              <Popover
+                className="w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
+                trigger="click"
+                options={["Hide"]}
+                placement="bottomLeft"
+                content={contentOutwear}
               >
                 Добавить размер{" "}
-              </button>
-
-              <div
-                onClick={() => setNewAddSizeModalShow(false)}
-                className={`fixed inset-0 z-[112]  w-full h-[100vh] bg-black opacity-50 ${
-                  newAddSizeModalShow ? "" : "hidden"
-                }`}
-              ></div>
-              <section
-                className={`fixed z-[113] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${
-                  newAddSizeModalShow ? "" : "hidden"
-                }`}
-              >
-                {newAddSizeModalShow && (
-                  <NewAddSizeModalEdit onClick={toggleNewAddSizeModalShow} />
-                )}{" "}
-              </section>
+              </Popover>
             </div>
           </div>
           {/* carousel item */}
