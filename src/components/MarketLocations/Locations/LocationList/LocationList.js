@@ -261,15 +261,17 @@ export default function LocationList() {
                   </div>
 
                   <div className="mb-[25px]">
-                    <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[12px] items-center mb-[8px]">
-                      <div className="pr-[10px] w-[20%]">Регион</div>
-                      <div className="pr-[10px] w-[50%]">Адрес</div>
+                    <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
+                      <div className="pr-[10px] w-[24%]">Регион</div>
+                      <div className="pr-[10px] w-[46%]">Адрес</div>
                       <div className="w-[30%]">Рабочее время</div>
                     </div>
 
-                    <div className="px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                      <div className="pr-[10px] w-[20%]"> {data?.city}</div>
-                      <div className="pr-[10px] w-[50%]">{data?.address}</div>
+                    <div className="px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
+                      <div className="pr-[10px] w-[24%] break-words">
+                        {data?.city}
+                      </div>
+                      <div className="pr-[10px] w-[46%]">{data?.address}</div>
                       <div className="w-[30%]"> {data?.time} </div>
                     </div>
                   </div>
@@ -277,7 +279,7 @@ export default function LocationList() {
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => goMapWear(data?.city)}
-                      className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                      className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                     >
                       <span className="mr-[5px]">
                         <svg
@@ -314,7 +316,7 @@ export default function LocationList() {
                     </button>
                     <button
                       onClick={() => goMapCity(data?.city)}
-                      className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                      className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                     >
                       {data?.showMore}
                       <span className="ml-[5px]">
