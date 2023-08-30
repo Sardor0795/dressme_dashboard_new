@@ -81,7 +81,7 @@ export default function LocationItem({ data, click }) {
             data?.isCheck
               ? "bg-[#007DCA] border-[#007DCA]"
               : "bg-white border-checkboxBorder"
-          } flex items-center justify-center rounded mr-[8px]`}
+          } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
         >
           <div
             className={`${

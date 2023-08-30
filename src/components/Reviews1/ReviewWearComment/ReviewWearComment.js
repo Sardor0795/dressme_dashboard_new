@@ -159,9 +159,9 @@ export default function ReviewWearComment() {
           <WearCommentDetail />
         </section>
 
-        <div className="w-full md:w-[calc(70%-70px)] ">
+        <section className="w-full md:w-[calc(70%-70px)] ">
           <WearCommentTitle />
-        </div>
+        </section>
       </div>
     </div>
   );

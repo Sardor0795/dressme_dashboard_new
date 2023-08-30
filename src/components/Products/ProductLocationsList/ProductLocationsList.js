@@ -8,6 +8,7 @@ import {
   CalendarIcons,
   CheckIcons,
   DeleteIcon,
+  GoBackIcons,
   SearchIcon,
 } from "../../../assets/icons";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -204,7 +205,7 @@ export default function LocationClothesCity() {
     <div>
       {/* Navbar */}
       <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
-        <section className="flex">
+        <section className="hidden md:flex">
           <button
             button
             onClick={() => {
@@ -214,9 +215,24 @@ export default function LocationClothesCity() {
           >
             <AiOutlineLeft />
           </button>
-          <p className="hidden md:block text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
+          <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
             Одежда{" "}
           </p>
+        </section>
+        <section className="w-full flex md:hidden">
+          <div className="w-full flex flex-col">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="flex items-center justify-start cursor-pointer "
+            >
+              <GoBackIcons />
+            </button>
+            <p className="w-full text-center text-black text-2xl not-italic font-AeonikProMedium">
+              Одежда
+            </p>
+          </div>
         </section>
         <section className="w-fit hidden md:flex items-center gap-x-[15px]">
           <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
@@ -239,7 +255,7 @@ export default function LocationClothesCity() {
       </div>
       
       {/* Search Section For Mobile */}
-      <div className="flex md:hidden items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
+      <div className="flex md:hidden items-center justify-between border-t md:border-0 border-borderColor pt-3 md:pt-0 md:mt-3">
         <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
           <label
             htmlFor="searchStore"
@@ -249,7 +265,7 @@ export default function LocationClothesCity() {
               type="text"
               name="s"
               id="searchStore"
-              className="w-full h-full   outline-0 	pl-[10px]"
+              className="w-full h-full outline-0 	pl-[10px]"
               placeholder="Поиск"
             />
             <span className="pr-[10px]">
@@ -320,10 +336,10 @@ export default function LocationClothesCity() {
             >
               <button
                 type="button"
-                className={`flex items-center rounded  justify-center min-w-[24px] min-h-[24px]  ${
+                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${
                   city1all
                     ? "bg-[#007DCA] border-[#007DCA]"
-                    : "bg-white border border-checkboxBorder"
+                    : "bg-white border border-[#f4a622]"
                 }`}
               >
                 <CheckIcons />
@@ -360,7 +376,7 @@ export default function LocationClothesCity() {
               </span>
               <button
                 type="button"
-                className={`flex items-center rounded  justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${
+                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${
                   arrayAllChecked
                     ? "bg-[#007DCA] border-[#007DCA]"
                     : "bg-white border border-checkboxBorder"
@@ -417,10 +433,10 @@ export default function LocationClothesCity() {
                 >
                   <button
                     type="button"
-                    className={`flex items-center rounded  justify-center min-w-[24px] min-h-[24px]  ${
+                    className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${
                       city2all
                         ? "bg-[#007DCA] border-[#007DCA]"
-                        : "bg-white border border-checkboxBorder"
+                        : "bg-white border border-[#f4a622]"
                     }`}
                   >
                     <CheckIcons />
