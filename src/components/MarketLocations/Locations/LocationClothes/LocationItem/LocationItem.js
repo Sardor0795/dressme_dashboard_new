@@ -181,7 +181,7 @@ export default function LocationItem({ data, click, index }) {
 
         <div className="w-full flex items-center justify-between mt-[18px]">
           <div
-            className="flex items-center text-[13px] leading-none"
+            className="flex items-center text-[13px] leading-none cursor-pointer select-none"
             onClick={() => {
               click(data?.id);
             }}
