@@ -2192,12 +2192,12 @@ const AddingProduct = () => {
                   <div className="w-full flex items-center justify-between">
                     <input
                       type="text"
-                      className="w-[80%] h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
+                      className="w-full h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
                       placeholder="0"
                     />
-                    <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
+                    {/* <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
                         <LoaderIcon />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
