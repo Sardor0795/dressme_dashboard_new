@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
 import { ColourCard } from "../../../../../../../assets";
 
-export default function AllSizeModalEdit({ onClick }) {
+export default function NewAddSizeModalEdit({ onClick }) {
   const [decraseList, setDecraseList] = useState(false);
   const [wearSizeList, setWearSizeList] = useState([
     { id: 1, action: false, name: "XXS" },
@@ -26,9 +26,18 @@ export default function AllSizeModalEdit({ onClick }) {
             Фильт цвет
           </span>
         </button>
-        <button type="button " onClick={onClick}>
+        <button type="button " className="" onClick={onClick}>
           <MenuCloseIcons colors={"#000"} />
         </button>
+      </div>
+      <div className="flex items-center mt-2 pl-7">
+        <span className="text-black text-sm not-italic font-AeonikProRegular">
+          Выбранный цвет:
+        </span>
+        <span className="w-[22px] h-[22px] rounded-full bg-black ml-2"></span>
+        <span className="ml-1">
+          <MenuCloseIcons colors={"#007dca"} />
+        </span>
       </div>
       {/* All Cards */}
       <div className="flex flex-col gap-y-2 mt-6">
@@ -51,7 +60,7 @@ export default function AllSizeModalEdit({ onClick }) {
                 Добавить выбранные к цвету
               </span>
             </div>
-            <div className="w-full border border-borderColor border-r-black border-r-8	 rounded-lg p-3 ">
+            <div className="w-full border border-borderColor rounded-lg p-3 ">
               <action
                 className={`w-full h-fit flex   justify-between not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center `}
               >
