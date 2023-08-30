@@ -834,11 +834,11 @@ const AddingProduct = () => {
                 {/* ----Colors Modal---------- */}
                 <div className="w-full">
                   <section
-                    className={`h-fit top-30  left-[16px] fixed  bg-white shadow-lg  duration-200 z-50 ${selectColorToggleMobile ? "w-[92%]" : "w-0"
+                    className={`h-fit top-30  left-[16px] fixed  bg-white shadow-lg  duration-200 z-[121] ${selectColorToggleMobile ? "w-[92%]" : "w-0"
                       }`}
                   >
                     {selectColorToggleMobile && (
-                      <div className="fixed inset-0 z-10 ">
+                      <div className="fixed inset-0 z-[120] ">
                         <div
                           className="fixed inset-0 w-full h-full bg-black opacity-40"
                           onClick={() => setSelectColorToggleMobile(false)}
@@ -1362,15 +1362,7 @@ const AddingProduct = () => {
                   ]}
                 />
               </div>
-              {/* <Popover
-                className="w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
-                trigger="click"
-                options={["Hide"]}
-                placement="bottomLeft"
-                content={contentOutwear}
-              >
-                Верхняя одежда
-              </Popover> */}
+
               <button
                 type="button"
                 onClick={() => setAllSizeModalShow(true)}
@@ -1381,15 +1373,15 @@ const AddingProduct = () => {
 
               <div
                 onClick={() => setAllSizeModalShow(false)}
-                className={`fixed inset-0 z-[115]  w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
+                className={`fixed inset-0 z-[113]  w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
                   }`}
               ></div>
               <section
-                className={`fixed z-[120] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                className={`fixed z-[115] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${allSizeModalShow ? "" : "hidden"
                   }`}
               >
                 {allSizeModalShow && (
-                  <AllSizeModalEdit onClick={toggleAllSizeModalShow} modalOpenColor={toggleColorGroup} />
+                  <AllSizeModalEdit colorGroup={colorGroup} onClick={toggleAllSizeModalShow} modalOpenColor={toggleColorGroup} />
                 )}{" "}
               </section>
               {/* NewLine */}

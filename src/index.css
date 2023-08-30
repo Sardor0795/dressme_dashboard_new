@@ -76,3 +76,14 @@ body {
 /* .ymaps-2-1-79-map:nth-child(2) {
   display: none;
 } */
+
+
+.AllSizeModalScroll::-webkit-scrollbar {
+  width: 2px;
+}
+
+.AllSizeModalScroll::-webkit-scrollbar-thumb {
+  background-color: #1e1e20;
+  height: 50px;
+  border-radius: 8px;
+}
