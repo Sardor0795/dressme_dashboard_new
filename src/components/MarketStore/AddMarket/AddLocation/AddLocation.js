@@ -24,7 +24,7 @@ export default function AddLocation() {
   }, []);
 
   return (
-    <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12">
+    <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 ">
       {openStoreList && <StoreListModal onClick={storeToggle} />}
       <div className=" ">
         <div className="md:hidden flex ">

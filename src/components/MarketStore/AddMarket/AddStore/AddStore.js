@@ -110,7 +110,7 @@ function AddStore({ onClick }) {
         action="#"
         className="w-full flex flex-col items-center justify-between  "
       >
-        <div className="w-full flex flex-col md:flex-row items-start justify-between mb-10 md:mb-[60px] gap-x-10">
+        <div className="w-full flex flex-col md:flex-row items-center justify-center mb-10 md:mb-[60px] gap-x-10">
           <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7">
             <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] mb-5">
               <label
@@ -149,10 +149,10 @@ function AddStore({ onClick }) {
                       type="button"
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
-                      className={`w-1/3 md:w-full flex items-center justify-center active:scale-95  border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
+                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
                                                     ${
                                                       data.action
-                                                        ? " h-full border-none py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                                        ? " h-full border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
                                                         : ""
                                                     }    
                                                     `}
@@ -176,7 +176,7 @@ function AddStore({ onClick }) {
               <div className="w-[70%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                 <button
                   type="button"
-                  className="group w-[28%] md:w-1/4 active:scale-95 focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
+                  className="group w-[28%] md:w-1/4  focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
                 >
                   <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
                     Такси
@@ -184,7 +184,7 @@ function AddStore({ onClick }) {
                 </button>
                 <button
                   type="button"
-                  className="group w-[72%] md:w-3/4 active:scale-95 group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
+                  className="group w-[72%] md:w-3/4  group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
                 >
                   <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
                     Собственная доставка
@@ -193,64 +193,12 @@ function AddStore({ onClick }) {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-2/5 md:flex flex-col items-start">
-            <div className="w-full relative mb-[6px]">
-              <div className="block mb-[5px] md:mb-1">
-                <span className="text-[12px] md:text-base mr-2 font-AeonikProRegular">
-                  Описание магазина на русском
-                </span>
-                <span className="text-[10px] ls:text-[12px]  md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-textLightColor">
-                  (не обязательно)
-                </span>
-              </div>
-              <textarea
-                name="storeDescription"
-                id="storeDescription"
-                className=" w-full h-[100px] text-[11px] md:text-[13px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 resize-none"
-                placeholder="Пишите здесь..."
-              ></textarea>
-              <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
-                {/* <AddBtn /> */}
-              </span>
-            </div>
-            <div className="w-full relative">
-              <div className="block mb-[5px] md:mb-1">
-                <span className="text-[12px] md:text-base mr-2 font-AeonikProRegular">
-                  Описание магазина на узбекском
-                </span>
-                <span className="text-[10px] ls:text-[12px]  md:text-[13px] font-AeonikProRegular md:font-AeonikProMedium text-textLightColor">
-                  (не обязательно)
-                </span>
-              </div>
-              <textarea
-                name="storeDescription"
-                id="storeDescription"
-                className=" w-full h-[100px] text-[11px] md:text-[13px] bg-bgColor border border-borderColor2 outline-none rounded-lg p-3 resize-none"
-                placeholder="Пишите здесь..."
-              ></textarea>
-              <span className="absolute cursor-pointer right-[6px] bottom-[12px] active:scale-90">
-                {/* <AddBtn /> */}
-              </span>
-            </div>
-            <div className="w-full flex items-end justify-end mt-2">
-              <p className="text-sm md:text-base font-AeonikProRegular md:font-AeonikProMedium text-mobileTextColor">
-                Воспользоваться{" "}
-                <Link
-                  target={"_blank"}
-                  to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
-                  className="text-textBlueColor border-b border-textBlueColor font-AeonikProRegular md:font-AeonikProMedium ml-3"
-                >
-                  Google переводчиком
-                </Link>
-              </p>
-            </div>
-          </div>
         </div>
       </form>
       <div className="flex items-center justify-center mb-10 md:mb-24">
         <button
           onClick={onClick}
-          className="inline-block px-[100px] flex items-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
+          className="inline-block w-full md:w-fit text xs:px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
           Создать магазин
         </button>

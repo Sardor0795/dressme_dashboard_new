@@ -52,17 +52,13 @@ export default function YandexMapStore() {
 
   // reset state & search
   function handleReset() {
-    // setState({ ...initialState });
-    setState({ ...initialState, title: "" });
+    setState({ ...initialState });
+    // setState({ ...initialState, title: "" });
     // setState({ title: "" });
     searchRef.current.value = "";
     // mapRef.current.setCenter(initialState.center);
     // mapRef.current.setZoom(initialState.zoom);
   }
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   // search popup
   useEffect(() => {
@@ -84,6 +80,8 @@ export default function YandexMapStore() {
 
   // change title
   const handleBoundsChange = (e) => {
+    setIsSendedLocation(true);
+
     const newCoords = mapRef.current.getCenter();
     mapConstructor.geocode(newCoords).then((res) => {
       const nearest = res.geoObjects.get(0);
@@ -121,9 +119,7 @@ export default function YandexMapStore() {
                 <input
                   ref={searchRef}
                   placeholder="Введите адрес"
-                  // name="s"
                   id="ForSearch"
-                  // disabled={!mapConstructor}
                   className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
                     !Boolean(state.title.length) ? "" : "hidden"
                   }`}
@@ -170,7 +166,7 @@ export default function YandexMapStore() {
                   {isSendedLocation ? (
                     <>
                       {" "}
-                      <span className="md:flex hidden">Подтверждено</span>
+                      <span className="md:flex hidden">Подтвердить</span>
                       <span className="md:hidden flex">OK</span>
                     </>
                   ) : (
@@ -184,7 +180,7 @@ export default function YandexMapStore() {
                   type="button"
                   className="w-[40px] md:w-[150px] h-10 px-3  flex items-center justify-center bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
                 >
-                  <span className="md:flex hidden">Подтверждено</span>
+                  <span className="md:flex hidden">Подтвердить</span>
                   <span className="md:hidden flex">OK</span>{" "}
                 </button>
               )}

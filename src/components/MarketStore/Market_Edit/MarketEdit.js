@@ -143,8 +143,8 @@ function MarketEdit() {
       </div>
       {/* Form */}
       <form className="w-full flex flex-col items-center justify-between  ">
-        <div className="w-full flex flex-col md:flex-row items-start justify-between mb-10 md:mb-[60px] gap-x-10">
-          <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7">
+        <div className="w-full flex flex-col md:flex-row items-center justify-center mb-10 md:mb-[60px] gap-x-10 ">
+          <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7 ">
             <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] mb-5">
               <label
                 htmlFor="shopName"
