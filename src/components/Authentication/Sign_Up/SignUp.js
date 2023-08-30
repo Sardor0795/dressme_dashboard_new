@@ -59,7 +59,7 @@ const SignUp = () => {
           openRegionModal || openEditModal ? "" : "hidden"
         }`}
       ></div>
-      <div className="w-full flex items-center justify-start md:hidden mt-4">
+      <div className="w-full md:w-auto flex items-center justify-start md:hidden mt-4">
         <span>
           {" "}
           <MobileHumburgerMenu />
@@ -79,7 +79,7 @@ const SignUp = () => {
         }`}
       ></div>
       <section
-        className={`fixed z-[113]   duration-300 overflow-hidden ${
+        className={`fixed z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
           openRegionModal ? "" : "hidden z-0"
         }`}
       >
