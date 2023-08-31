@@ -1,12 +1,14 @@
 import React from "react";
 import { CloseAnswer, LineIcon } from "../../../../../../../assets/icons";
+import AllSizeModalEdit from "../../AddingProduct/AllSizeModalEdit/AllSizeModalEdit";
 
-const CategoriesMobileDropUp = ({ onClick, title }) => {
+const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor }) => {
 
   return (
-    <div className="max-w-[440px] w-[100%] h-[90vh] mx-auto bg-white shadow-navMenuShadov border border-red-500 p-4   overflow-hidden  rounded-t-[12px]">
+    <div className=" w-[100%] h-[90vh] mx-auto bg-white shadow-navMenuShadov border border-red-500 p-4   overflow-hidden  rounded-t-[12px]">
+      {/* <div className="max-w-[440px] w-[100%] h-[90vh] mx-auto bg-white shadow-navMenuShadov border border-red-500 p-4   overflow-hidden  rounded-t-[12px]"> */}
       <section className=" w-full bg-btnBgColor flex items-center  justify-end ">
-        <button onClick={onClick}>
+        <button onClick={onClick1}>
           <CloseAnswer colors={"#000"} />
         </button>
       </section>
@@ -22,7 +24,8 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
         <button className="h-[35px] flex items-center justify-center px-[10px] text-textBlueColor focus:text-white border border-textBlueColor focus:bg-textBlueColor bg-white rounded-lg text-xs not-italic font-AeonikProMedium">Все размеры</button>
         <button className="h-[35px] flex items-center justify-center px-[10px] text-textBlueColor focus:text-white border border-textBlueColor focus:bg-textBlueColor bg-white rounded-lg text-xs not-italic font-AeonikProMedium">Добавить размер</button>
       </div>
-      <section className="w-full h-[500px] px-4 flex flex-col flex-nowrap">
+      <section className="w-full h-[70%] overflow-hidden flex flex-col flex-nowrap border border-red-500 mt-6">
+        <AllSizeModalEdit onClick={onClick2} colorGroup={colorGroup} modalOpenColor={modalOpenColor} />
 
 
 
