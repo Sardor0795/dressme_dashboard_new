@@ -686,10 +686,12 @@ const AddingProduct = () => {
             }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openCategories ? "bottom-0" : "bottom-[-800px] z-0"
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openCategories ? "bottom-0" : "bottom-[-800px] z-[-10]"
             }`}
         >
-          <CategoriesMobileDropUp onClick={toggleCategories} />
+          {openCategories &&
+            <CategoriesMobileDropUp onClick1={toggleCategories} colorGroup={colorGroup} onClick2={toggleAllSizeModalShow} modalOpenColor={toggleColorGroup} />
+          }
         </section>
       </div>
 

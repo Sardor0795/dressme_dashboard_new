@@ -35,7 +35,10 @@ const initialState = {
   center: [41.311151, 69.279737],
   zoom: 12,
 };
-
+const mapState = {
+  center: [41.311751, 69.279737],
+  zoom: 14,
+};
 export default function YandexMapStore() {
   const [isSendedLocation, setIsSendedLocation] = useState(true);
   const [state, setState] = useState({ ...initialState });
@@ -110,6 +113,7 @@ export default function YandexMapStore() {
             onLoad={setMapConstructor}
             onBoundsChange={handleBoundsChange}
             instanceRef={mapRef}
+          // defaultState={mapState}
           >
             <div className="h-fit p-1 md:p-[10px] absolute top-2 z-40 gap-x-5 mx-1 md:mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-1 md:px-3 rounded-lg">
               <label
@@ -120,9 +124,8 @@ export default function YandexMapStore() {
                   ref={searchRef}
                   placeholder="Введите адрес"
                   id="ForSearch"
-                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
-                    !Boolean(state.title.length) ? "" : "hidden"
-                  }`}
+                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(state.title.length) ? "" : "hidden"
+                    }`}
                 />
 
                 <div
