@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,25 +5,31 @@
 .active {
   color: #007dca;
 }
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-html,
-body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+@font-face {
+  font-family: "AeonikPro-Medium";
+  src: url("/public/fonts/AeonikPro-Medium.woff2") format("woff2"),
+    url("/public/fonts/AeonikPro-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: "RobotoMedium";
-  src: url(../public/fonts/Roboto/Roboto-Medium.ttf);
+  font-family: "AeonikPro-Regular";
+  src: url("/public/fonts/AeonikPro-Regular.woff2") format("woff2"),
+    url("/public/fonts/AeonikPro-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
-@font-face {
-  font-family: "RobotoRegular";
-  src: url(../public/fonts/Roboto/Roboto-Regular.ttf);
-}
+
 .ant-picker-range-separator {
   display: none;
 }
@@ -76,7 +81,6 @@ body {
 /* .ymaps-2-1-79-map:nth-child(2) {
   display: none;
 } */
-
 
 .AllSizeModalScroll::-webkit-scrollbar {
   width: 2px;
