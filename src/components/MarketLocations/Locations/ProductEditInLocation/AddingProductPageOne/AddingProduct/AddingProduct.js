@@ -690,7 +690,7 @@ const AddingProduct = () => {
             }`}
         >
           {openCategories &&
-            <CategoriesMobileDropUp onClick1={toggleCategories} colorGroup={colorGroup} onClick2={toggleAllSizeModalShow} modalOpenColor={toggleColorGroup} />
+            <CategoriesMobileDropUp wearSizeList={wearSizeList} onClick1={toggleCategories} colorGroup={colorGroup} onClick2={toggleAllSizeModalShow} modalOpenColor={toggleColorGroup} />
           }
         </section>
       </div>
