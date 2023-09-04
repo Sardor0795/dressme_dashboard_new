@@ -3,6 +3,7 @@ import InputMask from "react-input-mask";
 import {
   ArrowRightIcon,
   CircleNextIcon,
+  CreditCardNumber,
   UserMailIcon,
 } from "../../../assets/icons";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -11,6 +12,43 @@ import { NavLink } from "react-router-dom";
 import ModalEditCity from "./ModalEditCity/ModalEditCity";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import EditPassword from "./EditPassword/EditPassword";
+
+const CardCredit = React.forwardRef((props, ref) => {
+  const [card, setCard] = useState();
+  const fallbackRef = React.useRef();
+  const domRef = ref || fallbackRef;
+
+  const handleChange = React.useCallback(() => {
+    if (domRef.current) {
+      const cardValue = domRef.current.value
+        .replace(/\D/g, "")
+        .match(/(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})/);
+      if (cardValue) {
+        domRef.current.value = !cardValue[2]
+          ? cardValue[1]
+          : `${cardValue[1]}-${cardValue[2]}${`${cardValue[3] ? `-${cardValue[3]}` : ""
+          }`}${`${cardValue[4] ? `-${cardValue[4]}` : ""}`}`;
+        const numbers = domRef.current.value.replace(/(\D)/g, "");
+        setCard(numbers);
+      }
+    }
+  }, [domRef]);
+
+  useEffect(() => {
+    handleChange();
+  }, [card, handleChange]);
+
+  return (
+    <>
+      <input
+        className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+        type="text"
+        placeholder="0000-0000-0000-0000"
+        ref={domRef}
+        onChange={handleChange} />
+    </>
+  );
+});
 
 const ProfilePage = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -61,21 +99,18 @@ const ProfilePage = () => {
           setOpenRegionModal(false);
           setOpenEditModal(false);
         }}
-        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-          openRegionModal || openEditModal ? "" : "hidden"
-        }`}
+        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openRegionModal || openEditModal ? "" : "hidden"
+          }`}
       ></div>
       <section
-        className={`fixed z-[113] w-full md:w-auto bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
-          openRegionModal ? "" : "hidden z-0"
-        }`}
+        className={`fixed z-[113] w-full md:w-auto bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openRegionModal ? "" : "hidden z-0"
+          }`}
       >
         <ModalEditCity onClick={toggle} />
       </section>
       <section
-        className={`fixed w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
-          openEditModal ? "" : "hidden z-0"
-        }`}
+        className={`fixed w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
+          }`}
       >
         <EditPassword onClick={togglePassword} />
       </section>
@@ -223,9 +258,8 @@ const ProfilePage = () => {
                   mask="(99) 999-99-99"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className={`w-full px-4 outline-none h-full not-italic ${
-                    phone ? "font-AeonikProMedium" : null
-                  } text-base leading-4 text-black`}
+                  className={`w-full px-4 outline-none h-full not-italic ${phone ? "font-AeonikProMedium" : null
+                    } text-base leading-4 text-black`}
                   placeholder={"(97) 123-45-67"}
                 ></InputMask>
               </div>
@@ -276,19 +310,30 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        {/* Edit Password */}
-        <div>
-          <span>
-            <button
-              onClick={() => setOpenEditModal(true)}
-              className={
-                "text-textBlueColor text-base not-italic font-AeonikProRegular hover:underline"
-              }
-            >
-              Изменить пароль
-            </button>
-          </span>
+        {/* Edit Password and CardNumber */}
+        <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
+          {/* Имя организации */}
+          <div className="w-full xs:w-1/2 h-fit ">
+            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+              Номер банковской карты            </div>
+            <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
+              {/* CredtCardicons */}
+              <span><CreditCardNumber /></span>
+              {/* Component */}
+              <CardCredit />
+            </div>
+          </div>
+          {/* EditPassword */}
+          <button
+            onClick={() => setOpenEditModal(true)}
+            className={
+              "text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"
+            }
+          >
+            Изменить пароль
+          </button>
         </div>
+
 
         {/* Button */}
         <div className="w-full  flex items-center justify-between gap-x-6 mt-7">

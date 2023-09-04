@@ -47,8 +47,8 @@ export default function MyMarket() {
                 <SearchIcon />
               </span>
             </label>
-            <section className=" flex items-center gap-x-[30px] ">
-              <span>
+            <section className=" flex items-center gap-x-4 ll:gap-x-[30px] ">
+              <span className=" md:hidden flex items-center">
                 <CalendarIcons />
               </span>
               <span className="hidden md:flex items-center">

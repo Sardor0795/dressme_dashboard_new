@@ -146,25 +146,25 @@ function LocationMapCity() {
                 </div>
               </label>
               <div className="w-full md:w-[31%] xs:w-[48%]  ">
-                <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+                <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                   Рабочее время
                   <span className="ml-[5px]">
                     <StarLabel />
                   </span>
                 </div>
-                <div className="flex flex-wrap items-center">
+                <div className="w-full flex  items-center">
                   {" "}
                   от
                   <input
                     type="text"
                     value={"09:00"}
-                    className="mr-3 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="mr-5 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                   />
                   до
                   <input
                     type="text"
                     value={"20:00"}
-                    className=" ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                   />
                 </div>
               </div>
@@ -222,7 +222,7 @@ function LocationMapCity() {
           <div className="flex justify-center mt-[50px]  px-4 md:px-0 ">
             <Link
               className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
-              // to={"/store"}
+            // to={"/store"}
             >
               Добавить
             </Link>
