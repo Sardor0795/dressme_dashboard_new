@@ -7,8 +7,8 @@ import {
   StarIcon,
   StarOutlineIcon,
 } from "../../../../assets/icons";
-import { useNavigate } from "react-router-dom";
-import { ProductImg, wearImg } from "../../../../assets";
+import { NavLink, useNavigate } from "react-router-dom";
+import { ProductImg, pdpImg, wearImg } from "../../../../assets";
 
 import { DatePicker, Space, Popover } from "antd";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
@@ -151,11 +151,11 @@ export default function LocationList() {
           Nike <span className="hidden md:inline">(6)</span>
         </p>
 
-        <button className="md:hidden p-2 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
+        <NavLink to={"/store/location-add"} className="md:hidden p-2 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
           <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
             Добавить локацию
           </span>
-        </button>
+        </NavLink>
       </div>
       {/* Table */}
       <div className="w-full h-fit">
@@ -188,11 +188,11 @@ export default function LocationList() {
                 </span>
               </li>
               <li className="w-[40%] flex items-center justify-end ">
-                <button className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
+                <NavLink to={"/store/location-add"} className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-sm  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
                   </span>
-                </button>
+                </NavLink>
               </li>
             </div>
           </ul>
@@ -206,13 +206,11 @@ export default function LocationList() {
                   key={data?.id}
                   className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor"
                 >
-                  <li className="w-[70px]  pl-4 flex items-center ">
+                  <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
                     {data?.id}
                   </li>
-                  <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px]">
-                    <figure className="w-full h-full rounded-lg overflow-hidden">
-                      <img className="w-[100%] h-[100%]" src={wearImg} alt="" />
-                    </figure>
+                  <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
+                    <img className="w-[100%] h-[100%]  object-top	object-cover" src={pdpImg} alt="" />
                   </li>
                   <div className="w-[calc(100%-230px)]   flex items-center justify-between">
                     <li className="md:w-[15%] h-full flex items-center ">
@@ -262,23 +260,26 @@ export default function LocationList() {
 
                   <div className="mb-3 h-[148px]">
                     <figure className="w-full h-full rounded-lg overflow-hidden">
-                      <img className="w-[100%] h-[100%]" src={wearImg} alt="" />
+                      <img className="w-[100%] h-[100%]" src={pdpImg} alt="" />
                     </figure>
                   </div>
 
                   <div className="mb-[25px]">
                     <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-1 ll:px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
-                      <div className="text-gray-700 text-[10px]  not-italic font-AeonikProMedium pr-[10px] w-[24%]">Регион</div>
-                      <div className="text-gray-700 text-[10px]  not-italic font-AeonikProMedium pr-[10px] w-[46%]">Адрес</div>
-                      <div className="text-gray-700 text-[10px]  not-italic font-AeonikProMedium w-[30%]">Рабочее время</div>
+                      <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[24%]">Регион</div>
+                      <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[46%]">Адрес</div>
+                      <div className="text-[#3F6175] text-[12px] text-center not-italic font-AeonikProMedium w-[30%]">Рабочее время</div>
                     </div>
 
                     <div className="px-1 ll:px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
-                      <div className="pr-[10px] w-[24%] break-words  text-gray-700 text-[10px]  not-italic font-AeonikProRegular">
+                      <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
                         {data?.city}
                       </div>
-                      <div className="pr-[10px] w-[46%]  text-justify	text-gray-700 text-[10px]  not-italic font-AeonikProRegular">{data?.address}</div>
-                      <div className="w-[30%] flex items-center justify-center text-gray-700 text-[10px]  not-italic font-AeonikProRegular"> {data?.time} </div>
+                      <div className="relative pr-[5px] ll:pr-[10px] h-[60px] overflow-hidden  w-[46%]  text-justify	text-[11px] not-italic font-AeonikProMedium">
+                        <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
+
+                        {data?.address}</div>
+                      <div className="w-[30%] flex items-center justify-center text-[11px] not-italic font-AeonikProMedium"> {data?.time} </div>
                     </div>
                   </div>
 

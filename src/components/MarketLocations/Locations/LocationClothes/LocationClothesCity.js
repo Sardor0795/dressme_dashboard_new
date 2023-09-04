@@ -7,6 +7,7 @@ import {
   AddLocationIcon,
   CalendarIcons,
   DeleteIcon,
+  GoBackIcons,
   SearchIcon,
 } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -114,20 +115,23 @@ export default function LocationClothesCity() {
   return (
     <div className=" px-4 md:px-0 ">
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block ">
-        <div className="block md:flex justify-start items-center md:justify-between">
-          <section className="flex">
-            <Link
-              to="/locations-store"
-              className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+        <div className="block md:flex justify-start items-center md:justify-between ">
+          <div className=" flex items-center justify-center gap-x-2 ">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="h-8 w-8 md:static fixed left-0 flex items-center cursor-pointer justify-center rounded-lg md:border border-borderColor"
             >
-              <AiOutlineLeft />
-            </Link>
-            <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px] hidden md:block">
+              <GoBackIcons />
+            </button>
+            <div className="text-center flex items-center text-xl md:text-[24px] font-AeonikProMedium   md:px-0">
               Одежда
-            </p>
-          </section>
+            </div>
+          </div>{" "}
 
-          <section className="mt-[25px] pt-[25px] border-t border-[#F2F2F2] w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+
+          <section className="mt-[25px] pt-[25px] border-t border-[#F2F2F2]  w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
             <label
               htmlFor="searchStore"
               className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
@@ -317,18 +321,18 @@ export default function LocationClothesCity() {
           </div>
 
           <div className="hidden border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] w-full">
-            <div className="w-[45px]">No:</div>
-            <div className="mr-[75px]">Фото</div>
+            <div className="w-[45px] text-[#3F6175] text-base not-italic font-AeonikProMedium">No:</div>
+            <div className="mr-[75px] text-[#3F6175] text-base not-italic font-AeonikProMedium">Фото</div>
             <div className="flex w-full">
-              <div className="w-[18%]">Наименование товара</div>
-              <div className="w-[12%]">Артикул</div>
-              <div className="w-[11%]">Тип</div>
-              <div className="w-[10%]">Дата</div>
-              <div className="w-[14%]">Статус</div>
-              <div className="w-[12%]">Цена товара</div>
+              <div className="w-[18%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Наименование товара</div>
+              <div className="w-[12%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Артикул</div>
+              <div className="w-[11%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Тип</div>
+              <div className="w-[10%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Дата</div>
+              <div className="w-[14%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Статус</div>
+              <div className="w-[12%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Цена товара</div>
               <div className="w-[15%]"></div>
-              <div className="w-[9%] text-center">Добавить</div>
-              <div className="w-[9%] text-center">Удалить</div>
+              <div className="w-[9%] text-center text-[#3F6175] text-base not-italic font-AeonikProMedium">Добавить</div>
+              <div className="w-[9%] text-center text-[#3F6175] text-base not-italic font-AeonikProMedium">Удалить</div>
             </div>
           </div>
         </div>

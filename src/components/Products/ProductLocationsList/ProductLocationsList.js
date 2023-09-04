@@ -253,7 +253,7 @@ export default function LocationClothesCity() {
           </section>
         </section>
       </div>
-      
+
       {/* Search Section For Mobile */}
       <div className="flex md:hidden items-center justify-between border-t md:border-0 border-borderColor pt-3 md:pt-0 md:mt-3">
         <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
@@ -284,7 +284,7 @@ export default function LocationClothesCity() {
           </section>
         </section>
       </div>
-      
+
       <div>
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
@@ -299,11 +299,10 @@ export default function LocationClothesCity() {
               Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
             <button
-              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  ${
-                someChecked
-                  ? "opacity-100 active:translate-y-[2px]"
-                  : "opacity-30 cursor-not-allowed"
-              }`}
+              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  ${someChecked
+                ? "opacity-100 active:translate-y-[2px]"
+                : "opacity-30 cursor-not-allowed"
+                }`}
             >
               <span className="mr-[5px]">
                 <AddLocationIcon width={20} />
@@ -311,11 +310,10 @@ export default function LocationClothesCity() {
               Добавить в локацию
             </button>
             <button
-              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor ${
-                someChecked
-                  ? "opacity-100 active:translate-y-[2px]"
-                  : "opacity-30 cursor-not-allowed"
-              }`}
+              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor ${someChecked
+                ? "opacity-100 active:translate-y-[2px]"
+                : "opacity-30 cursor-not-allowed"
+                }`}
             >
               <span className="mr-[5px]">
                 <DeleteIcon width={20} />
@@ -336,11 +334,10 @@ export default function LocationClothesCity() {
             >
               <button
                 type="button"
-                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${
-                  city1all
-                    ? "bg-[#007DCA] border-[#007DCA]"
-                    : "bg-white border border-[#f4a622]"
-                }`}
+                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${city1all
+                  ? "bg-[#007DCA] border-[#007DCA]"
+                  : "bg-white border border-[#f4a622]"
+                  }`}
               >
                 <CheckIcons />
               </button>
@@ -364,7 +361,7 @@ export default function LocationClothesCity() {
           <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
             <p className="flex md:hidden text-sm font-AeonikProMedium">
               Общее количество: 6
-            </p> 
+            </p>
             <div
               onClick={() => {
                 setArrayAllChecked(!arrayAllChecked);
@@ -376,11 +373,10 @@ export default function LocationClothesCity() {
               </span>
               <button
                 type="button"
-                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${
-                  arrayAllChecked
-                    ? "bg-[#007DCA] border-[#007DCA]"
-                    : "bg-white border border-checkboxBorder"
-                }`}
+                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${arrayAllChecked
+                  ? "bg-[#007DCA] border-[#007DCA]"
+                  : "bg-white border border-checkboxBorder"
+                  }`}
               >
                 {arrayAllChecked && <CheckIcons />}
               </button>
@@ -392,23 +388,23 @@ export default function LocationClothesCity() {
         </div>
 
         <div className="mx-auto font-AeonikProRegular text-[16px]">
-          
+
           <div className="mb-[10px] hidden md:flex items-center text-tableTextTitle">
             <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
 
             <div className="border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] flex items-center gap-x-[5px] w-full">
-              <div className="w-[45px]">No:</div>
-              <div className="mr-[75px]">Фото</div>
+              <div className="w-[45px] text-[#3F6175] text-base not-italic font-AeonikProMedium">No:</div>
+              <div className="mr-[75px] text-[#3F6175] text-base not-italic font-AeonikProMedium">Фото</div>
               <div className="flex w-full">
-                <div className="w-[18%]">Наименование товара</div>
-                <div className="w-[12%]">Артикул</div>
-                <div className="w-[11%]">Тип</div>
-                <div className="w-[10%]">Дата</div>
-                <div className="w-[14%]">Статус</div>
-                <div className="w-[12%]">Цена товара</div>
+                <div className="w-[18%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Наименование товара</div>
+                <div className="w-[12%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Артикул</div>
+                <div className="w-[11%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Тип</div>
+                <div className="w-[10%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Дата</div>
+                <div className="w-[14%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Статус</div>
+                <div className="w-[12%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Цена товара</div>
                 <div className="w-[15%]"></div>
-                <div className="w-[9%] text-center">Добавить</div>
-                <div className="w-[9%] text-center">Удалить</div>
+                <div className="w-[9%] text-center text-[#3F6175] text-base not-italic font-AeonikProMedium">Добавить</div>
+                <div className="w-[9%] text-center text-[#3F6175] text-base not-italic font-AeonikProMedium">Удалить</div>
               </div>
             </div>
           </div>
@@ -419,7 +415,7 @@ export default function LocationClothesCity() {
               return <LocationItem data={data} click={onCheck1} />;
             })}
           </div>
-          
+
           {/* City 2 */}
           <div className=" mt-10">
             <div className="flex items-center justify-start my-[30px] w-full">
@@ -433,11 +429,10 @@ export default function LocationClothesCity() {
                 >
                   <button
                     type="button"
-                    className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${
-                      city2all
-                        ? "bg-[#007DCA] border-[#007DCA]"
-                        : "bg-white border border-[#f4a622]"
-                    }`}
+                    className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${city2all
+                      ? "bg-[#007DCA] border-[#007DCA]"
+                      : "bg-white border border-[#f4a622]"
+                      }`}
                   >
                     <CheckIcons />
                   </button>

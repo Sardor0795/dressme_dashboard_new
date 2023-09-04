@@ -17,3 +17,5 @@ export { default as img2 } from "./imgs/img2.svg";
 export { default as img3 } from "./imgs/img3.svg";
 export { default as img4 } from "./imgs/img4.svg";
 export { default as ColourCard } from "./imgs/ColourCard.svg";
+//Location Img
+export { default as pdpImg } from "./imgs/pdpImg.svg";

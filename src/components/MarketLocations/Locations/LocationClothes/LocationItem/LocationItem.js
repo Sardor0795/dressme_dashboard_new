@@ -8,7 +8,7 @@ import {
   CheckIcons,
   DeleteIcon,
 } from "../../../../../assets/icons";
-import { wearImg } from "../../../../../assets";
+import { pdpImg, wearImg } from "../../../../../assets";
 
 export default function LocationItem({ data, click, index }) {
   const [openStoreList, setOpenStoreList] = useState(false);
@@ -37,16 +37,14 @@ export default function LocationItem({ data, click, index }) {
         onClick={() => {
           click(data?.id);
         }}
-        className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
-          data?.isCheck
-            ? "bg-[#007DCA] border-[#007DCA]"
-            : "bg-white border-checkboxBorder"
-        } hidden md:flex items-center justify-center rounded mr-[8px]`}
+        className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${data?.isCheck
+          ? "bg-[#007DCA] border-[#007DCA]"
+          : "bg-white border-checkboxBorder"
+          } hidden md:flex items-center justify-center rounded mr-[8px]`}
       >
         <span
-          className={`${
-            data?.isCheck ? "flex items-center justify-center" : "hidden"
-          }`}
+          className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
+            }`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,13 +70,13 @@ export default function LocationItem({ data, click, index }) {
         </div>
         <div className="flex w-full items-center text-[13px]">
           <div className="w-[18%] text-weatherWinterColor">
-            <span className="max-w-[169px] inline-block">
+            <span className="max-w-[169px] inline-block text-base not-italic font-AeonikProMedium">
               Спортивная мужская кроссовка Nike RUN
             </span>
           </div>
-          <div className="text-tableTextTitle2 w-[12%]">BAA-00004</div>
-          <div className="text-tableTextTitle2 w-[11%]">Футболка</div>
-          <div className="w-[10%]">15-08-2023</div>
+          <div className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium w-[12%]">BAA-00004</div>
+          <div className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium w-[11%]">Футболка</div>
+          <div className="w-[10%] text-tableTextTitle2 text-base not-italic font-AeonikProMedium">15-08-2023</div>
           <div className="w-[14%]">
             <div
               className={`w-[113px] text-center text-white font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
@@ -86,7 +84,7 @@ export default function LocationItem({ data, click, index }) {
               {data?.state}
             </div>
           </div>
-          <div className="w-[12%]">452 000 сумара</div>
+          <div className="w-[12%] text-tableTextTitle2 text-base not-italic font-AeonikProMedium">452 000 сум</div>
           <button
             onClick={() => goProductDetailEdit(data?.id)}
             className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium w-[15%] "
@@ -122,7 +120,7 @@ export default function LocationItem({ data, click, index }) {
 
         <div className="mb-3 h-[148px]">
           <figure className="w-full h-full rounded-lg overflow-hidden">
-            <img className="w-[100%] h-[100%]" src={wearImg} alt="" />
+            <img className="w-[100%] h-[100%] object-center	object-cover" src={pdpImg} alt="" />
           </figure>
         </div>
 
@@ -134,7 +132,7 @@ export default function LocationItem({ data, click, index }) {
           </div>
 
           <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
-            <div className="w-[40%] text-[#007DCA]"> {data?.name}</div>
+            <div className="w-[40%] text-[#007DCA] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex items-center"> {data?.name}</div>
             <div
               className={`w-[30%] font-AeonikProRegular leading-none flex items-center justify-center text-white ${data.bgColor} rounded-lg px-[5px] py-[4px]`}
             >
@@ -145,9 +143,8 @@ export default function LocationItem({ data, click, index }) {
         </div>
 
         <div
-          className={`mb-3 overflow-hidden ${
-            toggleMobileMenu ? "hidden" : "block"
-          }`}
+          className={`mb-3 overflow-hidden ${toggleMobileMenu ? "hidden" : "block"
+            }`}
         >
           <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[13px] gap-x-[10px] mb-[8px]">
             <div className="w-[21%] flex items-center">Артикул</div>
@@ -187,16 +184,14 @@ export default function LocationItem({ data, click, index }) {
             }}
           >
             <div
-              className={`cursor-pointer min-w-[18px] min-h-[18px] border text-[#8C8C8C] border-checkboxBorder ${
-                data?.isCheck
-                  ? "bg-[#007DCA] border-[#007DCA]"
-                  : "bg-white border-checkboxBorder"
-              } flex items-center justify-center rounded mr-[5px]`}
+              className={`cursor-pointer min-w-[18px] min-h-[18px] border text-[#8C8C8C] border-checkboxBorder ${data?.isCheck
+                ? "bg-[#007DCA] border-[#007DCA]"
+                : "bg-white border-checkboxBorder"
+                } flex items-center justify-center rounded mr-[5px]`}
             >
               <span
-                className={`${
-                  data?.isCheck ? "flex items-center justify-center" : "hidden"
-                }`}
+                className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
+                  }`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -37,20 +37,20 @@ function LocationMapCity() {
   return (
     <div className="w-full">
       <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
-        <div className="my-4">
-          <div className=" md:hidden flex">
+        <div className="my-4 ">
+          <div className="  flex items-center justify-center mb-6">
             <button
               onClick={() => {
                 navigate(-1);
               }}
-              className="  md:hidden flex items-center cursor-pointer justify-center "
+              className="  md:hidden fixed left-2 flex items-center cursor-pointer justify-center "
             >
               <GoBackIcons />
             </button>
+            <div className="text-center  text-xl md:text-[35px] font-AeonikProMedium   md:px-0 ">
+              {NewId}
+            </div>
           </div>{" "}
-          <div className="text-center  text-5 md:text-[35px] font-AeonikProMedium  px-4 md:px-0 ">
-            {NewId}
-          </div>
           <div className=" px-4 md:px-0  w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
             <button
               onClick={() => {
@@ -63,21 +63,21 @@ function LocationMapCity() {
             <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
               <NavLink
                 to="/store/location-add"
-                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
                 Изменить магазин{" "}
               </NavLink>
               <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
               <NavLink
                 to="/store/market-add"
-                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
                 Одежда{" "}
               </NavLink>
               <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
               <button
                 onClick={success2}
-                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
                 Удалить
               </button>
@@ -154,13 +154,17 @@ function LocationMapCity() {
                 </div>
                 <div className="w-full flex  items-center">
                   {" "}
-                  от
+                  <span className="w-fit text-[12px] md:text-base flex items-center ">
+                    от
+                  </span>
                   <input
                     type="text"
                     value={"09:00"}
                     className="mr-5 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                   />
-                  до
+                  <span className="w-fit text-[12px] md:text-base flex items-center ">
+                    до
+                  </span>
                   <input
                     type="text"
                     value={"20:00"}

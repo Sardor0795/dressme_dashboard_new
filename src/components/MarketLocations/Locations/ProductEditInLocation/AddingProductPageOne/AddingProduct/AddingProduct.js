@@ -1152,7 +1152,7 @@ const AddingProduct = () => {
                 <input
                   type="text"
                   value="33"
-                  className="w-full h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
+                  className="w-full h-10 flex text-base items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
                   placeholder="0"
                 />
               </div>
@@ -1177,14 +1177,14 @@ const AddingProduct = () => {
                     <input
                       type="number"
                       value="12"
-                      className="w-[50%] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-[50%] h-[42px] text-center text-base fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Мин"
                     />
                     <span className="w-3 border-b text-borderColor mx-[4px]"></span>
                     <input
                       type="number"
                       value="100"
-                      className="w-[50%] h-[42px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-[50%] h-[42px] text-base text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Макс"
                     />
                   </div>
@@ -1206,7 +1206,7 @@ const AddingProduct = () => {
                       type="number"
                       placeholder="0"
                       value="270000"
-                      className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-[70%] text-base font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -1234,7 +1234,7 @@ const AddingProduct = () => {
                           type="number"
                           placeholder="0"
                           value="40"
-                          className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                          className="w-[70%] font-AeonikProMedium text-start outline-none  flex items-center  text-base [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         <span className="text-textLightColor ml-2">%</span>
                       </div>
@@ -1248,7 +1248,7 @@ const AddingProduct = () => {
                           type="number"
                           placeholder="0"
                           value="200000"
-                          className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                          className="w-[75%] text-base flex items-center font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                           сум
@@ -1332,7 +1332,7 @@ const AddingProduct = () => {
                   className="w-full h-[40px] rounded-lg flex items-center justify-between px-3 border border-borderColor overflow-hidden"
                 >
                   <span className="text-gray-500 text-sm not-italic font-AeonikProRegular ">
-                    Выбрать
+                    Верхняя одежда
                   </span>
                   <span
                     className={` ${categoryWear ? "rotate-[270deg]" : "rotate-[90deg]"
@@ -1412,7 +1412,7 @@ const AddingProduct = () => {
                   <input
                     type="number"
                     defaultValue={"80"}
-                    className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-full border border-borderColor px-2 h-10 rounded-lg outline-none text-base  flex items-center  [&::-webkit-inner-spin-button]:appearance-none"
                     placeholder="(необязательно)"
                   />
                 </div>

@@ -1729,20 +1729,15 @@ const AddingProduct = () => {
     { id: 11, data: 11, icons: InputCheck, action: false, colors: "bg-blue-900 " },
     { id: 12, data: 12, icons: InputCheck, action: false, colors: "bg-yellow-900 " },
   ];
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="relative w-full block md:flex items-center justify-between mb-[50px] focus:bg-textBlueColor">
 
-      <div className="w-full py-6 border-lightBorderColor block md:hidden">
-        <div className="w-full flex items-center justify-center">
-          <button className="absolute left-0 ">
-            <MobileHumburgerMenu />
-          </button>
-          <span className="text-2xl not-italic font-AeonikProMedium">
-            Добавить одежду
-          </span>
-        </div>
-      </div>
+
 
       <div className="absolute top-[85px] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
@@ -2148,7 +2143,7 @@ const AddingProduct = () => {
                       <div className="flex flex-col">
                         <input
                           type="number"
-                          className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="w-[60px] h-10 text-center border border-borderColor px-3 flex items-center rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none"
                           placeholder="Мин"
                         />
                       </div>
@@ -2156,7 +2151,7 @@ const AddingProduct = () => {
                       <div className="flex flex-col">
                         <input
                           type="number"
-                          className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="w-[60px] h-10 text-center border border-borderColor px-3 flex items-center rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
                           placeholder="Мах"
                         />
                       </div>
@@ -2178,7 +2173,7 @@ const AddingProduct = () => {
                   <div className="w-full flex items-center justify-between">
                     <input
                       type="text"
-                      className="w-full h-10 flex text-[10px] md:text-sm items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
+                      className="w-full h-10 text-base flex items-center justify-between border rounded-lg px-[10px] outline-none"
                       placeholder="0"
                     />
                     {/* <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
@@ -2266,7 +2261,7 @@ const AddingProduct = () => {
                     </div>
                     <input
                       type="number"
-                      className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-full border border-borderColor px-2 h-10 flex items-center rounded-lg outline-none text-base [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="(необязательно)"
                     />
                   </div>
