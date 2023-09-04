@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProductImg } from "../../../../assets";
 import {
   CheckTrue,
@@ -71,9 +71,7 @@ export default function ReviewWear() {
     openwear: false,
   });
 
-  const handleOpenChangeWear = (newOpen) => {
-    setState({ ...state, openwear: newOpen });
-  };
+
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
     { id: 2, checked: false, starValue: 4, starFree: 1, valueCount: 70 },
@@ -92,63 +90,11 @@ export default function ReviewWear() {
       });
     });
   };
-  const contentWear = (
-    <div className="w-[220px] h-fit m-0 p-0">
-      <div className="flex flex-col gap-y-3">
-        {filterStar.map((data) => {
-          return (
-            <div
-              key={data?.id}
-              onClick={() => handleFilterStar(data?.id)}
-              className="w-full h-5 flex items-center cursor-pointer"
-            >
-              <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
-                  data?.checked
-                    ? "border border-textBlueColor bg-textBlueColor"
-                    : "border border-lightBorderColor"
-                }`}
-              >
-                {data?.checked ? <CheckTrue /> : null}
-              </button>
-              <article className="flex items-center ml-[10px]">
-                <span className="text-gray-700 text-base not-italic font-AeonikProRegular">
-                  {data?.starValue}
-                </span>
-                <span className="flex items-center ml-[5px] gap-x-[2px]">
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                </span>
-                <span className="flex items-center  gap-x-[2px]">
-                  <StarOutlineIcon />
-                  <StarOutlineIcon />
-                </span>
-              </article>
-              <p className="ml-[15px] text-gray-700 text-base not-italic font-AeonikProRegular">
-                ({data?.valueCount})
-              </p>
-            </div>
-          );
-        })}
-      </div>
-      <div className="w-full pt-5 mt-5 border-t border-lightBorderColor flex items-center justify-between">
-        <span
-          onClick={() => setState({ ...state, openwear: false })}
-          className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
-        >
-          Отмена
-        </span>
-        <span className="h-8 w-[1px] bg-lightBorderColor"></span>
-        <span
-          onClick={() => setState({ ...state, openwear: false })}
-          className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
-        >
-          Готово
-        </span>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <div className="w-full h-full md:px-10 py-1">

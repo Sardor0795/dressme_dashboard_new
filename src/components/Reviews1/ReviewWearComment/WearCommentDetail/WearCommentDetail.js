@@ -163,7 +163,11 @@ const WearCommentDetail = () => {
       },
     ],
   };
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="w-full h-fit">
       <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">

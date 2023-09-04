@@ -27,19 +27,19 @@ export default function AddLocation() {
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 ">
       {openStoreList && <StoreListModal onClick={storeToggle} />}
       <div className=" ">
-        <div className="md:hidden flex ">
+        <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
           <button
             onClick={() => {
               navigate(-1);
             }}
-            className="  md:hidden flex items-center cursor-pointer justify-center "
+            className="  md:hidden fixed left-0 flex items-center cursor-pointer justify-center "
           >
             <GoBackIcons />
           </button>
+          <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium   md:px-0">
+            Добавить локацию магазина
+          </div>
         </div>{" "}
-        <div className="text-center mb-3 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium  px-4 md:px-0">
-          Добавить локацию магазина
-        </div>
         <div>
           <YandexMapStore />
         </div>
@@ -112,13 +112,17 @@ export default function AddLocation() {
               </div>
               <div className="w-full flex  items-center">
                 {" "}
-                от
+                <span className="w-fit text-[12px] md:text-base flex items-center ">
+                  от
+                </span>
                 <input
                   type="text"
                   value={"09:00"}
                   className="mr-5 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                 />
-                до
+                <span className="w-fit text-[12px] md:text-base flex items-center ">
+                  до
+                </span>
                 <input
                   type="text"
                   value={"20:00"}
@@ -187,7 +191,7 @@ export default function AddLocation() {
         <div className="flex justify-center mt-[50px]  px-4 md:px-0">
           <Link
             className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
-            // to={"/store"}
+          // to={"/store"}
           >
             Добавить
           </Link>

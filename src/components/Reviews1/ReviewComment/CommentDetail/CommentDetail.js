@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { deliveryIcon, man, nike, woman } from "../../../../assets";
 import { StarIcon } from "../../../../assets/icons";
 
 export default function CommentDetail() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="w-full h-full ">
       <div className="md:h-11"></div>
@@ -17,11 +22,11 @@ export default function CommentDetail() {
             </span>
             <div className="flex md:hidden items-center mt-[5px]">
               <div className="flex md:hidden items-center mr-[5px] md:mr-[6px]">
-                <StarIcon width={14} height={14}/>
-                <StarIcon width={14} height={14}/>
-                <StarIcon width={14} height={14}/>
-                <StarIcon width={14} height={14}/>
-                <StarIcon width={14} height={14}/>
+                <StarIcon width={14} height={14} />
+                <StarIcon width={14} height={14} />
+                <StarIcon width={14} height={14} />
+                <StarIcon width={14} height={14} />
+                <StarIcon width={14} height={14} />
               </div>
               <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                 <p className="font-AeonikProMedium text-black mr-[5px]">

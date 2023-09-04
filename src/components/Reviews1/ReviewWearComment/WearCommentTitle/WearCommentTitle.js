@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CloseAnswer,
   MobileStar,
@@ -68,6 +68,11 @@ export default function WearCommentTitle() {
       },
     ],
   });
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
@@ -105,19 +110,19 @@ export default function WearCommentTitle() {
           <div className="flex items-center ">
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">1</span>
-              <StarIcon width={14} height={14}/>
+              <StarIcon width={14} height={14} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">2</span>
-              <StarIcon width={16} height={16}/>
+              <StarIcon width={16} height={16} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">3</span>
-              <StarIcon width={16} height={16}/>
+              <StarIcon width={16} height={16} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg mr-[5px]">
               <span className="mr-[5px] group-focus:text-white">4</span>
-              <StarIcon width={16} height={16}/>
+              <StarIcon width={16} height={16} />
             </button>
             <button className="group w-[55px] focus:bg-textBlueColor h-9 flex items-center justify-center border border-borderColor rounded-lg">
               <span className="mr-[5px] group-focus:text-white">5</span>
