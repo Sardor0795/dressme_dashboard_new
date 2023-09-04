@@ -19,10 +19,10 @@ import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker;
 
 const AddingProduct = () => {
-  
+
   const [openColors, setOpenColors] = useState(false); // Colors
   const [openCategories, setOpenCategories] = useState(false); // Categories
   const [openClothingSection, setOpenClothingSection] = useState(false); // Clothing Types
@@ -50,7 +50,7 @@ const AddingProduct = () => {
 
   const [state, setState] = useState({
     buttonReviews: false,
-    openDropModalButton:true,
+    openDropModalButton: true,
   })
   // const [openDropModalButton,setOpenDropModalButton] = useState(false)
 
@@ -167,90 +167,90 @@ const AddingProduct = () => {
           </div>
         </div>
         <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mt-[15px]">
-            <div className="w-1/2 flex items-center gap-x-[25px]">
-              <div className="w-fit hidden md:flex flex-col items-start">
-                <div className="flex items-center justify-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProMedium"
-                  >
-                    Возраст
-                  </label>
-                </div>
-                <div className="w-full flex items-center">
-                  <input
-                    type="number"
-                    className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                    placeholder=""
-                  />
-                </div>
-              </div>
-              <div className="w-full md:w-[90%]">
-                <div className="flex items-center mb-[5px]">
-                  <label
-                    htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProMedium"
-                  >
-                    Цена
-                  </label>
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                  <input
-                    type="number"
-                    placeholder="0"
-                    className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
-                  />
-                  <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                    сум
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="w-1/2 flex flex-col items-start">
+          <div className="w-1/2 flex items-center gap-x-[25px]">
+            <div className="w-fit hidden md:flex flex-col items-start">
               <div className="flex items-center justify-center mb-[5px]">
                 <label
                   htmlFor=""
                   className="text-[13px] md:text-base font-AeonikProMedium"
                 >
-                  Скидка
+                  Возраст
                 </label>
-                <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                  (необязательно)
+              </div>
+              <div className="w-full flex items-center">
+                <input
+                  type="number"
+                  className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                  placeholder=""
+                />
+              </div>
+            </div>
+            <div className="w-full md:w-[90%]">
+              <div className="flex items-center mb-[5px]">
+                <label
+                  htmlFor=""
+                  className="text-[13px] md:text-base font-AeonikProMedium"
+                >
+                  Цена
+                </label>
+                <span className="ml-[5px]">
+                  <StarLabel />
                 </span>
               </div>
-              <div className="w-full flex items-center justify-center">
-                <div className="w-full flex items-center gap-x-1">
-                  <div className="w-[40%] md:w-[72px] flex items-start">
-                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                      <input
-                        type="number"
-                        placeholder="0"
-                        className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="text-textLightColor ml-2">%</span>
-                    </div>
+              <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                <input
+                  type="number"
+                  placeholder="0"
+                  className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+                <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                  сум
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2 flex flex-col items-start">
+            <div className="flex items-center justify-center mb-[5px]">
+              <label
+                htmlFor=""
+                className="text-[13px] md:text-base font-AeonikProMedium"
+              >
+                Скидка
+              </label>
+              <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
+                (необязательно)
+              </span>
+            </div>
+            <div className="w-full flex items-center justify-center">
+              <div className="w-full flex items-center gap-x-1">
+                <div className="w-[40%] md:w-[72px] flex items-start">
+                  <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                    <input
+                      type="number"
+                      placeholder="0"
+                      className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <span className="text-textLightColor ml-2">%</span>
                   </div>
-                  <span className="rotate-90 text-borderColor ml-[7px] mr-1 md:ml-3 md:mr-[9px]">
-                    |
-                  </span>
-                  <div className="w-[60%] md:w-[75%] flex items-center">
-                    <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                      <input
-                        type="number"
-                        placeholder="0"
-                        className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                        сум
-                      </span>
-                    </div>
+                </div>
+                <span className="rotate-90 text-borderColor ml-[7px] mr-1 md:ml-3 md:mr-[9px]">
+                  |
+                </span>
+                <div className="w-[60%] md:w-[75%] flex items-center">
+                  <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                    <input
+                      type="number"
+                      placeholder="0"
+                      className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                      сум
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
         <button className="w-full flex items-end justify-end text-lg text-textBlueColor font-AeonikProMedium pr-1">
           готово
@@ -1732,7 +1732,7 @@ const AddingProduct = () => {
 
   return (
     <div className="relative w-full block md:flex items-center justify-between mb-[50px] focus:bg-textBlueColor">
-      
+
       <div className="w-full py-6 border-lightBorderColor block md:hidden">
         <div className="w-full flex items-center justify-center">
           <button className="absolute left-0 ">
@@ -1743,7 +1743,7 @@ const AddingProduct = () => {
           </span>
         </div>
       </div>
-      
+
       <div className="absolute top-[85px] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
           1
@@ -1759,14 +1759,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenClothingSection(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openClothingSection ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openClothingSection ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <ClothingTypesAnimationPage onClick={toggleClothingSection} />
         </section>
@@ -1776,14 +1774,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenClothingSubSection(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openClothingSubSection ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openClothingSubSection ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openClothingSubSection ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openClothingSubSection ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <ClothingSubSectionPage onClick={toggleClothingSubSection} />
         </section>
@@ -1793,14 +1789,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenWeather(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openWeather ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openWeather ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openWeather ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openWeather ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <WeatherMobileDropUp onClick={toggleWeather} />
         </section>
@@ -1811,14 +1805,12 @@ const AddingProduct = () => {
       >
         <section
           onClick={() => setOpenColors(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openColors ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColors ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openColors ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openColors ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <ColorsMobileDropUp onClick={toggleColors} />
         </section>
@@ -1828,14 +1820,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenGender(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openGender ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openGender ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openGender ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openGender ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <GenderTypeDropUp onClick={toggleGender} />
         </section>
@@ -1845,14 +1835,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenCategories(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openCategories ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openCategories ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openCategories ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openCategories ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <CategoriesMobileDropUp onClick={toggleCategories} />
         </section>
@@ -1862,14 +1850,12 @@ const AddingProduct = () => {
       <div>
         <section
           onClick={() => setOpenTypes(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-            openTypes ? "" : "hidden"
-          }`}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openTypes ? "" : "hidden"
+            }`}
         ></section>
         <section
-          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-            openTypes ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+          className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openTypes ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
         >
           <TypesDropUp onClick={toggleTypes} />
         </section>
@@ -1880,7 +1866,7 @@ const AddingProduct = () => {
         className="w-full md:mx-[180px] md:mb-[50px]"
       >
         <div className="hidden md:flex items-center justify-center text-2xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду</div>
-        
+
         <div className="md:relative md:border border-borderColor rounded-xl md:px-[30px] md:pt-[50px]  md:pb-[250px]">
 
           {/* Photo Section For Mobile */}
@@ -1920,7 +1906,7 @@ const AddingProduct = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Add Product Parts Section */}
           <div className="w-full flex items-start justify-between md:gap-x-[30px]">
             <div className="w-full md:w-[65%]">
@@ -2124,7 +2110,7 @@ const AddingProduct = () => {
                           <StarLabel />
                         </span>
                       </label>
-                    </div> 
+                    </div>
                   </div>
                   <div className="w-full flex items-center ">
                     <div className="w-full md:w-[45%]">
@@ -2164,7 +2150,7 @@ const AddingProduct = () => {
                           type="number"
                           className="w-[60px] h-[42px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-sm [&::-webkit-inner-spin-button]:appearance-none outline-none"
                           placeholder="Мин"
-                      />
+                        />
                       </div>
                       <span className="rotate-90 h-full text-borderColor mx-3">|</span>
                       <div className="flex flex-col">
@@ -2201,7 +2187,7 @@ const AddingProduct = () => {
                   </div>
                 </div>
               </div>
-          
+
               {/* 4 */}
               <div className="w-full hidden md:flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
                 <div className="w-1/2 hidden md:flex flex-col items-start">
@@ -2213,17 +2199,17 @@ const AddingProduct = () => {
                       <StarLabel />
                     </span>
                   </div>
-                  <button 
+                  <button
                     onClick={toggleDropModalButton}
                     type="button" className={`w-full overflow-hidden h-[42px] flex items-center justify-between border border-borderColor rounded-lg p-3 `}>
                     <span className="text-[#a1a1a1]">Выбрать</span>
-                      {!state.openDropModalButton ? (
-                        <span className="-rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
-                      ):(
-                        <span className="rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
-                      )
+                    {state.openDropModalButton ? (
+                      <span className="-rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
+                    ) : (
+                      <span className="rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
+                    )
                     }
-                    
+
                   </button>
                 </div>
                 <div className="w-1/2 flex items-start gap-x-[10px]">
@@ -2389,66 +2375,66 @@ const AddingProduct = () => {
                   </div>
                 </div>
               </div>
-              
-              {/* 5 */}
-              {!state.openDropModalButton ? (
-              <div className="w-full hidden md:flex items-center justify-between">
-                <Popover
-                  // open={state?.openhat}
-                  // onOpenChange={handleOpenChangeHat}
-                  className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
-                  trigger="click"
-                  options={["Hide"]}
-                  placement="bottomLeft"
-                  content={contentHat}
-                >
-                  Головные уборы
-                </Popover>
-                <Popover
-                  // open={state?.openOutwear}
-                  // onOpenChange={handleOpenChangeOutwear}
-                  className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
-                  trigger="click"
-                  options={["Hide"]}
-                  placement="bottomLeft"
-                  content={contentOutwear}
-                >
-                  Верхняя одежда
-                </Popover>
-                <Popover
-                  // open={state?.openOutwaer}
-                  // onOpenChange={handleOpenChangeOutwear}
-                  className="group px-[15px] h-[38px] rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                  trigger="click"
-                  options={["Hide"]}
-                  placement="bottom"
-                  content={contentUnderWear}
-                >
-                  Нижняя одежда
-                </Popover>
-                <Popover
-                  // open={state?.openwear}
-                  // onOpenChange={handleOpenChangeWear}
-                  className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                  trigger="click"
-                  options={["Hide"]}
-                  placement="bottom"
-                  content={contentShoes}
-                >
-                  Обувь
-                </Popover>
-                <Popover
-                  // open={state?.openwear}
-                  // onOpenChange={handleOpenChangeWear}
-                  className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
-                  trigger="click"
-                  options={["Hide"]}
-                  placement="bottomRight"
-                  content={contentAccessories}
-                >
-                  Аксессуары
-                </Popover>
-              </div>
+
+              {/* 5 Категория одежды*/}
+              {state.openDropModalButton ? (
+                <div className="w-full hidden md:flex items-center justify-between">
+                  <Popover
+                    // open={state?.openhat}
+                    // onOpenChange={handleOpenChangeHat}
+                    className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300"
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="bottomLeft"
+                    content={contentHat}
+                  >
+                    Головные уборы
+                  </Popover>
+                  <Popover
+                    // open={state?.openOutwear}
+                    // onOpenChange={handleOpenChangeOutwear}
+                    className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 rounded-lg hover:bg-textBlueColor hover:text-white transition duration-300"
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="bottomLeft"
+                    content={contentOutwear}
+                  >
+                    Верхняя одежда
+                  </Popover>
+                  <Popover
+                    // open={state?.openOutwaer}
+                    // onOpenChange={handleOpenChangeOutwear}
+                    className="group px-[15px] h-[38px] rounded-lg border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer active:scale-95 focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="bottom"
+                    content={contentUnderWear}
+                  >
+                    Нижняя одежда
+                  </Popover>
+                  <Popover
+                    // open={state?.openwear}
+                    // onOpenChange={handleOpenChangeWear}
+                    className="px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95 rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="bottom"
+                    content={contentShoes}
+                  >
+                    Обувь
+                  </Popover>
+                  <Popover
+                    // open={state?.openwear}
+                    // onOpenChange={handleOpenChangeWear}
+                    className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="bottomRight"
+                    content={contentAccessories}
+                  >
+                    Аксессуары
+                  </Popover>
+                </div>
               ) : (
                 ""
               )}

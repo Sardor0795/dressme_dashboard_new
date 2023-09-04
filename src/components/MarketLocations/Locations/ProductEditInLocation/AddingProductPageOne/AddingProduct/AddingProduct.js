@@ -1319,7 +1319,7 @@ const AddingProduct = () => {
                   </span>
                 </button>
               </div>
-              <div className="w-1/2 hidden md:flex flex-col items-start bg-red-500 border border-red-500 ">
+              <div className="w-1/2 hidden md:flex flex-col items-start  border border-red-500 ">
                 <div className="flex items-center justify-between mb-[5px]">
                   <span> Категория одежды</span>
                   <span className="ml-[5px]">
@@ -1466,7 +1466,7 @@ const AddingProduct = () => {
               </div>
             </div>
 
-            {/* 6 */}
+            {/* 6 bg-red*/}
             <div
               className={`w-full items-center gap-x-6  ${categoryWear ? "md:flex hidden " : "hidden "
                 }`}
