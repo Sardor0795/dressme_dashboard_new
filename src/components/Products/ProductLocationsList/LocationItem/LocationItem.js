@@ -33,7 +33,7 @@ export default function LocationItem({ data, click }) {
       name_product: "Кроссовка Nike RUN",
       status: "Одобренный",
       money: "452 000 сум"
-      
+
     },
     {
       id: 2,
@@ -66,7 +66,7 @@ export default function LocationItem({ data, click }) {
       money: "452 000"
     },
   ];
-  
+
   return (
     <div className="w-full">
       {/* Item List For Desktop */}
@@ -77,16 +77,14 @@ export default function LocationItem({ data, click }) {
           onClick={() => {
             click(data?.id);
           }}
-          className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
-            data?.isCheck
+          className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${data?.isCheck
               ? "bg-[#007DCA] border-[#007DCA]"
               : "bg-white border-checkboxBorder"
-          } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
+            } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
         >
           <div
-            className={`${
-              data?.isCheck ? "flex items-center justify-center" : "hidden"
-            }`}
+            className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
+              }`}
           >
             <CheckIcons />
           </div>
@@ -98,21 +96,21 @@ export default function LocationItem({ data, click }) {
           </div>
           <div className="flex w-full items-center">
             <div className="w-[18%] text-weatherWinterColor">
-              <span className="max-w-[169px] inline-block">
+              <span className="max-w-[169px] inline-block text-base not-italic font-AeonikProMedium">
                 Спортивная мужская кроссовка Nike RUN
               </span>
             </div>
-            <div className="text-tableTextTitle2 w-[12%]">BAA-00004</div>
-            <div className="text-tableTextTitle2 w-[11%]">Футболка</div>
-            <div className="w-[10%]">15-08-2023</div>
+            <div className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium w-[12%]">BAA-00004</div>
+            <div className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium w-[11%]">Футболка</div>
+            <div className="w-[10%] text-tableTextTitle2 text-base not-italic font-AeonikProMedium">15-08-2023</div>
             <div className="w-[14%]">
               <div
-                className={`w-[113px] text-center text-white text-base font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
+                className={`w-[113px] text-center text-white font-AeonikProRegular py-[5px] px-[8px] rounded-full ${data?.bgColor} `}
               >
                 {data?.state}
               </div>
             </div>
-            <div className="w-[12%]">452 000 сумара</div>
+            <div className="w-[12%] text-tableTextTitle2 text-base not-italic font-AeonikProMedium">452 000 сум</div>
             <button
               onClick={() => goProductDetailEdit(data?.id)}
               className="text-[18px] text-weatherWinterColor w-[15%] text-center"
@@ -138,7 +136,7 @@ export default function LocationItem({ data, click }) {
 
 
       {/* Item List For Mobile */}
-      {productList.map(data =>(
+      {productList.map(data => (
         <div key={data.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
           <div className="mb-2">
             <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
@@ -188,16 +186,14 @@ export default function LocationItem({ data, click }) {
               onClick={() => {
                 click(data?.id);
               }}
-              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
-                data?.isCheck
+              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${data?.isCheck
                   ? "bg-[#007DCA] border-[#007DCA]"
                   : "bg-white border-checkboxBorder"
-              } flex items-center justify-center rounded mr-[8px]`}
+                } flex items-center justify-center rounded mr-[8px]`}
             >
               <div
-                className={`${
-                  data?.isCheck ? "flex items-center justify-center" : "hidden"
-                }`}
+                className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
+                  }`}
               >
                 <CheckIcons />
               </div>

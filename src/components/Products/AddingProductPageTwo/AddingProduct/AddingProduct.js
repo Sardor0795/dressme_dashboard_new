@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { CopyIcon, StarLabel, XIcon } from "../../../../assets/icons";
 import AddBtn from "./AddBtn/AddBtn";
 
 export default function AddingProduct() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="flex py-[40px] md:py-[50px]">
       <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
