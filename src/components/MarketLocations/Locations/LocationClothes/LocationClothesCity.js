@@ -73,6 +73,11 @@ export default function LocationClothesCity() {
     },
   ]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   const [someChecked, setSomeChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(false);
 
@@ -193,11 +198,10 @@ export default function LocationClothesCity() {
             Выбранные:
           </div>
           <button
-            className={`w-fit pr-1 ll:pr-3 border-r-[2px] border-addLocBorderRight flex items-center justify-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg ${
-              someChecked
-                ? "text-addLocationTextcolor active:translate-y-[2px]"
-                : "text-[#D2D2D2] cursor-not-allowed"
-            }`}
+            className={`w-fit pr-1 ll:pr-3 border-r-[2px] border-addLocBorderRight flex items-center justify-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg ${someChecked
+              ? "text-addLocationTextcolor active:translate-y-[2px]"
+              : "text-[#D2D2D2] cursor-not-allowed"
+              }`}
           >
             <span className="mr-[3px] ll:mr-[5px] hidden md:block">
               <AddLocationIcon width={20} />
@@ -208,11 +212,10 @@ export default function LocationClothesCity() {
             Добавить в локацию
           </button>
           <button
-            className={`pl-1 ll:pl-3 flex items-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg  ${
-              someChecked
-                ? "text-deleteColor active:translate-y-[2px]"
-                : "text-[#D2D2D2] cursor-not-allowed"
-            }`}
+            className={`pl-1 ll:pl-3 flex items-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg  ${someChecked
+              ? "text-deleteColor active:translate-y-[2px]"
+              : "text-[#D2D2D2] cursor-not-allowed"
+              }`}
           >
             <span className="mr-[3px] ll:mr-[5px] hidden md:block">
               <DeleteIcon width={20} />
@@ -232,16 +235,14 @@ export default function LocationClothesCity() {
               onCheck(checkIndicator);
               setAllChecked(!allChecked);
             }}
-            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${
-              allChecked
-                ? "bg-[#007DCA] border-[#007DCA]"
-                : "bg-white border-checkboxBorder"
-            } hidden md:flex items-center justify-center rounded mr-[8px]`}
+            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${allChecked
+              ? "bg-[#007DCA] border-[#007DCA]"
+              : "bg-white border-checkboxBorder"
+              } hidden md:flex items-center justify-center rounded mr-[8px]`}
           >
             <span
-              className={`${
-                allChecked ? "flex items-center justify-center" : "hidden"
-              }`}
+              className={`${allChecked ? "flex items-center justify-center" : "hidden"
+                }`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -268,16 +269,14 @@ export default function LocationClothesCity() {
                   onCheck(checkIndicator);
                   setAllChecked(!allChecked);
                 }}
-                className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
-                  allChecked
-                    ? "bg-[#007DCA] border-[#007DCA]"
-                    : "bg-white border-checkboxBorder"
-                } flex items-center justify-center rounded ml-[8px]`}
+                className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${allChecked
+                  ? "bg-[#007DCA] border-[#007DCA]"
+                  : "bg-white border-checkboxBorder"
+                  } flex items-center justify-center rounded ml-[8px]`}
               >
                 <span
-                  className={`${
-                    allChecked ? "flex items-center justify-center" : "hidden"
-                  }`}
+                  className={`${allChecked ? "flex items-center justify-center" : "hidden"
+                    }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 // import { ProductImg } from "../../assets";
 import {
   CalendarIcons,
@@ -71,6 +71,12 @@ export default function LocationList() {
   const goMapWear = (id) => {
     navigate(`/locations-store/wears/:${id}`);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="w-full h-full  px-4 md:px-0 ">
       <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
@@ -132,7 +138,7 @@ export default function LocationList() {
                 <SearchIcon />
               </button>
             </form>
-            <section className="mobileDate flex items-center gap-x-[30px]">
+            <section className="mobileDate flex items-center gap-x-4 ll:gap-x-[30px]">
               <Space direction="vertical" size={12}>
                 <RangePicker placeholder={["от", "до"]} />
               </Space>
@@ -261,18 +267,18 @@ export default function LocationList() {
                   </div>
 
                   <div className="mb-[25px]">
-                    <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
-                      <div className="pr-[10px] w-[24%]">Регион</div>
-                      <div className="pr-[10px] w-[46%]">Адрес</div>
-                      <div className="w-[30%]">Рабочее время</div>
+                    <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-1 ll:px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
+                      <div className="text-gray-700 text-[10px]  not-italic font-AeonikProMedium pr-[10px] w-[24%]">Регион</div>
+                      <div className="text-gray-700 text-[10px]  not-italic font-AeonikProMedium pr-[10px] w-[46%]">Адрес</div>
+                      <div className="text-gray-700 text-[10px]  not-italic font-AeonikProMedium w-[30%]">Рабочее время</div>
                     </div>
 
-                    <div className="px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
-                      <div className="pr-[10px] w-[24%] break-words">
+                    <div className="px-1 ll:px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
+                      <div className="pr-[10px] w-[24%] break-words  text-gray-700 text-[10px]  not-italic font-AeonikProRegular">
                         {data?.city}
                       </div>
-                      <div className="pr-[10px] w-[46%]">{data?.address}</div>
-                      <div className="w-[30%]"> {data?.time} </div>
+                      <div className="pr-[10px] w-[46%]  text-justify	text-gray-700 text-[10px]  not-italic font-AeonikProRegular">{data?.address}</div>
+                      <div className="w-[30%] flex items-center justify-center text-gray-700 text-[10px]  not-italic font-AeonikProRegular"> {data?.time} </div>
                     </div>
                   </div>
 

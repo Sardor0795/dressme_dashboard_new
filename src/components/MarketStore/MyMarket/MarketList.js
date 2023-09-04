@@ -26,8 +26,9 @@ const MarketList = () => {
             <div className="w-full md:w-fit flex items-center md:flex-row flex-col justify-center md:justify-start  md:border-0 border-b border-borderColor">
               <div className="w-full md:w-fit flex items-center justify-between  md:pr-7 md:pl-5 text-xl font-AeonikProRegular ">
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
-                <span className="text-checkboxBorder md:text-black">
+                <span className="text-checkboxBorder md:text-black flex items-center">
                   {" "}
+                  <span className="md:hidden flex">0</span>
                   {data.id}
                 </span>
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
@@ -71,14 +72,14 @@ const MarketList = () => {
                   <img src={woman} alt="" />
                 </div>
               </div>
-              <div className="h-[36px] ll:h-12 px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
+              <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
-                <span className="text-tableTextTitle2 text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
+                <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
                   Собственная доставка
                 </span>
               </div>
             </div>
-            <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[50px]  mt-6 md:mt-0">
+            <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
               <NavLink
                 to={"/locations-store"}
                 className="md:text-textBlueColor cursor-pointer  md:text-base text-[13px] not-italic md:font-AeonikProMedium font-AeonikProRegular md:hover:underline md:px-0 px-[20px] ll:px-[25px] xs:px-[54px] md:py-0 py-2 md:rounded-0 rounded-lg md:bg-white bg-locationBg text-locationText"

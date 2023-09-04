@@ -89,6 +89,12 @@ export default function LocationOfYandex() {
       }
     });
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className={`w-full `}>
       <div className={"mapRoot"}>
