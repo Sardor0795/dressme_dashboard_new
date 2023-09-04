@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { deliveryIcon, man, nike, woman } from "../../../../assets";
 import { useNavigate } from "react-router-dom";
 import { StarIcon } from "../../../../assets/icons";
@@ -16,7 +16,11 @@ const ReviewStore = () => {
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-store/${id}`);
   };
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="w-full h-fit flex flex-col gap-y-[30px]">
       {data.map((data) => {
@@ -44,18 +48,18 @@ const ReviewStore = () => {
                   </p>
                   <div className="flex items-center">
                     <div className="flex md:hidden items-center mr-[5px] md:mr-[6px]">
-                      <StarIcon width={14} height={14}/>
-                      <StarIcon width={14} height={14}/>
-                      <StarIcon width={14} height={14}/>
-                      <StarIcon width={14} height={14}/>
-                      <StarIcon width={14} height={14}/>
+                      <StarIcon width={14} height={14} />
+                      <StarIcon width={14} height={14} />
+                      <StarIcon width={14} height={14} />
+                      <StarIcon width={14} height={14} />
+                      <StarIcon width={14} height={14} />
                     </div>
                     <div className="hidden md:flex items-center mr-[5px] md:mr-[6px]">
-                      <StarIcon width={16} height={16}/>
-                      <StarIcon width={16} height={16}/>
-                      <StarIcon width={16} height={16}/>
-                      <StarIcon width={16} height={16}/>
-                      <StarIcon width={16} height={16}/>
+                      <StarIcon width={16} height={16} />
+                      <StarIcon width={16} height={16} />
+                      <StarIcon width={16} height={16} />
+                      <StarIcon width={16} height={16} />
+                      <StarIcon width={16} height={16} />
                     </div>
                     <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                       <p className="font-AeonikProMedium text-black mr-[5px]">
@@ -94,7 +98,7 @@ const ReviewStore = () => {
                 </p>
               </section>
             </action>
-            <action 
+            <action
               className="w-full flex md:hidden items-center gap-x-1 mt-3">
               <div className="w-9 h-9 rounded-lg border border-borderColor bg-lightBgColor flex items-center justify-center">
                 <img src={man} alt="" />
@@ -109,7 +113,7 @@ const ReviewStore = () => {
                 </span>
               </div>
             </action>
-            <button 
+            <button
               onClick={() => goDetail(data?.id)}
               className="w-full md:hidden flex items-center justify-center active:scale-95 h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium">
               Подробнее

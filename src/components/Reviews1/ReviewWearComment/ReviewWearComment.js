@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WearCommentDetail } from "./WearCommentDetail/WearCommentDetail";
 import WearCommentTitle from "./WearCommentTitle/WearCommentTitle";
 import {
@@ -54,11 +54,10 @@ export default function ReviewWearComment() {
               className="w-full h-5 flex items-center cursor-pointer"
             >
               <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
-                  data?.checked
-                    ? "border border-textBlueColor bg-textBlueColor"
-                    : "border border-lightBorderColor"
-                }`}
+                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
+                  ? "border border-textBlueColor bg-textBlueColor"
+                  : "border border-lightBorderColor"
+                  }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
               </button>
@@ -67,11 +66,11 @@ export default function ReviewWearComment() {
                   {data?.starValue}
                 </span>
                 <span className="flex items-center ml-[5px] gap-x-[2px]">
-                  <StarIcon 
+                  <StarIcon
                   />
-                  <StarIcon 
+                  <StarIcon
                   />
-                  <StarIcon 
+                  <StarIcon
                   />
                 </span>
                 <span className="flex items-center  gap-x-[2px]">
@@ -103,19 +102,24 @@ export default function ReviewWearComment() {
       </div>
     </div>
   );
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="">
-      <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
-        <div className="w-fit flex items-center">
+      <div className="w-full flex justify-between  md:border-b border-lightBorderColor pt-6 md:py-6">
+        <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
           <button
             onClick={() => {
               navigate(-1);
             }}
-            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+            className="w-8 h-8 flex fixed md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
           >
             <AiOutlineLeft />
           </button>
-          <span className="hidden md:block text-tableTextTitle2 text-2xl not-italic font-AeonikProMedium ml-[30px]">
+          <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
             Подробнее о товаре
           </span>
         </div>
@@ -136,9 +140,8 @@ export default function ReviewWearComment() {
               <BiChevronDown
                 size={20}
                 style={{ color: "#c2c2c2" }}
-                className={`${
-                  state?.openwear ? "rotate-[-180deg]" : ""
-                } duration-200`}
+                className={`${state?.openwear ? "rotate-[-180deg]" : ""
+                  } duration-200`}
               />
             </span>
           </Popover>

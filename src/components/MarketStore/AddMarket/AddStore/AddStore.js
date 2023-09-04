@@ -43,20 +43,19 @@ function AddStore({ onClick }) {
 
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
-      <div className="md:hidden flex ">
+      <div className=" flex  items-center justify-center  mb-6">
         <button
           onClick={() => {
             navigate(-1);
           }}
-          className="  md:hidden flex items-center cursor-pointer justify-center "
+          className="  md:hidden flex items-center fixed left-2 cursor-pointer justify-center "
         >
           <GoBackIcons />
         </button>
+        <div className="text-center text-tableTextTitle2 text-xl  md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
+          Создать магазин
+        </div>
       </div>{" "}
-      <div className="text-center text-tableTextTitle2 text-xl mb-3 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
-        {/* <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium"> */}
-        Создать магазин
-      </div>
       <div className="mb-3">
         <button
           onClick={() => {

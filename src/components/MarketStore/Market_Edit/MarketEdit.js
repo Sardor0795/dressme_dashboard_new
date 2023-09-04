@@ -69,25 +69,25 @@ function MarketEdit() {
 
   return (
     <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12  px-4 md:px-0">
-      <div className="text-center mb-3 md:mb-[22px] text-5 md:text-[35px] font-AeonikProMedium">
-        <div className="mt-3 md:hidden flex">
+      <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
+        <div className="mt-6 flex items-center justify-center  ">
           <button
             onClick={() => {
               navigate(-1);
             }}
-            className="  md:hidden flex items-center cursor-pointer justify-center "
+            className="  md:hidden fixed left-2 flex items-center cursor-pointer justify-center "
           >
             <GoBackIcons />
           </button>
+          <div className="w-fit">
+            <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
+              Создать магазин
+            </span>{" "}
+            <span className="md:block hidden">Магазины </span>
+          </div>
         </div>{" "}
-        <div>
-          <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
-            Создать магазин
-          </span>{" "}
-          <span className="md:block hidden">Магазины </span>
-        </div>
       </div>
-      <div className="w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
+      <div className="w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-2 md:border-0 border-borderColor">
         <button
           onClick={() => {
             navigate(-1);
@@ -99,21 +99,21 @@ function MarketEdit() {
         <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
           <NavLink
             to="/store/location-add"
-            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
           >
             Добавить локацию
           </NavLink>
           <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
           <NavLink
             to="/store/market-add"
-            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
           >
             Создать новый магазин
           </NavLink>
           <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
           <button
             onClick={success2}
-            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
           >
             Удалить
           </button>
@@ -183,11 +183,10 @@ function MarketEdit() {
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
                       className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
-                                                    ${
-                                                      data.action
-                                                        ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                                                        : ""
-                                                    }    
+                                                    ${data.action
+                          ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                          : ""
+                        }    
                                                     `}
                     >
                       {data.gender}
