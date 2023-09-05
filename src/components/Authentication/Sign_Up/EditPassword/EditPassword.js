@@ -13,8 +13,8 @@ export default function EditPassword({ onClick }) {
     eyesShowConfirm: true,
   });
   return (
-    <div className="w-full md:w-[500px] h-fit bg-white rounded-t-lg md:rounded-lg py-[35px] px-[50px]">
-      <div className="flex justify-end items-center mr-[-30px] mt-[-15px]">
+    <div className="w-full md:w-[455px] h-fit bg-white rounded-t-lg md:rounded-lg px-4 py-5 md:py-[35px] md:px-[50px]">
+      <div className="flex justify-end items-center md:mr-[-30px] md:mt-[-15px]">
         {" "}
         <button
           onClick={onClick}

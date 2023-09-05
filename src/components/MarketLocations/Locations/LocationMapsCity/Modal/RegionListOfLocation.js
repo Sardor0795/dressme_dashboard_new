@@ -1,7 +1,7 @@
 import React from "react";
 import { MenuCloseIcons } from "../../../../../assets/icons";
 
-export default function StoreListModal({ onClick }) {
+export default function RegionListOfLocation({ onClick }) {
 
   let data = []
 

@@ -130,372 +130,364 @@ export default function WearCollection({ onClick }) {
   };
 
   return (
-    <div className="w-full border border-red-500">
-      <section
-        className={`h-fit top-30  left-[16px] fixed  bg-white shadow-lg  duration-200 z-50  w-[92%]`}
-      >
-        <div className="fixed inset-0 z-10 ">
-          <div
-            className="fixed inset-0 w-full h-full bg-black opacity-40"
-            onClick={onClick}
-          ></div>
-          <div className="flex items-center min-h-screen px-4 py-8">
-            <div className="relative w-[1450px] p-10 mx-auto bg-white rounded-md shadow-lg">
-              <div className={`flex items-center justify-between`}>
-                <span className="text-gray-800 text-2xl not-italic font-AeonikProRegular">
-                  Все фото
-                </span>
-                <button className="py-2" type="" onClick={onClick}>
-                  <GrClose size={22} />
-                </button>
-              </div>
+    <div className="max-w-[1450px] bg-white h-fit w-full overflow-x-scroll carouselCollection">
 
-              <div className="w-full flex items-center  overflow-auto gap-x-1 overflow-auto	">
-                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
-                  <div className="w-full h-full flex items-center">
-                    <Slider
-                      className="w-full h-full rounded-lg "
-                      asNavFor={nav2}
-                      ref={slider1}
-                      {...settings}
+
+      <div className="flex items-center flex-col w-full px-4 py-8 gap-y-6">
+        <div className={`w-full flex items-center justify-between`}>
+          <span className="text-gray-800 text-2xl not-italic font-AeonikProRegular">
+            Все фото
+          </span>
+          <button className="py-2" type="" onClick={onClick}>
+            <GrClose size={22} />
+          </button>
+        </div>
+
+        <div className="w-full flex items-center gap-x-[30px] whitespace-nowrap overflow-x-scroll border border-red-500	carouselCollection">
+          <div className="!w-[320px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+            <div className="w-full h-full flex items-center">
+              <Slider
+                className="w-full h-full rounded-lg "
+                asNavFor={nav2}
+                ref={slider1}
+                {...settings}
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <article key={data?.id} object-fit>
+                      <img
+                        className="w-full h-[300px] object-cover object-top	 rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </article>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full items-center justify-between mt-[8.7px] ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                // slidesToShow={5}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[full] !h-[70px] cursor-pointer bg-btnBgColor rounded-lg "
                     >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <article key={data?.id} object-fit>
-                            <img
-                              className="w-full h-[328px] object-cover object-top	 rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </article>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full items-center justify-between mt-[8.7px] ">
-                    <Slider
-                      asNavFor={nav1}
-                      ref={slider2}
-                      // slidesToShow={5}
-                      swipeToSlide={true}
-                      focusOnSelect={true}
-                      vertical={false}
-                      {...settings1}
-                      className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <figure
-                            key={data?.id}
-                            className="!w-[full] !h-[64px] md:!w-[95%] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
-                          >
-                            <img
-                              className="w-fit h-full md:p-0 object-top	object-cover
+                      <img
+                        className="w-fit h-full md:p-0 object-top	object-cover
                                 md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </figure>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full flex items-center justify-between mt-5">
-                    <div className="w-1/2 flex items-center">
-                      <span className="text-base font-AeonikProRegular ">
-                        Цвет:
-                      </span>
-                      <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-black text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
-                        Черный
-                      </span>
-                    </div>
-                    <div className="w-1/2 flex items-center justify-end">
-                      <span className="text-base font-AeonikProRegular ">
-                        Статус:
-                      </span>
-                      <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-redText text-white px-2 py-[5px] ml-[10px] rounded-2xl">
-                        Отказанный
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
-                  <div className="w-full h-full flex items-center">
-                    <Slider
-                      className="w-full h-full rounded-lg "
-                      asNavFor={nav2}
-                      ref={slider1}
-                      {...settings}
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <article key={data?.id} object-fit>
-                            <img
-                              className="w-full h-[328px] object-cover object-top	 rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </article>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full items-center justify-between mt-[8.7px] ">
-                    <Slider
-                      asNavFor={nav1}
-                      ref={slider2}
-                      // slidesToShow={5}
-                      swipeToSlide={true}
-                      focusOnSelect={true}
-                      vertical={false}
-                      {...settings1}
-                      className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <figure
-                            key={data?.id}
-                            className="!w-[full] !h-[64px] md:!w-[95%] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
-                          >
-                            <img
-                              className="w-fit h-full md:p-0 object-top	object-cover
-                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </figure>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full flex items-center justify-between mt-5">
-                    <div className="w-1/2 flex items-center">
-                      <span className="text-base font-AeonikProRegular ">
-                        Цвет:
-                      </span>
-                      <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-textBlueColor text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
-                        Синий
-                      </span>{" "}
-                    </div>
-                    <div className="w-1/2 flex items-center justify-end">
-                      <span className="text-base font-AeonikProRegular ">
-                        Статус:
-                      </span>
-                      <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-[#4FB459] text-white px-2 py-[5px] ml-[10px] rounded-2xl">
-                        Одобренный
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
-                  <div className="w-full h-full flex items-center">
-                    <Slider
-                      className="w-full h-full rounded-lg "
-                      asNavFor={nav2}
-                      ref={slider1}
-                      {...settings}
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <article key={data?.id} object-fit>
-                            <img
-                              className="w-full h-[328px] object-cover object-top	 rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </article>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full items-center justify-between mt-[8.7px] ">
-                    <Slider
-                      asNavFor={nav1}
-                      ref={slider2}
-                      // slidesToShow={5}
-                      swipeToSlide={true}
-                      focusOnSelect={true}
-                      vertical={false}
-                      {...settings1}
-                      className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <figure
-                            key={data?.id}
-                            className="!w-[full] !h-[64px] md:!w-[95%] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
-                          >
-                            <img
-                              className="w-fit h-full md:p-0 object-top	object-cover
-                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </figure>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full flex items-center justify-between mt-5">
-                    <div className="w-1/2 flex items-center">
-                      <span className="text-base font-AeonikProRegular ">
-                        Цвет:
-                      </span>
-                      <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-[#FBAE2C] text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
-                        Желтый
-                      </span>{" "}
-                    </div>
-                    <div className="w-1/2 flex items-center justify-end">
-                      <span className="text-base font-AeonikProRegular ">
-                        Статус:
-                      </span>
-                      <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-red-500 text-white px-2 py-[5px] ml-[10px] rounded-2xl">
-                        Отказанный
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="!w-[400px] h-full flex flex-col  bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
-                  <div className="w-full h-full flex items-center">
-                    <Slider
-                      className="w-full h-full rounded-lg "
-                      asNavFor={nav2}
-                      ref={slider1}
-                      {...settings}
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <article key={data?.id} object-fit>
-                            <img
-                              className="w-full h-[328px] object-top	object-cover rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </article>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full items-center justify-between mt-[8.7px] ">
-                    <Slider
-                      asNavFor={nav1}
-                      ref={slider2}
-                      // slidesToShow={5}
-                      swipeToSlide={true}
-                      focusOnSelect={true}
-                      vertical={false}
-                      {...settings1}
-                      className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <figure
-                            key={data?.id}
-                            className="!w-[full] !h-[64px] md:!w-[95%] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
-                          >
-                            <img
-                              className="w-fit h-full md:p-0 object-top	object-cover
-                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </figure>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full flex items-center justify-between mt-5">
-                    <div className="w-1/2 flex items-center">
-                      <span className="text-base font-AeonikProRegular ">
-                        Цвет:
-                      </span>
-                      <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-redText text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
-                        Красный
-                      </span>{" "}
-                    </div>
-                    <div className="w-1/2 flex items-center justify-end">
-                      <span className="text-base font-AeonikProRegular ">
-                        Статус:
-                      </span>
-                      <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-[#4FB459] text-white px-2 py-[5px] ml-[10px] rounded-2xl">
-                        Одобренный
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                {/* <div className="!w-[400px] h-full flex flex-col border border-green-500 bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
-                  <div className="w-full h-full flex items-center">
-                    <Slider
-                      className="w-full h-full rounded-lg "
-                      asNavFor={nav2}
-                      ref={slider1}
-                      {...settings}
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <article key={data?.id} object-fit>
-                            <img
-                              className="w-full h-[328px] object-top	object-cover rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </article>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full items-center justify-between mt-[8.7px] ">
-                    <Slider
-                      asNavFor={nav1}
-                      ref={slider2}
-                      // slidesToShow={5}
-                      swipeToSlide={true}
-                      focusOnSelect={true}
-                      vertical={false}
-                      {...settings1}
-                      className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-                    >
-                      {imgGroup?.map((data) => {
-                        return (
-                          <figure
-                            key={data?.id}
-                            className="!w-[full] !h-[64px] md:!w-[95%] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
-                          >
-                            <img
-                              className="w-fit h-full md:p-0 object-top	object-cover
-                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
-                              src={data?.img}
-                              alt=""
-                            />
-                          </figure>
-                        );
-                      })}
-                    </Slider>
-                  </div>
-                  <div className="w-full flex items-center justify-between mt-5">
-                    <div className="w-1/2 flex items-center">
-                      <span className="text-base font-AeonikProRegular ">
-                        Цвет:
-                      </span>
-                      <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-redText text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
-                        Красный
-                      </span>{" "}
-                    </div>
-                    <div className="w-1/2 flex items-center justify-end">
-                      <span className="text-base font-AeonikProRegular ">
-                        Статус:
-                      </span>
-                      <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-[#4FB459] text-white px-2 py-[5px] ml-[10px] rounded-2xl">
-                        Одобренный
-                      </span>
-                    </div>
-                  </div>
-                </div> */}
+                        src={data?.img}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full flex items-center justify-between mt-5">
+              <div className="w-1/2 flex items-center">
+                <span className="text-base font-AeonikProRegular ">
+                  Цвет:
+                </span>
+                <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-black text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
+                  Черный
+                </span>
+              </div>
+              <div className="w-1/2 flex items-center justify-end">
+                <span className="text-base font-AeonikProRegular ">
+                  Статус:
+                </span>
+                <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-redText text-white px-2 py-[5px] ml-[10px] rounded-2xl">
+                  Отказанный
+                </span>
               </div>
             </div>
           </div>
+          <div className="!w-[320px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+            <div className="w-full h-full flex items-center">
+              <Slider
+                className="w-full h-full rounded-lg "
+                asNavFor={nav2}
+                ref={slider1}
+                {...settings}
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <article key={data?.id} object-fit>
+                      <img
+                        className="w-full h-[300px] object-cover object-top	 rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </article>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full items-center justify-between mt-[8.7px] ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                // slidesToShow={5}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[full] !h-[70px] cursor-pointer bg-btnBgColor rounded-lg "
+                    >
+                      <img
+                        className="w-fit h-full md:p-0 object-top	object-cover
+                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full flex items-center justify-between mt-5">
+              <div className="w-1/2 flex items-center">
+                <span className="text-base font-AeonikProRegular ">
+                  Цвет:
+                </span>
+                <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-black text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
+                  Черный
+                </span>
+              </div>
+              <div className="w-1/2 flex items-center justify-end">
+                <span className="text-base font-AeonikProRegular ">
+                  Статус:
+                </span>
+                <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-redText text-white px-2 py-[5px] ml-[10px] rounded-2xl">
+                  Отказанный
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="!w-[320px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+            <div className="w-full h-full flex items-center">
+              <Slider
+                className="w-full h-full rounded-lg "
+                asNavFor={nav2}
+                ref={slider1}
+                {...settings}
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <article key={data?.id} object-fit>
+                      <img
+                        className="w-full h-[300px] object-cover object-top	 rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </article>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full items-center justify-between mt-[8.7px] ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                // slidesToShow={5}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[full] !h-[70px] cursor-pointer bg-btnBgColor rounded-lg "
+                    >
+                      <img
+                        className="w-fit h-full md:p-0 object-top	object-cover
+                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full flex items-center justify-between mt-5">
+              <div className="w-1/2 flex items-center">
+                <span className="text-base font-AeonikProRegular ">
+                  Цвет:
+                </span>
+                <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-black text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
+                  Черный
+                </span>
+              </div>
+              <div className="w-1/2 flex items-center justify-end">
+                <span className="text-base font-AeonikProRegular ">
+                  Статус:
+                </span>
+                <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-redText text-white px-2 py-[5px] ml-[10px] rounded-2xl">
+                  Отказанный
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="!w-[320px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+            <div className="w-full h-full flex items-center">
+              <Slider
+                className="w-full h-full rounded-lg "
+                asNavFor={nav2}
+                ref={slider1}
+                {...settings}
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <article key={data?.id} object-fit>
+                      <img
+                        className="w-full h-[300px] object-cover object-top	 rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </article>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full items-center justify-between mt-[8.7px] ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                // slidesToShow={5}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[full] !h-[70px] cursor-pointer bg-btnBgColor rounded-lg "
+                    >
+                      <img
+                        className="w-fit h-full md:p-0 object-top	object-cover
+                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full flex items-center justify-between mt-5">
+              <div className="w-1/2 flex items-center">
+                <span className="text-base font-AeonikProRegular ">
+                  Цвет:
+                </span>
+                <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-black text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
+                  Черный
+                </span>
+              </div>
+              <div className="w-1/2 flex items-center justify-end">
+                <span className="text-base font-AeonikProRegular ">
+                  Статус:
+                </span>
+                <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-redText text-white px-2 py-[5px] ml-[10px] rounded-2xl">
+                  Отказанный
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="!w-[320px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+            <div className="w-full h-full flex items-center">
+              <Slider
+                className="w-full h-full rounded-lg "
+                asNavFor={nav2}
+                ref={slider1}
+                {...settings}
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <article key={data?.id} object-fit>
+                      <img
+                        className="w-full h-[300px] object-cover object-top	 rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </article>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full items-center justify-between mt-[8.7px] ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                // slidesToShow={5}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+              >
+                {imgGroup?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[full] !h-[70px] cursor-pointer bg-btnBgColor rounded-lg "
+                    >
+                      <img
+                        className="w-fit h-full md:p-0 object-top	object-cover
+                                md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
+                        src={data?.img}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>
+            <div className="w-full flex items-center justify-between mt-5">
+              <div className="w-1/2 flex items-center">
+                <span className="text-base font-AeonikProRegular ">
+                  Цвет:
+                </span>
+                <span className="w-fit h-fit flex items-center justify-center text-white px-2 py-[5px] rounded-full border bg-black text-white ml-[10px] text-xs not-italic font-AeonikProMedium">
+                  Черный
+                </span>
+              </div>
+              <div className="w-1/2 flex items-center justify-end">
+                <span className="text-base font-AeonikProRegular ">
+                  Статус:
+                </span>
+                <span className="w-fit h-fit text-sm font-AeonikProRegular border bg-redText text-white px-2 py-[5px] ml-[10px] rounded-2xl">
+                  Отказанный
+                </span>
+              </div>
+            </div>
+          </div>
+
+
         </div>
-      </section>
+      </div>
     </div>
   );
 }

@@ -68,7 +68,8 @@ const AddingProduct = () => {
       openColors ||
       openGender ||
       openCategories ||
-      openTypes
+      openTypes ||
+      wearCollection
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -82,6 +83,7 @@ const AddingProduct = () => {
     openGender,
     openCategories,
     openTypes,
+    wearCollection
   ]);
 
   const onChange = (value) => {
@@ -1314,7 +1316,7 @@ const AddingProduct = () => {
                   <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
                     Выбрать
                   </span>
-                  <span className="rotate-[180deg]">
+                  <span className="rotate-[90deg]">
                     <ArrowRightIcon />
                   </span>
                 </button>
@@ -1553,14 +1555,26 @@ const AddingProduct = () => {
               >
                 Все фото
               </button>
+              <div
+                onClick={() => setWearCollection(false)}
+                className={`fixed inset-0 z-[113]  w-full h-[100vh] bg-black opacity-50 ${wearCollection ? "" : "hidden"
+                  }`}
+              ></div>
+              <section
+
+                className={`w-fit h-fit fixed z-[115] rounded-lg overflow-hidden cursor-pointer  flex items-center justify-center left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%]  ${wearCollection ? "" : "hidden"
+                  }`}
+              >
+                {wearCollection && (
+                  <WearCollection onClick={toggleWearCollection} />
+                )}{" "}
+              </section>
             </div>
-            {/* ----------------wear collection------------ */}
-            <div>
-              {" "}
-              {wearCollection && (
-                <WearCollection onClick={toggleWearCollection} />
-              )}
-            </div>{" "}
+            {/* ------------------------------------------------------- */}
+
+
+            {/* ------------------------------------------------------- */}
+
           </div>
         </div>
         <div className="flex md:hidden items-center justify-center mb-[40px]">

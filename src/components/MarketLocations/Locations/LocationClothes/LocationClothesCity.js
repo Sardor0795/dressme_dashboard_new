@@ -125,7 +125,7 @@ export default function LocationClothesCity() {
             >
               <GoBackIcons />
             </button>
-            <div className="text-center flex items-center text-xl md:text-[24px] font-AeonikProMedium   md:px-0">
+            <div className="text-center flex items-center text-xl md:text-[24px] font-AeonikProMedium   md:ml-[30px]">
               Одежда
             </div>
           </div>{" "}
