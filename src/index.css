@@ -109,3 +109,45 @@
 .slick-arrow .slick-prev {
   display: none;
 }
+
+
+/* -------------------WearCarosuelScroll in Location */
+.WearScroll {
+  width: 100%;
+  height: fit-content;
+  /*  */
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  overflow-x: scroll;
+  row-gap: 12px;
+  border: 1px solid red
+}
+
+.WearScroll::-webkit-scrollbar {
+  width: 50px;
+  height: 5px;
+}
+
+.WearScroll::-webkit-scrollbar-thumb {
+  background-color: #a1a1a1;
+  width: 50px;
+  border-radius: 8px;
+}
+
+.WearScrollItem {
+  width: fit-content;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  /* border: 1px solid green; */
+}
+
+@media (max-width: 767px) {
+  .WearScroll {
+    display: block;
+    border: 1px solid green
+  }
+
+
+}
