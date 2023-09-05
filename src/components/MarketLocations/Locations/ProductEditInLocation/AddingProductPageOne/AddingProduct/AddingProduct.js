@@ -718,7 +718,7 @@ const AddingProduct = () => {
       // className="md:relative w-full  md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
       >
         {/* Photo Section For Mobile */}
-        <div className="w-full flex md:hidden justify-center mb-6 gap-x-[15px] ">
+        <div className="w-full flex flex-col items-center md:hidden justify-center mb-6 gap-x-[15px] ">
           <div className="w-fit h-full flex gap-x-1 xs:gap-x-2 ">
             <div className=" w-[200px] ls:w-[220px] ll:w-[270px] xs:w-[300px] h-[350px] flex items-center  ">
               <Slider
@@ -767,7 +767,16 @@ const AddingProduct = () => {
                 })}
               </Slider>
             </div>
+          </div>
 
+          <div className="max-w-[400px] w-full mt-4  flex items-center justify-end ">
+            <button
+              onClick={() => setWearCollection(true)}
+              type="button"
+              className="text-weatherWinterColor cursor-pointer hover:underline text-base not-italic font-AeonikProRegular"
+            >
+              Все фото
+            </button>
           </div>
 
 
@@ -1553,6 +1562,9 @@ const AddingProduct = () => {
               >
                 Все фото
               </button>
+              {/* --------------------------------------- */}
+
+              {/* --------------------------------------- */}
               <div
                 onClick={() => setWearCollection(false)}
                 className={`fixed inset-0 z-[113]  w-full h-[100vh] bg-black opacity-50 ${wearCollection ? "" : "hidden"
