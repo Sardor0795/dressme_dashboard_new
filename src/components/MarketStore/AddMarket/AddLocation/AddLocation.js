@@ -25,7 +25,23 @@ export default function AddLocation() {
 
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 ">
-      {openStoreList && <StoreListModal onClick={storeToggle} />}
+
+      <div className="">
+        <section
+          onClick={() => setOpenStoreList(false)}
+          className={`fixed inset-0 z-[10000] border border-red-500 duration-200 w-full h-[100vh] bg-black opacity-50 
+          ${openStoreList ? "" : "hidden"
+            }`}
+        ></section>
+        <section
+          className={`max-w-[440px] w-full h-fit mx-auto fixed z-[10001] left-0 right-0  duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
+        >
+          {openStoreList &&
+            <StoreListModal onClick={storeToggle} />
+          }
+        </section>
+      </div>
       <div className=" ">
         <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
           <button

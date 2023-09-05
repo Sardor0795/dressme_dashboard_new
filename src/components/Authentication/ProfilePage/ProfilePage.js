@@ -103,13 +103,13 @@ const ProfilePage = () => {
           }`}
       ></div>
       <section
-        className={`fixed z-[113] w-full md:w-auto bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openRegionModal ? "" : "hidden z-0"
+        className={`fixed z-[113]  max-w-[440px] mx-auto w-full md:w-auto bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openRegionModal ? "" : "hidden z-0"
           }`}
       >
         <ModalEditCity onClick={toggle} />
       </section>
       <section
-        className={`fixed w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
+        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
           }`}
       >
         <EditPassword onClick={togglePassword} />

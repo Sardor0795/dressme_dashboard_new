@@ -1,6 +1,7 @@
 import { DatePicker, Popover, Select, Space, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import {
+  AddIconsCircle1,
   ArrowRightIcon,
   CalendarIcons,
   DownloadIcon,
@@ -1725,9 +1726,9 @@ const AddingProduct = () => {
     { id: 7, data: 7, icons: InputCheck, action: false, colors: "bg-green-700 " },
     { id: 8, data: 8, icons: InputCheck, action: false, colors: "bg-amber-600 " },
     { id: 9, data: 9, icons: InputCheck, action: false, colors: "bg-red-700  " },
-    { id: 10, data: 10, icons: InputCheck, action: false, colors: "bg-purple-800 " },
-    { id: 11, data: 11, icons: InputCheck, action: false, colors: "bg-blue-900 " },
-    { id: 12, data: 12, icons: InputCheck, action: false, colors: "bg-yellow-900 " },
+    // { id: 10, data: 10, icons: InputCheck, action: false, colors: "bg-purple-800 " },
+    // { id: 11, data: 11, icons: InputCheck, action: false, colors: "bg-blue-900 " },
+    // { id: 12, data: 12, icons: InputCheck, action: false, colors: "bg-yellow-900 " },
   ];
   useEffect(() => {
     window.scrollTo({
@@ -2079,6 +2080,12 @@ const AddingProduct = () => {
                         </div>
                       );
                     })}
+                    <button
+                      // onClick={() => setSelectColorToggleMobile(true)}
+                      type="button"
+                    >
+                      <AddIconsCircle1 />
+                    </button>
                   </div>
                 </div>
               </div>

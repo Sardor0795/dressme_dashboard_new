@@ -99,20 +99,18 @@ export default function ModalEditCity({ onClick }) {
                   {data?.RegionName}
                 </span>
                 <span
-                  className={`${
-                    data?.RegionType ? "rotate-[-270deg]" : "rotate-[90deg]"
-                  } `}
+                  className={`${data?.RegionType ? "rotate-[-270deg]" : "rotate-[90deg]"
+                    } `}
                 >
                   <ArrowRightIcon />
                 </span>
               </div>
 
               <div
-                className={` w-full flex flex-wrap gap-x-2  duration-300  ${
-                  data?.RegionType
+                className={` w-full flex flex-wrap gap-x-2  duration-300  ${data?.RegionType
                     ? "h-[100px] overflow-hidden"
                     : "h-0 overflow-hidden"
-                }`}
+                  }`}
               >
                 {data?.RegionList.map((item) => {
                   return (
