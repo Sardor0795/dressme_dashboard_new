@@ -124,7 +124,7 @@ export default function YandexMapStore() {
                   ref={searchRef}
                   placeholder="Введите адрес"
                   id="ForSearch"
-                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(state.title.length) ? "" : "hidden"
+                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10 border border-red-500 rounded-lg ${!Boolean(state.title.length) ? "" : "hidden"
                     }`}
                 />
 
@@ -133,7 +133,7 @@ export default function YandexMapStore() {
                     ["titleBox_show"]: Boolean(state.title.length),
                   })}
                 >
-                  <span className="whitespace-nowrap "> {state.title} </span>
+                  <p className=" w-[90%] "> {state.title} </p>
                 </div>
 
                 {/* <div
@@ -162,7 +162,7 @@ export default function YandexMapStore() {
               {state?.title.length ? (
                 <button
                   type="button"
-                  className="w-[40px] md:w-[150px] h-10 border cursor-pointer active:scale-95 px-3  flex items-center justify-center bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                  className="w-[40px] md:w-[150px] h-10 border cursor-pointer active:scale-95 px-3  flex items-center justify-center bg-weatherWinterColor text-white rounded-lg text-sm font-AeonikProMedium"
                   onClick={handleSubmit}
                   disabled={Boolean(!state.title.length)}
                 >

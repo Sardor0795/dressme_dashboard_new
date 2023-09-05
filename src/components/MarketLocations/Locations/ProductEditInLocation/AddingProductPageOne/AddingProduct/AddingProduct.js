@@ -326,7 +326,7 @@ const AddingProduct = () => {
           <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
             <span className="flex text-mobileTextColor text-base not-italic font-AeonikProMedium">
               Скидка{" "}
-              <span className="text-gray-600 text-[13px] ml-1 not-italic font-AeonikProMedium">
+              <span className="text-gray-600 text-[12px] ls:text-[13px] ml-1 not-italic font-AeonikProMedium">
                 (не обезательно)
               </span>
             </span>
@@ -511,7 +511,7 @@ const AddingProduct = () => {
     const { onClick } = props;
     return (
       <main
-        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  right-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  right-2 ls:right-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
         onClick={onClick}
       >
         <button className="next">
@@ -524,7 +524,7 @@ const AddingProduct = () => {
     const { onClick } = props;
     return (
       <main
-        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  left-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  left-2 ls:left-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
         onClick={onClick}
       >
         <button className="prev">
@@ -719,8 +719,8 @@ const AddingProduct = () => {
       >
         {/* Photo Section For Mobile */}
         <div className="w-full flex md:hidden justify-center mb-6 gap-x-[15px] ">
-          <div className="w-fit h-full flex gap-x-2 ">
-            <div className="w-[300px] h-[350px] flex items-center  ">
+          <div className="w-fit h-full flex gap-x-1 xs:gap-x-2 ">
+            <div className=" w-[200px] ls:w-[220px] ll:w-[270px] xs:w-[300px] h-[350px] flex items-center  ">
               <Slider
                 className="w-full h-full rounded-lg "
                 asNavFor={nav2}
@@ -731,7 +731,7 @@ const AddingProduct = () => {
                   return (
                     <article key={data?.id} object-fit>
                       <img
-                        className="w-full  h-[350px] object-cover object-top	 rounded-lg"
+                        className="!w-full  !h-[350px]  object-cover   rounded-lg"
                         src={data?.img}
                         alt=""
                       />
@@ -740,11 +740,10 @@ const AddingProduct = () => {
                 })}
               </Slider>
             </div>
-            <div className="w-[90px] items-center justify-between   ">
+            <div className=" w-[70px] ls:w-[80px] xs:w-[90px] items-center justify-between   overflow-hidden ">
               <Slider
                 asNavFor={nav1}
                 ref={slider2}
-                // slidesToShow={5}
                 swipeToSlide={true}
                 focusOnSelect={true}
                 vertical={true}
@@ -758,7 +757,7 @@ const AddingProduct = () => {
                       className="!w-[100%] cursor-pointer bg-btnBgColor rounded-lg "
                     >
                       <img
-                        className=" h-[106px]  md:p-0 object-top	object-cover 
+                        className=" h-[108px]  md:p-0 object-top	object-cover 
                                 w-full  flex items-center justify-center border border-searchBgColor rounded-lg"
                         src={data?.img}
                         alt=""
@@ -781,7 +780,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Раздел одежды{" "}
                   </label>
@@ -836,7 +835,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Подраздел одежды{" "}
                   </label>
@@ -882,7 +881,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Сезон одежды
                   </label>
@@ -937,7 +936,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-between mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Цвет
                   </label>
@@ -1088,7 +1087,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="flex items-center text-[13px] md:text-base font-AeonikProRegular"
+                    className="flex items-center text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Пол
                     <span className="ml-[5px]">
@@ -1143,7 +1142,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Артикул
                   </label>
@@ -1154,7 +1153,7 @@ const AddingProduct = () => {
                 <input
                   type="text"
                   value="33"
-                  className="w-full h-10 flex text-base items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
+                  className="w-full h-10 flex text-[14px] md:text-base items-center justify-between border rounded-lg py-[7px] px-[10px] outline-none"
                   placeholder="0"
                 />
               </div>
@@ -1167,7 +1166,7 @@ const AddingProduct = () => {
                   <div className="flex items-center justify-center mb-[5px]">
                     <label
                       htmlFor=""
-                      className="text-[13px] md:text-base font-AeonikProRegular"
+                      className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                     >
                       Возраст
                     </label>
@@ -1179,14 +1178,14 @@ const AddingProduct = () => {
                     <input
                       type="number"
                       value="12"
-                      className="w-[50%] h-[42px] text-center text-base fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-[50%] h-[42px] text-center  text-[14px] md:text-base fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Мин"
                     />
                     <span className="w-3 border-b text-borderColor mx-[4px]"></span>
                     <input
                       type="number"
                       value="100"
-                      className="w-[50%] h-[42px] text-base text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-[50%] h-[42px]  text-[14px] md:text-base text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Макс"
                     />
                   </div>
@@ -1195,7 +1194,7 @@ const AddingProduct = () => {
                   <div className="flex items-center mb-[5px]">
                     <label
                       htmlFor=""
-                      className="text-[13px] md:text-base font-AeonikProRegular"
+                      className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                     >
                       Цена
                     </label>
@@ -1208,7 +1207,7 @@ const AddingProduct = () => {
                       type="number"
                       placeholder="0"
                       value="270000"
-                      className="w-[70%] text-base font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="w-[70%]  text-[14px] md:text-base font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -1220,7 +1219,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Скидка
                   </label>
@@ -1231,28 +1230,28 @@ const AddingProduct = () => {
                 <div className="w-full flex items-center justify-center">
                   <div className="w-full flex items-center gap-x-1">
                     <div className="w-[40%] md:w-[25%] flex items-start">
-                      <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] py-[8px]">
+                      <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-1 xs:px-[10px] ">
                         <input
-                          type="number"
+                          type="text"
                           placeholder="0"
                           value="40"
-                          className="w-[70%] font-AeonikProMedium text-start outline-none  flex items-center  text-base [&::-webkit-inner-spin-button]:appearance-none"
+                          className="w-[70%] font-AeonikProMedium text-start outline-none  flex items-center   text-[14px] md:text-base [&::-webkit-inner-spin-button]:appearance-none"
                         />
-                        <span className="text-textLightColor ml-2">%</span>
+                        <span className="text-textLightColor ml-1 xs:ml-2">%</span>
                       </div>
                     </div>
-                    <span className="rotate-90 text-borderColor ml-[7px] mr-1 md:ml-3 md:mr-[9px]">
-                      |
+                    <span className="w-[10px] h-[2px] flex items-center  bg-textLightColor ">
+
                     </span>
                     <div className="w-[60%] md:w-[75%] flex items-center">
-                      <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                      <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-1 xs:px-3  rounded-lg text-xs">
                         <input
-                          type="number"
+                          type="text"
                           placeholder="0"
                           value="200000"
-                          className="w-[75%] text-base flex items-center font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                          className="w-[75%]  text-[14px] md:text-base flex items-center font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
-                        <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                        <span className="text-textLightColor ml-1 xs:ml-[10px] text-[10px] ll:text-xs md:text-base font-AeonikProRegular">
                           сум
                         </span>
                       </div>
@@ -1268,7 +1267,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Категория одежды
                   </label>
@@ -1321,7 +1320,7 @@ const AddingProduct = () => {
                   </span>
                 </button>
               </div>
-              <div className="w-1/2 hidden md:flex flex-col items-start  border border-red-500 ">
+              <div className="w-1/2 hidden md:flex flex-col items-start   ">
                 <div className="flex items-center justify-between mb-[5px]">
                   <span> Категория одежды</span>
                   <span className="ml-[5px]">
@@ -1349,7 +1348,7 @@ const AddingProduct = () => {
                   <div className="flex items-center justify-center mb-[5px]">
                     <label
                       htmlFor=""
-                      className="text-[13px] md:text-base font-AeonikProRegular"
+                      className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                     >
                       Тип{" "}
                     </label>
@@ -1427,7 +1426,7 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Возраст
                   </label>
@@ -1438,15 +1437,14 @@ const AddingProduct = () => {
                 <div className="w-full flex items-center">
                   <input
                     type="number"
-                    className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-[47%] md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none  text-[14px] md:text-base [&::-webkit-inner-spin-button]:appearance-none"
                     placeholder="Мин"
                   />
-                  <span className="rotate-90 text-borderColor ml-3 mr-[9px]">
-                    |
-                  </span>
+                  <span className="w-[10px] h-[2px] flex items-center  bg-textLightColor "></span>
+
                   <input
                     type="number"
-                    className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-[47%] md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none  text-[14px] md:text-base [&::-webkit-inner-spin-button]:appearance-none"
                     placeholder="Макс"
                   />
                 </div>
@@ -1455,14 +1453,14 @@ const AddingProduct = () => {
                 <div className="flex items-center justify-center mb-[5px]">
                   <label
                     htmlFor=""
-                    className="text-[13px] md:text-base font-AeonikProRegular"
+                    className="text-[12px] ls:text-[13px] md:text-base font-AeonikProRegular"
                   >
                     Вес (грамм)
                   </label>
                 </div>
                 <input
                   type="number"
-                  className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full border border-borderColor p-[11px] rounded-lg outline-none  text-[14px] md:text-base [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   placeholder="(необязательно)"
                 />
               </div>
@@ -1522,7 +1520,7 @@ const AddingProduct = () => {
                   }`}
               ></div>
               <section
-                className={`fixed z-[115] cursor-pointer flex items-center justify-center inset-0 border border-red-500 overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                className={`fixed z-[115] cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
                   }`}
               >
                 {allSizeModalShow && (

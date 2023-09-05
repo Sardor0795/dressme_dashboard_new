@@ -132,7 +132,7 @@ export default function LocationOfYandex() {
                     ["titleBox_show"]: Boolean(state.title.length),
                   })}
                 >
-                  <span className="whitespace-nowrap ">{state.title} </span>
+                  <p className=" w-[90%] ">{state.title} </p>
                 </div>
                 {state?.title.length ? (
                   <button
