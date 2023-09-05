@@ -66,7 +66,7 @@ function LocationMapCity() {
               onClick={() => {
                 navigate(-1);
               }}
-              className="  md:hidden fixed left-2 flex items-center cursor-pointer justify-center "
+              className="  md:hidden absolute left-2 flex items-center cursor-pointer justify-center "
             >
               <GoBackIcons />
             </button>
