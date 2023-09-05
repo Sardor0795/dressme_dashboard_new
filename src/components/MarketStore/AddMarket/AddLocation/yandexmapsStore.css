@@ -14,6 +14,7 @@
   overflow: hidden;
   border-radius: 10px;
 }
+
 .searchFieldBox input {
   outline: none;
   border: none;
@@ -31,7 +32,9 @@
   bottom: 0;
   right: 0;
   background: "#ccc";
+  width: 100%;
 }
+
 .titleBox.titleBox_show {
   position: relative;
   z-index: 9999;
@@ -39,15 +42,17 @@
   display: flex;
 }
 
-.titleBox span {
+.titleBox p {
   flex-grow: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .titleBox button {
   margin-left: 2px;
 }
+
 .searchSubmitBtn {
   width: 100%;
 }
@@ -58,10 +63,12 @@
   background-color: white;
   z-index: 9999;
 }
+
 .mapsuz {
   height: 400px;
   overflow: hidden;
 }
+
 .placemark {
   position: absolute;
   top: 50%;
@@ -71,12 +78,41 @@
   font-size: 35px !important;
   cursor: grab;
 }
-@media (max-width: 550px) {
-  .titleBox.titleBox_show {
-    overflow-x: auto;
-    width: 90%;
+
+@media (max-width: 767px) {
+  .titleBox {
+    width: 450px;
+
   }
-  .titleBox span {
+
+  .titleBox.titleBox_show {
+    width: 90%;
+    white-space: normal;
+
+  }
+
+  .titleBox p {
+    white-space: normal;
+
+  }
+
+}
+
+@media (max-width: 550px) {
+  .titleBox {
+    width: 300px;
+
+  }
+
+  .titleBox.titleBox_show {
+    width: 90%;
+    white-space: normal;
+
+  }
+
+  .titleBox p {
     font-size: 12px;
+    white-space: normal;
+
   }
 }

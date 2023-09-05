@@ -206,7 +206,7 @@ export default function AddLocation() {
         </div>
         <div className="flex justify-center mt-[50px]  px-4 md:px-0">
           <Link
-            className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
+            className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-weatherWinterColor text-white rounded md:rounded-lg active:scale-95"
           // to={"/store"}
           >
             Добавить

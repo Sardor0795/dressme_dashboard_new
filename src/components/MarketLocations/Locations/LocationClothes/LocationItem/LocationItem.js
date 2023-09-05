@@ -120,7 +120,7 @@ export default function LocationItem({ data, click, index }) {
 
         <div className="mb-3 h-[148px]">
           <figure className="w-full h-full rounded-lg overflow-hidden">
-            <img className="w-[100%] h-[100%] object-center	object-cover" src={pdpImg} alt="" />
+            <img className="w-[100%] h-[100%] object-top	object-cover" src={wearImg} alt="" />
           </figure>
         </div>
 
@@ -169,7 +169,7 @@ export default function LocationItem({ data, click, index }) {
             Добавить в локацию
           </button>
           <button
-            onClick={() => goMapCity(data?.city)}
+            onClick={() => goProductDetailEdit(data?.city)}
             className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
           >
             Подробнее

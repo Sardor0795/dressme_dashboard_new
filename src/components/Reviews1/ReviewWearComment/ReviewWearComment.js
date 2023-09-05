@@ -3,6 +3,7 @@ import { WearCommentDetail } from "./WearCommentDetail/WearCommentDetail";
 import WearCommentTitle from "./WearCommentTitle/WearCommentTitle";
 import {
   CheckTrue,
+  GoBackIcons,
   SearchIcon,
   StarIcon,
   StarOutlineIcon,
@@ -115,9 +116,10 @@ export default function ReviewWearComment() {
             onClick={() => {
               navigate(-1);
             }}
-            className="w-8 h-8 flex fixed md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
+            className="w-8 h-8 flex absolute md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
           >
-            <AiOutlineLeft />
+            {/* <AiOutlineLeft /> */}
+            <GoBackIcons />
           </button>
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
             Подробнее о товаре
