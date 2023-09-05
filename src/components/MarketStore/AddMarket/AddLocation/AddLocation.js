@@ -48,7 +48,7 @@ export default function AddLocation() {
             onClick={() => {
               navigate(-1);
             }}
-            className="  md:hidden fixed left-0 flex items-center cursor-pointer justify-center "
+            className="  md:hidden absolute left-0 flex items-center cursor-pointer justify-center "
           >
             <GoBackIcons />
           </button>

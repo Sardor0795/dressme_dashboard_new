@@ -48,7 +48,7 @@ function AddStore({ onClick }) {
           onClick={() => {
             navigate(-1);
           }}
-          className="  md:hidden flex items-center fixed left-2 cursor-pointer justify-center "
+          className="  md:hidden flex items-center absolute left-2 cursor-pointer justify-center "
         >
           <GoBackIcons />
         </button>

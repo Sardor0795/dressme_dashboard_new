@@ -121,7 +121,7 @@ export default function LocationClothesCity() {
               onClick={() => {
                 navigate(-1);
               }}
-              className="h-8 w-8 md:static fixed left-0 flex items-center cursor-pointer justify-center rounded-lg md:border border-borderColor"
+              className="h-8 w-8 md:static absolute left-0 flex items-center cursor-pointer justify-center rounded-lg md:border border-borderColor"
             >
               <GoBackIcons />
             </button>
