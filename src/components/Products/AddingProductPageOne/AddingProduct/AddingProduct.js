@@ -1990,14 +1990,17 @@ const AddingProduct = () => {
               </div>
             </div>
           </div>
-          <div className="flex md:hidden items-center justify-center mb-[40px]">
+          <div className="flex md:hidden items-center justify-between mb-[40px]">
             <div className="w-1/3 h-[1px] bg-borderColor"></div>
-            <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]">
-              <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
+            <div className="w-1/3 flex items-center justify-around">
+              <button className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full	">
+                <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
+              </button>
+              <span className="w-1/2 h-[1px]  bg-textBlueColor "></span>
+              <button className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full">
+              </button>
             </div>
-            <div className="h-[1px] bg-textBlueColor w-[50px]"></div>
-            <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]"></div>
-            <div className="h-[1px] bg-borderColor flex-grow"></div>
+            <div className="w-1/3 h-[1px] bg-borderColor"></div>
           </div>
 
           <NavLink
