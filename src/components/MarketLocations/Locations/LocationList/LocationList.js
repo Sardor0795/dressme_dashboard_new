@@ -271,7 +271,7 @@ export default function LocationList() {
                       <div className="text-[#3F6175] text-[12px] text-center not-italic font-AeonikProMedium w-[30%]">Рабочее время</div>
                     </div>
 
-                    <div className="px-1 ll:px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
+                    <div className="px-1 ll:px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px]">
                       <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
                         {data?.city}
                       </div>
@@ -279,7 +279,7 @@ export default function LocationList() {
                         <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
 
                         {data?.address}</div>
-                      <div className="w-[30%] flex items-center justify-center text-[11px] not-italic font-AeonikProMedium"> {data?.time} </div>
+                      <div className="w-[30%] flex  justify-center text-[11px] not-italic font-AeonikProMedium"> {data?.time} </div>
                     </div>
                   </div>
 

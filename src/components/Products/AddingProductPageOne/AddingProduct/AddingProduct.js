@@ -363,7 +363,7 @@ const AddingProduct = () => {
                     {
                       data?.action && <label
                         htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
                       >
                         <input
                           type="checkbox"
@@ -625,7 +625,7 @@ const AddingProduct = () => {
                     {
                       data?.action && <label
                         htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
                       >
                         <input
                           type="checkbox"
@@ -989,7 +989,7 @@ const AddingProduct = () => {
                     {
                       data?.action && <label
                         htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
                       >
                         <input
                           type="checkbox"

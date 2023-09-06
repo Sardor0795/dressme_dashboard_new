@@ -131,10 +131,14 @@ export default function LocationItem({ data, click, index }) {
             <div className="w-[30%] flex items-center">Цена товара</div>
           </div>
 
-          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
-            <div className="w-[40%] text-[#007DCA] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex items-center"> {data?.name}</div>
+          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] ">
+
+            <div className="relative w-[40%] overflow-hidden h-[60px] text-justify text-[#007DCA] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex ">
+              <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
+              {data?.name}
+            </div>
             <div
-              className={`w-[30%] font-AeonikProRegular leading-none flex items-center justify-center text-white ${data.bgColor} rounded-lg px-[5px] py-[4px]`}
+              className={`w-[30%] font-AeonikProRegular  leading-none flex  justify-center text-white ${data.bgColor} rounded-lg  h-fit px-[5px] py-[4px]`}
             >
               {data?.state}
             </div>
@@ -154,10 +158,10 @@ export default function LocationItem({ data, click, index }) {
           </div>
 
           <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] items-center">
-            <div className="w-[21%]">BAA-00004</div>
-            <div className="w-[24%]">Футболка</div>
-            <div className="w-[25%]"> 15-08-2023 </div>
-            <div className="w-[30%]"> {data?.money} сум </div>
+            <div className="w-[21%] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex items-center">BAA-00004</div>
+            <div className="w-[24%] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex items-center">Футболка</div>
+            <div className="w-[25%] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex items-center"> 15-08-2023 </div>
+            <div className="w-[30%] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex items-center"> {data?.money} сум </div>
           </div>
         </div>
 

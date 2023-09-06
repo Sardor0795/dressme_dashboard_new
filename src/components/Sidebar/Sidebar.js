@@ -140,7 +140,7 @@ export default function Sidebar() {
                     <figure className="flex h-full gap-x-[15px] items-center justify-center pl-1">
                       <ClothesIcons
                         colors={"#007dca"}
-                        className="ml-[2px] border border-red-500"
+                        className="ml-[2px] "
                       />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
                         Одежда
@@ -150,7 +150,7 @@ export default function Sidebar() {
                     <figure className=" flex h-full gap-x-[15px] items-center justify-center pl-1">
                       <ClothesIcons
                         colors={"#2c2c2c"}
-                        className="ml-[2px] border border-red-500"
+                        className="ml-[2px] "
                       />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
                         Одежда

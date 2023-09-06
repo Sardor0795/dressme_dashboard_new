@@ -265,7 +265,7 @@ const AddingProduct = () => {
                     {
                       data?.action && <label
                         htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
                       >
                         <input
                           type="checkbox"
@@ -1546,11 +1546,11 @@ const AddingProduct = () => {
 
               <div
                 onClick={() => setAllSizeModalShow(false)}
-                className={`fixed inset-0 z-[113] border border-red-500  w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
+                className={`fixed inset-0 z-[113]   w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
                   }`}
               ></div>
               <section
-                className={`fixed z-[115] border border-green-500 w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                className={`fixed z-[115]  w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
                   }`}
               >
                 {allSizeModalShow && (
