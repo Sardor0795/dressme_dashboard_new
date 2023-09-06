@@ -5,17 +5,66 @@ import { ColourCard } from "../../../../../../../assets";
 function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
   const [decraseList, setDecraseList] = useState(false);
   const [wearSizeList, setWearSizeList] = useState([
-    { id: 1, action: false, name: "XXS" },
-    { id: 2, action: false, name: "XS" },
-    { id: 3, action: false, name: "S" },
-    { id: 4, action: false, name: "M" },
-    { id: 5, action: false, name: "5X" },
-    { id: 6, action: false, name: "7X" },
-    { id: 7, action: false, name: "9X" },
-    { id: 8, action: false, name: "10X" },
-    { id: 9, action: false, name: "L" },
-    { id: 10, action: false, name: "XL" },
+    { id: 1, action: true, name: "XXS" },
+    { id: 2, action: true, name: "XS" },
+    { id: 3, action: true, name: "S" },
+    { id: 4, action: true, name: "M" },
+    { id: 5, action: true, name: "5X" },
+    { id: 6, action: true, name: "7X" },
+    { id: 7, action: true, name: "9X" },
+    { id: 8, action: true, name: "10X" },
+    { id: 9, action: true, name: "L" },
+    { id: 10, action: true, name: "XL" },
+    { id: 11, action: true, name: "2XL" },
+    { id: 12, action: true, name: "3XL" },
+    { id: 13, action: true, name: "4X" },
+    { id: 14, action: true, name: "6X" },
+    { id: 15, action: true, name: "8X" },
   ]);
+
+  const WearSizeSmallToBig = () => {
+    setWearSizeList(current => {
+      return current.map(item => {
+        if (item.id > 8) {
+          return { ...item, action: !item.action }
+        } else {
+          return { ...item, action: true }
+        }
+      })
+    })
+  }
+  // Two card
+  const [decraseList2, setDecraseList2] = useState(false);
+  const [wearSizeList2, setWearSizeList2] = useState([
+    { id: 1, action: true, name: "XXS" },
+    { id: 2, action: true, name: "XS" },
+    { id: 3, action: true, name: "S" },
+    { id: 4, action: true, name: "M" },
+    { id: 5, action: true, name: "5X" },
+    { id: 6, action: true, name: "7X" },
+    { id: 7, action: true, name: "9X" },
+    { id: 8, action: true, name: "10X" },
+    { id: 9, action: true, name: "L" },
+    { id: 10, action: true, name: "XL" },
+    { id: 11, action: true, name: "2XL" },
+    { id: 12, action: true, name: "3XL" },
+    { id: 13, action: true, name: "4X" },
+    { id: 14, action: true, name: "6X" },
+    { id: 15, action: true, name: "8X" },
+  ]);
+
+  const WearSizeSmallToBig2 = () => {
+    setWearSizeList(current => {
+      return current.map(item => {
+        if (item.id > 8) {
+          return { ...item, action: !item.action }
+        } else {
+          return { ...item, action: true }
+        }
+      })
+    })
+  }
+
   // green black red
   return (
     <div className="w-full md:w-[690px]  h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
@@ -156,9 +205,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                           value={"18"}
                         />
                       </div>
-                      <span className="rotate-90 text-borderColor mx-[9px]">
-                        |
-                      </span>
+                      <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
                       <div className="flex flex-col">
                         <input
                           type="text"
@@ -186,9 +234,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                           value="11"
                         />
                       </div>
-                      <span className="rotate-90 text-borderColor mx-[9px]">
-                        |
-                      </span>
+                      <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
                       <div className="flex flex-col">
                         <input
                           type="text"
@@ -216,9 +263,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                           value={"5"}
                         />
                       </div>
-                      <span className="rotate-90 text-borderColor mx-[9px]">
-                        |
-                      </span>
+                      <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
                       <div className="flex flex-col">
                         <input
                           type="text"
@@ -242,9 +288,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
 
                         />
                       </div>
-                      <span className="rotate-90 text-borderColor mx-[9px]">
-                        |
-                      </span>
+                      <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
                       <div className="flex flex-col">
                         <input
                           type="text"
@@ -271,30 +316,35 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                             key={data?.id}
                             className="flex justify-center items-center"
                           >
-                            <label
-                              htmlFor="m_outwear"
-                              className="text-[14px] flex gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer"
-                            >
-                              <input
-                                type="checkbox"
-                                id="m_outwear"
-                                name="size_Outwear"
-                                value="M"
-                                className="w-[18px] h-[18px]"
-                              />
-                              <span className="text-textLightColor select-none text-md not-italic font-AeonikProMedium">
-                                {data?.name}
-                              </span>
-                            </label>
+                            {
+                              data?.action && <label
+                                htmlFor="m_outwear"
+                                className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  id="m_outwear"
+                                  name="size_Outwear"
+                                  value="M"
+                                  className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                />
+                                <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
+                                  {data?.name}
+                                </span>
+                              </label>
+                            }
                           </div>
                         );
                       })}
                       <button
                         type="button"
-                        onClick={() => setDecraseList(!decraseList)}
+                        onClick={() => {
+                          WearSizeSmallToBig()
+                          setDecraseList(!decraseList)
+                        }}
                         className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
                       >
-                        {decraseList ? "Меньше" : "Больше"}
+                        {decraseList ? "Больше" : "Меньше"}
                       </button>
                     </div>
                   </div>
@@ -339,7 +389,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                           <div className="flex items-center">
                             {data?.action && (
                               <button
-                                className={`rounded-[15px] pt-1 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular bg-${data?.colors}`}
+                                className={`rounded-[15px]  text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular bg-${data?.colors}`}
                               >{data?.colorName}</button>
                             )}
 
@@ -387,11 +437,11 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <StarLabel />
                     </span>
                   </p>
-                  <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
+                  <label className="w-[210] rounded-lg overflow-hidden flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                     <input
                       type="text"
                       placeholder="Цена"
-                      className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      className="w-full   px-3 h-full  text-xs font-AeonikProRegular outline-none"
                     />
                     <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
                       сум
@@ -414,20 +464,20 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                   <div className="flex items-center">
                     <div className="flex flex-col">
                       <input
-                        type="number"
+                        type="text"
                         value={"13 %"}
-                        className="w-[60px] px-3  h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="w-[60px] px-3 rounded-lg  h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular  outline-none"
                         placeholder=""
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+
                     </span>
-                    <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
+                    <label className="w-[210]  rounded-lg overflow-hidden flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                       <input
-                        type="number"
+                        type="text"
                         value="1 300 000"
-                        className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular  outline-none"
                       />
                       <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
                         сум
@@ -549,8 +599,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         value={"18"}
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+
                     </span>
                     <div className="flex flex-col">
                       <input
@@ -579,8 +629,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         value="11"
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+
                     </span>
                     <div className="flex flex-col">
                       <input
@@ -609,8 +659,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         value={"5"}
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+
                     </span>
                     <div className="flex flex-col">
                       <input
@@ -635,9 +685,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
 
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
-                    </span>
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -658,36 +706,41 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     </span>
                   </p>
                   <div className="w-full flex flex-wrap gap-[8px] ">
-                    {wearSizeList.map((data) => {
+                    {wearSizeList2.map((data) => {
                       return (
                         <div
                           key={data?.id}
                           className="flex justify-center items-center"
                         >
-                          <label
-                            htmlFor="m_outwear"
-                            className="text-[14px] flex gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              id="m_outwear"
-                              name="size_Outwear"
-                              value="M"
-                              className="w-[18px] h-[18px]"
-                            />
-                            <span className="text-textLightColor select-none text-md not-italic font-AeonikProMedium">
-                              {data?.name}
-                            </span>
-                          </label>
+                          {
+                            data?.action && <label
+                              htmlFor="m_outwear"
+                              className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                id="m_outwear"
+                                name="size_Outwear"
+                                value="M"
+                                className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                              />
+                              <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
+                                {data?.name}
+                              </span>
+                            </label>
+                          }
                         </div>
                       );
                     })}
                     <button
                       type="button"
-                      onClick={() => setDecraseList(!decraseList)}
+                      onClick={() => {
+                        WearSizeSmallToBig2()
+                        setDecraseList2(!decraseList2)
+                      }}
                       className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
                     >
-                      {decraseList ? "Меньше" : "Больше"}
+                      {decraseList2 ? "Больше" : "Меньше"}
                     </button>
                   </div>
                 </div>
@@ -732,7 +785,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         <div className="flex items-center">
                           {data?.action && (
                             <button
-                              className={`rounded-[15px] pt-1 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular bg-${data?.colors}`}
+                              className={`rounded-[15px]  text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular bg-${data?.colors}`}
                             >{data?.colorName}</button>
                           )}
 
@@ -807,7 +860,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                 <div className="flex items-center">
                   <div className="flex flex-col">
                     <input
-                      type="number"
+                      type="text"
                       value={"13 %"}
                       className="w-[60px] px-3  h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
                       placeholder=""
@@ -818,7 +871,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                   </span>
                   <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                     <input
-                      type="number"
+                      type="text"
                       value="1 300 000"
                       className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
                     />

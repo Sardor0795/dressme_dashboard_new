@@ -315,14 +315,19 @@ export default function AddingProduct() {
                 <div className="flex-1 mb-[10px]"></div>
               </div>
 
-              <div className="flex md:hidden items-center justify-center mb-[40px]">
-                <div className="bg-[#e5e5e5] flex-1 h-[1px] "></div>
-                <div className="w-4 h-4 rounded-full border border-[#007dca] flex items-center justify-center mr-[10px] ml-[10px]"></div>
-                <div className="w-[50px] bg-[#007dca] h-[1px]"></div>
-                <div className="w-4 h-4 rounded-full border border-[#007dca] flex items-center justify-center mr-[10px] ml-[10px]">
-                  <span className="w-2 inline-block h-2 rounded-full bg-[#007dca]"></span>
+              <div className="flex md:hidden items-center justify-between mb-[40px]">
+                <div className="w-1/3 h-[1px] bg-borderColor"></div>
+                <div className="w-1/3 flex items-center justify-around">
+                  <button className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full">
+                  </button>
+                  <span className="w-1/2 h-[1px]  bg-textBlueColor "></span>
+                  <button className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full	">
+                    <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
+                  </button>
                 </div>
-                <div className="bg-[#e5e5e5] flex-1 h-[1px]"></div>
+                <div className="w-1/3 h-[1px] bg-borderColor"></div>
+
+
               </div>
 
               <div className="flex justify-center md:justify-end gap-[20px] mt-auto">
