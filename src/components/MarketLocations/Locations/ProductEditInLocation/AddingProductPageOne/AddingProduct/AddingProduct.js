@@ -736,8 +736,7 @@ const AddingProduct = () => {
 
       <form
         action="#"
-        className="md:relative w-full   rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
-      // className="md:relative w-full  md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
+        className="md:relative w-full  md:border border-borderColor rounded-xl md:mx-[185px] md:px-[30px] md:py-[50px] md:pb-[250px]"
       >
         {/* Photo Section For Mobile */}
         <div className="w-full flex flex-col items-center md:hidden justify-center mb-6 gap-x-[15px] ">
@@ -1261,14 +1260,14 @@ const AddingProduct = () => {
                 <div className="w-full flex items-center justify-center">
                   <div className="w-full flex items-center gap-x-1">
                     <div className="w-[40%] md:w-[25%] flex items-start">
-                      <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-1 xs:px-[10px] ">
+                      <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-1 xs:px-2 ">
                         <input
                           type="text"
                           placeholder="0"
                           value="40"
                           className="w-[70%] font-AeonikProMedium text-start outline-none  flex items-center   text-[14px] md:text-base [&::-webkit-inner-spin-button]:appearance-none"
                         />
-                        <span className="text-textLightColor ml-1 xs:ml-2">%</span>
+                        <span className="text-textLightColor ml-1 ">%</span>
                       </div>
                     </div>
                     <span className="w-[10px] h-[2px] flex items-center  bg-textLightColor ">

@@ -25,7 +25,7 @@ const { RangePicker } = DatePicker;
 const AddingProduct = () => {
 
   const [openColors, setOpenColors] = useState(false); // Colors
-  const [openCategories, setOpenCategories] = useState(false); // Categories
+  const [openCategories, setOpenCategories] = useState(false); // Категория одежды
   const [openClothingSection, setOpenClothingSection] = useState(false); // Clothing Types
   const [openClothingSubSection, setOpenClothingSubSection] = useState(false); // Clothing Subsection
   const [openWeather, setOpenWeather] = useState(false); // Weather
@@ -1173,14 +1173,14 @@ const AddingProduct = () => {
     });
   }, []);
 
-  // Категория одежды
+  // Категория одеждыДобавить одежду
 
   return (
-    <div className="relative w-full block md:flex items-center justify-between mb-[50px] focus:bg-textBlueColor">
+    <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
 
 
 
-      <div className="absolute top-[85px] hidden md:flex items-center justify-center flex-col mr-[50px]">
+      <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
           1
         </div>
@@ -1301,7 +1301,6 @@ const AddingProduct = () => {
         action="#"
         className="w-full md:mx-[180px] md:mb-[50px]"
       >
-        <div className="hidden md:flex items-center justify-center text-2xl font-AeonikProMedium mt-6 mb-[34px]">Добавить одежду</div>
 
         <div className="md:relative md:border border-borderColor rounded-xl md:px-[30px] md:pt-[50px]  md:pb-[250px]">
 

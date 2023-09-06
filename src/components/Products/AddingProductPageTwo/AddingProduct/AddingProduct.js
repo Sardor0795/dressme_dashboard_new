@@ -10,6 +10,8 @@ export default function AddingProduct() {
       top: 0,
     });
   }, []);
+
+  // Категория одежды
   return (
     <div className="flex py-[40px] md:py-[50px]">
       <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
