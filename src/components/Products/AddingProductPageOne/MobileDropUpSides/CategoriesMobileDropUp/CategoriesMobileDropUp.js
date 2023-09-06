@@ -72,8 +72,8 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               <div className="w-full flex items-center mt-[7px]">
                 <div className="w-full flex flex-col">
                   <input
-                    type="number"
-                    className="w-full h-[38px] border border-borderColor px-[15px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-full h-[38px] border border-borderColor px-2 rounded-lg   outline-none"
                     placeholder="0"
                   />
                 </div>
@@ -86,19 +86,19 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               </div>
               <div className="w-full flex items-center mt-[7px]">
                 <div className="w-full flex items-center">
-                  <div className="w-[35%] h-[38px] flex items-center justify-between border border-borderColor pl-3 py-3 rounded-lg">
+                  <div className="w-[35%] h-[38px] flex items-center justify-between border border-borderColor pl-2 rounded-lg">
                     <input
-                      type="number"
-                      className="w-[50%] text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      type="text"
+                      className=" inputStyle w-[50%]  outline-none"
                       placeholder="0"
                     />
                     <span className="w-[40%] text-[13px] text-[#b5b5b5] pt-1 font-AeonikProRegular">%</span>
                   </div>
                   <span className="mx-[5px]"><LineIcon /></span>
-                  <div className="w-[65%] h-[38px] px-3 flex items-center justify-between border border-borderColor rounded-lg text-[11px] ">
+                  <div className="w-[65%] h-[38px] px-2 flex items-center justify-between border border-borderColor rounded-lg  ">
                     <input
-                      type="number"
-                      className="w-[62%] text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      type="text"
+                      className="w-[62%] inputStyle  outline-none"
                       placeholder="0"
                     />
                     <span className="w-[30%] text-xs text-[#b5b5b5] font-AeonikProRegular">сум</span>
@@ -117,16 +117,16 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               <div className="w-full flex items-center mt-[7px]">
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Мин"
                   />
                 </div>
                 <span className="mx-[5px]"><LineIcon /></span>
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
                 </div>
@@ -139,16 +139,16 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               <div className="w-full flex items-center mt-[7px]">
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg   outline-none font-AeonikProRegular "
                     placeholder="Мин"
                   />
                 </div>
                 <span className="mx-[5px]"><LineIcon /></span>
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
                 </div>
@@ -165,16 +165,16 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               <div className="w-full flex items-center mt-[7px]">
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Мин"
                   />
                 </div>
                 <span className="mx-[5px]"><LineIcon /></span>
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
                 </div>
@@ -188,16 +188,16 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               <div className="w-full flex items-center mt-[7px]">
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className=" inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Мин"
                   />
                 </div>
                 <span className="mx-[5px]"><LineIcon /></span>
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] h-[38px] text-center border border-borderColor px-[15px] py-3 rounded-lg text-[11px] font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
                 </div>
@@ -212,7 +212,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
               </p>
               <div className="w-full flex">
-                <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+                <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
                   {sizeList.sizeList1.map((data) => {
                     return (
                       <div
@@ -241,7 +241,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
                     );
                   })}
                 </div>
-                <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+                <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
                   {decraseList && sizeList.sizeList2.map((data) => {
                     return (
                       <div

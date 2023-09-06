@@ -149,8 +149,8 @@ const AddingProduct = () => {
             <div className="flex items-center ">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[55px] h-[42px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[55px] h-[42px] text-center border border-borderColor px-5  rounded-lg  "
                 />
                 <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
                   Мин
@@ -159,8 +159,8 @@ const AddingProduct = () => {
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[55px] h-[42px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[55px] h-[42px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
                 />
                 <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
                   Макс
@@ -190,8 +190,8 @@ const AddingProduct = () => {
             </p>
             <div className="flex items-start justify-between ">
               <input
-                type="number"
-                className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                type="text"
+                className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
               />
             </div>
           </div>
@@ -209,8 +209,8 @@ const AddingProduct = () => {
               </div>
               <div className="w-full flex items-center">
                 <input
-                  type="number"
-                  className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                  type="text"
+                  className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                   placeholder=""
                 />
               </div>
@@ -229,9 +229,9 @@ const AddingProduct = () => {
               </div>
               <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                 <input
-                  type="number"
+                  type="text"
                   placeholder="0"
-                  className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="inputStyle w-[70%] font-AeonikProMedium outline-none "
                 />
                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                   сум
@@ -256,9 +256,9 @@ const AddingProduct = () => {
                 <div className="w-[40%] md:w-[72px] flex items-start">
                   <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                     />
                     <span className="text-textLightColor ml-2">%</span>
                   </div>
@@ -267,9 +267,9 @@ const AddingProduct = () => {
                 <div className="w-[60%] md:w-[75%] flex items-center">
                   <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -304,16 +304,16 @@ const AddingProduct = () => {
             <div className="flex items-center">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -329,16 +329,16 @@ const AddingProduct = () => {
             <div className="flex items-center">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -352,7 +352,7 @@ const AddingProduct = () => {
               </span>
             </p>
             <div className="w-full flex">
-              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+              <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
                 {sizeList.sizeList1.map((data) => {
                   return (
                     <div
@@ -381,7 +381,7 @@ const AddingProduct = () => {
                   );
                 })}
               </div>
-              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+              <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
                 {decraseList && sizeList.sizeList2.map((data) => {
                   return (
                     <div
@@ -435,16 +435,16 @@ const AddingProduct = () => {
             <div className="flex items-center">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -457,16 +457,16 @@ const AddingProduct = () => {
             <div className="flex items-center">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -481,8 +481,8 @@ const AddingProduct = () => {
             </p>
             <div className="flex items-start justify-between ">
               <input
-                type="number"
-                className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                type="text"
+                className="inputStyle  w-[60px] h-[38px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
               />
             </div>
           </div>
@@ -503,8 +503,8 @@ const AddingProduct = () => {
               </div>
               <div className="w-fit flex items-center">
                 <input
-                  type="number"
-                  className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                  type="text"
+                  className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
                   placeholder=""
                 />
               </div>
@@ -523,9 +523,9 @@ const AddingProduct = () => {
               </div>
               <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                 <input
-                  type="number"
+                  type="text"
                   placeholder="0"
-                  className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="inputStyle w-[70%] font-AeonikProMedium outline-none "
                 />
                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                   сум
@@ -550,9 +550,9 @@ const AddingProduct = () => {
                 <div className="w-[40%] md:w-[72px] flex items-start">
                   <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                     />
                     <span className="text-textLightColor ml-2">%</span>
                   </div>
@@ -561,9 +561,9 @@ const AddingProduct = () => {
                 <div className="w-[60%] md:w-[75%] flex items-center">
                   <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -599,16 +599,16 @@ const AddingProduct = () => {
             <div className="flex items-center">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -625,16 +625,16 @@ const AddingProduct = () => {
               <div className="flex items-center">
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                     placeholder="Мин"
                   />
                 </div>
                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                     placeholder="Макс"
                   />
                 </div>
@@ -646,7 +646,7 @@ const AddingProduct = () => {
               Буквенный Размер
             </p>
             <div className="w-full flex">
-              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+              <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
                 {sizeList.sizeList1.map((data) => {
                   return (
                     <div
@@ -675,7 +675,7 @@ const AddingProduct = () => {
                   );
                 })}
               </div>
-              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+              <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
                 {decraseList && sizeList.sizeList2.map((data) => {
                   return (
                     <div
@@ -728,16 +728,16 @@ const AddingProduct = () => {
             <div className="flex items-center">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -751,16 +751,16 @@ const AddingProduct = () => {
               <div className="flex items-center">
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                     placeholder="Мин"
                   />
                 </div>
                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                 <div className="flex flex-col">
                   <input
-                    type="number"
-                    className="w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    type="text"
+                    className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                     placeholder="Макс"
                   />
                 </div>
@@ -776,8 +776,8 @@ const AddingProduct = () => {
             </p>
             <div className="flex items-start justify-between ">
               <input
-                type="number"
-                className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                type="text"
+                className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
               />
             </div>
           </div>
@@ -798,8 +798,8 @@ const AddingProduct = () => {
               </div>
               <div className="w-fit flex items-center">
                 <input
-                  type="number"
-                  className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                  type="text"
+                  className=" inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
                   placeholder=""
                 />
               </div>
@@ -818,9 +818,9 @@ const AddingProduct = () => {
               </div>
               <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                 <input
-                  type="number"
+                  type="text"
                   placeholder="0"
-                  className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="inputStyle w-[70%] font-AeonikProMedium outline-none"
                 />
                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                   сум
@@ -845,9 +845,9 @@ const AddingProduct = () => {
                 <div className="w-[40%] md:w-[72px] flex items-start">
                   <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                     />
                     <span className="text-textLightColor ml-2">%</span>
                   </div>
@@ -856,9 +856,9 @@ const AddingProduct = () => {
                 <div className="w-[60%] md:w-[75%] flex items-center">
                   <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -892,8 +892,8 @@ const AddingProduct = () => {
             <div className="w-[65px] flex items-center justify-between gap-x-1">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-full text-start h-[40px] border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                 />
               </div>
             </div>
@@ -906,16 +906,16 @@ const AddingProduct = () => {
             <div className="flex items-center gap-x-1">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                   placeholder="Мин"
                 />
               </div>
               <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                   placeholder="Макс"
                 />
               </div>
@@ -938,8 +938,8 @@ const AddingProduct = () => {
               </div>
               <div className="w-fit flex items-center">
                 <input
-                  type="number"
-                  className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                  type="text"
+                  className="inputStyle w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                   placeholder=""
                 />
               </div>
@@ -956,11 +956,11 @@ const AddingProduct = () => {
                   <StarLabel />
                 </span>
               </div>
-              <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+              <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs ">
                 <input
-                  type="number"
+                  type="text"
                   placeholder="0"
-                  className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="inputStyle w-[70%] font-AeonikProMedium outline-none "
                 />
                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                   сум
@@ -985,9 +985,9 @@ const AddingProduct = () => {
                 <div className="w-[40%] md:w-[72px] flex items-start">
                   <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                     />
                     <span className="text-textLightColor ml-2">%</span>
                   </div>
@@ -996,9 +996,9 @@ const AddingProduct = () => {
                 <div className="w-[60%] md:w-[75%] flex items-center">
                   <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -1030,8 +1030,8 @@ const AddingProduct = () => {
             <div className="w-[83px] flex items-center justify-between gap-x-1">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-full text-start h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                 />
               </div>
             </div>
@@ -1042,7 +1042,7 @@ const AddingProduct = () => {
               Буквенный Размер
             </p>
             <div className="w-full flex">
-              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+              <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
                 {sizeList.sizeList1.map((data) => {
                   return (
                     <div
@@ -1071,7 +1071,7 @@ const AddingProduct = () => {
                   );
                 })}
               </div>
-              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+              <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
                 {decraseList && sizeList.sizeList2.map((data) => {
                   return (
                     <div
@@ -1122,8 +1122,8 @@ const AddingProduct = () => {
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-full text-start border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                 />
               </div>
             </div>
@@ -1135,8 +1135,8 @@ const AddingProduct = () => {
             <div className="flex items-center justify-between gap-x-1">
               <div className="flex flex-col">
                 <input
-                  type="number"
-                  className="w-full text-start border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                  type="text"
+                  className="inputStyle w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                 />
               </div>
             </div>
@@ -1147,8 +1147,8 @@ const AddingProduct = () => {
             </p>
             <div className="flex items-start justify-between ">
               <input
-                type="number"
-                className="w-[60px] h-[38px] text-center border border-borderColor px-5 py-[10px] rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                type="text"
+                className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
               />
             </div>
           </div>
@@ -1169,8 +1169,8 @@ const AddingProduct = () => {
               </div>
               <div className="w-fit flex items-center">
                 <input
-                  type="number"
-                  className="w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                  type="text"
+                  className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                   placeholder=""
                 />
               </div>
@@ -1189,9 +1189,9 @@ const AddingProduct = () => {
               </div>
               <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                 <input
-                  type="number"
+                  type="text"
                   placeholder="0"
-                  className="w-[70%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="inputStyle w-[70%] font-AeonikProMedium outline-none "
                 />
                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                   сум
@@ -1216,9 +1216,9 @@ const AddingProduct = () => {
                 <div className="w-[40%] md:w-[72px] flex items-start">
                   <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[70%] font-AeonikProMedium text-start outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                     />
                     <span className="text-textLightColor ml-2">%</span>
                   </div>
@@ -1227,9 +1227,9 @@ const AddingProduct = () => {
                 <div className="w-[60%] md:w-[75%] flex items-center">
                   <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                     <input
-                      type="number"
+                      type="text"
                       placeholder="0"
-                      className="w-[75%] font-AeonikProMedium outline-none [&::-webkit-inner-spin-button]:appearance-none"
+                      className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                     />
                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                       сум
@@ -1267,7 +1267,7 @@ const AddingProduct = () => {
     });
   }, []);
 
-  // Категория одеждыДобавить одежду
+  // Категория одеждыДобавить одежду Артикул(необязательно)
 
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
@@ -1623,7 +1623,7 @@ const AddingProduct = () => {
                 </div>
               </div>
 
-              {/* 3 */}
+              {/* 3 input*/}
               <div className="w-full flex flex-row gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mb-[25px]">
                 <div className="w-1/2 flex flex-col items-start">
                   <div className="w-full mb-[5px]">
@@ -1682,16 +1682,16 @@ const AddingProduct = () => {
                     <div className="w-[60%] hidden md:flex items-center justify-center">
                       <div className="flex flex-col">
                         <input
-                          type="number"
-                          className="w-[60px] h-10 text-center border border-borderColor px-3 flex items-center rounded-lg text-base [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          type="text"
+                          className="inputStyle w-[60px] h-10 text-center border border-borderColor px-3 flex items-center rounded-lg font-AeonikProRegular "
                           placeholder="Мин"
                         />
                       </div>
                       <span className="rotate-90 h-full text-borderColor mx-3">|</span>
                       <div className="flex flex-col">
                         <input
-                          type="number"
-                          className="w-[60px] h-10 text-center border border-borderColor px-3 flex items-center rounded-lg text-base font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          type="text"
+                          className="inputStyle w-[60px] h-10 text-center border border-borderColor px-3 flex items-center rounded-lg  font-AeonikProRegular "
                           placeholder="Мах"
                         />
                       </div>
@@ -1713,8 +1713,9 @@ const AddingProduct = () => {
                   <div className="w-full flex items-center justify-between">
                     <input
                       type="text"
-                      className="w-full h-10 text-base flex items-center justify-between border rounded-lg px-[10px] outline-none"
+                      className="inputStyle w-full h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
                       placeholder="0"
+                      value={145}
                     />
                     {/* <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
                         <LoaderIcon />
@@ -1800,7 +1801,7 @@ const AddingProduct = () => {
                       </label>
                     </div>
                     <input
-                      type="number"
+                      type="text"
                       className="w-full border border-borderColor px-2 h-10 flex items-center rounded-lg outline-none text-base [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="(необязательно)"
                     />
@@ -1863,7 +1864,7 @@ const AddingProduct = () => {
                       </label>
                     </div>
                     <input
-                      type="number"
+                      type="text"
                       className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="(необязательно)"
                     />
@@ -1903,7 +1904,7 @@ const AddingProduct = () => {
                       </label>
                     </div>
                     <input
-                      type="number"
+                      type="text"
                       className="w-full border border-borderColor p-[11px] rounded-lg outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="(необязательно)"
                     />
@@ -2015,7 +2016,7 @@ const AddingProduct = () => {
                   </div>
                   <div className="w-full flex items-center">
                     <input
-                      type="number"
+                      type="text"
                       className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Мин"
                     />
@@ -2023,7 +2024,7 @@ const AddingProduct = () => {
                       |
                     </span>
                     <input
-                      type="number"
+                      type="text"
                       className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Макс"
                     />
