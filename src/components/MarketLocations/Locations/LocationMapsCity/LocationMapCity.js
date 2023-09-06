@@ -46,7 +46,7 @@ function LocationMapCity() {
       <div className="">
         <section
           onClick={() => setOpenRegionList(false)}
-          className={`fixed inset-0 z-[10000] border border-red-500 duration-200 w-full h-[100vh] bg-black opacity-50 
+          className={`fixed inset-0 z-[10000]  duration-200 w-full h-[100vh] bg-black opacity-50 
           ${openRegionList ? "" : "hidden"
             }`}
         ></section>
