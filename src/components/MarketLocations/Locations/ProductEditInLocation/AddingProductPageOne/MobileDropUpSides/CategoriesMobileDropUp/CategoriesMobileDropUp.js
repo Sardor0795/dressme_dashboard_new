@@ -3,9 +3,39 @@ import { CheckIconsCircle, CloseAnswer, StarLabel } from "../../../../../../../a
 import AllSizeModalEdit from "../../AddingProduct/AllSizeModalEdit/AllSizeModalEdit";
 import { Popover, Select, Switch } from "antd";
 
-const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor, wearSizeList }) => {
+const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor }) => {
 
   const AddSizeWear = () => {
+    const [decraseList, setDecraseList] = useState(false);
+    const [wearSizeList, setWearSizeList] = useState([
+      { id: 1, action: true, name: "XXS" },
+      { id: 2, action: true, name: "XS" },
+      { id: 3, action: true, name: "S" },
+      { id: 4, action: true, name: "M" },
+      { id: 5, action: true, name: "5X" },
+      { id: 6, action: true, name: "7X" },
+      { id: 7, action: true, name: "9X" },
+      { id: 8, action: true, name: "10X" },
+      { id: 9, action: true, name: "L" },
+      { id: 10, action: true, name: "XL" },
+      { id: 11, action: true, name: "2XL" },
+      { id: 12, action: true, name: "3XL" },
+      { id: 13, action: true, name: "4X" },
+      { id: 14, action: true, name: "6X" },
+      { id: 15, action: true, name: "8X" },
+    ]);
+
+    const WearSizeSmallToBig = () => {
+      setWearSizeList(current => {
+        return current.map(item => {
+          if (item.id > 8) {
+            return { ...item, action: !item.action }
+          } else {
+            return { ...item, action: true }
+          }
+        })
+      })
+    }
     return (
       <div className=" h-fit overflow-auto flex flex-col pt-4 gap-y-2 AllSizeModalScroll ">
         <div className="w-full flex items-center gap-x-[6px] px-2  border-borderColor">
@@ -87,7 +117,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                       <StarLabel />
                     </span>
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center ">
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -96,9 +126,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                         value={"18"}
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
-                    </span>
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -117,7 +145,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                       <StarLabel />
                     </span>
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center ">
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -126,9 +154,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                         value="11"
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
-                    </span>
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -147,7 +173,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                       <StarLabel />
                     </span>
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -156,9 +182,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                         value={"5"}
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
-                    </span>
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -173,7 +197,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                   <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                     Размер Бедер
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -182,9 +206,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
 
                       />
                     </div>
-                    <span className="rotate-90 text-borderColor mx-[9px]">
-                      |
-                    </span>
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                     <div className="flex flex-col">
                       <input
                         type="text"
@@ -204,6 +226,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                       <StarLabel />
                     </span>
                   </p>
+
                   <div className="w-full flex flex-wrap gap-[8px] ">
                     {wearSizeList.map((data) => {
                       return (
@@ -211,31 +234,35 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                           key={data?.id}
                           className="flex justify-center items-center"
                         >
-                          <label
-                            htmlFor="m_outwear"
-                            className="text-[14px] flex gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              id="m_outwear"
-                              name="size_Outwear"
-                              value="M"
-                              className="w-[18px] h-[18px]"
-                            />
-                            <span className="text-textLightColor select-none text-md not-italic font-AeonikProMedium">
-                              {data?.name}
-                            </span>
-                          </label>
+                          {
+                            data?.action && <label
+                              htmlFor="m_outwear"
+                              className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                            >
+                              <input
+                                type="checkbox"
+                                id="m_outwear"
+                                name="size_Outwear"
+                                value="M"
+                                className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                              />
+                              <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
+                                {data?.name}
+                              </span>
+                            </label>
+                          }
                         </div>
                       );
                     })}
                     <button
                       type="button"
-                      // onClick={() => setDecraseList(!decraseList)}
-                      className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
+                      onClick={() => {
+                        WearSizeSmallToBig()
+                        setDecraseList(!decraseList)
+                      }}
+                      className="text-textBlueColor select-none text-xs not-italic font-AeonikProMedium cursor-pointer"
                     >
-                      {/* {decraseList ? "Меньше" : "Больше"}  */}
-                      Меньше
+                      {decraseList ? "Больше" : "Меньше"}
                     </button>
                   </div>
                 </div>
@@ -361,9 +388,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                       placeholder=""
                     />
                   </div>
-                  <span className="rotate-90 text-borderColor mx-[9px]">
-                    |
-                  </span>
+                  <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                   <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                     <input
                       type="number"

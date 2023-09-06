@@ -45,7 +45,7 @@ const TypesDropUp = ({ onClick, title }) => {
                 return (
                   <div
                     key={data.id}
-                    className="w-full overflow-scroll flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular"
+                    className="w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular"
                   >
                     {data.name}
                   </div>

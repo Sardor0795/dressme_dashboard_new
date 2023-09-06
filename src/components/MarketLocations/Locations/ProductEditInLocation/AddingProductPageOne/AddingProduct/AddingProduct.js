@@ -56,8 +56,17 @@ const AddingProduct = () => {
     () => setWearCollection(false),
     []
   );
-  // Type
-
+  // allSizeModalShow
+  const [allSizeModalShow, setAllSizeModalShow] = useState(false);
+  const toggleAllSizeModalShow = React.useCallback(
+    () => setAllSizeModalShow(false),
+    []
+  );
+  // ModalColorGroup
+  const toggleColorGroup = React.useCallback(
+    () => setSelectColorToggleMobile(!selectColorToggleMobile),
+    []
+  );
 
   // For Drop UP
   useEffect(() => {
@@ -69,7 +78,8 @@ const AddingProduct = () => {
       openGender ||
       openCategories ||
       openTypes ||
-      wearCollection
+      wearCollection ||
+      allSizeModalShow
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -83,7 +93,8 @@ const AddingProduct = () => {
     openGender,
     openCategories,
     openTypes,
-    wearCollection
+    wearCollection,
+    allSizeModalShow
   ]);
 
   const onChange = (value) => {
@@ -99,33 +110,39 @@ const AddingProduct = () => {
   const goProductTitleEdit = (id) => {
     navigate(`/locations-store/edit-title/:${id}`);
   };
-  // allSizeModalShow
-  const [allSizeModalShow, setAllSizeModalShow] = useState(false);
-  const toggleAllSizeModalShow = React.useCallback(
-    () => setAllSizeModalShow(false),
-    []
-  );
-  // ModalColorGroup
-  const toggleColorGroup = React.useCallback(
-    () => setSelectColorToggleMobile(!selectColorToggleMobile),
-    []
-  );
+
 
   const [decraseList, setDecraseList] = useState(false);
   const [wearSizeList, setWearSizeList] = useState([
-    { id: 1, action: false, name: "XXS" },
-    { id: 2, action: false, name: "XS" },
-    { id: 3, action: false, name: "S" },
-    { id: 4, action: false, name: "M" },
-    { id: 5, action: false, name: "5X" },
-    { id: 6, action: false, name: "7X" },
-    { id: 7, action: false, name: "9X" },
-
-    { id: 8, action: false, name: "10X" },
-    { id: 9, action: false, name: "L" },
-    { id: 10, action: false, name: "XL" },
+    { id: 1, action: true, name: "XXS" },
+    { id: 2, action: true, name: "XS" },
+    { id: 3, action: true, name: "S" },
+    { id: 4, action: true, name: "M" },
+    { id: 5, action: true, name: "5X" },
+    { id: 6, action: true, name: "7X" },
+    { id: 7, action: true, name: "9X" },
+    { id: 8, action: true, name: "10X" },
+    { id: 9, action: true, name: "L" },
+    { id: 10, action: true, name: "XL" },
+    { id: 11, action: true, name: "2XL" },
+    { id: 12, action: true, name: "3XL" },
+    { id: 13, action: true, name: "4X" },
+    { id: 14, action: true, name: "6X" },
+    { id: 15, action: true, name: "8X" },
   ]);
-  // Outerwear
+  const WearSizeSmallToBig = () => {
+    setWearSizeList(current => {
+      return current.map(item => {
+        if (item.id > 8) {
+          return { ...item, action: !item.action }
+        } else {
+          return { ...item, action: true }
+        }
+      })
+    })
+  }
+  // Outerwear (необязательно)
+
   const contentOutwear = (
     <div className="w-[620px] h-fit">
       <action
@@ -147,7 +164,7 @@ const AddingProduct = () => {
                   placeholder="Мин"
                 />
               </div>
-              <span className="rotate-90 text-borderColor mx-[9px]">|</span>
+              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
                   type="number"
@@ -172,7 +189,7 @@ const AddingProduct = () => {
                   placeholder="Мин"
                 />
               </div>
-              <span className="rotate-90 text-borderColor mx-[9px]">|</span>
+              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
                   type="number"
@@ -197,7 +214,7 @@ const AddingProduct = () => {
                   placeholder="Мин"
                 />
               </div>
-              <span className="rotate-90 text-borderColor mx-[9px]">|</span>
+              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
                   type="number"
@@ -219,7 +236,7 @@ const AddingProduct = () => {
                   placeholder="Мин"
                 />
               </div>
-              <span className="rotate-90 text-borderColor mx-[9px]">|</span>
+              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
               <div className="flex flex-col">
                 <input
                   type="number"
@@ -245,30 +262,35 @@ const AddingProduct = () => {
                     key={data?.id}
                     className="flex justify-center items-center"
                   >
-                    <label
-                      htmlFor="m_outwear"
-                      className="text-[14px] flex gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        id="m_outwear"
-                        name="size_Outwear"
-                        value="M"
-                        className="w-[18px] h-[18px]"
-                      />
-                      <span className="text-textLightColor select-none text-sm not-italic font-AeonikProMedium">
-                        {data?.name}
-                      </span>
-                    </label>
+                    {
+                      data?.action && <label
+                        htmlFor="m_outwear"
+                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px] border border-red-500 cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          id="m_outwear"
+                          name="size_Outwear"
+                          value="M"
+                          className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                        />
+                        <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
+                          {data?.name}
+                        </span>
+                      </label>
+                    }
                   </div>
                 );
               })}
               <button
                 type="button"
-                onClick={() => setDecraseList(!decraseList)}
-                className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
+                onClick={() => {
+                  WearSizeSmallToBig()
+                  setDecraseList(!decraseList)
+                }}
+                className="text-textBlueColor select-none text-xs not-italic font-AeonikProMedium cursor-pointer"
               >
-                {decraseList ? "Меньше" : "Больше"}
+                {decraseList ? "Больше" : "Меньше"}
               </button>
             </div>
           </div>
@@ -344,7 +366,7 @@ const AddingProduct = () => {
                 placeholder=""
               />
             </div>
-            <span className="rotate-90 text-borderColor mx-[9px]">|</span>
+            <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
             <label className="w-[210]  flex h-[38px] border border-borderColor flex items-center">
               <input
                 type="number"
@@ -1420,9 +1442,9 @@ const AddingProduct = () => {
                     </label>
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     defaultValue={"80"}
-                    className="w-full border border-borderColor px-2 h-10 rounded-lg outline-none text-base  flex items-center  [&::-webkit-inner-spin-button]:appearance-none"
+                    className="w-full border border-borderColor px-2 h-10 rounded-lg outline-none text-base  flex items-center  "
                     placeholder="(необязательно)"
                   />
                 </div>
@@ -1469,7 +1491,7 @@ const AddingProduct = () => {
                 </div>
                 <input
                   type="number"
-                  className="w-full border border-borderColor p-[11px] rounded-lg outline-none  text-[14px] md:text-base [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full border border-borderColor h-10 flex items-center px-[11px] rounded-lg outline-none  text-[14px] md:text-base [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   placeholder="(необязательно)"
                 />
               </div>
@@ -1525,11 +1547,11 @@ const AddingProduct = () => {
 
               <div
                 onClick={() => setAllSizeModalShow(false)}
-                className={`fixed inset-0 z-[113]  w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
+                className={`fixed inset-0 z-[113] border border-red-500  w-full h-[100vh] bg-black opacity-50 ${allSizeModalShow ? "" : "hidden"
                   }`}
               ></div>
               <section
-                className={`fixed z-[115] cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                className={`fixed z-[115] border border-green-500 w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
                   }`}
               >
                 {allSizeModalShow && (
@@ -1564,7 +1586,6 @@ const AddingProduct = () => {
               </button>
               {/* --------------------------------------- */}
 
-              {/* --------------------------------------- */}
               <div
                 onClick={() => setWearCollection(false)}
                 className={`fixed inset-0 z-[113]  w-full h-[100vh] bg-black opacity-50 ${wearCollection ? "" : "hidden"
@@ -1583,18 +1604,21 @@ const AddingProduct = () => {
             {/* ------------------------------------------------------- */}
 
 
-            {/* ------------------------------------------------------- */}
 
           </div>
         </div>
-        <div className="flex md:hidden items-center justify-center mb-[40px]">
+        <div className="flex md:hidden items-center justify-between mb-[40px]">
           <div className="w-1/3 h-[1px] bg-borderColor"></div>
-          <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]">
-            <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
+          <div className="w-1/3 flex items-center justify-around">
+            <button className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full	">
+              <span className="w-2 h-2 rounded-full bg-textBlueColor block "></span>
+            </button>
+            <span className="w-1/2 h-[1px]  bg-textBlueColor "></span>
+            <button className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full">
+            </button>
           </div>
-          <div className="h-[1px] bg-textBlueColor w-[50px]"></div>
-          <div className="w-4 h-4 flex items-center justify-center border border-textBlueColor rounded-full  mx-[10px]"></div>
-          <div className="h-[1px] bg-borderColor flex-grow"></div>
+          <div className="w-1/3 h-[1px] bg-borderColor"></div>
+
         </div>
         <div className="w-full h-fit flex gap-x-[30px]  md:w-fit md:absolute md:right-3 md:bottom-3">
           <button
