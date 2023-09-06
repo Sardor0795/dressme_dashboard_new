@@ -160,7 +160,7 @@ export default function LocationOfYandex() {
                   {isSendedLocation ? (
                     <>
                       {" "}
-                      <span className="md:flex hidden">Подтверждено</span>
+                      <span className="md:flex hidden">Подтвердить</span>
                       <span className="md:hidden flex">OK</span>
                     </>
                   ) : (
@@ -174,7 +174,7 @@ export default function LocationOfYandex() {
                   type="button"
                   className="w-[40px] md:w-[150px] h-10 px-3  flex items-center justify-center bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
                 >
-                  <span className="md:flex hidden">Подтверждено</span>
+                  <span className="md:flex hidden">Подтвердить</span>
                   <span className="md:hidden flex">OK</span>{" "}
                 </button>
               )}

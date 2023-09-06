@@ -1,31 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { dressMainData } from "../hook/ContextTeam";
 import Error from "../components/Error/Error";
+import { dressMainData } from "../hook/ContextTeam";
 // --------------------------MarketStore=----------------
 import MarketStore from "../components/MarketStore";
-import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
+import MyMarket from "../components/MarketStore/MyMarket/MyMarket";
 import MarketEdit from "../components/MarketStore/Market_Edit/MarketEdit";
 import AddStore from "../components/MarketStore/AddMarket/AddStore/AddStore";
-import MyMarket from "../components/MarketStore/MyMarket/MyMarket";
+import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
 // --------------------------Products=----------------
 import Products from "../components/Products/Products";
+import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
 import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
 import NoLocationProduct from "../components/Products/NoLocationsProduct/NoLocationsProduct";
-import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
 import ProductLocationsList from "../components/Products/ProductLocationsList/ProductLocationsList";
 // --------------------------MarketLocations--------------
 import MarketLocations from "../components/MarketLocations";
-import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
 import NoLocations from "../components/MarketLocations/NoLocations/NoLocations";
+import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
 import LocationMapCity from "../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity";
 import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
 import ProductEditDetailLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation";
 import ProductEditTitleLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation";
 // -------------------Reviews1----------
 import Reviews1 from "../components/Reviews1";
-import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
+import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
 // -------------------Authentication----------
 import { SignUp } from "../components/Authentication/Sign_Up/SignUp";

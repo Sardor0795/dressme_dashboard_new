@@ -146,9 +146,7 @@ const CommentTitle = () => {
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
-                <figure className="w-10 h-10  rounded-full overflow-hidden flex items-center justify-center">
-                  <img src={data?.userImg} alt="" className="w-full h-full" />
-                </figure>
+
                 <div className="flex flex-col">
                   <div className="text-tableTextTitle2 text-base md:text-xl font-AeonikProMedium">
                     {data?.userName}
