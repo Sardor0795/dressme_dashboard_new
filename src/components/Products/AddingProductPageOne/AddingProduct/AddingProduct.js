@@ -103,35 +103,33 @@ const AddingProduct = () => {
   };
 
   const [decraseList, setDecraseList] = useState(false);
-  const [wearSizeList, setWearSizeList] = useState([
-    { id: 1, action: true, name: "XXS" },
-    { id: 2, action: true, name: "XS" },
-    { id: 3, action: true, name: "S" },
-    { id: 4, action: true, name: "M" },
-    { id: 5, action: true, name: "5X" },
-    { id: 6, action: true, name: "7X" },
-    { id: 7, action: true, name: "9X" },
-    { id: 8, action: true, name: "10X" },
-    { id: 9, action: true, name: "L" },
-    { id: 10, action: true, name: "XL" },
-    { id: 11, action: true, name: "2XL" },
-    { id: 12, action: true, name: "3XL" },
-    { id: 13, action: true, name: "4X" },
-    { id: 14, action: true, name: "6X" },
-    { id: 15, action: true, name: "8X" },
-  ]);
 
-  const WearSizeSmallToBig = () => {
-    setWearSizeList(current => {
-      return current.map(item => {
-        if (item.id > 8) {
-          return { ...item, action: !item.action }
-        } else {
-          return { ...item, action: true }
-        }
-      })
-    })
+  const [sizeList, setSizeList] = useState({
+    sizeList1: [
+      { id: 1, action: true, name: "XXS" },
+      { id: 2, action: true, name: "XS" },
+      { id: 3, action: true, name: "S" },
+      { id: 4, action: true, name: "M" },
+      { id: 5, action: true, name: "L" },
+      { id: 6, action: true, name: "XL" },
+      { id: 7, action: true, name: "2XL" },
+      { id: 8, action: true, name: "3XL" },
+    ],
+    sizeList2: [
+      { id: 1, action: true, name: "5X" },
+      { id: 2, action: true, name: "7X" },
+      { id: 3, action: true, name: "9X" },
+      { id: 4, action: true, name: "10X" },
+      { id: 5, action: true, name: "4X" },
+      { id: 6, action: true, name: "6X" },
+      { id: 7, action: true, name: "8X" },
+
+    ]
   }
+  )
+  // --------------------------------------
+
+
 
   // Hats
   const contentHat = (
@@ -353,43 +351,75 @@ const AddingProduct = () => {
                 <StarLabel />
               </span>
             </p>
-            <div className="w-full flex flex-wrap gap-[8px] ">
-              {wearSizeList.map((data) => {
-                return (
-                  <div
-                    key={data?.id}
-                    className="flex justify-center items-center"
-                  >
-                    {
-                      data?.action && <label
-                        htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
-                      >
-                        <input
-                          type="checkbox"
-                          id="m_outwear"
-                          name="size_Outwear"
-                          value="M"
-                          className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                        />
-                        <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
-                          {data?.name}
-                        </span>
-                      </label>
-                    }
-                  </div>
-                );
-              })}
-              <button
-                type="button"
-                onClick={() => {
-                  WearSizeSmallToBig()
-                  setDecraseList(!decraseList)
-                }}
-                className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
-              >
-                {decraseList ? "Больше" : "Меньше"}
-              </button>
+            <div className="w-full flex">
+              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+                {sizeList.sizeList1.map((data) => {
+                  return (
+                    <div
+                      key={data?.id}
+                      className="flex "
+                    >
+                      {
+                        data?.action &&
+                        <label
+                          htmlFor="m_outwear"
+                          className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            id="m_outwear"
+                            name="size_Outwear"
+                            value="M"
+                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                          />
+                          <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                            {data?.name}
+                          </span>
+                        </label>
+                      }
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+                {decraseList && sizeList.sizeList2.map((data) => {
+                  return (
+                    <div
+                      key={data?.id}
+                      className="flex "
+                    >
+                      {
+                        data?.action &&
+                        <label
+                          htmlFor="m_outwear"
+                          className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            id="m_outwear"
+                            name="size_Outwear"
+                            value="M"
+                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                          />
+                          <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                            {data?.name}
+                          </span>
+                        </label>
+                      }
+                    </div>
+                  );
+                })}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDecraseList(!decraseList)
+                  }}
+                  className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                >
+                  {decraseList ? "Меньше" : "Больше"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -615,43 +645,75 @@ const AddingProduct = () => {
             <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
               Буквенный Размер
             </p>
-            <div className="w-full flex flex-wrap gap-[8px] ">
-              {wearSizeList.map((data) => {
-                return (
-                  <div
-                    key={data?.id}
-                    className="flex justify-center items-center"
-                  >
-                    {
-                      data?.action && <label
-                        htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
-                      >
-                        <input
-                          type="checkbox"
-                          id="m_outwear"
-                          name="size_Outwear"
-                          value="M"
-                          className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                        />
-                        <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
-                          {data?.name}
-                        </span>
-                      </label>
-                    }
-                  </div>
-                );
-              })}
-              <button
-                type="button"
-                onClick={() => {
-                  WearSizeSmallToBig()
-                  setDecraseList(!decraseList)
-                }}
-                className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
-              >
-                {decraseList ? "Больше" : "Меньше"}
-              </button>
+            <div className="w-full flex">
+              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+                {sizeList.sizeList1.map((data) => {
+                  return (
+                    <div
+                      key={data?.id}
+                      className="flex "
+                    >
+                      {
+                        data?.action &&
+                        <label
+                          htmlFor="m_outwear"
+                          className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            id="m_outwear"
+                            name="size_Outwear"
+                            value="M"
+                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                          />
+                          <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                            {data?.name}
+                          </span>
+                        </label>
+                      }
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+                {decraseList && sizeList.sizeList2.map((data) => {
+                  return (
+                    <div
+                      key={data?.id}
+                      className="flex "
+                    >
+                      {
+                        data?.action &&
+                        <label
+                          htmlFor="m_outwear"
+                          className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            id="m_outwear"
+                            name="size_Outwear"
+                            value="M"
+                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                          />
+                          <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                            {data?.name}
+                          </span>
+                        </label>
+                      }
+                    </div>
+                  );
+                })}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDecraseList(!decraseList)
+                  }}
+                  className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                >
+                  {decraseList ? "Меньше" : "Больше"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -979,43 +1041,75 @@ const AddingProduct = () => {
             <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
               Буквенный Размер
             </p>
-            <div className="w-full flex flex-wrap gap-[8px] ">
-              {wearSizeList.map((data) => {
-                return (
-                  <div
-                    key={data?.id}
-                    className="flex justify-center items-center"
-                  >
-                    {
-                      data?.action && <label
-                        htmlFor="m_outwear"
-                        className="flex w-[48px] gap-x-1 items-center font-AeonikProMedium text-textLightColor mt-[2px]  cursor-pointer"
-                      >
-                        <input
-                          type="checkbox"
-                          id="m_outwear"
-                          name="size_Outwear"
-                          value="M"
-                          className="w-[16px] h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                        />
-                        <span className="text-textLightColor  select-none text-sm not-italic font-AeonikProMedium">
-                          {data?.name}
-                        </span>
-                      </label>
-                    }
-                  </div>
-                );
-              })}
-              <button
-                type="button"
-                onClick={() => {
-                  WearSizeSmallToBig()
-                  setDecraseList(!decraseList)
-                }}
-                className="text-textBlueColor text-xs not-italic font-AeonikProMedium cursor-pointer"
-              >
-                {decraseList ? "Больше" : "Меньше"}
-              </button>
+            <div className="w-full flex">
+              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+                {sizeList.sizeList1.map((data) => {
+                  return (
+                    <div
+                      key={data?.id}
+                      className="flex "
+                    >
+                      {
+                        data?.action &&
+                        <label
+                          htmlFor="m_outwear"
+                          className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            id="m_outwear"
+                            name="size_Outwear"
+                            value="M"
+                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                          />
+                          <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                            {data?.name}
+                          </span>
+                        </label>
+                      }
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+                {decraseList && sizeList.sizeList2.map((data) => {
+                  return (
+                    <div
+                      key={data?.id}
+                      className="flex "
+                    >
+                      {
+                        data?.action &&
+                        <label
+                          htmlFor="m_outwear"
+                          className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            id="m_outwear"
+                            name="size_Outwear"
+                            value="M"
+                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                          />
+                          <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                            {data?.name}
+                          </span>
+                        </label>
+                      }
+                    </div>
+                  );
+                })}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDecraseList(!decraseList)
+                  }}
+                  className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                >
+                  {decraseList ? "Меньше" : "Больше"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
