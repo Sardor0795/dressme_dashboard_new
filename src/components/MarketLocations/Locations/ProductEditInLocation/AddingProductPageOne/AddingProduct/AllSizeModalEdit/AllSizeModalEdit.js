@@ -30,7 +30,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
   }
   )
   // --------------------------------------------------------
-  // green black red
+  // green black red inputРазмер Талии
   return (
     <div className="w-full md:w-[780px]  h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
       <div className="w-full flex items-center justify-between md:pl-7 ">
@@ -85,7 +85,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                 Добавить выбранные к цвету
               </span>
             </div>
-            {/* <div className="w-full border md:border border-red-500  rounded-lg md:p-3 pb-4"> */}
+            {/* <div className="w-full border md:  rounded-lg md:p-3 pb-4"> */}
             <div className="w-full md:border border-borderColor  rounded-lg md:p-3 pb-4">
 
               {/* For Price Mobile*/}
@@ -103,7 +103,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       type="text"
                       placeholder="Цена"
                       value={"1300000"}
-                      className="w-full   pl-1 xs:pl-2 h-full rounded-lg text-[12px] font-AeonikProRegular  outline-none"
+                      className="inputStyle w-full   pl-1 xs:pl-2 h-full rounded-lg  font-AeonikProRegular  outline-none"
                     />
                     <span className="text-textLightColor text-[12px] not-italic font-AeonikProRegular pr-1 xs:pr-2">
                       сум
@@ -128,7 +128,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <input
                         type="text"
                         value={"13 %"}
-                        className="w-[40px] xs:w-[60px] h-[35px] md:h-[38px] border border-borderColor pl-1 xs:pl-2  rounded-lg text-[14px]  font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[40px] xs:w-[60px] h-[35px] md:h-[38px] border border-borderColor pl-1 xs:pl-2  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder=""
                       />
                     </div>
@@ -139,7 +139,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <input
                         type="text"
                         value="1 300 000"
-                        className="w-full   pl-1 xs:pl-2 h-full rounded-lg text-xs font-AeonikProRegular  outline-none"
+                        className="inputStyle w-full   pl-1 xs:pl-2 h-full rounded-lg  font-AeonikProRegular  outline-none"
                       />
                       <span className="text-textLightColor text-[12px] not-italic font-AeonikProRegular pr-1 xs:pr-2">
                         сум
@@ -164,7 +164,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 flex items-center justify-center rounded-lg   font-AeonikProRegular outline-none"
                           placeholder="Мин"
                           value={"18"}
                         />
@@ -174,7 +174,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 flex items-center justify-center rounded-lg  font-AeonikProRegular outline-none"
                           placeholder="Макс"
                           value={"19"}
 
@@ -193,7 +193,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                           placeholder="Мин"
                           value="11"
                         />
@@ -203,7 +203,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                           placeholder="Макс"
                           value="11"
 
@@ -222,7 +222,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] ll:w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                           placeholder="Мин"
                           value={"5"}
                         />
@@ -232,7 +232,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] ll:w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                           placeholder="Макс" value={"9"}
 
                         />
@@ -247,7 +247,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                           placeholder="Мин" value={"7"}
 
                         />
@@ -257,7 +257,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <div className="flex flex-col">
                         <input
                           type="text"
-                          className="w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                           placeholder="Макс" value={"8"}
 
                         />
@@ -274,7 +274,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       </span>
                     </p>
                     <div className="w-full flex">
-                      <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+                      <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
                         {sizeList.sizeList1.map((data) => {
                           return (
                             <div
@@ -303,7 +303,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                           );
                         })}
                       </div>
-                      <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+                      <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
                         {decraseList && sizeList.sizeList2.map((data) => {
                           return (
                             <div
@@ -357,7 +357,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         <input
                           type="text"
                           value={1}
-                          className="w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle flex items-center justify-center w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         />
                       </div>
                     </div>
@@ -372,7 +372,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         <input
                           type="text"
                           value={1}
-                          className="w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                          className="inputStyle flex items-center justify-center w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg font-AeonikProRegular  outline-none"
                         />
                       </div>
                     </div>
@@ -421,7 +421,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <input
                       type="text"
                       value={1}
-                      className="w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      className="inputStyle flex items-center justify-center w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                     />
                   </div>
                 </div>
@@ -437,7 +437,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <input
                       type="text"
                       placeholder="Цена"
-                      className="w-full   px-3 h-full  text-xs font-AeonikProRegular outline-none"
+                      className="inputStyle flex items-center justify-center w-full   px-3 h-full  font-AeonikProRegular outline-none"
                     />
                     <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
                       сум
@@ -462,7 +462,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <input
                         type="text"
                         value={"13 %"}
-                        className="w-[60px] px-3 rounded-lg  h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular  outline-none"
+                        className="inputStyle flex items-center justify-center w-[60px] px-3 rounded-lg  h-[35px] md:h-[38px] border border-borderColor rounded-lg font-AeonikProRegular  outline-none"
                         placeholder=""
                       />
                     </div>
@@ -473,7 +473,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <input
                         type="text"
                         value="1 300 000"
-                        className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular  outline-none"
+                        className="inputStyle flex items-center w-full   px-3 h-full rounded-lg font-AeonikProRegular  outline-none"
                       />
                       <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
                         сум
@@ -528,7 +528,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     type="text"
                     placeholder="Цена"
                     value={"1300000"}
-                    className="w-full   pl-1 xs:pl-2 h-full rounded-lg text-[12px] font-AeonikProRegular  outline-none"
+                    className="inputStyle flex items-center w-full   pl-1 xs:pl-2 h-full rounded-lg  font-AeonikProRegular  outline-none"
                   />
                   <span className="text-textLightColor text-[12px] not-italic font-AeonikProRegular pr-1 xs:pr-2">
                     сум
@@ -553,7 +553,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <input
                       type="text"
                       value={"13 %"}
-                      className="w-[40px] xs:w-[60px] h-[35px] md:h-[38px] border border-borderColor pl-1 xs:pl-2  rounded-lg text-[14px]  font-AeonikProRegular  outline-none"
+                      className="inputStyle flex items-center  w-[40px] xs:w-[60px] h-[35px] md:h-[38px] border border-borderColor pl-1 xs:pl-2  rounded-lg font-AeonikProRegular  outline-none"
                       placeholder=""
                     />
                   </div>
@@ -564,7 +564,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <input
                       type="text"
                       value="1 300 000"
-                      className="w-full   pl-1 xs:pl-2 h-full rounded-lg text-xs font-AeonikProRegular  outline-none"
+                      className="inputStyle flex items-center justify-center w-full   pl-1 xs:pl-2 h-full rounded-lg font-AeonikProRegular  outline-none"
                     />
                     <span className="text-textLightColor text-[12px] not-italic font-AeonikProRegular pr-1 xs:pr-2">
                       сум
@@ -590,7 +590,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value={"18"}
                       />
@@ -601,7 +601,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
                         placeholder="Макс"
                         value={"19"}
 
@@ -620,7 +620,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value="11"
                       />
@@ -631,7 +631,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
                         placeholder="Макс"
                         value="11"
 
@@ -650,7 +650,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] ll:w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value={"5"}
                       />
@@ -661,7 +661,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] ll:w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg font-AeonikProRegular  outline-none"
                         placeholder="Макс" value={"9"}
 
                       />
@@ -676,7 +676,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className=" inputStyle flex items-center justify-center w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин" value={"7"}
 
                       />
@@ -685,7 +685,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 py-[10px] rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className=" inputStyle flex items-center justify-center w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс" value={"8"}
 
                       />
@@ -702,7 +702,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     </span>
                   </p>
                   <div className="w-full flex  ">
-                    <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 ">
+                    <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
                       {sizeList.sizeList1.map((data) => {
                         return (
                           <div
@@ -731,7 +731,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         );
                       })}
                     </div>
-                    <div className="w-[222px] h-[50px] border border-red-500 grid grid-cols-4 gap-2 items-end">
+                    <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
                       {decraseList2 && sizeList.sizeList2.map((data) => {
                         return (
                           <div
@@ -785,7 +785,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <input
                         type="text"
                         value={1}
-                        className="w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
                       />
                     </div>
                   </div>
@@ -800,7 +800,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       <input
                         type="text"
                         value={1}
-                        className="w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                        className="inputStyle flex items-center justify-center w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
                       />
                     </div>
                   </div>
@@ -849,7 +849,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                   <input
                     type="text"
                     value={1}
-                    className="w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    className="inputStyle flex items-center justify-center w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                   />
                 </div>
               </div>
@@ -865,7 +865,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                   <input
                     type="text"
                     placeholder="Цена"
-                    className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                    className=" inputStyle flex items-center  w-full   px-3 h-full rounded-lg  font-AeonikProRegular  outline-none"
                   />
                   <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
                     сум
@@ -890,18 +890,18 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <input
                       type="text"
                       value={"13 %"}
-                      className="w-[60px] px-3  h-[35px] md:h-[38px] border border-borderColor px-3 py-[10px] rounded-lg text-xs  font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      className="inputStyle flex items-center justify-center w-[60px] px-3  h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                       placeholder=""
                     />
                   </div>
-                  <span className="rotate-90 text-borderColor mx-[9px]">
-                    |
+                  <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+
                   </span>
                   <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                     <input
                       type="text"
                       value="1 300 000"
-                      className="w-full   px-3 h-full rounded-lg text-xs font-AeonikProRegular [&::-webkit-inner-spin-button]:appearance-none outline-none"
+                      className="inputStyle flex items-center  w-full px-3 h-full rounded-lg  font-AeonikProRegular  outline-none"
                     />
                     <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
                       сум

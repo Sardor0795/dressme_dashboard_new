@@ -143,7 +143,31 @@
   /* border: 1px solid green; */
 }
 
+/* ------------------- */
+.inputStyle {
+  color: #000;
+  font-size: 16px;
+
+}
+
+.inputStyle::placeholder {
+  color: #C5C5C5;
+  font-size: 14px;
+}
+
+/* ------------------- */
 @media (max-width: 767px) {
+  .inputStyle {
+    color: #000;
+    font-size: 14px;
+
+  }
+
+  .inputStyle::placeholder {
+    color: #A1A1A1;
+    font-size: 12px;
+  }
+
   .WearScroll {
     display: block;
     border: 1px solid green
