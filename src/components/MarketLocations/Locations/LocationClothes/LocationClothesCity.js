@@ -13,6 +13,7 @@ import {
 import { AiOutlineLeft } from "react-icons/ai";
 
 import { DatePicker, Space } from "antd";
+import PickerOfFilter from "../../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 const { RangePicker } = DatePicker;
 export default function LocationClothesCity() {
   const navigate = useNavigate();
@@ -131,7 +132,7 @@ export default function LocationClothesCity() {
           </div>{" "}
 
 
-          <section className="mt-[25px] pt-[25px] border-t border-[#F2F2F2]  w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+          <section className="mt-[25px] pt-[25px] md:mt-0 md:pt-0 md:border-0 border-t border-[#F2F2F2]  w-full md:w-fit  flex items-center md:justify-start justify-between  gap-x-[15px]">
             <label
               htmlFor="searchStore"
               className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
@@ -147,19 +148,12 @@ export default function LocationClothesCity() {
                 <SearchIcon />
               </span>
             </label>
-            <section className=" flex items-center gap-x-[30px] ">
-              <span>
-                <CalendarIcons />
-              </span>
-              <span className="hidden md:flex items-center">
-                <Space direction="vertical" size={12}>
-                  <RangePicker className="" placeholder={["от", "до"]} />
-                </Space>
-              </span>
-            </section>
+            <div className="w-fit">
+              <PickerOfFilter />
+            </div>
           </section>
 
-          <div className="w-fit  items-center gap-x-[15px] hidden md:flex">
+          {/* <div className="w-fit  items-center gap-x-[15px] hidden md:flex">
             <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
               <input
                 type="text"
@@ -176,7 +170,7 @@ export default function LocationClothesCity() {
                 <RangePicker placeholder={["от", "до"]} />
               </Space>
             </section>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import { ProductImg } from "../../assets";
 import {
   CalendarIcons,
@@ -10,8 +10,9 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { ProductImg, pdpImg, wearImg } from "../../../../assets";
 
-import { DatePicker, Space, Popover } from "antd";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
+import { DatePicker, Space, Popover } from "antd";
+import PickerOfFilter from "../../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 const { RangePicker } = DatePicker;
 export default function LocationList() {
   const productList = [
@@ -77,6 +78,14 @@ export default function LocationList() {
       top: 0,
     });
   }, []);
+
+  const [showPicker, setShowPicker] = useState(true)
+  const showPickerHandle = () => {
+    setShowPicker(!showPicker)
+  }
+  // useEffect(() => {
+  //   showPickerHandle()
+  // }, [showPicker]);
   return (
     <div className="w-full h-full  px-4 md:px-0 ">
       <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
@@ -107,16 +116,10 @@ export default function LocationList() {
             <SearchIcon />
           </span>
         </label>
-        <section className=" flex items-center gap-x-[30px] ">
-          <span>
-            <CalendarIcons />
-          </span>
-          <span className="hidden md:flex items-center">
-            <Space direction="vertical" size={12}>
-              <RangePicker className="" placeholder={["от", "до"]} />
-            </Space>
-          </span>
-        </section>
+        <div className="w-fit">
+          <PickerOfFilter />
+        </div>
+
       </section>
 
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
@@ -138,11 +141,21 @@ export default function LocationList() {
                 <SearchIcon />
               </button>
             </form>
-            <section className="mobileDate flex items-center gap-x-4 ll:gap-x-[30px]">
-              <Space direction="vertical" size={12}>
-                <RangePicker placeholder={["от", "до"]} />
+            <div className="w-fit">
+              <PickerOfFilter />
+            </div>
+            {/* <section className="mobileDate flex items-center gap-x-4 ll:gap-x-[30px]">
+              <span className="p-2 border border-black cursor-pointer" onClick={showPickerHandle}>
+                <CalendarIcons />
+              </span>
+              <Space className="w-0 overflow-hidden " direction="vertical" size={12} open={true}>
+                <RangePicker
+                  dropdownClassName="border border-red-500"
+                  popupClassName="border border-green-500 flex"
+                  open={showPicker}
+                  placeholder={["от", "до"]} />
               </Space>
-            </section>
+            </section> */}
           </div>
         </div>
       </div>

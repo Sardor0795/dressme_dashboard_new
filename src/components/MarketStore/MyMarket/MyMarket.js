@@ -4,6 +4,7 @@ import { CalendarIcons, SearchIcon } from "../../../assets/icons";
 import MarketList from "./MarketList";
 import { Link } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 
 const { RangePicker } = DatePicker;
 
@@ -47,15 +48,8 @@ export default function MyMarket() {
                 <SearchIcon />
               </span>
             </label>
-            <section className=" flex items-center gap-x-4 ll:gap-x-[30px] ">
-              <span className=" md:hidden flex items-center">
-                <CalendarIcons />
-              </span>
-              <span className="hidden md:flex items-center">
-                <Space direction="vertical" size={12}>
-                  <RangePicker className="" placeholder={["от", "до"]} />
-                </Space>
-              </span>
+            <section className=" flex w-fit ">
+              <PickerOfFilter />
             </section>
           </section>
         </div>

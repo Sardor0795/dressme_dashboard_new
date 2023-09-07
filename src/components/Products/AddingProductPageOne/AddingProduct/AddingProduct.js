@@ -6,6 +6,7 @@ import {
   CalendarIcons,
   DownloadIcon,
   InputCheck,
+  LineIcon,
   LoaderIcon,
   SearchIcon,
   StarLabel,
@@ -127,7 +128,8 @@ const AddingProduct = () => {
     ]
   }
   )
-  // --------------------------------------
+  // --------------------------------------Возрастная категория Артикул
+
 
 
 
@@ -146,25 +148,22 @@ const AddingProduct = () => {
                 <StarLabel />
               </span>
             </p>
-            <div className="flex items-center ">
+
+            <div className="w-full flex items-center mt-[7px]">
               <div className="flex flex-col">
                 <input
                   type="text"
-                  className="inputStyle w-[55px] h-[42px] text-center border border-borderColor px-5  rounded-lg  "
+                  className="inputStyle w-[55px] h-[38px] text-center border border-borderColor px-2 rounded-lg   outline-none font-AeonikProRegular "
+                  placeholder="Мин"
                 />
-                <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
-                  Мин
-                </div>
               </div>
-              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+              <span className="mx-[5px]"><LineIcon /></span>
               <div className="flex flex-col">
                 <input
                   type="text"
-                  className="inputStyle w-[55px] h-[42px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
+                  className="inputStyle w-[55px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
+                  placeholder="Макс"
                 />
-                <div className="mt-[5px] text-textLightColor text-xs font-AeonikProMedium">
-                  Макс
-                </div>
               </div>
             </div>
           </div>
@@ -2014,7 +2013,20 @@ const AddingProduct = () => {
                       <StarLabel />
                     </span>
                   </div>
-                  <div className="w-full flex items-center">
+                  <div className="w-full flex items-center ">
+                    <input
+                      type="text"
+                      className="inputStyle w-[40%] md:w-[60px] h-[40px] text-center border border-borderColor px-2 rounded-lg   outline-none font-AeonikProRegular "
+                      placeholder="Мин"
+                    />
+                    <span className="mx-[5px]"><LineIcon /></span>
+                    <input
+                      type="text"
+                      className="inputStyle w-[40%] md:w-[60px] h-[40px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
+                      placeholder="Макс"
+                    />
+                  </div>
+                  {/* <div className="w-full flex items-center">
                     <input
                       type="text"
                       className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
@@ -2028,7 +2040,7 @@ const AddingProduct = () => {
                       className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
                       placeholder="Макс"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
