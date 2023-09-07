@@ -153,6 +153,35 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                 className={`w-full h-fit flex md:flex-row flex-col mt-[15px] md:mt-0  justify-between not-italic cursor-pointer font-AeonikProMedium text-md leading-4 text-center `}
               >
                 <div className="w-full md:w-[42%] flex flex-wrap justify-between gap-[15px] ll:gap-6 ">
+
+                  <div className="w-[45%] flex flex-col ">
+                    <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                      Обхват Талии
+                      <span className="ml-[5px] hidden md:flex">
+                        <StarLabel />
+                      </span>
+                    </p>
+                    <div className="flex items-center">
+                      <div className="flex flex-col">
+                        <input
+                          type="text"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
+                          placeholder="Мин"
+                          value={"5"}
+                        />
+                      </div>
+                      <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
+                      <div className="flex flex-col">
+                        <input
+                          type="text"
+                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
+                          placeholder="Макс" value={"9"}
+
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <div className="w-[45%] flex flex-col ">
                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                       Размер
@@ -184,7 +213,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                   </div>
                   <div className="w-[45%] flex flex-col ">
                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                      Размер Груди
+                      Обхват Груди
                       <span className="ml-[5px] hidden md:flex">
                         <StarLabel />
                       </span>
@@ -211,37 +240,10 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       </div>
                     </div>
                   </div>
+
                   <div className="w-[45%] flex flex-col ">
                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                      Размер Талии
-                      <span className="ml-[5px] hidden md:flex">
-                        <StarLabel />
-                      </span>
-                    </p>
-                    <div className="flex items-center">
-                      <div className="flex flex-col">
-                        <input
-                          type="text"
-                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
-                          placeholder="Мин"
-                          value={"5"}
-                        />
-                      </div>
-                      <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-
-                      <div className="flex flex-col">
-                        <input
-                          type="text"
-                          className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
-                          placeholder="Макс" value={"9"}
-
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-[45%] flex flex-col ">
-                    <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                      Размер Бедер
+                      Обхват Бедер
                     </p>
                     <div className="flex items-center">
                       <div className="flex flex-col">
@@ -581,6 +583,34 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
 
                 <div className="w-[45%] flex flex-col ">
                   <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                    Обхват Талии
+                    <span className="ml-[5px] hidden md:flex">
+                      <StarLabel />
+                    </span>
+                  </p>
+                  <div className="flex items-center">
+                    <div className="flex flex-col">
+                      <input
+                        type="text"
+                        className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
+                        placeholder="Мин"
+                        value={"5"}
+                      />
+                    </div>
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
+                    <div className="flex flex-col">
+                      <input
+                        type="text"
+                        className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
+                        placeholder="Макс" value={"9"}
+
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[45%] flex flex-col ">
+                  <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                     Размер
                     <span className="ml-[5px] hidden md:flex ">
                       <StarLabel />
@@ -590,18 +620,17 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 flex items-center justify-center rounded-lg   font-AeonikProRegular outline-none"
                         placeholder="Мин"
                         value={"18"}
                       />
                     </div>
-                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
 
-                    </span>
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 flex items-center justify-center rounded-lg  font-AeonikProRegular outline-none"
                         placeholder="Макс"
                         value={"19"}
 
@@ -611,7 +640,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                 </div>
                 <div className="w-[45%] flex flex-col ">
                   <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                    Размер Груди
+                    Обхват Груди
                     <span className="ml-[5px] hidden md:flex">
                       <StarLabel />
                     </span>
@@ -620,18 +649,17 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value="11"
                       />
                     </div>
-                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
+                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
 
-                    </span>
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс"
                         value="11"
 
@@ -641,51 +669,23 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                 </div>
                 <div className="w-[45%] flex flex-col ">
                   <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                    Размер Талии
-                    <span className="ml-[5px] hidden md:flex">
-                      <StarLabel />
-                    </span>
+                    Обхват Бедер
                   </p>
                   <div className="flex items-center">
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
-                        placeholder="Мин"
-                        value={"5"}
-                      />
-                    </div>
-                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]">
-
-                    </span>
-                    <div className="flex flex-col">
-                      <input
-                        type="text"
-                        className="inputStyle flex items-center justify-center w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg font-AeonikProRegular  outline-none"
-                        placeholder="Макс" value={"9"}
-
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-[45%] flex flex-col ">
-                  <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                    Размер Бедер
-                  </p>
-                  <div className="flex items-center">
-                    <div className="flex flex-col">
-                      <input
-                        type="text"
-                        className=" inputStyle flex items-center justify-center w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин" value={"7"}
 
                       />
                     </div>
                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+
                     <div className="flex flex-col">
                       <input
                         type="text"
-                        className=" inputStyle flex items-center justify-center w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
+                        className="inputStyle w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс" value={"8"}
 
                       />

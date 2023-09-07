@@ -128,7 +128,7 @@ const AddingProduct = () => {
     ]
   }
   )
-  // --------------------------------------Возрастная категория Артикул
+  // --------------------------------------Возрастная категория Артикул Обхват Талии
 
 
 
@@ -345,7 +345,7 @@ const AddingProduct = () => {
           </div>
           <div className="w-[53%] flex flex-col">
             <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
-              Буквенный Размер
+              Обхват Размер
               <span className="ml-[5px]">
                 <StarLabel />
               </span>
@@ -589,7 +589,7 @@ const AddingProduct = () => {
         <div className="w-full flex gap-x-10 px-3 pt-5">
           <div className="w-fit flex flex-col">
             <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Размер Талии
+              Обхват Талии
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
                 <StarLabel />
@@ -642,7 +642,7 @@ const AddingProduct = () => {
           </div>
           <div className="w-[53%] flex flex-col">
             <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
-              Буквенный Размер
+              Обхват Размер
             </p>
             <div className="w-full flex">
               <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
@@ -1038,7 +1038,7 @@ const AddingProduct = () => {
 
           <div className="w-[80%] flex flex-col">
             <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
-              Буквенный Размер
+              Обхват Размер
             </p>
             <div className="w-full flex">
               <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
