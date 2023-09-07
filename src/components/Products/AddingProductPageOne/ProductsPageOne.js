@@ -29,13 +29,7 @@ export default function ProductsPageOne() {
               Добавить одежду
             </p>
           </section>
-          <div className="w-fit flex items-center hidden md:flex ">
-            <section className="mobileDate flex items-center gap-x-[30px]">
-              <Space direction="vertical" size={12}>
-                <RangePicker placeholder={["от", "до"]} />
-              </Space>
-            </section>
-          </div>
+
         </div>
       </div>
       <div className="w-full max-w-[1540px] mx-auto">

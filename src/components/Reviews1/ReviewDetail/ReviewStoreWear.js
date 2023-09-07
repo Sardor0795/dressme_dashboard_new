@@ -12,6 +12,7 @@ import {
 import { dressMainData } from "../../../hook/ContextTeam";
 import NoReviewProduct from "../NoReview/NoReview";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 const { RangePicker } = DatePicker;
 export default function ReviewStoreWear() {
   const [storeOrWear, setStoreOrWear] = useState(false);
@@ -26,8 +27,8 @@ export default function ReviewStoreWear() {
       {/* filter */}
       <div className="w-full block pb-4 md:py-4 md:border-b border-lightBorderColor">
 
-        <div className="w-full py-6 border-lightBorderColor block md:hidden">
-          <div className="w-full flex items-center justify-center">
+        <div className="w-full md:py-0 py-6 border-lightBorderColor ">
+          <div className="w-full  md:hidden flex items-center justify-center">
             <button className="absolute left-4 ">
               <MobileHumburgerMenu />
             </button>
@@ -36,7 +37,7 @@ export default function ReviewStoreWear() {
             </span>
           </div>
           <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
-            <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+            <section className="w-full  flex items-center justify-between gap-x-[15px]">
               <label
                 htmlFor="searchStore"
                 className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
@@ -52,37 +53,13 @@ export default function ReviewStoreWear() {
                   <SearchIcon />
                 </span>
               </label>
-              <section className=" flex items-center gap-x-[30px] ">
-                <span>
-                  <CalendarIcons />
-                </span>
-                <span className="hidden md:flex items-center">
-                  <Space direction="vertical" size={12}>
-                    <RangePicker className="" placeholder={["от", "до"]} />
-                  </Space>
-                </span>
-              </section>
+              <div className="w-fit">
+                <PickerOfFilter />
+              </div>
             </section>
           </div>
         </div>
 
-        <div className="hidden md:flex items-center justify-between">
-          <div className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
-            <input
-              type="text"
-              className="w-full h-full outline-0	"
-              placeholder="Поиск"
-            />
-            <button>
-              <SearchIcon />
-            </button>
-          </div>
-          <div>
-            <Space direction="vertical" size={12}>
-              <RangePicker placeholder={["от", "до"]} />
-            </Space>
-          </div>
-        </div>
 
       </div>
       <div className="mb-[30px] md:my-[30px] w-full flex justify-center items-center">

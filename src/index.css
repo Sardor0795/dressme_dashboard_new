@@ -170,8 +170,26 @@
 
   .WearScroll {
     display: block;
-    border: 1px solid green
+  }
+
+  .ant-space-item {
+    overflow: visible;
+    height: 0px;
+    overflow: hidden;
+    position: relative;
+    width: 0px;
+    right: 40px;
+    z-index: -10;
+  }
+
+  .ant-picker-dropdown {
+    position: absolute;
+    z-index: 10;
   }
 
 
 }
+
+/* .ant-picker-input input::placeholder {
+  display: none;
+} */
