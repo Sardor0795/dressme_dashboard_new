@@ -240,7 +240,6 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                       </div>
                     </div>
                   </div>
-
                   <div className="w-[45%] flex flex-col ">
                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                       Обхват Бедер
@@ -275,8 +274,8 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                         <StarLabel />
                       </span>
                     </p>
-                    <div className="w-full flex">
-                      <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
+                    <div className="w-full flex md:flex-row flex-col">
+                      <div className="w-fit xs:w-[222px]  xs:h-[50px] flex xs:block flex-wrap xs:grid xs:grid-cols-4 gap-1 xs:gap-2 ">
                         {sizeList.sizeList1.map((data) => {
                           return (
                             <div
@@ -304,8 +303,46 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
                             </div>
                           );
                         })}
+                        {/* <span className="flex flex-wrap "> */}
+                        {decraseList && sizeList.sizeList2.map((data) => {
+                          return (
+                            <div
+                              key={data?.id}
+                              className="flex  xs:hidden"
+                            >
+                              {
+                                data?.action &&
+                                <label
+                                  htmlFor="m_outwear"
+                                  className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    id="m_outwear"
+                                    name="size_Outwear"
+                                    value="M"
+                                    className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                  />
+                                  <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
+                                    {data?.name}
+                                  </span>
+                                </label>
+                              }
+                            </div>
+                          );
+                        })}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDecraseList(!decraseList)
+                          }}
+                          className=" xs:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                        >
+                          {decraseList ? "Меньше" : "Больше"}
+                        </button>
+                        {/* </span> */}
                       </div>
-                      <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
+                      <div className="w-fit xs:w-[222px]  h-[50px] hidden xs:block flex-wrap  xs:grid xs:grid-cols-4gap-1 xs:gap-2 items-end">
                         {decraseList && sizeList.sizeList2.map((data) => {
                           return (
                             <div

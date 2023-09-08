@@ -128,7 +128,7 @@ const AddingProduct = () => {
     ]
   }
   )
-  // --------------------------------------Возрастная категория Артикул Обхват Талии
+  // --------------------------------------Возрастная категория Артикул Обхват Талии Цена Возраст
 
 
 
@@ -141,7 +141,8 @@ const AddingProduct = () => {
       >
         <div className="w-full flex justify-center  gap-x-10 px-3 pt-5">
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Обхват головы
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
@@ -168,7 +169,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col">
-            <p className="flex items-center justify-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               One Size
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
@@ -180,7 +182,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col items-center">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Количество
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
@@ -198,11 +201,10 @@ const AddingProduct = () => {
         <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mt-[15px]">
           <div className="w-1/2 flex items-center gap-x-[25px]">
             <div className="w-fit hidden md:flex flex-col items-start">
-              <div className="flex items-center justify-center mb-[5px]">
+              <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                   Возраст
                 </label>
               </div>
@@ -215,11 +217,10 @@ const AddingProduct = () => {
               </div>
             </div>
             <div className="w-full md:w-[90%]">
-              <div className="flex items-center mb-[5px]">
+              <div className="flex items-center mb-2 ll:mb-[10px] ">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                   Цена
                 </label>
                 <span className="ml-[5px]">
@@ -239,11 +240,11 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-1/2 flex flex-col items-start">
-            <div className="flex items-center justify-center mb-[5px]">
+            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
               <label
                 htmlFor=""
-                className="text-[13px] md:text-base font-AeonikProMedium"
-              >
+                className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                 Скидка
               </label>
               <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
@@ -285,7 +286,7 @@ const AddingProduct = () => {
       </action>
     </div>
   );
-  // Outerwear bor
+  // Outerwear bor 
   const contentOutwear = (
     <div className="w-[855px] h-fit">
       <action
@@ -293,7 +294,8 @@ const AddingProduct = () => {
       >
         <div className="w-full flex  gap-x-10 px-3 pt-5">
           <div className="w-[20%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Обхват Груди
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
@@ -319,7 +321,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-[20%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Размер
               <span className="ml-[5px]">
                 <StarLabel />
@@ -344,7 +347,7 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-[53%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
               Обхват Размер
               <span className="ml-[5px]">
                 <StarLabel />
@@ -424,7 +427,8 @@ const AddingProduct = () => {
         </div>
         <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Обхват Талии
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
@@ -450,7 +454,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Обхват Бедер
             </p>
             <div className="flex items-center">
@@ -472,7 +477,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col md:ml-5">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Количество
               <span className="ml-[5px]">
                 <StarLabel />
@@ -489,11 +495,11 @@ const AddingProduct = () => {
         <div className="w-full flex flex-row px-3 gap-x-[11px] md:pt-5 md:gap-x-[20px] mb-[15px]">
           <div className="w-fit flex items-center gap-x-[25px]">
             <div className="w-fit hidden md:flex flex-col items-start">
-              <div className="flex items-center justify-center mb-[5px]">
+              <div className="flex items-center justify-center ">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Возраст
                 </label>
                 {/* <span className="ml-[5px]">
@@ -509,11 +515,10 @@ const AddingProduct = () => {
               </div>
             </div>
             <div className="w-full md:w-[55%]">
-              <div className="flex items-center mb-[5px]">
+              <div className="flex items-center mb-2 ll:mb-[10px] ">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                   Цена
                 </label>
                 <span className="ml-[5px]">
@@ -533,11 +538,11 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col items-start">
-            <div className="flex items-center justify-center mb-[5px]">
+            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
               <label
                 htmlFor=""
-                className="text-[13px] md:text-base font-AeonikProMedium"
-              >
+                className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+
                 Скидка
               </label>
               <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
@@ -580,7 +585,7 @@ const AddingProduct = () => {
       </action>
     </div>
   );
-  // Underwear bor
+  // Underwear bor Цена
   const contentUnderWear = (
     <div className="w-[840px] h-fit">
       <action
@@ -588,7 +593,8 @@ const AddingProduct = () => {
       >
         <div className="w-full flex gap-x-10 px-3 pt-5">
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Обхват Талии
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
               <span className="ml-[5px]">
@@ -614,7 +620,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Размер
               <span className="ml-[5px]">
                 <StarLabel />
@@ -641,7 +648,7 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-[53%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
               Обхват Размер
             </p>
             <div className="w-full flex">
@@ -718,7 +725,8 @@ const AddingProduct = () => {
         </div>
         <div className="w-full flex gap-x-10 px-3 pt-5">
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Размер Бедер
               <span className="ml-[5px]">
                 <StarLabel />
@@ -743,7 +751,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Рост
             </p>
             <div className="flex items-center justify-between gap-x-1">
@@ -767,7 +776,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col md:ml-[14px]">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Количество
               <span className="ml-[5px]">
                 <StarLabel />
@@ -784,11 +794,11 @@ const AddingProduct = () => {
         <div className="w-full flex flex-row px-3 pt-5 gap-x-[11px] md:gap-x-[20px] mb-[15px]">
           <div className="w-fit flex items-center gap-x-[25px]">
             <div className="w-fit hidden md:flex flex-col items-start">
-              <div className="flex items-center justify-center mb-[5px]">
+              <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Возраст
                 </label>
                 {/* <span className="ml-[5px]">
@@ -804,11 +814,11 @@ const AddingProduct = () => {
               </div>
             </div>
             <div className="w-full md:w-[55%]">
-              <div className="flex items-center mb-[5px]">
+              <div className="flex items-center  mb-2 ll:mb-[10px]">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Цена
                 </label>
                 <span className="ml-[5px]">
@@ -828,11 +838,11 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col items-start">
-            <div className="flex items-center justify-center mb-[5px]">
+            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
               <label
                 htmlFor=""
-                className="text-[13px] md:text-base font-AeonikProMedium"
-              >
+                className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+
                 Скидка
               </label>
               <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
@@ -882,7 +892,8 @@ const AddingProduct = () => {
       >
         <div className="w-full flex gap-x-10 px-3 pt-5">
           <action className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Размер
               <span className="ml-[5px]">
                 <StarLabel />
@@ -898,7 +909,8 @@ const AddingProduct = () => {
             </div>
           </action>
           <action className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Длина Стопы
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
             </p>
@@ -924,11 +936,11 @@ const AddingProduct = () => {
         <div className="w-full flex flex-row px-3 pt-5 gap-x-[11px] md:gap-x-[20px] mb-[15px]">
           <div className="w-fit flex items-center gap-x-[25px]">
             <div className="w-fit hidden md:flex flex-col items-start">
-              <div className="flex items-center justify-center mb-[5px]">
+              <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Возраст
                 </label>
                 {/* <span className="ml-[5px]">
@@ -944,11 +956,11 @@ const AddingProduct = () => {
               </div>
             </div>
             <div className="w-full md:w-[55%]">
-              <div className="flex items-center mb-[5px]">
+              <div className="flex items-center mb-2 ll:mb-[10px] ">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Цена
                 </label>
                 <span className="ml-[5px]">
@@ -968,11 +980,11 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-fit flex flex-col items-start">
-            <div className="flex items-center justify-center mb-[5px]">
+            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
               <label
                 htmlFor=""
-                className="text-[13px] md:text-base font-AeonikProMedium"
-              >
+                className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                 Скидка
               </label>
               <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
@@ -1022,7 +1034,8 @@ const AddingProduct = () => {
       >
         <div className="w-full flex gap-x-10 px-3 pt-5">
           <div className="w-fit flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Размер{" "}
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
             </p>
@@ -1037,7 +1050,7 @@ const AddingProduct = () => {
           </div>
 
           <div className="w-[80%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[15px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
               Обхват Размер
             </p>
             <div className="w-full flex">
@@ -1114,7 +1127,8 @@ const AddingProduct = () => {
         </div>
         <div className="w-full flex gap-x-10 px-3 pt-5">
           <div className="w-[20%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Длина
               <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
             </p>
@@ -1128,7 +1142,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-[20%] flex flex-col">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Ширина
             </p>
             <div className="flex items-center justify-between gap-x-1">
@@ -1141,7 +1156,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-[60%] flex flex-col ml-auto">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
               Количество
             </p>
             <div className="flex items-start justify-between ">
@@ -1155,11 +1171,11 @@ const AddingProduct = () => {
         <div className="w-full flex flex-row px-3 pt-5 gap-x-[11px] md:gap-x-[20px] mb-[15px]">
           <div className="w-[45%] flex items-center gap-x-[25px]">
             <div className="w-fit hidden md:flex flex-col items-start">
-              <div className="flex items-center justify-center mb-[5px]">
+              <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Возраст
                 </label>
                 {/* <span className="ml-[5px]">
@@ -1175,11 +1191,11 @@ const AddingProduct = () => {
               </div>
             </div>
             <div className="w-full md:w-[55%]">
-              <div className="flex items-center mb-[5px]">
+              <div className="flex items-center mb-2 ll:mb-[10px] ">
                 <label
                   htmlFor=""
-                  className="text-[13px] md:text-base font-AeonikProMedium"
-                >
+                  className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
                   Цена
                 </label>
                 <span className="ml-[5px]">
@@ -1199,11 +1215,11 @@ const AddingProduct = () => {
             </div>
           </div>
           <div className="w-[40%] flex flex-col items-start">
-            <div className="flex items-center justify-center mb-[5px]">
+            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
               <label
                 htmlFor=""
-                className="text-[13px] md:text-base font-AeonikProMedium"
-              >
+                className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+
                 Скидка
               </label>
               <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
