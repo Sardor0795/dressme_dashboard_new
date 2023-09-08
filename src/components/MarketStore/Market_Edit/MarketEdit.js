@@ -97,20 +97,7 @@ function MarketEdit() {
           <AiOutlineLeft />
         </button>
         <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
-          <NavLink
-            to="/store/location-add"
-            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
-          >
-            Добавить локацию
-          </NavLink>
-          <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
-          <NavLink
-            to="/store/market-add"
-            className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
-          >
-            Создать новый магазин
-          </NavLink>
-          <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
+
           <button
             onClick={success2}
             className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
@@ -233,7 +220,7 @@ function MarketEdit() {
             goStore();
             success();
           }}
-          className="inline-block px-[100px] flex items-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
+          className="inline-block px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
           Сохранить{" "}
         </button>
