@@ -23,6 +23,7 @@ import WearCollection from "../WearCollection/WearCollection";
 import AllSizeModalEdit from "./AllSizeModalEdit/AllSizeModalEdit";
 import { img1, img2, img3, img4 } from "../../../../../../assets";
 import Slider from "react-slick";
+import WearCarosuelForMobile from "../WearCollection/WearCarosuelScroll/WearCarosuelForMobile";
 
 const AddingProduct = () => {
   const [openColors, setOpenColors] = useState(false); // Colors
@@ -35,6 +36,7 @@ const AddingProduct = () => {
   const [selectColorToggleMobile, setSelectColorToggleMobile] = useState(false); // Type
   const [categoryWear, setCategoryWear] = useState(true);
   const [wearCollection, setWearCollection] = useState(false);
+  const [wearCollectionForMobile, setWearCollectionForMobile] = useState(false);
 
   const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
   const toggleCategories = React.useCallback(
@@ -54,6 +56,10 @@ const AddingProduct = () => {
   const toggleTypes = React.useCallback(() => setOpenTypes(false), []); // Type
   const toggleWearCollection = React.useCallback(
     () => setWearCollection(false),
+    []
+  );
+  const toggleWearCollectionForMobile = React.useCallback(
+    () => setWearCollectionForMobile(false),
     []
   );
   // allSizeModalShow
@@ -79,7 +85,8 @@ const AddingProduct = () => {
       openCategories ||
       openTypes ||
       wearCollection ||
-      allSizeModalShow
+      allSizeModalShow ||
+      wearCollectionForMobile
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -94,7 +101,8 @@ const AddingProduct = () => {
     openCategories,
     openTypes,
     wearCollection,
-    allSizeModalShow
+    allSizeModalShow,
+    wearCollectionForMobile
   ]);
 
   const onChange = (value) => {
@@ -771,6 +779,20 @@ const AddingProduct = () => {
           <TypesDropUp onClick={toggleTypes} />
         </section>
       </div>
+      {/* Open Modal Menu For Wear carosuel */}
+      <div>
+        <section
+          onClick={() => setWearCollectionForMobile(false)}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${wearCollectionForMobile ? "" : "hidden"
+            }`}
+        ></section>
+        <section
+          className={`fixed w-fit mx-auto  z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${wearCollectionForMobile ? "bottom-0" : "bottom-[-800px] z-0"
+            }`}
+        >
+          <WearCarosuelForMobile onClick={toggleWearCollectionForMobile} />
+        </section>
+      </div>
 
       <form
         action="#"
@@ -828,9 +850,9 @@ const AddingProduct = () => {
             </div>
           </div>
 
-          <div className="max-w-[400px] w-full mt-4  flex items-center justify-end ">
+          <div className="max-w-[400px] w-full mt-4   flex items-center justify-end ">
             <button
-              onClick={() => setWearCollection(true)}
+              onClick={() => setWearCollectionForMobile(true)}
               type="button"
               className="text-weatherWinterColor cursor-pointer hover:underline text-base not-italic font-AeonikProRegular"
             >
