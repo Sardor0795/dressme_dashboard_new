@@ -33,11 +33,10 @@ export default function MyMarket() {
           </section>
 
           <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
-            <NavLink to={"/store/location-add"} className={"flex items-center md: hover:underline cursor-pointer text-textBlueColor text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProMedium"}>Создать новый магазин</NavLink>
-            <div className="w-fit flex items-center justify-between md:justify-static gap-x-[15px]">
+            <div className="w-full flex items-center justify-between md:justify-static gap-x-[15px]">
               <label
                 htmlFor="searchStore"
-                className=" w-10 focus:w-full relative z-[10] h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+                className=" w-full  h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
               >
                 <input
                   type="text"
@@ -57,11 +56,11 @@ export default function MyMarket() {
           </section>
         </div>
       </div>
-      <div className="h-fit py-7  w-full md:flex items-center justify-end hidden">
-        <button className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] bg-weatherWinterColor text-white text-base not-italic font-AeonikProMedium">
+      <NavLink to={'/store/market-add'} className="h-fit md:py-7  w-full flex items-center justify-end ">
+        <button className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] md:bg-weatherWinterColor text-weatherWinterColor  md:text-white text-[14px] md:text-base not-italic font-AeonikProMedium">
           Создать новый магазин
         </button>
-      </div>
+      </NavLink>
       <div className=" w-full">
         <MarketList />
       </div>

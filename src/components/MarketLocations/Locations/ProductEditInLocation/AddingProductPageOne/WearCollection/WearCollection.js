@@ -145,7 +145,7 @@ export default function WearCollection({ onClick }) {
     { id: 13, name: "Ремень" },
   ];
   return (
-    <div className="max-w-[440px] md:max-w-[1450px] bg-white h-fit w-full ">
+    <div className="max-w-[440px] md:max-w-[1450px] bg-white h-fit w-full overflow-hidden border border-borderColor2">
       <div className="flex items-center flex-col w-full px-4 py-8 gap-y-6">
         <div className={`w-full flex items-center justify-between`}>
           <span className="text-gray-800 text-2xl not-italic font-AeonikProRegular">
@@ -159,7 +159,16 @@ export default function WearCollection({ onClick }) {
           {wearGroup?.map((data) => {
             return (
               <div key={data.id} className={`WearScrollItem`}>
-                <div className="!w-[350px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+
+                <div className="!w-[350px] h-[500px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
+                  <div className="w-fit flex items-center gap-x-2 ">
+                    <button
+                      className="w-fit text-weatherWinterColor hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
+                    >Обновить</button>
+                    <span className="h-3 w-[2px] bg-borderColor"></span>
+                    <button className="w-fit text-redText hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
+                    >Удалить</button>
+                  </div>
                   <div className="w-full h-full flex items-center">
                     <Slider
                       className="w-full h-full rounded-lg "

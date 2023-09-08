@@ -147,6 +147,44 @@ const AddingProduct = () => {
   )
 
 
+  // ----------------Wear state management----------------------------
+  const [newOpen, setNewOpen] = useState(false)
+
+  const handleOpenChangeWear = (newOpen) => {
+    setNewOpen(newOpen)
+  };
+  const [selectWear, setselectWear] = useState("Верхняя одежда");
+
+  const handleWearValue = (value) => {
+    setselectWear(value);
+    setNewOpen(false);
+  };
+
+  const wearList = [
+    { id: 1, type: "Брюки" },
+    { id: 2, type: "Джинсы" },
+    { id: 3, type: "Штаны" },
+    { id: 4, type: "Шорты" },
+  ];
+  const contentWear = (
+    <div className="w-[150px] h-fit m-0 p-0">
+      {wearList.map((data) => {
+        return (
+          <p
+            key={data?.id}
+            onClick={() => {
+              handleWearValue(data?.type);
+            }}
+            className={`w-full h-[42px] flex items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-lightBorderColor`}
+          >
+            {data?.type}
+          </p>
+        );
+      })}
+    </div>
+  );
+  // ----------------Wear state management----------------------------
+
   // Outerwear (необязательно) <input Возраст Количество Вес (грамм Размер Талии
 
   const contentOutwear = (
@@ -670,7 +708,7 @@ const AddingProduct = () => {
       },
     ],
   };
-  {/* <input */ }
+  {/* <input  w-fit h-[510px] */ }
 
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
@@ -806,7 +844,7 @@ const AddingProduct = () => {
           className={`fixed w-fit mx-auto  z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${wearCollectionForMobile ? "bottom-0" : "bottom-[-800px] z-0"
             }`}
         >
-          <WearCarosuelForMobile onClick={toggleWearCollectionForMobile} />
+          {wearCollectionForMobile && <WearCarosuelForMobile onClick={toggleWearCollectionForMobile} />}
         </section>
       </div>
 
@@ -816,6 +854,16 @@ const AddingProduct = () => {
       >
         {/* Photo Section For Mobile */}
         <div className="w-full flex flex-col items-center md:hidden justify-center mb-6 gap-x-[15px] ">
+          <div className=" max-w-[390px] w-full mx-auto flex items-center justify-end ">
+            <div className="w-fit flex items-center gap-x-2 ">
+              <button
+                className="w-fit text-weatherWinterColor hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
+              >Обновить</button>
+              <span className="h-3 w-[2px] bg-borderColor"></span>
+              <button className="w-fit text-redText hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
+              >Удалить</button>
+            </div>
+          </div>
           <div className="w-fit h-full flex gap-x-1 xs:gap-x-2 ">
             <div className=" w-[200px] ls:w-[220px] ll:w-[270px] xs:w-[300px] h-[350px] flex items-center  ">
               <Slider
@@ -1540,17 +1588,17 @@ const AddingProduct = () => {
                     <StarLabel />
                   </span>
                 </div>
-                <div className="w-full flex items-center">
+                <div className="w-full flex items-center justify-between">
                   <input
                     type="text"
-                    className="inputStyle w-[47%] md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none  "
+                    className="inputStyle w-[40%] md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none  "
                     placeholder="Мин"
                   />
-                  <span className="w-[10px] h-[2px] flex items-center  bg-textLightColor "></span>
+                  <span className="w-[7%] h-[2px] flex items-center  bg-textLightColor "></span>
 
                   <input
                     type="text"
-                    className="inputStyle w-[47%] md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none  "
+                    className="inputStyle w-[40%] md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none  "
                     placeholder="Макс"
                   />
                 </div>
@@ -1577,9 +1625,24 @@ const AddingProduct = () => {
               className={`w-full items-center gap-x-6  ${categoryWear ? "md:flex hidden " : "hidden "
                 }`}
             >
-              <div className="w-[170px] flex items-center text-redText justify-center h-[38px] overflow-hidden border border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300">
+
+              <Popover
+                // open={state?.openwear}
+                // onOpenChange={handleOpenChangeWear}
+                className="w-[170px] flex items-center text-redText justify-center h-[38px] overflow-hidden border border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300" trigger="click"
+                options={["Hide"]}
+                placement="bottom"
+                content={contentWear}
+              >
+
+                <p className="not-italic font-AeonikProMedium text-center text-sm leading-4 text-black">
+                  {selectWear}
+                </p>
+
+              </Popover>
+              {/* <div className="w-[170px] flex items-center text-redText justify-center h-[38px] overflow-hidden border border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300">
                 <Select
-                  className="hidden md:block text-center rounded-lg w-full h-11 md:h-10 text-redText"
+                  className="hidden md:block text-center rounded-lg w-full h-11 md:h-10 !text-textBlueColor !placeholder-text-textBlueColor"
                   placeholder="Верхняя одежда"
                   optionFilterProp="children"
                   onChange={onChange}
@@ -1610,7 +1673,7 @@ const AddingProduct = () => {
                     },
                   ]}
                 />
-              </div>
+              </div> */}
 
               <button
                 type="button"

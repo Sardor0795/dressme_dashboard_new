@@ -66,7 +66,7 @@ function AllSizeModalEdit({ onClick, modalOpenColor, colorGroup }) {
 
       </div>
       {/* All Cards */}
-      <div className="md:h-[694px] h-fit overflow-auto flex flex-col gap-y-2 mt-4 md:mt-6 AllSizeModalScroll md:py-1">
+      <div className="md:h-[694px] h-fit flex flex-col gap-y-2 mt-4 md:mt-6  md:py-1">
         {/* Cards */}
         <div className="w-full flex items-center gap-x-[6px]  ">
           <div className="w-fit md:flex hidden items-center justify-center">

@@ -121,7 +121,6 @@
   cursor: pointer;
   overflow-x: scroll;
   row-gap: 12px;
-  border: 1px solid red
 }
 
 .WearScroll::-webkit-scrollbar {
@@ -192,4 +191,7 @@
 
 /* .ant-picker-input input::placeholder {
   display: none;
+} */
+/* .ant-select-selection::placeholder-shown {
+  color: red !important;
 } */

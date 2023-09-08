@@ -143,11 +143,21 @@ const ProductCarouselEdit = () => {
 
   return (
     <div className="max-w-[350px] w-full h-fit ">
-      <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
-        <p>Фото</p>
-        <span className="ml-[5px]">
-          <StarLabel />
-        </span>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
+          <p>Фото</p>
+          <span className="ml-[5px]">
+            <StarLabel />
+          </span>
+        </div>
+        <div className="flex items-center gap-x-2">
+          <button
+            className="w-fit text-weatherWinterColor hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
+          >Обновить</button>
+          <span className="h-3 w-[2px] bg-borderColor"></span>
+          <button className="w-fit text-redText hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
+          >Удалить</button>
+        </div>
       </div>
       <section className="w-full flex flex-col flex-wrap h-[377px] gap-x-[10px]">
         <div className="w-full h-full flex flex-col">

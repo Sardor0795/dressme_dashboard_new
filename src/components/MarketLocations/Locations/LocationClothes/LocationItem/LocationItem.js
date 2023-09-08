@@ -165,16 +165,16 @@ export default function LocationItem({ data, click, index }) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-3">
+        <div className="flex items-center justify-between pt-3 gap-x-[15px] ">
           <button
             onClick={() => goMapWear(data?.city)}
-            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
           >
             Добавить в локацию
           </button>
           <button
             onClick={() => goProductDetailEdit(data?.city)}
-            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
           >
             Подробнее
           </button>
