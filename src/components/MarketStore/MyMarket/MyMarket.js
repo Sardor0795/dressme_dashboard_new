@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { DatePicker, Space } from "antd";
 import { CalendarIcons, SearchIcon } from "../../../assets/icons";
 import MarketList from "./MarketList";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 
@@ -25,32 +25,35 @@ export default function MyMarket() {
             Все магазины
           </span>
         </div>
-        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
+        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-4 pt-5">
           <section className="hidden md:block">
             <p className="text-black text-2xl not-italic font-AeonikProMedium">
               Все магазины{" "}
             </p>
           </section>
 
-          <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
-            <label
-              htmlFor="searchStore"
-              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
-            >
-              <input
-                type="text"
-                name="s"
-                id="searchStore"
-                className="w-full h-full   outline-0 	pl-[10px]"
-                placeholder="Поиск"
-              />
-              <span className="pr-[10px]">
-                <SearchIcon />
-              </span>
-            </label>
-            <section className=" flex w-fit ">
-              <PickerOfFilter />
-            </section>
+          <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
+            <NavLink to={"/store/location-add"} className={"flex items-center md: hover:underline cursor-pointer text-textBlueColor text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProMedium"}>Создать новый магазин</NavLink>
+            <div className="w-fit flex items-center justify-between md:justify-static gap-x-[15px]">
+              <label
+                htmlFor="searchStore"
+                className=" w-10 focus:w-full relative z-[10] h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+              >
+                <input
+                  type="text"
+                  name="s"
+                  id="searchStore"
+                  className="w-full h-full   outline-0 	pl-[10px]"
+                  placeholder="Поиск"
+                />
+                <span className="pr-[10px]">
+                  <SearchIcon />
+                </span>
+              </label>
+              <section className=" flex w-fit ">
+                <PickerOfFilter />
+              </section>
+            </div>
           </section>
         </div>
       </div>

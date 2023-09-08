@@ -146,6 +146,57 @@ const AddingProduct = () => {
       <action
         className={`w-full h-fit flex   justify-between not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center `}
       >
+        <div className="w-[45%] flex flex-col ">
+          <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            Обхват Талии
+            <span className="ml-[5px]">
+              <StarLabel />
+            </span>
+          </p>
+          <div className="flex items-center">
+            <div className="flex flex-col">
+              <input
+                type="text"
+                className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
+                placeholder="Мин"
+              />
+            </div>
+            <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+            <div className="flex flex-col">
+              <input
+                type="text"
+                className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                placeholder="Макс"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="w-[45%] flex flex-col ">
+          <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
+            Размер
+            <span className="ml-[5px]">
+              <StarLabel />
+            </span>
+          </p>
+          <div className="flex items-center">
+            <div className="flex flex-col">
+              <input
+                type="text"
+                className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg  font-AeonikProRegular "
+                placeholder="Мин"
+              />
+            </div>
+            <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+            <div className="flex flex-col">
+              <input
+                type="text"
+                className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg font-AeonikProRegular "
+                placeholder="Макс"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="w-[42%] flex flex-wrap justify-between gap-6 ">
           <div className="w-[45%] flex flex-col ">
             <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
@@ -172,56 +223,7 @@ const AddingProduct = () => {
               </div>
             </div>
           </div>
-          <div className="w-[45%] flex flex-col ">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Размер
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </p>
-            <div className="flex items-center">
-              <div className="flex flex-col">
-                <input
-                  type="text"
-                  className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg  font-AeonikProRegular "
-                  placeholder="Мин"
-                />
-              </div>
-              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-              <div className="flex flex-col">
-                <input
-                  type="text"
-                  className="inputStyle w-[60px] text-center h-[38px] border border-borderColor px-3 py-[10px] rounded-lg font-AeonikProRegular "
-                  placeholder="Макс"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="w-[45%] flex flex-col ">
-            <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
-              Обхват Талии
-              <span className="ml-[5px]">
-                <StarLabel />
-              </span>
-            </p>
-            <div className="flex items-center">
-              <div className="flex flex-col">
-                <input
-                  type="text"
-                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
-                  placeholder="Мин"
-                />
-              </div>
-              <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-              <div className="flex flex-col">
-                <input
-                  type="text"
-                  className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                  placeholder="Макс"
-                />
-              </div>
-            </div>
-          </div>
+
           <div className="w-[45%] flex flex-col ">
             <p className="flex items-center text-base text-mobileTextColor mb-[10px]">
               Обхват Бедер

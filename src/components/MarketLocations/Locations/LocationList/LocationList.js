@@ -144,18 +144,7 @@ export default function LocationList() {
             <div className="w-fit">
               <PickerOfFilter />
             </div>
-            {/* <section className="mobileDate flex items-center gap-x-4 ll:gap-x-[30px]">
-              <span className="p-2 border border-black cursor-pointer" onClick={showPickerHandle}>
-                <CalendarIcons />
-              </span>
-              <Space className="w-0 overflow-hidden " direction="vertical" size={12} open={true}>
-                <RangePicker
-                  dropdownClassName="border border-red-500"
-                  popupClassName="border border-green-500 flex"
-                  open={showPicker}
-                  placeholder={["от", "до"]} />
-              </Space>
-            </section> */}
+
           </div>
         </div>
       </div>

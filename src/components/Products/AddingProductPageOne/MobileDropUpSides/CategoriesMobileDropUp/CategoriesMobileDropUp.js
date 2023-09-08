@@ -111,7 +111,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
           <div className="w-full flex items-center justify-between mb-[15px]">
             <div className="w-fit flex flex-col">
               <p className="text-sm font-AeonikProMedium text-mobileTextColor">
-                Размер Груди
+                Обхват Груди
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
               </p>
               <div className="w-full flex items-center mt-[7px]">
@@ -159,7 +159,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
           <div className="w-full flex items-center justify-between mb-[15px]">
             <div className="w-fit flex flex-col">
               <p className="text-sm font-AeonikProMedium text-mobileTextColor">
-                Размер Талии
+                Обхват Талии
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
               </p>
               <div className="w-full flex items-center mt-[7px]">
@@ -182,7 +182,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
             </div>
             <div className="w-fit flex flex-col">
               <p className="text-sm font-AeonikProMedium text-mobileTextColor">
-                Размер Бедер
+                Обхват Бедер
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
               </p>
               <div className="w-full flex items-center mt-[7px]">
@@ -206,7 +206,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
           </div>
           {/* 3 */}
           <div className="w-full flex items-center justify-between">
-            <div className="w-fit flex flex-col">
+            <div className="w-fit flex flex-col gap-y-2">
               <p className="text-sm font-AeonikProMedium text-mobileTextColor">
                 Буквенный Размер
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
@@ -284,12 +284,12 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
             </div>
           </div>
           {/* 4 */}
-          <div className="w-full flex items-center justify-between">
+          <div className="w-full flex items-center justify-between mt-[14px] md:mt-0">
             <div className="w-full flex flex-col">
               <div className="text-sm font-AeonikProMedium text-mobileTextColor mb-2">
                 Количество
               </div>
-              <div className="w-full flex items-center mt-[7px] gap-x-[10px]">
+              <div className="w-full flex items-center  gap-x-[10px]">
                 <button className="w-2/5 border border-borderColor rounded-lg py-[8px] bg-[#e5e5e5] active:scale-95">-</button>
                 <button className="w-1/5 border border-borderColor rounded-lg py-[8px]">1</button>
                 <button className="w-2/5 border border-borderColor rounded-lg py-[8px] bg-[#e5e5e5] active:scale-95">+</button>
