@@ -41,7 +41,7 @@ const ClothingSubSectionPage = ({ onClick, title }) => {
               />
               <SearchIcon />
             </div>
-            <div className="w-full h-[260px] overflow-auto">
+            <div className="w-full h-[260px] overflow-auto VerticelScroll">
               {clothingSubSectionList.map((data) => {
                 return (
                   <div

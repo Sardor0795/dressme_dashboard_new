@@ -39,7 +39,7 @@ const ClothingTypesAnimationPage = ({ onClick, title }) => {
               />
               <SearchIcon />
             </div>
-            <div className="w-full h-[260px] overflow-auto">
+            <div className="w-full h-[260px] overflow-auto VerticelScroll">
               {clothingTypesList.map((data) => {
                 return (
                   <div

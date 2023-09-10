@@ -37,7 +37,7 @@ const TypesDropUp = ({ onClick, title }) => {
               <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
               <SearchIcon />
             </div>
-            <div className='w-full h-[260px] overflow-auto'>
+            <div className='w-full h-[260px] overflow-auto VerticelScroll'>
               {typesList.map((data) => {
                 return (
                   <div key={data.id} className='w-full flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
