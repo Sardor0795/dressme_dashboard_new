@@ -458,7 +458,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
       {alldata?.map(item => {
         return (
           item?.action &&
-          <section className="w-full h-[70%] overflow-auto AllSizeModalScroll flex flex-col flex-nowrap rounded-lg border border-borderColor mt-6">
+          <section className="w-full h-[65%] overflow-auto AllSizeModalScroll flex flex-col flex-nowrap rounded-lg border border-borderColor mt-6">
             {item?.values}
           </section>
 

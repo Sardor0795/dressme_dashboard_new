@@ -1542,40 +1542,6 @@ const AddingProduct = () => {
                 </p>
 
               </Popover>
-              {/* <div className="w-[170px] flex items-center text-redText justify-center h-[38px] overflow-hidden border border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor hover:bg-textBlueColor hover:text-white transition duration-300">
-                <Select
-                  className="hidden md:block text-center rounded-lg w-full h-11 md:h-10 !text-textBlueColor !placeholder-text-textBlueColor"
-                  placeholder="Верхняя одежда"
-                  optionFilterProp="children"
-                  onChange={onChange}
-                  onSearch={onSearch}
-                  size="large"
-                  suffixIcon={null}
-                  filterOption={(input, option) =>
-                    (option?.label ?? "")
-                      .toLowerCase()
-                      .includes(input.toLowerCase())
-                  }
-                  options={[
-                    {
-                      value: "Брюки",
-                      label: "Брюки",
-                    },
-                    {
-                      value: "Джинсы",
-                      label: "Джинсы",
-                    },
-                    {
-                      value: "Штаны",
-                      label: "Штаны",
-                    },
-                    {
-                      value: "Шорты",
-                      label: "Шорты",
-                    },
-                  ]}
-                />
-              </div> */}
 
               <button
                 type="button"
