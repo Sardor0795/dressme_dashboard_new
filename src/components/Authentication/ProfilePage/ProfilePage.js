@@ -315,7 +315,8 @@ const ProfilePage = () => {
           {/* Имя организации */}
           <div className="w-full xs:w-1/2 h-fit ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Номер банковской карты            </div>
+              Номер банковской карты
+            </div>
             <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               {/* CredtCardicons */}
               <span><CreditCardNumber /></span>
@@ -324,14 +325,16 @@ const ProfilePage = () => {
             </div>
           </div>
           {/* EditPassword */}
-          <button
-            onClick={() => setOpenEditModal(true)}
-            className={
-              "text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"
-            }
-          >
-            Изменить пароль
-          </button>
+          <div className="w-full xs:w-1/2  flex items-center justify-end xs:mt-5">
+            <button
+              onClick={() => setOpenEditModal(true)}
+              className={
+                " text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"
+              }
+            >
+              Изменить пароль
+            </button>
+          </div>
         </div>
 
 
