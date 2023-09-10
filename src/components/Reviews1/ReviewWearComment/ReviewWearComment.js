@@ -110,7 +110,7 @@ export default function ReviewWearComment() {
   }, []);
   return (
     <div className="">
-      <div className="w-full flex justify-between  md:border-b border-lightBorderColor pt-6 md:py-6">
+      <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
           <button
             onClick={() => {
@@ -160,7 +160,7 @@ export default function ReviewWearComment() {
         </div>
       </div>
       <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
-        <section className="w-full md:w-[30%]">
+        <section className="w-full md:w-[30%] overflow-hidden">
           <WearCommentDetail />
         </section>
 
