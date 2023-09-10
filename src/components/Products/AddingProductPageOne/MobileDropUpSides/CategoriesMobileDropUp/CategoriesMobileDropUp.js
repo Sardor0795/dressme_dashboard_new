@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { CloseAnswer, LineIcon, StarLabel } from "../../../../../assets/icons";
+import AllSizeListForWear from "../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 
 const CategoriesMobileDropUp = ({ onClick, title }) => {
 
@@ -11,35 +12,6 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
     { id: 4, category: "Обувь" },
     { id: 5, category: "Нижняя одежда" },
   ];
-
-  const [decraseList, setDecraseList] = useState(false);
-
-  const [sizeList, setSizeList] = useState({
-    sizeList1: [
-      { id: 1, action: true, name: "XXS" },
-      { id: 2, action: true, name: "XS" },
-      { id: 3, action: true, name: "S" },
-      { id: 4, action: true, name: "M" },
-      { id: 5, action: true, name: "L" },
-      { id: 6, action: true, name: "XL" },
-      { id: 7, action: true, name: "2XL" },
-      { id: 8, action: true, name: "3XL" },
-    ],
-    sizeList2: [
-      { id: 1, action: true, name: "5X" },
-      { id: 2, action: true, name: "7X" },
-      { id: 3, action: true, name: "9X" },
-      { id: 4, action: true, name: "10X" },
-      { id: 5, action: true, name: "4X" },
-      { id: 6, action: true, name: "6X" },
-      { id: 7, action: true, name: "8X" },
-
-    ]
-  }
-  )
-  // --------------------------------------Макс
-
-
 
   return (
     <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
@@ -59,7 +31,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
             );
           })}
         </action>
-        <action className="w-full h-[400px] overflow-auto flex flex-col items-center  px-4 border border-borderColor rounded-xl p-5">
+        <action className="w-full h-[400px] overflow-auto VerticelScroll flex flex-col items-center  px-4 border border-borderColor rounded-xl p-5">
           {/* 1 */}
           <div className="w-full flex items-center justify-between mb-[15px] gap-x-[10px]">
             <div className="w-[40%] flex flex-col">
@@ -211,76 +183,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
                 Буквенный Размер
                 <span className="text-[13px] font-AeonikProMedium text-[#b5b5b5] ml-[5px]">(см)</span>
               </p>
-              <div className="w-full flex">
-                <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 ">
-                  {sizeList.sizeList1.map((data) => {
-                    return (
-                      <div
-                        key={data?.id}
-                        className="flex "
-                      >
-                        {
-                          data?.action &&
-                          <label
-                            htmlFor="m_outwear"
-                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              id="m_outwear"
-                              name="size_Outwear"
-                              value="M"
-                              className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                            />
-                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
-                              {data?.name}
-                            </span>
-                          </label>
-                        }
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="w-[222px] h-[50px]  grid grid-cols-4 gap-2 items-end">
-                  {decraseList && sizeList.sizeList2.map((data) => {
-                    return (
-                      <div
-                        key={data?.id}
-                        className="flex "
-                      >
-                        {
-                          data?.action &&
-                          <label
-                            htmlFor="m_outwear"
-                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                          >
-                            <input
-                              type="checkbox"
-                              id="m_outwear"
-                              name="size_Outwear"
-                              value="M"
-                              className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                            />
-                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] xs:text-[13px] not-italic font-AeonikProMedium">
-                              {data?.name}
-                            </span>
-                          </label>
-                        }
-                      </div>
-                    );
-                  })}
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDecraseList(!decraseList)
-                    }}
-                    className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
-                  >
-                    {decraseList ? "Меньше" : "Больше"}
-                  </button>
-                </div>
-              </div>
+              <AllSizeListForWear />
             </div>
           </div>
           {/* 4 */}

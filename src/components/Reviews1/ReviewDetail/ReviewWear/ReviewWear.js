@@ -137,7 +137,7 @@ export default function ReviewWear() {
           </ul>
         </div>
         {/* table product */}
-        <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto">
+        <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
           {productList.map((data) => {
             return (
               <ul

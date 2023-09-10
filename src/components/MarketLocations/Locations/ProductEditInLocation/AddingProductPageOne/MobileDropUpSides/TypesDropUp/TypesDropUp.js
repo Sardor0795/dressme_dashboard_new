@@ -40,7 +40,7 @@ const TypesDropUp = ({ onClick, title }) => {
               />
               <SearchIcon />
             </div>
-            <div className="w-full h-[260px] overflow-auto">
+            <div className="w-full h-[260px] overflow-auto VerticelScroll">
               {typesList.map((data) => {
                 return (
                   <div
