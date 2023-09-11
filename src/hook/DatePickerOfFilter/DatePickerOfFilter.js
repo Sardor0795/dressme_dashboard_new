@@ -36,6 +36,11 @@ export default function PickerOfFilter() {
 
     return (
         <section className="w-fit flex items-center ">
+            <section
+                onClick={() => setShowPicker(false)}
+                className={`fixed inset-0 z-[149] cursor-pointer  w-full h-[100vh] ${showPicker ? "md:hidden" : "hidden"
+                    }`}
+            ></section>
             <span
                 className="p-2 flex md:hidden  cursor-pointer"
                 onClick={showPickerHandle}

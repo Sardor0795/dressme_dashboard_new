@@ -56,11 +56,11 @@ export default function MyMarket() {
           </section>
         </div>
       </div>
-      <NavLink to={'/store/market-add'} className="h-fit md:py-7  w-full flex items-center justify-end ">
-        <button className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] md:bg-weatherWinterColor text-weatherWinterColor  md:text-white text-[14px] md:text-base not-italic font-AeonikProMedium">
+      <div className="h-fit md:py-7 w-full flex items-center justify-end ">
+        <NavLink to={'/store/market-add'} className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] md:bg-weatherWinterColor text-weatherWinterColor  md:text-white text-[14px] md:text-base not-italic font-AeonikProMedium">
           Создать новый магазин
-        </button>
-      </NavLink>
+        </NavLink>
+      </div>
       <div className=" w-full">
         <MarketList />
       </div>
