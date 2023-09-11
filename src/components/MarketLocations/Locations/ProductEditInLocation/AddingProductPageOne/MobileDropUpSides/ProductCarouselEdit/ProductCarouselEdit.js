@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
-import { StarLabel } from "../../../../../../../assets/icons";
+import { MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
 import { img1, img2, img3, img4 } from "../../../../../../../assets";
 
 const ProductCarouselEdit = () => {
@@ -22,6 +22,12 @@ const ProductCarouselEdit = () => {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
+
+  const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
+  const handleClickCarosuel = (id) => {
+    console.log("handleClickCarosuel", id);
+    setModalOfCarsouel(true)
+  }
 
   const [imgGroup] = useState([
     {
@@ -82,9 +88,43 @@ const ProductCarouselEdit = () => {
       </main>
     );
   };
+  const NextArrowModal = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  right-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="next">
+          <GrFormNext size={20} />
+        </button>
+      </main>
+    );
+  };
+
+  const PrevArrowModal = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  left-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="prev">
+          <GrFormPrevious size={20} />
+        </button>
+      </main>
+    );
+  };
   let settings = {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    infinite: true,
+    dots: false,
+    speed: 500,
+  };
+  let settingsModal = {
+    nextArrow: <NextArrowModal />,
+    prevArrow: <PrevArrowModal />,
     infinite: true,
     dots: false,
     speed: 500,
@@ -140,9 +180,66 @@ const ProductCarouselEdit = () => {
       },
     ],
   };
+  const ref = useRef(null);
 
+  const handleNextSlide = () => {
+    ref.current.slickNext();
+  };
+
+  const handlePrevSlide = () => {
+    ref.current.slickPrev();
+  };
   return (
     <div className="max-w-[350px] w-full h-fit ">
+
+      {/*------------------------- Modal Carosuel------------------------------------ */}
+      {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
+      <div>
+        <section
+          onClick={() => setModalOfCarsouel(false)}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${modalOfCarsouel ? "" : "hidden"
+            }`}
+        ></section>
+        <section
+          className={`fixed z-[115] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
+            }`}
+        >
+          <button
+            onClick={() => setModalOfCarsouel(false)}
+            className="absolute top-0  z-[116] right-[-80px] opacity-50 flex items-center justify-center w-[50px] h-[50px] rounded-full bg-black">
+            <MenuCloseIcons colors="#fff" />
+          </button>
+          <div>
+            <Slider
+              className="w-[670px] h-[80vh] bg-white rounded-lg mt-[-4px] p-0 m-0 "
+              asNavFor={nav2}
+              ref={slider1}
+              {...settingsModal}
+            >
+              {imgGroup?.map((data) => {
+                return (
+
+                  <article key={data?.id} >
+                    <img
+                      className="w-[670px] h-[80vh] object-top	object-cover cursor-pointer"
+                      src={data?.img}
+                      alt=""
+                    />
+                  </article>
+                );
+              })}
+            </Slider>
+          </div>
+          <div className="w-full flex items-center justify-between px-5 py-[15px]">
+            <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
+            <button className="text-[#D50000] text-lg not-italic font-AeonikProMedium">Удалить</button>
+          </div>
+
+        </section>
+
+      </div>
+      {/*------------------------- Modal Carosuel------------------------------------ */}
+
       <div className="flex items-center justify-between">
         <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
           <p>Фото</p>
@@ -170,9 +267,9 @@ const ProductCarouselEdit = () => {
             >
               {imgGroup?.map((data) => {
                 return (
-                  <article key={data?.id} object-fit>
+                  <article key={data?.id} onClick={() => handleClickCarosuel(data?.id)}>
                     <img
-                      className="w-[350px] h-[377px] object-top	object-cover"
+                      className="w-[350px] h-[377px] object-top	object-cover cursor-pointer"
                       src={data?.img}
                       alt=""
                     />

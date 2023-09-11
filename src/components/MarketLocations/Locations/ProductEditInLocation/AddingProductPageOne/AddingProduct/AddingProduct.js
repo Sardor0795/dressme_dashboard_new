@@ -120,17 +120,11 @@ const AddingProduct = () => {
     navigate(`/locations-store/edit-title/:${id}`);
   };
 
-  // ----------------Wear state management----------------------------
-  const [newOpen, setNewOpen] = useState(false)
-
-  const handleOpenChangeWear = (newOpen) => {
-    setNewOpen(newOpen)
-  };
+  // ----------------Wear state management----------------------------  
   const [selectWear, setselectWear] = useState("Верхняя одежда");
 
   const handleWearValue = (value) => {
     setselectWear(value);
-    setNewOpen(false);
   };
 
   const wearList = [
