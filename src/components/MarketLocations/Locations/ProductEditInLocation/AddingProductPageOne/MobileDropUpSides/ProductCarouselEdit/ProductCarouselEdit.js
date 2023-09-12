@@ -92,7 +92,7 @@ const ProductCarouselEdit = () => {
     const { onClick } = props;
     return (
       <main
-        className={`absolute text-center cursor-pointer no-underline opacity-50 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  right-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        className={`absolute text-center cursor-pointer no-underline opacity-70 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  right-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
         onClick={onClick}
       >
         <button className="next">
@@ -106,7 +106,7 @@ const ProductCarouselEdit = () => {
     const { onClick } = props;
     return (
       <main
-        className={`absolute text-center cursor-pointer no-underline opacity-50 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  left-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        className={`absolute text-center cursor-pointer no-underline opacity-70 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  left-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
         onClick={onClick}
       >
         <button className="prev">
@@ -197,16 +197,16 @@ const ProductCarouselEdit = () => {
       <div>
         <section
           onClick={() => setModalOfCarsouel(false)}
-          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${modalOfCarsouel ? "" : "hidden"
+          className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 ${modalOfCarsouel ? "" : "hidden"
             }`}
         ></section>
         <section
-          className={`fixed z-[115] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
+          className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
             }`}
         >
           <button
             onClick={() => setModalOfCarsouel(false)}
-            className="absolute top-0  z-[116] right-[-80px] opacity-50 flex items-center justify-center w-[50px] h-[50px] rounded-full bg-black">
+            className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
           <div>
@@ -219,13 +219,12 @@ const ProductCarouselEdit = () => {
               {imgGroup?.map((data) => {
                 return (
 
-                  <article key={data?.id} >
-                    <img
-                      className="w-[670px] h-[80vh] object-top	object-cover cursor-pointer"
-                      src={data?.img}
-                      alt=""
-                    />
-                  </article>
+                  <img
+                    key={data?.id}
+                    className="w-[670px] h-[80vh] object-top	object-cover cursor-pointer"
+                    src={data?.img}
+                    alt=""
+                  />
                 );
               })}
             </Slider>
@@ -247,14 +246,7 @@ const ProductCarouselEdit = () => {
             <StarLabel />
           </span>
         </div>
-        <div className="flex items-center gap-x-2">
-          <button
-            className="w-fit text-weatherWinterColor hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
-          >Обновить</button>
-          <span className="h-3 w-[2px] bg-borderColor"></span>
-          <button className="w-fit text-redText hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
-          >Удалить</button>
-        </div>
+
       </div>
       <section className="w-full flex flex-col flex-wrap h-[377px] gap-x-[10px]">
         <div className="w-full h-full flex flex-col">

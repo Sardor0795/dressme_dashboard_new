@@ -5,7 +5,7 @@ import { img1, img2, img3, img4 } from '../../../../../../../assets';
 import Slider from "react-slick";
 import { GrClose, GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-export default function WearCarosuelForMobile({ onClick }) {
+export default function WearCarosuelForMobile({ onClick, openModalId }) {
     const [imgGroup] = useState([
         {
             id: 1,
@@ -125,6 +125,7 @@ export default function WearCarosuelForMobile({ onClick }) {
     };
     return (
         <div className="max-w-[400px] w-[100%] h-[80vh] px-4 py-[18px] mx-auto bg-white shadow-navMenuShadov  overflow-hidden  rounded-t-[12px]">
+
             <div className='flex items-center justify-between pb-4'>
                 <span className='text-gray-800 text-xl not-italic font-AeonikProRegular'>Все фото</span>
                 <button type='button' className='p-1' onClick={onClick}><MenuCloseIcons colors={"#000"} /></button>
@@ -135,14 +136,7 @@ export default function WearCarosuelForMobile({ onClick }) {
                     imgGroup.map(data => {
                         return (
                             <div className="w-full h-[360px] flex flex-col   border border-borderColor rounded-lg p-[10px] bg-lightBgColor">
-                                <div className="w-fit flex items-center gap-x-2 ">
-                                    <button
-                                        className="w-fit text-weatherWinterColor hover:underline cursor-pointer  text-[13px] not-italic font-AeonikProMedium"
-                                    >Обновить</button>
-                                    <span className="h-3 w-[2px] bg-borderColor"></span>
-                                    <button className="w-fit text-redText hover:underline cursor-pointer  text-[13px] not-italic font-AeonikProMedium"
-                                    >Удалить</button>
-                                </div>
+
                                 <div className='w-full flex gap-x-1 h-[280px]'>
                                     <div className="w-[270px] h-full flex items-center  ">
                                         <Slider
@@ -153,9 +147,9 @@ export default function WearCarosuelForMobile({ onClick }) {
                                         >
                                             {imgGroup?.map((data) => {
                                                 return (
-                                                    <article key={data?.id} object-fit>
+                                                    <article key={data?.id} onClick={openModalId}>
                                                         <img
-                                                            className="!w-full  !h-[280px]  object-cover   rounded-lg"
+                                                            className="!w-full cursor-pointer !h-[280px]  object-cover   rounded-lg"
                                                             src={data?.img}
                                                             alt=""
                                                         />

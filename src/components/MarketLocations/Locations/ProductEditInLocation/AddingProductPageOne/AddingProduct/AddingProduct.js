@@ -7,6 +7,7 @@ import {
   DownloadIcon,
   InputCheck,
   InputCheckedTrueIcons,
+  MenuCloseIcons,
   StarLabel,
 } from "../../../../../../assets/icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -38,6 +39,7 @@ const AddingProduct = () => {
   const [categoryWear, setCategoryWear] = useState(true);
   const [wearCollection, setWearCollection] = useState(false);
   const [wearCollectionForMobile, setWearCollectionForMobile] = useState(false);
+  const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
 
   const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
   const toggleCategories = React.useCallback(
@@ -72,6 +74,11 @@ const AddingProduct = () => {
   // ModalColorGroup
   const toggleColorGroup = React.useCallback(
     () => setSelectColorToggleMobile(!selectColorToggleMobile),
+    []
+  );
+  // ModalCarosuelOneId
+  const toggleCarosuelModalOfId = React.useCallback(
+    () => setModalOfCarsouel(!modalOfCarsouel),
     []
   );
 
@@ -546,9 +553,44 @@ const AddingProduct = () => {
       </main>
     );
   };
+
+  const NextArrowModal = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-70 w-8 md:w-[44px] h-8 md:h-[44px] flex items-center justify-center top-[50%] z-10 right-[20px] md:right-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="next">
+          <GrFormNext size={20} />
+        </button>
+      </main>
+    );
+  };
+
+  const PrevArrowModal = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-70 w-8 md:w-[44px] h-8 md:h-[44px] flex items-center justify-center top-[50%] z-10 left-[20px]  md:left-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="prev">
+          <GrFormPrevious size={20} />
+        </button>
+      </main>
+    );
+  };
   let settings = {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    infinite: true,
+    dots: false,
+    speed: 500,
+  };
+  let settingsModal = {
+    nextArrow: <NextArrowModal />,
+    prevArrow: <PrevArrowModal />,
     infinite: true,
     dots: false,
     speed: 500,
@@ -740,7 +782,7 @@ const AddingProduct = () => {
           className={`fixed w-fit mx-auto  z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${wearCollectionForMobile ? "bottom-0" : "bottom-[-800px] z-0"
             }`}
         >
-          {wearCollectionForMobile && <WearCarosuelForMobile onClick={toggleWearCollectionForMobile} />}
+          {wearCollectionForMobile && <WearCarosuelForMobile openModalId={toggleCarosuelModalOfId} onClick={toggleWearCollectionForMobile} />}
         </section>
       </div>
 
@@ -750,27 +792,18 @@ const AddingProduct = () => {
       >
         {/* Photo Section For Mobile */}
         <div className="w-full flex flex-col items-center md:hidden justify-center mb-6 gap-x-[15px] ">
-          <div className=" max-w-[390px] w-full mx-auto flex items-center justify-end ">
-            <div className="w-fit flex items-center gap-x-2 ">
-              <button
-                className="w-fit text-weatherWinterColor hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
-              >Обновить</button>
-              <span className="h-3 w-[2px] bg-borderColor"></span>
-              <button className="w-fit text-redText hover:underline cursor-pointer  text-sm not-italic font-AeonikProMedium"
-              >Удалить</button>
-            </div>
-          </div>
+
           <div className="w-fit h-full flex gap-x-1 xs:gap-x-2 ">
             <div className=" w-[200px] ls:w-[220px] ll:w-[270px] xs:w-[300px] h-[350px] flex items-center  ">
               <Slider
-                className="w-full h-full rounded-lg "
+                className="w-full h-full rounded-lg cursor-pointer"
                 asNavFor={nav2}
                 ref={slider1}
                 {...settings}
               >
                 {imgGroup?.map((data) => {
                   return (
-                    <article key={data?.id} object-fit>
+                    <article key={data?.id} onClick={() => setModalOfCarsouel(true)}>
                       <img
                         className="!w-full  !h-[350px]  object-cover   rounded-lg"
                         src={data?.img}
@@ -1571,7 +1604,8 @@ const AddingProduct = () => {
               </Popover>
             </div>
           </div>
-          {/* carousel item */}
+
+          {/* Carousel item */}
           <div className="w-fit h-[510px] hidden md:flex flex-col gap-y-[120px]">
             <div className="">
               <ProductCarouselEdit />
@@ -1597,15 +1631,59 @@ const AddingProduct = () => {
                   }`}
               >
                 {wearCollection && (
-                  <WearCollection onClick={toggleWearCollection} />
+                  <WearCollection onClick={toggleWearCollection} openModalId={toggleCarosuelModalOfId} />
                 )}{" "}
               </section>
             </div>
             {/* ------------------------------------------------------- */}
+          </div>
+          {/*------------------------- Modal Carosuel for Wear Collection------------------------------------ */}
+          {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
+          <div>
+            <section
+              onClick={() => setModalOfCarsouel(false)}
+              className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 ${modalOfCarsouel ? "" : "hidden"
+                }`}
+            ></section>
+            <section
+              className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
+                }`}
+            >
+              <button
+                onClick={() => setModalOfCarsouel(false)}
+                className="absolute top-0  z-[116] right-0 md:right-[-80px] top-[-50px] md:top-0  flex items-center justify-center w-[36px] md:w-[50px] h-[36px] md:h-[50px] rounded-full bg-[#808080]">
+                <MenuCloseIcons colors="#fff" />
+              </button>
+              <div>
+                <Slider
+                  className="w-[300px] ll:w-[350px] xs:w-[440px] md:w-[670px] h-[320px] ll:h-[50vh] xs:h-[70vh] md:h-[80vh] bg-white rounded-lg mt-[-4px] p-0 m-0 "
+                  asNavFor={nav2}
+                  ref={slider1}
+                  {...settingsModal}
+                >
+                  {imgGroup?.map((data) => {
+                    return (
 
+                      <img
+                        key={data?.id}
+                        className="w-[300px] ll:w-[350px] xs:w-[440px] md:w-[670px]  h-[320px] ll:h-[50vh] xs:h-[70vh] md:h-[80vh] object-top	object-cover cursor-pointer"
+                        src={data?.img}
+                        alt=""
+                      />
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="w-full flex items-center justify-between px-5 py-2 xs:py-[15px]">
+                <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
+                <button className="text-[#D50000] text-lg not-italic font-AeonikProMedium">Удалить</button>
+              </div>
 
+            </section>
 
           </div>
+          {/*------------------------- Modal Carosuel------------------------------------ */}
+
         </div>
         <div className="flex md:hidden items-center justify-between mb-[40px]">
           <div className="w-1/3 h-[1px] bg-borderColor"></div>
