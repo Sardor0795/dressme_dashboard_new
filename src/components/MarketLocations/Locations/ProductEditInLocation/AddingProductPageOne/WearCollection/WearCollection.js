@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import CarouselItem from "./CarouselItem/CarouselItem";
 import { img1, img2, img3, img4 } from "../../../../../../assets";
 import WearCarouselScroll from "./WearCarosuelScroll/WearCarouselScroll";
+import WearOfNamuna from "./WearCarosuelScroll/WearOfNamuna";
 
 export default function WearCollection({ onClick, openModalId }) {
 
@@ -151,8 +152,8 @@ export default function WearCollection({ onClick, openModalId }) {
     <>
 
 
-      <div className="max-w-[440px] md:max-w-[1450px] bg-white h-fit w-full overflow-hidden border border-borderColor2">
-        <div className="flex items-center flex-col w-full px-4 py-8 gap-y-6">
+      <div className=" w-[1450px] bg-white h-[600px] overflow-hidden">
+        <div className="w-full h-full flex items-center flex-col w-full px-4 py-4 gap-y-6">
           <div className={`w-full flex items-center justify-between`}>
             <span className="text-gray-800 text-2xl not-italic font-AeonikProRegular">
               Все фото
@@ -161,14 +162,11 @@ export default function WearCollection({ onClick, openModalId }) {
               <GrClose size={22} />
             </button>
           </div>
-
-          <WearCarouselScroll _class="WearScroll gap-x-2 ">
+          <div className="w-full h-full gap-y-4  flex flex-wrap justify-between overflow-auto VerticelScroll ">
             {wearGroup?.map((data) => {
               return (
                 <div key={data.id} className={`WearScrollItem`}>
-
                   <div className="!w-[350px] h-[500px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
-
                     <div className="w-full h-full flex items-center">
                       <Slider
                         className="w-full h-full rounded-lg "
@@ -239,7 +237,8 @@ export default function WearCollection({ onClick, openModalId }) {
                 </div>
               );
             })}
-          </WearCarouselScroll>
+
+          </div>
 
           {/* <div className="w-full flex items-center gap-x-[30px] whitespace-nowrap overflow-x-scroll bor">
           <div className="!w-[320px] h-[480px] flex flex-col  border border-lightBorderColor bg-lightBgColor rounded-lg overflow-hidden p-[10px]">
