@@ -661,6 +661,22 @@ const AddingProduct = () => {
         <div className="line flex-1"></div>
       </div>
 
+      {/* -------------toggleCarosuelModalOfId--------------- */}
+
+      <div >
+        <section
+          onClick={() => setWearCollection(false)}
+          className={`fixed inset-0 z-[113] duration-200 w-full h-[100vh] bg-black opacity-50 ${wearCollection ? "" : "hidden"
+            }`}
+        ></section>
+        <section
+          className={`w-fit h-fit  my-auto top-[50%] rounded-lg fixed z-[115] bg-white left-0 right-0 duration-300 overflow-hidden left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%] `}
+        >
+          {wearCollection && (
+            <WearCollection onClick={toggleWearCollection} openModalId={toggleCarosuelModalOfId} />
+          )}{" "}
+        </section>
+      </div>
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
       <div>
         <section
@@ -1620,24 +1636,11 @@ const AddingProduct = () => {
               </button>
               {/* --------------------------------------- */}
 
-              <div
-                onClick={() => setWearCollection(false)}
-                className={`fixed inset-0 z-[113]  w-full h-[100vh] bg-black opacity-50 ${wearCollection ? "" : "hidden"
-                  }`}
-              ></div>
-              <section
-
-                className={`w-fit h-fit fixed z-[115] rounded-lg overflow-hidden cursor-pointer  flex items-center justify-center left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%]  ${wearCollection ? "" : "hidden"
-                  }`}
-              >
-                {wearCollection && (
-                  <WearCollection onClick={toggleWearCollection} openModalId={toggleCarosuelModalOfId} />
-                )}{" "}
-              </section>
             </div>
+            {/*------------------------- Modal Carosuel for Wear Collection------------------------------------ */}
             {/* ------------------------------------------------------- */}
           </div>
-          {/*------------------------- Modal Carosuel for Wear Collection------------------------------------ */}
+
           {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
           <div>
             <section
