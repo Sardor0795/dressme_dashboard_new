@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import InputMask from "react-input-mask";
 import {
   ArrowRightIcon,
@@ -6,20 +6,47 @@ import {
   CreditCardNumber,
   UserMailIcon,
 } from "../../../assets/icons";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { dressMainData } from "../../../hook/ContextTeam";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import ModalOfMenu from "./ModalOfMenu/ModalOfMenu";
 
 import EditPassword from "./EditPassword/EditPassword";
+import { useMutation, useQuery } from "@tanstack/react-query";
+// import { useMutation } from "@tanstack/react-query";
 
-const CardCredit = React.forwardRef((props, ref) => {
-  const [card, setCard] = useState();
-  const fallbackRef = React.useRef();
-  const domRef = ref || fallbackRef;
+// const { REACT_APP_BASE_URL: url } = process.env;
+const { REACT_APP_BASE_URL: url } = process.env
 
-  const handleChange = React.useCallback(() => {
+const SignUp = () => {
+  const navigate = useNavigate()
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
+  const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneCode: "+998",
+    region: 1,
+    sub_Region: 1,
+    cardNumber: "",
+    seller_type_id: 1,
+    phone: "",
+    password: "12233223",
+    error: ""
+
+  });
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  // ------------Card Number---------------------
+  const fallbackRef = useRef();
+  const domRef = fallbackRef;
+
+  const handleChange = useCallback(() => {
     if (domRef.current) {
       const cardValue = domRef.current.value
         .replace(/\D/g, "")
@@ -30,62 +57,132 @@ const CardCredit = React.forwardRef((props, ref) => {
           : `${cardValue[1]}-${cardValue[2]}${`${cardValue[3] ? `-${cardValue[3]}` : ""
           }`}${`${cardValue[4] ? `-${cardValue[4]}` : ""}`}`;
         const numbers = domRef.current.value.replace(/(\D)/g, "");
-        setCard(numbers);
+        setState({ ...state, cardNumber: numbers });
       }
     }
   }, [domRef]);
 
-  useEffect(() => {
-    handleChange();
-  }, [card, handleChange]);
 
-  return (
-    <>
-      <input
-        className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-        type="text"
-        placeholder="0000-0000-0000-0000"
-        ref={domRef}
-        onChange={handleChange} />
-    </>
-  );
-});
-
-const SignUp = () => {
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-
-  const [phone, setPhone] = useState("");
-  const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    phoneCode: "+998",
-    email: "",
-    password: "",
-    eyesShow: true,
-    validateConfirm: true,
-    requestPerson: true,
-  });
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-  }, []);
-  let data = phone.split("-");
+  // ----------phone Number----------
+  let data = state?.phone.split("-");
   let arr = data.join("");
   let data1 = arr.split("(");
   let arr1 = data1.join("");
   let arr2 = arr1.split(")");
   let data2 = arr2.join("");
+  let data3 = data2.split(" ")
+  let data4 = data3.join("")
   let arr3 = state.phoneCode.split("+");
-  let data3 = arr3.join("");
-  const sendMessagePhoneNumber = data3 + data2;
+  let data5 = arr3.join("");
+  const sendMessagePhoneNumber = data5 + data4;
+
+  // -------------------------------------
   const [openRegionModal, setOpenRegionModal] = useState(false);
   // -------------------------------------
   const toggle = React.useCallback(() => setOpenRegionModal(false), []);
   // -------------------------------------
-
   const [openEditModal, setOpenEditModal] = useState(false);
   const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
+  // -------------------------------------
+
+  // ------------------------GET METHOD-------------------
+  useQuery(["get statistic"], () => {
+    return fetch(`https://api.dressme.uz/api/main`)
+      .then(res => res.json())
+
+  },
+    {
+      onSuccess: res => {
+        console.log(res, "GET MAIN");
+      }
+    }, {
+    onError: err => {
+      console.log(err, "error");
+    }
+  }
+  )
+
+
+  // -----------------------POST METHOD-----------------
+  const { mutate } = useMutation(() => {
+    // return fetch(`https://api.dressme.uz/api/admin/login`, {
+    return fetch(`https://api.dressme.uz/api/seller/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: state?.firstName,
+        surname: state?.lastName,
+        email: state?.email,
+        password: state?.password,
+        // rememberToken: true
+        phone: sendMessagePhoneNumber,
+        card_number: state?.cardNumber,
+        seller_type_id: state?.seller_type_id,
+        region_id: state?.region,
+        sub_region_id: state?.sub_Region
+      })
+    }).then((res) => res.json());
+  });
+  const onSubmit = () => {
+    console.log("Clickup");
+    console.log(state?.firstName, "firstName");
+    console.log(state?.lastName, "lastName");
+    console.log(state?.email, "email");
+    console.log(state?.cardNumber, "cardNumber");
+    console.log(state?.password, "password");
+    console.log(state?.region, "region");
+    console.log(state?.sub_Region, "sub_Region");
+    console.log(state?.seller_type_id, "seller_type_id");
+    console.log(sendMessagePhoneNumber, "sendMessagePhoneNumber");
+    if (
+      // state?.firstName.length &&
+      // state?.lastName?.length &&
+      // state?.email?.length &&
+      // state?.cardNumber?.length &&
+      // state?.region &&
+      // state?.seller_type_id &&
+      sendMessagePhoneNumber
+    ) {
+      console.log("malumotlarni junatildi");
+
+      mutate({}, {
+        onSuccess: (res) => {
+          console.log(res, "res");
+        },
+        onError: (err) => {
+          console.log(err, "err");
+
+        },
+        onSettled: (onSett) => {
+          console.log(onSett, "onSett");
+        }
+
+      })
+    } else {
+      console.log("malumotlarni tuldring");
+    }
+    // if (state?.email?.length && state?.firstName.length) {
+    //   mutate(
+    //     {},
+    //     {
+    //       onSuccess: (res) => {
+    //         if (res?.authenticationToken) {
+    //           localStorage.setItem("token", res?.authenticationToken);
+    //           navigate("/home");
+    //           // setEmail("");
+    //         } else {
+    //           setError("Email yoki parolda xatolik");
+    //         }
+    //       },
+    //       onError: (error, variables, context) => { },
+    //       onSettled: (data, error, variables, context) => { }
+    //     }
+    //   );
+    // } else {
+    //   setError("Bush maydon junatish mumkin emas");
+    // }
+  };
+
   return (
     <div className="relative w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[70px] items-center justify-center px-4 md:px-0">
       <div
@@ -155,7 +252,11 @@ const SignUp = () => {
               <input
                 className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
+                name="fname"
+                autoComplete="off"
                 placeholder="Имя"
+                value={state?.firstName}
+                onChange={(e) => setState({ ...state, firstName: e.target.value })}
                 required
               />
             </div>
@@ -168,7 +269,11 @@ const SignUp = () => {
               <input
                 className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
+                name="lname"
+                autoComplete="off"
                 placeholder="Фамилия"
+                value={state?.lastName}
+                onChange={(e) => setState({ ...state, lastName: e.target.value })}
                 required
               />
             </div>
@@ -201,7 +306,10 @@ const SignUp = () => {
               <input
                 className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="email"
+                name="email"
                 placeholder="Адрес электронной почты"
+                value={state?.email}
+                onChange={(e) => setState({ ...state, email: e.target.value })}
                 required
               />
               <span>
@@ -210,49 +318,6 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-
-        {/* Тип, Изменить пароль */}
-        {/* <div className="w-full  flex items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Тип{" "}
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type="text"
-                placeholder="Тип"
-                required
-              />
-            </div>
-          </div>
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Пароль
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type={state?.eyesShow ? "password" : "text"}
-                placeholder="Enter your password"
-                required
-              />
-              <span className="cursor-pointer">
-                {state?.eyesShow ? (
-                  <AiOutlineEyeInvisible
-                    onClick={() => setState({ ...state, eyesShow: false })}
-                    size={20}
-                  />
-                ) : (
-                  <AiOutlineEye
-                    onClick={() => setState({ ...state, eyesShow: true })}
-                    size={20}
-                  />
-                )}
-              </span>
-            </div>
-          </div>
-        </div> */}
 
         {/* Выберите регион, surname */}
         <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
@@ -273,9 +338,9 @@ const SignUp = () => {
               <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-12 overflow-hidden">
                 <InputMask
                   mask="(99) 999-99-99"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={`w-full px-4 outline-none h-full not-italic ${phone ? "font-AeonikProMedium" : null
+                  value={state?.phone}
+                  onChange={(e) => setState({ ...state, phone: e.target.value })}
+                  className={`w-full px-4 outline-none h-full not-italic ${state?.phone ? "font-AeonikProMedium" : null
                     } text-base leading-4 text-black`}
                   placeholder={"(97) 123-45-67"}
                 ></InputMask>
@@ -315,31 +380,26 @@ const SignUp = () => {
           </div>
           <div className="w-full xs:w-1/2 h-fit ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Раздел{" "}
+              Номер банковской карты
             </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type="text"
-                placeholder="Раздел"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        {/* Edit Password and CardNumber */}
-        <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-          {/* Имя организации */}
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Номер банковской карты            </div>
             <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               {/* CredtCardicons */}
               <span><CreditCardNumber /></span>
               {/* Component */}
-              <CardCredit />
+              <input
+                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                ref={domRef}
+                type="text"
+                placeholder="0000-0000-0000-0000"
+                onChange={handleChange}
+              />
+
             </div>
           </div>
+        </div>
+        {/* Edit Password and CardNumber */}
+        <div className="w-full  flex  xs:flex-row flex-col items-center justify-end gap-x-6 gap-y-4 xs:gap-y-0">
+
           {/* EditPassword */}
           <div className="w-full xs:w-1/2  flex items-center justify-end xs:mt-5">
             <button
@@ -358,12 +418,13 @@ const SignUp = () => {
         {/* Button */}
         <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
           <button
-            onClick={() =>
-              setDressInfo({
-                ...dressInfo,
-                ConfirmAuthen: true,
-              })
-            }
+            onClick={onSubmit}
+            // onClick={() =>
+            //   setDressInfo({
+            //     ...dressInfo,
+            //     ConfirmAuthen: true,
+            //   })
+            // }
             className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
           >
             <span className="text-center text-base text-white not-italic font-AeonikProMedium">
