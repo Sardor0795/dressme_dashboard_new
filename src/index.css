@@ -219,3 +219,15 @@
 /* .ant-select-selection::placeholder-shown {
   color: red !important;
 } */
+/* ------------For Authentification------------- */
+.openAccardion {
+  min-height: 70px;
+  gap: 8px;
+  padding-top: 15px;
+  padding-bottom: 4px;
+}
+
+.CloseAccardion {
+  height: 0px;
+  overflow: hidden;
+}
