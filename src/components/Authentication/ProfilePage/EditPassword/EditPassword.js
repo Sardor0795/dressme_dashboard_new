@@ -8,9 +8,9 @@ export default function EditPassword({ onClick }) {
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
-    eyesShowOld: true,
-    eyesShowNew: true,
-    eyesShowConfirm: true,
+    eyesShowOld: false,
+    eyesShowNew: false,
+    eyesShowConfirm: false,
   });
   return (
     <div className="w-full md:w-[455px] h-fit bg-white rounded-t-lg md:rounded-lg px-4 py-5 md:py-[35px] md:px-[50px]">
@@ -36,21 +36,25 @@ export default function EditPassword({ onClick }) {
           <label className="mt-[6px]  overflow-hidden pr-2 w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none w-full h-[40px] pl-2 xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-              type={state?.eyesShowOld ? "password" : "text"}
+              type={state?.eyesShowOld ? "text" : "password"}
               placeholder="Старый пароль"
               required
             />
-            <span className="cursor-pointer">
+
+            <span className="cursor-pointer pr-2">
               {state?.eyesShowOld ? (
-                <AiOutlineEyeInvisible
+                <span
                   onClick={() => setState({ ...state, eyesShowOld: false })}
-                  size={20}
-                />
+                >
+                  < AiOutlineEye size={20} color={"#e2e2e2"} />
+                </span>
               ) : (
-                <AiOutlineEye
+                <span
                   onClick={() => setState({ ...state, eyesShowOld: true })}
-                  size={20}
-                />
+                >
+                  <AiOutlineEyeInvisible size={20} color={"#e2e2e2"} />
+                </span>
+
               )}
             </span>
           </label>
@@ -62,23 +66,28 @@ export default function EditPassword({ onClick }) {
           <label className="mt-[6px] pr-2 overflow-hidden  w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none w-full pl-2 h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-              type={state?.eyesShowNew ? "password" : "text"}
+              type={state?.eyesShowNew ? "text" : "password"}
               placeholder="Ввести старый пароль"
               required
             />
-            <span className="cursor-pointer">
+
+            <span className="cursor-pointer pr-2">
               {state?.eyesShowNew ? (
-                <AiOutlineEyeInvisible
+                <span
                   onClick={() => setState({ ...state, eyesShowNew: false })}
-                  size={20}
-                />
+                >
+                  < AiOutlineEye size={20} color={"#e2e2e2"} />
+                </span>
               ) : (
-                <AiOutlineEye
+                <span
                   onClick={() => setState({ ...state, eyesShowNew: true })}
-                  size={20}
-                />
+                >
+                  <AiOutlineEyeInvisible size={20} color={"#e2e2e2"} />
+                </span>
+
               )}
             </span>
+
           </label>
         </div>
         <div className="w-full  h-fit ">
@@ -88,23 +97,28 @@ export default function EditPassword({ onClick }) {
           <label className="mt-[6px] pr-2  overflow-hidden w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none pl-2 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-              type={state?.eyesShowConfirm ? "password" : "text"}
+              type={state?.eyesShowConfirm ? "text" : "password"}
               placeholder="Ввести старый пароль"
               required
             />
-            <span className="cursor-pointer">
+
+            <span className="cursor-pointer pr-2">
               {state?.eyesShowConfirm ? (
-                <AiOutlineEyeInvisible
+                <span
                   onClick={() => setState({ ...state, eyesShowConfirm: false })}
-                  size={20}
-                />
+                >
+                  < AiOutlineEye size={20} color={"#e2e2e2"} />
+                </span>
               ) : (
-                <AiOutlineEye
+                <span
                   onClick={() => setState({ ...state, eyesShowConfirm: true })}
-                  size={20}
-                />
+                >
+                  <AiOutlineEyeInvisible size={20} color={"#e2e2e2"} />
+                </span>
+
               )}
             </span>
+
           </label>
         </div>
       </div>

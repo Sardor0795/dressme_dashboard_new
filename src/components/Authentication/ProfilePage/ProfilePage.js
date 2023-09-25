@@ -2,56 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import InputMask from "react-input-mask";
 import {
   ArrowRightIcon,
+  ArrowTopIcons,
   CircleNextIcon,
   CreditCardNumber,
+  MenuCloseIcons,
   UserMailIcon,
 } from "../../../assets/icons";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { NavLink } from "react-router-dom";
-import ModalEditCity from "./ModalEditCity/ModalEditCity";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import EditPassword from "./EditPassword/EditPassword";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
-const CardCredit = React.forwardRef((props, ref) => {
-  const [card, setCard] = useState();
-  const fallbackRef = React.useRef();
-  const domRef = ref || fallbackRef;
 
-  const handleChange = React.useCallback(() => {
-    if (domRef.current) {
-      const cardValue = domRef.current.value
-        .replace(/\D/g, "")
-        .match(/(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})/);
-      if (cardValue) {
-        domRef.current.value = !cardValue[2]
-          ? cardValue[1]
-          : `${cardValue[1]}-${cardValue[2]}${`${cardValue[3] ? `-${cardValue[3]}` : ""
-          }`}${`${cardValue[4] ? `-${cardValue[4]}` : ""}`}`;
-        const numbers = domRef.current.value.replace(/(\D)/g, "");
-        setCard(numbers);
-      }
-    }
-  }, [domRef]);
-
-  useEffect(() => {
-    handleChange();
-  }, [card, handleChange]);
-
-  return (
-    <>
-      <input
-        className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-        type="text"
-        placeholder="0000-0000-0000-0000"
-        ref={domRef}
-        onChange={handleChange} />
-    </>
-  );
-});
 
 const ProfilePage = () => {
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
 
   const [phone, setPhone] = useState("");
   const [state, setState] = useState({
@@ -61,14 +28,20 @@ const ProfilePage = () => {
     email: "",
     password: "",
     eyesShow: true,
+    cardNumber: "",
     validateConfirm: true,
     requestPerson: true,
+    // ------Regions Get -----
+    getRegionList: "",
+    // -----region Modal-----
+    openModalRegions: false
   });
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-  }, []);
+
+  // ----------Card Number-----------
+  const card1 = state?.cardNumber?.split("-")
+  const BankCard = card1.join("")
+
+  // ----------phone Number----------
   let data = phone.split("-");
   let arr = data.join("");
   let data1 = arr.split("(");
@@ -78,14 +51,44 @@ const ProfilePage = () => {
   let arr3 = state.phoneCode.split("+");
   let data3 = arr3.join("");
   const sendMessagePhoneNumber = data3 + data2;
-  const [openRegionModal, setOpenRegionModal] = useState(false);
+
   const [openEditModal, setOpenEditModal] = useState(false);
-  // -------------------------------------
-  const toggle = React.useCallback(() => setOpenRegionModal(false), []);
-  // -------------------------------------
+
   // -------------------------------------
   const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   // -------------------------------------
+
+  const url = "https://api.dressme.uz/api/seller"
+  // ------------GET METHOD Region-----------------
+
+  const { isLoading } = useQuery(["get region"], () => {
+    return fetch(`${url}/regions`).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setState({ ...state, getRegionList: res })
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+    }
+  )
+
+  const [activeIndex, setActiveIndex] = useState();
+  const accordionCityList = (id) => {
+    if (activeIndex == id) {
+      setActiveIndex(0)
+    } else {
+      setActiveIndex(id)
+    }
+  }
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[70px] items-center justify-center px-4 md:px-0">
       <div className="w-full flex items-center justify-start md:hidden mt-4">
@@ -96,31 +99,25 @@ const ProfilePage = () => {
       </div>{" "}
       <div
         onClick={() => {
-          setOpenRegionModal(false);
           setOpenEditModal(false);
         }}
-        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openRegionModal || openEditModal ? "" : "hidden"
+        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${openEditModal ? "" : "hidden"
           }`}
       ></div>
-      <section
-        className={`fixed z-[113]  max-w-[440px] mx-auto w-full md:w-auto bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openRegionModal ? "" : "hidden z-0"
-          }`}
-      >
-        <ModalEditCity onClick={toggle} />
-      </section>
+
       <section
         className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
           }`}
       >
         <EditPassword onClick={togglePassword} />
       </section>
-      {dressInfo?.ConfirmAuthen && (
-        <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
-          <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
-            Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
-          </span>
-        </div>
-      )}
+
+      <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
+        <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
+          Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
+        </span>
+      </div>
+
       <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">
         {/* title */}
         <div>
@@ -194,48 +191,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Тип, Изменить пароль */}
-        {/* <div className="w-full  flex items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Тип{" "}
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type="text"
-                placeholder="Тип"
-                required
-              />
-            </div>
-          </div>
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Пароль
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type={state?.eyesShow ? "password" : "text"}
-                placeholder="Enter your password"
-                required
-              />
-              <span className="cursor-pointer">
-                {state?.eyesShow ? (
-                  <AiOutlineEyeInvisible
-                    onClick={() => setState({ ...state, eyesShow: false })}
-                    size={20}
-                  />
-                ) : (
-                  <AiOutlineEye
-                    onClick={() => setState({ ...state, eyesShow: true })}
-                    size={20}
-                  />
-                )}
-              </span>
-            </div>
-          </div>
-        </div> */}
+
 
         {/* Выберите регион, surname */}
         <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
@@ -265,7 +221,130 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <div className="w-full xs:w-1/2 h-fit ">
+          {/* ------------------------------------------------------------------------------------------------------------- */}
+          <div className="w-full xs:w-1/2 h-fit flex justify-center">
+            <div
+              onClick={() => {
+                setState({ ...state, openModalRegions: false });
+              }}
+              className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openModalRegions ? "" : "hidden"
+                }`}
+            ></div>
+            {
+              <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
+                <div className="w-full flex items-center justify-between  ">
+
+                  <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
+                  <span
+                    className="select-none cursor-pointer"
+                    onClick={() => {
+                      setState({ ...state, openModalRegions: false });
+                    }}
+                  >
+                    <MenuCloseIcons colors="#000" /></span>
+                </div>
+
+
+                <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+
+
+                  {state?.getRegionList?.regions ?
+                    state?.getRegionList?.regions?.map((data, index) => {
+                      return (
+                        <div key={data?.id} className="w-full  h-fit  ">
+                          <div
+                            onClick={() => accordionCityList(data?.id)}
+                            className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                          >
+                            <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                              {data?.name_ru}
+                            </span>
+                            <span
+                              className={`${activeIndex == data?.id ? "rotate-[0deg]" : "rotate-[180deg]"} `}
+                            >
+                              <ArrowTopIcons colors={"#a1a1a1"} />
+                            </span>
+                          </div>
+
+                          <div
+                            className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms] 
+                             ${activeIndex == data?.id ? "openAccardion" : "CloseAccardion"} `}
+                          >
+                            {data?.sub_regions?.map((item) => {
+                              return (
+                                <div key={item?.id} className="flex items-center px-[2px] gap-x-[4px] cursor-pointer">
+                                  <label
+                                    htmlFor={item?.name_ru}
+                                    className="flex items-center gap-x-[6px]"
+                                  >
+                                    <input
+                                      type="radio"
+                                      id={item?.name_ru}
+                                      name="type_work"
+                                      value={item?.region_id}
+                                      checked={state?.sub_region == item?.id}
+                                      className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                      onChange={(e) => {
+                                        setState({ ...state, region: e.target.value, sub_region: item?.id })
+                                      }}
+                                      required
+
+                                    />
+                                    <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular"
+                                    >{item?.name_ru}</span>
+                                  </label>
+                                </div>
+
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    }) :
+                    <p className="w-full h-full flex flex-col items-center justify-center">Malumotlar yuklanyapti...</p>}
+
+                </div>
+                <div className="w-full flex items-center justify-end  mt-2">
+                  <span onClick={() => {
+                    setState({ ...state, openModalRegions: false });
+                  }} className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium">Готово</span>
+                </div>
+              </div>
+            }
+            {/* Region INput  */}
+            <div className={"w-full"}>
+              <label htmlFor="" >
+                <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                  Выберите регион
+
+                </span>
+                <div
+                  onClick={() => {
+                    setState({ ...state, openModalRegions: true });
+                  }}
+                  className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
+                  <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                    {!state?.region && !state?.sub_region && "Выберите регион"}
+
+                    {state?.getRegionList?.regions?.filter(e => e.id == state?.region).map(item => {
+                      return <span className="flex items-center text-[#000] text-[14px] sm:text-base">
+                        {item?.name_ru},
+                        {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {
+                          return <span className="ml-1">{item?.name_ru}</span>
+                        })}
+                      </span>
+                    })
+                    }
+                  </span>
+                  <span className="rotate-[180deg]"><ArrowTopIcons colors={"#a1a1a1"} /></span>
+                </div>
+
+
+              </label>
+            </div>
+          </div>
+          {/* ------------------------------------------------------------------------------------------------------------- */}
+          {/* <div className="w-full xs:w-1/2 h-fit ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Выберите регион{" "}
             </div>
@@ -280,7 +359,7 @@ const ProfilePage = () => {
                 <ArrowRightIcon />
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="w-full  flex xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
           <div className="w-full xs:w-1/2 h-fit ">
@@ -312,17 +391,24 @@ const ProfilePage = () => {
         </div>
         {/* Edit Password and CardNumber */}
         <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-          {/* Имя организации */}
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+
+          {/* ------------------------------------------------------------------------------------------------------------- */}
+          <div className="w-full md:w-1/2 h-fit  ">
+            <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
               Номер банковской карты
-            </div>
+            </span>
             <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               {/* CredtCardicons */}
               <span><CreditCardNumber /></span>
-              {/* Component */}
-              <CardCredit />
+              <InputMask
+                value={state?.cardNumber}
+                mask='9999-9999-9999-9999'
+                className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
+                onChange={(e) => setState({ ...state, cardNumber: e.target.value })}
+                placeholder="0000-0000-0000-0000"
+              />
             </div>
+
           </div>
           {/* EditPassword */}
           <div className="w-full xs:w-1/2  flex items-center justify-end xs:mt-5">
@@ -341,12 +427,6 @@ const ProfilePage = () => {
         {/* Button */}
         <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
           <button
-            onClick={() =>
-              setDressInfo({
-                ...dressInfo,
-                ConfirmAuthen: true,
-              })
-            }
             className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
           >
             <span className="text-center text-base text-white not-italic font-AeonikProMedium">

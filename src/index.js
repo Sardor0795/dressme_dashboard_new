@@ -4,14 +4,17 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import ContextTeam from "./hook/ContextTeam";
-// import "antd/dist/antd.css";
-// import "antd/dist/antd.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ContextTeam>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ContextTeam>
+  <QueryClientProvider client={queryClient}>
+
+    <ContextTeam>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ContextTeam>
+  </QueryClientProvider>
 );

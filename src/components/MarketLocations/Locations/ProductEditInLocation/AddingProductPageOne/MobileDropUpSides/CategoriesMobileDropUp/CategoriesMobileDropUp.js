@@ -448,7 +448,10 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
             <button
               key={data?.BtnText}
               onClick={() => activeBtn(data?.id)}
-              className={`h-8 ll:h-[35px] flex items-center justify-center px-1 ll:px-[10px]  ${data?.action ? "text-white border border-textBlueColor bg-textBlueColor" : "text-textBlueColor bg-white  border border-textBlueColor"}   rounded-lg text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium`}>{data?.BtnText}</button>
+              className={`h-8 ll:h-[35px] flex items-center justify-center px-1 ll:px-[10px] 
+               ${data?.action ? "text-white border border-textBlueColor bg-textBlueColor" : "text-textBlueColor bg-white  border border-textBlueColor"}   rounded-lg text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium`}>
+              {data?.BtnText}
+            </button>
           )
         })}
       </div>
