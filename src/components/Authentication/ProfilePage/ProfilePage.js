@@ -103,15 +103,19 @@ const ProfilePage = () => {
       <div
         onClick={() => {
           setOpenEditModal(false);
-          setState({ ...state, popConfirmDelete: false })
+          setState({ ...state, popConfirmDelete: false, openModalRegions: false })
+          // setState({ ...state, openModalRegions: false })
         }}
-        className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.popConfirmDelete || openEditModal ? "" : "hidden"
+        className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions ? "" : "hidden"
           }`}
       ></div>
       {/* Delete Account Of Pop Confirm */}
       <section
-        className={`absolute   max-w-[440px] md:max-w-[550px] flex flex-col gap-y-[40px]   px-4 py-5 md:py-[35px] md:px-[50px] h-fit rounded-lg bg-white mx-auto w-full  z-[113] bottom-0 md:bottom-auto top-[40%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%]  duration-300 overflow-hidden ${state?.popConfirmDelete ? "" : "hidden z-0"
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
+      // className={`absolute mx-auto  max-w-[440px] md:max-w-[550px]  flex-col gap-y-[40px]   px-4 py-5 md:py-[35px] md:px-[50px] h-fit rounded-lg bg-white mx-auto w-full  z-[113]  top-[40%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%]  duration-300 overflow-hidden ${state?.popConfirmDelete ? " bottom-0  md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+      //   }`}
       >
         <button
           onClick={() => setState({ ...state, popConfirmDelete: false })}
@@ -121,23 +125,25 @@ const ProfilePage = () => {
             className="w-full h-full"
             colors={"#a1a1a1"} />
         </button>
-        <div className="flex flex-col justify-center items-center gap-y-4">
+        <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
           <span className="w-10 h-10 rounded-full border border-textRedColor flex items-center justify-center">
             <MenuCloseIcons colors={"#d50000"} />
           </span>
-          <span className=" text-black text-xl not-italic font-AeonikProMedium text-center">
+          <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
             Вы уверены?
           </span>
-          <span className=" text-[#a2a2a2] text-lg not-italic font-AeonikProMedium text-center">
+          <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
             Если вы удалите аккаунт все ваши товары и магазины удалятся
           </span>
         </div>
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
           <button
             onClick={() => setState({ ...state, popConfirmDelete: false })}
             type="button"
-            className="w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">отмена</button>
-          <button type="button" className="w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-textRedColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Удалить</button>
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Oтмена</button>
+          <button
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-textRedColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Удалить</button>
         </div>
 
       </section>
@@ -265,100 +271,91 @@ const ProfilePage = () => {
           </div>
           {/* ------------------------------------------------------------------------------------------------------------- */}
           <div className="w-full xs:w-1/2 h-fit flex justify-center">
-            <div
-              onClick={() => {
-                setState({ ...state, openModalRegions: false });
-              }}
-              className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black -50 ${state?.openModalRegions ? "" : "hidden"
-                }`}
-            ></div>
-            {
-              <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
-                <div className="w-full flex items-center justify-between  ">
+            <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
+              <div className="w-full flex items-center justify-between  ">
 
-                  <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
-                  <span
-                    className="select-none cursor-pointer"
-                    onClick={() => {
-                      setState({ ...state, openModalRegions: false });
-                    }}
-                  >
-                    <MenuCloseIcons colors="#000" /></span>
-                </div>
-
-
-                <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-
-
-                  {state?.getRegionList?.regions ?
-                    state?.getRegionList?.regions?.map((data, index) => {
-                      return (
-                        <div key={data?.id} className="w-full  h-fit  ">
-                          <div
-                            onClick={() => accordionCityList(data?.id)}
-                            className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
-                          >
-                            <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                              {data?.name_ru}
-                            </span>
-                            <span
-                              className={`${activeIndex == data?.id ? "rotate-[0deg]" : "rotate-[180deg]"} `}
-                            >
-                              <ArrowTopIcons colors={"#a1a1a1"} />
-                            </span>
-                          </div>
-
-                          <div
-                            className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms] 
-                             ${activeIndex == data?.id ? "openAccardion" : "CloseAccardion"} `}
-                          >
-                            {data?.sub_regions?.map((item) => {
-                              return (
-                                <div key={item?.id} className="flex items-center px-[2px] gap-x-[4px] cursor-pointer">
-                                  <label
-                                    htmlFor={item?.name_ru}
-                                    className="flex items-center gap-x-[6px]"
-                                  >
-                                    <input
-                                      type="radio"
-                                      id={item?.name_ru}
-                                      name="type_work"
-                                      value={item?.region_id}
-                                      checked={state?.sub_region == item?.id}
-                                      className="border border-borderColor  cursor-pointer  flex items-center justify-center"
-                                      onChange={(e) => {
-                                        setState({ ...state, region: e.target.value, sub_region: item?.id })
-                                      }}
-                                      required
-
-                                    />
-                                    <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular"
-                                    >{item?.name_ru}</span>
-                                  </label>
-                                </div>
-
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    }) :
-                    <p className="w-full h-full flex flex-col items-center justify-center">Malumotlar yuklanyapti...</p>}
-
-                </div>
-                <div className="w-full flex items-center justify-end  mt-2">
-                  <span onClick={() => {
+                <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
+                <span
+                  className="select-none cursor-pointer"
+                  onClick={() => {
                     setState({ ...state, openModalRegions: false });
-                  }} className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium">Готово</span>
-                </div>
+                  }}
+                >
+                  <MenuCloseIcons colors="#000" /></span>
               </div>
-            }
+
+
+              <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+
+
+                {state?.getRegionList?.regions ?
+                  state?.getRegionList?.regions?.map((data, index) => {
+                    return (
+                      <div key={data?.id} className="w-full  h-fit  ">
+                        <div
+                          onClick={() => accordionCityList(data?.id)}
+                          className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                        >
+                          <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                            {data?.name_ru}
+                          </span>
+                          <span
+                            className={`${activeIndex == data?.id ? "rotate-[0deg]" : "rotate-[180deg]"} `}
+                          >
+                            <ArrowTopIcons colors={"#a1a1a1"} />
+                          </span>
+                        </div>
+
+                        <div
+                          className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms] 
+                             ${activeIndex == data?.id ? "openAccardion" : "CloseAccardion"} `}
+                        >
+                          {data?.sub_regions?.map((item) => {
+                            return (
+                              <div key={item?.id} className="flex items-center px-[2px] gap-x-[4px] cursor-pointer">
+                                <label
+                                  htmlFor={item?.name_ru}
+                                  className="flex items-center gap-x-[6px]"
+                                >
+                                  <input
+                                    type="radio"
+                                    id={item?.name_ru}
+                                    name="type_work"
+                                    value={item?.region_id}
+                                    checked={state?.sub_region == item?.id}
+                                    className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                    onChange={(e) => {
+                                      setState({ ...state, region: e.target.value, sub_region: item?.id })
+                                    }}
+                                    required
+
+                                  />
+                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular"
+                                  >{item?.name_ru}</span>
+                                </label>
+                              </div>
+
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  }) :
+                  <p className="w-full h-full flex flex-col items-center justify-center">Malumotlar yuklanyapti...</p>}
+
+              </div>
+              <div className="w-full flex items-center justify-end  mt-2">
+                <span onClick={() => {
+                  setState({ ...state, openModalRegions: false });
+                }} className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium">Готово</span>
+              </div>
+            </div>
+
             {/* Region INput  */}
             <div className={"w-full"}>
               <label htmlFor="" >
                 <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                   Выберите регион
-
                 </span>
                 <div
                   onClick={() => {
@@ -386,22 +383,7 @@ const ProfilePage = () => {
             </div>
           </div>
           {/* ------------------------------------------------------------------------------------------------------------- */}
-          {/* <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Выберите регион{" "}
-            </div>
-            <div
-              onClick={() => setOpenRegionModal(true)}
-              className="mt-[6px] cursor-pointer select-none h-[40px] xs:h-12 px-[16px] w-full  flex items-center justify-between border border-searchBgColor rounded-lg leading-4"
-            >
-              <span className=" not-italic font-AeonikProRegular text-[14px] leading-4 text-textLightColor">
-                Выберите регион
-              </span>
-              <span className="rotate-[90deg]">
-                <ArrowRightIcon />
-              </span>
-            </div>
-          </div> */}
+
         </div>
         <div className="w-full  flex xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
           <div className="w-full xs:w-1/2 h-fit ">
