@@ -5,6 +5,7 @@ import {
   ArrowTopIcons,
   CircleNextIcon,
   CreditCardNumber,
+  DeleteIcon,
   MenuCloseIcons,
   UserMailIcon,
 } from "../../../assets/icons";
@@ -114,8 +115,7 @@ const ProfilePage = () => {
       <section
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
-      // className={`absolute mx-auto  max-w-[440px] md:max-w-[550px]  flex-col gap-y-[40px]   px-4 py-5 md:py-[35px] md:px-[50px] h-fit rounded-lg bg-white mx-auto w-full  z-[113]  top-[40%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%]  duration-300 overflow-hidden ${state?.popConfirmDelete ? " bottom-0  md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-      //   }`}
+
       >
         <button
           onClick={() => setState({ ...state, popConfirmDelete: false })}
@@ -126,14 +126,17 @@ const ProfilePage = () => {
             colors={"#a1a1a1"} />
         </button>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-          <span className="w-10 h-10 rounded-full border border-textRedColor flex items-center justify-center">
-            <MenuCloseIcons colors={"#d50000"} />
+          <span className="w-10 h-10 rounded-full border border-[#FF4747] flex items-center justify-center">
+            {/* <MenuCloseIcons colors={"#d50000"} /> */}
+            <span className="cursor-pointer active:translate-y-[2px] text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+              <DeleteIcon width={30} />
+            </span>
           </span>
           <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
             Вы уверены?
           </span>
           <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
-            Если вы удалите аккаунт все ваши товары и магазины удалятся
+            Если вы удалите аккаунт все ваши товары и магазины удалятся, если они имеются
           </span>
         </div>
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
@@ -143,7 +146,7 @@ const ProfilePage = () => {
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Oтмена</button>
           <button
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-textRedColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Удалить</button>
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Удалить</button>
         </div>
 
       </section>
@@ -163,55 +166,53 @@ const ProfilePage = () => {
 
       <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">
         {/* title */}
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between ">
           <span className="text-black text-[20px] md:text-2xl not-italic font-AeonikProMedium leading-6">
             Мои данные
           </span>
           <button
             onClick={() => setState({ ...state, popConfirmDelete: true })}
-            className="text-redText flex items-center text-base not-italic font-AeonikProRegular leading-5">
+            className="text-redText flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5">
             Удалить аккаунт
           </button>
         </div>
-        {/* Name, surname */}
-        <div className="w-full  xs:flex-row flex-col flex items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-          <div className="w-full xs:w-1/2 h-fit ">
+        <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 w-full h-fit ">
+          {/* Name */}
+          <div className="w-full h-fit ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Имя{" "}
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
                 placeholder="Имя"
                 required
               />
             </div>
           </div>
-          <div className="w-full xs:w-1/2 h-fit ">
+          {/*  surname */}
+          <div className="w-full h-fit ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Фамилия{" "}
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
                 placeholder="Фамилия"
                 required
               />
             </div>
           </div>
-        </div>
-        {/* Номер, Mail */}
-        <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
           {/* Имя организации */}
-          <div className="w-full xs:w-1/2 h-fit ">
+          <div className="w-full h-fit  ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Имя организации{" "}
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
                 placeholder="Имя организации"
                 required
@@ -219,7 +220,7 @@ const ProfilePage = () => {
             </div>
           </div>
           {/* Mail */}
-          <div className="w-full xs:w-1/2 h-fit ">
+          <div className="w-full h-fit  ">
             <div className=" flex items-center justify-between w-full">
               <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
                 Электронная почта{" "}
@@ -227,7 +228,7 @@ const ProfilePage = () => {
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="email"
                 placeholder="Адрес электронной почты"
                 required
@@ -237,19 +238,13 @@ const ProfilePage = () => {
               </span>{" "}
             </div>
           </div>
-        </div>
-
-
-
-        {/* Выберите регион, surname */}
-        <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
           {/* Номер */}
-          <div className="w-full xs:w-1/2 h-fit">
+          <div className="w-full h-fit ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Номер телефона{" "}
             </div>
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
-              <div className="ss:w-[35%] md:w-[30%] h-[40px] xs:h-12 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+              <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                 <input
                   className="w-[40px]  h-full select-none mx-2 not-italic font-AeonikProMedium text-base leading-4 text-black"
                   type="text"
@@ -257,7 +252,7 @@ const ProfilePage = () => {
                   readOnly
                 />
               </div>
-              <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-12 overflow-hidden">
+              <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                 <InputMask
                   mask="(99) 999-99-99"
                   value={phone}
@@ -269,8 +264,8 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          {/* ------------------------------------------------------------------------------------------------------------- */}
-          <div className="w-full xs:w-1/2 h-fit flex justify-center">
+          {/* Выберите регион, */}
+          <div className="w-full h-fit flex justify-center ">
             <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
               <div className="w-full flex items-center justify-between  ">
 
@@ -382,42 +377,22 @@ const ProfilePage = () => {
               </label>
             </div>
           </div>
-          {/* ------------------------------------------------------------------------------------------------------------- */}
-
-        </div>
-        <div className="w-full  flex xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-          <div className="w-full xs:w-1/2 h-fit ">
+          {/* Type */}
+          <div className="w-full h-fit  ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Тип{" "}
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
                 placeholder="Тип"
                 required
               />
             </div>
           </div>
-          <div className="w-full xs:w-1/2 h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Раздел{" "}
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type="text"
-                placeholder="Раздел"
-                required
-              />
-            </div>
-          </div>
-        </div>
-        {/* Edit Password and CardNumber */}
-        <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-6 gap-y-4 xs:gap-y-0">
-
-          {/* ------------------------------------------------------------------------------------------------------------- */}
-          <div className="w-full md:w-1/2 h-fit  ">
+          {/*  CardNumber */}
+          <div className="w-full  h-fit   ">
             <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
               Номер банковской карты
             </span>
@@ -435,7 +410,7 @@ const ProfilePage = () => {
 
           </div>
           {/* EditPassword */}
-          <div className="w-full xs:w-1/2  flex items-center justify-end xs:mt-5">
+          <div className="w-full  flex items-center xs:justify-start justify-end xs:mt-5 ">
             <button
               onClick={() => setOpenEditModal(true)}
               className={
@@ -446,7 +421,6 @@ const ProfilePage = () => {
             </button>
           </div>
         </div>
-
 
         {/* Button */}
         <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
