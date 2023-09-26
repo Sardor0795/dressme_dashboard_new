@@ -93,7 +93,7 @@ const ProfilePage = () => {
     });
   }, []);
   return (
-    <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[70px] items-center justify-center px-4 md:px-0">
+    <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <div className="w-full flex items-center justify-start md:hidden mt-4">
         <span>
           {" "}
@@ -169,7 +169,7 @@ const ProfilePage = () => {
           </span>
           <button
             onClick={() => setState({ ...state, popConfirmDelete: true })}
-            className="text-redText text-lg not-italic font-medium leading-5">
+            className="text-redText flex items-center text-base not-italic font-AeonikProRegular leading-5">
             Удалить аккаунт
           </button>
         </div>
