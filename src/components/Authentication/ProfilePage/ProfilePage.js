@@ -34,6 +34,8 @@ const ProfilePage = () => {
     requestPerson: true,
     // ------Regions Get -----
     getRegionList: "",
+    // ------ Get Profile-----
+    getProfileList: "",
     // -----region Modal-----
     openModalRegions: false,
     // ----popConfirmDelete
@@ -78,7 +80,30 @@ const ProfilePage = () => {
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
+  // ------------GET METHOD Region-----------------
 
+  useQuery(["get profile"], () => {
+    return fetch(`${url}/profile`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        console.log(res, "res");
+        setState({ ...state, getProfileList: res })
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+    }
+  )
+  console.log(state?.getProfileList, "DressmeUserToken")
 
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
