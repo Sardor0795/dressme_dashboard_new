@@ -73,6 +73,7 @@ export default function SignInSeller() {
               });
               // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
               navigate("/edit-profile")
+              window.location.reload();
             }
           },
           onError: (err) => {
