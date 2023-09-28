@@ -8,17 +8,17 @@ import {
   DeleteIcon,
   MenuCloseIcons,
   UserMailIcon,
-} from "../../../assets/icons";
+} from "../../../../assets/icons";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { dressMainData } from "../../../hook/ContextTeam";
+import { dressMainData } from "../../../../hook/ContextTeam";
 import { NavLink } from "react-router-dom";
-import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import EditPassword from "./EditPassword/EditPassword";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 
 
-const ProfilePage = () => {
+const EditProfilePage = () => {
 
 
   const [phone, setPhone] = useState("");
@@ -464,4 +464,4 @@ const ProfilePage = () => {
     </div>
   );
 };
-export { ProfilePage };
+export { EditProfilePage };

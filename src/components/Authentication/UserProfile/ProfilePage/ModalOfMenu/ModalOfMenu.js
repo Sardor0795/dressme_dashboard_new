@@ -5,7 +5,7 @@ import {
   InputCheckedTrueIcons,
   MenuCloseIcons,
   SearchIcon,
-} from "../../../../assets/icons";
+} from "../../../../../assets/icons";
 
 export default function ModalEditCity({ onClick }) {
   const [cityList, setCityList] = useState([
@@ -108,8 +108,8 @@ export default function ModalEditCity({ onClick }) {
 
               <div
                 className={` w-full flex flex-wrap gap-x-2  duration-300  ${data?.RegionType
-                    ? "h-[100px] overflow-hidden"
-                    : "h-0 overflow-hidden"
+                  ? "h-[100px] overflow-hidden"
+                  : "h-0 overflow-hidden"
                   }`}
               >
                 {data?.RegionList.map((item) => {

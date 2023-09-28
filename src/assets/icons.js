@@ -1181,7 +1181,111 @@ const CreditCardNumber = () => {
     </svg>
   );
 };
-
+// ----------
+const SircleNext = ({ colors }) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8.5 12H14.5"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12.5 15L15.5 12L12.5 9"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+const SuccessIconsForMail = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+      <path d="M32.375 1.15625L10.8687 24.8068L4.625 20.0777H1.15625L10.8687 35.8438L35.8438 1.15625H32.375Z" fill="#007DCA" />
+    </svg>
+  );
+};
+const DashboardUser = ({ colors }) => {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.0003 8.33329C11.8413 8.33329 13.3337 6.84091 13.3337 4.99996C13.3337 3.15901 11.8413 1.66663 10.0003 1.66663C8.15938 1.66663 6.66699 3.15901 6.66699 4.99996C6.66699 6.84091 8.15938 8.33329 10.0003 8.33329Z"
+        fill="#007DCA"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16.6668 14.5833C16.6668 16.6541 16.6668 18.3333 10.0002 18.3333C3.3335 18.3333 3.3335 16.6541 3.3335 14.5833C3.3335 12.5124 6.3185 10.8333 10.0002 10.8333C13.6818 10.8333 16.6668 12.5124 16.6668 14.5833Z"
+        fill="#007DCA"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+const DashboardList = ({ colors }) => {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.0001 2.5C8.94181 2.5 8.00015 3.16667 7.65015 4.16667H2.50015V5.83333H4.12515L1.66681 11.6667C1.27515 13.3333 2.50015 14.1667 4.58348 14.1667C6.66681 14.1667 7.96681 13.3333 7.50015 11.6667L5.04181 5.83333H7.64181C7.91681 6.54167 8.45848 7.08333 9.16681 7.35833V16.6667H1.66681V18.3333H18.3335V16.6667H10.8335V7.35C11.5418 7.08333 12.0835 6.54167 12.3501 5.83333H14.9585L12.5001 11.6667C12.1085 13.3333 13.3335 14.1667 15.4168 14.1667C17.5001 14.1667 18.8001 13.3333 18.3335 11.6667L15.8751 5.83333H17.5001V4.16667H12.3585C12.0001 3.16667 11.0585 2.5 10.0001 2.5ZM10.0001 4.16667C10.2212 4.16667 10.4331 4.25446 10.5894 4.41074C10.7457 4.56703 10.8335 4.77899 10.8335 5C10.8335 5.22101 10.7457 5.43298 10.5894 5.58926C10.4331 5.74554 10.2212 5.83333 10.0001 5.83333C9.77913 5.83333 9.56717 5.74554 9.41089 5.58926C9.25461 5.43298 9.16681 5.22101 9.16681 5C9.16681 4.77899 9.25461 4.56703 9.41089 4.41074C9.56717 4.25446 9.77913 4.16667 10.0001 4.16667ZM4.58348 8.54167L5.83348 11.6667H3.33348L4.58348 8.54167ZM15.4168 8.54167L16.6668 11.6667H14.1668L15.4168 8.54167Z"
+        fill="#007dca"
+        stroke={colors}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+const Star6Icon = () => {
+  return (
+    <svg
+      width="10"
+      height="9"
+      viewBox="0 0 10 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.312 3.56L6.456 4.616L8.424 6.848L7.032 8.048L5.112 5.528L3.216 8.024L1.848 6.824L3.816 4.592L0.984 3.536L1.704 1.856L4.32 3.104L4.248 0.175999H6.024L5.952 3.128L8.592 1.856L9.312 3.56Z"
+        fill="#FA4F4F"
+      />
+    </svg>
+  );
+};
 export {
   ProfileIcon,
   NavbarReviewIcon,
@@ -1231,5 +1335,13 @@ export {
   LoaderIcon,
   CalendarIcons,
   GoBackIcons,
-  CreditCardNumber
+  CreditCardNumber,
+  // ----------------
+  SircleNext,
+  SuccessIconsForMail,
+  Star6Icon,
+  DashboardList,
+  DashboardUser,
+
+
 };
