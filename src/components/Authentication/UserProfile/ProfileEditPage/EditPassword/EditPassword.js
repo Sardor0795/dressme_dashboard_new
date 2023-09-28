@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { MenuCloseIcons } from "../../../../assets/icons";
+import { MenuCloseIcons } from "../../../../../assets/icons";
 
 export default function EditPassword({ onClick }) {
   const [state, setState] = useState({

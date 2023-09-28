@@ -5,10 +5,10 @@ import {
   CircleNextIcon,
   CreditCardNumber,
   UserMailIcon,
-} from "../../../assets/icons";
-import { dressMainData } from "../../../hook/ContextTeam";
+} from "../../../../assets/icons";
+import { dressMainData } from "../../../../hook/ContextTeam";
 import { NavLink, useNavigate } from "react-router-dom";
-import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import ModalOfMenu from "./ModalOfMenu/ModalOfMenu";
 
 import EditPassword from "./EditPassword/EditPassword";
@@ -18,7 +18,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 // const { REACT_APP_BASE_URL: url } = process.env;
 const { REACT_APP_BASE_URL: url } = process.env
 
-const SignUp = () => {
+const UserProfile = () => {
   const navigate = useNavigate()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
@@ -439,4 +439,4 @@ const SignUp = () => {
     </div>
   );
 };
-export { SignUp };
+export { UserProfile };

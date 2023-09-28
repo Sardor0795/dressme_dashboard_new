@@ -15,6 +15,7 @@ module.exports = {
         textLightColor: "#a1a1a1",
         textBlackColor: "#000000",
         textBlueColor: "#007dca",
+        fullBlue: "#007DCA",
         textRedColor: "#d50000",
         yandexNavbar: " rgba(255, 255, 255, 0.8)",
 
