@@ -60,7 +60,9 @@ export default function SignInSeller() {
             } else if (res?.access_token) {
 
               localStorage.setItem("DressmeUserToken", res?.access_token)
-              setState({ ...state, email: "", password: "", errorGroup: "" });
+              navigate("/edit-profile")
+              window.location.reload();
+              // window.location.replace('/edit-profile');
               toast.success(`Успешный  вход в систему`, {
                 position: "top-right",
                 autoClose: 5000,
@@ -72,8 +74,7 @@ export default function SignInSeller() {
                 theme: "light",
               });
               // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
-              navigate("/edit-profile")
-              window.location.reload();
+              setState({ ...state, email: "", password: "", errorGroup: "" });
             }
           },
           onError: (err) => {

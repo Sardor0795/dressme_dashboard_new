@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   ClothesIcons,
   LocationIcon,
+  MenuCloseIcons,
   NavbarMarketIcon,
   NavbarReviewIcon,
   NavbarUserIcon,
@@ -10,11 +11,13 @@ import {
   UserExitIcon,
   UserIcon,
 } from "../../assets/icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { dressMainData } from "../../hook/ContextTeam";
 
 export default function Sidebar() {
+  const navigate = useNavigate()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [logOutModal, setLogOutModal] = useState(false)
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
 
@@ -287,7 +290,9 @@ export default function Sidebar() {
               )
             }
           </NavLink>
-          <button className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
+          <button
+            onClick={() => setLogOutModal(true)}
+            className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
             <UserExitIcon colors={"#FF4343"} />{" "}
             <span
               className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
@@ -295,8 +300,65 @@ export default function Sidebar() {
               Выйти
             </span>
           </button>
+          <div
+            onClick={() => {
+              setLogOutModal(false);
+            }}
+            className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+         ${logOutModal ? "" : "hidden"
+              }`}
+          ></div>
+          {/* Delete Account Of Pop Confirm */}
+          <section
+            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${logOutModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+              }`}
+
+          >
+            <button
+              onClick={() => setLogOutModal(false)}
+              type="button"
+              className="absolute  right-3 top-3 w-5 h-5 ">
+              <MenuCloseIcons
+                className="w-full h-full"
+                colors={"#a1a1a1"} />
+            </button>
+            <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              {/* <span className="w-10 h-10 rounded-full border border-[#FF4747] flex items-center justify-center">
+                <span className="cursor-pointer active:translate-y-[2px] text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
+              </span> */}
+              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+              <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
+                Если вы выйти все ваши товары и магазины удалятся, если они имеются
+              </span>
+            </div>
+            <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+              <button
+                onClick={() => setLogOutModal(false)}
+                type="button"
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                Oтмена
+              </button>
+              <button
+                onClick={() => {
+                  localStorage.clear();
+                  navigate("/signup-seller")
+                  window.location.reload();
+                  setLogOutModal(false)
+                }}
+                type="button"
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                <UserExitIcon colors={"#fff"} />{" "}
+                <span>Выйти</span>
+              </button>
+            </div>
+
+          </section>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

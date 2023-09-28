@@ -87,7 +87,7 @@ const EditProfilePage = () => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
 
     }).then(res => res.json())
@@ -100,6 +100,7 @@ const EditProfilePage = () => {
       onError: (err) => {
         console.log(err, "err");
       },
+
       keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
@@ -153,7 +154,6 @@ const EditProfilePage = () => {
         </button>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
           <span className="w-10 h-10 rounded-full border border-[#FF4747] flex items-center justify-center">
-            {/* <MenuCloseIcons colors={"#d50000"} /> */}
             <span className="cursor-pointer active:translate-y-[2px] text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
               <DeleteIcon width={30} />
             </span>
