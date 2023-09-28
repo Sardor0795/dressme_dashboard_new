@@ -89,6 +89,7 @@ const EditProfilePage = () => {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
+
     }).then(res => res.json())
   },
     {
