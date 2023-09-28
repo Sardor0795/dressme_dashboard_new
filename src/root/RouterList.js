@@ -145,6 +145,7 @@ export default function RouterList() {
             <Route path={"/forgot-password-seller"} element={<ForgotPasswordSeller />} />
             <Route path={"/reset-password-seller/:id"} element={<ResetPasswordSeller />} />
             <Route path={"/mail-verify-seller/:id"} element={<MailVerfySeller />} />
+            <Route path="*" element={<Error />} />
 
             <Route path="/" element={<Navigate to={"/signup-seller"} />} />
           </Routes>
