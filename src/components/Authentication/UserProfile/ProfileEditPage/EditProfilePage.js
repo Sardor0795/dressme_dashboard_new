@@ -9,20 +9,19 @@ import {
   MenuCloseIcons,
   UserMailIcon,
 } from "../../../../assets/icons";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { dressMainData } from "../../../../hook/ContextTeam";
-import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import EditPassword from "./EditPassword/EditPassword";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Select } from "antd";
+import { useNavigate } from "react-router-dom";
 
 
 
 const EditProfilePage = () => {
+  const navigate = useNavigate()
 
-
-  const [phone, setPhone] = useState("");
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -154,22 +153,8 @@ const EditProfilePage = () => {
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
-  console.log(localStorage.getItem("DressmeUserToken"), "localStorage.getItem")
-  console.log(state?.getProfileList, "DressmeUserToken")
 
 
-  //  selectSellerType: res?.individual.filter(e => e.id == sellerTypeId)?.map(item)=> { return { item?.name_ru } } 
-  // state?.getSellerList?.individual?.forEach(e => {
-  //   if (e?.id == state?.sellerTypeId)
-  //     setState({ ...state, selectSellerType: e?.name_ru })
-  // })
-  // ----------phone Number----------
-  // let codeNum = state?.getphoneNumber.slice(0, 3)
-  // let phoneNum1 = state?.getphoneNumber.slice(3, 12)
-  // state?.phoneCode(codeNum)
-  // state?.phoneNum(phoneNum1)
-  // console.log(codeNum, ":codeNuykm");
-  // console.log(phoneNum, ":phoneNum");
 
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
@@ -181,15 +166,30 @@ const EditProfilePage = () => {
         'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
 
       },
-      body: JSON.stringify({ email: "murodillaxayitov@gmail.com", password: "00000000" }),
     }).then((res) => res.json());
   });
 
   const onUserDelete = () => {
-    setState({ ...state, popConfirmDelete: false })
+    // setState({ ...state, popConfirmDelete: false })
     mutate({}, {
       onSuccess: res => {
-        console.log(res, "userDelete");
+        if (res?.message) {
+          localStorage.clear();
+          navigate("/")
+          window.location.reload();
+          setState({ ...state, popConfirmDelete: false })
+          console.log(res, "Delete");
+          toast.warn(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       },
       onError: err => {
 
@@ -211,6 +211,19 @@ const EditProfilePage = () => {
   }, []);
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="w-full flex items-center justify-start md:hidden mt-4">
         <span>
           {" "}
@@ -444,10 +457,10 @@ const EditProfilePage = () => {
                                     id={item?.name_ru}
                                     name="type_work"
                                     value={item?.region_id}
-                                    checked={state?.sub_region == item?.id}
+                                    checked={state?.subRegionId == item?.id}
                                     className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                     onChange={(e) => {
-                                      setState({ ...state, region: e.target.value, sub_region: item?.id })
+                                      setState({ ...state, regionId: e.target.value, subRegionId: item?.id })
                                     }}
                                     required
 
@@ -545,39 +558,12 @@ const EditProfilePage = () => {
                 </span>
               </div>
               :
-              // <div className="select relative w-full flex items-center ">
-              //   <Select
-              //     className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
-              //     placeholder="Тип предприятия"
-              //     onClick={changeTip}
-              //     optionFilterProp="children"
-              //     onChange={(e) => setState({ ...state, sellerTypeId: e })}
-              //     suffixIcon={null}
-              //     defaultValue={state?.selectSellerType}
-              //     // value={state?.getSellerList?.individual.filter(e => e.id == state?.sellerTypeId).map(item => {
-              //     //   return item?.name_ru
-              //     // })}
-              //     size="large"
-              //     options={
-              //       state?.getSellerList?.individual?.map(item => {
-              //         return (
-              //           {
-              //             value: item?.id,
-              //             label: item?.name_ru,
-              //           }
-              //         )
-              //       })
-              //     }
-              //   />
-              //   <span className={`data absolute right-[10px] top- h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}>
-              //     <ArrowTopIcons colors="#a1a1a1" />
-              //   </span>
-              // </div>
+
               <div className="w-full h-fit ">
                 <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
                   Тип
                 </div>
-                <div className="relative mt-[6px] flex items-center justify-between ">
+                <div className="relative z-10 mt-[6px] flex items-center justify-between ">
                   <select
                     id="changeIcons"
                     // className="text-[#a1a1a1]"
@@ -587,7 +573,6 @@ const EditProfilePage = () => {
                     placeholder="Тип предприятия"
                     required
                   >
-                    {/* <option value="">Тип предприятия</option> */}
                     {
                       state?.getSellerList?.individual?.map(data => {
                         return (
