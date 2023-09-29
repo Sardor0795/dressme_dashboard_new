@@ -331,9 +331,7 @@ export default function Sidebar() {
               <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
                 Вы уверены?
               </span>
-              <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
-                Если вы выйти все ваши товары и магазины удалятся, если они имеются
-              </span>
+
             </div>
             <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
               <button
