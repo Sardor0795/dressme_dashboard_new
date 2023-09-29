@@ -547,7 +547,7 @@ const SignUpSeller = () => {
             </div>
 
 
-            <div className="w-full h-[1px] bg-searchBgColor my-[30px]"></div>
+            <div className="w-full h-[1px] bg-[#f2f2f2] my-[30px]"></div>
             {/* Form */}
             <div className="w-full flex flex-col gap-y-4 xs:gap-y-5">
               {/* Namr, surname */}

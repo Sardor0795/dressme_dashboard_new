@@ -13,17 +13,68 @@ import {
 } from "../../assets/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { dressMainData } from "../../hook/ContextTeam";
+import { useMutation } from "@tanstack/react-query";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Sidebar() {
   const navigate = useNavigate()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [logOutModal, setLogOutModal] = useState(false)
+
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    logOutModal: false
+  });
+
+  // const [logOutModal, setLogOutModal] = useState(false)
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
 
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname]);
+  const url = "https://api.dressme.uz/api/seller"
+
+  // -----------------------Seller Delete---------------
+  const { mutate } = useMutation(() => {
+    return fetch(`${url}/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+
+      },
+    }).then((res) => res.json());
+  });
+
+  const logOutHandle = () => {
+    mutate({}, {
+      onSuccess: res => {
+        if (res?.message) {
+          localStorage.clear();
+          navigate("/signup-seller")
+          window.location.reload();
+          setState({ ...state, logOutModal: false })
+          console.log(res, "logOut");
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      },
+      onError: err => {
+
+      }
+    })
+  }
 
   return (
     <div
@@ -31,6 +82,19 @@ export default function Sidebar() {
         ${locationWindow !== "/store" ? "block" : "hidden"}
     `}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="flex flex-wrap content-between w-full h-full pb-10">
         <div className="w-full pt-5  px-2 flex flex-wrap gap-y-[44px]">
           <NavLink
@@ -291,7 +355,7 @@ export default function Sidebar() {
             }
           </NavLink>
           <button
-            onClick={() => setLogOutModal(true)}
+            onClick={() => setState({ ...state, logOutModal: true })}
             className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
             <UserExitIcon colors={"#FF4343"} />{" "}
             <span
@@ -301,21 +365,19 @@ export default function Sidebar() {
             </span>
           </button>
           <div
-            onClick={() => {
-              setLogOutModal(false);
-            }}
-            className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
-         ${logOutModal ? "" : "hidden"
+            onClick={() => setState({ ...state, logOutModal: false })}
+            className={`fixed inset-0 z-[99998] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+         ${state?.logOutModal ? "" : "hidden"
               }`}
           ></div>
           {/* Delete Account Of Pop Confirm */}
           <section
-            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${logOutModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[99999] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.logOutModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
               }`}
 
           >
             <button
-              onClick={() => setLogOutModal(false)}
+              onClick={() => setState({ ...state, logOutModal: false })}
               type="button"
               className="absolute  right-3 top-3 w-5 h-5 ">
               <MenuCloseIcons
@@ -335,18 +397,13 @@ export default function Sidebar() {
             </div>
             <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
               <button
-                onClick={() => setLogOutModal(false)}
+                onClick={() => setState({ ...state, logOutModal: false })}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
                 Oтмена
               </button>
               <button
-                onClick={() => {
-                  localStorage.clear();
-                  navigate("/signup-seller")
-                  window.location.reload();
-                  setLogOutModal(false)
-                }}
+                onClick={logOutHandle}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
                 <UserExitIcon colors={"#fff"} />{" "}
