@@ -15,6 +15,7 @@ import { NavLink } from "react-router-dom";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import EditPassword from "./EditPassword/EditPassword";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Select } from "antd";
 
 
 
@@ -25,17 +26,26 @@ const EditProfilePage = () => {
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
-    phoneCode: "+998",
     email: "",
-    password: "",
-    eyesShow: true,
     cardNumber: "",
+    password: "",
+    sellerTypeId: "",
+    selectSellerType: "",
+    regionId: "",
+    subRegionId: "",
+    phoneCode: "+",
+    phoneNum: "",
+    //----
+
     validateConfirm: true,
+    eyesShow: true,
     requestPerson: true,
     // ------Regions Get -----
     getRegionList: "",
     // ------ Get Profile-----
     getProfileList: "",
+    // ------ Get getSellerList-----
+    getSellerList: "",
     // -----region Modal-----
     openModalRegions: false,
     // ----popConfirmDelete
@@ -46,16 +56,16 @@ const EditProfilePage = () => {
   const card1 = state?.cardNumber?.split("-")
   const BankCard = card1.join("")
 
-  // ----------phone Number----------
-  let data = phone.split("-");
-  let arr = data.join("");
-  let data1 = arr.split("(");
-  let arr1 = data1.join("");
-  let arr2 = arr1.split(")");
-  let data2 = arr2.join("");
-  let arr3 = state.phoneCode.split("+");
-  let data3 = arr3.join("");
-  const sendMessagePhoneNumber = data3 + data2;
+
+  // let data = phone.split("-");
+  // let arr = data.join("");
+  // let data1 = arr.split("(");
+  // let arr1 = data1.join("");
+  // let arr2 = arr1.split(")");
+  // let data2 = arr2.join("");
+  // let arr3 = state.phoneCode.split("+");
+  // let data3 = arr3.join("");
+  // const sendMessageget = data3 + data2;
 
   const [openEditModal, setOpenEditModal] = useState(false);
 
@@ -71,7 +81,7 @@ const EditProfilePage = () => {
   },
     {
       onSuccess: (res) => {
-        setState({ ...state, getRegionList: res })
+        setState({ ...state, getRegionList: res, })
       },
       onError: (err) => {
         console.log(err, "err");
@@ -80,7 +90,34 @@ const EditProfilePage = () => {
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
-  // ------------GET METHOD Region-----------------
+
+  // ------------GET METHOD seller-types-----------------
+  const { isFetching } = useQuery(["get seller-type"], () => {
+    return fetch(`${url}/seller-types`).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setState({ ...state, getSellerList: res, })
+
+
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
+  console.log(state?.selectSellerType, "selectSellerType");
+  console.log(state?.sellerTypeId, "sellerTypeId");
+
+  const changeTip = () => {
+    state?.getSellerList?.individual?.forEach(e => {
+      if (e?.id == state?.sellerTypeId)
+        setState({ ...state, selectSellerType: e?.name_ru })
+    })
+  }
+  // ------------GET METHOD Profile-----------------
 
   useQuery(["get profile"], () => {
     return fetch(`${url}/profile`, {
@@ -95,7 +132,19 @@ const EditProfilePage = () => {
     {
       onSuccess: (res) => {
         console.log(res, "res");
-        setState({ ...state, getProfileList: res })
+        setState({
+          ...state, getProfileList: res,
+          firstName: res.name,
+          lastName: res.surname,
+          email: res?.email,
+          cardNumber: res?.card_number,
+          regionId: res?.region_id,
+          subRegionId: res?.sub_region_id,
+          sellerTypeId: res?.seller_type_id,
+          phoneCode: res?.phone.slice(0, 3),
+          phoneNum: res?.phone.slice(3, 12),
+
+        })
       },
       onError: (err) => {
         console.log(err, "err");
@@ -105,8 +154,48 @@ const EditProfilePage = () => {
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
+  console.log(localStorage.getItem("DressmeUserToken"), "localStorage.getItem")
   console.log(state?.getProfileList, "DressmeUserToken")
 
+
+  //  selectSellerType: res?.individual.filter(e => e.id == sellerTypeId)?.map(item)=> { return { item?.name_ru } } 
+  // state?.getSellerList?.individual?.forEach(e => {
+  //   if (e?.id == state?.sellerTypeId)
+  //     setState({ ...state, selectSellerType: e?.name_ru })
+  // })
+  // ----------phone Number----------
+  // let codeNum = state?.getphoneNumber.slice(0, 3)
+  // let phoneNum1 = state?.getphoneNumber.slice(3, 12)
+  // state?.phoneCode(codeNum)
+  // state?.phoneNum(phoneNum1)
+  // console.log(codeNum, ":codeNuykm");
+  // console.log(phoneNum, ":phoneNum");
+
+  // -----------------------Seller Delete---------------
+  const { mutate } = useMutation(() => {
+    return fetch(`${url}/delete`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+
+      },
+      body: JSON.stringify({ email: "murodillaxayitov@gmail.com", password: "00000000" }),
+    }).then((res) => res.json());
+  });
+
+  const onUserDelete = () => {
+    setState({ ...state, popConfirmDelete: false })
+    mutate({}, {
+      onSuccess: res => {
+        console.log(res, "userDelete");
+      },
+      onError: err => {
+
+      }
+    })
+  }
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
@@ -171,6 +260,7 @@ const EditProfilePage = () => {
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Oтмена</button>
           <button
+            onClick={onUserDelete}
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Удалить</button>
         </div>
@@ -212,7 +302,10 @@ const EditProfilePage = () => {
               <input
                 className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
+                name="fname"
                 placeholder="Имя"
+                value={state?.firstName || null}
+                onChange={(e) => setState({ ...state, firstName: e.target.value })}
                 required
               />
             </div>
@@ -226,25 +319,30 @@ const EditProfilePage = () => {
               <input
                 className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="text"
+                name="lname"
                 placeholder="Фамилия"
+                value={state?.lastName || null}
+                onChange={(e) => setState({ ...state, lastName: e.target.value })}
                 required
               />
             </div>
           </div>
           {/* Имя организации */}
-          <div className="w-full h-fit  ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Имя организации{" "}
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type="text"
-                placeholder="Имя организации"
-                required
-              />
-            </div>
-          </div>
+          {
+            state?.sellerTypeId >= 3 &&
+            <div className="w-full h-fit  ">
+              <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+                Имя организации{" "}
+              </div>
+              <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
+                <input
+                  className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                  type="text"
+                  placeholder="Имя организации"
+                  required
+                />
+              </div>
+            </div>}
           {/* Mail */}
           <div className="w-full h-fit  ">
             <div className=" flex items-center justify-between w-full">
@@ -256,7 +354,10 @@ const EditProfilePage = () => {
               <input
                 className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                 type="email"
+                name="email"
                 placeholder="Адрес электронной почты"
+                value={state?.email || null}
+                onChange={(e) => setState({ ...state, email: e.target.value })}
                 required
               />
               <span>
@@ -274,16 +375,17 @@ const EditProfilePage = () => {
                 <input
                   className="w-[40px]  h-full select-none mx-2 not-italic font-AeonikProMedium text-base leading-4 text-black"
                   type="text"
-                  value={state.phoneCode}
+                  value={"+" + state.phoneCode}
                   readOnly
                 />
               </div>
               <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                 <InputMask
                   mask="(99) 999-99-99"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={`w-full px-4 outline-none h-full not-italic ${phone ? "font-AeonikProMedium" : null
+                  name="phone"
+                  value={state?.phoneNum || null}
+                  onChange={(e) => setState({ ...state, phoneNum: e.target.value })}
+                  className={`w-full px-4 outline-none h-full not-italic ${state?.phoneNum ? "font-AeonikProMedium" : null
                     } text-base leading-4 text-black`}
                   placeholder={"(97) 123-45-67"}
                 ></InputMask>
@@ -294,7 +396,6 @@ const EditProfilePage = () => {
           <div className="w-full h-fit flex justify-center ">
             <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
               <div className="w-full flex items-center justify-between  ">
-
                 <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
                 <span
                   className="select-none cursor-pointer"
@@ -384,12 +485,12 @@ const EditProfilePage = () => {
                   }}
                   className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
                   <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
-                    {!state?.region && !state?.sub_region && "Выберите регион"}
+                    {!state?.regionId && !state?.subRegionId && "Выберите регион"}
 
-                    {state?.getRegionList?.regions?.filter(e => e.id == state?.region).map(item => {
+                    {state?.getRegionList?.regions?.filter(e => e.id == state?.regionId).map(item => {
                       return <span className="flex items-center text-[#000] text-[14px] sm:text-base">
                         {item?.name_ru},
-                        {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {
+                        {item?.sub_regions?.filter(i => i.id == state?.subRegionId).map(item => {
                           return <span className="ml-1">{item?.name_ru}</span>
                         })}
                       </span>
@@ -404,7 +505,7 @@ const EditProfilePage = () => {
             </div>
           </div>
           {/* Type */}
-          <div className="w-full h-fit  ">
+          {/* <div className="w-full h-fit  ">
             <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
               Тип{" "}
             </div>
@@ -416,7 +517,92 @@ const EditProfilePage = () => {
                 required
               />
             </div>
-          </div>
+          </div> */}
+          {
+            state?.sellerTypeId >= 3 ?
+
+              <div className="select relative w-full flex items-center ">
+                <Select
+                  className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                  placeholder="Тип предприятия"
+                  optionFilterProp="children"
+                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
+                  suffixIcon={null}
+                  size="large"
+                  options={
+                    state?.getSellerList?.company?.map(item => {
+                      return (
+                        {
+                          value: item?.id,
+                          label: item?.name_ru,
+                        }
+                      )
+                    })
+                  }
+                />
+                <span className={`data absolute right-[10px] top- h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}>
+                  <ArrowTopIcons colors="#a1a1a1" />
+                </span>
+              </div>
+              :
+              // <div className="select relative w-full flex items-center ">
+              //   <Select
+              //     className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+              //     placeholder="Тип предприятия"
+              //     onClick={changeTip}
+              //     optionFilterProp="children"
+              //     onChange={(e) => setState({ ...state, sellerTypeId: e })}
+              //     suffixIcon={null}
+              //     defaultValue={state?.selectSellerType}
+              //     // value={state?.getSellerList?.individual.filter(e => e.id == state?.sellerTypeId).map(item => {
+              //     //   return item?.name_ru
+              //     // })}
+              //     size="large"
+              //     options={
+              //       state?.getSellerList?.individual?.map(item => {
+              //         return (
+              //           {
+              //             value: item?.id,
+              //             label: item?.name_ru,
+              //           }
+              //         )
+              //       })
+              //     }
+              //   />
+              //   <span className={`data absolute right-[10px] top- h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}>
+              //     <ArrowTopIcons colors="#a1a1a1" />
+              //   </span>
+              // </div>
+              <div className="w-full h-fit ">
+                <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+                  Тип
+                </div>
+                <div className="relative mt-[6px] flex items-center justify-between ">
+                  <select
+                    id="changeIcons"
+                    // className="text-[#a1a1a1]"
+                    className="w-full h-[42px]  outline-none  px-[16px] w-full flex items-center border border-searchBgColor rounded-lg"
+                    value={state?.sellerTypeId}
+                    onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
+                    placeholder="Тип предприятия"
+                    required
+                  >
+                    {/* <option value="">Тип предприятия</option> */}
+                    {
+                      state?.getSellerList?.individual?.map(data => {
+                        return (
+                          <option key={data.id} value={data.id}> {data.name_ru} </option>
+                        )
+                      })
+                    }
+
+                  </select>
+                  <span className={`data absolute right-[10px]  h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}>
+                    <ArrowTopIcons colors="#a1a1a1" />
+                  </span>
+                </div>
+              </div>
+          }
           {/*  CardNumber */}
           <div className="w-full  h-fit   ">
             <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">

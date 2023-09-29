@@ -231,3 +231,32 @@
   height: 0px;
   overflow: hidden;
 }
+
+#changeIcons {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* .options li {
+  padding: 0 6px;
+  margin: 0 0;
+  padding: 0 10px;
+}
+
+.options li:hover {
+  background-color: #39f;
+  color: white;
+} */
+/* select option {
+  padding: 10px 5px !important;
+  background-color: green !important;
+  color: red !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  height: 40px !important;
+
+
+} */
