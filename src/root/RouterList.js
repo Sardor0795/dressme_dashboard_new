@@ -37,6 +37,7 @@ import ResetPasswordSeller from "../components/Authentication/SellerAuthenticati
 import MailVerfySeller from "../components/Authentication/SellerAuthentication/MailVerfy/MailVerfySeller";
 
 export default function RouterList() {
+
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
@@ -48,7 +49,7 @@ export default function RouterList() {
     <div>
       {/* <NavbarForSetting /> */}
       {
-        localStorage.getItem("DressmeUserToken") ?
+        dressInfo?.AccessTokenSeller ?
           <Routes>
             {/* ---------------------<Authentification>------------------------- */}
             <Route path={"/sign-up"} element={<UserProfile />} />
@@ -122,21 +123,17 @@ export default function RouterList() {
             {/* <Route path="/review-details/:id" element={<ReviewDetail />} /> */}
 
             {!dressInfo?.isAuthen ? (
-              locationWindow !== "/profile" ? (
-                <Route path="/" element={<Navigate to={"/profile"} />} />
+              locationWindow !== "/edit-profile" ? (
+                <Route path="/" element={<Navigate to={"/edit-profile"} />} />
               ) : (
-                <Route path="/" element={<Navigate to={"/profile"} />} />
+                <Route path="/" element={<Navigate to={"/edit-profile"} />} />
               )
             ) : (
-              <Route path="/" element={<Navigate to={"/reviews"} />} />
+              <Route path="/" element={<Navigate to={"/edit-profile"} />} />
             )}
 
-            {/* {dressInfo?.isAuthen ? (
-          <Route path="/" element={<Navigate to={"/reviews"} />} />
-        ) : (
-          <Route path="/" element={<Navigate to={"/profile"} />} />
-        )} */}
-            <Route path="*" element={<Error />} />
+
+            <Route path="*" element={<Error colors="text-[#007DCA]" />} />
           </Routes>
           :
           <Routes>
@@ -145,7 +142,7 @@ export default function RouterList() {
             <Route path={"/forgot-password-seller"} element={<ForgotPasswordSeller />} />
             <Route path={"/reset-password-seller/:id"} element={<ResetPasswordSeller />} />
             <Route path={"/mail-verify-seller/:id"} element={<MailVerfySeller />} />
-            <Route path="*" element={<Error />} />
+            <Route path="*" element={<Error colors="text-[#d50000]" />} />
 
             <Route path="/" element={<Navigate to={"/signup-seller"} />} />
           </Routes>

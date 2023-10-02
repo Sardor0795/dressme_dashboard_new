@@ -8,6 +8,7 @@ import {
   DeleteIcon,
   MenuCloseIcons,
   UserMailIcon,
+  VerticalMenuIcons,
 } from "../../../../assets/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -301,8 +302,8 @@ const EditProfilePage = () => {
           </span>
           <button
             onClick={() => setState({ ...state, popConfirmDelete: true })}
-            className="text-redText flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5">
-            Удалить аккаунт
+            className="h-5 flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5">
+            <VerticalMenuIcons className="h-full" />
           </button>
         </div>
         <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 w-full h-fit ">
@@ -386,7 +387,7 @@ const EditProfilePage = () => {
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
               <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                 <input
-                  className="w-[40px]  h-full select-none mx-2 not-italic font-AeonikProMedium text-base leading-4 text-black"
+                  className="w-[40px]  h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
                   type="text"
                   value={"+" + state.phoneCode}
                   readOnly
@@ -398,7 +399,7 @@ const EditProfilePage = () => {
                   name="phone"
                   value={state?.phoneNum || null}
                   onChange={(e) => setState({ ...state, phoneNum: e.target.value })}
-                  className={`w-full px-4 outline-none h-full not-italic ${state?.phoneNum ? "font-AeonikProMedium" : null
+                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.phoneNum ? "font-AeonikProMedium" : null
                     } text-base leading-4 text-black`}
                   placeholder={"(97) 123-45-67"}
                 ></InputMask>

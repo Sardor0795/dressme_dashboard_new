@@ -1,24 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
+import { dressMainData } from "../../../../hook/ContextTeam";
 
 
 export default function MailVerfySeller() {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const [state, setState] = useState({
     eyesShow: true,
     password: "",
     email: "",
     rememberCheck: "",
     // get method 
-    getToken: "",  //no use
-    getVerfyMessage: ""
+    getVerfyMessage: "",
+    // errorMesage
+    errorMessage: ""
   });
 
   const handleChange = (e) => {
+
     const { checked } = e.target;
     setState({ ...state, rememberCheck: checked })
   }
@@ -31,21 +36,6 @@ export default function MailVerfySeller() {
   const [error, setError] = useState(false);
   const url = "https://api.dressme.uz/api/seller";
 
-  // ------------GET METHOD seller-types-----------------
-  // const { isFetching } = useQuery(["verify mail"], () => {
-  //   return fetch(`${url}/email-verify/${PathnameToken ? PathnameToken : null}`).then(res => res.json())
-  // },
-  //   {
-  //     onSuccess: (res) => {
-  //       setState({ ...state, getToken: res })
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //     onError: (err) => {
-  //       console.log(err, "err");
-  //     }
-  //   }
-  // )
 
   React.useEffect(() => {
     fetch(`${url}/email-verify/${PathnameToken ? PathnameToken : null}`)
@@ -56,7 +46,6 @@ export default function MailVerfySeller() {
       });
   }, []);
 
-  console.log(state?.getToken, "getToken");
 
   const dataMutate = useMutation(() => {
     return fetch(`${url}/login`, {
@@ -76,11 +65,8 @@ export default function MailVerfySeller() {
           onSuccess: (res) => {
             console.log(res, "MailVerfySeller");
             if (res?.access_token) {
-              localStorage.setItem("DressmeUserToken  ", res?.access_token);
-              // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
-              navigate("/edit-profile")
-              window.location.reload();
-              setState({ ...state, email: "", password: "" });
+              // localStorage.setItem("DressmeUserToken", res?.access_token);
+              setDressInfo({ ...dressInfo, AccessTokenSeller: res?.access_token })
               toast.success("Muaffaqiyatli kirdingiz", {
                 position: "top-right",
                 autoClose: 5000,
@@ -91,10 +77,15 @@ export default function MailVerfySeller() {
                 progress: undefined,
                 theme: "light",
               });
+              // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
+              navigate("/")
+              // window.location.reload();
+              setState({ ...state, email: "", password: "" });
 
-            } else {
+            } else if (res?.message && res?.err) {
               setError("Email yoki parolda xatolik");
-              toast.error("Email yoki parolda xatolik", {
+              setState({ ...state, errorMessage: res?.message })
+              toast.error(`${res?.message}`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -135,6 +126,10 @@ export default function MailVerfySeller() {
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem('DressmeUserToken', dressInfo?.AccessTokenSeller);
+  }, [dressInfo?.AccessTokenSeller]);
+
   return (
     <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex flex-col items-center justify-center">
       <ToastContainer
@@ -153,16 +148,7 @@ export default function MailVerfySeller() {
       {/* <div>{PathnameToken}</div> */}
       <div className="max-w-[650px] w-[100%] flex flex-col items-center justify-center  h-fit mb-5 px-2">
         <div className="w-full flex items-center justify-center flex-col">
-          {/* {state?.getVerfyMessage?.error &&
-            <button className="w-[38px] md:w-[50px] h-[38px] md:h-[50px] flex p-2 md:p-4 items-center justify-center rounded-full bg-[#FF6C37]">
-              <MenuCloseIcons colors="#D50000" />
-            </button>
-          }
-          {state?.getVerfyMessage?.error ? null :
-            <button className="w-[38px] md:w-[50px] h-[38px] md:h-[50px] flex p-2 md:p-4 items-center justify-center rounded-full bg-[#C3F1D8]">
-              <SuccessIconsForMailGreen />
-            </button>
-          } */}
+
 
           <p className="mt-3 not-italic font-AeonikProRegular text-[20px] md:text-[25px] text-center leading-[30px]   tracking-[0,16px] text-black">
             {state?.getVerfyMessage?.message}</p>
@@ -182,7 +168,7 @@ export default function MailVerfySeller() {
           <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px]  ">
             Электронная почта
           </span>
-          <div className="mt-[4px]  w-full flex items-center border border-searchBgColor rounded-lg ">
+          <div className="mt-[4px]  w-full flex items-center border border-searchBgColor overflow-hidden rounded-lg ">
             <input
               className="w-full px-2 xs:px-[16px] outline-none	bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type="email"
@@ -195,7 +181,7 @@ export default function MailVerfySeller() {
               placeholder="Emailingizni kiriting..."
               required
             />
-            <span>
+            <span className=" pr-2 xs:pr-4">
               <UserMailIcon colors={"#A1A1A1"} />
             </span>
           </div>
@@ -204,7 +190,7 @@ export default function MailVerfySeller() {
           <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px]  ">
             Пароль
           </span>
-          <div className="mt-[4px]  w-full flex items-center border border-searchBgColor rounded-lg ">
+          <div className="mt-[4px]  w-full flex items-center border border-searchBgColor rounded-lg overflow-hidden">
             <input
               className="w-full px-2 xs:px-[16px] outline-none	bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShow ? "password" : "text"}
@@ -217,16 +203,18 @@ export default function MailVerfySeller() {
               }}
               required
             />
-            <span className="cursor-pointer">
+            <span className="cursor-pointer pr-2 xs:pr-4">
               {state?.eyesShow ? (
                 <AiOutlineEyeInvisible
                   onClick={() => setState({ ...state, eyesShow: false })}
                   size={20}
+                  color={"#e2e2e2"}
                 />
               ) : (
                 <AiOutlineEye
                   onClick={() => setState({ ...state, eyesShow: true })}
                   size={20}
+                  color={"#e2e2e2"}
                 />
               )}
             </span>
@@ -253,6 +241,8 @@ export default function MailVerfySeller() {
           </div>
 
         </div>
+        {state?.errorMessage &&
+          <span className="w-full h-fit text-12 text-red-500">{state?.errorMessage || null}</span>}
         <button
           type="button"
           onClick={EnterTheSystem}

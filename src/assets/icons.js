@@ -1286,6 +1286,15 @@ const Star6Icon = () => {
     </svg>
   );
 };
+const VerticalMenuIcons = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="36" viewBox="0 0 10 36" fill="none">
+      <path d="M5.03365 8.31657C6.8746 8.31657 8.36698 6.82418 8.36698 4.98324C8.36698 3.14229 6.8746 1.6499 5.03365 1.6499C3.1927 1.6499 1.70032 3.14229 1.70032 4.98324C1.70032 6.82418 3.1927 8.31657 5.03365 8.31657Z" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" />
+      <path d="M4.96697 21.3333C6.80792 21.3333 8.3003 19.8409 8.3003 18C8.3003 16.159 6.80792 14.6666 4.96697 14.6666C3.12602 14.6666 1.63364 16.159 1.63364 18C1.63364 19.8409 3.12602 21.3333 4.96697 21.3333Z" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" />
+      <path d="M5.03365 34.35C6.8746 34.35 8.36698 32.8576 8.36698 31.0167C8.36698 29.1757 6.8746 27.6833 5.03365 27.6833C3.1927 27.6833 1.70032 29.1757 1.70032 31.0167C1.70032 32.8576 3.1927 34.35 5.03365 34.35Z" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" />
+    </svg>
+  );
+};
 export {
   ProfileIcon,
   NavbarReviewIcon,
@@ -1342,6 +1351,7 @@ export {
   Star6Icon,
   DashboardList,
   DashboardUser,
+  VerticalMenuIcons
 
 
 };

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
+import { dressMainData } from "../../../../hook/ContextTeam";
 export default function SignInSeller() {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const [state, setState] = useState({
     eyesShow: true,
     password: "",
@@ -58,11 +61,11 @@ export default function SignInSeller() {
               });
 
             } else if (res?.access_token) {
+              setDressInfo({ ...dressInfo, AccessTokenSeller: res?.access_token })
 
-              localStorage.setItem("DressmeUserToken", res?.access_token)
+              // localStorage.setItem("DressmeUserToken", res?.access_token)
               navigate("/edit-profile")
               window.location.reload();
-              // window.location.replace('/edit-profile');
               toast.success(`Успешный  вход в систему`, {
                 position: "top-right",
                 autoClose: 5000,
@@ -104,7 +107,9 @@ export default function SignInSeller() {
       });
     }
   };
-
+  useEffect(() => {
+    localStorage.setItem('DressmeUserToken', dressInfo?.AccessTokenSeller);
+  }, [dressInfo?.AccessTokenSeller]);
   return (
     <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center">
       <ToastContainer
