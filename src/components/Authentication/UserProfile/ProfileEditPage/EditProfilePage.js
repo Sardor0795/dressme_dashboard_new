@@ -256,8 +256,8 @@ const EditProfilePage = () => {
             colors={"#a1a1a1"} />
         </button>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-          <span className="w-10 h-10 rounded-full border border-[#FF4747] flex items-center justify-center">
-            <span className="cursor-pointer active:translate-y-[2px] text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+          <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+            <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
               <DeleteIcon width={30} />
             </span>
           </span>
@@ -392,6 +392,7 @@ const EditProfilePage = () => {
                   type="text"
                   value={"+" + state.phoneCode}
                   readOnly
+                  placeholder="998"
                 />
               </div>
               <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
@@ -402,7 +403,7 @@ const EditProfilePage = () => {
                   onChange={(e) => setState({ ...state, phoneNum: e.target.value })}
                   className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.phoneNum ? "font-AeonikProMedium" : null
                     } text-base leading-4 text-black`}
-                  placeholder={"(97) 123-45-67"}
+                  placeholder={"(99) 999-99-99"}
                 ></InputMask>
               </div>
             </div>

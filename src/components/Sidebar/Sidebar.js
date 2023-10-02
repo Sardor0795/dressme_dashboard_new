@@ -78,7 +78,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
+      className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
     `}
     >
       <ToastContainer
