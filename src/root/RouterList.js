@@ -49,7 +49,7 @@ export default function RouterList() {
     <div>
       {/* <NavbarForSetting /> */}
       {
-        dressInfo?.AccessTokenSeller ?
+        dressInfo?.AccessTokenSeller?.length !== 0 ?
           <Routes>
             {/* ---------------------<Authentification>------------------------- */}
             <Route path={"/sign-up"} element={<UserProfile />} />
@@ -122,7 +122,7 @@ export default function RouterList() {
             {/* <Route path="/store-location" element={<Clothes />} /> */}
             {/* <Route path="/review-details/:id" element={<ReviewDetail />} /> */}
 
-            {!dressInfo?.isAuthen ? (
+            {/* {!dressInfo?.isAuthen ? (
               locationWindow !== "/edit-profile" ? (
                 <Route path="/" element={<Navigate to={"/edit-profile"} />} />
               ) : (
@@ -130,8 +130,9 @@ export default function RouterList() {
               )
             ) : (
               <Route path="/" element={<Navigate to={"/edit-profile"} />} />
-            )}
+            )} */}
 
+            <Route path="/" element={<Navigate to={"/edit-profile"} />} />
 
             <Route path="*" element={<Error colors="text-[#007DCA]" />} />
           </Routes>

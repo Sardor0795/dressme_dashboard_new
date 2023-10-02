@@ -11,9 +11,11 @@ export default function NavbarDashboard() {
     <div className="flex flex-col w-full h-full border border-green-500">
       {
         dressInfo?.AccessTokenSeller ?
-          <div className="relative w-full h-full flex justify-between">
-            <Sidebar />
-            <div className="w-full md:w-[calc(100%-300px)] h-full md:ml-[300px]">
+          <div className="relative w-full h-full flex justify-between border border-black">
+            <div className="w-[300px] h-full">
+              <Sidebar />
+            </div>
+            <div className="w-full md:w-[calc(100%-300px)] h-full  border border-black">
               <RouterList />
             </div>
           </div>
