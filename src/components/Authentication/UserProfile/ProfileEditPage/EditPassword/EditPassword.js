@@ -38,6 +38,8 @@ export default function EditPassword({ onClick }) {
               className=" outline-none w-full h-[40px] pl-2 xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowOld ? "text" : "password"}
               placeholder="Старый пароль"
+              name="password"
+              autoComplete="off"
               required
             />
 
@@ -68,6 +70,8 @@ export default function EditPassword({ onClick }) {
               className=" outline-none w-full pl-2 h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowNew ? "text" : "password"}
               placeholder="Ввести старый пароль"
+              name="password"
+              autoComplete="off"
               required
             />
 
@@ -99,6 +103,8 @@ export default function EditPassword({ onClick }) {
               className=" outline-none pl-2 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowConfirm ? "text" : "password"}
               placeholder="Ввести старый пароль"
+              name="password"
+              autoComplete="off"
               required
             />
 
