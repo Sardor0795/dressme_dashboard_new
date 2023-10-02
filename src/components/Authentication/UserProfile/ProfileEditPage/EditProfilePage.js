@@ -18,7 +18,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 
-
+import { CiMenuKebab } from "react-icons/ci";
 
 const EditProfilePage = () => {
   const navigate = useNavigate()
@@ -303,7 +303,8 @@ const EditProfilePage = () => {
           <button
             onClick={() => setState({ ...state, popConfirmDelete: true })}
             className="h-5 flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5">
-            <VerticalMenuIcons className="h-full" />
+            {/* <VerticalMenuIcons className="h-full" /> */}
+            <CiMenuKebab size={30} />
           </button>
         </div>
         <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 w-full h-fit ">

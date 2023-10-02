@@ -9,12 +9,8 @@ export default function ContextTeam({ children }) {
     AccessTokenSeller: ""
   });
   useEffect(() => {
-    const items = localStorage.getItem('DressmeUserToken');
-    if (items) {
-      setDressInfo({ ...dressInfo, AccessTokenSeller: items || null })
-    }
+    setDressInfo({ ...dressInfo, AccessTokenSeller: localStorage.getItem('DressmeUserToken') })
   }, []);
-  console.log(dressInfo?.AccessTokenSeller, "AccessTokenSeller");
   return (
     <dressMainData.Provider value={[dressInfo, setDressInfo]}>
       {children}
