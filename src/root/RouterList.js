@@ -41,88 +41,89 @@ export default function RouterList() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
-
+  console.log(dressInfo?.AccessTokenSeller, "dressInfo?.AccessTokenSeller");
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
   return (
     <div>
       {/* <NavbarForSetting /> */}
-      {
-        dressInfo?.AccessTokenSeller?.length !== 0 ?
-          <Routes>
-            {/* ---------------------<Authentification>------------------------- */}
-            <Route path={"/sign-up"} element={<UserProfile />} />
-            <Route path={"/edit-profile"} element={<EditProfilePage />} />
-            {/* ---------------------<Store>------------------------- */}
-            <Route path="/reviews" element={<Reviews1 />}>
-              <Route index element={<ReviewStoreWear />} />
-              <Route path={"review/store-wear"} element={<ReviewStoreWear />} />
-              <Route
-                path={"review/comment-store/:id"}
-                element={<ReviewComment />}
-              />
-              <Route
-                path={"review/comment-wear/:id"}
-                element={<ReviewWearComment />}
-              />
-            </Route>
 
-            {/* ---------------------<Store>------------------------- */}
-            <Route path="/store" element={<MarketStore />}>
-              {dressInfo?.isItPorduct ? (
-                <Route index element={<MyMarket />} />
-              ) : (
-                <Route index element={<AddStore />} />
-              )}
-              <Route path="/store/market-add" element={<AddStore />} />
-              <Route path="/store/market-list" element={<MyMarket />} />
-              <Route path="/store/location-add" element={<AddLocation />} />
-              <Route path="/store/list/:id" element={<MarketEdit />} />
-            </Route>
 
-            {/* ---------------------<Locations>------------------------- */}
-            <Route path="/locations-store" element={<MarketLocations />}>
-              {dressInfo?.isItPorduct ? (
-                <Route index element={<LocationList />} />
-              ) : (
-                <Route index element={<NoLocations />} />
-              )}
-              <Route path="/locations-store/list" element={<LocationList />} />
-              <Route
-                path="/locations-store/city/:id"
-                element={<LocationMapCity />}
-              />
-              <Route
-                path="/locations-store/wears/:id"
-                element={<LocationClothesCity />}
-              />
-              <Route
-                path="/locations-store/edit-detail/:id"
-                element={<ProductEditDetailLocation />}
-              />
-              <Route
-                path="/locations-store/edit-title/:id"
-                element={<ProductEditTitleLocation />}
-              />
-            </Route>
+      <Routes>
+        {/* ---------------------<Authentification>------------------------- */}
 
-            {/* ---------------------<LocationsProduct>------------------------- */}
-            <Route path="/products" element={<Products />}>
-              {dressInfo?.isItPorduct ? (
-                <Route index element={<ProductsPageOne />} />
-              ) : (
-                <Route index element={<NoLocationProduct />} />
-              )}
-              <Route path="/products/location" element={<ProductLocationsList />} />
-              <Route path="/products/add-wear" element={<ProductsPageOne />} />
-              <Route path="/products/add-detail" element={<ProductsPageTwo />} />
-            </Route>
+        <Route path={"/sign-up"} element={<UserProfile />} />
+        <Route path={"/edit-profile"} element={<EditProfilePage />} />
+        {/* ---------------------<Store>------------------------- */}
+        <Route path="/reviews" element={<Reviews1 />}>
+          <Route index element={<ReviewStoreWear />} />
+          <Route path={"review/store-wear"} element={<ReviewStoreWear />} />
+          <Route
+            path={"review/comment-store/:id"}
+            element={<ReviewComment />}
+          />
+          <Route
+            path={"review/comment-wear/:id"}
+            element={<ReviewWearComment />}
+          />
+        </Route>
 
-            {/* <Route path="/store-location" element={<Clothes />} /> */}
-            {/* <Route path="/review-details/:id" element={<ReviewDetail />} /> */}
+        {/* ---------------------<Store>------------------------- */}
+        <Route path="/store" element={<MarketStore />}>
+          {dressInfo?.isItPorduct ? (
+            <Route index element={<MyMarket />} />
+          ) : (
+            <Route index element={<AddStore />} />
+          )}
+          <Route path="/store/market-add" element={<AddStore />} />
+          <Route path="/store/market-list" element={<MyMarket />} />
+          <Route path="/store/location-add" element={<AddLocation />} />
+          <Route path="/store/list/:id" element={<MarketEdit />} />
+        </Route>
 
-            {/* {!dressInfo?.isAuthen ? (
+        {/* ---------------------<Locations>------------------------- */}
+        <Route path="/locations-store" element={<MarketLocations />}>
+          {dressInfo?.isItPorduct ? (
+            <Route index element={<LocationList />} />
+          ) : (
+            <Route index element={<NoLocations />} />
+          )}
+          <Route path="/locations-store/list" element={<LocationList />} />
+          <Route
+            path="/locations-store/city/:id"
+            element={<LocationMapCity />}
+          />
+          <Route
+            path="/locations-store/wears/:id"
+            element={<LocationClothesCity />}
+          />
+          <Route
+            path="/locations-store/edit-detail/:id"
+            element={<ProductEditDetailLocation />}
+          />
+          <Route
+            path="/locations-store/edit-title/:id"
+            element={<ProductEditTitleLocation />}
+          />
+        </Route>
+
+        {/* ---------------------<LocationsProduct>------------------------- */}
+        <Route path="/products" element={<Products />}>
+          {dressInfo?.isItPorduct ? (
+            <Route index element={<ProductsPageOne />} />
+          ) : (
+            <Route index element={<NoLocationProduct />} />
+          )}
+          <Route path="/products/location" element={<ProductLocationsList />} />
+          <Route path="/products/add-wear" element={<ProductsPageOne />} />
+          <Route path="/products/add-detail" element={<ProductsPageTwo />} />
+        </Route>
+
+        {/* <Route path="/store-location" element={<Clothes />} /> */}
+        {/* <Route path="/review-details/:id" element={<ReviewDetail />} /> */}
+
+        {/* {!dressInfo?.isAuthen ? (
               locationWindow !== "/edit-profile" ? (
                 <Route path="/" element={<Navigate to={"/edit-profile"} />} />
               ) : (
@@ -131,23 +132,26 @@ export default function RouterList() {
             ) : (
               <Route path="/" element={<Navigate to={"/edit-profile"} />} />
             )} */}
+        <Route path="/" element={<Navigate to={"/edit-profile"} />} />
+        {/* {
+          dressInfo?.AccessTokenSeller ?
+            :
+            <>
+              <Route path="/" element={<Navigate to={"/signup-seller"} />} />
+            </>
+        } */}
+        <Route path={"/signup-seller"} element={<SignUpSeller />} />
+        <Route path={"/login-seller"} element={<SignInSeller />} />
+        <Route path={"/forgot-password-seller"} element={<ForgotPasswordSeller />} />
+        <Route path={"/reset-password-seller/:id"} element={<ResetPasswordSeller />} />
+        <Route path={"/mail-verify-seller/:id"} element={<MailVerfySeller />} />
+        <Route path="*" element={<Error colors="text-[#007DCA]" />} />
 
-            <Route path="/" element={<Navigate to={"/edit-profile"} />} />
 
-            <Route path="*" element={<Error colors="text-[#007DCA]" />} />
-          </Routes>
-          :
-          <Routes>
-            <Route path={"/signup-seller"} element={<SignUpSeller />} />
-            <Route path={"/login-seller"} element={<SignInSeller />} />
-            <Route path={"/forgot-password-seller"} element={<ForgotPasswordSeller />} />
-            <Route path={"/reset-password-seller/:id"} element={<ResetPasswordSeller />} />
-            <Route path={"/mail-verify-seller/:id"} element={<MailVerfySeller />} />
-            <Route path="*" element={<Error colors="text-[#d50000]" />} />
+        {/* <Route path="*" element={<Error colors="text-[#d50000]" />} /> */}
 
-            <Route path="/" element={<Navigate to={"/signup-seller"} />} />
-          </Routes>
-      }
+      </Routes>
+
     </div>
   );
 }
