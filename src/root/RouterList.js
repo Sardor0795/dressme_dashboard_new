@@ -41,7 +41,6 @@ export default function RouterList() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
-  console.log(dressInfo?.AccessTokenSeller, "dressInfo?.AccessTokenSeller");
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);

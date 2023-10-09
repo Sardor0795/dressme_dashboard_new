@@ -54,7 +54,7 @@ export default function Sidebar() {
       onSuccess: res => {
         if (res?.message) {
           localStorage.clear();
-          navigate("/signup-seller")
+          navigate("/login-seller")
           window.location.reload();
           setState({ ...state, logOutModal: false })
           console.log(res, "logOut");
