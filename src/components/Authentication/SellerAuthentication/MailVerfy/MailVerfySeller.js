@@ -123,9 +123,9 @@ export default function MailVerfySeller() {
     }
   };
 
-  // useEffect(() => {
-  //   localStorage.setItem('DressmeUserToken', dressInfo?.AccessTokenSeller);
-  // }, [dressInfo?.AccessTokenSeller]);
+  useEffect(() => {
+    document.title = "Подтвердить адрес электронной почты";
+  }, []);
 
   return (
     <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex flex-col items-center justify-center">

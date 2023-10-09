@@ -160,7 +160,10 @@ const EditProfilePage = () => {
     window.scrollTo({
       top: 0,
     });
+    document.title = "редактировать профиль";
+
   }, []);
+
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer

@@ -109,6 +109,13 @@ export default function SignInSeller() {
   // useEffect(() => {
   //   localStorage.setItem('DressmeUserToken', dressInfo?.AccessTokenSeller);
   // }, [dressInfo?.AccessTokenSeller]);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+    document.title = "Войти в систему продавца";
+
+  }, []);
   return (
     <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center">
       <ToastContainer
