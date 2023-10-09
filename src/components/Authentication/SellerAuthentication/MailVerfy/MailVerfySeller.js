@@ -66,7 +66,6 @@ export default function MailVerfySeller() {
             console.log(res, "MailVerfySeller");
             if (res?.access_token) {
               localStorage.setItem("DressmeUserToken", res?.access_token);
-              // setDressInfo({ ...dressInfo, AccessTokenSeller: res?.access_token })
               toast.success("Muaffaqiyatli kirdingiz", {
                 position: "top-right",
                 autoClose: 5000,
@@ -77,9 +76,7 @@ export default function MailVerfySeller() {
                 progress: undefined,
                 theme: "light",
               });
-              // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
               navigate("/")
-              // window.location.reload();
               setState({ ...state, email: "", password: "" });
 
             } else if (res?.message && res?.err) {

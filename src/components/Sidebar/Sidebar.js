@@ -103,12 +103,28 @@ export default function Sidebar() {
             <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white flex items-center justify-center cursor-pointer">
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
-            <span className="text-black text-xl not-italic font-AeonikProRegular">
-              Самандар
+            <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
+              {dressInfo?.sellerFname || "Ism"}
+              {dressInfo?.sellerLname || "Familiya"}
             </span>
           </NavLink>
+          {/* <div>
+            <p>
+              {
+                localStorage.getItem("DressmeUserToken")
+              }
+              getItem
+            </p>
+            <p>
+
+              {
+                dressInfo?.AccessTokenSeller
+              }
+              dressMe
+            </p>
+          </div> */}
           {/* Links */}
-          {dressInfo?.isAuthen ? (
+          {dressInfo?.sellerStatus == "approved" ? (
             <div className="w-full flex flex-wrap gap-y-2">
               {" "}
               <NavLink

@@ -132,7 +132,7 @@ export default function RouterList() {
             ) : (
               <Route path="/" element={<Navigate to={"/edit-profile"} />} />
             )} */}
-        <Route path="/" element={<Navigate to={"/edit-profile"} />} />
+        <Route path="/" element={<Navigate to={"/signup-seller"} />} />
         {/* {
           dressInfo?.AccessTokenSeller ?
             :

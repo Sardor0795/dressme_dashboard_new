@@ -61,7 +61,6 @@ export default function SignInSeller() {
               });
 
             } else if (res?.access_token) {
-              setDressInfo({ ...dressInfo, AccessTokenSeller: res?.access_token })
 
               localStorage.setItem("DressmeUserToken", res?.access_token)
               navigate("/edit-profile")
