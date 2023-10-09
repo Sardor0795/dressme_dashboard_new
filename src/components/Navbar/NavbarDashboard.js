@@ -12,12 +12,12 @@ export default function NavbarDashboard() {
 
 
       <div className="relative w-full h-full flex justify-between ">
-        {
-          dressInfo?.AccessTokenSeller &&
-          <div className="w-[300px] h-full">
-            <Sidebar />
-          </div>
-        }
+        {/* {
+          dressInfo?.AccessTokenSeller && */}
+        <div className="w-[300px] h-full">
+          <Sidebar />
+        </div>
+        {/* // } */}
         <div className={`w-full  ${dressInfo?.AccessTokenSeller ? "md:w-[calc(100%-300px)] border border-red-500" : "md:w-full border border-black"} h-full `}>
           <RouterList />
         </div>
