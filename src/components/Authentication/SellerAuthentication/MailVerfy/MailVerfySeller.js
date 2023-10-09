@@ -55,15 +55,15 @@ export default function MailVerfySeller() {
     }).then((res) => res.json());
   });
   const EnterTheSystem = () => {
-    console.log(state?.email, "email");
-    console.log(state?.password, "password");
-    console.log(state?.rememberCheck, "rememberCheck");
+    // console.log(state?.email, "email");
+    // console.log(state?.password, "password");
+    // console.log(state?.rememberCheck, "rememberCheck");
     if (state.email?.length && state.password?.length) {
       dataMutate.mutate(
         {},
         {
           onSuccess: (res) => {
-            console.log(res, "MailVerfySeller");
+            // console.log(res, "MailVerfySeller");
             if (res?.access_token) {
               localStorage.setItem("DressmeUserToken", res?.access_token);
               toast.success("Muaffaqiyatli kirdingiz", {
@@ -76,7 +76,7 @@ export default function MailVerfySeller() {
                 progress: undefined,
                 theme: "light",
               });
-              navigate("/")
+              navigate("/edit-profile")
               setState({ ...state, email: "", password: "" });
 
             } else if (res?.message && res?.err) {
