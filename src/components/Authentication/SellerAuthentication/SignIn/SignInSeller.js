@@ -64,7 +64,7 @@ export default function SignInSeller() {
 
               localStorage.setItem("DressmeUserToken", res?.access_token)
               navigate("/edit-profile")
-              // window.location.reload();
+              window.location.reload();
               toast.success(`Успешный  вход в систему`, {
                 position: "top-right",
                 autoClose: 5000,
