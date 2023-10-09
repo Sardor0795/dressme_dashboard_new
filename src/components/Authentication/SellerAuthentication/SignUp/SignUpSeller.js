@@ -219,6 +219,13 @@ const SignUpSeller = () => {
       setActiveIndex(id)
     }
   }
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+    document.title = "Регистрация продавца    ";
+
+  }, []);
 
   // console.log(state?.isEmailMessage, "isEmailMessage");
   // console.log(state?.errorGroup?.errors, "errorGroup");

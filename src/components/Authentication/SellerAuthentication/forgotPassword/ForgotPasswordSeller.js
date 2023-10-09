@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useMutation } from "@tanstack/react-query";
 import { message } from 'antd';
@@ -87,6 +87,13 @@ export default function ForgotPasswordSeller() {
             });
         }
     }
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+        });
+        document.title = "Забыли пароль";
+
+    }, []);
     return (
         <div className="w-full min-h-[calc(100vh-180px)] flex flex-col items-center justify-center ss:px-4 md:px-0 ">
             <ToastContainer
