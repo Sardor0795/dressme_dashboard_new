@@ -77,6 +77,7 @@ export default function MailVerfySeller() {
                 theme: "light",
               });
               navigate("/edit-profile")
+              window.location.reload();
               setState({ ...state, email: "", password: "" });
 
             } else if (res?.message && res?.err) {

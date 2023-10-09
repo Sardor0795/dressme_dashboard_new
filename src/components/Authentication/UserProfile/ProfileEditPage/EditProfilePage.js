@@ -160,7 +160,7 @@ const EditProfilePage = () => {
     window.scrollTo({
       top: 0,
     });
-    document.title = "редактировать профиль";
+    document.title = "Pедактировать профиль";
 
   }, []);
 
@@ -241,13 +241,12 @@ const EditProfilePage = () => {
       >
         <EditPassword onClick={togglePassword} />
       </section>
-
-      {dressInfo?.sellerStatus !== "approved" ?
+      {dressInfo?.sellerStatus == "pending" &&
         <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
           <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
             Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
           </span>
-        </div> : null
+        </div>
       }
 
       <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">

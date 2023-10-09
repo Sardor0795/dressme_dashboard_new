@@ -124,7 +124,7 @@ export default function Sidebar() {
             </p>
           </div> */}
           {/* Links */}
-          {dressInfo?.sellerStatus == "approved" ? (
+          {dressInfo?.sellerStatus == "approved" && (
             <div className="w-full flex flex-wrap gap-y-2">
               {" "}
               <NavLink
@@ -242,7 +242,8 @@ export default function Sidebar() {
                 }
               </NavLink>
             </div>
-          ) : (
+          )}
+          {dressInfo?.sellerStatus == "pending" &&
             <div className="w-full flex flex-wrap gap-y-2">
               {" "}
               <p
@@ -293,8 +294,8 @@ export default function Sidebar() {
                   Одежда
                 </span>
               </p>
-            </div>
-          )}
+            </div>}
+
 
           <div className="w-full">
             <div className="w-full flex items-center justify-center">
