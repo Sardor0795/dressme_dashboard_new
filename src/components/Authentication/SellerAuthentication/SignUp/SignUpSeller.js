@@ -151,7 +151,7 @@ const SignUpSeller = () => {
 
     mutate({}, {
       onSuccess: (res) => {
-        console.log(res, "res");
+        // console.log(res, "res");
         if (res?.message && res?.errors) {
           setState({ ...state, errorGroup: res })
           toast.error(`${res?.message}`, {
@@ -220,10 +220,10 @@ const SignUpSeller = () => {
     }
   }
 
-  console.log(state?.isEmailMessage, "isEmailMessage");
-  console.log(state?.errorGroup?.errors, "errorGroup");
-  console.log(state?.errorGroup?.errors?.card_number, "errorGroup card_number");
-  console.log(parseInt(state?.seller_type_id), "seller_type_id");
+  // console.log(state?.isEmailMessage, "isEmailMessage");
+  // console.log(state?.errorGroup?.errors, "errorGroup");
+  // console.log(state?.errorGroup?.errors?.card_number, "errorGroup card_number");
+  // console.log(parseInt(state?.seller_type_id), "seller_type_id");
   return (
     <div className="max-w-[1280px] w-full flex justify-center items-center m-auto">
       <ToastContainer

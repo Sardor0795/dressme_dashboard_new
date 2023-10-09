@@ -14,7 +14,7 @@ export default function NavbarDashboard() {
       <div className="relative w-full h-full flex justify-between ">
         {/* {
           dressInfo?.AccessTokenSeller && */}
-        <div className="w-[300px] h-full">
+        <div className="hidden md:flex md:w-[300px] h-full">
           <Sidebar />
         </div>
         {/* // } */}
