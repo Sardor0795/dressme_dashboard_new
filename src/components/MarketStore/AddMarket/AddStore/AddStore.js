@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BgSelectSkin, GoBackIcons, StarLabel } from "../../../../assets/icons";
 import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 import { AiOutlineLeft } from "react-icons/ai";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
 
 function AddStore({ onClick }) {
   const navigate = useNavigate();
   const [uploadImg, setUploadImg] = useState(null);
+
+  const [methodDeliv, setMethodDeliv] = useState(null);
+
   const [genderCategory, setGenderCategory] = useState([
     {
       id: 1,
@@ -41,21 +46,39 @@ function AddStore({ onClick }) {
     });
   }, []);
 
+  // -------- ref
+
+  const nameRef = useRef(null);
+
+  const sendFunc = () => {
+    let [filt] = genderCategory.filter((v) => v.action === true);
+
+    const resPonse = {
+      name: nameRef.current.value,
+      gender: filt?.gender,
+      delivery_method: methodDeliv,
+    };
+
+    console.log(resPonse);
+    console.log(uploadImg);
+  };
+
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
-      <div className=" flex  items-center justify-center  mb-6">
+      <div className="md:hidden flex ">
         <button
           onClick={() => {
             navigate(-1);
           }}
-          className="  md:hidden flex items-center absolute left-2 cursor-pointer justify-center "
+          className="  md:hidden flex items-center cursor-pointer justify-center "
         >
           <GoBackIcons />
         </button>
-        <div className="text-center text-tableTextTitle2 text-xl  md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
-          Создать магазин
-        </div>
       </div>{" "}
+      <div className="text-center text-tableTextTitle2 text-xl mb-3 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
+        {/* <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium"> */}
+        Создать магазин
+      </div>
       <div className="mb-3">
         <button
           onClick={() => {
@@ -83,10 +106,13 @@ function AddStore({ onClick }) {
               <input
                 className="hidden"
                 value={uploadImg}
-                onChange={(e) => setUploadImg(e.target.value)}
+                onChange={(e) => {
+                  setUploadImg(e.target.value);
+                  console.log(uploadImg);
+                }}
                 id="DataImg"
                 type="file"
-                accept=" image/*"
+                // accept="image/*"
               />
             </label>
             <BgSelectSkin />
@@ -97,7 +123,7 @@ function AddStore({ onClick }) {
             to="#"
             className="text-[11px] md:text-sm font-AeonikProMedium text-textBlueColor p-3"
           >
-            выберите Логотип
+            Выберите Логотип
             <span className="absolute top-[47px] left-[67px] md:left-[95px] md:top-[70px]">
               <StarLabel />{" "}
             </span>
@@ -126,7 +152,7 @@ function AddStore({ onClick }) {
                 type="text"
                 name="shopName"
                 id="shopName"
-                value={"Dressme"}
+                ref={nameRef}
                 placeholder="Введите название магазина"
                 className="w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />
@@ -149,10 +175,11 @@ function AddStore({ onClick }) {
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
                       className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
-                                                    ${data.action
-                          ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                          : ""
-                        }    
+                                                    ${
+                                                      data.action
+                                                        ? " h-full border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                                        : ""
+                                                    }
                                                     `}
                     >
                       {data.gender}
@@ -174,6 +201,7 @@ function AddStore({ onClick }) {
               <div className="w-[70%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                 <button
                   type="button"
+                  onClick={() => setMethodDeliv("Такси")}
                   className="group w-[28%] md:w-1/4  focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
                 >
                   <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
@@ -182,6 +210,7 @@ function AddStore({ onClick }) {
                 </button>
                 <button
                   type="button"
+                  onClick={() => setMethodDeliv("Собственная доставка")}
                   className="group w-[72%] md:w-3/4  group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
                 >
                   <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
@@ -195,7 +224,10 @@ function AddStore({ onClick }) {
       </form>
       <div className="flex items-center justify-center mb-10 md:mb-24">
         <button
-          onClick={onClick}
+          onClick={() => {
+            // onClick;
+            sendFunc();
+          }}
           className="inline-block w-full md:w-fit text xs:px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
           Создать магазин

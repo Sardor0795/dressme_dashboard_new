@@ -211,6 +211,7 @@ const SignUpSeller = () => {
     })
 
   }
+  
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
@@ -445,7 +446,7 @@ const SignUpSeller = () => {
                               </div>
 
                               <div
-                                className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms] 
+                                className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
                              ${activeIndex == data?.id ? "openAccardion" : "CloseAccardion"} `}
                               >
                                 {data?.sub_regions?.map((item) => {
