@@ -30,6 +30,21 @@ function AddStore({ onClick }) {
     },
   ]);
 
+  // img upload--------------
+  const [file, setFile] = useState();
+  const [fileBrand, setFileBrand] = useState();
+  const handleChange = (e) => {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+  const handleChangeBrand = (e) => {
+    console.log(e.target.files);
+    setFileBrand(URL.createObjectURL(e.target.files[0]));
+  }
+
+
+  // -------------------------
+
   const handleGenderCheck = (value) => {
     setGenderCategory((data) => {
       return data.map((e) => {
@@ -90,44 +105,55 @@ function AddStore({ onClick }) {
         </button>
       </div>
       <div className="relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
-        {uploadImg ? (
-          <img
-            src={uploadImg}
-            className="w-full h-full object-cover rounded-lg"
-            alt=""
-          />
-        ) : (
-          <button className="flex items-center justify-center ">
+
+        <button className="h-full w-full flex items-center justify-center ">
+          <label
+            htmlFor="DataImg"
+            className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor mr-[5px]"
+          >
+            <input
+              className="hidden"
+              id="DataImg"
+              type="file"
+              onChange={handleChange}
+              accept=" image/*"
+            />
+            {
+              !file &&
+              <span className="flex items-center flex-col justify-center">
+                выберите облошка
+                <BgSelectSkin />
+              </span>
+            }
+            {file && <img src={file} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
+          </label>
+        </button>
+
+        <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
+
+          <button className="h-full w-full rounded-full flex items-center justify-center ">
             <label
-              htmlFor="DataImg"
-              className="text-sm font-AeonikProMedium cursor-pointer border-b border-textBlueColor text-textBlueColor mr-[5px]"
+              htmlFor="DataImgBrand"
+              className="h-full w-full flex items-center flex-col justify-center  text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor mr-[5px]"
             >
-              выберите облошка
               <input
                 className="hidden"
-                value={uploadImg}
-                onChange={(e) => {
-                  setUploadImg(e.target.value);
-                  console.log(uploadImg);
-                }}
-                id="DataImg"
+                id="DataImgBrand"
                 type="file"
-                // accept="image/*"
+                onChange={handleChangeBrand}
+                accept=" image/*"
               />
+              {
+                !fileBrand &&
+                <span className="flex items-center flex-col justify-center">
+                  Выберите Логотип
+                  <BgSelectSkin />
+                </span>
+              }
+
+              {fileBrand && <img src={fileBrand} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
             </label>
-            <BgSelectSkin />
           </button>
-        )}
-        <div className="absolute -bottom-11 md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
-          <Link
-            to="#"
-            className="text-[11px] md:text-sm font-AeonikProMedium text-textBlueColor p-3"
-          >
-            Выберите Логотип
-            <span className="absolute top-[47px] left-[67px] md:left-[95px] md:top-[70px]">
-              <StarLabel />{" "}
-            </span>
-          </Link>
         </div>
       </div>
       {/* Form */}
@@ -175,11 +201,10 @@ function AddStore({ onClick }) {
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
                       className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
-                                                    ${
-                                                      data.action
-                                                        ? " h-full border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                                                        : ""
-                                                    }
+                                                    ${data.action
+                          ? " h-full border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                          : ""
+                        }
                                                     `}
                     >
                       {data.gender}

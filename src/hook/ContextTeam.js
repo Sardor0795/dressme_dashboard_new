@@ -109,8 +109,8 @@ export default function ContextTeam({ children }) {
       refetchOnWindowFocus: false,
     }
   )
-  console.log(dressInfo?.hasMagazin, "hasMagazinhasMagazin");
-  console.log(dressInfo?.hasLocation, "hasLocationhasLocation");
+  // console.log(dressInfo?.hasMagazin, "hasMagazinhasMagazin");
+  // console.log(dressInfo?.hasLocation, "hasLocationhasLocation");
 
   return (
     <dressMainData.Provider value={[dressInfo, setDressInfo]}>
