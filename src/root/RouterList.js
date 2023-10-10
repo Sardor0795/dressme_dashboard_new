@@ -109,7 +109,7 @@ export default function RouterList() {
 
         {/* ---------------------<LocationsProduct>------------------------- */}
         <Route path="/products" element={<Products />}>
-          {dressInfo?.isItPorduct ? (
+          {dressInfo?.hasLocation?.length && dressInfo?.hasMagazin?.shops?.data?.length ? (
             <Route index element={<ProductsPageOne />} />
           ) : (
             <Route index element={<NoLocationProduct />} />
