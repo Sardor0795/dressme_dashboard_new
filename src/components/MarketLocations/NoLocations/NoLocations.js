@@ -8,9 +8,9 @@ export default function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true);
 
   const url = "https://api.dressme.uz/api/seller"
+
   
-  
-  // ------------GET  Has Shop ?-----------------
+  // ------------GET HAS SHOP ?-----------------
   useQuery(["shops"], () => {
     return fetch(`${url}/shops`, {
       method: "GET",
@@ -23,10 +23,10 @@ export default function NoLocations() {
   },
     {
       onSuccess: (res) => {
-        console.log(res, "res");
+        // console.log(res, "res");
       },
       onError: (err) => {
-        console.log(err, "err");
+        // console.log(err, "err");
       },
       // keepPreviousData: true,
       // refetchOnWindowFocus: false,

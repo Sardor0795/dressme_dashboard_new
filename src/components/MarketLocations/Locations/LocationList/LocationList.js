@@ -13,58 +13,59 @@ import { ProductImg, pdpImg, wearImg } from "../../../../assets";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { DatePicker, Space, Popover } from "antd";
 import PickerOfFilter from "../../../../hook/DatePickerOfFilter/DatePickerOfFilter";
+import { useQuery } from "@tanstack/react-query";
 const { RangePicker } = DatePicker;
+
+
 export default function LocationList() {
-  const productList = [
+
+  const [productList, setProductList] = useState([
     {
-      id: 1,
-      city: "Tashkent",
-      address: "г. Ташкент, Чиланзарский район, квартал-7, д 45б (Катартал)",
-      time: "10:00 - 20:00",
-      wearLink: "Одежда",
-      showMore: "Подробнее",
-    },
+      id: '',
+      photo: '',
+      city: '',
+      address: '',
+      startTime: '',
+      endTime: '',
+    }
+  ]);
+  const url = "https://api.dressme.uz/api/seller"
+  const urlRegion = "https://api.dressme.uz/api/seller"
+
+   // ------------GET HAS SHOP ?-----------------
+   useQuery(["shops"], () => {
+    return fetch(`${url}/shops/locations/index`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+
+    }).then(res => res.json())
+  },
     {
-      id: 2,
-      city: "Yunusobod",
-      address: "г. Ташкент, Чиланзарский район, квартал-7, д 45б (Катартал)",
-      time: "10:00 - 20:00",
-      wearLink: "Одежда",
-      showMore: "Подробнее",
-    },
-    {
-      id: 3,
-      city: "Mirzo Ulug'bek",
-      address: "г. Ташкент, Чиланзарский район, квартал-7, д 45б (Катартал)",
-      time: "10:00 - 20:00",
-      wearLink: "Одежда",
-      showMore: "Подробнее",
-    },
-    {
-      id: 4,
-      city: "Chilanzor",
-      address: "г. Ташкент, Чиланзарский район, квартал-7, д 45б (Катартал)",
-      time: "10:00 - 20:00",
-      wearLink: "Одежда",
-      showMore: "Подробнее",
-    },
-    {
-      id: 5,
-      city: "Mirabod",
-      address: "г. Ташкент, Чиланзарский район, квартал-7, д 45б (Катартал)",
-      time: "10:00 - 20:00",
-      wearLink: "Одежда",
-      showMore: "Подробнее",
-    },
-    {
-      id: 6,
-      city: "Yashnabod",
-      address: "г. Ташкент, Чиланзарский район, квартал-7, д 45б (Катартал)",
-      time: "10:00 - 20:00",
-      wearLink: "Одежда",
-      showMore: "Подробнее",
-    },
-  ];
+      onSuccess: (res) => {
+        console.log(res.locations.data[0], "LOCATIONS");
+        const data = res.locations.data[0]
+        setProductList([{
+          id: data.id,
+          photo: data.url_image_path_one,
+          city: data.region_id,
+          address: data.address,
+          startTime: data.work_time_from,
+          endTime: data.work_time_to,
+          // wearLink: "Одежда",
+          // showMore: "Подробнее",
+        }])
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      // keepPreviousData: true,
+      // refetchOnWindowFocus: false,
+    }
+  )
+
   const navigate = useNavigate();
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
@@ -92,14 +93,11 @@ export default function LocationList() {
         <div>
           <MobileHumburgerMenu />
         </div>
-
         <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
           Все локации
         </p>
-
         <div className="w-[30px]"></div>
       </div>
-
       <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
         <label
           htmlFor="searchStore"
@@ -121,7 +119,6 @@ export default function LocationList() {
         </div>
 
       </section>
-
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
         <div className="flex justify-end items-center md:justify-between">
           <section className="hidden md:flex">
@@ -199,9 +196,13 @@ export default function LocationList() {
             </div>
           </ul>
         </div>
+
+
+
         {/* table product */}
         <div className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
-          {productList.map((data) => {
+          {productList?.map((data) => { 
+            console.log(data, "DATA");
             return (
               <>
                 <ul
@@ -212,7 +213,7 @@ export default function LocationList() {
                     {data?.id}
                   </li>
                   <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
-                    <img className="w-[100%] h-[100%]  object-top	object-cover" src={pdpImg} alt="" />
+                    <img className="w-[100%] h-[100%]  object-top	object-cover" src={data?.photo} alt="" />
                   </li>
                   <div className="w-[calc(100%-230px)]   flex items-center justify-between">
                     <li className="md:w-[15%] h-full flex items-center ">
@@ -227,7 +228,7 @@ export default function LocationList() {
                     </li>
                     <li className="md:w-[20%] h-full flex items-center justify-center ">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                        {data?.time}
+                        {data?.startTime} - {data?.endTime}
                       </span>
                     </li>
                     <li className="md:w-[20%] h-full flex items-center justify-center text-center">
@@ -235,7 +236,8 @@ export default function LocationList() {
                         onClick={() => goMapWear(data?.city)}
                         className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                       >
-                        {data?.wearLink}
+                        {/* data?.wearLink */}
+                        Одежда
                       </button>
                     </li>
                     <li className="md:w-[20%] h-full flex items-center justify-center text-center">
@@ -243,7 +245,8 @@ export default function LocationList() {
                         onClick={() => goMapCity(data?.city)}
                         className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                       >
-                        {data?.showMore}
+                        {/* {data?.showMore} */}
+                        Подробнее
                       </button>
                     </li>
                   </div>
