@@ -7,8 +7,6 @@ export default function NoLocationProduct() {
   const [dressInfo, setDressInfo] = useContext(dressMainData)
 
 
-  console.log(dressInfo?.hasMagazin.shops?.data?.length, "11hasMagazinhasMagazin");
-  console.log(dressInfo?.hasLocation, "22hasLocationhasLocation");
   return (
     <div className="w-full h-[90vh] ">
       {
