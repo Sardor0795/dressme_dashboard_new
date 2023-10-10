@@ -2,9 +2,94 @@ import React, { useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { MenuCloseIcons } from "../../../assets/icons";
 import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export default function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true);
+
+  const url = "https://api.dressme.uz/api/seller"
+  
+  
+  // ------------GET  Has Shop ?-----------------
+  useQuery(["shops"], () => {
+    return fetch(`${url}/shops`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        console.log(res, "res");
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      // keepPreviousData: true,
+      // refetchOnWindowFocus: false,
+    }
+  )
+
+  // // ------------GET METHOD Region-----------------
+  // const { isLoading } = useQuery(["get region"], () => {
+  //   return fetch(`${url}/regions`).then(res => res.json())
+  // },
+  //   {
+  //     onSuccess: (res) => {
+  //       setState({ ...state, getRegionList: res })
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "err");
+  //     },
+  //     keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+  //     refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+  //   }
+  // )
+
+  // ------------POST METHOD-----------------
+  // const { mutate } = useMutation(() => {
+  //   return fetch(`${url}/register`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     },
+
+  //     body: parseInt(state?.seller_type_id) >= 3 ?
+  //       JSON.stringify({
+  //         name: state?.firstName,
+  //         surname: state?.lastName,
+  //         email: state?.email,
+  //         password: state?.password,
+  //         password_confirmation: state?.confirmPassword,
+  //         phone: sendMessagePhoneNumber,
+  //         card_number: BankCard,
+  //         seller_type_id: state?.seller_type_id,
+  //         region_id: state?.region,
+  //         sub_region_id: state?.sub_region,
+  //         company_name: state?.company_name,
+  //       }) : JSON.stringify({
+  //         name: state?.firstName,
+  //         surname: state?.lastName,
+  //         email: state?.email,
+  //         password: state?.password,
+  //         password_confirmation: state?.confirmPassword,
+  //         phone: sendMessagePhoneNumber,
+  //         card_number: BankCard,
+  //         seller_type_id: state?.seller_type_id,
+  //         region_id: state?.region,
+  //         sub_region_id: state?.sub_region,
+  //       })
+
+  //   }).then((res) => res.json())
+  // })
+  
+  
+  
+  
   return (
     <div className="w-full h-[calc(100vh-200px)]  flex items-center justify-center">
       {openSelect ? (
