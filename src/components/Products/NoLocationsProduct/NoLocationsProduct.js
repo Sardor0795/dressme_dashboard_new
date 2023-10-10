@@ -1,45 +1,59 @@
-import React, { useState } from "react";
-import { AddIconsCircle, MenuCloseIcons } from "../../../assets/icons";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { dressMainData } from "../../../hook/ContextTeam";
 
 export default function NoLocationProduct() {
-  const [isWear, setIsWear] = useState(true);
+  const [dressInfo, setDressInfo] = useContext(dressMainData)
+
+
+  console.log(dressInfo?.hasMagazin.shops?.data?.length, "11hasMagazinhasMagazin");
+  console.log(dressInfo?.hasLocation, "22hasLocationhasLocation");
   return (
-    <div className="w-full h-[calc(100vh-200px)] ">
-      {isWear ? (
-        <div className="w-full h-fit">
-          <section className="flex items-center  gap-x-4 py-10">
-            <p className="text-black text-2xl not-italic font-AeonikProMedium">
-              Юнусабад
-            </p>
-            <button
-              onClick={() => setIsWear(false)}
-              className="flex items-center gap-x-[4px] cursor-pointer"
+    <div className="w-full h-[90vh] ">
+      {
+        dressInfo?.hasMagazin?.shops?.data?.length ? (
+
+          !dressInfo?.hasLocation?.length && <div className="flex items-center h-full justify-center">
+            <Link
+              to="/locations-store"
+              className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
             >
-              <span>
-                <AddIconsCircle />
-              </span>
-              <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
-                Добавить одежду
-              </span>
-            </button>
-          </section>
-          <section className="w-full h-[80px] border border-borderColor rounded-lg flex items-center pl-6">
-            <span className="text-red-500 text-lg not-italic font-AeonikProRegular">
-              У вас пока нет одежд в этой локации !
-            </span>
-          </section>
-        </div>
-      ) : (
-        <div className="flex items-center h-full justify-center">
+              Сначала добавьте локацию!
+            </Link>
+          </div>
+        )
+          :
+          <div className="flex items-center h-full justify-center">
+            <Link
+              to="/store"
+              className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+            >
+              Сначала создайте магазин!
+            </Link>
+          </div>
+      }
+      {/* { dressInfo?.hasMagazin?.shops?.data?.length && dressInfo?.hasLocation && <div className="flex items-center h-full justify-center">
+        <Link
+          to="/locations-store"
+          className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+        >
+          Сначала добавьте локацию!
+        </Link>
+      </div>}
+      {
+        !dressInfo?.hasMagazin?.shops?.data?.length && <div className="flex items-center h-full justify-center">
           <Link
-            to="/products/location"
+            to="/store"
             className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
           >
-            Сначала добавьте локацию !
+            Сначала создайте магазин!
           </Link>
         </div>
-      )}
+      } */}
+
+
+
     </div>
   );
 }

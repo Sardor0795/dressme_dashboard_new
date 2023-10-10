@@ -20,10 +20,13 @@ export default function ContextTeam({ children }) {
     sellerPhoneCode: "",
     sellerPhoneNum: "",
     // ---------------url-----------
+    hasMagazin: "",
+    hasLocation: "",
 
   });
   const url = "https://api.dressme.uz/api/seller"
 
+  // ----------------Get Seller Profile-------------
   useQuery(["get profile"], () => {
     return fetch(`${url}/profile`, {
       method: "GET",
@@ -36,8 +39,8 @@ export default function ContextTeam({ children }) {
   },
     {
       onSuccess: (res) => {
-        console.log(res, "DressINfo");
         setDressInfo({
+          ...dressInfo,
           sellerFname: res.name,
           sellerLname: res.surname,
           sellerEmail: res?.email,
@@ -61,10 +64,53 @@ export default function ContextTeam({ children }) {
     }
   )
 
+  // ------------GET  Has Magazin ?-----------------
+  useQuery(["magazin"], () => {
+    return fetch(`${url}/shops`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
 
-  // useEffect(() => {
-  //   setDressInfo({ ...dressInfo, AccessTokenSeller: localStorage.getItem('DressmeUserToken') })
-  // }, []);
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setDressInfo({ ...dressInfo, hasMagazin: res })
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      // keepPreviousData: true,
+      // refetchOnWindowFocus: false,
+    }
+  )
+  // ------------GET  Has Location ?-----------------
+  useQuery(["magazin location"], () => {
+    return fetch(`${url}/shops/locations/index`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setDressInfo({ ...dressInfo, hasLocation: res })
+      },
+      onError: (err) => {
+        console.log(err, "err");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
+  console.log(dressInfo?.hasMagazin, "hasMagazinhasMagazin");
+  console.log(dressInfo?.hasLocation, "hasLocationhasLocation");
+
   return (
     <dressMainData.Provider value={[dressInfo, setDressInfo]}>
       {children}
