@@ -86,6 +86,7 @@ export default function ContextTeam({ children }) {
       // refetchOnWindowFocus: false,
     }
   )
+
   // ------------GET  Has Location ?-----------------
   useQuery(["magazin location"], () => {
     return fetch(`${url}/shops/locations/index`, {
