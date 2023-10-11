@@ -211,7 +211,7 @@ const SignUpSeller = () => {
     })
 
   }
-  
+
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
@@ -656,13 +656,13 @@ const SignUpSeller = () => {
                         className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
                         type="text"
                         value={state.phoneCode}
-                        readOnly
+                      // readOnly
                       />
                     </div>
                     <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-[42px] overflow-hidden">
                       <InputMask
                         mask="(99) 999-99-99"
-                        value={state?.phone}
+                        value={state?.phone || null}
                         name="phone"
                         onChange={(e) => setState({ ...state, phone: e.target.value })}
                         className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.phone ? "font-AeonikProMedium" : null

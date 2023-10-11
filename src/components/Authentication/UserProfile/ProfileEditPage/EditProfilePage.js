@@ -27,6 +27,17 @@ const EditProfilePage = () => {
   const navigate = useNavigate()
 
   const [state, setState] = useState({
+    sellerFname: "",
+    sellerLname: "",
+    sellerEmail: "",
+    sellerCardNumber: "",
+    sellerRegionId: "",
+    sellerSubRegionId: "",
+    sellerTypeId: "",
+    sellerStatus: "",
+    sellerPhoneCode: "",
+    sellerPhoneNum: "",
+    // -------------
     validateConfirm: true,
     eyesShow: true,
     requestPerson: true,
@@ -62,9 +73,49 @@ const EditProfilePage = () => {
   // -------------------------------------
 
   const url = "https://api.dressme.uz/api/seller"
+
+
+  // ----------------Get Seller Profile-------------
+  useQuery(["Get-Seller-Profile"], () => {
+    return fetch(`${url}/profile`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      }
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        console.log(res, "Response in Profile")
+        // setState({
+        //   ...state,
+        //   sellerFname: res.name,
+        //   sellerLname: res.surname,
+        //   sellerEmail: res?.email,
+        //   sellerCardNumber: res?.card_number,
+        //   sellerRegionId: res?.region_id,
+        //   sellerSubRegionId: res?.sub_region_id,
+        //   sellerTypeId: res?.seller_type_id,
+        //   sellerStatus: res?.status,
+        //   sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
+        //   sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
+        // })
+
+
+      },
+      onError: (err) => {
+        console.log(err, "err get profile");
+      },
+
+      // keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+      // refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+    }
+  )
   // ------------GET METHOD Region-----------------
 
-  const { isLoading } = useQuery(["get region"], () => {
+  useQuery(["get region"], () => {
     return fetch(`${url}/regions`).then(res => res.json())
   },
     {
@@ -72,7 +123,7 @@ const EditProfilePage = () => {
         setState({ ...state, getRegionList: res, })
       },
       onError: (err) => {
-        console.log(err, "err");
+        console.log(err, "err get region");
       },
       keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
@@ -80,7 +131,7 @@ const EditProfilePage = () => {
   )
 
   // ------------GET METHOD seller-types-----------------
-  const { isFetching } = useQuery(["get seller-type"], () => {
+  useQuery(["get seller-type"], () => {
     return fetch(`${url}/seller-types`).then(res => res.json())
   },
     {
@@ -90,7 +141,7 @@ const EditProfilePage = () => {
 
       },
       onError: (err) => {
-        console.log(err, "err");
+        console.log(err, "err get seller-type");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -241,7 +292,7 @@ const EditProfilePage = () => {
       >
         <EditPassword onClick={togglePassword} />
       </section>
-      {dressInfo?.sellerStatus == "pending" &&
+      {state?.sellerStatus == "pending" &&
         <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
           <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
             Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
@@ -276,8 +327,8 @@ const EditProfilePage = () => {
                 type="text"
                 name="fname"
                 placeholder="Имя"
-                value={dressInfo?.sellerFname || null}
-                onChange={(e) => setDressInfo({ ...dressInfo, sellerFname: e.target.value })}
+                value={state?.sellerFname || null}
+                onChange={(e) => setState({ ...state, sellerFname: e.target.value })}
                 required
               />
             </div>
@@ -293,15 +344,15 @@ const EditProfilePage = () => {
                 type="text"
                 name="lname"
                 placeholder="Фамилия"
-                value={dressInfo?.sellerLname || null}
-                onChange={(e) => setDressInfo({ ...dressInfo, sellerLname: e.target.value })}
+                value={state?.sellerLname || null}
+                onChange={(e) => setState({ ...state, sellerLname: e.target.value })}
                 required
               />
             </div>
           </div>
           {/* Имя организации */}
           {
-            dressInfo?.sellerTypeId >= 3 &&
+            state?.sellerTypeId >= 3 &&
             <div className="w-full h-fit  ">
               <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
                 Имя организации{" "}
@@ -328,8 +379,8 @@ const EditProfilePage = () => {
                 type="email"
                 name="email"
                 placeholder="Адрес электронной почты"
-                value={dressInfo?.sellerEmail || null}
-                onChange={(e) => setDressInfo({ ...dressInfo, sellerEmail: e.target.value })}
+                value={state?.sellerEmail || null}
+                onChange={(e) => setState({ ...state, sellerEmail: e.target.value })}
                 required
               />
               <span>
@@ -345,10 +396,10 @@ const EditProfilePage = () => {
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
               <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                 <input
-                  className="w-[40px]  h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
+                  className="w-[40px] outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
                   type="text"
-                  value={"+" + dressInfo.sellerPhoneCode}
-                  readOnly
+                  value={"+" + state?.sellerPhoneCode || ""}
+                  // readOnly
                   placeholder="998"
                 />
               </div>
@@ -356,9 +407,9 @@ const EditProfilePage = () => {
                 <InputMask
                   mask="(99) 999-99-99"
                   name="phone"
-                  value={dressInfo?.sellerPhoneNum || null}
-                  onChange={(e) => setDressInfo({ ...dressInfo, sellerPhoneNum: e.target.value })}
-                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${dressInfo?.sellerPhoneNum ? "font-AeonikProMedium" : null
+                  value={state?.sellerPhoneNum || null}
+                  onChange={(e) => setState({ ...state, sellerPhoneNum: e.target.value })}
+                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
                     } text-base leading-4 text-black`}
                   placeholder={"(99) 999-99-99"}
                 ></InputMask>
@@ -458,12 +509,12 @@ const EditProfilePage = () => {
                   }}
                   className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
                   <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
-                    {!dressInfo?.sellerRegionId && !dressInfo?.sellerSubRegionId && "Выберите регион"}
+                    {!state?.sellerRegionId && !state?.sellerSubRegionId && "Выберите регион"}
 
-                    {state?.getRegionList?.regions?.filter(e => e.id == dressInfo?.sellerRegionId).map(item => {
+                    {state?.getRegionList?.regions?.filter(e => e.id == state?.sellerRegionId).map(item => {
                       return <span className="flex items-center text-[#000] text-[14px] sm:text-base">
                         {item?.name_ru},
-                        {item?.sub_regions?.filter(i => i.id == dressInfo?.sellerSubRegionId).map(item => {
+                        {item?.sub_regions?.filter(i => i.id == state?.sellerSubRegionId).map(item => {
                           return <span className="ml-1">{item?.name_ru}</span>
                         })}
                       </span>
@@ -492,14 +543,14 @@ const EditProfilePage = () => {
             </div>
           </div> */}
           {
-            dressInfo?.sellerTypeId >= 3 ?
+            state?.sellerTypeId >= 3 ?
 
               <div className="select relative w-full flex items-center ">
                 <Select
                   className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
                   placeholder="Тип предприятия"
                   optionFilterProp="children"
-                  onChange={(e) => setDressInfo({ ...dressInfo, sellerTypeId: e })}
+                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
                   suffixIcon={null}
                   size="large"
                   options={
@@ -528,9 +579,9 @@ const EditProfilePage = () => {
                     id="changeIcons"
                     // className="text-[#a1a1a1]"
                     className="w-full h-[42px]  outline-none  px-[16px] w-full flex items-center border border-searchBgColor rounded-lg"
-                    value={dressInfo?.sellerTypeId}
+                    value={state?.sellerTypeId}
                     // onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
-                    onChange={(e) => setDressInfo({ ...dressInfo, sellerTypeId: e.target.value })}
+                    onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
 
                     placeholder="Тип предприятия"
                     required
@@ -559,10 +610,10 @@ const EditProfilePage = () => {
               {/* CredtCardicons */}
               <span><CreditCardNumber /></span>
               <InputMask
-                value={dressInfo?.sellerCardNumber}
+                value={state?.sellerCardNumber}
                 mask='9999-9999-9999-9999'
                 className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
-                onChange={(e) => setDressInfo({ ...dressInfo, sellerCardNumber: e.target.value })}
+                onChange={(e) => setState({ ...state, sellerCardNumber: e.target.value })}
                 placeholder="0000-0000-0000-0000"
               />
             </div>

@@ -1,18 +1,72 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { dressMainData } from "../../../hook/ContextTeam";
 
 export default function NoLocationProduct() {
-  const [dressInfo, setDressInfo] = useContext(dressMainData)
+  const [state, setState] = useState({
+    hasMagazin: "",
+    hasLocation: "",
+  })
+  const url = "https://api.dressme.uz/api/seller"
 
+  // // ------------GET  Has Magazin ?-----------------
+  useQuery(["magazin"], () => {
+    return fetch(`${url}/shops`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
 
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setState({ ...state, hasMagazin: res })
+      },
+      onError: (err) => {
+        console.log(err, "err magazin");
+      },
+      // keepPreviousData: true,
+      // refetchOnWindowFocus: false,
+    }
+  )
+
+  // ------------GET  Has Location ?-----------------
+  useQuery(["magazin location"], () => {
+    return fetch(`${url}/shops/locations/index`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setState({ ...state, hasLocation: res })
+      },
+      onError: (err) => {
+        console.log(err, "err magazin location");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
+
+  console.log(state?.hasLocation, "state?.hasLocation");
+  console.log(state?.hasMagazin, "state?.hasMagazin");
   return (
     <div className="w-full h-[90vh] ">
       {
-        dressInfo?.hasMagazin?.shops?.data?.length ? (
+        state?.hasMagazin?.shops?.data?.length ? (
 
-          !dressInfo?.hasLocation?.length && <div className="flex items-center h-full justify-center">
+          !state?.hasLocation?.length && <div className="flex items-center h-full justify-center">
             <Link
               to="/locations-store"
               className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
