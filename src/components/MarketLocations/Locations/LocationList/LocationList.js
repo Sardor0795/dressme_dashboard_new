@@ -1,20 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { ProductImg } from "../../assets";
 import {
-  CalendarIcons,
-  CheckTrue,
   SearchIcon,
-  StarIcon,
-  StarOutlineIcon,
 } from "../../../../assets/icons";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ProductImg, pdpImg, wearImg } from "../../../../assets";
+import { pdpImg } from "../../../../assets";
 
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
-import { DatePicker, Space, Popover } from "antd";
+// import { DatePicker } from "antd";
 import PickerOfFilter from "../../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 import { useQuery } from "@tanstack/react-query";
-const { RangePicker } = DatePicker;
+// const { RangePicker } = DatePicker;
 
 
 export default function LocationList() {
@@ -24,13 +20,13 @@ export default function LocationList() {
       id: '',
       photo: '',
       city: '',
+      sub_region: '',
       address: '',
       startTime: '',
       endTime: '',
     }
   ]);
   const url = "https://api.dressme.uz/api/seller"
-  const urlRegion = "https://api.dressme.uz/api/seller"
 
    // ------------GET HAS SHOP ?-----------------
    useQuery(["shops"], () => {
@@ -45,17 +41,16 @@ export default function LocationList() {
   },
     {
       onSuccess: (res) => {
-        console.log(res.locations.data[0], "LOCATIONS");
+        console.log(res.locations.data, "LOCATIONS");
         const data = res.locations.data[0]
         setProductList([{
           id: data.id,
-          photo: data.url_image_path_one,
-          city: data.region_id,
+          photo: data.shop.url_logo_photo,
+          city: data.region.name_ru,
+          sub_region: data.sub_region.name_ru,
           address: data.address,
           startTime: data.work_time_from,
           endTime: data.work_time_to,
-          // wearLink: "Одежда",
-          // showMore: "Подробнее",
         }])
       },
       onError: (err) => {
@@ -171,22 +166,22 @@ export default function LocationList() {
               </span>
             </li>
             <div className="w-[calc(100%-230px)]  flex items-center justify-between">
-              <li className="w-[15%] ">
+              <li className="w-[30%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Регион{" "}
                 </span>
               </li>
-              <li className="w-[25%] ">
+              <li className="w-[20%]">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Адрес
                 </span>
               </li>
-              <li className="w-[20%] text-center">
+              <li className="w-[20%]">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Рабочее время
                 </span>
               </li>
-              <li className="w-[40%] flex items-center justify-end ">
+              <li className="w-[30%] flex items-center justify-end ">
                 <NavLink to={"/store/location-add"} className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-sm  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
@@ -213,25 +208,25 @@ export default function LocationList() {
                     {data?.id}
                   </li>
                   <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
-                    <img className="w-[100%] h-[100%]  object-top	object-cover" src={data?.photo} alt="" />
+                    <img className="w-[100%] h-[100%] rounded-lg object-top	object-cover" src={data?.photo} alt="" />
                   </li>
-                  <div className="w-[calc(100%-230px)]   flex items-center justify-between">
-                    <li className="md:w-[15%] h-full flex items-center ">
+                  <div className="w-[calc(100%-230px)] flex items-center justify-between">
+                    <li className="md:w-[32%] h-full pr-5">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
-                        {data?.city}
+                        {data?.city}, {data.sub_region}
                       </span>
                     </li>
-                    <li className="md:w-[25%] h-full flex items-center ">
+                    <li className="md:w-[22%] h-full">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
                         {data?.address}
                       </span>{" "}
                     </li>
-                    <li className="md:w-[20%] h-full flex items-center justify-center ">
+                    <li className="md:w-[13%] h-full">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
                         {data?.startTime} - {data?.endTime}
                       </span>
                     </li>
-                    <li className="md:w-[20%] h-full flex items-center justify-center text-center">
+                    <li className="md:w-[15%] h-full flex items-center justify-center text-center">
                       <button
                         onClick={() => goMapWear(data?.city)}
                         className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
@@ -240,7 +235,7 @@ export default function LocationList() {
                         Одежда
                       </button>
                     </li>
-                    <li className="md:w-[20%] h-full flex items-center justify-center text-center">
+                    <li className="md:w-[25%] h-full flex items-center justify-center text-center">
                       <button
                         onClick={() => goMapCity(data?.city)}
                         className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
