@@ -32,12 +32,14 @@ export default function LocationList() {
   const url = "https://api.dressme.uz/api/seller"
   const urlRegion = "https://api.dressme.uz/api/seller"
 
-   // ------------GET HAS SHOP ?-----------------
-   useQuery(["shops"], () => {
+  // ------------GET HAS SHOP ?-----------------
+  useQuery(["shops"], () => {
     return fetch(`${url}/shops/locations/index`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        "Accept": "application/json",
+
         'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
 
@@ -201,7 +203,7 @@ export default function LocationList() {
 
         {/* table product */}
         <div className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
-          {productList?.map((data) => { 
+          {productList?.map((data) => {
             console.log(data, "DATA");
             return (
               <>

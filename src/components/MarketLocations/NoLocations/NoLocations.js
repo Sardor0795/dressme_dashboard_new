@@ -9,13 +9,15 @@ export default function NoLocations() {
 
   const url = "https://api.dressme.uz/api/seller"
 
-  
+
   // ------------GET HAS SHOP ?-----------------
   useQuery(["shops"], () => {
     return fetch(`${url}/shops`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
+        "Accept": "application/json",
+
         'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
 
@@ -86,10 +88,10 @@ export default function NoLocations() {
 
   //   }).then((res) => res.json())
   // })
-  
-  
-  
-  
+
+
+
+
   return (
     <div className="w-full h-[calc(100vh-200px)]  flex items-center justify-center">
       {openSelect ? (

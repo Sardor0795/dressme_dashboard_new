@@ -42,16 +42,16 @@ const UserIcon = ({ colors }) => {
       <path
         d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z"
         stroke={colors}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4.271 18.346C4.271 18.346 6.5 15.5 12 15.5C17.5 15.5 19.73 18.346 19.73 18.346M12 12C12.7956 12 13.5587 11.6839 14.1213 11.1213C14.6839 10.5587 15 9.79565 15 9C15 8.20435 14.6839 7.44129 14.1213 6.87868C13.5587 6.31607 12.7956 6 12 6C11.2043 6 10.4413 6.31607 9.87868 6.87868C9.31607 7.44129 9 8.20435 9 9C9 9.79565 9.31607 10.5587 9.87868 11.1213C10.4413 11.6839 11.2043 12 12 12Z"
         stroke={colors}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -65,7 +65,7 @@ const UserMailIcon = ({ }) => {
       viewBox="0 0 20 20"
       fill="none"
     >
-      <g clip-path="url(#clip0_1922_12387)">
+      <g clipPath="url(#clip0_1922_12387)">
         <path
           d="M16.6665 9.99984C16.6663 8.51391 16.1698 7.07062 15.2556 5.89916C14.3414 4.72771 13.0621 3.89524 11.6208 3.53395C10.1794 3.17266 8.65871 3.30326 7.30007 3.90501C5.94144 4.50676 4.82278 5.54516 4.12174 6.85533C3.4207 8.1655 3.17747 9.67232 3.43066 11.1365C3.68386 12.6007 4.41897 13.9384 5.51926 14.937C6.61955 15.9357 8.02195 16.5382 9.50376 16.6487C10.9856 16.7593 12.4618 16.3717 13.6982 15.5473L14.6232 16.934C13.255 17.8488 11.6456 18.3358 9.99984 18.3332C5.39734 18.3332 1.6665 14.6023 1.6665 9.99984C1.6665 5.39734 5.39734 1.6665 9.99984 1.6665C14.6023 1.6665 18.3332 5.39734 18.3332 9.99984V11.2498C18.3333 11.8738 18.1332 12.4813 17.7625 12.9832C17.3918 13.4851 16.8699 13.8549 16.2735 14.0382C15.677 14.2215 15.0375 14.2087 14.4489 14.0018C13.8603 13.7948 13.3536 13.4045 13.0032 12.8882C12.447 13.4665 11.7356 13.8719 10.9546 14.0558C10.1736 14.2396 9.35606 14.194 8.60031 13.9245C7.84455 13.6549 7.1827 13.1729 6.69426 12.5363C6.20582 11.8998 5.91157 11.1357 5.84687 10.3359C5.78217 9.53616 5.94977 8.73472 6.32952 8.0279C6.70928 7.32108 7.28505 6.73894 7.98764 6.35142C8.69024 5.96391 9.48979 5.7875 10.2902 5.84339C11.0906 5.89928 11.8579 6.1851 12.4998 6.6665H14.1665V11.2498C14.1665 11.5814 14.2982 11.8993 14.5326 12.1337C14.767 12.3681 15.085 12.4998 15.4165 12.4998C15.748 12.4998 16.066 12.3681 16.3004 12.1337C16.5348 11.8993 16.6665 11.5814 16.6665 11.2498V9.99984ZM9.99984 7.49984C9.3368 7.49984 8.70091 7.76323 8.23207 8.23207C7.76323 8.70091 7.49984 9.3368 7.49984 9.99984C7.49984 10.6629 7.76323 11.2988 8.23207 11.7676C8.70091 12.2364 9.3368 12.4998 9.99984 12.4998C10.6629 12.4998 11.2988 12.2364 11.7676 11.7676C12.2364 11.2988 12.4998 10.6629 12.4998 9.99984C12.4998 9.3368 12.2364 8.70091 11.7676 8.23207C11.2988 7.76323 10.6629 7.49984 9.99984 7.49984Z"
           fill="#D2D2D2"
@@ -91,9 +91,9 @@ const UserExitIcon = ({ colors }) => {
       <path
         d="M12 12L19 12M19 12L16 15M19 12L16 9M19 6V5C19 4.46957 18.7893 3.96086 18.4142 3.58579C18.0391 3.21071 17.5304 3 17 3L7 3C6.46957 3 5.96086 3.21071 5.58579 3.58579C5.21071 3.96086 5 4.46957 5 5L5 19C5 19.5304 5.21071 20.0391 5.58579 20.4142C5.96086 20.7893 6.46957 21 7 21H17C17.5304 21 18.0391 20.7893 18.4142 20.4142C18.7893 20.0391 19 19.5304 19 19V18"
         stroke={colors}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -879,7 +879,7 @@ const AddIconsCircle1 = ({ colors }) => {
       viewBox="0 0 22 22"
       fill="none"
     >
-      <g clip-path="url(#clip0_1350_8295)">
+      <g clipPath="url(#clip0_1350_8295)">
         <path
           d="M11 0C4.92491 0 0 4.92491 0 11C0 17.0754 4.92491 22 11 22C17.0754 22 22 17.0754 22 11C22 4.92491 17.0754 0 11 0ZM11 20.6467C5.69284 20.6467 1.375 16.3072 1.375 11C1.375 5.6928 5.69284 1.37496 11 1.37496C16.3072 1.37496 20.625 5.69282 20.625 11C20.625 16.3071 16.3072 20.6467 11 20.6467ZM15.8125 10.3125H11.6875V6.1875C11.6875 5.808 11.3795 5.5 11 5.5C10.6205 5.5 10.3125 5.808 10.3125 6.1875V10.3125H6.1875C5.808 10.3125 5.5 10.6205 5.5 11C5.5 11.3795 5.808 11.6875 6.1875 11.6875H10.3125V15.8125C10.3125 16.192 10.6205 16.5 11 16.5C11.3795 16.5 11.6875 16.192 11.6875 15.8125V11.6875H15.8125C16.192 11.6875 16.5 11.3795 16.5 11C16.5 10.6205 16.192 10.3125 15.8125 10.3125Z"
           fill="#007DCA"
@@ -896,7 +896,7 @@ const AddIconsCircle1 = ({ colors }) => {
 const CheckIconsCircle = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-      <g clip-path="url(#clip0_1412_8337)">
+      <g clipPath="url(#clip0_1412_8337)">
         <path d="M9 0C4.02947 0 0 4.02947 0 9C0 13.9708 4.02947 18 9 18C13.9708 18 18 13.9708 18 9C18 4.02947 13.9708 0 9 0ZM9 16.8927C4.65778 16.8927 1.125 13.3422 1.125 8.99996C1.125 4.65775 4.65778 1.12496 9 1.12496C13.3422 1.12496 16.875 4.65776 16.875 8.99996C16.875 13.3422 13.3422 16.8927 9 16.8927ZM12.5918 5.70684L7.31136 11.0205L4.93339 8.64253C4.71373 8.42288 4.35767 8.42288 4.13773 8.64253C3.91808 8.86219 3.91808 9.21825 4.13773 9.43791L6.92183 12.2223C7.14148 12.4417 7.49754 12.4417 7.71748 12.2223C7.74279 12.197 7.76447 12.1694 7.78416 12.1407L13.3878 6.50248C13.6072 6.28283 13.6072 5.92676 13.3878 5.70684C13.1678 5.48719 12.8118 5.48719 12.5918 5.70684Z" fill="black" />
       </g>
       <defs>
@@ -919,23 +919,23 @@ const CircleNextIcon = ({ colors }) => {
       <path
         d="M12.5 22C18.0228 22 22.5 17.5228 22.5 12C22.5 6.47715 18.0228 2 12.5 2C6.97715 2 2.5 6.47715 2.5 12C2.5 17.5228 6.97715 22 12.5 22Z"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9 12H15"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M13 15L16 12L13 9"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -950,7 +950,7 @@ const YandexFullScreenMapIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_633_49437)">
+      <g clipPath="url(#clip0_633_49437)">
         <path
           d="M7.82031 0L9.88818 2.06844L7.07406 4.88257L9.11743 6.92594L11.9316 4.11181L14 6.17969V0H7.82031ZM4.88257 7.07406L2.06844 9.88819L0 7.82031V14H6.17969L4.11182 11.9316L6.92595 9.11743L4.88257 7.07406Z"
           fill="#666666"
@@ -973,7 +973,7 @@ const YandexMazimizeMapIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_633_49661)">
+      <g clipPath="url(#clip0_633_49661)">
         <path
           d="M17.0809 0L13.0599 4.021L10.1058 1.06608V9.89422H18.9339L15.979 6.9401L20 2.9191L17.0809 0ZM1.06608 10.1058L4.021 13.0599L0 17.0809L2.9191 20L6.9401 15.979L9.8942 18.9339V10.1058H1.06608Z"
           fill="#666666"
@@ -1023,8 +1023,8 @@ const CheckIcons = () => {
       <path
         d="M1 9.5L5.88235 11L10 1"
         stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -1086,71 +1086,71 @@ const CalendarIcons = () => {
         d="M8 2V5"
         stroke="black"
         stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16 2V5"
         stroke="black"
         stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M3.5 9.08984H20.5"
         stroke="black"
         stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
         stroke="black"
         stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.6947 13.7002H15.7037"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M15.6947 16.7002H15.7037"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.9955 13.7002H12.0045"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11.9955 16.7002H12.0045"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.29431 13.7002H8.30329"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M8.29431 16.7002H8.30329"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -1167,9 +1167,9 @@ const GoBackIcons = () => {
       <path
         d="M23.3333 11.6668L15 20.0002L23.3333 28.3335"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -1289,9 +1289,9 @@ const Star6Icon = () => {
 const VerticalMenuIcons = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="36" viewBox="0 0 10 36" fill="none">
-      <path d="M5.03365 8.31657C6.8746 8.31657 8.36698 6.82418 8.36698 4.98324C8.36698 3.14229 6.8746 1.6499 5.03365 1.6499C3.1927 1.6499 1.70032 3.14229 1.70032 4.98324C1.70032 6.82418 3.1927 8.31657 5.03365 8.31657Z" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" />
-      <path d="M4.96697 21.3333C6.80792 21.3333 8.3003 19.8409 8.3003 18C8.3003 16.159 6.80792 14.6666 4.96697 14.6666C3.12602 14.6666 1.63364 16.159 1.63364 18C1.63364 19.8409 3.12602 21.3333 4.96697 21.3333Z" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" />
-      <path d="M5.03365 34.35C6.8746 34.35 8.36698 32.8576 8.36698 31.0167C8.36698 29.1757 6.8746 27.6833 5.03365 27.6833C3.1927 27.6833 1.70032 29.1757 1.70032 31.0167C1.70032 32.8576 3.1927 34.35 5.03365 34.35Z" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="bevel" />
+      <path d="M5.03365 8.31657C6.8746 8.31657 8.36698 6.82418 8.36698 4.98324C8.36698 3.14229 6.8746 1.6499 5.03365 1.6499C3.1927 1.6499 1.70032 3.14229 1.70032 4.98324C1.70032 6.82418 3.1927 8.31657 5.03365 8.31657Z" stroke="#151515" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="bevel" />
+      <path d="M4.96697 21.3333C6.80792 21.3333 8.3003 19.8409 8.3003 18C8.3003 16.159 6.80792 14.6666 4.96697 14.6666C3.12602 14.6666 1.63364 16.159 1.63364 18C1.63364 19.8409 3.12602 21.3333 4.96697 21.3333Z" stroke="#151515" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="bevel" />
+      <path d="M5.03365 34.35C6.8746 34.35 8.36698 32.8576 8.36698 31.0167C8.36698 29.1757 6.8746 27.6833 5.03365 27.6833C3.1927 27.6833 1.70032 29.1757 1.70032 31.0167C1.70032 32.8576 3.1927 34.35 5.03365 34.35Z" stroke="#151515" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="bevel" />
     </svg>
   );
 };

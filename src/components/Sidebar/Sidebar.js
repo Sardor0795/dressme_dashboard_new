@@ -22,8 +22,6 @@ export default function Sidebar() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   const [state, setState] = useState({
-    email: "",
-    password: "",
     logOutModal: false
   });
 
@@ -104,8 +102,9 @@ export default function Sidebar() {
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-              <span>{dressInfo?.sellerFname || "Ism"}</span>
-              <span>{dressInfo?.sellerLname || "Familiya"}</span>
+              {/* <span>{dressInfo?.sellerFname || "Ism"}</span>
+              <span>{dressInfo?.sellerLname || "Familiya"}</span> */}
+              <span>Ism familiya</span>
 
             </span>
           </NavLink>
@@ -125,7 +124,7 @@ export default function Sidebar() {
             </p>
           </div> */}
           {/* Links */}
-          {dressInfo?.sellerStatus == "approved" && (
+          {dressInfo?.isAuthen ? (
             <div className="w-full flex flex-wrap gap-y-2">
               {" "}
               <NavLink
@@ -243,59 +242,59 @@ export default function Sidebar() {
                 }
               </NavLink>
             </div>
-          )}
-          {dressInfo?.sellerStatus == "pending" &&
-            <div className="w-full flex flex-wrap gap-y-2">
-              {" "}
-              <p
-                className={
-                  "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
-                }
-              >
-                <span>
-                  <NavbarReviewIcon colors="#c5c5c5" />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Отзывы
-                </span>
-              </p>
-              <p
-                className={
-                  "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
-                }
-              >
-                <span>
-                  <NavbarMarketIcon colors="#c5c5c5" />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Магазины
-                </span>
-              </p>
-              <p
-                className={
-                  "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
-                }
-              >
-                <span>
-                  <LocationIcon colors="#c5c5c5" />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Локации
-                </span>
-              </p>
-              <p
-                className={
-                  "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
-                }
-              >
-                <span>
-                  <ClothesIcons colors="#c5c5c5" />
-                </span>
-                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                  Одежда
-                </span>
-              </p>
-            </div>}
+          )
+            : (
+              <div className="w-full flex flex-wrap gap-y-2">
+                {" "}
+                <p
+                  className={
+                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                  }
+                >
+                  <span>
+                    <NavbarReviewIcon colors="#c5c5c5" />
+                  </span>
+                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                    Отзывы
+                  </span>
+                </p>
+                <p
+                  className={
+                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                  }
+                >
+                  <span>
+                    <NavbarMarketIcon colors="#c5c5c5" />
+                  </span>
+                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                    Магазины
+                  </span>
+                </p>
+                <p
+                  className={
+                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                  }
+                >
+                  <span>
+                    <LocationIcon colors="#c5c5c5" />
+                  </span>
+                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                    Локации
+                  </span>
+                </p>
+                <p
+                  className={
+                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                  }
+                >
+                  <span>
+                    <ClothesIcons colors="#c5c5c5" />
+                  </span>
+                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                    Одежда
+                  </span>
+                </p>
+              </div>)}
 
 
           <div className="w-full">
