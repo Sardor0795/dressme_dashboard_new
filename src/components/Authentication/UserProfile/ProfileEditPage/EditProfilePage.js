@@ -76,33 +76,32 @@ const EditProfilePage = () => {
 
 
   // ----------------Get Seller Profile-------------
-  useQuery(["get profile"], () => {
+  useQuery(["Get-Seller-Profile"], () => {
     return fetch(`${url}/profile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
+      }
     }).then(res => res.json())
   },
     {
       onSuccess: (res) => {
         console.log(res, "Response in Profile")
-        setState({
-          ...state,
-          sellerFname: res.name,
-          sellerLname: res.surname,
-          sellerEmail: res?.email,
-          sellerCardNumber: res?.card_number,
-          sellerRegionId: res?.region_id,
-          sellerSubRegionId: res?.sub_region_id,
-          sellerTypeId: res?.seller_type_id,
-          sellerStatus: res?.status,
-          sellerPhoneCode: res?.phone.slice(0, 3),
-          sellerPhoneNum: res?.phone.slice(3, 12),
-        })
+        // setState({
+        //   ...state,
+        //   sellerFname: res.name,
+        //   sellerLname: res.surname,
+        //   sellerEmail: res?.email,
+        //   sellerCardNumber: res?.card_number,
+        //   sellerRegionId: res?.region_id,
+        //   sellerSubRegionId: res?.sub_region_id,
+        //   sellerTypeId: res?.seller_type_id,
+        //   sellerStatus: res?.status,
+        //   sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
+        //   sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
+        // })
 
 
       },
@@ -397,10 +396,10 @@ const EditProfilePage = () => {
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
               <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                 <input
-                  className="w-[40px]  h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
+                  className="w-[40px] outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
                   type="text"
-                  value={"+" + state.sellerPhoneCode}
-                  readOnly
+                  value={"+" + state?.sellerPhoneCode || ""}
+                  // readOnly
                   placeholder="998"
                 />
               </div>

@@ -25,7 +25,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
         <action className="w-full flex flex-row flex-wrap gap-y-[10px] gap-x-[10px] mb-4">
           {categoriesList.map((data) => {
             return (
-              <button className="w-fit h-fit focus:bg-textBlueColor focus:text-white p-[10px] border border-textBlueColor text-textBlueColor rounded-lg text-[13px] font-AeonikProMedium">
+              <button key={data?.id} className="w-fit h-fit focus:bg-textBlueColor focus:text-white p-[10px] border border-textBlueColor text-textBlueColor rounded-lg text-[13px] font-AeonikProMedium">
                 {data.category}
               </button>
             );
