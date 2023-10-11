@@ -116,7 +116,7 @@ function AddStore({ onClick }) {
               id="DataImg"
               type="file"
               onChange={handleChange}
-              accept=" image/*"
+              accept=" image/*" 
             />
             {
               !file &&
