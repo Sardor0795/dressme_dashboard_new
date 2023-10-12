@@ -31,15 +31,27 @@ function AddStore({ onClick }) {
   ]);
 
   // img upload--------------
-  const [file, setFile] = useState();
-  const [fileBrand, setFileBrand] = useState();
+  const [file, setFile] = useState({
+    pictureBgFile: "",
+    pictureBgView: ""
+  });
+  const [fileBrand, setFileBrand] = useState({
+    pictureLogoFile: "",
+    pictureLogoView: ""
+  });
   const handleChange = (e) => {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    setFile({
+      ...fileBrand,
+      pictureBgFile: e.target.files[0],
+      pictureBgView: URL.createObjectURL(e.target.files[0])
+    });
   }
   const handleChangeBrand = (e) => {
-    console.log(e.target.files);
-    setFileBrand(URL.createObjectURL(e.target.files[0]));
+    setFileBrand({
+      ...fileBrand,
+      pictureLogoFile: e.target.files[0],
+      pictureLogoView: URL.createObjectURL(e.target.files[0])
+    });
   }
 
 
@@ -65,19 +77,38 @@ function AddStore({ onClick }) {
 
   const nameRef = useRef(null);
 
+  const url = "https://api.dressme.uz/api/seller"
+
+
+
+  let [filt] = genderCategory.filter((v) => v.action === true);
+
   const sendFunc = () => {
-    let [filt] = genderCategory.filter((v) => v.action === true);
+    // console.log(nameRef?.current.value, "name");
+    // console.log(file?.pictureAsFile?.name, "background_photo");
+    // console.log(fileBrand?.pictureAsFile?.name, "logo_photo");
+    // console.log(filt?.gender, "filt?.gender");
+    // console.log(methodDeliv, "delivery_method");
+    let form = new FormData()
+    form.append("name", nameRef?.current.value);
+    form.append("logo_photo", fileBrand?.pictureLogoFile);
+    form.append("background_photo", file?.pictureBgFile);
+    form.append("gender", "female");
+    form.append("delivery_method", "Taxi");
+    return fetch(`${url}/shops/store`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('DressmeUserToken')}`,
+      },
+      body: form
+    })
+      .then((res) => res.json())
+      .then(res => console.log(res, "resImages"))
+      .catch(err => console.log(err, "errImage"))
 
-    const resPonse = {
-      name: nameRef.current.value,
-      gender: filt?.gender,
-      delivery_method: methodDeliv,
-    };
 
-    console.log(resPonse);
-    console.log(uploadImg);
   };
-
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
       <div className="md:hidden flex ">
@@ -109,23 +140,23 @@ function AddStore({ onClick }) {
         <button className="h-full w-full flex items-center justify-center ">
           <label
             htmlFor="DataImg"
-            className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor mr-[5px]"
+            className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
           >
             <input
               className="hidden"
               id="DataImg"
               type="file"
               onChange={handleChange}
-              accept=" image/*" 
+              accept=" image/*"
             />
             {
-              !file &&
+              !file?.pictureBgView &&
               <span className="flex items-center flex-col justify-center">
                 выберите облошка
                 <BgSelectSkin />
               </span>
             }
-            {file && <img src={file} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
+            {file?.pictureBgView && <img src={file?.pictureBgView} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
           </label>
         </button>
 
@@ -134,7 +165,7 @@ function AddStore({ onClick }) {
           <button className="h-full w-full rounded-full flex items-center justify-center ">
             <label
               htmlFor="DataImgBrand"
-              className="h-full w-full flex items-center flex-col justify-center  text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor mr-[5px]"
+              className="h-full w-full flex items-center flex-col justify-center  text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor"
             >
               <input
                 className="hidden"
@@ -144,14 +175,14 @@ function AddStore({ onClick }) {
                 accept=" image/*"
               />
               {
-                !fileBrand &&
+                !fileBrand?.pictureLogoView &&
                 <span className="flex items-center flex-col justify-center">
                   Выберите Логотип
                   <BgSelectSkin />
                 </span>
               }
 
-              {fileBrand && <img src={fileBrand} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+              {fileBrand?.pictureLogoView && <img src={fileBrand?.pictureLogoView} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
             </label>
           </button>
         </div>
