@@ -8,6 +8,10 @@ export default function ContextTeam({ children }) {
     isAuthen: true,
     ConfirmAuthen: false,
     // AccessTokenSeller: localStorage.getItem('DressmeUserToken'),
+    SellerName: "",
+    SellerSurName: "",
+    SellerMagazin: "",
+    SellerMagazinLocation: ""
 
   });
 

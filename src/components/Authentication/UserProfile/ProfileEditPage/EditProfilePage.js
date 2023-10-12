@@ -80,8 +80,9 @@ const EditProfilePage = () => {
     return fetch(`${url}/profile`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
+        // "Content-Type": "application/json",
+        // "Accept": "application/json",
+        'Content-type': 'application/json; charset=UTF-8',
         "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       }
     }).then(res => res.json())
@@ -89,28 +90,27 @@ const EditProfilePage = () => {
     {
       onSuccess: (res) => {
         console.log(res, "Response in Profile")
-        // setState({
-        //   ...state,
-        //   sellerFname: res.name,
-        //   sellerLname: res.surname,
-        //   sellerEmail: res?.email,
-        //   sellerCardNumber: res?.card_number,
-        //   sellerRegionId: res?.region_id,
-        //   sellerSubRegionId: res?.sub_region_id,
-        //   sellerTypeId: res?.seller_type_id,
-        //   sellerStatus: res?.status,
-        //   sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
-        //   sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
-        // })
-
-
+        setDressInfo({ ...dressInfo, SellerName: res?.name, SellerSurName: res?.surname })
+        setState({
+          ...state,
+          sellerFname: res?.name,
+          sellerLname: res?.surname,
+          sellerEmail: res?.email,
+          sellerCardNumber: res?.card_number,
+          sellerRegionId: res?.region_id,
+          sellerSubRegionId: res?.sub_region_id,
+          sellerTypeId: res?.seller_type_id,
+          sellerStatus: res?.status,
+          sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
+          sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
+        })
       },
       onError: (err) => {
         console.log(err, "err get profile");
       },
 
-      // keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-      // refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
   // ------------GET METHOD Region-----------------
@@ -468,10 +468,10 @@ const EditProfilePage = () => {
                                     id={item?.name_ru}
                                     name="type_work"
                                     value={item?.region_id}
-                                    checked={state?.subRegionId == item?.id}
+                                    checked={state?.sellerSubRegionId == item?.id}
                                     className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                     onChange={(e) => {
-                                      setState({ ...state, regionId: e.target.value, subRegionId: item?.id })
+                                      setState({ ...state, sellerRegionId: e.target.value, sellerSubRegionId: item?.id })
                                     }}
                                     required
 

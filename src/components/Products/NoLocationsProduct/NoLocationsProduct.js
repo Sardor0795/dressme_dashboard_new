@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { dressMainData } from "../../../hook/ContextTeam";
 
 export default function NoLocationProduct() {
-  const [state, setState] = useState({
-    hasMagazin: "",
-    hasLocation: "",
-  })
+
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
+
   const url = "https://api.dressme.uz/api/seller"
 
   // // ------------GET  Has Magazin ?-----------------
@@ -24,13 +25,13 @@ export default function NoLocationProduct() {
   },
     {
       onSuccess: (res) => {
-        setState({ ...state, hasMagazin: res })
+        setDressInfo({ ...dressInfo, SellerMagazin: res })
       },
       onError: (err) => {
         console.log(err, "err magazin");
       },
-      // keepPreviousData: true,
-      // refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   )
 
@@ -41,7 +42,6 @@ export default function NoLocationProduct() {
       headers: {
         "Content-type": "application/json",
         "Accept": "application/json",
-
         'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
 
@@ -49,7 +49,8 @@ export default function NoLocationProduct() {
   },
     {
       onSuccess: (res) => {
-        setState({ ...state, hasLocation: res })
+        setDressInfo({ ...dressInfo, SellerMagazinLocation: res })
+
       },
       onError: (err) => {
         console.log(err, "err magazin location");
@@ -59,14 +60,14 @@ export default function NoLocationProduct() {
     }
   )
 
-  console.log(state?.hasLocation, "state?.hasLocation");
-  console.log(state?.hasMagazin, "state?.hasMagazin");
+  console.log(dressInfo?.SellerMagazinLocation, "dressInfo?.SellerMagazinLocation");
+  console.log(dressInfo?.SellerMagazin, "dressInfo?.SellerMagazin");
   return (
     <div className="w-full h-[90vh] ">
       {
-        state?.hasMagazin?.shops?.data?.length ? (
+        dressInfo?.SellerMagazin?.shops?.data?.length ? (
 
-          !state?.hasLocation?.length && <div className="flex items-center h-full justify-center">
+          !dressInfo?.SellerMagazinLocation?.length && <div className="flex items-center h-full justify-center">
             <Link
               to="/locations-store"
               className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
