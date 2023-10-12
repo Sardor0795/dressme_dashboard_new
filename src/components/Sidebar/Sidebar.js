@@ -102,9 +102,9 @@ export default function Sidebar() {
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-              {/* <span>{dressInfo?.sellerFname || "Ism"}</span>
-              <span>{dressInfo?.sellerLname || "Familiya"}</span> */}
-              <span>Ism familiya</span>
+              <span>{dressInfo?.SellerName || "Ism"}</span>
+              <span>{dressInfo?.SellerSurName || "Familiya"}</span>
+              {/* <span>Ism familiya</span> */}
 
             </span>
           </NavLink>
