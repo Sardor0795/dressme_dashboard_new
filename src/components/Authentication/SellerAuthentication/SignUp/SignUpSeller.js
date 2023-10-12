@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./style.css";
 import InputMask from "react-input-mask";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Select } from "antd";
+import { AiFillInfoCircle, AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
+import { Select,Button, notification } from "antd";
 import { ArrowTopIcons, CreditCardNumber, DashboardList, DashboardUser, MenuCloseIcons, Star6Icon, SuccessIconsForMail, UserMailIcon } from "../../../../assets/icons";
 
 const SignUpSeller = () => {
@@ -14,6 +14,7 @@ const SignUpSeller = () => {
   const url = "https://api.dressme.uz/api/seller"
   const navigate = useNavigate()
   const [naturalPerson, setNaturalPerson] = useState(true);
+  const [api, contextHolder] = notification.useNotification();
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -142,19 +143,18 @@ const SignUpSeller = () => {
           region_id: state?.region,
           sub_region_id: state?.sub_region,
         })
-
-
-
-    }).then((res) => res.json())
+    
+      }).then((res) => res.json())
   })
+
   const onSubmit = () => {
 
     mutate({}, {
       onSuccess: (res) => {
-        // console.log(res, "res");
+        console.log(res, "resAPi-Data");
         if (res?.message && res?.errors) {
           setState({ ...state, errorGroup: res })
-          toast.error(`${res?.message}`, {
+          api.error(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -163,7 +163,20 @@ const SignUpSeller = () => {
             draggable: true,
             progress: undefined,
             theme: "light",
+            // message: "Notification",
+            // duration: 3,
+            // description:res.message,
+            // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
           });
+          
+            // api.open.error({
+            //   message: 'Notification Title',
+            //   duration: 3,
+            //   description:
+            //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+            //   icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
+            // });
+          
 
         } else if (res?.message && !res?.errors) {
           setState({
@@ -178,9 +191,13 @@ const SignUpSeller = () => {
             cardNumber: "",
             phone: "",
             openModalEmailMessage: true,
-            errorGroup: ""
+            errorGroup: "",
+            // message: "Notification",
+            // duration: 3,
+            // description:res.message,
+            // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
           });
-          toast.success(`${res?.message}`, {
+          api.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -189,13 +206,17 @@ const SignUpSeller = () => {
             draggable: true,
             progress: undefined,
             theme: "light",
+            // message: "Notification",
+            // duration: 3,
+            // description:res.message,
+            // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
           });
 
         }
       },
       onError: (err) => {
         console.log(err, "Error");
-        toast.error("Serverda xatolik", {
+        api.error("Serverda xatolik", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -204,10 +225,12 @@ const SignUpSeller = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
+          // message: "Notification",
+          // duration: 3,
+          // description:err,
+          // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
         });
       },
-
-
     })
 
   }
@@ -224,7 +247,7 @@ const SignUpSeller = () => {
     window.scrollTo({
       top: 0,
     });
-    document.title = "Регистрация продавца    ";
+    document.title = "Регистрация продавца";
 
   }, []);
 
@@ -232,9 +255,12 @@ const SignUpSeller = () => {
   // console.log(state?.errorGroup?.errors, "errorGroup");
   // console.log(state?.errorGroup?.errors?.card_number, "errorGroup card_number");
   // console.log(parseInt(state?.seller_type_id), "seller_type_id");
+  
+
+
   return (
     <div className="max-w-[1280px] w-full flex justify-center items-center m-auto">
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         limit={4}
@@ -246,7 +272,10 @@ const SignUpSeller = () => {
         draggable
         pauseOnHover
         theme="colored"
-      />
+      /> */}
+
+      {contextHolder}
+     
       <div className="w-full h-fit px-2 md:px-0">
         <div className="text-xl md:text-3xl font-medium mt-[20px] mb-[30px] text-center">
           Регистрация продавца
@@ -800,7 +829,7 @@ const SignUpSeller = () => {
         {/* -------------------------Email Verify Modal------------------ */}
 
         <div className="flex items-center justify-center flex-col mt-[30px] xs:mt-[50px] md:mt-[90px]  mb-[88px] md:mb-8">
-          <button type="button" onClick={onSubmit} className="w-full md:w-[360px] h-12 flex items-center justify-center mx-auto font-medium bg-fullBlue text-base text-white rounded-xl  ">
+          <button type="button" onClick={onSubmit} className="w-full md:w-[360px] h-12 flex items-center justify-center mx-auto font-medium bg-fullBlue text-base text-white rounded-xl active:scale-95">
             Зарегистрироваться
           </button>
           <NavLink to="/login-seller" className={"mt-[15px] text-fullBlue hover:underline text-base not-italic font-AeonikProRegular"}>

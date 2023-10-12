@@ -45,15 +45,15 @@ export default function LocationList() {
       onSuccess: (res) => {
         console.log(res.locations.data, "LOCATIONS");
         const data = res.locations.data[0]
-        setProductList([{
-          id: data.id,
-          photo: data.shop.url_logo_photo,
-          city: data.region.name_ru,
-          sub_region: data.sub_region.name_ru,
-          address: data.address,
-          startTime: data.work_time_from,
-          endTime: data.work_time_to,
-        }])
+        // setProductList([{
+        //   id: data.id,
+        //   photo: data.shop.url_logo_photo,
+        //   city: data.region.name_ru,
+        //   sub_region: data.sub_region.name_ru,
+        //   address: data.address,
+        //   startTime: data.work_time_from,
+        //   endTime: data.work_time_to,
+        // }])
       },
       onError: (err) => {
         console.log(err, "err");
