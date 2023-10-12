@@ -8,7 +8,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 function AddStore({ onClick }) {
   const navigate = useNavigate();
-  const [uploadImg, setUploadImg] = useState(null);
+  const [magazinName, setMagazinName] = useState();
 
   const [methodDeliv, setMethodDeliv] = useState(null);
 
@@ -73,9 +73,7 @@ function AddStore({ onClick }) {
     });
   }, []);
 
-  // -------- ref
 
-  const nameRef = useRef(null);
 
   const url = "https://api.dressme.uz/api/seller"
 
@@ -84,17 +82,13 @@ function AddStore({ onClick }) {
   let [filt] = genderCategory.filter((v) => v.action === true);
 
   const sendFunc = () => {
-    // console.log(nameRef?.current.value, "name");
-    // console.log(file?.pictureAsFile?.name, "background_photo");
-    // console.log(fileBrand?.pictureAsFile?.name, "logo_photo");
-    // console.log(filt?.gender, "filt?.gender");
-    // console.log(methodDeliv, "delivery_method");
+
     let form = new FormData()
-    form.append("name", nameRef?.current.value);
+    form.append("name", magazinName);
     form.append("logo_photo", fileBrand?.pictureLogoFile);
     form.append("background_photo", file?.pictureBgFile);
-    form.append("gender", "female");
-    form.append("delivery_method", "Taxi");
+    form.append("gender", filt?.gender);
+    form.append("delivery_method", methodDeliv);
     return fetch(`${url}/shops/store`, {
       method: "POST",
       headers: {
@@ -104,7 +98,11 @@ function AddStore({ onClick }) {
       body: form
     })
       .then((res) => res.json())
-      .then(res => console.log(res, "resImages"))
+      .then(res => {
+        if (res?.shop) {
+          navigate('/store/market-list')
+        }
+      })
       .catch(err => console.log(err, "errImage"))
 
 
@@ -188,8 +186,7 @@ function AddStore({ onClick }) {
         </div>
       </div>
       {/* Form */}
-      <form
-        action="#"
+      <div
         className="w-full flex flex-col items-center justify-between  "
       >
         <div className="w-full flex flex-col md:flex-row items-center justify-center mb-10 md:mb-[60px] gap-x-10">
@@ -209,7 +206,8 @@ function AddStore({ onClick }) {
                 type="text"
                 name="shopName"
                 id="shopName"
-                ref={nameRef}
+                value={magazinName}
+                onChange={(e) => setMagazinName(e.target.value)}
                 placeholder="Введите название магазина"
                 className="w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />
@@ -277,7 +275,7 @@ function AddStore({ onClick }) {
             </div>
           </div>
         </div>
-      </form>
+      </div>
       <div className="flex items-center justify-center mb-10 md:mb-24">
         <button
           onClick={() => {
