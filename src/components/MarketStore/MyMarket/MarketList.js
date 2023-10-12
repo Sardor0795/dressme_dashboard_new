@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { deliveryIcon, man, nike, woman } from "../../../assets";
-import { StarIcon } from "../../../assets/icons";
+import { BgNoImgIcon, StarIcon } from "../../../assets/icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { dressMainData } from "../../../hook/ContextTeam";
 
 const MarketList = () => {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const data = [
     { id: 1, name: "Nike Store Official Dealer" },
     { id: 2, name: "Nike Store Official Dealer" },
@@ -12,12 +15,12 @@ const MarketList = () => {
   ];
   const navigate = useNavigate();
   const goDetail = (id) => {
-    navigate(`/store/list/:${id}`);
+    navigate(`/store/market-list/:${id}`);
   };
 
   return (
     <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-      {data.map((data) => {
+      {dressInfo?.SellerMagazin?.shops?.data?.map((data) => {
         return (
           <div
             key={data?.id}
@@ -34,12 +37,12 @@ const MarketList = () => {
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
               </div>
               <div className="w-full md:w-fit flex items-center justify-between my-[15px] md:my-0 ">
-                <figure className="w-[80px] md:w-[120px] h-[80px] md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
-                  <img src={nike} alt="" />
+                <figure className="w-[80px] md:w-[120px] h-[80px] overflow-hidden md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
+                  <img src={data?.url_logo_photo} alt="" className="w-full h-full  object-cover" />
                 </figure>
                 <div className="flex flex-col ll:ml-8">
                   <p className="text-[13px] ls:text-[14px] xs:text-xl  xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
-                    Nike Store Official Dealer
+                    {data?.name || null}
                   </p>
                   <div className="">
                     <div className="flex items-center ">
@@ -75,7 +78,7 @@ const MarketList = () => {
               <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
                 <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
-                  Собственная доставка
+                  {data?.delivery_method}
                 </span>
               </div>
             </div>

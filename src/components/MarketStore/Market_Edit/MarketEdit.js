@@ -1,11 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { GoBackIcons, LocationIcon, StarLabel } from "../../../assets/icons";
 import { adidas, backImg } from "../../../assets";
 import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
+import { dressMainData } from "../../../hook/ContextTeam";
+import { useQuery } from "@tanstack/react-query";
 
 function MarketEdit() {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [getIdShops, setGetIdShops] = useState(null);
+  const pathname = window.location.pathname;
+
+  let id = pathname.replace("/store/market-list/:", "")
+
+
+  const url = "https://api.dressme.uz/api/seller"
+
+  // // ------------GET  Has Magazin ?-----------------
+  useQuery(["magazin"], () => {
+    return fetch(`${url}/shops/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        console.log(res, "resShopRouteID")
+        setGetIdShops(res)
+      },
+      onError: (err) => {
+        console.log(err, "err magazin");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
+
+
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = () => {
@@ -36,7 +73,7 @@ function MarketEdit() {
   const [genderCategory, setGenderCategory] = useState([
     {
       id: 1,
-      action: true,
+      action: false,
       gender: "Мужской",
     },
     {
@@ -50,6 +87,19 @@ function MarketEdit() {
       gender: "Унисекс",
     },
   ]);
+
+  useEffect(() => {
+    setGenderCategory(current => {
+      return current?.map(item => {
+        if (item?.gender == getIdShops?.shop?.gender) {
+          return { ...item, action: true }
+        } else {
+          return { ...item, action: false }
+        }
+      })
+    })
+
+  }, [getIdShops?.shop?.gender])
 
   const handleGenderCheck = (value) => {
     setGenderCategory((data) => {
@@ -66,7 +116,7 @@ function MarketEdit() {
       top: 0,
     });
   }, []);
-
+  console.log(getIdShops?.shop?.delivery_method, "delivery_method");
   return (
     <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12  px-4 md:px-0">
       <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
@@ -106,14 +156,14 @@ function MarketEdit() {
           </button>
         </div>
       </div>
-      <div className="relative w-full md:h-[360px] h-[200px] md:h-fit flex items-center   justify-center rounded-lg ">
+      <div className="relative w-full md:h-[360px] h-[200px]  overflow-hidden flex items-center border border-[#f2f2f2]  justify-center rounded-lg ">
         <img
-          src={backImg}
-          className="w-full h-full object-cover rounded-lg"
+          src={getIdShops?.shop?.url_background_photo}
+          className="w-full h-full object-contain rounded-lg"
           alt=""
         />
         <div className="absolute bottom-[-30px] ll:-bottom-11  md:bottom-[-60px] z-[20] bg-white overflow-hidden left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full ">
-          <img src={adidas} className="w-full h-full " alt="" />
+          <img src={getIdShops?.shop?.url_logo_photo} className="w-full h-full " alt="" />
         </div>
       </div>
       <div className="w-full flex items-center justify-end mb-[24px] md:mb-20 mt-4">
@@ -147,7 +197,7 @@ function MarketEdit() {
                 type="text"
                 name="shopName"
                 id="shopName"
-                value={"Dressme"}
+                value={getIdShops?.shop?.name}
                 placeholder="Введите название магазина"
                 className="w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />

@@ -8,57 +8,57 @@ export default function NoLocationProduct() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
 
-  const url = "https://api.dressme.uz/api/seller"
+  // const url = "https://api.dressme.uz/api/seller"
 
-  // // ------------GET  Has Magazin ?-----------------
-  useQuery(["magazin"], () => {
-    return fetch(`${url}/shops`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
+  // // // ------------GET  Has Magazin ?-----------------
+  // useQuery(["magazin"], () => {
+  //   return fetch(`${url}/shops`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //       "Accept": "application/json",
 
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
+  //       'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     },
 
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setDressInfo({ ...dressInfo, SellerMagazin: res })
-      },
-      onError: (err) => {
-        console.log(err, "err magazin");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  )
+  //   }).then(res => res.json())
+  // },
+  //   {
+  //     onSuccess: (res) => {
+  //       setDressInfo({ ...dressInfo, SellerMagazin: res })
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "err magazin");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // )
 
-  // ------------GET  Has Location ?-----------------
-  useQuery(["magazin location"], () => {
-    return fetch(`${url}/shops/locations/index`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
+  // // ------------GET  Has Location ?-----------------
+  // useQuery(["magazin location"], () => {
+  //   return fetch(`${url}/shops/locations/index`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-type": "application/json",
+  //       "Accept": "application/json",
+  //       'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     },
 
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setDressInfo({ ...dressInfo, SellerMagazinLocation: res })
+  //   }).then(res => res.json())
+  // },
+  //   {
+  //     onSuccess: (res) => {
+  //       setDressInfo({ ...dressInfo, SellerMagazinLocation: res })
 
-      },
-      onError: (err) => {
-        console.log(err, "err magazin location");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  )
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "err magazin location");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // )
 
   console.log(dressInfo?.SellerMagazinLocation, "dressInfo?.SellerMagazinLocation");
   console.log(dressInfo?.SellerMagazin, "dressInfo?.SellerMagazin");

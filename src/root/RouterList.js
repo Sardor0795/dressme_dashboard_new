@@ -35,6 +35,7 @@ import SignInSeller from "../components/Authentication/SellerAuthentication/Sign
 import ForgotPasswordSeller from "../components/Authentication/SellerAuthentication/forgotPassword/ForgotPasswordSeller";
 import ResetPasswordSeller from "../components/Authentication/SellerAuthentication/ResetPasswordSeller/ResetPasswordSeller";
 import MailVerfySeller from "../components/Authentication/SellerAuthentication/MailVerfy/MailVerfySeller";
+import { useQuery } from "@tanstack/react-query";
 
 export default function RouterList() {
 
@@ -44,6 +45,35 @@ export default function RouterList() {
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
+
+  const url = "https://api.dressme.uz/api/seller"
+
+  // // ------------GET  Has Magazin ?-----------------
+  useQuery(["magazin"], () => {
+    return fetch(`${url}/shops`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setDressInfo({ ...dressInfo, SellerMagazin: res })
+        console.log(res?.shops?.data, "resShopRoute")
+      },
+      onError: (err) => {
+        console.log(err, "err magazin");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
+
+
   return (
     <div>
       {/* <NavbarForSetting /> */}
@@ -70,7 +100,7 @@ export default function RouterList() {
 
         {/* ---------------------<Store>------------------------- */}
         <Route path="/store" element={<MarketStore />}>
-          {dressInfo?.isItPorduct ? (
+          {dressInfo?.SellerMagazin?.shops?.data?.length >= 1 ? (
             <Route index element={<MyMarket />} />
           ) : (
             <Route index element={<AddStore />} />
@@ -78,7 +108,7 @@ export default function RouterList() {
           <Route path="/store/market-add" element={<AddStore />} />
           <Route path="/store/market-list" element={<MyMarket />} />
           <Route path="/store/location-add" element={<AddLocation />} />
-          <Route path="/store/list/:id" element={<MarketEdit />} />
+          <Route path="/store/market-list/:id" element={<MarketEdit />} />
         </Route>
 
         {/* ---------------------<Locations>------------------------- */}

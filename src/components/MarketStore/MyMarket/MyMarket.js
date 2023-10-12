@@ -6,9 +6,10 @@ import { Link, NavLink } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 
-const { RangePicker } = DatePicker;
 
 export default function MyMarket() {
+  // const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
