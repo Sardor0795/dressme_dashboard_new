@@ -26,16 +26,16 @@ export default function LocationList() {
       endTime: '',
     }
   ]);
+  const [locationListId, setLocationListId] = useState("")
   const url = "https://api.dressme.uz/api/seller"
 
-  // ------------GET HAS SHOP ?-----------------
-  useQuery(["shops"], () => {
+  // // ------------GET  Has Magazin ?-----------------
+  const { isLoading } = useQuery(["locations-index"], () => {
     return fetch(`${url}/shops/locations/index`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
         "Accept": "application/json",
-
         'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
 
@@ -43,25 +43,18 @@ export default function LocationList() {
   },
     {
       onSuccess: (res) => {
-        // console.log(res.locations.data, "LOCATIONS");
-        // const data = res.locations.data[0]
-        // setProductList([{
-        //   id: data.id,
-        //   photo: data.shop.url_logo_photo,
-        //   city: data.region.name_ru,
-        //   sub_region: data.sub_region.name_ru,
-        //   address: data.address,
-        //   startTime: data.work_time_from,
-        //   endTime: data.work_time_to,
-        // }])
+        setLocationListId(res)
+        console.log(res, "magazin yesy");
       },
       onError: (err) => {
-        console.log(err, "err");
+        console.log(err, "err magazin");
       },
-      // keepPreviousData: true,
-      // refetchOnWindowFocus: false,
     }
   )
+
+  // locationListId?.locations?.data?.map((item, index) => {
+  console.log(locationListId?.locations, "item");
+  // })
 
   const navigate = useNavigate();
   const goMapCity = (id) => {
@@ -144,7 +137,7 @@ export default function LocationList() {
       </div>
       <div className="md:mt-[16px] flex justify-between items-center">
         <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
-          Nike <span className="hidden md:inline">(6)</span>
+          {locationListId?.locations?.data[0]?.shop?.name} <span className="hidden md:inline">({locationListId?.locations?.data?.length})</span>
         </p>
 
         <NavLink to={"/store/location-add"} className="md:hidden p-2 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
@@ -198,8 +191,7 @@ export default function LocationList() {
 
         {/* table product */}
         <div className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
-          {productList?.map((data) => {
-            console.log(data, "DATA");
+          {locationListId?.locations?.data?.map((data, index) => {
             return (
               <>
                 <ul
@@ -210,27 +202,28 @@ export default function LocationList() {
                     {data?.id}
                   </li>
                   <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
-                    <img className="w-[100%] h-[100%] rounded-lg object-top	object-cover" src={data?.photo} alt="" />
+                    <img className="w-[100%] h-[100%] rounded-lg object-top	object-cover"
+                      src={data?.url_image_path_one} alt="" />
                   </li>
                   <div className="w-[calc(100%-230px)] flex items-center justify-between">
                     <li className="md:w-[32%] h-full pr-5">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
-                        {data?.city}, {data.sub_region}
+                        {data?.region?.name_ru || "city"}, {data?.sub_region?.name_ru || "sub_region"}
                       </span>
                     </li>
                     <li className="md:w-[22%] h-full">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                        {data?.address}
+                        {data?.address || "address"}
                       </span>{" "}
                     </li>
                     <li className="md:w-[13%] h-full">
                       <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                        {data?.startTime} - {data?.endTime}
+                        {data?.work_time_from || "startTime"} - {data?.work_time_to || "endTime"}
                       </span>
                     </li>
                     <li className="md:w-[15%] h-full flex items-center justify-center text-center">
                       <button
-                        onClick={() => goMapWear(data?.city)}
+                        onClick={() => goMapWear(data?.shop_id)}
                         className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                       >
                         {/* data?.wearLink */}
@@ -239,7 +232,7 @@ export default function LocationList() {
                     </li>
                     <li className="md:w-[25%] h-full flex items-center justify-center text-center">
                       <button
-                        onClick={() => goMapCity(data?.city)}
+                        onClick={() => goMapCity(data?.region?.name_ru)}
                         className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                       >
                         {/* {data?.showMore} */}
@@ -255,14 +248,14 @@ export default function LocationList() {
                   <div className="mb-2">
                     <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                       <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                      <span className="text-checkboxBorder">0{data.id}</span>
+                      <span className="text-checkboxBorder">0{data?.id}</span>
                       <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                     </div>
                   </div>
 
                   <div className="mb-3 h-[148px]">
                     <figure className="w-full h-full rounded-lg overflow-hidden">
-                      <img className="w-[100%] h-[100%]" src={pdpImg} alt="" />
+                      <img className="w-[100%] h-[100%]  object-cover" src={data?.url_image_path_one} alt="" />
                     </figure>
                   </div>
 
@@ -275,19 +268,22 @@ export default function LocationList() {
 
                     <div className="px-1 ll:px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px]">
                       <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
-                        {data?.city}
+                        {data?.region?.name_ru}
                       </div>
                       <div className="relative pr-[5px] ll:pr-[10px] h-[60px] overflow-hidden  w-[46%]  text-justify	text-[11px] not-italic font-AeonikProMedium">
                         <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
 
                         {data?.address}</div>
-                      <div className="w-[30%] flex  justify-center text-[11px] not-italic font-AeonikProMedium"> {data?.time} </div>
+                      <div className="w-[30%] flex  justify-center text-[11px] not-italic font-AeonikProMedium">
+                        {data?.work_time_from || "startTime"} - {data?.work_time_to || "endTime"}
+                      </div>
                     </div>
                   </div>
+                  {/* {data?.region?.name_ru || "city"}, {data?.sub_region?.name_ru || "sub_region"} */}
 
                   <div className="flex items-center justify-between gap-x-[15px]">
                     <button
-                      onClick={() => goMapWear(data?.city)}
+                      onClick={() => goMapWear(data?.shop_id)}
                       className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                     >
                       <span className="mr-[5px]">
@@ -324,7 +320,7 @@ export default function LocationList() {
                       {data?.wearLink}
                     </button>
                     <button
-                      onClick={() => goMapCity(data?.city)}
+                      onClick={() => goMapCity(data?.region?.name_ru)}
                       className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                     >
                       {data?.showMore}
@@ -358,7 +354,7 @@ export default function LocationList() {
                   </div>
                 </div>
               </>
-            );
+            )
           })}
         </div>
       </div>

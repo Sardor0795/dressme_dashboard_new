@@ -1,16 +1,17 @@
 import React from 'react'
-import LocationList from '../Locations/LocationList/LocationList'
-import NoLocations from '../NoLocations/NoLocations'
+
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import MyMarket from '../MyMarket/MyMarket'
+import AddStore from '../AddMarket/AddStore/AddStore'
 
-export default function MarketIsCheck() {
-    const [isLocation, setIsLocation] = useState("")
+export default function MarketIsStoreCheck() {
+    const [sellerShops, setSellerShops] = useState("")
     const url = "https://api.dressme.uz/api/seller"
 
     // // ------------GET  Has Magazin ?-----------------
-    const { isLoading } = useQuery(["location index"], () => {
-        return fetch(`${url}/shops/locations/index`, {
+    const { isLoading } = useQuery(["sellerShops"], () => {
+        return fetch(`${url}/shops`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
@@ -23,14 +24,15 @@ export default function MarketIsCheck() {
     },
         {
             onSuccess: (res) => {
-                setIsLocation(res)
+                setSellerShops(res)
+                // setDressInfo({ ...dressInfo, SellerMagazin: res })
             },
             onError: (err) => {
                 console.log(err, "err magazin");
             },
+
         }
     )
-
 
 
     return (
@@ -41,8 +43,8 @@ export default function MarketIsCheck() {
                     <h1>Waiting please....</h1>
                 </div> : <>
 
-                    {isLocation?.locations?.data?.length && <LocationList />}
-                    {!isLocation?.locations?.data?.length && <NoLocations />}
+                    {sellerShops?.shops?.data?.length && <MyMarket />}
+                    {!sellerShops?.shops?.data?.length && <AddStore />}
 
 
                 </>
