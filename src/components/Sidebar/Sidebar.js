@@ -17,7 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Sidebar() {
+export default function Sidebar({ name, surName }) {
   const navigate = useNavigate()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
@@ -25,13 +25,7 @@ export default function Sidebar() {
     logOutModal: false
   });
 
-  // const [logOutModal, setLogOutModal] = useState(false)
-  const location = useLocation();
-  const [locationWindow, setLocationWindow] = useState("");
 
-  useEffect(() => {
-    setLocationWindow(location.pathname);
-  }, [location.pathname]);
   const url = "https://api.dressme.uz/api/seller"
 
   // -----------------------Seller Delete---------------
@@ -102,8 +96,8 @@ export default function Sidebar() {
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-              <span>{dressInfo?.SellerName || "Ism"}</span>
-              <span>{dressInfo?.SellerSurName || "Familiya"}</span>
+              <span>{name || "Ism"}</span>
+              <span>{surName || "Familiya"}</span>
               {/* <span>Ism familiya</span> */}
 
             </span>

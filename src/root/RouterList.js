@@ -46,32 +46,6 @@ export default function RouterList() {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
 
-  const url = "https://api.dressme.uz/api/seller"
-
-  // // ------------GET  Has Magazin ?-----------------
-  useQuery(["magazin"], () => {
-    return fetch(`${url}/shops`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setDressInfo({ ...dressInfo, SellerMagazin: res })
-        console.log(res?.shops?.data, "resShopRoute")
-      },
-      onError: (err) => {
-        console.log(err, "err magazin");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  )
 
 
   return (

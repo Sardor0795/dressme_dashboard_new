@@ -31,8 +31,7 @@ function App() {
       onError: (err) => {
         console.log(err, "err magazin");
       },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+
     }
   )
 
@@ -60,7 +59,7 @@ function App() {
       refetchOnWindowFocus: false,
     }
   )
-  console.log("ishga tushdi");
+
 
   return <NavbarDashboard />;
 }
