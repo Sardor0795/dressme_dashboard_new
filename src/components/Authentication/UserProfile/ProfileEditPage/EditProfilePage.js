@@ -90,7 +90,7 @@ const EditProfilePage = () => {
     {
       onSuccess: (res) => {
         console.log(res, "Response in Profile")
-        setDressInfo({ ...dressInfo, SellerName: res?.name, SellerSurName: res?.surname })
+        // setDressInfo({ ...dressInfo, SellerName: res?.name, SellerSurName: res?.surname })
         setState({
           ...state,
           sellerFname: res?.name,
