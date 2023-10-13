@@ -5,34 +5,35 @@ import { adidas, backImg } from "../../../assets";
 import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
 import { dressMainData } from "../../../hook/ContextTeam";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 function MarketEdit() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [getIdShops, setGetIdShops] = useState(null);
   const pathname = window.location.pathname;
 
-  let id = pathname.replace("/store/market-list/:", "")
+  let id = pathname.replace("/store/market-list/:", "");
 
-
-  const url = "https://api.dressme.uz/api/seller"
+  const url = "https://api.dressme.uz/api/seller";
 
   // // ------------GET  Has Magazin ?-----------------
-  useQuery(["magazin"], () => {
-    return fetch(`${url}/shops/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
+  useQuery(
+    ["magazin"],
+    () => {
+      return fetch(`${url}/shops/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
 
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+      }).then((res) => res.json());
+    },
     {
       onSuccess: (res) => {
-        console.log(res, "resShopRouteID")
-        setGetIdShops(res)
+        console.log(res, "resShopRouteID");
+        setGetIdShops(res);
       },
       onError: (err) => {
         console.log(err, "err magazin");
@@ -40,8 +41,54 @@ function MarketEdit() {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
 
+  // Delete ----
+
+  const { mutate } = useMutation(() => {
+    return fetch(`${url}/shops/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then((res) => res.json());
+  });
+
+  const onUserDelete = () => {
+    // setState({ ...state, popConfirmDelete: false });
+    mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          console.log(res);
+          navigate("/store/market-list");
+          window.location.reload();
+          // if (res?.message) {
+          //   // localStorage.clear();
+          //   // navigate("/signup-seller");
+          //   // window.location.reload();
+          //   // setState({ ...state, popConfirmDelete: false });
+          //   console.log(res, "Delete");
+          //   // toast.warn(`${res?.message}`, {
+          //   //   position: "top-right",
+          //   //   autoClose: 5000,
+          //   //   hideProgressBar: false,
+          //   //   closeOnClick: true,
+          //   //   pauseOnHover: true,
+          //   //   draggable: true,
+          //   //   progress: undefined,
+          //   //   theme: "light",
+          //   // });
+          // }
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      }
+    );
+  };
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -51,7 +98,9 @@ function MarketEdit() {
       content: "Сохранить",
     });
   };
+
   const success2 = () => {
+    onUserDelete();
     messageApi.open({
       type: "success",
       content: "Удалить",
@@ -89,17 +138,16 @@ function MarketEdit() {
   ]);
 
   useEffect(() => {
-    setGenderCategory(current => {
-      return current?.map(item => {
+    setGenderCategory((current) => {
+      return current?.map((item) => {
         if (item?.gender == getIdShops?.shop?.gender) {
-          return { ...item, action: true }
+          return { ...item, action: true };
         } else {
-          return { ...item, action: false }
+          return { ...item, action: false };
         }
-      })
-    })
-
-  }, [getIdShops?.shop?.gender])
+      });
+    });
+  }, [getIdShops?.shop?.gender]);
 
   const handleGenderCheck = (value) => {
     setGenderCategory((data) => {
@@ -147,7 +195,6 @@ function MarketEdit() {
           <AiOutlineLeft />
         </button>
         <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
-
           <button
             onClick={success2}
             className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
@@ -156,14 +203,18 @@ function MarketEdit() {
           </button>
         </div>
       </div>
-      <div className="relative w-full md:h-[360px] h-[200px]  overflow-hidden flex items-center border border-[#f2f2f2]  justify-center rounded-lg ">
+      <div className="relative w-full md:h-[360px] h-[200px] flex items-center border border-[#f2f2f2]  justify-center rounded-lg ">
         <img
           src={getIdShops?.shop?.url_background_photo}
           className="w-full h-full object-contain rounded-lg"
           alt=""
         />
         <div className="absolute bottom-[-30px] ll:-bottom-11  md:bottom-[-60px] z-[20] bg-white overflow-hidden left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full ">
-          <img src={getIdShops?.shop?.url_logo_photo} className="w-full h-full " alt="" />
+          <img
+            src={getIdShops?.shop?.url_logo_photo}
+            className="w-full h-full "
+            alt=""
+          />
         </div>
       </div>
       <div className="w-full flex items-center justify-end mb-[24px] md:mb-20 mt-4">
@@ -220,10 +271,11 @@ function MarketEdit() {
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
                       className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
-                                                    ${data.action
-                          ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                          : ""
-                        }    
+                                                    ${
+                                                      data.action
+                                                        ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                                                        : ""
+                                                    }
                                                     `}
                     >
                       {data.gender}
