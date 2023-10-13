@@ -3,10 +3,10 @@ import "./style.css";
 import InputMask from "react-input-mask";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillInfoCircle, AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
-import { Select,Button, notification } from "antd";
+import { VscError} from "react-icons/vsc";
+import { Select, notification } from "antd";
 import { ArrowTopIcons, CreditCardNumber, DashboardList, DashboardUser, MenuCloseIcons, Star6Icon, SuccessIconsForMail, UserMailIcon } from "../../../../assets/icons";
 
 const SignUpSeller = () => {
@@ -143,7 +143,6 @@ const SignUpSeller = () => {
           region_id: state?.region,
           sub_region_id: state?.sub_region,
         })
-    
       }).then((res) => res.json())
   })
 
@@ -151,34 +150,16 @@ const SignUpSeller = () => {
 
     mutate({}, {
       onSuccess: (res) => {
-        console.log(res, "resAPi-Data");
+        console.log(res, "SIGN-UP");
         if (res?.message && res?.errors) {
           setState({ ...state, errorGroup: res })
-          api.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            // message: "Notification",
-            // duration: 3,
-            // description:res.message,
-            // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
+          api.open( {
+            message: `${res?.message}`,
+            duration: 3,
+            icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
           });
-          
-            // api.open.error({
-            //   message: 'Notification Title',
-            //   duration: 3,
-            //   description:
-            //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-            //   icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
-            // });
-          
-
-        } else if (res?.message && !res?.errors) {
+        } 
+        else if (res?.message && !res?.errors) {
           setState({
             ...state,
             email: "",
@@ -192,43 +173,21 @@ const SignUpSeller = () => {
             phone: "",
             openModalEmailMessage: true,
             errorGroup: "",
-            // message: "Notification",
-            // duration: 3,
-            // description:res.message,
-            // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
           });
-          api.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            // message: "Notification",
-            // duration: 3,
-            // description:res.message,
-            // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
+          api.open( {
+            message: `${res?.message}`,
+            duration: 3,
+            icon: <VscError  style={{ color: '#FF0000' }} />,
           });
-
         }
       },
+
       onError: (err) => {
         console.log(err, "Error");
-        api.error("Serverda xatolik", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          // message: "Notification",
-          // duration: 3,
-          // description:err,
-          // icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
+        api.open( {
+          message: `${err?.message}`,
+          duration: 3,
+          icon: <VscError style={{ color: '#FF0000' }} />,
         });
       },
     })
@@ -249,33 +208,14 @@ const SignUpSeller = () => {
     });
     document.title = "Регистрация продавца";
 
-  }, []);
-
-  // console.log(state?.isEmailMessage, "isEmailMessage");
-  // console.log(state?.errorGroup?.errors, "errorGroup");
-  // console.log(state?.errorGroup?.errors?.card_number, "errorGroup card_number");
-  // console.log(parseInt(state?.seller_type_id), "seller_type_id");
-  
+  }, []);  
 
 
   return (
     <div className="max-w-[1280px] w-full flex justify-center items-center m-auto">
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      /> */}
 
       {contextHolder}
-     
+
       <div className="w-full h-fit px-2 md:px-0">
         <div className="text-xl md:text-3xl font-medium mt-[20px] mb-[30px] text-center">
           Регистрация продавца
