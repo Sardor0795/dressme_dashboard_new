@@ -27,6 +27,7 @@ export default function LocationAddById() {
     assistantNameFirst: "",
     assistantNameSecond: "",
     assistantPhoneFirst: "",
+    phoneCode: "+998",
     assistantPhoneSecond: "",
     regionIdShops: "",
     subRegionIdShops: "",
@@ -43,6 +44,31 @@ export default function LocationAddById() {
 
 
   });
+  // ----------phone Number----------1
+  let data = state?.assistantPhoneFirst.split("-");
+  let arr = data.join("");
+  let data1 = arr.split("(");
+  let arr1 = data1.join("");
+  let arr2 = arr1.split(")");
+  let data2 = arr2.join("");
+  let data3 = data2.split(" ")
+  let data4 = data3.join("")
+  let arr3 = state.phoneCode.split("+");
+  let data5 = arr3.join("");
+  const assistantPhoneNumberFirst = data5 + data4;
+  // ----------phone Number----------2
+
+  let secData = state?.assistantPhoneSecond.split("-");
+  let secArr = secData.join("");
+  let secData1 = secArr.split("(");
+  let secArr1 = secData1.join("");
+  let secArr2 = secArr1.split(")");
+  let secData2 = secArr2.join("");
+  let secData3 = secData2.split(" ")
+  let secData4 = secData3.join("")
+  let secArr3 = state.phoneCode.split("+");
+  let secData5 = secArr3.join("");
+  const assistantPhoneNumberSecond = secData5 + secData4;
 
   function CallBackYandex(childData) {
     setState({ ...state, shopCenterAddress: childData?.title, shopLatitude: childData?.center[0], shopLongitude: childData?.center[1] })
@@ -81,19 +107,19 @@ export default function LocationAddById() {
     });
   }
 
-  console.log(state?.shopCenterAddress, "shopCenterAddress ");
-  console.log(state?.shopLatitude, "shopLatitude ");
-  console.log(state?.shopLongitude, "shopLongitude ");
-  console.log(state?.assistantNameFirst, "assistantNameFirst ");
-  console.log(state?.assistantNameSecond, "assistantNameSecond ");
-  console.log(state?.assistantPhoneFirst, "assistantPhoneFirst ");
-  console.log(state?.assistantPhoneSecond, "assistantPhoneSecond ");
-  console.log(state?.regionIdShops, "regionIdShops ");
-  console.log(state?.subRegionIdShops, "subRegionIdShops ");
-  console.log(state?.shopId, "shopId ");
-  console.log(locationImgFirst?.pictureBgFile1, "pictureBgFile1 ");
-  console.log(locationImgSecond?.picturelogoFile2, "picturelogoFile2 ");
-  console.log(locationImgThird?.pictureLastFile3, "pictureLastFile3 ");
+  // console.log(state?.shopCenterAddress, "shopCenterAddress ");
+  // console.log(state?.shopLatitude, "shopLatitude ");
+  // console.log(state?.shopLongitude, "shopLongitude ");
+  // console.log(state?.assistantNameFirst, "assistantNameFirst ");
+  // console.log(state?.assistantNameSecond, "assistantNameSecond ");
+  // console.log(state?.assistantPhoneFirst, "assistantPhoneFirst ");
+  // console.log(state?.assistantPhoneSecond, "assistantPhoneSecond ");
+  // console.log(state?.regionIdShops, "regionIdShops ");
+  // console.log(state?.subRegionIdShops, "subRegionIdShops ");
+  // console.log(state?.shopId, "shopId ");
+  // console.log(locationImgFirst?.pictureBgFile1, "pictureBgFile1 ");
+  // console.log(locationImgSecond?.picturelogoFile2, "picturelogoFile2 ");
+  // console.log(locationImgThird?.pictureLastFile3, "pictureLastFile3 ");
   // -----------------------get Region-----------------
 
   useQuery(["shops-regions"], () => {
@@ -121,6 +147,8 @@ export default function LocationAddById() {
   )
 
   const LocationAddSubmit = () => {
+    // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
+
     let form = new FormData()
     form.append("address", state?.shopCenterAddress);
     form.append("longitude", state?.shopLongitude);
@@ -131,7 +159,9 @@ export default function LocationAddById() {
     form.append("work_time_from", state?.workTimeFrom);
     form.append("work_time_to", state?.workTimeTo);
     form.append("assistant_name", state?.assistantNameFirst);
-    form.append("assistant_phone", state?.assistantPhoneFirst);
+    form.append("second_assistant_name", state?.assistantNameSecond);
+    form.append("assistant_phone", assistantPhoneNumberFirst);
+    form.append("second_assistant_phone", assistantPhoneNumberSecond);
     form.append("shop_photo_one", locationImgFirst?.pictureBgFile1);
     form.append("shop_photo_two", locationImgSecond?.picturelogoFile2);
     form.append("shop_photo_three", locationImgThird?.pictureLastFile3);
@@ -146,10 +176,10 @@ export default function LocationAddById() {
     })
       .then((res) => res.json())
       .then(res => {
-        console.log(res, "resformData");
-        // if (res?.shop) {
-        //   navigate('/store/market-list')
-        // }
+        if (res) {
+          navigate('/locations-store')
+        }
+
       })
       .catch(err => console.log(err, "errImage"))
 
@@ -354,7 +384,7 @@ export default function LocationAddById() {
                   <input
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
                     type="text"
-                    value={"+998"}
+                    value={state.phoneCode}
                     readOnly
                   />
                 </div>
@@ -385,7 +415,7 @@ export default function LocationAddById() {
                   <input
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
                     type="text"
-                    value={"+998"}
+                    value={state.phoneCode}
                     readOnly
                   />
                 </div>
@@ -394,7 +424,7 @@ export default function LocationAddById() {
                     mask="(99) 999-99-99"
                     value={state?.assistantPhoneSecond || null}
                     name="phone"
-                    placeholder={"(не обезательно)"}
+                    placeholder={"(77) 777-77-77"}
                     onChange={(e) => setState({ ...state, assistantPhoneSecond: e.target.value })}
                     className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond ? "font-AeonikProMedium" : null
                       } ll:text-[14px] sm:text-[16px] leading-4 text-black`}

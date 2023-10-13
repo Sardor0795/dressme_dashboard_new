@@ -4,8 +4,8 @@ import InputMask from "react-input-mask";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { AiFillInfoCircle, AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
-import { VscError} from "react-icons/vsc";
+import { AiFillInfoCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { VscError } from "react-icons/vsc";
 import { Select, notification } from "antd";
 import { ArrowTopIcons, CreditCardNumber, DashboardList, DashboardUser, MenuCloseIcons, Star6Icon, SuccessIconsForMail, UserMailIcon } from "../../../../assets/icons";
 
@@ -143,7 +143,7 @@ const SignUpSeller = () => {
           region_id: state?.region,
           sub_region_id: state?.sub_region,
         })
-      }).then((res) => res.json())
+    }).then((res) => res.json())
   })
 
   const onSubmit = () => {
@@ -153,12 +153,12 @@ const SignUpSeller = () => {
         console.log(res, "SIGN-UP");
         if (res?.message && res?.errors) {
           setState({ ...state, errorGroup: res })
-          api.open( {
+          api.open({
             message: `${res?.message}`,
             duration: 3,
-            icon: <AiFillInfoCircle  style={{ color: '#108ee9' }} />,
+            icon: <AiFillInfoCircle style={{ color: '#108ee9' }} />,
           });
-        } 
+        }
         else if (res?.message && !res?.errors) {
           setState({
             ...state,
@@ -174,17 +174,17 @@ const SignUpSeller = () => {
             openModalEmailMessage: true,
             errorGroup: "",
           });
-          api.open( {
+          api.open({
             message: `${res?.message}`,
             duration: 3,
-            icon: <VscError  style={{ color: '#FF0000' }} />,
+            icon: <VscError style={{ color: '#FF0000' }} />,
           });
         }
       },
 
       onError: (err) => {
         console.log(err, "Error");
-        api.open( {
+        api.open({
           message: `${err?.message}`,
           duration: 3,
           icon: <VscError style={{ color: '#FF0000' }} />,
@@ -208,7 +208,7 @@ const SignUpSeller = () => {
     });
     document.title = "Регистрация продавца";
 
-  }, []);  
+  }, []);
 
 
   return (

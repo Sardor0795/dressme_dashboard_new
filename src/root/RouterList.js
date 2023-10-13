@@ -38,6 +38,7 @@ import MailVerfySeller from "../components/Authentication/SellerAuthentication/M
 import { useQuery } from "@tanstack/react-query";
 import MarketIsCheck from "../components/MarketLocations/MarketIsCheck/MarketIsCheck";
 import LocationAddById from "../components/MarketLocations/Locations/LocationAddById/LocationAddById";
+import MarketIsStoreCheck from "../components/MarketStore/MarketIsStoreCheck/MarketIsStoreCheck";
 
 export default function RouterList() {
 
@@ -76,11 +77,12 @@ export default function RouterList() {
 
         {/* ---------------------<Store>------------------------- */}
         <Route path="/store" element={<MarketStore />}>
-          {dressInfo?.SellerMagazin?.shops?.data?.length >= 1 ? (
+          {/* {dressInfo?.SellerMagazin?.shops?.data?.length >= 1 ? (
             <Route index element={<MyMarket />} />
           ) : (
-            <Route index element={<AddStore />} />
-          )}
+          <Route index element={<AddStore />} />
+        )} */}
+          <Route index element={<MarketIsStoreCheck />} />
           <Route path="/store/market-add" element={<AddStore />} />
           <Route path="/store/market-list" element={<MyMarket />} />
           <Route path="/store/location-add" element={<AddLocation />} />
