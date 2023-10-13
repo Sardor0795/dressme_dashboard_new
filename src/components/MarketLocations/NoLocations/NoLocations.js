@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { MenuCloseIcons } from "../../../assets/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export default function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true);
-
+  const [shopsList, setShopsList] = useState()
   const url = "https://api.dressme.uz/api/seller"
+  const navigate = useNavigate()
 
 
   // ------------GET HAS SHOP ?-----------------
-  useQuery(["shops"], () => {
+  const { isLoading } = useQuery(["shops-location"], () => {
     return fetch(`${url}/shops`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
         "Accept": "application/json",
-
         'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
 
@@ -25,7 +25,8 @@ export default function NoLocations() {
   },
     {
       onSuccess: (res) => {
-        // console.log(res, "res");
+        setShopsList(res)
+        // console.log(res, "reslocation");
       },
       onError: (err) => {
         // console.log(err, "err");
@@ -35,65 +36,14 @@ export default function NoLocations() {
     }
   )
 
-  // // ------------GET METHOD Region-----------------
-  // const { isLoading } = useQuery(["get region"], () => {
-  //   return fetch(`${url}/regions`).then(res => res.json())
-  // },
-  //   {
-  //     onSuccess: (res) => {
-  //       setState({ ...state, getRegionList: res })
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "err");
-  //     },
-  //     keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-  //     refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
-  //   }
-  // )
 
-  // ------------POST METHOD-----------------
-  // const { mutate } = useMutation(() => {
-  //   return fetch(`${url}/register`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-
-  //     body: parseInt(state?.seller_type_id) >= 3 ?
-  //       JSON.stringify({
-  //         name: state?.firstName,
-  //         surname: state?.lastName,
-  //         email: state?.email,
-  //         password: state?.password,
-  //         password_confirmation: state?.confirmPassword,
-  //         phone: sendMessagePhoneNumber,
-  //         card_number: BankCard,
-  //         seller_type_id: state?.seller_type_id,
-  //         region_id: state?.region,
-  //         sub_region_id: state?.sub_region,
-  //         company_name: state?.company_name,
-  //       }) : JSON.stringify({
-  //         name: state?.firstName,
-  //         surname: state?.lastName,
-  //         email: state?.email,
-  //         password: state?.password,
-  //         password_confirmation: state?.confirmPassword,
-  //         phone: sendMessagePhoneNumber,
-  //         card_number: BankCard,
-  //         seller_type_id: state?.seller_type_id,
-  //         region_id: state?.region,
-  //         sub_region_id: state?.sub_region,
-  //       })
-
-  //   }).then((res) => res.json())
-  // })
-
-
-
+  const handleShopsOfLocation = (id) => {
+    setOpenSelect(true)
+    navigate(`/locations-store/:${id}`)
+  }
 
   return (
-    <div className="w-full h-[calc(100vh-200px)]  flex items-center justify-center">
+    <div className="w-full h-[100vh]  flex items-center justify-center">
       {openSelect ? (
         <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
           <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
@@ -125,24 +75,29 @@ export default function NoLocations() {
                 </p>
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-                <Link
-                  to={"/store/location-add"}
-                  className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                >
-                  <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                    {" "}
-                    Nike
-                  </span>
-                </Link>
-                <Link
-                  to={"/store/location-add"}
-                  className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                >
-                  <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                    {" "}
-                    Nike Kids
-                  </span>
-                </Link>
+                {
+                  shopsList?.shops?.data?.map(item => {
+                    return (
+                      <>
+                        {isLoading ? <div>
+                          <h1>Waiting please....</h1>
+                        </div> :
+                          <button
+                            onClick={() => handleShopsOfLocation(item?.id)}
+                            key={item?.id}
+                            className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                          >
+                            <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                              {" "}
+                              {item?.name}
+                            </span>
+                          </button>
+                        }
+                      </>
+                    )
+                  })
+                }
+
               </div>
             </div>
           </div>

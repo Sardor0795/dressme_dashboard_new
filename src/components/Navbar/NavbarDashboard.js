@@ -9,7 +9,7 @@ export default function NavbarDashboard() {
   const [name, setName] = useState()
   const [surName, setSurName] = useState()
 
-  console.log("ishga NavbarDashboard");
+  // console.log("ishga NavbarDashboard");
   // ----------------Get Seller Profile-------------
   useQuery(["Get-Seller-Profile-dash"], () => {
     return fetch(`${url}/profile`, {
@@ -32,8 +32,6 @@ export default function NavbarDashboard() {
       onError: (err) => {
         console.log(err, "err get profile");
       },
-
-
     }
   )
   return (

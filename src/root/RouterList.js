@@ -36,6 +36,8 @@ import ForgotPasswordSeller from "../components/Authentication/SellerAuthenticat
 import ResetPasswordSeller from "../components/Authentication/SellerAuthentication/ResetPasswordSeller/ResetPasswordSeller";
 import MailVerfySeller from "../components/Authentication/SellerAuthentication/MailVerfy/MailVerfySeller";
 import { useQuery } from "@tanstack/react-query";
+import MarketIsCheck from "../components/MarketLocations/MarketIsCheck/MarketIsCheck";
+import LocationAddById from "../components/MarketLocations/Locations/LocationAddById/LocationAddById";
 
 export default function RouterList() {
 
@@ -87,11 +89,14 @@ export default function RouterList() {
 
         {/* ---------------------<Locations>------------------------- */}
         <Route path="/locations-store" element={<MarketLocations />}>
-          {dressInfo?.isItPorduct ? (
+          {/* {dressInfo?.isItPorduct ? (
             <Route index element={<LocationList />} />
           ) : (
             <Route index element={<NoLocations />} />
-          )}
+          )} */}
+          <Route index element={<MarketIsCheck />} />
+
+          <Route path="/locations-store/:id" element={<LocationAddById />} />
           <Route path="/locations-store/list" element={<LocationList />} />
           <Route
             path="/locations-store/city/:id"
@@ -110,6 +115,7 @@ export default function RouterList() {
             element={<ProductEditTitleLocation />}
           />
         </Route>
+        {/* to={"/store/location-add"} */}
 
         {/* ---------------------<LocationsProduct>------------------------- */}
         <Route path="/products" element={<Products />}>
