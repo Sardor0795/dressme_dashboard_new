@@ -43,8 +43,8 @@ export default function LocationList() {
   },
     {
       onSuccess: (res) => {
-        console.log(res.locations.data, "LOCATIONS");
-        const data = res.locations.data[0]
+        // console.log(res.locations.data, "LOCATIONS");
+        // const data = res.locations.data[0]
         // setProductList([{
         //   id: data.id,
         //   photo: data.shop.url_logo_photo,
