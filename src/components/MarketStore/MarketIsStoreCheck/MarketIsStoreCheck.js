@@ -10,7 +10,7 @@ export default function MarketIsStoreCheck() {
     const url = "https://api.dressme.uz/api/seller"
 
     // // ------------GET  Has Magazin ?-----------------
-    const { isLoading } = useQuery(["sellerShops"], () => {
+    const { isLoading, isFetching } = useQuery(["sellerShops"], () => {
         return fetch(`${url}/shops`, {
             method: "GET",
             headers: {
@@ -39,12 +39,12 @@ export default function MarketIsStoreCheck() {
         <div>
 
             {
-                isLoading ? <div>
+                isLoading ? <div className={`w-[100vw] h-[100vh] flex items-center justify-center`} >
                     <h1>Waiting please....</h1>
                 </div> : <>
 
-                    {sellerShops?.shops?.data?.length && <MyMarket />}
-                    {!sellerShops?.shops?.data?.length && <AddStore />}
+                    {sellerShops?.shops?.data?.length && isFetching && <MyMarket />}
+                    {!sellerShops?.shops?.data?.length && isFetching && <AddStore />}
 
 
                 </>

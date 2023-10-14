@@ -1,12 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { deliveryIcon, man, nike, woman } from "../../../assets";
 import { BgNoImgIcon, StarIcon } from "../../../assets/icons";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../hook/ContextTeam";
+import { useQuery } from "@tanstack/react-query";
 
 const MarketList = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [sellerMagazinList, setSellerMagazinList] = useState()
+  const url = "https://api.dressme.uz/api/seller"
 
+  // // ------------GET  Has Magazin ?-----------------
+  useQuery(["magazin"], () => {
+    return fetch(`${url}/shops`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setSellerMagazinList(res)
+        // setDressInfo({ ...dressInfo, SellerMagazin: res })
+      },
+      onError: (err) => {
+        console.log(err, "err magazin");
+      },
+
+    }
+  )
   const data = [
     { id: 1, name: "Nike Store Official Dealer" },
     { id: 2, name: "Nike Store Official Dealer" },
@@ -20,7 +47,7 @@ const MarketList = () => {
 
   return (
     <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-      {dressInfo?.SellerMagazin?.shops?.data?.map((data) => {
+      {sellerMagazinList?.shops?.data?.map((data) => {
         return (
           <div
             key={data?.id}

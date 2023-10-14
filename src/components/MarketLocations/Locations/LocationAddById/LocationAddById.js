@@ -182,7 +182,6 @@ export default function LocationAddById() {
 
       })
       .catch(err => console.log(err, "errImage"))
-
   }
 
 
@@ -199,7 +198,8 @@ export default function LocationAddById() {
       top: 0,
     });
   }, []);
-
+  console.log(state?.workTimeFrom, "workTimeFrom");
+  console.log(state?.workTimeTo, "workTimeTo");
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 ">
 
@@ -354,23 +354,29 @@ export default function LocationAddById() {
                   от
                 </span>
                 <input
-                  type="text"
-                  // value={"09:00"}
-                  value={state?.workTimeFrom}
+                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                  type="time"
+                  step="3600"
+                  min="00:00"
+                  max="23:59"
+                  pattern="[0-2][0-9]:[0-5][0-9]"
+                  value={state?.workTimeFrom || "09:00"}
                   onChange={(e) => setState({ ...state, workTimeFrom: e.target.value })}
-                  placeholder="09:00"
-                  className="mr-5 ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                />
+                  required />
+
                 <span className="w-fit text-[12px] md:text-base flex items-center ">
                   до
                 </span>
                 <input
-                  type="text"
-                  value={state?.workTimeTo}
+                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                  type="time"
+                  min="00:00"
+                  max="23:59"
+                  pattern="[0-2][0-9]:[0-5][0-9]"
+                  value={state?.workTimeTo || "19:00"}
                   onChange={(e) => setState({ ...state, workTimeTo: e.target.value })}
-                  placeholder="19:00"
-                  className="ml-[5px] w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                />
+                  required />
+
               </div>
             </div>
             <label className="w-full md:w-[31%] xs:w-[48%]   ">
