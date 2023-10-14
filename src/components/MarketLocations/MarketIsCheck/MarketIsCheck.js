@@ -37,7 +37,7 @@ export default function MarketIsCheck() {
         <div>
 
             {
-                isLoading ? <div>
+                isLoading ? <div className={`w-[100vw] h-[100vh] flex items-center justify-center`}>
                     <h1>Waiting please....</h1>
                 </div> : <>
 

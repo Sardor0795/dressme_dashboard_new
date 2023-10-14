@@ -11,29 +11,7 @@ function App() {
 
   const url = "https://api.dressme.uz/api/seller"
 
-  // // ------------GET  Has Magazin ?-----------------
-  useQuery(["magazin"], () => {
-    return fetch(`${url}/shops`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
 
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setDressInfo({ ...dressInfo, SellerMagazin: res })
-      },
-      onError: (err) => {
-        console.log(err, "err magazin");
-      },
-
-    }
-  )
 
   // ------------GET  Has Location ?-----------------
   useQuery(["magazin location"], () => {
