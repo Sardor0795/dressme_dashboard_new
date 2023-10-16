@@ -164,6 +164,7 @@ function MarketEdit() {
       top: 0,
     });
   }, []);
+  
   console.log(getIdShops?.shop?.delivery_method, "delivery_method");
   return (
     <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12  px-4 md:px-0">
