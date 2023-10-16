@@ -160,33 +160,34 @@ export default function LocationList() {
                 Фото
               </span>
             </li>
-            <div className="w-[calc(100%-230px)]  flex items-center justify-between">
-              <li className="w-[30%] ">
-                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Регион{" "}
-                </span>
-              </li>
-              <li className="w-[20%]">
-                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Адрес
-                </span>
-              </li>
-              <li className="w-[20%]">
-                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Рабочее время
-                </span>
-              </li>
-              <li className="w-[30%] flex items-center justify-end ">
-                <NavLink to={"/store/location-add"} className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
-                  <span className="text-sm  text-white not-italic font-AeonikProMedium">
-                    Добавить локацию
+            <li className="w-[calc(100%-230px)]  flex items-center justify-between">
+              <ul className="flex items-center w-full">
+                <li className="w-[30%] ">
+                  <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                    Регион{" "}
                   </span>
-                </NavLink>
-              </li>
-            </div>
+                </li>
+                <li className="w-[20%]">
+                  <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                    Адрес
+                  </span>
+                </li>
+                <li className="w-[20%]">
+                  <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                    Рабочее время
+                  </span>
+                </li>
+                <li className="w-[30%] flex items-center justify-end ">
+                  <NavLink to={"/store/location-add"} className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
+                    <span className="text-sm  text-white not-italic font-AeonikProMedium">
+                      Добавить локацию
+                    </span>
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
-
 
 
         {/* table product */}
@@ -205,45 +206,46 @@ export default function LocationList() {
                     <img className="w-[100%] h-[100%] rounded-lg object-top	object-cover"
                       src={data?.url_image_path_one} alt="" />
                   </li>
-                  <div className="w-[calc(100%-230px)] flex items-center justify-between">
-                    <li className="md:w-[32%] h-full pr-5">
-                      <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
-                        {data?.region?.name_ru || "city"}, {data?.sub_region?.name_ru || "sub_region"}
-                      </span>
-                    </li>
-                    <li className="md:w-[22%] h-full">
-                      <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                        {data?.address || "address"}
-                      </span>{" "}
-                    </li>
-                    <li className="md:w-[13%] h-full">
-                      <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                        {data?.work_time_from || "startTime"} - {data?.work_time_to || "endTime"}
-                      </span>
-                    </li>
-                    <li className="md:w-[15%] h-full flex items-center justify-center text-center">
-                      <button
-                        onClick={() => goMapWear(data?.shop_id)}
-                        className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
-                      >
-                        {/* data?.wearLink */}
-                        Одежда
-                      </button>
-                    </li>
-                    <li className="md:w-[25%] h-full flex items-center justify-center text-center">
-                      <button
-                        onClick={() => goMapCity(data?.region?.name_ru)}
-                        className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
-                      >
-                        {/* {data?.showMore} */}
-                        Подробнее
-                      </button>
-                    </li>
-                  </div>
+                  <li className="w-[calc(100%-230px)] flex items-center justify-between">
+                    <ul className="flex items-center w-full">
+                      <li className="md:w-[32%] h-full pr-5">
+                        <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
+                          {data?.region?.name_ru || "city"}, {data?.sub_region?.name_ru || "sub_region"}
+                        </span>
+                      </li>
+                      <li className="md:w-[22%] h-full">
+                        <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
+                          {data?.address || "address"}
+                        </span>{" "}
+                      </li>
+                      <li className="md:w-[13%] h-full">
+                        <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
+                          {data?.work_time_from || "startTime"} - {data?.work_time_to || "endTime"}
+                        </span>
+                      </li>
+                      <li className="md:w-[15%] h-full flex items-center justify-center text-center">
+                        <button
+                          onClick={() => goMapWear(data?.shop_id)}
+                          className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
+                        >
+                          {/* data?.wearLink */}
+                          Одежда
+                        </button>
+                      </li>
+                      <li className="md:w-[25%] h-full flex items-center justify-center text-center">
+                        <button
+                          onClick={() => goMapCity(data?.region?.name_ru)}
+                          className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
+                        >
+                          {/* {data?.showMore} */}
+                          Подробнее
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
 
                 {/* Mobile */}
-
                 <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
                   <div className="mb-2">
                     <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
