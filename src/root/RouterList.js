@@ -40,6 +40,7 @@ import { useQuery } from "@tanstack/react-query";
 import LocationAddById from "../components/MarketLocations/Locations/LocationAddById/LocationAddById";
 import MarketIsStoreCheck from "../components/MarketStore/MarketIsStoreCheck/MarketIsStoreCheck";
 import LoadingForSeller from "../components/Loading/LoadingFor";
+import LocationsByIdShow from "../components/MarketStore/LocationsById/LocationsById";
 
 // -------------------------Location---------------------
 const MarketLocations = React.lazy(() => import("../components/MarketLocations"));
@@ -95,6 +96,7 @@ export default function RouterList() {
           <Route path="/store/market-list" element={<MyMarket />} />
           <Route path="/store/location-add" element={<AddLocation />} />
           <Route path="/store/market-list/:id" element={<MarketEdit />} />
+          <Route path="/store/locations" element={<LocationsByIdShow/>} />
         </Route>
 
         {/* ---------------------<Locations>------------------------- */}
