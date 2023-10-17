@@ -53,10 +53,10 @@ function LocationMapCity() {
 
   const [storeLocation, setStoreLocation] = useState("")
   const [storeLocationById, setStoreLocationById] = useState("")
-  // const url = "https://api.dressme.uz/api/seller"
+  const url = "https://api.dressme.uz/api/seller"
   // const pathname = window.location.pathname;
 
-  let LocationMapId = pathname.replace("/locations-store/city/:", "");
+  // let LocationMapId = pathname.replace("/locations-store/city/:", "");
   // // ------------GET  Has Magazin ?-----------------
   const { isLoading } = useQuery(["store-location"], () => {
     return fetch(`${url}/shops/locations/index`, {
@@ -231,7 +231,7 @@ function LocationMapCity() {
             </div>
           </div>
           <div className="h-[400px]">
-            <LocationOfYandex />
+            {/* <LocationOfYandex /> */}
           </div>
           <div className=" px-4 md:px-0  flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
