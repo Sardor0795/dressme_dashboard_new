@@ -12,7 +12,7 @@ function MarketEdit() {
   const [getIdShops, setGetIdShops] = useState(null);
   const pathname = window.location.pathname;
 
-  let id = pathname.replace("/store/market-list/:", "");
+  let id = pathname.replace("/store/market-list/", "");
 
   const url = "https://api.dressme.uz/api/seller";
 
@@ -44,7 +44,6 @@ function MarketEdit() {
   );
 
   // Delete ----
-
   const { mutate } = useMutation(() => {
     return fetch(`${url}/shops/${id}`, {
       method: "DELETE",

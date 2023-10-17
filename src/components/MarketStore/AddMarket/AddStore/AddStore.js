@@ -73,10 +73,8 @@ function AddStore({ onClick }) {
     });
   }, []);
 
-
-
+  
   const url = "https://api.dressme.uz/api/seller"
-
 
 
   let [filt] = genderCategory.filter((v) => v.action === true);
@@ -229,9 +227,9 @@ function AddStore({ onClick }) {
                       type="button"
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
-                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
-                                                    ${data.action
-                          ? " h-full border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg
+                          ${data.action
+                          ? "border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
                           : ""
                         }
                                                     `}
