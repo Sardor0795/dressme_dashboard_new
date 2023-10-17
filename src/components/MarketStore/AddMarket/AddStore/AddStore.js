@@ -87,8 +87,8 @@ function AddStore({ onClick }) {
     form.append("name", magazinName);
     form.append("logo_photo", fileBrand?.pictureLogoFile);
     form.append("background_photo", file?.pictureBgFile);
-    form.append("gender", filt?.gender);
-    form.append("delivery_method", methodDeliv);
+    form.append("gender_id", filt?.id);
+    form.append("delivery_id", methodDeliv);
     return fetch(`${url}/shops/store`, {
       method: "POST",
       headers: {
@@ -255,7 +255,7 @@ function AddStore({ onClick }) {
               <div className="w-[70%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                 <button
                   type="button"
-                  onClick={() => setMethodDeliv("Такси")}
+                  onClick={() => setMethodDeliv(1)}
                   className="group w-[28%] md:w-1/4  focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
                 >
                   <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
@@ -264,7 +264,7 @@ function AddStore({ onClick }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setMethodDeliv("Собственная доставка")}
+                  onClick={() => setMethodDeliv(2)}
                   className="group w-[72%] md:w-3/4  group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
                 >
                   <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">

@@ -97,7 +97,6 @@ export default function NoLocations() {
                     )
                   })
                 }
-
               </div>
             </div>
           </div>
