@@ -36,7 +36,7 @@ const initialState = {
   zoom: 12,
 };
 
-export default function LocationOfYandex() {
+export default function LocationOfYandex({item}) {
   const [isSendedLocation, setIsSendedLocation] = useState(true);
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
