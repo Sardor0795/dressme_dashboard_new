@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { ProductImg } from "../../assets";
 // import { SearchIcon } from "../../../../assets/icons";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 // import { pdpImg } from "../../../../assets";
 
 import { DatePicker } from "antd";
@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { SearchIcon } from "../../../assets/icons";
+import { AiOutlineLeft } from "react-icons/ai";
 const { RangePicker } = DatePicker;
 
 export default function LocationsByIdShow() {
@@ -51,8 +52,8 @@ export default function LocationsByIdShow() {
   );
 
   locationListId?.locations?.data?.map((item, index) => {
-  console.log(locationListId?.locations, "item");
-  })
+    console.log(locationListId?.locations, "item");
+  });
 
   const navigate = useNavigate();
   const goMapCity = (id) => {
@@ -73,7 +74,7 @@ export default function LocationsByIdShow() {
     setShowPicker(!showPicker);
   };
   useEffect(() => {
-    showPickerHandle()
+    showPickerHandle();
   }, [showPicker]);
   return (
     <div className="w-full h-full  px-4 md:px-0 ">
@@ -81,10 +82,21 @@ export default function LocationsByIdShow() {
         <div>
           <MobileHumburgerMenu />
         </div>
-        <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
+        <Link
+          to={"/locations-store"}
+          className="text-black text-2xl not-italic font-AeonikProMedium text-center"
+        >
           Все локации
-        </p>
+        </Link>
         <div className="w-[30px]"></div>
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="md:w-8 md:h-8 w-6 h-6 md:hidden flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+        >
+          <AiOutlineLeft />
+        </button>
       </div>
       <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
         <label
@@ -108,10 +120,21 @@ export default function LocationsByIdShow() {
       </section>
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
         <div className="flex justify-end items-center md:justify-between">
-          <section className="hidden md:flex">
-            <p className="text-black text-2xl not-italic font-AeonikProMedium">
+          <section className="hidden md:flex items-center">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="md:w-8 md:h-8 w-6 h-6 hidden md:flex mr-5 items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+            >
+              <AiOutlineLeft />
+            </button>
+            <Link
+              to={"/locations-store"}
+              className="text-black hover:text-weatherWinterColor text-2xl not-italic font-AeonikProMedium"
+            >
               Все локации
-            </p>
+            </Link>
           </section>
           <div className="w-fit flex items-center gap-x-[15px]">
             <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
