@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { ProductImg } from "../../assets";
 import {
+  MenuCloseIcons,
   SearchIcon,
 } from "../../../../assets/icons";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -16,7 +17,40 @@ import { useQuery } from "@tanstack/react-query";
 export default function LocationList() {
 
   const [locationListId, setLocationListId] = useState("")
+  const [openSelect, setOpenSelect] = useState(false);
+  const [shopsList, setShopsList] = useState()
+  const navigate = useNavigate()
+
   const url = "https://api.dressme.uz/api/seller"
+
+  // ------------GET HAS SHOP ?-----------------
+  useQuery(["shops-location-modal"], () => {
+    return fetch(`${url}/shops`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        setShopsList(res)
+        // console.log(res, "reslocation-modal");
+      },
+      onError: (err) => {
+        // console.log(err, "err");
+      },
+
+    }
+  )
+
+
+  const handleShopsOfLocation = (id) => {
+    navigate(`/locations-store/:${id}`)
+    setOpenSelect(false)
+  }
 
   // // ------------GET  Has Magazin ?-----------------
   const { isLoading } = useQuery(["locations-index"], () => {
@@ -41,11 +75,7 @@ export default function LocationList() {
     }
   )
 
-  // locationListId?.locations?.data?.map((item, index) => {
-  console.log(locationListId?.locations, "item");
-  // })
 
-  const navigate = useNavigate();
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
   };
@@ -68,6 +98,98 @@ export default function LocationList() {
   // }, [showPicker]);
   return (
     <div className="w-full h-full  px-4 md:px-0 ">
+      <div
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"}`}
+        onClick={() => setOpenSelect(false)}
+      ></div>
+      <section
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+
+      >
+        <button
+          onClick={() => setOpenSelect(false)}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
+          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+            Прикрепить к магазину
+          </p>
+        </div>
+        <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
+          {shopsList?.shops?.data ?
+            shopsList?.shops?.data?.map(item => {
+              return (
+                <>
+                  {isLoading ? <div>
+                    <h1>Waiting please....</h1>
+                  </div> :
+                    <button
+                      onClick={() => handleShopsOfLocation(item?.id)}
+                      key={item?.id}
+                      className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                    >
+                      <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                        {" "}
+                        {item?.name}
+                      </span>
+                    </button>
+                  }
+                </>
+              )
+            })
+            :
+            <div className="flex items-center jsutify-center">
+              Malumotlar mavjud emas...
+            </div>
+          }
+        </div>
+
+      </section>
+      {/* {openSelect && <div className="flex items-center min-h-screen justify-center">
+        <div className="relative w-[440px] py-[5px] h-[350px] rounded-[20px] bg-white overflow-hidden">
+          <div className="absolute top-4 right-4 ">
+            <button type="button" onClick={() => setOpenSelect(false)}>
+              <MenuCloseIcons colors={"#A5A5A5"} />
+            </button>
+          </div>
+          <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
+            <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+              Прикрепить к магазину
+            </p>
+          </div>
+          <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
+            {
+              shopsList?.shops?.data?.map(item => {
+                return (
+                  <>
+                    {isLoading ? <div>
+                      <h1>Waiting please....</h1>
+                    </div> :
+                      <button
+                        onClick={() => handleShopsOfLocation(item?.id)}
+                        key={item?.id}
+                        className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                      >
+                        <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                          {" "}
+                          {item?.name}
+                        </span>
+                      </button>
+                    }
+                  </>
+                )
+              })
+            }
+          </div>
+        </div>
+      </div>
+      } */}
+
       <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
         <div>
           <MobileHumburgerMenu />
@@ -129,12 +251,15 @@ export default function LocationList() {
           {locationListId?.locations?.data[0]?.shop?.name} <span className="hidden md:inline">({locationListId?.locations?.data?.length})</span>
         </p>
 
-        <NavLink to={"/store/location-add"} className="md:hidden p-2 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
+        <button
+          onClick={() => setOpenSelect(true)}
+          className="md:hidden p-2 flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
           <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
             Добавить локацию
           </span>
-        </NavLink>
+        </button>
       </div>
+
       {/* Table */}
       <div className="w-full h-fit">
         <div className="w-full mb-[10px] hidden md:block">
@@ -167,11 +292,12 @@ export default function LocationList() {
                   </span>
                 </li>
                 <li className="w-[30%] flex items-center justify-end ">
-                  <NavLink to={"/store/location-add"} className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
+                  <button onClick={() => setOpenSelect(true)}
+                    className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                     <span className="text-sm  text-white not-italic font-AeonikProMedium">
                       Добавить локацию
                     </span>
-                  </NavLink>
+                  </button>
                 </li>
               </ul>
             </li>
