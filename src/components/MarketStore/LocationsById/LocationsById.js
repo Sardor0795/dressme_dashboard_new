@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { ProductImg } from "../../assets";
 // import { SearchIcon } from "../../../../assets/icons";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 // import { pdpImg } from "../../../../assets";
 
 import { DatePicker } from "antd";
@@ -10,28 +10,34 @@ import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter"
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { SearchIcon } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
+import NoLocations from "../../MarketLocations/NoLocations/NoLocations";
 const { RangePicker } = DatePicker;
 
 export default function LocationsByIdShow() {
-  const [productList, setProductList] = useState([
-    {
-      id: "",
-      photo: "",
-      city: "",
-      sub_region: "",
-      address: "",
-      startTime: "",
-      endTime: "",
-    },
-  ]);
+  // const [productList, setProductList] = useState([
+  //   {
+  //     id: "",
+  //     photo: "",
+  //     city: "",
+  //     sub_region: "",
+  //     address: "",
+  //     startTime: "",
+  //     endTime: "",
+  //   },
+  // ]);
+
   const [locationListId, setLocationListId] = useState("");
+
+  const params = useParams();
+
   const url = "https://api.dressme.uz/api/seller";
 
   // ------------GET  Has Magazin ?-----------------
+
   const { isLoading } = useQuery(
     ["locations-index"],
     () => {
-      return fetch(`${url}/shops/locations/index`, {
+      return fetch(`${url}/shops/locations/shop/${params?.id}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -43,17 +49,20 @@ export default function LocationsByIdShow() {
     {
       onSuccess: (res) => {
         setLocationListId(res);
-        console.log(res, "magazin yesy");
+
+        console.log(res, "magazin----------------");
       },
       onError: (err) => {
         console.log(err, "err magazin");
       },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   );
 
-  locationListId?.locations?.data?.map((item, index) => {
-    console.log(locationListId?.locations, "item");
-  });
+  // locationListId?.locations?.data?.map((item, index) => {
+  //   console.log(locationListId?.locations, "item");
+  // });
 
   const navigate = useNavigate();
   const goMapCity = (id) => {
@@ -69,23 +78,21 @@ export default function LocationsByIdShow() {
     });
   }, []);
 
-  const [showPicker, setShowPicker] = useState(true);
-  const showPickerHandle = () => {
-    setShowPicker(!showPicker);
-  };
-  useEffect(() => {
-    showPickerHandle();
-  }, [showPicker]);
-  return (
+  // const [showPicker, setShowPicker] = useState(true);
+  // const showPickerHandle = () => {
+  //   setShowPicker(!showPicker);
+  // };
+  // useEffect(() => {
+  //   showPickerHandle();
+  // }, [showPicker]);
+  return locationListId?.locations?.data.length ? (
     <div className="w-full h-full  px-4 md:px-0 ">
       <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
         <div>
           <MobileHumburgerMenu />
         </div>
-        <p
-          className="text-black text-2xl not-italic font-AeonikProMedium text-center"
-        >
-          Все локации
+        <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
+          Локации
         </p>
         <div className="w-[30px]"></div>
         <button
@@ -128,10 +135,8 @@ export default function LocationsByIdShow() {
             >
               <AiOutlineLeft />
             </button>
-            <p
-              className="text-black text-2xl not-italic font-AeonikProMedium"
-            >
-              Все локации
+            <p className="text-black text-2xl not-italic font-AeonikProMedium">
+              Локации
             </p>
           </section>
           <div className="w-fit flex items-center gap-x-[15px]">
@@ -400,5 +405,7 @@ export default function LocationsByIdShow() {
         </div>
       </div>
     </div>
+  ) : (
+    <NoLocations />
   );
 }

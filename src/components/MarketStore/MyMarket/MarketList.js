@@ -7,33 +7,33 @@ import { useQuery } from "@tanstack/react-query";
 
 const MarketList = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [sellerMagazinList, setSellerMagazinList] = useState()
-  const url = "https://api.dressme.uz/api/seller"
+  const [sellerMagazinList, setSellerMagazinList] = useState();
+  const url = "https://api.dressme.uz/api/seller";
 
   // // ------------GET  Has Magazin ?-----------------
-  useQuery(["magazin"], () => {
-    return fetch(`${url}/shops`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
+  useQuery(
+    ["magazin"],
+    () => {
+      return fetch(`${url}/shops`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
 
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+      }).then((res) => res.json());
+    },
     {
       onSuccess: (res) => {
-        setSellerMagazinList(res)
+        setSellerMagazinList(res);
         // setDressInfo({ ...dressInfo, SellerMagazin: res })
       },
       onError: (err) => {
         console.log(err, "err magazin");
       },
-
     }
-  )
+  );
   const data = [
     { id: 1, name: "Nike Store Official Dealer" },
     { id: 2, name: "Nike Store Official Dealer" },
@@ -65,7 +65,11 @@ const MarketList = () => {
               </div>
               <div className="w-full md:w-fit flex items-center justify-between my-[15px] md:my-0 ">
                 <figure className="w-[80px] md:w-[120px] h-[80px] overflow-hidden md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
-                  <img src={data?.url_logo_photo} alt="" className="w-full h-full  object-cover" />
+                  <img
+                    src={data?.url_logo_photo}
+                    alt=""
+                    className="w-full h-full  object-cover"
+                  />
                 </figure>
                 <div className="flex flex-col ll:ml-8">
                   <p className="text-[13px] ls:text-[14px] xs:text-xl  xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
@@ -105,13 +109,13 @@ const MarketList = () => {
               <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
                 <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
-                  {data?.delivery_method}
+                  {data?.delivery_id}
                 </span>
               </div>
             </div>
             <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
               <NavLink
-                to={"locations"}
+                to={`locations/shop/${data?.id}`}
                 className="md:text-textBlueColor cursor-pointer w-[50%] flex items-center justify-center md:w-fit  md:text-base text-[13px] not-italic md:font-AeonikProMedium font-AeonikProRegular md:hover:underline md:px-0 px-[20px] ll:px-[25px] xs:px-[54px] md:py-0 py-2 md:rounded-0 rounded-lg md:bg-white bg-locationBg text-locationText"
               >
                 Локации

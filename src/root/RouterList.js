@@ -96,7 +96,7 @@ export default function RouterList() {
           <Route path="/store/market-list" element={<MyMarket />} />
           <Route path="/store/location-add" element={<AddLocation />} />
           <Route path="/store/market-list/:id" element={<MarketEdit />} />
-          <Route path="/store/locations" element={<LocationsByIdShow/>} />
+          <Route path="/store/locations/shop/:id" element={<LocationsByIdShow/>} />
         </Route>
 
         {/* ---------------------<Locations>------------------------- */}
