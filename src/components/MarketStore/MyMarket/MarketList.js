@@ -109,7 +109,7 @@ const MarketList = () => {
               <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
                 <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
-                  {data?.delivery_method}
+                  {data?.delivery_id}
                 </span>
               </div>
             </div>
