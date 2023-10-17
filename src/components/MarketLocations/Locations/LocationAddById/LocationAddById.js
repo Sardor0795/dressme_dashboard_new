@@ -176,6 +176,7 @@ export default function LocationAddById() {
     })
       .then((res) => res.json())
       .then(res => {
+        // console.log(res, "AddLocationById");
         if (res) {
           navigate('/locations-store')
         }
@@ -198,8 +199,8 @@ export default function LocationAddById() {
       top: 0,
     });
   }, []);
-  console.log(state?.workTimeFrom, "workTimeFrom");
-  console.log(state?.workTimeTo, "workTimeTo");
+  // console.log(state?.workTimeFrom, "workTimeFrom");
+  // console.log(state?.workTimeTo, "workTimeTo");
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 ">
 
