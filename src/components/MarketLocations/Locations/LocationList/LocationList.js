@@ -15,17 +15,6 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function LocationList() {
 
-  const [productList, setProductList] = useState([
-    {
-      id: '',
-      photo: '',
-      city: '',
-      sub_region: '',
-      address: '',
-      startTime: '',
-      endTime: '',
-    }
-  ]);
   const [locationListId, setLocationListId] = useState("")
   const url = "https://api.dressme.uz/api/seller"
 

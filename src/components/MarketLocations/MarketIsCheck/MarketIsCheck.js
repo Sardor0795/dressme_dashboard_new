@@ -35,19 +35,16 @@ export default function MarketIsCheck() {
 
     return (
         <div>
-
             {
-                isLoading ? <div className={`w-[100vw] h-[100vh] flex items-center justify-center`}>
+                isLoading 
+                ? <div className={`w-[100vw] h-[100vh] flex items-center justify-center`}>
                     <h1>Waiting please....</h1>
-                </div> : <>
-
+                  </div> 
+                : <>
                     {isLocation?.locations?.data?.length && <LocationList />}
                     {!isLocation?.locations?.data?.length && <NoLocations />}
-
-
-                </>
+                  </>
             }
-
         </div>
     )
 }

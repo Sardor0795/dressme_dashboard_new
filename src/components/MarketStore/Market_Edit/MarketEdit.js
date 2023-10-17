@@ -271,13 +271,13 @@ function MarketEdit() {
                       type="button"
                       key={data.id}
                       onClick={() => handleGenderCheck(data.id)}
-                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular flex items-center justify-center h-[32px] md:h-[42px] rounded-lg
-                                                    ${
-                                                      data.action
-                                                        ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                                                        : ""
-                                                    }
-                                                    `}
+                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg
+                        ${
+                          data.action
+                            ? " md:h-full border-none h-[32px] md:py-[10px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
+                            : ""
+                        }
+                        `}
                     >
                       {data.gender}
                     </button>
