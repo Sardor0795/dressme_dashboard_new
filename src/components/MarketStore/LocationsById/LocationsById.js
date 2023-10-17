@@ -82,12 +82,11 @@ export default function LocationsByIdShow() {
         <div>
           <MobileHumburgerMenu />
         </div>
-        <Link
-          to={"/locations-store"}
+        <p
           className="text-black text-2xl not-italic font-AeonikProMedium text-center"
         >
           Все локации
-        </Link>
+        </p>
         <div className="w-[30px]"></div>
         <button
           onClick={() => {
@@ -129,12 +128,11 @@ export default function LocationsByIdShow() {
             >
               <AiOutlineLeft />
             </button>
-            <Link
-              to={"/locations-store"}
-              className="text-black hover:text-weatherWinterColor text-2xl not-italic font-AeonikProMedium"
+            <p
+              className="text-black text-2xl not-italic font-AeonikProMedium"
             >
               Все локации
-            </Link>
+            </p>
           </section>
           <div className="w-fit flex items-center gap-x-[15px]">
             <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
