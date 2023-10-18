@@ -1,19 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
-// import "../../../../index.css";
 import {
   YMaps,
   Map,
   ZoomControl,
   GeolocationControl,
-  FullscreenControl,
-  Clusterer,
+
 } from "react-yandex-maps";
 import {
   MapLocationIcon,
-  MenuCloseIcons,
   SearchIcon,
-  StarIcon,
-  marketIcons,
 } from "../../../../../assets/icons";
 import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
@@ -25,37 +20,36 @@ const mapOptions = {
   defaultOptions: { suppressMapOpenBlock: true },
 };
 
-const geolocationOptions = {
-  defaultOptions: { maxWidth: 128 },
-  defaultData: { content: "Determine" },
-};
 
-const initialState = {
-  title: "",
-  center: [41.311151, 69.279737],
-  zoom: 12,
-};
 
-export default function LocationOfYandex({item}) {
+export default function LocationOfYandex({ handleCallback, lang, lat, address }) {
+
+  const initialState = {
+    title: "",
+    center: [lang, lat],
+    zoom: 12,
+  };
+
   const [isSendedLocation, setIsSendedLocation] = useState(true);
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
 
+
+
   // submits
   const handleSubmit = () => {
+    handleCallback({ title: state.title, center: mapRef.current.getCenter() })
     setIsSendedLocation(false);
-    console.log({ title: state.title, center: mapRef.current.getCenter() });
   };
-
   // reset state & search
   const handleReset = () => {
     setState({ ...initialState });
     // setState({ ...initialState, title: "" });
     searchRef.current.value = "";
     // mapRef.current.setCenter(initialState.center);
-    mapRef.current.setZoom(initialState.zoom);
+    // mapRef.current.setZoom(initialState.zoom);
   };
 
   // search popup
@@ -117,29 +111,29 @@ export default function LocationOfYandex({item}) {
                 htmlFor="ForSearch"
                 className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-1 md:px-3 rounded-lg"
               >
-                {!Boolean(state.title.length) && (
-                  <input
-                    ref={searchRef}
-                    placeholder="Введите адрес"
-                    // name="s"
-                    id="ForSearch"
-                    // disabled={!mapConstructor}
-                    className="w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg "
-                  />
-                )}
+                <input
+                  ref={searchRef}
+                  placeholder="Введите адрес"
+                  id="ForSearch"
+                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(state.title.length) ? "" : "hidden"
+                    }`}
+                />
+
                 <div
                   className={clsx(["titleBox"], {
                     ["titleBox_show"]: Boolean(state.title.length),
                   })}
                 >
-                  <p className=" w-[90%] ">{state.title} </p>
+                  <p className=" w-[90%] "> {state.title} </p>
                 </div>
+
+
                 {state?.title.length ? (
                   <button
                     onClick={handleReset}
                     className="cursor-pointer flex items-center h-10 justify-center "
                   >
-                    <GrClose />
+                    <GrClose className="pointer-events-none" />
                   </button>
                 ) : (
                   <button
@@ -179,19 +173,7 @@ export default function LocationOfYandex({item}) {
                 </button>
               )}
             </div>
-            {/* <div
-              className={
-                "w-full h-fit border border-black relative flex items-center justify-center bg-transparent"
-              }
-            >
-              <div className="absolute top-0 left-0 z-[50]" title={state.title}>
-                {state.title}
-              </div>
-              <button onClick={handleReset}>
-                <MenuCloseIcons />
-              </button>
-            </div>
-          */}
+
             <span className={"placemark"}>
               <MapLocationIcon color="primary" />
             </span>
