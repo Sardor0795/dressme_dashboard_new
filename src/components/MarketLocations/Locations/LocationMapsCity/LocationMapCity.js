@@ -6,20 +6,31 @@ import {
   MenuCloseIcons,
   SearchIcon,
   StarLabel,
-  TelIcon,
+  MapLocationIcon,
 } from "../../../../assets/icons";
 import { Aligarx } from "../../../../assets";
 import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
-import { DatePicker, Space } from "antd";
 import LocationOfYandex from "./LocationOfYandex/LocationOfYandex.js";
 import RegionListOfLocation from "./Modal/RegionListOfLocation";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import InputMask from "react-input-mask";
+import {
+  YMaps,
+  Map,
+  ZoomControl,
+  GeolocationControl,
 
-const { RangePicker } = DatePicker;
+} from "react-yandex-maps";
 
-function LocationMapCity() {
+import { BiCheckDouble } from "react-icons/bi";
+import { GrClose } from "react-icons/gr";
+import { clsx } from "clsx";
+// import "./LocationOfYandex.css";
+import './LocationOfYandex/LocationOfYandex.css'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+export default function LocationMapCity() {
   const [state, setState] = useState({
     idAddress: "",
     idAssistantMessenger: "",
@@ -44,9 +55,21 @@ function LocationMapCity() {
     // ---------------
     getRegionList: ""
   })
+  const [locationImgFirst, setLocationImgFirst] = useState({
+    pictureBgFile1: "",
+    pictureBgView1: ""
+  });
+  const [locationImgSecond, setLocationImgSecond] = useState({
+    picturelogoFile2: "",
+    picturelogoView2: ""
+  });
+  const [locationImgThird, setLocationImgThird] = useState({
+    pictureLastFile3: "",
+    pictureLastView3: ""
+  });
+
   const { id } = useParams();
   const NewId = id.replace(":", "");
-  // console.log(NewId, "NewId-locationMapCity");
 
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
@@ -57,6 +80,43 @@ function LocationMapCity() {
   // const pathname = window.location.pathname;
 
   // let LocationMapId = pathname.replace("/locations-store/city/:", "");
+  // // ------------GET  Has Magazin ?-----------shops/locations/:id------
+  const { mutate } = useMutation(() => {
+    return fetch(`${url}/shops/locations/${NewId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+
+      },
+    }).then((res) => res.json());
+  });
+
+  const onLocaTionDelete = () => {
+    mutate({}, {
+      onSuccess: res => {
+        // console.log(res, "location delte");
+        toast.warn(`${res?.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        if (res?.message) {
+          navigate("/locations-store")
+        }
+      },
+      onError: err => {
+
+      }
+    })
+  }
+
   // // ------------GET  Has Magazin ?-----------------
   const { isLoading } = useQuery(["store-location"], () => {
     return fetch(`${url}/shops/locations/index`, {
@@ -107,9 +167,6 @@ function LocationMapCity() {
           idShopId: res?.location?.shop_id,
           idRegionId: res?.location?.region_id,
           idSupRregionId: res?.location?.sub_region_id,
-          idImageOne: res?.location?.url_image_path_one,
-          idImageTwo: res?.location?.url_image_path_two,
-          idImageThree: res?.location?.url_image_path_three,
           idWorkTimeFrom: res?.location?.work_time_from,
           idWorkTimeTo: res?.location?.work_time_to,
           // -
@@ -119,6 +176,16 @@ function LocationMapCity() {
           idSecondAssistantPhoneCode: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(0, 3),
           idSecondAssistantPhone: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(3, 12),
         })
+        // setLocationImgFirst({
+        //   ...locationImgFirst, pictureBgView1: res?.location?.url_image_path_one,
+        // })
+        // setLocationImgSecond({
+        //   ...locationImgSecond, picturelogoView2: res?.location?.url_image_path_two,
+        // })
+        setLocationImgThird({
+          ...locationImgThird, pictureLastView3: res?.location?.url_image_path_three,
+        })
+
         setStoreLocationById(res)
         console.log(res, "magazin location id show");
       },
@@ -145,11 +212,35 @@ function LocationMapCity() {
     }
   )
 
-  const success2 = () => {
-    messageApi.open({
-      type: "success",
-      content: "Удалить",
+  // ------------------------ImgUpload------------------
+
+  // console.log();
+  const handleLocationImageOne = (e) => {
+    setLocationImgFirst({
+      pictureBgFile1: e.target.files[0],
+      pictureBgView1: URL.createObjectURL(e.target.files[0])
     });
+  }
+  const handleLocationImageTwo = (e) => {
+    setLocationImgSecond({
+      picturelogoFile2: e.target.files[0],
+      picturelogoView2: URL.createObjectURL(e.target.files[0])
+    });
+  }
+  const handleLocationImageThree = (e) => {
+    setLocationImgThird({
+      pictureLastFile3: e.target.files[0],
+      pictureLastView3: URL.createObjectURL(e.target.files[0])
+    });
+  }
+
+  // ------------------------ImgUpload------------------
+
+  const success2 = () => {
+    // messageApi.open({
+    //   type: "success",
+    //   content: "Удалить",
+    // });
   };
 
   useEffect(() => {
@@ -158,8 +249,7 @@ function LocationMapCity() {
     });
   }, []);
 
-  console.log(state?.idImageOne, "idImageOne");
-  console.log(state?.idWorkTimeTo);
+
 
   const [openRegionList, setOpenRegionList] = useState(false);
   // const RegionToggle = React.useCallback(() => setOpenRegionList(false), []);
@@ -171,24 +261,134 @@ function LocationMapCity() {
       setActiveIndex(id)
     }
   }
+  // -------------------------------------------Maps---------------------------------
+  const mapOptions = {
+    modules: ["geocode", "SuggestView"],
+    defaultOptions: { suppressMapOpenBlock: true },
+  };
+  const initialState = {
+    title: state?.idAddress,
+    center: [state?.idLangitudeById, state?.idLatitudeById],
+    zoom: 12,
+  };
+
+  const [isSendedLocation, setIsSendedLocation] = useState(true);
+  const [forMaps, setForMaps] = useState({ ...initialState });
+  const [mapConstructor, setMapConstructor] = useState(null);
+  const mapRef = useRef(null);
+  const searchRef = useRef(null);
+
+
+
+  // submits length
+  const handleSubmit = () => {
+    setState({
+      ...state,
+      idAddress: forMaps?.title,
+      idLangitudeById: mapRef.current.getCenter()[0],
+      idLatitudeById: mapRef.current.getCenter()[1]
+    })
+    setIsSendedLocation(false);
+  };
+  // reset state & search
+  const handleReset = () => {
+    setForMaps({ ...initialState });
+    // setState({ ...initialState, title: "" });
+    searchRef.current.value = "";
+    // mapRef.current.setCenter(initialState.center);
+    // mapRef.current.setZoom(initialState.zoom);
+  };
+
+  // search popup
+  useEffect(() => {
+
+    if (mapConstructor) {
+      new mapConstructor.SuggestView(searchRef.current).events.add(
+        "select",
+        function (e) {
+          const selectedName = e.get("item").value;
+          mapConstructor.geocode(selectedName).then((result) => {
+            const newCoords = result.geoObjects
+              .get(0)
+              .geometry.getCoordinates();
+            setForMaps((prevState) => ({ ...prevState, center: newCoords }));
+          });
+        }
+      );
+    }
+  }, [mapConstructor]);
+
+  // change title
+  const handleBoundsChange = (e) => {
+    setIsSendedLocation(true);
+
+    const newCoords = mapRef.current.getCenter();
+    mapConstructor.geocode(newCoords).then((res) => {
+      const nearest = res.geoObjects.get(0);
+      const foundAddress = nearest.properties.get("text");
+      const [centerX, centerY] = nearest.geometry.getCoordinates();
+      const [initialCenterX, initialCenterY] = initialState.center;
+      if (centerX !== initialCenterX && centerY !== initialCenterY) {
+        setForMaps((prevState) => ({ ...prevState, title: foundAddress }));
+      }
+    });
+  };
+  // -------------------------------------------Maps---------------------------------
+  // -----------Edit Location-----
+  const handleEditLocation = () => {
+    let form = new FormData()
+    form.append("address", state?.idAddress);
+    form.append("longitude", state?.idLangitudeById);
+    form.append("latitude", state?.idLatitudeById);
+    form.append("shop_id", state?.idShopId);
+    // form.append("region_id", state?.regionIdShops);
+    // form.append("sub_region_id", state?.subRegionIdShops);
+    // form.append("work_time_from", state?.workTimeFrom);
+    // form.append("work_time_to", state?.workTimeTo);
+    // form.append("assistant_name", state?.assistantNameFirst);
+    // form.append("second_assistant_name", state?.assistantNameSecond);
+    // form.append("assistant_phone", assistantPhoneNumberFirst);
+    // form.append("second_assistant_phone", assistantPhoneNumberSecond);
+    form.append("shop_photo_one", locationImgFirst?.pictureBgFile1);
+    form.append("shop_photo_two", locationImgSecond?.picturelogoFile2);
+    // form.append("shop_photo_three", locationImgThird?.pictureLastFile3);
+
+    return fetch(`${url}/shops/locations/:${NewId}`, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem('DressmeUserToken')}`,
+      },
+      body: form
+    })
+      .then((res) => res.json())
+      .then(res => {
+        console.log(res, "editlocationById");
+        // if (res) {
+        //   navigate('/locations-store')
+        // }
+
+      })
+      .catch(err => console.log(err, "errImage"))
+  }
+
+
+
   return (
     <div className="w-full">
-      {/* <div className="">
-        <section
-          onClick={() => setOpenRegionList(false)}
-          className={`fixed inset-0 z-[10000]  duration-200 w-full h-[100vh] bg-black opacity-50 
-          ${openRegionList ? "" : "hidden"
-            }`}
-        ></section>
-        <section
-          className={`max-w-[440px] w-full h-fit mx-auto fixed z-[10001] left-0 right-0  duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openRegionList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-            }`}
-        >
-          {openRegionList &&
-            <RegionListOfLocation onClick={RegionToggle} />
-          }
-        </section>
-      </div> */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
 
         <div className="my-4 ">
@@ -223,7 +423,7 @@ function LocationMapCity() {
               </NavLink>
               <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
               <button
-                onClick={success2}
+                onClick={onLocaTionDelete}
                 className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
                 Удалить
@@ -231,29 +431,202 @@ function LocationMapCity() {
             </div>
           </div>
           <div className="h-[400px]">
-            {/* <LocationOfYandex /> */}
+            <div className={`w-full `}>
+              <div className={"mapRoot"}>
+                <YMaps
+                  query={{
+                    apikey: "8b56a857-f05f-4dc6-a91b-bc58f302ff21",
+                    lang: "uz",
+                  }}
+                >
+                  <Map
+                    className={` overflow-hidden w-full h-full`}
+                    {...mapOptions}
+                    state={forMaps}
+                    onLoad={setMapConstructor}
+                    onBoundsChange={handleBoundsChange}
+                    instanceRef={mapRef}
+                  >
+                    <div className="h-fit p-1 md:p-[10px] absolute top-2 z-40 gap-x-5 mx-1 md:mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-1 md:px-3 rounded-lg">
+                      <label
+                        htmlFor="ForSearch"
+                        className="w-[100%] h-full flex items-center justify-between bg-white  border border-textLightColor px-1 md:px-3 rounded-lg"
+                      >
+                        <input
+                          ref={searchRef}
+                          placeholder="Введите адрес"
+                          id="ForSearch"
+                          className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps.title.length) ? "" : "hidden"
+                            }`}
+                        />
+
+                        <div
+                          className={clsx(["titleBox"], {
+                            ["titleBox_show"]: Boolean(forMaps.title.length),
+                          })}
+                        >
+                          <p className=" w-[90%] "> {forMaps.title} </p>
+                        </div>
+
+
+                        {forMaps?.title.length ? (
+                          <button
+                            onClick={handleReset}
+                            className="cursor-pointer flex items-center h-10 justify-center "
+                          >
+                            <GrClose className="pointer-events-none" />
+                          </button>
+                        ) : (
+                          <button
+                            type="submit"
+                            className="cursor-pointer flex items-center h-10 justify-center "
+                          >
+                            <SearchIcon />
+                          </button>
+                        )}
+                      </label>
+                      {forMaps?.title.length ? (
+                        <button
+                          type="button"
+                          className="w-[40px] md:w-[150px] h-10 border cursor-pointer active:scale-95 px-3  flex items-center justify-center bg-textBlueColor text-white rounded-lg text-sm font-AeonikProMedium"
+                          onClick={handleSubmit}
+                          disabled={Boolean(!forMaps.title.length)}
+                        >
+                          {isSendedLocation ? (
+                            <>
+                              {" "}
+                              <span className="md:flex hidden">Подтвердить</span>
+                              <span className="md:hidden flex">OK</span>
+                            </>
+                          ) : (
+                            <span>
+                              <BiCheckDouble size={30} />
+                            </span>
+                          )}
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="w-[40px] md:w-[150px] h-10 px-3  flex items-center justify-center bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
+                        >
+                          <span className="md:flex hidden">Подтвердить</span>
+                          <span className="md:hidden flex">OK</span>{" "}
+                        </button>
+                      )}
+                    </div>
+
+                    <span className={"placemark"}>
+                      <MapLocationIcon color="primary" />
+                    </span>
+                    <ZoomControl
+                      options={{
+                        float: "right",
+                        position: { bottom: 200, right: 10, size: "small" },
+                        size: "small",
+                      }}
+                    />{" "}
+                    <GeolocationControl
+                      options={{
+                        float: "right",
+                        position: { bottom: 60, right: 10 },
+                        size: "small",
+                      }}
+                    />
+                  </Map>
+                </YMaps>
+              </div>
+            </div>
+            {/* <LocationOfYandex
+            handleCallback={CallBackYandex}
+            lang={state?.idLangitudeById}
+            lat={state?.idLatitudeById}
+            address={state?.idAddress}
+          /> */}
           </div>
           <div className=" px-4 md:px-0  flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
-              <img
-                className="w-full h-full object-cover rounded-lg"
-                src={state?.idImageOne}
-                alt=""
-              />
+              <button className="h-full w-full flex items-center justify-center ">
+                <label
+                  htmlFor="DataImg1"
+                  className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id="DataImg1"
+                    type="file"
+                    onChange={handleLocationImageOne}
+                    accept=" image/*"
+                  />
+                  {
+                    !locationImgFirst?.pictureBgView1 &&
+                    <div className="w-fit h-fit flex items-center">
+                      <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        Фото локации
+                      </span>
+                      <span className=" ml-[2px] md:ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                  }
+                  {locationImgFirst?.pictureBgView1 &&
+                    <img src={locationImgFirst?.pictureBgView1} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+                </label>
+              </button>
+
             </div>
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
-              <img
-                className="w-full h-full object-cover rounded-lg"
-                src={state?.idImageTwo}
-                alt=""
-              />
+              <button className="h-full w-full flex items-center justify-center">
+                <label
+                  htmlFor="DataImg2"
+                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id="DataImg2"
+                    type="file"
+                    onChange={handleLocationImageTwo}
+                    accept=" image/*"
+                  />
+                  {
+                    !locationImgSecond?.picturelogoView2 &&
+                    <div className="w-fit h-fit flex items-center">
+                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="hidden md:flex">Второе</span> фото локации
+                      </span>
+                    </div>
+                  }
+                  {locationImgSecond?.picturelogoView2 &&
+                    <img src={locationImgSecond?.picturelogoView2} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+                </label>
+              </button>
+
             </div>
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
-              <img
-                className="w-full h-full object-cover rounded-lg"
-                src={state?.idImageThree}
-                alt=""
-              />
+              <button className="h-full w-full flex items-center justify-center ">
+                <label
+                  htmlFor="DataImg3"
+                  className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id="DataImg3"
+                    type="file"
+                    onChange={handleLocationImageThree}
+                    accept=" image/*"
+                  />
+                  {
+                    !locationImgThird?.pictureLastView3 &&
+                    <div className="w-fit h-fit flex items-center">
+                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="hidden md:flex"> Третье</span> фото локации
+                      </span>
+                    </div>
+                  }
+                  {locationImgThird?.pictureLastView3 &&
+                    <img src={locationImgThird?.pictureLastView3} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+                </label>
+              </button>
+
             </div>
           </div>
           <div className="w-full  px-4 md:px-0  ">
@@ -502,32 +875,18 @@ function LocationMapCity() {
                     </label>
                   </div>
                 </div>
-                {/* <div className="w-full">
-                  <div className="text-[12px] md:text-[14px] font-AeonikProRegular flex items-center mb-[10px]">
-                    Выберите регион
-                    <span className="ml-[5px]">
-                      <StarLabel />
-                    </span>
-                  </div>
-                  <div onClick={() => setOpenRegionList(true)} className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:max-w-[287px] text-base font-AeonikProMedium">
-                    <span className="text-[#8C8C8C] text-[12px] md:text-[14px] font-AeonikProRegular ">
-                      Выберите регион
-                    </span>
-                    <span className="rotate-[90deg]">
-                      <ArrowTopIcons colors={"#A4A4A4"} />
-                    </span>
-                  </div>
-                </div> */}
+
               </div>
             </div>
           </div>
           <div className="flex justify-center mt-[50px]  px-4 md:px-0 ">
-            <Link
+            <button
+              onClick={handleEditLocation}
+
               className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
-            // to={"/store"}
             >
-              Добавить
-            </Link>
+              сохранит
+            </button>
           </div>
         </div>
 
@@ -535,4 +894,5 @@ function LocationMapCity() {
     </div >
   );
 }
-export default React.memo(LocationMapCity);
+// export default LocationMapCity;
+// export default React.memo(LocationMapCity);

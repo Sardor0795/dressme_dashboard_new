@@ -74,7 +74,7 @@ export default function LocationList() {
       },
     }
   )
-  console.log(locationListId, "setLocationListId");
+  console.log(locationListId?.locations?.data, "setLocationListId");
 
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
@@ -208,10 +208,10 @@ export default function LocationList() {
         </div>
       </div>
       {
-        locationListId?.locations?.data?.map(item => {
+        locationListId?.locations?.data?.map((item, index) => {
           return (
             <div>
-              <div className="md:mt-[16px] flex justify-between items-center">
+              < div className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {item?.shop?.name} <span className="hidden md:inline">({item?.length})</span>
                 </p>
@@ -227,7 +227,7 @@ export default function LocationList() {
 
               {/* Table */}
               <div className="w-full h-fit">
-                <div className="w-full mb-[10px] hidden md:block">
+                {index == 0 && <div className="w-full mb-[10px] hidden md:block">
                   <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
                     <li className="w-[70px] pl-4">
                       <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
@@ -267,7 +267,7 @@ export default function LocationList() {
                       </ul>
                     </li>
                   </ul>
-                </div>
+                </div>}
 
 
                 {/* table product */}
@@ -443,6 +443,6 @@ export default function LocationList() {
             </div>)
         })
       }
-    </div>
+    </div >
   );
 }
