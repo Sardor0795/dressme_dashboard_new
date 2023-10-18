@@ -8,6 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 const MarketList = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerMagazinList, setSellerMagazinList] = useState();
+  const [deliverList, setDeliverList] = useState();
+
   const url = "https://api.dressme.uz/api/seller";
 
   // // ------------GET  Has Magazin ?-----------------
@@ -34,12 +36,28 @@ const MarketList = () => {
       },
     }
   );
-  const data = [
-    { id: 1, name: "Nike Store Official Dealer" },
-    { id: 2, name: "Nike Store Official Dealer" },
-    { id: 3, name: "Nike Store Official Dealer" },
-    { id: 4, name: "Nike Store Official Dealer" },
-  ];
+  // ------------GET METHOD delivery-method-----------------
+  useQuery(["get delivery-method"], () => {
+    return fetch(`${url}/delivery-method`, {
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        // console.log(res?.delivery_methods, "delivery-method");
+        setDeliverList(res?.delivery_methods)
+      },
+      onError: (err) => {
+        console.log(err, "err getDelivery-method");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
   const navigate = useNavigate();
   const goDetail = (id) => {
     navigate(`/store/market-list/:${id}`);
@@ -108,9 +126,16 @@ const MarketList = () => {
               </div>
               <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
-                <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
-                  {data?.delivery_id}
-                </span>
+                {
+                  deliverList?.filter(e => e.id == data?.delivery_id)?.map(item => {
+                    return (
+                      <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
+                        {item?.name_ru}
+                      </span>
+
+                    )
+                  })
+                }
               </div>
             </div>
             <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
