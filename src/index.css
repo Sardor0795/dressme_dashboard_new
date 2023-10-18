@@ -280,3 +280,27 @@ input[type=time]::-webkit-clear-button {
   -ms-appearance: none;
   appearance: none;
 }
+
+/* ---------------tyoe radio----------- */
+.radio-toolbar input[type="radio"] {
+  display: none;
+}
+
+.radio-toolbar label {
+  /* display: inline-block; */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red */
+}
+
+.radio-toolbar input[type="radio"]:checked+label {
+  background-color: #e6f2f9;
+  color: #007DCA;
+  /* border: 1px solid green */
+}
+
+input[type="radio"]:checked+label span {
+  /* background-color: #660006; */
+}

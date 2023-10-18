@@ -10,25 +10,17 @@ function AddStore({ onClick }) {
   const navigate = useNavigate();
   const [magazinName, setMagazinName] = useState();
 
-  const [methodDeliv, setMethodDeliv] = useState(null);
+  const [genderType, setGenderType] = useState();
+  const [checkGender, setCheckGender] = useState(1);
 
-  const [genderCategory, setGenderCategory] = useState([
-    {
-      id: 1,
-      action: true,
-      gender: "Мужской",
-    },
-    {
-      id: 2,
-      action: false,
-      gender: "Женский",
-    },
-    {
-      id: 3,
-      action: false,
-      gender: "Унисекс",
-    },
-  ]);
+  const [deliverList, setDeliverList] = useState();
+  const [deliverCheck, setDeliverCheck] = useState(1);
+
+
+
+  const [errorGroup, setErrorGroup] = useState();
+
+
 
   // img upload--------------
   const [file, setFile] = useState({
@@ -55,38 +47,65 @@ function AddStore({ onClick }) {
   }
 
 
-  // -------------------------
-
-  const handleGenderCheck = (value) => {
-    setGenderCategory((data) => {
-      return data.map((e) => {
-        if (e.id == value) {
-          return { ...e, action: true };
-        } else return { ...e, action: false };
-      });
-    });
-  };
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
 
-  
+
   const url = "https://api.dressme.uz/api/seller"
-
-
-  let [filt] = genderCategory.filter((v) => v.action === true);
-
+  // ------------GET METHOD Gender-type-----------------
+  useQuery(["get genders"], () => {
+    return fetch(`${url}/genders`, {
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        console.log(res, "genderlist");
+        setGenderType(res?.genders)
+      },
+      onError: (err) => {
+        console.log(err, "err getGenderlist");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
+  // ------------GET METHOD delivery-method-----------------
+  useQuery(["get delivery-method"], () => {
+    return fetch(`${url}/delivery-method`, {
+      headers: {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+    }).then(res => res.json())
+  },
+    {
+      onSuccess: (res) => {
+        // console.log(res?.delivery_methods, "delivery-method");
+        setDeliverList(res?.delivery_methods)
+      },
+      onError: (err) => {
+        console.log(err, "err getDelivery-method");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  )
   const sendFunc = () => {
-
     let form = new FormData()
     form.append("name", magazinName);
     form.append("logo_photo", fileBrand?.pictureLogoFile);
     form.append("background_photo", file?.pictureBgFile);
-    form.append("gender_id", filt?.id);
-    form.append("delivery_id", methodDeliv);
+    form.append("gender_id", checkGender);
+    form.append("delivery_id", deliverCheck);
     return fetch(`${url}/shops/store`, {
       method: "POST",
       headers: {
@@ -97,14 +116,17 @@ function AddStore({ onClick }) {
     })
       .then((res) => res.json())
       .then(res => {
+        console.log(res?.errors, "BUAddMarket");
         if (res?.shop) {
-          navigate('/store/market-list')
+          // navigate('/store/market-list')
+        } else if (res?.errors) {
+          setErrorGroup(res?.errors)
         }
       })
-      .catch(err => console.log(err, "errImage"))
-
-
+      .catch(err => console.log(err, "BUAddMarket errImage"))
   };
+
+
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
       <div className="md:hidden flex ">
@@ -146,11 +168,19 @@ function AddStore({ onClick }) {
               accept=" image/*"
             />
             {
-              !file?.pictureBgView &&
-              <span className="flex items-center flex-col justify-center">
-                выберите облошка
-                <BgSelectSkin />
-              </span>
+              !file?.pictureBgView && <>
+                <span className="flex items-center flex-col justify-center">
+                  выберите облошка
+                  <BgSelectSkin />
+                </span>
+                {
+                  errorGroup?.background_photo && !file?.pictureBgView &&
+                  <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                    {errorGroup?.background_photo}
+                  </p>
+                }
+              </>
+
             }
             {file?.pictureBgView && <img src={file?.pictureBgView} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
           </label>
@@ -171,11 +201,18 @@ function AddStore({ onClick }) {
                 accept=" image/*"
               />
               {
-                !fileBrand?.pictureLogoView &&
-                <span className="flex items-center flex-col justify-center">
-                  Выберите Логотип
-                  <BgSelectSkin />
-                </span>
+                !fileBrand?.pictureLogoView && <>
+                  <span className="flex items-center flex-col justify-center px-2">
+                    Выберите Логотип
+                    <BgSelectSkin />
+                  </span>
+                  {
+                    errorGroup?.logo_photo && !file?.pictureLogoView &&
+                    <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                      {errorGroup?.logo_photo}
+                    </p>
+                  }
+                </>
               }
 
               {fileBrand?.pictureLogoView && <img src={fileBrand?.pictureLogoView} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
@@ -189,7 +226,7 @@ function AddStore({ onClick }) {
       >
         <div className="w-full flex flex-col md:flex-row items-center justify-center mb-10 md:mb-[60px] gap-x-10">
           <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7">
-            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] mb-5">
+            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] ">
               <label
                 htmlFor="shopName"
                 className="w-[40%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular
@@ -209,8 +246,16 @@ function AddStore({ onClick }) {
                 placeholder="Введите название магазина"
                 className="w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />
+
             </div>
-            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] mb-5">
+            <div className="w-full flex items-center justify-end">
+              {
+                errorGroup?.delivery_id && !magazinName &&
+                <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                  {errorGroup?.delivery_id}
+                </p>
+              }</div>
+            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] my-5">
               <label
                 htmlFor="shopName"
                 className="w-[40%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
@@ -220,24 +265,28 @@ function AddStore({ onClick }) {
                   <StarLabel />{" "}
                 </span>
               </label>
-              <div className="w-[70%] md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                {genderCategory.map((data) => {
+              <div className="w-[70%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
+                {genderType?.map((data) => {
                   return (
-                    <button
-                      type="button"
-                      key={data.id}
-                      onClick={() => handleGenderCheck(data.id)}
-                      className={`w-1/3 md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg
-                          ${data.action
-                          ? "border-none  h-[32px] md:h-[42px] bg-textBlueColor md:bg-btnLightBlueColor text-white md:text-textBlueColor my-auto mx-auto border-searchBgColor rounded-lg"
-                          : ""
-                        }
-                                                    `}
-                    >
-                      {data.gender}
-                    </button>
+                    <>
+
+                      <input
+                        type="radio"
+                        id={data?.id}
+                        value={data?.id}
+                        name="checkGender"
+                        checked={data?.id === checkGender}
+                        onChange={() => setCheckGender(data?.id)}
+                      // id={answer.answer_ID}
+                      />
+                      <label htmlFor={data?.id} className={`w-1/3 cursor-pointer md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
+                        <span>{data?.name_ru}</span>
+                      </label>
+                    </>
                   );
                 })}
+
+
               </div>
             </div>
             <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] ">
@@ -250,25 +299,26 @@ function AddStore({ onClick }) {
                   <StarLabel />
                 </span>
               </label>
-              <div className="w-[70%] flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                <button
-                  type="button"
-                  onClick={() => setMethodDeliv(1)}
-                  className="group w-[28%] md:w-1/4  focus:bg-textBlueColor font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
-                >
-                  <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
-                    Такси
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMethodDeliv(2)}
-                  className="group w-[72%] md:w-3/4  group-focus:text-white focus:bg-textBlueColor text-base font-AeonikProRegular border border-borderColor2 rounded-lg h-[32px] md:h-[42px] flex items-center justify-center"
-                >
-                  <span className="group-focus:text-white text-[10px] ls:text-[12px] md:text-base">
-                    Собственная доставка
-                  </span>
-                </button>
+              <div className="w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+                {deliverList?.map((data) => {
+                  return (
+                    <>
+
+                      <input
+                        type="radio"
+                        id={data?.name_uz}
+                        value={data?.id}
+                        name="checkDeliver"
+                        checked={data?.id === deliverCheck}
+                        onChange={() => setDeliverCheck(data?.id)}
+                      />
+                      <label htmlFor={data?.name_uz} className={` cursor-pointer md:px-3 w-fit border border-searchBgColor flex items-center justify-center   text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
+                        <span>{data?.name_ru}</span>
+                      </label>
+                    </>
+                  );
+                })}
+
               </div>
             </div>
           </div>
