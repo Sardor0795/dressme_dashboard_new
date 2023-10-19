@@ -118,7 +118,7 @@ export default function LocationMapCity() {
   const onLocaTionDelete = () => {
     mutate({}, {
       onSuccess: res => {
-        // console.log(res, "location delte");
+        console.log(res, "location delte");
         toast.warn(`${res?.message}`, {
           position: "top-right",
           autoClose: 5000,
@@ -129,9 +129,9 @@ export default function LocationMapCity() {
           progress: undefined,
           theme: "light",
         });
-        if (res?.message) {
-          navigate("/locations-store")
-        }
+        // if (res?.message) {
+        //   navigate("/locations-store")
+        // }
       },
       onError: err => {
 
@@ -234,7 +234,6 @@ export default function LocationMapCity() {
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
-
 
   useEffect(() => {
     window.scrollTo({

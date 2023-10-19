@@ -376,13 +376,13 @@ export default function Sidebar({ name, surName }) {
           </button>
           <div
             onClick={() => setState({ ...state, logOutModal: false })}
-            className={`fixed inset-0 z-[999998] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+            className={`fixed inset-0 z-[9999] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
          ${state?.logOutModal ? "" : "hidden"
               }`}
           ></div>
           {/* Delete Account Of Pop Confirm */}
           <section
-            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[999999] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.logOutModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[99999] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.logOutModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
               }`}
 
           >
