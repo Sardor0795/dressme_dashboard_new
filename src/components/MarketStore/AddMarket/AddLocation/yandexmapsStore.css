@@ -37,7 +37,7 @@
 
 .titleBox.titleBox_show {
   position: relative;
-  z-index: 9999;
+  z-index: 400;
   top: 0px;
   display: flex;
 }
@@ -61,7 +61,7 @@
   position: relative;
   height: 400px;
   background-color: white;
-  z-index: 9999;
+  z-index: 400;
 }
 
 .mapsuz {
