@@ -148,7 +148,7 @@ function MarketEdit() {
       {},
       {
         onSuccess: (res) => {
-          console.log(res, "delete");
+          // console.log(res, "delete");
           if (res?.message) {
             toast.success(`${res?.message}`, {
               position: "top-right",

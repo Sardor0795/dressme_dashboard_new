@@ -14,7 +14,8 @@ import { AiOutlineLeft } from "react-icons/ai";
 import StoreListModal from "./Modal/StoreListModal";
 import YandexMapStore from "./YandexMaps";
 import { useMutation, useQuery } from "@tanstack/react-query";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function LocationAddById() {
   const url = "https://api.dressme.uz/api/seller";
   const navigate = useNavigate();
@@ -176,9 +177,40 @@ export default function LocationAddById() {
     })
       .then((res) => res.json())
       .then(res => {
-        // console.log(res, "AddLocationById");
-        if (res) {
+        console.log(res, "AddLocationById");
+        toast.error(`${res?.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+        if (res?.created_at) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
           navigate('/locations-store')
+        } else if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
         }
 
       })
@@ -203,7 +235,20 @@ export default function LocationAddById() {
   // console.log(state?.workTimeTo, "workTimeTo");
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 ">
-
+      <ToastContainer
+        style={{ zIndex: "1000", top: "80px" }}
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className=" ">
         <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
           <button
