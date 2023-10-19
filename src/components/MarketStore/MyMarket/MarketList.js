@@ -77,7 +77,7 @@ const MarketList = () => {
                 <span className="text-checkboxBorder md:text-black flex items-center">
                   {" "}
                   <span className="md:hidden flex">0</span>
-                  {index}
+                  {data?.id}
                 </span>
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
               </div>
