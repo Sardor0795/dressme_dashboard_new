@@ -65,7 +65,7 @@ const MarketList = () => {
 
   return (
     <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-      {sellerMagazinList?.shops?.data?.map((data) => {
+      {sellerMagazinList?.shops?.data?.map((data, index) => {
         return (
           <div
             key={data?.id}
@@ -77,7 +77,7 @@ const MarketList = () => {
                 <span className="text-checkboxBorder md:text-black flex items-center">
                   {" "}
                   <span className="md:hidden flex">0</span>
-                  {data.id}
+                  {index}
                 </span>
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
               </div>

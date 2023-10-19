@@ -4,7 +4,8 @@ import { BgSelectSkin, GoBackIcons, StarLabel } from "../../../../assets/icons";
 import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddStore({ onClick }) {
   const navigate = useNavigate();
@@ -116,19 +117,65 @@ function AddStore({ onClick }) {
     })
       .then((res) => res.json())
       .then(res => {
-        console.log(res?.errors, "BUAddMarket");
         if (res?.shop) {
-          // navigate('/store/market-list')
-        } else if (res?.errors) {
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate('/store')
+        } else if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           setErrorGroup(res?.errors)
         }
       })
-      .catch(err => console.log(err, "BUAddMarket errImage"))
+      .catch(err => {
+        toast.error(`${err}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      })
+
   };
 
 
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
+      <ToastContainer
+        style={{ zIndex: "1000", top: "80px" }}
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+
       <div className="md:hidden flex ">
         <button
           onClick={() => {
