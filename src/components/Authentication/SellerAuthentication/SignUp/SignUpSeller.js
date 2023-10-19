@@ -88,8 +88,8 @@ const SignUpSeller = () => {
       onError: (err) => {
         console.log(err, "err");
       },
-      // keepPreviousData: true,
-      // refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   )
   // ------------GET METHOD Region-----------------
@@ -258,23 +258,24 @@ const SignUpSeller = () => {
               <div className="w-full  max-w-[370px]  mx-auto flex flex-col gap-y-4">
                 {
                   state?.getSellerList?.individual?.map(data => {
+
                     return (
                       <div key={data?.id}>
                         <div className="flex items-center">
+                          <input
+                            type="radio"
+                            id={data?.id}
+                            name="type_work"
+                            value={data?.id}
+                            checked={parseFloat(data?.id) === parseFloat(state?.seller_type_id)}
+                            className="w-[18px] h-[18px] cursor-pointer"
+                            onChange={(e) => setState({ ...state, seller_type_id: e.target.value })}
+                            required
+                          />
                           <label
                             htmlFor={data?.id}
                             className="flex items-center"
                           >
-                            <input
-                              type="radio"
-                              id={data?.id}
-                              name="type_work"
-                              value={data?.id}
-                              checked={parseInt(state?.seller_type_id) == data?.id}
-                              className="w-[18px] h-[18px] cursor-pointer"
-                              onChange={(e) => setState({ ...state, seller_type_id: e.target.value })}
-                              required
-                            />
                             <span className="ml-[10px] font-AeonikProMedium text-[13px] md:text-base cursor-pointer">
                               {data?.name_ru}
                             </span>
@@ -430,7 +431,7 @@ const SignUpSeller = () => {
                                           id={item?.name_ru}
                                           name="type_work"
                                           value={item?.region_id}
-                                          checked={state?.sub_region == item?.id}
+                                          checked={parseFloat(item?.id) === parseFloat(state?.sub_region)}
                                           className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                           onChange={(e) => {
                                             setState({ ...state, region: e.target.value, sub_region: item?.id })
@@ -476,7 +477,7 @@ const SignUpSeller = () => {
                         {!state?.region && !state?.sub_region && "Выберите регион"}
 
                         {state?.getRegionList?.regions?.filter(e => e.id == state?.region).map(item => {
-                          return <span className="flex items-center text-[#000] text-[14px] sm:text-base">
+                          return <span key={item?.id} className="flex items-center text-[#000] text-[14px] sm:text-base">
                             {item?.name_ru},
                             {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {
                               return <span className="ml-1">{item?.name_ru}</span>
@@ -530,7 +531,7 @@ const SignUpSeller = () => {
               {/* Namr, surname */}
               <div className="w-full  xs:flex-row flex-col flex items-center justify-between gap-x-5 sm:gap-x-[50px] gap-y-4 xs:gap-y-0">
                 <div className="w-full xs:w-1/2 h-fit ">
-                  <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                  <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                     Имя{" "}
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </span>
@@ -554,7 +555,7 @@ const SignUpSeller = () => {
                   }
                 </div>
                 <div className="w-full xs:w-1/2 h-fit ">
-                  <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                  <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                     Фамилия{" "}
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </span>
@@ -583,7 +584,7 @@ const SignUpSeller = () => {
                 {/* Mail */}
                 <div className="w-full xs:w-1/2 h-fit ">
                   <div className=" flex items-center justify-between w-full">
-                    <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                    <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                       Электронная почта{" "}
                       <span className="ml-[5px]"><Star6Icon /></span>
                     </span>
@@ -615,7 +616,7 @@ const SignUpSeller = () => {
                 </div>
                 {/* Номер телефона */}
                 <div className="w-full xs:w-1/2 h-fit">
-                  <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                  <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                     Номер телефона{" "}
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </span>
@@ -652,7 +653,7 @@ const SignUpSeller = () => {
               <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-5 sm:gap-x-[50px] gap-y-4 xs:gap-y-0">
                 {/* Пароль */}
                 <div className="w-full xs:w-1/2 h-[85px] ll:h-[100px]">
-                  <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                  <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                     Пароль
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </span>
@@ -667,15 +668,17 @@ const SignUpSeller = () => {
                       required
 
                     />
-                    <span className="cursor-pointer pr-2">
+                    <span className="cursor-pointer w-[48px] h-[42px]   flex items-center">
                       {state?.passwordEye ? (
                         <span
+                          className="w-full h-full  flex items-center justify-center"
                           onClick={() => setState({ ...state, passwordEye: false })}
                         >
                           < AiOutlineEye size={20} color={"#e2e2e2"} />
                         </span>
                       ) : (
                         <span
+                          className="w-full h-full  flex items-center justify-center"
                           onClick={() => setState({ ...state, passwordEye: true })}
                         >
                           <AiOutlineEyeInvisible size={20} color={"#e2e2e2"} />
@@ -693,7 +696,7 @@ const SignUpSeller = () => {
                 </div>
                 {/* Повторите пароль */}
                 <div className="w-full xs:w-1/2 h-[85px] ll:h-[100px] ">
-                  <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                  <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                     Повторите пароль
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </span>
@@ -710,15 +713,17 @@ const SignUpSeller = () => {
                       // onBlur={handleBlur}
                       required
                     />
-                    <span className="cursor-pointer pr-2">
+                    <span className="cursor-pointer w-[48px] h-[42px] flex items-center  ">
                       {state?.confirmPasswordEye ? (
                         <span
+                          className="w-full h-full  flex items-center justify-center"
                           onClick={() => setState({ ...state, confirmPasswordEye: false })}
                         >
                           < AiOutlineEye size={20} color={"#e2e2e2"} />
                         </span>
                       ) : (
                         <span
+                          className="w-full h-full  flex items-center justify-center"
                           onClick={() => setState({ ...state, confirmPasswordEye: true })}
                         >
                           <AiOutlineEyeInvisible size={20} color={"#e2e2e2"} />
@@ -769,10 +774,10 @@ const SignUpSeller = () => {
         {/* -------------------------Email Verify Modal------------------ */}
 
         <div className="flex items-center justify-center flex-col mt-[30px] xs:mt-[50px] md:mt-[90px]  mb-[88px] md:mb-8">
-          <button type="button" onClick={onSubmit} className="w-full md:w-[360px] h-12 flex items-center justify-center mx-auto font-medium bg-fullBlue text-base text-white rounded-xl active:scale-95">
+          <button type="button" onClick={onSubmit} className="w-full md:w-[360px] select-none h-12 flex items-center justify-center mx-auto font-medium bg-fullBlue text-base text-white rounded-xl active:scale-95">
             Зарегистрироваться
           </button>
-          <NavLink to="/login-seller" className={"mt-[15px] text-fullBlue hover:underline text-base not-italic font-AeonikProRegular"}>
+          <NavLink to="/login-seller" className={"mt-[15px] text-fullBlue hover:underline select-none  text-base not-italic font-AeonikProRegular"}>
             Есть аккаунт?
           </NavLink>
           {/* <NavLink to="/login-seller" className={"mt-[15px] text-fullBlue hover:underline text-base not-italic font-AeonikProRegular"}>
