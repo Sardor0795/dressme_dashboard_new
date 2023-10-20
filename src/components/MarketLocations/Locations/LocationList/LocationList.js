@@ -74,7 +74,7 @@ export default function LocationList() {
       },
     }
   )
-  console.log(locationListId?.locations?.data[0].shop_locations?.length, "setLocationListId1");
+  // console.log(locationListId?.locations?.data[0].shop_locations?.length, "setLocationListId1");
 
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
@@ -93,9 +93,7 @@ export default function LocationList() {
   const showPickerHandle = () => {
     setShowPicker(!showPicker)
   }
-  // useEffect(() => {
-  //   showPickerHandle()
-  // }, [showPicker]);
+
   return (
     <div className="w-full h-full  px-4 md:px-0 ">
       <div
@@ -213,7 +211,7 @@ export default function LocationList() {
             <div>
               {item?.shop_locations?.length ? <div className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
-                  {item?.name} <span className="hidden md:inline">({item?.length})</span>
+                  {item?.name} <span className="hidden md:inline">({item?.shop_locations?.length})</span>
                 </p>
 
                 <button
