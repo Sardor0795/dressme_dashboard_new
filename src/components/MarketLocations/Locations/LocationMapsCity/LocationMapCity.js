@@ -60,8 +60,9 @@ export default function LocationMapCity() {
     picturelogoFile2: "",
     picturelogoView2: "",
     pictureLastFile3: "",
-    pictureLastView3: ""
-    // 
+    pictureLastView3: "",
+    // ----
+
   })
   const handleLocationImageOne = (e) => {
     setState({
@@ -91,7 +92,6 @@ export default function LocationMapCity() {
     title: "",
     center: [],
     zoom: 12,
-
   });
   const { id } = useParams();
   const NewId = id.replace(":", "");
@@ -201,12 +201,19 @@ export default function LocationMapCity() {
           pictureBgView1: res?.location?.url_image_path_one,
           picturelogoView2: res?.location?.url_image_path_two,
           pictureLastView3: res?.location?.url_image_path_three,
+          // -----------
+          // title: res?.location?.address,
+          // center: [parseFloat(res?.location?.latitude), parseFloat(res?.location?.longitude)]
 
         })
+        // console.log(res?.location?.address, "title: res?.location?.address,");
+        // console.log(parseFloat(res?.location?.longitude), " parseFloat(res?.location?.longitude),");
+        // console.log(parseFloat(res?.location?.latitude), " parseFloat(res?.location?.latitude),");
+
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
-          center: [parseFloat(res?.location?.longitude), parseFloat(res?.location?.latitude)]
+          center: [parseFloat(res?.location?.latitude), parseFloat(res?.location?.longitude)]
         })
 
         setStoreLocationById(res)
@@ -220,7 +227,7 @@ export default function LocationMapCity() {
 
   // ------------GET METHOD Region-----------------
 
-  useQuery(["getRegionList"], () => {
+  useQuery(["getRegionList-map-ity"], () => {
     return fetch(`${url}/regions`).then(res => res.json())
   },
     {
@@ -241,7 +248,7 @@ export default function LocationMapCity() {
     });
   }, []);
 
-
+  // console.log(state?.getRegionList, "getRegionList");
 
   const [openRegionList, setOpenRegionList] = useState(false);
   // const RegionToggle = React.useCallback(() => setOpenRegionList(false), []);
@@ -262,8 +269,14 @@ export default function LocationMapCity() {
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
-
-
+  // const initialState = {
+  //   title: "",
+  //   center: [49.444444, 69.555555],
+  //   zoom: 12,
+  // };
+  // console.log(initialState, "center.initialState");
+  // console.log(state?.center, "center");
+  // console.log(state?.title, "title");
   // submits length
   const handleSubmit = () => {
 
@@ -344,7 +357,8 @@ export default function LocationMapCity() {
     })
       .then((res) => res.json())
       .then(res => {
-        if (res?.address || res?.latitude) {
+        console.log(res, "editL=City");
+        if (res?.message) {
           toast.success(`Успешно обновлено!`, {
             position: "top-right",
             autoClose: 5000,
@@ -433,7 +447,12 @@ export default function LocationMapCity() {
                   <Map
                     className={` overflow-hidden w-full h-full`}
                     {...mapOptions}
-                    state={forMaps}
+                    state={{
+                      center: forMaps?.center,
+                      zoom: forMaps?.zoom,
+                      title: forMaps?.title
+                    }}
+                    defaultState={forMaps}
                     onLoad={setMapConstructor}
                     onBoundsChange={handleBoundsChange}
                     instanceRef={mapRef}

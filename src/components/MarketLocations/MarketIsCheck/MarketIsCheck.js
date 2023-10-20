@@ -80,8 +80,6 @@ export default function MarketIsCheck() {
         })
     },)
 
-
-
     return (
         <div>
             {loading ? <LoadingForSeller /> :
