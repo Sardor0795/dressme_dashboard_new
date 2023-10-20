@@ -163,9 +163,9 @@ export default function LocationAddById() {
     form.append("second_assistant_name", state?.assistantNameSecond);
     form.append("assistant_phone", assistantPhoneNumberFirst);
     form.append("second_assistant_phone", assistantPhoneNumberSecond);
-    form.append("shop_photo_one", locationImgFirst?.pictureBgFile1);
-    form.append("shop_photo_two", locationImgSecond?.picturelogoFile2);
-    form.append("shop_photo_three", locationImgThird?.pictureLastFile3);
+    locationImgFirst?.pictureBgFile1 && form.append("shop_photo_one", locationImgFirst?.pictureBgFile1);
+    locationImgSecond?.picturelogoFile2 && form.append("shop_photo_two", locationImgSecond?.picturelogoFile2);
+    locationImgThird?.pictureLastFile3 && form.append("shop_photo_three", locationImgThird?.pictureLastFile3);
 
     return fetch(`${url}/shops/locations/store`, {
       method: "POST",

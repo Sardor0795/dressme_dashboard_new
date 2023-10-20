@@ -5,7 +5,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 29;
+  z-index: 99999;
+  /* left: 0; */
+  inset: 0;
   background-color: white;
 }
 

@@ -7,6 +7,7 @@ import {
   CreditCardNumber,
   DeleteIcon,
   MenuCloseIcons,
+  UserExitIcon,
   UserMailIcon,
   VerticalMenuIcons,
 } from "../../../../assets/icons";
@@ -199,6 +200,9 @@ const EditProfilePage = () => {
       }
     })
   }
+
+
+
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
@@ -214,7 +218,6 @@ const EditProfilePage = () => {
     document.title = "Pедактировать профиль";
 
   }, []);
-
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -240,12 +243,15 @@ const EditProfilePage = () => {
         onClick={() => {
           setOpenEditModal(false);
           setState({ ...state, popConfirmDelete: false, openModalRegions: false })
-          // setState({ ...state, openModalRegions: false })
+          setDressInfo({ ...dressInfo, logOutSeller: false })
+          // setState({...state, openModalRegions: false })
         }}
         className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
          ${state?.popConfirmDelete || openEditModal || state?.openModalRegions ? "" : "hidden"
           }`}
       ></div>
+
+
       {/* Delete Account Of Pop Confirm */}
       <section
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
@@ -292,7 +298,8 @@ const EditProfilePage = () => {
       >
         <EditPassword onClick={togglePassword} />
       </section>
-      {state?.sellerStatus == "pending" &&
+      {
+        state?.sellerStatus == "pending" &&
         <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
           <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
             Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
@@ -646,7 +653,7 @@ const EditProfilePage = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 export { EditProfilePage };

@@ -7,6 +7,7 @@ export default function ContextTeam({ children }) {
     isItPorduct: true,
     isAuthen: true,
     ConfirmAuthen: false,
+    logOutSeller: false,
     // AccessTokenSeller: localStorage.getItem('DressmeUserToken'),
     SellerName: "",
     SellerSurName: "",
