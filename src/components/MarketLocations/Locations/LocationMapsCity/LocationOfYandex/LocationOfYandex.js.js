@@ -26,7 +26,7 @@ export default function LocationOfYandex({ handleCallback, lang, lat, address })
 
   const initialState = {
     title: "",
-    center: [lang, lat],
+    center: [41.311151, 69.279737],
     zoom: 12,
   };
 

@@ -4,9 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import MyMarket from "../MyMarket/MyMarket";
 import AddStore from "../AddMarket/AddStore/AddStore";
+import LoadingForSeller from "../../Loading/LoadingFor";
 
 export default function MarketIsStoreCheck() {
   const [sellerShops, setSellerShops] = useState("");
+  const [loading, setLoading] = useState(true);
+  // LoadingForSeller
   const url = "https://api.dressme.uz/api/seller";
 
   // // ------------GET  Has Magazin ?-----------------
@@ -25,25 +28,29 @@ export default function MarketIsStoreCheck() {
     },
     {
       onSuccess: (res) => {
-        setSellerShops(res);
+        console.log(res, "markets");
+        if (res?.shops) {
+          setSellerShops(res);
+          setLoading(false)
+        }
         // setDressInfo({ ...dressInfo, SellerMagazin: res })
       },
       onError: (err) => {
         console.log(err, "err magazin");
       },
+      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   );
 
   return (
     <div>
-      {isLoading ? (
-        <div className={`w-[100vw] h-[100vh] flex items-center justify-center`}>
-          <h1>Waiting please....</h1>
-        </div>
+      {loading ? (
+        <LoadingForSeller />
       ) : (
         <>
-          {sellerShops?.shops?.data?.length && <MyMarket />}
-          {!sellerShops?.shops?.data?.length && <AddStore />}
+          {sellerShops?.shops?.data?.length >= 1 && <MyMarket />}
+          {sellerShops?.shops?.data?.length == 0 && <AddStore />}
         </>
       )}
     </div>

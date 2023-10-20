@@ -40,8 +40,9 @@ export default function LocationAddById() {
     shopCenterAddress: "",
     // region toogle
     openStoreList: false,
-    getRegionList: ""
-    // ----get yandex ----
+    getRegionList: "",
+    // ----errorGroup ----
+    errorGroup: ""
 
 
   });
@@ -178,16 +179,7 @@ export default function LocationAddById() {
       .then((res) => res.json())
       .then(res => {
         console.log(res, "AddLocationById");
-        toast.error(`${res?.message}`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
+
         if (res?.created_at) {
           toast.error(`${res?.message}`, {
             position: "top-right",
@@ -201,16 +193,8 @@ export default function LocationAddById() {
           })
           navigate('/locations-store')
         } else if (res?.errors && res?.message) {
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
+          setState({ ...state, errorGroup: res?.errors })
+          console.log(res?.errors, "errorsGRoup");
         }
 
       })
@@ -264,10 +248,21 @@ export default function LocationAddById() {
           </div>
         </div>{" "}
         <div>
-          <YandexMapStore handleCallback={CallBackYandex} />
+          <YandexMapStore
+            handleCallback={CallBackYandex}
+            errorLat={state?.errorGroup?.latitude}
+            errorLong={state?.errorGroup?.longitude}
+            errorTitle={state?.errorGroup?.address}
+          />
+          {
+            state?.errorGroup?.address && !state?.shopCenterAddress &&
+            < p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+              {state?.errorGroup?.address}
+            </p>
+          }
         </div>
         <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
-          <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] flex-col  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
               <label
                 htmlFor="DataImg1"
@@ -294,7 +289,12 @@ export default function LocationAddById() {
                 {locationImgFirst?.pictureBgView1 && <img src={locationImgFirst?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
               </label>
             </button>
-
+            {
+              state?.errorGroup?.shop_photo_one && !locationImgFirst?.pictureBgView1 &&
+              <p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
+                {state?.errorGroup?.shop_photo_one}
+              </p>
+            }
           </div>
           <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center">
@@ -350,41 +350,51 @@ export default function LocationAddById() {
           </div>
         </div>
         <div className="w-full  px-4 md:px-0 ">
-          <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
-            <label className="w-full md:w-[31%] xs:w-[48%]   ">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 md:gap-4 ">
+            <label className="w-full md:w-[31%] xs:w-[48%]">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя администратора{" "}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center  h-[70px]  w-full md:w-[287px] text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
                   placeholder=" Имя администратора"
                   value={state?.assistantNameFirst}
                   onChange={(e) => setState({ ...state, assistantNameFirst: e.target.value })}
-                  className="w-full outline-none text-[12px] md:text-[14px] font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px]  h-[32px] md:h-[42px]  border border-borderColor rounded md:rounded-lg font-AeonikProRegular px-2"
                 />
+                {
+                  state?.errorGroup?.assistant_name && !state?.assistantNameFirst &&
+                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                    {state?.errorGroup?.assistant_name}
+                  </p>
+                }
               </div>
             </label>
             <label className="w-full md:w-[31%] xs:w-[48%]  ">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя второго администратора{" "}
-                <span className="ml-[5px]">
-                  <StarLabel />
-                </span>
+
               </div>
-              <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center  h-[70px]  w-full md:w-[287px] text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
                   placeholder=" (не обезательно)"
                   value={state?.assistantNameSecond}
                   onChange={(e) => setState({ ...state, assistantNameSecond: e.target.value })}
-                  className="w-full outline-none text-[12px] md:text-[14px] font-AeonikProRegular px-2 "
+                  className="w-full outline-none text-[12px] md:text-[14px]  h-[32px] md:h-[42px]  border border-borderColor rounded md:rounded-lg font-AeonikProRegular px-2"
                 />
+                {/* {
+                  state?.errorGroup?.assistant_name &&
+                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                    {state?.errorGroup?.assistant_name}
+                  </p>
+                } */}
               </div>
             </label>
             <div className="w-full md:w-[31%] xs:w-[48%]  ">
@@ -394,47 +404,63 @@ export default function LocationAddById() {
                   <StarLabel />
                 </span>
               </div>
-              <div className="w-full flex  items-center">
+              <div className="w-full flex items-start  ">
                 {" "}
-                <span className="w-fit text-[12px] md:text-base flex items-center ">
+                <span className="w-fit text-[12px] md:text-base flex items-center mt-2">
                   от
                 </span>
-                <input
-                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                  type="time"
-                  step="3600"
-                  min="00:00"
-                  max="23:59"
-                  pattern="[0-2][0-9]:[0-5][0-9]"
-                  value={state?.workTimeFrom || "09:00"}
-                  onChange={(e) => setState({ ...state, workTimeFrom: e.target.value })}
-                  required />
+                <div className="flex flex-col items-center  h-[70px]">
+                  <input
+                    className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[42px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    type="time"
+                    min="00:00"
+                    max="23:59"
+                    pattern="[0-2][0-9]:[0-5][0-9]"
+                    value={state?.workTimeFrom || "09:00"}
+                    onChange={(e) => setState({ ...state, workTimeFrom: e.target.value })}
+                    required />
+                  {
+                    state?.errorGroup?.work_time_from && !state?.workTimeFrom &&
+                    <p className="text-[#D50000] text-[12px]   w-full ">
+                      {state?.errorGroup?.work_time_from}
+                    </p>
+                  }
+                </div>
 
-                <span className="w-fit text-[12px] md:text-base flex items-center ">
+                <span className="w-fit text-[12px] md:text-base flex items-center mt-2">
                   до
                 </span>
-                <input
-                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[45px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                  type="time"
-                  min="00:00"
-                  max="23:59"
-                  pattern="[0-2][0-9]:[0-5][0-9]"
-                  value={state?.workTimeTo || "19:00"}
-                  onChange={(e) => setState({ ...state, workTimeTo: e.target.value })}
-                  required />
+                <div className="flex flex-col items-center  h-[70px]">
+                  <input
+                    className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[42px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    type="time"
+                    min="00:00"
+                    max="23:59"
+                    pattern="[0-2][0-9]:[0-5][0-9]"
+                    value={state?.workTimeTo || "19:00"}
+                    onChange={(e) => setState({ ...state, workTimeTo: e.target.value })}
+                    required />
+                  {
+                    state?.errorGroup?.work_time_to && !state?.workTimeTo &&
+                    <p className="text-[#D50000] text-[12px]   w-full ">
+                      {state?.errorGroup?.work_time_to}
+                    </p>
+                  }
+                </div>
 
               </div>
             </div>
             <label className="w-full md:w-[31%] xs:w-[48%]   ">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер администратора
-                <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+                <span className="ml-[5px]"><StarLabel /></span>
               </div>
 
               <div className="mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                    name="phone"
                     type="text"
                     value={state.phoneCode}
                     readOnly
@@ -455,6 +481,12 @@ export default function LocationAddById() {
                   </span>
                 </div>
               </div>
+              {
+                state?.errorGroup?.assistant_phone && !state?.assistantPhoneFirst &&
+                <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                  {state?.errorGroup?.assistant_phone}
+                </p>
+              }
             </label>
             <label className="w-full md:w-[31%] xs:w-[48%]  ">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
@@ -488,24 +520,7 @@ export default function LocationAddById() {
                 </div>
               </div>
             </label>
-            {/* <div className="w-full md:w-[31%] xs:w-[48%]   ">
-              <div className="w-full" onClick={() => setOpenStoreList(true)}>
-                <div className="text-[12px] text-[12px] md:text-base font-AeonikProRegular flex items-center mb-1 md:mb-[10px]">
-                  Выберите регион
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
-                </div>
-                <div className="flex items-center justify-between px-3 cursor-pointer border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:w-[287px] text-base font-AeonikProMedium">
-                  <span className="text-[#8C8C8C] text-[12px] md:text-base font-AeonikProRegular ">
-                    Выберите регион
-                  </span>
-                  <span className="rotate-[90deg]">
-                    <ArrowTopIcons colors={"#A4A4A4"} />
-                  </span>
-                </div>
-              </div>
-            </div> */}
+
 
             <div className="w-full md:w-[31%] xs:w-[48%]  h-fit flex justify-center">
               <div
@@ -565,7 +580,7 @@ export default function LocationAddById() {
                                         id={item?.name_ru}
                                         name="type_work"
                                         value={item?.region_id}
-                                        checked={state?.subRegionIdShops == item?.id}
+                                        checked={item?.id == state?.subRegionIdShops}
                                         className="border border-searchBgColor  cursor-pointer  flex items-center justify-center"
                                         onChange={(e) => {
                                           setState({ ...state, regionIdShops: e.target.value, subRegionIdShops: item?.id })
@@ -623,9 +638,9 @@ export default function LocationAddById() {
                     <span className="rotate-[180deg]"><ArrowTopIcons colors={"#a1a1a1"} /></span>
                   </div>
                   {
-                    state?.errorGroup?.errors?.region_id && !state?.region &&
-                    <p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
-                      {state?.errorGroup?.errors?.region_id}
+                    state?.errorGroup?.region_id && !state?.subRegionIdShops &&
+                    < p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
+                      {state?.errorGroup?.region_id}
                     </p>
                   }
 
