@@ -423,7 +423,7 @@ function MarketEdit() {
                         checked={data?.id == state?.deliverCheck}
                         onChange={() => setState({ ...state, deliverCheck: data?.id })}
                       />
-                      <label htmlFor={data?.name_uz} className={` cursor-pointer md:px-3 w-fit border border-searchBgColor flex items-center justify-center   text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
+                      <label htmlFor={data?.name_uz} className={` cursor-pointer md:px-3 w-[200px] border border-searchBgColor flex items-center justify-center   text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
                         <span>{data?.name_ru}</span>
                       </label>
                     </>
