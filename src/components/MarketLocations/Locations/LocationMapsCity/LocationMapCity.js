@@ -203,6 +203,7 @@ export default function LocationMapCity() {
           pictureLastView3: res?.location?.url_image_path_three,
         })
 
+
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
@@ -264,7 +265,19 @@ export default function LocationMapCity() {
   let arr3 = state.idAssistantPhoneCode.split("+");
   let data5 = arr3.join("");
   const assistantPhoneNumberFirst = data5 + data4;
-  console.log(assistantPhoneNumberFirst, "assistantPhoneNumberFirst");
+  // ----------phone Number----------2
+
+  let secData = state?.idSecondAssistantPhone?.split("-");
+  let secArr = secData.join("");
+  let secData1 = secArr.split("(");
+  let secArr1 = secData1.join("");
+  let secArr2 = secArr1.split(")");
+  let secData2 = secArr2.join("");
+  let secData3 = secData2.split(" ")
+  let secData4 = secData3.join("")
+  let secArr3 = state?.idSecondAssistantPhoneCode?.split("+");
+  let secData5 = secArr3.join("");
+  const assistantPhoneNumberSecond = secData5 + secData4;
 
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
@@ -348,7 +361,9 @@ export default function LocationMapCity() {
     form.append("work_time_from", state?.idWorkTimeFrom);
     form.append("work_time_to", state?.idWorkTimeTo);
     form.append("assistant_name", state?.idAssistantName);
-    form.append("assistant_phone", state?.idAssistantPhone);
+    form.append("second_assistant_name", state?.idSecondAssistantName);
+    form.append("assistant_phone", assistantPhoneNumberFirst);
+    form.append("second_assistant_phone", assistantPhoneNumberSecond);
     state?.pictureBgFile1 && form.append("shop_photo_one", state?.pictureBgFile1);
     state?.picturelogoFile2 && form.append("shop_photo_two", state?.picturelogoFile2);
     state?.pictureLastFile3 && form.append("shop_photo_three", state?.pictureLastFile3);
