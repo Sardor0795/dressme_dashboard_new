@@ -201,14 +201,7 @@ export default function LocationMapCity() {
           pictureBgView1: res?.location?.url_image_path_one,
           picturelogoView2: res?.location?.url_image_path_two,
           pictureLastView3: res?.location?.url_image_path_three,
-          // -----------
-          // title: res?.location?.address,
-          // center: [parseFloat(res?.location?.latitude), parseFloat(res?.location?.longitude)]
-
         })
-        // console.log(res?.location?.address, "title: res?.location?.address,");
-        // console.log(parseFloat(res?.location?.longitude), " parseFloat(res?.location?.longitude),");
-        // console.log(parseFloat(res?.location?.latitude), " parseFloat(res?.location?.latitude),");
 
         setForMaps({
           ...forMaps,
@@ -220,8 +213,8 @@ export default function LocationMapCity() {
       },
       onError: (err) => {
       },
-      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   )
   // ------------GET METHOD Region-----------------
@@ -236,8 +229,8 @@ export default function LocationMapCity() {
       onError: (err) => {
         // console.log(err, "err get region");
       },
-      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   )
 
@@ -247,10 +240,9 @@ export default function LocationMapCity() {
     });
   }, []);
 
-  // console.log(state?.getRegionList, "getRegionList");
 
+  const [openRegionModal, setOpenRegionModal] = useState(false);
   const [openRegionList, setOpenRegionList] = useState(false);
-  // const RegionToggle = React.useCallback(() => setOpenRegionList(false), []);
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
@@ -260,6 +252,19 @@ export default function LocationMapCity() {
     }
   }
   console.log(forMaps?.center, "formaps.Center");
+  // ----------phone Number----------1
+  let data = state?.idAssistantPhone.split("-");
+  let arr = data.join("");
+  let data1 = arr.split("(");
+  let arr1 = data1.join("");
+  let arr2 = arr1.split(")");
+  let data2 = arr2.join("");
+  let data3 = data2.split(" ")
+  let data4 = data3.join("")
+  let arr3 = state.idAssistantPhoneCode.split("+");
+  let data5 = arr3.join("");
+  const assistantPhoneNumberFirst = data5 + data4;
+  console.log(assistantPhoneNumberFirst, "assistantPhoneNumberFirst");
 
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
@@ -378,6 +383,14 @@ export default function LocationMapCity() {
       .catch(err => console.log(err, "errImage"))
   }
 
+  // For DropUp
+  useEffect(() => {
+    if (openRegionModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openRegionModal]);
 
   return (
     <div className="w-full">
@@ -396,7 +409,12 @@ export default function LocationMapCity() {
         theme="colored"
       />
       <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
-
+        <div
+          onClick={() => setOpenRegionModal(false)}
+          className={`fixed inset-0 z-[99999] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+         ${openRegionModal ? "" : "hidden"
+            }`}
+        ></div>
         <div className="my-4 ">
           <div className="flex items-center justify-center mb-6">
             <button
@@ -777,14 +795,12 @@ export default function LocationMapCity() {
               </label>
               <div className="w-full md:w-[31%] xs:w-[48%]   ">
                 <div className="w-full h-fit flex justify-center ">
-                  <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionList ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
+                  <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[999999] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
                     <div className="w-full flex items-center justify-between  ">
                       <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
                       <span
                         className="select-none cursor-pointer"
-
-                        onClick={() => setOpenRegionList(false)}
-
+                        onClick={() => setOpenRegionModal(false)}
                       >
                         <MenuCloseIcons colors="#000" /></span>
                     </div>
@@ -851,7 +867,7 @@ export default function LocationMapCity() {
                     </div>
                     <div className="w-full flex items-center justify-end  mt-2">
                       <span
-                        onClick={() => setOpenRegionList(false)}
+                        onClick={() => setOpenRegionModal(false)}
                         className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium">Готово</span>
                     </div>
                   </div>
@@ -864,7 +880,7 @@ export default function LocationMapCity() {
                       </span>
                       <div
 
-                        onClick={() => setOpenRegionList(true)}
+                        onClick={() => setOpenRegionModal(true)}
                         className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
                         <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                           {!state?.idRegionId && !state?.idSupRregionId && "Выберите регион"}
