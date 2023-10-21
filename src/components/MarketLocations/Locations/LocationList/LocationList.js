@@ -276,7 +276,7 @@ export default function LocationList() {
                           className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor"
                         >
                           <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
-                            {index}
+                            {index + 1}
                           </li>
                           <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
                             <img className="w-[100%] h-[100%] rounded-lg object-top	object-cover"

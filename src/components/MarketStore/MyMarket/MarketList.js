@@ -77,7 +77,7 @@ const MarketList = () => {
                 <span className="text-checkboxBorder md:text-black flex items-center">
                   {" "}
                   <span className="md:hidden flex">0</span>
-                  {data?.id}
+                  {index + 1}
                 </span>
                 <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
               </div>
@@ -124,7 +124,7 @@ const MarketList = () => {
                   <img src={woman} alt="" />
                 </div>
               </div>
-              <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center gap-x-1 ll:gap-x-3 ">
+              <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                 <img src={deliveryIcon} alt="" />
                 {
                   deliverList?.filter(e => e.id == data?.delivery_id)?.map(item => {
