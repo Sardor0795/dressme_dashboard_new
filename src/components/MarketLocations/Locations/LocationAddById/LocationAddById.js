@@ -210,6 +210,14 @@ export default function LocationAddById() {
       setActiveIndex(id)
     }
   }
+  // For DropUp
+  useEffect(() => {
+    if (state?.openStoreList) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [state?.openStoreList]);
   useEffect(() => {
     window.scrollTo({
       top: 0,
