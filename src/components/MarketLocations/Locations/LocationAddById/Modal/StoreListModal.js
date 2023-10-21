@@ -39,8 +39,8 @@ export default function StoreListModal({ onClick }) {
                   <path
                     d="M1 9.5L5.88235 11L10 1"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                   />
                 </svg>
               </span>
@@ -72,8 +72,8 @@ export default function StoreListModal({ onClick }) {
                   <path
                     d="M1 9.5L5.88235 11L10 1"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                   />
                 </svg>
               </span>
@@ -105,8 +105,8 @@ export default function StoreListModal({ onClick }) {
                   <path
                     d="M1 9.5L5.88235 11L10 1"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                   />
                 </svg>
               </span>
@@ -138,8 +138,8 @@ export default function StoreListModal({ onClick }) {
                   <path
                     d="M1 9.5L5.88235 11L10 1"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                   />
                 </svg>
               </span>

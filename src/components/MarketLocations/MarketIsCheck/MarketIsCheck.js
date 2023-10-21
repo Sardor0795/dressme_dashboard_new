@@ -14,35 +14,8 @@ export default function MarketIsCheck() {
 
     const url = "https://api.dressme.uz/api/seller"
 
-    // // ------------GET  Has Magazin ?-----------------
-    const { isFetched, isLoading, isFetching } = useQuery(["location index"], () => {
-        return fetch(`${url}/shops/locations/index`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json",
-                "Accept": "application/json",
 
-                'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-            },
-
-        }).then(res => res.json())
-    },
-        {
-            onSuccess: (res) => {
-                if (res?.locations) {
-                    setIsLocation(res)
-                    setLoading(false)
-
-                }
-            },
-            onError: (err) => {
-                console.log(err, "err magazin");
-            },
-            keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-            refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
-        }
-    )
-    useQuery(["shops index"], () => {
+    const { isFetched, isLoading, isFetching } = useQuery(["shops index"], () => {
         return fetch(`${url}/shops`, {
             method: "GET",
             headers: {
@@ -69,7 +42,40 @@ export default function MarketIsCheck() {
             refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
         }
     )
+    // // ------------GET  Has Magazin ?-----------------
+    useQuery(["location index"], () => {
+        return fetch(`${url}/shops/locations/index`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "Accept": "application/json",
 
+                'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+            },
+
+        }).then(res => res.json())
+    },
+        {
+            onSuccess: (res) => {
+                if (res?.locations) {
+                    setIsLocation(res)
+                    setLoading(false)
+
+                }
+            },
+            onError: (err) => {
+                console.log(err, "err magazin");
+            },
+            keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+            refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+        }
+    )
+    console.log("---------------------------");
+    console.log(isLoading, "isLoading");
+    console.log(isFetched, "isFetched");
+    console.log(isFetching, "isFetching");
+    console.log(isLocation, "isLocation");
+    console.log(isMarket, "isMarket");
 
 
     useEffect(() => {
@@ -79,7 +85,6 @@ export default function MarketIsCheck() {
             }
         })
     },)
-
     return (
         <div>
             {loading ? <LoadingForSeller /> :
