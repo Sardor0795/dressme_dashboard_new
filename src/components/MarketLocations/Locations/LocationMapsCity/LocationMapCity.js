@@ -435,6 +435,7 @@ export default function LocationMapCity() {
               </button>
             </div>
           </div>
+          {/* Location of Maps edit page */}
           <div className="h-[400px]">
             <div className={`w-full `}>
               <div className={"mapRoot"}>
@@ -452,7 +453,7 @@ export default function LocationMapCity() {
                       zoom: forMaps?.zoom,
                       title: forMaps?.title
                     }}
-                    defaultState={forMaps}
+                    // defaultState={forMaps}
                     onLoad={setMapConstructor}
                     onBoundsChange={handleBoundsChange}
                     instanceRef={mapRef}
