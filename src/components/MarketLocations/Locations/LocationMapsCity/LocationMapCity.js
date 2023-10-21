@@ -213,7 +213,7 @@ export default function LocationMapCity() {
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
-          center: [parseFloat(res?.location?.latitude), parseFloat(res?.location?.longitude)]
+          center: [parseFloat(res?.location?.longitude?.slice(0, 9)), parseFloat(res?.location?.latitude?.slice(0, 9))]
         })
 
         setStoreLocationById(res)
@@ -224,7 +224,6 @@ export default function LocationMapCity() {
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
   )
-
   // ------------GET METHOD Region-----------------
 
   useQuery(["getRegionList-map-ity"], () => {
@@ -260,6 +259,8 @@ export default function LocationMapCity() {
       setActiveIndex(id)
     }
   }
+  console.log(forMaps?.center, "formaps.Center");
+
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
     modules: ["geocode", "SuggestView"],

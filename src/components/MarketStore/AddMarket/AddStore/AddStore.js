@@ -130,16 +130,7 @@ function AddStore({ onClick }) {
           });
           navigate('/store')
         } else if (res?.errors && res?.message) {
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+
           setErrorGroup(res?.errors)
         }
       })
