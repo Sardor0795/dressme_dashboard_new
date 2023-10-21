@@ -303,7 +303,7 @@ function MarketEdit() {
               </div>
             }
             {state?.pictureBgView1 &&
-              <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+              <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
           </label>
         </button>
         <div className="absolute bottom-[-30px] ll:-bottom-11 overflow-hidden border border-searchBgColor md:bottom-[-60px] z-[20] bg-white overflow-hidden left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full ">
