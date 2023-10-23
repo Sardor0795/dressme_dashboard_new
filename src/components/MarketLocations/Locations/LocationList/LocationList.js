@@ -231,22 +231,22 @@ export default function LocationList() {
           </li>
           <li className="w-[calc(100%-230px)]  flex items-center justify-between">
             <ul className="flex items-center w-full">
-              <li className="w-[30%] ">
+              <li className="w-[23%]">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Регион{" "}
                 </span>
               </li>
-              <li className="w-[20%]">
+              <li className="w-[29%]">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Адрес
                 </span>
               </li>
-              <li className="w-[20%]">
+              <li className="w-[16%]">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Рабочее время
                 </span>
               </li>
-              <li className="w-[30%] flex items-center justify-end ">
+              <li className="w-[32%] flex items-center justify-end ">
                 <button onClick={() => setOpenSelect(true)}
                   className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-sm  text-white not-italic font-AeonikProMedium">
@@ -296,12 +296,12 @@ export default function LocationList() {
                           </li>
                           <li className="w-[calc(100%-230px)] flex items-center justify-between">
                             <ul className="flex items-center w-full">
-                              <li className="md:w-[32%] h-full pr-5">
+                              <li className="md:w-[24%] h-full pr-10">
                                 <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
                                   {value?.region?.name_ru || "city"}, {value?.sub_region?.name_ru || "sub_region"}
                                 </span>
                               </li>
-                              <li className="md:w-[22%] h-full">
+                              <li className="md:w-[30%] h-full pr-10">
                                 <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
                                   {value?.address || "address"}
                                 </span>{" "}
@@ -320,7 +320,7 @@ export default function LocationList() {
                                   Одежда
                                 </button>
                               </li>
-                              <li className="md:w-[25%] h-full flex items-center justify-center text-center">
+                              <li className="md:w-[22%] h-full flex items-center justify-center text-center">
                                 <button
                                   onClick={() => goMapCity(value?.id)}
                                   className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
