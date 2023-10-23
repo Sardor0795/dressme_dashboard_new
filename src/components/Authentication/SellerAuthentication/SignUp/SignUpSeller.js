@@ -8,7 +8,8 @@ import { AiFillInfoCircle, AiOutlineEye, AiOutlineEyeInvisible } from "react-ico
 import { VscError } from "react-icons/vsc";
 import { Select, notification } from "antd";
 import { ArrowTopIcons, CreditCardNumber, DashboardList, DashboardUser, MenuCloseIcons, Star6Icon, SuccessIconsForMail, UserMailIcon } from "../../../../assets/icons";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const SignUpSeller = () => {
   // const { REACT_APP_BASE_URL: url } = process.env;
   const url = "https://api.dressme.uz/api/seller"
@@ -153,11 +154,17 @@ const SignUpSeller = () => {
         console.log(res, "SIGN-UP");
         if (res?.message && res?.errors) {
           setState({ ...state, errorGroup: res })
-          api.open({
-            message: `${res?.message}`,
-            duration: 3,
-            icon: <AiFillInfoCircle style={{ color: '#108ee9' }} />,
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
           });
+
         }
         else if (res?.message && !res?.errors) {
           setState({
@@ -174,20 +181,31 @@ const SignUpSeller = () => {
             openModalEmailMessage: true,
             errorGroup: "",
           });
-          api.open({
-            message: `${res?.message}`,
-            duration: 3,
-            icon: <VscError style={{ color: '#FF0000' }} />,
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
           });
+
         }
       },
 
       onError: (err) => {
         console.log(err, "Error");
-        api.open({
-          message: `${err?.message}`,
-          duration: 3,
-          icon: <VscError style={{ color: '#FF0000' }} />,
+        toast.error("Serverda xatolik", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
         });
       },
     })
@@ -214,8 +232,19 @@ const SignUpSeller = () => {
   return (
     <div className="max-w-[1280px] w-full flex justify-center items-center m-auto">
 
-      {contextHolder}
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <div className="w-full h-fit px-2 md:px-0">
         <div className="text-xl md:text-3xl font-medium mt-[20px] mb-[30px] text-center">
           Регистрация продавца

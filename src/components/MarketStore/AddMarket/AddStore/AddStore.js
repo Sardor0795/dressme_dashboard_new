@@ -117,7 +117,20 @@ function AddStore({ onClick }) {
     })
       .then((res) => res.json())
       .then(res => {
-        if (res?.shop) {
+        console.log(res, "AddMarket Store");
+        if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setErrorGroup(res?.errors)
+        } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -129,9 +142,6 @@ function AddStore({ onClick }) {
             theme: "light",
           });
           navigate('/store')
-        } else if (res?.errors && res?.message) {
-
-          setErrorGroup(res?.errors)
         }
       })
       .catch(err => {

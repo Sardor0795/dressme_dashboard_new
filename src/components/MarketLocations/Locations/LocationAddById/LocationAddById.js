@@ -143,8 +143,8 @@ export default function LocationAddById() {
       onError: (err) => {
         console.log(err, "err");
       },
-      // keepPreviousData: true,
-      // refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   )
 
@@ -180,7 +180,8 @@ export default function LocationAddById() {
       .then(res => {
         console.log(res, "AddLocationById");
 
-        if (res?.created_at) {
+        if (res?.errors && res?.message) {
+          setState({ ...state, errorGroup: res?.errors })
           toast.error(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -191,10 +192,18 @@ export default function LocationAddById() {
             progress: undefined,
             theme: "light",
           })
+        } else if (res?.message) {
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
           navigate('/locations-store')
-        } else if (res?.errors && res?.message) {
-          setState({ ...state, errorGroup: res?.errors })
-          console.log(res?.errors, "errorsGRoup");
         }
 
       })
