@@ -32,8 +32,8 @@ export default function LocationAddById() {
     assistantPhoneSecond: "",
     regionIdShops: "",
     subRegionIdShops: "",
-    workTimeFrom: "",
-    workTimeTo: "",
+    workTimeFrom: "09:00",
+    workTimeTo: "18:00",
     shopId: shopId,
     shopLatitude: "",
     shopLongitude: "",
@@ -73,6 +73,7 @@ export default function LocationAddById() {
   const assistantPhoneNumberSecond = secData5 + secData4;
 
   function CallBackYandex(childData) {
+    console.log(childData, "childData");
     setState({ ...state, shopCenterAddress: childData?.title, shopLatitude: childData?.center[0], shopLongitude: childData?.center[1] })
   }
 
@@ -182,16 +183,7 @@ export default function LocationAddById() {
 
         if (res?.errors && res?.message) {
           setState({ ...state, errorGroup: res?.errors })
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
+
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
