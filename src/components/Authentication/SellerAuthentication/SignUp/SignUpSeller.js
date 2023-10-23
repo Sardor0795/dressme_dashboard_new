@@ -148,13 +148,56 @@ const SignUpSeller = () => {
   })
 
   const onSubmit = () => {
+    if (state?.firstName && state?.lastName && state?.email && state?.password && state?.confirmPassword && sendMessagePhoneNumber && BankCard && state?.seller_type_id && state?.region && state?.sub_region) {
+      mutate({}, {
+        onSuccess: (res) => {
+          console.log(res, "SIGN-UP");
+          if (res?.message && res?.errors) {
+            setState({ ...state, errorGroup: res })
+            // toast.error(`${res?.message}`, {
+            //   position: "top-right",
+            //   autoClose: 5000,
+            //   hideProgressBar: false,
+            //   closeOnClick: true,
+            //   pauseOnHover: true,
+            //   draggable: true,
+            //   progress: undefined,
+            //   theme: "light",
+            // });
 
-    mutate({}, {
-      onSuccess: (res) => {
-        console.log(res, "SIGN-UP");
-        if (res?.message && res?.errors) {
-          setState({ ...state, errorGroup: res })
-          toast.error(`${res?.message}`, {
+          }
+          else if (res?.message && !res?.errors) {
+            setState({
+              ...state,
+              email: "",
+              password: "",
+              firstName: "",
+              lastName: "",
+              region: "",
+              sub_region: "",
+              seller_type_id: "",
+              cardNumber: "",
+              phone: "",
+              openModalEmailMessage: true,
+              errorGroup: "",
+            });
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+
+          }
+        },
+
+        onError: (err) => {
+          console.log(err, "Error");
+          toast.error("Serverda xatolik", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -164,51 +207,9 @@ const SignUpSeller = () => {
             progress: undefined,
             theme: "light",
           });
-
-        }
-        else if (res?.message && !res?.errors) {
-          setState({
-            ...state,
-            email: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            region: "",
-            sub_region: "",
-            seller_type_id: "",
-            cardNumber: "",
-            phone: "",
-            openModalEmailMessage: true,
-            errorGroup: "",
-          });
-          toast.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-
-        }
-      },
-
-      onError: (err) => {
-        console.log(err, "Error");
-        toast.error("Serverda xatolik", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      },
-    })
+        },
+      })
+    }
 
   }
 
@@ -652,7 +653,7 @@ const SignUpSeller = () => {
                   <div className="mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                     <div className="w-[30%] sm:w-[35%] md:w-[100px] h-[40px] xs:h-[42px] flex items-center justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                       <div
-                        className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                        className=" outline-none flex items-center	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
 
                       >{state.phoneCode}</div>
                     </div>

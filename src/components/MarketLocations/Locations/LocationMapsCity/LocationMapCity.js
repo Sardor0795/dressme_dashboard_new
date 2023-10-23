@@ -36,11 +36,11 @@ export default function LocationMapCity() {
     idAssistantMessenger: "",
     idAssistantName: "",
     idAssistantPhone: "",
-    idAssistantPhoneCode: "",
+    idAssistantPhoneCode: "998",
     idSecondAssistantMessegner: "",
     idSecondAssistantName: "",
     idSecondAssistantPhone: "",
-    idSecondAssistantPhoneCode: "",
+    idSecondAssistantPhoneCode: "998",
     idLangitudeById: "",
     idLatitudeById: "",
     idAssistantName: "",
@@ -175,6 +175,7 @@ export default function LocationMapCity() {
   },
     {
       onSuccess: (res) => {
+        console.log(res, "EditLocation");
         setState({
           ...state,
           idAddress: res?.location?.address,
@@ -184,16 +185,16 @@ export default function LocationMapCity() {
           idSecondAssistantMessegner: res?.location?.second_assistant_messenger,
           idSecondAssistantName: res?.location?.second_assistant_name,
           idLecondAssistantPhone: res?.location?.second_assistant_phone,
-          idLangitudeById: res?.location?.latitude,
-          idLatitudeById: res?.location?.longitude,
+          idLangitudeById: res?.location?.longitude,
+          idLatitudeById: res?.location?.latitude,
           idShopId: res?.location?.shop_id,
           idRegionId: res?.location?.region_id,
           idSupRregionId: res?.location?.sub_region_id,
           idWorkTimeFrom: res?.location?.work_time_from,
           idWorkTimeTo: res?.location?.work_time_to,
           // -
-          idAssistantPhoneCode: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(0, 3),
-          idAssistantPhone: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(3, 12),
+          idAssistantPhoneCode: res?.location?.assistant_phone && res?.location?.assistant_phone?.slice(0, 3),
+          idAssistantPhone: res?.location?.assistant_phone && res?.location?.assistant_phone?.slice(3, 12),
           // -
           idSecondAssistantPhoneCode: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(0, 3),
           idSecondAssistantPhone: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(3, 12),
@@ -207,7 +208,7 @@ export default function LocationMapCity() {
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
-          center: [parseFloat(res?.location?.longitude?.slice(0, 9)), parseFloat(res?.location?.latitude?.slice(0, 9))]
+          center: [parseFloat(res?.location?.latitude?.slice(0, 9)), parseFloat(res?.location?.longitude?.slice(0, 9))]
         })
 
         setStoreLocationById(res)
@@ -252,31 +253,31 @@ export default function LocationMapCity() {
       setActiveIndex(id)
     }
   }
-  console.log(forMaps?.center, "formaps.Center");
+  // console.log(forMaps?.center, "formaps.Center");
   // ----------phone Number----------1
-  let data = state?.idAssistantPhone.split("-");
-  let arr = data.join("");
-  let data1 = arr.split("(");
-  let arr1 = data1.join("");
-  let arr2 = arr1.split(")");
-  let data2 = arr2.join("");
-  let data3 = data2.split(" ")
-  let data4 = data3.join("")
-  let arr3 = state.idAssistantPhoneCode.split("+");
-  let data5 = arr3.join("");
+  let data = state?.idAssistantPhone?.split("-");
+  let arr = data?.join("");
+  let data1 = arr?.split("(");
+  let arr1 = data1?.join("");
+  let arr2 = arr1?.split(")");
+  let data2 = arr2?.join("");
+  let data3 = data2?.split(" ")
+  let data4 = data3?.join("")
+  let arr3 = state?.idAssistantPhoneCode?.split("+");
+  let data5 = arr3?.join("");
   const assistantPhoneNumberFirst = data5 + data4;
   // ----------phone Number----------2
 
   let secData = state?.idSecondAssistantPhone?.split("-");
-  let secArr = secData.join("");
-  let secData1 = secArr.split("(");
-  let secArr1 = secData1.join("");
-  let secArr2 = secArr1.split(")");
-  let secData2 = secArr2.join("");
-  let secData3 = secData2.split(" ")
-  let secData4 = secData3.join("")
+  let secArr = secData?.join("");
+  let secData1 = secArr?.split("(");
+  let secArr1 = secData1?.join("");
+  let secArr2 = secArr1?.split(")");
+  let secData2 = secArr2?.join("");
+  let secData3 = secData2?.split(" ")
+  let secData4 = secData3?.join("")
   let secArr3 = state?.idSecondAssistantPhoneCode?.split("+");
-  let secData5 = secArr3.join("");
+  let secData5 = secArr3?.join("");
   const assistantPhoneNumberSecond = secData5 + secData4;
 
   // -------------------------------------------Maps---------------------------------
@@ -361,9 +362,9 @@ export default function LocationMapCity() {
     form.append("work_time_from", state?.idWorkTimeFrom);
     form.append("work_time_to", state?.idWorkTimeTo);
     form.append("assistant_name", state?.idAssistantName);
-    form.append("second_assistant_name", state?.idSecondAssistantName);
     form.append("assistant_phone", assistantPhoneNumberFirst);
-    form.append("second_assistant_phone", assistantPhoneNumberSecond);
+    state?.idSecondAssistantName && form.append("second_assistant_name", state?.idSecondAssistantName);
+    state?.idSecondAssistantPhone && form.append("second_assistant_phone", assistantPhoneNumberSecond);
     state?.pictureBgFile1 && form.append("shop_photo_one", state?.pictureBgFile1);
     state?.picturelogoFile2 && form.append("shop_photo_two", state?.picturelogoFile2);
     state?.pictureLastFile3 && form.append("shop_photo_three", state?.pictureLastFile3);
@@ -757,13 +758,11 @@ export default function LocationMapCity() {
                 </div>
                 <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
                   <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                    <input
-                      className="w-[40px] outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
-                      type="text"
-                      value={"+" + state?.idAssistantPhoneCode || ""}
-                      // readOnly
-                      placeholder="998"
-                    />
+
+                    <div
+                      className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
+
+                    > {state?.idAssistantPhoneCode ? "+" + state?.idAssistantPhoneCode : "+998"}</div>
                   </div>
                   <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                     <InputMask
@@ -786,14 +785,11 @@ export default function LocationMapCity() {
                 </div>
 
                 <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
-                  <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                    <input
-                      className="w-[40px] outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
-                      type="text"
-                      value={"+" + state?.idSecondAssistantPhoneCode || ""}
-                      // readOnly
-                      placeholder="998"
-                    />
+                  <div className="ss:w-[35%]  md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+                    <div
+                      className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
+
+                    > {state?.idSecondAssistantPhoneCode ? "+" + state?.idSecondAssistantPhoneCode : "+998"}</div>
                   </div>
                   <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                     <InputMask

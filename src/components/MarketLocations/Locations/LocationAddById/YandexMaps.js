@@ -50,13 +50,15 @@ export default function YandexMapStore({ handleCallback }) {
   // submits
   const handleSubmit = () => {
     setIsSendedLocation(false);
-    // console.log({ title: state.title, center: mapRef.current.getCenter() });
+    console.log({ title: state.title, center: mapRef.current.getCenter() });
     handleCallback({ title: state.title, center: mapRef.current.getCenter() })
   };
 
   // reset state & search
   function handleReset() {
     setState({ ...initialState });
+    handleCallback({ title: "", center: [] })
+
     // setState({ ...initialState, title: "" });
     // setState({ title: "" });
     searchRef.current.value = "";
