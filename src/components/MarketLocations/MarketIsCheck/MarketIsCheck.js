@@ -10,12 +10,12 @@ export default function MarketIsCheck() {
     const [isLocation, setIsLocation] = useState("")
     const [isMarket, setIsMarket] = useState("")
     const [loading, setLoading] = useState(true)
-    const [example, setExample] = useState(false)
+    const [example, setExample] = useState()
 
     const url = "https://api.dressme.uz/api/seller"
 
 
-    const { isFetched, isLoading, isFetching } = useQuery(["shops index"], () => {
+    useQuery(["shops index"], () => {
         return fetch(`${url}/shops`, {
             method: "GET",
             headers: {
@@ -43,7 +43,7 @@ export default function MarketIsCheck() {
         }
     )
     // // ------------GET  Has Magazin ?-----------------
-    useQuery(["location index"], () => {
+    const { isFetched } = useQuery(["location index"], () => {
         return fetch(`${url}/shops/locations/index`, {
             method: "GET",
             headers: {
@@ -59,6 +59,7 @@ export default function MarketIsCheck() {
             onSuccess: (res) => {
                 if (res?.locations) {
                     setIsLocation(res)
+                    setExample(res?.locations_exist)
                     setLoading(false)
 
                 }
@@ -70,28 +71,28 @@ export default function MarketIsCheck() {
             refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
         }
     )
-    console.log("---------------------------");
-    console.log(isLoading, "isLoading");
-    console.log(isFetched, "isFetched");
-    console.log(isFetching, "isFetching");
-    console.log(isLocation, "isLocation");
-    console.log(isMarket, "isMarket");
+    // console.log("---------------------------");
+    // console.log(isLoading, "isLoading");
+    // console.log(isFetched, "isFetched");
+    // console.log(isFetching, "isFetching");
+    // console.log(isLocation, "isLocation");
+    // console.log(isMarket, "isMarket");
 
-
-    useEffect(() => {
-        isLocation?.locations?.data?.forEach(item => {
-            if (item?.shop_locations?.length >= 1) {
-                setExample(true)
-            }
-        })
-    },)
+    // console.log(isLocation?.locations_exist, 'isLocation');
+    // useEffect(() => {
+    //     isLocation?.locations?.data?.forEach(item => {
+    //         if (item?.shop_locations?.length >= 1) {
+    //             setExample(true)
+    //         }
+    //     })
+    // },)
     return (
         <div>
             {loading ? <LoadingForSeller /> :
                 <>  {
                     isMarket?.shops?.data?.length >= 1 ?
                         <>
-                            {example ? <LocationList /> : < NoLocations />}
+                            {isFetched ? <> {!example ? < NoLocations /> : <LocationList />} </> : <LoadingForSeller />}
                         </>
                         :
                         <div className="flex items-center h-[100vh] justify-center">
