@@ -155,9 +155,9 @@ export default function LocationList() {
         </div>
 
       </section>
-      {locationListId?.locations?.data?.length >= 1 &&
+      {
+        locationListId?.locations?.data?.length >= 1 &&
         <>
-
           <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
             <div>
               <MobileHumburgerMenu />
@@ -213,9 +213,54 @@ export default function LocationList() {
 
               </div>
             </div>
-          </div> </>}
+          </div> 
+        </>
+      }
+      
+      <div className="w-full hidden md:block mt-6">
+        <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
+          <li className="w-[70px] pl-4">
+            <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
+              No:
+            </span>
+          </li>
+          <li className="w-[200px] pl-4 mr-[60px]">
+            <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
+              Фото
+            </span>
+          </li>
+          <li className="w-[calc(100%-230px)]  flex items-center justify-between">
+            <ul className="flex items-center w-full">
+              <li className="w-[30%] ">
+                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                  Регион{" "}
+                </span>
+              </li>
+              <li className="w-[20%]">
+                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                  Адрес
+                </span>
+              </li>
+              <li className="w-[20%]">
+                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                  Рабочее время
+                </span>
+              </li>
+              <li className="w-[30%] flex items-center justify-end ">
+                <button onClick={() => setOpenSelect(true)}
+                  className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
+                  <span className="text-sm  text-white not-italic font-AeonikProMedium">
+                    Добавить локацию
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
       {
-        locationListId?.locations?.data?.map((item, index) => {
+        locationListId?.locations?.data?.map((item) => {
           return (
             <div>
               {item?.shop_locations?.length ? <div key={item?.id} className="md:mt-[16px] flex justify-between items-center">
@@ -233,49 +278,7 @@ export default function LocationList() {
               </div> : null}
 
               {/* Table */}
-              <div className="w-full h-fit">
-                {item?.shop_locations?.length ? <div className="w-full mb-[10px] hidden md:block">
-                  <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
-                    <li className="w-[70px] pl-4">
-                      <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
-                        No:
-                      </span>
-                    </li>
-                    <li className="w-[200px] pl-4 mr-[60px]">
-                      <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
-                        Фото
-                      </span>
-                    </li>
-                    <li className="w-[calc(100%-230px)]  flex items-center justify-between">
-                      <ul className="flex items-center w-full">
-                        <li className="w-[30%] ">
-                          <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                            Регион{" "}
-                          </span>
-                        </li>
-                        <li className="w-[20%]">
-                          <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                            Адрес
-                          </span>
-                        </li>
-                        <li className="w-[20%]">
-                          <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                            Рабочее время
-                          </span>
-                        </li>
-                        <li className="w-[30%] flex items-center justify-end ">
-                          <button onClick={() => setOpenSelect(true)}
-                            className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
-                            <span className="text-sm  text-white not-italic font-AeonikProMedium">
-                              Добавить локацию
-                            </span>
-                          </button>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div> : null}
-                {/* table product */}
+              <div className="w-full h-fit">               
                 {
                   item?.shop_locations?.length ? item?.shop_locations?.map((value, index) => {
                     return (
