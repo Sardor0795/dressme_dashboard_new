@@ -148,7 +148,6 @@ const SignUpSeller = () => {
   })
 
   const onSubmit = () => {
-    if (state?.firstName && state?.lastName && state?.email && state?.password && state?.confirmPassword && sendMessagePhoneNumber && BankCard && state?.seller_type_id && state?.region && state?.sub_region) {
       mutate({}, {
         onSuccess: (res) => {
           console.log(res, "SIGN-UP");
@@ -209,7 +208,6 @@ const SignUpSeller = () => {
           });
         },
       })
-    }
 
   }
 
