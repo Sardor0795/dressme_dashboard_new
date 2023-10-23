@@ -9,7 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 function AddStore({ onClick }) {
   const navigate = useNavigate();
-  const [magazinName, setMagazinName] = useState();
+  const [magazinName, setMagazinName] = useState(null);
+  const [shopMarketList, setShopMarketList] = useState(null);
 
   const [genderType, setGenderType] = useState();
   const [checkGender, setCheckGender] = useState(1);
@@ -56,6 +57,32 @@ function AddStore({ onClick }) {
 
 
   const url = "https://api.dressme.uz/api/seller"
+
+  // // ------------GET  Has Magazin ?-----------------
+  useQuery(
+    ["magazin-list"],
+    () => {
+      return fetch(`${url}/shops`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+      }).then((res) => res.json());
+    },
+    {
+      onSuccess: (res) => {
+        setShopMarketList(res?.shops);
+        // console.log(res?.shops?.data, "ShopMarketList");
+      },
+      onError: (err) => {
+        console.log(err, "err magazin");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
   // ------------GET METHOD Gender-type-----------------
   useQuery(["get genders"], () => {
     return fetch(`${url}/genders`, {
@@ -102,9 +129,9 @@ function AddStore({ onClick }) {
   )
   const sendFunc = () => {
     let form = new FormData()
-    form.append("name", magazinName);
+    magazinName && form.append("name", magazinName);
     form.append("logo_photo", fileBrand?.pictureLogoFile);
-    form.append("background_photo", file?.pictureBgFile);
+    file?.pictureBgFile && form.append("background_photo", file?.pictureBgFile);
     form.append("gender_id", checkGender);
     form.append("delivery_id", deliverCheck);
     return fetch(`${url}/shops/store`, {
@@ -119,16 +146,7 @@ function AddStore({ onClick }) {
       .then(res => {
         console.log(res, "AddMarket Store");
         if (res?.errors && res?.message) {
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+
           setErrorGroup(res?.errors)
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
@@ -141,7 +159,7 @@ function AddStore({ onClick }) {
             progress: undefined,
             theme: "light",
           });
-          navigate('/store')
+          navigate('/store/market-list')
         }
       })
       .catch(err => {
@@ -177,7 +195,7 @@ function AddStore({ onClick }) {
         theme="colored"
       />
 
-      <div className="md:hidden flex ">
+      {shopMarketList?.data?.length >= 1 && <div className="md:hidden flex ">
         <button
           onClick={() => {
             navigate(-1);
@@ -186,12 +204,12 @@ function AddStore({ onClick }) {
         >
           <GoBackIcons />
         </button>
-      </div>{" "}
+      </div>}
       <div className="text-center text-tableTextTitle2 text-xl mb-3 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
         {/* <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium"> */}
         Создать магазин
       </div>
-      <div className="mb-3">
+      {shopMarketList?.data?.length >= 1 && <div className="mb-3">
         <button
           onClick={() => {
             navigate(-1);
@@ -200,7 +218,7 @@ function AddStore({ onClick }) {
         >
           <AiOutlineLeft />
         </button>
-      </div>
+      </div>}
       <div className="relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
 
         <button className="h-full w-full flex items-center justify-center ">
@@ -251,12 +269,16 @@ function AddStore({ onClick }) {
               {
                 !fileBrand?.pictureLogoView && <>
                   <span className="flex items-center flex-col justify-center px-2">
-                    Выберите логотип
+                    <div className="flex items-center">
+                      Выберите логотип  <span className="ml-[5px] hidden md:block">
+                        <StarLabel />{" "}
+                      </span>
+                    </div>
                     <BgSelectSkin />
                   </span>
                   {
                     errorGroup?.logo_photo && !file?.pictureLogoView &&
-                    <p className="text-[#D50000] text-[12px] ll:text-[12px] md:text-sm ">
+                    <p className="text-[#D50000] text-[12px] ll:text-[12px] ">
                       {errorGroup?.logo_photo}
                     </p>
                   }
@@ -298,11 +320,12 @@ function AddStore({ onClick }) {
             </div>
             <div className="w-full flex items-center justify-end">
               {
-                errorGroup?.delivery_id && !magazinName &&
+                errorGroup?.name && !magazinName &&
                 <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
-                  {errorGroup?.delivery_id}
+                  {errorGroup?.name}
                 </p>
-              }</div>
+              }
+            </div>
             <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] my-5">
               <label
                 htmlFor="shopName"
@@ -316,7 +339,7 @@ function AddStore({ onClick }) {
               <div className="w-[70%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                 {genderType?.map((data) => {
                   return (
-                    <>
+                    <div key={data?.id}>
 
                       <input
                         type="radio"
@@ -330,7 +353,7 @@ function AddStore({ onClick }) {
                       <label htmlFor={data?.id} className={`w-1/3 cursor-pointer md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
                         <span>{data?.name_ru}</span>
                       </label>
-                    </>
+                    </div>
                   );
                 })}
 

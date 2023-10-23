@@ -34,6 +34,8 @@ const MarketList = () => {
       onError: (err) => {
         console.log(err, "err magazin");
       },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   );
   // ------------GET METHOD delivery-method-----------------
@@ -129,7 +131,7 @@ const MarketList = () => {
                 {
                   deliverList?.filter(e => e.id == data?.delivery_id)?.map(item => {
                     return (
-                      <span className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
+                      <span key={item?.id} className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
                         {item?.name_ru}
                       </span>
 
