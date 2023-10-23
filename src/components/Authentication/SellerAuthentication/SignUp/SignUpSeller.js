@@ -409,7 +409,7 @@ const SignUpSeller = () => {
                                   {data?.name_ru}
                                 </span>
                                 <span
-                                  className={`${activeIndex == data?.id ? "rotate-[0deg]" : "rotate-[180deg]"} `}
+                                  className={`${data?.id == activeIndex ? "rotate-[0deg]" : "rotate-[180deg]"} `}
                                 >
                                   <ArrowTopIcons colors={"#a1a1a1"} />
                                 </span>
@@ -417,7 +417,7 @@ const SignUpSeller = () => {
 
                               <div
                                 className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id ? "openAccardion" : "CloseAccardion"} `}
+                             ${data?.id == activeIndex ? "openAccardion" : "CloseAccardion"} `}
                               >
                                 {data?.sub_regions?.map((item) => {
                                   return (
@@ -429,7 +429,7 @@ const SignUpSeller = () => {
                                         <input
                                           type="radio"
                                           id={item?.name_ru}
-                                          name="type_work"
+                                          name="select_in_city"
                                           value={item?.region_id}
                                           checked={parseFloat(item?.id) === parseFloat(state?.sub_region)}
                                           className="border border-borderColor  cursor-pointer  flex items-center justify-center"
@@ -480,7 +480,7 @@ const SignUpSeller = () => {
                           return <span key={item?.id} className="flex items-center text-[#000] text-[14px] sm:text-base">
                             {item?.name_ru},
                             {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {
-                              return <span className="ml-1">{item?.name_ru}</span>
+                              return <span key={item?.id} className="ml-1">{item?.name_ru}</span>
                             })}
                           </span>
                         })
@@ -622,12 +622,10 @@ const SignUpSeller = () => {
                   </span>
                   <div className="mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                     <div className="w-[30%] sm:w-[35%] md:w-[100px] h-[40px] xs:h-[42px] flex items-center justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
-                      <input
+                      <div
                         className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                        type="text"
-                        value={state.phoneCode}
-                      // readOnly
-                      />
+
+                      >{state.phoneCode}</div>
                     </div>
                     <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-[42px] overflow-hidden">
                       <InputMask
