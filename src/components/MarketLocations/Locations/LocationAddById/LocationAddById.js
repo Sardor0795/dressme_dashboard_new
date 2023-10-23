@@ -161,9 +161,9 @@ export default function LocationAddById() {
     form.append("work_time_from", state?.workTimeFrom);
     form.append("work_time_to", state?.workTimeTo);
     form.append("assistant_name", state?.assistantNameFirst);
-    form.append("second_assistant_name", state?.assistantNameSecond);
     form.append("assistant_phone", assistantPhoneNumberFirst);
-    form.append("second_assistant_phone", assistantPhoneNumberSecond);
+    state?.assistantNameSecond && form.append("second_assistant_name", state?.assistantNameSecond);
+    state?.assistantPhoneSecond && form.append("second_assistant_phone", assistantPhoneNumberSecond);
     locationImgFirst?.pictureBgFile1 && form.append("shop_photo_one", locationImgFirst?.pictureBgFile1);
     locationImgSecond?.picturelogoFile2 && form.append("shop_photo_two", locationImgSecond?.picturelogoFile2);
     locationImgThird?.pictureLastFile3 && form.append("shop_photo_three", locationImgThird?.pictureLastFile3);
@@ -406,12 +406,12 @@ export default function LocationAddById() {
                   onChange={(e) => setState({ ...state, assistantNameSecond: e.target.value })}
                   className="w-full outline-none text-[12px] md:text-[14px]  h-[32px] md:h-[42px]  border border-borderColor rounded md:rounded-lg font-AeonikProRegular px-2"
                 />
-                {/* {
-                  state?.errorGroup?.assistant_name &&
+                {
+                  state?.errorGroup?.second_assistant_name && !state?.assistantNameSecond &&
                   <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
-                    {state?.errorGroup?.assistant_name}
+                    {state?.errorGroup?.second_assistant_name}
                   </p>
-                } */}
+                }
               </div>
             </label>
             <div className="w-full md:w-[31%] xs:w-[48%]  ">
@@ -454,7 +454,7 @@ export default function LocationAddById() {
                     min="00:00"
                     max="23:59"
                     pattern="[0-2][0-9]:[0-5][0-9]"
-                    value={state?.workTimeTo || "19:00"}
+                    value={state?.workTimeTo || "18:00"}
                     onChange={(e) => setState({ ...state, workTimeTo: e.target.value })}
                     required />
                   {
@@ -536,6 +536,12 @@ export default function LocationAddById() {
                   </span>
                 </div>
               </div>
+              {
+                state?.errorGroup?.second_assistant_phone && !state?.assistantPhoneSecond &&
+                <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                  {state?.errorGroup?.second_assistant_phone}
+                </p>
+              }
             </label>
 
 
