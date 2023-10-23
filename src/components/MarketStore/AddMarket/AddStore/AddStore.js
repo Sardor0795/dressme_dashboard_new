@@ -218,12 +218,12 @@ function AddStore({ onClick }) {
             {
               !file?.pictureBgView && <>
                 <span className="flex items-center flex-col justify-center">
-                  выберите облошка
+                  Выберите облошка
                   <BgSelectSkin />
                 </span>
                 {
                   errorGroup?.background_photo && !file?.pictureBgView &&
-                  <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                  <p className="text-[#D50000] text-[12px] ll:text-[12px] md:text-base">
                     {errorGroup?.background_photo}
                   </p>
                 }
@@ -251,12 +251,12 @@ function AddStore({ onClick }) {
               {
                 !fileBrand?.pictureLogoView && <>
                   <span className="flex items-center flex-col justify-center px-2">
-                    Выберите Логотип
+                    Выберите логотип
                     <BgSelectSkin />
                   </span>
                   {
                     errorGroup?.logo_photo && !file?.pictureLogoView &&
-                    <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                    <p className="text-[#D50000] text-[12px] ll:text-[12px] md:text-sm ">
                       {errorGroup?.logo_photo}
                     </p>
                   }
