@@ -278,20 +278,20 @@ export default function LocationList() {
               </div> : null}
 
               {/* Table */}
-              <div className="w-full h-fit">
+              <div className="w-full h-fit border md:rounded-xl md:overflow-hidden">
                 {
                   item?.shop_locations?.length ? item?.shop_locations?.map((value, index) => {
                     return (
-                      <div key={value?.id} className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
+                      <div key={value?.id} className="w-full h-full flex flex-col md:rounded-none overflow-auto rounded-xl">
                         <ul
                           key={value?.id}
-                          className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor"
+                          className="w-full last:border-b-0 md:px-0 md:py-3  overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor"
                         >
                           <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
                             {index + 1}
                           </li>
-                          <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
-                            <img className="w-[100%] h-[100%] rounded-lg object-top	object-cover"
+                          <li className="w-[200px] h-[100px] flex items-center justify-center mr-[60px] rounded-lg overflow-hidden border">
+                            <img className="w-[100%] h-[100%] object-contain rounded-lg"
                               src={value?.url_image_path_one} alt="" />
                           </li>
                           <li className="w-[calc(100%-230px)] flex items-center justify-between">

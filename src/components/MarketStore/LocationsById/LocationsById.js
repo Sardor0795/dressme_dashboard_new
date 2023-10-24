@@ -244,9 +244,9 @@ export default function LocationsByIdShow() {
                           <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
                             {data?.id}
                           </li>
-                          <li className="w-[200px] h-[100px] pl-4 flex items-center mr-[60px] rounded-lg overflow-hidden">
+                          <li className="w-[200px] h-[100px] flex items-center mr-[60px] rounded-lg overflow-hidden border">
                             <img
-                              className="w-[100%] h-[100%] rounded-lg object-top	object-cover"
+                              className="w-[100%] h-[100%] object-contain rounded-lg object-top"
                               src={data?.url_image_path_one}
                               alt=""
                             />
