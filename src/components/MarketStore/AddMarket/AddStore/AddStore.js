@@ -270,8 +270,8 @@ function AddStore({ onClick }) {
                 !fileBrand?.pictureLogoView && <>
                   <span className="flex items-center flex-col justify-center px-2">
                     <div className="flex items-center">
-                      Выберите логотип  <span className="ml-[5px] hidden md:block">
-                        <StarLabel />{" "}
+                      Выберите логотип  <span className="hidden md:block">
+                        <StarLabel />
                       </span>
                     </div>
                     <BgSelectSkin />
@@ -339,7 +339,7 @@ function AddStore({ onClick }) {
               <div className="w-[70%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                 {genderType?.map((data) => {
                   return (
-                    <div key={data?.id}>
+                    <div key={data?.id} className="md:w-1/3">
 
                       <input
                         type="radio"
