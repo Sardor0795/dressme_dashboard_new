@@ -15,14 +15,14 @@ import ProductsPageTwo from "../components/Products/AddingProductPageTwo/Product
 import NoLocationProduct from "../components/Products/NoLocationsProduct/NoLocationsProduct";
 import ProductLocationsList from "../components/Products/ProductLocationsList/ProductLocationsList";
 // --------------------------MarketLocations--------------
-// import NoLocations from "../components/MarketLocations/NoLocations/NoLocations";
-// import MarketLocations from "../components/MarketLocations";
-// import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
-// import LocationMapCity from "../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity";
-// import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
-// import ProductEditDetailLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation";
-// import ProductEditTitleLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation";
-// import MarketIsCheck from "../components/MarketLocations/MarketIsCheck/MarketIsCheck";
+import NoLocations from "../components/MarketLocations/NoLocations/NoLocations";
+import MarketLocations from "../components/MarketLocations";
+import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
+import LocationMapCity from "../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity";
+import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
+import ProductEditDetailLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation";
+import ProductEditTitleLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation";
+import MarketIsCheck from "../components/MarketLocations/MarketIsCheck/MarketIsCheck";
 // -------------------Reviews1----------
 import Reviews1 from "../components/Reviews1";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
@@ -43,13 +43,13 @@ import LoadingForSeller from "../components/Loading/LoadingFor";
 import LocationsByIdShow from "../components/MarketStore/LocationsById/LocationsById";
 
 // -------------------------Location---------------------
-const MarketLocations = React.lazy(() => import("../components/MarketLocations"));
-const LocationList = React.lazy(() => import("../components/MarketLocations/Locations/LocationList/LocationList"));
-const LocationMapCity = React.lazy(() => import("../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity"));
-const LocationClothesCity = React.lazy(() => import("../components/MarketLocations/Locations/LocationClothes/LocationClothesCity"));
-const ProductEditDetailLocation = React.lazy(() => import("../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation"));
-const ProductEditTitleLocation = React.lazy(() => import("../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation"));
-const MarketIsCheck = React.lazy(() => import("../components/MarketLocations/MarketIsCheck/MarketIsCheck"));
+// const MarketLocations = React.lazy(() => import("../components/MarketLocations"));
+// const LocationList = React.lazy(() => import("../components/MarketLocations/Locations/LocationList/LocationList"));
+// const LocationMapCity = React.lazy(() => import("../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity"));
+// const LocationClothesCity = React.lazy(() => import("../components/MarketLocations/Locations/LocationClothes/LocationClothesCity"));
+// const ProductEditDetailLocation = React.lazy(() => import("../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation"));
+// const ProductEditTitleLocation = React.lazy(() => import("../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation"));
+// const MarketIsCheck = React.lazy(() => import("../components/MarketLocations/MarketIsCheck/MarketIsCheck"));
 
 export default function RouterList() {
 
@@ -96,129 +96,23 @@ export default function RouterList() {
           <Route path="/store/market-list" element={<MyMarket />} />
           <Route path="/store/location-add" element={<AddLocation />} />
           <Route path="/store/market-list/:id" element={<MarketEdit />} />
-          <Route path="/store/locations/shop/:id" element={<LocationsByIdShow/>} />
+          <Route path="/store/locations/shop/:id" element={<LocationsByIdShow />} />
         </Route>
 
         {/* ---------------------<Locations>------------------------- */}
-        {/* <Route
-          path="/"
-          element={
-            <Suspense
-              fallback={
-                <div>
-                  <SkeletonHomeIndex />
-                </div>
-              }
-            >
-              <HomeIndex />
-            </Suspense>
-          }
-        /> */}
 
-        <Route path="/locations-store" element={
-          <Suspense
-            fallback={
-              <div>
-                <LoadingForSeller />
-              </div>
-            }
-          >
-            <MarketLocations />
-          </Suspense>
-        }>
-
-          <Route index element={
-            <Suspense
-              fallback={
-                <div>
-                  <LoadingForSeller />
-                </div>
-              }
-            >
-              <MarketIsCheck />
-            </Suspense>
-          } />
-
-          <Route path="/locations-store/:id" element={
-            <Suspense
-              fallback={
-                <div>
-                  <LoadingForSeller />
-                </div>
-              }
-            >
-              <LocationAddById />
-            </Suspense>
-          } />
-          <Route path="/locations-store/list" element={
-            <Suspense
-              fallback={
-                <div>
-                  <LoadingForSeller />
-                </div>
-              }
-            >
-              <LocationList />
-            </Suspense>
-          } />
-          <Route
-            path="/locations-store/city/:id"
-            element={
-              <Suspense
-                fallback={
-                  <div>
-                    <LoadingForSeller />
-                  </div>
-                }
-              >
-                <LocationMapCity />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/locations-store/wears/:id"
-            element={
-              <Suspense
-                fallback={
-                  <div>
-                    <LoadingForSeller />
-                  </div>
-                }
-              >
-                <LocationClothesCity />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/locations-store/edit-detail/:id"
-            element={
-              <Suspense
-                fallback={
-                  <div>
-                    <LoadingForSeller />
-                  </div>
-                }
-              >
-                <ProductEditDetailLocation />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/locations-store/edit-title/:id"
-            element={
-              <Suspense
-                fallback={
-                  <div>
-                    <LoadingForSeller />
-                  </div>
-                }
-              >
-                <ProductEditTitleLocation />
-              </Suspense>
-            }
-          />
+        <Route path="/locations-store" element={<MarketStore />}>
+          <Route index element={<MarketIsCheck />} />
+          <Route path="/locations-store/:id" element={<LocationAddById />} />
+          <Route path="/locations-store/list" element={<LocationList />} />
+          <Route path="/locations-store/city/:id" element={<LocationMapCity />} />
+          <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
+          {/* <Route path="/locations-store/wears/:id" element={<MarketLocations />} /> */}
+          <Route path="/locations-store/edit-detail/:id" element={<ProductEditDetailLocation />} />
+          <Route path="/locations-store/edit-title/:id" element={<ProductEditTitleLocation />} />
         </Route>
-        {/* to={"/store/location-add"} */}
+
+
 
         {/* ---------------------<LocationsProduct>------------------------- */}
         <Route path="/products" element={<Products />}>
