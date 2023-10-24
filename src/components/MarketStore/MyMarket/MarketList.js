@@ -92,7 +92,7 @@ const MarketList = () => {
                   />
                 </figure>
                 <div className="flex flex-col ll:ml-8">
-                  <p className="text-[13px] ls:text-[14px] xs:text-xl  xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
+                  <p className="text-[13px] w-[350px] ls:text-[14px] xs:text-xl  xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
                     {data?.name || null}
                   </p>
                   <div className="">
