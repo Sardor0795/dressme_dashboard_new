@@ -20,7 +20,7 @@ const WatherMobileDropUp = ({ onClick, title }) => {
       </section>
 
       <section className="w-full h-[380px] px-4 flex flex-col items-center">
-        <action className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
+        <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
           <form className='w-full flex flex-col items-center'>
 
             <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
@@ -37,13 +37,13 @@ const WatherMobileDropUp = ({ onClick, title }) => {
               })}
             </div>
           </form>
-        </action>
-        <action className="w-full flex items-center justify-between gap-x-3 mb-10">
+        </div>
+        <div className="w-full flex items-center justify-between gap-x-3 mb-10">
           <button
             onClick={onClick}
             className="w-[45%] h-[38px] text-base font-AeonikProMedium bg-white text-textBlueColor border border-textBlueColor rounded-md active:scale-95">Отмена</button>
           <button className="w-[55%] h-[38px] text-base font-AeonikProMedium bg-textBlueColor text-white border border-textBlueColor rounded-md active:scale-95">Готово</button>
-        </action>
+        </div>
       </section>
     </div>
   );
