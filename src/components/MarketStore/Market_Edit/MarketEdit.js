@@ -215,7 +215,7 @@ function MarketEdit() {
 
 
   const goLocation = (id) => {
-    navigate(`/locations-store`);
+    navigate(`/store/locations/shop/:${id}`);
   };
 
   useEffect(() => {
@@ -335,7 +335,7 @@ function MarketEdit() {
       </div>
       <div className="w-full flex items-center justify-end mb-[24px] md:mb-20 mt-4">
         <div className="flex items-center">
-          <button onClick={goLocation} className="flex items-end gap-x-2">
+          <button onClick={() => goLocation(state?.marketId)} className="flex items-end gap-x-2">
             <span>
               <LocationIcon colors="#007dca" />
             </span>
