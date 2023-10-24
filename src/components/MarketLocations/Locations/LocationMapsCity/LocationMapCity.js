@@ -116,7 +116,9 @@ export default function LocationMapCity() {
   });
 
   const onLocaTionDelete = () => {
-    mutate({}, {
+    mutate(
+      {}, 
+      {
       onSuccess: res => {
         console.log(res, "location delte");
         toast.warn(`${res?.message}`, {
@@ -130,11 +132,11 @@ export default function LocationMapCity() {
           theme: "light",
         });
         // if (res?.message) {
-        //   navigate("/locations-store")
+          navigate("/locations-store")
         // }
       },
       onError: err => {
-
+        console.log(err);
       }
     })
   }
@@ -508,7 +510,7 @@ export default function LocationMapCity() {
 
                         <div
                           className={clsx(["titleBox"], {
-                            ["titleBox_show"]: Boolean(forMaps.title.length),
+                            ["titleBox_show"]:Boolean(forMaps.title.length),
                           })}
                         >
                           <p className=" w-[90%] "> {forMaps.title} </p>
