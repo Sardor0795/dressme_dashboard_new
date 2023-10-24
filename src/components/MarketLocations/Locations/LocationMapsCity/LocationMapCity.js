@@ -698,9 +698,7 @@ export default function LocationMapCity() {
               <label className="w-full md:w-[31%] xs:w-[48%]  ">
                 <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
                   Имя второго администратора{" "}
-                  <span className="ml-[5px]">
-                    <StarLabel />
-                  </span>
+
                 </div>
                 <div className="w-full flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
                   <input
@@ -754,7 +752,7 @@ export default function LocationMapCity() {
               <label className="w-full md:w-[31%] xs:w-[48%]   ">
                 <div className="text-[12px] md:text-base flex items-center mb-[10px]">
                   Номер администратора
-                  <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+                  <span className="ml-[5px]"><StarLabel /></span>
                 </div>
                 <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
                   <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
