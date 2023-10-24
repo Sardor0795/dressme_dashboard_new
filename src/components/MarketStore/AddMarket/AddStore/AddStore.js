@@ -269,8 +269,8 @@ function AddStore({ onClick }) {
               {
                 !fileBrand?.pictureLogoView && <>
                   <span className="flex items-center flex-col justify-center px-2">
-                    <div className="flex items-center">
-                      Выберите логотип  <span className="hidden md:block">
+                    <div className="flex items-center md:w-[85px]">Выберите логотип
+                      <span className="hidden md:block">
                         <StarLabel />
                       </span>
                     </div>
