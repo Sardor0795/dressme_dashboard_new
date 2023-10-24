@@ -43,7 +43,7 @@ export default function NoLocations() {
   }
 
   return (
-    <div className="w-full h-[100vh]  flex items-center justify-center">
+    <div className="w-full h-[100vh]  flex items-center justify-center md:px-10 ">
       {openSelect ? (
         <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
           <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">

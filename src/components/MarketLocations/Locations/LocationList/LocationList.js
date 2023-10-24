@@ -100,9 +100,9 @@ export default function LocationList() {
   // console.log(isFetching, "isFetching");
   // console.log(isError, "isError");
   // console.log(shopsList, "shopsList");
-  // console.log(locationListId, "locationListId");
+  // console.log(locationListId, "locationListId"); red
   return (
-    <div className={`w-full h-full  px-4 md:px-0 `}>
+    <div className={`w-full h-full  px-4  md:px-10 `}>
       <div
         className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"}`}
         onClick={() => setOpenSelect(false)}
@@ -213,11 +213,11 @@ export default function LocationList() {
 
               </div>
             </div>
-          </div> 
+          </div>
         </>
       }
-      
-      <div className="w-full hidden md:block mt-6">
+
+      {locationListId?.locations?.data?.length >= 1 && <div className="w-full hidden md:block mt-6">
         <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
           <li className="w-[70px] pl-4">
             <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
@@ -257,7 +257,7 @@ export default function LocationList() {
             </ul>
           </li>
         </ul>
-      </div>
+      </div>}
 
       {
         locationListId?.locations?.data?.map((item) => {
@@ -278,7 +278,7 @@ export default function LocationList() {
               </div> : null}
 
               {/* Table */}
-              <div className="w-full h-fit">               
+              <div className="w-full h-fit">
                 {
                   item?.shop_locations?.length ? item?.shop_locations?.map((value, index) => {
                     return (

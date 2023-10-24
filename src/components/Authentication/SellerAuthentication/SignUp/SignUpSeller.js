@@ -148,55 +148,39 @@ const SignUpSeller = () => {
   })
 
   const onSubmit = () => {
-      mutate({}, {
-        onSuccess: (res) => {
-          console.log(res, "SIGN-UP");
-          if (res?.message && res?.errors) {
-            setState({ ...state, errorGroup: res })
-            // toast.error(`${res?.message}`, {
-            //   position: "top-right",
-            //   autoClose: 5000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            // });
+    mutate({}, {
+      onSuccess: (res) => {
+        console.log(res, "SIGN-UP");
+        if (res?.message && res?.errors) {
+          setState({ ...state, errorGroup: res })
+          // toast.error(`${res?.message}`, {
+          //   position: "top-right",
+          //   autoClose: 5000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "light",
+          // });
 
-          }
-          else if (res?.message && !res?.errors) {
-            setState({
-              ...state,
-              email: "",
-              password: "",
-              firstName: "",
-              lastName: "",
-              region: "",
-              sub_region: "",
-              seller_type_id: "",
-              cardNumber: "",
-              phone: "",
-              openModalEmailMessage: true,
-              errorGroup: "",
-            });
-            toast.success(`${res?.message}`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-
-          }
-        },
-
-        onError: (err) => {
-          console.log(err, "Error");
-          toast.error("Serverda xatolik", {
+        }
+        else if (res?.message && !res?.errors) {
+          setState({
+            ...state,
+            email: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            region: "",
+            sub_region: "",
+            seller_type_id: "",
+            cardNumber: "",
+            phone: "",
+            openModalEmailMessage: true,
+            errorGroup: "",
+          });
+          toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -206,8 +190,24 @@ const SignUpSeller = () => {
             progress: undefined,
             theme: "light",
           });
-        },
-      })
+
+        }
+      },
+
+      onError: (err) => {
+        console.log(err, "Error");
+        toast.error("Serverda xatolik", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      },
+    })
 
   }
 
@@ -635,7 +635,7 @@ const SignUpSeller = () => {
                     </span>{" "}
                   </div>
                   {
-                    state?.errorGroup?.errors?.email && !state?.isEmailMessage &&
+                    state?.errorGroup?.errors?.email &&
                     <p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
                       {state?.errorGroup?.errors?.email}
                     </p>
