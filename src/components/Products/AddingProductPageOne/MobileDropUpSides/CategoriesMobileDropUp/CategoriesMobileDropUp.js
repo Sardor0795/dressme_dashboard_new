@@ -22,7 +22,7 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
         </button>
       </section>
       <section className="w-full h-[500px] px-4 flex flex-col flex-nowrap">
-        <action className="w-full flex flex-row flex-wrap gap-y-[10px] gap-x-[10px] mb-4">
+        <div className="w-full flex flex-row flex-wrap gap-y-[10px] gap-x-[10px] mb-4">
           {categoriesList.map((data) => {
             return (
               <button key={data?.id} className="w-fit h-fit focus:bg-textBlueColor focus:text-white p-[10px] border border-textBlueColor text-textBlueColor rounded-lg text-[13px] font-AeonikProMedium">
@@ -30,8 +30,8 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               </button>
             );
           })}
-        </action>
-        <action className="w-full h-[400px] overflow-auto VerticelScroll flex flex-col items-center  px-4 border border-borderColor rounded-xl p-5">
+        </div>
+        <div className="w-full h-[400px] overflow-auto VerticelScroll flex flex-col items-center  px-4 border border-borderColor rounded-xl p-5">
           {/* 1 */}
           <div className="w-full flex items-center justify-between mb-[15px] gap-x-[10px]">
             <div className="w-[40%] flex flex-col">
@@ -199,13 +199,13 @@ const CategoriesMobileDropUp = ({ onClick, title }) => {
               </div>
             </div>
           </div>
-        </action>
-        <action
+        </div>
+        <div
           onClick={onClick}
           className="w-full flex items-center justify-between gap-x-3 my-10">
           <button className="w-[45%] h-[38px] text-base font-AeonikProMedium border border-textBlueColor rounded-md text-textBlueColor active:scale-95">Отмена</button>
           <button className="w-[55%] h-[38px] active:scale-95 text-base font-AeonikProMedium bg-textBlueColor text-white  focus:bg-textBlueColor focus:text-white border border-textBlueColor rounded-md ">Готово</button>
-        </action>
+        </div>
       </section>
     </div>
   );
