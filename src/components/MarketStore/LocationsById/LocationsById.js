@@ -73,6 +73,8 @@ export default function LocationsByIdShow() {
 
   const navigate = useNavigate();
   const goMapCity = (id) => {
+    // locations - store / city /: 3
+    // console.log(id, "testId")
     navigate(`/locations-store/city/:${id}`);
   };
   const goMapWear = (id) => {
@@ -92,7 +94,7 @@ export default function LocationsByIdShow() {
   // useEffect(() => {
   //   showPickerHandle();
   // }, [showPicker]);
-  console.log(loading, "loading", '\n', locationIsCheck, "locationIsCheck");
+  // console.log(loading, "loading", '\n', locationIsCheck, "locationIsCheck");
   return (
     <div>
       {
@@ -278,7 +280,7 @@ export default function LocationsByIdShow() {
                             </li>
                             <li className="md:w-[25%] h-full flex items-center justify-center text-center">
                               <button
-                                onClick={() => goMapCity(data?.region?.name_ru)}
+                                onClick={() => goMapCity(data?.id)}
                                 className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                               >
                                 {/* {data?.showMore} */}
@@ -378,7 +380,7 @@ export default function LocationsByIdShow() {
                               {data?.wearLink}
                             </button>
                             <button
-                              onClick={() => goMapCity(data?.region?.name_ru)}
+                              onClick={() => goMapCity(data?.id)}
                               className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               {data?.showMore}
