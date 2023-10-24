@@ -7,8 +7,17 @@ import { Link } from 'react-router-dom'
 import LoadingForSeller from '../../Loading/LoadingFor'
 
 export default function MarketIsCheck() {
+
+    // const [state, setState] = useState({
+    //     isLocation: "",
+    //     isMarket: "",
+    //     Loading: "",
+    //     isCheckLocation: ""
+    // })
     const [isLocation, setIsLocation] = useState("")
     const [isMarket, setIsMarket] = useState("")
+    const [isMarketCheck, setIsMarketCheck] = useState(false)
+
     const [loading, setLoading] = useState(true)
     const [example, setExample] = useState()
 
@@ -30,6 +39,7 @@ export default function MarketIsCheck() {
         {
             onSuccess: (res) => {
                 if (res?.shops) {
+                    setIsMarketCheck(true)
                     setIsMarket(res)
                     setLoading(false)
                     // console.log(res, "magazin bormi");
@@ -43,7 +53,7 @@ export default function MarketIsCheck() {
         }
     )
     // // ------------GET  Has Magazin ?-----------------
-    const { isFetched } = useQuery(["location index"], () => {
+    const { isFetched, isFetching } = useQuery(["location index"], () => {
         return fetch(`${url}/shops/locations/index`, {
             method: "GET",
             headers: {
@@ -88,9 +98,9 @@ export default function MarketIsCheck() {
     // },)
     return (
         <div>
-            {loading || isLoading ? <LoadingForSeller /> :
+            {loading || isLoading || !isMarketCheck ? <LoadingForSeller /> :
                 <>  {
-                    isMarket?.shops?.data?.length >= 1 ? <>{isFetched ? <> {!example ? < NoLocations /> : <LocationList />} </> : <LoadingForSeller />}</>
+                    isMarketCheck ? <>{isFetched && isLocation?.locations?.data ? <> {example ? <LocationList /> : < NoLocations />} </> : <LoadingForSeller />}</>
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link
@@ -103,6 +113,24 @@ export default function MarketIsCheck() {
                 }
                 </>
             }
+            {/* {loading || isLoading || !isFetched ? <LoadingForSeller /> :
+                <>  {
+                    isMarketCheck &&
+                    <div className="flex items-center h-[100vh] justify-center">
+                        <Link
+                            to="/store"
+                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                        >
+                            Сначала создайте магазин!
+                        </Link>
+                    </div >
+                }
+                </>
+            }
+            <>
+                {isFetched && <> {example ? <LocationList /> : < NoLocations />} </>
+                }</> */}
+
         </div >
     )
 }
