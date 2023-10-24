@@ -6,8 +6,10 @@ import {
   CalendarIcons,
   DownloadIcon,
   InputCheck,
+  InputCheckedTrueIcons,
   LineIcon,
   LoaderIcon,
+  MenuCloseIcons,
   SearchIcon,
   StarLabel,
 } from "../../../../assets/icons";
@@ -21,8 +23,7 @@ import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import AllSizeListForWear from "../../../../hook/AllSizeListForWear/AllSizeListForWear";
-
-const { RangePicker } = DatePicker;
+import { FaRandom } from "react-icons/fa";
 
 const AddingProduct = () => {
 
@@ -33,6 +34,8 @@ const AddingProduct = () => {
   const [openWeather, setOpenWeather] = useState(false); // Weather
   const [openGender, setOpenGender] = useState(false); // Genders
   const [openTypes, setOpenTypes] = useState(false); // Type
+  const [showColor, setShowColor] = useState(false); // Color
+
 
   const toggleColors = React.useCallback(() => setOpenColors(false), []); // Colors
   const toggleCategories = React.useCallback(
@@ -1032,20 +1035,184 @@ const AddingProduct = () => {
     </div>
   );
 
-  const changeColor = [
-    { id: 1, data: 1, icons: InputCheck, action: false, colors: "bg-black" },
-    { id: 2, data: 2, icons: InputCheck, action: false, colors: "bg-white" },
-    { id: 3, data: 3, icons: InputCheck, action: false, colors: "bg-zinc-500" },
-    { id: 4, data: 4, icons: InputCheck, action: false, colors: "bg-purple-500" },
-    { id: 5, data: 5, icons: InputCheck, action: false, colors: "bg-sky-600" },
-    { id: 6, data: 6, icons: InputCheck, action: false, colors: "bg-amber-400 " },
-    { id: 7, data: 7, icons: InputCheck, action: false, colors: "bg-green-700 " },
-    { id: 8, data: 8, icons: InputCheck, action: false, colors: "bg-amber-600 " },
-    { id: 9, data: 9, icons: InputCheck, action: false, colors: "bg-red-700  " },
-    // { id: 10, data: 10, icons: InputCheck, action: false, colors: "bg-purple-800 " },
-    // { id: 11, data: 11, icons: InputCheck, action: false, colors: "bg-blue-900 " },
-    // { id: 12, data: 12, icons: InputCheck, action: false, colors: "bg-yellow-900 " },
-  ];
+  // const changeColor = [
+  //   { id: 1, data: 1, icons: InputCheck, action: false, colors: "bg-black" },
+  //   { id: 2, data: 2, icons: InputCheck, action: false, colors: "bg-white" },
+  //   { id: 3, data: 3, icons: InputCheck, action: false, colors: "bg-zinc-500" },
+  //   { id: 4, data: 4, icons: InputCheck, action: false, colors: "bg-purple-500" },
+  //   { id: 5, data: 5, icons: InputCheck, action: false, colors: "bg-sky-600" },
+  //   { id: 6, data: 6, icons: InputCheck, action: false, colors: "bg-amber-400 " },
+  //   { id: 7, data: 7, icons: InputCheck, action: false, colors: "bg-green-700 " },
+  //   { id: 8, data: 8, icons: InputCheck, action: false, colors: "bg-amber-600 " },
+  //   { id: 9, data: 9, icons: InputCheck, action: false, colors: "bg-red-700  " },
+  //   // { id: 10, data: 10, icons: InputCheck, action: false, colors: "bg-purple-800 " },
+  //   // { id: 11, data: 11, icons: InputCheck, action: false, colors: "bg-blue-900 " },
+  //   // { id: 12, data: 12, icons: InputCheck, action: false, colors: "bg-yellow-900 " },
+  // ];
+  const [changeColor, setChangeColor] = useState([
+    {
+      id: 1,
+      data: 1,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colors: "bg-black",
+      colorName: "Black",
+
+    },
+    {
+      id: 2,
+      data: 2,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colors: "bg-white",
+      colorName: "Black",
+
+    },
+    {
+      id: 3,
+      data: 3,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colors: "bg-zinc-500",
+      colorName: "Black",
+
+    },
+    {
+      id: 4,
+      data: 4,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colors: "bg-purple-500",
+      colorName: "Black",
+
+    },
+    {
+      id: 5,
+      data: 5,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colors: "bg-sky-600",
+      colorName: "Black",
+
+    },
+    {
+      id: 6,
+      data: 6,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-amber-400 ",
+    },
+    {
+      id: 7,
+      data: 7,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-green-700 ",
+    },
+    {
+      id: 8,
+      data: 8,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-amber-600 ",
+    },
+    {
+      id: 9,
+      data: 9,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-red-700  ",
+    },
+    {
+      id: 10,
+      data: 10,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-purple-800 ",
+    },
+    {
+      id: 11,
+      data: 11,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-blue-900  ",
+    },
+    {
+      id: 12,
+      data: 12,
+      icons: <InputCheckedTrueIcons />,
+      action: false,
+      colorName: "Black",
+      colors: "bg-yellow-900 ",
+    },
+  ])
+  useEffect(() => {
+    if (
+      showColor
+    ) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [
+    showColor
+  ]);
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+    };
+  }
+  useEffect(() => {
+    const updateDimension = () => {
+      if (getCurrentDimension().width < 758 && showColor) {
+        setShowColor(false)
+      }
+      setScreenSize(getCurrentDimension());
+    };
+
+    window.addEventListener("resize", updateDimension);
+
+    return () => {
+      window.removeEventListener("resize", updateDimension);
+    };
+  }, [screenSize]);
+  const [iconsColor, setIconsColor] = useState("black");
+  const HandleIconsColor = (color, id) => {
+    setIconsColor(color);
+    setChangeColor((current) => {
+      return current.map((data) => {
+        if (data?.id == id) {
+          return { ...data, action: true };
+        } else {
+          return { ...data, action: false };
+        }
+      });
+    });
+  };
+
+  // Checks whether an element is even
+  const even = (element) => element.action == true;
+  let toggleAction = changeColor.some(even);
+
+  const unCheckedAll = () => {
+    setShowColor(false);
+
+    setChangeColor((current) => {
+      return current.map((data) => {
+        return { ...data, action: false };
+      });
+    });
+    setIconsColor("black");
+  };
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -1053,11 +1220,84 @@ const AddingProduct = () => {
   }, []);
 
   // Категория одеждыДобавить одежду Артикул(необязательно)
+  const [randomSellerCode, setRandomSellerCode] = useState(null)
+
+  function randomCode(len) {
+    let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    setRandomSellerCode([...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], ''))
+
+  }
 
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
 
+      {/* Open for select color modal */}
+      <div
+        onClick={() => { setShowColor(false) }}
+        className={`fixed inset-0 z-[220] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+         ${showColor ? "" : "hidden"}`}
+      >
+      </div>
+      {showColor && (
+        <div className="max-w-[576px] w-full fixed z-[221]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ">
 
+          {/* </div> */}
+          <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+            <div
+              className={`flex items-center justify-between border-b border-searchBgColor pb-3"
+                       `}
+            >
+              <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">Выберите цвет</span>
+              <button
+                className="py-2"
+                type=""
+                onClick={() => { setShowColor(false) }}
+
+              >
+                <MenuCloseIcons colors={"#000"} />
+              </button>
+            </div>
+            <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
+              {changeColor?.map((data) => {
+                return (
+                  <div className="flex flex-col items-center justify-center ">
+                    <div
+                      key={data?.id}
+                      onClick={() =>
+                        HandleIconsColor(data?.IconsColor, data?.id)
+                      }
+                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] ${data?.colors
+                        } cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : ""
+                        } `}
+                    >
+                      {data?.action && data?.id === 2 ? (
+                        <InputCheckedTrueIcons colors={"#000"} />
+                      ) : null}
+
+                      {data?.action && data?.id !== 2 ? (
+                        <InputCheckedTrueIcons colors={"#fff"} />
+                      ) : null}
+                    </div>
+                    <span className={`text-black text-center text-xs not-italic font-AeonikProRegular`}>{data?.colorName}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="flex items-center justify-end">
+              {toggleAction && (
+                <button
+                  onClick={unCheckedAll}
+                  className="flex items-center text-fullBlue active:scale-95  active:opacity-70 justify-center  px-4 py-1"
+                >
+                  Отключить
+                </button>
+              )}
+              {/* </div> */}
+            </div>
+          </div>
+        </div>
+      )
+      }
 
       <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
         <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
@@ -1379,7 +1619,7 @@ const AddingProduct = () => {
                     <ArrowRightIcon />
                   </button>
                   <div className="w-full hidden md:flex items-center justify-between border rounded-lg md:py-[9px] px-[12px]">
-                    {changeColor?.map((data) => {
+                    {changeColor?.filter(e => e?.id <= 9)?.map((data) => {
                       return (
                         <div key={data?.id} className="hidden md:block">
                           <label
@@ -1399,7 +1639,7 @@ const AddingProduct = () => {
                       );
                     })}
                     <button
-                      // onClick={() => setSelectColorToggleMobile(true)}
+                      onClick={() => { setShowColor(true) }}
                       type="button"
                     >
                       <AddIconsCircle1 />
@@ -1496,15 +1736,18 @@ const AddingProduct = () => {
                     </span>
                   </div>
                   <div className="w-full flex items-center justify-between">
-                    <input
-                      type="text"
+                    <div
                       className="inputStyle w-full h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
-                      placeholder="0"
-                      value={145}
-                    />
-                    {/* <div className="w-[54px] h-[42px] flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
-                        <LoaderIcon />
-                    </div> */}
+                    > {randomSellerCode}</div>
+                    {/* <button onClick={() => randomCode(10)}>Random Genereate {randomSellerCode}</button> */}
+
+                    <button
+                      onClick={() => randomCode(10)}
+                      type={"button"}
+                      className="w-[54px] h-[42px] active:scale-95  active:opacity-70 flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
+                      {/* <LoaderIcon />  */}
+                      <FaRandom color={"#ffffff"} />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1699,7 +1942,7 @@ const AddingProduct = () => {
 
               {/* 5 Категория одежды*/}
               {state.openDropModalButton ? (
-                <div className="w-full hidden md:flex items-center justify-between">
+                <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
                   <Popover
                     // open={state?.openhat}
                     // onOpenChange={handleOpenChangeHat}
