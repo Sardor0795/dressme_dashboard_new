@@ -15,7 +15,7 @@ export default function MarketIsCheck() {
     const url = "https://api.dressme.uz/api/seller"
 
 
-    useQuery(["shops index"], () => {
+    const { isLoading } = useQuery(["shops index"], () => {
         return fetch(`${url}/shops`, {
             method: "GET",
             headers: {
@@ -30,8 +30,8 @@ export default function MarketIsCheck() {
         {
             onSuccess: (res) => {
                 if (res?.shops) {
-                    setLoading(false)
                     setIsMarket(res)
+                    setLoading(false)
                     // console.log(res, "magazin bormi");
                 }
             },
@@ -88,12 +88,9 @@ export default function MarketIsCheck() {
     // },)
     return (
         <div>
-            {loading ? <LoadingForSeller /> :
+            {loading || isLoading ? <LoadingForSeller /> :
                 <>  {
-                    isMarket?.shops?.data?.length >= 1 ?
-                        <>
-                            {isFetched ? <> {!example ? < NoLocations /> : <LocationList />} </> : <LoadingForSeller />}
-                        </>
+                    isMarket?.shops?.data?.length >= 1 ? <>{isFetched ? <> {!example ? < NoLocations /> : <LocationList />} </> : <LoadingForSeller />}</>
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link

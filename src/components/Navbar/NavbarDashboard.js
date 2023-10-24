@@ -84,7 +84,7 @@ export default function NavbarDashboard() {
     })
   }
   return (
-    <div className="flex flex-col w-full h-full border border-green-500">
+    <div className="flex flex-col w-full h-full ">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -153,7 +153,7 @@ export default function NavbarDashboard() {
           </div> : null
 
         }
-        <div className={`  ${localStorage.getItem("DressmeUserToken") ? "md:w-[calc(100%-300px)] md:ml-[300px] border border-red-500" : "md:w-full border border-black"} h-full `}>
+        <div className={`  ${localStorage.getItem("DressmeUserToken") ? "md:w-[calc(100%-300px)] md:ml-[300px]" : "md:w-full border border-black"} h-full `}>
           <RouterList />
         </div>
       </div>

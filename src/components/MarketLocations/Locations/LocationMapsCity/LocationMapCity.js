@@ -409,7 +409,7 @@ export default function LocationMapCity() {
   }, [openRegionModal]);
 
   return (
-    <div className="w-full">
+    <div className="w-full md:px-10 ">
       <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
@@ -615,7 +615,7 @@ export default function LocationMapCity() {
                     </div>
                   }
                   {state?.pictureBgView1 &&
-                    <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+                    <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
                 </label>
               </button>
 
@@ -642,7 +642,7 @@ export default function LocationMapCity() {
                     </div>
                   }
                   {state?.picturelogoView2 &&
-                    <img src={state?.picturelogoView2} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+                    <img src={state?.picturelogoView2} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
                 </label>
               </button>
 
@@ -669,7 +669,7 @@ export default function LocationMapCity() {
                     </div>
                   }
                   {state?.pictureLastView3 &&
-                    <img src={state?.pictureLastView3} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+                    <img src={state?.pictureLastView3} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
                 </label>
               </button>
 
