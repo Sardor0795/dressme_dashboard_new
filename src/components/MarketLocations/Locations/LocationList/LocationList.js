@@ -15,51 +15,33 @@ import { useHttp } from "../../../../hook/useHttp";
 // const { RangePicker } = DatePicker;
 
 
-export default function LocationList() {
+function LocationList({ marketList, locationList }) {
   const { request } = useHttp()
+  console.log("LocationList Is Render");
 
-  const [state, setState] = useState({
-    locationListId: "",
-    openSelect: false,
     shopsList: ""
-  })
-
+  const [openSelect, setOpenSelect] = useState(false)
   const navigate = useNavigate()
-
-
-  // ------------GET HAS SHOP ?-----------------
-  useQuery(["shops_location_modal"], () => { return request({ url: "/shops", token: true }) },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, shopsList: res })
-      },
-      onError: (err) => {
-        console.log(err, "err shops_location_modal");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
 
   const handleShopsOfLocation = (id) => {
     navigate(`/locations-store/:${id}`)
-    setState({ ...state, openSelect: false })
+    setOpenSelect(false)
 
   }
 
-  // // ------------GET  Has Magazin ?-----------------
-  const { isLoading } = useQuery(["locations_index"], () => { return request({ url: "/shops/locations/index", token: true }) },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, locationListId: res })
-      },
-      onError: (err) => {
-        console.log(err, "err locations_index");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+  // // // ------------GET  Has Magazin ?-----------------
+  // const { isLoading } = useQuery(["locations_index"], () => { return request({ url: "/shops/locations/index", token: true }) },
+  //   {
+  //     onSuccess: (res) => {
+  //       setLocationList(res)
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "err locations_index");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
@@ -79,16 +61,16 @@ export default function LocationList() {
   return (
     <div className={`w-full h-full  px-4  md:px-10 `}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${state?.openSelect ? "" : "hidden"}`}
-        onClick={() => setState({ ...state, openSelect: false })}
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"}`}
+        onClick={() => setOpenSelect(false)}
       ></div>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
-
       >
         <button
-          onClick={() => setState({ ...state, openSelect: false })}
+          onClick={() => setOpenSelect(false)
+          }
           type="button"
           className="absolute  right-3 top-3 w-5 h-5 ">
           <MenuCloseIcons
@@ -101,30 +83,24 @@ export default function LocationList() {
           </p>
         </div>
         <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-          {state?.shopsList?.shops?.data ?
-            state?.shopsList?.shops?.data?.map(item => {
+          {marketList?.shops?.data ?
+            marketList?.shops?.data?.map(item => {
               return (
-                <>
-                  {isLoading ? <div>
-                    <h1>Waiting please....</h1>
-                  </div> :
-                    <button
-                      onClick={() => handleShopsOfLocation(item?.id)}
-                      key={item?.id}
-                      className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                    >
-                      <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                        {" "}
-                        {item?.name}
-                      </span>
-                    </button>
-                  }
-                </>
+                <button
+                  onClick={() => handleShopsOfLocation(item?.id)}
+                  key={item?.id}
+                  className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                >
+                  <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                    {" "}
+                    {item?.name}
+                  </span>
+                </button>
               )
             })
             :
             <div className="flex items-center jsutify-center">
-              Malumotlar mavjud emas...
+              Malumotlar yuklanyapti...
             </div>
           }
         </div>
@@ -221,8 +197,9 @@ export default function LocationList() {
                 </span>
               </li>
               <li className="w-[32%] flex items-center justify-end ">
-                <button onClick={() => setState({ ...state, openSelect: true })
-                }
+                <button
+                  onClick={() => setOpenSelect(true)
+                  }
                   className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-sm  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
@@ -235,7 +212,7 @@ export default function LocationList() {
       </div>
 
       {
-        state?.locationListId?.locations?.data?.map((item) => {
+        locationList?.locations?.data?.map((item) => {
           return (
             <div key={item?.id}>
               {item?.shop_locations?.length ? <div key={item?.id} className="md:mt-[16px] flex justify-between items-center">
@@ -244,7 +221,8 @@ export default function LocationList() {
                 </p>
 
                 <button
-                  onClick={() => setState({ ...state, openSelect: true })}
+                  onClick={() => setOpenSelect(true)}
+
                   className="md:hidden p-2 flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
@@ -428,3 +406,4 @@ export default function LocationList() {
     </div >
   );
 }
+export default React.memo(LocationList);
