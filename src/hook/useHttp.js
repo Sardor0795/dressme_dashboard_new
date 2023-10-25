@@ -1,5 +1,4 @@
 const { REACT_APP_BASE_URL } = process.env;
-// const url = "https://api.dressme.uz/api/seller"
 
 export const useHttp = () => {
     const request = async ({
