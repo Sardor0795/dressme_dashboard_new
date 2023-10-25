@@ -25,7 +25,7 @@ function NoLocations({ marketList }) {
             У вас пока нет локации !
           </p>
           <button
-            onClick={() => setOpenSelect(true)}
+            onClick={() => setOpenSelect(false)}
             className="px-7 active:scale-95  active:opacity-70 cursor-pointer py-3 rounded-lg flex items-center justify-center bg-textBlueColor text-white text-lg not-italic font-AeonikProMedium"
           >
             Добавить локацию
