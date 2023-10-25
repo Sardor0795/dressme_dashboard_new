@@ -16,9 +16,11 @@ import YandexMapStore from "./YandexMaps";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHttp } from "../../../../hook/useHttp";
 export default function LocationAddById() {
   const url = "https://api.dressme.uz/api/seller";
   const navigate = useNavigate();
+  const { request } = useHttp()
   const { id } = useParams()
   const shopId = id?.replace(":", "")
   const [state, setState] = useState({
@@ -42,9 +44,14 @@ export default function LocationAddById() {
     openStoreList: false,
     getRegionList: "",
     // ----errorGroup ----
-    errorGroup: ""
-
-
+    errorGroup: "",
+    //-----ForImg
+    pictureBgFile1: "",
+    pictureBgView1: "",
+    picturelogoFile2: "",
+    picturelogoView2: "",
+    pictureLastFile3: "",
+    pictureLastView3: "",
   });
   // ----------phone Number----------1
   let data = state?.assistantPhoneFirst.split("-");
@@ -77,77 +84,46 @@ export default function LocationAddById() {
     setState({ ...state, shopCenterAddress: childData?.title, shopLatitude: childData?.center[0], shopLongitude: childData?.center[1] })
   }
 
-  // img upload--------------
-  const [locationImgFirst, setLocationImgFirst] = useState({
-    pictureBgFile1: "",
-    pictureBgView1: ""
-  });
-  const [locationImgSecond, setLocationImgSecond] = useState({
-    picturelogoFile2: "",
-    picturelogoView2: ""
-  });
-  const [locationImgThird, setLocationImgThird] = useState({
-    pictureLastFile3: "",
-    pictureLastView3: ""
-  });
+
   // console.log();
   const handleLocationImageOne = (e) => {
-    setLocationImgFirst({
+    setState({
+      ...state,
       pictureBgFile1: e.target.files[0],
       pictureBgView1: URL.createObjectURL(e.target.files[0])
     });
   }
   const handleLocationImageTwo = (e) => {
-    setLocationImgSecond({
-      picturelogoFile2: e.target.files[0],
+    setState({
+      ...state, picturelogoFile2: e.target.files[0],
       picturelogoView2: URL.createObjectURL(e.target.files[0])
     });
   }
   const handleLocationImageThree = (e) => {
-    setLocationImgThird({
-      pictureLastFile3: e.target.files[0],
+    setState({
+      ...state, pictureLastFile3: e.target.files[0],
       pictureLastView3: URL.createObjectURL(e.target.files[0])
     });
   }
 
-  // console.log(state?.shopCenterAddress, "shopCenterAddress ");
-  // console.log(state?.shopLatitude, "shopLatitude ");
-  // console.log(state?.shopLongitude, "shopLongitude ");
-  // console.log(state?.assistantNameFirst, "assistantNameFirst ");
-  // console.log(state?.assistantNameSecond, "assistantNameSecond ");
-  // console.log(state?.assistantPhoneFirst, "assistantPhoneFirst ");
-  // console.log(state?.assistantPhoneSecond, "assistantPhoneSecond ");
-  // console.log(state?.regionIdShops, "regionIdShops ");
-  // console.log(state?.subRegionIdShops, "subRegionIdShops ");
-  // console.log(state?.shopId, "shopId ");
-  // console.log(locationImgFirst?.pictureBgFile1, "pictureBgFile1 ");
-  // console.log(locationImgSecond?.picturelogoFile2, "picturelogoFile2 ");
-  // console.log(locationImgThird?.pictureLastFile3, "pictureLastFile3 ");
-  // -----------------------get Region-----------------
 
-  useQuery(["shops-regions"], () => {
-    return fetch(`${url}/shops/locations/regions`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
+  const { refetch } = useQuery(
+    ["shops_regions"],
+    () => {
+      return request({ url: "/shops/locations/regions", token: true });
+    },
     {
       onSuccess: (res) => {
         setState({ ...state, getRegionList: res })
-
       },
       onError: (err) => {
-        console.log(err, "err");
+        console.log(err, "BU -- HOC -- Error");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
+
 
   const LocationAddSubmit = () => {
     // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
@@ -165,9 +141,9 @@ export default function LocationAddById() {
     form.append("assistant_phone", assistantPhoneNumberFirst);
     state?.assistantNameSecond && form.append("second_assistant_name", state?.assistantNameSecond);
     state?.assistantPhoneSecond && form.append("second_assistant_phone", assistantPhoneNumberSecond);
-    locationImgFirst?.pictureBgFile1 && form.append("shop_photo_one", locationImgFirst?.pictureBgFile1);
-    locationImgSecond?.picturelogoFile2 && form.append("shop_photo_two", locationImgSecond?.picturelogoFile2);
-    locationImgThird?.pictureLastFile3 && form.append("shop_photo_three", locationImgThird?.pictureLastFile3);
+    state?.pictureBgFile1 && form.append("shop_photo_one", state?.pictureBgFile1);
+    state?.picturelogoFile2 && form.append("shop_photo_two", state?.picturelogoFile2);
+    state?.pictureLastFile3 && form.append("shop_photo_three", state?.pictureLastFile3);
 
     return fetch(`${url}/shops/locations/store`, {
       method: "POST",
@@ -285,7 +261,7 @@ export default function LocationAddById() {
                   accept=" image/*"
                 />
                 {
-                  !locationImgFirst?.pictureBgView1 &&
+                  !state?.pictureBgView1 &&
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                       Фото локации
@@ -295,11 +271,11 @@ export default function LocationAddById() {
                     </span>
                   </div>
                 }
-                {locationImgFirst?.pictureBgView1 && <img src={locationImgFirst?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
+                {state?.pictureBgView1 && <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
               </label>
             </button>
             {
-              state?.errorGroup?.shop_photo_one && !locationImgFirst?.pictureBgView1 &&
+              state?.errorGroup?.shop_photo_one && !state?.pictureBgView1 &&
               <p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
                 {state?.errorGroup?.shop_photo_one}
               </p>
@@ -319,14 +295,14 @@ export default function LocationAddById() {
                   accept=" image/*"
                 />
                 {
-                  !locationImgSecond?.picturelogoView2 &&
+                  !state?.picturelogoView2 &&
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                       <span className="hidden md:flex">Второе</span> фото локации
                     </span>
                   </div>
                 }
-                {locationImgSecond?.picturelogoView2 && <img src={locationImgSecond?.picturelogoView2} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
+                {state?.picturelogoView2 && <img src={state?.picturelogoView2} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
               </label>
             </button>
 
@@ -345,14 +321,14 @@ export default function LocationAddById() {
                   accept=" image/*"
                 />
                 {
-                  !locationImgThird?.pictureLastView3 &&
+                  !state?.pictureLastView3 &&
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                       <span className="hidden md:flex"> Третье</span> фото локации
                     </span>
                   </div>
                 }
-                {locationImgThird?.pictureLastView3 && <img src={locationImgThird?.pictureLastView3} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
+                {state?.pictureLastView3 && <img src={state?.pictureLastView3} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
               </label>
             </button>
 

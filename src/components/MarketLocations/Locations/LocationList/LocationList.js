@@ -11,72 +11,55 @@ import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu"
 // import { DatePicker } from "antd";
 import PickerOfFilter from "../../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 import { isError, useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../../hook/useHttp";
 // const { RangePicker } = DatePicker;
 
 
 export default function LocationList() {
+  const { request } = useHttp()
 
-  const [locationListId, setLocationListId] = useState("")
-  const [openSelect, setOpenSelect] = useState(false);
-  const [shopsList, setShopsList] = useState()
+  const [state, setState] = useState({
+    locationListId: "",
+    openSelect: false,
+    shopsList: ""
+  })
+
   const navigate = useNavigate()
 
-  const url = "https://api.dressme.uz/api/seller"
 
   // ------------GET HAS SHOP ?-----------------
-  const { isFetched, isFetching, isError } = useQuery(["shops-location-modal"], () => {
-    return fetch(`${url}/shops`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
+  useQuery(["shops_location_modal"], () => { return request({ url: "/shops", token: true }) },
     {
       onSuccess: (res) => {
-        setShopsList(res)
-        // console.log(res, "reslocation-modal");
+        setState({ ...state, shopsList: res })
       },
       onError: (err) => {
-        // console.log(err, "err");
+        console.log(err, "err shops_location_modal");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
-  // console.log(locationListId, "locationListId");
+  );
 
   const handleShopsOfLocation = (id) => {
     navigate(`/locations-store/:${id}`)
-    setOpenSelect(false)
+    setState({ ...state, openSelect: false })
+
   }
 
   // // ------------GET  Has Magazin ?-----------------
-  const { isLoading } = useQuery(["locations-index"], () => {
-    return fetch(`${url}/shops/locations/index`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
+  const { isLoading } = useQuery(["locations_index"], () => { return request({ url: "/shops/locations/index", token: true }) },
     {
       onSuccess: (res) => {
-        setLocationListId(res)
-        // console.log(res, "magazin yesy");
+        setState({ ...state, locationListId: res })
       },
       onError: (err) => {
-        console.log(err, "err magazin");
+        console.log(err, "err locations_index");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
 
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
@@ -91,29 +74,21 @@ export default function LocationList() {
     });
   }, []);
 
-  const [showPicker, setShowPicker] = useState(true)
-  const showPickerHandle = () => {
-    setShowPicker(!showPicker)
-  }
-  // console.log(isLoading, "isLoading");
-  // console.log(isFetched, "isFetched");
-  // console.log(isFetching, "isFetching");
-  // console.log(isError, "isError");
-  // console.log(shopsList, "shopsList");
-  // console.log(locationListId, "locationListId"); red
+
+
   return (
     <div className={`w-full h-full  px-4  md:px-10 `}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"}`}
-        onClick={() => setOpenSelect(false)}
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${state?.openSelect ? "" : "hidden"}`}
+        onClick={() => setState({ ...state, openSelect: false })}
       ></div>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
 
       >
         <button
-          onClick={() => setOpenSelect(false)}
+          onClick={() => setState({ ...state, openSelect: false })}
           type="button"
           className="absolute  right-3 top-3 w-5 h-5 ">
           <MenuCloseIcons
@@ -126,8 +101,8 @@ export default function LocationList() {
           </p>
         </div>
         <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-          {shopsList?.shops?.data ?
-            shopsList?.shops?.data?.map(item => {
+          {state?.shopsList?.shops?.data ?
+            state?.shopsList?.shops?.data?.map(item => {
               return (
                 <>
                   {isLoading ? <div>
@@ -155,69 +130,68 @@ export default function LocationList() {
         </div>
 
       </section>
-      {
-        locationListId?.locations?.data?.length >= 1 &&
-        <>
-          <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
-            <div>
-              <MobileHumburgerMenu />
-            </div>
-            <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
-              Все локации
-            </p>
-            <div className="w-[30px]"></div>
+
+      <>
+        <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
+          <div>
+            <MobileHumburgerMenu />
           </div>
-          <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
-            <label
-              htmlFor="searchStore"
-              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
-            >
-              <input
-                type="text"
-                name="s"
-                id="searchStore"
-                className="w-full h-full   outline-0 	pl-[10px]"
-                placeholder="Поиск"
-              />
-              <span className="pr-[10px]">
-                <SearchIcon />
-              </span>
-            </label>
-            <div className="w-fit">
-              <PickerOfFilter />
-            </div>
+          <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
+            Все локации
+          </p>
+          <div className="w-[30px]"></div>
+        </div>
+        <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+          <label
+            htmlFor="searchStore"
+            className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+          >
+            <input
+              type="text"
+              name="s"
+              id="searchStore"
+              className="w-full h-full   outline-0 	pl-[10px]"
+              placeholder="Поиск"
+            />
+            <span className="pr-[10px]">
+              <SearchIcon />
+            </span>
+          </label>
+          <div className="w-fit">
+            <PickerOfFilter />
+          </div>
 
-          </section>
-          <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
-            <div className="flex justify-end items-center md:justify-between">
-              <section className="hidden md:flex">
-                <p className="text-black text-2xl not-italic font-AeonikProMedium">
-                  Все локации
-                </p>
-              </section>
-              <div className="w-fit flex items-center gap-x-[15px]">
-                <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
-                  <input
-                    type="text"
-                    name="s"
-                    className="w-full h-full  outline-0	"
-                    placeholder="Поиск"
-                  />
-                  <button>
-                    <SearchIcon />
-                  </button>
-                </form>
-                <div className="w-fit">
-                  <PickerOfFilter />
-                </div>
-
+        </section>
+        <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
+          <div className="flex justify-end items-center md:justify-between">
+            <section className="hidden md:flex">
+              <p className="text-black text-2xl not-italic font-AeonikProMedium">
+                Все локации
+              </p>
+            </section>
+            <div className="w-fit flex items-center gap-x-[15px]">
+              <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+                <input
+                  type="text"
+                  name="s"
+                  className="w-full h-full  outline-0	"
+                  placeholder="Поиск"
+                />
+                <button>
+                  <SearchIcon />
+                </button>
+              </form>
+              <div className="w-fit">
+                <PickerOfFilter />
               </div>
+
             </div>
           </div>
-        </>
-      }
+        </div>
+      </>
 
-      {locationListId?.locations?.data?.length >= 1 && <div className="w-full hidden md:block mt-6">
+
+      <div className="w-full hidden md:block mt-6">
         <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
           <li className="w-[70px] pl-4">
             <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
@@ -247,7 +221,8 @@ export default function LocationList() {
                 </span>
               </li>
               <li className="w-[32%] flex items-center justify-end ">
-                <button onClick={() => setOpenSelect(true)}
+                <button onClick={() => setState({ ...state, openSelect: true })
+                }
                   className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-sm  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
@@ -257,19 +232,19 @@ export default function LocationList() {
             </ul>
           </li>
         </ul>
-      </div>}
+      </div>
 
       {
-        locationListId?.locations?.data?.map((item) => {
+        state?.locationListId?.locations?.data?.map((item) => {
           return (
-            <div>
+            <div key={item?.id}>
               {item?.shop_locations?.length ? <div key={item?.id} className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {item?.name} <span className="hidden md:inline">({item?.shop_locations?.length})</span>
                 </p>
 
                 <button
-                  onClick={() => setOpenSelect(true)}
+                  onClick={() => setState({ ...state, openSelect: true })}
                   className="md:hidden p-2 flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor">
                   <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
@@ -278,9 +253,9 @@ export default function LocationList() {
               </div> : null}
 
               {/* Table */}
-              <div className="w-full h-fit border md:rounded-xl md:overflow-hidden">
+              {item?.shop_locations?.length ? <div className="w-full h-fit border md:rounded-xl md:overflow-hidden">
                 {
-                  item?.shop_locations?.length ? item?.shop_locations?.map((value, index) => {
+                  item?.shop_locations?.map((value, index) => {
                     return (
                       <div key={value?.id} className="w-full h-full flex flex-col md:rounded-none overflow-auto rounded-xl">
                         <ul
@@ -444,9 +419,9 @@ export default function LocationList() {
                         </div>
                       </div>
                     )
-                  }) : null
+                  })
                 }
-              </div>
+              </div> : null}
             </div>)
         })
       }
