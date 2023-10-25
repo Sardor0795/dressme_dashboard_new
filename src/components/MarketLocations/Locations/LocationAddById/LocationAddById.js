@@ -10,8 +10,6 @@ import {
 } from "../../../../assets/icons";
 import InputMask from "react-input-mask";
 
-import { AiOutlineLeft } from "react-icons/ai";
-import StoreListModal from "./Modal/StoreListModal";
 import YandexMapStore from "./YandexMaps";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
@@ -53,6 +51,7 @@ export default function LocationAddById() {
     pictureLastFile3: "",
     pictureLastView3: "",
   });
+  // console.log(state?.assistantPhoneFirst?.split("-"), "assistantPhoneFirst");
   // ----------phone Number----------1
   let data = state?.assistantPhoneFirst.split("-");
   let arr = data.join("");
@@ -80,7 +79,6 @@ export default function LocationAddById() {
   const assistantPhoneNumberSecond = secData5 + secData4;
 
   function CallBackYandex(childData) {
-    console.log(childData, "childData");
     setState({ ...state, shopCenterAddress: childData?.title, shopLongitude: childData?.center[0], shopLatitude: childData?.center[1] })
   }
 
@@ -107,11 +105,7 @@ export default function LocationAddById() {
   }
 
 
-  const { refetch } = useQuery(
-    ["shops_regions"],
-    () => {
-      return request({ url: "/shops/locations/regions", token: true });
-    },
+  useQuery(["shops_regions"], () => { return request({ url: "/shops/locations/regions", token: true }) },
     {
       onSuccess: (res) => {
         setState({ ...state, getRegionList: res })
