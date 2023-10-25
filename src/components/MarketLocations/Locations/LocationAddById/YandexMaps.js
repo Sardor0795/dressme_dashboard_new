@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-// import "../../../../index.css";
 import {
   YMaps,
   Map,
