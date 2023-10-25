@@ -5,102 +5,59 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoadingForSeller from '../../Loading/LoadingFor'
+import { useHttp } from '../../../hook/useHttp'
 
 export default function MarketIsCheck() {
+    const { request } = useHttp()
+    const [state, setState] = useState({
+        isLocation: "",
+        isCheckLocation: null,
+        isMarket: "",
+        isMarketCheck: false,
+        loading: true,
+    })
 
-    // const [state, setState] = useState({
-    //     isLocation: "",
-    //     isMarket: "",
-    //     Loading: "",
-    //     isCheckLocation: ""
-    // })
-    const [isLocation, setIsLocation] = useState("")
-    const [isMarket, setIsMarket] = useState("")
-    const [isMarketCheck, setIsMarketCheck] = useState(false)
-
-    const [loading, setLoading] = useState(true)
-    const [example, setExample] = useState()
-
-    const url = "https://api.dressme.uz/api/seller"
-
-
-    const { isLoading } = useQuery(["shops index"], () => {
-        return fetch(`${url}/shops`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json",
-                "Accept": "application/json",
-
-                'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-            },
-
-        }).then(res => res.json())
-    },
+    const { isLoading } = useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
         {
             onSuccess: (res) => {
+                console.log(res, "get magazin check");
                 if (res?.shops) {
-                    setIsMarketCheck(true)
-                    setIsMarket(res)
-                    setLoading(false)
-                    // console.log(res, "magazin bormi");
+                    setState({ ...state, isMarketCheck: true, isMarket: res, loading: false })
                 }
             },
             onError: (err) => {
-                console.log(err, "err magazin");
+                setState({ ...state, loading: false })
+                console.log(err, "BU -- HOC -- Error");
             },
-            keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-            refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+            keepPreviousData: true,
+            refetchOnWindowFocus: false,
         }
-    )
-    // // ------------GET  Has Magazin ?-----------------
-    const { isFetched, isFetching } = useQuery(["location index"], () => {
-        return fetch(`${url}/shops/locations/index`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json",
-                "Accept": "application/json",
+    );
 
-                'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-            },
-
-        }).then(res => res.json())
+    // ------------GET  Has Magazin ?-----------------
+    const { isFetched, isFetching } = useQuery(["location_index"], () => {
+        return request({ url: "/shops/locations/index", token: true });
     },
         {
             onSuccess: (res) => {
+                console.log(res, "get location check");
                 if (res?.locations) {
-                    setIsLocation(res)
-                    setExample(res?.locations_exist)
-                    setLoading(false)
-
+                    setState({ ...state, isCheckLocation: res?.locations_exist, isLocation: res, loading: false })
                 }
             },
             onError: (err) => {
-                console.log(err, "err magazin");
+                setState({ ...state, loading: false })
+                console.log(err, "BU -- HOC -- Error");
             },
-            keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-            refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+            keepPreviousData: true,
+            refetchOnWindowFocus: false,
         }
-    )
-    // console.log("---------------------------");
-    // console.log(isLoading, "isLoading");
-    // console.log(isFetched, "isFetched");
-    // console.log(isFetching, "isFetching");
-    // console.log(isLocation, "isLocation");
-    // console.log(isMarket, "isMarket");
-
-    // console.log(isLocation?.locations_exist, 'isLocation');
-    // useEffect(() => {
-    //     isLocation?.locations?.data?.forEach(item => {
-    //         if (item?.shop_locations?.length >= 1) {
-    //             setExample(true)
-    //         }
-    //     })
-    // },)
+    );
     return (
         <div>
-            {loading || isLoading || !isMarketCheck ? <LoadingForSeller /> :
+            {state?.loading || isLoading || !state?.isMarketCheck ? <LoadingForSeller /> :
                 <>  {
-                    isMarketCheck ? <>{isFetched && isLocation?.locations?.data ? <> {example ? <LocationList /> : < NoLocations />} </> : <LoadingForSeller />}</>
+                    state?.isMarketCheck ? <>{isFetched && state?.isLocation?.locations?.data ? <> {state?.isCheckLocation ? <LocationList /> : < NoLocations />} </> : <LoadingForSeller />}</>
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link
@@ -113,23 +70,7 @@ export default function MarketIsCheck() {
                 }
                 </>
             }
-            {/* {loading || isLoading || !isFetched ? <LoadingForSeller /> :
-                <>  {
-                    isMarketCheck &&
-                    <div className="flex items-center h-[100vh] justify-center">
-                        <Link
-                            to="/store"
-                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                        >
-                            Сначала создайте магазин!
-                        </Link>
-                    </div >
-                }
-                </>
-            }
-            <>
-                {isFetched && <> {example ? <LocationList /> : < NoLocations />} </>
-                }</> */}
+
 
         </div >
     )

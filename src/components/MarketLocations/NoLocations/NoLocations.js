@@ -3,54 +3,44 @@ import { GrClose } from "react-icons/gr";
 import { MenuCloseIcons } from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../hook/useHttp";
 
 export default function NoLocations() {
-  const [openSelect, setOpenSelect] = useState(true);
-  const [shopsList, setShopsList] = useState()
-  const url = "https://api.dressme.uz/api/seller"
+  const { request } = useHttp()
+  const [state, setState] = useState({
+    shopsList: "",
+    openSelect: true
+  })
   const navigate = useNavigate()
 
-
   // ------------GET HAS SHOP ?-----------------
-  const { isLoading } = useQuery(["shops-location"], () => {
-    return fetch(`${url}/shops`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
+  const { isLoading } = useQuery(["shops_location"], () => { return request({ url: "/shops", token: true }) },
     {
       onSuccess: (res) => {
-        setShopsList(res)
-        // console.log(res, "reslocation");
+        setState({ ...state, shopsList: res })
       },
       onError: (err) => {
-        // console.log(err, "err");
+        console.log(err, "err locations_index");
       },
-      // keepPreviousData: true,
-      // refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
-  )
-
+  );
 
   const handleShopsOfLocation = (id) => {
-    setOpenSelect(true)
+    setState({ ...state, openSelect: true })
     navigate(`/locations-store/:${id}`)
   }
 
   return (
     <div className="w-full h-[100vh]  flex items-center justify-center md:px-10 ">
-      {openSelect ? (
+      {state?.openSelect ? (
         <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
           <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
             У вас пока нет локации !
           </p>
           <button
-            onClick={() => setOpenSelect(false)}
+            onClick={() => setState({ ...state, openSelect: false })}
             className="px-7 active:scale-95  active:opacity-70 cursor-pointer py-3 rounded-lg flex items-center justify-center bg-textBlueColor text-white text-lg not-italic font-AeonikProMedium"
           >
             Добавить локацию
@@ -60,12 +50,14 @@ export default function NoLocations() {
         <div className="fixed inset-0 z-10 ">
           <div
             className="fixed cursor-pointer inset-0 w-full h-full bg-black opacity-40"
-            onClick={() => setOpenSelect(true)}
+            onClick={() => setState({ ...state, openSelect: true })
+            }
           ></div>
           <div className="flex items-center min-h-screen justify-center">
             <div className="relative w-[440px] py-[5px] h-[350px] rounded-[20px] bg-white overflow-hidden">
               <div className="absolute top-4 right-4 ">
-                <button type="button" onClick={() => setOpenSelect(true)}>
+                <button type="button" onClick={() => setState({ ...state, openSelect: true })
+                }>
                   <MenuCloseIcons colors={"#A5A5A5"} />
                 </button>
               </div>
@@ -76,9 +68,9 @@ export default function NoLocations() {
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
                 {
-                  shopsList?.shops?.data?.map(item => {
+                  state?.shopsList?.shops?.data?.map(item => {
                     return (
-                      <>
+                      <div key={item?.id}>
                         {isLoading ? <div>
                           <h1>Waiting please....</h1>
                         </div> :
@@ -93,7 +85,7 @@ export default function NoLocations() {
                             </span>
                           </button>
                         }
-                      </>
+                      </div>
                     )
                   })
                 }

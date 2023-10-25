@@ -3,40 +3,32 @@ import NavbarDashboard from "./components/Navbar/NavbarDashboard";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { dressMainData } from "./hook/ContextTeam";
+import { useHttp } from "./hook/useHttp";
 
 function App() {
-
+  const { REACT_APP_BASE_URL: url } = process.env;
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
-
-  const url = "https://api.dressme.uz/api/seller"
-
+  const { request } = useHttp()
 
 
   // ------------GET  Has Location ?-----------------
-  useQuery(["magazin location"], () => {
-    return fetch(`${url}/shops/locations/index`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
+  useQuery(
+    ["magazin_location"],
+    () => {
+      return request({ url: "/shops/locations/index", token: true });
+    },
     {
       onSuccess: (res) => {
         setDressInfo({ ...dressInfo, SellerMagazinLocation: res })
-
       },
       onError: (err) => {
-        console.log(err, "err magazin location");
+        console.log(err, "BU -- HOC -- Error");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
+
 
 
   return <NavbarDashboard />;
