@@ -19,7 +19,6 @@ function LocationList({ marketList, locationList }) {
   const { request } = useHttp()
   console.log("LocationList Is Render");
 
-    shopsList: ""
   const [openSelect, setOpenSelect] = useState(false)
   const navigate = useNavigate()
 
