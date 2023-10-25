@@ -1,19 +1,15 @@
-import { DatePicker, Popover, Select, Space, Switch } from "antd";
+import { Popover, Select, Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   AddIconsCircle1,
   ArrowRightIcon,
-  CalendarIcons,
   DownloadIcon,
-  InputCheck,
   InputCheckedTrueIcons,
   LineIcon,
-  LoaderIcon,
   MenuCloseIcons,
-  SearchIcon,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import ClothingTypesAnimationPage from "../MobileDropUpSides/ClothingTypesMobileDropUp/ClothingTypesMobileDropUp";
 import ClothingSubSectionPage from "../MobileDropUpSides/ClothingSubSectionMobileDropUp/ClothingSubSectionMobileDropUp";
 import WeatherMobileDropUp from "../MobileDropUpSides/WeatherMobileDropUp/WeatherMobileDropUp";
@@ -21,9 +17,9 @@ import ColorsMobileDropUp from "../MobileDropUpSides/ColorsMobileDropUp/ColorsMo
 import GenderTypeDropUp from "../MobileDropUpSides/GenderTypeDropUp/GenderTypeDropUp";
 import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
-import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import AllSizeListForWear from "../../../../hook/AllSizeListForWear/AllSizeListForWear";
 import { FaRandom } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 
 const AddingProduct = () => {
 
@@ -59,6 +55,36 @@ const AddingProduct = () => {
     openDropModalButton: true,
   })
   // const [openDropModalButton,setOpenDropModalButton] = useState(false)
+
+  const [ productsData, setProductsData ] = useState({}) 
+  const url = "https://api.dressme.uz/api/seller";
+
+  const { isLoading, isFetched } = useQuery(
+    ["products-data-get"],
+    () => {
+      return fetch(`${url}/products/get-product-info`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+      }).then((res) => res.json());
+    },
+    {
+      onSuccess: (res) => {
+        if (res) {
+          setProductsData(res)
+        }
+      },
+      onError: (err) => {
+        console.log(err, "ERR PRODUCTS");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
 
   useEffect(() => {
     if (state?.openDropModalButton) {
@@ -109,8 +135,6 @@ const AddingProduct = () => {
 
 
   // --------------------------------------Возрастная категория Артикул Обхват Талии Цена Возраст
-
-
 
 
   // Hats
@@ -1502,9 +1526,14 @@ const AddingProduct = () => {
                         .includes(input.toLowerCase())
                     }
                     options={
-                      [
-                        // no data
-                      ]
+                      productsData?.sections?.map(item => {
+                        return(
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
                     }
                   />
                 </div>
@@ -1514,7 +1543,7 @@ const AddingProduct = () => {
                       htmlFor=""
                       className="text-[13px] md:text-base font-AeonikProRegular"
                     >
-                      Подраздел одежды{" "}
+                      Производитель
                     </label>
                     <span className="ml-[5px]">
                       <StarLabel />
@@ -1544,9 +1573,14 @@ const AddingProduct = () => {
                         .includes(input.toLowerCase())
                     }
                     options={
-                      [
-                        // no data
-                      ]
+                      productsData?.producers?.map(item => {
+                        return(
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
                     }
                   />
                 </div>
@@ -1590,9 +1624,14 @@ const AddingProduct = () => {
                         .includes(input.toLowerCase())
                     }
                     options={
-                      [
-                        // no data
-                      ]
+                      productsData?.seasons?.map(item => {
+                        return(
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
                     }
                   />
                 </div>
@@ -1698,9 +1737,14 @@ const AddingProduct = () => {
                             .includes(input.toLowerCase())
                         }
                         options={
-                          [
-                            // no data
-                          ]
+                          productsData?.gender?.map(item => {
+                            return(
+                              {
+                                value: item?.id,
+                                label: item?.name_ru
+                              }
+                            )
+                          })
                         }
                       />
                     </div>
@@ -1776,64 +1820,51 @@ const AddingProduct = () => {
 
                   </button>
                 </div>
-                <div className="w-1/2 flex items-start gap-x-[10px]">
-                  <div className="w-full md:w-1/2 flex flex-col items-start">
-                    <div className="flex items-center justify-center mb-[5px]">
-                      <label
-                        className="text-[13px] md:text-base font-AeonikProRegular"
-                      >
-                        Тип{" "}
-                      </label>
-                      <span className="ml-[5px]">
-                        <StarLabel />
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => setOpenTypes(true)}
-                      type="button"
-                      className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
-                    >
-                      <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
-                        Выбрать
-                      </span>
-                      <span className="">
-                        <ArrowRightIcon />
-                      </span>
-                    </button>
-                    <Select
-                      className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                      showSearch
-                      placeholder="Выбрать"
-                      optionFilterProp="children"
-                      onChange={onChange}
-                      onSearch={onSearch}
-                      size="large"
-                      filterOption={(input, option) =>
-                        (option?.label ?? "")
-                          .toLowerCase()
-                          .includes(input.toLowerCase())
-                      }
-                      options={
-                        [
-                          // no data
-                        ]
-                      }
-                    />
+                <div className="w-1/2 items-start gap-x-[10px]">
+                  <div className="w-full flex items-center justify-start mb-[5px]">
+                    <label className="text-[13px] md:text-base font-AeonikProRegular" >
+                      Тип{" "}
+                    </label>
+                    <span className="ml-[5px]">
+                      <StarLabel />
+                    </span>
                   </div>
-                  <div className="w-1/2 hidden md:flex flex-col items-start">
-                    <div className="flex items-center justify-center mb-[5px]">
-                      <label
-                        className="text-base font-AeonikProRegular"
-                      >
-                        Вес (грамм)
-                      </label>
-                    </div>
-                    <input
-                      type="text"
-                      className="w-full border border-borderColor px-2 h-10 flex items-center rounded-lg outline-none text-base [&::-webkit-inner-spin-button]:appearance-none"
-                      placeholder="(необязательно)"
-                    />
-                  </div>
+                  <button
+                    onClick={() => setOpenTypes(true)}
+                    type="button"
+                    className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
+                  >
+                    <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
+                      Выбрать
+                    </span>
+                    <span className="">
+                      <ArrowRightIcon />
+                    </span>
+                  </button>
+                  <Select
+                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      productsData?.types?.map(item => {
+                        return(
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
+                    }
+                  />
                 </div>
               </div>
 
