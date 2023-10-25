@@ -81,7 +81,7 @@ export default function LocationAddById() {
 
   function CallBackYandex(childData) {
     console.log(childData, "childData");
-    setState({ ...state, shopCenterAddress: childData?.title, shopLatitude: childData?.center[0], shopLongitude: childData?.center[1] })
+    setState({ ...state, shopCenterAddress: childData?.title, shopLongitude: childData?.center[0], shopLatitude: childData?.center[1] })
   }
 
 

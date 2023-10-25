@@ -41,7 +41,7 @@ export default function LocationMapCity() {
     idSecondAssistantName: "",
     idSecondAssistantPhone: "",
     idSecondAssistantPhoneCode: "998",
-    idLangitudeById: "",
+    idLongitudeById: "",
     idLatitudeById: "",
     idAssistantName: "",
     idShopId: "",
@@ -117,28 +117,28 @@ export default function LocationMapCity() {
 
   const onLocaTionDelete = () => {
     mutate(
-      {}, 
+      {},
       {
-      onSuccess: res => {
-        console.log(res, "location delte");
-        toast.warn(`${res?.message}`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        // if (res?.message) {
+        onSuccess: res => {
+          console.log(res, "location delte");
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          // if (res?.message) {
           navigate("/locations-store")
-        // }
-      },
-      onError: err => {
-        console.log(err);
-      }
-    })
+          // }
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
   }
 
   // // ------------GET  Has Magazin ?-----------------
@@ -187,7 +187,7 @@ export default function LocationMapCity() {
           idSecondAssistantMessegner: res?.location?.second_assistant_messenger,
           idSecondAssistantName: res?.location?.second_assistant_name,
           idLecondAssistantPhone: res?.location?.second_assistant_phone,
-          idLangitudeById: res?.location?.longitude,
+          idLongitudeById: res?.location?.longitude,
           idLatitudeById: res?.location?.latitude,
           idShopId: res?.location?.shop_id,
           idRegionId: res?.location?.region_id,
@@ -210,7 +210,7 @@ export default function LocationMapCity() {
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
-          center: [parseFloat(res?.location?.latitude?.slice(0, 9)), parseFloat(res?.location?.longitude?.slice(0, 9))]
+          center: [parseFloat(res?.location?.longitude?.slice(0, 9)), parseFloat(res?.location?.latitude?.slice(0, 9))]
         })
 
         setStoreLocationById(res)
@@ -510,7 +510,7 @@ export default function LocationMapCity() {
 
                         <div
                           className={clsx(["titleBox"], {
-                            ["titleBox_show"]:Boolean(forMaps.title.length),
+                            ["titleBox_show"]: Boolean(forMaps.title.length),
                           })}
                         >
                           <p className=" w-[90%] "> {forMaps.title} </p>
@@ -586,7 +586,7 @@ export default function LocationMapCity() {
             </div>
             {/* <LocationOfYandex
             handleCallback={CallBackYandex}
-            lang={state?.idLangitudeById}
+            lang={state?.idLongitudeById}
             lat={state?.idLatitudeById}
             address={state?.idAddress}
           /> */}
