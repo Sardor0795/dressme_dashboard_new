@@ -24,8 +24,7 @@ import {
 import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { clsx } from "clsx";
-// import "./LocationOfYandex.css";
-import './LocationOfYandex/LocationOfYandex.css'
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
