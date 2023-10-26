@@ -101,20 +101,11 @@ export default function LocationMapCity() {
 
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
   const { mutate } = useMutation(() => {
-    return fetch(`${url}/shops/locations/${NewId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-
-      },
-    }).then((res) => res.json());
+    return request({ url: `/shops/locations/${NewId}`, method: "DELETE", token: true });
   });
 
   const onLocaTionDelete = () => {
-    mutate(
-      {},
+    mutate({},
       {
         onSuccess: res => {
           console.log(res, "location delte");
@@ -128,9 +119,7 @@ export default function LocationMapCity() {
             progress: undefined,
             theme: "light",
           });
-          // if (res?.message) {
           navigate("/locations-store")
-          // }
         },
         onError: err => {
           console.log(err);

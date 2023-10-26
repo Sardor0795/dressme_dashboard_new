@@ -108,7 +108,7 @@ export default function SignInSeller() {
   };
   // useEffect(() => {
   //   localStorage.setItem('DressmeUserToken', dressInfo?.AccessTokenSeller);
-  // }, [dressInfo?.AccessTokenSeller]);
+  // }, [dressInfo?.AccessTokenSeller]); black
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -117,7 +117,7 @@ export default function SignInSeller() {
 
   }, []);
   return (
-    <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center">
+    <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
       <ToastContainer
         position="top-right"
         autoClose={5000}

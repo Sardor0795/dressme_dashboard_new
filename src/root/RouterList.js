@@ -7,7 +7,7 @@ import MarketStore from "../components/MarketStore";
 import MyMarket from "../components/MarketStore/MyMarket/MyMarket";
 import MarketEdit from "../components/MarketStore/Market_Edit/MarketEdit";
 import AddStore from "../components/MarketStore/AddMarket/AddStore/AddStore";
-import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
+// import AddLocation from "../components/MarketStore/AddMarket/AddLocation/AddLocation";
 // --------------------------Products=----------------
 import Products from "../components/Products/Products";
 import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
@@ -94,7 +94,7 @@ export default function RouterList() {
           <Route index element={<MarketIsStoreCheck />} />
           <Route path="/store/market-add" element={<AddStore />} />
           <Route path="/store/market-list" element={<MyMarket />} />
-          <Route path="/store/location-add" element={<AddLocation />} />
+          {/* <Route path="/store/location-add" element={<AddLocation />} /> */}
           <Route path="/store/market-list/:id" element={<MarketEdit />} />
           <Route path="/store/locations/shop/:id" element={<LocationsByIdShow />} />
         </Route>
