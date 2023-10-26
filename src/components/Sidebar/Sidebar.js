@@ -1,51 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   ClothesIcons,
   LocationIcon,
-  MenuCloseIcons,
   NavbarMarketIcon,
   NavbarReviewIcon,
   NavbarUserIcon,
-  ProfileIcon,
   UserExitIcon,
   UserIcon,
 } from "../../assets/icons";
-import { useLocation, useNavigate } from "react-router-dom";
 import { dressMainData } from "../../hook/ContextTeam";
-import { useMutation } from "@tanstack/react-query";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function Sidebar({ name, surName }) {
-  const navigate = useNavigate()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
-  const [state, setState] = useState({
-    logOutModal: false
-  });
-
-
-  const url = "https://api.dressme.uz/api/seller"
 
   return (
     <div
       className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
     `}
     >
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+
       <div className="flex flex-wrap content-between w-full h-full pb-10">
         <div className="w-full pt-5  px-2 flex flex-wrap gap-y-[44px]">
           <NavLink
@@ -62,21 +36,7 @@ export default function Sidebar({ name, surName }) {
 
             </span>
           </NavLink>
-          {/* <div>
-            <p>
-              {
-                localStorage.getItem("DressmeUserToken")
-              }
-              getItem
-            </p>
-            <p>
 
-              {
-                dressInfo?.AccessTokenSeller
-              }
-              dressMe
-            </p>
-          </div> */}
           {/* Links */}
           {dressInfo?.isAuthen ? (
             <div className="w-full flex flex-wrap gap-y-2">

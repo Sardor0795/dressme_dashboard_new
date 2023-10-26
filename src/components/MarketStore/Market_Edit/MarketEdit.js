@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, } from "react-router-dom";
 import { GoBackIcons, LocationIcon, StarLabel } from "../../../assets/icons";
-import { adidas, backImg } from "../../../assets";
-import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
-import { dressMainData } from "../../../hook/ContextTeam";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHttp } from "../../../hook/useHttp";
+
 function MarketEdit() {
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [getIdShops, setGetIdShops] = useState(null);
+  const { request } = useHttp()
   const [state, setState] = useState({
     marketName: "",
     marketDeliverId: "",
@@ -22,12 +20,11 @@ function MarketEdit() {
     picturelogoView2: "",
     checkGender: "",
     deliverCheck: "",
-
-
+    // -----
+    genderList: null,
+    deliverList: null,
   });
-  const [genderList, setGenderList] = useState();
 
-  const [deliverList, setDeliverList] = useState();
   const handleLocationImageOne = (e) => {
     setState({
       ...state,
@@ -44,31 +41,14 @@ function MarketEdit() {
   }
 
   const navigate = useNavigate();
-
   const pathname = window.location.pathname;
-
   let id = pathname.replace("/store/market-list/:", "");
-
   const url = "https://api.dressme.uz/api/seller";
 
   // // ------------GET  Has Magazin ?-----------------
-  useQuery(
-    ["magazin"],
-    () => {
-      return fetch(`${url}/shops/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
-
-          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-        },
-      }).then((res) => res.json());
-    },
+  useQuery(["magazin"], () => { return request({ url: `/shops/${id}`, token: true }) },
     {
       onSuccess: (res) => {
-        console.log(res, "resShopRouteID");
-        setGetIdShops(res);
         setState({
           ...state,
           marketName: res?.shop?.name,
@@ -80,48 +60,30 @@ function MarketEdit() {
         })
       },
       onError: (err) => {
-        console.log(err, "err magazin");
+        console.log(err, "err getDelivery-method");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
-
   // ------------GET METHOD Gender-type-----------------
-  useQuery(["get genders"], () => {
-    return fetch(`${url}/genders`, {
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
+  useQuery(["get_genders"], () => { return request({ url: "/genders", token: true }) },
     {
       onSuccess: (res) => {
-        setGenderList(res?.genders)
+        setState({ ...state, genderList: res?.genders })
       },
       onError: (err) => {
-        console.log(err, "err getGenderlist");
+        console.log(err, "err getGenderlist-method");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
   // ------------GET METHOD delivery-method-----------------
-  useQuery(["get delivery-method"], () => {
-    return fetch(`${url}/delivery-method`, {
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
+  useQuery(["get_delivery_method"], () => { return request({ url: "/delivery-method", token: true }) },
     {
       onSuccess: (res) => {
-        setDeliverList(res?.delivery_methods)
-
+        setState({ ...state, deliverList: res?.delivery_methods })
       },
       onError: (err) => {
         console.log(err, "err getDelivery-method");
@@ -129,26 +91,16 @@ function MarketEdit() {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
 
-  // Delete ----
+  // -------Delete ----
   const { mutate } = useMutation(() => {
-    return fetch(`${url}/shops/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then((res) => res.json());
+    return request({ url: `/shops/${id}`, method: "DELETE", token: true });
   });
-
   const onUserDelete = () => {
-    mutate(
-      {},
+    mutate({},
       {
         onSuccess: (res) => {
-          // console.log(res, "delete");
           if (res?.message) {
             toast.success(`${res?.message}`, {
               position: "top-right",
@@ -163,13 +115,9 @@ function MarketEdit() {
             navigate("/store");
           }
         },
-        onError: (err) => {
-          console.log(err);
-        },
       }
     );
   };
-
 
   // ---------Handle Edit---------
   const handleEditShops = () => {
@@ -177,11 +125,8 @@ function MarketEdit() {
     form.append("name", state?.marketName);
     form.append("gender_id", state?.checkGender);
     form.append("delivery_id", state?.deliverCheck);
-
-
     state?.pictureBgFile1 && form.append("background_photo", state?.pictureBgFile1);
     state?.picturelogoFile2 && form.append("logo_photo", state?.picturelogoFile2);
-
     return fetch(`${url}/shops/edit/${id}`, {
       method: "POST",
       headers: {
@@ -192,7 +137,6 @@ function MarketEdit() {
     })
       .then((res) => res.json())
       .then(res => {
-        // console.log(res, "Edit - message ");
         if (res?.fields || res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -204,15 +148,11 @@ function MarketEdit() {
             progress: undefined,
             theme: "light",
           });
-
           navigate('/store')
-
         }
-
       })
       .catch(err => console.log(err, "errImage"))
   }
-
 
   const goLocation = (id) => {
     navigate(`/store/locations/shop/:${id}`);
@@ -381,7 +321,7 @@ function MarketEdit() {
                 </span>
               </label>
               <div className="w-[70%] radio-toolbar  md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                {genderList?.map((data) => {
+                {state?.genderList?.map((data) => {
                   return (
                     <>
                       <input
@@ -412,7 +352,7 @@ function MarketEdit() {
                 </span>
               </label>
               <div className="w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                {deliverList?.map((data) => {
+                {state?.deliverList?.map((data) => {
                   return (
                     <>
                       <input

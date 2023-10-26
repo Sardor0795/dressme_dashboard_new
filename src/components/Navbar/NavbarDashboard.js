@@ -8,54 +8,32 @@ import { MenuCloseIcons, UserExitIcon } from "../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHttp } from "../../hook/useHttp";
 
 export default function NavbarDashboard() {
+  const { request } = useHttp()
   const [dressInfo, setDressInfo] = useContext(dressMainData)
   const navigate = useNavigate()
-  const url = "https://api.dressme.uz/api/seller"
   const [name, setName] = useState()
   const [surName, setSurName] = useState()
 
-  // console.log("ishga NavbarDashboard");
   // ----------------Get Seller Profile-------------
-  useQuery(["Get-Seller-Profile-dash"], () => {
-    return fetch(`${url}/profile`, {
-      method: "GET",
-      headers: {
-        // "Content-Type": "application/json",
-        // "Accept": "application/json",
-        'Content-type': 'application/json; charset=UTF-8',
-        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      }
-    }).then(res => res.json())
-  },
+  // ------------GET  Has Location ?-----------------
+  useQuery(["Get_Seller_Profile_dash"], () => { return request({ url: "/profile", token: true }); },
     {
       onSuccess: (res) => {
-        // console.log(res, "Response in Profile Dashboard")
         setName(res?.name)
         setSurName(res?.surname)
-
       },
-      onError: (err) => {
-        console.log(err, "err get profile");
-      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
-  )
-  // ------------LogOutSeller------------
+  );
 
   // -----------------------Seller Delete---------------
   const HandleLogOutSeller = useMutation(() => {
-    return fetch(`${url}/logout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-
-      },
-    }).then((res) => res.json());
+    return request({ url: `/logout`, method: "POST", token: true });
   });
-
   const logOutHandle = () => {
     HandleLogOutSeller.mutate({}, {
       onSuccess: res => {
@@ -63,7 +41,6 @@ export default function NavbarDashboard() {
           localStorage.clear();
           navigate("/login-seller")
           window.location.reload();
-          console.log(res, "logOut");
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -75,7 +52,6 @@ export default function NavbarDashboard() {
             theme: "light",
           });
           setDressInfo({ ...dressInfo, logOutSeller: false })
-
         }
       },
       onError: err => {

@@ -1,84 +1,50 @@
 import React, { useEffect, useState } from "react";
-// import { ProductImg } from "../../assets";
-// import { SearchIcon } from "../../../../assets/icons";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-// import { pdpImg } from "../../../../assets";
-
-import { DatePicker } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { SearchIcon } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
-import NoLocations from "../../MarketLocations/NoLocations/NoLocations";
 import LoadingForSeller from "../../Loading/LoadingFor";
-const { RangePicker } = DatePicker;
+import { useHttp } from "../../../hook/useHttp";
 
 export default function LocationsByIdShow() {
-  // const [productList, setProductList] = useState([
-  //   {
-  //     id: "",
-  //     photo: "",
-  //     city: "",
-  //     sub_region: "",
-  //     address: "",
-  //     startTime: "",
-  //     endTime: "",
-  //   },
-  // ]);
-
-  const [locationListId, setLocationListId] = useState("");
-  const [locationIsCheck, setLocationIsCheck] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const { request } = useHttp()
+  const [state, setState] = useState({
+    locationListId: "",
+    locationIsCheck: false,
+    loading: true
+  });
 
   const { id } = useParams();
   const newId = id?.replace(":", "")
 
-  const url = "https://api.dressme.uz/api/seller";
-
   // ------------GET  Has Magazin ?-----------------
-
-  const { isLoading, isFetched } = useQuery(
-    ["locations-index-id"],
-    () => {
-      return fetch(`${url}/shops/locations/shop/${newId}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-        },
-      }).then((res) => res.json());
-    },
+  useQuery(["locations_index_id"], () => { return request({ url: `/shops/locations/shop/${newId}`, token: true }) },
     {
       onSuccess: (res) => {
         if (res) {
-          setLocationListId(res);
-          setLocationIsCheck(res?.locations_exist)
-          setLoading(false)
-          console.log(res, "magazin----------------");
+          setState({ ...state, locationListId: res, locationIsCheck: res?.locations_exist, loading: false })
         }
       },
       onError: (err) => {
-        console.log(err, "err magazin");
+        setState({ ...state, loading: false })
+        console.log(err, "err In MarketStore");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
 
-  // locationListId?.locations?.data?.map((item, index) => {
-  //   console.log(locationListId?.locations, "item");
-  // });
-
   const navigate = useNavigate();
   const goMapCity = (id) => {
-    // locations - store / city /: 3
-    // console.log(id, "testId")
     navigate(`/locations-store/city/:${id}`);
   };
   const goMapWear = (id) => {
     navigate(`/locations-store/wears/:${id}`);
+  };
+  const addLocationByMarket = () => {
+    navigate(`/locations-store/:${newId}`);
   };
 
   useEffect(() => {
@@ -87,19 +53,11 @@ export default function LocationsByIdShow() {
     });
   }, []);
 
-  // const [showPicker, setShowPicker] = useState(true);
-  // const showPickerHandle = () => {
-  //   setShowPicker(!showPicker);
-  // };
-  // useEffect(() => {
-  //   showPickerHandle();
-  // }, [showPicker]);
-  // console.log(loading, "loading", '\n', locationIsCheck, "locationIsCheck");
   return (
     <div>
       {
-        loading ? <LoadingForSeller /> :
-          locationIsCheck ? (
+        state?.loading ? <LoadingForSeller /> :
+          state?.locationIsCheck ? (
             <div className="w-full h-full  px-4 md:px-0 ">
               <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
                 <div>
@@ -173,20 +131,19 @@ export default function LocationsByIdShow() {
               </div>
               <div className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
-                  {locationListId?.locations?.data[0]?.shop?.name}{" "}
+                  {state?.locationListId?.locations?.data[0]?.shop?.name}{" "}
                   <span className="hidden md:inline">
-                    ({locationListId?.locations?.data?.length})
+                    ({state?.locationListId?.locations?.data?.length})
                   </span>
                 </p>
-
-                <NavLink
-                  to={"/store/location-add"}
+                <button
+                  onClick={addLocationByMarket}
                   className="md:hidden p-2 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
                 >
                   <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
                     Добавить локацию
                   </span>
-                </NavLink>
+                </button>
               </div>
               {/* Table */}
               <div className="w-full h-fit">
@@ -219,14 +176,14 @@ export default function LocationsByIdShow() {
                         </span>
                       </li>
                       <li className="w-[30%] flex items-center justify-end ">
-                        <NavLink
-                          to={"/store/location-add"}
+                        <button
+                          onClick={addLocationByMarket}
                           className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
                         >
                           <span className="text-sm  text-white not-italic font-AeonikProMedium">
                             Добавить локацию
                           </span>
-                        </NavLink>
+                        </button>
                       </li>
                     </div>
                   </ul>
@@ -234,7 +191,7 @@ export default function LocationsByIdShow() {
 
                 {/* table product */}
                 <div className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
-                  {locationListId?.locations?.data?.map((data, index) => {
+                  {state?.locationListId?.locations?.data?.map((data, index) => {
                     return (
                       <>
                         <ul
@@ -420,7 +377,21 @@ export default function LocationsByIdShow() {
               </div>
             </div>
           ) : (
-            <NoLocations />
+            <div className="w-full h-[100vh]  flex items-center justify-center  ">
+
+              <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
+                <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
+                  У вас пока нет локации !
+                </p>
+                <button
+                  onClick={addLocationByMarket}
+                  className="px-7 active:scale-95  active:opacity-70 cursor-pointer py-3 rounded-lg flex items-center justify-center bg-textBlueColor text-white text-lg not-italic font-AeonikProMedium"
+                >
+                  Добавить локацию
+                </button>
+              </div>
+            </div>
+            // <NoLocations />
           )
       }
     </div>
