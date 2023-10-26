@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import {
   AddIconsCircle1,
   ArrowRightIcon,
+  ArrowTopIcons,
   DownloadIcon,
   InputCheckedTrueIcons,
   LineIcon,
   LoaderIcon,
   MenuCloseIcons,
+  Star6Icon,
   StarLabel,
 } from "../../../../assets/icons";
 import { Link, NavLink, useParams } from "react-router-dom";
@@ -1253,6 +1255,17 @@ const AddingProduct = () => {
 
   }
 
+
+  const [activeIndex, setActiveIndex] = useState();
+  const accordionCityList = (id) => {
+    if (activeIndex == id) {
+      setActiveIndex(0)
+    } else {
+      setActiveIndex(id)
+    }
+  }
+
+
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
 
@@ -1513,7 +1526,7 @@ const AddingProduct = () => {
                     </label>
                     <ArrowRightIcon />
                   </button>
-                  <Select
+                  {/* <Select
                     className="hidden md:block rounded-lg w-full h-11 md:h-10"
                     showSearch
                     placeholder="Выбрать"
@@ -1536,7 +1549,125 @@ const AddingProduct = () => {
                         )
                       })
                     }
-                  />
+                  /> */}
+
+                  {
+                    <div className={`max-w-[300px] h-fit fixed px-3 md:px-6 py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] overflow-hidden`} >
+                    <div className="w-full flex items-center justify-between  ">
+                      {/* <div
+                        className="select-none cursor-pointer"
+                        onClick={() => {
+                          setState({ ...state, openModalRegions: false });
+                        }}
+                      >
+                        <MenuCloseIcons colors="#000" /></div> */}
+                    </div>
+                   
+                    <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+
+
+                      {state?.getRegionList?.regions ?
+                        state?.getRegionList?.regions?.map((data, index) => {
+                          return (
+                            <div key={data?.id} className="w-full  h-fit  ">
+                              <div
+                                onClick={() => accordionCityList(data?.id)}
+                                className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                              >
+                                <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                                  {data?.name_ru}
+                                </span>
+                                <span
+                                  className={`${data?.id == activeIndex ? "rotate-[0deg]" : "rotate-[180deg]"} `}
+                                >
+                                  <ArrowTopIcons colors={"#a1a1a1"} />
+                                </span>
+                              </div>
+                              <div
+                                className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                              `}
+                              >
+                                {data?.sub_regions?.map((item) => {
+                                  return (
+                                    <div key={item?.id} className="flex items-center px-[2px] gap-x-[4px] cursor-pointer">
+                                      <label
+                                        htmlFor={item?.name_ru}
+                                        className="flex items-center gap-x-[6px]"
+                                      >
+                                        <input
+                                          type="radio"
+                                          id={item?.name_ru}
+                                          name="select_in_city"
+                                          value={item?.region_id}
+                                          checked={parseFloat(item?.id) === parseFloat(state?.sub_region)}
+                                          className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                          onChange={(e) => {
+                                            setState({ ...state, region: e.target.value, sub_region: item?.id })
+                                          }}
+                                          required
+
+                                        />
+                                        <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular"
+                                        >{item?.name_ru}</span>
+                                      </label>
+                                    </div>
+
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        }) :
+                        <p className="w-full h-full flex flex-col items-center justify-center">Malumotlar yuklanyapti...</p>}
+
+                    </div>
+                    <div className="w-full flex items-center justify-end  mt-2">
+                      <span onClick={() => {
+                        setState({ ...state, openModalRegions: false });
+                      }} className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium">Готово</span>
+                    </div>
+                    </div>
+                  }
+
+                  {/* Region INput  */}
+                  <div className={"w-full"}>
+                    <label htmlFor="" >
+                      <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                        Выберите регион
+
+                        <span className="ml-[5px]"><Star6Icon /></span>
+                      </span>
+                      <div
+                        onClick={() => {
+                          setState({ ...state, openModalRegions: true });
+                        }}
+                        className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
+                        <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                          {!state?.region && !state?.sub_region && "Выберите регион"}
+
+                          {state?.getRegionList?.regions?.filter(e => e.id == state?.region).map(item => {
+                            return <span key={item?.id} className="flex items-center text-[#000] text-[14px] sm:text-base">
+                              {item?.name_ru},
+                              {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {
+                                return <span key={item?.id} className="ml-1">{item?.name_ru}</span>
+                              })}
+                            </span>
+                          })
+                          }
+                        </span>
+                        <span className="rotate-[180deg]"><ArrowTopIcons colors={"#a1a1a1"} /></span>
+                      </div>
+                      {
+                        state?.errorGroup?.errors?.region_id && !state?.region &&
+                        <p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
+                          {state?.errorGroup?.errors?.region_id}
+                        </p>
+                      }
+
+                    </label>
+                  </div>
+
+
                 </div>
                 <div className="w-1/2 flex  flex-col items-start">
                   <div className="flex items-center justify-center mb-[5px]">
