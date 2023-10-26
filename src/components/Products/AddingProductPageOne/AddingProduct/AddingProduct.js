@@ -1282,7 +1282,8 @@ const AddingProduct = () => {
               </button>
             </div>
             <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-              {changeColor?.map((data) => {
+              {productsData?.colors.map((data) => {
+                console.log(data.hex, "COLORS");
                 return (
                   <div className="flex flex-col items-center justify-center ">
                     <div
@@ -1290,9 +1291,8 @@ const AddingProduct = () => {
                       onClick={() =>
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
-                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] ${data?.colors
-                        } cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : ""
-                        } `}
+                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] bg-[#aaaaaa] bg-[${data.hex}] cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : "" }
+                     `}
                     >
                       {data?.action && data?.id === 2 ? (
                         <InputCheckedTrueIcons colors={"#000"} />
@@ -1302,7 +1302,7 @@ const AddingProduct = () => {
                         <InputCheckedTrueIcons colors={"#fff"} />
                       ) : null}
                     </div>
-                    <span className={`text-black text-center text-xs not-italic font-AeonikProRegular`}>{data?.colorName}</span>
+                    <span className={`text-black text-center text-xs not-italic font-AeonikProRegular`}>{data?.name_ru}</span>
                   </div>
                 );
               })}
@@ -1783,10 +1783,11 @@ const AddingProduct = () => {
                     <div
                       className="inputStyle w-full h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
                     > {randomSellerCode}</div>
+
                     {/* <button onClick={() => randomCode(10)}>Random Genereate {randomSellerCode}</button> */}
 
                     <button
-                      onClick={() => randomCode(10)}
+                      onClick={() => randomCode(17)}
                       type={"button"}
                       className="w-[54px] h-[42px] active:scale-95  active:opacity-70 flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
                       {/* <LoaderIcon />  */}
@@ -2182,3 +2183,4 @@ const AddingProduct = () => {
 };
 
 export default AddingProduct;
+
