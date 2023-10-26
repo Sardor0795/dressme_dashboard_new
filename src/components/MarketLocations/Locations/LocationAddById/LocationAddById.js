@@ -51,32 +51,11 @@ export default function LocationAddById() {
     pictureLastFile3: "",
     pictureLastView3: "",
   });
-  // console.log(state?.assistantPhoneFirst?.split("-"), "assistantPhoneFirst");
   // ----------phone Number----------1
-  let data = state?.assistantPhoneFirst.split("-");
-  let arr = data.join("");
-  let data1 = arr.split("(");
-  let arr1 = data1.join("");
-  let arr2 = arr1.split(")");
-  let data2 = arr2.join("");
-  let data3 = data2.split(" ")
-  let data4 = data3.join("")
-  let arr3 = state.phoneCode.split("+");
-  let data5 = arr3.join("");
-  const assistantPhoneNumberFirst = data5 + data4;
-  // ----------phone Number----------2
 
-  let secData = state?.assistantPhoneSecond.split("-");
-  let secArr = secData.join("");
-  let secData1 = secArr.split("(");
-  let secArr1 = secData1.join("");
-  let secArr2 = secArr1.split(")");
-  let secData2 = secArr2.join("");
-  let secData3 = secData2.split(" ")
-  let secData4 = secData3.join("")
-  let secArr3 = state.phoneCode.split("+");
-  let secData5 = secArr3.join("");
-  const assistantPhoneNumberSecond = secData5 + secData4;
+  const assistantPhoneNumberFirst = state.phoneCode.split("+")?.join("") + state?.assistantPhoneFirst?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  const assistantPhoneNumberSecond = state.phoneCode.split("+")?.join("") + state?.assistantPhoneSecond?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  // ----------phone Number----------2
 
   function CallBackYandex(childData) {
     setState({ ...state, shopCenterAddress: childData?.title, shopLongitude: childData?.center[0], shopLatitude: childData?.center[1] })

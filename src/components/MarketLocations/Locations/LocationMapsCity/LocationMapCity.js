@@ -11,8 +11,6 @@ import {
 import { Aligarx } from "../../../../assets";
 import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
-import LocationOfYandex from "./LocationOfYandex/LocationOfYandex.js";
-import RegionListOfLocation from "./Modal/RegionListOfLocation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import InputMask from "react-input-mask";
 import {
@@ -30,7 +28,9 @@ import { clsx } from "clsx";
 import './LocationOfYandex/LocationOfYandex.css'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHttp } from "../../../../hook/useHttp";
 export default function LocationMapCity() {
+  const { request } = useHttp()
   const [state, setState] = useState({
     idAddress: "",
     idAssistantMessenger: "",
@@ -98,8 +98,6 @@ export default function LocationMapCity() {
 
   const navigate = useNavigate();
 
-  const [storeLocation, setStoreLocation] = useState("")
-  const [storeLocationById, setStoreLocationById] = useState("")
   const url = "https://api.dressme.uz/api/seller"
 
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
@@ -141,49 +139,16 @@ export default function LocationMapCity() {
       })
   }
 
-  // // ------------GET  Has Magazin ?-----------------
-  const { isLoading } = useQuery(["store-location"], () => {
-    return fetch(`${url}/shops/locations/index`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
 
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setStoreLocation(res)
-        // console.log(res, "magazin yes");
-      },
-      onError: (err) => {
-        // console.log(err, "err magazin");
-      },
-    }
-  )
   // // ------------GET  location id?-----------------
-  useQuery(["store-location-id"], () => {
-    return fetch(`${url}/shops/locations/${NewId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-
-    }).then(res => res.json())
-  },
+  useQuery(["location_index_id"], () => { return request({ url: `/shops/locations/${NewId}`, token: true }); },
     {
       onSuccess: (res) => {
-        console.log(res, "EditLocation");
         setState({
           ...state,
           idAddress: res?.location?.address,
           idAssistantMessenger: res?.location?.assistant_messenger,
           idAssistantName: res?.location?.assistant_name,
-          // assistantPhone: res?.location?.assistant_phone,
           idSecondAssistantMessegner: res?.location?.second_assistant_messenger,
           idSecondAssistantName: res?.location?.second_assistant_name,
           idLecondAssistantPhone: res?.location?.second_assistant_phone,
@@ -205,38 +170,33 @@ export default function LocationMapCity() {
           picturelogoView2: res?.location?.url_image_path_two,
           pictureLastView3: res?.location?.url_image_path_three,
         })
-
-
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
           center: [parseFloat(res?.location?.longitude?.slice(0, 9)), parseFloat(res?.location?.latitude?.slice(0, 9))]
         })
-
-        setStoreLocationById(res)
       },
       onError: (err) => {
+        console.log(err, "BU -- LocationMapCity -- Error");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
-  // ------------GET METHOD Region-----------------
+  );
 
-  useQuery(["getRegionList-map-ity"], () => {
-    return fetch(`${url}/regions`).then(res => res.json())
-  },
+  // ------------GET METHOD Region-----------------
+  useQuery(["getRegionList_map_city"], () => { return request({ url: "/regions", token: true }); },
     {
       onSuccess: (res) => {
         setState({ ...state, getRegionList: res, })
       },
       onError: (err) => {
-        // console.log(err, "err get region");
+        console.log(err, "err get region");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
 
   useEffect(() => {
     window.scrollTo({
@@ -244,9 +204,7 @@ export default function LocationMapCity() {
     });
   }, []);
 
-
   const [openRegionModal, setOpenRegionModal] = useState(false);
-  const [openRegionList, setOpenRegionList] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
@@ -255,32 +213,11 @@ export default function LocationMapCity() {
       setActiveIndex(id)
     }
   }
-  // console.log(forMaps?.center, "formaps.Center");
   // ----------phone Number----------1
-  let data = state?.idAssistantPhone?.split("-");
-  let arr = data?.join("");
-  let data1 = arr?.split("(");
-  let arr1 = data1?.join("");
-  let arr2 = arr1?.split(")");
-  let data2 = arr2?.join("");
-  let data3 = data2?.split(" ")
-  let data4 = data3?.join("")
-  let arr3 = state?.idAssistantPhoneCode?.split("+");
-  let data5 = arr3?.join("");
-  const assistantPhoneNumberFirst = data5 + data4;
+  const assistantPhoneNumberFirst = state.idAssistantPhoneCode.split("+")?.join("") + state?.idAssistantPhone?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  const assistantPhoneNumberSecond = state.idSecondAssistantPhoneCode.split("+")?.join("") + state?.idSecondAssistantPhone?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
   // ----------phone Number----------2
 
-  let secData = state?.idSecondAssistantPhone?.split("-");
-  let secArr = secData?.join("");
-  let secData1 = secArr?.split("(");
-  let secArr1 = secData1?.join("");
-  let secArr2 = secArr1?.split(")");
-  let secData2 = secArr2?.join("");
-  let secData3 = secData2?.split(" ")
-  let secData4 = secData3?.join("")
-  let secArr3 = state?.idSecondAssistantPhoneCode?.split("+");
-  let secData5 = secArr3?.join("");
-  const assistantPhoneNumberSecond = secData5 + secData4;
 
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
@@ -291,15 +228,7 @@ export default function LocationMapCity() {
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
-  // const initialState = {
-  //   title: "",
-  //   center: [49.444444, 69.555555],
-  //   zoom: 12,
-  // };
-  // console.log(initialState, "center.initialState");
-  // console.log(state?.center, "center");
-  // console.log(state?.title, "title");
-  // submits length
+
   const handleSubmit = () => {
 
     setForMaps({

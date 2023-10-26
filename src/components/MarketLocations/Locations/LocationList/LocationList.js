@@ -16,8 +16,7 @@ import { useHttp } from "../../../../hook/useHttp";
 
 
 function LocationList({ marketList, locationList }) {
-  const { request } = useHttp()
-  console.log("LocationList Is Render");
+
 
   const [openSelect, setOpenSelect] = useState(false)
   const navigate = useNavigate()
@@ -28,19 +27,7 @@ function LocationList({ marketList, locationList }) {
 
   }
 
-  // // // ------------GET  Has Magazin ?-----------------
-  // const { isLoading } = useQuery(["locations_index"], () => { return request({ url: "/shops/locations/index", token: true }) },
-  //   {
-  //     onSuccess: (res) => {
-  //       setLocationList(res)
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "err locations_index");
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+
 
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
