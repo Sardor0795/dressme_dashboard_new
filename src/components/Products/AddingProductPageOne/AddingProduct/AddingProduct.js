@@ -1283,7 +1283,8 @@ const AddingProduct = () => {
               </button>
             </div>
             <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-              {changeColor?.map((data) => {
+              {productsData?.colors.map((data) => {
+                console.log(data.hex, "COLORS");
                 return (
                   <div className="flex flex-col items-center justify-center ">
                     <div
@@ -1291,9 +1292,8 @@ const AddingProduct = () => {
                       onClick={() =>
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
-                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] ${data?.colors
-                        } cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : ""
-                        } `}
+                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] bg-[#aaaaaa] bg-[${data.hex}] cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : "" }
+                     `}
                     >
                       {data?.action && data?.id === 2 ? (
                         <InputCheckedTrueIcons colors={"#000"} />
@@ -1303,7 +1303,7 @@ const AddingProduct = () => {
                         <InputCheckedTrueIcons colors={"#fff"} />
                       ) : null}
                     </div>
-                    <span className={`text-black text-center text-xs not-italic font-AeonikProRegular`}>{data?.colorName}</span>
+                    <span className={`text-black text-center text-xs not-italic font-AeonikProRegular`}>{data?.name_ru}</span>
                   </div>
                 );
               })}
@@ -1788,6 +1788,7 @@ const AddingProduct = () => {
                       placeholder="Seller code of random "
                       className="inputStyle w-full h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
                     />
+
                     <button
                       onClick={() => randomCode(17)}
                       type={"button"}
@@ -2185,3 +2186,4 @@ const AddingProduct = () => {
 };
 
 export default AddingProduct;
+
