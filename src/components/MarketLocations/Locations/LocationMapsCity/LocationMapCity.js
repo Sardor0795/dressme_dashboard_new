@@ -24,7 +24,7 @@ import {
 import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { clsx } from "clsx";
-
+import "../LocationAddById/yandexmapsStore.css"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
@@ -213,10 +213,9 @@ export default function LocationMapCity() {
     }
   }
   // ----------phone Number----------1
-  const assistantPhoneNumberFirst = state.idAssistantPhoneCode.split("+")?.join("") + state?.idAssistantPhone?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
-  const assistantPhoneNumberSecond = state.idSecondAssistantPhoneCode.split("+")?.join("") + state?.idSecondAssistantPhone?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  const assistantPhoneNumberFirst = state.idAssistantPhoneCode?.split("+")?.join("") + state?.idAssistantPhone?.split("-")?.join("")?.split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  const assistantPhoneNumberSecond = state.idSecondAssistantPhoneCode?.split("+")?.join("") + state?.idSecondAssistantPhone?.split("-")?.join("")?.split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
   // ----------phone Number----------2
-
 
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
@@ -294,7 +293,7 @@ export default function LocationMapCity() {
     form.append("assistant_name", state?.idAssistantName);
     form.append("assistant_phone", assistantPhoneNumberFirst);
     state?.idSecondAssistantName && form.append("second_assistant_name", state?.idSecondAssistantName);
-    state?.idSecondAssistantPhone && form.append("second_assistant_phone", assistantPhoneNumberSecond);
+    state?.idSecondAssistantPhone && state?.idSecondAssistantPhoneCode && form.append("second_assistant_phone", assistantPhoneNumberSecond);
     state?.pictureBgFile1 && form.append("shop_photo_one", state?.pictureBgFile1);
     state?.picturelogoFile2 && form.append("shop_photo_two", state?.picturelogoFile2);
     state?.pictureLastFile3 && form.append("shop_photo_three", state?.pictureLastFile3);
