@@ -3,122 +3,62 @@ import { Link, useNavigate } from "react-router-dom";
 import { BgSelectSkin, GoBackIcons, StarLabel } from "../../../../assets/icons";
 import AddBtn from "../../../Products/AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 import { AiOutlineLeft } from "react-icons/ai";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHttp } from "../../../../hook/useHttp";
 
-function AddStore({ onClick }) {
+function AddStore({ shopsList }) {
   const navigate = useNavigate();
-  const [magazinName, setMagazinName] = useState(null);
-  const [shopMarketList, setShopMarketList] = useState(null);
-
-  const [genderType, setGenderType] = useState();
-  const [checkGender, setCheckGender] = useState(1);
-
-  const [deliverList, setDeliverList] = useState();
-  const [deliverCheck, setDeliverCheck] = useState(1);
-
-
-
-  const [errorGroup, setErrorGroup] = useState();
-
-
-
-  // img upload--------------
-  const [file, setFile] = useState({
+  const { request } = useHttp()
+  const url = "https://api.dressme.uz/api/seller"
+  const [state, setState] = useState({
+    magazinName: null,
+    genderType: null,
+    checkGender: 1,
+    deliverList: null,
+    deliverCheck: 1,
+    errorGroup: "",
+    // ---ForImg
     pictureBgFile: "",
-    pictureBgView: ""
-  });
-  const [fileBrand, setFileBrand] = useState({
+    pictureBgView: "",
     pictureLogoFile: "",
-    pictureLogoView: ""
+    pictureLogoView: "",
   });
+
   const handleChange = (e) => {
-    setFile({
-      ...fileBrand,
+    setState({
+      ...state,
       pictureBgFile: e.target.files[0],
       pictureBgView: URL.createObjectURL(e.target.files[0])
     });
   }
   const handleChangeBrand = (e) => {
-    setFileBrand({
-      ...fileBrand,
+    setState({
+      ...state,
       pictureLogoFile: e.target.files[0],
       pictureLogoView: URL.createObjectURL(e.target.files[0])
     });
   }
 
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-  }, []);
-
-
-  const url = "https://api.dressme.uz/api/seller"
-
-  // // ------------GET  Has Magazin ?-----------------
-  useQuery(
-    ["magazin-list"],
-    () => {
-      return fetch(`${url}/shops`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-        },
-      }).then((res) => res.json());
-    },
+  // ------------GET METHOD Gender-type-----------------
+  useQuery(["get_genders"], () => { return request({ url: "/genders", token: true }) },
     {
       onSuccess: (res) => {
-        setShopMarketList(res?.shops);
-        // console.log(res?.shops?.data, "ShopMarketList");
+        setState({ ...state, genderType: res?.genders })
       },
       onError: (err) => {
-        console.log(err, "err magazin");
+        console.log(err, "err getGenderlist-method");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
-  // ------------GET METHOD Gender-type-----------------
-  useQuery(["get genders"], () => {
-    return fetch(`${url}/genders`, {
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        console.log(res, "genderlist");
-        setGenderType(res?.genders)
-      },
-      onError: (err) => {
-        console.log(err, "err getGenderlist");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  )
   // ------------GET METHOD delivery-method-----------------
-  useQuery(["get delivery-method"], () => {
-    return fetch(`${url}/delivery-method`, {
-      headers: {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-    }).then(res => res.json())
-  },
+  useQuery(["get_delivery_method"], () => { return request({ url: "/delivery-method", token: true }) },
     {
       onSuccess: (res) => {
-        // console.log(res?.delivery_methods, "delivery-method");
-        setDeliverList(res?.delivery_methods)
+        setState({ ...state, deliverList: res?.delivery_methods })
       },
       onError: (err) => {
         console.log(err, "err getDelivery-method");
@@ -126,14 +66,15 @@ function AddStore({ onClick }) {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
+
   const sendFunc = () => {
     let form = new FormData()
-    magazinName && form.append("name", magazinName);
-    form.append("logo_photo", fileBrand?.pictureLogoFile);
-    file?.pictureBgFile && form.append("background_photo", file?.pictureBgFile);
-    form.append("gender_id", checkGender);
-    form.append("delivery_id", deliverCheck);
+    state?.magazinName && form.append("name", state?.magazinName);
+    state?.pictureBgFile && form.append("background_photo", state?.pictureBgFile);
+    form.append("logo_photo", state?.pictureLogoFile);
+    form.append("gender_id", state?.checkGender);
+    form.append("delivery_id", state?.deliverCheck);
     return fetch(`${url}/shops/store`, {
       method: "POST",
       headers: {
@@ -144,10 +85,8 @@ function AddStore({ onClick }) {
     })
       .then((res) => res.json())
       .then(res => {
-        console.log(res, "AddMarket Store");
         if (res?.errors && res?.message) {
-
-          setErrorGroup(res?.errors)
+          setState({ ...state, errorGroup: res?.errors })
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -177,6 +116,11 @@ function AddStore({ onClick }) {
 
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
@@ -195,7 +139,7 @@ function AddStore({ onClick }) {
         theme="colored"
       />
 
-      {shopMarketList?.data?.length >= 1 && <div className="md:hidden flex ">
+      {shopsList?.shops?.data?.length >= 1 && <div className="md:hidden flex ">
         <button
           onClick={() => {
             navigate(-1);
@@ -209,7 +153,7 @@ function AddStore({ onClick }) {
         {/* <div className="text-center mb-6 md:mb-[50px] text-5 md:text-[35px] font-AeonikProMedium"> */}
         Создать магазин
       </div>
-      {shopMarketList?.data?.length >= 1 && <div className="mb-3">
+      {shopsList?.shops?.data?.length >= 1 && <div className="mb-3">
         <button
           onClick={() => {
             navigate(-1);
@@ -234,21 +178,21 @@ function AddStore({ onClick }) {
               accept=" image/*"
             />
             {
-              !file?.pictureBgView && <>
+              !state?.pictureBgView && <>
                 <span className="flex items-center flex-col justify-center">
                   Выберите облошка
                   <BgSelectSkin />
                 </span>
                 {
-                  errorGroup?.background_photo && !file?.pictureBgView &&
+                  state?.errorGroup?.background_photo && !state?.pictureBgView &&
                   <p className="text-[#D50000] text-[12px] ll:text-[12px] md:text-base">
-                    {errorGroup?.background_photo}
+                    {state?.errorGroup?.background_photo}
                   </p>
                 }
               </>
 
             }
-            {file?.pictureBgView && <img src={file?.pictureBgView} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
+            {state?.pictureBgView && <img src={state?.pictureBgView} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
           </label>
         </button>
 
@@ -267,7 +211,7 @@ function AddStore({ onClick }) {
                 accept=" image/*"
               />
               {
-                !fileBrand?.pictureLogoView && <>
+                !state?.pictureLogoView && <>
                   <span className="flex items-center flex-col justify-center px-2">
                     <div className="flex items-center md:w-[85px]">Выберите логотип
                       <span className="hidden md:block">
@@ -277,15 +221,15 @@ function AddStore({ onClick }) {
                     <BgSelectSkin />
                   </span>
                   {
-                    errorGroup?.logo_photo && !file?.pictureLogoView &&
+                    state?.errorGroup?.logo_photo && !state?.pictureLogoView &&
                     <p className="text-[#D50000] text-[12px] ll:text-[12px] ">
-                      {errorGroup?.logo_photo}
+                      {state?.errorGroup?.logo_photo}
                     </p>
                   }
                 </>
               }
 
-              {fileBrand?.pictureLogoView && <img src={fileBrand?.pictureLogoView} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
+              {state?.pictureLogoView && <img src={state?.pictureLogoView} alt="backImg" className="w-full h-full object-cover rounded-lg" />}
             </label>
           </button>
         </div>
@@ -311,8 +255,8 @@ function AddStore({ onClick }) {
                 type="text"
                 name="shopName"
                 id="shopName"
-                value={magazinName}
-                onChange={(e) => setMagazinName(e.target.value)}
+                value={state?.magazinName}
+                onChange={(e) => setState({ ...state, magazinName: e.target.value })}
                 placeholder="Введите название магазина"
                 className="w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />
@@ -320,9 +264,9 @@ function AddStore({ onClick }) {
             </div>
             <div className="w-full flex items-center justify-end">
               {
-                errorGroup?.name && !magazinName &&
+                state?.errorGroup?.name && !state?.magazinName &&
                 <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
-                  {errorGroup?.name}
+                  {state?.errorGroup?.name}
                 </p>
               }
             </div>
@@ -337,7 +281,7 @@ function AddStore({ onClick }) {
                 </span>
               </label>
               <div className="w-[70%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                {genderType?.map((data) => {
+                {state?.genderType?.map((data) => {
                   return (
                     <div key={data?.id} className="md:w-1/3">
 
@@ -346,8 +290,8 @@ function AddStore({ onClick }) {
                         id={data?.id}
                         value={data?.id}
                         name="checkGender"
-                        checked={data?.id === checkGender}
-                        onChange={() => setCheckGender(data?.id)}
+                        checked={data?.id === state?.checkGender}
+                        onChange={(e) => setState({ ...state, checkGender: e.target.value })}
                       // id={answer.answer_ID}
                       />
                       <label htmlFor={data?.id} className={`w-1/3 cursor-pointer md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
@@ -371,7 +315,7 @@ function AddStore({ onClick }) {
                 </span>
               </label>
               <div className="w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                {deliverList?.map((data) => {
+                {state?.deliverList?.map((data) => {
                   return (
                     <>
 
@@ -380,8 +324,8 @@ function AddStore({ onClick }) {
                         id={data?.name_uz}
                         value={data?.id}
                         name="checkDeliver"
-                        checked={data?.id === deliverCheck}
-                        onChange={() => setDeliverCheck(data?.id)}
+                        checked={data?.id === state?.deliverCheck}
+                        onChange={(e) => setState({ ...state, deliverCheck: e.target.value })}
                       />
                       <label htmlFor={data?.name_uz} className={`cursor-pointer md:px-3 w-[200px] border border-searchBgColor flex items-center justify-center   text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}>
                         <span>{data?.name_ru}</span>
@@ -397,10 +341,7 @@ function AddStore({ onClick }) {
       </div>
       <div className="flex items-center justify-center mb-10 md:mb-24">
         <button
-          onClick={() => {
-            // onClick;
-            sendFunc();
-          }}
+          onClick={sendFunc}
           className="inline-block w-full md:w-fit text xs:px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
           Создать магазин

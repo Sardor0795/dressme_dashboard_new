@@ -6,6 +6,7 @@ import {
   DownloadIcon,
   InputCheckedTrueIcons,
   LineIcon,
+  LoaderIcon,
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
@@ -56,7 +57,7 @@ const AddingProduct = () => {
   })
   // const [openDropModalButton,setOpenDropModalButton] = useState(false)
 
-  const [ productsData, setProductsData ] = useState({}) 
+  const [productsData, setProductsData] = useState({})
   const url = "https://api.dressme.uz/api/seller";
 
   const { isLoading, isFetched } = useQuery(
@@ -1527,7 +1528,7 @@ const AddingProduct = () => {
                     }
                     options={
                       productsData?.sections?.map(item => {
-                        return(
+                        return (
                           {
                             value: item?.id,
                             label: item?.name_ru
@@ -1574,7 +1575,7 @@ const AddingProduct = () => {
                     }
                     options={
                       productsData?.producers?.map(item => {
-                        return(
+                        return (
                           {
                             value: item?.id,
                             label: item?.name_ru
@@ -1625,7 +1626,7 @@ const AddingProduct = () => {
                     }
                     options={
                       productsData?.seasons?.map(item => {
-                        return(
+                        return (
                           {
                             value: item?.id,
                             label: item?.name_ru
@@ -1738,7 +1739,7 @@ const AddingProduct = () => {
                         }
                         options={
                           productsData?.gender?.map(item => {
-                            return(
+                            return (
                               {
                                 value: item?.id,
                                 label: item?.name_ru
@@ -1780,18 +1781,20 @@ const AddingProduct = () => {
                     </span>
                   </div>
                   <div className="w-full flex items-center justify-between">
-                    <div
+                    <input
+                      type="text"
+                      value={randomSellerCode}
+                      onChange={(e) => setRandomSellerCode(e.target.value)}
+                      placeholder="Seller code of random "
                       className="inputStyle w-full h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
-                    > {randomSellerCode}</div>
-
-                    {/* <button onClick={() => randomCode(10)}>Random Genereate {randomSellerCode}</button> */}
+                    />
 
                     <button
                       onClick={() => randomCode(17)}
                       type={"button"}
                       className="w-[54px] h-[42px] active:scale-95  active:opacity-70 flex items-center justify-center ml-3 bg-textBlueColor border border-borderColor rounded-lg">
-                      {/* <LoaderIcon />  */}
-                      <FaRandom color={"#ffffff"} />
+                      <LoaderIcon />
+                      {/* <FaRandom color={"#ffffff"} /> */}
                     </button>
                   </div>
                 </div>
@@ -1857,7 +1860,7 @@ const AddingProduct = () => {
                     }
                     options={
                       productsData?.types?.map(item => {
-                        return(
+                        return (
                           {
                             value: item?.id,
                             label: item?.name_ru
@@ -2177,8 +2180,8 @@ const AddingProduct = () => {
             Продолжить
           </NavLink>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 

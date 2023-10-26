@@ -53,8 +53,8 @@ export default function LocationAddById() {
   });
   // ----------phone Number----------1
 
-  const assistantPhoneNumberFirst = state.phoneCode.split("+")?.join("") + state?.assistantPhoneFirst?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
-  const assistantPhoneNumberSecond = state.phoneCode.split("+")?.join("") + state?.assistantPhoneSecond?.split("-")?.join("").split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  const assistantPhoneNumberFirst = state.phoneCode?.split("+")?.join("") + state?.assistantPhoneFirst?.split("-")?.join("")?.split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
+  const assistantPhoneNumberSecond = state.phoneCode?.split("+")?.join("") + state?.assistantPhoneSecond?.split("-")?.join("")?.split(")")?.join("")?.split("(")?.join("")?.split(" ")?.join("");
   // ----------phone Number----------2
 
   function CallBackYandex(childData) {
