@@ -694,7 +694,7 @@ const AddingProduct = () => {
                         .includes(input.toLowerCase())
                     }
                     options={
-                      productsData?.sections.sub_sections?.map(item => {
+                      productsData?.sections?.map(item => {
                         return (
                           {
                             value: item?.id,
