@@ -1,4 +1,4 @@
-import { Popover, Select, Switch } from "antd";
+import { Popover, Select, Switch, TreeSelect } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   AddIconsCircle1,
@@ -139,6 +139,43 @@ const AddingProduct = () => {
     console.log(`switch to ${checked}`);
   };
 
+  const treeData = [
+    {
+      title: 'Node1',
+      value: '1',
+      children: [
+        {
+          title: 'Child Node1',
+          value: '2',
+        },
+        {
+          title: 'Child Node2',
+          value: '3',
+        },
+      ],
+    },
+    {
+      title: 'Node2',
+      value: '4',
+      children: [
+        {
+          title: 'Child Node3',
+          value: '5',
+        },
+        {
+          title: 'Child Node4',
+          value: '6',
+        },
+      ],
+    },
+  ];
+
+  const [value, setValue] = useState();
+  const onChangeSelect = (newValue) => {
+    console.log(newValue);
+    setValue(newValue);
+  }
+
 
   // const changeColor = [
   //   { id: 1, data: 1, icons: InputCheck, action: false, colors: "bg-black" },
@@ -154,6 +191,7 @@ const AddingProduct = () => {
   //   // { id: 11, data: 11, icons: InputCheck, action: false, colors: "bg-blue-900 " },
   //   // { id: 12, data: 12, icons: InputCheck, action: false, colors: "bg-yellow-900 " },
   // ];
+
   const [changeColor, setChangeColor] = useState([
     {
       id: 1,
@@ -332,6 +370,8 @@ const AddingProduct = () => {
     setRandomSellerCode([...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], ''))
   }
 
+
+
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
 
@@ -371,7 +411,9 @@ const AddingProduct = () => {
                       onClick={() =>
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
-                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] bg-[#aaaaaa] bg-[${data.hex}] cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : ""}
+
+                      style={{background: `${data.hex}`}}
+                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] bg-[${data.hex}] cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : "" }
                      `}
                     >
                       {data?.action && data?.id === 2 ? (
@@ -591,7 +633,7 @@ const AddingProduct = () => {
                     </label>
                     <ArrowRightIcon />
                   </button>
-                  <Select
+                  {/* <Select
                     className="hidden md:block rounded-lg w-full h-11 md:h-10"
                     showSearch
                     placeholder="Выбрать"
@@ -614,7 +656,26 @@ const AddingProduct = () => {
                         )
                       })
                     }
-                  />
+                  /> */}
+                  {/* {productsData.sections.map(item => { */}
+                    {/* return( */}
+                      <TreeSelect
+                        style={{
+                          width: '100%',
+                        }}
+                        value={value}
+                        size="large"
+                        dropdownStyle={{
+                          maxHeight: 400,
+                          overflow: 'auto',
+                        }}
+                        treeData={treeData}
+                        placeholder="Please select"
+                        treeDefaultExpandAll
+                        onChange={onChangeSelect}
+                      />
+                    {/* ) */}
+                  {/* })} */}
                 </div>
                 <div className="w-1/2 flex  flex-col items-start">
                   <div className="flex items-center justify-center mb-[5px]">
@@ -658,10 +719,11 @@ const AddingProduct = () => {
                             value: item?.id,
                             label: item?.name_ru
                           }
-                        )
+                          )
                       })
                     }
                   />
+
                 </div>
               </div>
 
@@ -737,12 +799,14 @@ const AddingProduct = () => {
                     <ArrowRightIcon />
                   </button>
                   <div className="w-full hidden md:flex items-center justify-between border rounded-lg md:py-[9px] px-[12px]">
-                    {changeColor?.filter(e => e?.id <= 9)?.map((data) => {
+                    {productsData.colors?.filter(e => e?.id <= 9)?.map((data) => {
+                      console.log(data.hex, 'Colors');
                       return (
                         <div key={data?.id} className="hidden md:block">
                           <label
                             key={data?.id}
-                            className={`${data.colors} rounded-full border border-${data.colors} w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
+                            style={{background: `${data.hex}`}}
+                            className={`rounded-full border  w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
                           >
                             {/* <img src={data.icons} alt="" /> */}
                           </label>
@@ -863,7 +927,7 @@ const AddingProduct = () => {
                       type="text"
                       value={randomSellerCode}
                       onChange={(e) => setRandomSellerCode(e.target.value)}
-                      placeholder="Seller code of random "
+                      placeholder=""
                       className="inputStyle w-full h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
                     />
 
@@ -1118,21 +1182,6 @@ const AddingProduct = () => {
                       placeholder="Макс"
                     />
                   </div>
-                  {/* <div className="w-full flex items-center">
-                    <input
-                      type="text"
-                      className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                      placeholder="Мин"
-                    />
-                    <span className="rotate-90 text-borderColor ml-3 mr-[9px]">
-                      |
-                    </span>
-                    <input
-                      type="text"
-                      className="w-1/2 md:w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[10px] py-[10px] outline-none text-xs [&::-webkit-inner-spin-button]:appearance-none"
-                      placeholder="Макс"
-                    />
-                  </div> */}
                 </div>
               </div>
             </div>
