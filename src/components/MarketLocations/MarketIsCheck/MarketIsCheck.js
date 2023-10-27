@@ -16,8 +16,7 @@ export default function MarketIsCheck() {
         isMarketCheck: false,
         loading: true,
     })
-    const location = useLocation();
-    const [locationWindow, setLocationWindow] = useState("");
+
 
     const { isLoading, data } = useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
         {
@@ -56,15 +55,6 @@ export default function MarketIsCheck() {
         }
     );
 
-    useEffect(() => {
-        setLocationWindow(location.pathname);
-        const interval = setInterval(() => {
-            if (!isFetched) {
-                refetch()
-            }
-        }, 2 * 1000);
-        return () => clearInterval(interval);
-    }, [location.pathname]);
 
 
     return (
