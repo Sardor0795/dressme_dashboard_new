@@ -59,7 +59,22 @@ const AddingProduct = () => {
   const [state, setState] = useState({
     buttonReviews: false,
     openDropModalButton: true,
+    pictureBgFile1: "",
+    pictureBgView1: "",
+    pictureBgFile2: "",
+    pictureBgView2: "",
+    pictureBgFile3: "",
+    pictureBgView3: "",
+    pictureBgFile4: "",
+    pictureBgView4: "",
   })
+  const handleLocationImageOne = (e) => {
+    setState({
+      ...state,
+      pictureBgFile1: e.target.files[0],
+      pictureBgView1: URL.createObjectURL(e.target.files[0])
+    });
+  }
   // const [openDropModalButton,setOpenDropModalButton] = useState(false)
 
   const [productsData, setProductsData] = useState({})
@@ -92,13 +107,13 @@ const AddingProduct = () => {
   );
 
 
-  useEffect(() => {
-    if (state?.openDropModalButton) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [state?.openDropModalButton]);
+  // useEffect(() => {
+  //   if (state?.openDropModalButton) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  // }, [state?.openDropModalButton]);
 
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
@@ -131,6 +146,9 @@ const AddingProduct = () => {
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
+  };
+  const onChange1 = (value) => {
+    console.log(`onChange1 ${value}`);
   };
   const onSearch = (value) => {
     console.log("search:", value);
@@ -170,10 +188,10 @@ const AddingProduct = () => {
     },
   ];
 
-  const [value, setValue] = useState();
+  // const [value, setValue] = useState();
   const onChangeSelect = (newValue) => {
-    console.log(newValue);
-    setValue(newValue);
+    // console.log(newValue);
+    // setValue(newValue);
   }
 
 
@@ -373,7 +391,7 @@ const AddingProduct = () => {
 
 
   return (
-    <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">
+    <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor border border-black">
 
       {/* Open for select color modal */}
       <div
@@ -412,8 +430,8 @@ const AddingProduct = () => {
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
 
-                      style={{background: `${data.hex}`}}
-                      className={`rounded-[12px] flex items-center justify-center mr-2 w-[65px] h-[40px] bg-[${data.hex}] cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : "" }
+                      style={{ background: `${data.hex}` }}
+                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex}] cursor-pointer ${data?.id == 2 ? "border border-setTexOpacity flex items-center justify-center" : ""}
                      `}
                     >
                       {data?.action && data?.id === 2 ? (
@@ -562,10 +580,436 @@ const AddingProduct = () => {
         </section>
       </div>
 
-      <form
-        action="#"
-        className="w-full md:mx-[180px] md:mb-[50px]"
+      <div
+        className="w-full md:mx-[140px] md:mb-[50px] border border-red-500"
       >
+        <div className="hidden border border-green-500 w-full h-fit flex gap-x-4 flex-col-reverse	 md:flex-row md:px-7 py-12">
+          <div className="w-full md:w-[70%] h-fit border border-blue-500 flex flex-col gap-y-6">
+            <div className="w-full grid grid-cols-2 gap-x-4 gap-y-6 border border-yellow-500">
+              {/* Input Select 1 */}
+              <div className="w-full h-fit border  border-red-500 flex flex-col gap-y-[5px]">
+                <div className="flex items-center">
+                  <span className="text-[13px] md:text-base font-AeonikProRegular">Раздел одежды</span>
+                  <span className="ml-[5px]"><StarLabel /></span>
+                </div>
+                <div className="w-full h-fit">
+                  <Select
+                    className=" rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange1}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      productsData?.sections?.map(item => {
+                        return (
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              {/* Input Select 2 */}
+              <div className="w-full h-fit border border-red-500 flex flex-col gap-y-[5px]">
+                <div className="flex items-center">
+                  <span className="text-[13px] md:text-base font-AeonikProRegular">Подраздел одежды</span>
+                  <span className="ml-[5px]"><StarLabel /></span>
+                </div>
+                <div className="w-full h-fit">
+                  <Select
+                    className=" rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange1}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      productsData?.sections?.map(item => {
+                        return (
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              {/* Input Select 3 */}
+              <div className="w-full h-fit border border-red-500 flex flex-col gap-y-[5px]">
+                <div className="flex items-center">
+                  <span className="text-[13px] md:text-base font-AeonikProRegular">Сезон одежды</span>
+                  <span className="ml-[5px]"><StarLabel /></span>
+                </div>
+                <div className="w-full h-fit">
+                  <Select
+                    className=" rounded-lg w-full h-11 md:h-10"
+                    showSearch
+                    placeholder="Выбрать"
+                    optionFilterProp="children"
+                    onChange={onChange1}
+                    onSearch={onSearch}
+                    size="large"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    options={
+                      productsData?.sections?.map(item => {
+                        return (
+                          {
+                            value: item?.id,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              {/* Input Select 4 */}
+              <div className="w-full h-fit border border-red-500 flex flex-col gap-y-[5px]">
+                <div className="flex items-center">
+                  <span className="text-[13px] md:text-base font-AeonikProRegular">Цвет</span>
+                  <span className="ml-[5px]"><StarLabel /></span>
+                </div>
+                <div className="w-full h-fit flex items-center justify-between border rounded-lg  h-11 md:h-10 px-[12px]">
+                  {productsData.colors?.filter(e => e?.id <= 9)?.map((data) => {
+                    // console.log(data.hex, 'Colors');
+                    return (
+                      <div key={data?.id} className="hidden md:block">
+                        <label
+                          key={data?.id}
+                          style={{ background: `${data.hex}` }}
+                          className={`rounded-full border  w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
+                        >
+                          {/* <img src={data.icons} alt="" /> */}
+                        </label>
+                        <input
+                          type="radio"
+                          id={data?.id}
+                          name="checkStatus"
+                          value={data?.id}
+                          className={"hidden w-full h-full"}
+                        />
+                      </div>
+                    );
+                  })}
+                  <button
+                    onClick={() => { setShowColor(true) }}
+                    type="button"
+                  >
+                    <AddIconsCircle1 />
+                  </button>
+                </div>
+              </div>
+              {/* Input Select 5 */}
+              <div className="w-full h-fit border border-red-500 flex items-center gap-x-3">
+                <div className="w-1/2 flex flex-col gap-y-[5px]">
+                  <div className="flex items-center">
+                    <span className="text-[13px] md:text-base font-AeonikProRegular">Пол</span>
+                    <span className="ml-[5px]"><StarLabel /></span>
+                  </div>
+                  <div className="w-full h-fit">
+                    <Select
+                      className=" rounded-lg w-full h-11 md:h-10"
+                      showSearch
+                      placeholder="Выбрать"
+                      optionFilterProp="children"
+                      onChange={onChange1}
+                      onSearch={onSearch}
+                      size="large"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      options={
+                        productsData?.sections?.map(item => {
+                          return (
+                            {
+                              value: item?.id,
+                              label: item?.name_ru
+                            }
+                          )
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="w-1/2 flex flex-col gap-y-[5px]">
+                  <div className="flex items-center">
+                    <span className="text-[13px] md:text-base font-AeonikProRegular">Возрастная категория</span>
+                    <span className="ml-[5px]"><StarLabel /></span>
+                  </div>
+                  <div className="w-full h-fit flex items-center gap-x-2">
+                    <input
+                      type="text"
+                      name="age"
+                      placeholder="Мин"
+                      className="inputStyle outline-none w-[55px] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                    />
+                    <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
+                    <input
+                      type="text"
+                      name="age"
+                      placeholder="Мах"
+                      className="inputStyle outline-none w-[55px] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Input Select 6 */}
+              <div className="w-full h-fit border border-red-500 flex flex-col gap-y-[5px]">
+                <div className="flex items-center  ">
+                  <span className="text-[13px] md:text-base font-AeonikProRegular">Артикул</span>
+                  <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">(необязательно)</span>
+                </div>
+                <div className="w-full h-fit flex items-center justify-between gap-x-3">
+                  <input
+                    type="text"
+                    value={randomSellerCode}
+                    onChange={(e) => setRandomSellerCode(e.target.value)}
+                    placeholder=""
+                    className="inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
+                  />
+                  <button
+                    onClick={() => randomCode(17)}
+                    type={"button"}
+                    className="w-[40px] h-[40px] active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg">
+                    <LoaderIcon />
+                  </button>
+                </div>
+              </div>
+              {/* Input Select 7 */}
+              <div className="w-full h-fit border border-red-500 flex flex-col gap-y-[5px]">
+                <div className="flex items-center">
+                  <span className="text-[13px] md:text-base font-AeonikProRegular">Категория одежды</span>
+                  <span className="ml-[5px]"><StarLabel /></span>
+                </div>
+                <div className="w-full h-fit">
+                  <button
+                    onClick={toggleDropModalButton}
+                    type="button" className={`w-full overflow-hidden h-[42px] flex items-center justify-between border border-borderColor rounded-lg p-3 `}>
+                    <span className="text-[#a1a1a1]">Выбрать</span>
+                    {state.openDropModalButton ? (
+                      <span className="-rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
+                    ) : (
+                      <span className="rotate-90 transition duration-200 ease-out"><ArrowRightIcon /></span>
+                    )
+                    }
+                  </button>
+                </div>
+              </div>
+              {/* Input Select 8 */}
+              <div className="w-full h-fit border border-red-500 flex items-center gap-x-3">
+                <div className="w-1/2 flex flex-col gap-y-[5px]">
+                  <div className="flex items-center">
+                    <span className="text-[13px] md:text-base font-AeonikProRegular">Тип</span>
+                    <span className="ml-[5px]"><StarLabel /></span>
+                  </div>
+                  <div className="w-full h-fit">
+                    <Select
+                      className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                      showSearch
+                      placeholder="Выбрать"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onSearch={onSearch}
+                      size="large"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      options={
+                        productsData?.types?.map(item => {
+                          return (
+                            {
+                              value: item?.id,
+                              label: item?.name_ru
+                            }
+                          )
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="w-1/2 flex flex-col gap-y-[5px]">
+                  <div className="flex items-center">
+                    <span className="text-[13px] md:text-base font-AeonikProRegular">Производитель</span>
+                    <span className="ml-[5px]"><StarLabel /></span>
+                  </div>
+                  <div className="w-full h-fit">
+                    <Select
+                      className=" rounded-lg w-full h-11 md:h-10"
+                      showSearch
+                      placeholder="Выбрать"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onSearch={onSearch}
+                      size="large"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      options={
+                        productsData?.producers?.map(item => {
+                          return (
+                            {
+                              value: item?.id,
+                              label: item?.name_ru
+                            }
+                          )
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {state.openDropModalButton ? (
+              <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
+                <HeadWearAdd />
+                <OutWearAdd />
+                <UnderAddWear />
+                <ShoesAdd />
+                <AccessoriesAdd />
+              </div>
+            ) : (
+              null
+            )}
+          </div>
+          <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 border border-blue-500">
+            <div className="hidden md:flex items-center  justify-start mb-[5px]">
+              <span className="text-base font-AeonikProRegular">Фото</span>
+              <span className="ml-[5px]"><StarLabel /></span>
+            </div>
+            <div className="w-[300px] md:w-full h-[350px] flex items-center justify-center ">
+              <button type="button" className="h-full w-full flex items-center justify-center ">
+                <label
+                  htmlFor="DataImg1"
+                  className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id="DataImg1"
+                    type="file"
+                    onChange={handleLocationImageOne}
+                    accept=" image/*"
+                  />
+                  {
+                    !state?.pictureBgView1 &&
+                    <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
+                      <span className="leading-none text-textBlueColor border-b border-textBlueColor font-AeonikProMedium text-textBlueColor">
+                        Выберите фото
+                      </span>
+                    </div>
+                  }
+                  {state?.pictureBgView1 && <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full border border-searchBgColor object-contain rounded-lg" />}
+                </label>
+              </button>
+            </div>
+            <div className="w-[90px] md:w-full flex flex-col md:flex-row items-center justify-between gap-y-2 gap-x-[10px] md:mt-[10px]">
+              <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center md:mb-[21px]">
+                <button type="button" className="h-full w-full flex items-center justify-center ">
+                  <label
+                    htmlFor="DataImg1"
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id="DataImg1"
+                      type="file"
+                      onChange={handleLocationImageOne}
+                      accept=" image/*"
+                    />
+                    {
+                      !state?.pictureBgView1 &&
+                      <div className="w-full h-full bg-photoBg border border-dashed rounded-lg flex items-center justify-center">
+                        <DownloadIcon />
+                      </div>
+                    }
+                    {state?.pictureBgView1 && <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain border border-searchBgColor rounded-lg" />}
+                  </label>
+                </button>
+
+              </div>
+              <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center">
+                <button type="button" className="h-full w-full flex items-center justify-center ">
+                  <label
+                    htmlFor="DataImg1"
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id="DataImg1"
+                      type="file"
+                      onChange={handleLocationImageOne}
+                      accept=" image/*"
+                    />
+                    {
+                      !state?.pictureBgView1 &&
+                      <div className="w-full h-full bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    }
+                    {state?.pictureBgView1 && <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain border border-searchBgColor rounded-lg" />}
+                  </label>
+                </button>
+              </div>
+              <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                <button type="button" className="h-full w-full flex items-center justify-center ">
+                  <label
+                    htmlFor="DataImg1"
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id="DataImg1"
+                      type="file"
+                      onChange={handleLocationImageOne}
+                      accept=" image/*"
+                    />
+                    {
+                      !state?.pictureBgView1 &&
+                      <div className="w-full h-full bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    }
+                    {state?.pictureBgView1 && <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain border border-searchBgColor rounded-lg" />}
+                  </label>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="md:relative md:border border-borderColor rounded-xl md:px-[30px] md:pt-[50px]  md:pb-[250px]">
 
@@ -638,7 +1082,7 @@ const AddingProduct = () => {
                     showSearch
                     placeholder="Выбрать"
                     optionFilterProp="children"
-                    onChange={onChange}
+                    onChange={onChange1}
                     onSearch={onSearch}
                     size="large"
                     filterOption={(input, option) =>
@@ -701,7 +1145,7 @@ const AddingProduct = () => {
                             label: item?.name_ru
                           }
                         )
-                        })
+                      })
                     }
                   />
 
@@ -781,12 +1225,12 @@ const AddingProduct = () => {
                   </button>
                   <div className="w-full hidden md:flex items-center justify-between border rounded-lg md:py-[9px] px-[12px]">
                     {productsData.colors?.filter(e => e?.id <= 9)?.map((data) => {
-                      console.log(data.hex, 'Colors');
+                      // console.log(data.hex, 'Colors');
                       return (
                         <div key={data?.id} className="hidden md:block">
                           <label
                             key={data?.id}
-                            style={{background: `${data.hex}`}}
+                            style={{ background: `${data.hex}` }}
                             className={`rounded-full border  w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
                           >
                             {/* <img src={data.icons} alt="" /> */}
@@ -1036,11 +1480,11 @@ const AddingProduct = () => {
                               value: item?.id,
                               label: item?.name_ru
                             }
-                            )
+                          )
                         })
                       }
                     />
-                </div>
+                  </div>
                 </div>
               </div>
 
@@ -1287,7 +1731,7 @@ const AddingProduct = () => {
             Продолжить
           </NavLink>
         </div>
-      </form >
+      </div >
     </div >
   );
 };

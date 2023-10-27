@@ -156,7 +156,7 @@ function ShoesAdd() {
             placement="bottom"
             content={contentShoes}
         >
-            Аксессуары
+            Обувь
         </Popover>
     );
 }
