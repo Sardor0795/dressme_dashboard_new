@@ -633,7 +633,7 @@ const AddingProduct = () => {
                     </label>
                     <ArrowRightIcon />
                   </button>
-                  {/* <Select
+                  <Select
                     className="hidden md:block rounded-lg w-full h-11 md:h-10"
                     showSearch
                     placeholder="Выбрать"
@@ -656,26 +656,7 @@ const AddingProduct = () => {
                         )
                       })
                     }
-                  /> */}
-                  {/* {productsData.sections.map(item => { */}
-                    {/* return( */}
-                      <TreeSelect
-                        style={{
-                          width: '100%',
-                        }}
-                        value={value}
-                        size="large"
-                        dropdownStyle={{
-                          maxHeight: 400,
-                          overflow: 'auto',
-                        }}
-                        treeData={treeData}
-                        placeholder="Please select"
-                        treeDefaultExpandAll
-                        onChange={onChangeSelect}
-                      />
-                    {/* ) */}
-                  {/* })} */}
+                  />
                 </div>
                 <div className="w-1/2 flex  flex-col items-start">
                   <div className="flex items-center justify-center mb-[5px]">
@@ -966,51 +947,100 @@ const AddingProduct = () => {
 
                   </button>
                 </div>
-                <div className="w-1/2 items-start gap-x-[10px]">
-                  <div className="w-full flex items-center justify-start mb-[5px]">
-                    <label className="text-[13px] md:text-base font-AeonikProRegular" >
-                      Тип{" "}
-                    </label>
-                    <span className="ml-[5px]">
-                      <StarLabel />
-                    </span>
+                <div className="w-1/2 flex items-start gap-x-[10px]">
+                  <div className="w-1/2">
+                    <div className="w-full flex items-center justify-start mb-[5px]">
+                      <label className="text-[13px] md:text-base font-AeonikProRegular" >
+                        Тип{" "}
+                      </label>
+                      <span className="ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setOpenTypes(true)}
+                      type="button"
+                      className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
+                    >
+                      <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
+                        Выбрать
+                      </span>
+                      <span className="">
+                        <ArrowRightIcon />
+                      </span>
+                    </button>
+                    <Select
+                      className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                      showSearch
+                      placeholder="Выбрать"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onSearch={onSearch}
+                      size="large"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      options={
+                        productsData?.types?.map(item => {
+                          return (
+                            {
+                              value: item?.id,
+                              label: item?.name_ru
+                            }
+                          )
+                        })
+                      }
+                    />
                   </div>
-                  <button
-                    onClick={() => setOpenTypes(true)}
-                    type="button"
-                    className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
-                  >
-                    <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
-                      Выбрать
-                    </span>
-                    <span className="">
+                  <div className="w-1/2 flex  flex-col items-start">
+                    <div className="flex items-center justify-center mb-[5px]">
+                      <label
+                        htmlFor=""
+                        className="text-[13px] md:text-base font-AeonikProRegular"
+                      >
+                        Производитель
+                      </label>
+                      <span className="ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setOpenClothingSubSection(true)}
+                      type="button"
+                      className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                    >
+                      <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        Выбрать
+                      </label>
                       <ArrowRightIcon />
-                    </span>
-                  </button>
-                  <Select
-                    className="hidden md:block rounded-lg w-full h-11 md:h-10"
-                    showSearch
-                    placeholder="Выбрать"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onSearch={onSearch}
-                    size="large"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "")
-                        .toLowerCase()
-                        .includes(input.toLowerCase())
-                    }
-                    options={
-                      productsData?.types?.map(item => {
-                        return (
-                          {
-                            value: item?.id,
-                            label: item?.name_ru
-                          }
-                        )
-                      })
-                    }
-                  />
+                    </button>
+                    <Select
+                      className="hidden md:block rounded-lg w-full h-11 md:h-10"
+                      showSearch
+                      placeholder="Выбрать"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onSearch={onSearch}
+                      size="large"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "")
+                          .toLowerCase()
+                          .includes(input.toLowerCase())
+                      }
+                      options={
+                        productsData?.producers?.map(item => {
+                          return (
+                            {
+                              value: item?.id,
+                              label: item?.name_ru
+                            }
+                            )
+                        })
+                      }
+                    />
+                </div>
                 </div>
               </div>
 
