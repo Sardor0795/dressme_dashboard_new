@@ -167,7 +167,7 @@ function HeadWearAdd() {
             placement="bottom"
             content={contentHat}
         >
-            Аксессуары
+            Головные уборы
         </Popover>
     );
 }

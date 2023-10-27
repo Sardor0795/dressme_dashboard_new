@@ -245,7 +245,7 @@ function OutWearAdd() {
             placement="bottom"
             content={contentOutwear}
         >
-            Аксессуары
+            Верхняя одежда
         </Popover>
     );
 }

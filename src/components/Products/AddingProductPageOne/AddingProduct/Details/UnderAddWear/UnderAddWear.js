@@ -246,7 +246,7 @@ function UnderAddWear() {
             placement="bottom"
             content={contentUnderWear}
         >
-            Аксессуары
+            Нижняя одежда
         </Popover>
     );
 }
