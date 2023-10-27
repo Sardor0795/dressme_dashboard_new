@@ -23,7 +23,7 @@ import { FaRandom } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
-import UnderWearAdd from "../../AddingProductPageOne copy/AddingProduct/Details/UnderWear copy/underWearAdd";
+import UnderWearAdd from "./Details/UnderWearAdd/UnderWearAdd1";
 import AccessoriesAdd from "./Details/Accessories/AccessoriesAdd";
 import ShoesAdd from "./Details/Shoes/ShoesAdd";
 
