@@ -664,7 +664,7 @@ const AddingProduct = () => {
                       htmlFor=""
                       className="text-[13px] md:text-base font-AeonikProRegular"
                     >
-                      Производитель
+                      Подраздел одежды
                     </label>
                     <span className="ml-[5px]">
                       <StarLabel />
@@ -694,14 +694,14 @@ const AddingProduct = () => {
                         .includes(input.toLowerCase())
                     }
                     options={
-                      productsData?.producers?.map(item => {
+                      productsData?.sections.sub_sections?.map(item => {
                         return (
                           {
                             value: item?.id,
                             label: item?.name_ru
                           }
-                          )
-                      })
+                        )
+                        })
                     }
                   />
 
