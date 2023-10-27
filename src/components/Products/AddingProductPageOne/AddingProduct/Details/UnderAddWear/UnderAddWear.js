@@ -4,7 +4,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 
-function UnderWearAdd1() {
+function UnderAddWear() {
     // Shoes
     // Underwear bor Цена
     const contentUnderWear = (
@@ -250,4 +250,4 @@ function UnderWearAdd1() {
         </Popover>
     );
 }
-export default UnderWearAdd1
+export default UnderAddWear

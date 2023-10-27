@@ -23,9 +23,9 @@ import { FaRandom } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
-import UnderWearAdd from "./Details/UnderWearAdd/UnderWearAdd1";
 import AccessoriesAdd from "./Details/Accessories/AccessoriesAdd";
 import ShoesAdd from "./Details/Shoes/ShoesAdd";
+import UnderAddWear from "./Details/UnderAddWear/UnderAddWear";
 
 const AddingProduct = () => {
 
@@ -1058,7 +1058,7 @@ const AddingProduct = () => {
                 <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
                   <HeadWearAdd />
                   <OutWearAdd />
-                  <UnderWearAdd />
+                  <UnderAddWear />
                   <ShoesAdd />
                   <AccessoriesAdd />
                 </div>
