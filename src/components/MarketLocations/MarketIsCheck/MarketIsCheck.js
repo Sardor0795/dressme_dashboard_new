@@ -3,7 +3,7 @@ import LocationList from '../Locations/LocationList/LocationList'
 import NoLocations from '../NoLocations/NoLocations'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import LoadingForSeller from '../../Loading/LoadingFor'
 import { useHttp } from '../../../hook/useHttp'
 
@@ -16,8 +16,10 @@ export default function MarketIsCheck() {
         isMarketCheck: false,
         loading: true,
     })
+    const location = useLocation();
+    const [locationWindow, setLocationWindow] = useState("");
 
-    useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
+    const { isLoading, data } = useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
         {
             onSuccess: (res) => {
                 console.log(res, "Magazin Market--Is--Check");
@@ -35,7 +37,7 @@ export default function MarketIsCheck() {
     );
 
     // ------------GET  Has Magazin ?-----------------
-    const { isFetched, } = useQuery(["location_index"], () => {
+    const { isFetched, refetch } = useQuery(["location_index"], () => {
         return request({ url: "/shops/locations/index", token: true });
     },
         {
@@ -53,11 +55,23 @@ export default function MarketIsCheck() {
             refetchOnWindowFocus: false,
         }
     );
+
+    useEffect(() => {
+        setLocationWindow(location.pathname);
+        const interval = setInterval(() => {
+            if (!isFetched) {
+                refetch()
+            }
+        }, 2 * 1000);
+        return () => clearInterval(interval);
+    }, [location.pathname]);
+
+
     return (
         <div>
-            {state?.loading || !state?.isMarketCheck ? <>  <LoadingForSeller /></> :
+            {state?.loading || isLoading ? <LoadingForSeller /> :
                 <>  {
-                    state?.isMarketCheck ? <>
+                    data ? <>
                         {isFetched && state?.isLocation?.locations?.data ? <> {state?.isCheckLocation ?
                             <LocationList marketList={state?.isMarket} locationList={state?.isLocation} /> :
                             < NoLocations marketList={state?.isMarket} locationList={state?.isLocation} />} </> :
