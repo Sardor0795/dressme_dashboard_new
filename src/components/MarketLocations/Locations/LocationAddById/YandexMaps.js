@@ -49,7 +49,7 @@ export default function YandexMapStore({ handleCallback }) {
   // submits
   const handleSubmit = () => {
     setIsSendedLocation(false);
-    console.log({ title: state.title, center: mapRef.current.getCenter() });
+    // console.log({ title: state.title, center: mapRef.current.getCenter() });
     handleCallback({ title: state.title, center: mapRef.current.getCenter() })
   };
 
