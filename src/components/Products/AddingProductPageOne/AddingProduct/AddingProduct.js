@@ -24,8 +24,10 @@ import GenderList from "./DetailsForMobile/GenderList/GenderList";
 import DressType from "./DetailsForMobile/DressType/DressType";
 import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
 import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCategory";
+import { useHttp } from "../../../../hook/useHttp";
 
 const AddingProduct = () => {
+  const { request } = useHttp()
   const [state, setState] = useState({
     buttonReviews: false,
     openDropModalButton: true,
@@ -496,7 +498,7 @@ const AddingProduct = () => {
       {/* ---------------------------------------- */}
 
       <div
-        className="w-full md:mx-[140px] md:mb-[50px] border border-borderColor rounded-xl overflow-hidden"
+        className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl overflow-hidden"
       >
         <div className="  w-full h-fit md:relative  py-12 ">
           <div className=" w-full h-fit flex gap-x-4 flex-col-reverse	 md:flex-row md:px-7 ">
