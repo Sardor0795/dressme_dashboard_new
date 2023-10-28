@@ -5,21 +5,11 @@ import {
   ArrowRightIcon,
   DownloadIcon,
   InputCheckedTrueIcons,
-  LineIcon,
   LoaderIcon,
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, NavLink, useParams } from "react-router-dom";
-import ClothingTypesAnimationPage from "../MobileDropUpSides/ClothingTypesMobileDropUp/ClothingTypesMobileDropUp";
-import ClothingSubSectionPage from "../MobileDropUpSides/ClothingSubSectionMobileDropUp/ClothingSubSectionMobileDropUp";
-import WeatherMobileDropUp from "../MobileDropUpSides/WeatherMobileDropUp/WeatherMobileDropUp";
-import ColorsMobileDropUp from "../MobileDropUpSides/ColorsMobileDropUp/ColorsMobileDropUp";
-import GenderTypeDropUp from "../MobileDropUpSides/GenderTypeDropUp/GenderTypeDropUp";
-import CategoriesMobileDropUp from "../MobileDropUpSides/CategoriesMobileDropUp/CategoriesMobileDropUp";
-import TypesDropUp from "../MobileDropUpSides/TypesDropUp/TypesDropUp";
-import AllSizeListForWear from "../../../../hook/AllSizeListForWear/AllSizeListForWear";
-import { FaRandom } from "react-icons/fa";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -34,8 +24,10 @@ import GenderList from "./DetailsForMobile/GenderList/GenderList";
 import DressType from "./DetailsForMobile/DressType/DressType";
 import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
 import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCategory";
+import { useHttp } from "../../../../hook/useHttp";
 
 const AddingProduct = () => {
+  const { request } = useHttp()
   const [state, setState] = useState({
     buttonReviews: false,
     openDropModalButton: true,
@@ -59,6 +51,8 @@ const AddingProduct = () => {
     pictureBgFile4: "",
     pictureBgView4: "",
   })
+  const [productsData, setProductsData] = useState({})
+
   // ---------Callback----
   const ClothingSectionToggle = React.useCallback(() => setState({ ...state, ClothingSection: false }), []); // ClothingSection
   const SubClothingSectionToggle = React.useCallback(() => setState({ ...state, SubClothingSection: false }), []); // ClothingSection
@@ -72,7 +66,7 @@ const AddingProduct = () => {
   // ---------Callback----
   useEffect(() => {
     if (
-      state?.showColor,
+      state?.showColor ||
       state?.ClothingCategoryModal ||
       state?.ClothingSection ||
       state?.Colour ||
@@ -80,7 +74,8 @@ const AddingProduct = () => {
       state?.DressTypeModal ||
       state?.GenderModal ||
       state?.MakeCountryModal ||
-      state?.SubClothingSections
+      state?.SubClothingSections ||
+      state?.openDropModalButton
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -96,6 +91,8 @@ const AddingProduct = () => {
     state?.GenderModal,
     state?.MakeCountryModal,
     state?.SubClothingSections,
+    state?.openDropModalButton
+
   ]);
 
   const handleLocationImageOne = (e) => {
@@ -105,23 +102,8 @@ const AddingProduct = () => {
       pictureBgView1: URL.createObjectURL(e.target.files[0])
     });
   }
-  // const [openDropModalButton,setOpenDropModalButton] = useState(false)
 
-  const [productsData, setProductsData] = useState({})
-  const url = "https://api.dressme.uz/api/seller";
-
-  useQuery(
-    ["products-data-get"],
-    () => {
-      return fetch(`${url}/products/get-product-info`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-        },
-      }).then((res) => res.json());
-    },
+  useQuery(["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
     {
       onSuccess: (res) => {
         if (res) {
@@ -130,20 +112,13 @@ const AddingProduct = () => {
       },
       onError: (err) => {
         console.log(err, "ERR PRODUCTS");
+        ;
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
 
-
-  // useEffect(() => {
-  //   if (state?.openDropModalButton) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-  // }, [state?.openDropModalButton]);
 
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
@@ -523,7 +498,7 @@ const AddingProduct = () => {
       {/* ---------------------------------------- */}
 
       <div
-        className="w-full md:mx-[140px] md:mb-[50px] border border-borderColor rounded-xl overflow-hidden"
+        className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl overflow-hidden"
       >
         <div className="  w-full h-fit md:relative  py-12 ">
           <div className=" w-full h-fit flex gap-x-4 flex-col-reverse	 md:flex-row md:px-7 ">
@@ -1139,12 +1114,12 @@ const AddingProduct = () => {
               <div className="w-1/3 h-[1px] bg-borderColor"></div>
             </div>
 
-            <NavLink
+            <Link
               to="/products/add-detail"
               className="w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
             >
               Продолжить
-            </NavLink>
+            </Link>
           </div>
         </div>
       </div >
