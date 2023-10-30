@@ -1,10 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { CopyIcon, StarLabel, XIcon } from "../../../../assets/icons";
 import AddBtn from "./AddBtn/AddBtn";
+import { useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../../hook/useHttp";
 
 export default function AddingProduct() {
+
+  const { request } = useHttp()
+  const [productsData, setProductsData] = useState({})
+
+  useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
+  {
+    onSuccess: (res) => {
+      if (res) {
+        setProductsData(res)
+      }
+    },
+    onError: (err) => {
+      console.log(err, "ERR PRODUCTS_NEXT_PAGE");
+      ;
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  }
+);
+
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -121,6 +144,7 @@ export default function AddingProduct() {
 
             <div className="w-full pb-[30px] md:border border-[#f2f2f2] flex flex-col md:rounded-lg md:p-5 flex-1">
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
+                {/* Language in RUSSIAN */}
                 <div className="flex-1 mb-[10px]">
                   <div className="flex items-center mb-[5px]">
                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
@@ -132,6 +156,7 @@ export default function AddingProduct() {
                   </div>
                   <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
                 </div>
+                {/* Language in UZBEK */}
                 <div className="flex-1 mb-[10px]">
                   <div className="flex items-center mb-[5px]">
                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
@@ -196,6 +221,16 @@ export default function AddingProduct() {
                     className="font-AeonikProMedium"
                     placeholder={"Выбрать"}
                     style={{ width: "100%" }}
+                    options={
+                      productsData?.brands?.map(item => {
+                        return (
+                          {
+                            value: item?.id,
+                            label: item?.name
+                          }
+                        )
+                      })
+                    }
                   />
                 </div>
                 <div className="flex-1 mb-[10px]"></div>

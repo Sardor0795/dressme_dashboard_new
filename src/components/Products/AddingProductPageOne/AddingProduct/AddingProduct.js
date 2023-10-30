@@ -168,8 +168,6 @@ const AddingProduct = () => {
     },
   ];
 
-
-
   const [changeColor, setChangeColor] = useState([
     {
       id: 1,
@@ -383,7 +381,7 @@ const AddingProduct = () => {
             </div>
             <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
               {productsData?.colors.map((data) => {
-                console.log(data.hex, "COLORS");
+                // console.log(data.hex, "COLORS");
                 return (
                   <div className="flex flex-col items-center justify-center ">
                     <div
@@ -578,7 +576,7 @@ const AddingProduct = () => {
                           .includes(input.toLowerCase())
                       }
                       options={
-                        productsData?.sections?.map(item => {
+                        productsData?.sub_sections?.map(item => {
                           return (
                             {
                               value: item?.id,
@@ -621,7 +619,7 @@ const AddingProduct = () => {
                           .includes(input.toLowerCase())
                       }
                       options={
-                        productsData?.sections?.map(item => {
+                        productsData?.seasons?.map(item => {
                           return (
                             {
                               value: item?.id,
@@ -711,7 +709,7 @@ const AddingProduct = () => {
                             .includes(input.toLowerCase())
                         }
                         options={
-                          productsData?.sections?.map(item => {
+                          productsData?.gender?.map(item => {
                             return (
                               {
                                 value: item?.id,
@@ -1095,7 +1093,6 @@ const AddingProduct = () => {
                       {state?.pictureBgView1 && <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain border border-searchBgColor rounded-lg" />}
                     </label>
                   </button>
-
                 </div>
               </div>
             </div>
