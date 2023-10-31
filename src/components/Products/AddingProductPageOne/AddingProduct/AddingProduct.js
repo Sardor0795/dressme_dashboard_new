@@ -1,4 +1,4 @@
-import { Popover, Select, Switch, TreeSelect } from "antd";
+import { Popover, Select, Space, Switch, TreeSelect } from "antd";
 import React, { useEffect, useState } from "react";
 import {
   AddIconsCircle1,
@@ -25,6 +25,7 @@ import DressType from "./DetailsForMobile/DressType/DressType";
 import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
 import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCategory";
 import { useHttp } from "../../../../hook/useHttp";
+const { Option } = Select;
 
 const AddingProduct = () => {
   const { request } = useHttp();
@@ -158,21 +159,13 @@ const AddingProduct = () => {
     setSelectedSectionData(productsData?.sections[value - 1]);
     setSelectedSubSectionsData(null);
   };
-  console.log(selectedSectionData?.sub_sections);
-
-  // useEffect(() => {
-  //   if(selectedSectionData?.sub_sections.length > 0)
-  //     setSelectedSectionData()
-  // },[selectedSubSectionsData])
 
   const onChange2 = (value) => {
-    console.log(value, "Onchange2");
     const data = selectedSectionData?.sub_sections.filter((e) => {
       return e.id === value;
     });
     setSelectedSubSectionsData(data[0]);
   };
-  console.log(selectedSubSectionsData);
 
   const onSearch = (value) => {
     console.log("search:", value);
@@ -180,37 +173,6 @@ const AddingProduct = () => {
   const onChangeSwitch = (checked) => {
     console.log(`switch to ${checked}`);
   };
-
-  const treeData = [
-    {
-      title: "Node1",
-      value: "1",
-      children: [
-        {
-          title: "Child Node1",
-          value: "2",
-        },
-        {
-          title: "Child Node2",
-          value: "3",
-        },
-      ],
-    },
-    {
-      title: "Node2",
-      value: "4",
-      children: [
-        {
-          title: "Child Node3",
-          value: "5",
-        },
-        {
-          title: "Child Node4",
-          value: "6",
-        },
-      ],
-    },
-  ];
 
   const [changeColor, setChangeColor] = useState([
     {
@@ -345,6 +307,10 @@ const AddingProduct = () => {
     });
   };
 
+  const handleChangeWeather = (value) => {
+    console.log(`selected ${value}`);
+  };
+
   // Checks whether an element is even
   const even = (element) => element.action == true;
   let toggleAction = changeColor.some(even);
@@ -412,8 +378,7 @@ const AddingProduct = () => {
           {/* </div> */}
           <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
             <div
-              className={`flex items-center justify-between border-b border-searchBgColor pb-3"
-                       `}
+              className={`flex items-center justify-between border-b border-searchBgColor pb-3`}
             >
               <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
                 Выберите цвет
@@ -688,25 +653,26 @@ const AddingProduct = () => {
                   </button>
                   <div className="w-full h-fit hidden md:flex">
                     <Select
-                      className=" rounded-lg w-full h-11 md:h-10"
-                      showSearch
-                      placeholder="Выбрать"
-                      optionFilterProp="children"
-                      // onChange={onChange1}
-                      onSearch={onSearch}
+                      mode="multiple"
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Select weather"
+                      // defaultValue={["china"]}
                       size="large"
-                      filterOption={(input, option) =>
-                        (option?.label ?? "")
-                          .toLowerCase()
-                          .includes(input.toLowerCase())
-                      }
-                      options={productsData?.seasons?.map((item) => {
-                        return {
-                          value: item?.id,
-                          label: item?.name_ru,
-                        };
+                      onChange={handleChangeWeather}
+                      optionLabelProp="label"
+                    >
+                      {productsData?.seasons?.map((item) => {
+                        return (
+                          <Option key={item.id} value={item.id} label={item.name_ru}>
+                            <Space>
+                              <span>{item.name_ru}</span>
+                            </Space>
+                          </Option>
+                        );
                       })}
-                    />
+                    </Select>
                   </div>
                 </div>
                 {/* Input Select 4 */}
@@ -1117,7 +1083,7 @@ const AddingProduct = () => {
                 >
                   <label
                     htmlFor="DataImg1"
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  text-textBlueColor "
                   >
                     <input
                       className="hidden"
@@ -1128,7 +1094,7 @@ const AddingProduct = () => {
                     />
                     {!state?.pictureBgView1 && (
                       <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
-                        <span className="leading-none text-textBlueColor border-b border-textBlueColor font-AeonikProMedium text-textBlueColor">
+                        <span className="leading-none text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
                           Выберите фото
                         </span>
                       </div>
@@ -1151,7 +1117,7 @@ const AddingProduct = () => {
                   >
                     <label
                       htmlFor="DataImg1"
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1182,7 +1148,7 @@ const AddingProduct = () => {
                   >
                     <label
                       htmlFor="DataImg1"
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
