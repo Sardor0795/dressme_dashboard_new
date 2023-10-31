@@ -52,6 +52,8 @@ const AddingProduct = () => {
     pictureBgView4: "",
   })
   const [productsData, setProductsData] = useState({})
+  const [selectedData, setSelectedData] = useState(null)
+  const [selectedSubSectionsData, setSelectedSubSectionsData] = useState(null)
 
   // ---------Callback----
   const ClothingSectionToggle = React.useCallback(() => setState({ ...state, ClothingSection: false }), []); // ClothingSection
@@ -129,7 +131,14 @@ const AddingProduct = () => {
   };
   const onChange1 = (value) => {
     console.log(`onChange1 ${value}`);
+    setSelectedData(productsData?.sections[value-1])
   };
+  // const onChange2 = (value) => {
+  //   console.log(1,"Onchange2", value);
+  //   setSelectedSubSectionsData(selectedData?.sub_sections[1])
+  // }
+  // console.log(selectedSubSectionsData);
+
   const onSearch = (value) => {
     console.log("search:", value);
   };
@@ -565,18 +574,20 @@ const AddingProduct = () => {
                     <Select
                       className=" rounded-lg w-full h-11 md:h-10"
                       showSearch
-                      placeholder="Выбрать"
+                      disabled={selectedData?.sub_sections?.length ? false : true}
+                      placeholder={selectedData?.sub_sections.length ? "Выбрать" : "No data"}
                       optionFilterProp="children"
-                      onChange={onChange1}
+                      // onChange={onChange2}
                       onSearch={onSearch}
                       size="large"
+                      // value={selectedSubSectionsData ? selectedSubSectionsData : 'No data'}
                       filterOption={(input, option) =>
                         (option?.label ?? "")
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
                       options={
-                        productsData?.sub_sections?.map(item => {
+                        selectedData?.sub_sections?.map(item => {
                           return (
                             {
                               value: item?.id,
