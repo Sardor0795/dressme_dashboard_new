@@ -154,7 +154,20 @@ export default function AddingProduct() {
                       <StarLabel />
                     </span>
                   </div>
-                  <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
+                  <Select 
+                    placeholder={"Выбрать"} 
+                    style={{ width: "100%" }} 
+                    options={
+                      productsData?.quality?.map(item => {
+                        return (
+                          {
+                            value: item?.name_ru,
+                            label: item?.name_ru
+                          }
+                        )
+                      })
+                    }  
+                  />
                 </div>
                 {/* Language in UZBEK */}
                 <div className="flex-1 mb-[10px]">
@@ -166,7 +179,20 @@ export default function AddingProduct() {
                       <StarLabel />
                     </span>
                   </div>
-                  <Select placeholder={"Выбрать"} style={{ width: "100%" }} />
+                  <Select 
+                    placeholder={"Выбрать"} 
+                    style={{ width: "100%" }} 
+                    options={
+                      productsData?.quality?.map(item => {
+                        return (
+                          {
+                            value: item?.name_uz,
+                            label: item?.name_uz
+                          }
+                        )
+                      })
+                    }
+                  />
                 </div>
               </div>
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
@@ -195,7 +221,7 @@ export default function AddingProduct() {
                 </div>
                 <div className="flex-1 mb-[10px]">
                   <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
-                    Состав на узбекском{" "}
+                    Состав на узбекском
                     <span className="notRecquired font-AeonikProRegular text-sm text-textLightColor">
                       (необязательно)
                     </span>
