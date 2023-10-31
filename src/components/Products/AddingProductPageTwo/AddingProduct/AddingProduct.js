@@ -10,6 +10,31 @@ export default function AddingProduct() {
 
   const { request } = useHttp()
   const [productsData, setProductsData] = useState({})
+  const [lang, setLang] = useState('')
+
+  const handleLangSelect = (value) => {
+    setLang(value)
+  }
+  useEffect(() => {
+    if(lang === 'Original'){
+      setLang('Оригинал')
+    }
+    else if (lang === 'Yarim original'){
+      setLang('Полуоригинал')      
+    }
+    else if(lang === 'Original emas'){
+      setLang('Не оригинал')
+    }
+    // else {
+    //   // if(lang === 'Оригинал')
+    //   //   setLang('Original')
+    //   // else if (lang === 'Полуоригинал'){
+    //   //   setLang('Yarim original')      
+    //   // }
+    //   // else if(lang === 'Не оригинал')
+    //   //   setLang('Original emas')
+    // }
+  },[lang])
 
   useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
   {
@@ -155,14 +180,16 @@ export default function AddingProduct() {
                     </span>
                   </div>
                   <Select 
-                    placeholder={"Выбрать"} 
-                    style={{ width: "100%" }} 
+                    // placeholder={"Выбрать"} 
+                    style={{ width: "100%" }}
+                    value={lang === '' ? 'Выбрать' : lang}
+                    onChange={handleLangSelect}
                     options={
                       productsData?.quality?.map(item => {
                         return (
                           {
-                            value: item?.name_ru,
-                            label: item?.name_ru
+                            value:item.name_ru,
+                            label: item.name_ru 
                           }
                         )
                       })
@@ -180,8 +207,17 @@ export default function AddingProduct() {
                     </span>
                   </div>
                   <Select 
-                    placeholder={"Выбрать"} 
+                    // placeholder={"Выбрать"} 
                     style={{ width: "100%" }} 
+                    value={lang === '' 
+                      ? 'Выбрать' 
+                      :  lang === 'Оригинал' 
+                        ? 'Original' 
+                        : lang === 'Полуоригинал' 
+                          ? 'Yarim original'
+                          : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
+                    }
+                    onChange={handleLangSelect}
                     options={
                       productsData?.quality?.map(item => {
                         return (
