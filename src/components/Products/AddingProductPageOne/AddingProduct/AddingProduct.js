@@ -52,7 +52,7 @@ const AddingProduct = () => {
     pictureBgView4: "",
   })
   const [productsData, setProductsData] = useState({})
-  const [selectedData, setSelectedData] = useState(null)
+  const [selectedSectionData, setSelectedSectionData] = useState(null)
   const [selectedSubSectionsData, setSelectedSubSectionsData] = useState(null)
 
   // ---------Callback----
@@ -121,7 +121,6 @@ const AddingProduct = () => {
     }
   );
 
-
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
   };
@@ -130,14 +129,25 @@ const AddingProduct = () => {
     console.log(`selected ${value}`);
   };
   const onChange1 = (value) => {
-    console.log(`onChange1 ${value}`);
-    setSelectedData(productsData?.sections[value-1])
+    setSelectedSectionData(productsData?.sections[value-1])
   };
-  // const onChange2 = (value) => {
-  //   console.log(1,"Onchange2", value);
-  //   setSelectedSubSectionsData(selectedData?.sub_sections[1])
-  // }
-  // console.log(selectedSubSectionsData);
+  console.log(selectedSectionData?.sub_sections);
+
+  // useEffect(() => {
+  //   if(selectedSectionData?.sub_sections.length > 0)
+  //     setSelectedSectionData()
+  // },[selectedSubSectionsData])
+
+  const onChange2 = (value) => {
+    console.log(value, "Onchange2");
+    const data = selectedSectionData?.sub_sections.filter((e) => {
+      return(
+        e.id === value
+      )
+    })
+    setSelectedSubSectionsData(data[0])
+  }
+  console.log(selectedSubSectionsData);
 
   const onSearch = (value) => {
     console.log("search:", value);
@@ -536,6 +546,7 @@ const AddingProduct = () => {
                       onChange={onChange1}
                       onSearch={onSearch}
                       size="large"
+
                       filterOption={(input, option) =>
                         (option?.label ?? "")
                           .toLowerCase()
@@ -574,20 +585,20 @@ const AddingProduct = () => {
                     <Select
                       className=" rounded-lg w-full h-11 md:h-10"
                       showSearch
-                      disabled={selectedData?.sub_sections?.length ? false : true}
-                      placeholder={selectedData?.sub_sections.length ? "Выбрать" : "No data"}
+                      disabled={selectedSectionData?.sub_sections?.length ? false : true}
+                      placeholder={selectedSectionData?.sub_sections.length ? "Выбрать" : "No data"}
                       optionFilterProp="children"
-                      // onChange={onChange2}
+                      onChange={onChange2}
                       onSearch={onSearch}
                       size="large"
-                      // value={selectedSubSectionsData ? selectedSubSectionsData : 'No data'}
+                      value={selectedSubSectionsData ? selectedSubSectionsData?.name_ru : 'No data'}
                       filterOption={(input, option) =>
                         (option?.label ?? "")
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
                       options={
-                        selectedData?.sub_sections?.map(item => {
+                        selectedSectionData?.sub_sections?.map(item => {
                           return (
                             {
                               value: item?.id,
@@ -621,7 +632,7 @@ const AddingProduct = () => {
                       showSearch
                       placeholder="Выбрать"
                       optionFilterProp="children"
-                      onChange={onChange1}
+                      // onChange={onChange1}
                       onSearch={onSearch}
                       size="large"
                       filterOption={(input, option) =>
@@ -711,7 +722,7 @@ const AddingProduct = () => {
                         showSearch
                         placeholder="Выбрать"
                         optionFilterProp="children"
-                        onChange={onChange1}
+                        // onChange={onChange1}
                         onSearch={onSearch}
                         size="large"
                         filterOption={(input, option) =>
