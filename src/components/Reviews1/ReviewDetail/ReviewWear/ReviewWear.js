@@ -27,41 +27,6 @@ export default function ReviewWear() {
       dateSend: "19 февраля 2023 г.",
       link: "Подробнее",
     },
-    {
-      id: 3,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
-    {
-      id: 4,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
-    {
-      id: 5,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
-    {
-      id: 6,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
-    {
-      id: 7,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
   ];
   const navigate = useNavigate();
   const goDetail = (id) => {
@@ -70,7 +35,6 @@ export default function ReviewWear() {
   const [state, setState] = useState({
     openwear: false,
   });
-
 
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
@@ -192,7 +156,7 @@ export default function ReviewWear() {
           })}
         </div>
       </div>
-      <div className="hidden md:block">Reviews</div>
+      {/* <div className="hidden md:block">Reviews</div> */}
     </div>
   );
 }
