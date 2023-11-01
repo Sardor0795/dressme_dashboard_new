@@ -166,15 +166,15 @@ const AddingProduct = () => {
     setHandleWearSubList(value)
   };
 
-  const newArray = []
 
+  const newArray = []
   productsData?.sections?.filter(e => handleWearList?.includes(e?.id))?.map((data) => {
-    return data?.sub_sections?.map(item => newArray.push(item))
+    return data?.sub_sections?.map(item => {
+      newArray.push(item)
+    })
   })
 
-
-  // console.log(handleWearList, "handleWearList");
-
+  // --------------------------
 
   const onSearch = (value) => {
     console.log("search:", value);
@@ -612,13 +612,14 @@ const AddingProduct = () => {
                   </button>
                   <div className="w-full h-fit hidden md:flex">
                     <Select
-                      className=" rounded-lg w-full h-fit"
+                      className=" rounded-lg w-full h-11 md:h-10"
                       showSearch
                       disabled={
                         newArray?.length ? false : true
                       }
                       placeholder={
-                        newArray?.length
+                        newArray.length
+
                           ? "Выбрать"
                           : "No data"
                       }
@@ -647,6 +648,7 @@ const AddingProduct = () => {
                             </Space>
                           </Option>
                         );
+
                       })
                       }
                     </Select>
