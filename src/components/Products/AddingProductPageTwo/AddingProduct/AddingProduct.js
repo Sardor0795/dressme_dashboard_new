@@ -10,19 +10,48 @@ export default function AddingProduct() {
 
   const { request } = useHttp()
   const [productsData, setProductsData] = useState({})
+  // ru
+  const [noteValueRu, setNoteValueRu] = useState('')
+  const [noteListRu, setNoteListRu] = useState([{}])
+  const [incrementRu, setIncrementRu] = useState(1)
+  // Uz
+  const [noteValueUz, setNoteValueUz] = useState('')
+  const [noteListUz, setNoteListUz] = useState([{}])
+  const [incrementUz, setIncrementUz] = useState(1)
+
   const [lang, setLang] = useState('')
+
+  const deleteNote = (e) => {
+    console.log("index E", e);
+  }
+
+  const _handleKeyDownRu = (event) => {
+    if (event.key === 'Enter') {
+      setNoteListRu((countryList) => [...countryList, { id: incrementRu, name: noteValueRu }])
+      setIncrementRu(incrementRu + 1)
+      setNoteValueRu('')
+    }
+  }
+  const _handleKeyDownUz = (event) => {
+    if (event.key === 'Enter') {
+      setNoteListUz((countryList) => [...countryList, { id: incrementUz, name: noteValueUz }])
+      setIncrementUz(incrementUz + 1)
+      setNoteValueUz('')
+    }
+  }
+
 
   const handleLangSelect = (value) => {
     setLang(value)
   }
   useEffect(() => {
-    if(lang === 'Original'){
+    if (lang === 'Original') {
       setLang('Оригинал')
     }
-    else if (lang === 'Yarim original'){
-      setLang('Полуоригинал')      
+    else if (lang === 'Yarim original') {
+      setLang('Полуоригинал')
     }
-    else if(lang === 'Original emas'){
+    else if (lang === 'Original emas') {
       setLang('Не оригинал')
     }
     // else {
@@ -34,23 +63,23 @@ export default function AddingProduct() {
     //   // else if(lang === 'Не оригинал')
     //   //   setLang('Original emas')
     // }
-  },[lang])
+  }, [lang])
 
   useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
-  {
-    onSuccess: (res) => {
-      if (res) {
-        setProductsData(res)
-      }
-    },
-    onError: (err) => {
-      console.log(err, "ERR PRODUCTS_NEXT_PAGE");
-      ;
-    },
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  }
-);
+    {
+      onSuccess: (res) => {
+        if (res) {
+          setProductsData(res)
+        }
+      },
+      onError: (err) => {
+        console.log(err, "ERR PRODUCTS_NEXT_PAGE");
+        ;
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
 
   useEffect(() => {
@@ -59,7 +88,7 @@ export default function AddingProduct() {
     });
   }, []);
 
-  // Категория одежды
+  // Категория одежды хлопок
   return (
     <div className="flex py-[40px] md:py-[50px]">
       <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
@@ -83,9 +112,8 @@ export default function AddingProduct() {
               Google переводчиком
             </Link>
           </div>
-          <form
+          <div
             className="flex flex-wrap md:flex-nowrap gap-[25px] md:gap-[40px]"
-            action="#"
           >
             <div className="section1 border-b pb-[30px] md:rounded-lg md:p-5 w-full md:max-w-[490px] md:border border-[#f2f2f2] ">
               <div className="mb-[10px]">
@@ -179,7 +207,7 @@ export default function AddingProduct() {
                       <StarLabel />
                     </span>
                   </div>
-                  <Select 
+                  <Select
                     // placeholder={"Выбрать"} 
                     style={{ width: "100%" }}
                     value={lang === '' ? 'Выбрать' : lang}
@@ -188,12 +216,12 @@ export default function AddingProduct() {
                       productsData?.quality?.map(item => {
                         return (
                           {
-                            value:item.name_ru,
-                            label: item.name_ru 
+                            value: item.name_ru,
+                            label: item.name_ru
                           }
                         )
                       })
-                    }  
+                    }
                   />
                 </div>
                 {/* Language in UZBEK */}
@@ -206,14 +234,14 @@ export default function AddingProduct() {
                       <StarLabel />
                     </span>
                   </div>
-                  <Select 
+                  <Select
                     // placeholder={"Выбрать"} 
-                    style={{ width: "100%" }} 
-                    value={lang === '' 
-                      ? 'Выбрать' 
-                      :  lang === 'Оригинал' 
-                        ? 'Original' 
-                        : lang === 'Полуоригинал' 
+                    style={{ width: "100%" }}
+                    value={lang === ''
+                      ? 'Выбрать'
+                      : lang === 'Оригинал'
+                        ? 'Original'
+                        : lang === 'Полуоригинал'
                           ? 'Yarim original'
                           : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
                     }
@@ -232,6 +260,8 @@ export default function AddingProduct() {
                 </div>
               </div>
               <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
+
+                {/* Состав на русском */}
                 <div className="flex-1 mb-[17px] md:mb-[10px]">
                   <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
                     Состав на русском{" "}
@@ -243,18 +273,28 @@ export default function AddingProduct() {
                     <input
                       className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
+                      // name="note"
+                      value={noteValueRu}
+                      onKeyDown={_handleKeyDownRu}
+                      onChange={(e) => setNoteValueRu(e.target.value)}
                     />
+                    {/* <button type="button" onClick={addNoteList}>addBtn</button> */}
                     <AddBtn />
                   </div>
-                  <div className="mt-[10px]">
-                    <div className="flex items-center text-white w-fit px-2 py-[5px] text-[16px] rounded-md font-AeonikProRegular bg-[#007dca]">
-                      хлопок{" "}
-                      <Link className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
-                        <XIcon />
-                      </Link>
-                    </div>
+                  <div className="mt-[10px] 
+                   w-full flex flex-wrap items-center gap-2">
+                    {noteListRu?.length > 1 && noteListRu?.filter(e => e?.id >= 1)?.map((data, index) => {
+                      return (
+                        <div key={data?.id} className="flex items-center text-white w-fit px-2 py-[4px] text-[14px] rounded-md font-AeonikProRegular bg-[#007dca]">
+                          {data?.name}{" "}
+                          <button onClick={deleteNote(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                            <XIcon />
+                          </button>
+                        </div>)
+                    })}
                   </div>
                 </div>
+                {/* Состав на узбекском */}
                 <div className="flex-1 mb-[10px]">
                   <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
                     Состав на узбекском
@@ -266,8 +306,23 @@ export default function AddingProduct() {
                     <input
                       className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                       type="text"
+                      value={noteValueUz}
+                      onKeyDown={_handleKeyDownUz}
+                      onChange={(e) => setNoteValueUz(e.target.value)}
                     />
                     <AddBtn />
+                  </div>
+                  <div className="mt-[10px] 
+                   w-full flex flex-wrap items-center gap-2">
+                    {noteListUz?.length > 1 && noteListUz?.filter(e => e?.id >= 1)?.map((data, index) => {
+                      return (
+                        <div key={data?.id} className="flex items-center text-white w-fit px-2 py-[4px] text-[14px] rounded-md font-AeonikProRegular bg-[#007dca]">
+                          {data?.name}{" "}
+                          <button onClick={deleteNote(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                            <XIcon />
+                          </button>
+                        </div>)
+                    })}
                   </div>
                 </div>
               </div>
@@ -323,7 +378,7 @@ export default function AddingProduct() {
                 </Link>
               </div>
             </div>
-          </form>
+          </div>
           <div className="hidden md:block mt-[30px] font-AeonikProRegular">
             Воспользоваться
             <Link
