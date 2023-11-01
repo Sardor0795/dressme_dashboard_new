@@ -119,9 +119,9 @@ function LocationList({ marketList, locationList }) {
               <SearchIcon />
             </span>
           </label>
-          <div className="w-fit">
+          {/* <div className="w-fit">
             <PickerOfFilter />
-          </div>
+          </div> */}
 
         </section>
         <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
@@ -132,20 +132,20 @@ function LocationList({ marketList, locationList }) {
               </p>
             </section>
             <div className="w-fit flex items-center gap-x-[15px]">
-              <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+              <form className="w-full md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
                 <input
                   type="text"
                   name="s"
-                  className="w-full h-full  outline-0	"
+                  className="w-full h-full outline-0"
                   placeholder="Поиск"
                 />
                 <button>
                   <SearchIcon />
                 </button>
               </form>
-              <div className="w-fit">
+              {/* <div className="w-fit">
                 <PickerOfFilter />
-              </div>
+              </div> */}
 
             </div>
           </div>

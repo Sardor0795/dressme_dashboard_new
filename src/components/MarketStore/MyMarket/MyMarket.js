@@ -57,25 +57,25 @@ function MyMarket({ shopsList }) {
           </section>
 
           <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
-            <div className="w-full flex items-center justify-between md:justify-static gap-x-[15px]">
+            <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
               <label
                 htmlFor="searchStore"
-                className=" w-full  h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+                className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
               >
                 <input
                   type="text"
                   name="s"
                   id="searchStore"
-                  className="w-full h-full   outline-0 	pl-[10px]"
+                  className="w-full h-full outline-0 	pl-[10px]"
                   placeholder="Поиск"
                 />
                 <span className="pr-[10px]">
                   <SearchIcon />
                 </span>
               </label>
-              <section className=" flex w-fit ">
+              {/* <section className=" flex w-fit ">
                 <PickerOfFilter />
-              </section>
+              </section> */}
             </div>
           </section>
         </div>
