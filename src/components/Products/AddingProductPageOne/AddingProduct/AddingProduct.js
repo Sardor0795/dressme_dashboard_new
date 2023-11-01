@@ -157,29 +157,24 @@ const AddingProduct = () => {
   };
   const [handleWearList, setHandleWearList] = useState([])
   const [handleWearSubList, setHandleWearSubList] = useState([])
+
   const handleWearGroup = (value) => {
     setHandleWearList(value)
-    setSelectedSectionData(productsData?.sections[value - 1]);
-    setSelectedSubSectionsData(null);
   };
+
   const handleWearSubGroup = (value) => {
     setHandleWearSubList(value)
-    const data = selectedSectionData?.sub_sections.filter((e) => {
-      return e.id === value;
-    });
-    console.log(data, "bunnima");
-    setSelectedSubSectionsData(data[0]);
   };
+
+  const newArray = []
+
+  productsData?.sections?.filter(e => handleWearList?.includes(e?.id))?.map((data) => {
+    return data?.sub_sections?.map(item => newArray.push(item))
+  })
+
+
   // console.log(handleWearList, "handleWearList");
 
-
-  const onChange2 = (value) => {
-    // setHandleWearSubList(value)
-    const data = selectedSectionData?.sub_sections.filter((e) => {
-      return e.id === value;
-    });
-    setSelectedSubSectionsData(data[0]);
-  };
 
   const onSearch = (value) => {
     console.log("search:", value);
@@ -598,7 +593,7 @@ const AddingProduct = () => {
                       Подраздел одежды
                     </span>
                     <span className="ml-[5px]">
-                      {selectedSectionData?.sub_sections?.length ? (
+                      {newArray?.length ? (
                         <StarLabel />
                       ) : null}
                     </span>
@@ -617,20 +612,18 @@ const AddingProduct = () => {
                   </button>
                   <div className="w-full h-fit hidden md:flex">
                     <Select
-                      className=" rounded-lg w-full h-11 md:h-10"
+                      className=" rounded-lg w-full h-fit"
                       showSearch
-                      // disabled={
-                      //   selectedSectionData?.sub_sections?.length ? false : true
-                      // }
-                      // placeholder={
-                      //   selectedSectionData?.sub_sections.length
-                      //     ? "Выбрать"
-                      //     : "No data"
-                      // }
+                      disabled={
+                        newArray?.length ? false : true
+                      }
+                      placeholder={
+                        newArray?.length
+                          ? "Выбрать"
+                          : "No data"
+                      }
                       mode="multiple"
-                      placeholder="Выбрать"
                       optionLabelProp="label"
-                      optionFilterProp="children"
                       onChange={handleWearSubGroup}
                       onSearch={onSearch}
                       size="large"
@@ -642,21 +635,20 @@ const AddingProduct = () => {
                       }
 
                     >
-                      {productsData?.sections?.filter(e => handleWearList?.includes(e?.id))?.map((data) => {
-                        return data?.sub_sections?.map(item => {
-                          return (
-                            <Option
-                              key={item.id}
-                              value={item.section_id}
-                              label={item.name_ru}
-                            >
-                              <Space>
-                                <span>{item.name_ru}</span>
-                              </Space>
-                            </Option>
-                          );
-                        })
-                      })}
+                      {newArray?.map(item => {
+                        return (
+                          <Option
+                            key={item.id}
+                            value={item.id}
+                            label={item.name_ru}
+                          >
+                            <Space>
+                              <span>{item.name_ru}</span>
+                            </Space>
+                          </Option>
+                        );
+                      })
+                      }
                     </Select>
 
                   </div>
