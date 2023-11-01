@@ -155,12 +155,26 @@ const AddingProduct = () => {
   const onChange = (value) => {
     console.log(`selected ${value}`);
   };
-  const onChange1 = (value) => {
+  const [handleWearList, setHandleWearList] = useState([])
+  const [handleWearSubList, setHandleWearSubList] = useState([])
+  const handleWearGroup = (value) => {
+    setHandleWearList(value)
     setSelectedSectionData(productsData?.sections[value - 1]);
     setSelectedSubSectionsData(null);
   };
+  const handleWearSubGroup = (value) => {
+    setHandleWearSubList(value)
+    const data = selectedSectionData?.sub_sections.filter((e) => {
+      return e.id === value;
+    });
+    console.log(data, "bunnima");
+    setSelectedSubSectionsData(data[0]);
+  };
+  // console.log(handleWearList, "handleWearList");
+
 
   const onChange2 = (value) => {
+    // setHandleWearSubList(value)
     const data = selectedSectionData?.sub_sections.filter((e) => {
       return e.id === value;
     });
@@ -358,19 +372,18 @@ const AddingProduct = () => {
           })
         }
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${
-           state?.ClothingSection ||
-           state?.SubClothingSection ||
-           state?.DressSeason ||
-           state?.Colour ||
-           state?.GenderModal ||
-           state?.DressTypeModal ||
-           state?.ClothingCategoryModal ||
-           state?.showColor ||
-           state?.MakeCountryModal
-             ? ""
-             : "hidden"
-         }`}
+         ${state?.ClothingSection ||
+            state?.SubClothingSection ||
+            state?.DressSeason ||
+            state?.Colour ||
+            state?.GenderModal ||
+            state?.DressTypeModal ||
+            state?.ClothingCategoryModal ||
+            state?.showColor ||
+            state?.MakeCountryModal
+            ? ""
+            : "hidden"
+          }`}
       ></section>
 
       {state?.showColor && (
@@ -402,13 +415,11 @@ const AddingProduct = () => {
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
                       style={{ background: `${data.hex}` }}
-                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${
-                        data.hex
-                      }] cursor-pointer ${
-                        data?.id == 2
+                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                        }] cursor-pointer ${data?.id == 2
                           ? "border border-setTexOpacity flex items-center justify-center"
                           : ""
-                      }
+                        }
                      `}
                     >
                       {data?.action && data?.id === 2 ? (
@@ -457,66 +468,58 @@ const AddingProduct = () => {
       {/* ---------------------------------------- */}
       {/* Clothing Section */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <ClothingSection onClick={ClothingSectionToggle} />
       </section>
 
       {/*Sub Clothing Section */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <SubClothingSection onClick={SubClothingSectionToggle} />
       </section>
       {/*DressSeason */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <DressSeason onClick={DressSeasonToggle} />
       </section>
       {/*ColourList */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <ColourGroup onClick={ColourListToggle} />
       </section>
       {/*ColourList */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <GenderList onClick={GenderListToggle} />
       </section>
       {/*DressType */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <DressType onClick={DressTypeToggle} />
       </section>
       {/*MakeCountry */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <MakeCountry onClick={MakeCountryToggle} />
       </section>
       {/*ClothingCategory */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <ClothingCategory onClick={ClothingCategoryToggle} />
       </section>
@@ -528,7 +531,7 @@ const AddingProduct = () => {
             <div className="w-full md:w-[70%] h-fit  flex flex-col gap-y-6">
               <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 ">
                 {/* Input Select 1 */}
-                <div className="ClothesSection w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
+                <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                   <div className="flex items-center">
                     <span className="text-[13px] md:text-base font-AeonikProRegular">
                       Раздел одежды
@@ -549,14 +552,15 @@ const AddingProduct = () => {
                     </label>
                     <ArrowRightIcon />
                   </button>
-                  <div className="w-full h-10 hidden md:flex border rounded-lg focus:border-none overflow-hidden">
+                  <div className="w-full  hidden md:flex border rounded-lg focus:border-none overflow-hidden">
                     <Select
-                      className=" rounded-lg w-full h-11 md:h-10"
+                      className=" rounded-lg w-full h-fit "
                       showSearch
                       mode="multiple"
                       placeholder="Выбрать"
-                      optionFilterProp="children"
-                      onChange={onChange1}
+                      optionLabelProp="label"
+                      // optionFilterProp="children"
+                      onChange={handleWearGroup}
                       onSearch={onSearch}
                       size="large"
                       filterOption={(input, option) =>
@@ -564,27 +568,27 @@ const AddingProduct = () => {
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
-                      // options={productsData?.sections?.map((item) => {
-                      //   return {
-                      //     value: item?.id,
-                      //     label: item?.name_ru,
-                      //   };
-                      // })}
-                      >
-                        {productsData?.sections?.map((item) => {
-                          return (
-                            <Option
-                              key={item.id}
-                              value={item.id}
-                              label={item.name_ru}
-                            >
-                              <Space>
-                                <span>{item.name_ru}</span>
-                              </Space>
-                            </Option>
-                            );
-                          })}
-                      </Select>
+                    // options={productsData?.sections?.map((item) => {
+                    //   return {
+                    //     value: item?.id,
+                    //     label: item?.name_ru,
+                    //   };
+                    // })}
+                    >
+                      {productsData?.sections?.map((item) => {
+                        return (
+                          <Option
+                            key={item.id}
+                            value={item.id}
+                            label={item.name_ru}
+                          >
+                            <Space>
+                              <span>{item.name_ru}</span>
+                            </Space>
+                          </Option>
+                        );
+                      })}
+                    </Select>
                   </div>
                 </div>
                 {/* Input Select 2 */}
@@ -615,37 +619,46 @@ const AddingProduct = () => {
                     <Select
                       className=" rounded-lg w-full h-11 md:h-10"
                       showSearch
-                      disabled={
-                        selectedSectionData?.sub_sections?.length ? false : true
-                      }
-                      placeholder={
-                        selectedSectionData?.sub_sections.length
-                          ? "Выбрать"
-                          : "No data"
-                      }
+                      // disabled={
+                      //   selectedSectionData?.sub_sections?.length ? false : true
+                      // }
+                      // placeholder={
+                      //   selectedSectionData?.sub_sections.length
+                      //     ? "Выбрать"
+                      //     : "No data"
+                      // }
+                      mode="multiple"
+                      placeholder="Выбрать"
+                      optionLabelProp="label"
                       optionFilterProp="children"
-                      onChange={onChange2}
+                      onChange={handleWearSubGroup}
                       onSearch={onSearch}
                       size="large"
-                      value={
-                        selectedSubSectionsData
-                          ? selectedSubSectionsData?.name_ru
-                          : "Выбрать"
-                      }
+
                       filterOption={(input, option) =>
                         (option?.label ?? "")
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
-                      options={selectedSectionData?.sub_sections?.map(
-                        (item) => {
-                          return {
-                            value: item?.id,
-                            label: item?.name_ru,
-                          };
-                        }
-                      )}
-                    />
+
+                    >
+                      {productsData?.sections?.filter(e => handleWearList?.includes(e?.id))?.map((data) => {
+                        return data?.sub_sections?.map(item => {
+                          return (
+                            <Option
+                              key={item.id}
+                              value={item.section_id}
+                              label={item.name_ru}
+                            >
+                              <Space>
+                                <span>{item.name_ru}</span>
+                              </Space>
+                            </Option>
+                          );
+                        })
+                      })}
+                    </Select>
+
                   </div>
                 </div>
                 {/* Input Select 3 */}
