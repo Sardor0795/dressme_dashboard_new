@@ -528,7 +528,7 @@ const AddingProduct = () => {
             <div className="w-full md:w-[70%] h-fit  flex flex-col gap-y-6">
               <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 ">
                 {/* Input Select 1 */}
-                <div className=" w-full h-fit  flex flex-col gap-y-[5px]">
+                <div className="ClothesSection w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                   <div className="flex items-center">
                     <span className="text-[13px] md:text-base font-AeonikProRegular">
                       Раздел одежды
@@ -549,10 +549,11 @@ const AddingProduct = () => {
                     </label>
                     <ArrowRightIcon />
                   </button>
-                  <div className="w-full h-fit hidden md:flex">
+                  <div className="w-full h-10 hidden md:flex border rounded-lg focus:border-none overflow-hidden">
                     <Select
                       className=" rounded-lg w-full h-11 md:h-10"
                       showSearch
+                      mode="multiple"
                       placeholder="Выбрать"
                       optionFilterProp="children"
                       onChange={onChange1}
@@ -563,13 +564,27 @@ const AddingProduct = () => {
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
-                      options={productsData?.sections?.map((item) => {
-                        return {
-                          value: item?.id,
-                          label: item?.name_ru,
-                        };
-                      })}
-                    />
+                      // options={productsData?.sections?.map((item) => {
+                      //   return {
+                      //     value: item?.id,
+                      //     label: item?.name_ru,
+                      //   };
+                      // })}
+                      >
+                        {productsData?.sections?.map((item) => {
+                          return (
+                            <Option
+                              key={item.id}
+                              value={item.id}
+                              label={item.name_ru}
+                            >
+                              <Space>
+                                <span>{item.name_ru}</span>
+                              </Space>
+                            </Option>
+                            );
+                          })}
+                      </Select>
                   </div>
                 </div>
                 {/* Input Select 2 */}

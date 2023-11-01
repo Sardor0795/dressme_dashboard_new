@@ -304,3 +304,12 @@ input[type=time]::-webkit-clear-button {
 input[type="radio"]:checked+label span {
   /* background-color: #660006; */
 }
+
+.ClothesSection .ant-select-selector{
+  height: 40px;
+  overflow-y: auto;
+}
+
+.ant-select-arrow {
+  padding-right: 8px;
+}
