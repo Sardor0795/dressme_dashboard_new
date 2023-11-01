@@ -135,7 +135,7 @@ export default function LocationClothesCity() {
           <section className="mt-[25px] pt-[25px] md:mt-0 md:pt-0 md:border-0 border-t border-[#F2F2F2]  w-full md:w-fit  flex items-center md:justify-start justify-between  gap-x-[15px]">
             <label
               htmlFor="searchStore"
-              className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+              className="w-full md:w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
             >
               <input
                 type="text"
@@ -148,29 +148,10 @@ export default function LocationClothesCity() {
                 <SearchIcon />
               </span>
             </label>
-            <div className="w-fit">
+            {/* <div className="w-fit">
               <PickerOfFilter />
-            </div>
+            </div> */}
           </section>
-
-          {/* <div className="w-fit  items-center gap-x-[15px] hidden md:flex">
-            <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
-              <input
-                type="text"
-                name="s"
-                className="w-full h-full  outline-0	"
-                placeholder="Поиск"
-              />
-              <button>
-                <SearchIcon />
-              </button>
-            </form>
-            <section className="mobileDate flex items-center gap-x-[30px]">
-              <Space direction="vertical" size={12}>
-                <RangePicker placeholder={["от", "до"]} />
-              </Space>
-            </section>
-          </div> */}
         </div>
       </div>
 

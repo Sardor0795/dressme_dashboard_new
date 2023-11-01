@@ -53,9 +53,9 @@ export default function ReviewStoreWear() {
                   <SearchIcon />
                 </span>
               </label>
-              <div className="w-fit">
+              {/* <div className="w-fit">
                 <PickerOfFilter />
-              </div>
+              </div> */}
             </section>
           </div>
         </div>
