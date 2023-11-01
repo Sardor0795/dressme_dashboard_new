@@ -4,7 +4,6 @@ import { StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 
 function AccessoriesAdd({ title }) {
-    console.log(title, "titleAccessoriesAdd");
     // Accessories bor
     const contentAccessories = (
         <div className="w-[595px] h-fit">
