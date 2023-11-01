@@ -358,18 +358,19 @@ const AddingProduct = () => {
           })
         }
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.ClothingSection ||
-            state?.SubClothingSection ||
-            state?.DressSeason ||
-            state?.Colour ||
-            state?.GenderModal ||
-            state?.DressTypeModal ||
-            state?.ClothingCategoryModal ||
-            state?.showColor ||
-            state?.MakeCountryModal
-            ? ""
-            : "hidden"
-          }`}
+         ${
+           state?.ClothingSection ||
+           state?.SubClothingSection ||
+           state?.DressSeason ||
+           state?.Colour ||
+           state?.GenderModal ||
+           state?.DressTypeModal ||
+           state?.ClothingCategoryModal ||
+           state?.showColor ||
+           state?.MakeCountryModal
+             ? ""
+             : "hidden"
+         }`}
       ></section>
 
       {state?.showColor && (
@@ -401,11 +402,13 @@ const AddingProduct = () => {
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
                       style={{ background: `${data.hex}` }}
-                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
-                        }] cursor-pointer ${data?.id == 2
+                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${
+                        data.hex
+                      }] cursor-pointer ${
+                        data?.id == 2
                           ? "border border-setTexOpacity flex items-center justify-center"
                           : ""
-                        }
+                      }
                      `}
                     >
                       {data?.action && data?.id === 2 ? (
@@ -454,58 +457,66 @@ const AddingProduct = () => {
       {/* ---------------------------------------- */}
       {/* Clothing Section */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <ClothingSection onClick={ClothingSectionToggle} />
       </section>
 
       {/*Sub Clothing Section */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <SubClothingSection onClick={SubClothingSectionToggle} />
       </section>
       {/*DressSeason */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <DressSeason onClick={DressSeasonToggle} />
       </section>
       {/*ColourList */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <ColourGroup onClick={ColourListToggle} />
       </section>
       {/*ColourList */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <GenderList onClick={GenderListToggle} />
       </section>
       {/*DressType */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <DressType onClick={DressTypeToggle} />
       </section>
       {/*MakeCountry */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <MakeCountry onClick={MakeCountryToggle} />
       </section>
       {/*ClothingCategory */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-          }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
+          state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
+        }`}
       >
         <ClothingCategory onClick={ClothingCategoryToggle} />
       </section>
@@ -568,7 +579,9 @@ const AddingProduct = () => {
                       Подраздел одежды
                     </span>
                     <span className="ml-[5px]">
-                      <StarLabel />
+                      {selectedSectionData?.sub_sections?.length ? (
+                        <StarLabel />
+                      ) : null}
                     </span>
                   </div>
                   <button
@@ -654,7 +667,11 @@ const AddingProduct = () => {
                     >
                       {productsData?.seasons?.map((item) => {
                         return (
-                          <Option key={item.id} value={item.id} label={item.name_ru}>
+                          <Option
+                            key={item.id}
+                            value={item.id}
+                            label={item.name_ru}
+                          >
                             <Space>
                               <span>{item.name_ru}</span>
                             </Space>
@@ -763,7 +780,7 @@ const AddingProduct = () => {
                   <div className="w-1/2 hidden md:flex flex-col gap-y-[5px] ">
                     <div className="flex items-center">
                       <span className="text-[12px] flex flex-wrap whitespace-nowrap md:text-base font-AeonikProRegular">
-                        Возрастная категория
+                        Возраст
                       </span>
                       <span className="ml-[5px]">
                         <StarLabel />
