@@ -358,19 +358,18 @@ const AddingProduct = () => {
           })
         }
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${
-           state?.ClothingSection ||
-           state?.SubClothingSection ||
-           state?.DressSeason ||
-           state?.Colour ||
-           state?.GenderModal ||
-           state?.DressTypeModal ||
-           state?.ClothingCategoryModal ||
-           state?.showColor ||
-           state?.MakeCountryModal
-             ? ""
-             : "hidden"
-         }`}
+         ${state?.ClothingSection ||
+            state?.SubClothingSection ||
+            state?.DressSeason ||
+            state?.Colour ||
+            state?.GenderModal ||
+            state?.DressTypeModal ||
+            state?.ClothingCategoryModal ||
+            state?.showColor ||
+            state?.MakeCountryModal
+            ? ""
+            : "hidden"
+          }`}
       ></section>
 
       {state?.showColor && (
@@ -402,13 +401,11 @@ const AddingProduct = () => {
                         HandleIconsColor(data?.IconsColor, data?.id)
                       }
                       style={{ background: `${data.hex}` }}
-                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${
-                        data.hex
-                      }] cursor-pointer ${
-                        data?.id == 2
+                      className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                        }] cursor-pointer ${data?.id == 2
                           ? "border border-setTexOpacity flex items-center justify-center"
                           : ""
-                      }
+                        }
                      `}
                     >
                       {data?.action && data?.id === 2 ? (
@@ -457,66 +454,58 @@ const AddingProduct = () => {
       {/* ---------------------------------------- */}
       {/* Clothing Section */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <ClothingSection onClick={ClothingSectionToggle} />
       </section>
 
       {/*Sub Clothing Section */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <SubClothingSection onClick={SubClothingSectionToggle} />
       </section>
       {/*DressSeason */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <DressSeason onClick={DressSeasonToggle} />
       </section>
       {/*ColourList */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <ColourGroup onClick={ColourListToggle} />
       </section>
       {/*ColourList */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <GenderList onClick={GenderListToggle} />
       </section>
       {/*DressType */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <DressType onClick={DressTypeToggle} />
       </section>
       {/*MakeCountry */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <MakeCountry onClick={MakeCountryToggle} />
       </section>
       {/*ClothingCategory */}
       <section
-        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-          state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-        }`}
+        className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
+          }`}
       >
         <ClothingCategory onClick={ClothingCategoryToggle} />
       </section>
@@ -1060,11 +1049,11 @@ const AddingProduct = () => {
               <div>
                 {state.openDropModalButton ? (
                   <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                    <HeadWearAdd />
-                    <OutWearAdd />
-                    <UnderAddWear />
-                    <ShoesAdd />
-                    <AccessoriesAdd />
+                    <HeadWearAdd title={productsData?.categories} />
+                    <OutWearAdd title={productsData?.categories} />
+                    <UnderAddWear title={productsData?.categories} />
+                    <ShoesAdd title={productsData?.categories} />
+                    <AccessoriesAdd title={productsData?.categories} />
                   </div>
                 ) : null}
               </div>
