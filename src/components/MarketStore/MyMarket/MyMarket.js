@@ -13,10 +13,14 @@ function MyMarket({ shopsList }) {
   const navigate = useNavigate();
 
   // ------------GET METHOD delivery-method-----------------
-  useQuery(["get_delivery_method"], () => { return request({ url: "/delivery-method", token: true }) },
+  useQuery(
+    ["get_delivery_method"],
+    () => {
+      return request({ url: "/delivery-method", token: true });
+    },
     {
       onSuccess: (res) => {
-        setDeliverList(res?.delivery_methods)
+        setDeliverList(res?.delivery_methods);
       },
       onError: (err) => {
         console.log(err, "err getDelivery-method");
@@ -28,7 +32,7 @@ function MyMarket({ shopsList }) {
 
   const goDetail = (id) => {
     navigate(`/store/market-list/:${id}`);
-  }
+  };
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -77,7 +81,10 @@ function MyMarket({ shopsList }) {
         </div>
       </div>
       <div className="h-fit md:py-7 w-full flex items-center justify-end ">
-        <Link to={'/store/market-add'} className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] md:bg-weatherWinterColor text-weatherWinterColor  md:text-white text-[14px] md:text-base not-italic font-AeonikProMedium">
+        <Link
+          to={"/store/market-add"}
+          className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] md:bg-weatherWinterColor text-weatherWinterColor  md:text-white text-[14px] md:text-base not-italic font-AeonikProMedium"
+        >
           Создать новый магазин
         </Link>
       </div>
@@ -143,16 +150,18 @@ function MyMarket({ shopsList }) {
                 </div>
                 <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                   <img src={deliveryIcon} alt="" />
-                  {
-                    deliverList?.filter(e => e.id == data?.delivery_id)?.map(item => {
+                  {deliverList
+                    ?.filter((e) => e.id == data?.delivery_id)
+                    ?.map((item) => {
                       return (
-                        <span key={item?.id} className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium">
+                        <span
+                          key={item?.id}
+                          className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium"
+                        >
                           {item?.name_ru}
                         </span>
-
-                      )
-                    })
-                  }
+                      );
+                    })}
                 </div>
               </div>
               <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
@@ -175,7 +184,6 @@ function MyMarket({ shopsList }) {
         })}
       </div>
     </div>
-  )
+  );
 }
 export default React.memo(MyMarket);
-
