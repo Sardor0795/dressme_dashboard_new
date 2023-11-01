@@ -3,7 +3,7 @@ import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSiz
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 
-function HeadWearAdd() {
+function HeadWearAdd({ title }) {
     // Hats
     const contentHat = (
         <div className="w-[520px] h-fit">
@@ -167,8 +167,14 @@ function HeadWearAdd() {
             placement="bottom"
             content={contentHat}
         >
-            Головные уборы
+            {
+                title?.filter(e => e?.id === 1)?.map(item => {
+                    return (
+                        <span key={item?.id}>{item?.name_ru}</span>
+                    )
+                })
+            }
         </Popover>
     );
 }
-export default HeadWearAdd
+export default React.memo(HeadWearAdd)
