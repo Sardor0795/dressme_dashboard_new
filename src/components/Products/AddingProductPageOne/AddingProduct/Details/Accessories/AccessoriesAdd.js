@@ -3,7 +3,7 @@ import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSiz
 import { StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 
-function AccessoriesAdd() {
+function AccessoriesAdd({ title }) {
     // Accessories bor
     const contentAccessories = (
         <div className="w-[595px] h-fit">
@@ -180,8 +180,14 @@ function AccessoriesAdd() {
             placement="bottom"
             content={contentAccessories}
         >
-            Аксессуары
+            {
+                title?.filter(e => e?.id === 5)?.map(item => {
+                    return (
+                        <span key={item?.id}>{item?.name_ru}</span>
+                    )
+                })
+            }
         </Popover>
     );
 }
-export default AccessoriesAdd
+export default React.memo(AccessoriesAdd)

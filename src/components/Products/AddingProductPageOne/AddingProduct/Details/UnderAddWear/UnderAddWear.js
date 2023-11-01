@@ -4,7 +4,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 
-function UnderAddWear() {
+function UnderAddWear({ title }) {
     // Shoes
     // Underwear bor Цена
     const contentUnderWear = (
@@ -246,8 +246,14 @@ function UnderAddWear() {
             placement="bottom"
             content={contentUnderWear}
         >
-            Нижняя одежда
+            {
+                title?.filter(e => e?.id === 3)?.map(item => {
+                    return (
+                        <span key={item?.id}>{item?.name_ru}</span>
+                    )
+                })
+            }
         </Popover>
     );
 }
-export default UnderAddWear
+export default React.memo(UnderAddWear)

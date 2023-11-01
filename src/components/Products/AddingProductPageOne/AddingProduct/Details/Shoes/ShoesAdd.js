@@ -3,7 +3,7 @@ import React from "react";
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 
-function ShoesAdd() {
+function ShoesAdd({ title }) {
     // Shoes
     const contentShoes = (
         <div className="w-fit h-fit">
@@ -156,8 +156,14 @@ function ShoesAdd() {
             placement="bottom"
             content={contentShoes}
         >
-            Обувь
+            {
+                title?.filter(e => e?.id === 4)?.map(item => {
+                    return (
+                        <span key={item?.id}>{item?.name_ru}</span>
+                    )
+                })
+            }
         </Popover>
     );
 }
-export default ShoesAdd
+export default React.memo(ShoesAdd)

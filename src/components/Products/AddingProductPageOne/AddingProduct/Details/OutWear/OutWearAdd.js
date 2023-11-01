@@ -4,7 +4,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 
-function OutWearAdd() {
+function OutWearAdd({ title }) {
     // Outerwear bor 
     const contentOutwear = (
         <div className="w-[855px] h-fit">
@@ -245,8 +245,14 @@ function OutWearAdd() {
             placement="bottom"
             content={contentOutwear}
         >
-            Верхняя одежда
+            {
+                title?.filter(e => e?.id === 2)?.map(item => {
+                    return (
+                        <span key={item?.id}>{item?.name_ru}</span>
+                    )
+                })
+            }
         </Popover>
     );
 }
-export default OutWearAdd
+export default React.memo(OutWearAdd)
