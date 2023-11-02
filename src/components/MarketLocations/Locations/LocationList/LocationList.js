@@ -27,8 +27,6 @@ function LocationList({ marketList, locationList }) {
 
   }
 
-
-
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
   };
@@ -42,8 +40,6 @@ function LocationList({ marketList, locationList }) {
     });
   }, []);
 
-
-
   return (
     <div className={`w-full h-full  px-4  md:px-10 `}>
       <div
@@ -51,7 +47,7 @@ function LocationList({ marketList, locationList }) {
         onClick={() => setOpenSelect(false)}
       ></div>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
       >
         <button

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { SearchIcon, StarIcon } from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 import { useQuery } from "@tanstack/react-query";
 import { deliveryIcon, man, woman } from "../../../assets";
 import { useHttp } from "../../../hook/useHttp";
@@ -73,9 +72,6 @@ function MyMarket({ shopsList }) {
                   <SearchIcon />
                 </span>
               </label>
-              {/* <section className=" flex w-fit ">
-                <PickerOfFilter />
-              </section> */}
             </div>
           </section>
         </div>
