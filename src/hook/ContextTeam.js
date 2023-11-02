@@ -12,7 +12,9 @@ export default function ContextTeam({ children }) {
     SellerName: "",
     SellerSurName: "",
     SellerMagazin: "",
-    SellerMagazinLocation: ""
+    SellerMagazinLocation: "",
+    // ------Product----
+    ProductFilterType: null
 
   });
 

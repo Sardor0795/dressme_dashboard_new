@@ -1,5 +1,5 @@
 import { Popover, Select, Space, Switch, TreeSelect } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   AddIconsCircle1,
   ArrowRightIcon,
@@ -25,9 +25,12 @@ import DressType from "./DetailsForMobile/DressType/DressType";
 import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
 import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCategory";
 import { useHttp } from "../../../../hook/useHttp";
+import { dressMainData } from "../../../../hook/ContextTeam";
 const { Option } = Select;
 
 const AddingProduct = () => {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const { request } = useHttp();
   const [state, setState] = useState({
     buttonReviews: false,
@@ -174,12 +177,15 @@ const AddingProduct = () => {
   })
   // -----------------------------------------------------------
   const [getTypeId, setGetTypeId] = useState(0)
+  const [typeFilter, setTypeFilter] = useState(null)
 
   const CategoryTypeId = (value, attribute2) => {
     setGetTypeId(attribute2)
   };
-  console.log(getTypeId, "getTypeId");
-  // console.log(productsData?.types, "productsData?.types"); onChangeSwitch
+  // console.log(getTypeId, "getTypeId");
+  // console.log(productsData?.types, "productsData?.types");
+
+  // console.log(typeFilter, "typeFilter");
 
   // -----------------------------------------------------------
 
@@ -926,9 +932,7 @@ const AddingProduct = () => {
                         showSearch
                         placeholder="Выбрать"
                         optionFilterProp="children"
-                        // onChange={CategoryTypeId}
                         onChange={(value, attribute2) => {
-
                           CategoryTypeId(value, attribute2?.attribute2)
                         }}
                         onSearch={onSearch}
@@ -938,33 +942,28 @@ const AddingProduct = () => {
                             .toLowerCase()
                             .includes(input.toLowerCase())
                         }
-                      // options={productsData?.types?.map((item) => {
-                      //   return {
-                      //     value: item?.id,
-                      //     label: item?.name_ru,
-                      //   };
-                      // })}
-                      // onChange={(value, attribute2) => {
-
-                      //   console.log(value, attribute2);
-                      //   // id_variable = value[0];
-                      //   // attribute2_variable = value.attribute2;
-                      //   // attribute2_variable = value[1];
-                      //   // attribute2_variable = attribute2
-                      // }}
-
                       >
-                        {productsData?.types?.map((item) => {
+                        {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
                           return (
                             <Option
                               key={"item_" + item.id}
                               value={item?.id}
                               attribute2={item?.category_id}
                             >
-                              {item.name_ru}</Option>)
-                        }
-
-                        )
+                              {item.name_ru}
+                            </Option>
+                          )
+                        }) : productsData?.types?.map((item) => {
+                          return (
+                            <Option
+                              key={"item_" + item.id}
+                              value={item?.id}
+                              attribute2={item?.category_id}
+                            >
+                              {item.name_ru}
+                            </Option>
+                          )
+                        })
                         }
                       </Select>
                     </div>
