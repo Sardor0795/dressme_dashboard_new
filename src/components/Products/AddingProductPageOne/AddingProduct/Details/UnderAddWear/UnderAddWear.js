@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
+import { dressMainData } from "../../../../../../hook/ContextTeam";
 
 function UnderAddWear({ title, typeId }) {
+    const [dressInfo, setDressInfo] = useContext(dressMainData);
+
+    const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
     const SelectedNumber = 3
     useEffect(() => {
@@ -14,6 +18,20 @@ function UnderAddWear({ title, typeId }) {
             setToggle(false)
         }
     }, [typeId])    // Underwear bor Цена
+    // console.log(dressInfo?.ProductFilterType, "ProductFilterType - underWear");
+    const handleOpenPopver = () => {
+        setToggleShow(true)
+    }
+    const handleSendDetail = (e) => {
+        setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+        setToggleShow(false)
+
+    }
+    const cancelSendDetail = (e) => {
+        setDressInfo({ ...dressInfo, ProductFilterType: null })
+        setToggleShow(false)
+
+    }
     const contentUnderWear = (
         <div className="w-[840px] h-fit">
             <div
@@ -237,21 +255,34 @@ function UnderAddWear({ title, typeId }) {
                         </div>
                     </div>
                 </div>
-                <button className="w-full flex items-end justify-end text-lg text-textBlueColor font-AeonikProMedium pr-1">
-                    готово
-                </button>
+                <div className="w-full h-fit flex items-center justify-end gap-x-5">
+                    <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
+                        Отменить
+                    </button>
+                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                        Готово
+                    </button>
+                </div>
             </div>
         </div>
     );
     return (
         <Popover
-            // open={state?.openwear}
-            // onOpenChange={handleOpenChangeWear}
-            className={`group px-[15px] h-[38px] border-textBlueColor  ${toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor"} border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300`}
+            // open={toggleShow}
+            // onOpenChange={handleOpenPopver}
+            className={`
+            ${dressInfo?.ProductFilterType ?
+                    dressInfo?.ProductFilterType == SelectedNumber ? "!bg-textBlueColor text-white" : "text-[#bababa]  border-[#bababa]"
+                    :
+                    toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"}
+                    group px-[15px] h-[38px] select-none border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
+            `}
+            // className={`group px-[15px] h-[38px] border-textBlueColor  ${toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor"} border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300`}
             trigger="click"
             options={["Hide"]}
             placement="bottom"
-            content={contentUnderWear}
+            content={dressInfo?.ProductFilterType ? dressInfo?.ProductFilterType == SelectedNumber ? contentUnderWear : null : contentUnderWear}
+
         >
             {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
@@ -260,6 +291,7 @@ function UnderAddWear({ title, typeId }) {
                     )
                 })
             }
+
         </Popover>
     );
 }
