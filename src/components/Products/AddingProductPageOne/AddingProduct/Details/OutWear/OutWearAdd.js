@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 
-function OutWearAdd({ title }) {
+function OutWearAdd({ title, typeId }) {
+    const [toggle, setToggle] = useState(false)
+    const SelectedNumber = 2
+    useEffect(() => {
+        if (typeId == SelectedNumber) {
+            setToggle(true)
+        } else {
+            setToggle(false)
+        }
+    }, [typeId])
     // Outerwear bor 
     const contentOutwear = (
         <div className="w-[855px] h-fit">
@@ -239,14 +248,14 @@ function OutWearAdd({ title }) {
         <Popover
             // open={state?.openwear}
             // onOpenChange={handleOpenChangeWear}
-            className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+            className={`group px-[15px] h-[38px] border-textBlueColor  ${toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor"} border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300`}
             trigger="click"
             options={["Hide"]}
             placement="bottom"
             content={contentOutwear}
         >
             {
-                title?.filter(e => e?.id === 2)?.map(item => {
+                title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
                         <span key={item?.id}>{item?.name_ru}</span>
                     )

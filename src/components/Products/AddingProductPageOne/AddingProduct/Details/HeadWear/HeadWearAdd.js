@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 
-function HeadWearAdd({ title }) {
+function HeadWearAdd({ title, typeId }) {
+    const [toggle, setToggle] = useState(false)
+    const SelectedNumber = 1
+    useEffect(() => {
+        if (typeId == SelectedNumber) {
+            setToggle(true)
+        } else {
+            setToggle(false)
+        }
+    }, [typeId])
+    const onChangeSwitch = (checked) => {
+        console.log(`switch to ${checked}`);
+    };
     // Hats
     const contentHat = (
         <div className="w-[520px] h-fit">
@@ -12,7 +24,7 @@ function HeadWearAdd({ title }) {
             >
                 <div className="w-full flex justify-center  gap-x-10 px-3 pt-5">
                     <div className="w-fit flex flex-col">
-                        <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
                             Обхват головы
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -21,7 +33,7 @@ function HeadWearAdd({ title }) {
                             </span>
                         </p>
 
-                        <div className="w-full flex items-center mt-[7px]">
+                        <div className="w-full flex items-center mt-[10px]">
                             <div className="flex flex-col">
                                 <input
                                     type="text"
@@ -40,7 +52,7 @@ function HeadWearAdd({ title }) {
                         </div>
                     </div>
                     <div className="w-fit flex flex-col">
-                        <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
                             One Size
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -49,11 +61,11 @@ function HeadWearAdd({ title }) {
                             </span>
                         </p>
                         <div className="flex items-center justify-center mt-[10px]">
-                            {/* <Switch className="bg-[#8B8B8B]" onChange={onChangeSwitch} /> */}
+                            <Switch className="bg-[#8B8B8B]" onChange={onChangeSwitch} />
                         </div>
                     </div>
                     <div className="w-fit flex flex-col items-center">
-                        <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
                             Количество
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -61,7 +73,7 @@ function HeadWearAdd({ title }) {
                                 <StarLabel />
                             </span>
                         </p>
-                        <div className="flex items-start justify-between ">
+                        <div className="flex items-start justify-between mt-[10px]">
                             <input
                                 type="text"
                                 className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
@@ -161,14 +173,14 @@ function HeadWearAdd({ title }) {
         <Popover
             // open={state?.openwear}
             // onOpenChange={handleOpenChangeWear}
-            className="group px-[15px] h-[38px] border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300"
+            className={`group px-[15px] h-[38px] border-textBlueColor ${toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor"} border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300`}
             trigger="click"
             options={["Hide"]}
             placement="bottom"
             content={contentHat}
         >
             {
-                title?.filter(e => e?.id === 1)?.map(item => {
+                title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
                         <span key={item?.id}>{item?.name_ru}</span>
                     )

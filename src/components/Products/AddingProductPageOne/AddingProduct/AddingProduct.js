@@ -173,14 +173,13 @@ const AddingProduct = () => {
     })
   })
   // -----------------------------------------------------------
-  const [getTypeId, setGetTypeId] = useState()
+  const [getTypeId, setGetTypeId] = useState(0)
 
   const CategoryTypeId = (value, attribute2) => {
-    console.log(`CategoryTypeId ${value}`);
-    console.log(`attribute2 ${attribute2}`);
-    console.log(`getTypeId ${getTypeId}`);
+    setGetTypeId(attribute2)
   };
-  // console.log(productsData?.types, "productsData?.types");
+  console.log(getTypeId, "getTypeId");
+  // console.log(productsData?.types, "productsData?.types"); onChangeSwitch
 
   // -----------------------------------------------------------
 
@@ -928,7 +927,10 @@ const AddingProduct = () => {
                         placeholder="Выбрать"
                         optionFilterProp="children"
                         // onChange={CategoryTypeId}
-                        onChange={(value, attribute2) => { setGetTypeId(attribute2) }}
+                        onChange={(value, attribute2) => {
+
+                          CategoryTypeId(value, attribute2?.attribute2)
+                        }}
                         onSearch={onSearch}
                         size="large"
                         filterOption={(input, option) =>
@@ -1119,11 +1121,11 @@ const AddingProduct = () => {
               <div>
                 {state.openDropModalButton ? (
                   <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                    <HeadWearAdd title={productsData?.categories} />
-                    <OutWearAdd title={productsData?.categories} />
-                    <UnderAddWear title={productsData?.categories} />
-                    <ShoesAdd title={productsData?.categories} />
-                    <AccessoriesAdd title={productsData?.categories} />
+                    <HeadWearAdd title={productsData?.categories} typeId={getTypeId} />
+                    <OutWearAdd title={productsData?.categories} typeId={getTypeId} />
+                    <UnderAddWear title={productsData?.categories} typeId={getTypeId} />
+                    <ShoesAdd title={productsData?.categories} typeId={getTypeId} />
+                    <AccessoriesAdd title={productsData?.categories} typeId={getTypeId} />
                   </div>
                 ) : null}
               </div>
