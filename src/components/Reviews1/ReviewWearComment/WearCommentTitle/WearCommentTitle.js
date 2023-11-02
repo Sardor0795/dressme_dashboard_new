@@ -225,7 +225,7 @@ export default function WearCommentTitle() {
                               }
                               className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
                             >
-                              <CloseAnswer />
+                              <CloseAnswer colors="#007DCA" />
                             </button>
                           </div>
                         </div>

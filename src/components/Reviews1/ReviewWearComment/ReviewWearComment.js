@@ -118,7 +118,6 @@ export default function ReviewWearComment() {
             }}
             className="w-8 h-8 flex absolute md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
           >
-            {/* <AiOutlineLeft /> */}
             <GoBackIcons />
           </button>
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
