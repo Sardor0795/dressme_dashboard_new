@@ -101,7 +101,7 @@ const AddingProduct = () => {
       state?.DressTypeModal ||
       state?.GenderModal ||
       state?.MakeCountryModal ||
-      state?.SubClothingSections ||
+      state?.SubClothingSection ||
       state?.openDropModalButton
     ) {
       document.body.style.overflow = "hidden";
@@ -117,7 +117,7 @@ const AddingProduct = () => {
     state?.DressTypeModal,
     state?.GenderModal,
     state?.MakeCountryModal,
-    state?.SubClothingSections,
+    state?.SubClothingSection,
     state?.openDropModalButton,
   ]);
 
@@ -151,7 +151,7 @@ const AddingProduct = () => {
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
   };
-
+  // -----------------------------------------------------------
   const onChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -166,15 +166,23 @@ const AddingProduct = () => {
     setHandleWearSubList(value)
   };
 
-
   const newArray = []
   productsData?.sections?.filter(e => handleWearList?.includes(e?.id))?.map((data) => {
     return data?.sub_sections?.map(item => {
       newArray.push(item)
     })
   })
+  // -----------------------------------------------------------
+  const [getTypeId, setGetTypeId] = useState()
 
-  // --------------------------
+  const CategoryTypeId = (value, attribute2) => {
+    console.log(`CategoryTypeId ${value}`);
+    console.log(`attribute2 ${attribute2}`);
+    console.log(`getTypeId ${getTypeId}`);
+  };
+  // console.log(productsData?.types, "productsData?.types");
+
+  // -----------------------------------------------------------
 
   const onSearch = (value) => {
     console.log("search:", value);
@@ -589,7 +597,7 @@ const AddingProduct = () => {
                 {/* Input Select 2 */}
                 <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                   <div className="flex items-center">
-                    <span className="text-[13px] md:text-base font-AeonikProRegular">
+                    <span className={`text-[13px] md:text-base font-AeonikProRegular ${newArray?.length ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                       Подраздел одежды
                     </span>
                     <span className="ml-[5px]">
@@ -628,7 +636,7 @@ const AddingProduct = () => {
                       onChange={handleWearSubGroup}
                       onSearch={onSearch}
                       size="large"
-
+                      allowClear
                       filterOption={(input, option) =>
                         (option?.label ?? "")
                           .toLowerCase()
@@ -919,7 +927,8 @@ const AddingProduct = () => {
                         showSearch
                         placeholder="Выбрать"
                         optionFilterProp="children"
-                        onChange={onChange}
+                        // onChange={CategoryTypeId}
+                        onChange={(value, attribute2) => { setGetTypeId(attribute2) }}
                         onSearch={onSearch}
                         size="large"
                         filterOption={(input, option) =>
@@ -927,13 +936,35 @@ const AddingProduct = () => {
                             .toLowerCase()
                             .includes(input.toLowerCase())
                         }
-                        options={productsData?.types?.map((item) => {
-                          return {
-                            value: item?.id,
-                            label: item?.name_ru,
-                          };
-                        })}
-                      />
+                      // options={productsData?.types?.map((item) => {
+                      //   return {
+                      //     value: item?.id,
+                      //     label: item?.name_ru,
+                      //   };
+                      // })}
+                      // onChange={(value, attribute2) => {
+
+                      //   console.log(value, attribute2);
+                      //   // id_variable = value[0];
+                      //   // attribute2_variable = value.attribute2;
+                      //   // attribute2_variable = value[1];
+                      //   // attribute2_variable = attribute2
+                      // }}
+
+                      >
+                        {productsData?.types?.map((item) => {
+                          return (
+                            <Option
+                              key={"item_" + item.id}
+                              value={item?.id}
+                              attribute2={item?.category_id}
+                            >
+                              {item.name_ru}</Option>)
+                        }
+
+                        )
+                        }
+                      </Select>
                     </div>
                   </div>
                   <div className="w-1/2 flex flex-col gap-y-[5px]">
