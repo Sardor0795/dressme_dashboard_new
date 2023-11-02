@@ -146,34 +146,35 @@ function AddStore({ shopsList }) {
         pauseOnHover
         theme="colored"
       />
-
-      {shopsList?.shops?.data?.length >= 1 && (
-        <div className="flex md:hidden items-start">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="flex items-center cursor-pointer justify-center "
-          >
-            <GoBackIcons />
-          </button>
+      <div className="w-full flex items-center">
+        {/* {shopsList?.shops?.data?.length >= 1 && ( */}
+          <div className="flex md:hidden items-start">
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="flex items-center cursor-pointer justify-center "
+            >
+              <GoBackIcons />
+            </button>
+          </div>
+        {/* )} */}
+        <div className="w-full text-center text-tableTextTitle2 text-xl mb-0 pr-6 md:pr-0 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
+          Создать магазин
         </div>
-      )}
-      <div className="text-center text-tableTextTitle2 text-xl mb-3 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
-        Создать магазин
       </div>
-      {shopsList?.shops?.data?.length >= 1 && (
-        <div className="mb-3">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-          >
-            <AiOutlineLeft />
-          </button>
-        </div>
-      )}
+      {/* {shopsList?.shops?.data?.length >= 1 && ( */}
+      <div className="mb-3">
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+          className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+        >
+          <AiOutlineLeft />
+        </button>
+      </div>
+       {/* )} */}
       <div className="relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
         <button className="h-full w-full flex items-center justify-center ">
           <label
@@ -210,7 +211,6 @@ function AddStore({ shopsList }) {
             )}
           </label>
         </button>
-
         <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
           <button className="h-full w-full rounded-full flex items-center justify-center ">
             <label
@@ -254,19 +254,19 @@ function AddStore({ shopsList }) {
           </button>
         </div>
       </div>
+
       {/* Form */}
-      <div className="w-full flex flex-col items-center justify-between  ">
+      <div className="w-full flex flex-col items-center justify-between">
         <div className="w-full flex flex-col md:flex-row items-center justify-center mb-10 md:mb-[60px] gap-x-10">
           <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7">
-            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] ">
+            <div className="w-full flex items-center justify-between md:gap-x-[30px] ">
               <label
                 htmlFor="shopName"
-                className="w-[40%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular
-                                        "
+                className="w-[30%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
               >
                 Название магазина
                 <span className="ml-[5px] hidden md:block">
-                  <StarLabel />{" "}
+                  <StarLabel />
                 </span>
               </label>
               <input
@@ -288,10 +288,10 @@ function AddStore({ shopsList }) {
                 </p>
               )}
             </div>
-            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] my-5">
+            <div className="w-full flex items-center justify-between md:gap-x-[30px] my-5">
               <label
                 htmlFor="shopName"
-                className="w-[40%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
+                className="w-[30%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
               >
                 Пол
                 <span className="ml-[5px] hidden md:block">
@@ -301,7 +301,7 @@ function AddStore({ shopsList }) {
               <div className="w-[70%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                 {state?.genderType?.map((data) => {
                   return (
-                    <div key={data?.id} className="md:w-1/3">
+                    <div key={data?.id} className="w-1/3 focus:bg-weatherWinterColor cursor-pointer flex items-center justify-center border md:border-none border-borderColor2 rounded-lg">
                       <input
                         type="radio"
                         id={data?.id}
@@ -311,11 +311,10 @@ function AddStore({ shopsList }) {
                         onChange={(e) =>
                           setState({ ...state, checkGender: e.target.value })
                         }
-                        // id={answer.answer_ID}
                       />
                       <label
                         htmlFor={data?.id}
-                        className={`w-1/3 cursor-pointer md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
+                        className={`md:w-full flex items-center justify-center text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
                       >
                         <span>{data?.name_ru}</span>
                       </label>
@@ -324,7 +323,7 @@ function AddStore({ shopsList }) {
                 })}
               </div>
             </div>
-            <div className="w-full flex items-center justify-between gap-x-[8px] md:gap-x-[30px] ">
+            <div className="w-full flex items-center justify-between md:gap-x-[30px] ">
               <label
                 htmlFor="shopName"
                 className="w-[40%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
@@ -350,7 +349,7 @@ function AddStore({ shopsList }) {
                       />
                       <label
                         htmlFor={data?.name_uz}
-                        className={`cursor-pointer md:px-3 w-[200px] border border-searchBgColor flex items-center justify-center   text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
+                        className={`flex items-center justify-center cursor-pointer md:px-3 w-[200px] border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
                       >
                         <span>{data?.name_ru}</span>
                       </label>
@@ -365,7 +364,7 @@ function AddStore({ shopsList }) {
       <div className="flex items-center justify-center mb-10 md:mb-24">
         <button
           onClick={sendFunc}
-          className="inline-block w-full md:w-fit text xs:px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
+          className="w-full md:w-fit text xs:px-[100px] flex items-center justify-center h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
           Создать магазин
         </button>

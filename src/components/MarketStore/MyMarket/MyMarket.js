@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { SearchIcon, StarIcon } from "../../../assets/icons";
+import { SearchIcon} from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { useQuery } from "@tanstack/react-query";
 import { deliveryIcon, man, woman } from "../../../assets";
 import { useHttp } from "../../../hook/useHttp";
+import { StarIcon } from "../../../assets/icons";
 
 function MyMarket({ shopsList }) {
   const [deliverList, setDeliverList] = useState();
@@ -89,33 +90,32 @@ function MyMarket({ shopsList }) {
           return (
             <div
               key={data?.id}
-              className="w-full md:h-[100px] h-fit border border-borderColor md:pr-10  p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
-            >
-              <div className="w-full md:w-fit flex items-center md:flex-row flex-col justify-center md:justify-start  md:border-0 border-b border-borderColor">
+              className="w-full h-fit md:h-[100px] border border-borderColor md:pr-10  p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
+            >  
+              <div className="w-full md:w-fit flex flex-col md:flex-row items-center md:justify-start  md:border-0 border-b border-borderColor">
                 <div className="w-full md:w-fit flex items-center justify-between  md:pr-7 md:pl-5 text-xl font-AeonikProRegular ">
                   <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
                   <span className="text-checkboxBorder md:text-black flex items-center">
-                    {" "}
                     <span className="md:hidden flex">0</span>
                     {index + 1}
                   </span>
                   <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
                 </div>
-                <div className="w-full md:w-fit flex items-center justify-between my-[15px] md:my-0 ">
-                  <figure className="w-[80px] md:w-[120px] h-[80px] overflow-hidden md:h-[120px] md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
+                <div className="w-full md:w-fit flex items-center my-[15px] md:my-0 ">
+                  <figure className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] overflow-hidden md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
                     <img
                       src={data?.url_logo_photo}
                       alt=""
-                      className="w-full h-full  object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </figure>
-                  <div className="flex flex-col ll:ml-8">
-                    <p className="text-[13px] w-[350px] ls:text-[14px] xs:text-xl  xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
+                  <div className="w-fit flex flex-col ml-5 md:ml-8">
+                    <p className="w-fit text-[13px] md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
                       {data?.name || null}
                     </p>
-                    <div className="">
-                      <div className="flex items-center ">
-                        <div className="flex items-center  mr-[6px]">
+                    <div className="w-full flex items-center">
+                      <div className="w-fit flex items-center ">
+                        <div className="w-fit flex items-center mr-[6px]">
                           <StarIcon />
                         </div>
                         <div className="not-italic font-AeonikProRegular  text-[10px] ls:text-xs leading-4 text-right text-gray-500 md:ml-1 flex items-center text-sm">
@@ -134,7 +134,7 @@ function MyMarket({ shopsList }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>     
               <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[130px] mt-3 md:mt-0">
                 <div className="flex items-center gap-x-1 ">
                   <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
@@ -163,7 +163,6 @@ function MyMarket({ shopsList }) {
               <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
                 <button
                   onClick={() => navigate(`/store/locations/shop/:${data?.id}`)}
-                  // to={`locations/shop/${data?.id}`}
                   className="md:text-textBlueColor cursor-pointer w-[50%] flex items-center justify-center md:w-fit  md:text-base text-[13px] not-italic md:font-AeonikProMedium font-AeonikProRegular md:hover:underline md:px-0 px-[20px] ll:px-[25px] xs:px-[54px] md:py-0 py-2 md:rounded-0 rounded-lg md:bg-white bg-locationBg text-locationText"
                 >
                   Локации
