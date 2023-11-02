@@ -146,7 +146,6 @@ const CommentTitle = () => {
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
-
                 <div className="flex flex-col">
                   <div className="text-tableTextTitle2 text-base md:text-xl font-AeonikProMedium">
                     {data?.userName}
@@ -225,7 +224,7 @@ const CommentTitle = () => {
                               }
                               className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
                             >
-                              <CloseAnswer />
+                              <CloseAnswer colors="#007DCA" />
                             </button>
                           </div>
                         </div>

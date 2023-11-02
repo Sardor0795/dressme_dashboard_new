@@ -130,7 +130,7 @@ const ReviewStore = () => {
                   <img src={woman} alt="" />
                 </div>
               </section>
-              <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3">
+              <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg hidden md:flex items-center justify-center gap-x-1 ll:gap-x-3">
                 <img src={deliveryIcon} alt="" />
                 {deliverList
                   ?.filter((e) => e.id == data?.delivery_id)
@@ -144,9 +144,6 @@ const ReviewStore = () => {
                       </span>
                     );
                   })}
-                {/* <span className="text-tableTextTitle2 text-base not-italic font-AeonikProMedium">
-                  Собственная доставка
-                </span> */}
               </section>
               <section className="hidden md:flex items-center gap-x-[50px]">
                 <p

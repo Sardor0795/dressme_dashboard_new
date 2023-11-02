@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ProductImg } from "../../../../assets";
 import {
-  CheckTrue,
   SearchIcon,
   StarIcon,
-  StarOutlineIcon,
 } from "../../../../assets/icons";
-import { DatePicker, Space, Popover } from "antd";
 import { useNavigate } from "react-router-dom";
-import { BiChevronDown } from "react-icons/bi";
 
-const { RangePicker } = DatePicker;
 export default function ReviewWear() {
   const productList = [
     {
@@ -32,9 +27,9 @@ export default function ReviewWear() {
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-wear/${id}`);
   };
-  const [state, setState] = useState({
-    openwear: false,
-  });
+  // const [state, setState] = useState({
+  //   openwear: false,
+  // });
 
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
@@ -156,7 +151,6 @@ export default function ReviewWear() {
           })}
         </div>
       </div>
-      {/* <div className="hidden md:block">Reviews</div> */}
     </div>
   );
 }

@@ -85,7 +85,7 @@ export default function NavbarDashboard() {
       ></div>
       {/* LogOut  Account Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${dressInfo?.logOutSeller ? " bottom-0 md:flex z-[113]" : "md:hidden bottom-[-800px] z-[-10]"
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${dressInfo?.logOutSeller ? " bottom-0 md:flex z-[113]" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
 
       >
@@ -129,7 +129,7 @@ export default function NavbarDashboard() {
           </div> : null
 
         }
-        <div className={`  ${localStorage.getItem("DressmeUserToken") ? "md:w-[calc(100%-300px)] md:ml-[300px]" : "md:w-full border border-black"} h-full `}>
+        <div className={`${localStorage.getItem("DressmeUserToken") ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "md:w-full border border-black"} h-full `}>
           <RouterList />
         </div>
       </div>

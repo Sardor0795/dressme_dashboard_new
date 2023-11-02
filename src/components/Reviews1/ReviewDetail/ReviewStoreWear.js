@@ -26,9 +26,8 @@ export default function ReviewStoreWear() {
     <div className="w-full h-fit">
       {/* filter */}
       <div className="w-full block pb-4 md:py-4 md:border-b border-lightBorderColor">
-
         <div className="w-full md:py-0 py-6 border-lightBorderColor ">
-          <div className="w-full  md:hidden flex items-center justify-center">
+          <div className="w-full md:hidden flex items-center justify-center">
             <button className="absolute left-4 ">
               <MobileHumburgerMenu />
             </button>
@@ -53,32 +52,29 @@ export default function ReviewStoreWear() {
                   <SearchIcon />
                 </span>
               </label>
-              {/* <div className="w-fit">
-                <PickerOfFilter />
-              </div> */}
             </section>
           </div>
         </div>
-
-
       </div>
       <div className="mb-[30px] md:my-[30px] w-full flex justify-center items-center">
         <div className="w-fit h-[44px] bg-lightBorderColor flex items-center justify-center rounded-lg overflow-hidden">
           <button
             onClick={() => setStoreOrWear(false)}
-            className={`w-[260px] ${!storeOrWear
-              ? "text-textBlueColor border rounded-lg border-textBlueColor"
-              : "text-black"
-              } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
+            className={`w-[260px] ${
+              !storeOrWear
+                ? "text-textBlueColor border rounded-lg border-textBlueColor"
+                : "text-black"
+            } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
           >
             Одежда (6)
           </button>
           <button
             onClick={() => setStoreOrWear(true)}
-            className={`w-[260px] ${storeOrWear
-              ? "text-textBlueColor border rounded-lg border-textBlueColor"
-              : "text-black"
-              } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
+            className={`w-[260px] ${
+              storeOrWear
+                ? "text-textBlueColor border rounded-lg border-textBlueColor"
+                : "text-black"
+            } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
           >
             Магазины (2)
           </button>
