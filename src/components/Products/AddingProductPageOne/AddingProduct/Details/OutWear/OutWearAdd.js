@@ -256,10 +256,10 @@ function OutWearAdd({ title, typeId }) {
                 </div>
 
                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                    <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
+                    <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
                         Отменить
                     </button>
-                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Готово
                     </button>
                 </div>
@@ -271,17 +271,19 @@ function OutWearAdd({ title, typeId }) {
             // open={toggleShow}
             // onOpenChange={handleOpenPopver}
             className={`
-            ${dressInfo?.ProductFilterType ?
-                    dressInfo?.ProductFilterType == SelectedNumber ? "!bg-textBlueColor text-white" : "text-[#bababa]  border-[#bababa]"
-                    :
-                    toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"}
-                    group px-[15px] h-[38px] select-none border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
-            `}
-            // className={`group px-[15px] h-[38px] border-textBlueColor  ${toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor"} border-[1.5px] font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer active:scale-95  rounded-lg focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white transition duration-300`}
+            ${dressInfo?.ProductFilterType || typeId ?
+                    dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ?
+                        "!bg-textBlueColor text-white" :
+                        "text-[#bababa]  border-[#bababa]" :
+                    "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"} 
+                    group px-[15px] h-[38px]  border-[1.5px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
+                    `}
             trigger="click"
             options={["Hide"]}
             placement="bottom"
-            content={dressInfo?.ProductFilterType ? dressInfo?.ProductFilterType == SelectedNumber ? contentOutwear : null : contentOutwear}
+            content={dressInfo?.ProductFilterType || typeId ? dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ? contentOutwear : null : contentOutwear}
+
+        // content={dressInfo?.ProductFilterType ? dressInfo?.ProductFilterType == SelectedNumber ? contentOutwear : null : contentOutwear}
 
 
         >
