@@ -6,7 +6,19 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 
 function AccessoriesAdd({ title, typeId }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
-
+    const [state, setState] = useState({
+        rowSize: "",
+        colSize: "",
+        minSize: "",
+        ageNum: "",
+        quantityNum: "",
+        priceNum: "",
+        salePercent: "",
+        salePrice: "",
+        isCheckValid: false,
+        // ------
+        onConcel: false
+    })
     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
     const SelectedNumber = 5
@@ -19,12 +31,17 @@ function AccessoriesAdd({ title, typeId }) {
     }, [typeId])
     // console.log(dressInfo?.ProductFilterType, "ProductFilterType - accessor");
     // Accessories bor
-    const handleOpenPopver = () => {
-        setToggleShow(true)
+    const handleOpenPopver = (newOpen) => {
+        setToggleShow(newOpen)
     }
     const handleSendDetail = (e) => {
-        setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-        setToggleShow(false)
+        setState({ ...state, isCheckValid: true })
+        if (state?.priceNum) {
+            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+            setState({ ...state, isCheckValid: false, onConcel: true })
+            setToggleShow(false)
+        }
+
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
@@ -48,6 +65,8 @@ function AccessoriesAdd({ title, typeId }) {
                                 <input
                                     type="text"
                                     className="inputStyle w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
+                                    value={state?.minSize}
+                                    onChange={(e) => setState({ ...state, minSize: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -72,6 +91,8 @@ function AccessoriesAdd({ title, typeId }) {
                                 <input
                                     type="text"
                                     className="inputStyle w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
+                                    value={state?.colSize}
+                                    onChange={(e) => setState({ ...state, colSize: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -86,6 +107,8 @@ function AccessoriesAdd({ title, typeId }) {
                                 <input
                                     type="text"
                                     className="inputStyle w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                    value={state?.rowSize}
+                                    onChange={(e) => setState({ ...state, rowSize: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -99,6 +122,8 @@ function AccessoriesAdd({ title, typeId }) {
                             <input
                                 type="text"
                                 className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
+                                value={state?.quantityNum}
+                                onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                             />
                         </div>
                     </div>
@@ -122,6 +147,8 @@ function AccessoriesAdd({ title, typeId }) {
                                     type="text"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                                     placeholder=""
+                                    value={state?.ageNum}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -137,16 +164,19 @@ function AccessoriesAdd({ title, typeId }) {
                                     <StarLabel />
                                 </span>
                             </div>
-                            <div className="w-full h-[40px] flex items-center border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                            <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
                                     type="text"
                                     placeholder="0"
-                                    className="inputStyle w-[70%] font-AeonikProMedium outline-none "
+                                    id="priceAccess"
+                                    className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
+                                    value={state?.priceNum}
+                                    onChange={(e) => setState({ ...state, priceNum: e.target.value })}
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
                                 </span>
-                            </div>
+                            </label>
                         </div>
                     </div>
                     <div className="w-[40%] flex flex-col items-start">
@@ -169,31 +199,36 @@ function AccessoriesAdd({ title, typeId }) {
                                             type="text"
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
+                                            value={state?.salePercent}
+                                            onChange={(e) => setState({ ...state, salePercent: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-2">%</span>
                                     </div>
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
                                             type="text"
                                             placeholder="0"
+                                            id="salePrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none "
+                                            value={state?.salePrice}
+                                            onChange={(e) => setState({ ...state, salePrice: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
                                         </span>
-                                    </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                    <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
+                    {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
                         Отменить
-                    </button>
+                    </button>}
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Готово
                     </button>
@@ -203,8 +238,8 @@ function AccessoriesAdd({ title, typeId }) {
     );
     return (
         <Popover
-            // open={toggleShow}
-            // onOpenChange={handleOpenPopver}
+            open={toggleShow}
+            onOpenChange={handleOpenPopver}
 
             className={`
             ${dressInfo?.ProductFilterType || typeId ?

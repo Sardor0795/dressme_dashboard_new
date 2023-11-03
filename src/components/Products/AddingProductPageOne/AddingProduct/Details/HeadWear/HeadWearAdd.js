@@ -16,7 +16,9 @@ function HeadWearAdd({ title, typeId }) {
         priceNum: "",
         salePercent: "",
         salePrice: "",
-        isCheckValid: false
+        isCheckValid: false,
+        // ------
+        onConcel: false
     })
 
     const [toggleShow, setToggleShow] = useState(false)
@@ -30,19 +32,19 @@ function HeadWearAdd({ title, typeId }) {
         }
     }, [typeId])
     const onChangeSwitch = (checked) => {
-        // console.log(`switch to ${checked}`);
         setState({ ...state, sizeCheck: checked })
     };
     // Hats
-    const handleOpenPopver = () => {
-        setToggleShow(true)
+
+    const handleOpenPopver = (newOpen) => {
+        setToggleShow(newOpen)
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.maxNum && state?.maxNum && state?.quantityNum && state?.priceNum) {
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setToggleShow(false)
-            setState({ ...state, isCheckValid: false })
+            setState({ ...state, isCheckValid: false, onConcel: true })
 
         }
 
@@ -116,7 +118,7 @@ function HeadWearAdd({ title, typeId }) {
                         <div className="flex items-start justify-between mt-[10px]">
                             <input
                                 type="text"
-                                className={`inputStyle w-[60px] h-[38px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
+                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                 required
@@ -155,11 +157,12 @@ function HeadWearAdd({ title, typeId }) {
                                     <StarLabel />
                                 </span>
                             </div>
-                            <div className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                            <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
                                     type="text"
                                     placeholder="0"
-                                    className="inputStyle w-[70%] font-AeonikProMedium outline-none "
+                                    id="enterPrice"
+                                    className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.priceNum}
                                     onChange={(e) => setState({ ...state, priceNum: e.target.value })}
                                     required
@@ -167,7 +170,7 @@ function HeadWearAdd({ title, typeId }) {
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
                                 </span>
-                            </div>
+                            </label>
                         </div>
                     </div>
                     <div className="w-1/2 flex flex-col items-start">
@@ -185,51 +188,52 @@ function HeadWearAdd({ title, typeId }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
+                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.salePercent}
                                             onChange={(e) => setState({ ...state, salePercent: e.target.value })}
                                         />
-                                        <span className="text-textLightColor ml-2">%</span>
+                                        <span className="text-textLightColor ml-1">%</span>
                                     </div>
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none "
+                                            id="salePrice"
+                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.salePrice}
                                             onChange={(e) => setState({ ...state, salePrice: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
                                         </span>
-                                    </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                    <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
+                    {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
                         Отменить
-                    </button>
+                    </button>}
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Готово
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     );
     return (
         <Popover
-            // open={toggleShow}
-            // onOpenChange={handleOpenPopver}
+            open={toggleShow}
+            onOpenChange={handleOpenPopver}
             // className={`
             // ${dressInfo?.ProductFilterType ?
             //         dressInfo?.ProductFilterType == SelectedNumber ? "!bg-textBlueColor text-white" : "text-[#bababa]  border-[#bababa]"
