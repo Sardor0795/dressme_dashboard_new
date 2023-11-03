@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import { SearchIcon } from "../../../assets/icons";
+import { GoBackIcons, SearchIcon } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import LoadingForSeller from "../../Loading/LoadingFor";
 import { useHttp } from "../../../hook/useHttp";
@@ -58,23 +58,21 @@ export default function LocationsByIdShow() {
       {
         state?.loading ? <LoadingForSeller /> :
           state?.locationIsCheck ? (
-            <div className="w-full h-full  px-4 md:px-0 ">
+            <div className="w-full h-full px-4 md:px-0 ">
               <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
-                <div>
-                  <MobileHumburgerMenu />
-                </div>
-                <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
-                  Локации
-                </p>
-                <div className="w-[30px]"></div>
+                {/* <MobileHumburgerMenu /> */}
                 <button
                   onClick={() => {
                     navigate(-1);
                   }}
-                  className="md:w-8 md:h-8 w-6 h-6 md:hidden flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+                  className="flex items-center cursor-pointer justify-center "
                 >
-                  <AiOutlineLeft />
+                  <GoBackIcons />
                 </button>
+                <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
+                  Локации
+                </p>
+                <div className="w-[30px]"></div>
               </div>
               <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
                 <label
@@ -92,9 +90,6 @@ export default function LocationsByIdShow() {
                     <SearchIcon />
                   </span>
                 </label>
-                <div className="w-fit">
-                  <PickerOfFilter />
-                </div>
               </section>
               <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
                 <div className="flex justify-end items-center md:justify-between">
@@ -112,20 +107,17 @@ export default function LocationsByIdShow() {
                     </p>
                   </section>
                   <div className="w-fit flex items-center gap-x-[15px]">
-                    <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+                    <form className="w-[100%] md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
                       <input
                         type="text"
                         name="s"
-                        className="w-full h-full  outline-0	"
+                        className="w-full h-full outline-0"
                         placeholder="Поиск"
                       />
                       <button>
                         <SearchIcon />
                       </button>
                     </form>
-                    <div className="w-fit">
-                      <PickerOfFilter />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -190,7 +182,7 @@ export default function LocationsByIdShow() {
                 </div>
 
                 {/* table product */}
-                <div className="w-full h-full  flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
+                <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
                   {state?.locationListId?.locations?.data?.map((data, index) => {
                     return (
                       <>
@@ -248,7 +240,6 @@ export default function LocationsByIdShow() {
                         </ul>
 
                         {/* Mobile */}
-
                         <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
                           <div className="mb-2">
                             <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
@@ -257,7 +248,6 @@ export default function LocationsByIdShow() {
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                             </div>
                           </div>
-
                           <div className="mb-3 h-[148px]">
                             <figure className="w-full h-full rounded-lg overflow-hidden">
                               <img
@@ -267,16 +257,15 @@ export default function LocationsByIdShow() {
                               />
                             </figure>
                           </div>
-
                           <div className="mb-[25px]">
                             <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-1 ll:px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
-                              <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[24%]">
+                              <div className="w-[24%] text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px]">
                                 Регион
                               </div>
-                              <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[46%]">
+                              <div className="w-[46%] text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px]">
                                 Адрес
                               </div>
-                              <div className="text-[#3F6175] text-[12px] text-center not-italic font-AeonikProMedium w-[30%]">
+                              <div className="w-[30%] text-[#3F6175] text-[12px] text-center not-italic font-AeonikProMedium">
                                 Рабочее время
                               </div>
                             </div>

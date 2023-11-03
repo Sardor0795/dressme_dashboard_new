@@ -148,16 +148,16 @@ function AddStore({ shopsList }) {
       />
       <div className="w-full flex items-center">
         {/* {shopsList?.shops?.data?.length >= 1 && ( */}
-          <div className="flex md:hidden items-start">
-            <button
-              onClick={() => {
-                navigate(-1);
-              }}
-              className="flex items-center cursor-pointer justify-center "
-            >
-              <GoBackIcons />
-            </button>
-          </div>
+        <div className="flex md:hidden items-start">
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="flex items-center cursor-pointer justify-center "
+          >
+            <GoBackIcons />
+          </button>
+        </div>
         {/* )} */}
         <div className="w-full text-center text-tableTextTitle2 text-xl mb-0 pr-6 md:pr-0 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
           Создать магазин
@@ -174,7 +174,7 @@ function AddStore({ shopsList }) {
           <AiOutlineLeft />
         </button>
       </div>
-       {/* )} */}
+      {/* )} */}
       <div className="relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
         <button className="h-full w-full flex items-center justify-center ">
           <label
@@ -262,7 +262,7 @@ function AddStore({ shopsList }) {
             <div className="w-full flex items-center justify-between md:gap-x-[30px] ">
               <label
                 htmlFor="shopName"
-                className="w-[30%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
+                className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
               >
                 Название магазина
                 <span className="ml-[5px] hidden md:block">
@@ -278,7 +278,7 @@ function AddStore({ shopsList }) {
                   setState({ ...state, magazinName: e.target.value })
                 }
                 placeholder="Введите название магазина"
-                className="w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
+                className="w-[65%] md:w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />
             </div>
             <div className="w-full flex items-center justify-end">
@@ -291,17 +291,17 @@ function AddStore({ shopsList }) {
             <div className="w-full flex items-center justify-between md:gap-x-[30px] my-5">
               <label
                 htmlFor="shopName"
-                className="w-[30%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
+                className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
               >
                 Пол
                 <span className="ml-[5px] hidden md:block">
                   <StarLabel />{" "}
                 </span>
               </label>
-              <div className="w-[70%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
+              <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                 {state?.genderType?.map((data) => {
                   return (
-                    <div key={data?.id} className="w-1/3 focus:bg-weatherWinterColor cursor-pointer flex items-center justify-center border md:border-none border-borderColor2 rounded-lg">
+                    <>
                       <input
                         type="radio"
                         id={data?.id}
@@ -314,11 +314,11 @@ function AddStore({ shopsList }) {
                       />
                       <label
                         htmlFor={data?.id}
-                        className={`md:w-full flex items-center justify-center text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
+                        className={`w-1/3 cursor-pointer md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
                       >
                         <span>{data?.name_ru}</span>
                       </label>
-                    </div>
+                    </>
                   );
                 })}
               </div>
@@ -326,14 +326,14 @@ function AddStore({ shopsList }) {
             <div className="w-full flex items-center justify-between md:gap-x-[30px] ">
               <label
                 htmlFor="shopName"
-                className="w-[40%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
+                className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
               >
                 Метод доставки
                 <span className="ml-[5px] hidden md:block">
                   <StarLabel />
                 </span>
               </label>
-              <div className="w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+              <div className="w-[65%] md:w-[70%] radio-toolbar flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                 {state?.deliverList?.map((data) => {
                   return (
                     <>
@@ -349,9 +349,9 @@ function AddStore({ shopsList }) {
                       />
                       <label
                         htmlFor={data?.name_uz}
-                        className={`flex items-center justify-center cursor-pointer md:px-3 w-[200px] border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
+                        className={`w-1/2 h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                       >
-                        <span>{data?.name_ru}</span>
+                        <span className="leading-none">{data?.name_ru}</span>
                       </label>
                     </>
                   );
