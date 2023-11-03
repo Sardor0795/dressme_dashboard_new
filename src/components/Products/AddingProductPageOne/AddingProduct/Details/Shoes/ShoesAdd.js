@@ -43,6 +43,19 @@ function ShoesAdd({ title, typeId }) {
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
+        setState({
+            ...state,
+            minFootLength: "",
+            maxFootLength: "",
+            minSize: "",
+            ageNum: "",
+            priceNum: "",
+            salePercent: "",
+            salePrice: "",
+            isCheckValid: false,
+            // ------
+            onConcel: false
+        })
         setToggleShow(false)
 
     }
@@ -64,7 +77,7 @@ function ShoesAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-full text-start h-[40px] ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
                                 />
@@ -81,7 +94,7 @@ function ShoesAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
+                                    className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                                     placeholder="Мин"
                                     value={state?.minFootLength}
                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
@@ -91,7 +104,7 @@ function ShoesAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                    className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                     placeholder="Макс"
                                     value={state?.maxFootLength}
                                     onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
@@ -136,7 +149,7 @@ function ShoesAdd({ title, typeId }) {
                                     <StarLabel />
                                 </span>
                             </div>
-                            <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
+                            <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                 <input
                                     type="text"
                                     id="priceShoes"
@@ -166,7 +179,7 @@ function ShoesAdd({ title, typeId }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                    <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                         <input
                                             type="text"
                                             placeholder="0"
@@ -179,7 +192,7 @@ function ShoesAdd({ title, typeId }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
                                             type="text"
                                             placeholder="0"

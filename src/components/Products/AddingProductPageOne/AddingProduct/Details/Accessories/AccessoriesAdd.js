@@ -45,6 +45,20 @@ function AccessoriesAdd({ title, typeId }) {
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
+        setState({
+            ...state,
+            rowSize: "",
+            colSize: "",
+            minSize: "",
+            ageNum: "",
+            quantityNum: "",
+            priceNum: "",
+            salePercent: "",
+            salePrice: "",
+            isCheckValid: false,
+            // ------
+            onConcel: false
+        })
         setToggleShow(false)
     }
 
@@ -64,7 +78,7 @@ function AccessoriesAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
+                                    className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
                                 />
@@ -90,7 +104,7 @@ function AccessoriesAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
+                                    className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                     value={state?.colSize}
                                     onChange={(e) => setState({ ...state, colSize: e.target.value })}
                                 />
@@ -106,7 +120,7 @@ function AccessoriesAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                    className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                     value={state?.rowSize}
                                     onChange={(e) => setState({ ...state, rowSize: e.target.value })}
                                 />
@@ -121,7 +135,7 @@ function AccessoriesAdd({ title, typeId }) {
                         <div className="flex items-start justify-between ">
                             <input
                                 type="text"
-                                className="inputStyle w-[60px] h-[40px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
+                                className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                             />
@@ -164,7 +178,7 @@ function AccessoriesAdd({ title, typeId }) {
                                     <StarLabel />
                                 </span>
                             </div>
-                            <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
+                            <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
                                     type="text"
                                     placeholder="0"
@@ -194,7 +208,7 @@ function AccessoriesAdd({ title, typeId }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                    <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                         <input
                                             type="text"
                                             placeholder="0"
@@ -207,7 +221,7 @@ function AccessoriesAdd({ title, typeId }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
                                             type="text"
                                             placeholder="0"
