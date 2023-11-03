@@ -560,7 +560,7 @@ const AddingProduct = () => {
                     </label>
                     <ArrowRightIcon />
                   </button>
-                  <div className="w-full  hidden md:flex border rounded-lg focus:border-none overflow-hidden">
+                  <div className="w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden">
                     <Select
                       className=" rounded-lg w-full h-fit "
                       showSearch
@@ -630,12 +630,7 @@ const AddingProduct = () => {
                       disabled={
                         newArray?.length ? false : true
                       }
-                      placeholder={
-                        newArray.length
-
-                          ? "Выбрать"
-                          : "No data"
-                      }
+                      placeholder="Выбрать"
                       mode="multiple"
                       optionLabelProp="label"
                       onChange={handleWearSubGroup}
@@ -694,7 +689,7 @@ const AddingProduct = () => {
                       style={{
                         width: "100%",
                       }}
-                      placeholder="Select weather"
+                      placeholder="Выбрать"
                       // defaultValue={["china"]}
                       size="large"
                       onChange={handleChangeWeather}
