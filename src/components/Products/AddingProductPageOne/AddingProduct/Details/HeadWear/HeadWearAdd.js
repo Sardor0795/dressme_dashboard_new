@@ -18,17 +18,18 @@ function HeadWearAdd({ title, typeId }) {
         salePrice: "",
         isCheckValid: false,
         // ------
-        onConcel: false
-    })
+        onConcel: false,
+        // ----
+        toggleShow: false,
+        isHasTypeId: false
 
-    const [toggleShow, setToggleShow] = useState(false)
-    const [toggle, setToggle] = useState(false)
+    })
     const SelectedNumber = 1
     useEffect(() => {
         if (typeId == SelectedNumber) {
-            setToggle(true)
+            setState({ ...state, isHasTypeId: true })
         } else {
-            setToggle(false)
+            setState({ ...state, isHasTypeId: false })
         }
     }, [typeId])
     const onChangeSwitch = (checked) => {
@@ -37,22 +38,32 @@ function HeadWearAdd({ title, typeId }) {
     // Hats
 
     const handleOpenPopver = (newOpen) => {
-        setToggleShow(newOpen)
+        setState({ ...state, toggleShow: newOpen })
+
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.maxNum && state?.maxNum && state?.quantityNum && state?.priceNum) {
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setToggleShow(false)
-            setState({ ...state, isCheckValid: false, onConcel: true })
-
+            setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
         }
 
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
-        setToggleShow(false)
-
+        setState({
+            ...state,
+            minNum: "",
+            maxNum: "",
+            sizeCheck: false,
+            quantityNum: "",
+            ageNum: "",
+            priceNum: "",
+            salePercent: "",
+            salePrice: "",
+            onConcel: false,
+            toggleShow: false
+        })
     }
     const contentHat = (
         <div className="w-[520px] h-fit">
@@ -103,7 +114,11 @@ function HeadWearAdd({ title, typeId }) {
                             </span>
                         </p>
                         <div className="flex items-center justify-center mt-[10px]">
-                            <Switch className={`${state?.isCheckValid && !state?.sizeCheck ? "border border-[#FFB8B8] bg-[#FFB8B8]" : "border border-borderColor bg-[#8B8B8B]"} `} onChange={onChangeSwitch} />
+                            <Switch
+                                className={`${state?.isCheckValid && !state?.sizeCheck ? "border border-[#FFB8B8] bg-[#FFB8B8]" : "border border-borderColor bg-[#8B8B8B]"} `}
+                                onChange={onChangeSwitch}
+                                defaultChecked={state?.sizeCheck}
+                            />
                         </div>
                     </div>
                     <div className="w-fit flex flex-col items-center">
@@ -232,7 +247,7 @@ function HeadWearAdd({ title, typeId }) {
     );
     return (
         <Popover
-            open={toggleShow}
+            open={state?.toggleShow}
             onOpenChange={handleOpenPopver}
             // className={`
             // ${dressInfo?.ProductFilterType ?
@@ -243,7 +258,7 @@ function HeadWearAdd({ title, typeId }) {
             // `}
             className={`
             ${dressInfo?.ProductFilterType || typeId ?
-                    dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ?
+                    dressInfo?.ProductFilterType == SelectedNumber || state?.isHasTypeId && typeId ?
                         "!bg-textBlueColor text-white" :
                         "text-[#bababa]  border-[#bababa]" :
                     "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"} 
@@ -252,11 +267,7 @@ function HeadWearAdd({ title, typeId }) {
             trigger="click"
             options={["Hide"]}
             placement="bottom"
-            content={dressInfo?.ProductFilterType || typeId ? dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ? contentHat : null : contentHat}
-
-        // content={dressInfo?.ProductFilterType ? dressInfo?.ProductFilterType == SelectedNumber ? contentHat : null : contentHat}
-
-
+            content={dressInfo?.ProductFilterType || typeId ? dressInfo?.ProductFilterType == SelectedNumber || state?.isHasTypeId && typeId ? contentHat : null : contentHat}
         >
             {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {

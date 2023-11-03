@@ -58,6 +58,24 @@ function OutWearAdd({ title, typeId }) {
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
+        setState({
+            ...state,
+            onConcel: false,
+            minBreast: "",
+            maxBreast: "",
+            minSize: "",
+            maxSize: "",
+            minWaist: "",
+            maxWaist: "",
+            minHips: "",
+            maxHips: "",
+            quantityNum: "",
+            ageNum: "",
+            priceNum: "",
+            salePercent: "",
+            salePrice: "",
+            isCheckValid: false,
+        })
         setToggleShow(false)
 
     }
@@ -80,7 +98,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minBreast}
                                     onChange={(e) => setState({ ...state, minBreast: e.target.value })}
@@ -90,7 +108,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxBreast}
                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
@@ -110,7 +128,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
@@ -120,7 +138,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.maxSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.maxSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxSize}
                                     onChange={(e) => setState({ ...state, maxSize: e.target.value })}
@@ -152,7 +170,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[60px] h-[38px]  text-center ${state?.isCheckValid && !state?.minWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.isCheckValid && !state?.minWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minWaist}
                                     onChange={(e) => setState({ ...state, minWaist: e.target.value })}
@@ -163,7 +181,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[60px] h-[38px]  text-center ${state?.isCheckValid && !state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.isCheckValid && !state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxWaist}
                                     onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
@@ -181,7 +199,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
+                                    className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                                     placeholder="Мин"
                                     value={state?.minHips}
                                     onChange={(e) => setState({ ...state, minHips: e.target.value })}
@@ -191,7 +209,7 @@ function OutWearAdd({ title, typeId }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
+                                    className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                     placeholder="Макс"
                                     value={state?.maxHips}
                                     onChange={(e) => setState({ ...state, maxHips: e.target.value })}
@@ -210,7 +228,7 @@ function OutWearAdd({ title, typeId }) {
                         <div className="flex items-start justify-between ">
                             <input
                                 type="text"
-                                className={`inputStyle  w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
+                                className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                             />
@@ -243,19 +261,19 @@ function OutWearAdd({ title, typeId }) {
                         </div>
                         <div className="w-full md:w-[55%]">
                             <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                <label
-                                    htmlFor=""
+                                <span
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                     Цена
-                                </label>
+                                </span>
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
                             </div>
-                            <div className={`w-full h-[40px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                            <label htmlFor="priceOutWear" className={`w-full h-[40px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
                                     type="text"
                                     placeholder="0"
+                                    id="priceOutWear"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
                                     value={state?.priceNum}
                                     onChange={(e) => setState({ ...state, priceNum: e.target.value })}
@@ -263,7 +281,7 @@ function OutWearAdd({ title, typeId }) {
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
                                 </span>
-                            </div>
+                            </label>
                         </div>
                     </div>
                     <div className="w-fit flex flex-col items-start">
@@ -281,7 +299,7 @@ function OutWearAdd({ title, typeId }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                    <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                         <input
                                             type="text"
                                             placeholder="0"
@@ -294,18 +312,19 @@ function OutWearAdd({ title, typeId }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none "
+                                            id="salePrice"
+                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.salePrice}
                                             onChange={(e) => setState({ ...state, salePrice: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
                                         </span>
-                                    </div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
