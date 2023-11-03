@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CommentTitle } from "./CommentTitle/CommentTitle";
 import CommentDetail from "./CommentDetail/CommentDetail";
-import { Space, DatePicker } from "antd";
 import {
   CheckTrue,
   GoBackIcons,
@@ -11,7 +10,6 @@ import {
 } from "../../../assets/icons";
 import { Popover } from "antd";
 import { BiChevronDown } from "react-icons/bi";
-import { AiOutlineLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 export default function ReviewComment() {
 
@@ -116,7 +114,6 @@ export default function ReviewComment() {
             }}
             className="w-8 h-8 flex absolute md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
           >
-            {/* <AiOutlineLeft /> */}
             <GoBackIcons />
           </button>
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
@@ -145,13 +142,13 @@ export default function ReviewComment() {
               />
             </span>
           </Popover>
-          <div className="w-[350px]  h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-[12px]">
+          <div className="w-[350px]  h-10 overflow-hidden border border-lightBorderColor flex items-center  rounded-[12px]">
             <input
               type="text"
-              className="w-full h-full  outline-0	"
+              className="w-full h-full px-[10px] outline-0	"
               placeholder="Поиск"
             />
-            <button>
+            <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
               <SearchIcon />
             </button>
           </div>

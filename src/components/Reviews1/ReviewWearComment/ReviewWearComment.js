@@ -9,10 +9,8 @@ import {
   StarOutlineIcon,
 } from "../../../assets/icons";
 import { BiChevronDown } from "react-icons/bi";
-import { AiOutlineLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Popover } from "antd";
-import { Space, DatePicker } from "antd";
 
 export default function ReviewWearComment() {
   const [state, setState] = useState({
@@ -55,10 +53,11 @@ export default function ReviewWearComment() {
               className="w-full h-5 flex items-center cursor-pointer"
             >
               <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                  ? "border border-textBlueColor bg-textBlueColor"
-                  : "border border-lightBorderColor"
-                  }`}
+                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
+                  data?.checked
+                    ? "border border-textBlueColor bg-textBlueColor"
+                    : "border border-lightBorderColor"
+                }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
               </button>
@@ -67,12 +66,9 @@ export default function ReviewWearComment() {
                   {data?.starValue}
                 </span>
                 <span className="flex items-center ml-[5px] gap-x-[2px]">
-                  <StarIcon
-                  />
-                  <StarIcon
-                  />
-                  <StarIcon
-                  />
+                  <StarIcon />
+                  <StarIcon />
+                  <StarIcon />
                 </span>
                 <span className="flex items-center  gap-x-[2px]">
                   <StarOutlineIcon />
@@ -141,18 +137,19 @@ export default function ReviewWearComment() {
               <BiChevronDown
                 size={20}
                 style={{ color: "#c2c2c2" }}
-                className={`${state?.openwear ? "rotate-[-180deg]" : ""
-                  } duration-200`}
+                className={`${
+                  state?.openwear ? "rotate-[-180deg]" : ""
+                } duration-200`}
               />
             </span>
           </Popover>
-          <div className="w-[350px]  h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-[12px]">
+          <div className="w-[350px]  h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-[12px]">
             <input
               type="text"
-              className="w-full h-full  outline-0	"
+              className="w-full h-full px-[10px] outline-0	"
               placeholder="Поиск"
             />
-            <button>
+            <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
               <SearchIcon />
             </button>
           </div>

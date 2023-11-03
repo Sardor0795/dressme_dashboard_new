@@ -82,13 +82,13 @@ export default function ReviewWear() {
               </span>
             </li>
             <li className="w-[20%] flex items-center justify-end ">
-              <div className="max-w-[350px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+              <div className="max-w-[350px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
                 <input
                   type="text"
-                  className="w-full h-full  outline-0	"
+                  className="w-full h-full px-[10px] outline-0	"
                   placeholder="Поиск"
                 />
-                <button>
+                <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                   <SearchIcon />
                 </button>
               </div>
