@@ -11,7 +11,7 @@ import {
 import InputMask from "react-input-mask";
 
 import YandexMapStore from "./YandexMaps";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
@@ -311,6 +311,42 @@ export default function LocationAddById() {
         </div>
         <div className="w-full  px-4 md:px-0 ">
           <div className="flex flex-wrap items-center justify-between gap-x-3 md:gap-4 ">
+            {/* Region Input  */}
+            <div className={"w-full block md:hidden"}>
+              <label htmlFor="" >
+                <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
+                  Выберите регион
+                  <span className="ml-[5px]"><Star6Icon /></span>
+                </span>
+                <div
+                  onClick={() => {
+                    setState({ ...state, openStoreList: true });
+                  }}
+                  className="w-full  h-[32px] md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
+                  <span className=" w-full  h-[32px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                    {!state?.regionIdShops && !state?.subRegionIdShops && "Выберите регион"}
+
+                    {state?.getRegionList?.regions?.filter(e => e.id == state?.regionIdShops).map(item => {
+                      return <span className="flex items-center text-[#000] text-[14px] sm:text-base">
+                        {item?.name_ru},
+                        {item?.sub_regions?.filter(i => i.id == state?.subRegionIdShops).map(item => {
+                          return <span className="ml-1">{item?.name_ru}</span>
+                        })}
+                      </span>
+                    })
+                    }
+                  </span>
+                  <span className="rotate-[180deg]"><ArrowTopIcons colors={"#a1a1a1"} /></span>
+                </div>
+                {
+                  state?.errorGroup?.region_id && !state?.subRegionIdShops &&
+                  < p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
+                    {state?.errorGroup?.region_id}
+                  </p>
+                }
+
+              </label>
+            </div>
             <label className="w-full md:w-[31%] xs:w-[48%]">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя администратора{" "}
@@ -575,12 +611,11 @@ export default function LocationAddById() {
                   </div>
                 </div>
               }
-              {/* Region INput  */}
-              <div className={"w-full"}>
+              {/* Region Input  */}
+              <div className={"w-full hidden md:block"}>
                 <label htmlFor="" >
                   <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                     Выберите регион
-
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </span>
                   <div
