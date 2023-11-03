@@ -925,6 +925,7 @@ const AddingProduct = () => {
                       <Select
                         className="block rounded-lg w-full h-11 md:h-10"
                         showSearch
+                        allowClear
                         placeholder="Выбрать"
                         optionFilterProp="children"
                         onChange={(value, attribute2) => {
