@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-// import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
-import { LineIcon, StarLabel } from "../../../../../../assets/icons";
+import { StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
-import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
+import { Checkbox, Col, Row } from 'antd';
 
 function UnderAddWear({ title, typeId }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -25,8 +24,37 @@ function UnderAddWear({ title, typeId }) {
         // ------
         onConcel: false
     })
+    const sizeListCheck = []
     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
+    const [decraseList, setDecraseList] = useState(false)
+    const [sizeList, setSizeList] = useState({
+        sizeList1: [
+            { id: 1, action: true, name: "XXS" },
+            { id: 2, action: true, name: "XS" },
+            { id: 3, action: true, name: "S" },
+            { id: 4, action: true, name: "M" },
+            { id: 5, action: true, name: "L" },
+            { id: 6, action: true, name: "XL" },
+            { id: 7, action: true, name: "2XL" },
+            { id: 8, action: true, name: "3XL" },
+        ],
+        sizeList2: [
+            { id: 1, action: true, name: "5X" },
+            { id: 2, action: true, name: "7X" },
+            { id: 3, action: true, name: "9X" },
+            { id: 4, action: true, name: "10X" },
+            { id: 5, action: true, name: "4X" },
+            { id: 6, action: true, name: "6X" },
+            { id: 7, action: true, name: "8X" },
+        ]
+    }
+    )
+    const handleSizeList = (checkedValues) => {
+        sizeListCheck.push(checkedValues.target.value)
+    };
+    console.log(sizeListCheck, "sizeListCheck");
+
     const SelectedNumber = 3
     useEffect(() => {
         if (typeId == SelectedNumber) {
@@ -73,12 +101,11 @@ function UnderAddWear({ title, typeId }) {
             salePrice: "",
             isCheckValid: false,
             onConcel: false
-
         })
-
         setToggleShow(false)
-
     }
+
+
     const contentUnderWear = (
         <div className="w-[840px] h-fit">
             <div
@@ -152,7 +179,178 @@ function UnderAddWear({ title, typeId }) {
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                             Обхват Размер
                         </p>
-                        <AllSizeListForWear />
+
+                        <div className='w-full '>
+                            {/* -----------------Desktop--------------------- */}
+                            <div className="w-full hidden md:flex flex-row">
+                                <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
+                                    {sizeList.sizeList1.map((data) => {
+                                        return (
+                                            <div
+                                                key={data?.id}
+                                                className="flex "
+                                            >
+
+                                                {data?.action && <Checkbox.Group
+                                                    style={{
+                                                        width: '100%',
+                                                    }}
+                                                >
+                                                    <Row>
+                                                        <Col span={8}>
+                                                            <Checkbox onChange={handleSizeList} value={data?.name}>{data?.name}</Checkbox>
+                                                        </Col>
+                                                    </Row>
+                                                </Checkbox.Group>}
+                                            </div>
+                                        );
+                                    })}
+
+                                </div>
+                                <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 items-end">
+                                    {decraseList && sizeList.sizeList2.map((data) => {
+                                        return (
+                                            <div
+                                                key={data?.id}
+                                                className="flex "
+                                            >
+
+                                                {data?.action && <Checkbox.Group
+                                                    style={{
+                                                        width: '100%',
+                                                    }}
+                                                >
+                                                    <Row>
+                                                        <Col span={8}>
+                                                            <Checkbox onChange={handleSizeList} value={data?.name}>{data?.name}</Checkbox>
+                                                        </Col>
+                                                    </Row>
+                                                </Checkbox.Group>}
+                                            </div>
+                                        );
+                                    })}
+
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setDecraseList(!decraseList)
+                                        }}
+                                        className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                                    >
+                                        {decraseList ? "Меньше" : "Больше"}
+                                    </button>
+                                </div>
+                            </div>
+                            {/* -----------------Mobile--------------------- */}
+                            <div className="w-full flex md:flex-row flex-col md:hidden">
+                                <div className="w-fit md:w-[222px]  md:h-[50px] flex md:block flex-wrap md:grid md:grid-cols-4 gap-1 md:gap-2 ">
+                                    {sizeList.sizeList1.map((data) => {
+                                        return (
+                                            <div
+                                                key={data?.id}
+                                                className="flex "
+                                            >
+                                                {
+                                                    data?.action &&
+                                                    <label
+                                                        htmlFor="m_outwear"
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id="m_outwear"
+                                                            name="size_Outwear"
+                                                            value="M"
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>
+                                                }
+                                            </div>
+                                        );
+                                    })}
+                                    {/* <span className="flex flex-wrap "> */}
+                                    {decraseList && sizeList.sizeList2.map((data) => {
+                                        return (
+                                            <div
+                                                key={data?.id}
+                                                className="flex  md:hidden"
+                                            >
+                                                {
+                                                    data?.action &&
+                                                    <label
+                                                        htmlFor="m_outwear"
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id="m_outwear"
+                                                            name="size_Outwear"
+                                                            value="M"
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>
+                                                }
+                                            </div>
+                                        );
+                                    })}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setDecraseList(!decraseList)
+                                        }}
+                                        className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
+                                    >
+                                        {decraseList ? "Меньше" : "Больше"}
+                                    </button>
+                                    {/* </span> */}
+                                </div>
+                                <div className="w-fit md:w-[222px]  h-[50px] hidden md:block flex-wrap  md:grid md:grid-cols-4gap-1 md:gap-2 items-end">
+                                    {decraseList && sizeList.sizeList2.map((data) => {
+                                        return (
+                                            <div
+                                                key={data?.id}
+                                                className="flex "
+                                            >
+                                                {
+                                                    data?.action &&
+                                                    <label
+                                                        htmlFor="m_outwear"
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id="m_outwear"
+                                                            name="size_Outwear"
+                                                            value="M"
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>
+                                                }
+                                            </div>
+                                        );
+                                    })}
+
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setDecraseList(!decraseList)
+                                        }}
+                                        className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                                    >
+                                        {decraseList ? "Меньше" : "Больше"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="w-full flex gap-x-10 px-3 pt-5">
