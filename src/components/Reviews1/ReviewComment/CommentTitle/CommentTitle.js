@@ -83,15 +83,14 @@ const CommentTitle = () => {
       </div>
 
       <div className="flex md:hidden gap-x-[14px] mb-4">
-        <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+        <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
           <input
             type="text"
-            className="w-full h-full text-[13px] outline-0	"
+            className="w-full h-full text-[13px] px-[10px] outline-0"
             placeholder="Поиск"
           />
-          <span>
-            {" "}
-            <SearchIcon />{" "}
+          <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+            <SearchIcon />
           </span>
         </div>
         <button

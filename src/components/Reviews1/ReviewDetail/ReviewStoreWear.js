@@ -1,19 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReviewStore from "./ReviewStore/ReviewStore";
 import ReviewWear from "./ReviewWear/ReviewWear";
-import { Space, DatePicker } from "antd";
 import {
-  CalendarIcons,
-  CheckTrue,
   SearchIcon,
-  StarIcon,
-  StarOutlineIcon,
 } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import NoReviewProduct from "../NoReview/NoReview";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
-const { RangePicker } = DatePicker;
+
 export default function ReviewStoreWear() {
   const [storeOrWear, setStoreOrWear] = useState(false);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -27,7 +21,7 @@ export default function ReviewStoreWear() {
       {/* filter */}
       <div className="w-full block pb-4 md:py-4 md:border-b border-lightBorderColor">
         <div className="w-full md:py-0 py-6 border-lightBorderColor ">
-          <div className="w-full md:hidden flex items-center justify-center">
+          <div className="w-full flex items-center justify-center md:justify-start">
             <button className="absolute left-4 ">
               <MobileHumburgerMenu />
             </button>
@@ -39,16 +33,16 @@ export default function ReviewStoreWear() {
             <section className="w-full  flex items-center justify-between gap-x-[15px]">
               <label
                 htmlFor="searchStore"
-                className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+                className="w-full md:max-w-[400px] h-10 flex md:hidden items-center overflow-hidden border  border-lightBorderColor  rounded-lg"
               >
                 <input
                   type="text"
                   name="s"
                   id="searchStore"
-                  className="w-full h-full   outline-0 	pl-[10px]"
+                  className="w-full h-full outline-0 px-[10px]"
                   placeholder="Поиск"
                 />
-                <span className="pr-[10px]">
+                <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                   <SearchIcon />
                 </span>
               </label>

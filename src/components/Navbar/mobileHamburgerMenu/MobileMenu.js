@@ -197,12 +197,12 @@ export default function MobileHumburgerMenu() {
             }
           </NavLink>
         </div>
-        <div className=" flex items-center justify-between border-t border-borderColor w-full mt-2 pt-2">
+        <div className=" flex items-center justify-between gap-x-2 border-t border-borderColor w-full mt-2 pt-2">
 
           <button
             onClick={logOutHandle}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium">
             <UserExitIcon colors={"#fff"} />{" "}
             <span>Выйти</span>
           </button>
@@ -220,14 +220,14 @@ export default function MobileHumburgerMenu() {
               isActive ? (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#007dca"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                  <p className="text-base not-italic font-AeonikProMedium leading-5">
                     Профиль
                   </p>
                 </figure>
               ) : (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#2c2c2c"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                  <p className="text-base not-italic font-AeonikProMedium leading-5">
                     Профиль
                   </p>
                 </figure>

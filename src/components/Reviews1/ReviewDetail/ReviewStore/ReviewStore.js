@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { deliveryIcon, man, nike, woman } from "../../../../assets";
+import { deliveryIcon, man, woman } from "../../../../assets";
 import { useNavigate } from "react-router-dom";
 import { StarIcon } from "../../../../assets/icons";
 import { useQuery } from "@tanstack/react-query";
