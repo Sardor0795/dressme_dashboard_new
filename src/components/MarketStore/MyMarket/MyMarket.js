@@ -66,10 +66,10 @@ function MyMarket({ shopsList }) {
                   type="text"
                   name="s"
                   id="searchStore"
-                  className="w-full h-full outline-0 	pl-[10px]"
+                  className="w-full h-full outline-0 px-[10px]"
                   placeholder="Поиск"
                 />
-                <span className="pr-[10px]">
+                <span  className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                   <SearchIcon />
                 </span>
               </label>
@@ -134,7 +134,7 @@ function MyMarket({ shopsList }) {
                     </div>
                   </div>
                 </div>
-              </div>     
+              </div>      
               <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[130px] mt-3 md:mt-0">
                 <div className="flex items-center gap-x-1 ">
                   <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">

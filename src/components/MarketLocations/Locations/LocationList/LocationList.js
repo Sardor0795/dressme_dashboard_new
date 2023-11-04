@@ -115,9 +115,6 @@ function LocationList({ marketList, locationList }) {
               <SearchIcon />
             </span>
           </label>
-          {/* <div className="w-fit">
-            <PickerOfFilter />
-          </div> */}
 
         </section>
         <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
