@@ -3,7 +3,7 @@ import LocationList from '../Locations/LocationList/LocationList'
 import NoLocations from '../NoLocations/NoLocations'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import LoadingForSeller from '../../Loading/LoadingFor'
 import { useHttp } from '../../../hook/useHttp'
 

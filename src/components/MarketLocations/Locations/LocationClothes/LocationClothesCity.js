@@ -144,13 +144,10 @@ export default function LocationClothesCity() {
                 className="w-full h-full   outline-0 	pl-[10px]"
                 placeholder="Поиск"
               />
-              <span className="pr-[10px]">
+              <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                 <SearchIcon />
               </span>
             </label>
-            {/* <div className="w-fit">
-              <PickerOfFilter />
-            </div> */}
           </section>
         </div>
       </div>

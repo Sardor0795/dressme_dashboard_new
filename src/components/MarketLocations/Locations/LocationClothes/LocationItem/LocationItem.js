@@ -5,10 +5,9 @@ import StoreListModal from "./StoreListModal";
 import {
   AddLocationIcon,
   BgNoImgIcon,
-  CheckIcons,
   DeleteIcon,
 } from "../../../../../assets/icons";
-import { pdpImg, wearImg } from "../../../../../assets";
+import { wearImg } from "../../../../../assets";
 
 export default function LocationItem({ data, click, index }) {
   const [openStoreList, setOpenStoreList] = useState(false);
@@ -108,7 +107,6 @@ export default function LocationItem({ data, click, index }) {
       </div>
 
       {/* Mobile */}
-
       <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full text-[13px]">
         <div className="mb-2">
           <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
@@ -133,7 +131,7 @@ export default function LocationItem({ data, click, index }) {
 
           <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px] ">
 
-            <div className="relative w-[40%] overflow-hidden h-[60px] text-justify text-[#007DCA] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex ">
+            <div className="relative w-[40%] overflow-hidden text-justify text-[#007DCA] not-italic font-AeonikProRegular text-[11px] ls:text-[12px] flex ">
               <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
               {data?.name}
             </div>

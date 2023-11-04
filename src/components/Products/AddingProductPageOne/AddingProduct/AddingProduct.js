@@ -9,7 +9,7 @@ import {
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -533,11 +533,11 @@ const AddingProduct = () => {
       </section>
       {/* ---------------------------------------- */}
 
-      <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl overflow-hidden">
-        <div className="  w-full h-fit md:relative  py-12 ">
-          <div className=" w-full h-fit flex gap-x-4 flex-col-reverse	 md:flex-row md:px-7 ">
-            <div className="w-full md:w-[70%] h-fit  flex flex-col gap-y-6">
-              <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 ">
+      <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl ">
+        <div className="w-full h-fit md:relative md:py-12">
+          <div className=" w-full h-fit flex gap-x-4 flex-col-reverse md:flex-row md:px-7 ">
+            <div className="w-full md:w-[70%] h-fit flex flex-col gap-y-6">
+              <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 mt-6 md:mt-0">
                 {/* Input Select 1 */}
                 <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                   <div className="flex items-center">

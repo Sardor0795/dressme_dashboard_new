@@ -108,10 +108,10 @@ function LocationList({ marketList, locationList }) {
               type="text"
               name="s"
               id="searchStore"
-              className="w-full h-full   outline-0 	pl-[10px]"
+              className="w-full h-full outline-0 px-[10px]"
               placeholder="Поиск"
             />
-            <span className="pr-[10px]">
+            <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
               <SearchIcon />
             </span>
           </label>
@@ -125,26 +125,22 @@ function LocationList({ marketList, locationList }) {
               </p>
             </section>
             <div className="w-fit flex items-center gap-x-[15px]">
-              <form className="w-full md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+              <form className="w-full md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
                 <input
                   type="text"
                   name="s"
-                  className="w-full h-full outline-0"
+                  className="w-full h-full outline-0 px-[10px] "
                   placeholder="Поиск"
                 />
-                <button>
+                <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                   <SearchIcon />
                 </button>
               </form>
-              {/* <div className="w-fit">
-                <PickerOfFilter />
-              </div> */}
 
             </div>
           </div>
         </div>
       </>
-
 
       <div className="w-full hidden md:block mt-6">
         <ul className="w-full h-full flex items-center justify-between bg-lightBgColor border md:rounded-xl">
@@ -210,7 +206,7 @@ function LocationList({ marketList, locationList }) {
               </div> : null}
 
               {/* Table */}
-              {item?.shop_locations?.length ? <div className="w-full h-fit border md:rounded-xl md:overflow-hidden">
+              {item?.shop_locations?.length ? <div className="w-full h-fit md:border md:rounded-xl md:overflow-hidden">
                 {
                   item?.shop_locations?.map((value, index) => {
                     return (
@@ -291,7 +287,7 @@ function LocationList({ marketList, locationList }) {
                               <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
                                 {value?.region?.name_ru}
                               </div>
-                              <div className="relative pr-[5px] ll:pr-[10px] h-[60px] overflow-hidden  w-[46%]  text-justify	text-[11px] not-italic font-AeonikProMedium">
+                              <div className="relative pr-[5px] ll:pr-[10px] overflow-hidden  w-[46%]  text-justify	text-[11px] not-italic font-AeonikProMedium">
                                 <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
 
                                 {value?.address}</div>
@@ -305,7 +301,7 @@ function LocationList({ marketList, locationList }) {
                           <div className="flex items-center justify-between gap-x-[15px]">
                             <button
                               onClick={() => goMapWear(value?.shop_id)}
-                              className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                              className="h-[31px] text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               <span className="mr-[5px]">
                                 <svg
@@ -342,7 +338,7 @@ function LocationList({ marketList, locationList }) {
                             </button>
                             <button
                               onClick={() => goMapCity(value?.id)}
-                              className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                              className="h-[31px] text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               {value?.showMore}
                               <span className="ml-[5px]">
