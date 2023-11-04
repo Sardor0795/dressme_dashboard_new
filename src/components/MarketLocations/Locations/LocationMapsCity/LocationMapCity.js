@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
   GoBackIcons,
@@ -8,8 +8,6 @@ import {
   StarLabel,
   MapLocationIcon,
 } from "../../../../assets/icons";
-import { Aligarx } from "../../../../assets";
-import { message } from "antd";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import InputMask from "react-input-mask";

@@ -250,7 +250,7 @@ export default function LocationAddById() {
           )}
         </div>
         <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
-          <div className=" w-full md:w-[31%] flex-col  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] flex-col h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
               <label
                 htmlFor="DataImg1"
@@ -288,7 +288,7 @@ export default function LocationAddById() {
               </p>
             )}
           </div>
-          <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center">
               <label
                 htmlFor="DataImg2"
@@ -319,7 +319,7 @@ export default function LocationAddById() {
               </label>
             </button>
           </div>
-          <div className=" w-full md:w-[31%]   h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
               <label
                 htmlFor="DataImg3"
@@ -353,7 +353,7 @@ export default function LocationAddById() {
         </div>
         <div className="w-full  px-4 md:px-0 ">
           <div className="flex flex-wrap items-center justify-between gap-x-3 md:gap-4 ">
-            {/* Region Input  */}
+            {/* INPUT DATA */}
             <div className={"w-full block md:hidden mb-3 md:mb-0"}>
               <label htmlFor="">
                 <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
@@ -366,7 +366,7 @@ export default function LocationAddById() {
                   onClick={() => {
                     setState({ ...state, openStoreList: true });
                   }}
-                  className="w-full h-[32px] md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                  className="w-full h-10 md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                 >
                   <span className=" w-full  h-[32px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-xs md:text-[16px] leading-4 ">
                     {!state?.regionIdShops &&
@@ -401,14 +401,14 @@ export default function LocationAddById() {
                 )}
               </label>
             </div>
-            <label className="w-full md:w-[31%] xs:w-[48%] mb-3 md:mb-0">
+            <label className="w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя администратора{" "}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex flex-col items-center h-[32px] md:h-[70px] w-full text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center h-10 md:h-[70px] w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
@@ -417,7 +417,7 @@ export default function LocationAddById() {
                   onChange={(e) =>
                     setState({ ...state, assistantNameFirst: e.target.value })
                   }
-                  className="w-full outline-none text-[12px] md:text-[14px]  h-[32px] md:h-[42px]  border border-borderColor rounded md:rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px]  h-10 md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
                 />
                 {state?.errorGroup?.assistant_name &&
                   !state?.assistantNameFirst && (
@@ -427,11 +427,11 @@ export default function LocationAddById() {
                   )}
               </div>
             </label>
-            <label className="w-full md:w-[31%] xs:w-[48%] mb-3 md:mb-0">
+            <label className="w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя второго администратора{" "}
               </div>
-              <div className="flex flex-col items-center h-[32px] md:h-[70px] w-full text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center h-10 md:h-[70px] w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
@@ -440,7 +440,7 @@ export default function LocationAddById() {
                   onChange={(e) =>
                     setState({ ...state, assistantNameSecond: e.target.value })
                   }
-                  className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded md:rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px] h-10 md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
                 {state?.errorGroup?.second_assistant_name &&
                   !state?.assistantNameSecond && (
@@ -450,177 +450,7 @@ export default function LocationAddById() {
                   )}
               </div>
             </label>
-            <div className="w-full md:w-[31%] xs:w-[48%] hidden md:flex justify-center">
-              <div
-                onClick={() => {
-                  setState({ ...state, openStoreList: false });
-                }}
-                className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-                  state?.openStoreList ? "" : "hidden"
-                }`}
-              ></div>
-              {
-                <div
-                  className={` max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                    state?.openStoreList
-                      ? " bottom-0 md:flex flex-col"
-                      : "md:hidden bottom-[-1500px] z-[-10]"
-                  }`}
-                >
-                  <div className="w-full flex items-center justify-between">
-                    <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">
-                      Выберите регион
-                    </span>
-                    <span
-                      className="select-none cursor-pointer"
-                      onClick={() => {
-                        setState({ ...state, openStoreList: false });
-                      }}
-                    >
-                      <MenuCloseIcons colors="#000" />
-                    </span>
-                  </div>
-
-                  <div className="w-full overflow-auto flex flex-col gap-y-4 pt-3 overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                    {state?.getRegionList?.regions ? (
-                      state?.getRegionList?.regions?.map((data, index) => {
-                        return (
-                          <div key={data?.id} className="w-full  h-fit  ">
-                            <div
-                              onClick={() => accordionCityList(data?.id)}
-                              className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
-                            >
-                              <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                                {data?.name_ru}
-                              </span>
-                              <span
-                                className={`${
-                                  activeIndex == data?.id
-                                    ? "rotate-[0deg]"
-                                    : "rotate-[180deg]"
-                                } `}
-                              >
-                                <ArrowTopIcons colors={"#a1a1a1"} />
-                              </span>
-                            </div>
-
-                            <div
-                              className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
-                            >
-                              {data?.sub_regions?.map((item) => {
-                                return (
-                                  <div
-                                    key={item?.id}
-                                    className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
-                                  >
-                                    <label
-                                      htmlFor={item?.name_ru}
-                                      className="flex items-center gap-x-[6px]"
-                                    >
-                                      <input
-                                        type="radio"
-                                        id={item?.name_ru}
-                                        name="type_work"
-                                        value={item?.region_id}
-                                        checked={
-                                          item?.id == state?.subRegionIdShops
-                                        }
-                                        className="border border-searchBgColor  cursor-pointer  flex items-center justify-center"
-                                        onChange={(e) => {
-                                          setState({
-                                            ...state,
-                                            regionIdShops: e.target.value,
-                                            subRegionIdShops: item?.id,
-                                          });
-                                        }}
-                                        required
-                                      />
-                                      <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
-                                        {item?.name_ru}
-                                      </span>
-                                    </label>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <p className="w-full h-full flex flex-col items-center justify-center">
-                        Malumotlar yuklanyapti...
-                      </p>
-                    )}
-                  </div>
-                  <div className="w-full flex items-center justify-end  mt-2">
-                    <span
-                      onClick={() => {
-                        setState({ ...state, openStoreList: false });
-                      }}
-                      className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium"
-                    >
-                      Готово
-                    </span>
-                  </div>
-                </div>
-              }
-              {/* Region Input  */}
-              <div className={"w-full hidden md:block"}>
-                <label htmlFor="">
-                  <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
-                    Выберите регион
-                    <span className="ml-[5px]">
-                      <Star6Icon />
-                    </span>
-                  </span>
-                  <div
-                    onClick={() => {
-                      setState({ ...state, openStoreList: true });
-                    }}
-                    className="w-full  h-[32px] md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
-                  >
-                    <span className=" w-full  h-[32px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
-                      {!state?.regionIdShops &&
-                        !state?.subRegionIdShops &&
-                        "Выберите регион"}
-
-                      {state?.getRegionList?.regions
-                        ?.filter((e) => e.id == state?.regionIdShops)
-                        .map((item) => {
-                          return (
-                            <span className="flex items-center text-[#000] text-[14px] sm:text-base">
-                              {item?.name_ru},
-                              {item?.sub_regions
-                                ?.filter((i) => i.id == state?.subRegionIdShops)
-                                .map((item) => {
-                                  return (
-                                    <span className="ml-1">
-                                      {item?.name_ru}
-                                    </span>
-                                  );
-                                })}
-                            </span>
-                          );
-                        })}
-                    </span>
-                    <span className="rotate-[180deg]">
-                      <ArrowTopIcons colors={"#a1a1a1"} />
-                    </span>
-                  </div>
-                  {state?.errorGroup?.region_id && !state?.subRegionIdShops && (
-                    <p className="text-[#D50000]  text-[12px] ll:text-[14px] md:text-base">
-                      {state?.errorGroup?.region_id}
-                    </p>
-                  )}
-                </label>
-              </div>
-            </div>
-            <div className="block md:hidden w-full md:w-[31%] xs:w-[48%]">
+            <div className="block w-full md:w-[31%]">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Рабочее время
                 <span className="ml-[5px]">
@@ -633,7 +463,7 @@ export default function LocationAddById() {
                 </span>
                 <div className="flex flex-col items-center h-[32px] md:h-[70px]">
                   <input
-                    className="without_ampm mr-5 ml-[5px] outline-none w-[70%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[42px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="without_ampm mr-5 ml-[5px] outline-none w-[70%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[42px] rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                     type="time"
                     min="00:00"
                     max="23:59"
@@ -656,7 +486,7 @@ export default function LocationAddById() {
                 </span>
                 <div className="flex flex-col items-center md:h-[70px]">
                   <input
-                    className="without_ampm w-[70%] md:w-[80px] xs:w-[40%] h-[32px] md:h-[42px] mr-5 ml-[5px] outline-none border border-borderColor text-center flex items-center justify-center  rounded md:rounded-lg text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="without_ampm w-[70%] md:w-[80px] xs:w-[40%] h-[32px] md:h-[42px] mr-5 ml-[5px] outline-none border border-borderColor text-center flex items-center justify-center rounded-lg text-[12px] md:text-[14px] font-AeonikProRegular "
                     type="time"
                     min="00:00"
                     max="23:59"
@@ -675,7 +505,7 @@ export default function LocationAddById() {
                 </div>
               </div>
             </div>
-            <label className="w-full md:w-[31%] xs:w-[48%] mb-3 md:mb-0 ">
+            <label className="w-full md:w-[31%] mb-3 md:mb-0 ">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер администратора
                 <span className="ml-[5px]">
@@ -683,7 +513,7 @@ export default function LocationAddById() {
                 </span>
               </div>
 
-              <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
+              <div className="h-10 md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
@@ -693,7 +523,7 @@ export default function LocationAddById() {
                     readOnly
                   />
                 </div>
-                <div className="w-full md:w-[70%] h-[32px] xs:h-[42px] overflow-hidden flex items-center">
+                <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
                   <InputMask
                     mask="(99) 999-99-99"
                     value={state?.assistantPhoneFirst || null}
@@ -721,12 +551,12 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label className="w-full md:w-[31%] xs:w-[48%]">
+            <label className="w-full md:w-[31%]">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер второго администратора
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
               </div>
-              <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
+              <div className="h-10 md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
                     className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium 
@@ -736,7 +566,7 @@ export default function LocationAddById() {
                     readOnly
                   />
                 </div>
-                <div className="w-full md:w-[70%] h-[32px] xs:h-[42px] overflow-hidden flex items-center">
+                <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
                   <InputMask
                     mask="(99) 999-99-99"
                     value={state?.assistantPhoneSecond || null}
@@ -766,7 +596,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <div className="flex md:hidden w-full md:w-[31%] xs:w-[48%] justify-center">
+            <div className="flex w-full md:w-[31%]">
               <div
                 onClick={() => {
                   setState({ ...state, openStoreList: false });
@@ -898,7 +728,7 @@ export default function LocationAddById() {
                     onClick={() => {
                       setState({ ...state, openStoreList: true });
                     }}
-                    className="w-full  h-[32px] md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                    className="w-full  h-[32px] md:h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                   >
                     <span className=" w-full  h-[32px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                       {!state?.regionIdShops &&
@@ -936,7 +766,7 @@ export default function LocationAddById() {
                 </label>
               </div>
             </div>
-            <div className="hidden md:block w-full md:w-[31%] xs:w-[48%]">
+            {/* <div className="hidden md:block w-full md:w-[31%]">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Рабочее время
                 <span className="ml-[5px]">
@@ -990,7 +820,7 @@ export default function LocationAddById() {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex justify-center mt-[50px]  px-4 md:px-0">
