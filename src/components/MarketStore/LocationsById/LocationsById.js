@@ -60,7 +60,6 @@ export default function LocationsByIdShow() {
           state?.locationIsCheck ? (
             <div className="w-full h-full px-4 md:px-0 ">
               <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
-                {/* <MobileHumburgerMenu /> */}
                 <button
                   onClick={() => {
                     navigate(-1);
@@ -77,16 +76,16 @@ export default function LocationsByIdShow() {
               <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
                 <label
                   htmlFor="searchStore"
-                  className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+                  className="w-full md:max-w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg"
                 >
                   <input
                     type="text"
                     name="s"
                     id="searchStore"
-                    className="w-full h-full   outline-0 	pl-[10px]"
+                    className="w-full h-full outline-0 px-[10px]"
                     placeholder="Поиск"
                   />
-                  <span className="pr-[10px]">
+                  <span  className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                     <SearchIcon />
                   </span>
                 </label>
@@ -107,14 +106,14 @@ export default function LocationsByIdShow() {
                     </p>
                   </section>
                   <div className="w-fit flex items-center gap-x-[15px]">
-                    <form className="w-[100%] md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
+                    <form className="w-[100%] md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
                       <input
                         type="text"
                         name="s"
-                        className="w-full h-full outline-0"
+                        className="w-full h-full outline-0 px-[10px]"
                         placeholder="Поиск"
                       />
-                      <button>
+                      <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                         <SearchIcon />
                       </button>
                     </form>
@@ -257,7 +256,7 @@ export default function LocationsByIdShow() {
                               />
                             </figure>
                           </div>
-                          <div className="mb-[25px]">
+                          <div className="mb-2">
                             <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-1 ll:px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
                               <div className="w-[24%] text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px]">
                                 Регион
@@ -290,7 +289,7 @@ export default function LocationsByIdShow() {
                           <div className="flex items-center justify-between gap-x-[15px]">
                             <button
                               onClick={() => goMapWear(data?.shop_id)}
-                              className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                              className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] h-[31px] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               <span className="mr-[5px]">
                                 <svg
@@ -327,7 +326,7 @@ export default function LocationsByIdShow() {
                             </button>
                             <button
                               onClick={() => goMapCity(data?.id)}
-                              className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                              className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] h-[31px] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               {data?.showMore}
                               <span className="ml-[5px]">
