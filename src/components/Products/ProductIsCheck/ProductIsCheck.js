@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-// import LocationList from '../Locations/LocationList/LocationList'
-// import NoLocations from '../NoLocations/NoLocations'
+
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
