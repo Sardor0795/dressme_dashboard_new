@@ -2,70 +2,55 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { dressMainData } from "../../../hook/ContextTeam";
+import { useHttp } from "../../../hook/useHttp";
 
 export default function NoLocationProduct() {
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const { request } = useHttp()
+  const [isLocation, setIsLocation] = useState()
+  const [isShops, setIsShops] = useState()
+
+  useQuery(["magazin_location"], () => { return request({ url: "/shops/locations/index", token: true }); },
+    {
+      onSuccess: (res) => {
+        setIsLocation(res)
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+  useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
+    {
+      onSuccess: (res) => {
+        if (res?.shops) {
+          setIsShops(res?.shops)
+        }
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
 
-  // const url = "https://api.dressme.uz/api/seller"
 
-  // // // ------------GET  Has Magazin ?-----------------
-  // useQuery(["magazin"], () => {
-  //   return fetch(`${url}/shops`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       "Accept": "application/json",
-
-  //       'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-  //     },
-
-  //   }).then(res => res.json())
-  // },
-  //   {
-  //     onSuccess: (res) => {
-  //       setDressInfo({ ...dressInfo, SellerMagazin: res })
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "err magazin");
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // )
-
-  // // ------------GET  Has Location ?-----------------
-  // useQuery(["magazin location"], () => {
-  //   return fetch(`${url}/shops/locations/index`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       "Accept": "application/json",
-  //       'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-  //     },
-
-  //   }).then(res => res.json())
-  // },
-  //   {
-  //     onSuccess: (res) => {
-  //       setDressInfo({ ...dressInfo, SellerMagazinLocation: res })
-
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "err magazin location");
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // )
-
-  console.log(dressInfo?.SellerMagazinLocation, "dressInfo?.SellerMagazinLocation");
-  console.log(dressInfo?.SellerMagazin, "dressInfo?.SellerMagazin");
+  console.log(isLocation, "isLocation------");
+  console.log(isShops, "isShops---------");
   return (
-    <div className="w-full h-[90vh] ">
-      {
-        dressInfo?.SellerMagazin?.shops?.data?.length ? (
+    <div className="w-full h-[90vh] flex items-center justify-center">
+      <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
+        <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
+          У вас пока нет локации !
+        </p>
+        <Link
+          to={"/locations-store"}
+          className="px-7 active:scale-95  active:opacity-70 cursor-pointer py-3 rounded-lg flex items-center justify-center bg-textBlueColor text-white text-lg not-italic font-AeonikProMedium"
+        >
+          Добавить локацию
+        </Link>
+      </div>
+      {/* {
+        isShops?.data?.length ? (
 
           !dressInfo?.SellerMagazinLocation?.length && <div className="flex items-center h-full justify-center">
             <Link
@@ -85,7 +70,7 @@ export default function NoLocationProduct() {
               Сначала создайте магазин!
             </Link>
           </div>
-      }
+      } */}
       {/* { dressInfo?.hasMagazin?.shops?.data?.length && dressInfo?.hasLocation && <div className="flex items-center h-full justify-center">
         <Link
           to="/locations-store"

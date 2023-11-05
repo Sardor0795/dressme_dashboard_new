@@ -84,15 +84,6 @@ export default function TextFormAdd() {
     const sendAllData = () => {
         console.log("sended");
     }
-    const [pressed, setPressed] = useState(false);
-
-    const onClickCopied = () => {
-        setPressed(true);
-
-        setTimeout(() => {
-            setPressed(false);
-        }, 1000);
-    };
 
 
     // Категория одежды хлопок

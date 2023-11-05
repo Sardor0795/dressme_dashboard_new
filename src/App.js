@@ -20,6 +20,8 @@ function App() {
       refetchOnWindowFocus: false,
     }
   );
+
+
   return <NavbarDashboard />;
 }
 
