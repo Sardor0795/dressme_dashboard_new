@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
-
 import { useQuery } from "@tanstack/react-query";
-
-import AddBtn from "../../../AddingProductPageTwo/AddingProduct/AddBtn/AddBtn";
 import { useHttp } from "../../../../../hook/useHttp";
 import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
+import AddBtn from "./AddBtn";
 
 export default function TextFormAdd() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -58,15 +56,7 @@ export default function TextFormAdd() {
         else if (lang === 'Original emas') {
             setLang('Не оригинал')
         }
-        // else {
-        //   // if(lang === 'Оригинал')
-        //   //   setLang('Original')
-        //   // else if (lang === 'Полуоригинал'){
-        //   //   setLang('Yarim original')      
-        //   // }
-        //   // else if(lang === 'Не оригинал')
-        //   //   setLang('Original emas')
-        // }
+
     }, [lang])
 
     useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
@@ -94,6 +84,16 @@ export default function TextFormAdd() {
     const sendAllData = () => {
         console.log("sended");
     }
+    const [pressed, setPressed] = useState(false);
+
+    const onClickCopied = () => {
+        setPressed(true);
+
+        setTimeout(() => {
+            setPressed(false);
+        }, 1000);
+    };
+
 
     // Категория одежды хлопок
     return (
