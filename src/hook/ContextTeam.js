@@ -14,7 +14,8 @@ export default function ContextTeam({ children }) {
     SellerMagazin: "",
     SellerMagazinLocation: "",
     // ------Product----
-    ProductFilterType: null
+    ProductFilterType: null,
+    nextPageShowForm: true
 
   });
 
