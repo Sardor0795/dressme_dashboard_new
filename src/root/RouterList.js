@@ -11,7 +11,6 @@ import AddStore from "../components/MarketStore/AddMarket/AddStore/AddStore";
 // --------------------------Products=----------------
 import Products from "../components/Products/Products";
 import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
-import ProductsPageTwo from "../components/Products/AddingProductPageTwo/ProductsPageTwo";
 import NoLocationProduct from "../components/Products/NoLocationsProduct/NoLocationsProduct";
 import ProductLocationsList from "../components/Products/ProductLocationsList/ProductLocationsList";
 // --------------------------MarketLocations--------------
@@ -41,6 +40,7 @@ import LocationAddById from "../components/MarketLocations/Locations/LocationAdd
 import MarketIsStoreCheck from "../components/MarketStore/MarketIsStoreCheck/MarketIsStoreCheck";
 import LoadingForSeller from "../components/Loading/LoadingFor";
 import LocationsByIdShow from "../components/MarketStore/LocationsById/LocationsById";
+import ProductIsCheck from "../components/Products/ProductIsCheck/ProductIsCheck";
 
 // -------------------------Location---------------------
 // const MarketLocations = React.lazy(() => import("../components/MarketLocations"));
@@ -116,14 +116,9 @@ export default function RouterList() {
 
         {/* ---------------------<LocationsProduct>------------------------- */}
         <Route path="/products" element={<Products />}>
-          {dressInfo?.isItPorduct ? (
-            <Route index element={<ProductsPageOne />} />
-          ) : (
-            <Route index element={<NoLocationProduct />} />
-          )}
+          <Route index element={<ProductIsCheck />} />
           <Route path="/products/location" element={<ProductLocationsList />} />
           <Route path="/products/add-wear" element={<ProductsPageOne />} />
-          <Route path="/products/add-detail" element={<ProductsPageTwo />} />
         </Route>
 
         {/* <Route path="/store-location" element={<Clothes />} /> */}
