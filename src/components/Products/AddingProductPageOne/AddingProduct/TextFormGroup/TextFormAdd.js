@@ -15,66 +15,26 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
     const [descriptionInUz, setDescriptionInUz] = useState('')
     const [qualityInRu, setQualityInRu] = useState('')
     const [qualityInUz, setQualityInUz] = useState('')
-    const [compositionInRu, setCompositionInRu] = useState('')
-    const [compositionInUz, setCompositionInUz] = useState('')
+    const [noteValueRu, setNoteValueRu] = useState('')
+    const [noteValueUz, setNoteValueUz] = useState('')
     const [brand, setBrand] = useState('')
 
 
 
     const { request } = useHttp()
     const [productsData, setProductsData] = useState({})
-    // ru
-    const [noteValueRu, setNoteValueRu] = useState('')
-    const [noteListRu, setNoteListRu] = useState([{}])
-    const [incrementRu, setIncrementRu] = useState(1)
-    // Uz
-    const [noteValueUz, setNoteValueUz] = useState('')
-    const [noteListUz, setNoteListUz] = useState([{}])
-    const [incrementUz, setIncrementUz] = useState(1)
-
-    const [lang, setLang] = useState('')
-
-
-
-    const _handleKeyDownRu = (event) => {
-        if (event.key === 'Enter') {
-            setNoteListRu((countryList) => [...countryList, { id: incrementRu, name: noteValueRu }])
-            setIncrementRu(incrementRu + 1)
-            setNoteValueRu('')
-        }
-    }
-    const _handleKeyDownUz = (event) => {
-        if (event.key === 'Enter') {
-            setNoteListUz((countryList) => [...countryList, { id: incrementUz, name: noteValueUz }])
-            setIncrementUz(incrementUz + 1)
-            setNoteValueUz('')
-        }
-    }
-
 
     const handleSelectQuality = (value) => {
-        // setLang(value)
+        productsData?.quality?.filter(e => e.name_ru == value).map(item => {
+            setQualityInUz(item?.name_uz)
+        })
         setQualityInRu(value)
     }
     const handleSelectQualityUz = (value) => {
-        setQualityInUz(value)
     }
     const handleBrand = (value) => {
         setBrand(value)
     }
-
-    // useEffect(() => {
-    //     if (lang === 'Original') {
-    //         setLang('Оригинал')
-    //     }
-    //     else if (lang === 'Yarim original') {
-    //         setLang('Полуоригинал')
-    //     }
-    //     else if (lang === 'Original emas') {
-    //         setLang('Не оригинал')
-    //     }
-
-    // }, [lang])
 
     useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
         {
@@ -99,23 +59,19 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
         });
     }, [dressInfo?.nextPageShowForm]);
 
-    const deleteNoteUz = (e) => {
-        // console.log("deleteNoteUz E", e);
-    }
-    const deleteNoteRu = (e) => {
-        // console.log("deleteNoteRu E", e);
-    }
+
     const send = () => {
         onClick()
         handlCallBack({
             brand: brand,
-            qualityInRu: qualityInRu,
-            noteListRu: noteListRu,
-            noteListUz: noteListUz,
             titleInRu: titleInRu,
             titleInUz: titleInUz,
             descriptionInRu: descriptionInRu,
             descriptionInUz: descriptionInUz,
+            qualityInRu: qualityInRu,
+            qualityInUz: qualityInUz,
+            noteValueRu: noteValueRu,
+            noteValueUz: noteValueUz,
         })
         // console.log(
         //     brand, "brand \n",
@@ -333,13 +289,12 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             type="text"
                                             // name="note"
                                             value={noteValueRu}
-                                            onKeyDown={_handleKeyDownRu}
+                                            // onKeyDown={_handleKeyDownRu}
                                             onChange={(e) => setNoteValueRu(e.target.value)}
                                         />
-                                        {/* <button type="button" onClick={addNoteList}>addBtn</button> */}
                                         <AddBtn />
                                     </div>
-                                    <div className="mt-[10px] 
+                                    {/* <div className="mt-[10px] 
                    w-full flex flex-wrap items-center gap-2">
                                         {noteListRu?.length > 1 && noteListRu?.filter(e => e?.id >= 1)?.map((data, index) => {
                                             return (
@@ -350,7 +305,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                                     </button>
                                                 </div>)
                                         })}
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {/* Состав на узбекском */}
                                 <div className="flex-1 mb-[10px]">
@@ -365,12 +320,12 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             value={noteValueUz}
-                                            onKeyDown={_handleKeyDownUz}
+                                            // onKeyDown={_handleKeyDownUz}
                                             onChange={(e) => setNoteValueUz(e.target.value)}
                                         />
                                         <AddBtn />
                                     </div>
-                                    <div className="mt-[10px] 
+                                    {/* <div className="mt-[10px] 
                    w-full flex flex-wrap items-center gap-2">
                                         {noteListUz?.length > 1 && noteListUz?.filter(e => e?.id >= 1)?.map((data, index) => {
                                             return (
@@ -381,7 +336,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                                     </button>
                                                 </div>)
                                         })}
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
