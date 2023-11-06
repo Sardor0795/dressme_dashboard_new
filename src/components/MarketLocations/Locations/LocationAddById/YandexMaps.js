@@ -4,15 +4,10 @@ import {
   Map,
   ZoomControl,
   GeolocationControl,
-  FullscreenControl,
-  Clusterer,
 } from "react-yandex-maps";
 import {
   MapLocationIcon,
-  MenuCloseIcons,
   SearchIcon,
-  StarIcon,
-  marketIcons,
 } from "../../../../assets/icons";
 import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
