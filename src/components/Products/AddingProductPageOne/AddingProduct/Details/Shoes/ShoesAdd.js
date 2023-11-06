@@ -13,6 +13,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
         priceNum: "",
         salePercent: "",
         salePrice: "",
+        quantityNum: "",
         isCheckValid: false,
         // ------
         onConcel: false
@@ -33,7 +34,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.priceNum) {
+        if (state?.minSize && state?.priceNum && state?.quantityNum) {
             handleCallBack({
                 minFootLength: state?.minFootLength,
                 maxFootLength: state?.maxFootLength,
@@ -82,7 +83,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                 <StarLabel />
                             </span>
                         </p>
-                        <div className="w-[65px] flex items-center justify-between gap-x-1">
+                        <div className="w-[58px] flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
                                 <input
                                     type="text"
@@ -119,6 +120,23 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
                                 />
                             </div>
+                        </div>
+                    </div>
+                    <div className="w-fit flex flex-col md:ml-5">
+                        <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
+                            Количество
+                            <span className="ml-[5px]">
+                                <StarLabel />
+                            </span>
+                        </p>
+                        <div className="flex items-start justify-between ">
+                            <input
+                                type="text"
+                                className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
+                                value={state?.quantityNum}
+                                onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                            />
                         </div>
                     </div>
                 </div>

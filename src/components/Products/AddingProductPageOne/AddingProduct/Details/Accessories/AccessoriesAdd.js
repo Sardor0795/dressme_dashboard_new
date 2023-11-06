@@ -126,7 +126,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
 
                     <div className="w-[80%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Обхват Размер
+                            Буквенный Размер
                         </p>
                         <div className='w-full '>
                             {/* -----------------Desktop--------------------- */}
@@ -339,11 +339,15 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                             Количество
+                            <span className="ml-[5px]">
+                                <StarLabel />
+                            </span>
                         </p>
+
                         <div className="flex items-start justify-between ">
                             <input
                                 type="text"
-                                className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-5  rounded-lg  font-AeonikProRegular "
+                                className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                             />
