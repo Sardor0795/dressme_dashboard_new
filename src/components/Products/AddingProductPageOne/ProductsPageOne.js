@@ -47,7 +47,7 @@ export default function ProductsPageOne() {
 
         </div>
       </div>
-      <div className="w-full max-w-[1540px] mx-auto border border-red-500">
+      <div className="w-full max-w-[1540px] mx-auto ">
         <div className="w-full">
           <AddingProduct />
         </div>

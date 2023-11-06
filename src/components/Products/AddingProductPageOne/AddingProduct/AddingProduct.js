@@ -362,9 +362,9 @@ const AddingProduct = () => {
     );
   }
   return (
-    <div className="w-full h-fit border border-red-500">
+    <div className="w-full h-fit ">
       {dressInfo?.nextPageShowForm ?
-        <div className="relative w-full md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor border border-green-500">
+        <div className="relative w-full md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor ">
           <section
             onClick={() =>
               setState({

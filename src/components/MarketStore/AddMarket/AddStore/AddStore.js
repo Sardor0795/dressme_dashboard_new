@@ -41,11 +41,9 @@ function AddStore({ shopsList }) {
   };
 
   // ------------GET METHOD Gender-type-----------------
-  useQuery(
-    ["get_genders"],
-    () => {
-      return request({ url: "/genders", token: true });
-    },
+  useQuery(["get_genders"], () => {
+    return request({ url: "/genders", token: true });
+  },
     {
       onSuccess: (res) => {
         setState({ ...state, genderType: res?.genders });
@@ -58,11 +56,9 @@ function AddStore({ shopsList }) {
     }
   );
   // ------------GET METHOD delivery-method-----------------
-  useQuery(
-    ["get_delivery_method"],
-    () => {
-      return request({ url: "/delivery-method", token: true });
-    },
+  useQuery(["get_delivery_method"], () => {
+    return request({ url: "/delivery-method", token: true });
+  },
     {
       onSuccess: (res) => {
         setState({ ...state, deliverList: res?.delivery_methods });
@@ -106,7 +102,7 @@ function AddStore({ shopsList }) {
             progress: undefined,
             theme: "light",
           });
-          navigate("/store/market-list");
+          navigate("/store");
         }
       })
       .catch((err) => {
