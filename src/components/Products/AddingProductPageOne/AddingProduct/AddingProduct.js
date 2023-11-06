@@ -58,6 +58,13 @@ const AddingProduct = () => {
     pictureBgView4: "",
   });
   const [productsData, setProductsData] = useState({});
+  function CallBackTextForm(childData) {
+    console.log(childData, "childData-CallBackTextForm");
+  }
+  function CallBackDetails(childData) {
+    console.log(childData, "childData-CallBackHeadWear");
+  }
+
 
 
   // ---------Callback----
@@ -1173,11 +1180,11 @@ const AddingProduct = () => {
                   <div>
                     {state.openDropModalButton ? (
                       <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                        <HeadWearAdd title={productsData?.categories} typeId={getTypeId} />
-                        <OutWearAdd title={productsData?.categories} typeId={getTypeId} />
-                        <UnderAddWear title={productsData?.categories} typeId={getTypeId} />
-                        <ShoesAdd title={productsData?.categories} typeId={getTypeId} />
-                        <AccessoriesAdd title={productsData?.categories} typeId={getTypeId} />
+                        <HeadWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
+                        <OutWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
+                        <UnderAddWear title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
+                        <ShoesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
+                        <AccessoriesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
                       </div>
                     ) : null}
                   </div>
@@ -1352,7 +1359,7 @@ const AddingProduct = () => {
         </div>
         :
         <div className="relative w-full">
-          <TextFormAdd onClick={LocationAddSubmit} />
+          <TextFormAdd onClick={LocationAddSubmit} handlCallBack={CallBackTextForm} />
         </div>
       }
     </div>

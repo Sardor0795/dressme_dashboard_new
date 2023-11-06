@@ -4,7 +4,7 @@ import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function OutWearAdd({ title, typeId }) {
+function OutWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minBreast: "",
@@ -22,11 +22,12 @@ function OutWearAdd({ title, typeId }) {
         salePrice: "",
         isCheckValid: false,
         // ------
-        onConcel: false
+        onConcel: false,
+        toggleShow: false,
+
     })
     const sizeListCheck = []
     const sizeListCheck1 = []
-    const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
@@ -64,7 +65,7 @@ function OutWearAdd({ title, typeId }) {
     }, [typeId])
 
     const handleOpenPopver = (newOpen) => {
-        setToggleShow(newOpen)
+        setState({ ...state, toggleShow: newOpen })
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
@@ -79,8 +80,23 @@ function OutWearAdd({ title, typeId }) {
             state?.quantityNum &&
             state?.priceNum) {
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true })
-            setToggleShow(false)
+            setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
+            // setToggleShow(false)
+            handleCallBack({
+                minBreast: state?.minBreast,
+                maxBreast: state?.maxBreast,
+                minSize: state?.minSize,
+                maxSize: state?.maxSize,
+                minWaist: state?.minWaist,
+                maxWaist: state?.maxWaist,
+                minHips: state?.minHips,
+                maxHips: state?.maxHips,
+                quantityNum: state?.quantityNum,
+                ageNum: state?.ageNum,
+                priceNum: state?.priceNum,
+                salePercent: state?.salePercent,
+                salePrice: state?.salePrice,
+            })
         }
     }
     const cancelSendDetail = (e) => {
@@ -102,8 +118,8 @@ function OutWearAdd({ title, typeId }) {
             salePercent: "",
             salePrice: "",
             isCheckValid: false,
+            toggleShow: false
         })
-        setToggleShow(false)
     }
     const contentOutwear = (
         <div className="w-[855px] h-fit">
@@ -544,7 +560,7 @@ function OutWearAdd({ title, typeId }) {
     );
     return (
         <Popover
-            open={toggleShow}
+            open={state?.toggleShow}
             onOpenChange={handleOpenPopver}
             className={`
             ${dressInfo?.ProductFilterType || typeId ?

@@ -4,7 +4,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function HeadWearAdd({ title, typeId }) {
+function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -44,6 +44,16 @@ function HeadWearAdd({ title, typeId }) {
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.maxNum && state?.maxNum && state?.quantityNum && state?.priceNum) {
+            handleCallBack({
+                minNum: state?.minNum,
+                maxNum: state?.maxNum,
+                sizeCheck: state?.sizeCheck,
+                quantityNum: state?.quantityNum,
+                ageNum: state?.ageNum,
+                priceNum: state?.priceNum,
+                salePercent: state?.salePercent,
+                salePrice: state?.salePrice,
+            })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
         }
