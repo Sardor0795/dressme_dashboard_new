@@ -43,7 +43,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.maxNum && state?.maxNum && state?.quantityNum && state?.priceNum) {
+        if (state?.quantityNum && state?.priceNum) {
             handleCallBack({
                 minNum: state?.minNum,
                 maxNum: state?.maxNum,
@@ -86,15 +86,15 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
                             Обхват головы
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                            <span className="ml-[5px]">
+                            {/* <span className="ml-[5px]">
                                 <StarLabel />
-                            </span>
+                            </span> */}
                         </p>
                         <div className="w-full flex items-center mt-[10px]">
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[55px] h-[38px] text-center ${state?.isCheckValid && !state?.minNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                    className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minNum}
                                     onChange={(e) => setState({ ...state, minNum: e.target.value })}
@@ -105,7 +105,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle w-[55px] h-[38px] text-center  ${state?.isCheckValid && !state?.maxNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                    className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                     placeholder="Макс"
                                     value={state?.maxNum}
                                     onChange={(e) => setState({ ...state, maxNum: e.target.value })}
@@ -119,13 +119,13 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
                             One Size
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                            <span className="ml-[5px]">
+                            {/* <span className="ml-[5px]">
                                 <StarLabel />
-                            </span>
+                            </span> */}
                         </p>
                         <div className="flex items-center justify-center mt-[10px]">
                             <Switch
-                                className={`${state?.isCheckValid && !state?.sizeCheck ? "border border-[#FFB8B8] bg-[#FFB8B8]" : "border border-borderColor bg-[#8B8B8B]"} `}
+                                className={`border border-borderColor bg-[#8B8B8B] `}
                                 onChange={onChangeSwitch}
                                 defaultChecked={state?.sizeCheck}
                             />

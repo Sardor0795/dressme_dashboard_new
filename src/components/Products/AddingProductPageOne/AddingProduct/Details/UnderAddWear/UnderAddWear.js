@@ -68,15 +68,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (
-            state?.minBreast &&
-            state?.maxBreast &&
-            state?.minSize &&
-            state?.maxSize &&
-            state?.minHips &&
-            state?.maxHips &&
-            state?.quantityNum &&
-            state?.priceNum) {
+        if (state?.minSize && state?.quantityNum && state?.priceNum) {
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
             setToggleShow(false)
@@ -132,15 +124,15 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
 
                             Обхват Талии
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                            <span className="ml-[5px]">
+                            {/* <span className="ml-[5px]">
                                 <StarLabel />
-                            </span>
+                            </span> */}
                         </p>
                         <div className="flex items-center">
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.minBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minBreast}
                                     onChange={(e) => setState({ ...state, minBreast: e.target.value })}
@@ -150,7 +142,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxBreast}
                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
@@ -181,7 +173,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 <div className="flex flex-col">
                                     <input
                                         type="text"
-                                        className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.maxSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
+                                        className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxSize}
                                         onChange={(e) => setState({ ...state, maxSize: e.target.value })}
@@ -192,7 +184,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-[53%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Обхват Размер
+                            Буквенный Размер
                         </p>
 
                         <div className='w-full '>
@@ -373,15 +365,15 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                             Размер Бедер
-                            <span className="ml-[5px]">
+                            {/* <span className="ml-[5px]">
                                 <StarLabel />
-                            </span>
+                            </span> */}
                         </p>
                         <div className="flex items-center">
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.minHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minHips}
                                     onChange={(e) => setState({ ...state, minHips: e.target.value })}
@@ -391,7 +383,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="text"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxHips}
                                     onChange={(e) => setState({ ...state, maxHips: e.target.value })}
