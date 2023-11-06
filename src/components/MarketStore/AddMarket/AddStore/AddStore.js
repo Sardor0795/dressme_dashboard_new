@@ -41,9 +41,11 @@ function AddStore({ shopsList }) {
   };
 
   // ------------GET METHOD Gender-type-----------------
-  useQuery(["get_genders"], () => {
-    return request({ url: "/genders", token: true });
-  },
+  useQuery(
+    ["get_genders"],
+    () => {
+      return request({ url: "/genders", token: true });
+    },
     {
       onSuccess: (res) => {
         setState({ ...state, genderType: res?.genders });
@@ -56,9 +58,11 @@ function AddStore({ shopsList }) {
     }
   );
   // ------------GET METHOD delivery-method-----------------
-  useQuery(["get_delivery_method"], () => {
-    return request({ url: "/delivery-method", token: true });
-  },
+  useQuery(
+    ["get_delivery_method"],
+    () => {
+      return request({ url: "/delivery-method", token: true });
+    },
     {
       onSuccess: (res) => {
         setState({ ...state, deliverList: res?.delivery_methods });
@@ -170,7 +174,7 @@ function AddStore({ shopsList }) {
         </button>
       </div>
       {/* )} */}
-      <div className="relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg mb-[69px] md:mb-20">
+      <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-[69px]'} relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg md:mb-20`}>
         <button className="h-full w-full flex items-center justify-center ">
           <label
             htmlFor="DataImg"
@@ -231,13 +235,12 @@ function AddStore({ shopsList }) {
                     <BgSelectSkin />
                   </span>
                   {state?.errorGroup?.logo_photo && !state?.pictureLogoView && (
-                    <p className="text-[#D50000] text-[12px] ll:text-[12px] ">
+                    <p className="hidden md:block text-[#D50000] text-[12px] ll:text-[12px] ">
                       {state?.errorGroup?.logo_photo}
                     </p>
                   )}
                 </>
               )}
-
               {state?.pictureLogoView && (
                 <img
                   src={state?.pictureLogoView}
@@ -249,6 +252,15 @@ function AddStore({ shopsList }) {
           </button>
         </div>
       </div>
+      {!state?.pictureBgView && (
+        <>
+          {state?.errorGroup?.logo_photo && !state?.pictureLogoView && (
+            <p className="w-full flex mb-5 pl-6 md:hidden text-[#D50000] text-[12px] ll:text-[12px] ">
+              {state?.errorGroup?.logo_photo}
+            </p>
+          )}
+        </>
+      )}
 
       {/* Form */}
       <div className="w-full flex flex-col items-center justify-between">
