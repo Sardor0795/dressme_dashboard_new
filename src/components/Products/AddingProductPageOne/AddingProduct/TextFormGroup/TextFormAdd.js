@@ -88,7 +88,7 @@ export default function TextFormAdd() {
 
     // Категория одежды хлопок
     return (
-        <div className="flex py-[40px] md:py-[50px] border border-green-500">
+        <div className="flex py-[40px] md:py-[50px] ">
             <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
                 <div className="text-[#007dca] text-2xl w-[45px] h-[45px] rounded-full flex items-center justify-center border-2 border-[#1e88e5] mb-[5px] font-AeonikProRegular">
                     1

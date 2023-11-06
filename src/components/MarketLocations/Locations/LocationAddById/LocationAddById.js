@@ -109,11 +109,9 @@ export default function LocationAddById() {
     });
   };
 
-  useQuery(
-    ["shops_regions"],
-    () => {
-      return request({ url: "/shops/locations/regions", token: true });
-    },
+  useQuery(["shops_regions"], () => {
+    return request({ url: "/shops/locations/regions", token: true });
+  },
     {
       onSuccess: (res) => {
         setState({ ...state, getRegionList: res });
@@ -239,9 +237,9 @@ export default function LocationAddById() {
         <div>
           <YandexMapStore
             handleCallback={CallBackYandex}
-            errorLat={state?.errorGroup?.latitude}
-            errorLong={state?.errorGroup?.longitude}
-            errorTitle={state?.errorGroup?.address}
+          // errorLat={state?.errorGroup?.latitude}
+          // errorLong={state?.errorGroup?.longitude}
+          // errorTitle={state?.errorGroup?.address}
           />
           {state?.errorGroup?.address && !state?.shopCenterAddress && (
             <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
@@ -534,9 +532,8 @@ export default function LocationAddById() {
                         assistantPhoneFirst: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                      state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
-                    } text-xs md:text-base leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
+                      } text-xs md:text-base leading-4 text-black`}
                     placeholder={"(77) 777-77-77"}
                   ></InputMask>
                   <span className="mr-[12px]">
@@ -578,11 +575,10 @@ export default function LocationAddById() {
                         assistantPhoneSecond: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                      state?.assistantPhoneSecond
-                        ? "font-AeonikProMedium"
-                        : null
-                    } text-xs md:text-[16px] leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond
+                      ? "font-AeonikProMedium"
+                      : null
+                      } text-xs md:text-[16px] leading-4 text-black`}
                   ></InputMask>
                   <span className="mr-[12px]">
                     <TelIcon />
@@ -601,17 +597,15 @@ export default function LocationAddById() {
                 onClick={() => {
                   setState({ ...state, openStoreList: false });
                 }}
-                className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-                  state?.openStoreList ? "" : "hidden"
-                }`}
+                className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openStoreList ? "" : "hidden"
+                  }`}
               ></div>
               {
                 <div
-                  className={` max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                    state?.openStoreList
-                      ? " bottom-0 md:flex flex-col"
-                      : "md:hidden bottom-[-1500px] z-[-10]"
-                  }`}
+                  className={` max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openStoreList
+                    ? " bottom-0 md:flex flex-col"
+                    : "md:hidden bottom-[-1500px] z-[-10]"
+                    }`}
                 >
                   <div className="w-full flex items-center justify-between">
                     <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">
@@ -640,11 +634,10 @@ export default function LocationAddById() {
                                 {data?.name_ru}
                               </span>
                               <span
-                                className={`${
-                                  activeIndex == data?.id
-                                    ? "rotate-[0deg]"
-                                    : "rotate-[180deg]"
-                                } `}
+                                className={`${activeIndex == data?.id
+                                  ? "rotate-[0deg]"
+                                  : "rotate-[180deg]"
+                                  } `}
                               >
                                 <ArrowTopIcons colors={"#a1a1a1"} />
                               </span>
@@ -652,11 +645,10 @@ export default function LocationAddById() {
 
                             <div
                               className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                                  ? "openAccardion"
+                                  : "CloseAccardion"
+                                } `}
                             >
                               {data?.sub_regions?.map((item) => {
                                 return (
@@ -827,7 +819,7 @@ export default function LocationAddById() {
           <button
             onClick={LocationAddSubmit}
             className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-weatherWinterColor text-white rounded md:rounded-lg active:scale-95"
-            // to={"/store"}
+          // to={"/store"}
           >
             Добавить
           </button>

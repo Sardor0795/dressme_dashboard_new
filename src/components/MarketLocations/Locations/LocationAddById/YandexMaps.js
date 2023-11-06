@@ -135,7 +135,11 @@ export default function YandexMapStore({ handleCallback }) {
                     ["titleBox_show"]: Boolean(state.title.length),
                   })}
                 >
-                  <p className=" w-[90%] "> {state.title} </p>
+                  <p className=" w-[90%] ">
+                    <span className="whitespace-normal">
+                      {state.title}
+                    </span>
+                  </p>
                 </div>
 
                 {/* <div
@@ -221,8 +225,8 @@ export default function YandexMapStore({ handleCallback }) {
               }}
             />
           </Map>
-        </YMaps>
-      </div>
-    </div>
+        </YMaps >
+      </div >
+    </div >
   );
 }
