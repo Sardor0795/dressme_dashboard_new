@@ -906,6 +906,9 @@ const AddingProduct = () => {
                         <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
                           (необязательно)
                         </span>
+                        <span className="ml-[5px]">
+                          <StarLabel />
+                        </span>
                       </div>
                       <div className="w-full h-fit flex items-center justify-between gap-x-3">
                         <input
