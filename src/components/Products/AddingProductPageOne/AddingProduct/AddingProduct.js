@@ -28,6 +28,7 @@ import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
 const { Option } = Select;
+const url = "https://api.dressme.uz/api/seller";
 
 const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -57,8 +58,7 @@ const AddingProduct = () => {
     pictureBgView4: "",
   });
   const [productsData, setProductsData] = useState({});
-  const [selectedSectionData, setSelectedSectionData] = useState(null);
-  const [selectedSubSectionsData, setSelectedSubSectionsData] = useState(null);
+
 
   // ---------Callback----
   const ClothingSectionToggle = React.useCallback(
@@ -128,6 +128,27 @@ const AddingProduct = () => {
       ...state,
       pictureBgFile1: e.target.files[0],
       pictureBgView1: URL.createObjectURL(e.target.files[0]),
+    });
+  };
+  const handleLocationImage2 = (e) => {
+    setState({
+      ...state,
+      pictureBgFile2: e.target.files[0],
+      pictureBgView2: URL.createObjectURL(e.target.files[0]),
+    });
+  };
+  const handleLocationImage3 = (e) => {
+    setState({
+      ...state,
+      pictureBgFile3: e.target.files[0],
+      pictureBgView3: URL.createObjectURL(e.target.files[0]),
+    });
+  };
+  const handleLocationImage4 = (e) => {
+    setState({
+      ...state,
+      pictureBgFile4: e.target.files[0],
+      pictureBgView4: URL.createObjectURL(e.target.files[0]),
     });
   };
 
@@ -360,6 +381,41 @@ const AddingProduct = () => {
     setRandomSellerCode(
       [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], "")
     );
+  }
+
+  const LocationAddSubmit1 = () => {
+    // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
+
+    let form = new FormData();
+    form.append("address", state?.shopCenterAddress);
+
+    state?.pictureBgFile1 &&
+      form.append("shop_photo_one", state?.pictureBgFile1);
+    state?.pictureBgFile2 &&
+      form.append("shop_photo_two", state?.pictureBgFile2);
+    state?.pictureBgFile3 &&
+      form.append("shop_photo_three", state?.pictureBgFile3);
+    state?.pictureBgFile4 &&
+      form.append("shop_photo_three", state?.pictureBgFile4);
+
+    return fetch(`${url}/shops/locations/store`, {
+      method: "POST",
+      headers: {
+        'Accept': "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: form,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res, "AddLocationById");
+
+
+      })
+      .catch((err) => console.log(err, "errImage"));
+  };
+  const LocationAddSubmit = () => {
+    console.log("CLick Form RUn");
   }
   return (
     <div className="w-full h-fit ">
@@ -1180,7 +1236,7 @@ const AddingProduct = () => {
                             className="hidden"
                             id="DataImg1"
                             type="file"
-                            onChange={handleLocationImageOne}
+                            onChange={handleLocationImage2}
                             accept=" image/*"
                           />
                           {!state?.pictureBgView1 && (
@@ -1211,7 +1267,7 @@ const AddingProduct = () => {
                             className="hidden"
                             id="DataImg1"
                             type="file"
-                            onChange={handleLocationImageOne}
+                            onChange={handleLocationImage3}
                             accept=" image/*"
                           />
                           {!state?.pictureBgView1 && (
@@ -1245,7 +1301,7 @@ const AddingProduct = () => {
                             className="hidden"
                             id="DataImg1"
                             type="file"
-                            onChange={handleLocationImageOne}
+                            onChange={handleLocationImage4}
                             accept=" image/*"
                           />
                           {!state?.pictureBgView1 && (
@@ -1296,7 +1352,7 @@ const AddingProduct = () => {
         </div>
         :
         <div className="relative w-full">
-          <TextFormAdd />
+          <TextFormAdd onClick={LocationAddSubmit} />
         </div>
       }
     </div>
