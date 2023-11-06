@@ -4,7 +4,7 @@ import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function UnderAddWear({ title, typeId }) {
+function UnderAddWear({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minBreast: "",
@@ -80,6 +80,21 @@ function UnderAddWear({ title, typeId }) {
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
             setToggleShow(false)
+            handleCallBack({
+                minBreast: state?.minBreast,
+                maxBreast: state?.maxBreast,
+                minSize: state?.minSize,
+                maxSize: state?.maxSize,
+                minHeight: state?.minHeight,
+                maxHeight: state?.maxHeight,
+                minHips: state?.minHips,
+                maxHips: state?.maxHips,
+                quantityNum: state?.quantityNum,
+                ageNum: state?.ageNum,
+                priceNum: state?.priceNum,
+                salePercent: state?.salePercent,
+                salePrice: state?.salePrice,
+            })
         }
     }
     const cancelSendDetail = (e) => {

@@ -7,7 +7,7 @@ import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 
-export default function TextFormAdd({ onClick }) {
+export default function TextFormAdd({ onClick, handlCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [titleInRu, setTitleInRu] = useState('')
     const [titleInUz, setTitleInUz] = useState('')
@@ -106,16 +106,27 @@ export default function TextFormAdd({ onClick }) {
         // console.log("deleteNoteRu E", e);
     }
     const send = () => {
-        console.log(
-            brand, "brand \n",
-            titleInRu, "titleInRu \n",
-            titleInUz, "titleInUz \n",
-            descriptionInRu, "descriptionInRu \n",
-            descriptionInUz, "descriptionInUz \n",
-            qualityInRu, "qualityInRu \n",
-            noteListRu, "noteListRu \n",
-            noteListUz, "noteListUz \n",
-        );
+        onClick()
+        handlCallBack({
+            brand: brand,
+            qualityInRu: qualityInRu,
+            noteListRu: noteListRu,
+            noteListUz: noteListUz,
+            titleInRu: titleInRu,
+            titleInUz: titleInUz,
+            descriptionInRu: descriptionInRu,
+            descriptionInUz: descriptionInUz,
+        })
+        // console.log(
+        //     brand, "brand \n",
+        //     titleInRu, "titleInRu \n",
+        //     titleInUz, "titleInUz \n",
+        //     descriptionInRu, "descriptionInRu \n",
+        //     descriptionInUz, "descriptionInUz \n",
+        //     qualityInRu, "qualityInRu \n",
+        //     noteListRu, "noteListRu \n",
+        //     noteListUz, "noteListUz \n",
+        // );
     }
 
 

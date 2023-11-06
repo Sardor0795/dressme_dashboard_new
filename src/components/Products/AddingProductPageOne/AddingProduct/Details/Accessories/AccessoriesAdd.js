@@ -4,7 +4,7 @@ import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function AccessoriesAdd({ title, typeId }) {
+function AccessoriesAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         rowSize: "",
@@ -65,6 +65,16 @@ function AccessoriesAdd({ title, typeId }) {
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.priceNum) {
+            handleCallBack({
+                rowSize: state?.rowSize,
+                colSize: state?.colSize,
+                minSize: state?.minSize,
+                ageNum: state?.ageNum,
+                quantityNum: state?.quantityNum,
+                priceNum: state?.priceNum,
+                salePercent: state?.salePercent,
+                salePrice: state?.salePrice,
+            })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
             setToggleShow(false)

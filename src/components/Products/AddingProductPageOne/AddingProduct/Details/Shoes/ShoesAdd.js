@@ -3,7 +3,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function ShoesAdd({ title, typeId }) {
+function ShoesAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minFootLength: "",
@@ -34,6 +34,15 @@ function ShoesAdd({ title, typeId }) {
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.minSize && state?.priceNum) {
+            handleCallBack({
+                minFootLength: state?.minFootLength,
+                maxFootLength: state?.maxFootLength,
+                minSize: state?.minSize,
+                ageNum: state?.ageNum,
+                priceNum: state?.priceNum,
+                salePercent: state?.salePercent,
+                salePrice: state?.salePrice,
+            })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
             setToggleShow(false)
