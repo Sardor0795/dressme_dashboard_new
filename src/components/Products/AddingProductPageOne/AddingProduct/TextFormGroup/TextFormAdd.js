@@ -7,8 +7,19 @@ import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 
-export default function TextFormAdd() {
+export default function TextFormAdd({ onClick }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const [titleInRu, setTitleInRu] = useState('')
+    const [titleInUz, setTitleInUz] = useState('')
+    const [descriptionInRu, setDescriptionInRu] = useState('')
+    const [descriptionInUz, setDescriptionInUz] = useState('')
+    const [qualityInRu, setQualityInRu] = useState('')
+    const [qualityInUz, setQualityInUz] = useState('')
+    const [compositionInRu, setCompositionInRu] = useState('')
+    const [compositionInUz, setCompositionInUz] = useState('')
+    const [brand, setBrand] = useState('')
+
+
 
     const { request } = useHttp()
     const [productsData, setProductsData] = useState({})
@@ -23,9 +34,7 @@ export default function TextFormAdd() {
 
     const [lang, setLang] = useState('')
 
-    const deleteNote = (e) => {
-        console.log("index E", e);
-    }
+
 
     const _handleKeyDownRu = (event) => {
         if (event.key === 'Enter') {
@@ -43,21 +52,29 @@ export default function TextFormAdd() {
     }
 
 
-    const handleLangSelect = (value) => {
-        setLang(value)
+    const handleSelectQuality = (value) => {
+        // setLang(value)
+        setQualityInRu(value)
     }
-    useEffect(() => {
-        if (lang === 'Original') {
-            setLang('Оригинал')
-        }
-        else if (lang === 'Yarim original') {
-            setLang('Полуоригинал')
-        }
-        else if (lang === 'Original emas') {
-            setLang('Не оригинал')
-        }
+    const handleSelectQualityUz = (value) => {
+        setQualityInUz(value)
+    }
+    const handleBrand = (value) => {
+        setBrand(value)
+    }
 
-    }, [lang])
+    // useEffect(() => {
+    //     if (lang === 'Original') {
+    //         setLang('Оригинал')
+    //     }
+    //     else if (lang === 'Yarim original') {
+    //         setLang('Полуоригинал')
+    //     }
+    //     else if (lang === 'Original emas') {
+    //         setLang('Не оригинал')
+    //     }
+
+    // }, [lang])
 
     useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
         {
@@ -81,8 +98,24 @@ export default function TextFormAdd() {
             top: 0,
         });
     }, [dressInfo?.nextPageShowForm]);
-    const sendAllData = () => {
-        console.log("sended");
+
+    const deleteNoteUz = (e) => {
+        // console.log("deleteNoteUz E", e);
+    }
+    const deleteNoteRu = (e) => {
+        // console.log("deleteNoteRu E", e);
+    }
+    const send = () => {
+        console.log(
+            brand, "brand \n",
+            titleInRu, "titleInRu \n",
+            titleInUz, "titleInUz \n",
+            descriptionInRu, "descriptionInRu \n",
+            descriptionInUz, "descriptionInUz \n",
+            qualityInRu, "qualityInRu \n",
+            noteListRu, "noteListRu \n",
+            noteListUz, "noteListUz \n",
+        );
     }
 
 
@@ -127,6 +160,9 @@ export default function TextFormAdd() {
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
                                         type="text"
+                                        name="title"
+                                        value={titleInRu}
+                                        onChange={(e) => setTitleInRu(e.target.value)}
                                     />
                                     <AddBtn />
                                 </div>
@@ -144,6 +180,9 @@ export default function TextFormAdd() {
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
+                                        name="title"
+                                        value={titleInUz}
+                                        onChange={(e) => setTitleInUz(e.target.value)}
                                     />
                                     <AddBtn />
                                 </div>
@@ -162,6 +201,8 @@ export default function TextFormAdd() {
                                         className="block w-full h-full text-[#666] text-sm resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
+                                        value={descriptionInRu}
+                                        onChange={(e) => setDescriptionInRu(e.target.value)}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
                                         <AddBtn />
@@ -183,6 +224,8 @@ export default function TextFormAdd() {
                                         className="block w-full h-full text-[#666] text-sm resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
+                                        value={descriptionInUz}
+                                        onChange={(e) => setDescriptionInUz(e.target.value)}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
                                         <AddBtn />
@@ -206,10 +249,11 @@ export default function TextFormAdd() {
                                         </span>
                                     </div>
                                     <Select
-                                        // placeholder={"Выбрать"} 
+                                        placeholder={"Выбрать"}
                                         style={{ width: "100%" }}
-                                        value={lang === '' ? 'Выбрать' : lang}
-                                        onChange={handleLangSelect}
+                                        // value={lang === '' ? 'Выбрать' : lang}
+                                        allowClear
+                                        onChange={handleSelectQuality}
                                         options={
                                             productsData?.quality?.map(item => {
                                                 return (
@@ -233,17 +277,22 @@ export default function TextFormAdd() {
                                         </span>
                                     </div>
                                     <Select
-                                        // placeholder={"Выбрать"} 
+                                        placeholder={"Выбрать"}
                                         style={{ width: "100%" }}
-                                        value={lang === ''
-                                            ? 'Выбрать'
-                                            : lang === 'Оригинал'
-                                                ? 'Original'
-                                                : lang === 'Полуоригинал'
-                                                    ? 'Yarim original'
-                                                    : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
+                                        value={
+                                            productsData?.quality?.filter(e => e.name_ru == qualityInRu).map(item => {
+                                                return item?.name_uz
+                                            })
+                                            // lang === ''
+                                            // ? 'Выбрать'
+                                            // : lang === 'Оригинал'
+                                            //     ? 'Original'
+                                            //     : lang === 'Полуоригинал'
+                                            //         ? 'Yarim original'
+                                            //         : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
                                         }
-                                        onChange={handleLangSelect}
+                                        onChange={handleSelectQualityUz}
+                                        allowClear
                                         options={
                                             productsData?.quality?.map(item => {
                                                 return (
@@ -285,7 +334,7 @@ export default function TextFormAdd() {
                                             return (
                                                 <div key={data?.id} className="flex items-center text-white w-fit px-2 py-[4px] text-[14px] rounded-md font-AeonikProRegular bg-[#007dca]">
                                                     {data?.name}{" "}
-                                                    <button onClick={deleteNote(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                                                    <button onClick={deleteNoteRu(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
                                                         <XIcon />
                                                     </button>
                                                 </div>)
@@ -316,7 +365,7 @@ export default function TextFormAdd() {
                                             return (
                                                 <div key={data?.id} className="flex items-center text-white w-fit px-2 py-[4px] text-[14px] rounded-md font-AeonikProRegular bg-[#007dca]">
                                                     {data?.name}{" "}
-                                                    <button onClick={deleteNote(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                                                    <button onClick={deleteNoteUz(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
                                                         <XIcon />
                                                     </button>
                                                 </div>)
@@ -336,6 +385,7 @@ export default function TextFormAdd() {
                                         className="font-AeonikProMedium"
                                         placeholder={"Выбрать"}
                                         style={{ width: "100%" }}
+                                        onChange={handleBrand}
                                         options={
                                             productsData?.brands?.map(item => {
                                                 return (
@@ -374,7 +424,8 @@ export default function TextFormAdd() {
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={sendAllData}
+                                    onClick={send}
+                                    // onClick={onClick}
                                     className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
                                     Добавить
                                 </button>
