@@ -133,7 +133,7 @@ export default function ReviewWear() {
                 <li className="w-[20%] md:pl-5 h-fit flex items-center ">
                   {data?.photos?.map(item => {
                     return(
-                      <figure className="w-[70px] h-[65px] rounded-lg overflow-hidden border border-lightBorderColor">
+                      <figure className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
                         <img className="w-full h-full object-contain" src={item?.url_photo} alt="" />
                       </figure>
                     )
