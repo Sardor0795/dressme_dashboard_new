@@ -53,7 +53,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
     const handleSizeList = (checkedValues) => {
         sizeListCheck.push(checkedValues.target.value)
     };
-    console.log(sizeListCheck, "sizeListCheck");
+    // console.log(sizeListCheck, "sizeListCheck");
 
     const SelectedNumber = 3
     useEffect(() => {
@@ -73,19 +73,21 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             setState({ ...state, isCheckValid: false, onConcel: true })
             setToggleShow(false)
             handleCallBack({
-                minBreast: state?.minBreast,
-                maxBreast: state?.maxBreast,
-                minSize: state?.minSize,
-                maxSize: state?.maxSize,
+                minUnderwearWaistGirth: state?.minBreast,
+                maxUnderwearWaistGirth: state?.maxBreast,
+                minUnderWearSize: state?.minSize,
+                maxUnderWearSize: state?.maxSize,
+                minUnderWearHipGirth: state?.minHips,
+                maxUnderWearHipGirth: state?.maxHips,
                 minHeight: state?.minHeight,
                 maxHeight: state?.maxHeight,
-                minHips: state?.minHips,
-                maxHips: state?.maxHips,
-                quantityNum: state?.quantityNum,
-                ageNum: state?.ageNum,
-                priceNum: state?.priceNum,
-                salePercent: state?.salePercent,
-                salePrice: state?.salePrice,
+                underWearLetterSize: sizeListCheck,
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum,
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice,
+                category_Id: SelectedNumber,
             })
         }
     }
@@ -108,6 +110,24 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             salePrice: "",
             isCheckValid: false,
             onConcel: false
+        })
+        handleCallBack({
+            minUnderwearWaistGirth: '',
+            maxUnderwearWaistGirth: '',
+            minUnderWearSize: '',
+            maxUnderWearSize: '',
+            minUnderWearHipGirth: '',
+            maxUnderWearHipGirth: '',
+            minHeight: '',
+            maxHeight: '',
+            underWearLetterSize: '',
+            amount: '',
+            age: '',
+            price: '',
+            discountPercent: '',
+            discountPrice: '',
+            category_Id: '',
+
         })
         setToggleShow(false)
     }

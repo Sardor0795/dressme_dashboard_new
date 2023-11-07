@@ -53,6 +53,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 price: state?.price,
                 discountPercent: state?.discountPercent,
                 discountPrice: state?.discountPrice,
+                category_Id: SelectedNumber,
+
             })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
@@ -83,6 +85,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
             price: "",
             discountPercent: "",
             discountPrice: "",
+            category_Id: '',
+
+
         })
     }
     const contentHat = (
@@ -90,7 +95,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
             <div
                 className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
-                <div className="w-full flex justify-center  gap-x-10 px-3 pt-5">
+                <div className="w-full flex justify-start px-3  gap-x-10  pt-5 ">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
