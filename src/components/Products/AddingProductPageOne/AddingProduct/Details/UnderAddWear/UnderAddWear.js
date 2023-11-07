@@ -3,6 +3,7 @@ import { StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
+import { BiPlus } from "react-icons/bi";
 
 function UnderAddWear({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -20,6 +21,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
         priceNum: "",
         salePercent: "",
         salePrice: "",
+        maxSizeShow: false,
         isCheckValid: false,
         // ------
         onConcel: false
@@ -191,13 +193,17 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
+                                    {state?.maxSizeShow ? <input
                                         type="text"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxSize}
                                         onChange={(e) => setState({ ...state, maxSize: e.target.value })}
-                                    />
+                                    /> :
+                                        <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>

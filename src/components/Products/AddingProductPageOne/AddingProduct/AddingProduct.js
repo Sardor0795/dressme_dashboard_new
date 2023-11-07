@@ -57,6 +57,8 @@ const AddingProduct = () => {
     pictureBgFile4: "",
     pictureBgView4: "",
     // ---------------
+    shop_id: '',
+    shop_location_id: '',
     section_Id: [],
     sub_Section_Id: [],
     season_Id: [],
@@ -69,6 +71,12 @@ const AddingProduct = () => {
     type_Id: '',
     producer_Id: '',
     photos1: [],
+    amount: '',
+    age: '',
+    price: '',
+    discount_percent: '',
+    discount_price: '',
+
     // -----Details-----
     headWearList: '',
     outWearList: "",
@@ -86,19 +94,68 @@ const AddingProduct = () => {
     setState({ ...state, textForm: childData })
   }
   function CallBackHeadWear(childData) {
-    setState({ ...state, headWearList: childData, category_Id: childData?.category_Id })
+    console.log(childData);
+    setState({
+      ...state,
+      headWearList: childData,
+      category_Id: childData?.category_Id,
+      amount: childData?.amount,
+      age: childData?.age,
+      price: childData?.price,
+      discount_price: childData?.discountPrice,
+      discount_percent: childData?.discountPercent,
+    })
   }
   function CallBackOutWear(childData) {
-    setState({ ...state, outWearList: childData, category_Id: childData?.category_Id })
+
+    setState({
+      ...state,
+      outWearList: childData,
+      category_Id: childData?.category_Id,
+      amount: childData?.amount,
+      age: childData?.age,
+      price: childData?.price,
+      discount_price: childData?.discountPrice,
+      discount_percent: childData?.discountPercent,
+    })
   }
   function CallBackUnderWear(childData) {
-    setState({ ...state, underWearList: childData, category_Id: childData?.category_Id })
+    setState({
+      ...state,
+      underWearList: childData,
+      category_Id: childData?.category_Id,
+      amount: childData?.amount,
+      age: childData?.age,
+      price: childData?.price,
+      discount_price: childData?.discountPrice,
+      discount_percent: childData?.discountPercent,
+    })
   }
   function CallBackShoesWear(childData) {
-    setState({ ...state, shoesList: childData, category_Id: childData?.category_Id })
+
+    setState({
+      ...state,
+      shoesList: childData,
+      category_Id: childData?.category_Id,
+      amount: childData?.amount,
+      age: childData?.age,
+      price: childData?.price,
+      discount_price: childData?.discountPrice,
+      discount_percent: childData?.discountPercent,
+    })
   }
   function CallBackAccessoriesWear(childData) {
-    setState({ ...state, AccessoriesList: childData, category_Id: childData?.category_Id })
+
+    setState({
+      ...state,
+      AccessoriesList: childData,
+      category_Id: childData?.category_Id,
+      amount: childData?.amount,
+      age: childData?.age,
+      price: childData?.price,
+      discount_price: childData?.discountPrice,
+      discount_percent: childData?.discountPercent,
+    })
   }
 
   function randomCode(len) {
@@ -301,18 +358,72 @@ const AddingProduct = () => {
     // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
 
     let form = new FormData();
-    form.append("address", state?.shopCenterAddress);
+    form.append("shop_id", state?.shop_id);
+    form.append("shop_location_id", state?.shop_location_id);
+    form.append("section_ids", state?.section_Id);
+    form.append("sub_section_ids", state?.sub_Section_Id);//no R
+    form.append("season_ids", state?.season_Id);
+    form.append("color_ id", state?.color_Id);
+    form.append("gender_id", state?.gender_Id);
+    form.append("min_age_category", state?.min_Age_Category);
+    form.append("max_age_category", state?.max_Age_Category);
+    form.append("sku", state?.sku);
+    form.append("category_id", state?.category_Id);
+    form.append("type_id", state?.type_Id);
+    form.append("producer_id", state?.producer_Id);
+    form.append("photos[]", state?.photos1);//img
+    // detailsForAll
+    form.append("amount", state?.amount);
+    form.append("age", state?.age);
+    form.append("price", state?.price);
+    form.append("discount_percent", state?.discount_percent);//no R
+    form.append("discount_price", state?.discount_price);//no R
+    // textForm
+    form.append("brand_id", state?.textForm?.brand_id);//no R
+    form.append("name_uz", state?.textForm?.name_Uz);
+    form.append("name_ru", state?.textForm?.name_Ru);
+    form.append("quality_uz", state?.textForm?.quality_Uz);
+    form.append("quality_ru", state?.textForm?.quality_Ru);
+    form.append("description_uz", state?.textForm?.description_Uz);
+    form.append("description_ru", state?.textForm?.description_Ru);
+    form.append("composition_uz", state?.textForm?.composition_Uz);//no R
+    form.append("composition_ru", state?.textForm?.composition_Ru);//no R
+    // HeadWear
+    form.append("one_size", state?.headWearList?.oneSize);
+    form.append("min_head_girth", state?.headWearList?.minHeadGirth);
+    form.append("max_head_girth", state?.headWearList?.maxHeadGirth);
+    // OutWear
+    form.append("outwear_letter_size", state?.outWearList?.outWearLetterSize);
+    form.append("min_outwear_size", state?.outWearList?.minOutWearSize);
+    form.append("max_outwear_size", state?.outWearList?.maxOutWearSize);
+    form.append("min_chest_girth", state?.outWearList?.minChestGirth);
+    form.append("max_chest_girth", state?.outWearList?.maxChestGirth);
+    form.append("min_outwear_waist_girth", state?.outWearList?.minOutWearWaistGirth);
+    form.append("max_outwear_waist_girth", state?.outWearList?.maxOutWearWaistGirth);
+    form.append("min_outwear_hip_girth", state?.outWearList?.minOutWearHipGirth);
+    form.append("max_outwear_hip_girth", state?.outWearList?.maxOutWearHipGirth);
+    // UnderWear
+    form.append("underwear_letter_size", state?.underWearList?.underWearLetterSize);
+    form.append("min_height", state?.underWearList?.minHeight);
+    form.append("max_height", state?.underWearList?.maxHeight);
+    form.append("min_underwear_size", state?.underWearList?.minUnderWearSize);
+    form.append("max_underwear_size", state?.underWearList?.maxUnderWearSize);
+    form.append("min_underwear_waist_girth", state?.underWearList?.minUnderwearWaistGirth);
+    form.append("max_underwear_waist_girth", state?.underWearList?.maxUnderwearWaistGirth);
+    form.append("min_underwear_hip_girth", state?.underWearList?.minUnderWearHipGirth);
+    form.append("max_underwear_hip_girth", state?.underWearList?.maxUnderWearHipGirth);
+    // FooterSize
+    form.append("footwear_size", state?.shoesList?.footWearSize);
+    form.append("min_foot_length", state?.shoesList?.minFootLength);
+    form.append("max_foot_length", state?.shoesList?.maxFootLength);
+    // Accessory
+    form.append("accessory_letter_size", state?.AccessoriesList?.accessoryLetterSize);
+    form.append("accessory_size", state?.AccessoriesList?.accessorySize);
+    form.append("length", state?.AccessoriesList?.legnthAcc);
+    form.append("width", state?.AccessoriesList?.widthAcc);
 
-    state?.pictureBgFile1 &&
-      form.append("shop_photo_one", state?.pictureBgFile1);
-    state?.pictureBgFile2 &&
-      form.append("shop_photo_two", state?.pictureBgFile2);
-    state?.pictureBgFile3 &&
-      form.append("shop_photo_three", state?.pictureBgFile3);
-    state?.pictureBgFile4 &&
-      form.append("shop_photo_three", state?.pictureBgFile4);
 
-    return fetch(`${url}/shops/locations/store`, {
+    return fetch(`${url}/products/store`, {
       method: "POST",
       headers: {
         'Accept': "application/json",
@@ -322,16 +433,13 @@ const AddingProduct = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "AddLocationById");
+        console.log(res, "ProductStore");
 
 
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  // const LocationAddSubmit = () => {
-  //   console.log("CLick Form RUn");
-  // }
-  // console.log(productsData?.sections, " productsData?.sections");
+  console.log(productsData?.shops, "shops");
   return (
     <div className="w-full h-fit ">
       {dressInfo?.nextPageShowForm ?
@@ -507,6 +615,153 @@ const AddingProduct = () => {
               <div className=" w-full h-fit flex gap-x-4 flex-col-reverse md:flex-row md:px-7 ">
                 <div className="w-full md:w-[70%] h-fit flex flex-col gap-y-6">
                   <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 mt-6 md:mt-0">
+                    {/* Input Select 1.1 */}
+                    <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
+                      <div className="flex items-center">
+                        <span className="text-[13px] md:text-base font-AeonikProRegular">
+                          Магазин
+                        </span>
+                        <span className="ml-[5px]">
+                          <StarLabel />
+                        </span>
+                      </div>
+                      <button
+                        // onClick={() =>
+                        //   setState({ ...state, ClothingSection: true })
+                        // }
+                        type="button"
+                        className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                      >
+                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          Выбрать
+                        </label>
+                        <ArrowRightIcon />
+                      </button>
+                      <div className="w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden">
+                        <Select
+                          className=" rounded-lg w-full h-11 md:h-10"
+                          showSearch
+                          placeholder="Выбрать"
+                          optionFilterProp="children"
+                          onChange={(e) => setState({ ...state, shop_id: e })}
+                          onSearch={onSearch}
+                          size="large"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          options={productsData?.shops?.map((item) => {
+                            return {
+                              value: item?.id,
+                              label: item?.name,
+                            };
+                          })}
+                        />
+                        {/* <Select
+                          className=" rounded-lg w-full h-fit "
+                          showSearch
+                          // mode="multiple"
+                          placeholder="Выбрать"
+                          // optionLabelProp="label"
+                          optionFilterProp="children"
+                          onChange={(e) => setState({ ...state, shop_id: e })}
+                          onSearch={onSearch}
+                          size="large"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          options={productsData?.shops?.map((item) => {
+                            return {
+                              value: item?.id,
+                              label: item?.name,
+                            };
+                          })}
+
+                        /> */}
+                      </div>
+                    </div>
+                    {/* Input Select 2.1 */}
+                    <div className="w-full h-fit  flex flex-col gap-y-[5px]">
+                      <div className="flex items-center">
+                        <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shop_id ? "text-[#000]" : "text-[#b5b5b5]"}`}>
+                          Локация
+                        </span>
+                        <span className="ml-[5px]">
+                          {state?.shop_id ? (
+                            <StarLabel />
+                          ) : null}
+                        </span>
+                      </div>
+                      <button
+                        // onClick={() =>
+                        //   setState({ ...state, SubClothingSection: true })
+                        // }
+                        type="button"
+                        className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                      >
+                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          Выбрать
+                        </label>
+                        <ArrowRightIcon />
+                      </button>
+                      <div className="w-full h-fit hidden md:flex">
+                        <Select
+                          className=" rounded-lg w-full h-11 md:h-10"
+                          showSearch
+                          placeholder="Выбрать"
+                          optionFilterProp="children"
+                          onChange={(e) => setState({ ...state, shop_location_id: e })}
+                          onSearch={onSearch}
+                          size="large"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          options={productsData?.shops?.filter(e => e?.id == state?.shop_id).map((item) => {
+                            item?.shop_locations?.map(data => {
+                              return {
+                                value: data?.id,
+                                label: data?.address,
+                              };
+                            })
+                          })}
+                        />
+                        {/* <Select
+                          className=" rounded-lg w-full h-11 md:h-10"
+                          showSearch
+                          disabled={
+                            state?.shop_id ? false : true
+                          }
+                          placeholder="Выбрать"
+                          // mode="multiple"
+                          optionFilterProp="children"
+                          onChange={(e) => setState({ ...state, shop_location_id: e })}
+                          onSearch={onSearch}
+                          size="large"
+                          allowClear
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          options={productsData?.shops?.filter(e => e?.id == state?.shop_id).map((item) => {
+                            item?.shop_locations?.map(data => {
+                              return {
+                                value: data?.id,
+                                label: data?.address,
+                              };
+                            })
+                          })}
+
+                        /> */}
+
+
+                      </div>
+                    </div>
                     {/* Input Select 1 */}
                     <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                       <div className="flex items-center">
