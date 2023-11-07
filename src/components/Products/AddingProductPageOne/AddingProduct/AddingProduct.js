@@ -27,6 +27,9 @@ import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCatego
 import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
+// import { DownOutlined } from '@ant-design/icons'
+
+
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
 
@@ -38,6 +41,7 @@ const AddingProduct = () => {
     buttonReviews: false,
     openDropModalButton: true,
     showColor: false,
+    openSelect: false,
     // --------------
     ClothingSection: false,
     SubClothingSection: false,
@@ -442,7 +446,7 @@ const AddingProduct = () => {
   console.log(productsData?.shops, "shops");
   console.log(state?.shopId, "shop_id");
   console.log(state?.shopLocationId, "shopLocationId");
-  productsData?.shops?.filter(e => e.id == state?.shopId)?.map(item => {
+  productsData?.shops?.map(item => {
     item?.shop_locations?.map(data => {
       console.log(data, "data");
     })
@@ -466,6 +470,7 @@ const AddingProduct = () => {
                 MakeCountryModal: false,
                 ClothingCategoryModal: false,
                 showColor: false,
+                openSelect: false,
               })
             }
             className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
@@ -477,6 +482,7 @@ const AddingProduct = () => {
                 state?.DressTypeModal ||
                 state?.ClothingCategoryModal ||
                 state?.showColor ||
+                state?.openSelect ||
                 state?.MakeCountryModal
                 ? ""
                 : "hidden"
@@ -547,6 +553,43 @@ const AddingProduct = () => {
               </div>
             </div>
           )}
+          <section
+            className={` max-w-[440px] md:max-w-[700px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+              }`}
+          >
+            <button
+              onClick={() => setState({ ...state, openSelect: false })}
+              type="button"
+              className="absolute  right-3 top-3 w-5 h-5 "
+            >
+              <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
+            </button>
+            <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
+              <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+                Прикрепить к локация
+              </p>
+            </div>
+            <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
+              {productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+                return item?.shop_locations?.map(data => {
+                  return (
+                    <button
+                      onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
+                      key={data?.id}
+                      className="w-full py-[10px] flex items-center  rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                    >
+                      <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                        {" "}
+                        {data?.address}
+                      </span>
+                    </button>
+                  )
+                })
+              })
+              }
+
+            </div>
+          </section>
 
           <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
             <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
@@ -661,13 +704,22 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-                          options={productsData?.shops?.map((item) => {
-                            return {
-                              value: item?.id,
-                              label: item?.name,
-                            };
+
+                        >
+                          {productsData?.shops?.map((data) => {
+                            return (
+                              <>
+                                {data?.shop_locations?.length >= 1 && <Option
+                                  key={data.id}
+                                  value={data?.id}
+                                >
+                                  {data?.name}
+                                </Option>}
+                              </>
+                            )
                           })}
-                        />
+
+                        </Select>
                       </div>
                     </div>
                     {/* Input Select 2.1 */}
@@ -695,63 +747,64 @@ const AddingProduct = () => {
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full h-fit hidden md:flex">
-                        <Select
-                          className=" rounded-lg w-full h-11 md:h-10"
-                          showSearch
-                          placeholder="Выбрать"
-                          optionFilterProp="children"
-                          onChange={(e) => setState({ ...state, shopLocationId: e })}
-                          onSearch={onSearch}
-                          size="large"
-                          filterOption={(input, option) =>
-                            (option?.label ?? "")
-                              .toLowerCase()
-                              .includes(input.toLowerCase())
-                          }
-
+                        {state?.shopId ? <button
+                          onClick={() => setState({ ...state, openSelect: true })}
+                          type="button"
+                          className="w-full h-11 md:h-10 rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
                         >
-                          {productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
-                            return item?.shop_locations?.map(data => {
-                              return (
-                                <Option
-                                  key={data.id}
-                                  value={data?.id}
-                                >
-                                  {data?.address}
-                                </Option>
-                              )
-                            })
-                          })
-                          }
-                        </Select>
+                          <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                            Выбрать
+                          </label>
+                          <span className="rotate-[90deg]">
+                            <ArrowRightIcon />
+                            {/* <DownOutlined style={{ colors: "#b5b5b5" }} /> */}
+                          </span>
+                        </button> :
+                          <button
+                            type="button"
+                            className="w-full h-11 md:h-10 rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
+                          >
+                            <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </label>
+                            <span className="rotate-[90deg]">
+                              <ArrowRightIcon />
+                              {/* <DownOutlined style={{ fontSize: "16px", colors: "#b5b5b5" }} /> */}
+                            </span>
+                          </button>}
+
+
                         {/* <Select
                           className=" rounded-lg w-full h-11 md:h-10"
                           showSearch
-                          disabled={
-                            state?.shop_id ? false : true
-                          }
                           placeholder="Выбрать"
-                          // mode="multiple"
                           optionFilterProp="children"
-                          onChange={(e) => setState({ ...state, shop_location_id: e })}
-                          onSearch={onSearch}
+                          onClick={() => setState({ ...state, openSelect: true })}
+                          // onChange={(e) => setState({ ...state, shopLocationId: e })}
+                          // onSearch={onSearch}
                           size="large"
-                          allowClear
-                          filterOption={(input, option) =>
-                            (option?.label ?? "")
-                              .toLowerCase()
-                              .includes(input.toLowerCase())
-                          }
-                          options={productsData?.shops?.filter(e => e?.id == state?.shop_id).map((item) => {
-                            item?.shop_locations?.map(data => {
-                              return {
-                                value: data?.id,
-                                label: data?.address,
-                              };
-                            })
-                          })}
+                        // filterOption={(input, option) =>
+                        //   (option?.label ?? "")
+                        //     .toLowerCase()
+                        //     .includes(input.toLowerCase())
+                        // }
 
-                        /> */}
+                        >
+                          //  {productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+                          //   return item?.shop_locations?.map(data => {
+                          //     return (
+                          //       <Option
+                          //         key={data.id}
+                          //         value={data?.id}
+                          //       >
+                          //         {data?.address}
+                          //       </Option>
+                          //     )
+                          //   })
+                          // })
+                          // } 
+                      </Select> */}
+
 
 
                       </div>
@@ -1551,7 +1604,7 @@ const AddingProduct = () => {
           <TextFormAdd onClick={LocationAddSubmit} handlCallBack={CallBackTextForm} />
         </div>
       }
-    </div>
+    </div >
   );
 };
 
