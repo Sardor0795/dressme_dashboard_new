@@ -21,6 +21,7 @@ const ReviewStore = () => {
     {
       onSuccess: (res) => {
         if (res?.shops) {
+          console.log(res, "REVIEW-STORE");
           setSellerShops(res);
           // setLoading(false);
         }
