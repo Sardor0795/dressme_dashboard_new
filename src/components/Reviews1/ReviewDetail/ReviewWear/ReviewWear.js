@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ProductImg } from "../../../../assets";
-import { MobileStar, SearchIcon, StarIcon } from "../../../../assets/icons";
+import { MobileStar, SearchIcon, } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
@@ -8,29 +7,8 @@ import { useHttp } from "../../../../hook/useHttp";
 export default function ReviewWear() {
   const { request } = useHttp();
   const [reviewsList, setReviewsList] = useState();
-  // const [state, setState] = useState({
-  //   name_product: "",
-  //   starsScore: "",
-  //   dataTime:"",
-  //   loading: true
-  // });
-  // const productList = [
-  //   {
-  //     id: 1,
-  //     text: "Nike store official Dealer",
-  //     starCount: 5,
-  //     dateSend: "19 февраля 2023 г.",
-  //     link: "Подробнее",
-  //   },
-  //   {
-  //     id: 2,
-  //     text: "Nike store official Dealer",
-  //     starCount: 5,
-  //     dateSend: "19 февраля 2023 г.",
-  //     link: "Подробнее",
-  //   },
-  // ];
   const navigate = useNavigate();
+
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-wear/${id}`);
   };
@@ -123,8 +101,6 @@ export default function ReviewWear() {
         {/* table product */}
         <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
           {reviewsList?.map((data) => {
-            // console.log(data, 'DATA-REVIEW-LIST');
-            // console.log(data.photos, 'DATA-REVIEW-PHOTOS');
             return (
               <ul
                 key={data?.id}

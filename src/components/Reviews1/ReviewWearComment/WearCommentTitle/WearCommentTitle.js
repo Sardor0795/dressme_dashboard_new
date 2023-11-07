@@ -174,13 +174,11 @@ export default function WearCommentTitle() {
         return(
           <>
             {data?.ratings.map(item => {
-              console.log(item, 'DATA_RATINGS');
               return(
                 <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
                 {/* userImg and Date */}
                   <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
                     <div className="h-10 w-fit flex items-center gap-x-[15px]">
-
                       <div className="flex flex-col">
                         <div className="text-tableTextTitle2 text-base md:text-xl font-AeonikProMedium">
                           {item?.user.name}
@@ -212,7 +210,6 @@ export default function WearCommentTitle() {
                       {item?.comment}
                     </span>
                   </div>
-
                   <div>
                     {/* {item?.reply !== 0 ? (
                       <div>
