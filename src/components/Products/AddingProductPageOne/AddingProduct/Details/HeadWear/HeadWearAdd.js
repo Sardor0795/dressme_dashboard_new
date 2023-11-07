@@ -8,14 +8,14 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
-        minNum: "",
-        maxNum: "",
+        minHeadGirth: "",
+        maxHeadGirth: "",
         sizeCheck: false,
-        quantityNum: "",
-        ageNum: "",
-        priceNum: "",
-        salePercent: "",
-        salePrice: "",
+        amount: "",
+        age: "",
+        price: "",
+        discountPercent: "",
+        discountPrice: "",
         isCheckValid: false,
         // ------
         onConcel: false,
@@ -43,16 +43,16 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.quantityNum && state?.priceNum) {
+        if (state?.amount && state?.price) {
             handleCallBack({
-                minNum: state?.minNum,
-                maxNum: state?.maxNum,
-                sizeCheck: state?.sizeCheck,
-                quantityNum: state?.quantityNum,
-                ageNum: state?.ageNum,
-                priceNum: state?.priceNum,
-                salePercent: state?.salePercent,
-                salePrice: state?.salePrice,
+                minHeadGirth: state?.minHeadGirth,
+                maxHeadGirth: state?.maxHeadGirth,
+                oneSize: state?.sizeCheck,
+                amount: state?.amount,
+                age: state?.age,
+                price: state?.price,
+                discountPercent: state?.discountPercent,
+                discountPrice: state?.discountPrice,
             })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
@@ -63,16 +63,26 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
         setState({
             ...state,
-            minNum: "",
-            maxNum: "",
+            minHeadGirth: "",
+            maxHeadGirth: "",
             sizeCheck: false,
-            quantityNum: "",
-            ageNum: "",
-            priceNum: "",
-            salePercent: "",
-            salePrice: "",
+            amount: "",
+            age: "",
+            price: "",
+            discountPercent: "",
+            discountPrice: "",
             onConcel: false,
             toggleShow: false
+        })
+        handleCallBack({
+            minHeadGirth: "",
+            maxHeadGirth: "",
+            oneSize: "",
+            amount: "",
+            age: "",
+            price: "",
+            discountPercent: "",
+            discountPrice: "",
         })
     }
     const contentHat = (
@@ -96,8 +106,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="text"
                                     className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                     placeholder="Мин"
-                                    value={state?.minNum}
-                                    onChange={(e) => setState({ ...state, minNum: e.target.value })}
+                                    value={state?.minHeadGirth}
+                                    onChange={(e) => setState({ ...state, minHeadGirth: e.target.value })}
                                     required
                                 />
                             </div>
@@ -107,8 +117,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="text"
                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                     placeholder="Макс"
-                                    value={state?.maxNum}
-                                    onChange={(e) => setState({ ...state, maxNum: e.target.value })}
+                                    value={state?.maxHeadGirth}
+                                    onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
                                     required
                                 />
                             </div>
@@ -143,9 +153,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         <div className="flex items-start justify-between mt-[10px]">
                             <input
                                 type="text"
-                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                value={state?.quantityNum}
-                                onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                value={state?.amount}
+                                onChange={(e) => setState({ ...state, amount: e.target.value })}
                                 required
                             />
                         </div>
@@ -166,8 +176,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="text"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                     placeholder="age"
-                                    value={state?.ageNum}
-                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    value={state?.age}
+                                    onChange={(e) => setState({ ...state, age: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -182,14 +192,14 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     <StarLabel />
                                 </span>
                             </div>
-                            <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                            <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
                                     type="text"
                                     placeholder="0"
                                     id="enterPrice"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                    value={state?.priceNum}
-                                    onChange={(e) => setState({ ...state, priceNum: e.target.value })}
+                                    value={state?.price}
+                                    onChange={(e) => setState({ ...state, price: e.target.value })}
                                     required
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -218,22 +228,22 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                             type="text"
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
-                                            value={state?.salePercent}
-                                            onChange={(e) => setState({ ...state, salePercent: e.target.value })}
+                                            value={state?.discountPercent}
+                                            onChange={(e) => setState({ ...state, discountPercent: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-1">%</span>
                                     </div>
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            id="salePrice"
+                                            id="discountPrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
-                                            value={state?.salePrice}
-                                            onChange={(e) => setState({ ...state, salePrice: e.target.value })}
+                                            value={state?.discountPrice}
+                                            onChange={(e) => setState({ ...state, discountPrice: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
