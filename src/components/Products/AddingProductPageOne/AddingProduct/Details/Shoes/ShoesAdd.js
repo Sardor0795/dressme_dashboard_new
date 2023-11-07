@@ -36,13 +36,16 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
         setState({ ...state, isCheckValid: true })
         if (state?.minSize && state?.priceNum && state?.quantityNum) {
             handleCallBack({
+                footWearSize: state?.minSize,
                 minFootLength: state?.minFootLength,
                 maxFootLength: state?.maxFootLength,
-                minSize: state?.minSize,
-                ageNum: state?.ageNum,
-                priceNum: state?.priceNum,
-                salePercent: state?.salePercent,
-                salePrice: state?.salePrice,
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum,
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice,
+                category_Id: SelectedNumber,
+
             })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
@@ -65,6 +68,18 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
             isCheckValid: false,
             // ------
             onConcel: false
+        })
+        handleCallBack({
+            footWearSize: '',
+            minFootLength: '',
+            maxFootLength: '',
+            amount: '',
+            age: '',
+            price: '',
+            discountPercent: '',
+            discountPrice: '',
+            category_Id: '',
+
         })
         setToggleShow(false)
 

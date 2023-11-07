@@ -68,7 +68,7 @@ const AddingProduct = () => {
     category_Id: '',
     type_Id: '',
     producer_Id: '',
-    photos: [],
+    photos1: [],
     // -----Details-----
     headWearList: '',
     outWearList: "",
@@ -84,29 +84,31 @@ const AddingProduct = () => {
 
   function CallBackTextForm(childData) {
     setState({ ...state, textForm: childData })
-    console.log(childData, "childData-CallBackTextForm");
   }
   function CallBackHeadWear(childData) {
-    setState({ ...state, headWearList: childData })
+    setState({ ...state, headWearList: childData, category_Id: childData?.category_Id })
   }
   function CallBackOutWear(childData) {
-    setState({ ...state, outWearList: childData })
+    setState({ ...state, outWearList: childData, category_Id: childData?.category_Id })
   }
   function CallBackUnderWear(childData) {
-    setState({ ...state, underWearList: childData })
+    setState({ ...state, underWearList: childData, category_Id: childData?.category_Id })
   }
   function CallBackShoesWear(childData) {
-    setState({ ...state, shoesList: childData })
+    setState({ ...state, shoesList: childData, category_Id: childData?.category_Id })
   }
   function CallBackAccessoriesWear(childData) {
-    setState({ ...state, AccessoriesList: childData })
+    setState({ ...state, AccessoriesList: childData, category_Id: childData?.category_Id })
   }
-  console.log(state?.headWearList, "headWearList");
-  console.log(state?.outWearList, "outWearList");
-  console.log(state?.underWearList, "underWearList");
-  console.log(state?.shoesList, "shoesList");
-  console.log(state?.AccessoriesList, "AccessoriesList");
 
+  function randomCode(len) {
+    let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    setState({
+      ...state,
+      sku: [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], "")
+    }
+    )
+  }
 
   // ---------Callback----
   const ClothingSectionToggle = React.useCallback(
@@ -174,7 +176,7 @@ const AddingProduct = () => {
   const handleLocationImageOne = (e) => {
     setState({
       ...state,
-      pictureBgFile1: e.target.files[0],
+      photos1: e.target.files[0],
       pictureBgView1: URL.createObjectURL(e.target.files[0]),
     });
   };
@@ -200,6 +202,32 @@ const AddingProduct = () => {
     });
   };
 
+  const LocationAddSubmit = () => {
+    console.log(
+      state?.section_Id, "section_Id \n",
+      state?.sub_Section_Id, "sub_Section_Id \n",
+      state?.season_Id, "season_Id \n",
+      state?.color_Id, "color_Id \n",
+      state?.gender_Id, "gender_Id \n",
+      state?.min_Age_Category, "min_Age_Category \n",
+      state?.max_Age_Category, "max_Age_Category \n",
+      state?.sku, "sku \n",
+      state?.category_Id, "category_Id \n",
+      state?.type_Id, "type_Id \n",
+      state?.producer_Id, "producer_Id \n",
+      state?.photos1, "photos1 \n",
+      state?.headWearList, "headWearList \n",
+      state?.outWearList, "outWearList \n",
+      state?.underWearList, "underWearList \n",
+      state?.shoesList, "shoesList \n",
+      state?.AccessoriesList, "AccessoriesList \n",
+      state?.textForm, "textForm \n",
+    );
+  }
+
+  // -----------------------------------------------------------
+
+
   useQuery(
     ["products_get"],
     () => {
@@ -222,146 +250,18 @@ const AddingProduct = () => {
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
   };
-  // -----------------------------------------------------------
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-  const [handleWearList, setHandleWearList] = useState([])
-  const [handleWearSubList, setHandleWearSubList] = useState([])
-
-  const handleWearGroup = (value) => {
-    setHandleWearList(value)
-  };
-
-  const handleWearSubGroup = (value) => {
-    setHandleWearSubList(value)
-  };
-
   const newArray = []
-  productsData?.sections?.filter(e => handleWearList?.includes(e?.id))?.map((data) => {
+  productsData?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
     return data?.sub_sections?.map(item => {
       newArray.push(item)
     })
   })
   // -----------------------------------------------------------
-  const [getTypeId, setGetTypeId] = useState(0)
-  const [typeFilter, setTypeFilter] = useState(null)
-
-  const CategoryTypeId = (value, attribute2) => {
-    setGetTypeId(attribute2)
-  };
-  // console.log(getTypeId, "getTypeId");
-  // console.log(productsData?.types, "productsData?.types");
-
-  // console.log(typeFilter, "typeFilter");
-
-  // -----------------------------------------------------------
 
   const onSearch = (value) => {
-    console.log("search:", value);
-  };
-  const onChangeSwitch = (checked) => {
-    console.log(`switch to ${checked}`);
+    // console.log("search:", value);
   };
 
-  const [changeColor, setChangeColor] = useState([
-    {
-      id: 1,
-      data: 1,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colors: "bg-black",
-      colorName: "Black",
-    },
-    {
-      id: 2,
-      data: 2,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colors: "bg-white",
-      colorName: "Black",
-    },
-    {
-      id: 3,
-      data: 3,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colors: "bg-zinc-500",
-      colorName: "Black",
-    },
-    {
-      id: 4,
-      data: 4,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colors: "bg-purple-500",
-      colorName: "Black",
-    },
-    {
-      id: 5,
-      data: 5,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colors: "bg-sky-600",
-      colorName: "Black",
-    },
-    {
-      id: 6,
-      data: 6,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-amber-400 ",
-    },
-    {
-      id: 7,
-      data: 7,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-green-700 ",
-    },
-    {
-      id: 8,
-      data: 8,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-amber-600 ",
-    },
-    {
-      id: 9,
-      data: 9,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-red-700  ",
-    },
-    {
-      id: 10,
-      data: 10,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-purple-800 ",
-    },
-    {
-      id: 11,
-      data: 11,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-blue-900  ",
-    },
-    {
-      id: 12,
-      data: 12,
-      icons: <InputCheckedTrueIcons />,
-      action: false,
-      colorName: "Black",
-      colors: "bg-yellow-900 ",
-    },
-  ]);
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
@@ -385,35 +285,7 @@ const AddingProduct = () => {
     };
   }, [screenSize]);
 
-  const HandleIconsColor = (color, id) => {
-    setChangeColor((current) => {
-      return current.map((data) => {
-        if (data?.id == id) {
-          return { ...data, action: true };
-        } else {
-          return { ...data, action: false };
-        }
-      });
-    });
-  };
 
-  const handleChangeWeather = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  // Checks whether an element is even
-  const even = (element) => element.action == true;
-  let toggleAction = changeColor.some(even);
-
-  const unCheckedAll = () => {
-    setState({ ...state, showColor: false });
-
-    setChangeColor((current) => {
-      return current.map((data) => {
-        return { ...data, action: false };
-      });
-    });
-  };
 
   useEffect(() => {
     window.scrollTo({
@@ -421,15 +293,9 @@ const AddingProduct = () => {
     });
   }, [dressInfo?.nextPageShowForm]);
 
-  // Категория одеждыДобавить одежду Артикул(необязательно)
-  const [randomSellerCode, setRandomSellerCode] = useState(null);
 
-  function randomCode(len) {
-    let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    setRandomSellerCode(
-      [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], "")
-    );
-  }
+
+
 
   const LocationAddSubmit1 = () => {
     // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
@@ -462,9 +328,10 @@ const AddingProduct = () => {
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  const LocationAddSubmit = () => {
-    console.log("CLick Form RUn");
-  }
+  // const LocationAddSubmit = () => {
+  //   console.log("CLick Form RUn");
+  // }
+  // console.log(productsData?.sections, " productsData?.sections");
   return (
     <div className="w-full h-fit ">
       {dressInfo?.nextPageShowForm ?
@@ -519,14 +386,11 @@ const AddingProduct = () => {
                 </div>
                 <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
                   {productsData?.colors.map((data) => {
-                    // console.log(data.hex, "COLORS");
                     return (
                       <div className="flex flex-col items-center justify-center ">
                         <div
                           key={data?.id}
-                          onClick={() =>
-                            HandleIconsColor(data?.IconsColor, data?.id)
-                          }
+                          onClick={() => setState({ ...state, color_Id: data?.id })}
                           style={{ background: `${data.hex}` }}
                           className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
                             }] cursor-pointer ${data?.id == 2
@@ -535,11 +399,11 @@ const AddingProduct = () => {
                             }
                      `}
                         >
-                          {data?.action && data?.id === 2 ? (
+                          {data?.id === state?.color_Id && state?.color_Id !== 1 ? (
                             <InputCheckedTrueIcons colors={"#000"} />
                           ) : null}
 
-                          {data?.action && data?.id !== 2 ? (
+                          {state?.color_Id === 1 && data?.id === state?.color_Id ? (
                             <InputCheckedTrueIcons colors={"#fff"} />
                           ) : null}
                         </div>
@@ -553,9 +417,9 @@ const AddingProduct = () => {
                   })}
                 </div>
                 <div className="flex items-center justify-end">
-                  {toggleAction && (
+                  {state?.color_Id && (
                     <button
-                      onClick={unCheckedAll}
+                      onClick={() => setState({ ...state, color_Id: '', showColor: false })}
                       className="flex items-center text-fullBlue active:scale-95  active:opacity-70 justify-center  px-4 py-1"
                     >
                       Отключить
@@ -673,7 +537,7 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           optionLabelProp="label"
                           // optionFilterProp="children"
-                          onChange={handleWearGroup}
+                          onChange={(e) => setState({ ...state, section_Id: e })}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -681,12 +545,7 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-                        // options={productsData?.sections?.map((item) => {
-                        //   return {
-                        //     value: item?.id,
-                        //     label: item?.name_ru,
-                        //   };
-                        // })}
+
                         >
                           {productsData?.sections?.map((item) => {
                             return (
@@ -738,7 +597,7 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           mode="multiple"
                           optionLabelProp="label"
-                          onChange={handleWearSubGroup}
+                          onChange={(e) => setState({ ...state, sub_Section_Id: e })}
                           onSearch={onSearch}
                           size="large"
                           allowClear
@@ -797,7 +656,7 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           // defaultValue={["china"]}
                           size="large"
-                          onChange={handleChangeWeather}
+                          onChange={(e) => setState({ ...state, season_Id: e })}
                           optionLabelProp="label"
                         >
                           {productsData?.seasons?.map((item) => {
@@ -895,7 +754,7 @@ const AddingProduct = () => {
                             showSearch
                             placeholder="Выбрать"
                             optionFilterProp="children"
-                            // onChange={onChange1}
+                            onChange={(e) => setState({ ...state, gender_Id: e })}
                             onSearch={onSearch}
                             size="large"
                             filterOption={(input, option) =>
@@ -926,6 +785,8 @@ const AddingProduct = () => {
                             type="text"
                             name="age"
                             placeholder="Мин"
+                            value={state?.min_Age_Category}
+                            onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
                             className="inputStyle outline-none w-[55px] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           />
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
@@ -933,6 +794,8 @@ const AddingProduct = () => {
                             type="text"
                             name="age"
                             placeholder="Мах"
+                            value={state?.max_Age_Category}
+                            onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                             className="inputStyle outline-none w-[55px] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           />
                         </div>
@@ -944,9 +807,7 @@ const AddingProduct = () => {
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
                           Артикул
                         </span>
-                        <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                          (необязательно)
-                        </span>
+
                         <span className="ml-[5px]">
                           <StarLabel />
                         </span>
@@ -954,8 +815,8 @@ const AddingProduct = () => {
                       <div className="w-full h-fit flex items-center justify-between gap-x-3">
                         <input
                           type="text"
-                          value={randomSellerCode}
-                          onChange={(e) => setRandomSellerCode(e.target.value)}
+                          value={state?.sku}
+                          onChange={(e) => setState({ ...state, sku: e.target.value })}
                           placeholder=""
                           className="inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
                         />
@@ -1037,7 +898,8 @@ const AddingProduct = () => {
                             placeholder="Выбрать"
                             optionFilterProp="children"
                             onChange={(value, attribute2) => {
-                              CategoryTypeId(value, attribute2?.attribute2)
+                              setState({ ...state, type_Id: attribute2?.attribute2 })
+                              // CategoryTypeId(value, attribute2?.attribute2)
                             }}
                             onSearch={onSearch}
                             size="large"
@@ -1087,7 +949,7 @@ const AddingProduct = () => {
                             showSearch
                             placeholder="Выбрать"
                             optionFilterProp="children"
-                            onChange={onChange}
+                            onChange={(e) => setState({ ...state, producer_Id: e })}
                             onSearch={onSearch}
                             size="large"
                             filterOption={(input, option) =>
@@ -1131,7 +993,9 @@ const AddingProduct = () => {
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
-                          onChange={onChange}
+                          onChange={(value, attribute2) => {
+                            setState({ ...state, type_Id: attribute2?.attribute2 })
+                          }}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -1139,13 +1003,36 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-                          options={productsData?.types?.map((item) => {
-                            return {
-                              value: item?.id,
-                              label: item?.name_ru,
-                            };
-                          })}
-                        />
+                        // options={productsData?.types?.map((item) => {
+                        //   return {
+                        //     value: item?.id,
+                        //     label: item?.name_ru,
+                        //   };
+                        // })}
+                        >
+                          {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
+                            return (
+                              <Option
+                                key={"item_" + item.id}
+                                value={item?.id}
+                                attribute2={item?.category_id}
+                              >
+                                {item.name_ru}
+                              </Option>
+                            )
+                          }) : productsData?.types?.map((item) => {
+                            return (
+                              <Option
+                                key={"item_" + item.id}
+                                value={item?.id}
+                                attribute2={item?.category_id}
+                              >
+                                {item.name_ru}
+                              </Option>
+                            )
+                          })
+                          }
+                        </Select>
                       </div>
                     </div>
                     {/* Input Select 10 mobile */}
@@ -1176,7 +1063,7 @@ const AddingProduct = () => {
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
-                          onChange={onChange}
+                          onChange={(e) => setState({ ...state, producer_Id: e })}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -1208,6 +1095,8 @@ const AddingProduct = () => {
                           type="text"
                           name="age"
                           placeholder="Мин"
+                          value={state?.min_Age_Category}
+                          onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
                           className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                         />
                         <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
@@ -1215,6 +1104,8 @@ const AddingProduct = () => {
                           type="text"
                           name="age"
                           placeholder="Мах"
+                          value={state?.max_Age_Category}
+                          onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                           className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                         />
                       </div>
@@ -1224,11 +1115,11 @@ const AddingProduct = () => {
                   <div>
                     {state.openDropModalButton ? (
                       <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                        <HeadWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackHeadWear} />
-                        <OutWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackOutWear} />
-                        <UnderAddWear title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackUnderWear} />
-                        <ShoesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackShoesWear} />
-                        <AccessoriesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackAccessoriesWear} />
+                        <HeadWearAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
+                        <OutWearAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackOutWear} />
+                        <UnderAddWear title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackUnderWear} />
+                        <ShoesAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackShoesWear} />
+                        <AccessoriesAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackAccessoriesWear} />
                       </div>
                     ) : null}
                   </div>
@@ -1258,8 +1149,10 @@ const AddingProduct = () => {
                         />
                         {!state?.pictureBgView1 && (
                           <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
-                            <span className="leading-none text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
-                              Выберите фото
+                            <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
+                              Выберите фото   <span className="ml-[5px]">
+                                <StarLabel />
+                              </span>
                             </span>
                           </div>
                         )}
@@ -1291,8 +1184,11 @@ const AddingProduct = () => {
                             accept=" image/*"
                           />
                           {!state?.pictureBgView1 && (
-                            <div className="w-full h-full bg-photoBg border border-dashed rounded-lg flex items-center justify-center">
+                            <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                               <DownloadIcon />
+                              <div className="text-[11px] text-textLightColor mt-[5px]">
+                                (необязательно)
+                              </div>
                             </div>
                           )}
                           {state?.pictureBgView1 && (
@@ -1322,7 +1218,7 @@ const AddingProduct = () => {
                             accept=" image/*"
                           />
                           {!state?.pictureBgView1 && (
-                            <div className="w-full h-full bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                            <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                               <DownloadIcon />
                               <div className="text-[11px] text-textLightColor mt-[5px]">
                                 (необязательно)
@@ -1356,9 +1252,9 @@ const AddingProduct = () => {
                             accept=" image/*"
                           />
                           {!state?.pictureBgView1 && (
-                            <div className="w-full h-full bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                            <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                               <DownloadIcon />
-                              <div className="text-[11px] text-textLightColor mt-[5px]">
+                              <div className="text-[11px] whitespace-normal text-center text-textLightColor mt-[5px]">
                                 (необязательно)
                               </div>
                             </div>

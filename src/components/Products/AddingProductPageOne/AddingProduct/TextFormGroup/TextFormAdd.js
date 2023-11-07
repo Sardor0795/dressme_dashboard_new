@@ -61,28 +61,19 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
 
 
     const send = () => {
-        onClick()
         handlCallBack({
-            brand: brand,
-            titleInRu: titleInRu,
-            titleInUz: titleInUz,
-            descriptionInRu: descriptionInRu,
-            descriptionInUz: descriptionInUz,
-            qualityInRu: qualityInRu,
-            qualityInUz: qualityInUz,
-            noteValueRu: noteValueRu,
-            noteValueUz: noteValueUz,
+            brand_id: brand,
+            name_Ru: titleInRu,
+            name_Uz: titleInUz,
+            description_Ru: descriptionInRu,
+            description_Uz: descriptionInUz,
+            quality_Ru: qualityInRu,
+            quality_Uz: qualityInUz,
+            composition_Ru: noteValueRu,
+            composition_Uz: noteValueUz,
         })
-        // console.log(
-        //     brand, "brand \n",
-        //     titleInRu, "titleInRu \n",
-        //     titleInUz, "titleInUz \n",
-        //     descriptionInRu, "descriptionInRu \n",
-        //     descriptionInUz, "descriptionInUz \n",
-        //     qualityInRu, "qualityInRu \n",
-        //     noteListRu, "noteListRu \n",
-        //     noteListUz, "noteListUz \n",
-        // );
+        onClick()
+
     }
 
 

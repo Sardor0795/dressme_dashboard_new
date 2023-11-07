@@ -66,14 +66,17 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         setState({ ...state, isCheckValid: true })
         if (state?.priceNum) {
             handleCallBack({
-                rowSize: state?.rowSize,
-                colSize: state?.colSize,
-                minSize: state?.minSize,
-                ageNum: state?.ageNum,
-                quantityNum: state?.quantityNum,
-                priceNum: state?.priceNum,
-                salePercent: state?.salePercent,
-                salePrice: state?.salePrice,
+                accessorySize: state?.minSize,
+                legnthAcc: state?.rowSize,
+                widthAcc: state?.colSize,
+                accessoryLetterSize: sizeListCheck,
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum,
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice,
+                category_Id: SelectedNumber,
+
             })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
@@ -96,6 +99,19 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             isCheckValid: false,
             // ------
             onConcel: false
+        })
+        handleCallBack({
+            accessorySize: '',
+            legnthAcc: '',
+            widthAcc: '',
+            accessoryLetterSize: '',
+            amount: '',
+            age: '',
+            price: '',
+            discountPercent: '',
+            discountPrice: '',
+            category_Id: '',
+
         })
         setToggleShow(false)
     }

@@ -73,19 +73,22 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
             handleCallBack({
-                minBreast: state?.minBreast,
-                maxBreast: state?.maxBreast,
-                minSize: state?.minSize,
-                maxSize: state?.maxSize,
-                minWaist: state?.minWaist,
-                maxWaist: state?.maxWaist,
-                minHips: state?.minHips,
-                maxHips: state?.maxHips,
-                quantityNum: state?.quantityNum,
-                ageNum: state?.ageNum,
-                priceNum: state?.priceNum,
-                salePercent: state?.salePercent,
-                salePrice: state?.salePrice,
+                minChestGirth: state?.minBreast,
+                maxChestGirth: state?.maxBreast,
+                minOutWearSize: state?.minSize,
+                maxOutWearSize: state?.maxSize,
+                minOutWearWaistGirth: state?.minWaist,
+                maxOutWearWaistGirth: state?.maxWaist,
+                minOutWearHipGirth: state?.minHips,
+                maxOutWearHipGirth: state?.maxHips,
+                outWearLetterSize: sizeListCheck,
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum,
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice,
+                category_Id: SelectedNumber,
+
             })
         }
     }
@@ -109,6 +112,24 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
             salePrice: "",
             isCheckValid: false,
             toggleShow: false
+        })
+        handleCallBack({
+            minChestGirth: '',
+            maxChestGirth: '',
+            minOutWearSize: '',
+            maxOutWearSize: '',
+            minOutWearWaistGirth: '',
+            maxOutWearWaistGirth: '',
+            minOutWearHipGirth: '',
+            maxOutWearHipGirth: '',
+            outWearLetterSize: '',
+            amount: '',
+            age: '',
+            price: '',
+            discountPercent: '',
+            discountPrice: '',
+            category_Id: '',
+
         })
     }
     const contentOutwear = (
