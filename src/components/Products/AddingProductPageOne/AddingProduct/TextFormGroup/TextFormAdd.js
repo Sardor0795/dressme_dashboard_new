@@ -150,8 +150,8 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                         Описание на русском
                                     </div>
-                                    <span className="ml-[5px]">
-                                        <StarLabel />
+                                    <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
+                                        (необязательно)
                                     </span>
                                 </div>
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
@@ -172,8 +172,8 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                         Описание на узбекском
                                     </div>
-                                    <span className="ml-[5px]">
-                                        <StarLabel />
+                                    <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
+                                        (необязательно)
                                     </span>
                                 </div>
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
@@ -269,7 +269,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                 {/* Состав на русском */}
                                 <div className="flex-1 mb-[17px] md:mb-[10px]">
                                     <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
-                                        Состав на русском{" "}
+                                        Состав на русском
                                         <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
                                             (необязательно)
                                         </span>
@@ -302,7 +302,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                 <div className="flex-1 mb-[10px]">
                                     <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
                                         Состав на узбекском
-                                        <span className="notRecquired font-AeonikProRegular text-sm text-textLightColor">
+                                        <span className="notRecquired ml-[5px] font-AeonikProRegular text-sm text-textLightColor">
                                             (необязательно)
                                         </span>
                                     </div>
@@ -333,8 +333,8 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
                                 <div className="flex-1 mb-[10px]">
                                     <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
-                                        Бренд{" "}
-                                        <span className="notRecquired text-sm text-textLightColor font-AeonikProRegular">
+                                        Бренд
+                                        <span className="notRecquired ml-[5px] text-sm text-textLightColor font-AeonikProRegular">
                                             (необязательно)
                                         </span>
                                     </div>
