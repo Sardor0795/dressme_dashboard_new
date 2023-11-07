@@ -1,35 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { ProductImg } from "../../../../assets";
-import {
-  SearchIcon,
-  StarIcon,
-} from "../../../../assets/icons";
+import { MobileStar, SearchIcon, StarIcon } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../../hook/useHttp";
 
 export default function ReviewWear() {
-  const productList = [
-    {
-      id: 1,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
-    {
-      id: 2,
-      text: "Nike store official Dealer",
-      starCount: 5,
-      dateSend: "19 февраля 2023 г.",
-      link: "Подробнее",
-    },
-  ];
+  const { request } = useHttp();
+  const [reviewsList, setReviewsList] = useState();
+  // const [state, setState] = useState({
+  //   name_product: "",
+  //   starsScore: "",
+  //   dataTime:"",
+  //   loading: true
+  // });
+  // const productList = [
+  //   {
+  //     id: 1,
+  //     text: "Nike store official Dealer",
+  //     starCount: 5,
+  //     dateSend: "19 февраля 2023 г.",
+  //     link: "Подробнее",
+  //   },
+  //   {
+  //     id: 2,
+  //     text: "Nike store official Dealer",
+  //     starCount: 5,
+  //     dateSend: "19 февраля 2023 г.",
+  //     link: "Подробнее",
+  //   },
+  // ];
   const navigate = useNavigate();
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-wear/${id}`);
   };
-  // const [state, setState] = useState({
-  //   openwear: false,
-  // });
+
+  // ------------GET  Has Reviews ?-----------------
+  useQuery(
+    ["review_products"],
+    () => {
+      return request({ url: `/products`, token: true });
+    },
+    {
+      onSuccess: (res) => {
+        if (res) {
+          // console.log(res.products.data, "REVIEWS");
+          setReviewsList(res.products.data)
+        }
+      },
+      onError: (err) => {
+        console.log(err, "err In Reviews");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
@@ -97,16 +122,22 @@ export default function ReviewWear() {
         </div>
         {/* table product */}
         <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
-          {productList.map((data) => {
+          {reviewsList?.map((data) => {
+            // console.log(data, 'DATA-REVIEW-LIST');
+            // console.log(data.photos, 'DATA-REVIEW-PHOTOS');
             return (
               <ul
                 key={data?.id}
                 className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
               >
                 <li className="w-[20%] md:pl-5 h-fit flex items-center ">
-                  <figure>
-                    <img src={ProductImg} alt="" />
-                  </figure>
+                  {data?.photos?.map(item => {
+                    return(
+                      <figure className="w-[70px] h-[65px] rounded-lg overflow-hidden border border-lightBorderColor">
+                        <img className="w-full h-full object-contain" src={item?.url_photo} alt="" />
+                      </figure>
+                    )
+                  })}
                 </li>
                 <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
                   <li className="md:w-[25%] h-full flex items-center">
@@ -114,7 +145,7 @@ export default function ReviewWear() {
                       Имя товара
                     </span>
                     <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
-                      {data?.text}
+                      {data?.name_ru}
                     </span>
                   </li>
                   <li className="md:w-[25%] h-full flex items-center">
@@ -122,11 +153,8 @@ export default function ReviewWear() {
                       Отзывы
                     </span>
                     <div className="flex items-center">
-                      <StarIcon className="" />
-                      <StarIcon />
-                      <StarIcon />
-                      <StarIcon />
-                      <StarIcon />
+                      {data?.overall_rating}
+                      <MobileStar/>
                     </div>
                   </li>
                   <li className="md:w-[20%] h-full flex items-center ">
@@ -134,7 +162,7 @@ export default function ReviewWear() {
                       Дата
                     </span>
                     <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                      {data?.dateSend}
+                      {data?.created_at}
                     </span>
                   </li>
                   <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
@@ -142,7 +170,8 @@ export default function ReviewWear() {
                       onClick={() => goDetail(data?.id)}
                       className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
                     >
-                      {data?.link}
+                      {/* {data?.link} */}
+                      Подробнее
                     </button>
                   </li>
                 </div>
