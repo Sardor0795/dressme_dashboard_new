@@ -57,8 +57,8 @@ const AddingProduct = () => {
     pictureBgFile4: "",
     pictureBgView4: "",
     // ---------------
-    shop_id: '',
-    shop_location_id: '',
+    shopId: '',
+    shopLocationId: '',
     section_Id: [],
     sub_Section_Id: [],
     season_Id: [],
@@ -358,8 +358,8 @@ const AddingProduct = () => {
     // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
 
     let form = new FormData();
-    form.append("shop_id", state?.shop_id);
-    form.append("shop_location_id", state?.shop_location_id);
+    form.append("shop_id", state?.shopId);
+    form.append("shop_location_id", state?.shopLocationId);
     form.append("section_ids", state?.section_Id);
     form.append("sub_section_ids", state?.sub_Section_Id);//no R
     form.append("season_ids", state?.season_Id);
@@ -440,6 +440,15 @@ const AddingProduct = () => {
       .catch((err) => console.log(err, "errImage"));
   };
   console.log(productsData?.shops, "shops");
+  console.log(state?.shopId, "shop_id");
+  console.log(state?.shopLocationId, "shopLocationId");
+  productsData?.shops?.filter(e => e.id == state?.shopId)?.map(item => {
+    item?.shop_locations?.map(data => {
+      console.log(data, "data");
+    })
+    console.log(item, "shops-Location");
+
+  })
   return (
     <div className="w-full h-fit ">
       {dressInfo?.nextPageShowForm ?
@@ -638,12 +647,13 @@ const AddingProduct = () => {
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden">
+
                         <Select
                           className=" rounded-lg w-full h-11 md:h-10"
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
-                          onChange={(e) => setState({ ...state, shop_id: e })}
+                          onChange={(e) => setState({ ...state, shopId: e })}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -658,39 +668,16 @@ const AddingProduct = () => {
                             };
                           })}
                         />
-                        {/* <Select
-                          className=" rounded-lg w-full h-fit "
-                          showSearch
-                          // mode="multiple"
-                          placeholder="Выбрать"
-                          // optionLabelProp="label"
-                          optionFilterProp="children"
-                          onChange={(e) => setState({ ...state, shop_id: e })}
-                          onSearch={onSearch}
-                          size="large"
-                          filterOption={(input, option) =>
-                            (option?.label ?? "")
-                              .toLowerCase()
-                              .includes(input.toLowerCase())
-                          }
-                          options={productsData?.shops?.map((item) => {
-                            return {
-                              value: item?.id,
-                              label: item?.name,
-                            };
-                          })}
-
-                        /> */}
                       </div>
                     </div>
                     {/* Input Select 2.1 */}
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
-                        <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shop_id ? "text-[#000]" : "text-[#b5b5b5]"}`}>
+                        <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shopId ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                           Локация
                         </span>
                         <span className="ml-[5px]">
-                          {state?.shop_id ? (
+                          {state?.shopId ? (
                             <StarLabel />
                           ) : null}
                         </span>
@@ -713,7 +700,7 @@ const AddingProduct = () => {
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
-                          onChange={(e) => setState({ ...state, shop_location_id: e })}
+                          onChange={(e) => setState({ ...state, shopLocationId: e })}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -721,15 +708,22 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-                          options={productsData?.shops?.filter(e => e?.id == state?.shop_id).map((item) => {
-                            item?.shop_locations?.map(data => {
-                              return {
-                                value: data?.id,
-                                label: data?.address,
-                              };
+
+                        >
+                          {productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+                            return item?.shop_locations?.map(data => {
+                              return (
+                                <Option
+                                  key={data.id}
+                                  value={data?.id}
+                                >
+                                  {data?.address}
+                                </Option>
+                              )
                             })
-                          })}
-                        />
+                          })
+                          }
+                        </Select>
                         {/* <Select
                           className=" rounded-lg w-full h-11 md:h-10"
                           showSearch
