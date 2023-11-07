@@ -65,6 +65,7 @@ const ReviewStore = () => {
   return (
     <div className="w-full h-fit flex flex-col gap-y-[30px]">
       {sellerShops?.shops?.data.map((data, i) => {
+        console.log(data);
         return (
           <div
             key={data?.id}
@@ -94,30 +95,26 @@ const ReviewStore = () => {
                     {data?.name}
                   </p>
                   <div className="flex items-center">
-                    <div className="flex md:hidden items-center mr-[5px] md:mr-[6px]">
+                    <div className="flex items-center mr-[5px] md:mr-[6px]">
                       <StarIcon width={14} height={14} />
                       <StarIcon width={14} height={14} />
                       <StarIcon width={14} height={14} />
                       <StarIcon width={14} height={14} />
                       <StarIcon width={14} height={14} />
                     </div>
-                    <div className="hidden md:flex items-center mr-[5px] md:mr-[6px]">
+                    {/* <div className="hidden md:flex items-center mr-[5px] md:mr-[6px]">
                       <StarIcon width={16} height={16} />
                       <StarIcon width={16} height={16} />
                       <StarIcon width={16} height={16} />
                       <StarIcon width={16} height={16} />
                       <StarIcon width={16} height={16} />
-                    </div>
+                    </div> */}
                     <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                       <p className="font-AeonikProMedium text-black mr-[5px]">
-                        5.0
+                        {data.overall_rating}
                       </p>
                       <p className="text-setTexOpacity font-AeonikProRegular">
-                        (859 votes){" "}
-                        <span className="ml-[7px] md:ml-[10px]">|</span>{" "}
-                      </p>
-                      <p className="font-AeonikProRegular ml-[7px] md:ml-[10px] text-setTexOpacity">
-                        4937 orders
+                        ( {data.rated_users_count} votes ){" "}
                       </p>
                     </div>
                   </div>
