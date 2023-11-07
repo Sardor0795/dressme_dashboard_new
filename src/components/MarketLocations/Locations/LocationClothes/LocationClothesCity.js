@@ -5,16 +5,11 @@ import LocationItem from "./LocationItem/LocationItem";
 import {
   AddIconsCircle,
   AddLocationIcon,
-  CalendarIcons,
   DeleteIcon,
   GoBackIcons,
   SearchIcon,
 } from "../../../../assets/icons";
-import { AiOutlineLeft } from "react-icons/ai";
 
-import { DatePicker, Space } from "antd";
-import PickerOfFilter from "../../../../hook/DatePickerOfFilter/DatePickerOfFilter";
-const { RangePicker } = DatePicker;
 export default function LocationClothesCity() {
   const navigate = useNavigate();
 

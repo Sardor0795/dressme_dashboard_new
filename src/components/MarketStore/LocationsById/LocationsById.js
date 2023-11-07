@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import PickerOfFilter from "../../../hook/DatePickerOfFilter/DatePickerOfFilter";
-import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { GoBackIcons, SearchIcon } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import LoadingForSeller from "../../Loading/LoadingFor";
@@ -24,6 +22,7 @@ export default function LocationsByIdShow() {
     {
       onSuccess: (res) => {
         if (res) {
+          console.log(res, "LOCATIONS");
           setState({ ...state, locationListId: res, locationIsCheck: res?.locations_exist, loading: false })
         }
       },
