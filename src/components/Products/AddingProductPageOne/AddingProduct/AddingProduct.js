@@ -56,15 +56,56 @@ const AddingProduct = () => {
     pictureBgView3: "",
     pictureBgFile4: "",
     pictureBgView4: "",
+    // ---------------
+    section_Id: [],
+    sub_Section_Id: [],
+    season_Id: [],
+    color_Id: '',
+    gender_Id: '',
+    min_Age_Category: '',
+    max_Age_Category: '',
+    sku: '',
+    category_Id: '',
+    type_Id: '',
+    producer_Id: '',
+    photos: [],
+    // -----Details-----
+    headWearList: '',
+    outWearList: "",
+    underWearList: '',
+    shoesList: '',
+    AccessoriesList: '',
+    // -----TextForm-----
+    textForm: ''
+
   });
+
   const [productsData, setProductsData] = useState({});
+
   function CallBackTextForm(childData) {
+    setState({ ...state, textForm: childData })
     console.log(childData, "childData-CallBackTextForm");
   }
-  function CallBackDetails(childData) {
-    console.log(childData, "childData-CallBackHeadWear");
+  function CallBackHeadWear(childData) {
+    setState({ ...state, headWearList: childData })
   }
-
+  function CallBackOutWear(childData) {
+    setState({ ...state, outWearList: childData })
+  }
+  function CallBackUnderWear(childData) {
+    setState({ ...state, underWearList: childData })
+  }
+  function CallBackShoesWear(childData) {
+    setState({ ...state, shoesList: childData })
+  }
+  function CallBackAccessoriesWear(childData) {
+    setState({ ...state, AccessoriesList: childData })
+  }
+  console.log(state?.headWearList, "headWearList");
+  console.log(state?.outWearList, "outWearList");
+  console.log(state?.underWearList, "underWearList");
+  console.log(state?.shoesList, "shoesList");
+  console.log(state?.AccessoriesList, "AccessoriesList");
 
 
   // ---------Callback----
@@ -1183,11 +1224,11 @@ const AddingProduct = () => {
                   <div>
                     {state.openDropModalButton ? (
                       <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                        <HeadWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
-                        <OutWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
-                        <UnderAddWear title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
-                        <ShoesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
-                        <AccessoriesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackDetails} />
+                        <HeadWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackHeadWear} />
+                        <OutWearAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackOutWear} />
+                        <UnderAddWear title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackUnderWear} />
+                        <ShoesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackShoesWear} />
+                        <AccessoriesAdd title={productsData?.categories} typeId={getTypeId} handleCallBack={CallBackAccessoriesWear} />
                       </div>
                     ) : null}
                   </div>
