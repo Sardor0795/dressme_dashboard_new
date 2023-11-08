@@ -52,6 +52,7 @@ const AddingProduct = () => {
     DressTypeModal: false,
     MakeCountryModal: false,
     ClothingCategoryModal: false,
+    type_Id: null,
     // --------------
     pictureBgFile1: "",
     pictureBgView1: "",
@@ -62,34 +63,34 @@ const AddingProduct = () => {
     pictureBgFile4: "",
     pictureBgView4: "",
     // ---------------
-    shopId: '',
-    shopLocationId: '',
+    shopId: null,
+    shopLocationId: null,
     section_Id: [],
     sub_Section_Id: [],
     season_Id: [],
-    color_Id: '',
-    gender_Id: '',
-    min_Age_Category: '',
-    max_Age_Category: '',
-    sku: '',
-    category_Id: '',
-    type_Id: '',
-    producer_Id: '',
+    color_Id: null,
+    gender_Id: null,
+    min_Age_Category: null,
+    max_Age_Category: null,
+    sku: null,
+    category_Id: null,
+    filterTypeId: null,
+    producer_Id: null,
     photos1: [],
-    amount: '',
-    age: '',
-    price: '',
-    discount_percent: '',
-    discount_price: '',
+    amount: null,
+    age: null,
+    price: null,
+    discount_percent: null,
+    discount_price: null,
 
     // -----Details-----
-    headWearList: '',
-    outWearList: "",
-    underWearList: '',
-    shoesList: '',
-    AccessoriesList: '',
+    headWearList: null,
+    outWearList: null,
+    underWearList: null,
+    shoesList: null,
+    AccessoriesList: null,
     // -----TextForm-----
-    textForm: ''
+    textForm: null
 
   });
 
@@ -336,19 +337,34 @@ const AddingProduct = () => {
 
 
   const LocationAddSubmit = () => {
+    state?.section_Id?.map((e, index) => {
+      console.log(
+        "section_ids[]", state?.section_Id[index]
+      );
+    })
     console.log(
-      state?.section_Id, "section_Id \n",
-      state?.sub_Section_Id, "sub_Section_Id \n",
+      state?.section_Id, "section_Id", '\n',
+      state?.sub_Section_Id, "sub_Section_Id", ' \n',
       state?.season_Id, "season_Id \n",
       state?.color_Id, "color_Id \n",
       state?.gender_Id, "gender_Id \n",
       state?.min_Age_Category, "min_Age_Category \n",
       state?.max_Age_Category, "max_Age_Category \n",
       state?.sku, "sku \n",
+      <br />,
       state?.category_Id, "category_Id \n",
       state?.type_Id, "type_Id \n",
+      state?.filterTypeId, "filterTypeId \n",
+      <br />,
       state?.producer_Id, "producer_Id \n",
       state?.photos1, "photos1 \n",
+      state?.shopId, "shopId \n",
+      state?.shopLocationId, "shopLocationId \n",
+      state?.amount, 'amount \n',
+      state?.age, 'age \n',
+      state?.price, 'price \n',
+      state?.discount_percent, 'discount_percent \n',
+      state?.discount_price, 'discount_price \n',
       state?.headWearList, "headWearList \n",
       state?.outWearList, "outWearList \n",
       state?.underWearList, "underWearList \n",
@@ -359,16 +375,25 @@ const AddingProduct = () => {
     let form = new FormData();
     form.append("shop_id", state?.shopId);
     form.append("shop_location_id", state?.shopLocationId);
-    form.append("section_ids", state?.section_Id);
-    form.append("sub_section_ids", state?.sub_Section_Id);//no R
-    form.append("season_ids", state?.season_Id);
+    state?.section_Id?.map((e, index) => {
+      form.append("section_ids[]", state?.section_Id[index]);
+    })
+    state?.sub_Section_Id?.map((e, index) => {
+      form.append("sub_section_ids[]", state?.sub_Section_Id[index]);
+    })
+    state?.season_Id?.map((e, index) => {
+      form.append("season_ids[]", state?.season_Id[index]);
+    })
+    // form.append("section_ids", state?.section_Id);
+    // form.append("sub_section_ids", state?.sub_Section_Id);
+    // form.append("season_ids", state?.season_Id);
     form.append("color_id", state?.color_Id);
     form.append("gender_id", state?.gender_Id);
     form.append("min_age_category", state?.min_Age_Category);
     form.append("max_age_category", state?.max_Age_Category);
     form.append("sku", state?.sku);
-    form.append("category_id", state?.category_Id);
-    form.append("type_id", state?.type_Id);
+    form.append("category_id", parseFloat(state?.category_Id));
+    form.append("type_id", parseFloat(state?.filterTypeId));
     form.append("producer_id", state?.producer_Id);
     form.append("photos[]", state?.photos1);//img
     // detailsForAll
@@ -382,14 +407,14 @@ const AddingProduct = () => {
     form.append("name_ru", state?.textForm?.name_Ru);
     form.append("quality_uz", state?.textForm?.quality_Uz);
     form.append("quality_ru", state?.textForm?.quality_Ru);
-    state?.textForm?.description_Uz && form.append("description_uz", state?.textForm?.description_Uz);
-    state?.textForm?.description_Ru && form.append("description_ru", state?.textForm?.description_Ru);
-    form.append("composition_uz", state?.textForm?.composition_Uz);//no R
-    form.append("composition_uz", state?.textForm?.composition_Uz);//no R
+    form.append("description_uz", state?.textForm?.description_Uz);
+    form.append("description_ru", state?.textForm?.description_Ru);
+    state?.textForm?.composition_Uz && form.append("composition_uz", state?.textForm?.composition_Uz);//no R
     state?.textForm?.composition_Ru && form.append("composition_ru", state?.textForm?.composition_Ru);//no R
     state?.textForm?.brand_id && form.append("brand_id", state?.textForm?.brand_id);//no R
     // HeadWear
-    form.append("one_size", state?.headWearList?.oneSize);
+    state?.headWearList?.oneSiz && form.append("one_size", state?.headWearList?.oneSize);
+    // form.append("one_size", true);
     state?.headWearList?.minHeadGirth && form.append("min_head_girth", state?.headWearList?.minHeadGirth);
     state?.headWearList?.maxHeadGirth && form.append("max_head_girth", state?.headWearList?.maxHeadGirth);
     // OutWear
@@ -426,8 +451,8 @@ const AddingProduct = () => {
     return fetch(`${url}/products/store`, {
       method: "POST",
       headers: {
-        'Accept': "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
       body: form,
     })
@@ -440,7 +465,7 @@ const AddingProduct = () => {
       .catch((err) => console.log(err, "errImage"));
   };
   // console.log(productsData?.shops, "shops");
-  // console.log(state?.shopId, "shop_id");
+  console.log(state?.type_Id, state?.filterTypeId, "type_Id-----filterTypeId");
   // console.log(state?.shopLocationId, "shopLocationId");
   // productsData?.shops?.map(item => {
   //   item?.shop_locations?.map(data => {
@@ -1187,7 +1212,7 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           optionFilterProp="children"
                           onChange={(value, attribute2) => {
-                            setState({ ...state, type_Id: attribute2?.attribute2 })
+                            setState({ ...state, filterTypeId: value, type_Id: attribute2?.attribute2 })
                             // CategoryTypeId(value, attribute2?.attribute2)
                           }}
                           onSearch={onSearch}
@@ -1283,7 +1308,7 @@ const AddingProduct = () => {
                         placeholder="Выбрать"
                         optionFilterProp="children"
                         onChange={(value, attribute2) => {
-                          setState({ ...state, type_Id: attribute2?.attribute2 })
+                          setState({ ...state, filterTypeId: value, type_Id: attribute2?.attribute2 })
                         }}
                         onSearch={onSearch}
                         size="large"

@@ -113,24 +113,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             isCheckValid: false,
             onConcel: false
         })
-        handleCallBack({
-            minUnderwearWaistGirth: '',
-            maxUnderwearWaistGirth: '',
-            minUnderWearSize: '',
-            maxUnderWearSize: '',
-            minUnderWearHipGirth: '',
-            maxUnderWearHipGirth: '',
-            minHeight: '',
-            maxHeight: '',
-            underWearLetterSize: '',
-            amount: '',
-            age: '',
-            price: '',
-            discountPercent: '',
-            discountPrice: '',
-            category_Id: '',
-
-        })
+        handleCallBack()
         setToggleShow(false)
     }
 

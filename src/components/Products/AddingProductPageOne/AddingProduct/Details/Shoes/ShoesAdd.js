@@ -69,18 +69,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
             // ------
             onConcel: false
         })
-        handleCallBack({
-            footWearSize: '',
-            minFootLength: '',
-            maxFootLength: '',
-            amount: '',
-            age: '',
-            price: '',
-            discountPercent: '',
-            discountPrice: '',
-            category_Id: '',
-
-        })
+        handleCallBack()
         setToggleShow(false)
 
     }
