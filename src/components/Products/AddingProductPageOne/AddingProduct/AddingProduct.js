@@ -52,6 +52,8 @@ const AddingProduct = () => {
     DressTypeModal: false,
     MakeCountryModal: false,
     ClothingCategoryModal: false,
+    isCheckValid: false,
+
     type_Id: null,
     // --------------
     pictureBgFile1: "",
@@ -95,7 +97,17 @@ const AddingProduct = () => {
   });
 
   const [productsData, setProductsData] = useState({});
+  const [selectedFiles, setSelectedFiles] = useState([{}]);
+  const [incrementUz, setIncrementUz] = useState(1);
 
+  const handleLocationImage2 = (e) => {
+    setSelectedFiles((countryList) => [...countryList, {
+      id: incrementUz, pictureBgFile: e.target.files[0],
+      pictureBgView1: URL.createObjectURL(e.target.files[0]
+      ),
+    }])
+    setIncrementUz(incrementUz + 1)
+  };
   function CallBackTextForm(childData) {
     setState({ ...state, textForm: childData })
   }
@@ -235,18 +247,6 @@ const AddingProduct = () => {
     state?.SubClothingSection,
 
   ]);
-  const [selectedFiles, setSelectedFiles] = useState([{}]);
-  const [incrementUz, setIncrementUz] = useState(1);
-
-  const handleLocationImage2 = (e) => {
-    setSelectedFiles((countryList) => [...countryList, {
-      id: incrementUz, pictureBgFile: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0]
-      ),
-    }])
-    setIncrementUz(incrementUz + 1)
-  };
-
 
   useQuery(
     ["products_get"],
@@ -284,7 +284,6 @@ const AddingProduct = () => {
 
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
-
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -307,26 +306,9 @@ const AddingProduct = () => {
 
 
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-  }, [dressInfo?.nextPageShowForm]);
-
-
-
 
 
   const LocationAddSubmit = () => {
-    // state?.section_Id?.map((e, index) => {
-    //   console.log(
-    //     "section_ids[]", state?.section_Id[index]
-    //   );
-    // })
-    selectedFiles?.map((item, index) => {
-      console.log(item?.id && item?.pictureBgFile, "BuItem");
-
-    })
 
     // console.log(
     //   state?.section_Id, "section_Id", '\n',
@@ -445,22 +427,24 @@ const AddingProduct = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "ProductStore");
-
-
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  // console.log(productsData?.shops, "shops");
-  // console.log(state?.type_Id, state?.filterTypeId, "type_Id-----filterTypeId");
-  // console.log(state?.shopLocationId, "shopLocationId");
-  // productsData?.shops?.map(item => {
-  //   item?.shop_locations?.map(data => {
-  //     console.log(data, "data");
-  //   })
-  //   console.log(item, "shops-Location");
+  const handleNextPage = () => {
+    setState({ ...state, isCheckValid: true })
+    console.log("checked");
+    if (false)
+      setDressInfo({ ...dressInfo, nextPageShowForm: false })
+  }
+  console.log(state?.isCheckValid, "isCheckValid");
 
-  // })
-  console.log(selectedFiles?.length, "uzuznlik");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, [dressInfo?.nextPageShowForm]);
+
   return (
     <div className="w-full h-fit ">
       {/* {dressInfo?.nextPageShowForm ? */}
@@ -701,10 +685,10 @@ const AddingProduct = () => {
                       </label>
                       <ArrowRightIcon />
                     </button>
-                    <div className="w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden">
+                    <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
 
                       <Select
-                        className=" rounded-lg w-full h-11 md:h-10"
+                        className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                         showSearch
                         placeholder="Выбрать"
                         optionFilterProp="children"
@@ -830,9 +814,9 @@ const AddingProduct = () => {
                       </label>
                       <ArrowRightIcon />
                     </button>
-                    <div className="w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden">
+                    <div className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}>
                       <Select
-                        className=" rounded-lg w-full h-fit "
+                        className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                         showSearch
                         mode="multiple"
                         placeholder="Выбрать"
@@ -950,6 +934,7 @@ const AddingProduct = () => {
                     </button>
                     <div className="w-full h-fit hidden md:flex">
                       <Select
+                        className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                         mode="multiple"
                         style={{
                           width: "100%",
@@ -1648,7 +1633,7 @@ const AddingProduct = () => {
               <button
                 type="button"
                 // to="/products/add-detail"
-                onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: false })}
+                onClick={handleNextPage}
                 className="w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
               >
                 Продолжить
