@@ -15,62 +15,26 @@ const CommentTitle = () => {
   const [state, setState] = useState({
     sendAnswer: false,
     startReviews: true,
-    userInfo: [
-      {
-        id: 1,
-        userName: "Umar",
-        userImg:
-          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-        starCount: 5,
-        date: "19 февраля 2023 г.",
-        userFeedback:
-          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-        wearSubject: [
-          {
-            id: 1,
-            subjectBrand: "Ответ Nike Store Official Dealer",
-            subjectReply: "Спасибо вам за оценку!",
-            replyDate: "26 февраля 2023 г.",
-          },
-        ],
-      },
-      {
-        id: 2,
-        userName: "Firdavsbek",
-        userImg:
-          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-        starCount: 4,
-        date: "19 февраля 2023 г.",
-        userFeedback:
-          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-        wearSubject: [
-          {
-            id: 1,
-            subjectBrand: "",
-            subjectReply: "",
-            replyDate: "",
-          },
-        ],
-      },
-      {
-        id: 3,
-        userName: "Shohjahon",
-        userImg:
-          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-        starCount: 5,
-        date: "19 февраля 2023 г.",
-        userFeedback:
-          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-        wearSubject: [
-          {
-            id: 1,
-            subjectBrand: "Ответ Nike Store Official Dealer",
-            subjectReply: "Спасибо вам за оценку!",
-            replyDate: "26 февраля 2023 г.",
-          },
-        ],
-      },
-    ],
+    // userInfo: [
+    //   {
+    //     id: 1,
+    //     userName: "Umar",
+    //     userImg:
+    //       "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+    //     starCount: 5,
+    //     date: "19 февраля 2023 г.",
+    //     userFeedback:
+    //       "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+    //     wearSubject: [
+    //       {
+    //         id: 1,
+    //         subjectBrand: "Ответ Nike Store Official Dealer",
+    //         subjectReply: "Спасибо вам за оценку!",
+    //         replyDate: "26 февраля 2023 г.",
+    //       },
+    //     ],
+    //   },
+    // ],
   });
 
   // ------------GET Has Reviews-STORE ?-----------------
@@ -83,8 +47,7 @@ const CommentTitle = () => {
       onSuccess: (res) => {
         if (res) {
           setCommnetStore(res.shops.data);
-          console.log(res.shops.data, "Comments-Store-Review");
-          // setCommentRatings(res.products.data.ratings)
+          // console.log(res.shops.data, "Comments-Store-Review");
         }
       },
       onError: (err) => {
@@ -106,7 +69,7 @@ const CommentTitle = () => {
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
-          ( {commentStore.length ? commentStore.length : 0} отзывы ){" "}
+          ( {commentStore?.length ? commentStore?.length : 0} отзывы ){" "}
         </span>
       </div>
 

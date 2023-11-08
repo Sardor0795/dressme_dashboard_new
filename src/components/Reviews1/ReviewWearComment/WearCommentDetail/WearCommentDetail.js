@@ -1,8 +1,12 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
+import { useHttp } from "../../../../hook/useHttp";
 
 const WearCommentDetail = () => {
+  const { request } = useHttp();
+  const [productDetails, setProductDetails] = useState();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
   function getCurrentDimension() {
@@ -10,6 +14,29 @@ const WearCommentDetail = () => {
       width: window.innerWidth,
     };
   }
+
+  // ------------GET Has Reviews-STORE ?-----------------
+  useQuery(
+    ["review_products_details"],
+    () => {
+      return request({ url: `/products`, token: true });
+    },
+    {
+      onSuccess: (res) => {
+        if (res) {
+          setProductDetails(res.products.data[0]);
+          console.log(res.products.data[0], "Review-Products-Details");
+          // setCommentRatings(res.products.data.ratings)
+        }
+      },
+      onError: (err) => {
+        console.log(err, "ERR-IN-STORE-COMMENTS");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
   useEffect(() => {
     const updateDimension = () => {
       setScreenSize(getCurrentDimension());
@@ -91,7 +118,6 @@ const WearCommentDetail = () => {
       </main>
     );
   };
-
   const PrevArrow = (props) => {
     const { onClick } = props;
     return (
@@ -168,11 +194,12 @@ const WearCommentDetail = () => {
       top: 0,
     });
   }, []);
+
   return (
     <div className="w-full h-fit">
       <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
         <div className="h-5 w-[4px] bg-textBlueColor"></div>
-        <p>Nike store official Dealer</p>
+        <p>{productDetails.name_ru}</p>
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
         <div className="w-full flex flex-col">
