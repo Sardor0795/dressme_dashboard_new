@@ -10,7 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 
 export default function WearCommentTitle() {
-
   const { request } = useHttp();
   const [commentData, setCommentData] = useState();
   // const [commentRatings, setCommentRatings] = useState();
@@ -76,18 +75,16 @@ export default function WearCommentTitle() {
     ],
   });
 
-
-   // ------------GET  Has Reviews ?-----------------
-   useQuery(
-    ["review_comments"],
+  // ------------GET  Has Reviews-Products ?-----------------
+  useQuery(
+    ["review_products_comments"],
     () => {
       return request({ url: `/products`, token: true });
     },
     {
       onSuccess: (res) => {
         if (res) {
-          setCommentData(res.products.data)
-          console.log(res.products.data, "Comments-Ratings");
+          setCommentData(res.products.data);
           // setCommentRatings(res.products.data.ratings)
         }
       },
@@ -171,12 +168,12 @@ export default function WearCommentTitle() {
       )}
 
       {commentData?.map((data) => {
-        return(
+        return (
           <>
-            {data?.ratings.map(item => {
-              return(
+            {data?.ratings.map((item) => {
+              return (
                 <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
-                {/* userImg and Date */}
+                  {/* userImg and Date */}
                   <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
                     <div className="h-10 w-fit flex items-center gap-x-[15px]">
                       <div className="flex flex-col">
@@ -233,54 +230,53 @@ export default function WearCommentTitle() {
                       </div>
                     ) : null} */}
                     {/* {item?.reply !== 0 ? null : ( */}
-                      <div className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end">
-                        {state?.sendAnswer ? (
-                          <div className="w-full flex flex-col md:flex-row items-center justify-between">
-                            <textarea
-                              name="answer"
-                              id="answer"
-                              className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]"
-                              placeholder="Add your answer..."
-                            ></textarea>
-                            <div className="flex items-center ml-auto mt-3 md:mt-0">
-                              <button className="w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]">
-                                <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                                  Отправить
-                                </span>
-                                {/* <SendIcon /> */}
-                              </button>
-                              <button
-                                onClick={() =>
-                                  setState({ ...state, sendAnswer: false })
-                                }
-                                className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
-                              >
-                                <CloseAnswer colors="#007DCA" />
-                              </button>
-                            </div>
+                    <div className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end">
+                      {state?.sendAnswer ? (
+                        <div className="w-full flex flex-col md:flex-row items-center justify-between">
+                          <textarea
+                            name="answer"
+                            id="answer"
+                            className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]"
+                            placeholder="Add your answer..."
+                          ></textarea>
+                          <div className="flex items-center ml-auto mt-3 md:mt-0">
+                            <button className="w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]">
+                              <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
+                                Отправить
+                              </span>
+                              {/* <SendIcon /> */}
+                            </button>
+                            <button
+                              onClick={() =>
+                                setState({ ...state, sendAnswer: false })
+                              }
+                              className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
+                            >
+                              <CloseAnswer colors="#007DCA" />
+                            </button>
                           </div>
-                        ) : (
-                          <button
-                            onClick={() =>
-                              setState({ ...state, sendAnswer: true })
-                            }
-                            className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
-                          >
-                            <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                              Ответить
-                            </span>
-                          </button>
-                        )}
-                      </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            setState({ ...state, sendAnswer: true })
+                          }
+                          className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
+                        >
+                          <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
+                            Ответить
+                          </span>
+                        </button>
+                      )}
+                    </div>
                     {/* )} */}
                   </div>
                 </div>
-              )
+              );
             })}
           </>
-        )}
-      )}
+        );
+      })}
     </div>
   );
 }
-

@@ -96,25 +96,18 @@ const ReviewStore = () => {
                   </p>
                   <div className="flex items-center">
                     <div className="flex items-center mr-[5px] md:mr-[6px]">
-                      <StarIcon width={14} height={14} />
-                      <StarIcon width={14} height={14} />
-                      <StarIcon width={14} height={14} />
-                      <StarIcon width={14} height={14} />
-                      <StarIcon width={14} height={14} />
+                      <StarIcon width={15} height={15} />
+                      <StarIcon width={15} height={15} />
+                      <StarIcon width={15} height={15} />
+                      <StarIcon width={15} height={15} />
+                      <StarIcon width={15} height={15} />
                     </div>
-                    {/* <div className="hidden md:flex items-center mr-[5px] md:mr-[6px]">
-                      <StarIcon width={16} height={16} />
-                      <StarIcon width={16} height={16} />
-                      <StarIcon width={16} height={16} />
-                      <StarIcon width={16} height={16} />
-                      <StarIcon width={16} height={16} />
-                    </div> */}
                     <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                       <p className="font-AeonikProMedium text-black mr-[5px]">
-                        {data.overall_rating}
+                        {data.overall_rating ? data.overall_rating : 0}
                       </p>
                       <p className="text-setTexOpacity font-AeonikProRegular">
-                        ( {data.rated_users_count} votes ){" "}
+                        ( {data.rated_users_count ? data.rated_users_count : 0 } votes ){" "}
                       </p>
                     </div>
                   </div>
