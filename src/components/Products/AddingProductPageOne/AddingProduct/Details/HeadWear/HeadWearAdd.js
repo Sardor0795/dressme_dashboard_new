@@ -8,14 +8,14 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
-        minHeadGirth: "",
-        maxHeadGirth: "",
+        minHeadGirth: null,
+        maxHeadGirth: null,
         sizeCheck: false,
-        amount: "",
-        age: "",
-        price: "",
-        discountPercent: "",
-        discountPrice: "",
+        amount: null,
+        age: null,
+        price: null,
+        discountPercent: null,
+        discountPrice: null,
         isCheckValid: false,
         // ------
         onConcel: false,
@@ -65,30 +65,18 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
         setState({
             ...state,
-            minHeadGirth: "",
-            maxHeadGirth: "",
+            minHeadGirth: null,
+            maxHeadGirth: null,
             sizeCheck: false,
-            amount: "",
-            age: "",
-            price: "",
-            discountPercent: "",
-            discountPrice: "",
+            amount: null,
+            age: null,
+            price: null,
+            discountPercent: null,
+            discountPrice: null,
             onConcel: false,
             toggleShow: false
         })
-        handleCallBack({
-            minHeadGirth: "",
-            maxHeadGirth: "",
-            oneSize: "",
-            amount: "",
-            age: "",
-            price: "",
-            discountPercent: "",
-            discountPrice: "",
-            category_Id: '',
-
-
-        })
+        handleCallBack()
     }
     const contentHat = (
         <div className="w-[520px] h-fit">

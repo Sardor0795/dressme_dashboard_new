@@ -9,15 +9,15 @@ import AddBtn from "./AddBtn";
 
 export default function TextFormAdd({ onClick, handlCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
-    const [titleInRu, setTitleInRu] = useState('')
-    const [titleInUz, setTitleInUz] = useState('')
-    const [descriptionInRu, setDescriptionInRu] = useState('')
-    const [descriptionInUz, setDescriptionInUz] = useState('')
-    const [qualityInRu, setQualityInRu] = useState('')
-    const [qualityInUz, setQualityInUz] = useState('')
-    const [noteValueRu, setNoteValueRu] = useState('')
-    const [noteValueUz, setNoteValueUz] = useState('')
-    const [brand, setBrand] = useState('')
+    const [titleInRu, setTitleInRu] = useState(null)
+    const [titleInUz, setTitleInUz] = useState(null)
+    const [descriptionInRu, setDescriptionInRu] = useState(null)
+    const [descriptionInUz, setDescriptionInUz] = useState(null)
+    const [qualityInRu, setQualityInRu] = useState(null)
+    const [qualityInUz, setQualityInUz] = useState(null)
+    const [noteValueRu, setNoteValueRu] = useState(null)
+    const [noteValueUz, setNoteValueUz] = useState(null)
+    const [brand, setBrand] = useState(null)
 
 
 

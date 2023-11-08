@@ -115,24 +115,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
             isCheckValid: false,
             toggleShow: false
         })
-        handleCallBack({
-            minChestGirth: '',
-            maxChestGirth: '',
-            minOutWearSize: '',
-            maxOutWearSize: '',
-            minOutWearWaistGirth: '',
-            maxOutWearWaistGirth: '',
-            minOutWearHipGirth: '',
-            maxOutWearHipGirth: '',
-            outWearLetterSize: '',
-            amount: '',
-            age: '',
-            price: '',
-            discountPercent: '',
-            discountPrice: '',
-            category_Id: '',
-
-        })
+        handleCallBack()
     }
     const contentOutwear = (
         <div className="w-[855px] h-fit">

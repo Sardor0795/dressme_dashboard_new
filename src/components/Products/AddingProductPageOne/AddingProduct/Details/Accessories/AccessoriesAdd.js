@@ -7,14 +7,14 @@ import { Checkbox, Col, Row } from 'antd';
 function AccessoriesAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
-        rowSize: "",
-        colSize: "",
-        minSize: "",
-        ageNum: "",
-        quantityNum: "",
-        priceNum: "",
-        salePercent: "",
-        salePrice: "",
+        rowSize: null,
+        colSize: null,
+        minSize: null,
+        ageNum: null,
+        quantityNum: null,
+        priceNum: null,
+        salePercent: null,
+        salePrice: null,
         isCheckValid: false,
         // ------
         onConcel: false,
@@ -88,32 +88,20 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
         setState({
             ...state,
-            rowSize: "",
-            colSize: "",
-            minSize: "",
-            ageNum: "",
-            quantityNum: "",
-            priceNum: "",
-            salePercent: "",
-            salePrice: "",
+            rowSize: null,
+            colSize: null,
+            minSize: null,
+            ageNum: null,
+            quantityNum: null,
+            priceNum: null,
+            salePercent: null,
+            salePrice: null,
             isCheckValid: false,
             // ------
             onConcel: false
         })
-        handleCallBack({
-            accessorySize: '',
-            legnthAcc: '',
-            widthAcc: '',
-            accessoryLetterSize: '',
-            amount: '',
-            age: '',
-            price: '',
-            discountPercent: '',
-            discountPrice: '',
-            category_Id: '',
-
-        })
         setToggleShow(false)
+        handleCallBack()
     }
 
     const contentAccessories = (
