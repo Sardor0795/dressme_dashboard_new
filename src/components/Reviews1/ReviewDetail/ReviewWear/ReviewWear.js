@@ -3,6 +3,7 @@ import { MobileStar, SearchIcon, } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
+import { Rate } from "antd";
 
 export default function ReviewWear() {
   const { request } = useHttp();
@@ -129,8 +130,7 @@ export default function ReviewWear() {
                       Отзывы
                     </span>
                     <div className="flex items-center">
-                      {data?.overall_rating}
-                      <MobileStar/>
+                      <Rate disabled allowHalf defaultValue={data?.overall_rating}/>
                     </div>
                   </li>
                   <li className="md:w-[20%] h-full flex items-center ">
@@ -146,7 +146,6 @@ export default function ReviewWear() {
                       onClick={() => goDetail(data?.id)}
                       className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
                     >
-                      {/* {data?.link} */}
                       Подробнее
                     </button>
                   </li>

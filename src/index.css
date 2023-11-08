@@ -313,3 +313,15 @@ input[type="radio"]:checked+label span {
 .ant-select-arrow {
   padding-right: 8px;
 }
+
+.ant-rate {
+  font-size: 14px !important;
+}
+
+.ant-rate-star .ant-rate-star-full{
+  margin-inline-end: 2px !important;
+}
+
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-rate .ant-rate-star:not(:last-child) {
+  margin-inline-end: 4px !important;
+}

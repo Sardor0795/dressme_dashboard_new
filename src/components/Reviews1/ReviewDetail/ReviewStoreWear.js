@@ -7,10 +7,54 @@ import {
 import { dressMainData } from "../../../hook/ContextTeam";
 import NoReviewProduct from "../NoReview/NoReview";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import { useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../hook/useHttp";
 
 export default function ReviewStoreWear() {
+  const {request} = useHttp()
   const [storeOrWear, setStoreOrWear] = useState(false);
+  const [reviewsStore, setReviewsStore] = useState()
+  const [reviewsProduct, setReviewsProduct] = useState()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+
+  // -------------  GET ALL SHOPS LENGTH --------------
+  useQuery(
+    ["get_revies_all_store"],
+    () => {
+      return request({ url: "/shops", token: true });
+    },
+    {
+      onSuccess: (res) => {
+        setReviewsStore(res.shops.data.length);
+        console.log(res.shops.data.length, "Store");
+      },
+      onError: (err) => {
+        console.log(err, "err getAll Shops");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  // -------------  GET ALL PRODUCTS LENGTH --------------
+  useQuery(
+    ["get_revies_all_products"],
+    () => {
+      return request({ url: "/products", token: true });
+    },
+    {
+      onSuccess: (res) => {
+        setReviewsProduct(res.products.data.length);
+        console.log(res.products.data.length, "Products");
+      },
+      onError: (err) => {
+        console.log(err, "err getAll Products");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -60,7 +104,7 @@ export default function ReviewStoreWear() {
                 : "text-black"
             } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
           >
-            Одежда (6)
+            Одежда ({reviewsProduct})
           </button>
           <button
             onClick={() => setStoreOrWear(true)}
@@ -70,7 +114,7 @@ export default function ReviewStoreWear() {
                 : "text-black"
             } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
           >
-            Магазины (2)
+            Магазины ({reviewsStore})
           </button>
         </div>
       </div>
