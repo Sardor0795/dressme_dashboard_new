@@ -235,36 +235,17 @@ const AddingProduct = () => {
     state?.SubClothingSection,
 
   ]);
+  const [selectedFiles, setSelectedFiles] = useState([{}]);
+  const [incrementUz, setIncrementUz] = useState(1);
 
-  const handleLocationImageOne = (e) => {
-    setState({
-      ...state,
-      photos1: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0]),
-    });
-  };
   const handleLocationImage2 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile2: e.target.files[0],
-      pictureBgView2: URL.createObjectURL(e.target.files[0]),
-    });
+    setSelectedFiles((countryList) => [...countryList, {
+      id: incrementUz, pictureBgFile: e.target.files[0],
+      pictureBgView1: URL.createObjectURL(e.target.files[0]
+      ),
+    }])
+    setIncrementUz(incrementUz + 1)
   };
-  const handleLocationImage3 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile3: e.target.files[0],
-      pictureBgView3: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-  const handleLocationImage4 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile4: e.target.files[0],
-      pictureBgView4: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-
 
 
   useQuery(
@@ -337,41 +318,46 @@ const AddingProduct = () => {
 
 
   const LocationAddSubmit = () => {
-    state?.section_Id?.map((e, index) => {
-      console.log(
-        "section_ids[]", state?.section_Id[index]
-      );
+    // state?.section_Id?.map((e, index) => {
+    //   console.log(
+    //     "section_ids[]", state?.section_Id[index]
+    //   );
+    // })
+    selectedFiles?.map((item, index) => {
+      console.log(item?.id && item?.pictureBgFile, "BuItem");
+
     })
-    console.log(
-      state?.section_Id, "section_Id", '\n',
-      state?.sub_Section_Id, "sub_Section_Id", ' \n',
-      state?.season_Id, "season_Id \n",
-      state?.color_Id, "color_Id \n",
-      state?.gender_Id, "gender_Id \n",
-      state?.min_Age_Category, "min_Age_Category \n",
-      state?.max_Age_Category, "max_Age_Category \n",
-      state?.sku, "sku \n",
-      <br />,
-      state?.category_Id, "category_Id \n",
-      state?.type_Id, "type_Id \n",
-      state?.filterTypeId, "filterTypeId \n",
-      <br />,
-      state?.producer_Id, "producer_Id \n",
-      state?.photos1, "photos1 \n",
-      state?.shopId, "shopId \n",
-      state?.shopLocationId, "shopLocationId \n",
-      state?.amount, 'amount \n',
-      state?.age, 'age \n',
-      state?.price, 'price \n',
-      state?.discount_percent, 'discount_percent \n',
-      state?.discount_price, 'discount_price \n',
-      state?.headWearList, "headWearList \n",
-      state?.outWearList, "outWearList \n",
-      state?.underWearList, "underWearList \n",
-      state?.shoesList, "shoesList \n",
-      state?.AccessoriesList, "AccessoriesList \n",
-      state?.textForm, "textForm \n",
-    );
+
+    // console.log(
+    //   state?.section_Id, "section_Id", '\n',
+    //   state?.sub_Section_Id, "sub_Section_Id", ' \n',
+    //   state?.season_Id, "season_Id \n",
+    //   state?.color_Id, "color_Id \n",
+    //   state?.gender_Id, "gender_Id \n",
+    //   state?.min_Age_Category, "min_Age_Category \n",
+    //   state?.max_Age_Category, "max_Age_Category \n",
+    //   state?.sku, "sku \n",
+    //   <br />,
+    //   state?.category_Id, "category_Id \n",
+    //   state?.type_Id, "type_Id \n",
+    //   state?.filterTypeId, "filterTypeId \n",
+    //   <br />,
+    //   state?.producer_Id, "producer_Id \n",
+    //   state?.photos1, "photos1 \n",
+    //   state?.shopId, "shopId \n",
+    //   state?.shopLocationId, "shopLocationId \n",
+    //   state?.amount, 'amount \n',
+    //   state?.age, 'age \n',
+    //   state?.price, 'price \n',
+    //   state?.discount_percent, 'discount_percent \n',
+    //   state?.discount_price, 'discount_price \n',
+    //   state?.headWearList, "headWearList \n",
+    //   state?.outWearList, "outWearList \n",
+    //   state?.underWearList, "underWearList \n",
+    //   state?.shoesList, "shoesList \n",
+    //   state?.AccessoriesList, "AccessoriesList \n",
+    //   state?.textForm, "textForm \n",
+    // );
     let form = new FormData();
     form.append("shop_id", state?.shopId);
     form.append("shop_location_id", state?.shopLocationId);
@@ -384,9 +370,7 @@ const AddingProduct = () => {
     state?.season_Id?.map((e, index) => {
       form.append("season_ids[]", state?.season_Id[index]);
     })
-    // form.append("section_ids", state?.section_Id);
-    // form.append("sub_section_ids", state?.sub_Section_Id);
-    // form.append("season_ids", state?.season_Id);
+
     form.append("color_id", state?.color_Id);
     form.append("gender_id", state?.gender_Id);
     form.append("min_age_category", state?.min_Age_Category);
@@ -395,7 +379,9 @@ const AddingProduct = () => {
     form.append("category_id", parseFloat(state?.category_Id));
     form.append("type_id", parseFloat(state?.filterTypeId));
     form.append("producer_id", state?.producer_Id);
-    form.append("photos[]", state?.photos1);//img
+    selectedFiles?.map((item, index) => {
+      item?.id && form.append("photos[]", item?.pictureBgFile);
+    })
     // detailsForAll
     form.append("price", state?.price);
     state?.amount && form.append("amount", state?.amount);
@@ -465,7 +451,7 @@ const AddingProduct = () => {
       .catch((err) => console.log(err, "errImage"));
   };
   // console.log(productsData?.shops, "shops");
-  console.log(state?.type_Id, state?.filterTypeId, "type_Id-----filterTypeId");
+  // console.log(state?.type_Id, state?.filterTypeId, "type_Id-----filterTypeId");
   // console.log(state?.shopLocationId, "shopLocationId");
   // productsData?.shops?.map(item => {
   //   item?.shop_locations?.map(data => {
@@ -474,6 +460,7 @@ const AddingProduct = () => {
   //   console.log(item, "shops-Location");
 
   // })
+  console.log(selectedFiles?.length, "uzuznlik");
   return (
     <div className="w-full h-fit ">
       {/* {dressInfo?.nextPageShowForm ? */}
@@ -1446,7 +1433,49 @@ const AddingProduct = () => {
                   </span>
                 </div>
                 <div className="w-[300px] md:w-full h-[350px] flex items-center justify-center ">
-                  <button
+                  {
+                    selectedFiles?.filter(e => e?.id <= 1)?.map((item, index) => {
+                      return (
+                        <>
+                          {item?.id && <button
+                            type="button"
+                            className="h-full w-full flex items-center justify-center "
+                          >
+                            <label
+                              htmlFor="DataImg1"
+                              className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  text-textBlueColor "
+                            >
+                              <input
+                                className="hidden"
+                                id="DataImg1"
+                                type="file"
+                                onChange={handleLocationImage2}
+                                accept=" image/*"
+                              />
+                              {!item?.pictureBgView1 && (
+                                <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
+                                  <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
+                                    Выберите фото   <span className="ml-[5px]">
+                                      <StarLabel />
+                                    </span>
+                                  </span>
+                                </div>
+                              )}
+                              {item?.pictureBgView1 && (
+                                <img
+                                  src={item?.pictureBgView1}
+                                  alt="backImg"
+                                  className="w-full h-full border border-searchBgColor object-contain rounded-lg"
+                                />
+                              )}
+                            </label>
+                          </button>
+                          }
+                        </>
+                      )
+                    })
+                  }
+                  {selectedFiles?.length <= 1 && <button
                     type="button"
                     className="h-full w-full flex items-center justify-center "
                   >
@@ -1458,30 +1487,66 @@ const AddingProduct = () => {
                         className="hidden"
                         id="DataImg1"
                         type="file"
-                        onChange={handleLocationImageOne}
+                        onChange={handleLocationImage2}
                         accept=" image/*"
                       />
-                      {!state?.pictureBgView1 && (
-                        <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
-                          <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
-                            Выберите фото   <span className="ml-[5px]">
-                              <StarLabel />
-                            </span>
+                      {/* {!item?.pictureBgView1 && ( */}
+                      <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
+                        <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
+                          Выберите фото   <span className="ml-[5px]">
+                            <StarLabel />
                           </span>
-                        </div>
-                      )}
-                      {state?.pictureBgView1 && (
-                        <img
-                          src={state?.pictureBgView1}
-                          alt="backImg"
-                          className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                        />
-                      )}
+                        </span>
+                      </div>
+                      {/* )} */}
+
                     </label>
-                  </button>
+                  </button>}
                 </div>
                 <div className="w-[90px] md:w-full flex flex-col md:flex-row items-center justify-between gap-y-2 gap-x-[10px] md:mt-[10px]">
-                  <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                  {
+                    selectedFiles?.filter(e => e?.id <= 3)?.map((item, index) => {
+                      return (
+                        <>
+                          {item?.id && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                            <button
+                              type="button"
+                              className="h-full w-full flex items-center justify-center "
+                            >
+                              <label
+                                htmlFor="DataImg1"
+                                className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                              >
+                                <input
+                                  className="hidden"
+                                  id="DataImg1"
+                                  type="file"
+                                  onChange={handleLocationImage2}
+                                  accept=" image/*"
+                                />
+                                {!item?.pictureBgView1 && (
+                                  <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                                    <DownloadIcon />
+                                    <div className="text-[11px] text-textLightColor mt-[5px]">
+                                      (необязательно)
+                                    </div>
+                                  </div>
+                                )}
+                                {item?.pictureBgView1 && (
+                                  <img
+                                    src={item?.pictureBgView1}
+                                    alt="backImg"
+                                    className="w-full h-full object-contain border border-searchBgColor rounded-lg"
+                                  />
+                                )}
+                              </label>
+                            </button>
+                          </div>}
+                        </>
+                      )
+                    })
+                  }
+                  {selectedFiles?.length <= 1 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
                     <button
                       type="button"
                       className="h-full w-full flex items-center justify-center "
@@ -1497,25 +1562,19 @@ const AddingProduct = () => {
                           onChange={handleLocationImage2}
                           accept=" image/*"
                         />
-                        {!state?.pictureBgView1 && (
-                          <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                            <DownloadIcon />
-                            <div className="text-[11px] text-textLightColor mt-[5px]">
-                              (необязательно)
-                            </div>
+
+                        <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                          <DownloadIcon />
+                          <div className="text-[11px] text-textLightColor mt-[5px]">
+                            (необязательно)
                           </div>
-                        )}
-                        {state?.pictureBgView1 && (
-                          <img
-                            src={state?.pictureBgView1}
-                            alt="backImg"
-                            className="w-full h-full object-contain border border-searchBgColor rounded-lg"
-                          />
-                        )}
+                        </div>
+
+
                       </label>
                     </button>
-                  </div>
-                  <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center">
+                  </div>}
+                  {selectedFiles?.length <= 2 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center">
                     <button
                       type="button"
                       className="h-full w-full flex items-center justify-center "
@@ -1528,28 +1587,22 @@ const AddingProduct = () => {
                           className="hidden"
                           id="DataImg1"
                           type="file"
-                          onChange={handleLocationImage3}
+                          onChange={handleLocationImage2}
                           accept=" image/*"
                         />
-                        {!state?.pictureBgView1 && (
-                          <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                            <DownloadIcon />
-                            <div className="text-[11px] text-textLightColor mt-[5px]">
-                              (необязательно)
-                            </div>
+                        {/* {!state?.pictureBgView1 && ( */}
+                        <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                          <DownloadIcon />
+                          <div className="text-[11px] text-textLightColor mt-[5px]">
+                            (необязательно)
                           </div>
-                        )}
-                        {state?.pictureBgView1 && (
-                          <img
-                            src={state?.pictureBgView1}
-                            alt="backImg"
-                            className="w-full h-full object-contain border border-searchBgColor rounded-lg"
-                          />
-                        )}
+                        </div>
+                        {/* )} */}
+
                       </label>
                     </button>
-                  </div>
-                  <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                  </div>}
+                  {selectedFiles?.length <= 3 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
                     <button
                       type="button"
                       className="h-full w-full flex items-center justify-center "
@@ -1562,27 +1615,20 @@ const AddingProduct = () => {
                           className="hidden"
                           id="DataImg1"
                           type="file"
-                          onChange={handleLocationImage4}
+                          onChange={handleLocationImage2}
                           accept=" image/*"
                         />
-                        {!state?.pictureBgView1 && (
-                          <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                            <DownloadIcon />
-                            <div className="text-[11px] whitespace-normal text-center text-textLightColor mt-[5px]">
-                              (необязательно)
-                            </div>
+                        <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                          <DownloadIcon />
+                          <div className="text-[11px] whitespace-normal text-center text-textLightColor mt-[5px]">
+                            (необязательно)
                           </div>
-                        )}
-                        {state?.pictureBgView1 && (
-                          <img
-                            src={state?.pictureBgView1}
-                            alt="backImg"
-                            className="w-full h-full object-contain border border-searchBgColor rounded-lg"
-                          />
-                        )}
+                        </div>
+
+
                       </label>
                     </button>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
