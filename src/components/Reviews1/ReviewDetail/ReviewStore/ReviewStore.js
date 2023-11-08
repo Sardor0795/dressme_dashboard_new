@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { StarIcon } from "../../../../assets/icons";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
+import { Rate } from "antd";
 
 const ReviewStore = () => {
   const { request } = useHttp();
@@ -96,18 +97,15 @@ const ReviewStore = () => {
                   </p>
                   <div className="flex items-center">
                     <div className="flex items-center mr-[5px] md:mr-[6px]">
-                      <StarIcon width={15} height={15} />
-                      <StarIcon width={15} height={15} />
-                      <StarIcon width={15} height={15} />
-                      <StarIcon width={15} height={15} />
-                      <StarIcon width={15} height={15} />
+                      <Rate disabled allowHalf defaultValue={data?.overall_rating} />
                     </div>
                     <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                       <p className="font-AeonikProMedium text-black mr-[5px]">
                         {data.overall_rating ? data.overall_rating : 0}
                       </p>
                       <p className="text-setTexOpacity font-AeonikProRegular">
-                        ( {data.rated_users_count ? data.rated_users_count : 0 } votes ){" "}
+                        ( {data.rated_users_count ? data.rated_users_count : 0}{" "}
+                        votes ){" "}
                       </p>
                     </div>
                   </div>

@@ -47,7 +47,7 @@ const CommentTitle = () => {
       onSuccess: (res) => {
         if (res) {
           setCommnetStore(res.shops.data);
-          // console.log(res.shops.data, "Comments-Store-Review");
+          // console.log(res.shops.data, "Comments-STORE-Review");
         }
       },
       onError: (err) => {
@@ -69,7 +69,7 @@ const CommentTitle = () => {
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
-          ( {commentStore?.length ? commentStore?.length : 0} отзывы ){" "}
+          ( {commentStore?.ratings?.length ? commentStore?.ratings?.length : 0} отзывы ){" "}
         </span>
       </div>
 
@@ -132,10 +132,10 @@ const CommentTitle = () => {
 
       {commentStore?.map((data) => {
         return (
-          <>
+          <div key={data.id}>
             {data?.ratings.map((item) => {
               return (
-                <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
+                <div key={item.id} className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
                   {/* userImg and Date */}
                   <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
                     <div className="h-10 w-fit flex items-center gap-x-[15px]">
@@ -171,7 +171,7 @@ const CommentTitle = () => {
                     </span>
                   </div>
                   {/* Comment Section */}
-                  <div>
+                  {/* <div>
                     <div className="w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] ">
                       <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                         <div>
@@ -189,7 +189,7 @@ const CommentTitle = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end">
                     {state?.sendAnswer ? (
                       <div className="w-full flex flex-col md:flex-row items-center justify-between">
@@ -204,7 +204,6 @@ const CommentTitle = () => {
                             <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
                               Отправить
                             </span>
-                            {/* <SendIcon /> */}
                           </button>
                           <button
                             onClick={() =>
@@ -230,7 +229,7 @@ const CommentTitle = () => {
                 </div>
               );
             })}
-          </>
+          </div>
         );
       })}
     </div>
@@ -238,10 +237,3 @@ const CommentTitle = () => {
 };
 export { CommentTitle };
 
-// {data?.wearSubject.map((item) => {
-//   return (
-//     <>
-//
-//     </>
-//   );
-// })}

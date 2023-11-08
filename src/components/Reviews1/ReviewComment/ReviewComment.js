@@ -12,7 +12,6 @@ import { Popover } from "antd";
 import { BiChevronDown } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 export default function ReviewComment() {
-
   const [state, setState] = useState({
     openwear: false,
   });
@@ -23,7 +22,6 @@ export default function ReviewComment() {
   const handleOpenChangeWear = (newOpen) => {
     setState({ ...state, openwear: newOpen });
   };
-
 
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
@@ -54,10 +52,11 @@ export default function ReviewComment() {
               className="w-full h-5 flex items-center cursor-pointer"
             >
               <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                  ? "border border-textBlueColor bg-textBlueColor"
-                  : "border border-lightBorderColor"
-                  }`}
+                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
+                  data?.checked
+                    ? "border border-textBlueColor bg-textBlueColor"
+                    : "border border-lightBorderColor"
+                }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
               </button>
@@ -99,11 +98,13 @@ export default function ReviewComment() {
       </div>
     </div>
   );
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, []);
+  
   return (
     <div>
       <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
@@ -137,8 +138,9 @@ export default function ReviewComment() {
               <BiChevronDown
                 size={20}
                 style={{ color: "#c2c2c2" }}
-                className={`${state?.openwear ? "rotate-[-180deg]" : ""
-                  } duration-200`}
+                className={`${
+                  state?.openwear ? "rotate-[-180deg]" : ""
+                } duration-200`}
               />
             </span>
           </Popover>

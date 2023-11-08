@@ -24,8 +24,8 @@ const WearCommentDetail = () => {
     {
       onSuccess: (res) => {
         if (res) {
-          setProductDetails(res.products.data[0]);
-          console.log(res.products.data[0], "Review-Products-Details");
+          setProductDetails(res.products.data);
+          // console.log(res.products.data, "Review-Products-Details");
           // setCommentRatings(res.products.data.ratings)
         }
       },
@@ -199,7 +199,7 @@ const WearCommentDetail = () => {
     <div className="w-full h-fit">
       <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
         <div className="h-5 w-[4px] bg-textBlueColor"></div>
-        <p>{productDetails.name_ru}</p>
+        <p>Nike</p>
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
         <div className="w-full flex flex-col">
