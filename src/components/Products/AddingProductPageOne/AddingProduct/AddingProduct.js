@@ -779,9 +779,9 @@ const AddingProduct = () => {
                         :
                         <button
                           type="button"
-                          className="w-full h-11 md:h-10 rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
+                          className="w-full h-11 md:h-10  bg-[#F5F5F5] rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <label className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
                             Выбрать
                           </label>
                           <span className="rotate-[90deg]">
@@ -879,7 +879,7 @@ const AddingProduct = () => {
                     </button>
                     <div className="w-full h-fit hidden md:flex">
                       <Select
-                        className=" rounded-lg w-full h-11 md:h-10"
+                        className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.sub_Section_Id?.length && newArray?.length ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
                         showSearch
                         disabled={
                           newArray?.length ? false : true
@@ -939,7 +939,7 @@ const AddingProduct = () => {
                     </button>
                     <div className="w-full h-fit hidden md:flex">
                       <Select
-                        className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                        className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.season_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                         mode="multiple"
                         style={{
                           width: "100%",
@@ -979,39 +979,43 @@ const AddingProduct = () => {
                     <button
                       onClick={() => setState({ ...state, Colour: true })}
                       type="button"
-                      className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                      className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-2"
                     >
                       <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                         Выбрать
                       </label>
                       <ArrowRightIcon />
                     </button>
-                    <div className={`w-full hidden md:flex items-center justify-between                    
-                          ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}
+                    <div className={`w-full hidden md:flex items-center gap-x-1 justify-between  overflow-hidden                   
+                          ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
  rounded-lg  h-[42px] md:h-10 px-[12px]`}>
-                      {productsData.colors
-                        ?.filter((e) => e?.id <= 9)
-                        ?.map((data) => {
-                          // console.log(data.hex, 'Colors');
-                          return (
-                            <div key={data?.id} className="block">
-                              <label
-                                key={data?.id}
-                                style={{ background: `${data.hex}` }}
-                                className={`rounded-full border  w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
-                              >
-                                {/* <img src={data.icons} alt="" /> */}
-                              </label>
-                              <input
-                                type="radio"
-                                id={data?.id}
-                                name="checkStatus"
-                                value={data?.id}
-                                className={"hidden w-full h-full"}
-                              />
-                            </div>
-                          );
-                        })}
+                      <div className="w-[90%] flex items-center overflow-auto HorizantalScroll">
+                        {productsData.colors
+                          ?.filter((e) => e?.id <= 9)
+                          ?.map((data) => {
+                            // console.log(data.hex, 'Colors');
+                            return (
+                              <div key={data?.id} className="block ">
+                                <div className="w-full ">
+                                  <label
+                                    key={data?.id}
+                                    style={{ background: `${data.hex}` }}
+                                    className={`rounded-full border  w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
+                                  >
+                                    {/* <img src={data.icons} alt="" /> */}
+                                  </label>
+                                  <input
+                                    type="radio"
+                                    id={data?.id}
+                                    name="checkStatus"
+                                    value={data?.id}
+                                    className={"hidden w-full h-full"}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </div>
                       <button
                         onClick={() => setState({ ...state, showColor: true })}
                         type="button"
@@ -1043,7 +1047,7 @@ const AddingProduct = () => {
                       </button>
                       <div className="w-full h-fit md:flex hidden">
                         <Select
-                          className={` ${state?.isCheckValid && !state?.gender_Id ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}
+                          className={` ${state?.isCheckValid && !state?.gender_Id ? "border border-[#FFB8B8] " : ""}
                           rounded-lg w-full h-11 md:h-10 overflow-hidden`}
                           showSearch
                           placeholder="Выбрать"
@@ -1081,7 +1085,7 @@ const AddingProduct = () => {
                           placeholder="Мин"
                           value={state?.min_Age_Category}
                           onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
-                          className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                          className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                         />
                         <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                         <input
@@ -1090,7 +1094,7 @@ const AddingProduct = () => {
                           placeholder="Мах"
                           value={state?.max_Age_Category}
                           onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
-                          className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                          className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                         />
                       </div>
                     </div>
@@ -1112,7 +1116,7 @@ const AddingProduct = () => {
                         value={state?.sku}
                         onChange={(e) => setState({ ...state, sku: e.target.value })}
                         placeholder=""
-                        className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
+                        className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] " : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
                       />
                       <button
                         onClick={() => randomCode(17)}
@@ -1137,7 +1141,7 @@ const AddingProduct = () => {
                       <button
                         onClick={toggleDropModalButton}
                         type="button"
-                        className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between border border-borderColor rounded-lg p-3 `}
+                        className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                       >
                         <span className="text-[#a1a1a1]">Выбрать</span>
                         {state.openDropModalButton ? (
@@ -1175,7 +1179,7 @@ const AddingProduct = () => {
                   </div>
                   {/* Input Select 8 */}
                   <div className="w-full   h-fit  hidden md:flex items-center gap-x-3">
-                    <div className="w-1/2 flex flex-col gap-y-[5px]">
+                    <div className="w-1/2 flex flex-col gap-y-[5px] ">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
                           Тип
@@ -1186,7 +1190,7 @@ const AddingProduct = () => {
                       </div>
                       <div className="w-full h-fit">
                         <Select
-                          className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
+                          className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : ""}`}
                           showSearch
                           allowClear
                           placeholder="Выбрать"
@@ -1228,7 +1232,7 @@ const AddingProduct = () => {
                         </Select>
                       </div>
                     </div>
-                    <div className="w-1/2 flex flex-col gap-y-[5px]">
+                    <div className="w-1/2 flex flex-col gap-y-[5px] ">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
                           Производитель
@@ -1237,9 +1241,9 @@ const AddingProduct = () => {
                           <StarLabel />
                         </span>
                       </div>
-                      <div className="w-full h-fit">
+                      <div className="w-full h-11 md:h-10 overflow-hidden">
                         <Select
-                          className={`overflow-hidden rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.producer_Id ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
+                          className={`overflow-hidden rounded-lg w-full  h-full ${state?.isCheckValid && !state?.producer_Id ? "border border-[#FFB8B8] " : ""}`}
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
@@ -1484,7 +1488,7 @@ const AddingProduct = () => {
                         accept=" image/*"
                       />
                       {/* {!item?.pictureBgView1 && ( */}
-                      <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
+                      <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state?.isCheckValid && !state?.category_Id ? "border border-[#FFB8B8] " : "border border-dashed"}   rounded-lg`}>
                         <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
                           Выберите фото   <span className="ml-[5px]">
                             <StarLabel />
