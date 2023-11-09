@@ -576,12 +576,12 @@ const AddingProduct = () => {
                           }
                      `}
                       >
-                        {data?.id === state?.color_Id && state?.color_Id !== 1 ? (
-                          <InputCheckedTrueIcons colors={"#000"} />
+                        {data?.id === state?.color_Id && state?.color_Id !== 2 ? (
+                          <InputCheckedTrueIcons colors={"#fff"} />
                         ) : null}
 
-                        {state?.color_Id === 1 && data?.id === state?.color_Id ? (
-                          <InputCheckedTrueIcons colors={"#fff"} />
+                        {state?.color_Id === 2 && data?.id === state?.color_Id ? (
+                          <InputCheckedTrueIcons colors={"#000"} />
                         ) : null}
                       </div>
                       <span
@@ -1054,33 +1054,39 @@ const AddingProduct = () => {
                     <div className={`w-full hidden md:flex items-center gap-x-1 justify-between  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
  rounded-lg  h-[42px] md:h-10 px-[12px]`}>
-                      <div className="w-[90%] flex items-center overflow-auto HorizantalScroll">
-                        {productsData.colors
-                          ?.filter((e) => e?.id <= 9)
-                          ?.map((data) => {
-                            // console.log(data.hex, 'Colors');
-                            return (
-                              <div key={data?.id} className="block ">
-                                <div className="w-full ">
-                                  <label
-                                    key={data?.id}
-                                    style={{ background: `${data.hex}` }}
-                                    className={`rounded-full border  w-[22px] h-[22px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
-                                  >
-                                    {/* <img src={data.icons} alt="" /> */}
-                                  </label>
-                                  <input
-                                    type="radio"
-                                    id={data?.id}
-                                    name="checkStatus"
-                                    value={data?.id}
-                                    className={"hidden w-full h-full"}
-                                  />
-                                </div>
+                      {productsData.colors
+                        ?.filter((e) => e?.id <= 9)
+                        ?.map((data) => {
+                          return (
+                            <div key={data?.id} className="block ">
+                              <div className="w-full ">
+                                <label
+                                  key={data?.id}
+                                  htmlFor={data?.id}
+                                  onClick={() => setState({ ...state, color_Id: data?.id })}
+
+                                  style={{ background: `${data.hex}` }}
+                                  className={`rounded-full border  w-[22px] h-[22px] p-[2px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
+                                >
+                                  {data?.id === state?.color_Id && state?.color_Id !== 2 ? (
+                                    <BiCheck size={25} color={"#fff"} className="flex items-center justify-center" />
+                                  ) : null}
+
+                                  {state?.color_Id === 2 && data?.id === state?.color_Id ? (
+                                    <BiCheck size={25} color={"#000"} className="flex items-center justify-center" />
+                                  ) : null}
+                                </label>
+                                <input
+                                  type="radio"
+                                  id={data?.id}
+                                  name="checkStatus"
+                                  value={data?.id}
+                                  className={"hidden w-full h-full"}
+                                />
                               </div>
-                            );
-                          })}
-                      </div>
+                            </div>
+                          );
+                        })}
                       <button
                         onClick={() => setState({ ...state, showColor: true })}
                         type="button"
@@ -1208,7 +1214,14 @@ const AddingProduct = () => {
                         type="button"
                         className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                       >
-                        <span className="text-[#a1a1a1]">Выбрать</span>
+                        {state?.type_Id ?
+                          productsData?.categories?.filter(e => e?.id == state?.type_Id)?.map((item) => {
+                            return (
+                              <span className="text-[#000]">{item?.name_ru}</span>
+                            )
+                          })
+                          : <span className="text-[#a1a1a1]"> Выбрать</span>
+                        }
                         {state.openDropModalButton ? (
                           <span className="-rotate-90 transition duration-200 ease-out">
                             <ArrowRightIcon />
