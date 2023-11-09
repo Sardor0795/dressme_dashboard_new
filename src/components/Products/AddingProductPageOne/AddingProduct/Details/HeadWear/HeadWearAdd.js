@@ -69,14 +69,14 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
         setState({
             ...state,
-            minHeadGirth: null,
-            maxHeadGirth: null,
+            minHeadGirth: '',
+            maxHeadGirth: '',
             sizeCheck: false,
-            amount: null,
-            age: null,
-            price: null,
-            discountPercent: null,
-            discountPrice: null,
+            amount: '',
+            age: '',
+            price: '',
+            discountPercent: '',
+            discountPrice: '',
             onConcel: false,
             toggleShow: false
         })

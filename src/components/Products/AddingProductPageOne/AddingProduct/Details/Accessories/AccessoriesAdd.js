@@ -15,11 +15,12 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         priceNum: null,
         salePercent: null,
         salePrice: null,
+        sizeListCheck: null,
         isCheckValid: false,
         // ------
         onConcel: false,
+        selected: null
     })
-    const sizeListCheck = []
     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
@@ -35,19 +36,16 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             { id: 8, action: true, name: "3XL" },
         ],
         sizeList2: [
-            { id: 1, action: true, name: "5X" },
-            { id: 2, action: true, name: "7X" },
-            { id: 3, action: true, name: "9X" },
-            { id: 4, action: true, name: "10X" },
-            { id: 5, action: true, name: "4X" },
-            { id: 6, action: true, name: "6X" },
-            { id: 7, action: true, name: "8X" },
+            { id: 11, action: true, name: "5X" },
+            { id: 12, action: true, name: "7X" },
+            { id: 13, action: true, name: "9X" },
+            { id: 14, action: true, name: "10X" },
+            { id: 15, action: true, name: "4X" },
+            { id: 16, action: true, name: "6X" },
+            { id: 17, action: true, name: "8X" },
         ]
     }
     )
-    const handleSizeList = (checkedValues) => {
-        sizeListCheck.push(checkedValues.target.value)
-    };
 
 
     const SelectedNumber = 5
@@ -69,7 +67,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 accessorySize: state?.minSize,
                 legnthAcc: state?.rowSize,
                 widthAcc: state?.colSize,
-                accessoryLetterSize: sizeListCheck,
+                accessoryLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
                 price: state?.priceNum,
@@ -88,14 +86,15 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
         setState({
             ...state,
-            rowSize: null,
-            colSize: null,
-            minSize: null,
-            ageNum: null,
-            quantityNum: null,
-            priceNum: null,
-            salePercent: null,
-            salePrice: null,
+            rowSize: '',
+            colSize: '',
+            minSize: '',
+            ageNum: '',
+            quantityNum: '',
+            priceNum: '',
+            salePercent: '',
+            salePrice: '',
+            selected: null,
             isCheckValid: false,
             // ------
             onConcel: false
@@ -143,17 +142,25 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                                 className="flex "
                                             >
 
-                                                {data?.action && <Checkbox.Group
-                                                    style={{
-                                                        width: '100%',
-                                                    }}
-                                                >
-                                                    <Row>
-                                                        <Col span={8}>
-                                                            <Checkbox onChange={handleSizeList} value={data?.name}>{data?.name}</Checkbox>
-                                                        </Col>
-                                                    </Row>
-                                                </Checkbox.Group>}
+                                                {data?.action &&
+                                                    <label
+                                                        htmlFor={data?.id}
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id={data?.id}
+                                                            name="size_Outwear"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>
+                                                }
                                             </div>
                                         );
                                     })}
@@ -167,17 +174,27 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                                 className="flex "
                                             >
 
-                                                {data?.action && <Checkbox.Group
-                                                    style={{
-                                                        width: '100%',
-                                                    }}
-                                                >
-                                                    <Row>
-                                                        <Col span={8}>
-                                                            <Checkbox onChange={handleSizeList} value={data?.name}>{data?.name}</Checkbox>
-                                                        </Col>
-                                                    </Row>
-                                                </Checkbox.Group>}
+                                                {data?.action &&
+
+                                                    <label
+                                                        htmlFor="m_outwear"
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id="m_outwear"
+                                                            name="size_Outwear"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>
+
+                                                }
                                             </div>
                                         );
                                     })}
@@ -205,14 +222,16 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                                 {
                                                     data?.action &&
                                                     <label
-                                                        htmlFor="m_outwear"
+                                                        htmlFor={data?.id}
                                                         className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
                                                     >
                                                         <input
                                                             type="checkbox"
-                                                            id="m_outwear"
+                                                            id={data?.id}
                                                             name="size_Outwear"
-                                                            value="M"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
                                                         <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
@@ -233,14 +252,16 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                                 {
                                                     data?.action &&
                                                     <label
-                                                        htmlFor="m_outwear"
+                                                        htmlFor={data?.id}
                                                         className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
                                                     >
                                                         <input
                                                             type="checkbox"
-                                                            id="m_outwear"
+                                                            id={data?.id}
                                                             name="size_Outwear"
-                                                            value="M"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
                                                         <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">

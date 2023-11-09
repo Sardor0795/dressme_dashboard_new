@@ -305,9 +305,12 @@ const AddingProduct = () => {
     };
   }, [screenSize]);
 
+  console.log(state?.AccessoriesList, "AccessoriesList");
+  console.log(state?.outWearList, "outWearList");
 
-
-
+  // console.log(state?.underWearList?.underWearLetterSize, state?.underWearList?.underWearLetterSize?.length, "state?.underWearList?.underWearLetterSize");
+  // console.log(state?.outWearList?.outWearLetterSize, state?.outWearList?.outWearLetterSize?.length, "state?.outWearList?.outWearLetterSize");
+  // console.log(state?.AccessoriesList?.accessoryLetterSize, state?.AccessoriesList?.accessoryLetterSize?.length, "state?.AccessoriesList?.accessoryLetterSize");
 
   const LocationAddSubmit = () => {
 
