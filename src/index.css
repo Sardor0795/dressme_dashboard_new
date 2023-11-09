@@ -156,7 +156,7 @@
 
 .HorizantalScroll::-webkit-scrollbar {
   width: 50px;
-  height: 5px;
+  height: 3px;
 }
 
 .HorizantalScroll::-webkit-scrollbar-thumb {
@@ -305,7 +305,7 @@ input[type="radio"]:checked+label span {
   /* background-color: #660006; */
 }
 
-.ClothesSection .ant-select-selector{
+.ClothesSection .ant-select-selector {
   height: 40px;
   overflow-y: auto;
 }
@@ -318,7 +318,7 @@ input[type="radio"]:checked+label span {
   font-size: 14px !important;
 }
 
-.ant-rate-star .ant-rate-star-full{
+.ant-rate-star .ant-rate-star-full {
   margin-inline-end: 2px !important;
 }
 
