@@ -8,28 +8,29 @@ import { BiPlus } from "react-icons/bi";
 function OutWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
-        minBreast: "",
-        maxBreast: "",
-        minSize: "",
-        maxSize: "",
-        minWaist: "",
-        maxWaist: "",
-        minHips: "",
-        maxHips: "",
-        quantityNum: "",
-        ageNum: "",
-        priceNum: "",
-        salePercent: "",
-        salePrice: "",
+        minBreast: null,
+        maxBreast: null,
+        minSize: null,
+        maxSize: null,
+        minWaist: null,
+        maxWaist: null,
+        minHips: null,
+        maxHips: null,
+        quantityNum: null,
+        ageNum: null,
+        priceNum: null,
+        salePercent: null,
+        salePrice: null,
         maxSizeShow: false,
+        sizeListCheck: null,
+        selected: null,
         isCheckValid: false,
         // ------
         onConcel: false,
         toggleShow: false,
 
     })
-    const sizeListCheck = []
-    const sizeListCheck1 = []
+
     const [toggle, setToggle] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
@@ -54,9 +55,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         ]
     }
     )
-    const handleSizeList = (checkedValues) => {
-        sizeListCheck.push(checkedValues.target.value)
-    };
+
     const SelectedNumber = 2
     useEffect(() => {
         if (typeId == SelectedNumber) {
@@ -83,7 +82,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                 maxOutWearWaistGirth: state?.maxWaist,
                 minOutWearHipGirth: state?.minHips,
                 maxOutWearHipGirth: state?.maxHips,
-                outWearLetterSize: sizeListCheck,
+                outWearLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
                 price: state?.priceNum,
@@ -112,6 +111,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
             priceNum: "",
             salePercent: "",
             salePrice: "",
+            selected: null,
             isCheckValid: false,
             toggleShow: false
         })
@@ -203,21 +203,25 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                                 key={data?.id}
                                                 className="flex "
                                             >
-                                                {data?.action && <Checkbox.Group
-                                                    style={{
-                                                        width: '100%',
-                                                    }}
-                                                >
-                                                    <Row>
-                                                        <Col span={8}>
-                                                            <Checkbox
-                                                                // className={` ${state?.isCheckValid && !sizeListCheck?.length && "border border-[#FFB8B8] bg-[#FFF6F6]"} `}
-                                                                value={data?.name}
-                                                                onChange={handleSizeList}
-                                                            >{data?.name}</Checkbox>
-                                                        </Col>
-                                                    </Row>
-                                                </Checkbox.Group>}
+                                                {data?.action &&
+                                                    <label
+                                                        htmlFor={data?.id}
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id={data?.id}
+                                                            name="size_Outwear"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>
+                                                }
                                             </div>
                                         );
                                     })}
@@ -231,17 +235,24 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                                 className="flex "
                                             >
 
-                                                {data?.action && <Checkbox.Group
-                                                    style={{
-                                                        width: '100%',
-                                                    }}
-                                                >
-                                                    <Row>
-                                                        <Col span={8}>
-                                                            <Checkbox value={data?.name} onChange={handleSizeList} >{data?.name}</Checkbox>
-                                                        </Col>
-                                                    </Row>
-                                                </Checkbox.Group>}
+                                                {data?.action &&
+                                                    <label
+                                                        htmlFor={data?.id}
+                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            id={data?.id}
+                                                            name="size_Outwear"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
+                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                        />
+                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                            {data?.name}
+                                                        </span>
+                                                    </label>}
                                             </div>
                                         );
                                     })}
@@ -269,14 +280,16 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                                 {
                                                     data?.action &&
                                                     <label
-                                                        htmlFor="m_outwear"
+                                                        htmlFor={data?.id}
                                                         className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
                                                     >
                                                         <input
                                                             type="checkbox"
-                                                            id="m_outwear"
+                                                            id={data?.id}
                                                             name="size_Outwear"
-                                                            value="M"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
                                                         <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
@@ -297,14 +310,16 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                                 {
                                                     data?.action &&
                                                     <label
-                                                        htmlFor="m_outwear"
+                                                        htmlFor={data?.id}
                                                         className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
                                                     >
                                                         <input
                                                             type="checkbox"
-                                                            id="m_outwear"
+                                                            id={data?.id}
                                                             name="size_Outwear"
-                                                            value="M"
+                                                            checked={data?.id === state?.selected}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
                                                         <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
