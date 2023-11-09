@@ -31,15 +31,19 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         } else {
             setState({ ...state, isHasTypeId: false })
         }
+
     }, [typeId])
+
+
+
+
     const onChangeSwitch = (checked) => {
         setState({ ...state, sizeCheck: checked })
     };
-    // Hats
+
 
     const handleOpenPopver = (newOpen) => {
         setState({ ...state, toggleShow: newOpen })
-
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })

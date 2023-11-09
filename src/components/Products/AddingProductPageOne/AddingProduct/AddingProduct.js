@@ -9,7 +9,7 @@ import {
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -29,14 +29,15 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
 import { BiCheck, BiCheckDouble } from "react-icons/bi";
 // import { DownOutlined } from '@ant-design/icons'
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
 
 const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
+  const navigate = useNavigate()
   const { request } = useHttp();
   const [state, setState] = useState({
     buttonReviews: false,
@@ -426,17 +427,61 @@ const AddingProduct = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+        } else if (res?.message) {
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          navigate("/products")
+          setDressInfo({ ...dressInfo, nextPageShowForm: true })
+          window.location.reload();
+        }
         console.log(res, "ProductStore");
       })
       .catch((err) => console.log(err, "errImage"));
   };
   const handleNextPage = () => {
     setState({ ...state, isCheckValid: true })
-    console.log("checked");
-    if (false)
+    if (
+      state?.shopId &&
+      state?.shopLocationId &&
+      state?.section_Id &&
+      state?.color_Id &&
+      state?.gender_Id &&
+      state?.min_Age_Category &&
+      state?.max_Age_Category &&
+      state?.sku &&
+      state?.category_Id &&
+      state?.price &&
+      state?.filterTypeId &&
+      state?.producer_Id &&
+      state?.producer_Id &&
+      state?.season_Id &&
+      selectedFiles?.length > 1
+    ) {
       setDressInfo({ ...dressInfo, nextPageShowForm: false })
+      setState({ ...state, isCheckValid: false })
+
+    }
   }
-  console.log(state?.isCheckValid, "isCheckValid");
+  // console.log(state?.isCheckValid, "isCheckValid");
 
 
   useEffect(() => {
@@ -447,6 +492,20 @@ const AddingProduct = () => {
 
   return (
     <div className="w-full h-fit ">
+      <ToastContainer
+        style={{ zIndex: "1000", top: "80px" }}
+        position="top-right"
+        autoClose={5000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {/* {dressInfo?.nextPageShowForm ? */}
       <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"} relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
         <section
@@ -531,16 +590,19 @@ const AddingProduct = () => {
                   );
                 })}
               </div>
-              <div className="flex items-center justify-end">
-                {state?.color_Id && (
+              <div className="flex items-center justify-end  gap-x-5">
+
+                {state?.color_Id &&
                   <button
                     onClick={() => setState({ ...state, color_Id: '', showColor: false })}
-                    className="flex items-center text-fullBlue active:scale-95  active:opacity-70 justify-center  px-4 py-1"
-                  >
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                     Отключить
                   </button>
-                )}
-                {/* </div> */}
+                }
+                <button onClick={() => setState({ ...state, showColor: false })}
+                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                  Готово
+                </button>
               </div>
             </div>
           </div>
@@ -748,7 +810,7 @@ const AddingProduct = () => {
                           onClick={() => setState({ ...state, openSelect: true })}
                           type="button"
                           className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
-                           ${state?.isCheckValid && !state?.shopLocationId?.length ? "border border-[#FFB8B8] " : "border border-borderColor"}
+                           ${state?.isCheckValid && !state?.shopLocationId ? "border border-[#FFB8B8] " : "border border-borderColor"}
 
                            px-3`}
                         >
@@ -1141,7 +1203,7 @@ const AddingProduct = () => {
                       <button
                         onClick={toggleDropModalButton}
                         type="button"
-                        className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
+                        className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                       >
                         <span className="text-[#a1a1a1]">Выбрать</span>
                         {state.openDropModalButton ? (
@@ -1488,7 +1550,7 @@ const AddingProduct = () => {
                         accept=" image/*"
                       />
                       {/* {!item?.pictureBgView1 && ( */}
-                      <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state?.isCheckValid && !state?.category_Id ? "border border-[#FFB8B8] " : "border border-dashed"}   rounded-lg`}>
+                      <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state?.isCheckValid && selectedFiles?.length <= 1 ? "border border-[#FFB8B8] " : "border border-dashed"}   rounded-lg`}>
                         <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
                           Выберите фото   <span className="ml-[5px]">
                             <StarLabel />
