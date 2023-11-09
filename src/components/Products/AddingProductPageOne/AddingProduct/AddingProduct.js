@@ -54,7 +54,7 @@ const AddingProduct = () => {
     MakeCountryModal: false,
     ClothingCategoryModal: false,
     isCheckValid: false,
-
+    errorList: null,
     type_Id: null,
     // --------------
     pictureBgFile1: "",
@@ -431,16 +431,7 @@ const AddingProduct = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res?.errors && res?.message) {
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
+          setState({ ...state, errorList: res?.errors })
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -452,9 +443,9 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
-          navigate("/products")
-          setDressInfo({ ...dressInfo, nextPageShowForm: true })
-          window.location.reload();
+          // navigate("/products")
+          // setDressInfo({ ...dressInfo, nextPageShowForm: true })
+          // window.location.reload();
         }
         console.log(res, "ProductStore");
       })
@@ -509,6 +500,7 @@ const AddingProduct = () => {
         pauseOnHover
         theme="colored"
       />
+      <div>{state?.errorList}</div>
       {/* {dressInfo?.nextPageShowForm ? */}
       <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"} relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
         <section
