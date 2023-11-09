@@ -54,7 +54,7 @@ const AddingProduct = () => {
     MakeCountryModal: false,
     ClothingCategoryModal: false,
     isCheckValid: false,
-
+    errorList: null,
     type_Id: null,
     // --------------
     pictureBgFile1: "",
@@ -117,7 +117,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       headWearList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -130,7 +130,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       outWearList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -142,7 +142,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       underWearList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -155,7 +155,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       shoesList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -168,7 +168,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       AccessoriesList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -362,7 +362,7 @@ const AddingProduct = () => {
     form.append("min_age_category", state?.min_Age_Category);
     form.append("max_age_category", state?.max_Age_Category);
     form.append("sku", state?.sku);
-    form.append("category_id", parseFloat(state?.category_Id));
+    form.append("category_id", parseFloat(state?.type_Id));
     form.append("type_id", parseFloat(state?.filterTypeId));
     form.append("producer_id", state?.producer_Id);
     selectedFiles?.map((item, index) => {
@@ -431,16 +431,7 @@ const AddingProduct = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res?.errors && res?.message) {
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
+          setState({ ...state, errorList: res?.errors })
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -452,9 +443,9 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
-          navigate("/products")
-          setDressInfo({ ...dressInfo, nextPageShowForm: true })
-          window.location.reload();
+          // navigate("/products")
+          // setDressInfo({ ...dressInfo, nextPageShowForm: true })
+          // window.location.reload();
         }
         console.log(res, "ProductStore");
       })
@@ -471,10 +462,9 @@ const AddingProduct = () => {
       state?.min_Age_Category &&
       state?.max_Age_Category &&
       state?.sku &&
-      state?.category_Id &&
+      state?.type_Id &&
       state?.price &&
       state?.filterTypeId &&
-      state?.producer_Id &&
       state?.producer_Id &&
       state?.season_Id &&
       selectedFiles?.length > 1
@@ -484,7 +474,7 @@ const AddingProduct = () => {
 
     }
   }
-  // console.log(state?.isCheckValid, "isCheckValid");
+  // console.log(state?.isCheckValid, "isCheckValid");category_Id
 
 
   useEffect(() => {
@@ -509,6 +499,7 @@ const AddingProduct = () => {
         pauseOnHover
         theme="colored"
       />
+      <div>{state?.errorList}</div>
       {/* {dressInfo?.nextPageShowForm ? */}
       <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"} relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
         <section

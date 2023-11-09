@@ -79,10 +79,11 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
             setIsCheckValid(false)
 
         }
-
     }
 
-
+    const handleCopyText = () => {
+        navigator.clipboard.writeText(titleInRu)
+    }
     // Категория одежды хлопок
     return (
         <div className="flex py-[40px] md:py-[50px] ">
@@ -128,7 +129,13 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                         value={titleInRu}
                                         onChange={(e) => setTitleInRu(e.target.value)}
                                     />
-                                    <AddBtn />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => navigator.clipboard.writeText(titleInRu)}
+                                        className="cursor-pointer ">
+                                        <AddBtn />
+                                    </button>
                                 </div>
                             </div>
                             <div className="mb-[10px]">
@@ -148,7 +155,12 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                         value={titleInUz}
                                         onChange={(e) => setTitleInUz(e.target.value)}
                                     />
-                                    <AddBtn />
+                                    <button
+                                        type="button"
+                                        onClick={() => navigator.clipboard.writeText(titleInUz)}
+                                        className="cursor-pointer ">
+                                        <AddBtn />
+                                    </button>
                                 </div>
                             </div>
                             <div className="mb-[10px]">
@@ -169,7 +181,12 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                         onChange={(e) => setDescriptionInRu(e.target.value)}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
-                                        <AddBtn />
+                                        <button
+                                            type="button"
+                                            onClick={() => navigator.clipboard.writeText(descriptionInRu)}
+                                            className="cursor-pointer ">
+                                            <AddBtn />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +209,12 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                         onChange={(e) => setDescriptionInUz(e.target.value)}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
-                                        <AddBtn />
+                                        <button
+                                            type="button"
+                                            onClick={() => navigator.clipboard.writeText(descriptionInUz)}
+                                            className="cursor-pointer ">
+                                            <AddBtn />
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -291,7 +313,13 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             value={noteValueRu}
                                             onChange={(e) => setNoteValueRu(e.target.value)}
                                         />
-                                        <AddBtn />
+
+                                        <button
+                                            type="button"
+                                            onClick={() => navigator.clipboard.writeText(noteValueRu)}
+                                            className="cursor-pointer ">
+                                            <AddBtn />
+                                        </button>
                                     </div>
 
                                 </div>
@@ -310,7 +338,12 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             value={noteValueUz}
                                             onChange={(e) => setNoteValueUz(e.target.value)}
                                         />
-                                        <AddBtn />
+                                        <button
+                                            type="button"
+                                            onClick={() => navigator.clipboard.writeText(noteValueUz)}
+                                            className="cursor-pointer ">
+                                            <AddBtn />
+                                        </button>
                                     </div>
 
                                 </div>
