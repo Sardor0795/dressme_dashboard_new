@@ -17,6 +17,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
     const [qualityInUz, setQualityInUz] = useState(null)
     const [noteValueRu, setNoteValueRu] = useState(null)
     const [noteValueUz, setNoteValueUz] = useState(null)
+    const [isCheckValid, setIsCheckValid] = useState(false)
     const [brand, setBrand] = useState(null)
 
 
@@ -61,18 +62,23 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
 
 
     const send = () => {
-        handlCallBack({
-            brand_id: brand,
-            name_Ru: titleInRu,
-            name_Uz: titleInUz,
-            description_Ru: descriptionInRu,
-            description_Uz: descriptionInUz,
-            quality_Ru: qualityInRu,
-            quality_Uz: qualityInUz,
-            composition_Ru: noteValueRu,
-            composition_Uz: noteValueUz,
-        })
-        onClick()
+        setIsCheckValid(true)
+        if (titleInRu && titleInUz && qualityInRu && qualityInUz && noteValueRu && noteValueUz) {
+            handlCallBack({
+                brand_id: brand,
+                name_Ru: titleInRu,
+                name_Uz: titleInUz,
+                description_Ru: descriptionInRu,
+                description_Uz: descriptionInUz,
+                quality_Ru: qualityInRu,
+                quality_Uz: qualityInUz,
+                composition_Ru: noteValueRu,
+                composition_Uz: noteValueUz,
+            })
+            onClick()
+            setIsCheckValid(false)
+
+        }
 
     }
 
@@ -114,7 +120,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className="justify-between rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
+                                <div className={`justify-between rounded-lg   ${isCheckValid && !titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex py-[10px] px-[5px]`}>
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
                                         type="text"
@@ -134,7 +140,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
+                                <div className={`justify-between rounded-lg   ${isCheckValid && !titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex py-[10px] px-[5px]`}>
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
@@ -208,6 +214,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
+                                        className={`rounded-[6px] overflow-hidden ${isCheckValid && !qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         allowClear
@@ -236,6 +243,8 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
+                                        className={`rounded-[6px] overflow-hidden ${isCheckValid && !qualityInUz ? "border border-[#FFB8B8] " : ""}  `}
+
                                         style={{ width: "100%" }}
                                         value={
                                             productsData?.quality?.filter(e => e.name_ru == qualityInRu).map(item => {
@@ -274,29 +283,17 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             (необязательно)
                                         </span>
                                     </div>
-                                    <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
+                                    <div className={`rounded-lg  flex py-[10px] px-[5px] ${isCheckValid && !noteValueRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             // name="note"
                                             value={noteValueRu}
-                                            // onKeyDown={_handleKeyDownRu}
                                             onChange={(e) => setNoteValueRu(e.target.value)}
                                         />
                                         <AddBtn />
                                     </div>
-                                    {/* <div className="mt-[10px] 
-                   w-full flex flex-wrap items-center gap-2">
-                                        {noteListRu?.length > 1 && noteListRu?.filter(e => e?.id >= 1)?.map((data, index) => {
-                                            return (
-                                                <div key={data?.id} className="flex items-center text-white w-fit px-2 py-[4px] text-[14px] rounded-md font-AeonikProRegular bg-[#007dca]">
-                                                    {data?.name}{" "}
-                                                    <button onClick={deleteNoteRu(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
-                                                        <XIcon />
-                                                    </button>
-                                                </div>)
-                                        })}
-                                    </div> */}
+
                                 </div>
                                 {/* Состав на узбекском */}
                                 <div className="flex-1 mb-[10px]">
@@ -306,28 +303,16 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             (необязательно)
                                         </span>
                                     </div>
-                                    <div className="rounded-lg border border-[#e5e5e5] flex py-[10px] px-[5px]">
+                                    <div className={`rounded-lg  flex py-[10px] px-[5px] ${isCheckValid && !noteValueUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             value={noteValueUz}
-                                            // onKeyDown={_handleKeyDownUz}
                                             onChange={(e) => setNoteValueUz(e.target.value)}
                                         />
                                         <AddBtn />
                                     </div>
-                                    {/* <div className="mt-[10px] 
-                   w-full flex flex-wrap items-center gap-2">
-                                        {noteListUz?.length > 1 && noteListUz?.filter(e => e?.id >= 1)?.map((data, index) => {
-                                            return (
-                                                <div key={data?.id} className="flex items-center text-white w-fit px-2 py-[4px] text-[14px] rounded-md font-AeonikProRegular bg-[#007dca]">
-                                                    {data?.name}{" "}
-                                                    <button onClick={deleteNoteUz(data?.id)} className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
-                                                        <XIcon />
-                                                    </button>
-                                                </div>)
-                                        })}
-                                    </div> */}
+
                                 </div>
                             </div>
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
