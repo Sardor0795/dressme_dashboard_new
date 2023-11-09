@@ -1564,10 +1564,10 @@ const AddingProduct = () => {
                 </div>
                 <div className="w-[90px] md:w-full flex flex-col md:flex-row items-center justify-between gap-y-2 gap-x-[10px] md:mt-[10px]">
                   {
-                    selectedFiles?.filter(e => e?.id <= 3)?.map((item, index) => {
+                    selectedFiles?.filter(e => e?.id >= 2)?.map((item, index) => {
                       return (
                         <>
-                          {item?.id && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                          {item?.id && <div className="w-[90px] h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
                             <button
                               type="button"
                               className="h-full w-full flex items-center justify-center "
@@ -1605,7 +1605,7 @@ const AddingProduct = () => {
                       )
                     })
                   }
-                  {selectedFiles?.length <= 1 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                  {selectedFiles?.length <= 2 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
                     <button
                       type="button"
                       className="h-full w-full flex items-center justify-center "
@@ -1633,7 +1633,7 @@ const AddingProduct = () => {
                       </label>
                     </button>
                   </div>}
-                  {selectedFiles?.length <= 2 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center">
+                  {selectedFiles?.length <= 3 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center">
                     <button
                       type="button"
                       className="h-full w-full flex items-center justify-center "
@@ -1661,7 +1661,7 @@ const AddingProduct = () => {
                       </label>
                     </button>
                   </div>}
-                  {selectedFiles?.length <= 3 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
+                  {selectedFiles?.length <= 4 && <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
                     <button
                       type="button"
                       className="h-full w-full flex items-center justify-center "
