@@ -117,7 +117,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       headWearList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -130,7 +130,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       outWearList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -142,7 +142,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       underWearList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -155,7 +155,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       shoesList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -168,7 +168,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       AccessoriesList: childData,
-      category_Id: childData?.category_Id,
+      type_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -362,7 +362,7 @@ const AddingProduct = () => {
     form.append("min_age_category", state?.min_Age_Category);
     form.append("max_age_category", state?.max_Age_Category);
     form.append("sku", state?.sku);
-    form.append("category_id", parseFloat(state?.category_Id));
+    form.append("category_id", parseFloat(state?.type_Id));
     form.append("type_id", parseFloat(state?.filterTypeId));
     form.append("producer_id", state?.producer_Id);
     selectedFiles?.map((item, index) => {
@@ -462,10 +462,9 @@ const AddingProduct = () => {
       state?.min_Age_Category &&
       state?.max_Age_Category &&
       state?.sku &&
-      state?.category_Id &&
+      state?.type_Id &&
       state?.price &&
       state?.filterTypeId &&
-      state?.producer_Id &&
       state?.producer_Id &&
       state?.season_Id &&
       selectedFiles?.length > 1
@@ -475,7 +474,7 @@ const AddingProduct = () => {
 
     }
   }
-  // console.log(state?.isCheckValid, "isCheckValid");
+  // console.log(state?.isCheckValid, "isCheckValid");category_Id
 
 
   useEffect(() => {
