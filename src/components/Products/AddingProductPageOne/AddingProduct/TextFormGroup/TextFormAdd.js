@@ -63,7 +63,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
 
     const send = () => {
         setIsCheckValid(true)
-        if (titleInRu && titleInUz && qualityInRu && qualityInUz && noteValueRu && noteValueUz) {
+        if (titleInRu && titleInUz && qualityInRu && qualityInUz) {
             handlCallBack({
                 brand_id: brand,
                 name_Ru: titleInRu,
@@ -305,7 +305,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             (необязательно)
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex py-[10px] px-[5px] ${isCheckValid && !noteValueRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  `}>
+                                    <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor  `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
@@ -331,7 +331,7 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             (необязательно)
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex py-[10px] px-[5px] ${isCheckValid && !noteValueUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  `}>
+                                    <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"

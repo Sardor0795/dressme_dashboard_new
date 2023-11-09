@@ -55,6 +55,7 @@ const AddingProduct = () => {
     ClothingCategoryModal: false,
     isCheckValid: false,
     errorList: null,
+    errorListMessage: null,
     type_Id: null,
     // --------------
     pictureBgFile1: "",
@@ -117,7 +118,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       headWearList: childData,
-      type_Id: childData?.category_Id,
+      category_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -130,7 +131,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       outWearList: childData,
-      type_Id: childData?.category_Id,
+      category_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -142,7 +143,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       underWearList: childData,
-      type_Id: childData?.category_Id,
+      category_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -155,7 +156,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       shoesList: childData,
-      type_Id: childData?.category_Id,
+      category_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -168,7 +169,7 @@ const AddingProduct = () => {
     setState({
       ...state,
       AccessoriesList: childData,
-      type_Id: childData?.category_Id,
+      category_Id: childData?.category_Id,
       amount: childData?.amount,
       age: childData?.age,
       price: childData?.price,
@@ -362,7 +363,7 @@ const AddingProduct = () => {
     form.append("min_age_category", state?.min_Age_Category);
     form.append("max_age_category", state?.max_Age_Category);
     form.append("sku", state?.sku);
-    form.append("category_id", parseFloat(state?.type_Id));
+    form.append("category_id", parseFloat(state?.category_Id));
     form.append("type_id", parseFloat(state?.filterTypeId));
     form.append("producer_id", state?.producer_Id);
     selectedFiles?.map((item, index) => {
@@ -431,7 +432,11 @@ const AddingProduct = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res?.errors && res?.message) {
-          setState({ ...state, errorList: res?.errors })
+          if (res?.errors === true) {
+            setState({ ...state, errorListMessage: res?.message })
+          } else {
+            setState({ ...state, errorList: res?.errors })
+          }
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -499,7 +504,68 @@ const AddingProduct = () => {
         pauseOnHover
         theme="colored"
       />
-      <div>{state?.errorList}</div>
+      <div className="flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
+        {state?.errorListMessage && <div className="w-full  flex items-center gap-x-2 ">
+          <span className="text-[16px] text-textRedColor font-AeonikProRegular">{state?.errorListMessage}</span>
+        </div>}
+        {state?.errorList?.shop_id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Магазин:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.shop_id[0]}</span>
+        </div>}
+        {state?.errorList?.shop_location_id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Локация:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.shop_location_id[0]}</span>
+        </div>}
+        {state?.errorList?.section_ids && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Раздел одежды:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.section_ids[0]}</span>
+        </div>}
+        {state?.errorList?.season_ids && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Сезон одежды:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.season_ids[0]}</span>
+        </div>}
+        {state?.errorList?.color_id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Цвет:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.color_id[0]}</span>
+        </div>}
+        {state?.errorList?.gender_id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Пол:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.gender_id[0]}</span>
+        </div>}
+        {state?.errorList?.min_age_category && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Возраст Min:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.min_age_category[0]}</span>
+        </div>}
+        {state?.errorList?.max_age_category && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Возраст Max:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.max_age_category[0]}</span>
+        </div>}
+        {state?.errorList?.category_id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Категория одежды:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.category_id[0]}</span>
+        </div>}
+        {state?.errorList?.type_id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Тип:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.type_id[0]}</span>
+        </div>}
+        {state?.errorList?.producer_Id && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Производитель:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.producer_Id[0]}</span>
+        </div>}
+        {state?.errorList?.amount && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Количество:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.amount[0]}</span>
+        </div>}
+        {state?.errorList?.price && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Цена:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.price[0]}</span>
+        </div>}
+        {state?.errorList?.photos && <div className="w-full  flex items-center gap-x-2 ">
+          <span className=" md:text-base font-AeonikProRegular">Выберите фото:</span>
+          <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.photos[0]}</span>
+        </div>}
+
+      </div>
       {/* {dressInfo?.nextPageShowForm ? */}
       <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"} relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
         <section
