@@ -747,7 +747,10 @@ const AddingProduct = () => {
                         <button
                           onClick={() => setState({ ...state, openSelect: true })}
                           type="button"
-                          className="w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
+                          className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
+                           ${state?.isCheckValid && !state?.shopLocationId?.length ? "border border-[#FFB8B8] " : "border border-borderColor"}
+
+                           px-3`}
                         >
 
                           {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
@@ -761,7 +764,8 @@ const AddingProduct = () => {
                                 </span>
                               )
                             })
-                          }) :
+                          })
+                            :
                             <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                               Выбрать
                             </label>
@@ -771,7 +775,8 @@ const AddingProduct = () => {
                             <ArrowRightIcon />
                             {/* <DownOutlined style={{ colors: "#b5b5b5" }} /> */}
                           </span>
-                        </button> :
+                        </button>
+                        :
                         <button
                           type="button"
                           className="w-full h-11 md:h-10 rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
@@ -981,7 +986,9 @@ const AddingProduct = () => {
                       </label>
                       <ArrowRightIcon />
                     </button>
-                    <div className="w-full hidden md:flex items-center justify-between border rounded-lg  h-[42px] md:h-10 px-[12px]">
+                    <div className={`w-full hidden md:flex items-center justify-between                    
+                          ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}
+ rounded-lg  h-[42px] md:h-10 px-[12px]`}>
                       {productsData.colors
                         ?.filter((e) => e?.id <= 9)
                         ?.map((data) => {
@@ -1036,7 +1043,8 @@ const AddingProduct = () => {
                       </button>
                       <div className="w-full h-fit md:flex hidden">
                         <Select
-                          className=" rounded-lg w-full h-11 md:h-10"
+                          className={` ${state?.isCheckValid && !state?.gender_Id ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}
+                          rounded-lg w-full h-11 md:h-10 overflow-hidden`}
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
@@ -1073,7 +1081,7 @@ const AddingProduct = () => {
                           placeholder="Мин"
                           value={state?.min_Age_Category}
                           onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
-                          className="inputStyle outline-none w-[55px] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                          className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                         />
                         <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                         <input
@@ -1082,7 +1090,7 @@ const AddingProduct = () => {
                           placeholder="Мах"
                           value={state?.max_Age_Category}
                           onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
-                          className="inputStyle outline-none w-[55px] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                          className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                         />
                       </div>
                     </div>
@@ -1104,12 +1112,12 @@ const AddingProduct = () => {
                         value={state?.sku}
                         onChange={(e) => setState({ ...state, sku: e.target.value })}
                         placeholder=""
-                        className="inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between border rounded-lg px-[10px] outline-none"
+                        className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
                       />
                       <button
                         onClick={() => randomCode(17)}
                         type={"button"}
-                        className="w-[40px] h-[40px] active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg"
+                        className={`w-[40px] h-[40px] active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
                       >
                         <LoaderIcon />
                       </button>
@@ -1178,7 +1186,7 @@ const AddingProduct = () => {
                       </div>
                       <div className="w-full h-fit">
                         <Select
-                          className="block rounded-lg w-full h-11 md:h-10"
+                          className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
                           showSearch
                           allowClear
                           placeholder="Выбрать"
@@ -1231,7 +1239,7 @@ const AddingProduct = () => {
                       </div>
                       <div className="w-full h-fit">
                         <Select
-                          className=" rounded-lg w-full h-11 md:h-10"
+                          className={`overflow-hidden rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.producer_Id ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
                           showSearch
                           placeholder="Выбрать"
                           optionFilterProp="children"
@@ -1275,7 +1283,7 @@ const AddingProduct = () => {
                     </button>
                     <div className="w-full h-fit md:flex hidden">
                       <Select
-                        className="block rounded-lg w-full h-11 md:h-10"
+                        className={`block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
                         showSearch
                         placeholder="Выбрать"
                         optionFilterProp="children"
