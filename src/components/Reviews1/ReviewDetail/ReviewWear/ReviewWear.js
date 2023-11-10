@@ -10,10 +10,6 @@ export default function ReviewWear() {
   const [reviewsList, setReviewsList] = useState();
   const navigate = useNavigate();
 
-  const goDetail = (id) => {
-    navigate(`/reviews/review/comment-wear/${id}`);
-  };
-
   // ------------GET  Has Reviews ?-----------------
   useQuery(
     ["review_products"],
@@ -34,6 +30,10 @@ export default function ReviewWear() {
       refetchOnWindowFocus: false,
     }
   );
+
+  const goDetail = (id) => {
+    navigate(`/reviews/review/comment-wear/${id}`);
+  };
 
   const [filterStar, setFilterStar] = useState([
     { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
@@ -102,7 +102,7 @@ export default function ReviewWear() {
         {/* table product */}
         <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
           {reviewsList?.map((data) => {
-            console.log(data.photos, "PHOTOS");
+            console.log(data, "PHOTOS");
             return (
               <ul
                 key={data?.id}
@@ -164,7 +164,8 @@ export default function ReviewWear() {
                   </li>
                   <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
                     <button
-                      onClick={() => goDetail(data?.id)}
+                      // onClick={() => goDetail(data?.id)}
+                      onClick={() => navigate(`/reviews/review/comment-store/:${data?.id}`)}
                       className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
                     >
                       Подробнее

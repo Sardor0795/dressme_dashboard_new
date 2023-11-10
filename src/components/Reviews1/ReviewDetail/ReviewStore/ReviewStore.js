@@ -57,6 +57,7 @@ const ReviewStore = () => {
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-store/${id}`);
   };
+  
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -89,7 +90,7 @@ const ReviewStore = () => {
                     alt=""
                   />
                 </figure>
-                <div className="flex flex-col ml-[8px] md:ml-8">
+                <div className="w-[60%] flex flex-col ml-[8px] md:ml-8">
                   <p className="text-sm md:text-xl font-AeonikProMedium mb-3">
                     {data?.name}
                   </p>
