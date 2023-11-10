@@ -73,7 +73,7 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
         setState({ ...state, isCheckValid: true })
 
         if (state?.titleInRu && state?.titleInUz && state?.qualityInRu && state?.qualityInRu) {
-            LocationAddSubmit()
+            // LocationAddSubmit()
             handlCallBack({
                 brand_id: state?.brand,
                 name_Ru: state?.titleInRu,
