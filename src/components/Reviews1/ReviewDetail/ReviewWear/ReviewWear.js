@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MobileStar, SearchIcon } from "../../../../assets/icons";
+import { SearchIcon } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
@@ -164,8 +164,8 @@ export default function ReviewWear() {
                   </li>
                   <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
                     <button
-                      // onClick={() => goDetail(data?.id)}
-                      onClick={() => navigate(`/reviews/review/comment-store/:${data?.id}`)}
+                      onClick={() => goDetail(data?.id)}
+                      // onClick={() => navigate(`/reviews/review/comment-store/:${data?.id}`)}
                       className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
                     >
                       Подробнее

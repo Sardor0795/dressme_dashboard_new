@@ -84,7 +84,6 @@ export default function WearCommentTitle() {
       onSuccess: (res) => {
         if (res) {
           setCommentData(res.products.data);
-          // setCommentRatings(res.products.data.ratings)
         }
       },
       onError: (err) => {
@@ -244,7 +243,6 @@ export default function WearCommentTitle() {
                               <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
                                 Отправить
                               </span>
-                              {/* <SendIcon /> */}
                             </button>
                             <button
                               onClick={() =>
