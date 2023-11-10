@@ -12,7 +12,6 @@ import { useHttp } from "../../../../hook/useHttp";
 export default function WearCommentTitle() {
   const { request } = useHttp();
   const [commentData, setCommentData] = useState();
-  // const [commentRatings, setCommentRatings] = useState();
 
   const [state, setState] = useState({
     sendAnswer: false,
@@ -101,6 +100,7 @@ export default function WearCommentTitle() {
       top: 0,
     });
   }, []);
+
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">

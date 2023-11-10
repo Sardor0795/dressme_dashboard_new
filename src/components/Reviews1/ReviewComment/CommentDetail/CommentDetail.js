@@ -18,8 +18,8 @@ export default function CommentDetail() {
     {
       onSuccess: (res) => {
         if (res) {
-          setStoreDetails(res.shops.data);
-          // console.log(res.shops.data, "Review-Store-Details");
+          setStoreDetails(res?.shops?.data);
+          console.log(res.shops.data, "Review-Store-Details");
           // setCommentRatings(res.products.data.ratings)
         }
       },
