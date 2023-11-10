@@ -26,7 +26,6 @@ const WearCommentDetail = () => {
         if (res) {
           setProductDetails(res.products.data);
           // console.log(res.products.data, "Review-Products-Details");
-          // setCommentRatings(res.products.data.ratings)
         }
       },
       onError: (err) => {
