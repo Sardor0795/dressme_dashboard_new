@@ -139,7 +139,7 @@ export default function Sidebar({ name, surName }) {
                         className="ml-[2px] "
                       />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Одежда
+                        Товар
                       </p>
                     </figure>
                   ) : (
@@ -149,7 +149,7 @@ export default function Sidebar({ name, surName }) {
                         className="ml-[2px] "
                       />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Одежда
+                        Товар
                       </p>
                     </figure>
                   )

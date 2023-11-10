@@ -43,13 +43,13 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             { id: 8, action: true, name: "3XL" },
         ],
         sizeList2: [
-            { id: 1, action: true, name: "5X" },
+            { id: 11, action: true, name: "5X" },
             { id: 2, action: true, name: "7X" },
-            { id: 3, action: true, name: "9X" },
-            { id: 4, action: true, name: "10X" },
-            { id: 5, action: true, name: "4X" },
-            { id: 6, action: true, name: "6X" },
-            { id: 7, action: true, name: "8X" },
+            { id: 13, action: true, name: "9X" },
+            { id: 14, action: true, name: "10X" },
+            { id: 15, action: true, name: "4X" },
+            { id: 16, action: true, name: "6X" },
+            { id: 17, action: true, name: "8X" },
         ]
     }
     )
@@ -111,7 +111,6 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             isCheckValid: false,
             onConcel: false,
             selected: null,
-
         })
         handleCallBack()
         setToggleShow(false)
