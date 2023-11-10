@@ -40,7 +40,7 @@ export default function ProductsPageOne() {
                   <GoBackIcons />
                 </button></>}
               <p className={`text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${!dressInfo?.nextPageShowForm && "md:ml-[30px]"} `}>
-                Добавить одежду
+                Добавить товар
               </p>
             </section>
           </section>

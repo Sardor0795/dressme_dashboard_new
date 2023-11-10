@@ -321,7 +321,6 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
                                             <AddBtn />
                                         </button>
                                     </div>
-
                                 </div>
                                 {/* Состав на узбекском */}
                                 <div className="flex-1 mb-[10px]">
