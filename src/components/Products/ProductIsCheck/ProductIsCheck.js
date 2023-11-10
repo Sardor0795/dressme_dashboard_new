@@ -57,7 +57,7 @@ export default function ProductIsCheck() {
         }
     );
 
-    console.log(state?.isLocation, state?.isMarket);
+    // console.log(state?.isLocation, state?.isMarket);
 
     return (
         <div>

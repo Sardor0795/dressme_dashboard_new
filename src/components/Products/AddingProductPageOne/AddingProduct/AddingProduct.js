@@ -148,10 +148,7 @@ const AddingProduct = () => {
       discount_percent: childData?.discountPercent,
     })
   }
-  function CallBackTextForm(childData) {
-    setState({ ...state, textListOfFormList: childData, titleRu: childData?.name_Ru, titleUz: childData?.name_Uz })
 
-  }
   function CallBackOutWear(childData) {
 
     setState({
@@ -349,7 +346,10 @@ const AddingProduct = () => {
   }, [screenSize]);
 
   const LocationAddSubmit = () => {
+    console.log(state?.textListOfFormList, " state?.textListOfFormList");
+  }
 
+  const CallBackTextForm = (childData) => {
     setState({ ...state, errorListMessage: '' })
 
 
@@ -385,15 +385,15 @@ const AddingProduct = () => {
     state?.discount_percent && form.append("discount_percent", state?.discount_percent);//no R
     state?.discount_price && form.append("discount_price", state?.discount_price);//no R
     // textListOfFormList
-    form.append("name_uz", state?.textListOfFormList?.name_Uz);
-    form.append("name_ru", state?.textListOfFormList?.name_Ru);
-    form.append("quality_uz", state?.textListOfFormList?.quality_Uz);
-    form.append("quality_ru", state?.textListOfFormList?.quality_Ru);
-    state?.textListOfFormList?.description_Uz && form.append("description_uz", state?.textListOfFormList?.description_Uz);
-    state?.textListOfFormList?.description_Ru && form.append("description_ru", state?.textListOfFormList?.description_Ru);
-    state?.textListOfFormList?.composition_Uz && form.append("composition_uz", state?.textListOfFormList?.composition_Uz);//no R
-    state?.textListOfFormList?.composition_Ru && form.append("composition_ru", state?.textListOfFormList?.composition_Ru);//no R
-    state?.textListOfFormList?.brand_id && form.append("brand_id", state?.textListOfFormList?.brand_id);//no R
+    form.append("name_uz", childData?.name_Uz);
+    form.append("name_ru", childData?.name_Ru);
+    form.append("quality_uz", childData?.quality_Uz);
+    form.append("quality_ru", childData?.quality_Ru);
+    childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
+    childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
+    childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
+    childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
+    childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
     // HeadWear
     state?.headWearList?.oneSiz && form.append("one_size", state?.headWearList?.oneSize);
     state?.headWearList?.minHeadGirth && form.append("min_head_girth", state?.headWearList?.minHeadGirth);
@@ -447,7 +447,7 @@ const AddingProduct = () => {
           }
         } else if (res?.message) {
           console.log("checked boldi");
-          navigate("/products")
+          navigate("/products/location")
           setDressInfo({ ...dressInfo, nextPageShowForm: true })
           // window.location.reload();
           toast.success(`${res?.message}`, {
@@ -1576,7 +1576,7 @@ const AddingProduct = () => {
                         accept=" image/*"
                       />
                       {!state.pictureBgView1 && (
-                        <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state.pictureBgView1 ? " border border-dashed" : "border border-[#FFB8B8]"} rounded-lg`}>
+                        <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state?.isCheckValid && !state.pictureBgView1 ? "border border-[#FFB8B8]" : "border border-dashed"} rounded-lg`}>
                           <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
                             Выберите фото   <span className="ml-[5px]">
                               <StarLabel />

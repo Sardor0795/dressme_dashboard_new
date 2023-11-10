@@ -16,10 +16,30 @@ import { Space, DatePicker } from "antd";
 // import { SearchIcon } from "../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { wearImg } from "../../../assets";
+import { useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../hook/useHttp";
 
 const { RangePicker } = DatePicker;
 
 export default function LocationClothesCity() {
+  const { request } = useHttp()
+  const [state, setState] = useState({
+    productList: null
+  })
+
+  useQuery(["products"], () => {
+    return request({ url: "/products", token: true });
+  },
+    {
+      onSuccess: (res) => {
+        setState({ ...state, productList: res?.products?.data })
+        console.log(res, "nbuRes");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+  console.log(state?.productList, "productList");
   const [city1, setCity1] = useState([
     {
       id: 1,
@@ -199,6 +219,7 @@ export default function LocationClothesCity() {
   }, [arrayAllChecked]);
 
 
+  // products
   const navigate = useNavigate();
 
   return (
@@ -411,9 +432,7 @@ export default function LocationClothesCity() {
 
           {/* City 1 */}
           <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-            {city1.map((data, i) => {
-              return <LocationItem data={data} click={onCheck1} />;
-            })}
+            <LocationItem data={state?.productList} click={onCheck1} />;
           </div>
 
           {/* City 2 */}
@@ -454,9 +473,8 @@ export default function LocationClothesCity() {
               </section>
             </div>
             <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-              {city2.map((data, i) => {
-                return <LocationItem data={data} click={onCheck2} />;
-              })}
+
+              <LocationItem data={state?.productList} click={onCheck2} />;
             </div>
           </div>
         </div>
