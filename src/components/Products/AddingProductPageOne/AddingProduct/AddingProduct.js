@@ -93,14 +93,12 @@ const AddingProduct = () => {
     underWearList: null,
     shoesList: null,
     AccessoriesList: null,
-    // -----TextForm-----
     textForm: null
 
   });
 
   const [productsData, setProductsData] = useState({});
-  const [selectedFiles, setSelectedFiles] = useState([{}]);
-  const [incrementUz, setIncrementUz] = useState(1);
+
 
   const handleLocationImage1 = (e) => {
     setState({
@@ -138,6 +136,7 @@ const AddingProduct = () => {
   };
   function CallBackTextForm(childData) {
     setState({ ...state, textForm: childData })
+    console.log(childData, "TextForm");
   }
   function CallBackHeadWear(childData) {
     console.log(childData);
@@ -203,6 +202,12 @@ const AddingProduct = () => {
       discount_percent: childData?.discountPercent,
     })
   }
+  // console.log(state?.textForm, "state?.textForm");
+  // console.log(state?.underWearList, "state?.underWearList");
+  // console.log(state?.outWearList, "state?.outWearList");
+  // console.log(state?.headWearList, "state?.headWearList");
+  // console.log(state?.shoesList, "state?.shoesList");
+  // console.log(state?.AccessoriesList, "state?.AccessoriesList");
 
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -332,14 +337,15 @@ const AddingProduct = () => {
     };
   }, [screenSize]);
 
-  console.log(state?.AccessoriesList, "AccessoriesList");
-  console.log(state?.outWearList, "outWearList");
+  // console.log(state?.AccessoriesList, "AccessoriesList");
+  // console.log(state?.outWearList, "outWearList");
 
   // console.log(state?.underWearList?.underWearLetterSize, state?.underWearList?.underWearLetterSize?.length, "state?.underWearList?.underWearLetterSize");
   // console.log(state?.outWearList?.outWearLetterSize, state?.outWearList?.outWearLetterSize?.length, "state?.outWearList?.outWearLetterSize");
   // console.log(state?.AccessoriesList?.accessoryLetterSize, state?.AccessoriesList?.accessoryLetterSize?.length, "state?.AccessoriesList?.accessoryLetterSize");
 
   const LocationAddSubmit = () => {
+    setState({ ...state, errorListMessage: '' })
 
     // console.log(
     //   state?.section_Id, "section_Id", '\n',
@@ -464,6 +470,7 @@ const AddingProduct = () => {
             setState({ ...state, errorList: res?.errors })
           }
         } else if (res?.message) {
+          console.log("checked boldi");
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -474,8 +481,8 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
-          // navigate("/products")
-          // setDressInfo({ ...dressInfo, nextPageShowForm: true })
+          navigate("/products")
+          setDressInfo({ ...dressInfo, nextPageShowForm: true })
           // window.location.reload();
         }
         console.log(res, "ProductStore");
@@ -498,14 +505,14 @@ const AddingProduct = () => {
       state?.filterTypeId &&
       state?.producer_Id &&
       state?.season_Id &&
-      selectedFiles?.length > 1
+      state?.pictureBgFile1
     ) {
       setDressInfo({ ...dressInfo, nextPageShowForm: false })
       setState({ ...state, isCheckValid: false })
 
     }
   }
-  // console.log(state?.isCheckValid, "isCheckValid");category_Id
+  // console.log(state?.textForm, " state?.textForm?.name_Uz");
 
 
   useEffect(() => {
