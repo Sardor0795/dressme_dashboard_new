@@ -88,12 +88,14 @@ const AddingProduct = () => {
     discount_price: null,
 
     // -----Details-----
+    textListOfFormList: null,
     headWearList: null,
     outWearList: null,
     underWearList: null,
     shoesList: null,
     AccessoriesList: null,
-    textForm: null
+    titleUz: null,
+    titleRu: null,
 
   });
 
@@ -134,12 +136,7 @@ const AddingProduct = () => {
       pictureBgView4: URL.createObjectURL(e.target.files[0])
     })
   };
-  function CallBackTextForm(childData) {
-    setState({ ...state, textForm: childData })
-    console.log(childData, "TextForm");
-  }
   function CallBackHeadWear(childData) {
-    console.log(childData);
     setState({
       ...state,
       headWearList: childData,
@@ -150,6 +147,10 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
+  }
+  function CallBackTextForm(childData) {
+    setState({ ...state, textListOfFormList: childData, titleRu: childData?.name_Ru, titleUz: childData?.name_Uz })
+
   }
   function CallBackOutWear(childData) {
 
@@ -202,7 +203,17 @@ const AddingProduct = () => {
       discount_percent: childData?.discountPercent,
     })
   }
-  // console.log(state?.textForm, "state?.textForm");
+  // console.log(state?.textListOfFormList,
+  //   state?.textListOfFormList?.name_Ru,
+  //   state?.textListOfFormList?.name_Uz,
+  //   state?.textListOfFormList?.quality_Ru,
+  //   state?.textListOfFormList?.quality_Uz,
+  //   state?.textListOfFormList?.description_Uz,
+  //   state?.textListOfFormList?.description_Ru,
+  //   state?.textListOfFormList?.composition_Uz,
+  //   state?.textListOfFormList?.composition_Ru,
+  //   "state?.textListOfFormList");
+
   // console.log(state?.underWearList, "state?.underWearList");
   // console.log(state?.outWearList, "state?.outWearList");
   // console.log(state?.headWearList, "state?.headWearList");
@@ -337,46 +348,11 @@ const AddingProduct = () => {
     };
   }, [screenSize]);
 
-  // console.log(state?.AccessoriesList, "AccessoriesList");
-  // console.log(state?.outWearList, "outWearList");
-
-  // console.log(state?.underWearList?.underWearLetterSize, state?.underWearList?.underWearLetterSize?.length, "state?.underWearList?.underWearLetterSize");
-  // console.log(state?.outWearList?.outWearLetterSize, state?.outWearList?.outWearLetterSize?.length, "state?.outWearList?.outWearLetterSize");
-  // console.log(state?.AccessoriesList?.accessoryLetterSize, state?.AccessoriesList?.accessoryLetterSize?.length, "state?.AccessoriesList?.accessoryLetterSize");
-
   const LocationAddSubmit = () => {
+
     setState({ ...state, errorListMessage: '' })
 
-    // console.log(
-    //   state?.section_Id, "section_Id", '\n',
-    //   state?.sub_Section_Id, "sub_Section_Id", ' \n',
-    //   state?.season_Id, "season_Id \n",
-    //   state?.color_Id, "color_Id \n",
-    //   state?.gender_Id, "gender_Id \n",
-    //   state?.min_Age_Category, "min_Age_Category \n",
-    //   state?.max_Age_Category, "max_Age_Category \n",
-    //   state?.sku, "sku \n",
-    //   <br />,
-    //   state?.category_Id, "category_Id \n",
-    //   state?.type_Id, "type_Id \n",
-    //   state?.filterTypeId, "filterTypeId \n",
-    //   <br />,
-    //   state?.producer_Id, "producer_Id \n",
-    //   state?.photos1, "photos1 \n",
-    //   state?.shopId, "shopId \n",
-    //   state?.shopLocationId, "shopLocationId \n",
-    //   state?.amount, 'amount \n',
-    //   state?.age, 'age \n',
-    //   state?.price, 'price \n',
-    //   state?.discount_percent, 'discount_percent \n',
-    //   state?.discount_price, 'discount_price \n',
-    //   state?.headWearList, "headWearList \n",
-    //   state?.outWearList, "outWearList \n",
-    //   state?.underWearList, "underWearList \n",
-    //   state?.shoesList, "shoesList \n",
-    //   state?.AccessoriesList, "AccessoriesList \n",
-    //   state?.textForm, "textForm \n",
-    // );
+
     let form = new FormData();
     form.append("shop_id", state?.shopId);
     form.append("shop_location_id", state?.shopLocationId);
@@ -408,16 +384,16 @@ const AddingProduct = () => {
     state?.age && form.append("age", state?.age);
     state?.discount_percent && form.append("discount_percent", state?.discount_percent);//no R
     state?.discount_price && form.append("discount_price", state?.discount_price);//no R
-    // textForm
-    form.append("name_uz", state?.textForm?.name_Uz);
-    form.append("name_ru", state?.textForm?.name_Ru);
-    form.append("quality_uz", state?.textForm?.quality_Uz);
-    form.append("quality_ru", state?.textForm?.quality_Ru);
-    form.append("description_uz", state?.textForm?.description_Uz);
-    form.append("description_ru", state?.textForm?.description_Ru);
-    state?.textForm?.composition_Uz && form.append("composition_uz", state?.textForm?.composition_Uz);//no R
-    state?.textForm?.composition_Ru && form.append("composition_ru", state?.textForm?.composition_Ru);//no R
-    state?.textForm?.brand_id && form.append("brand_id", state?.textForm?.brand_id);//no R
+    // textListOfFormList
+    form.append("name_uz", state?.textListOfFormList?.name_Uz);
+    form.append("name_ru", state?.textListOfFormList?.name_Ru);
+    form.append("quality_uz", state?.textListOfFormList?.quality_Uz);
+    form.append("quality_ru", state?.textListOfFormList?.quality_Ru);
+    state?.textListOfFormList?.description_Uz && form.append("description_uz", state?.textListOfFormList?.description_Uz);
+    state?.textListOfFormList?.description_Ru && form.append("description_ru", state?.textListOfFormList?.description_Ru);
+    state?.textListOfFormList?.composition_Uz && form.append("composition_uz", state?.textListOfFormList?.composition_Uz);//no R
+    state?.textListOfFormList?.composition_Ru && form.append("composition_ru", state?.textListOfFormList?.composition_Ru);//no R
+    state?.textListOfFormList?.brand_id && form.append("brand_id", state?.textListOfFormList?.brand_id);//no R
     // HeadWear
     state?.headWearList?.oneSiz && form.append("one_size", state?.headWearList?.oneSize);
     state?.headWearList?.minHeadGirth && form.append("min_head_girth", state?.headWearList?.minHeadGirth);
@@ -471,6 +447,9 @@ const AddingProduct = () => {
           }
         } else if (res?.message) {
           console.log("checked boldi");
+          navigate("/products")
+          setDressInfo({ ...dressInfo, nextPageShowForm: true })
+          // window.location.reload();
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -481,9 +460,6 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
-          navigate("/products")
-          setDressInfo({ ...dressInfo, nextPageShowForm: true })
-          // window.location.reload();
         }
         console.log(res, "ProductStore");
       })
@@ -512,7 +488,6 @@ const AddingProduct = () => {
 
     }
   }
-  // console.log(state?.textForm, " state?.textForm?.name_Uz");
 
 
   useEffect(() => {
@@ -523,20 +498,7 @@ const AddingProduct = () => {
 
   return (
     <div className="w-full h-fit ">
-      <ToastContainer
-        style={{ zIndex: "1000", top: "80px" }}
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+
       <div className="flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
         {state?.errorListMessage && <div className="w-full  flex items-center gap-x-2 ">
           <span className="text-[16px] text-textRedColor font-AeonikProRegular">{state?.errorListMessage}</span>
@@ -956,7 +918,7 @@ const AddingProduct = () => {
                   <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                     <div className="flex items-center">
                       <span className="text-[13px] md:text-base font-AeonikProRegular">
-                        Раздел товар
+                        Раздел товара
                       </span>
                       <span className="ml-[5px]">
                         <StarLabel />
@@ -1012,7 +974,7 @@ const AddingProduct = () => {
                   <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                     <div className="flex items-center">
                       <span className={`text-[13px] md:text-base font-AeonikProRegular ${newArray?.length ? "text-[#000]" : "text-[#b5b5b5]"}`}>
-                        Подраздел товар
+                        Подраздел товара
                       </span>
                       <span className="ml-[5px]">
                         {newArray?.length ? (
@@ -1292,7 +1254,7 @@ const AddingProduct = () => {
                   <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                     <div className="flex items-center">
                       <span className="text-[13px] md:text-base font-AeonikProRegular">
-                        Категория одежды
+                        Категория товара
                       </span>
                       <span className="ml-[5px]">
                         <StarLabel />
@@ -1614,7 +1576,7 @@ const AddingProduct = () => {
                         accept=" image/*"
                       />
                       {!state.pictureBgView1 && (
-                        <div className="w-full h-full flex  bg-photoBg items-center justify-center border border-dashed rounded-lg">
+                        <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state.pictureBgView1 ? " border border-dashed" : "border border-[#FFB8B8]"} rounded-lg`}>
                           <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
                             Выберите фото   <span className="ml-[5px]">
                               <StarLabel />
@@ -1776,7 +1738,22 @@ const AddingProduct = () => {
         </div>
       </div>
       <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"}`}>
-        <TextFormAdd onClick={LocationAddSubmit} handlCallBack={CallBackTextForm} />
+        <ToastContainer
+          style={{ zIndex: "1000", top: "80px" }}
+          position="top-right"
+          autoClose={5000}
+          limit={1}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+
+        />
+        <TextFormAdd LocationAddSubmit={LocationAddSubmit} handlCallBack={CallBackTextForm} />
       </div>
       {/* } */}
     </div >

@@ -7,7 +7,7 @@ import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 
-export default function TextFormAdd({ onClick, handlCallBack }) {
+export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -32,8 +32,10 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
     const handleSelectQuality = (value) => {
         productsData?.quality?.filter(e => e.name_ru == value).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz })
+            // console.log(item?.name_uz, "nameuz");
+            // console.log(state?.qualityInUz, "qualityInUz");
         })
-        setState({ ...state, qualityInRu: value })
+        setState({ ...state, qualityInRu: value, qualityInUz: value })
 
     }
     const handleSelectQualityUz = (value) => {
@@ -70,21 +72,20 @@ export default function TextFormAdd({ onClick, handlCallBack }) {
     const send = () => {
         setState({ ...state, isCheckValid: true })
 
-        handlCallBack({
-            brand_id: state?.brand,
-            name_Ru: state?.titleInRu,
-            name_Uz: state?.titleInUz,
-            description_Ru: state?.descriptionInRu,
-            description_Uz: state?.descriptionInUz,
-            quality_Ru: state?.qualityInRu,
-            quality_Uz: state?.qualityInUz,
-            composition_Ru: state?.noteValueRu,
-            composition_Uz: state?.noteValueUz,
-        })
         if (state?.titleInRu && state?.titleInUz && state?.qualityInRu && state?.qualityInRu) {
-            onClick()
+            LocationAddSubmit()
+            handlCallBack({
+                brand_id: state?.brand,
+                name_Ru: state?.titleInRu,
+                name_Uz: state?.titleInUz,
+                description_Ru: state?.descriptionInRu,
+                description_Uz: state?.descriptionInUz,
+                quality_Ru: state?.qualityInRu,
+                quality_Uz: state?.qualityInUz,
+                composition_Ru: state?.noteValueRu,
+                composition_Uz: state?.noteValueUz,
+            })
             setState({ ...state, isCheckValid: false })
-
         }
     }
 
