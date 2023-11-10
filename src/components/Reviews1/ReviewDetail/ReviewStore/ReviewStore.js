@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { useNavigate } from "react-router-dom";
-import { StarIcon } from "../../../../assets/icons";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 import { Rate } from "antd";
@@ -66,7 +65,6 @@ const ReviewStore = () => {
   return (
     <div className="w-full h-fit flex flex-col gap-y-[30px]">
       {sellerShops?.shops?.data.map((data, i) => {
-        console.log(data);
         return (
           <div
             key={data?.id}
@@ -80,7 +78,7 @@ const ReviewStore = () => {
               <span className="w-1/2 h-[1px] bg-borderColor"></span>
             </action>
             <action className="w-full flex items-center justify-between md:-mt-3">
-              <section className="w-full md:w-fit flex items-center pb-[15px] md:pb-0 border-b border-borderColor md:border-none">
+              <section className="w-full md:w-[40%] overflow-auto flex items-center pb-[15px] md:pb-0 border-b border-borderColor md:border-none">
                 <div className="hidden md:flex items-center justify-center pr-7 pl-5 text-xl font-AeonikProRegular">
                   {i + 1}
                 </div>
@@ -111,7 +109,7 @@ const ReviewStore = () => {
                   </div>
                 </div>
               </section>
-              <section className="hidden md:flex items-center gap-x-1">
+              <section className="hidden w-[15%] md:flex items-center gap-x-1">
                 <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
                   <img src={man} alt="" />
                 </div>
@@ -119,7 +117,7 @@ const ReviewStore = () => {
                   <img src={woman} alt="" />
                 </div>
               </section>
-              <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg hidden md:flex items-center justify-center gap-x-1 ll:gap-x-3">
+              <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[20%] ll:px-5 active:opacity-70 border border-borderColor rounded-lg hidden md:flex items-center justify-center gap-x-1 ll:gap-x-3">
                 <img src={deliveryIcon} alt="" />
                 {deliverList
                   ?.filter((e) => e.id == data?.delivery_id)
@@ -134,7 +132,7 @@ const ReviewStore = () => {
                     );
                   })}
               </section>
-              <section className="hidden md:flex items-center gap-x-[50px]">
+              <section className="hidden w-[15%] md:flex items-center justify-center gap-x-[50px]">
                 <p
                   onClick={() => goDetail(data?.id)}
                   className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"

@@ -55,8 +55,6 @@ export default function MarketIsCheck() {
         }
     );
 
-
-
     return (
         <div>
             {state?.loading || isLoading ? <LoadingForSeller /> :
@@ -78,8 +76,6 @@ export default function MarketIsCheck() {
                 }
                 </>
             }
-
-
         </div >
     )
 }

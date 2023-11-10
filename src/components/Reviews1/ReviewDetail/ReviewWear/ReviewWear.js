@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MobileStar, SearchIcon, } from "../../../../assets/icons";
+import { MobileStar, SearchIcon } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
@@ -23,8 +23,8 @@ export default function ReviewWear() {
     {
       onSuccess: (res) => {
         if (res) {
-          // console.log(res.products.data, "REVIEWS");
-          setReviewsList(res.products.data)
+          console.log(res.products.data, "REVIEWS-WEAR");
+          setReviewsList(res.products.data);
         }
       },
       onError: (err) => {
@@ -102,19 +102,36 @@ export default function ReviewWear() {
         {/* table product */}
         <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
           {reviewsList?.map((data) => {
+            console.log(data.photos, "PHOTOS");
             return (
               <ul
                 key={data?.id}
                 className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
               >
                 <li className="w-[20%] md:pl-5 h-fit flex items-center ">
-                  {data?.photos?.map(item => {
-                    return(
-                      <figure className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
-                        <img className="w-full h-full object-contain" src={item?.url_photo} alt="" />
-                      </figure>
-                    )
-                  })}
+                  {data?.photos.length > 1
+                    ? data?.photos?.map((item, index) =>
+                        index === 0 ? (
+                          <figure className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
+                            <img
+                              className="w-full h-full object-contain"
+                              src={item.url_photo[0]}
+                              alt=""
+                            />
+                          </figure>
+                        ) : null
+                      )
+                    : data?.photos?.map((item) => {
+                        return (
+                          <figure className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
+                            <img
+                              className="w-full h-full object-contain"
+                              src={item?.url_photo}
+                              alt=""
+                            />
+                          </figure>
+                        );
+                      })}
                 </li>
                 <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
                   <li className="md:w-[25%] h-full flex items-center">
@@ -130,7 +147,11 @@ export default function ReviewWear() {
                       Отзывы
                     </span>
                     <div className="flex items-center">
-                      <Rate disabled allowHalf defaultValue={data?.overall_rating}/>
+                      <Rate
+                        disabled
+                        allowHalf
+                        defaultValue={data?.overall_rating}
+                      />
                     </div>
                   </li>
                   <li className="md:w-[20%] h-full flex items-center ">
