@@ -23,12 +23,12 @@ export default function CommentDetail() {
   useQuery(
     ["review_store_details"],
     () => {
-      return request({ url: `/shops/locations/shop/${newId}`, token: true });
+      return request({ url: `/shops/${newId}`, token: true });
     },
     {
       onSuccess: (res) => {
         if (res) {
-          console.log(res?.locations, "Review-Store-Details");
+          console.log(res?.shop, "Review-Store-Details");
           setState({
             ...state,
             locationListId: res,
@@ -106,7 +106,7 @@ export default function CommentDetail() {
               <div className="h-12 flex items-center px-5 active:opacity-70 border border-borderColor bg-lightBgColor md:bg-white rounded-lg gap-x-3">
                 <img src={deliveryIcon} alt="" />
                 <span className="text-tableTextTitle2 text-[13px] md:text-base not-italic font-AeonikProMedium">
-                  Собственная доставка
+                {state?.locationListId?.locations?.data[0]?.delivery?.name_ru || "NoDelivery" }
                 </span>
               </div>
             </div>
