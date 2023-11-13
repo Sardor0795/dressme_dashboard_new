@@ -11,17 +11,40 @@ import {
 import { BiChevronDown } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { Popover } from "antd";
+import LoadingForSeller from "../../Loading/LoadingFor";
+import { useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../hook/useHttp";
 
 export default function ReviewWearComment() {
+  const { request } = useHttp();
   const [state, setState] = useState({
     openwear: false,
+    loading: true,
   });
   const navigate = useNavigate();
+
+  // ------------GET METHOD delivery-method-----------------
+  // useQuery(
+  //   ["Loading"],
+  //   () => {
+  //     return request({ url: "/", token: true });
+  //   },
+  //   {
+  //     onSuccess: (res) => {
+  //       setState({ ...state, loading: false });
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "Err Loading");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   // ----------------Wear state management----------------------------
 
   const handleOpenChangeWear = (newOpen) => {
-    setState({ ...state, openwear: newOpen });
+    setState({ ...state, openwear: newOpen, loading: false });
   };
 
   const [filterStar, setFilterStar] = useState([
@@ -104,6 +127,7 @@ export default function ReviewWearComment() {
       top: 0,
     });
   }, []);
+
   return (
     <div className="">
       <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6">
@@ -155,15 +179,19 @@ export default function ReviewWearComment() {
           </div>
         </div>
       </div>
-      <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
-        <section className="w-full md:w-[30%] overflow-hidden">
-          <WearCommentDetail />
-        </section>
+      {state?.loading ? (
+        <LoadingForSeller />
+      ) : (
+        <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
+          <section className="w-full md:w-[30%] overflow-hidden">
+            <WearCommentDetail />
+          </section>
 
-        <section className="w-full md:w-[calc(70%-70px)] ">
-          <WearCommentTitle />
-        </section>
-      </div>
+          <section className="w-full md:w-[calc(70%-70px)] ">
+            <WearCommentTitle />
+          </section>
+        </div>
+      )}
     </div>
   );
 }

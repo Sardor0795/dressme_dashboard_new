@@ -5,19 +5,19 @@ import { useHttp } from "../../../../hook/useHttp";
 import { Rate } from "antd";
 import { useParams } from "react-router-dom";
 import { NoImg } from "../../../../assets/icons";
+import LoadingForSeller from "../../../Loading/LoadingFor";
 
 export default function CommentDetail() {
   const { request } = useHttp();
-  const [storeDetails, setStoreDetails] = useState();
   const [state, setState] = useState({
     locationListId: "",
-    // locationIsCheck: false,
-    // loading: true
+    locationIsCheck: false,
+    loading: true,
   });
-
+  console.log(state.locationListId);
 
   const { id } = useParams();
-  const newId = id?.replace(":", "")
+  const newId = id?.replace(":", "");
 
   // ------------GET Has Reviews-STORE-Details ?-----------------
   useQuery(
@@ -28,9 +28,13 @@ export default function CommentDetail() {
     {
       onSuccess: (res) => {
         if (res) {
-          // setStoreDetails(res?.locations?.data[0]?.shop);
-          console.log(res?.locations?.data, "Review-Store-Details");
-          setState({ ...state, locationListId: res?.locations?.data})
+          console.log(res?.locations, "Review-Store-Details");
+          setState({
+            ...state,
+            locationListId: res,
+            locationIsCheck: res?.locations_exist,
+            loading: false,
+          });
         }
       },
       onError: (err) => {
@@ -49,24 +53,39 @@ export default function CommentDetail() {
 
   return (
     <div className="w-full h-full ">
-      <div className="md:h-11"></div>
+      {/* {state?.loading ? (
+        <LoadingForSeller />
+      ) : (
+        <> */}
+          <div className="md:h-11"></div>
           <div className="h-full w-full ">
             <div className="w-full md:h-[120px] flex items-center gap-x-5">
               <button className="w-20 h-20 md:h-[120px] md:w-[120px] flex items-center justify-center rounded-full md:rounded-[20px] border border-lightBorderColor">
-                <img src={state?.locationListId?.url_logo_photo} alt="" />
+                <img
+                  src={
+                    state?.locationListId?.locations?.data[0]?.shop
+                      ?.url_logo_photo
+                  }
+                  alt=""
+                />
                 {/* {state?.locationListId?} */}
               </button>
               <div className="flex flex-col">
                 <span className="text-tableTextTitle2 text-sm md:text-2xl not-italic font-AeonikProMedium">
-                  {state?.locationListId?.name || "noName"}
+                  {state?.locationListId?.locations?.data[0]?.shop?.name ||
+                    "noName"}
                 </span>
                 <div className="flex md:hidden items-center mt-[5px]">
                   <div className="flex md:hidden items-center mr-[5px] md:mr-[6px]">
-                    <Rate allowHalf disabled defaultValue={state?.locationListId?.overall_rating} />
+                    <Rate
+                      allowHalf
+                      disabled
+                      defaultValue={state?.locationListId?.overall_rating}
+                    />
                   </div>
                   <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                     <p className="font-AeonikProMedium text-black mr-[5px]">
-                      {state?.locationListId?.overall_rating || '0'}
+                      {state?.locationListId?.overall_rating || "0"}
                     </p>
                     <p className="text-setTexOpacity font-AeonikProRegular">
                       ({state?.locationListId?.rated_users_count || "0"} votes){" "}
@@ -92,6 +111,8 @@ export default function CommentDetail() {
               </div>
             </div>
           </div>
+        {/* </>
+      )} */}
     </div>
   );
 }
