@@ -114,7 +114,7 @@ export default function ReviewStoreWear() {
                     : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
               >
-                Одежда ({reviewsProduct})
+                Товары ({reviewsProduct?.rated_users_count > 0 ? reviewsProduct : 0})
               </button>
               <button
                 onClick={() => setStoreOrWear(true)}
@@ -124,7 +124,7 @@ export default function ReviewStoreWear() {
                     : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
               >
-                Магазины ({reviewsStore})
+                Магазины ({reviewsStore?.rated_users_count > 0 ? reviewsStore : 0})
               </button>
             </div>
           </div>
