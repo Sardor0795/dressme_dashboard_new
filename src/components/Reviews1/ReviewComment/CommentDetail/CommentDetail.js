@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 import { Rate } from "antd";
 import { useParams } from "react-router-dom";
+import { NoImg } from "../../../../assets/icons";
 
 export default function CommentDetail() {
   const { request } = useHttp();
@@ -27,7 +28,7 @@ export default function CommentDetail() {
     {
       onSuccess: (res) => {
         if (res) {
-          setStoreDetails(res?.locations?.data[0].shop);
+          // setStoreDetails(res?.locations?.data[0]?.shop);
           console.log(res?.locations?.data, "Review-Store-Details");
           setState({ ...state, locationListId: res?.locations?.data})
         }
@@ -57,7 +58,7 @@ export default function CommentDetail() {
               </button>
               <div className="flex flex-col">
                 <span className="text-tableTextTitle2 text-sm md:text-2xl not-italic font-AeonikProMedium">
-                  {storeDetails?.name}
+                  {state?.locationListId?.name || "noName"}
                 </span>
                 <div className="flex md:hidden items-center mt-[5px]">
                   <div className="flex md:hidden items-center mr-[5px] md:mr-[6px]">
@@ -65,10 +66,10 @@ export default function CommentDetail() {
                   </div>
                   <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                     <p className="font-AeonikProMedium text-black mr-[5px]">
-                      {state?.locationListId?.overall_rating ? state?.locationListId?.overall_rating : 0}
+                      {state?.locationListId?.overall_rating || '0'}
                     </p>
                     <p className="text-setTexOpacity font-AeonikProRegular">
-                      ({state?.locationListId?.rated_users_count} votes){" "}
+                      ({state?.locationListId?.rated_users_count || "0"} votes){" "}
                     </p>
                   </div>
                 </div>
