@@ -21,7 +21,7 @@ const ReviewStore = () => {
     {
       onSuccess: (res) => {
         if (res?.shops) {
-          console.log(res?.shops?.data, "REVIEW-STORE");
+          // console.log(res?.shops?.data, "REVIEW-STORE");/
           setSellerShops(res?.shops?.data);
           setLoading(false);
         }
@@ -165,7 +165,8 @@ const ReviewStore = () => {
                     </div>
                   </action>
                   <button
-                    onClick={() => goDetail(data?.id)}
+                    // onClick={() => goDetail(data?.id)}
+                    onClick={() => navigate(`review/comment-store/:${data?.id}`)}
                     className="w-full md:hidden flex items-center justify-center active:scale-95 h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium"
                   >
                     Подробнее
