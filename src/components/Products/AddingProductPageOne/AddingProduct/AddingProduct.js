@@ -96,6 +96,7 @@ const AddingProduct = () => {
     AccessoriesList: null,
     titleUz: null,
     titleRu: null,
+    selectedUz: []
 
   });
 
@@ -488,8 +489,19 @@ const AddingProduct = () => {
 
     }
   }
-
-
+  const handleChangeSubSection = (e) => {
+    setState({ ...state, sub_Section_Id: e })
+  }
+  // console.log(state?.sub_Section_Id, "state?.selectedUz");
+  // const clearSelected = () => {
+  //   setState({ ...state, selectedUz: [] });
+  //   alert("clearSelected")
+  // }
+  useEffect(() => {
+    if (!newArray?.length) {
+      setState({ ...state, sub_Section_Id: [] });
+    }
+  }, [newArray?.length])
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -994,6 +1006,15 @@ const AddingProduct = () => {
                       </label>
                       <ArrowRightIcon />
                     </button>
+                    {/* <button
+                      onClick={clearSelected}
+                      type="button"
+                      className="w-fit h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                    >
+                      <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#000]">
+                        clearSelected
+                      </label>
+                    </button> */}
                     <div className="w-full h-fit hidden md:flex">
                       <Select
                         className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.sub_Section_Id?.length && newArray?.length ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
@@ -1004,7 +1025,9 @@ const AddingProduct = () => {
                         placeholder="Выбрать"
                         mode="multiple"
                         optionLabelProp="label"
-                        onChange={(e) => setState({ ...state, sub_Section_Id: e })}
+                        value={state?.sub_Section_Id}
+                        // onChange={(e) => setState({ ...state, sub_Section_Id: e })}
+                        onChange={handleChangeSubSection}
                         onSearch={onSearch}
                         size="large"
                         allowClear
@@ -1022,14 +1045,13 @@ const AddingProduct = () => {
                               value={item.id}
                               label={item.name_ru}
                             >
-                              <Space>
-                                <span>{item.name_ru}</span>
-                              </Space>
+                              <span>{item.name_ru}</span>
                             </Option>
                           );
 
                         })
                         }
+
                       </Select>
 
                     </div>
