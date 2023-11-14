@@ -8,6 +8,7 @@ import {
 } from "../../../../assets/icons";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
+import { useParams } from "react-router-dom";
 
 const CommentTitle = () => {
   const { request } = useHttp();
@@ -18,6 +19,8 @@ const CommentTitle = () => {
     replyText: null,
     getUserId: null,
   });
+
+  const url = "https://api.dressme.uz/api/seller/reply";
 
   // ------------GET Has Reviews-STORE ?-----------------
   useQuery(
@@ -30,6 +33,7 @@ const CommentTitle = () => {
         if (res) {
           setCommnetStore(res.shops.data);
           console.log(res.shops.data, "Comments-STORE-Review");
+          setState({ ...state, getUserId: res });
         }
       },
       onError: (err) => {
@@ -40,7 +44,23 @@ const CommentTitle = () => {
     }
   );
 
-  // const url = "https://api.dressme.uz/api/seller/reply";
+  const params = useParams();
+
+  // const postData = async user => {
+  //   const response = await fetch(url, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       reply_Text: state.replyText,
+  //       id: state.getUserId
+  //     }),
+  //     headers: {
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     }
+  //   })
+  //   return response.json()
+  // }
+
   const { mutate } = useMutation(() => {
     return fetch(`https://api.dressme.uz/api/seller/reply`, {
       method: "POST",
@@ -48,25 +68,53 @@ const CommentTitle = () => {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
-      body: JSON.stringify({ reply: state?.replyText, id: "12" }),
-      // body: JSON.stringify({ reply: state?.replyText, id: state?.getUserId }),
-    }).then((res) => res.json());
+      body: JSON.stringify({
+        reply: state?.replyText,
+        id: "12",
+      }),
+    }).then((res) => {
+      res.json();
+    });
   });
   console.log(state?.getUserId, " state?.getUserId");
+
   function sendReplyText() {
     // setState({ ...state, getUserId: id });
     mutate(
       {},
       {
         onSuccess: (res) => {
-          console.log(res, "BUReplySuccess");
+          console.log(res, "Bu-Reply-Success");
         },
         onError: (err) => {
-          console.log(err, "BUReplError");
+          console.log(err, "Bu-Reply-Error");
         },
       }
     );
   }
+
+  const sendReply = () => {
+    fetch(`https://api.dressme.uz/api/seller/reply`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: {
+        reply: state.replyText,
+        id: params.id,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((v) => {
+        console.log(v);
+      })
+      .catch((v) => {
+        console.log(v);
+      });
+  };
 
   useEffect(() => {
     window.scrollTo({
@@ -225,7 +273,8 @@ const CommentTitle = () => {
                             onClick={() => {
                               // setState({ ...state, getUserId: item?.user?.id });
                               // sendReplyText();
-                              console.log(state?.replyText, state?.getId)
+                              // console.log(state?.replyText);
+                              sendReply();
                             }}
                             className="w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]"
                           >
