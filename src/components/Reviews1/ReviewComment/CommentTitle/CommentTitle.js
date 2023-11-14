@@ -243,7 +243,7 @@ const CommentTitle = ({titleStore}) => {
                       <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                         <div>
                           <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
-                            {titleStore?.locationListId?.shop?.name}
+                            <span className="mr-1">Ответ</span>{titleStore?.locationListId?.shop?.name}
                           </p>
                           <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
                             {state?.getComment?.rating?.reply}

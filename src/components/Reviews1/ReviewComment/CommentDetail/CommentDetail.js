@@ -59,7 +59,7 @@ export default function CommentDetail({state}) {
       <div className="md:h-11"></div>
       <div className="h-full w-full ">
         <div className="w-full md:h-[120px] flex items-center gap-x-5">
-          <button className="w-20 h-20 md:h-[120px] md:w-[120px] flex items-center justify-center rounded-full md:rounded-[20px] border border-lightBorderColor">
+          <button className="w-20 h-20 md:h-[120px] md:w-[120px] flex items-center justify-center overflow-hidden rounded-full md:rounded-[20px] border border-lightBorderColor">
             <img
               src={state?.locationListId?.shop?.url_logo_photo || NoImg}
               alt=""
