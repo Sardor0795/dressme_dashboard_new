@@ -7,43 +7,42 @@ import { useParams } from "react-router-dom";
 import { NoImg } from "../../../../assets/icons";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 
-export default function CommentDetail() {
-  const { request } = useHttp();
-  const [state, setState] = useState({
-    locationListId: "",
-    locationIsCheck: false,
-    loading: true,
-  });
-  // console.log(state.locationListId);
+export default function CommentDetail({state}) {
+  // const { request } = useHttp();
+  // const [state, setState] = useState({
+  //   locationListId: "",
+  //   locationIsCheck: false,
+  //   loading: true,
+  // });
 
-  const { id } = useParams();
-  const newId = id?.replace(":", "");
+  // const { id } = useParams();
+  // const newId = id?.replace(":", "");
 
-  // ------------GET Has Reviews-STORE-Details ?-----------------
-  useQuery(
-    ["review_store_details"],
-    () => {
-      return request({ url: `/shops/${newId}`, token: true });
-    },
-    {
-      onSuccess: (res) => {
-        if (res) {
-          console.log(res?.shop, "Review-Store-Details");
-          setState({
-            ...state,
-            locationListId: res,
-            locationIsCheck: res?.locations_exist,
-            loading: false,
-          });
-        }
-      },
-      onError: (err) => {
-        console.log(err, "ERR-IN-STORE-COMMENTS");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+  // // ------------GET Has Reviews-STORE-Details ?-----------------
+  // useQuery(
+  //   ["review_store_details"],
+  //   () => {
+  //     return request({ url: `/shops/${newId}`, token: true });
+  //   },
+  //   {
+  //     onSuccess: (res) => {
+  //       if (res) {
+  //         console.log(res?.shop, "Review-Store-Details");
+  //         setState({
+  //           ...state,
+  //           locationListId: res,
+  //           locationIsCheck: res?.locations_exist,
+  //           loading: false,
+  //         });
+  //       }
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "ERR-IN-STORE-COMMENTS");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   useEffect(() => {
     window.scrollTo({
@@ -60,7 +59,7 @@ export default function CommentDetail() {
       <div className="md:h-11"></div>
       <div className="h-full w-full ">
         <div className="w-full md:h-[120px] flex items-center gap-x-5">
-          <button className="w-20 h-20 md:h-[120px] md:w-[120px] flex items-center justify-center rounded-full md:rounded-[20px] border border-lightBorderColor">
+          <button className="w-20 h-20 md:h-[120px] md:w-[120px] flex items-center justify-center overflow-hidden rounded-full md:rounded-[20px] border border-lightBorderColor">
             <img
               src={state?.locationListId?.shop?.url_logo_photo || NoImg}
               alt=""
