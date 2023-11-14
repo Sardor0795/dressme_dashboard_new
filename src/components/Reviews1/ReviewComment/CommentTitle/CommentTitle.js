@@ -17,7 +17,6 @@ const CommentTitle = () => {
     startReviews: true,
     replyText: null,
     getUserId: null,
-  
   });
 
   // ------------GET Has Reviews-STORE ?-----------------
@@ -42,7 +41,6 @@ const CommentTitle = () => {
   );
 
   // const url = "https://api.dressme.uz/api/seller/reply";
-
   const { mutate } = useMutation(() => {
     return fetch(`https://api.dressme.uz/api/seller/reply`, {
       method: "POST",
@@ -81,8 +79,7 @@ const CommentTitle = () => {
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
-          ( {commentStore?.ratings?.length ||  0}{" "}
-          отзывы ){" "}
+          ( {commentStore?.ratings?.length || 0} отзывы ){" "}
         </span>
       </div>
 
@@ -207,7 +204,10 @@ const CommentTitle = () => {
                       </div>
                     </div>
                   </div> */}
-                  <div className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end">
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end"
+                  >
                     {state?.sendAnswer ? (
                       <div className="w-full flex flex-col md:flex-row items-center justify-between">
                         <textarea
@@ -223,9 +223,9 @@ const CommentTitle = () => {
                         <div className="flex items-center ml-auto mt-3 md:mt-0">
                           <button
                             onClick={() => {
-                              setState({ ...state, getUserId: item?.user?.id });
-
-                              sendReplyText();
+                              // setState({ ...state, getUserId: item?.user?.id });
+                              // sendReplyText();
+                              console.log(state?.replyText, state?.getId)
                             }}
                             className="w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]"
                           >
@@ -253,7 +253,7 @@ const CommentTitle = () => {
                         </span>
                       </button>
                     )}
-                  </div>
+                  </form>
                 </div>
               );
             })}
