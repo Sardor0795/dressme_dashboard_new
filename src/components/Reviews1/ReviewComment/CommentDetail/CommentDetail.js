@@ -14,7 +14,7 @@ export default function CommentDetail() {
     locationIsCheck: false,
     loading: true,
   });
-  console.log(state.locationListId);
+  // console.log(state.locationListId);
 
   const { id } = useParams();
   const newId = id?.replace(":", "");

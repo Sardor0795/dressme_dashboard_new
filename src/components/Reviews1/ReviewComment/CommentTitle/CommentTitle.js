@@ -41,7 +41,7 @@ const CommentTitle = () => {
     }
   );
 
-  const url = "https://api.dressme.uz/api/seller/reply";
+  // const url = "https://api.dressme.uz/api/seller/reply";
 
   const { mutate } = useMutation(() => {
     return fetch(`https://api.dressme.uz/api/seller/reply`, {
@@ -50,7 +50,7 @@ const CommentTitle = () => {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
-      body: JSON.stringify({ reply: state?.replyText, id: "13" }),
+      body: JSON.stringify({ reply: state?.replyText, id: "12" }),
       // body: JSON.stringify({ reply: state?.replyText, id: state?.getUserId }),
     }).then((res) => res.json());
   });
@@ -81,7 +81,7 @@ const CommentTitle = () => {
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
-          ( {commentStore?.ratings?.length ? commentStore?.ratings?.length : 0}{" "}
+          ( {commentStore?.ratings?.length ||  0}{" "}
           отзывы ){" "}
         </span>
       </div>
