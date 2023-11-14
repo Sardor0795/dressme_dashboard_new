@@ -514,13 +514,21 @@ export default function ProductLocationsList() {
                                               </div>
                                             </td>
                                             <td className="w-[10%] h-full  flex items-center justify-center ">
+                                              {data?.sizes?.map(itemValue => {
+                                                return (
+                                                  <div className="w-full flex items-center justify-center gap-x-1">
+
+                                                    <span className=""> {itemValue?.discount_price || itemValue?.price}</span>
+                                                    <span className=""> {itemValue?.currency}</span>
+                                                  </div>
+                                                )
+                                              })}
                                               {/* {data?.accessory_price && data?.accessory_price} */}
-                                              {data?.headwear_price && (data?.headwear_price?.discount_price || data?.headwear_price?.price)}
+                                              {/* {data?.headwear_price && (data?.headwear_price?.discount_price || data?.headwear_price?.price)}
                                               {data?.outwear_price && (data?.outwear_price?.discount_price || data?.outwear_price?.price)}
                                               {data?.underwear_price && (data?.underwear_price?.discount_price || data?.underwear_price?.price)}
                                               {data?.accessory_price && (data?.accessory_price?.discount_price || data?.accessory_price?.price)}
-                                              {data?.footwear_price && (data?.footwear_price?.discount_price || data?.footwear_price?.price)}
-                                              <span className="ml-1"> сум</span>
+                                              {data?.footwear_price && (data?.footwear_price?.discount_price || data?.footwear_price?.price)} */}
                                             </td>
                                             <td className="w-[10%] h-full  flex items-center justify-center ">
                                               <button

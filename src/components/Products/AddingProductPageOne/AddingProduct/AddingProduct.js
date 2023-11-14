@@ -512,7 +512,7 @@ const AddingProduct = () => {
   let shopIdRoute = shopIdList[1] + shopIdList[2]
   useEffect(() => {
     if (shopIdRoute) {
-      setState({ ...state, shopId: shopIdRoute })
+      setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
     }
   }, [location.pathname]);
 
