@@ -29,10 +29,9 @@ export default function ProductLocationsList() {
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
   const [productList, setProductList] = useState('')
+  const [getProductOfCategory, setGetProductOfCategory] = useState('')
 
-  useQuery(["products"], () => {
-    return request({ url: "/products/locations", token: true });
-  },
+  useQuery(["products"], () => { return request({ url: "/products/locations", token: true }) },
     {
       onSuccess: (res) => {
         setProductList(res)
@@ -41,7 +40,17 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
-  // console.log(productList, " productList");
+  useQuery(
+    ["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
+    {
+      onSuccess: (res) => {
+        setGetProductOfCategory(res?.types);
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+  console.log(getProductOfCategory, " getProductOfCategory");
   console.log(productList?.products_locations, "products_locations");
   // console.log(state?.productList?.products_locations[0]);
   const [city1, setCity1] = useState([
@@ -489,17 +498,21 @@ export default function ProductLocationsList() {
                                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                               <img src={item?.url_logo_photo} alt={"red"} className="w-full h-full object-cover" />
                                             </td>
-                                            <td className="w-[15%] h-full  flex items-center  ">
-                                              <p className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
+                                            <td className="w-[15%] h-full  flex items-center  justify-center">
+                                              <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
                                                 {data?.name_ru || "namrRu"}
                                               </p>
                                             </td>
                                             <td className="w-[15%] h-full  flex items-center justify-center ">
                                               {data?.sku || "sku"}
                                             </td>
-                                            <td className="w-[8%] h-full  flex items-center justify-center ">
-                                              {data?.type_id || "type_id"}
-                                            </td>
+                                            {getProductOfCategory?.filter(e => e?.id == data?.type_id)?.map(valueType => {
+                                              return (
+                                                <td className="w-[8%] h-full  flex items-center justify-center ">
+                                                  {valueType?.name_ru || "type_id"}
+                                                </td>
+                                              )
+                                            })}
                                             <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
                                             <td className="w-[10%] h-full  flex items-center justify-center ">
                                               <div
