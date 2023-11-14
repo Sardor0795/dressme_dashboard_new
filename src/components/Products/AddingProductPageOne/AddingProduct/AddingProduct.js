@@ -457,6 +457,22 @@ const AddingProduct = () => {
   };
   const handleNextPage = () => {
     setState({ ...state, isCheckValid: true })
+    console.log(
+      state?.shopId, "state?.shopId",
+      state?.shopLocationId, "state?.shopLocationId",
+      state?.section_Id, "state?.section_Id",
+      state?.color_Id, "state?.color_Id",
+      state?.gender_Id, "state?.gender_Id",
+      state?.min_Age_Category, "state?.min_Age_Category",
+      state?.max_Age_Category, "state?.max_Age_Category",
+      state?.sku, "state?.sku",
+      state?.type_Id, "state?.type_Id",
+      state?.price, "state?.price",
+      state?.filterTypeId, "state?.filterTypeId",
+      state?.producer_Id, "state?.producer_Id",
+      state?.season_Id, "state?.season_Id",
+      state?.pictureBgFile1, "state?.pictureBgFile1",
+    );
     if (
       state?.shopId &&
       state?.shopLocationId &&
@@ -514,16 +530,8 @@ const AddingProduct = () => {
     if (shopIdRoute) {
       setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
     }
-  }, [location.pathname]);
+  }, [state?.PathnameToken]);
 
-
-
-  // console.log(state?.PathnameToken, "state?.PathnameToken");
-  // console.log(shopIdRoute, "shopIdRoute");
-  // console.log(locationIdRoute, "locationIdRoute");
-  // console.log(productsData, "productsData");
-  // console.log(dressInfo?.productAddByIdForToggle, "dressInfo?.productAddByIdForToggle");
-  // console.log(state?.shopId, "state?.shopId");
   return (
     <div className="w-full h-fit ">
       {/* <span>{state?.PathnameToken},PathnameToken</span> */}
@@ -905,9 +913,9 @@ const AddingProduct = () => {
                           className="w-full overflow-hidden h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
                           {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
-                            console.log(item, "buItem");
+                            // console.log(item, "buItem");
                             return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map(data => {
-                              console.log(data, "BUData");
+                              // console.log(data, "BUData");
                               return (
                                 <span
                                   className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"     >

@@ -116,7 +116,10 @@ export default function RouterList() {
 
         {/* ---------------------<LocationsProduct>------------------------- */}
         <Route path="/products" element={<Products />}>
-          <Route index element={<ProductIsCheck />} />
+          {dressInfo?.isCheckPoructList?.length !== 0 ?
+            <Route path="/products" element={<Navigate to={"/products/location"} />} />
+            : <Route index element={<ProductIsCheck />} />}
+
           <Route path="/products/location" element={<ProductLocationsList />} />
           <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
         </Route>

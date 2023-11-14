@@ -20,7 +20,15 @@ function App() {
       refetchOnWindowFocus: false,
     }
   );
-
+  useQuery(["products"], () => { return request({ url: "/products/locations", token: true }) },
+    {
+      onSuccess: (res) => {
+        setDressInfo({ ...dressInfo, isCheckPoructList: res?.products_locations })
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return <NavbarDashboard />;
 }

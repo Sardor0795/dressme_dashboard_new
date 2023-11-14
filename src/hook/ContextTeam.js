@@ -16,8 +16,8 @@ export default function ContextTeam({ children }) {
     // ------Product----
     ProductFilterType: null,
     nextPageShowForm: true,
-    productAddByIdForToggle: ''
-
+    productAddByIdForToggle: '',
+    isCheckPoructList: null
   });
 
 
