@@ -15,7 +15,8 @@ export default function ContextTeam({ children }) {
     SellerMagazinLocation: "",
     // ------Product----
     ProductFilterType: null,
-    nextPageShowForm: true
+    nextPageShowForm: true,
+    productAddByIdForToggle: ''
 
   });
 
