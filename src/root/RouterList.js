@@ -118,7 +118,7 @@ export default function RouterList() {
         <Route path="/products" element={<Products />}>
           <Route index element={<ProductIsCheck />} />
           <Route path="/products/location" element={<ProductLocationsList />} />
-          <Route path="/products/add-wear" element={<ProductsPageOne />} />
+          <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
         </Route>
 
         {/* <Route path="/store-location" element={<Clothes />} /> */}

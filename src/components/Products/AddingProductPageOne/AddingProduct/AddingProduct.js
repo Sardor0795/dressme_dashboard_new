@@ -9,7 +9,7 @@ import {
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -34,6 +34,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
+
+
 
 const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -96,7 +98,9 @@ const AddingProduct = () => {
     AccessoriesList: null,
     titleUz: null,
     titleRu: null,
-    selectedUz: []
+    selectedUz: [],
+    PathnameToken: '',
+
 
   });
 
@@ -201,22 +205,7 @@ const AddingProduct = () => {
       discount_percent: childData?.discountPercent,
     })
   }
-  // console.log(state?.textListOfFormList,
-  //   state?.textListOfFormList?.name_Ru,
-  //   state?.textListOfFormList?.name_Uz,
-  //   state?.textListOfFormList?.quality_Ru,
-  //   state?.textListOfFormList?.quality_Uz,
-  //   state?.textListOfFormList?.description_Uz,
-  //   state?.textListOfFormList?.description_Ru,
-  //   state?.textListOfFormList?.composition_Uz,
-  //   state?.textListOfFormList?.composition_Ru,
-  //   "state?.textListOfFormList");
 
-  // console.log(state?.underWearList, "state?.underWearList");
-  // console.log(state?.outWearList, "state?.outWearList");
-  // console.log(state?.headWearList, "state?.headWearList");
-  // console.log(state?.shoesList, "state?.shoesList");
-  // console.log(state?.AccessoriesList, "state?.AccessoriesList");
 
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -508,9 +497,36 @@ const AddingProduct = () => {
     });
   }, [dressInfo?.nextPageShowForm]);
 
+  const location = useLocation();
+  const pathname = window.location.pathname;
+  useEffect(() => {
+    if (pathname !== '/products')
+      setState({ ...state, PathnameToken: pathname.replace("/products/location/add/:", "") })
+    setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
+
+  }, [location.pathname]);
+
+  let locationIdList = state?.PathnameToken?.split('')
+  let locationIdRoute = locationIdList[0]
+  let shopIdList = state?.PathnameToken?.split('')
+  let shopIdRoute = shopIdList[1] + shopIdList[2]
+  useEffect(() => {
+    if (shopIdRoute) {
+      setState({ ...state, shopId: shopIdRoute })
+    }
+  }, [location.pathname]);
+
+
+
+  // console.log(state?.PathnameToken, "state?.PathnameToken");
+  // console.log(shopIdRoute, "shopIdRoute");
+  // console.log(locationIdRoute, "locationIdRoute");
+  // console.log(productsData, "productsData");
+  // console.log(dressInfo?.productAddByIdForToggle, "dressInfo?.productAddByIdForToggle");
+  // console.log(state?.shopId, "state?.shopId");
   return (
     <div className="w-full h-fit ">
-
+      {/* <span>{state?.PathnameToken},PathnameToken</span> */}
       <div className="flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
         {state?.errorListMessage && <div className="w-full  flex items-center gap-x-2 ">
           <span className="text-[16px] text-textRedColor font-AeonikProRegular">{state?.errorListMessage}</span>
@@ -803,9 +819,6 @@ const AddingProduct = () => {
                       </span>
                     </div>
                     <button
-                      // onClick={() =>
-                      //   setState({ ...state, ClothingSection: true })
-                      // }
                       type="button"
                       className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                     >
@@ -815,36 +828,49 @@ const AddingProduct = () => {
                       <ArrowRightIcon />
                     </button>
                     <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
-
-                      <Select
-                        className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
-                        showSearch
-                        placeholder="Выбрать"
-                        optionFilterProp="children"
-                        onChange={(e) => setState({ ...state, shopId: e })}
-                        onSearch={onSearch}
-                        size="large"
-                        filterOption={(input, option) =>
-                          (option?.label ?? "")
-                            .toLowerCase()
-                            .includes(input.toLowerCase())
-                        }
-
+                      {shopIdRoute ? <button
+                        type="button"
+                        className="w-full h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
                       >
-                        {productsData?.shops?.map((data) => {
+                        {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
                           return (
-                            <>
-                              {data?.shop_locations?.length >= 1 && <Option
-                                key={data.id}
-                                value={data?.id}
-                              >
-                                {data?.name}
-                              </Option>}
-                            </>
+                            <span
+                              className=" mt-[3px] font-AeonikProRegular text-[#000]">
+                              {data?.name}
+                            </span>
                           )
                         })}
+                        <span className="rotate-[90deg]"><ArrowRightIcon /></span>
+                      </button> :
+                        <Select
+                          className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                          showSearch
+                          placeholder="Выбрать"
+                          optionFilterProp="children"
+                          onChange={(e) => setState({ ...state, shopId: e })}
+                          onSearch={onSearch}
+                          size="large"
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
 
-                      </Select>
+                        >
+                          {productsData?.shops?.map((data) => {
+                            return (
+                              <>
+                                {data?.shop_locations?.length >= 1 && <Option
+                                  key={data.id}
+                                  value={data?.id}
+                                >
+                                  {data?.name}
+                                </Option>}
+                              </>
+                            )
+                          })}
+
+                        </Select>}
                     </div>
                   </div>
                   {/* Input Select 2.1 */}
@@ -871,57 +897,74 @@ const AddingProduct = () => {
                       </label>
                       <ArrowRightIcon />
                     </button>
+
                     <div className="w-full h-fit hidden md:flex">
-                      {state?.shopId ?
+                      {locationIdRoute ?
                         <button
-                          onClick={() => setState({ ...state, openSelect: true })}
                           type="button"
-                          className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
-                           ${state?.isCheckValid && !state?.shopLocationId ? "border border-[#FFB8B8] " : "border border-borderColor"}
-
-                           px-3`}
+                          className="w-full overflow-hidden h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
-
-                          {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
-                            return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
+                          {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
+                            console.log(item, "buItem");
+                            return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map(data => {
+                              console.log(data, "BUData");
                               return (
                                 <span
-                                  className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
-                                  key={data?.id}
-                                >
-                                  <span className="w-full whitespace-nowrap flex items-center">{data?.address}</span>
+                                  className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"     >
+                                  {data?.address}
                                 </span>
                               )
                             })
-                          })
-                            :
-                            <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                              Выбрать
-                            </label>
-                          }
-
-                          <span className="rotate-[90deg]">
-                            <ArrowRightIcon />
-                            {/* <DownOutlined style={{ colors: "#b5b5b5" }} /> */}
-                          </span>
+                          })}
+                          <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                         </button>
                         :
-                        <button
-                          type="button"
-                          className="w-full h-11 md:h-10  bg-[#F5F5F5] rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
-                        >
-                          <label className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
-                            Выбрать
-                          </label>
-                          <span className="rotate-[90deg]">
-                            <ArrowRightIcon />
-                            {/* <DownOutlined style={{ fontSize: "16px", colors: "#b5b5b5" }} /> */}
-                          </span>
-                        </button>}
+                        state?.shopId ?
+                          <button
+                            onClick={() => setState({ ...state, openSelect: true })}
+                            type="button"
+                            className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
+                             ${state?.isCheckValid && !state?.shopLocationId ? "border border-[#FFB8B8] " : "border border-borderColor"}
+  
+                             px-3`}
+                          >
 
+                            {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+                              return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
+                                return (
+                                  <span
+                                    className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
+                                    key={data?.id}
+                                  >
+                                    <span className="w-full whitespace-nowrap flex items-center">{data?.address}</span>
+                                  </span>
+                                )
+                              })
+                            })
+                              :
+                              <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                Выбрать
+                              </label>
+                            }
 
-
-
+                            <span className="rotate-[90deg]">
+                              <ArrowRightIcon />
+                              {/* <DownOutlined style={{ colors: "#b5b5b5" }} /> */}
+                            </span>
+                          </button>
+                          :
+                          <button
+                            type="button"
+                            className="w-full h-11 md:h-10  bg-[#F5F5F5] rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
+                          >
+                            <label className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
+                              Выбрать
+                            </label>
+                            <span className="rotate-[90deg]">
+                              <ArrowRightIcon />
+                            </span>
+                          </button>
+                      }
 
 
                     </div>

@@ -240,6 +240,12 @@ export default function ProductLocationsList() {
   const goMapWear = (id) => {
     navigate(`/locations-store/wears/:${id}`);
   };
+  function addNewProductId(locationId, shopId) {
+    console.log("RuN");
+    console.log(locationId, shopId, "locationId, shopId");
+    navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
+  };
+
   return (
     <div>
       {/* Navbar */}
@@ -328,7 +334,7 @@ export default function ProductLocationsList() {
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
-            Общее количество: 6
+            Общее количество: {productList?.products_locations?.length}
           </p>
           {/* <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
             Nike Store Official Dealer
@@ -438,9 +444,9 @@ export default function ProductLocationsList() {
                                   {resData?.address}
                                 </p>
                               </div>
-                              <Link
-                                to="/products/add-wear"
-                                className="active:translate-y-[2px] flex items-center gap-x-[4px]"
+                              <button
+                                onClick={() => addNewProductId(resData?.id, resData?.shop_id)}
+                                className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
                               >
                                 <span>
                                   <AddIconsCircle />
@@ -448,7 +454,7 @@ export default function ProductLocationsList() {
                                 <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
                                   Добавить одежду
                                 </span>
-                              </Link>
+                              </button>
                             </section>
 
                             <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
