@@ -10,15 +10,50 @@ import {
 } from "../../../assets/icons";
 import { Popover } from "antd";
 import { BiChevronDown } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useHttp } from "../../../hook/useHttp";
+
 export default function ReviewComment() {
+  const { request } = useHttp();
   const [state, setState] = useState({
     openwear: false,
+    locationListId: "",
+    locationIsCheck: false,
+    loading: true,
   });
   const navigate = useNavigate();
 
-  // ----------------Wear state management----------------------------
+  const { id } = useParams();
+  const newId = id?.replace(":", "");
 
+  useQuery(
+    ["review_store_details"],
+    () => {
+      return request({ url: `/shops/${newId}`, token: true });
+    },
+    {
+      onSuccess: (res) => {
+        if (res) {
+          console.log(res?.shop, "Review-Store-Details");
+          setState({
+            ...state,
+            locationListId: res,
+            locationIsCheck: res?.locations_exist,
+            loading: false,
+          });
+        }
+      },
+      onError: (err) => {
+        console.log(err, "ERR-IN-STORE-COMMENTS");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+
+  // ----------------Wear state management----------------------------
   const handleOpenChangeWear = (newOpen) => {
     setState({ ...state, openwear: newOpen });
   };
@@ -158,11 +193,11 @@ export default function ReviewComment() {
       </div>
       <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
         <div className="w-full md:w-[35%]">
-          <CommentDetail />
+          <CommentDetail state={state} />
         </div>
 
         <div className="w-full md:w-[calc(70%-40px)] ">
-          <CommentTitle />
+          <CommentTitle titleStore={state}/>
         </div>
       </div>
     </div>

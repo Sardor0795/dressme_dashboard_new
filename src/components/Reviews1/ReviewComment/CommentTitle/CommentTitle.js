@@ -10,7 +10,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 import { useParams } from "react-router-dom";
 
-const CommentTitle = () => {
+const CommentTitle = ({titleStore}) => {
   const { request } = useHttp();
   const [commentStore, setCommnetStore] = useState();
   const [state, setState] = useState({
@@ -18,9 +18,10 @@ const CommentTitle = () => {
     startReviews: true,
     replyText: null,
     getUserId: null,
+    getComment: null
   });
+  console.log(state.getComment, "COMMENT_GET");
 
-  const url = "https://api.dressme.uz/api/seller/reply";
 
   // ------------GET Has Reviews-STORE ?-----------------
   useQuery(
@@ -61,58 +62,62 @@ const CommentTitle = () => {
   //   return response.json()
   // }
 
-  const { mutate } = useMutation(() => {
-    return fetch(`https://api.dressme.uz/api/seller/reply`, {
+  // const { mutate } = useMutation(() => {
+  //   return fetch(`https://api.dressme.uz/api/seller/reply`, {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     },
+  //     body: JSON.stringify({
+  //       reply: state?.replyText,
+  //       id: "12",
+  //     }),
+  //   }).then((res) => {
+  //     res.json();
+  //   });
+  // });
+  // console.log(state?.getUserId, " state?.getUserId");
+
+  // function sendReplyText() {
+  //   // setState({ ...state, getUserId: id });
+  //   mutate(
+  //     {},
+  //     {
+  //       onSuccess: (res) => {
+  //         console.log(res, "Bu-Reply-Success");
+  //       },
+  //       onError: (err) => {
+  //         console.log(err, "Bu-Reply-Error");
+  //       },
+  //     }
+  //   );
+  // }
+
+  const url = "https://api.dressme.uz/api/seller/reply";
+
+  const sendReply = () => {
+    fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
+        "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
       body: JSON.stringify({
-        reply: state?.replyText,
-        id: "12",
-      }),
-    }).then((res) => {
-      res.json();
-    });
-  });
-  console.log(state?.getUserId, " state?.getUserId");
-
-  function sendReplyText() {
-    // setState({ ...state, getUserId: id });
-    mutate(
-      {},
-      {
-        onSuccess: (res) => {
-          console.log(res, "Bu-Reply-Success");
-        },
-        onError: (err) => {
-          console.log(err, "Bu-Reply-Error");
-        },
-      }
-    );
-  }
-
-  const sendReply = () => {
-    fetch(`https://api.dressme.uz/api/seller/reply`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-      body: {
         reply: state.replyText,
         id: params.id,
-      },
+      }),
     })
       .then((res) => {
         return res.json();
       })
-      .then((v) => {
-        console.log(v);
+      .then((data) => {
+        // console.log(data);
+        setState({...state, getComment: data})
       })
-      .catch((v) => {
-        console.log(v);
+      .catch((data) => {
+        console.log(data);
       });
   };
 
@@ -233,15 +238,15 @@ const CommentTitle = () => {
                     </span>
                   </div>
                   {/* Comment Section */}
-                  {/* <div>
+                  <div>
                     <div className="w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] ">
                       <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                         <div>
                           <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
-                            {item?.subjectBrand}
+                            {titleStore?.locationListId?.shop?.name}
                           </p>
                           <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
-                            {item?.subjectReply}
+                            {state?.getComment?.rating?.reply}
                           </p>
                         </div>
                         <div className="flex items-start mt-[2px]">
@@ -251,7 +256,7 @@ const CommentTitle = () => {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                   <form
                     onSubmit={(e) => e.preventDefault()}
                     className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end"
