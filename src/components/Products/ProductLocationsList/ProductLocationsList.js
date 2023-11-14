@@ -338,9 +338,9 @@ export default function ProductLocationsList() {
               Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
             <button
-              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  ${someChecked
-                ? "opacity-100 active:translate-y-[2px]"
-                : "opacity-30 cursor-not-allowed"
+              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${someChecked
+                ? "text-addLocationTextcolor  active:translate-y-[2px]"
+                : "text-[#D2D2D2] cursor-not-allowed"
                 }`}
             >
               <span className="mr-[5px]">
@@ -349,9 +349,9 @@ export default function ProductLocationsList() {
               Добавить в локацию
             </button>
             <button
-              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor ${someChecked
-                ? "opacity-100 active:translate-y-[2px]"
-                : "opacity-30 cursor-not-allowed"
+              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${someChecked
+                ? "text-deleteColor active:translate-y-[2px]"
+                : "text-[#D2D2D2] cursor-not-allowed"
                 }`}
             >
               <span className="mr-[5px]">
@@ -380,21 +380,40 @@ export default function ProductLocationsList() {
               </tr>
             </thead>
           </table>
+          <div
+            onClick={() => {
+              setArrayAllChecked(!arrayAllChecked);
+            }}
+            className="w-full justify-end cursor-pointer bg-white flex items-center gap-x-2"
+          >
+            <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
+              Выбрать все
+            </span>
+            <button
+              type="button"
+              className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${arrayAllChecked
+                ? "bg-[#007DCA] border-[#007DCA]"
+                : "bg-white border border-checkboxBorder"
+                }`}
+            >
+              {arrayAllChecked && <CheckIcons />}
+            </button>
+          </div>
         </div>
         {productList?.products_locations?.map(item => {
           return (
             <div className="flex items-center w-full">
-              {item?.shop_locations?.length !== 0 && <div className="w-full border border-black my-6">
+              {item?.shop_locations?.length !== 0 && < div className="w-full border border-black my-6">
                 <div className="w-full  flex items-center justify-center mb-6">
                   <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
                     {item?.name}
                   </p>
                 </div>
                 {item?.shop_locations?.map(resData => {
-                  console.log(resData, "resData");
+                  // console.log(resData, "resData");
                   return (
                     <div className="w-full">
-                      {resData?.products?.length !== 0 &&
+                      {
                         <div className="w-full  mt-10">
                           <div className="flex justify-end items-center md:justify-between mx-auto ">
                             <section className="hidden md:flex items-center">
@@ -416,9 +435,7 @@ export default function ProductLocationsList() {
                                 </button>
 
                                 <p className="text-black text-base not-italic font-AeonikProMedium mr-[20px]">
-                                  {/* Юнусабад (6) */}
                                   {resData?.address}
-
                                 </p>
                               </div>
                               <Link
@@ -438,25 +455,7 @@ export default function ProductLocationsList() {
                               <p className="flex md:hidden text-sm font-AeonikProMedium">
                                 Общее количество: 6
                               </p>
-                              <div
-                                onClick={() => {
-                                  setArrayAllChecked(!arrayAllChecked);
-                                }}
-                                className=" cursor-pointer bg-white flex items-center gap-x-2"
-                              >
-                                <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
-                                  Выбрать все
-                                </span>
-                                <button
-                                  type="button"
-                                  className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${arrayAllChecked
-                                    ? "bg-[#007DCA] border-[#007DCA]"
-                                    : "bg-white border border-checkboxBorder"
-                                    }`}
-                                >
-                                  {arrayAllChecked && <CheckIcons />}
-                                </button>
-                              </div>
+
                             </div>
                           </div>
                           <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
@@ -464,132 +463,18 @@ export default function ProductLocationsList() {
                           </div>
                           <div className="mx-auto font-AeonikProRegular text-[16px]">
                             <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
-                              {resData?.products?.map(data => {
-                                return (
-                                  <tbody className="w-full flex flex-col gap-y-[10px] mt-5  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-
-                                    <div className="flex flex-col w-full">
-                                      <div className="w-full flex h-[120px]  items-center">
-                                        {openStoreList && <StoreListModal onClick={storeToggle} />}
-                                        <div
-                                          className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${data?.isCheck
-                                            ? "bg-[#007DCA] border-[#007DCA]"
-                                            : "bg-white border-checkboxBorder"
-                                            } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
-                                        >
+                              {item?.shop_locations?.length !== 0 && resData?.products?.length !== 0 ?
+                                resData?.products?.map(data => {
+                                  return (
+                                    <tbody className="w-full flex flex-col gap-y-[10px] mt-5  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                                      <div className="flex flex-col w-full">
+                                        <div className="w-full flex h-[120px]  items-center">
+                                          {openStoreList && <StoreListModal onClick={storeToggle} />}
                                           <div
-                                            className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
-                                              }`}
-                                          >
-                                            <CheckIcons />
-                                          </div>
-                                        </div>
-                                        <tr className="w-full h-full py-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                          <td className="w-[5%] h-full  flex items-center justify-center " >{data?.id}</td>
-                                          <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                            <img src={item?.url_logo_photo} alt={"red"} className="w-full h-full object-cover" />
-                                          </td>
-                                          <td className="w-[15%] h-full  flex items-center  ">
-                                            <p className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
-                                              {data?.name_ru || "namrRu"}
-                                            </p>
-                                          </td>
-                                          <td className="w-[15%] h-full  flex items-center justify-center ">
-                                            {data?.sku || "sku"}
-                                          </td>
-                                          <td className="w-[8%] h-full  flex items-center justify-center ">
-                                            {data?.type_id || "type_id"}
-                                          </td>
-                                          <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
-                                          <td className="w-[10%] h-full  flex items-center justify-center ">
-                                            <div
-                                              className={`w-fit text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500 `}
-                                            >
-                                              {data?.status || "status"}
-                                            </div>
-                                          </td>
-                                          <td className="w-[10%] h-full  flex items-center justify-center ">{data?.price || "no price"} сум</td>
-                                          <td className="w-[10%] h-full  flex items-center justify-center ">
-                                            <button
-                                              onClick={() => goProductDetailEdit(data?.id)}
-                                              className="text-[18px] text-weatherWinterColor w-full text-center"
-                                            >
-                                              Подробнее
-                                            </button>
-                                          </td>
-                                          <td className="w-[9%] h-full  flex items-center justify-center ">
-                                            <button className="w-full flex justify-center cursor-auto">
-                                              <span
-                                                onClick={() => setOpenStoreList(true)}
-                                                className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
-                                              >
-                                                <AddLocationIcon width={30} />
-                                              </span>
-                                            </button>
-                                          </td>
-                                          <td className="w-[9%] h-full  flex items-center justify-center ">
-                                            <button className="w-full flex justify-center cursor-auto">
-                                              <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
-                                                <DeleteIcon width={30} />
-                                              </span>
-                                            </button>
-                                          </td>
-                                        </tr>
-                                      </div>
-                                      {/* For Mobile Device */}
-                                      <div key={data?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
-                                        <div className="mb-2">
-                                          <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
-                                            <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                            <span className="text-checkboxBorder">0{data?.id}</span>
-                                            <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                          </div>
-                                        </div>
-
-                                        <div className="mb-3 h-[148px]">
-                                          <figure className="w-full h-full rounded-lg overflow-hidden">
-                                            {/* <img className="w-[100%] h-[100%]" src={data?.photos[0]?.url_photo} alt="" /> */}
-                                          </figure>
-                                        </div>
-
-                                        <div className="mb-6">
-                                          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                            <div className="w-[40%] flex items-center">Имя товара</div>
-                                            <div className="w-[30%] flex items-center">Статус</div>
-                                            <div className="w-[30%] flex items-center">Цена товара</div>
-                                          </div>
-
-                                          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                            <div className="w-[40%]"> {data?.name_product}</div>
-                                            <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{data?.status}</div>
-                                            <div className="w-[30%]"> {data?.money} сум </div>
-                                          </div>
-                                        </div>
-
-                                        <div className="flex items-center justify-between">
-                                          <button
-                                            onClick={() => goMapWear(data?.city)}
-                                            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                          >
-                                            Добавить в локацию
-                                          </button>
-                                          <button
-                                            onClick={() => goMapCity(data?.city)}
-                                            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                          >
-                                            Подробнее
-                                          </button>
-                                        </div>
-
-                                        <div className="w-full flex items-center justify-between mt-[18px]">
-                                          <div
-                                            // onClick={() => {
-                                            //   click(data?.id);
-                                            // }}
-                                            className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${data?.isCheck
+                                            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${data?.isCheck
                                               ? "bg-[#007DCA] border-[#007DCA]"
                                               : "bg-white border-checkboxBorder"
-                                              } flex items-center justify-center rounded mr-[8px]`}
+                                              } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
                                           >
                                             <div
                                               className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
@@ -598,17 +483,142 @@ export default function ProductLocationsList() {
                                               <CheckIcons />
                                             </div>
                                           </div>
-                                          <button to="#" className="text-textBlueColor text-[13px] font-AeonikProMedium">
-                                            Больше...
-                                          </button>
-                                          <button className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
+                                          <tr className="w-full h-full py-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
+                                            <td className="w-[5%] h-full  flex items-center justify-center " >{data?.id}</td>
+                                            <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                              <img src={item?.url_logo_photo} alt={"red"} className="w-full h-full object-cover" />
+                                            </td>
+                                            <td className="w-[15%] h-full  flex items-center  ">
+                                              <p className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
+                                                {data?.name_ru || "namrRu"}
+                                              </p>
+                                            </td>
+                                            <td className="w-[15%] h-full  flex items-center justify-center ">
+                                              {data?.sku || "sku"}
+                                            </td>
+                                            <td className="w-[8%] h-full  flex items-center justify-center ">
+                                              {data?.type_id || "type_id"}
+                                            </td>
+                                            <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
+                                            <td className="w-[10%] h-full  flex items-center justify-center ">
+                                              <div
+                                                className={`w-fit text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500 `}
+                                              >
+                                                {data?.status || "status"}
+                                              </div>
+                                            </td>
+                                            <td className="w-[10%] h-full  flex items-center justify-center ">
+                                              {/* {data?.accessory_price && data?.accessory_price} */}
+                                              {data?.headwear_price && (data?.headwear_price?.discount_price || data?.headwear_price?.price)}
+                                              {data?.outwear_price && (data?.outwear_price?.discount_price || data?.outwear_price?.price)}
+                                              {data?.underwear_price && (data?.underwear_price?.discount_price || data?.underwear_price?.price)}
+                                              {data?.accessory_price && (data?.accessory_price?.discount_price || data?.accessory_price?.price)}
+                                              {data?.footwear_price && (data?.footwear_price?.discount_price || data?.footwear_price?.price)}
+                                              <span className="ml-1"> сум</span>
+                                            </td>
+                                            <td className="w-[10%] h-full  flex items-center justify-center ">
+                                              <button
+                                                onClick={() => goProductDetailEdit(data?.id)}
+                                                className="text-[18px] text-weatherWinterColor w-full text-center"
+                                              >
+                                                Подробнее
+                                              </button>
+                                            </td>
+                                            <td className="w-[9%] h-full  flex items-center justify-center ">
+                                              <button className="w-full flex justify-center cursor-auto">
+                                                <span
+                                                  onClick={() => setOpenStoreList(true)}
+                                                  className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                                >
+                                                  <AddLocationIcon width={30} />
+                                                </span>
+                                              </button>
+                                            </td>
+                                            <td className="w-[9%] h-full  flex items-center justify-center ">
+                                              <button className="w-full flex justify-center cursor-auto">
+                                                <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+                                                  <DeleteIcon width={30} />
+                                                </span>
+                                              </button>
+                                            </td>
+                                          </tr>
+                                        </div>
+                                        {/* For Mobile Device */}
+                                        <div key={data?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+                                          <div className="mb-2">
+                                            <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
+                                              <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
+                                              <span className="text-checkboxBorder">0{data?.id}</span>
+                                              <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
+                                            </div>
+                                          </div>
+
+                                          <div className="mb-3 h-[148px]">
+                                            <figure className="w-full h-full rounded-lg overflow-hidden">
+                                              {/* <img className="w-[100%] h-[100%]" src={data?.photos[0]?.url_photo} alt="" /> */}
+                                            </figure>
+                                          </div>
+
+                                          <div className="mb-6">
+                                            <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                              <div className="w-[40%] flex items-center">Имя товара</div>
+                                              <div className="w-[30%] flex items-center">Статус</div>
+                                              <div className="w-[30%] flex items-center">Цена товара</div>
+                                            </div>
+
+                                            <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                              <div className="w-[40%]"> {data?.name_product}</div>
+                                              <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{data?.status}</div>
+                                              <div className="w-[30%]"> {data?.money} сум </div>
+                                            </div>
+                                          </div>
+
+                                          <div className="flex items-center justify-between">
+                                            <button
+                                              onClick={() => goMapWear(data?.city)}
+                                              className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                            >
+                                              Добавить в локацию
+                                            </button>
+                                            <button
+                                              onClick={() => goMapCity(data?.city)}
+                                              className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                            >
+                                              Подробнее
+                                            </button>
+                                          </div>
+
+                                          <div className="w-full flex items-center justify-between mt-[18px]">
+                                            <div
+                                              // onClick={() => {
+                                              //   click(data?.id);
+                                              // }}
+                                              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${data?.isCheck
+                                                ? "bg-[#007DCA] border-[#007DCA]"
+                                                : "bg-white border-checkboxBorder"
+                                                } flex items-center justify-center rounded mr-[8px]`}
+                                            >
+                                              <div
+                                                className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
+                                                  }`}
+                                              >
+                                                <CheckIcons />
+                                              </div>
+                                            </div>
+                                            <button to="#" className="text-textBlueColor text-[13px] font-AeonikProMedium">
+                                              Больше...
+                                            </button>
+                                            <button className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
 
-                                  </tbody>
-                                )
-                              })
+                                    </tbody>
+                                  )
+                                }) :
+                                <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
+                                  <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
+                                </div>
                               }
 
                             </table>
@@ -626,6 +636,6 @@ export default function ProductLocationsList() {
         })
         }
       </div>
-    </div>
+    </div >
   );
 }
