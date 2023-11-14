@@ -24,22 +24,22 @@ export default function ReviewWearComment() {
   const navigate = useNavigate();
 
   // ------------GET METHOD delivery-method-----------------
-  useQuery(
-    ["Loading"],
-    () => {
-      return request({ url: "/", token: true });
-    },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, loading: false });
-      },
-      onError: (err) => {
-        console.log(err, "Err Loading");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+  // useQuery(
+  //   ["Loading"],
+  //   () => {
+  //     return request({ url: "/", token: true });
+  //   },
+  //   {
+  //     onSuccess: (res) => {
+  //       setState({ ...state, loading: false });
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "Err Loading");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   // ----------------Wear state management----------------------------
 
