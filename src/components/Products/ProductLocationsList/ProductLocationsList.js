@@ -36,11 +36,6 @@ export default function ProductLocationsList() {
     {
       onSuccess: (res) => {
         setProductList(res)
-        // setState({ ...state, productList: res?.products_locations })
-        // console.log(res, "nbuRes");
-        // res?.products_locations?.map(item => {
-        //   console.log(item, "BuResItem");
-        // })
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -330,7 +325,7 @@ export default function ProductLocationsList() {
         </section>
       </div>
 
-      <div className="border border-blue-500 w-full">
+      <div className=" w-full">
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
@@ -367,7 +362,7 @@ export default function ProductLocationsList() {
             </button>
           </div>
         </div>
-        <div className="w-full mb-4">
+        <div className="w-full my-4">
           <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
             <thead className="w-full  h-[70px] flex items-center">
               <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
@@ -409,7 +404,7 @@ export default function ProductLocationsList() {
         {productList?.products_locations?.map(item => {
           return (
             <div className="flex items-center w-full">
-              {item?.shop_locations?.length !== 0 && < div className="w-full border border-black my-6">
+              {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
                 <div className="w-full  flex items-center justify-center mb-6">
                   <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
                     {item?.name}
