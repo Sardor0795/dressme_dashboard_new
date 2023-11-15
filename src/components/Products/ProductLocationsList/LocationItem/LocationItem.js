@@ -12,7 +12,7 @@ import {
 import { wearImg } from "../../../../assets";
 import { Checkbox, List } from "antd";
 
-function LocationItem({ data, getProductOfCategory, handleGetCheckAll, click }) {
+function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, click }) {
   const [openStoreList, setOpenStoreList] = useState(false);
 
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
@@ -51,35 +51,65 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, click }) 
   // console.log(data?.products, "dataBuQandayData---products");
   return (
     <div className="w-full">
-      {/* {data?.map(list => {
-        return ( */}
-      <div className="w-full">
-        <section className="hidden md:flex items-center">
-          <div
 
-            className=" cursor-pointer bg-white flex items-center gap-x-2"
-          >
-            <Checkbox
-              defaultChecked={indeterminate}
-              onChange={onCheckAllChange}
-              checked={checkAll}
-              style={{ width: "26px", height: "26px" }}
-              className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}>
-            </Checkbox>
-            <span className="text-black text-base not-italic font-AeonikProMedium mr-[20px]">{data?.address}</span>
+      <div className="w-full">
+        <section className="hidden md:flex items-center justify-between">
+          <div className="w-fit flex items-center">
+            <div className=" cursor-pointer bg-white flex items-center gap-x-2"
+            >
+              <Checkbox
+                defaultChecked={indeterminate}
+                onChange={onCheckAllChange}
+                checked={checkAll}
+                style={{ width: "26px", height: "26px" }}
+                className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}>
+              </Checkbox>
+              <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{data?.address}
+                {data?.products?.length > 1 && <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({data?.products?.length})</span>}
+              </p>
+
+            </div>
+            <button
+              onClick={() => addNewProductId(data?.id, data?.shop_id)}
+              className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
+            >
+              <span>
+                <AddIconsCircle />
+              </span>
+              <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
+                Добавить одежду
+              </span>
+            </button>
           </div>
-          <button
-            onClick={() => addNewProductId(data?.id, data?.shop_id)}
-            className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
+          {index1 == 1 && <div className="w-fit  cursor-pointer bg-white flex items-center gap-x-2"
           >
-            <span>
-              <AddIconsCircle />
+            <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
+              Выбрать все
             </span>
-            <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
-              Добавить одежду
-            </span>
-          </button>
+            <Checkbox value={"all"} />
+          </div>}
         </section>
+        {index1 == 1 &&
+          < div className="w-full hidden md:flex flex-col mb-5">
+            <table className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
+              <thead className="w-full  h-[70px] flex items-center">
+                <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
+                <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
+                  <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
+                  <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
+                  <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
+                  <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
+                  <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
+                  <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
+                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
+                  <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
+                  <th className="w-[10%] h-full flex items-center justify-center"></th>
+                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
+                  <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                </tr>
+              </thead>
+            </table>
+          </div>}
 
         <Checkbox.Group
           style={{ width: "100%" }}
