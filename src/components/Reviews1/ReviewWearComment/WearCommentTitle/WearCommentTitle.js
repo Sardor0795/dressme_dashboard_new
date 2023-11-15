@@ -16,62 +16,62 @@ export default function WearCommentTitle() {
   const [state, setState] = useState({
     sendAnswer: false,
     startReviews: true,
-    userInfo: [
-      {
-        id: 1,
-        userName: "Umar",
-        userImg:
-          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-        starCount: 5,
-        date: "19 февраля 2023 г.",
-        userFeedback:
-          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-        wearSubject: [
-          {
-            id: 1,
-            subjectBrand: "Ответ Nike Store Official Dealer",
-            subjectReply: "Спасибо вам за оценку!",
-            replyDate: "26 февраля 2023 г.",
-          },
-        ],
-      },
-      {
-        id: 2,
-        userName: "Firdavsbek",
-        userImg:
-          "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-        starCount: 4,
-        date: "19 февраля 2023 г.",
-        userFeedback:
-          "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-        wearSubject: [
-          {
-            id: 1,
-            subjectBrand: "",
-            subjectReply: "",
-            replyDate: "",
-          },
-        ],
-      },
-      // {
-      //   id: 3,
-      //   userName: "Shohjahon",
-      //   userImg:
-      //     "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
-      //   starCount: 5,
-      //   date: "19 февраля 2023 г.",
-      //   userFeedback:
-      //     "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
-      //   wearSubject: [
-      //     {
-      //       id: 1,
-      //       subjectBrand: "Ответ Nike Store Official Dealer",
-      //       subjectReply: "Спасибо вам за оценку!",
-      //       replyDate: "26 февраля 2023 г.",
-      //     },
-      //   ],
-      // },
-    ],
+    // userInfo: [
+    //   {
+    //     id: 1,
+    //     userName: "Umar",
+    //     userImg:
+    //       "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+    //     starCount: 5,
+    //     date: "19 февраля 2023 г.",
+    //     userFeedback:
+    //       "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+    //     wearSubject: [
+    //       {
+    //         id: 1,
+    //         subjectBrand: "Ответ Nike Store Official Dealer",
+    //         subjectReply: "Спасибо вам за оценку!",
+    //         replyDate: "26 февраля 2023 г.",
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     id: 2,
+    //     userName: "Firdavsbek",
+    //     userImg:
+    //       "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+    //     starCount: 4,
+    //     date: "19 февраля 2023 г.",
+    //     userFeedback:
+    //       "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+    //     wearSubject: [
+    //       {
+    //         id: 1,
+    //         subjectBrand: "",
+    //         subjectReply: "",
+    //         replyDate: "",
+    //       },
+    //     ],
+    //   },
+    //   // {
+    //   //   id: 3,
+    //   //   userName: "Shohjahon",
+    //   //   userImg:
+    //   //     "https://storage.kun.uz/source/thumbnails/_medium/9/I0iHdUWlWwccLwGsh3rqHOJznm3TsLI3_medium.jpg",
+    //   //   starCount: 5,
+    //   //   date: "19 февраля 2023 г.",
+    //   //   userFeedback:
+    //   //     "Качество среднее но стоит своих денег точно мне понравилась классный оверсайз. Качество среднее но стоит своих денег точно мне понравилась классный оверсайз.",
+    //   //   wearSubject: [
+    //   //     {
+    //   //       id: 1,
+    //   //       subjectBrand: "Ответ Nike Store Official Dealer",
+    //   //       subjectReply: "Спасибо вам за оценку!",
+    //   //       replyDate: "26 февраля 2023 г.",
+    //   //     },
+    //   //   ],
+    //   // },
+    // ],
   });
 
   // ------------GET  Has Reviews-Products ?-----------------

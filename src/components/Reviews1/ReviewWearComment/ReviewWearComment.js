@@ -179,19 +179,19 @@ export default function ReviewWearComment() {
           </div>
         </div>
       </div>
-      {state?.loading ? (
+      {/* {state?.loading ? (
         <LoadingForSeller />
-      ) : (
+      ) : ( */}
         <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
           <section className="w-full md:w-[30%] overflow-hidden">
             <WearCommentDetail />
           </section>
 
           <section className="w-full md:w-[calc(70%-70px)] ">
-            <WearCommentTitle />
+            {/* <WearCommentTitle /> */}
           </section>
         </div>
-      )}
+      
     </div>
   );
 }

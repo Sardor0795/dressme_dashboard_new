@@ -73,7 +73,7 @@ const CommentTitle = ({ titleStore }) => {
         console.log(data);
       });
   };
-  // Mrs. Lauren Wolff
+
   useEffect(() => {
     window.scrollTo({
       top: 0,

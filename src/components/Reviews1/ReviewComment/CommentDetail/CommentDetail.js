@@ -1,48 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,} from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
-import { useQuery } from "@tanstack/react-query";
-import { useHttp } from "../../../../hook/useHttp";
 import { Rate } from "antd";
-import { useParams } from "react-router-dom";
 import { NoImg } from "../../../../assets/icons";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 
 export default function CommentDetail({state}) {
-  // const { request } = useHttp();
-  // const [state, setState] = useState({
-  //   locationListId: "",
-  //   locationIsCheck: false,
-  //   loading: true,
-  // });
 
-  // const { id } = useParams();
-  // const newId = id?.replace(":", "");
-
-  // // ------------GET Has Reviews-STORE-Details ?-----------------
-  // useQuery(
-  //   ["review_store_details"],
-  //   () => {
-  //     return request({ url: `/shops/${newId}`, token: true });
-  //   },
-  //   {
-  //     onSuccess: (res) => {
-  //       if (res) {
-  //         console.log(res?.shop, "Review-Store-Details");
-  //         setState({
-  //           ...state,
-  //           locationListId: res,
-  //           locationIsCheck: res?.locations_exist,
-  //           loading: false,
-  //         });
-  //       }
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "ERR-IN-STORE-COMMENTS");
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
 
   useEffect(() => {
     window.scrollTo({
