@@ -280,18 +280,10 @@ const AddingProduct = () => {
   ]);
 
   useQuery(
-    ["products_get"],
-    () => {
-      return request({ url: "/products/get-product-info", token: true });
-    },
+    ["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
     {
       onSuccess: (res) => {
-        if (res) {
-          setProductsData(res);
-        }
-      },
-      onError: (err) => {
-        console.log(err, "ERR PRODUCTS");
+        setProductsData(res);
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -518,7 +510,6 @@ const AddingProduct = () => {
   useEffect(() => {
     if (pathname !== '/products')
       setState({ ...state, PathnameToken: pathname.replace("/products/location/add/:", "") })
-    setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
 
   }, [location.pathname]);
 
@@ -528,13 +519,14 @@ const AddingProduct = () => {
   let shopIdRoute = shopIdList[1] + shopIdList[2]
   useEffect(() => {
     if (shopIdRoute) {
+      setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
       setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
     }
   }, [state?.PathnameToken]);
 
   return (
     <div className="w-full h-fit ">
-      {/* <span>{state?.PathnameToken},PathnameToken</span> */}
+      <span>{dressInfo?.productAddByIdForToggle},productAddByIdForToggle</span>
       <div className="flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
         {state?.errorListMessage && <div className="w-full  flex items-center gap-x-2 ">
           <span className="text-[16px] text-textRedColor font-AeonikProRegular">{state?.errorListMessage}</span>
@@ -838,16 +830,18 @@ const AddingProduct = () => {
                     <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
                       {shopIdRoute ? <button
                         type="button"
-                        className="w-full h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                        className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                       >
-                        {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
-                          return (
-                            <span
-                              className=" mt-[3px] font-AeonikProRegular text-[#000]">
-                              {data?.name}
-                            </span>
-                          )
-                        })}
+                        <span>
+                          {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
+                            return (
+                              <span
+                                className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                {data?.name}
+                              </span>
+                            )
+                          })}
+                        </span>
                         <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                       </button> :
                         <Select
@@ -910,20 +904,20 @@ const AddingProduct = () => {
                       {locationIdRoute ?
                         <button
                           type="button"
-                          className="w-full overflow-hidden h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                          className="w-full overflow-hidden h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
                         >
-                          {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
-                            // console.log(item, "buItem");
-                            return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map(data => {
-                              // console.log(data, "BUData");
-                              return (
-                                <span
-                                  className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"     >
-                                  {data?.address}
-                                </span>
-                              )
-                            })
-                          })}
+                          <span>
+                            {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
+                              return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map(data => {
+                                return (
+                                  <span
+                                    className="w-[95%] overflow-hidden whitespace-nowrap text-[#b5b5b5]	flex items-center  text-[14px] not-italic font-AeonikProRegular"     >
+                                    {data?.address}
+                                  </span>
+                                )
+                              })
+                            })}
+                          </span>
                           <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                         </button>
                         :

@@ -19,6 +19,7 @@ import { wearImg } from "../../../assets";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import StoreListModal from "./LocationItem/StoreListModal";
+import LoadingForSeller from "../../Loading/LoadingFor";
 
 const { RangePicker } = DatePicker;
 
@@ -31,17 +32,7 @@ export default function ProductLocationsList() {
   const [productList, setProductList] = useState('')
   const [getProductOfCategory, setGetProductOfCategory] = useState('')
 
-  useQuery(["products"], () => { return request({ url: "/products/locations", token: true }) },
-    {
-      onSuccess: (res) => {
-        setProductList(res)
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-  useQuery(
-    ["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
+  useQuery(["getProductOfCategory"], () => { return request({ url: "/products/get-product-info", token: true }) },
     {
       onSuccess: (res) => {
         setGetProductOfCategory(res?.types);
@@ -50,8 +41,19 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
-  console.log(getProductOfCategory, " getProductOfCategory");
+  const { isLoading, isFetching } = useQuery(["productList"], () => { return request({ url: "/products/locations", token: true }) },
+    {
+      onSuccess: (res) => {
+        setProductList(res)
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  // console.log(getProductOfCategory, " getProductOfCategory");
   console.log(productList?.products_locations, "products_locations");
+  // console.log(isLoading, isFetching, "isLoading,isFetching");
   // console.log(state?.productList?.products_locations[0]);
   const [city1, setCity1] = useState([
     {
@@ -245,10 +247,12 @@ export default function ProductLocationsList() {
     navigate(`/locations-store/wears/:${id}`);
   };
   function addNewProductId(locationId, shopId) {
-    console.log("RuN");
-    console.log(locationId, shopId, "locationId, shopId");
     navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
   };
+  function openMarketEditPage(id) {
+    navigate(`/store/market-list/:${id}`);
+  };
+
 
   return (
     <div>
@@ -333,97 +337,100 @@ export default function ProductLocationsList() {
           </section>
         </section>
       </div>
-
-      <div className=" w-full">
-        {/* Up Title */}
-        <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
-          <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
-            Общее количество: {productList?.products_locations?.length}
-          </p>
-          {/* <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+      {isLoading ? <LoadingForSeller /> :
+        <div className=" w-full">
+          {/* Up Title */}
+          <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
+            <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
+              Общее количество: {productList?.products_locations?.length}
+            </p>
+            {/* <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
             Nike Store Official Dealer
           </p> */}
-          <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
-            <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
-              Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
+            <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
+              <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
+                Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
+              </div>
+              <button
+                className={`pr - 3 border - r - [2px] border - addLocBorderRight flex items - center font - AeonikProRegular text - sm md: text - lg ${someChecked
+                  ? "text-addLocationTextcolor  active:translate-y-[2px]"
+                  : "text-[#D2D2D2] cursor-not-allowed"
+                  }`}
+              >
+                <span className="mr-[5px]">
+                  <AddLocationIcon width={20} />
+                </span>
+                Добавить в локацию
+              </button>
+              <button
+                className={`pl - [6px] md: pl - 3 flex items - center font - AeonikProRegular text - sm md: text - lg  ${someChecked
+                  ? "text-deleteColor active:translate-y-[2px]"
+                  : "text-[#D2D2D2] cursor-not-allowed"
+                  }`}
+              >
+                <span className="mr-[5px]">
+                  <DeleteIcon width={20} />
+                </span>
+                Удалить
+              </button>
             </div>
-            <button
-              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${someChecked
-                ? "text-addLocationTextcolor  active:translate-y-[2px]"
-                : "text-[#D2D2D2] cursor-not-allowed"
-                }`}
-            >
-              <span className="mr-[5px]">
-                <AddLocationIcon width={20} />
-              </span>
-              Добавить в локацию
-            </button>
-            <button
-              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${someChecked
-                ? "text-deleteColor active:translate-y-[2px]"
-                : "text-[#D2D2D2] cursor-not-allowed"
-                }`}
-            >
-              <span className="mr-[5px]">
-                <DeleteIcon width={20} />
-              </span>
-              Удалить
-            </button>
           </div>
-        </div>
-        <div className="w-full my-4">
-          <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
-            <thead className="w-full  h-[70px] flex items-center">
-              <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
-              <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
-                <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
-                <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
-                <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
-                <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
-                <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
-                <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
-                <th className="w-[10%] h-full flex items-center justify-center"></th>
-                <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
-                <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
-              </tr>
-            </thead>
-          </table>
-          <div
-            onClick={() => {
-              setArrayAllChecked(!arrayAllChecked);
-            }}
-            className="w-full justify-end cursor-pointer bg-white flex items-center gap-x-2"
-          >
-            <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
-              Выбрать все
-            </span>
-            <button
-              type="button"
-              className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${arrayAllChecked
-                ? "bg-[#007DCA] border-[#007DCA]"
-                : "bg-white border border-checkboxBorder"
-                }`}
+          <div className="w-full my-4">
+            {/* <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
+              <thead className="w-full  h-[70px] flex items-center">
+                <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
+                <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
+                  <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
+                  <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
+                  <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
+                  <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
+                  <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
+                  <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
+                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
+                  <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
+                  <th className="w-[10%] h-full flex items-center justify-center"></th>
+                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
+                  <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                </tr>
+              </thead>
+            </table> */}
+            <div
+              onClick={() => {
+                setArrayAllChecked(!arrayAllChecked);
+              }}
+              className="w-full justify-end cursor-pointer bg-white flex items-center gap-x-2"
             >
-              {arrayAllChecked && <CheckIcons />}
-            </button>
+              <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
+                Выбрать все
+              </span>
+              <button
+                type="button"
+                className={`flex items - center rounded - [6px] md: rounded - lg justify - center min - w - [18px] min - h - [18px] md: min - w - [24px] md: min - h - [24px]  ${arrayAllChecked
+                  ? "bg-[#007DCA] border-[#007DCA]"
+                  : "bg-white border border-checkboxBorder"
+                  }`}
+              >
+                {arrayAllChecked && <CheckIcons />}
+              </button>
+            </div>
           </div>
-        </div>
-        {productList?.products_locations?.map(item => {
-          return (
-            <div className="flex items-center w-full">
-              {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
-                <div className="w-full  flex items-center justify-center mb-6">
-                  <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                    {item?.name}
-                  </p>
-                </div>
-                {item?.shop_locations?.map(resData => {
-                  // console.log(resData, "resData");
-                  return (
-                    <div className="w-full">
-                      {
+          {productList?.products_locations?.map((item, index1) => {
+            return (
+              <div className="flex items-center w-full">
+                {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
+                  <button
+                    type="button"
+                    onClick={() => openMarketEditPage(item?.id)}
+                    className="w-full  flex items-center justify-center mb-6 cursor-pointer">
+                    <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                      {item?.name}
+                    </p>
+                  </button>
+
+                  {item?.shop_locations?.map((resData, index) => {
+                    // console.log(resData, "resData");
+                    return (
+                      <div className="w-full">
                         <div className="w-full  mt-10">
                           <div className="flex justify-end items-center md:justify-between mx-auto ">
                             <section className="hidden md:flex items-center">
@@ -436,7 +443,7 @@ export default function ProductLocationsList() {
                               >
                                 <button
                                   type="button"
-                                  className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${city1all
+                                  className={`flex items - center rounded - [6px] md: rounded - lg justify - center min - w - [24px] min - h - [24px]  ${city1all
                                     ? "bg-[#007DCA] border-[#007DCA]"
                                     : "bg-white border border-[#f4a622]"
                                     }`}
@@ -461,6 +468,7 @@ export default function ProductLocationsList() {
                               </button>
                             </section>
 
+
                             <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                               <p className="flex md:hidden text-sm font-AeonikProMedium">
                                 Общее количество: 6
@@ -468,6 +476,26 @@ export default function ProductLocationsList() {
 
                             </div>
                           </div>
+                          {index1 == 1 && < div className="w-full hidden md:flex ">
+                            <table className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
+                              <thead className="w-full  h-[70px] flex items-center">
+                                <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
+                                <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
+                                  <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
+                                  <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
+                                  <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
+                                  <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
+                                  <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
+                                  <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
+                                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
+                                  <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
+                                  <th className="w-[10%] h-full flex items-center justify-center"></th>
+                                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
+                                  <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>}
                           <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
                             {item?.name}
                           </div>
@@ -481,10 +509,10 @@ export default function ProductLocationsList() {
                                         <div className="w-full flex h-[120px]  items-center">
                                           {openStoreList && <StoreListModal onClick={storeToggle} />}
                                           <div
-                                            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${data?.isCheck
+                                            className={`cursor - pointer min - w - [24px] min - h - [24px] border border - checkboxBorder ${data?.isCheck
                                               ? "bg-[#007DCA] border-[#007DCA]"
                                               : "bg-white border-checkboxBorder"
-                                              } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
+                                              } flex items - center justify - center rounded - [6px] md: rounded - lg mr - [8px]`}
                                           >
                                             <div
                                               className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
@@ -506,7 +534,7 @@ export default function ProductLocationsList() {
                                             <td className="w-[15%] h-full  flex items-center justify-center ">
                                               {data?.sku || "sku"}
                                             </td>
-                                            {getProductOfCategory?.filter(e => e?.id == data?.type_id)?.map(valueType => {
+                                            {getProductOfCategory && getProductOfCategory?.filter(e => e?.id == data?.type_id)?.map(valueType => {
                                               return (
                                                 <td className="w-[8%] h-full  flex items-center justify-center ">
                                                   {valueType?.name_ru || "type_id"}
@@ -516,7 +544,7 @@ export default function ProductLocationsList() {
                                             <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
                                             <td className="w-[10%] h-full  flex items-center justify-center ">
                                               <div
-                                                className={`w-fit text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500 `}
+                                                className={`w - fit text - center text - white font - AeonikProRegular py - [5px] px - [15px] rounded - full bg - green - 500 `}
                                               >
                                                 {data?.status || "status"}
                                               </div>
@@ -615,10 +643,10 @@ export default function ProductLocationsList() {
                                               // onClick={() => {
                                               //   click(data?.id);
                                               // }}
-                                              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${data?.isCheck
+                                              className={`cursor - pointer min - w - [18px] min - h - [18px] border border - checkboxBorder ${data?.isCheck
                                                 ? "bg-[#007DCA] border-[#007DCA]"
                                                 : "bg-white border-checkboxBorder"
-                                                } flex items-center justify-center rounded mr-[8px]`}
+                                                } flex items - center justify - center rounded mr - [8px]`}
                                             >
                                               <div
                                                 className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
@@ -647,17 +675,16 @@ export default function ProductLocationsList() {
 
                           </div>
                         </div>
-                      }
-                    </div>
-                  )
-                })}
+                      </div>
+                    )
+                  })}
+                </div>
+                }
               </div>
-              }
-            </div>
-          )
-        })
-        }
-      </div>
+            )
+          })
+          }
+        </div>}
     </div >
   );
 }

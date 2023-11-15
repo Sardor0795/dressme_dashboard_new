@@ -30,9 +30,9 @@ export default function ProductsPageOne() {
                 onClick={() => {
                   navigate(-1);
                 }}
-                className="absolute flex items-center justify-start cursor-pointer "
+                className="w-8 h-8 md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
               >
-                <GoBackIcons />
+                <AiOutlineLeft />
               </button> :
                 !dressInfo?.nextPageShowForm && <> <button
                   button
@@ -60,7 +60,7 @@ export default function ProductsPageOne() {
           <AddingProduct />
         </div>
       </div>
-    </div>
+    </div >
 
   );
 }
