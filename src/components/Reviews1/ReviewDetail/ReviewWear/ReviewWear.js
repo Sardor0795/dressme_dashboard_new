@@ -39,24 +39,24 @@ export default function ReviewWear() {
     navigate(`/reviews/review/comment-wear/${id}`);
   };
 
-  // const [filterStar, setFilterStar] = useState([
-  //   { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
-  //   { id: 2, checked: false, starValue: 4, starFree: 1, valueCount: 70 },
-  //   { id: 3, checked: false, starValue: 3, starFree: 2, valueCount: 60 },
-  //   { id: 4, checked: false, starValue: 2, starFree: 3, valueCount: 50 },
-  //   { id: 5, checked: false, starValue: 1, starFree: 4, valueCount: 20 },
-  // ]);
-  // const handleFilterStar = (id) => {
-  //   setFilterStar((current) => {
-  //     return current.map((data) => {
-  //       if (data?.id === id) {
-  //         return { ...data, checked: !data?.checked };
-  //       } else {
-  //         return { ...data };
-  //       }
-  //     });
-  //   });
-  // };
+  const [filterStar, setFilterStar] = useState([
+    { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
+    { id: 2, checked: false, starValue: 4, starFree: 1, valueCount: 70 },
+    { id: 3, checked: false, starValue: 3, starFree: 2, valueCount: 60 },
+    { id: 4, checked: false, starValue: 2, starFree: 3, valueCount: 50 },
+    { id: 5, checked: false, starValue: 1, starFree: 4, valueCount: 20 },
+  ]);
+  const handleFilterStar = (id) => {
+    setFilterStar((current) => {
+      return current.map((data) => {
+        if (data?.id === id) {
+          return { ...data, checked: !data?.checked };
+        } else {
+          return { ...data };
+        }
+      });
+    });
+  };
 
   useEffect(() => {
     window.scrollTo({
@@ -67,10 +67,11 @@ export default function ReviewWear() {
   return (
     <>
       {loading ? (
-        <LoadingForSeller className="h-[100vh]"/>
+        <LoadingForSeller className="h-[80vh]"/>
       ) : (
         <div className="w-full h-full md:px-10 py-1">
-          {reviewsList?.length > 0 && reviewsList?.rated_users_count > 0 
+          {reviewsList?.length > 0 
+          // && reviewsList?.rated_users_count > 0 
           ? (
             <>
             {/* Table */}

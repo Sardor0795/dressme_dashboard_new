@@ -12,7 +12,8 @@ import { useParams } from "react-router-dom";
 
 const CommentTitle = ({ titleStore }) => {
   const { request } = useHttp();
-  const [commentStore, setCommnetStore] = useState();
+  const [commentStore, setCommnetStore] = useState(); 
+  const [sendText, setSendText] = useState(false); 
   const [state, setState] = useState({
     sendAnswer: false,
     sendText: false,
@@ -190,8 +191,8 @@ const CommentTitle = ({ titleStore }) => {
                     </span>
                   </div>
                   {/* Comment Section */}
-                  {state?.sendText ? (
-                    <div className="w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] ">
+                  {/* {state?.sendText ? ( */}
+                    <div className={`${sendText ? 'block' : 'hidden' } w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] `}>
                       <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                         <div>
                           <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
@@ -209,12 +210,12 @@ const CommentTitle = ({ titleStore }) => {
                         </div>
                       </div>
                     </div>
-                  ) : (
+                  {/* ) : (
                     ""
-                  )}
+                  )} */}
                   <form
                     onSubmit={(e) => e.preventDefault()}
-                    className="w-full h-fit mt-[25px] md:mt-[5px] flex justify-end"
+                    className={`${sendText ? 'hidden' : 'flex '} w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
                   >
                     {state?.sendAnswer ? (
                       <div className="w-full flex flex-col md:flex-row items-center justify-between">
@@ -232,7 +233,8 @@ const CommentTitle = ({ titleStore }) => {
                           <button
                             onClick={() => {
                               sendReply();
-                              setState({ ...state, sendText: true });
+                              // setState({ ...state, sendText: false })
+                              setSendText(!sendText)
                             }}
                             className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]`}
                           >
