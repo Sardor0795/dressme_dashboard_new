@@ -352,7 +352,7 @@ export default function ProductLocationsList() {
                 Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
               </div>
               <button
-                className={`pr - 3 border - r - [2px] border - addLocBorderRight flex items - center font - AeonikProRegular text - sm md: text - lg ${someChecked
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${someChecked
                   ? "text-addLocationTextcolor  active:translate-y-[2px]"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -363,7 +363,7 @@ export default function ProductLocationsList() {
                 Добавить в локацию
               </button>
               <button
-                className={`pl - [6px] md: pl - 3 flex items - center font - AeonikProRegular text - sm md: text - lg  ${someChecked
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${someChecked
                   ? "text-deleteColor active:translate-y-[2px]"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -405,7 +405,7 @@ export default function ProductLocationsList() {
               </span>
               <button
                 type="button"
-                className={`flex items - center rounded - [6px] md: rounded - lg justify - center min - w - [18px] min - h - [18px] md: min - w - [24px] md: min - h - [24px]  ${arrayAllChecked
+                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${arrayAllChecked
                   ? "bg-[#007DCA] border-[#007DCA]"
                   : "bg-white border border-checkboxBorder"
                   }`}
@@ -443,7 +443,7 @@ export default function ProductLocationsList() {
                               >
                                 <button
                                   type="button"
-                                  className={`flex items - center rounded - [6px] md: rounded - lg justify - center min - w - [24px] min - h - [24px]  ${city1all
+                                  className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${city1all
                                     ? "bg-[#007DCA] border-[#007DCA]"
                                     : "bg-white border border-[#f4a622]"
                                     }`}
@@ -509,10 +509,10 @@ export default function ProductLocationsList() {
                                         <div className="w-full flex h-[120px]  items-center">
                                           {openStoreList && <StoreListModal onClick={storeToggle} />}
                                           <div
-                                            className={`cursor - pointer min - w - [24px] min - h - [24px] border border - checkboxBorder ${data?.isCheck
+                                            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${data?.isCheck
                                               ? "bg-[#007DCA] border-[#007DCA]"
                                               : "bg-white border-checkboxBorder"
-                                              } flex items - center justify - center rounded - [6px] md: rounded - lg mr - [8px]`}
+                                              } flex items-center justify-center rounded-[6px] md:rounded-lg mr-[8px]`}
                                           >
                                             <div
                                               className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
@@ -544,7 +544,7 @@ export default function ProductLocationsList() {
                                             <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
                                             <td className="w-[10%] h-full  flex items-center justify-center ">
                                               <div
-                                                className={`w - fit text - center text - white font - AeonikProRegular py - [5px] px - [15px] rounded - full bg - green - 500 `}
+                                                className={`w-fit text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500 `}
                                               >
                                                 {data?.status || "status"}
                                               </div>
@@ -643,10 +643,10 @@ export default function ProductLocationsList() {
                                               // onClick={() => {
                                               //   click(data?.id);
                                               // }}
-                                              className={`cursor - pointer min - w - [18px] min - h - [18px] border border - checkboxBorder ${data?.isCheck
+                                              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${data?.isCheck
                                                 ? "bg-[#007DCA] border-[#007DCA]"
                                                 : "bg-white border-checkboxBorder"
-                                                } flex items - center justify - center rounded mr - [8px]`}
+                                                } flex items-center justify-center rounded mr-[8px]`}
                                             >
                                               <div
                                                 className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
