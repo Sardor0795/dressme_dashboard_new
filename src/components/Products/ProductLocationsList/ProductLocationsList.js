@@ -396,25 +396,7 @@ export default function ProductLocationsList() {
                 </tr>
               </thead>
             </table> */}
-            <div
-              onClick={() => {
-                setArrayAllChecked(!arrayAllChecked);
-              }}
-              className="w-full justify-end cursor-pointer bg-white flex items-center gap-x-2"
-            >
-              <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
-                Выбрать все
-              </span>
-              <button
-                type="button"
-                className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[18px] min-h-[18px] md:min-w-[24px] md:min-h-[24px]  ${arrayAllChecked
-                  ? "bg-[#007DCA] border-[#007DCA]"
-                  : "bg-white border border-checkboxBorder"
-                  }`}
-              >
-                {arrayAllChecked && <CheckIcons />}
-              </button>
-            </div>
+
           </div>
           {productList?.products_locations?.map((item, index1) => {
             return (
@@ -478,26 +460,7 @@ export default function ProductLocationsList() {
 
                             </div>
                           </div>
-                          {index1 == 1 && < div className="w-full hidden md:flex mb-5">
-                            <table className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
-                              <thead className="w-full  h-[70px] flex items-center">
-                                <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
-                                <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                                  <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
-                                  <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
-                                  <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
-                                  <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
-                                  <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
-                                  <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
-                                  <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
-                                  <th className="w-[10%] h-full flex items-center justify-center"></th>
-                                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
-                                  <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
-                                </tr>
-                              </thead>
-                            </table>
-                          </div>}
+
                           <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
                             {item?.name}
                           </div>
@@ -505,7 +468,7 @@ export default function ProductLocationsList() {
                             {item?.shop_locations?.length !== 0 && resData?.products?.length !== 0 ?
                               // resData?.products?.map(data => {
 
-                              <LocationItem handleGetCheckAll={getCheckListItems} data={resData} getProductOfCategory={getProductOfCategory} />
+                              <LocationItem handleGetCheckAll={getCheckListItems} index1={index1} data={resData} getProductOfCategory={getProductOfCategory} />
                               // <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
                               //   <tbody className="w-full flex flex-col gap-y-[10px] mt-5  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                               //     <div className="flex flex-col w-full">
