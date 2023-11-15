@@ -325,3 +325,21 @@ input[type="radio"]:checked+label span {
 :where(.css-dev-only-do-not-override-1jr9qlj).ant-rate .ant-rate-star:not(:last-child) {
   margin-inline-end: 4px !important;
 }
+
+/* ant-checkbox-input */
+.idCheck .ant-checkbox .ant-checkbox-inner {
+  width: 25px;
+  height: 25px;
+  border: none;
+  /* background-color: red; */
+}
+
+.ant-checkbox .ant-checkbox-inner {
+  width: 25px;
+  height: 25px;
+  /* background-color: red; */
+}
+
+.ant-list-split .ant-list-item {
+  border: none;
+}

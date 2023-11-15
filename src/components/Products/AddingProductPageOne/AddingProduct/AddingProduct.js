@@ -141,6 +141,7 @@ const AddingProduct = () => {
       pictureBgView4: URL.createObjectURL(e.target.files[0])
     })
   };
+
   function CallBackHeadWear(childData) {
     setState({
       ...state,
