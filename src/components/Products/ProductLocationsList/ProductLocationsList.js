@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import LocationItem from "./LocationItem/LocationItem";
@@ -27,7 +27,6 @@ export default function ProductLocationsList() {
   const { request } = useHttp()
   const [openStoreList, setOpenStoreList] = useState(false);
 
-  const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
   function getCheckListItems(childData) {
     console.log(childData, "GetAllCheckValue");
   }
@@ -43,7 +42,7 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
-  const { isLoading, isFetching } = useQuery(["productList"], () => { return request({ url: "/products/locations", token: true }) },
+  const { isLoading, refetch } = useQuery(["productList"], () => { return request({ url: "/products/locations", token: true }) },
     {
       onSuccess: (res) => {
         setProductList(res)
@@ -53,10 +52,8 @@ export default function ProductLocationsList() {
     }
   );
 
-  // console.log(getProductOfCategory, " getProductOfCategory");
   console.log(productList?.products_locations, "products_locations");
-  // console.log(isLoading, isFetching, "isLoading,isFetching");
-  // console.log(state?.productList?.products_locations[0]);
+
   const [city1, setCity1] = useState([
     {
       id: 1,
@@ -101,7 +98,6 @@ export default function ProductLocationsList() {
       state: "Замечание",
     },
   ]);
-  const [city1all, setCity1all] = useState(false);
 
   const [city2, setCity2] = useState([
     {
@@ -147,93 +143,11 @@ export default function ProductLocationsList() {
       state: "Замечание",
     },
   ]);
-  const [city2all, setCity2all] = useState(false);
-
-  const [arrayAllChecked, setArrayAllChecked] = useState(false);
 
   const [someChecked, setSomeChecked] = useState(false);
 
-  // ---------------------------------------
-  // Alohida alohida checked qilish
-  const onCheck1 = (id) => {
-    let newArr = city1.map((item) => {
-      return item.id === id ? { ...item, isCheck: !item.isCheck } : item;
-    });
-    setCity1(newArr);
-    setSomeChecked(true);
-  };
-  const onCheck2 = (id) => {
-    let newArr = city2.map((item) => {
-      return item.id === id ? { ...item, isCheck: !item.isCheck } : item;
-    });
-    setCity2(newArr);
-    setSomeChecked(true);
-  };
 
-  // ------------------------------------
-  // City buyicha checked qilish
-  const City1Checked = () => {
-    if (!city1all) {
-      let city1Array = city1.map((item) => {
-        return { ...item, isCheck: true };
-      });
-      setCity1(city1Array);
-      setSomeChecked(true);
-    } else if (city1all) {
-      let city1Array = city1.map((item) => {
-        return { ...item, isCheck: false };
-      });
-      setCity1(city1Array);
-    }
-  };
-  const City2Checked = () => {
-    if (!city2all) {
-      let city2Array = city2.map((item) => {
-        return { ...item, isCheck: true };
-      });
-      setCity2(city2Array);
-      setSomeChecked(true);
-    } else if (city2all) {
-      let city2Array = city2.map((item) => {
-        return { ...item, isCheck: false };
-      });
-      setCity2(city2Array);
-    }
-  };
 
-  // this effect for all check
-  useEffect(() => {
-    if (arrayAllChecked) {
-      setCity1all(true);
-      setCity2all(true);
-      // array1
-      let city2Array = city2.map((item) => {
-        return { ...item, isCheck: true };
-      });
-      setCity2(city2Array);
-      // array2
-      let city1Array = city1.map((item) => {
-        return { ...item, isCheck: true };
-      });
-      setCity1(city1Array);
-      setSomeChecked(true);
-    }
-    if (!arrayAllChecked) {
-      setCity1all(false);
-      setCity2all(false);
-      // array1
-      let city2Array = city2.map((item) => {
-        return { ...item, isCheck: false };
-      });
-      setCity2(city2Array);
-      // array2
-      let city1Array = city1.map((item) => {
-        return { ...item, isCheck: false };
-      });
-      setCity1(city1Array);
-      setSomeChecked(false);
-    }
-  }, [arrayAllChecked]);
 
 
   // products
@@ -399,7 +313,6 @@ export default function ProductLocationsList() {
 
           </div>
           {productList?.products_locations?.map((item, index1) => {
-            // console.log(index1, "index1");
             return (
               <div className="flex items-center w-full">
                 {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
@@ -411,65 +324,23 @@ export default function ProductLocationsList() {
                       {item?.name}
                     </p>
                   </button>
-
                   {item?.shop_locations?.map((resData, index) => {
-                    // console.log(index1, "index1")
-
-                    // console.log(resData, "resData");
                     return (
                       <div className="w-full">
                         <div className="w-full  mt-10">
                           <div className="flex justify-end items-center md:justify-between mx-auto ">
-                            {/* <section className="hidden md:flex items-center">
-                              <div
-                                onClick={() => {
-                                  setCity1all(!city1all);
-                                  City1Checked();
-                                }}
-                                className=" cursor-pointer bg-white flex items-center gap-x-2"
-                              >
-                                <button
-                                  type="button"
-                                  className={`flex items-center rounded-[6px] md:rounded-lg justify-center min-w-[24px] min-h-[24px]  ${city1all
-                                    ? "bg-[#007DCA] border-[#007DCA]"
-                                    : "bg-white border border-[#f4a622]"
-                                    }`}
-                                >
-                                  <CheckIcons />
-                                </button>
-
-                                <p className="text-black text-base not-italic font-AeonikProMedium mr-[20px]">
-                                  {resData?.address}
-                                </p>
-                              </div>
-                              <button
-                                onClick={() => addNewProductId(resData?.id, resData?.shop_id)}
-                                className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
-                              >
-                                <span>
-                                  <AddIconsCircle />
-                                </span>
-                                <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
-                                  Добавить одежду
-                                </span>
-                              </button>
-                            </section> */}
-
-
                             <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                               <p className="flex md:hidden text-sm font-AeonikProMedium">
                                 Общее количество: 6
                               </p>
-
                             </div>
                           </div>
-
                           <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
                             {item?.name}
                           </div>
                           <div className="mx-auto font-AeonikProRegular text-[16px]">
                             {item?.shop_locations?.length !== 0 && resData?.products?.length !== 0 ?
-                              <LocationItem handleGetCheckAll={getCheckListItems} checkIndex={index1} data={resData} getProductOfCategory={getProductOfCategory} />
+                              <LocationItem handleGetCheckAll={getCheckListItems} checkIndex={index1} onRefetch={refetch} data={resData} getProductOfCategory={getProductOfCategory} />
                               :
                               <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
                                 <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
