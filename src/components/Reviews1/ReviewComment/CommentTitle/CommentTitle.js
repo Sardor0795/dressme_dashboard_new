@@ -131,7 +131,7 @@ const CommentTitle = ({ titleStore,handleRefetch }) => {
         return (
           <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
             {/* userImg and Date */}
-            <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between border border-red-500">
+            <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between ">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
                 <div className="flex flex-col">
                   <div className="text-tableTextTitle2 text-base md:text-xl font-AeonikProMedium">
@@ -159,7 +159,7 @@ const CommentTitle = ({ titleStore,handleRefetch }) => {
               </div>
             </div>
             {/* userText */}
-            <div className="md:p-[15px] w-full md:w-[95%] h-fit border border-green-500">
+            <div className="md:p-[15px] w-full md:w-[95%] h-fit ">
               <span className="text-mobileTextColor text-[13px] md:text-base not-italic font-AeonikProRegular leading-normal">
                 {item?.comment}
               </span>
@@ -168,7 +168,7 @@ const CommentTitle = ({ titleStore,handleRefetch }) => {
             {titleStore?.locationListId?.shop?.ratings?.length !== 0 &&
               item?.reply && (
                 <div
-                  className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] border border-black`}
+                  className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px]`}
                 >
                   <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                     <div>
@@ -220,7 +220,7 @@ const CommentTitle = ({ titleStore,handleRefetch }) => {
                         className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]`}
                       >
                         <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                          Отправить{item?.id}
+                          Отправить
                         </span>
                       </button>
                       <button
