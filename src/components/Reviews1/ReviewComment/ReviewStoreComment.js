@@ -16,13 +16,13 @@ import { useHttp } from "../../../hook/useHttp";
 
 export default function ReviewComment() {
   const { request } = useHttp();
+  const navigate = useNavigate();
   const [state, setState] = useState({
     openwear: false,
     locationListId: "",
     locationIsCheck: false,
     loading: true,
   });
-  const navigate = useNavigate();
 
   const { id } = useParams();
   const newId = id?.replace(":", "");

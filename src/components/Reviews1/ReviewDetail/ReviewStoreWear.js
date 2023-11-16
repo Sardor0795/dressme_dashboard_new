@@ -27,7 +27,7 @@ export default function ReviewStoreWear() {
       onSuccess: (res) => {
         setLoading(false);
         setReviewsStore(res.shops.data.length);
-        console.log(res.shops.data.length, "Store");
+        // console.log(res.shops.data.length, "Store");
       },
       onError: (err) => {
         setLoading(false);
@@ -49,7 +49,6 @@ export default function ReviewStoreWear() {
         if (res.products) {
           setLoading(false);
           setReviewsProduct(res.products.data.length);
-          console.log(res.products.data.length, "Products");
         }
       },
       onError: (err) => {

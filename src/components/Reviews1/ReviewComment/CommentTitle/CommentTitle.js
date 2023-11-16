@@ -7,8 +7,7 @@ import {
   StarOutlineIcon,
 } from "../../../../assets/icons";
 
-const CommentTitle = ({ titleStore,handleRefetch }) => {
-
+const CommentTitle = ({ titleStore, handleRefetch }) => {
   const [sendText, setSendText] = useState(false);
   const [state, setState] = useState({
     sendAnswer: false,
@@ -40,9 +39,8 @@ const CommentTitle = ({ titleStore,handleRefetch }) => {
         return res.json();
       })
       .then((data) => {
-        // console.log(data);
         setState({ ...state, getComment: data });
-        handleRefetch()
+        handleRefetch();
       })
       .catch((data) => {
         console.log(data);
@@ -54,11 +52,13 @@ const CommentTitle = ({ titleStore,handleRefetch }) => {
       top: 0,
     });
   }, []);
+
   useEffect(() => {
     // titleStore?.locationListId?.shop?.ratings?.map((item) => {
     //   setState({ ...state, getUserId: item?.id });
     // });
   }, [titleStore || sendText]);
+
   // console.log(replyText, "replyText");
   console.log(state?.getUserId, "getUserId");
   return (

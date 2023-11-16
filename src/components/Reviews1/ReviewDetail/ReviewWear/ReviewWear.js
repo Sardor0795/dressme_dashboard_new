@@ -21,7 +21,7 @@ export default function ReviewWear() {
     {
       onSuccess: (res) => {
         if (res) {
-          console.log(res?.products?.data?.rated_users_count, "REVIEWS-WEAR");
+          // console.log(res?.products?.data?.rated_users_count, "REVIEWS-WEAR");
           setReviewsList(res?.products?.data);
           setLoading(false)
         }
@@ -115,7 +115,7 @@ export default function ReviewWear() {
               {/* table product */}
               <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
                 {reviewsList?.map((data) => {
-                  console.log(data, "PHOTOS");
+                  // console.log(data, "PHOTOS");
                   return (
                     <ul
                       key={data?.id}
