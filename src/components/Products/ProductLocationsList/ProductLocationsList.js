@@ -346,7 +346,7 @@ export default function ProductLocationsList() {
                             {item?.name}
                           </div>
                           <div className="mx-auto font-AeonikProRegular text-[16px]">
-                            {item?.shop_locations?.length !== 0 && resData?.products?.length !== 0 ?
+                            {item?.shop_locations?.length !== 0 ?
                               <LocationItem handleGetCheckAll={getCheckListItems} checkIndex={index1} onRefetch={refetch} data={resData} getProductOfCategory={getProductOfCategory} />
                               :
                               <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">

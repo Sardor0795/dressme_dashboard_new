@@ -113,7 +113,8 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                 className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}>
               </Checkbox>
               <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{data?.address}
-                {data?.products?.length > 1 && <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({data?.products?.length})</span>}
+                {data?.products?.length > 1 &&
+                  <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({data?.products?.length})</span>}
               </p>
             </div>
             <button
@@ -130,7 +131,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
           </div>
 
         </section>
-        {checkIndex &&
+        {checkIndex && data?.products?.length !== 0 &&
           < div className="w-full hidden md:flex flex-col mb-5">
             <table className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
               <thead className="w-full  h-[70px] flex items-center">
@@ -313,7 +314,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
       </div>
       {/* )
       })} */}
-    </div>
+    </div >
   );
 }
 export default React.memo(LocationItem)
