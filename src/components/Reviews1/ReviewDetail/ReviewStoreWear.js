@@ -8,14 +8,18 @@ import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import LoadingForSeller from "../../Loading/LoadingFor";
+import { SelectedButtonContext } from "../../../hook/SelectedButtonContext";
+// import { SelectedButtonContext } from "../../../hook/SelectedButtonContext";
 
 export default function ReviewStoreWear() {
+  const [showSelectedButton, setShowSelectedButton] = useContext( SelectedButtonContext);
   const { request } = useHttp();
   const [loading, setLoading] = useState(true);
   const [storeOrWear, setStoreOrWear] = useState(false);
   const [reviewsStore, setReviewsStore] = useState();
   const [reviewsProduct, setReviewsProduct] = useState();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  // const [showSelectedButton, setShowSelectedButton] = useContext(SelectedButtonContext);
 
   // -------------  GET ALL SHOPS LENGTH --------------
   useQuery(
@@ -65,6 +69,7 @@ export default function ReviewStoreWear() {
       top: 0,
     });
   }, []);
+
   return (
     <>
       {loading ? (
@@ -106,30 +111,38 @@ export default function ReviewStoreWear() {
           <div className="mb-[30px] md:my-[30px] w-full flex justify-center items-center">
             <div className="w-fit h-[44px] bg-lightBorderColor flex items-center justify-center rounded-lg overflow-hidden">
               <button
-                onClick={() => setStoreOrWear(false)}
+                onClick={() => {
+                  setStoreOrWear(false);
+                  setShowSelectedButton("products");
+                }}
                 className={`w-[260px] ${
-                  !storeOrWear
+                  showSelectedButton === 'products'
                     ? "text-textBlueColor border rounded-lg border-textBlueColor"
                     : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
               >
-                Товары ({reviewsProduct?.rated_users_count > 0 ? reviewsProduct : 0})
+                Товары (
+                {reviewsProduct?.rated_users_count > 0 ? reviewsProduct : 0})
               </button>
               <button
-                onClick={() => setStoreOrWear(true)}
+                onClick={() => {
+                  setShowSelectedButton("shops");
+                  setStoreOrWear(true);
+                }}
                 className={`w-[260px] ${
-                  storeOrWear
+                  showSelectedButton === 'shops'
                     ? "text-textBlueColor border rounded-lg border-textBlueColor"
                     : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
               >
-                Магазины ({reviewsStore?.rated_users_count > 0 ? reviewsStore : 0})
+                Магазины (
+                {reviewsStore?.rated_users_count > 0 ? reviewsStore : 0})
               </button>
             </div>
           </div>
           <div>
             {dressInfo?.isItPorduct ? (
-              storeOrWear ? (
+              showSelectedButton === 'shops' ? (
                 <ReviewStore />
               ) : (
                 <ReviewWear />
