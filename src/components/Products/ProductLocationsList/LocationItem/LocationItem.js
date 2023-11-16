@@ -12,7 +12,7 @@ import {
 import { wearImg } from "../../../../assets";
 import { Checkbox, List } from "antd";
 
-function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, click }) {
+function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkIndex, click }) {
   const [openStoreList, setOpenStoreList] = useState(false);
 
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
@@ -46,9 +46,12 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, c
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
-  // console.log(checked, "checked");
-  // console.log(data, "dataBuQandayData");
-  // console.log(data?.products, "dataBuQandayData---products");
+
+
+
+
+
+
   return (
     <div className="w-full">
 
@@ -81,7 +84,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, c
               </span>
             </button>
           </div>
-          {index1 == 1 && <div className="w-fit  cursor-pointer bg-white flex items-center gap-x-2"
+          {checkIndex === checkIndex && <div className="w-fit  cursor-pointer bg-white flex items-center gap-x-2"
           >
             <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
               Выбрать все
@@ -89,7 +92,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, c
             <Checkbox value={"all"} />
           </div>}
         </section>
-        {index1 == 1 &&
+        {checkIndex === checkIndex &&
           < div className="w-full hidden md:flex flex-col mb-5">
             <table className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
               <thead className="w-full  h-[70px] flex items-center">
@@ -125,6 +128,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, c
             renderItem={(data) => (
               <List.Item className="w-full"
               >
+
                 <table className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
                   <tbody className="w-full flex flex-col gap-y-[10px]   items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                     <div className="flex flex-col w-full">
@@ -160,15 +164,16 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, index1, c
                             </div>
                           </td>
                           <td className="w-[10%] h-full  flex items-center justify-center ">
-                            {data?.sizes?.map(itemValue => {
-                              return (
-                                <div className="w-full flex items-center justify-center gap-x-1">
+                            {data?.cost?.discount_price || data?.cost?.price}
+                            {/* {data?.cost?.map(itemValue => { */}
+                            {/* // return ( */}
+                            {/* <div className="w-full flex items-center justify-center gap-x-1">
 
-                                  <span className=""> {itemValue?.discount_price || itemValue?.price}</span>
-                                  <span className=""> {itemValue?.currency}</span>
-                                </div>
-                              )
-                            })}
+                              <span className=""> {cost?.discount_price || cost?.price}</span>
+                              <span className=""> {cost?.currency}</span>
+                            </div> */}
+                            {/* )
+                            })} */}
                             {/* {data?.accessory_price && data?.accessory_price} */}
                             {/* {data?.headwear_price && (data?.headwear_price?.discount_price || data?.headwear_price?.price)}
                                               {data?.outwear_price && (data?.outwear_price?.discount_price || data?.outwear_price?.price)}
