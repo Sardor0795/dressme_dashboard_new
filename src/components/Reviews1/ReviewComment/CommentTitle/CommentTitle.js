@@ -6,13 +6,9 @@ import {
   StarIcon,
   StarOutlineIcon,
 } from "../../../../assets/icons";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useHttp } from "../../../../hook/useHttp";
-import { useParams } from "react-router-dom";
 
-const CommentTitle = ({ titleStore }) => {
-  const { request } = useHttp();
-  const [commentStore, setCommnetStore] = useState();
+const CommentTitle = ({ titleStore,handleRefetch }) => {
+
   const [sendText, setSendText] = useState(false);
   const [state, setState] = useState({
     sendAnswer: false,
@@ -22,36 +18,9 @@ const CommentTitle = ({ titleStore }) => {
     getUserId: null,
     getComment: null,
   });
-  // console.log(titleStore, "titleStore");
-  // console.log(titleStore?.locationListId?.shop?.ratings?.length, "Length");
-  // console.log(commentStore.shop.ratings,'commentStore');
+  console.log(titleStore, "titleStore");
+  console.log(titleStore?.locationListId?.shop?.ratings, "RATING");
 
-  const { id } = useParams();
-  const newId = id?.replace(":", "")
-
-  // ------------GET Has Reviews-STORE ?-----------------
-  useQuery(
-    ["review_shops_comments"],
-    () => {
-      return request({ url: `/shops/${newId}`, token: true });
-    },
-    {
-      onSuccess: (res) => {
-        if (res) {
-          setCommnetStore(res);
-          // console.log(res, "Comments-STORE-Review");
-          // setState({ ...state, getUserId: res });
-        }
-      },
-      onError: (err) => {
-        console.log(err, "ERR-IN-STORE-COMMENTS");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  const params = useParams();
   const url = "https://api.dressme.uz/api/seller/reply";
 
   const sendReply = () => {
@@ -73,6 +42,7 @@ const CommentTitle = ({ titleStore }) => {
       .then((data) => {
         // console.log(data);
         setState({ ...state, getComment: data });
+        handleRefetch()
       })
       .catch((data) => {
         console.log(data);
@@ -84,21 +54,19 @@ const CommentTitle = ({ titleStore }) => {
       top: 0,
     });
   }, []);
-  const [replyText, setReplyText] = useState("");
   useEffect(() => {
-    titleStore?.locationListId?.shop?.ratings?.map((item) => {
-      setReplyText(item?.reply);
-      setState({ ...state, getUserId: item?.id });
-    });
-  },[]);
+    // titleStore?.locationListId?.shop?.ratings?.map((item) => {
+    //   setState({ ...state, getUserId: item?.id });
+    // });
+  }, [titleStore || sendText]);
   // console.log(replyText, "replyText");
-  // console.log(state?.getUserId, "getUserId");
+  console.log(state?.getUserId, "getUserId");
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
-          ( {commentStore?.ratings?.length || 0} отзывы ){" "}
+          ( {titleStore?.locationListId?.shop?.ratings?.length || 0} отзывы ){" "}
         </span>
       </div>
 
@@ -159,15 +127,11 @@ const CommentTitle = ({ titleStore }) => {
         ""
       )}
 
-      {commentStore?.shop?.ratings?.map((item) => {
-        console.log(item,"ITEM");
+      {titleStore?.locationListId?.shop?.ratings?.map((item) => {
         return (
-          <div
-            key={item.id}
-            className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0"
-          >
+          <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
             {/* userImg and Date */}
-            <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
+            <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between border border-red-500">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
                 <div className="flex flex-col">
                   <div className="text-tableTextTitle2 text-base md:text-xl font-AeonikProMedium">
@@ -194,16 +158,18 @@ const CommentTitle = ({ titleStore }) => {
                 </span>
               </div>
             </div>
-            {/* userText and  */}
-            <div className="md:p-[15px] w-full md:w-[95%] h-fit ">
+            {/* userText */}
+            <div className="md:p-[15px] w-full md:w-[95%] h-fit border border-green-500">
               <span className="text-mobileTextColor text-[13px] md:text-base not-italic font-AeonikProRegular leading-normal">
                 {item?.comment}
               </span>
             </div>
             {/* Comment Section */}
             {titleStore?.locationListId?.shop?.ratings?.length !== 0 &&
-              replyText && (
-                <div className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px]`}>
+              item?.reply && (
+                <div
+                  className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px] border border-black`}
+                >
                   <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                     <div>
                       <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
@@ -211,14 +177,7 @@ const CommentTitle = ({ titleStore }) => {
                         {titleStore?.locationListId?.shop?.name}
                       </p>
                       <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
-                        {/* {state?.getComment?.rating?.reply} */}
-                        {titleStore?.locationListId?.shop?.ratings?.map(
-                          (item) => {
-                            return (
-                              <span>{item?.reply || "null reply"}</span>
-                            );
-                          }
-                        )}
+                        <span>{item?.reply}</span>
                       </p>
                     </div>
                     <div className="flex items-start mt-[2px]">
@@ -229,7 +188,7 @@ const CommentTitle = ({ titleStore }) => {
                   </div>
                 </div>
               )}
-            {!replyText && (
+            {!item?.reply && (
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className={`${
@@ -244,7 +203,11 @@ const CommentTitle = ({ titleStore }) => {
                       className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]"
                       value={state?.replyText}
                       onChange={(e) =>
-                        setState({ ...state, replyText: e.target.value })
+                        setState({
+                          ...state,
+                          replyText: e.target.value,
+                          getUserId: item?.id,
+                        })
                       }
                       placeholder="Add your answer..."
                     ></textarea>
@@ -252,13 +215,12 @@ const CommentTitle = ({ titleStore }) => {
                       <button
                         onClick={() => {
                           sendReply();
-                          // setState({ ...state, sendText: false })
                           setSendText(!sendText);
                         }}
                         className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg mr-[10px]`}
                       >
                         <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                          Отправить
+                          Отправить{item?.id}
                         </span>
                       </button>
                       <button
@@ -273,9 +235,7 @@ const CommentTitle = ({ titleStore }) => {
                   </div>
                 ) : (
                   <button
-                    onClick={() =>
-                      setState({ ...state, sendAnswer: true })
-                    }
+                    onClick={() => setState({ ...state, sendAnswer: true })}
                     className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
                   >
                     <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
@@ -288,8 +248,6 @@ const CommentTitle = ({ titleStore }) => {
           </div>
         );
       })}
-          
-     
     </div>
   );
 };
