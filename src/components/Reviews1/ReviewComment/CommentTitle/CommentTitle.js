@@ -127,9 +127,9 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
         ""
       )}
 
-      {titleStore?.locationListId?.shop?.ratings?.map((item) => {
+      {titleStore?.locationListId?.shop?.ratings?.map((item,id) => {
         return (
-          <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
+          <div key={id} className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between ">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">

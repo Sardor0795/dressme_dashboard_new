@@ -4,7 +4,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
 import { useHttp } from "../../../../hook/useHttp";
 
-const WearCommentDetail = () => {
+const WearCommentDetail = ({ sliderData }) => {
   const { request } = useHttp();
   const [productDetails, setProductDetails] = useState();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
@@ -14,27 +14,28 @@ const WearCommentDetail = () => {
       width: window.innerWidth,
     };
   }
+  console.log(sliderData, "Slider-Data");
 
   // ------------GET Has Reviews-STORE ?-----------------
-  useQuery(
-    ["review_products_details"],
-    () => {
-      return request({ url: `/products`, token: true });
-    },
-    {
-      onSuccess: (res) => {
-        if (res) {
-          setProductDetails(res.products.data);
-          console.log(res.products.data, "Review-Products-Details");
-        }
-      },
-      onError: (err) => {
-        console.log(err, "ERR-IN-STORE-COMMENTS");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+  // useQuery(
+  //   ["review_products_details"],
+  //   () => {
+  //     return request({ url: `/products`, token: true });
+  //   },
+  //   {
+  //     onSuccess: (res) => {
+  //       if (res) {
+  //         setProductDetails(res?.products?.data);
+  //         // console.log(res?.products?.data, "Review-Products-Details");
+  //       }
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "ERR-IN-STORE-COMMENTS");
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
 
   useEffect(() => {
     const updateDimension = () => {
@@ -198,60 +199,82 @@ const WearCommentDetail = () => {
     <div className="w-full h-fit">
       <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
         <div className="h-5 w-[4px] bg-textBlueColor"></div>
-        <p>Nike</p>
+        <p>{sliderData?.locationListId?.product?.shop?.name}</p>
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
         <div className="w-full flex flex-col">
-          <div className="w-full flex items-center">
-            <Slider
-              className="w-full h-full rounded-lg "
-              asNavFor={nav2}
-              ref={slider1}
-              {...settings}
-            >
-              {imgGroup?.map((data) => {
-                return (
-                  <article key={data?.id}>
-                    <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
-                      <img
-                        className="h-full md:w-full md:h-fit"
-                        src={data?.img}
-                        alt=""
-                      />
-                    </figure>
-                  </article>
-                );
-              })}
-            </Slider>
-          </div>
-          <div className="w-full items-center justify-between mt-1">
-            <Slider
-              asNavFor={nav1}
-              ref={slider2}
-              // slidesToShow={5}
-              swipeToSlide={true}
-              focusOnSelect={true}
-              vertical={false}
-              {...settings1}
-              className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-            >
-              {imgGroup?.map((data) => {
-                return (
-                  <figure
-                    key={data?.id}
-                    className="!w-fit !h-[70px] md:!w-[72px] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
-                  >
-                    <img
-                      className="w-fit h-full md:p-0
+          {sliderData?.locationListId?.product?.photos?.length > 1 ? (
+            <>
+              <div className="w-[300px] md:h-[350px] overflow-hidden flex items-center justify-center border border-red-600">
+                <Slider
+                  className="w-full h-full rounded-lg "
+                  asNavFor={nav2}
+                  ref={slider1}
+                  {...settings}
+                >
+                  {sliderData?.locationListId?.product?.photos?.map((data) => {
+                    return (
+                      <article key={data?.id}>
+                        <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+                          <img
+                            className="h-full md:w-full md:h-fit"
+                            src={data?.url_photo}
+                            alt=""
+                          />
+                        </figure>
+                      </article>
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="w-full items-center justify-between mt-1 border border-green-600">
+                <Slider
+                  asNavFor={nav1}
+                  ref={slider2}
+                  // slidesToShow={5}
+                  swipeToSlide={true}
+                  focusOnSelect={true}
+                  vertical={false}
+                  {...settings1}
+                  className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+                >
+                  {sliderData?.locationListId?.product?.photos?.map((data) => {
+                    return (
+                      <figure
+                        key={data?.id}
+                        className="!w-fit !h-[70px] md:!w-[72px] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
+                      >
+                        <img
+                          className="w-fit h-full md:p-0
                        md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
-                      src={data?.img}
-                      alt=""
-                    />
-                  </figure>
-                );
-              })}
-            </Slider>
-          </div>
+                          src={data?.url_photo}
+                          alt=""
+                        />
+                      </figure>
+                    );
+                  })}
+                </Slider>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-[300px] md:h-[350px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
+                  {sliderData?.locationListId?.product?.photos?.map((data) => {
+                    return (
+                      <article key={data?.id}>
+                        <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+                          <img
+                            className="h-full md:w-full md:h-fit"
+                            src={data?.url_photo}
+                            alt=""
+                          />
+                        </figure>
+                      </article>
+                    );
+                  })}
+              </div>
+            </>
+          )}
         </div>
       </section>
     </div>

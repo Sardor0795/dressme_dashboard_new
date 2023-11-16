@@ -21,7 +21,7 @@ export default function ReviewWear() {
     {
       onSuccess: (res) => {
         if (res) {
-          // console.log(res?.products?.data?.rated_users_count, "REVIEWS-WEAR");
+          // console.log(res?.products?.data, "REVIEWS-WEAR");
           setReviewsList(res?.products?.data);
           setLoading(false)
         }
@@ -70,8 +70,7 @@ export default function ReviewWear() {
         <LoadingForSeller className="h-[80vh]"/>
       ) : (
         <div className="w-full h-full md:px-10 py-1">
-          {reviewsList?.length > 0 
-          // && reviewsList?.rated_users_count > 0 
+          {reviewsList?.length > 0 //&& reviewsList?.rated_users_count > 0 
           ? (
             <>
             {/* Table */}
@@ -115,7 +114,7 @@ export default function ReviewWear() {
               {/* table product */}
               <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
                 {reviewsList?.map((data) => {
-                  // console.log(data, "PHOTOS");
+                  // console.log(data, "DATA-PRODUCT");
                   return (
                     <ul
                       key={data?.id}
@@ -125,7 +124,7 @@ export default function ReviewWear() {
                         {data?.photos.length > 1
                           ? data?.photos?.map((item, index) =>
                               index === 0 ? (
-                                <figure className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
+                                <figure key={index} className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
                                   <img
                                     className="w-full h-full object-contain"
                                     src={item.url_photo[0]}
@@ -136,7 +135,7 @@ export default function ReviewWear() {
                             )
                           : data?.photos?.map((item) => {
                               return (
-                                <figure className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
+                                <figure key={item.id} className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
                                   <img
                                     className="w-full h-full object-contain"
                                     src={item?.url_photo}

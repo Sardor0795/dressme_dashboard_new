@@ -22,9 +22,6 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
     getComment: null,
   });
 
-  console.log(titleProduct, "titleStore");
-  console.log(titleProduct?.locationListId?.shop?.ratings, "RATING");
-
   const url = "https://api.dressme.uz/api/seller/reply";
 
   const sendReply = () => {
@@ -131,7 +128,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
       )}
       {titleProduct?.locationListId?.product?.ratings?.map((item) => {
         return (
-          <div className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
+          <div key={item.id} className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between ">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
