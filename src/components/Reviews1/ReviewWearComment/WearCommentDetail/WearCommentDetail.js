@@ -207,15 +207,15 @@ const WearCommentDetail = ({ sliderData }) => {
             <>
               <div className="w-full md:w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
                 <Slider
-                  className="w-full h-full rounded-lg "
+                  className="w-full h-full flex items-center justify-center rounded-lg "
                   asNavFor={nav2}
                   ref={slider1}
                   {...settings}
                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
-                      <article key={data?.id}>
-                        <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+                      <article key={data?.id} className="flex items-center justify-center h-full">
+                        <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                           <img
                             className="h-full md:w-full md:h-fit"
                             src={data?.url_photo}
