@@ -24,7 +24,7 @@ import ProductEditTitleLocation from "../components/MarketLocations/Locations/Pr
 import MarketIsCheck from "../components/MarketLocations/MarketIsCheck/MarketIsCheck";
 // -------------------Reviews1----------
 import Reviews1 from "../components/Reviews1";
-import ReviewComment from "../components/Reviews1/ReviewComment/ReviewComment";
+import ReviewComment from "../components/Reviews1/ReviewComment/ReviewStoreComment";
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
 // -------------------Authentication----------

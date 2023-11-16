@@ -9,7 +9,7 @@ import {
   StarOutlineIcon,
 } from "../../../assets/icons";
 import { BiChevronDown } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Popover } from "antd";
 import LoadingForSeller from "../../Loading/LoadingFor";
 import { useQuery } from "@tanstack/react-query";
@@ -20,26 +20,40 @@ export default function ReviewWearComment() {
   const [state, setState] = useState({
     openwear: false,
     loading: true,
+    locationListId: "",
+    locationIsCheck: false,
   });
+  
   const navigate = useNavigate();
 
+  const {id} = useParams()
+  const newId = id?.replace(":", "");
+
   // ------------GET METHOD delivery-method-----------------
-  // useQuery(
-  //   ["Loading"],
-  //   () => {
-  //     return request({ url: "/", token: true });
-  //   },
-  //   {
-  //     onSuccess: (res) => {
-  //       setState({ ...state, loading: false });
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "Err Loading");
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+  const { refetch } = useQuery(
+    ["review_product_details"],
+    () => {
+      return request({ url: `/products/${newId}`, token: true });
+    },
+    {
+      onSuccess: (res) => {
+        if (res) {
+          // console.log(res.product, "Review-Product-Details");
+          setState({
+            ...state,
+            locationListId: res,
+            locationIsCheck: res?.locations_exist,
+            loading: false,
+          });
+        }
+      },
+      onError: (err) => {
+        console.log(err, "ERR-IN-PRODUCTS-COMMENTS");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   // ----------------Wear state management----------------------------
 
@@ -188,7 +202,7 @@ export default function ReviewWearComment() {
           </section>
 
           <section className="w-full md:w-[calc(70%-70px)] ">
-            {/* <WearCommentTitle /> */}
+            <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
           </section>
         </div>
       

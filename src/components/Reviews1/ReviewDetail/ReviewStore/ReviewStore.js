@@ -14,7 +14,7 @@ const ReviewStore = () => {
 
   // // ------------GET  Has Magazin ?-----------------
   useQuery(
-    ["seller_shops"],
+    ["review_shops"],
     () => {
       return request({ url: "/shops", token: true });
     },
