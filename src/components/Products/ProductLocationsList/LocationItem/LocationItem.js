@@ -104,8 +104,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
       <div className="w-full">
         <section className="hidden md:flex items-center justify-between">
           <div className="w-fit flex items-center">
-            <div className=" cursor-pointer bg-white flex items-center gap-x-2"
-            >
+            <div className=" cursor-pointer bg-white flex items-center gap-x-2">
               <Checkbox
                 defaultChecked={indeterminate}
                 onChange={onCheckAllChange}
@@ -116,7 +115,6 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
               <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{data?.address}
                 {data?.products?.length > 1 && <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({data?.products?.length})</span>}
               </p>
-
             </div>
             <button
               onClick={() => addNewProductId(data?.id, data?.shop_id)}
@@ -130,17 +128,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
               </span>
             </button>
           </div>
-          {checkIndex === checkIndex && <div className="w-fit  cursor-pointer bg-white flex items-center gap-x-2"
-          >
-            <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
-              Выбрать все
-            </span>
-            <Checkbox
-              // defaultChecked={indeterminate}
-              // onChange={onCheckedAlllll}
-              value={"all"}
-            />
-          </div>}
+
         </section>
         {checkIndex &&
           < div className="w-full hidden md:flex flex-col mb-5">
@@ -189,7 +177,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                             <td className="w-[5%] h-full  flex items-center justify-center " >{data?.id}</td>
                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                              <img src={data?.url_logo_photo || "nodate"} alt={"red"} className="w-full h-full object-cover" />
+                              <img src={data?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
                             </td>
                             <td className="w-[15%] h-full  flex items-center  justify-center">
                               <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
