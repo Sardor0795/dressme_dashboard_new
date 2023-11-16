@@ -12,7 +12,7 @@ import {
   SearchIcon,
 } from "../../../assets/icons";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Space, DatePicker } from "antd";
+import { Space, DatePicker, Checkbox } from "antd";
 // import { SearchIcon } from "../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { wearImg } from "../../../assets";
@@ -290,6 +290,13 @@ export default function ProductLocationsList() {
                 Удалить
               </button>
             </div>
+          </div>
+          <div className="w-full justify-end  cursor-pointer bg-white flex items-center gap-x-2"
+          >
+            <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
+              Выбрать все
+            </span>
+            <Checkbox value={"all"} />
           </div>
           <div className="w-full my-4">
             {/* <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
