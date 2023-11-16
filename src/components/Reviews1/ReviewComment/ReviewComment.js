@@ -27,7 +27,7 @@ export default function ReviewComment() {
   const { id } = useParams();
   const newId = id?.replace(":", "");
 
-  useQuery(
+  const { refetch } = useQuery(
     ["review_store_details"],
     () => {
       return request({ url: `/shops/${newId}`, token: true });
@@ -51,7 +51,6 @@ export default function ReviewComment() {
       refetchOnWindowFocus: false,
     }
   );
-
 
   // ----------------Wear state management----------------------------
   const handleOpenChangeWear = (newOpen) => {
@@ -139,7 +138,7 @@ export default function ReviewComment() {
       top: 0,
     });
   }, []);
-  
+
   return (
     <div>
       <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
@@ -197,7 +196,7 @@ export default function ReviewComment() {
         </div>
 
         <div className="w-full md:w-[calc(70%-40px)] ">
-          <CommentTitle titleStore={state}/>
+          <CommentTitle titleStore={state} handleRefetch={refetch} />
         </div>
       </div>
     </div>

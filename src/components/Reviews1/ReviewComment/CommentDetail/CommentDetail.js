@@ -2,7 +2,6 @@ import React, { useEffect,} from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { Rate } from "antd";
 import { NoImg } from "../../../../assets/icons";
-import LoadingForSeller from "../../../Loading/LoadingFor";
 
 export default function CommentDetail({state}) {
 
