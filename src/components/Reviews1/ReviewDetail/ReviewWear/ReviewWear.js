@@ -127,7 +127,7 @@ export default function ReviewWear() {
                                 <figure key={index} className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
                                   <img
                                     className="w-full h-full object-contain"
-                                    src={item.url_photo[0]}
+                                    src={item.url_photo}
                                     alt=""
                                   />
                                 </figure>
