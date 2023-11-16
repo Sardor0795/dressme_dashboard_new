@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-
+import PuffLoader from "react-spinners/PuffLoader";
+import { FaCheck } from "react-icons/fa6";
 import StoreListModal from "./StoreListModal";
 import {
   AddIconsCircle,
   AddLocationIcon,
   BgNoImgIcon,
   CheckIcons,
+  CheckTrue,
   DeleteIcon,
+  MenuCloseIcons,
 } from "../../../../assets/icons";
 import { Checkbox, List } from "antd";
 import { useMutation } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingForSeller from "../../../Loading/LoadingFor";
 
 function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkIndex, onRefetch }) {
   const { request } = useHttp()
   const [openStoreList, setOpenStoreList] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
+
+  const [deleteId, setDeleteId] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
@@ -41,9 +51,11 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
   const [checkAll, setCheckAll] = useState(false);
 
   useEffect(() => {
-    setIndeterminate(checked.length && checked.length !== data?.products?.length);
-    setCheckAll(checked.length === data?.products?.length);
-    handleGetCheckAll(checked)
+    if (data?.products?.length) {
+      setIndeterminate(checked.length && checked.length !== data?.products?.length);
+      setCheckAll(checked.length === data?.products?.length);
+      handleGetCheckAll(checked)
+    }
   }, [checked]);
 
   const onCheckAllChange = (e) => {
@@ -53,27 +65,35 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
 
 
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
-  const { mutate } = useMutation((id) => {
-    return request({ url: `/products/${id}`, method: "DELETE", token: true });
+  const { mutate } = useMutation(() => {
+    return request({ url: `/products/${deleteId}`, method: "DELETE", token: true });
   });
 
-  function onProductDelete(id) {
-    console.log(id, "BU--DEL--ID");
-    mutate(id,
+  function onProductDelete() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    mutate({},
       {
         onSuccess: res => {
-          onRefetch()
-          console.log(res, "product delte");
-          // toast.success(`${res?.message}`, {
-          //   position: "top-right",
-          //   autoClose: 3000,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "light",
-          // });
+          if (res?.message) {
+            setDeleteMessage(res?.message)
+            setLoader(false)
+            onRefetch()
+            setTimeout(() => {
+              setDeleteModal(false)
+            }, 1000);
+            console.log(res, "product delte");
+            // toast.success(`${res?.message}`, {
+            //   position: "top-right",
+            //   autoClose: 3000,
+            //   hideProgressBar: false,
+            //   closeOnClick: true,
+            //   pauseOnHover: true,
+            //   draggable: true,
+            //   progress: undefined,
+            //   theme: "light",
+            // });
+          }
         },
         onError: err => {
           console.log(err);
@@ -102,6 +122,68 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
 
       />
       <div className="w-full">
+        <section
+          onClick={() => setDeleteModal(false)}
+          className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
+         ${deleteModal ? "" : "hidden"}`}
+        ></section>
+        {/* ---------------------------------------- */}
+        {/* Delete Product Of Pop Confirm */}
+        <section
+          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
+        >
+          <button
+            onClick={() => setDeleteModal(false)}
+            type="button"
+            className="absolute  right-3 top-3 w-5 h-5 ">
+            <MenuCloseIcons
+              className="w-full h-full"
+              colors={"#a1a1a1"} />
+          </button>
+          {hideDeleteIcons ?
+            <div className="w-full flex items-center justify-center">
+              {loader && hideDeleteIcons ?
+                <PuffLoader
+                  // className={styles.loader1}
+                  color={"#007DCA"}
+                  size={80}
+                  loading={true}
+                />
+                :
+                <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2"><FaCheck size={30} color="#009B17" /></span>
+                  <span className="text-base not-italic font-AeonikProMedium">{deleteMessage}</span>
+                </div>
+              }
+            </div>
+            :
+            <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
+              </span>
+              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+
+          }
+          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+            <button
+              onClick={() => setDeleteModal(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Oтмена</button>
+            <button
+              onClick={() => onProductDelete()}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Удалить</button>
+          </div>
+
+        </section>
         <section className="hidden md:flex items-center justify-between">
           <div className="w-fit flex items-center">
             <div className=" cursor-pointer bg-white flex items-center gap-x-2">
@@ -132,9 +214,9 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
 
         </section>
         {checkIndex && data?.products?.length !== 0 &&
-          < div className="w-full hidden md:flex flex-col mb-5">
-            <table className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
-              <thead className="w-full  h-[70px] flex items-center">
+          < div className="w-full hidden md:flex flex-col">
+            <div className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
+              <div className="w-full  h-[70px] flex items-center">
                 <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
                 <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
                   <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
@@ -149,11 +231,11 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                   <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
                   <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
                 </tr>
-              </thead>
-            </table>
+              </div>
+            </div>
           </div>}
 
-        <Checkbox.Group
+        {data?.products?.length !== 0 ? <Checkbox.Group
           style={{ width: "100%" }}
           value={checked}
           onChange={(checkedValues) => {
@@ -169,8 +251,8 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                 <List.Item className="w-full"
                 >
 
-                  <table className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
-                    <tbody className="w-full flex flex-col gap-y-[10px]   items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                  <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
+                    <div className="w-full flex flex-col gap-y-[5px]   items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                       <div className="flex flex-col w-full">
                         <div className="w-full flex h-[120px]  items-center">
                           {openStoreList && <StoreListModal onClick={storeToggle} />}
@@ -196,12 +278,8 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                               )
                             })}
                             <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
-                            <td className="w-[10%] h-full  flex items-center justify-center ">
-                              <div
-                                className={`w-fit text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500 `}
-                              >
-                                {data?.status || "status"}
-                              </div>
+                            <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500">
+                              {data?.status || "status"}
                             </td>
                             <td className="w-[10%] h-full  flex items-center justify-center ">
                               {data?.cost?.discount_price || data?.cost?.price}
@@ -225,7 +303,12 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                               </button>
                             </td>
                             <td className="w-[9%] h-full  flex items-center justify-center ">
-                              <button type="button" onClick={() => onProductDelete(data?.id)} className="w-fit flex justify-center cursor-auto">
+                              <button type="button"
+                                onClick={() => {
+                                  setDeleteModal(true)
+                                  setDeleteId(data?.id)
+                                }}
+                                className="w-fit flex justify-center cursor-auto">
                                 <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
                                   <DeleteIcon width={30} />
                                 </span>
@@ -303,14 +386,17 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                         </div>
                       </div>
 
-                    </tbody>
-                  </table>
+                    </div>
+                  </div>
 
                 </List.Item>
               )
             })}
           </List>
         </Checkbox.Group>
+          : <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
+            <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
+          </div>}
       </div>
       {/* )
       })} */}

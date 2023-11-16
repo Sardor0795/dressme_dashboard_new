@@ -349,9 +349,7 @@ export default function ProductLocationsList() {
                             {item?.shop_locations?.length !== 0 ?
                               <LocationItem handleGetCheckAll={getCheckListItems} checkIndex={index1} onRefetch={refetch} data={resData} getProductOfCategory={getProductOfCategory} />
                               :
-                              <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
-                                <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
-                              </div>
+                              ""
                             }
                           </div>
                         </div>
