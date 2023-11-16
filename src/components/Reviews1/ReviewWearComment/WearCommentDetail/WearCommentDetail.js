@@ -139,21 +139,21 @@ const WearCommentDetail = ({ sliderData }) => {
     speed: 500,
   };
   let settings1 = {
-    slidesToShow: 5,
+    slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -161,14 +161,14 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 560,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 6,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -176,14 +176,14 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 6,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 360,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -205,7 +205,7 @@ const WearCommentDetail = ({ sliderData }) => {
         <div className="w-full flex flex-col">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
             <>
-              <div className="w-[300px] md:h-[350px] overflow-hidden flex items-center justify-center border border-red-600">
+              <div className="w-full md:w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
                 <Slider
                   className="w-full h-full rounded-lg "
                   asNavFor={nav2}
@@ -227,7 +227,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   })}
                 </Slider>
               </div>
-              <div className="w-full items-center justify-between mt-1 border border-green-600">
+              <div className="w-full md:w-[350px] flex items-center justify-between mt-1">
                 <Slider
                   asNavFor={nav1}
                   ref={slider2}
@@ -236,17 +236,16 @@ const WearCommentDetail = ({ sliderData }) => {
                   focusOnSelect={true}
                   vertical={false}
                   {...settings1}
-                  className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+                  className="w-full flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
                       <figure
                         key={data?.id}
-                        className="!w-fit !h-[70px] md:!w-[72px] md:!h-[96px] cursor-pointer bg-btnBgColor rounded-lg "
+                        className="!w-full !h-[70px] md:!w-[110px] md:!h-[73px] cursor-pointer bg-btnBgColor rounded-lg pr-2 md:pr-0"
                       >
                         <img
-                          className="w-fit h-full md:p-0
-                       md:w-full md:h-full flex items-center justify-center border border-searchBgColor rounded-lg"
+                          className="w-full h-full md:p-0 md:w-full md:h-full object-contain flex items-center justify-center border border-searchBgColor rounded-lg"
                           src={data?.url_photo}
                           alt=""
                         />
@@ -258,7 +257,7 @@ const WearCommentDetail = ({ sliderData }) => {
             </>
           ) : (
             <>
-              <div className="w-[300px] md:h-[350px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
+              <div className="w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
                       <article key={data?.id}>
