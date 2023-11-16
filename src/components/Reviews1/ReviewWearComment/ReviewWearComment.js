@@ -23,7 +23,7 @@ export default function ReviewWearComment() {
     locationListId: "",
     locationIsCheck: false,
   });
-  
+
   const navigate = useNavigate();
 
   const {id} = useParams()
@@ -38,7 +38,7 @@ export default function ReviewWearComment() {
     {
       onSuccess: (res) => {
         if (res) {
-          // console.log(res.product, "Review-Product-Details");
+          console.log(res?.product?.photos, "Review-Product-Details");
           setState({
             ...state,
             locationListId: res,
@@ -198,7 +198,7 @@ export default function ReviewWearComment() {
       ) : ( */}
         <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
           <section className="w-full md:w-[30%] overflow-hidden">
-            <WearCommentDetail />
+            <WearCommentDetail sliderData={state} />
           </section>
 
           <section className="w-full md:w-[calc(70%-70px)] ">
