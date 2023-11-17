@@ -210,6 +210,8 @@ const WearCommentDetail = ({ sliderData }) => {
                   className="w-full h-full flex items-center justify-center rounded-lg "
                   asNavFor={nav2}
                   ref={slider1}
+                  swipeToSlide={true}
+                  focusOnSelect={true}
                   {...settings}
                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
@@ -231,12 +233,11 @@ const WearCommentDetail = ({ sliderData }) => {
                 <Slider
                   asNavFor={nav1}
                   ref={slider2}
-                  // slidesToShow={5}
                   swipeToSlide={true}
                   focusOnSelect={true}
-                  vertical={false}
+                  vertical={true}
                   {...settings1}
-                  className="w-full flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+                  className="!w-full md:!h-[73px] flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
