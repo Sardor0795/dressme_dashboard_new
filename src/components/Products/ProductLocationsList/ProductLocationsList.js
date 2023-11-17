@@ -18,9 +18,8 @@ const { RangePicker } = DatePicker;
 export default function ProductLocationsList() {
   const { request } = useHttp()
 
-  function getCheckListItems(childData) {
-    console.log(childData, "GetAllCheckValue");
-  }
+  const [getCheckedProductList, setGetCheckedProductList] = useState([])
+
   const [productList, setProductList] = useState('')
   const [getProductOfCategory, setGetProductOfCategory] = useState('')
 
@@ -42,9 +41,13 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
-
+  function getCheckListItems(childData) {
+    console.log(childData, "GetAllCheckValue");
+    // setGetCheckedProductList(childData)
+  }
 
   console.log(productList?.products_locations, "products_locations");
+  // console.log(getCheckedProductList, "getCheckedProductList");
   const [someChecked, setSomeChecked] = useState(false);
 
   // products
@@ -52,7 +55,9 @@ export default function ProductLocationsList() {
   function openMarketEditPage(id) {
     navigate(`/store/market-list/:${id}`);
   };
-
+  function getCheckListItems(childData) {
+    console.log(childData, "GetAllCheckValue");
+  }
 
   return (
     <div>

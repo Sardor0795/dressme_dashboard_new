@@ -20,6 +20,7 @@ import { useHttp } from "../../../../hook/useHttp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+const url = "https://api.dressme.uz/api/seller";
 
 function LocationItem({ allProductLocationList, data, getProductOfCategory, handleGetCheckAll, checkIndex, onRefetch }) {
   const { request } = useHttp()
@@ -30,11 +31,11 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [deleteMessage, setDeleteMessage] = useState(null);
 
+  const [getIdShopLocation, setGetIdShopLocation] = useState(null);
   const [loader, setLoader] = useState(false);
   // ------------
   const [openStoreList, setOpenStoreList] = useState(false);
   const [getIdProduct, setGetIdProduct] = useState(null);
-  const [getIdShopLocation, setGetIdShopLocation] = useState(null);
   const [hideProductList, setHideProductList] = useState(false);
 
 
@@ -76,14 +77,14 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
 
 
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
-  const { mutate } = useMutation(() => {
-    return request({ url: `/products/${deleteId}`, method: "DELETE", token: true });
+  const deleteProductById = useMutation(() => {
+    return request({ url: `/products/${deleteId}/${0}`, method: "DELETE", token: true });
   });
 
   function onProductDelete() {
     setLoader(true)
     setHideDeleteIcons(true)
-    mutate({},
+    deleteProductById.mutate({},
       {
         onSuccess: res => {
           if (res?.message) {
@@ -93,17 +94,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
             setTimeout(() => {
               setDeleteModal(false)
             }, 1000);
-            console.log(res, "product delte");
-            // toast.success(`${res?.message}`, {
-            //   position: "top-right",
-            //   autoClose: 3000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            // });
+
           }
         },
         onError: err => {
@@ -111,7 +102,61 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
         }
       })
   }
-  const postAddProduct = useMutation(() => {
+  const deleteProductByAddress = useMutation(() => {
+    return request({ url: `/products/${deleteId}/${getIdShopLocation}`, method: "DELETE", token: true });
+  });
+
+  function onProductAddressDelete() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteProductByAddress.mutate({},
+      {
+        onSuccess: res => {
+          if (res?.message) {
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            onRefetch()
+            setTimeout(() => {
+              setDeleteModal(false)
+            }, 1000);
+
+          }
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+  }
+  // const postAddProductSelected = () => {
+  //   let form = new FormData();
+  //   checked?.map((e, index) => {
+  //     form.append("product_ids[]", checked[index]);
+  //   })
+  //   form.append("location_ids[]", getIdShopLocation);
+  //   return fetch(`${url}/shops/locations/products/add-selected`, {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     },
+  //     body: form,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       if (res?.errors && res?.message) {
+
+  //         if (res?.errors === true) {
+
+  //         } else {
+
+  //         }
+  //       } else if (res?.message) {
+
+  //       }
+  //     })
+  //     .catch((err) => console.log(err, "errImage"));
+  // };
+  const postAddProductId = useMutation(() => {
     return request({
       url: `/shops/locations/products/add`,
       method: "POST",
@@ -126,7 +171,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
   const sendAddProductById = () => {
     setLoader(true)
     setHideProductList(true)
-    postAddProduct?.mutate({}, {
+    postAddProductId?.mutate({}, {
       onSuccess: (res) => {
         if (res?.message && res?.errors) {
           setDeleteMessage(res?.message)
@@ -168,6 +213,8 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     setHideProductList(false)
   }, [deleteModal, openStoreList]);
 
+  console.log(checked, "checked");
+  console.log(checked?.length, "checkedlength");
   console.log(getIdProduct, "getIdProduct");
   console.log(getIdShopLocation, "getIdShopLocation");
 
@@ -242,16 +289,17 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
 
           }
           <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
-            <button
-              onClick={() => setDeleteModal(false)}
-              type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Oтмена</button>
+
             <button
               onClick={() => onProductDelete()}
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Удалить</button>
+              Удалить везде</button>
+            <button
+              onClick={() => onProductAddressDelete()}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Удалить из адреса</button>
           </div>
 
         </section>
@@ -399,7 +447,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
             itemLayout="horizontal"
             dataSource={data?.products}
             className="w-full">
-            {data?.products?.map(data => {
+            {data?.products?.map(itemValue => {
               return (
                 <List.Item className="w-full "
                 >
@@ -408,44 +456,44 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                     <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                       <div className="flex flex-col w-full">
                         <div className="w-full flex h-[120px]  items-center">
-                          <Checkbox value={data?.id} />
+                          <Checkbox value={itemValue?.id} />
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                            <td className="w-[5%] h-full  flex items-center justify-center " >{data?.id}</td>
+                            <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                              <img src={data?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
                             </td>
                             <td className="w-[15%] h-full  flex items-center  justify-center">
                               <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
-                                {data?.name_ru || "namrRu"}
+                                {itemValue?.name_ru || "namrRu"}
                               </p>
                             </td>
                             <td className="w-[15%] h-full  flex items-center justify-center ">
-                              {data?.sku || "sku"}
+                              {itemValue?.sku || "sku"}
                             </td>
-                            {getProductOfCategory && getProductOfCategory?.filter(e => e?.id == data?.type_id)?.map(valueType => {
+                            {getProductOfCategory && getProductOfCategory?.filter(e => e?.id == itemValue?.type_id)?.map(valueType => {
                               return (
                                 <td className="w-[8%] h-full  flex items-center justify-center ">
                                   {valueType?.name_ru || "type_id"}
                                 </td>
                               )
                             })}
-                            <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
+                            <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                            {data?.status === "approved" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                              {data?.status || "status"}
+                            {itemValue?.status === "approved" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                              {itemValue?.status || "status"}
                             </td>}
-                            {data?.status === "declined" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                              {data?.status || "status"}
+                            {itemValue?.status === "declined" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                              {itemValue?.status || "status"}
                             </td>}
-                            {data?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                              {data?.status || "status"}
+                            {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                              {itemValue?.status || "status"}
                             </td>}
                             <td className="w-[10%] h-full  flex items-center justify-center ">
-                              {data?.cost?.discount_price || data?.cost?.price}
+                              {itemValue?.cost?.discount_price || itemValue?.cost?.price}
                             </td>
                             <td className="w-[10%] h-full  flex items-center justify-center ">
                               <button
-                                onClick={() => goProductDetailEdit(data?.id)}
+                                onClick={() => goProductDetailEdit(itemValue?.id)}
                                 className="text-[18px] text-weatherWinterColor w-full text-center"
                               >
                                 Подробнее
@@ -453,7 +501,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                             </td>
                             <td className="w-[9%] h-full  flex items-center justify-center ">
                               <button
-                                onClick={() => setGetIdProduct(data?.id)}
+                                onClick={() => setGetIdProduct(itemValue?.id)}
                                 type="button" className="w-full flex justify-center cursor-auto">
                                 <span
                                   onClick={() => setOpenStoreList(true)}
@@ -467,7 +515,8 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                               <button type="button"
                                 onClick={() => {
                                   setDeleteModal(true)
-                                  setDeleteId(data?.id)
+                                  setDeleteId(itemValue?.id)
+                                  setGetIdShopLocation(data?.id)
                                 }}
                                 className="w-fit flex justify-center cursor-auto">
                                 <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
@@ -478,18 +527,18 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                           </tr>
                         </div>
                         {/* For Mobile Device */}
-                        <div key={data?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+                        <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
                           <div className="mb-2">
                             <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                              <span className="text-checkboxBorder">0{data?.id}</span>
+                              <span className="text-checkboxBorder">0{itemValue?.id}</span>
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                             </div>
                           </div>
 
                           <div className="mb-3 h-[148px]">
                             <figure className="w-full h-full rounded-lg overflow-hidden">
-                              {/* <img className="w-[100%] h-[100%]" src={data?.photos[0]?.url_photo} alt="" /> */}
+                              {/* <img className="w-[100%] h-[100%]" src={itemValue?.photos[0]?.url_photo} alt="" /> */}
                             </figure>
                           </div>
 
@@ -501,21 +550,21 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                             </div>
 
                             <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                              <div className="w-[40%]"> {data?.name_product}</div>
-                              <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{data?.status}</div>
-                              <div className="w-[30%]"> {data?.money} сум </div>
+                              <div className="w-[40%]"> {itemValue?.name_product}</div>
+                              <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{itemValue?.status}</div>
+                              <div className="w-[30%]"> {itemValue?.money} сум </div>
                             </div>
                           </div>
 
                           <div className="flex items-center justify-between">
                             <button
-                              onClick={() => goMapWear(data?.city)}
+                              onClick={() => goMapWear(itemValue?.city)}
                               className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               Добавить в локацию
                             </button>
                             <button
-                              onClick={() => goMapCity(data?.city)}
+                              onClick={() => goMapCity(itemValue?.city)}
                               className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               Подробнее
@@ -525,15 +574,15 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                           <div className="w-full flex items-center justify-between mt-[18px]">
                             <div
                               // onClick={() => {
-                              //   click(data?.id);
+                              //   click(itemValue?.id);
                               // }}
-                              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${data?.isCheck
+                              className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${itemValue?.isCheck
                                 ? "bg-[#007DCA] border-[#007DCA]"
                                 : "bg-white border-checkboxBorder"
                                 } flex items-center justify-center rounded mr-[8px]`}
                             >
                               <div
-                                className={`${data?.isCheck ? "flex items-center justify-center" : "hidden"
+                                className={`${itemValue?.isCheck ? "flex items-center justify-center" : "hidden"
                                   }`}
                               >
                                 <CheckIcons />
