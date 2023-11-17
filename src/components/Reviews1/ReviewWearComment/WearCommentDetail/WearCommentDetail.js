@@ -238,7 +238,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   vertical={true}
                   {...settings1}
                   className="!w-full md:!h-[73px] flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-                >
+                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
                       <figure

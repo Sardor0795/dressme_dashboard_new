@@ -3,6 +3,7 @@ import { deliveryIcon, man, woman } from "../../../../assets";
 import { Rate } from "antd";
 import { NoImg } from "../../../../assets/icons";
 
+
 export default function CommentDetail({state}) {
 
 
