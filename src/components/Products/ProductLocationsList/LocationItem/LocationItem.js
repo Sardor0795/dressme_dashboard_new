@@ -13,21 +13,27 @@ import {
   MenuCloseIcons,
 } from "../../../../assets/icons";
 import { Checkbox, List } from "antd";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 
-function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkIndex, onRefetch }) {
+function LocationItem({ allProductLocationList, data, getProductOfCategory, handleGetCheckAll, checkIndex, onRefetch }) {
   const { request } = useHttp()
-  const [openStoreList, setOpenStoreList] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
-
   const [deleteId, setDeleteId] = useState(null);
-  const [deleteMessage, setDeleteMessage] = useState(false);
+  // --------------
+  const [SuccessMessage, setSuccessMessage] = useState(false);
   const [loader, setLoader] = useState(false);
+  // ------------
+  const [openStoreList, setOpenStoreList] = useState(false);
+  const [getIdProduct, setGetIdProduct] = useState(null);
+  const [getIdShopLocation, setGetIdShopLocation] = useState(null);
+  const [hideProductList, setHideProductList] = useState(false);
+
+
 
   // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
@@ -64,6 +70,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
   };
 
 
+
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
   const { mutate } = useMutation(() => {
     return request({ url: `/products/${deleteId}`, method: "DELETE", token: true });
@@ -76,7 +83,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
       {
         onSuccess: res => {
           if (res?.message) {
-            setDeleteMessage(res?.message)
+            setSuccessMessage(res?.message)
             setLoader(false)
             onRefetch()
             setTimeout(() => {
@@ -100,6 +107,40 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
         }
       })
   }
+  const postAddProduct = useMutation(() => {
+    return request({
+      url: `/shops/locations/products/add`,
+      method: "POST",
+      token: true,
+      body: {
+        product_id: getIdProduct,
+        shop_location_id: getIdShopLocation,
+      }
+    });
+  });
+
+  const sendAddProductById = () => {
+    setLoader(true)
+    setHideProductList(true)
+    postAddProduct?.mutate({}, {
+      onSuccess: (res) => {
+        if (res?.message && res?.errors) {
+
+        } else if (res?.message) {
+          setSuccessMessage(res?.message)
+          setLoader(false)
+          onRefetch()
+          setTimeout(() => {
+            setOpenStoreList(false)
+          }, 1000);
+          console.log(res, "getIdShopLocation -----POST");
+        }
+      },
+      onError: err => {
+        console.log(err, "POSTID");
+      }
+    })
+  }
 
   // ---------Callback----
   useEffect(() => {
@@ -110,6 +151,8 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
     }
   }, [deleteModal, openStoreList]);
 
+  console.log(getIdProduct, "getIdProduct");
+  console.log(getIdShopLocation, "getIdShopLocation");
 
   return (
     <div className="w-full">
@@ -163,7 +206,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                 :
                 <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
                   <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2"><FaCheck size={30} color="#009B17" /></span>
-                  <span className="text-base not-italic font-AeonikProMedium">{deleteMessage}</span>
+                  <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
                 </div>
               }
             </div>
@@ -196,7 +239,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
         </section>
         {/* Add the selected products to the new one */}
         <section
-          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-4 py-4 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
             }`}
         >
           <button
@@ -212,33 +255,50 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
               Добавить локацию
             </p>
           </div>
-          <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px] h-[300px]">
-            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
-              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                {" "}
-                Yunusobod
-              </span>
-            </button>
-            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
-              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                {" "}
-                Mirzo Ulug'bek
-              </span>
-            </button>
-            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
-              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                {" "}
-                Chilanzor
-              </span>
-            </button>
-            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
-              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                {" "}
-                Yashnabod
-              </span>
-            </button>
+          <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
+            {hideProductList ?
+              <div className="w-full h-full flex items-center justify-center">
+                {loader && hideProductList ?
+                  <PuffLoader
+                    // className={styles.loader1}
+                    color={"#007DCA"}
+                    size={80}
+                    loading={true}
+                  />
+                  :
+                  <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                      <FaCheck size={30} color="#009B17" /></span>
+                    <span className="text-2xl not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                  </div>
+                }
+              </div> :
+              <div className="w-full h-full overflow-auto VerticelScroll">
+                {allProductLocationList?.map(item => {
+                  return (
+                    <div className="w-full cursor-pointer mt-2">
+                      {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
+                        <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                          {" "}
+                          {item?.name}
+                        </span>
+                        {item?.shop_locations?.map((data, index) => {
+                          return (
+                            <div onClick={() => setGetIdShopLocation(data?.id)} className={`w-full flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                              <span>{index + 1}</span>)
+                              <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                {data?.address}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>}
+                    </div>
+                  )
+                })}
+              </div>}
           </div>
-          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+          <div className="w-full flex items-center justify-between mt-5 gap-x-2">
             <button
               onClick={() => setOpenStoreList(false)}
               type="button"
@@ -246,7 +306,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
               Oтмена
             </button>
             <button
-              onClick={() => setOpenStoreList(false)}
+              onClick={sendAddProductById}
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
               Готово
@@ -254,8 +314,6 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
 
           </div>
         </section>
-        {/* {openStoreList && <StoreListModal onClick={storeToggle} />} */}Готово
-
         <section className="hidden md:flex items-center justify-between">
           <div className="w-fit flex items-center">
             <div className=" cursor-pointer bg-white flex items-center gap-x-2">
@@ -324,7 +382,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                 >
 
                   <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
-                    <div className="w-full flex flex-col border border-red-500  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                    <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                       <div className="flex flex-col w-full">
                         <div className="w-full flex h-[120px]  items-center">
                           <Checkbox value={data?.id} />
@@ -371,7 +429,9 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                               </button>
                             </td>
                             <td className="w-[9%] h-full  flex items-center justify-center ">
-                              <button className="w-full flex justify-center cursor-auto">
+                              <button
+                                onClick={() => setGetIdProduct(data?.id)}
+                                type="button" className="w-full flex justify-center cursor-auto">
                                 <span
                                   onClick={() => setOpenStoreList(true)}
                                   className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
