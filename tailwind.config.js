@@ -53,6 +53,10 @@ module.exports = {
         Editbg: "#E8F5FD",
 
         redText: "#FF4343",
+        // -----
+        bgApproved: 'rgba(79, 180, 89, 0.10)',
+        bgDecline: 'rgba(255, 0, 0, 0.10)',
+        bgPending: 'rgba(241, 193, 22, 0.10)',
       },
       fontFamily: {
         // 500
