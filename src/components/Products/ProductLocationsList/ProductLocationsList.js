@@ -1,31 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-
 import LocationItem from "./LocationItem/LocationItem";
 import {
-  AddIconsCircle,
   AddLocationIcon,
   CalendarIcons,
-  CheckIcons,
   DeleteIcon,
   GoBackIcons,
   SearchIcon,
 } from "../../../assets/icons";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Space, DatePicker, Checkbox } from "antd";
-// import { SearchIcon } from "../../assets/icons";
-import { AiOutlineLeft } from "react-icons/ai";
-import { wearImg } from "../../../assets";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
-import StoreListModal from "./LocationItem/StoreListModal";
 import LoadingForSeller from "../../Loading/LoadingFor";
 
 const { RangePicker } = DatePicker;
 
 export default function ProductLocationsList() {
   const { request } = useHttp()
-  const [openStoreList, setOpenStoreList] = useState(false);
 
   function getCheckListItems(childData) {
     console.log(childData, "GetAllCheckValue");
@@ -53,118 +44,10 @@ export default function ProductLocationsList() {
   );
 
   console.log(productList?.products_locations, "products_locations");
-
-  const [city1, setCity1] = useState([
-    {
-      id: 1,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#4FB459]",
-      state: "Одобренный",
-    },
-    {
-      id: 2,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#F1C116]",
-      state: "Ожидающий",
-    },
-    {
-      id: 3,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#FF4747]",
-      state: "Отказанный",
-    },
-    {
-      id: 4,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#AA3FFF]",
-      state: "Замечание",
-    },
-    {
-      id: 5,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#F1C116]",
-      state: "Ожидающий",
-    },
-    {
-      id: 6,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#AA3FFF]",
-      state: "Замечание",
-    },
-  ]);
-
-  const [city2, setCity2] = useState([
-    {
-      id: 1,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#4FB459]",
-      state: "Одобренный",
-    },
-    {
-      id: 2,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#F1C116]",
-      state: "Одобренный",
-    },
-    {
-      id: 3,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#FF4747]",
-      state: "Отказанный",
-    },
-    {
-      id: 4,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#AA3FFF]",
-      state: "Отказанный",
-    },
-    {
-      id: 5,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#F1C116]",
-      state: "Ожидающий",
-    },
-    {
-      id: 6,
-      name: "wear",
-      isCheck: false,
-      bgColor: "bg-[#AA3FFF]",
-      state: "Замечание",
-    },
-  ]);
-
   const [someChecked, setSomeChecked] = useState(false);
-
-
-
-
 
   // products
   const navigate = useNavigate();
-  const goProductDetailEdit = (id) => {
-    navigate(`/locations-store/edit-detail/:${id}`);
-  };
-
-  const goMapCity = (id) => {
-    navigate(`/locations-store/city/:${id}`);
-  };
-  const goMapWear = (id) => {
-    navigate(`/locations-store/wears/:${id}`);
-  };
-  function addNewProductId(locationId, shopId) {
-    navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
-  };
   function openMarketEditPage(id) {
     navigate(`/store/market-list/:${id}`);
   };
@@ -175,16 +58,7 @@ export default function ProductLocationsList() {
       {/* Navbar */}
       <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
         <section className="hidden md:flex">
-          <button
-            button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-          >
-            <AiOutlineLeft />
-          </button>
-          <p className="text-black text-2xl not-italic font-AeonikProMedium ml-[30px]">
+          <p className="text-black text-2xl not-italic font-AeonikProMedium ">
             Одежда{" "}
           </p>
         </section>
@@ -334,7 +208,7 @@ export default function ProductLocationsList() {
                   {item?.shop_locations?.map((resData, index) => {
                     return (
                       <div className="w-full">
-                        <div className="w-full  mt-10">
+                        <div className="w-full  mt-5">
                           <div className="flex justify-end items-center md:justify-between mx-auto ">
                             <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                               <p className="flex md:hidden text-sm font-AeonikProMedium">

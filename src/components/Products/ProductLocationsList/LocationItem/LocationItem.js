@@ -29,7 +29,7 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
   const [deleteMessage, setDeleteMessage] = useState(false);
   const [loader, setLoader] = useState(false);
 
-  const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
+  // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
   const navigate = useNavigate();
   const goProductDetailEdit = (id) => {
@@ -101,7 +101,14 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
       })
   }
 
-  // console.log("ishga tushdi");
+  // ---------Callback----
+  useEffect(() => {
+    if (deleteModal || openStoreList) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [deleteModal, openStoreList]);
 
 
   return (
@@ -123,9 +130,12 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
       />
       <div className="w-full">
         <section
-          onClick={() => setDeleteModal(false)}
+          onClick={() => {
+            setDeleteModal(false)
+            setOpenStoreList(false)
+          }}
           className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${deleteModal ? "" : "hidden"}`}
+         ${deleteModal || openStoreList ? "" : "hidden"}`}
         ></section>
         {/* ---------------------------------------- */}
         {/* Delete Product Of Pop Confirm */}
@@ -184,6 +194,68 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
           </div>
 
         </section>
+        {/* Add the selected products to the new one */}
+        <section
+          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
+        >
+          <button
+            onClick={() => setOpenStoreList(false)}
+            type="button"
+            className="absolute  right-3 top-3 w-5 h-5 ">
+            <MenuCloseIcons
+              className="w-full h-full"
+              colors={"#a1a1a1"} />
+          </button>
+          <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
+            <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+              Добавить локацию
+            </p>
+          </div>
+          <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px] h-[300px]">
+            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
+              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                {" "}
+                Yunusobod
+              </span>
+            </button>
+            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
+              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                {" "}
+                Mirzo Ulug'bek
+              </span>
+            </button>
+            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
+              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                {" "}
+                Chilanzor
+              </span>
+            </button>
+            <button className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg">
+              <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                {" "}
+                Yashnabod
+              </span>
+            </button>
+          </div>
+          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+            <button
+              onClick={() => setOpenStoreList(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Oтмена
+            </button>
+            <button
+              onClick={() => setOpenStoreList(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Готово
+            </button>
+
+          </div>
+        </section>
+        {/* {openStoreList && <StoreListModal onClick={storeToggle} />} */}Готово
+
         <section className="hidden md:flex items-center justify-between">
           <div className="w-fit flex items-center">
             <div className=" cursor-pointer bg-white flex items-center gap-x-2">
@@ -248,14 +320,13 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
             className="w-full">
             {data?.products?.map(data => {
               return (
-                <List.Item className="w-full"
+                <List.Item className="w-full "
                 >
 
                   <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
-                    <div className="w-full flex flex-col gap-y-[5px]   items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                    <div className="w-full flex flex-col border border-red-500  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                       <div className="flex flex-col w-full">
                         <div className="w-full flex h-[120px]  items-center">
-                          {openStoreList && <StoreListModal onClick={storeToggle} />}
                           <Checkbox value={data?.id} />
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                             <td className="w-[5%] h-full  flex items-center justify-center " >{data?.id}</td>
@@ -278,9 +349,16 @@ function LocationItem({ data, getProductOfCategory, handleGetCheckAll, checkInde
                               )
                             })}
                             <td className="w-[8%] h-full  flex items-center justify-center ">{data?.created_at || "created_at"}</td>
-                            <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-white font-AeonikProRegular py-[5px] px-[15px] rounded-full bg-green-500">
+
+                            {data?.status === "approved" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
                               {data?.status || "status"}
-                            </td>
+                            </td>}
+                            {data?.status === "declined" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                              {data?.status || "status"}
+                            </td>}
+                            {data?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                              {data?.status || "status"}
+                            </td>}
                             <td className="w-[10%] h-full  flex items-center justify-center ">
                               {data?.cost?.discount_price || data?.cost?.price}
                             </td>
