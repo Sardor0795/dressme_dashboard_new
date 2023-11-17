@@ -43,6 +43,7 @@ export default function ProductLocationsList() {
     }
   );
 
+
   console.log(productList?.products_locations, "products_locations");
   const [someChecked, setSomeChecked] = useState(false);
 
@@ -221,7 +222,7 @@ export default function ProductLocationsList() {
                           </div>
                           <div className="mx-auto font-AeonikProRegular text-[16px]">
                             {item?.shop_locations?.length !== 0 ?
-                              <LocationItem handleGetCheckAll={getCheckListItems} checkIndex={index1} onRefetch={refetch} data={resData} getProductOfCategory={getProductOfCategory} />
+                              <LocationItem allProductLocationList={productList?.products_locations} handleGetCheckAll={getCheckListItems} checkIndex={index1} onRefetch={refetch} data={resData} getProductOfCategory={getProductOfCategory} />
                               :
                               ""
                             }
