@@ -18,7 +18,10 @@ const { RangePicker } = DatePicker;
 export default function ProductLocationsList() {
   const { request } = useHttp()
 
-  const [getCheckedProductList, setGetCheckedProductList] = useState([])
+  const [getCheckListItem, setGetCheckListItem] = useState(null)
+  const [addLocationAllProductToggle, setAddLocationAllProductToggle] = useState(false)
+  const ProductToggleAllItems = React.useCallback(() => setAddLocationAllProductToggle(false), []);
+  console.log(addLocationAllProductToggle, "addLocationAllProductToggle----------");
 
   const [productList, setProductList] = useState('')
   const [getProductOfCategory, setGetProductOfCategory] = useState('')
@@ -41,22 +44,18 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
-  function getCheckListItems(childData) {
-    console.log(childData, "GetAllCheckValue");
-    // setGetCheckedProductList(childData)
-  }
 
-  console.log(productList?.products_locations, "products_locations");
-  // console.log(getCheckedProductList, "getCheckedProductList");
-  const [someChecked, setSomeChecked] = useState(false);
+
+  // console.log(productList?.products_locations, "products_locations");
+
 
   // products
   const navigate = useNavigate();
   function openMarketEditPage(id) {
     navigate(`/store/market-list/:${id}`);
   };
-  function getCheckListItems(childData) {
-    console.log(childData, "GetAllCheckValue");
+  function handleChekListItem(childData) {
+    setGetCheckListItem(childData)
   }
 
   return (
@@ -148,8 +147,10 @@ export default function ProductLocationsList() {
                 Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
               </div>
               <button
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${someChecked
-                  ? "text-addLocationTextcolor  active:translate-y-[2px]"
+                type="button"
+                onClick={() => setAddLocationAllProductToggle(!addLocationAllProductToggle)}
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${getCheckListItem
+                  ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
               >
@@ -159,8 +160,8 @@ export default function ProductLocationsList() {
                 Добавить в локацию
               </button>
               <button
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${someChecked
-                  ? "text-deleteColor active:translate-y-[2px]"
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${getCheckListItem
+                  ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
               >
@@ -227,7 +228,15 @@ export default function ProductLocationsList() {
                           </div>
                           <div className="mx-auto font-AeonikProRegular text-[16px]">
                             {item?.shop_locations?.length !== 0 ?
-                              <LocationItem allProductLocationList={productList?.products_locations} handleGetCheckAll={getCheckListItems} checkIndex={index1} onRefetch={refetch} data={resData} getProductOfCategory={getProductOfCategory} />
+                              <LocationItem
+                                allProductLocationList={productList?.products_locations}
+                                handleGetCheckAll={handleChekListItem}
+                                onRefetch={refetch}
+                                data={resData}
+                                getProductOfCategory={getProductOfCategory}
+                                ProductToggleOnclick={ProductToggleAllItems}
+                                ProductToggleState={addLocationAllProductToggle}
+                              />
                               :
                               ""
                             }
