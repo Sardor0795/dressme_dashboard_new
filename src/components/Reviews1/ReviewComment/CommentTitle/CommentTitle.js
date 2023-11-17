@@ -17,9 +17,11 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
     replyText: null,
     getUserId: null,
     getComment: null,
+    editCommit: false,
   });
-  console.log(titleStore, "titleStore");
-  console.log(titleStore?.locationListId?.shop?.ratings, "RATING");
+  // console.log(titleStore, "titleStore");
+  // console.log(titleStore?.locationListId?.shop?.ratings, "RATING");
+  // console.log(state?.editCommit);
 
   const url = "https://api.dressme.uz/api/seller/reply";
 
@@ -61,7 +63,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
   }, [titleStore || sendText]);
 
   // console.log(replyText, "replyText");
-  console.log(state?.getUserId, "getUserId");
+  // console.log(state?.getUserId, "getUserId");
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
@@ -189,8 +191,13 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                         {item?.replyDate}
                       </span>
                     </div>
-                    <button className="absolute top-2 right-3 shadow rounded p-1 bg-white ">
-                      <CiEdit width={'20px'} height={'20px'}/>
+                    <button
+                      onClick={() => 
+                        setState({...state, editCommit: true})
+                      }
+                      className="absolute top-2 right-2 shadow rounded p-1 bg-white"
+                    >
+                      <CiEdit />
                     </button>
                   </div>
                 </div>
@@ -199,7 +206,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className={`${
-                  sendText ? "hidden" : "flex "
+                  sendText || state?.editCommit ? "hidden" : "hidden "
                 } w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
               >
                 {state?.sendAnswer ? (
