@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CiEdit } from "react-icons/ci";
 import {
   CloseAnswer,
   MobileStar,
@@ -127,9 +128,12 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
         ""
       )}
 
-      {titleStore?.locationListId?.shop?.ratings?.map((item,id) => {
+      {titleStore?.locationListId?.shop?.ratings?.map((item, id) => {
         return (
-          <div key={id} className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
+          <div
+            key={id}
+            className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0"
+          >
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between ">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
@@ -170,7 +174,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                 <div
                   className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px]`}
                 >
-                  <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
+                  <div className="relative w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                     <div>
                       <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
                         <span className="mr-1">Ответ</span>
@@ -185,6 +189,9 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                         {item?.replyDate}
                       </span>
                     </div>
+                    <button className="absolute top-2 right-3 shadow rounded p-1 bg-white ">
+                      <CiEdit width={'20px'} height={'20px'}/>
+                    </button>
                   </div>
                 </div>
               )}
