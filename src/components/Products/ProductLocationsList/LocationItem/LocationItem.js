@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
+import { MdError } from "react-icons/md";
+
 import StoreListModal from "./StoreListModal";
 import {
   AddIconsCircle,
@@ -25,7 +27,9 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   // --------------
-  const [SuccessMessage, setSuccessMessage] = useState(false);
+  const [SuccessMessage, setSuccessMessage] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState(null);
+
   const [loader, setLoader] = useState(false);
   // ------------
   const [openStoreList, setOpenStoreList] = useState(false);
@@ -125,13 +129,22 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     postAddProduct?.mutate({}, {
       onSuccess: (res) => {
         if (res?.message && res?.errors) {
+          setDeleteMessage(res?.message)
+          setLoader(false)
+          setTimeout(() => {
+            setOpenStoreList(false)
+            setHideProductList(false)
 
+          }, 5000);
         } else if (res?.message) {
           setSuccessMessage(res?.message)
+          setGetIdShopLocation('')
           setLoader(false)
           onRefetch()
           setTimeout(() => {
             setOpenStoreList(false)
+            setHideProductList(false)
+
           }, 1000);
           console.log(res, "getIdShopLocation -----POST");
         }
@@ -149,6 +162,10 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     } else {
       document.body.style.overflow = "auto";
     }
+  }, [deleteModal, openStoreList]);
+  useEffect(() => {
+    setHideDeleteIcons(false)
+    setHideProductList(false)
   }, [deleteModal, openStoreList]);
 
   console.log(getIdProduct, "getIdProduct");
@@ -176,6 +193,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
           onClick={() => {
             setDeleteModal(false)
             setOpenStoreList(false)
+
           }}
           className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal || openStoreList ? "" : "hidden"}`}
@@ -239,7 +257,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
         </section>
         {/* Add the selected products to the new one */}
         <section
-          className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-4 py-4 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
             }`}
         >
           <button
@@ -250,7 +268,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
               className="w-full h-full"
               colors={"#a1a1a1"} />
           </button>
-          <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
+          <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
             <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
               Добавить локацию
             </p>
@@ -267,13 +285,18 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                   />
                   :
                   <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
-                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                      <FaCheck size={30} color="#009B17" /></span>
-                    <span className="text-2xl not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                    {deleteMessage ?
+                      <span className="flex items-center justify-center p-2">
+                        <MdError size={35} color="#FF4343" />
+                      </span> :
+                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                        <FaCheck size={30} color="#009B17" />
+                      </span>}
+                    <span className="text-2xl not-italic font-AeonikProMedium">{deleteMessage ? deleteMessage : SuccessMessage}</span>
                   </div>
                 }
               </div> :
-              <div className="w-full h-full overflow-auto VerticelScroll">
+              <div className="w-full h-full overflow-y-auto VerticelScroll">
                 {allProductLocationList?.map(item => {
                   return (
                     <div className="w-full cursor-pointer mt-2">
@@ -284,9 +307,9 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                         </span>
                         {item?.shop_locations?.map((data, index) => {
                           return (
-                            <div onClick={() => setGetIdShopLocation(data?.id)} className={`w-full flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                              <span>{index + 1}</span>)
-                              <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                            <div onClick={() => setGetIdShopLocation(data?.id)} className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                              <span className="text-[17px]">{index + 1}</span>)
+                              <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                 {data?.address}
                               </p>
                             </div>
@@ -302,13 +325,13 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
             <button
               onClick={() => setOpenStoreList(false)}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
               Oтмена
             </button>
             <button
               onClick={sendAddProductById}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
               Готово
             </button>
 
