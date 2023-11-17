@@ -139,7 +139,7 @@ export default function Sidebar({ name, surName }) {
                         className="ml-[2px] "
                       />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Товар
+                        Товары
                       </p>
                     </figure>
                   ) : (
@@ -149,7 +149,7 @@ export default function Sidebar({ name, surName }) {
                         className="ml-[2px] "
                       />
                       <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Товар
+                        Товары
                       </p>
                     </figure>
                   )
@@ -211,7 +211,7 @@ export default function Sidebar({ name, surName }) {
               </div>)}
 
 
-          <div className="w-full">
+          {/* <div className="w-full">
             <div className="w-full flex items-center justify-center">
               {dressInfo.isItPorduct ? (
                 <button
@@ -252,7 +252,7 @@ export default function Sidebar({ name, surName }) {
                 </button>
               )}
             </div>
-          </div>
+          </div> */}
 
         </div>
 
