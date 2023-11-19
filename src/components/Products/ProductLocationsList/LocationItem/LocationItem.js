@@ -65,12 +65,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
-      if (checked.length >= 2) {
-        handleGetCheckAll(true)
-      } else {
-        handleGetCheckAll(false)
-
-      }
+      handleGetCheckAll(checked)
     }
   }, [checked]);
 
@@ -78,6 +73,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
+  console.log(checked, "checked");
 
 
 
@@ -132,10 +128,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
         }
       })
   }
-  console.log(checked, "checked");
-  checked?.map((e, index) => {
-    console.log("product_ids[]", checked[index]);
-  })
+
   const postAddProductSelected = () => {
     setLoader(true)
     setHideProductList(true)
