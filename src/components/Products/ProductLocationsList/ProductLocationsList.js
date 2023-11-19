@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import LocationItem from "./LocationItem/LocationItem";
 import {
   AddLocationIcon,
@@ -18,7 +18,7 @@ const { RangePicker } = DatePicker;
 export default function ProductLocationsList() {
   const { request } = useHttp()
 
-  const [getCheckListItem, setGetCheckListItem] = useState(null)
+  const [getCheckListItem, setGetCheckListItem] = useState(false)
   const [addLocationAllProductToggle, setAddLocationAllProductToggle] = useState(false)
   const ProductToggleAllItems = React.useCallback(() => setAddLocationAllProductToggle(false), []);
   console.log(addLocationAllProductToggle, "addLocationAllProductToggle----------");
@@ -54,9 +54,24 @@ export default function ProductLocationsList() {
   function openMarketEditPage(id) {
     navigate(`/store/market-list/:${id}`);
   };
+  // function handleChekListItem(childData) {
+  //   setGetCheckListItem(childData)
+  // }
   function handleChekListItem(childData) {
-    setGetCheckListItem(childData)
+    // if (childData?.length >= 2) {
+    //   setGetCheckListItem(true)
+    // } else {
+    //   setGetCheckListItem(false)
+    // }
+    setGetCheckListItem({ childData })
+
+    console.log(childData, "childData");
+    console.log(childData[0], "childData[0]");
+    // Update the name in the component's state
+    // this.setState({ name: childData })
+
   }
+  console.log(getCheckListItem, "Parent---getCheckListItem");
 
   return (
     <div>
