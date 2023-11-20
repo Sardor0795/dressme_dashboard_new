@@ -9,7 +9,7 @@ import {
   SearchIcon,
 } from "../../../assets/icons";
 import { useNavigate } from "react-router-dom";
-import { Space, DatePicker, Checkbox } from "antd";
+import { Space, DatePicker, Checkbox, message } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import LoadingForSeller from "../../Loading/LoadingFor";
@@ -28,11 +28,14 @@ export default function ProductLocationsList() {
     getProductCategory: null,
     onSuccessMessaage: null,
     onErrorMessage: null,
+    onErrorTitle: null,
     getShopLocationId: null,
     getCheckListItem: null,
     loader: false,
     openSelectModal: false,
     hideProductList: false,
+    // -----------
+    openDeleteModal: false
 
 
   });
@@ -78,15 +81,46 @@ export default function ProductLocationsList() {
       .then((res) => res.json())
       .then((res) => {
         if (res?.problems?.length !== 0 && res?.message) {
-          setState({ ...state, onErrorMessage: res?.problems, loader: false })
+          setState({ ...state, onErrorMessage: res?.problems, onErrorTitle: res?.message, loader: false })
         } else if (res?.errors !== 0 && res?.message) {
           setState({ ...state, onErrorMessage: res?.errors?.location_id, loader: false })
-        } else if (res?.message) {
-          setState({ ...state, onSuccessMessaage: res?.message, getShopLocationId: null, loader: false })
-          console.log(res?.message,);
+        } else if (res?.problems?.length == 0 && res?.message) {
+          setState({ ...state, onSuccessMessaage: res?.message, onErrorTitle: res?.message, getShopLocationId: null, loader: false })
           refetch()
           setTimeout(() => {
             setState({ ...state, openSelectModal: false, })
+          }, 2000);
+        }
+        console.log(res, "Success - ThisIsSeveralSelected");
+      })
+      .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
+  };
+  const onDeleteSeveralSelect = () => {
+    setState({ ...state, loader: true, hideProductList: true })
+    setHideProductList(true)
+    let form = new FormData();
+    form.append("location_ids[]", 15);
+    state?.getCheckListItem?.childData?.map((e, index) => {
+      form.append("product_ids[]", state?.getCheckListItem?.childData[index]);
+    })
+    return fetch(`${url}/products/massive-delete-products`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: form,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res?.errors && res?.message) {
+          setState({ ...state, onErrorMessage: res?.errors, loader: false })
+        } else if (res?.message) {
+          setState({ ...state, onSuccessMessaage: res?.message, loader: false })
+          refetch()
+          setTimeout(() => {
+            setState({ ...state, openDeleteModal: false, })
+            setHideProductList(false)
           }, 2000);
         }
         console.log(res, "Success - ThisIsSeveralSelected");
@@ -100,16 +134,26 @@ export default function ProductLocationsList() {
     navigate(`/store/market-list/:${id}`);
   };
 
+  console.log(state?.onSuccessMessaage, 'onSuccessMessaage');
+
 
   return (
     <div>
       <section
         onClick={() => {
-          setState({ ...state, onSuccessMessaage: null, onErrorMessage: null, openSelectModal: false, hideProductList: false })
+          setState({
+            ...state,
+            onSuccessMessaage: null,
+            onErrorTitle: null,
+            onErrorMessage: null,
+            openSelectModal: false,
+            hideProductList: false,
+            openDeleteModal: false
+          })
           setHideProductList(false)
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.openSelectModal ? "" : "hidden"}`}
+         ${state?.openSelectModal || state?.openDeleteModal ? "" : "hidden"}`}
       ></section>
       {/* Add the Several selected products to the new one */}
       <section
@@ -120,7 +164,7 @@ export default function ProductLocationsList() {
           onClick={() => {
             setHideProductList(false)
 
-            setState({ ...state, onSuccessMessaage: null, onErrorMessage: null, openSelectModal: false, hideProductList: false })
+            setState({ ...state, onSuccessMessaage: null, onErrorTitle: null, onErrorMessage: null, openSelectModal: false, hideProductList: false })
           }
           }
           type="button"
@@ -146,29 +190,39 @@ export default function ProductLocationsList() {
                 :
                 <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                   {state?.onErrorMessage ?
-                    <span className="flex items-center justify-center p-2">
+                    <span className="flex flex-col items-center justify-center p-2">
+                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorTitle}</span>
                       <MdError size={45} color="#FF4343" />
                     </span>
                     :
-                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                      <FaCheck size={30} color="#009B17" />
-                    </span>}
+                    state?.onErrorTitle ? <span className="flex flex-col items-center justify-center p-2">
+                      <MdError size={45} color="#FF4343" />
+                    </span> :
+                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                        <FaCheck size={30} color="#009B17" />
+                      </span>}
                   {state?.onErrorMessage ?
-                    <div className="flex flex-col item-center justify-center gap-y-2">
-                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorMessage?.message?.ru}</span>
-                      {state?.onErrorMessage?.products?.map((item, index) => {
-                        return (
-                          <div className={`w-min-[200px] w-full  mx-auto my-1 flex items-center p-[2px] rounded-[4px]  justify-start gap-x-1   `}>
-                            <span className="text-[17px]">{index + 1}</span>)
-                            <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                              {item?.name_ru}
-                            </p>
-                          </div>
-                        )
-                      })}
+                    <div className="w-fit flex flex-col overflow-hidden item-center justify-center gap-y-2">
+                      <span className="text-[18px] not-italic font-AeonikProMedium">{state?.onErrorMessage?.message?.ru}</span>
+                      <div className="w-full overflow-auto flex flex-col VerticelScroll item-center justify-center gap-y-2  h-[170px]">
+
+                        {state?.onErrorMessage?.products?.map((item, index) => {
+                          return (
+                            <div className={`w-min-[200px] w-full  mx-auto my-1 flex items-center p-[2px] rounded-[4px]  justify-start gap-x-1   `}>
+                              <span className="text-[16px]">{index + 1}</span>)
+                              <p className="text-black text-[16px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                {item?.name_ru}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>
                     </div>
                     :
-                    <span className="text-2xl not-italic font-AeonikProMedium">{state?.onSuccessMessaage}</span>
+                    <div className="w-full flex items-center justify-center">
+                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorTitle}</span>
+                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onSuccessMessaage}</span>
+                    </div>
                   }
 
                 </div>
@@ -200,7 +254,7 @@ export default function ProductLocationsList() {
               })}
             </div>}
         </div>
-        {!state?.onErrorMessage && !state?.onSuccessMessaage && <div className="w-full flex items-center justify-between mt-5 gap-x-2">
+        {!state?.onErrorMessage && !state?.onSuccessMessaage && !state?.onErrorTitle && <div className="w-full flex items-center justify-between mt-5 gap-x-2">
           <button
             onClick={() => setState({ ...state, openSelectModal: false })}
             type="button"
@@ -215,6 +269,70 @@ export default function ProductLocationsList() {
           </button>
 
         </div>}
+      </section>
+      {/* Delete Product Of Pop Confirm */}
+      <section
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openDeleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setState({ ...state, openDeleteModal: false })}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        {hideProductList ?
+          <div className="w-full flex items-center justify-center">
+            {state?.loader && hideProductList ?
+              <PuffLoader
+                // className={styles.loader1}
+                color={"#007DCA"}
+                size={80}
+                loading={true}
+              />
+              :
+              <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                  <FaCheck size={30} color="#009B17" /></span>
+                <span className="text-base not-italic font-AeonikProMedium">{state?.onSuccessMessaage}</span>
+              </div>
+            }
+          </div>
+          :
+          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+              <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                <DeleteIcon width={30} />
+              </span>
+            </span>
+            <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+              Вы уверены?
+            </span>
+          </div>
+
+        }
+        <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+          {/* <button
+            onClick={() => onProductDelete()}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            Удалить везде</button> */}
+          <button
+            onClick={() => setState({ ...state, openDeleteModal: false })}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
+            Oтмена
+          </button>
+          <button
+            onClick={onDeleteSeveralSelect}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            Удалить из адреса</button>
+        </div>
+
       </section>
       {/* Navbar */}
       <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
@@ -316,6 +434,8 @@ export default function ProductLocationsList() {
                 Добавить в локацию
               </button>
               <button
+                type="button"
+                onClick={() => setState({ ...state, openDeleteModal: true })}
                 className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${state?.getCheckListItem?.childData?.length >= 2
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
