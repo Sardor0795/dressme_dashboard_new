@@ -5,6 +5,7 @@ import {
   CalendarIcons,
   DeleteIcon,
   GoBackIcons,
+  MenuCloseIcons,
   SearchIcon,
 } from "../../../assets/icons";
 import { useNavigate } from "react-router-dom";
@@ -12,11 +13,23 @@ import { Space, DatePicker, Checkbox } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import LoadingForSeller from "../../Loading/LoadingFor";
+import PuffLoader from "react-spinners/PuffLoader";
+import { MdError } from "react-icons/md";
+import { FaCheck } from "react-icons/fa6";
 
 const { RangePicker } = DatePicker;
+const url = "https://api.dressme.uz/api/seller";
 
 export default function ProductLocationsList() {
   const { request } = useHttp()
+  const [getIdShopLocation, setGetIdShopLocation] = useState(null);
+  const [loader, setLoader] = useState(false);
+  // ------------
+  const [openStoreList, setOpenStoreList] = useState(false);
+  const [hideProductList, setHideProductList] = useState(false);
+
+  const [SuccessMessage, setSuccessMessage] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState(null);
 
   const [getCheckListItem, setGetCheckListItem] = useState(false)
   const [addLocationAllProductToggle, setAddLocationAllProductToggle] = useState(false)
@@ -44,37 +57,151 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
+  function handleChekListItem(childData) { setGetCheckListItem({ childData }) }
 
-
-  // console.log(productList?.products_locations, "products_locations");
-
+  const sendAddProductById = () => {
+    setLoader(true)
+    setHideProductList(true)
+    let form = new FormData();
+    form.append("location_id", getIdShopLocation);
+    getCheckListItem?.childData?.map((e, index) => {
+      form.append("product_ids[]", getCheckListItem?.childData[index]);
+    })
+    return fetch(`${url}/shops/locations/products/add-selected`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: form,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res?.errors && res?.message) {
+          setDeleteMessage(res?.message)
+          setLoader(false)
+          refetch()
+          setTimeout(() => {
+            setOpenStoreList(false)
+            setHideProductList(false)
+          }, 5000);
+        } else if (res?.message) {
+          setSuccessMessage(res?.message)
+          setGetIdShopLocation('')
+          setLoader(false)
+          refetch()
+          setTimeout(() => {
+            setOpenStoreList(false)
+            setHideProductList(false)
+          }, 1000);
+        }
+        console.log(res, "Success - ThisIsSeveralSelected");
+      })
+      .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
+  };
 
   // products
   const navigate = useNavigate();
   function openMarketEditPage(id) {
     navigate(`/store/market-list/:${id}`);
   };
-  // function handleChekListItem(childData) {
-  //   setGetCheckListItem(childData)
-  // }
-  function handleChekListItem(childData) {
-    // if (childData?.length >= 2) {
-    //   setGetCheckListItem(true)
-    // } else {
-    //   setGetCheckListItem(false)
-    // }
-    setGetCheckListItem({ childData })
 
-    console.log(childData, "childData");
-    console.log(childData[0], "childData[0]");
-    // Update the name in the component's state
-    // this.setState({ name: childData })
 
-  }
-  console.log(getCheckListItem, "Parent---getCheckListItem");
+  // console.log(getCheckListItem?.childData?.length, "Parent---getCheckListItem");
 
   return (
     <div>
+      <section
+        onClick={() => {
+          setOpenStoreList(false)
+        }}
+        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
+         ${openStoreList ? "" : "hidden"}`}
+      ></section>
+      {/* Add the Several selected products to the new one */}
+      <section
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setOpenStoreList(false)
+          }
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
+          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+            Добавить локацию
+          </p>
+        </div>
+        <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
+          {hideProductList ?
+            <div className="w-full h-full flex items-center justify-center">
+              {loader && hideProductList ?
+                <PuffLoader
+                  // className={styles.loader1}
+                  color={"#007DCA"}
+                  size={80}
+                  loading={true}
+                />
+                :
+                <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                  {deleteMessage ?
+                    <span className="flex items-center justify-center p-2">
+                      <MdError size={35} color="#FF4343" />
+                    </span>
+                    :
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                      <FaCheck size={30} color="#009B17" />
+                    </span>}
+                  <span className="text-2xl not-italic font-AeonikProMedium">{deleteMessage ? deleteMessage : SuccessMessage}</span>
+                </div>
+              }
+            </div> :
+            <div className="w-full h-full overflow-y-auto VerticelScroll">
+              {productList?.products_locations?.map(item => {
+                return (
+                  <div className="w-full cursor-pointer mt-2">
+                    {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
+                      <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                        {" "}
+                        {item?.name}
+                      </span>
+                      {item?.shop_locations?.map((data, index) => {
+                        return (
+                          <div onClick={() => setGetIdShopLocation(data?.id)} className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                            <span className="text-[17px]">{index + 1}</span>)
+                            <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                              {data?.address}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>}
+                  </div>
+                )
+              })}
+            </div>}
+        </div>
+        <div className="w-full flex items-center justify-between mt-5 gap-x-2">
+          <button
+            onClick={() => setOpenStoreList(false)}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
+            Oтмена
+          </button>
+          <button
+            onClick={sendAddProductById}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
+            Готово
+          </button>
+
+        </div>
+      </section>
       {/* Navbar */}
       <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
         <section className="hidden md:flex">
@@ -163,8 +290,8 @@ export default function ProductLocationsList() {
               </div>
               <button
                 type="button"
-                onClick={() => setAddLocationAllProductToggle(!addLocationAllProductToggle)}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${getCheckListItem
+                onClick={() => setOpenStoreList(true)}
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${getCheckListItem?.childData?.length >= 2
                   ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -175,7 +302,7 @@ export default function ProductLocationsList() {
                 Добавить в локацию
               </button>
               <button
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${getCheckListItem
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${getCheckListItem?.childData?.length >= 2
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
