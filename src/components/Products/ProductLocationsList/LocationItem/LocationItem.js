@@ -22,7 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 const url = "https://api.dressme.uz/api/seller";
 
-function LocationItem({ allProductLocationList, data, getProductOfCategory, handleGetCheckAll, onRefetch }) {
+function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefetch }) {
   const { request } = useHttp()
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -39,7 +39,16 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
   const [hideProductList, setHideProductList] = useState(false);
 
 
-
+  const [getProductCategory, setGetProductCategory] = useState(null);
+  useQuery(["getProductOfCategory"], () => { return request({ url: "/products/get-product-info", token: true }) },
+    {
+      onSuccess: (res) => {
+        setGetProductCategory(res?.types)
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
   // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
 
   const navigate = useNavigate();
@@ -57,6 +66,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
   };
 
+  const [shopId, setShopId] = useState();
   const [checked, setChecked] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
@@ -65,7 +75,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
-      handleGetCheckAll(checked)
+      handleGetCheckAll(checked, shopId)
     }
   }, [checked]);
 
@@ -373,6 +383,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                 onChange={onCheckAllChange}
                 checked={checkAll}
                 style={{ width: "26px", height: "26px" }}
+                onClick={() => setShopId(data?.id)}
                 className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}>
               </Checkbox>
               <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{data?.address}
@@ -422,6 +433,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
           onChange={(checkedValues) => {
             setChecked(checkedValues);
           }}
+
         >
           <List
             itemLayout="horizontal"
@@ -436,7 +448,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                     <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                       <div className="flex flex-col w-full">
                         <div className="w-full flex h-[120px]  items-center">
-                          <Checkbox value={itemValue?.id} />
+                          <Checkbox value={itemValue?.id} onClick={() => setShopId(data?.id)} />
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                             <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
@@ -450,7 +462,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
                             <td className="w-[15%] h-full  flex items-center justify-center ">
                               {itemValue?.sku || "sku"}
                             </td>
-                            {getProductOfCategory && getProductOfCategory?.filter(e => e?.id == itemValue?.type_id)?.map(valueType => {
+                            {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map(valueType => {
                               return (
                                 <td className="w-[8%] h-full  flex items-center justify-center ">
                                   {valueType?.name_ru || "type_id"}
