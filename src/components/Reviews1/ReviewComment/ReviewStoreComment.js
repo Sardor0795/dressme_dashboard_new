@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CommentTitle } from "./CommentTitle/CommentTitle";
+// import { CommentTitle } from "./CommentTitle/CommentTitle";
 import CommentDetail from "./CommentDetail/CommentDetail";
 import {
   CheckTrue,
@@ -13,6 +13,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
+import CommentTitle from "./CommentTitle/CommentTitle";
 
 export default function ReviewComment() {
   const { request } = useHttp();
