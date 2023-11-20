@@ -73,7 +73,7 @@ function LocationItem({ allProductLocationList, data, getProductOfCategory, hand
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
-  console.log(checked, "checked");
+  // console.log(checked, "checked");
 
 
 
