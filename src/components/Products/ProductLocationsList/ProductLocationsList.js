@@ -35,22 +35,15 @@ export default function ProductLocationsList() {
     openSelectModal: false,
     hideProductList: false,
     // -----------
-    openDeleteModal: false
+    openDeleteModal: false,
+    shopId: null
 
 
   });
   // ------------
   const [hideProductList, setHideProductList] = useState(false);
 
-  useQuery(["getProductOfCategory"], () => { return request({ url: "/products/get-product-info", token: true }) },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getProductCategory: res?.types })
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+
   const { isLoading, refetch } = useQuery(["productList"], () => { return request({ url: "/products/locations", token: true }) },
     {
       onSuccess: (res) => {
@@ -60,7 +53,10 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
-  function handleChekListItem(childData) { setState({ ...state, getCheckListItem: { childData } }) }
+  function handleChekListItem(childData, shopId) {
+    setState({ ...state, getCheckListItem: { childData }, shopId: { shopId } })
+  }
+  // console.log(state?.shopId?.shopId, "state?--shopId");
 
   const onSendPeoductSeveralSelect = () => {
     setState({ ...state, loader: true, hideProductList: true })
@@ -80,13 +76,15 @@ export default function ProductLocationsList() {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res?.problems?.length);
         if (res?.problems?.length !== 0 && res?.message) {
-          setState({ ...state, onErrorMessage: res?.problems, onErrorTitle: res?.message, loader: false })
-        } else if (res?.errors !== 0 && res?.message) {
+          setState({ ...state, onErrorMessage: res, onErrorTitle: res?.message, loader: false })
+        } else if (res?.errors && res?.message) {
           setState({ ...state, onErrorMessage: res?.errors?.location_id, loader: false })
         } else if (res?.problems?.length == 0 && res?.message) {
-          setState({ ...state, onSuccessMessaage: res?.message, onErrorTitle: res?.message, getShopLocationId: null, loader: false })
           refetch()
+          setState({ ...state, onSuccessMessaage: res?.message, getShopLocationId: null, loader: false })
+          console.log("Ishladi");
           setTimeout(() => {
             setState({ ...state, openSelectModal: false, })
           }, 2000);
@@ -99,7 +97,7 @@ export default function ProductLocationsList() {
     setState({ ...state, loader: true, hideProductList: true })
     setHideProductList(true)
     let form = new FormData();
-    form.append("location_ids[]", 15);
+    form.append("location_ids[]", state?.shopId?.shopId);
     state?.getCheckListItem?.childData?.map((e, index) => {
       form.append("product_ids[]", state?.getCheckListItem?.childData[index]);
     })
@@ -134,7 +132,9 @@ export default function ProductLocationsList() {
     navigate(`/store/market-list/:${id}`);
   };
 
-  console.log(state?.onSuccessMessaage, 'onSuccessMessaage');
+  // console.log(state?.onSuccessMessaage, 'onSuccessMessaage');
+  // console.log(state?.onErrorMessage, 'onErrorMessage');
+  // console.log(state?.getProductList, 'getProductList');
 
 
   return (
@@ -191,22 +191,19 @@ export default function ProductLocationsList() {
                 <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                   {state?.onErrorMessage ?
                     <span className="flex flex-col items-center justify-center p-2">
-                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorTitle}</span>
+                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorMessage?.message}</span>
                       <MdError size={45} color="#FF4343" />
                     </span>
                     :
-                    state?.onErrorTitle ? <span className="flex flex-col items-center justify-center p-2">
-                      <MdError size={45} color="#FF4343" />
-                    </span> :
-                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                        <FaCheck size={30} color="#009B17" />
-                      </span>}
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                      <FaCheck size={30} color="#009B17" />
+                    </span>}
                   {state?.onErrorMessage ?
                     <div className="w-fit flex flex-col overflow-hidden item-center justify-center gap-y-2">
-                      <span className="text-[18px] not-italic font-AeonikProMedium">{state?.onErrorMessage?.message?.ru}</span>
+                      <span className="text-[18px] not-italic font-AeonikProMedium">{state?.onErrorMessage?.problems?.message?.ru}</span>
                       <div className="w-full overflow-auto flex flex-col VerticelScroll item-center justify-center gap-y-2  h-[170px]">
 
-                        {state?.onErrorMessage?.products?.map((item, index) => {
+                        {state?.onErrorMessage?.problems?.products?.map((item, index) => {
                           return (
                             <div className={`w-min-[200px] w-full  mx-auto my-1 flex items-center p-[2px] rounded-[4px]  justify-start gap-x-1   `}>
                               <span className="text-[16px]">{index + 1}</span>)
@@ -220,7 +217,7 @@ export default function ProductLocationsList() {
                     </div>
                     :
                     <div className="w-full flex items-center justify-center">
-                      <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorTitle}</span>
+                      {/* <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorTitle}</span> */}
                       <span className="text-2xl not-italic font-AeonikProMedium">{state?.onSuccessMessaage}</span>
                     </div>
                   }
@@ -509,7 +506,6 @@ export default function ProductLocationsList() {
                                 handleGetCheckAll={handleChekListItem}
                                 onRefetch={refetch}
                                 data={resData}
-                                getProductOfCategory={state?.getProductCategory}
                               />
                               :
                               ""
