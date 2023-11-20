@@ -8,6 +8,7 @@ import {
 } from "../../../../assets/icons";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
+import { CiEdit } from "react-icons/ci";
 
 export default function WearCommentTitle({ titleProduct, handleRefetch }) {
   // const { request } = useHttp();
@@ -20,6 +21,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
     replyText: null,
     getUserId: null,
     getComment: null,
+    editCommit: false,
   });
 
   const url = "https://api.dressme.uz/api/seller/reply";
@@ -66,7 +68,8 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
         <span className="block md:hidden text-xs text-mobileTextColor">
-          ( {titleProduct?.locationListId?.product?.ratings?.length || 0} отзывы ){" "}
+          ( {titleProduct?.locationListId?.product?.ratings?.length || 0} отзывы
+          ){" "}
         </span>
       </div>
 
@@ -128,7 +131,10 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
       )}
       {titleProduct?.locationListId?.product?.ratings?.map((item) => {
         return (
-          <div key={item.id} className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0">
+          <div
+            key={item.id}
+            className="w-full h-fit border border-lightBorderColor rounded-[5px] p-[15px] mb-[10px] md:mb-0"
+          >
             {/* userImg and Date */}
             <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between ">
               <div className="h-10 w-fit flex items-center gap-x-[15px]">
@@ -169,7 +175,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
                 <div
                   className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px]`}
                 >
-                  <div className="w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
+                  <div className="relative w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
                     <div>
                       <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
                         <span className="mr-1">Ответ</span>
@@ -184,6 +190,12 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
                         {item?.replyDate}
                       </span>
                     </div>
+                    <button
+                      onClick={() => setState({ ...state, editCommit: !state.editCommit })}
+                      className="absolute top-2 right-2 shadow rounded p-1 bg-white"
+                    >
+                      <CiEdit />
+                    </button>
                   </div>
                 </div>
               )}
@@ -243,6 +255,50 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
                   </button>
                 )}
               </form>
+            )}
+
+            {state?.editCommit && (
+              <div className="w-full flex flex-col md:flex-row items-center justify-between md:px-[15px]">
+                <textarea
+                  name="answer"
+                  id="answer"
+                  className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]"
+                  value={state?.replyText}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      replyText: e.target.value,
+                      getUserId: item?.id,
+                    })
+                  }
+                  placeholder="Add your answer..."
+                ></textarea>
+                <div className="flex items-center ml-auto mt-3 md:mt-0">
+                  <button
+                    onClick={() => {
+                      sendReply();
+                      setSendText(!sendText);
+                    }}
+                    className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
+                  >
+                    <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
+                      Отправить
+                    </span>
+                  </button>
+                  <button
+                    onClick={() =>
+                      setState({
+                        ...state,
+                        sendAnswer: false,
+                        editCommit: false,
+                      })
+                    }
+                    className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
+                  >
+                    <CloseAnswer colors="#007DCA" />
+                  </button>
+                </div>
+              </div>
             )}
           </div>
         );
