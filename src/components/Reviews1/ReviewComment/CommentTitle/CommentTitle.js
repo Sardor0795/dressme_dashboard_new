@@ -16,11 +16,13 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
     startReviews: true,
     replyText: null,
     getUserId: null,
+    replyTextEdit: "",
+    getUserIdEdit: "",
     getComment: null,
-    editCommit: false,
-    // ------
-    editComment: "",
+    editComment: false,
   });
+
+  console.log(state.editComment, 'editComment');
 
   const url = "https://api.dressme.uz/api/seller/reply";
 
@@ -49,41 +51,30 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
       });
   };
 
-  // const [commentData, setCommentData] = useState({
-  //   myObject: {
-  //     text: "",
-  //     id: "",
-  //   },
-  // });
-
-  // const {id} = useParams();
-  // useEffect(() => {
-  //   fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-  //     },
-  //     body: JSON.stringify({
-  //       reply: state.replyText,
-  //       id: state?.getUserId,
-  //     }),
-  //   })
-  //     .then((res) => {
-  //       const getData = res;
-  //       // console.log(getData, "EDIT-DATA");
-  //       // setCommentData({ myObject: getData });
-  //     })
-  //     .catch((e) => console.log(e));
-  // }, []);
-
-  // const inputHandler = (e) => {
-  //   setCommentData((userData) => ({
-  //     ...userData,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
+  const sendReplyEdit = () => {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: JSON.stringify({
+        reply: state.replyTextEdit,
+        id: state?.getUserIdEdit,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setState({ ...state, getComment: data });
+        handleRefetch();
+      })
+      .catch((data) => {
+        console.log(data);
+      });
+  };
 
   useEffect(() => {
     window.scrollTo({
@@ -91,14 +82,6 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
     });
   }, []);
 
-  useEffect(() => {
-    // titleStore?.locationListId?.shop?.ratings?.map((item) => {
-    //   setState({ ...state, getUserId: item?.id });
-    // });
-  }, [titleStore || sendText]);
-
-  // console.log(replyText, "replyText");
-  // console.log(state?.getUserId, "getUserId");
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
@@ -227,9 +210,9 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                       </span>
                     </div>
                     <button
-                      onClick={() =>
-                        setState({ ...state, editCommit: !state.editCommit })
-                      }
+                      onClick={() => {
+                        setState({ ...state, editComment: !state.editComment });
+                      }}
                       className="absolute top-2 right-2 shadow rounded p-1 bg-white"
                     >
                       <CiEdit />
@@ -242,7 +225,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
               <form
                 onSubmit={(e) => e.preventDefault()}
                 className={`${
-                  sendText ? "hidden" : "hidden "
+                  sendText ? "hidden" : "flex"
                 } w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
               >
                 {state?.sendAnswer ? (
@@ -285,7 +268,9 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                   </div>
                 ) : (
                   <button
-                    onClick={() => setState({ ...state, sendAnswer: true })}
+                    onClick={() =>
+                      setState({ ...state, sendAnswer: !state.sendAnswer })
+                    }
                     className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
                   >
                     <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
@@ -295,23 +280,34 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                 )}
               </form>
             )}
-            {state?.editCommit && (
+
+            {state?.editComment && (
               <div className="w-full flex flex-col md:flex-row items-center justify-between md:px-[15px]">
-                <textarea
-                  name="answer"
-                  id="answer"
+                <input
+                  name="answer1"
+                  id="answer1"
                   className="w-full md:w-4/5 h-12 text-[13px] md:text-base md:h-14 border rounded-lg p-3 md:mr-[20px] xxl:mr-[30px]"
-                  // value={commentData.myObject.text}
-                  // onChange={inputHandler}
+                  defaultValue={item?.reply}
+                  onChange={(e) =>
+                    setState({
+                      ...state,
+                      replyTextEdit: e.target.value,
+                      getUserIdEdit: item?.id,
+                    })
+                  }
                   placeholder="Add your answer..."
-                ></textarea>
+                />
                 <div className="flex items-center ml-auto mt-3 md:mt-0">
                   <button
                     onClick={() => {
-                      sendReply();
+                      sendReplyEdit();
                       setSendText(!sendText);
+                      setState({
+                        ...state,
+                        editComment: false,
+                      });
                     }}
-                    className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
+                    className={` w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
                   >
                     <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
                       Отправить
@@ -322,7 +318,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
                       setState({
                         ...state,
                         sendAnswer: false,
-                        editCommit: false,
+                        editComment: false,
                       })
                     }
                     className="w-9 h-9 md:w-11 md:h-11 bg-white flex items-center justify-center active:scale-95  active:opacity-70 text-white border border-textBlueColor rounded-lg"
@@ -338,4 +334,4 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
     </div>
   );
 };
-export { CommentTitle };
+export default React.memo(CommentTitle);
