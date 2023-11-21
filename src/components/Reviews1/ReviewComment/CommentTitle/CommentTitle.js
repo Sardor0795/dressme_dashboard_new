@@ -5,7 +5,7 @@ import {
   SearchIcon,
   StarIcon,
 } from "../../../../assets/icons";
-import EditComponent from "./EditComponent";
+import EditComponent from "./EditComment";
 
 const CommentTitle = ({ titleStore, handleRefetch }) => {
   
@@ -93,8 +93,6 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
               item={item}
               titleStore={titleStore}
               handleRefetch={handleRefetch}
-              // sendReply={sendReply}
-              // sendReplyEdit={sendReplyEdit}
             />
           </div>
         );
