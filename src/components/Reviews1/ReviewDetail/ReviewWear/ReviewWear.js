@@ -70,7 +70,7 @@ export default function ReviewWear() {
         <LoadingForSeller className="h-[80vh]"/>
       ) : (
         <div className="w-full h-full md:px-10 py-1">
-          {reviewsList?.length > 0 //&& reviewsList?.rated_users_count > 0 
+          {reviewsList?.length > 0 && reviewsList?.rated_users_count > 0 
           ? (
             <>
             {/* Table */}
@@ -114,7 +114,6 @@ export default function ReviewWear() {
               {/* table product */}
               <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
                 {reviewsList?.map((data) => {
-                  // console.log(data, "DATA-PRODUCT");
                   return (
                     <ul
                       key={data?.id}
@@ -177,7 +176,6 @@ export default function ReviewWear() {
                         <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
                           <button
                             onClick={() => goDetail(data?.id)}
-                            // onClick={() => navigate(`/reviews/review/comment-store/:${data?.id}`)}
                             className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
                           >
                             Подробнее

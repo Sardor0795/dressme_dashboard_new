@@ -11,7 +11,6 @@ import {
 import { BiChevronDown } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 import { Popover } from "antd";
-import LoadingForSeller from "../../Loading/LoadingFor";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 
