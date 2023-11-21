@@ -446,7 +446,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openSelectModal: true })}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${state?.getCheckListItem?.childData?.length >= 2
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || state?.getCheckListItem?.childData?.length >= 2
                   ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -459,7 +459,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openDeleteModal: true })}
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${state?.getCheckListItem?.childData?.length >= 2
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || state?.getCheckListItem?.childData?.length >= 2
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
