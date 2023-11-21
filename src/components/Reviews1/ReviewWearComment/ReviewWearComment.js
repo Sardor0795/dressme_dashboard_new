@@ -197,11 +197,11 @@ export default function ReviewWearComment() {
         <LoadingForSeller />
       ) : ( */}
         <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
-          <section className="w-full md:w-[30%] overflow-hidden">
+          <section className="w-full md:w-[32%] overflow-hidden">
             <WearCommentDetail sliderData={state} />
           </section>
 
-          <section className="w-full md:w-[calc(70%-70px)] ">
+          <section className="w-full md:w-[calc(68%-70px)] ">
             <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
           </section>
         </div>
