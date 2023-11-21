@@ -59,7 +59,7 @@ export default function ProductLocationsList() {
   function handleAllCheckList(childData) {
     console.log(childData, "childData");
   }
-  // console.log(state?.shopId?.shopId, "state?--shopId");
+  // console.log(state?.getCheckListItem, "getCheckListItem?--shopId");
 
   const onSendPeoductSeveralSelect = () => {
     setState({ ...state, loader: true, hideProductList: true })
@@ -506,7 +506,7 @@ export default function ProductLocationsList() {
                   <button
                     type="button"
                     onClick={() => openMarketEditPage(item?.id)}
-                    className="w-full  flex items-center justify-center mb-6 cursor-pointer">
+                    className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
                     <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
                       {item?.name}
                     </p>
