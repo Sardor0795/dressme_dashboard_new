@@ -16,27 +16,6 @@ const WearCommentDetail = ({ sliderData }) => {
   }
   console.log(sliderData, "Slider-Data");
 
-  // ------------GET Has Reviews-STORE ?-----------------
-  // useQuery(
-  //   ["review_products_details"],
-  //   () => {
-  //     return request({ url: `/products`, token: true });
-  //   },
-  //   {
-  //     onSuccess: (res) => {
-  //       if (res) {
-  //         setProductDetails(res?.products?.data);
-  //         // console.log(res?.products?.data, "Review-Products-Details");
-  //       }
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "ERR-IN-STORE-COMMENTS");
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
-
   useEffect(() => {
     const updateDimension = () => {
       setScreenSize(getCurrentDimension());
@@ -202,10 +181,10 @@ const WearCommentDetail = ({ sliderData }) => {
         <p>{sliderData?.locationListId?.product?.shop?.name}</p>
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
-        <div className="w-full flex flex-col">
+        <div className="w-full flex justify-between items-start">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
             <>
-              <div className="w-full md:w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
+              <div className="w-full md:w-[350px] md:h-[402px] overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
                 <Slider
                   className="w-full h-full flex items-center justify-center rounded-lg "
                   asNavFor={nav2}
@@ -229,7 +208,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   })}
                 </Slider>
               </div>
-              <div className="w-full md:w-[350px] flex items-center justify-between mt-1">
+              <div className="w-full md:w-[120px] h-fit flex items-center justify-between mt-1">
                 <Slider
                   asNavFor={nav1}
                   ref={slider2}
