@@ -53,9 +53,44 @@ export default function ProductLocationsList() {
       refetchOnWindowFocus: false,
     }
   );
+  const [locationId, setLocationId] = useState([]);
   function handleChekListItem(childData, shopId) {
     setState({ ...state, getCheckListItem: { childData }, shopId: { shopId } })
+    console.log(shopId, "shopId");
+    if (shopId > 0) {
+      if (locationId?.length !== 0) {
+        setLocationId(locationId.filter((x, i, a) => a.indexOf(x) == i))
+        console.log("1");
+        console.log(shopId, "shopId1");
+        if (!locationId.includes(shopId)) {
+          console.log(shopId, "shopId2");
+          console.log("2");
+          setLocationId(locationId => [...locationId, shopId]);
+        }
+      } else {
+        console.log("3");
+        setLocationId(locationId => [...locationId, shopId]);
+      }
+    } else if (shopId < 0 && locationId?.length !== 0) {
+      setLocationId(locationId?.filter(e => e !== Math.abs(shopId)))
+      console.log(shopId, "Minus-ShopID");
+    }
   }
+  // useEffect(() => {
+
+  // }, [shopId])
+  // const dataList11 = locationId.filter((x, i, a) => a.indexOf(x) == i)
+  // console.log(dataList11, "dataList11");
+
+  // var newarray = locationId?.reduce(function (a, b) {
+  //   if (a.indexOf(b) == -1) {
+  //     a.push(b)
+  //   }
+  //   return a;
+  // }, []);
+
+  // console.log(newarray, "newarray");
+  console.log(locationId, "locationId-----");
   function handleAllCheckList(childData) {
     console.log(childData, "childData");
   }
@@ -161,9 +196,9 @@ export default function ProductLocationsList() {
       setProductAllId([])
     }
   }
-  console.log(locationAllId, "locationAllId");
-  console.log(productAllId, "productAllId");
-  console.log(allCheckedAction, "allCheckedAction");
+  // console.log(locationAllId, "locationAllId");
+  // console.log(productAllId, "productAllId");
+  // console.log(allCheckedAction, "allCheckedAction");
   return (
     <div>
       <section

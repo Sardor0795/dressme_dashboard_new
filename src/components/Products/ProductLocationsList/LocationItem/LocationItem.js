@@ -65,7 +65,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   function addNewProductId(locationId, shopId) {
     navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
   };
-  const [locationId, setLocationId] = useState();
+  // const [locationId, setLocationId] = useState();
   const [shopId, setShopId] = useState();
   const [checked, setChecked] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -74,28 +74,33 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   //   console.log(item, "BU_data_item");
   // })
   // console.log(data, "BU_data_item");
+  // console.log(locationId?.some(e => e == data?.id), "some")
+  // setLocationId(locationId => [...locationId, data?.id]);
+  // if (true) {
+  //   // console.log(locationId && locationId?.indexof(3), "locationId.indexof(data?.id)")
+  //   console.log(data?.id, "buFilterId");
+  //   // setBooks(books => [....books, ...x]);
+  // }
   useEffect(() => {
     data?.products?.map(item => {
       if (checked?.length >= 1) {
-
         if (checked.includes(item?.id)) {
-          // console.log(locationId?.some(e => e == data?.id), "some")
-          // setLocationId(locationId => [...locationId, data?.id]);
-          setLocationId(data?.id);
-          // if (true) {
-          //   // console.log(locationId && locationId?.indexof(3), "locationId.indexof(data?.id)")
-          //   console.log(data?.id, "buFilterId");
-          //   // setBooks(books => [....books, ...x]);
+          // setLocationId(data?.id);
+          handleGetCheckAll(checked, data?.id)
+          // console.log("log-1");
 
-          // }
+        } else {
+          // console.log("log-2");
+          // setLocationId(-data?.id);
         }
       } else {
-        setLocationId()
+        handleGetCheckAll(checked, -data?.id)
+        // setLocationId()
       }
     })
 
   }, [checked])
-  // console.log(locationId, "locationId");
+  // console.log(locationId, "locationIdChikldz");
   useEffect(() => {
     if (AllSelectCheckedAction) {
 
@@ -111,7 +116,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
-      handleGetCheckAll(checked, locationId)
+      // handleGetCheckAll(checked, locationId)
     }
   }, [checked]);
 
@@ -119,7 +124,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
-  console.log(checked, "checked");
+  // console.log(checked, "checked");
 
 
 
