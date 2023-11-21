@@ -163,7 +163,6 @@ export default function ProductLocationsList() {
         <button
           onClick={() => {
             setHideProductList(false)
-
             setState({ ...state, onSuccessMessaage: null, onErrorTitle: null, onErrorMessage: null, openSelectModal: false, hideProductList: false })
           }
           }
@@ -175,7 +174,7 @@ export default function ProductLocationsList() {
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
           <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-            Добавить локацию
+            Добавить в локацию
           </p>
         </div>
         <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">

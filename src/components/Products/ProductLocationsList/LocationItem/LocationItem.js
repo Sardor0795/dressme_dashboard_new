@@ -65,17 +65,42 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
   function addNewProductId(locationId, shopId) {
     navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
   };
-
+  const [locationId, setLocationId] = useState();
   const [shopId, setShopId] = useState();
   const [checked, setChecked] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
+  // data?.map(item => {
+  //   console.log(item, "BU_data_item");
+  // })
+  // console.log(data, "BU_data_item");
+  useEffect(() => {
+    data?.products?.map(item => {
+      if (checked?.length >= 1) {
 
+        if (checked.includes(item?.id)) {
+          // console.log(locationId?.some(e => e == data?.id), "some")
+          // setLocationId(locationId => [...locationId, data?.id]);
+          setLocationId(data?.id);
+          // if (true) {
+          //   // console.log(locationId && locationId?.indexof(3), "locationId.indexof(data?.id)")
+          //   console.log(data?.id, "buFilterId");
+          //   // setBooks(books => [....books, ...x]);
+
+          // }
+        }
+      } else {
+        setLocationId()
+      }
+    })
+
+  }, [checked])
+  console.log(locationId, "locationId");
   useEffect(() => {
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
-      handleGetCheckAll(checked, shopId)
+      handleGetCheckAll(checked, locationId)
     }
   }, [checked]);
 
