@@ -56,6 +56,9 @@ export default function ProductLocationsList() {
   function handleChekListItem(childData, shopId) {
     setState({ ...state, getCheckListItem: { childData }, shopId: { shopId } })
   }
+  function handleAllCheckList(childData) {
+    console.log(childData, "childData");
+  }
   // console.log(state?.shopId?.shopId, "state?--shopId");
 
   const onSendPeoductSeveralSelect = () => {
@@ -135,8 +138,32 @@ export default function ProductLocationsList() {
   // console.log(state?.onSuccessMessaage, 'onSuccessMessaage');
   // console.log(state?.onErrorMessage, 'onErrorMessage');
   // console.log(state?.getProductList, 'getProductList');
+  const [locationAllId, setLocationAllId] = useState([]);
+  const [productAllId, setProductAllId] = useState([]);
+  const [allCheckedAction, setAllCheckedAction] = useState(null);
 
+  const handleGetValueAll = (e) => {
+    setAllCheckedAction(e.target.checked)
+    if (e.target.checked) {
+      state?.getProductList?.products_locations?.map(item => {
+        // console.log(item, "item");
+        return item?.shop_locations?.map(value => {
+          console.log(value?.id, "value");
+          setLocationAllId(locationAllId => [...locationAllId, value?.id]);
+          return value?.products?.map(data => {
+            setProductAllId(productAllId => [...productAllId, data?.id]);
+          })
+        })
+      })
 
+    } else {
+      setLocationAllId([])
+      setProductAllId([])
+    }
+  }
+  console.log(locationAllId, "locationAllId");
+  console.log(productAllId, "productAllId");
+  console.log(allCheckedAction, "allCheckedAction");
   return (
     <div>
       <section
@@ -449,7 +476,7 @@ export default function ProductLocationsList() {
             <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
               Выбрать все
             </span>
-            <Checkbox value={"all"} />
+            <Checkbox onChange={handleGetValueAll} />
           </div>
           <div className="w-full my-4">
             {/* <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
@@ -503,8 +530,10 @@ export default function ProductLocationsList() {
                               <LocationItem
                                 allProductLocationList={state?.getProductList?.products_locations}
                                 handleGetCheckAll={handleChekListItem}
+                                handleCheckAllBtn={handleAllCheckList}
                                 onRefetch={refetch}
                                 data={resData}
+                                AllSelectCheckedAction={allCheckedAction}
                               />
                               :
                               ""
