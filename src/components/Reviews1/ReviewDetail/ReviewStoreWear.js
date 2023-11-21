@@ -9,7 +9,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import LoadingForSeller from "../../Loading/LoadingFor";
 import { SelectedButtonContext } from "../../../hook/SelectedButtonContext";
-// import { SelectedButtonContext } from "../../../hook/SelectedButtonContext";
 
 export default function ReviewStoreWear() {
   const [showSelectedButton, setShowSelectedButton] = useContext( SelectedButtonContext);
@@ -19,7 +18,6 @@ export default function ReviewStoreWear() {
   const [reviewsStore, setReviewsStore] = useState();
   const [reviewsProduct, setReviewsProduct] = useState();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  // const [showSelectedButton, setShowSelectedButton] = useContext(SelectedButtonContext);
 
   // -------------  GET ALL SHOPS LENGTH --------------
   useQuery(
@@ -31,7 +29,6 @@ export default function ReviewStoreWear() {
       onSuccess: (res) => {
         setLoading(false);
         setReviewsStore(res.shops.data.length);
-        // console.log(res.shops.data.length, "Store");
       },
       onError: (err) => {
         setLoading(false);

@@ -69,7 +69,7 @@ const ReviewStore = () => {
         <LoadingForSeller />
       ) : (
       <div className="w-full h-fit flex flex-col gap-y-[30px]">
-        {sellerShops?.length > 0 //&& sellerShops?.rated_users_count > 0 
+        {sellerShops?.length > 0 && sellerShops?.rated_users_count > 0 
           ? (
           <>
             {sellerShops?.map((data, i) => {
@@ -164,7 +164,6 @@ const ReviewStore = () => {
                     </div>
                   </action>
                   <button
-                    // onClick={() => goDetail(data?.id)}
                     onClick={() => navigate(`review/comment-store/:${data?.id}`)}
                     className="w-full md:hidden flex items-center justify-center active:scale-95 h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium"
                   >
