@@ -22,7 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 const url = "https://api.dressme.uz/api/seller";
 
-function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefetch }) {
+function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSelectCheckedAction, onRefetch }) {
   const { request } = useHttp()
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -50,7 +50,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
     }
   );
   // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
-
+  console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
   const navigate = useNavigate();
   const goProductDetailEdit = (id) => {
     navigate(`/locations-store/edit-detail/:${id}`);
@@ -95,7 +95,18 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
     })
 
   }, [checked])
-  console.log(locationId, "locationId");
+  // console.log(locationId, "locationId");
+  useEffect(() => {
+    if (AllSelectCheckedAction) {
+
+      setChecked(AllSelectCheckedAction ? data?.products?.map((item) => item.id) : []);
+      setCheckAll(AllSelectCheckedAction);
+    } else {
+      setChecked(AllSelectCheckedAction ? data?.products?.map((item) => item.id) : []);
+      setCheckAll(AllSelectCheckedAction);
+    }
+  }, [AllSelectCheckedAction]);
+
   useEffect(() => {
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
@@ -108,7 +119,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
-  // console.log(checked, "checked");
+  console.log(checked, "checked");
 
 
 
@@ -222,6 +233,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
   // console.log(checked?.length, "checkedlength");
   // console.log(getIdProduct, "getIdProduct");
   // console.log(getIdShopLocation, "getIdShopLocation");
+  console.log("------------------------------");
 
   return (
     <div className="w-full">
@@ -454,17 +466,17 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
 
         {data?.products?.length !== 0 ? <Checkbox.Group
           style={{ width: "100%" }}
+          // checked={AllSelectCheckedAction || checked}
           value={checked}
           onChange={(checkedValues) => {
             setChecked(checkedValues);
-          }}
-
-        >
+          }} >
           <List
             itemLayout="horizontal"
             dataSource={data?.products}
             className="w-full">
             {data?.products?.map(itemValue => {
+
               return (
                 <List.Item className="w-full "
                 >
@@ -473,7 +485,8 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, onRefet
                     <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                       <div className="flex flex-col w-full">
                         <div className="w-full flex h-[120px]  items-center">
-                          <Checkbox value={itemValue?.id} onClick={() => setShopId(data?.id)} />
+                          <Checkbox value={itemValue?.id} checked={AllSelectCheckedAction || checked}
+                            onClick={() => setShopId(data?.id)} />
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                             <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
