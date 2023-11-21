@@ -1,12 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
-import { useHttp } from "../../../../hook/useHttp";
 
 const WearCommentDetail = ({ sliderData }) => {
-  const { request } = useHttp();
-  const [productDetails, setProductDetails] = useState();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
   function getCurrentDimension() {
@@ -27,53 +23,6 @@ const WearCommentDetail = ({ sliderData }) => {
     };
   }, [screenSize]);
 
-  const [imgGroup] = useState([
-    {
-      id: 1,
-      action: true,
-      img: "https://images.uzum.uz/ch15okj57mg9720fq5h0/original.jpg",
-    },
-    {
-      id: 2,
-      action: false,
-      img: "https://images.uzum.uz/cgcp9n7g49devoab8a50/t_product_240_high.jpg",
-    },
-    {
-      id: 3,
-      action: false,
-      img: "https://images.uzum.uz/ch15okng49devoaengt0/original.jpg",
-    },
-    {
-      id: 4,
-      action: false,
-      img: "https://images.uzum.uz/ch15okvhj8j9g69e280g/original.jpg",
-    },
-    {
-      id: 5,
-      action: false,
-      img: "https://images.uzum.uz/cgcphi7hgiov1qif46p0/original.jpg",
-    },
-    {
-      id: 6,
-      action: false,
-      img: "https://images.uzum.uz/ch0g2rr57mg9720fmb9g/t_product_240_high.jpg",
-    },
-    {
-      id: 7,
-      action: false,
-      img: "https://images.uzum.uz/ch0g2rvhj8j9g69dv4v0/original.jpg",
-    },
-    {
-      id: 8,
-      action: false,
-      img: "https://images.uzum.uz/ch0g2rvhj8j9g69dv4vg/original.jpg",
-    },
-    {
-      id: 9,
-      action: false,
-      img: "https://images.uzum.uz/cgl7vevhj8j9g69br4e0/original.jpg",
-    },
-  ]);
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
   const slider1 = useRef(null);
@@ -174,14 +123,16 @@ const WearCommentDetail = ({ sliderData }) => {
     });
   }, []);
 
+  console.log(sliderData?.locationListId?.product, "Product");
+
   return (
     <div className="w-full h-fit">
       <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
         <div className="h-5 w-[4px] bg-textBlueColor"></div>
-        <p>{sliderData?.locationListId?.product?.shop?.name}</p>
+        <p>{sliderData?.locationListId?.product?.name_ru}</p>
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
-        <div className="w-full flex justify-between items-start">
+        <div className="w-full flex flex-col md:flex-row justify-between items-start md:gap-x-[10px]">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
             <>
               <div className="w-full md:w-[350px] md:h-[402px] overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">

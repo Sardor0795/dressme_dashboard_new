@@ -4,13 +4,12 @@ import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
 
 export default function EditComponent({
   item,
-  titleStore,
+  titleProduct,
   handleRefetch
 }) {
   const [sendText, setSendText] = useState(false);
   const [state, setState] = useState({
     sendAnswer: false,
-    // sendTextData: false,
     startReviews: true,
     replyText: null,
     getUserId: null,
@@ -100,7 +99,7 @@ export default function EditComponent({
         </div>
         <div className="h-10 w-fit flex items-start md:items-center">
           <span className="text-textLightColor text-xs md:text-base font-AeonikProRegular leading-normal">
-            {/* {item?.created_at} */}
+            {item?.created_at}
           </span>
         </div>
       </div>
@@ -111,14 +110,14 @@ export default function EditComponent({
         </span>
       </div>
       {/* Comment Section */}
-      {titleStore?.locationListId?.shop?.ratings?.length !== 0 &&
+      {titleProduct?.locationListId?.product?.ratings?.length !== 0 &&
         item?.reply && (
           <div className={`w-full h-fit mt-[20px] md:mt-[15px] md:p-[15px]`}>
             <div className="relative w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
               <div>
                 <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
                   <span className="mr-1">Ответ</span>
-                  {titleStore?.locationListId?.shop?.name}
+                  {titleProduct?.locationListId?.product?.name}
                 </p>
                 <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
                   <span>{item?.reply}</span>
