@@ -1,15 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import InputMask from "react-input-mask";
 import {
-  ArrowRightIcon,
   ArrowTopIcons,
   CircleNextIcon,
   CreditCardNumber,
   DeleteIcon,
   MenuCloseIcons,
-  UserExitIcon,
   UserMailIcon,
-  VerticalMenuIcons,
 } from "../../../../assets/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,8 +15,6 @@ import EditPassword from "./EditPassword/EditPassword";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
-
-import { CiMenuKebab } from "react-icons/ci";
 import { dressMainData } from "../../../../hook/ContextTeam";
 
 const EditProfilePage = () => {

@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
-import { dressMainData } from "../../../../hook/ContextTeam";
-export default function SignInSeller() {
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
+export default function SignInSeller() {
   const [state, setState] = useState({
     eyesShow: true,
     password: "",
@@ -117,7 +115,7 @@ export default function SignInSeller() {
 
   }, []);
   return (
-    <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
+    <div className=" w-full h-full md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -132,8 +130,8 @@ export default function SignInSeller() {
         theme="colored"
       />
 
-      <div className="max-w-[440px] w-[100%]  h-fit  md:px-[40px] md:py-[32px] py-3 px-2 border border-searchBgColor rounded-lg">
-        <div className=" w-full  mb-7 not-italic font-AeonikProMedium text-[18px] ls:text-xl ss:text-start md:text-center leading-5   tracking-[0,16px] text-black">
+      <div className="max-w-[440px] w-[100%]  h-fit  md:px-[40px] md:py-[32px] py-3 px-3 border border-searchBgColor rounded-lg">
+        <div className="w-full mb-7 not-italic font-AeonikProMedium text-[18px] ls:text-xl text-center leading-5 tracking-[0,16px] text-black">
           Войти в систему продавца
         </div>
 
@@ -189,12 +187,6 @@ export default function SignInSeller() {
             </span>
           </div>
         </div>
-        {/* {
-          state?.errorGroup &&
-          <p className=" mx-auto text-[#D50000] text-[12px] md:text-[14px]  ">
-            {state?.errorGroup}
-          </p>
-        } */}
 
         <div className="my-5 flex items-center justify-between w-full">
           <div className="flex items-center">

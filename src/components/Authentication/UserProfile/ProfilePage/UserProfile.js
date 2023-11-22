@@ -7,15 +7,13 @@ import {
   UserMailIcon,
 } from "../../../../assets/icons";
 import { dressMainData } from "../../../../hook/ContextTeam";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import ModalOfMenu from "./ModalOfMenu/ModalOfMenu";
 
 import EditPassword from "./EditPassword/EditPassword";
 import { useMutation, useQuery } from "@tanstack/react-query";
-// import { useMutation } from "@tanstack/react-query";
 
-// const { REACT_APP_BASE_URL: url } = process.env;
 const { REACT_APP_BASE_URL: url } = process.env
 
 const UserProfile = () => {

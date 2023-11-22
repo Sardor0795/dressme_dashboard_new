@@ -50,7 +50,7 @@ export default function ReviewWear() {
         <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
         <div className="w-full h-full md:px-10 py-1">
-          {reviewsList?.length > 0 //&& reviewsList?.rated_users_count > 0 
+          {reviewsList?.length > 0 && reviewsList?.rated_users_count > 0 
           ? (
             <>
             {/* Table */}

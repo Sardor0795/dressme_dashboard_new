@@ -61,7 +61,7 @@ export default function RouterList() {
   }, [location.pathname, dressInfo?.isAuthen]);
 
   return (
-    <div>
+    <div className="w-full h-full">
       {/* <NavbarForSetting /> */}
 
 
