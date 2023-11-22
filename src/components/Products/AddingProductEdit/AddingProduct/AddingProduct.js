@@ -32,6 +32,7 @@ import { BiCheck, BiCheckDouble } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import AddSize from "./Details/AddSize/AddSize";
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
@@ -336,140 +337,11 @@ const AddingProduct = () => {
   }
 
   const CallBackTextForm = (childData) => {
-    setState({ ...state, errorListMessage: '', sendingLoader: true })
 
-
-    let form = new FormData();
-    form.append("shop_id", state?.shopId);
-    form.append("shop_location_id", state?.shopLocationId);
-    state?.section_Id?.map((e, index) => {
-      form.append("section_ids[]", state?.section_Id[index]);
-    })
-    state?.sub_Section_Id?.map((e, index) => {
-      form.append("sub_section_ids[]", state?.sub_Section_Id[index]);
-    })
-    state?.season_Id?.map((e, index) => {
-      form.append("season_ids[]", state?.season_Id[index]);
-    })
-
-    form.append("color_id", state?.color_Id);
-    form.append("gender_id", state?.gender_Id);
-    form.append("min_age_category", state?.min_Age_Category);
-    form.append("max_age_category", state?.max_Age_Category);
-    form.append("sku", state?.sku);
-    form.append("category_id", parseFloat(state?.category_Id));
-    form.append("type_id", parseFloat(state?.filterTypeId));
-    form.append("producer_id", state?.producer_Id);
-    state?.pictureBgFile1 && form.append("photos[]", state?.pictureBgFile1);
-    state?.pictureBgFile2 && form.append("photos[]", state?.pictureBgFile2);
-    state?.pictureBgFile3 && form.append("photos[]", state?.pictureBgFile3);
-    state?.pictureBgFile4 && form.append("photos[]", state?.pictureBgFile4);
-    // detailsForAll
-    form.append("price", state?.price);
-    state?.amount && form.append("amount", state?.amount);
-    state?.age && form.append("age", state?.age);
-    state?.discount_percent && form.append("discount_percent", state?.discount_percent);//no R
-    state?.discount_price && form.append("discount_price", state?.discount_price);//no R
-    // textListOfFormList
-    form.append("name_uz", childData?.name_Uz);
-    form.append("name_ru", childData?.name_Ru);
-    form.append("quality_uz", childData?.quality_Uz);
-    form.append("quality_ru", childData?.quality_Ru);
-    childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
-    childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
-    childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
-    childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
-    childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
-    // HeadWear
-    state?.headWearList?.oneSiz && form.append("one_size", state?.headWearList?.oneSize);
-    state?.headWearList?.minHeadGirth && form.append("min_head_girth", state?.headWearList?.minHeadGirth);
-    state?.headWearList?.maxHeadGirth && form.append("max_head_girth", state?.headWearList?.maxHeadGirth);
-    // OutWear
-    state?.outWearList?.outWearLetterSize && form.append("outwear_letter_size", state?.outWearList?.outWearLetterSize);
-    state?.outWearList?.minOutWearSize && form.append("min_outwear_size", state?.outWearList?.minOutWearSize);
-    state?.outWearList?.maxOutWearSize && form.append("max_outwear_size", state?.outWearList?.maxOutWearSize);
-    state?.outWearList?.minChestGirth && form.append("min_chest_girth", state?.outWearList?.minChestGirth);
-    state?.outWearList?.maxChestGirth && form.append("max_chest_girth", state?.outWearList?.maxChestGirth);
-    state?.outWearList?.minOutWearWaistGirth && form.append("min_outwear_waist_girth", state?.outWearList?.minOutWearWaistGirth);
-    state?.outWearList?.maxOutWearWaistGirth && form.append("max_outwear_waist_girth", state?.outWearList?.maxOutWearWaistGirth);
-    state?.outWearList?.minOutWearHipGirth && form.append("min_outwear_hip_girth", state?.outWearList?.minOutWearHipGirth);
-    state?.outWearList?.maxOutWearHipGirth && form.append("max_outwear_hip_girth", state?.outWearList?.maxOutWearHipGirth);
-    // UnderWear
-    state?.underWearList?.underWearLetterSize && form.append("underwear_letter_size", state?.underWearList?.underWearLetterSize);
-    state?.underWearList?.minHeight && form.append("min_height", state?.underWearList?.minHeight);
-    state?.underWearList?.maxHeight && form.append("max_height", state?.underWearList?.maxHeight);
-    state?.underWearList?.minUnderWearSize && form.append("min_underwear_size", state?.underWearList?.minUnderWearSize);
-    state?.underWearList?.maxUnderWearSize && form.append("max_underwear_size", state?.underWearList?.maxUnderWearSize);
-    state?.underWearList?.minUnderwearWaistGirth && form.append("min_underwear_waist_girth", state?.underWearList?.minUnderwearWaistGirth);
-    state?.underWearList?.maxUnderwearWaistGirth && form.append("max_underwear_waist_girth", state?.underWearList?.maxUnderwearWaistGirth);
-    state?.underWearList?.minUnderWearHipGirth && form.append("min_underwear_hip_girth", state?.underWearList?.minUnderWearHipGirth);
-    state?.underWearList?.maxUnderWearHipGirth && form.append("max_underwear_hip_girth", state?.underWearList?.maxUnderWearHipGirth);
-    // FooterSize
-    state?.shoesList?.footWearSize && form.append("footwear_size", state?.shoesList?.footWearSize);
-    state?.shoesList?.minFootLength && form.append("min_foot_length", state?.shoesList?.minFootLength);
-    state?.shoesList?.maxFootLength && form.append("max_foot_length", state?.shoesList?.maxFootLength);
-    // Accessory
-    state?.AccessoriesList?.accessoryLetterSize && form.append("accessory_letter_size", state?.AccessoriesList?.accessoryLetterSize);
-    state?.AccessoriesList?.accessorySize && form.append("accessory_size", state?.AccessoriesList?.accessorySize);
-    state?.AccessoriesList?.legnthAcc && form.append("length", state?.AccessoriesList?.legnthAcc);
-    state?.AccessoriesList?.widthAcc && form.append("width", state?.AccessoriesList?.widthAcc);
-
-
-    return fetch(`${url}/products/store`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-      body: form,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res?.errors && res?.message) {
-          setState({ ...state, sendingLoader: false })
-          if (res?.errors === true) {
-            setState({ ...state, errorListMessage: res?.message })
-          } else {
-            setState({ ...state, errorList: res?.errors })
-          }
-        } else if (res?.message) {
-          setState({ ...state, sendingLoader: false })
-          navigate("/products/location")
-          setDressInfo({ ...dressInfo, nextPageShowForm: true })
-          // window.location.reload();
-          toast.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
-        }
-        console.log(res, "ProductStore");
-      })
-      .catch((err) => console.log(err, "errImage"));
   };
   const handleNextPage = () => {
     setState({ ...state, isCheckValid: true })
-    // console.log(
-    //   state?.shopId, "state?.shopId",
-    //   state?.shopLocationId, "state?.shopLocationId",
-    //   state?.section_Id, "state?.section_Id",
-    //   state?.color_Id, "state?.color_Id",
-    //   state?.gender_Id, "state?.gender_Id",
-    //   state?.min_Age_Category, "state?.min_Age_Category",
-    //   state?.max_Age_Category, "state?.max_Age_Category",
-    //   state?.sku, "state?.sku",
-    //   state?.type_Id, "state?.type_Id",
-    //   state?.price, "state?.price",
-    //   state?.filterTypeId, "state?.filterTypeId",
-    //   state?.producer_Id, "state?.producer_Id",
-    //   state?.season_Id, "state?.season_Id",
-    //   state?.pictureBgFile1, "state?.pictureBgFile1",
-    // );
+
     if (
       state?.shopId &&
       state?.shopLocationId &&
@@ -829,51 +701,36 @@ const AddingProduct = () => {
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
-                          {shopIdRoute ? <button
-                            type="button"
-                            className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
+
+                          <Select
+                            className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                            showSearch
+                            placeholder="Выбрать"
+                            optionFilterProp="children"
+                            onChange={(e) => setState({ ...state, shopId: e })}
+                            onSearch={onSearch}
+                            size="large"
+                            filterOption={(input, option) =>
+                              (option?.label ?? "")
+                                .toLowerCase()
+                                .includes(input.toLowerCase())
+                            }
+
                           >
-                            <span>
-                              {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
-                                return (
-                                  <span
-                                    className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                            {productsData?.shops?.map((data) => {
+                              return (
+                                <>
+                                  {data?.shop_locations?.length >= 1 && <Option
+                                    key={data.id}
+                                    value={data?.id}
+                                  >
                                     {data?.name}
-                                  </span>
-                                )
-                              })}
-                            </span>
-                            <span className="rotate-[90deg]"><ArrowRightIcon /></span>
-                          </button> :
-                            <Select
-                              className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
-                              showSearch
-                              placeholder="Выбрать"
-                              optionFilterProp="children"
-                              onChange={(e) => setState({ ...state, shopId: e })}
-                              onSearch={onSearch}
-                              size="large"
-                              filterOption={(input, option) =>
-                                (option?.label ?? "")
-                                  .toLowerCase()
-                                  .includes(input.toLowerCase())
-                              }
+                                  </Option>}
+                                </>
+                              )
+                            })}
 
-                            >
-                              {productsData?.shops?.map((data) => {
-                                return (
-                                  <>
-                                    {data?.shop_locations?.length >= 1 && <Option
-                                      key={data.id}
-                                      value={data?.id}
-                                    >
-                                      {data?.name}
-                                    </Option>}
-                                  </>
-                                )
-                              })}
-
-                            </Select>}
+                          </Select>
                         </div>
                       </div>
                       {/* Input Select 2.1 */}
@@ -889,9 +746,7 @@ const AddingProduct = () => {
                           </span>
                         </div>
                         <button
-                          // onClick={() =>
-                          //   setState({ ...state, SubClothingSection: true })
-                          // }
+
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
@@ -902,74 +757,46 @@ const AddingProduct = () => {
                         </button>
 
                         <div className="w-full h-fit hidden md:flex">
-                          {locationIdRoute ?
-                            <button
-                              type="button"
-                              className="w-full overflow-hidden h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
-                            >
-                              <span>
-                                {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
-                                  return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map(data => {
-                                    return (
-                                      <span
-                                        className="w-[95%] overflow-hidden whitespace-nowrap text-[#b5b5b5]	flex items-center  text-[14px] not-italic font-AeonikProRegular"     >
-                                        {data?.address}
-                                      </span>
-                                    )
-                                  })
-                                })}
-                              </span>
-                              <span className="rotate-[90deg]"><ArrowRightIcon /></span>
-                            </button>
-                            :
-                            state?.shopId ?
-                              <button
-                                onClick={() => setState({ ...state, openSelect: true })}
-                                type="button"
-                                className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
+                          <button
+                            onClick={() => setState({ ...state, openSelect: true })}
+                            type="button"
+                            className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
                              ${state?.isCheckValid && !state?.shopLocationId ? "border border-[#FFB8B8] " : "border border-borderColor"}
   
                              px-3`}
-                              >
+                          >
 
-                                {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
-                                  return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
-                                    return (
-                                      <span
-                                        className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
-                                        key={data?.id}
-                                      >
-                                        <span className="w-full whitespace-nowrap flex items-center">{data?.address}</span>
-                                      </span>
-                                    )
-                                  })
-                                })
-                                  :
-                                  <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                    Выбрать
-                                  </label>
-                                }
-
-                                <span className="rotate-[90deg]">
-                                  <ArrowRightIcon />
-                                  {/* <DownOutlined style={{ colors: "#b5b5b5" }} /> */}
-                                </span>
-                              </button>
+                            {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+                              return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
+                                return (
+                                  <span
+                                    className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
+                                    key={data?.id}
+                                  >
+                                    <span className="w-full whitespace-nowrap flex items-center">{data?.address}</span>
+                                  </span>
+                                )
+                              })
+                            })
                               :
-                              <button
-                                type="button"
-                                className="w-full h-11 md:h-10  bg-[#F5F5F5] rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
-                              >
-                                <label className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
+                              <div className="w-full flex items-center">
+                                <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                   Выбрать
                                 </label>
                                 <span className="rotate-[90deg]">
                                   <ArrowRightIcon />
                                 </span>
-                              </button>
-                          }
-
-
+                              </div>
+                            }
+                            <div className="w-full flex items-center justify-between ">
+                              <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                Выбрать
+                              </label>
+                              <span className="rotate-[90deg]">
+                                <ArrowRightIcon />
+                              </span>
+                            </div>
+                          </button>
                         </div>
                       </div>
                       {/* Input Select 1 */}
@@ -1171,14 +998,14 @@ const AddingProduct = () => {
                           </label>
                           <ArrowRightIcon />
                         </button>
-                        <div className={`w-full hidden md:flex items-center gap-x-1 justify-between  overflow-hidden                   
+                        <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
  rounded-lg  h-[42px] md:h-10 px-[12px]`}>
                           {productsData.colors
-                            ?.filter((e) => e?.id <= 9)
+                            ?.filter((e) => e?.id <= 1)
                             ?.map((data) => {
                               return (
-                                <div key={data?.id} className="block ">
+                                <div key={data?.id} className="block w-fit">
                                   <div className="w-full ">
                                     <label
                                       key={data?.id}
@@ -1330,48 +1157,19 @@ const AddingProduct = () => {
                         </div>
                         <div className="w-full h-fit">
                           <button
-                            onClick={toggleDropModalButton}
+                            // onClick={toggleDropModalButton}
                             type="button"
                             className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                           >
-                            {state?.type_Id ?
-                              productsData?.categories?.filter(e => e?.id == state?.type_Id)?.map((item) => {
-                                return (
-                                  <span className="text-[#000]">{item?.name_ru}</span>
-                                )
-                              })
-                              : <span className="text-[#a1a1a1]"> Выбрать</span>
-                            }
-                            {state.openDropModalButton ? (
-                              <span className="-rotate-90 transition duration-200 ease-out">
-                                <ArrowRightIcon />
-                              </span>
-                            ) : (
-                              <span className="rotate-90 transition duration-200 ease-out">
-                                <ArrowRightIcon />
-                              </span>
-                            )}
+                            <span className="text-[#a1a1a1]"> Головные уборы</span>
                           </button>
                           <button
-                            onClick={() =>
-                              setState({
-                                ...state,
-                                ClothingCategoryModal: !state?.ClothingCategoryModal,
-                              })
-                            }
+
                             type="button"
                             className={`w-full overflow-hidden h-[40px] md:hidden flex items-center justify-between border border-borderColor rounded-lg p-3 `}
                           >
-                            <span className="text-[#a1a1a1]">Выбрать</span>
-                            {state.openDropModalButton ? (
-                              <span className="-rotate-90 transition duration-200 ease-out">
-                                <ArrowRightIcon />
-                              </span>
-                            ) : (
-                              <span className="rotate-90 transition duration-200 ease-out">
-                                <ArrowRightIcon />
-                              </span>
-                            )}
+                            <span className="text-[#a1a1a1]"> Головные уборы</span>
+
                           </button>
                         </div>
                       </div>
@@ -1607,18 +1405,21 @@ const AddingProduct = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="w-full flex items-center gap-x-3" >
+                      <button
+                        type="button"
+                        // onClick={() => setAllSizeModalShow(true)}
+                        className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+                      >
+                        Все размеры{" "}
+                      </button>
+                      <button className=" w-fit">
+                        <AddSize title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
+                      </button>
 
-                    <div>
-                      {state.openDropModalButton ? (
-                        <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                          <HeadWearAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
-                          <OutWearAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackOutWear} />
-                          <UnderAddWear title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackUnderWear} />
-                          <ShoesAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackShoesWear} />
-                          <AccessoriesAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackAccessoriesWear} />
-                        </div>
-                      ) : null}
                     </div>
+
+
                   </div>
                   <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ">
                     <div className="hidden md:flex items-center  justify-start mb-[5px]">
