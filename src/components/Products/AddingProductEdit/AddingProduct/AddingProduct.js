@@ -9,7 +9,7 @@ import {
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -217,6 +217,21 @@ const AddingProduct = () => {
       refetchOnWindowFocus: false,
     }
   );
+  const { id } = useParams()
+  const newProductId = id?.replace(":", "")
+  const [productsDataId, setProductsDataId] = useState({});
+
+  useQuery(
+    ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
+    {
+      onSuccess: (res) => {
+        console.log(res?.product, "product");
+        setProductsDataId(res);
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
   // ------------------------------------------------------------------------
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
@@ -227,9 +242,7 @@ const AddingProduct = () => {
 
 
   // ------------------------------------------------------------------------
-  const toggleDropModalButton = () => {
-    setState({ ...state, openDropModalButton: !state.openDropModalButton });
-  };
+
   const newArray = []
   productsData?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
     return data?.sub_sections?.map(item => {
@@ -291,18 +304,12 @@ const AddingProduct = () => {
   const pathname = window.location.pathname;
   useEffect(() => {
     if (pathname !== '/products')
-      setState({ ...state, PathnameToken: pathname.replace("/products/location/add/:", "") })
+      setState({ ...state, PathnameToken: pathname.replace("/products/location/:", "") })
 
   }, [location.pathname]);
-
-  let locationIdList = state?.PathnameToken?.split('')
-  let locationIdRoute = locationIdList[0]
-  let shopIdList = state?.PathnameToken?.split('')
-  let shopIdRoute = shopIdList[1] + shopIdList[2]
   useEffect(() => {
-    if (shopIdRoute) {
+    if (state?.PathnameToken) {
       setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
-      setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
     }
   }, [state?.PathnameToken]);
 
