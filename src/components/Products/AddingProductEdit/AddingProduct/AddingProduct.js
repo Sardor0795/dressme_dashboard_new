@@ -33,6 +33,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import AddSize from "./Details/AddSize/AddSize";
+import AllSizeModalEdit from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/AddingProduct/AllSizeModalEdit/AllSizeModalEdit";
+import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
+import Slider from "react-slick";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { img1, img2, img3, img4 } from "../../../../assets";
+import { useRef } from "react";
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
@@ -111,40 +117,7 @@ const AddingProduct = () => {
   const [productsData, setProductsData] = useState({});
 
 
-  const handleLocationImage1 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile1: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0])
-    })
-    // setSelectedFiles((countryList) => [...countryList, {
-    //   id: incrementUz, pictureBgFile: e.target.files[0],
-    //   pictureBgView1: URL.createObjectURL(e.target.files[0]
-    //   ),
-    // }])
-    // setIncrementUz(incrementUz + 1)
-  };
-  const handleLocationImage2 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile2: e.target.files[0],
-      pictureBgView2: URL.createObjectURL(e.target.files[0])
-    })
-  };
-  const handleLocationImage3 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile3: e.target.files[0],
-      pictureBgView3: URL.createObjectURL(e.target.files[0])
-    })
-  };
-  const handleLocationImage4 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile4: e.target.files[0],
-      pictureBgView4: URL.createObjectURL(e.target.files[0])
-    })
-  };
+
 
   function CallBackHeadWear(childData) {
     setState({
@@ -159,57 +132,7 @@ const AddingProduct = () => {
     })
   }
 
-  function CallBackOutWear(childData) {
 
-    setState({
-      ...state,
-      outWearList: childData,
-      category_Id: childData?.category_Id,
-      amount: childData?.amount,
-      age: childData?.age,
-      price: childData?.price,
-      discount_price: childData?.discountPrice,
-      discount_percent: childData?.discountPercent,
-    })
-  }
-  function CallBackUnderWear(childData) {
-    setState({
-      ...state,
-      underWearList: childData,
-      category_Id: childData?.category_Id,
-      amount: childData?.amount,
-      age: childData?.age,
-      price: childData?.price,
-      discount_price: childData?.discountPrice,
-      discount_percent: childData?.discountPercent,
-    })
-  }
-  function CallBackShoesWear(childData) {
-
-    setState({
-      ...state,
-      shoesList: childData,
-      category_Id: childData?.category_Id,
-      amount: childData?.amount,
-      age: childData?.age,
-      price: childData?.price,
-      discount_price: childData?.discountPrice,
-      discount_percent: childData?.discountPercent,
-    })
-  }
-  function CallBackAccessoriesWear(childData) {
-
-    setState({
-      ...state,
-      AccessoriesList: childData,
-      category_Id: childData?.category_Id,
-      amount: childData?.amount,
-      age: childData?.age,
-      price: childData?.price,
-      discount_price: childData?.discountPrice,
-      discount_percent: childData?.discountPercent,
-    })
-  }
 
 
   function randomCode(len) {
@@ -294,7 +217,16 @@ const AddingProduct = () => {
       refetchOnWindowFocus: false,
     }
   );
+  // ------------------------------------------------------------------------
+  // allSizeModalShow
+  const [allSizeModalShow, setAllSizeModalShow] = useState(false);
+  const toggleAllSizeModalShow = React.useCallback(
+    () => setAllSizeModalShow(false),
+    []
+  );
 
+
+  // ------------------------------------------------------------------------
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
   };
@@ -335,33 +267,10 @@ const AddingProduct = () => {
   const LocationAddSubmit = () => {
     console.log(state?.textListOfFormList, " state?.textListOfFormList");
   }
-
   const CallBackTextForm = (childData) => {
-
   };
   const handleNextPage = () => {
-    setState({ ...state, isCheckValid: true })
-
-    if (
-      state?.shopId &&
-      state?.shopLocationId &&
-      state?.section_Id &&
-      state?.color_Id &&
-      state?.gender_Id &&
-      state?.min_Age_Category &&
-      state?.max_Age_Category &&
-      state?.sku &&
-      state?.type_Id &&
-      state?.price &&
-      state?.filterTypeId &&
-      state?.producer_Id &&
-      state?.season_Id &&
-      state?.pictureBgFile1
-    ) {
-      setDressInfo({ ...dressInfo, nextPageShowForm: false })
-      setState({ ...state, isCheckValid: false })
-
-    }
+    setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
   const handleChangeSubSection = (e) => {
     setState({ ...state, sub_Section_Id: e })
@@ -465,7 +374,7 @@ const AddingProduct = () => {
           </div>
           <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"} relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
             <section
-              onClick={() =>
+              onClick={() => {
                 setState({
                   ...state,
                   ClothingSection: false,
@@ -479,6 +388,8 @@ const AddingProduct = () => {
                   showColor: false,
                   openSelect: false,
                 })
+                setAllSizeModalShow(false)
+              }
               }
               className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${state?.ClothingSection ||
@@ -490,7 +401,8 @@ const AddingProduct = () => {
                   state?.ClothingCategoryModal ||
                   state?.showColor ||
                   state?.openSelect ||
-                  state?.MakeCountryModal
+                  state?.MakeCountryModal ||
+                  allSizeModalShow
                   ? ""
                   : "hidden"
                 }`}
@@ -604,6 +516,15 @@ const AddingProduct = () => {
 
               </div>
             </section>
+            <section
+              className={`fixed z-[115]  w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                }`}
+            >
+              {allSizeModalShow && (
+                <AllSizeModalEdit colorGroup={productsData.colors} onClick={toggleAllSizeModalShow} modalOpenColor={false} />
+              )}{" "}
+            </section>
+
 
             <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
               <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
@@ -1408,7 +1329,7 @@ const AddingProduct = () => {
                     <div className="w-full flex items-center gap-x-3" >
                       <button
                         type="button"
-                        // onClick={() => setAllSizeModalShow(true)}
+                        onClick={() => setAllSizeModalShow(true)}
                         className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
                       >
                         Все размеры{" "}
@@ -1422,163 +1343,12 @@ const AddingProduct = () => {
 
                   </div>
                   <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ">
-                    <div className="hidden md:flex items-center  justify-start mb-[5px]">
-                      <span className="text-base font-AeonikProRegular">Фото</span>
-                      <span className="ml-[5px]">
-                        <StarLabel />
-                      </span>
+
+                    {/* Img Carousel */}
+                    <div className="w-full h-[510px] hidden md:flex flex-col gap-y-[120px]">
+                      <ProductCarouselEdit />
                     </div>
-                    <div className="w-[300px] md:w-full h-[350px] flex items-center justify-center ">
-                      <button
-                        type="button"
-                        className="h-full w-full flex items-center justify-center "
-                      >
-                        <label
-                          htmlFor="DataImg1"
-                          className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center  text-textBlueColor "
-                        >
-                          <input
-                            className="hidden"
-                            id="DataImg1"
-                            type="file"
-                            onChange={handleLocationImage1}
-                            accept=" image/*"
-                          />
-                          {!state.pictureBgView1 && (
-                            <div className={`w-full h-full flex  bg-photoBg items-center justify-center ${state?.isCheckValid && !state.pictureBgView1 ? "border border-[#FFB8B8]" : "border border-dashed"} rounded-lg`}>
-                              <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
-                                Выберите фото   <span className="ml-[5px]">
-                                  <StarLabel />
-                                </span>
-                              </span>
-                            </div>
-                          )}
-                          {state.pictureBgView1 && (
-                            <img
-                              src={state.pictureBgView1}
-                              alt="backImg"
-                              className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                            />
-                          )}
-                        </label>
-                      </button>
 
-                    </div>
-                    <div className="w-[90px] md:w-full flex flex-col md:flex-row items-center justify-between gap-y-2 gap-x-[10px] md:mt-[10px]">
-
-                      <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
-                        <button
-                          type="button"
-                          className="h-full w-full flex items-center justify-center "
-                        >
-                          <label
-                            htmlFor="DataImg2"
-                            className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                          >
-                            <input
-                              className="hidden"
-                              id="DataImg2"
-                              type="file"
-                              onChange={handleLocationImage2}
-                              accept=" image/*"
-                            />
-
-
-                            {!state?.pictureBgView2 && (
-                              <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                                <DownloadIcon />
-                                <div className="text-[11px] text-textLightColor mt-[5px]">
-                                  (необязательно)
-                                </div>
-                              </div>
-                            )}
-                            {state?.pictureBgView2 && (
-                              <img
-                                src={state?.pictureBgView2}
-                                alt="backImg"
-                                className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                              />
-                            )}
-
-                          </label>
-                        </button>
-                      </div>
-                      <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
-                        <button
-                          type="button"
-                          className="h-full w-full flex items-center justify-center "
-                        >
-                          <label
-                            htmlFor="DataImg3"
-                            className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                          >
-                            <input
-                              className="hidden"
-                              id="DataImg3"
-                              type="file"
-                              onChange={handleLocationImage3}
-                              accept=" image/*"
-                            />
-
-
-                            {!state?.pictureBgView3 && (
-                              <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                                <DownloadIcon />
-                                <div className="text-[11px] text-textLightColor mt-[5px]">
-                                  (необязательно)
-                                </div>
-                              </div>
-                            )}
-                            {state?.pictureBgView3 && (
-                              <img
-                                src={state?.pictureBgView3}
-                                alt="backImg"
-                                className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                              />
-                            )}
-
-                          </label>
-                        </button>
-                      </div>
-                      <div className="w-full h-1/3 md:h-[73px] md:w-1/3 flex flex-col items-center justify-center ">
-                        <button
-                          type="button"
-                          className="h-full w-full flex items-center justify-center "
-                        >
-                          <label
-                            htmlFor="DataImg4"
-                            className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                          >
-                            <input
-                              className="hidden"
-                              id="DataImg4"
-                              type="file"
-                              onChange={handleLocationImage4}
-                              accept=" image/*"
-                            />
-
-
-                            {!state?.pictureBgView4 && (
-                              <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                                <DownloadIcon />
-                                <div className="text-[11px] text-textLightColor mt-[5px]">
-                                  (необязательно)
-                                </div>
-                              </div>
-                            )}
-                            {state?.pictureBgView4 && (
-                              <img
-                                src={state?.pictureBgView4}
-                                alt="backImg"
-                                className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                              />
-                            )}
-
-                          </label>
-                        </button>
-                      </div>
-
-                    </div>
                   </div>
                 </div>
                 <div className="md:relative w-full  md:mt-[200px]">
@@ -1625,7 +1395,7 @@ const AddingProduct = () => {
             <TextFormAdd LocationAddSubmit={LocationAddSubmit} handlCallBack={CallBackTextForm} />
           </div>
         </div>}
-    </div>
+    </div >
   );
 };
 
