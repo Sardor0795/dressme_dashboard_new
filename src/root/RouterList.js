@@ -41,6 +41,7 @@ import MarketIsStoreCheck from "../components/MarketStore/MarketIsStoreCheck/Mar
 import LoadingForSeller from "../components/Loading/LoadingFor";
 import LocationsByIdShow from "../components/MarketStore/LocationsById/LocationsById";
 import ProductIsCheck from "../components/Products/ProductIsCheck/ProductIsCheck";
+import ProductEditPage from "../components/Products/AddingProductEdit/ProductsEditPage";
 
 // -------------------------Location---------------------
 // const MarketLocations = React.lazy(() => import("../components/MarketLocations"));
@@ -120,6 +121,7 @@ export default function RouterList() {
             <Route path="/products" element={<Navigate to={"/products/location"} />} />
             : <Route index element={<ProductIsCheck />} />}
 
+          <Route path="/products/location/:id" element={<ProductEditPage />} />
           <Route path="/products/location" element={<ProductLocationsList />} />
           <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
         </Route>
