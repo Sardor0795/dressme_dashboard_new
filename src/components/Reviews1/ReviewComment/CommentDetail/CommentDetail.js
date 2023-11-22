@@ -1,12 +1,9 @@
-import React, { useEffect,} from "react";
+import React, { useEffect } from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { Rate } from "antd";
 import { NoImg } from "../../../../assets/icons";
 
-
-export default function CommentDetail({state}) {
-
-
+export default function CommentDetail({ state }) {
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -27,7 +24,6 @@ export default function CommentDetail({state}) {
               src={state?.locationListId?.shop?.url_logo_photo || NoImg}
               alt=""
             />
-            {/* {state?.locationListId?} */}
           </button>
           <div className="flex flex-col">
             <span className="text-tableTextTitle2 text-sm md:text-2xl not-italic font-AeonikProMedium">
@@ -46,7 +42,8 @@ export default function CommentDetail({state}) {
                   {state?.locationListId?.shop?.overall_rating || "0"}
                 </p>
                 <p className="text-setTexOpacity font-AeonikProRegular">
-                  ({state?.locationListId?.shop?.rated_users_count || "0"} votes){" "}
+                  ({state?.locationListId?.shop?.rated_users_count || "0"}{" "}
+                  votes){" "}
                 </p>
               </div>
             </div>
@@ -64,8 +61,7 @@ export default function CommentDetail({state}) {
           <div className="h-12 flex items-center px-5 active:opacity-70 border border-borderColor bg-lightBgColor md:bg-white rounded-lg gap-x-3">
             <img src={deliveryIcon} alt="" />
             <span className="text-tableTextTitle2 text-[13px] md:text-base not-italic font-AeonikProMedium">
-              {state?.locationListId?.shop?.delivery?.name_ru ||
-                "NoDelivery"}
+              {state?.locationListId?.shop?.delivery?.name_ru || "NoDelivery"}
             </span>
           </div>
         </div>

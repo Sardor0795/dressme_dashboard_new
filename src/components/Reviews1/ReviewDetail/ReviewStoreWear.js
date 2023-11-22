@@ -11,7 +11,9 @@ import LoadingForSeller from "../../Loading/LoadingFor";
 import { SelectedButtonContext } from "../../../hook/SelectedButtonContext";
 
 export default function ReviewStoreWear() {
-  const [showSelectedButton, setShowSelectedButton] = useContext( SelectedButtonContext);
+  const [showSelectedButton, setShowSelectedButton] = useContext(
+    SelectedButtonContext
+  );
   const { request } = useHttp();
   const [loading, setLoading] = useState(true);
   const [storeOrWear, setStoreOrWear] = useState(false);
@@ -73,7 +75,7 @@ export default function ReviewStoreWear() {
         <LoadingForSeller />
       ) : (
         <div className="w-full h-fit">
-          {/* filter */}
+          {/* FILTER */}
           <div className="w-full block pb-4 md:py-4 md:border-b border-lightBorderColor">
             <div className="w-full md:py-0 py-6 border-lightBorderColor ">
               <div className="w-full flex items-center justify-center md:justify-start">
@@ -113,7 +115,7 @@ export default function ReviewStoreWear() {
                   setShowSelectedButton("products");
                 }}
                 className={`w-[260px] ${
-                  showSelectedButton === 'products'
+                  showSelectedButton === "products"
                     ? "text-textBlueColor border rounded-lg border-textBlueColor"
                     : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
@@ -127,7 +129,7 @@ export default function ReviewStoreWear() {
                   setStoreOrWear(true);
                 }}
                 className={`w-[260px] ${
-                  showSelectedButton === 'shops'
+                  showSelectedButton === "shops"
                     ? "text-textBlueColor border rounded-lg border-textBlueColor"
                     : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
@@ -139,7 +141,7 @@ export default function ReviewStoreWear() {
           </div>
           <div>
             {dressInfo?.isItPorduct ? (
-              showSelectedButton === 'shops' ? (
+              showSelectedButton === "shops" ? (
                 <ReviewStore />
               ) : (
                 <ReviewWear />
