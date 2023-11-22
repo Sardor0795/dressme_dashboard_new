@@ -55,6 +55,9 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   const goProductDetailEdit = (id) => {
     navigate(`/locations-store/edit-detail/:${id}`);
   };
+  const goProductDetailEdit1 = (id) => {
+    navigate(`/products/location/:${id}`);
+  };
 
   const goMapCity = (id) => {
     navigate(`/locations-store/city/:${id}`);
@@ -532,6 +535,12 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                 className="text-[18px] text-weatherWinterColor w-full text-center"
                               >
                                 Подробнее
+                              </button>
+                              <button
+                                onClick={() => goProductDetailEdit1(itemValue?.id)}
+                                className="text-[18px] text-weatherWinterColor w-full text-center"
+                              >
+                                --1Подробнее
                               </button>
                             </td>
                             <td className="w-[9%] h-full  flex items-center justify-center ">
