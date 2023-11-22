@@ -21,7 +21,6 @@ export default function ReviewWear() {
     {
       onSuccess: (res) => {
         if (res) {
-          // console.log(res?.products?.data, "REVIEWS-WEAR");
           setReviewsList(res?.products?.data);
           setLoading(false)
         }
@@ -39,25 +38,6 @@ export default function ReviewWear() {
     navigate(`/reviews/review/comment-wear/${id}`);
   };
 
-  const [filterStar, setFilterStar] = useState([
-    { id: 1, checked: false, starValue: 5, starFree: 0, valueCount: 100 },
-    { id: 2, checked: false, starValue: 4, starFree: 1, valueCount: 70 },
-    { id: 3, checked: false, starValue: 3, starFree: 2, valueCount: 60 },
-    { id: 4, checked: false, starValue: 2, starFree: 3, valueCount: 50 },
-    { id: 5, checked: false, starValue: 1, starFree: 4, valueCount: 20 },
-  ]);
-  const handleFilterStar = (id) => {
-    setFilterStar((current) => {
-      return current.map((data) => {
-        if (data?.id === id) {
-          return { ...data, checked: !data?.checked };
-        } else {
-          return { ...data };
-        }
-      });
-    });
-  };
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -65,12 +45,12 @@ export default function ReviewWear() {
   }, []);
 
   return (
-    <>
+    <div className="relative">
       {loading ? (
-        <LoadingForSeller className="h-[80vh]"/>
+        <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
         <div className="w-full h-full md:px-10 py-1">
-          {reviewsList?.length > 0 && reviewsList?.rated_users_count > 0 
+          {reviewsList?.length > 0 //&& reviewsList?.rated_users_count > 0 
           ? (
             <>
             {/* Table */}
@@ -119,11 +99,11 @@ export default function ReviewWear() {
                       key={data?.id}
                       className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
                     >
-                      <li className="w-[20%] md:pl-5 h-fit flex items-center ">
+                      <li className="w-[80px] h-[75px] md:w-[20%] md:h-fit md:pl-5 flex items-center ">
                         {data?.photos.length > 1
                           ? data?.photos?.map((item, index) =>
                               index === 0 ? (
-                                <figure key={index} className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
+                                <figure key={index} className="w-full h-full md:w-[200px] md:h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
                                   <img
                                     className="w-full h-full object-contain"
                                     src={item.url_photo}
@@ -134,7 +114,7 @@ export default function ReviewWear() {
                             )
                           : data?.photos?.map((item) => {
                               return (
-                                <figure key={item.id} className="w-[200px] h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
+                                <figure key={item.id} className="w-full h-full md:w-[200px] md:h-[100px] rounded-lg overflow-hidden border border-lightBorderColor">
                                   <img
                                     className="w-full h-full object-contain"
                                     src={item?.url_photo}
@@ -197,6 +177,6 @@ export default function ReviewWear() {
           
         </div>
       )}
-    </>
+    </div>
   );
 }

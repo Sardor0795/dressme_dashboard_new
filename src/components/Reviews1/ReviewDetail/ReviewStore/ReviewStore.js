@@ -21,7 +21,6 @@ const ReviewStore = () => {
     {
       onSuccess: (res) => {
         if (res?.shops) {
-          // console.log(res?.shops?.data, "REVIEW-STORE");/
           setSellerShops(res?.shops?.data);
           setLoading(false);
         }
@@ -64,12 +63,12 @@ const ReviewStore = () => {
     });
   }, []);
   return (
-    <>
+    <div className="relative">
       {loading ? (
-        <LoadingForSeller />
+        <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
       <div className="w-full h-fit flex flex-col gap-y-[30px]">
-        {sellerShops?.length > 0 && sellerShops?.rated_users_count > 0 
+        {sellerShops?.length > 0 //&& sellerShops?.rated_users_count > 0 
           ? (
           <>
             {sellerShops?.map((data, i) => {
@@ -180,7 +179,7 @@ const ReviewStore = () => {
         }
       </div>
       )}
-    </>
+    </div>
   );
 };
 export default ReviewStore;

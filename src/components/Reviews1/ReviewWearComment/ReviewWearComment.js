@@ -25,7 +25,7 @@ export default function ReviewWearComment() {
 
   const navigate = useNavigate();
 
-  const {id} = useParams()
+  const { id } = useParams();
   const newId = id?.replace(":", "");
 
   // ------------GET METHOD delivery-method-----------------
@@ -37,7 +37,6 @@ export default function ReviewWearComment() {
     {
       onSuccess: (res) => {
         if (res) {
-          console.log(res?.product?.photos, "Review-Product-Details");
           setState({
             ...state,
             locationListId: res,
@@ -195,16 +194,15 @@ export default function ReviewWearComment() {
       {/* {state?.loading ? (
         <LoadingForSeller />
       ) : ( */}
-        <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
-          <section className="w-full md:w-[32%] overflow-hidden">
-            <WearCommentDetail sliderData={state} />
-          </section>
+      <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
+        <section className="w-full md:w-[32%] overflow-hidden">
+          <WearCommentDetail sliderData={state} />
+        </section>
 
-          <section className="w-full md:w-[calc(68%-70px)] ">
-            <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
-          </section>
-        </div>
-      
+        <section className="w-full md:w-[calc(68%-70px)] ">
+          <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
+        </section>
+      </div>
     </div>
   );
 }
