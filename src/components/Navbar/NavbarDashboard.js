@@ -60,7 +60,7 @@ export default function NavbarDashboard() {
     })
   }
   return (
-    <div className="flex flex-col w-full h-full ">
+    <div className="flex flex-col w-full h-[100vh] ">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -98,11 +98,9 @@ export default function NavbarDashboard() {
             colors={"#a1a1a1"} />
         </button>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-
           <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
             Вы уверены?
           </span>
-
         </div>
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
           <button
@@ -129,7 +127,7 @@ export default function NavbarDashboard() {
           </div> : null
 
         }
-        <div className={`${localStorage.getItem("DressmeUserToken") ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "md:w-full border border-black"} h-full `}>
+        <div className={`${localStorage.getItem("DressmeUserToken") ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "w-full"} h-full `}>
           <RouterList />
         </div>
       </div>
