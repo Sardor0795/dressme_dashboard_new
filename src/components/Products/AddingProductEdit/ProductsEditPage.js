@@ -22,9 +22,7 @@ export default function ProductEditPage() {
 
         <div className="flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit  flex justify-center md:justify-start">
-            {dressInfo?.nextPageShowForm && <button className="absolute left-4 md:hidden flex">
-              <MobileHumburgerMenu />
-            </button>}
+
             <section className=" w-full md:w-fit  flex justify-center md:justify-start">
               {dressInfo?.productAddByIdForToggle ? <button
                 onClick={() => {
@@ -34,6 +32,7 @@ export default function ProductEditPage() {
               >
                 <AiOutlineLeft />
               </button> :
+
                 !dressInfo?.nextPageShowForm && <> <button
                   button
                   onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}

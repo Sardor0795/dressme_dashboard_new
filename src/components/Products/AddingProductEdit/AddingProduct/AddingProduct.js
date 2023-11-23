@@ -11,11 +11,7 @@ import {
 } from "../../../../assets/icons";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
-import OutWearAdd from "./Details/OutWear/OutWearAdd";
-import AccessoriesAdd from "./Details/Accessories/AccessoriesAdd";
-import ShoesAdd from "./Details/Shoes/ShoesAdd";
-import UnderAddWear from "./Details/UnderAddWear/UnderAddWear";
+
 import ClothingSection from "./DetailsForMobile/ClothesSection/ClothingSection";
 import SubClothingSection from "./DetailsForMobile/SubClothesSection/SubClothingSection";
 import DressSeason from "./DetailsForMobile/DressSeason/DressSeason";
@@ -35,10 +31,7 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/AddingProduct/AllSizeModalEdit/AllSizeModalEdit";
 import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
-import Slider from "react-slick";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import { img1, img2, img3, img4 } from "../../../../assets";
-import { useRef } from "react";
+
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
@@ -220,7 +213,7 @@ const AddingProduct = () => {
 
   const { id } = useParams()
   const newProductId = id?.replace(":", "")
-  const [productsDataId, setProductsDataId] = useState({});
+  const [productsDataIdEdit, setProductsDataIdEdit] = useState();
   const [section_Id, setSection_Id] = useState([]);
   const [subSection_Id, setSubSection_Id] = useState([]);
   const [season_Id, setSeason_Id] = useState([]);
@@ -231,6 +224,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
+        setProductsDataIdEdit(res?.product)
         console.log(res?.product, "product");
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
@@ -264,14 +258,14 @@ const AddingProduct = () => {
       refetchOnWindowFocus: true,
     }
   );
-  console.log(section_Id, "section_Id");
-  console.log(subSection_Id, "subSection_Id");
-  console.log(season_Id, "season_Id");
-  console.log(colors_Id, "colors_Id");
-  console.log(state?.gender_Id, "state?.gender_Id");
-  console.log(state?.shopId, "state?.shopId");
-  console.log(state?.shopLocationId, "state?.shopLocationId");
-  // ------------------------------------------------------------------------
+  // console.log(section_Id, "section_Id");
+  // console.log(subSection_Id, "subSection_Id");
+  // console.log(season_Id, "season_Id");
+  // console.log(colors_Id, "colors_Id");
+  // console.log(state?.gender_Id, "state?.gender_Id");
+  // console.log(state?.shopId, "state?.shopId");
+  // console.log(state?.shopLocationId, "state?.shopLocationId");
+  // ------------------------------------------------------------------------ border-red-500
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
   const toggleAllSizeModalShow = React.useCallback(
@@ -293,7 +287,7 @@ const AddingProduct = () => {
     })
 
   }, [section_Id])
-  console.log(newArray, "newArray");
+  // console.log(newArray, "newArray");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -334,11 +328,7 @@ const AddingProduct = () => {
     setSubSection_Id(e)
   }
 
-  // useEffect(() => {
-  //   if (!newArray?.length) {
-  //     setState({ ...state, sub_Section_Id: [] });
-  //   }
-  // }, [newArray?.length])
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -365,7 +355,7 @@ const AddingProduct = () => {
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
         <div>
-          <div className="flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
+          <div className=" flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
             {state?.errorListMessage && <div className="w-full  flex items-center gap-x-2 ">
               <span className="text-[16px] text-textRedColor font-AeonikProRegular">{state?.errorListMessage}</span>
             </div>}
@@ -427,7 +417,7 @@ const AddingProduct = () => {
             </div>}
 
           </div>
-          <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"} relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
+          <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"}  relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
             <section
               onClick={() => {
                 setState({
@@ -593,65 +583,63 @@ const AddingProduct = () => {
             </div>
 
             {/* ---------------------------------------- */}
-            <div className="w-full h-full">
-              {/* Clothing Section */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <ClothingSection onClick={ClothingSectionToggle} />
-              </section>
+            {/* Clothing Section */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <ClothingSection onClick={ClothingSectionToggle} />
+            </section>
 
-              {/*Sub Clothing Section */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <SubClothingSection onClick={SubClothingSectionToggle} />
-              </section>
-              {/*DressSeason */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <DressSeason onClick={DressSeasonToggle} />
-              </section>
-              {/*ColourList */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <ColourGroup onClick={ColourListToggle} />
-              </section>
-              {/*ColourList */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <GenderList onClick={GenderListToggle} />
-              </section>
-              {/*DressType */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <DressType onClick={DressTypeToggle} />
-              </section>
-              {/*MakeCountry */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <MakeCountry onClick={MakeCountryToggle} />
-              </section>
-              {/*ClothingCategory */}
-              <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-                  }`}
-              >
-                <ClothingCategory onClick={ClothingCategoryToggle} />
-              </section>
-            </div>
+            {/*Sub Clothing Section */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <SubClothingSection onClick={SubClothingSectionToggle} />
+            </section>
+            {/*DressSeason */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <DressSeason onClick={DressSeasonToggle} />
+            </section>
+            {/*ColourList */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <ColourGroup onClick={ColourListToggle} />
+            </section>
+            {/*ColourList */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <GenderList onClick={GenderListToggle} />
+            </section>
+            {/*DressType */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <DressType onClick={DressTypeToggle} />
+            </section>
+            {/*MakeCountry */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <MakeCountry onClick={MakeCountryToggle} />
+            </section>
+            {/*ClothingCategory */}
+            <section
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
+            >
+              <ClothingCategory onClick={ClothingCategoryToggle} />
+            </section>
             {/* ---------------------------------------- */}
 
             <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
@@ -731,7 +719,7 @@ const AddingProduct = () => {
                                       className="w-[85%] whitespace-nowrap  overflow-hidden	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
                                       key={data?.id}
                                     >
-                                      <span className="w-full whitespace-nowrap text-[#b5b5b5] flex items-center">{data?.address}</span>
+                                      <span className="w-full overflow-hidden whitespace-nowrap text-[#b5b5b5] flex items-center">{data?.address}</span>
                                     </span>
                                   )
                                 })
@@ -1374,7 +1362,7 @@ const AddingProduct = () => {
 
                   </div>
                 </div>
-                <div className="md:relative w-full  md:mt-[200px]">
+                <div className="md:relative w-full mt-[60px]  md:mt-[200px]">
                   <div className="flex md:hidden items-center justify-between mb-[40px]">
                     <div className="w-1/3 h-[1px] bg-borderColor"></div>
                     <div className="w-1/3 flex items-center justify-around">
@@ -1399,7 +1387,7 @@ const AddingProduct = () => {
               </div>
             </div>
           </div>
-          <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"}`}>
+          <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"} `}>
             <ToastContainer
               style={{ zIndex: "1000", top: "80px" }}
               position="top-right"
@@ -1415,7 +1403,7 @@ const AddingProduct = () => {
               theme="colored"
 
             />
-            <TextFormAdd LocationAddSubmit={LocationAddSubmit} handlCallBack={CallBackTextForm} />
+            <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={CallBackTextForm} />
           </div>
         </div>}
     </div >
