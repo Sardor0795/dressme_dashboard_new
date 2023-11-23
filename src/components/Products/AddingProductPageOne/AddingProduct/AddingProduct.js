@@ -515,9 +515,9 @@ const AddingProduct = () => {
   }, [location.pathname]);
 
   let locationIdList = state?.PathnameToken?.split('')
-  let locationIdRoute = locationIdList[0]
+  let locationIdRoute = locationIdList[0] + locationIdList[1]
   let shopIdList = state?.PathnameToken?.split('')
-  let shopIdRoute = shopIdList[1] + shopIdList[2]
+  let shopIdRoute = shopIdList[2] + shopIdList[3]
   useEffect(() => {
     if (shopIdRoute) {
       setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
@@ -829,22 +829,24 @@ const AddingProduct = () => {
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
-                          {shopIdRoute ? <button
-                            type="button"
-                            className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
-                          >
-                            <span>
-                              {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
-                                return (
-                                  <span
-                                    className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                    {data?.name}
-                                  </span>
-                                )
-                              })}
-                            </span>
-                            <span className="rotate-[90deg]"><ArrowRightIcon /></span>
-                          </button> :
+                          {shopIdRoute ?
+                            <button
+                              type="button"
+                              className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                            >
+                              <span>
+                                {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
+                                  return (
+                                    <span
+                                      className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                      {data?.name}
+                                    </span>
+                                  )
+                                })}
+                              </span>
+                              <span className="rotate-[90deg]"><ArrowRightIcon /></span>
+                            </button>
+                            :
                             <Select
                               className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                               showSearch
