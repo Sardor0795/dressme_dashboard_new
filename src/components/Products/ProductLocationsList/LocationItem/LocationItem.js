@@ -50,7 +50,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     }
   );
   // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
-  console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
+  // console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
   const navigate = useNavigate();
   const goProductDetailEdit = (id) => {
     navigate(`/locations-store/edit-detail/:${id}`);
