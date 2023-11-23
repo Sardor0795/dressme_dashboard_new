@@ -220,18 +220,51 @@ const AddingProduct = () => {
   const { id } = useParams()
   const newProductId = id?.replace(":", "")
   const [productsDataId, setProductsDataId] = useState({});
+  const [section_Id, setSection_Id] = useState([]);
+  const [subSection_Id, setSubSection_Id] = useState([]);
+  const [season_Id, setSeason_Id] = useState([]);
+  const [colors_Id, setColors_Id] = useState([]);
+
 
   useQuery(
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
         console.log(res?.product, "product");
-        setProductsDataId(res);
+        res?.product?.sections?.map(value => {
+          setSection_Id(section_Id => [...section_Id, value?.id])
+        })
+        res?.product?.sub_sections?.map(value => {
+          setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
+        })
+        res?.product?.seasons?.map(value => {
+          setSeason_Id(season_Id => [...season_Id, value?.id])
+        })
+        res?.product?.colors?.map(value => {
+          setColors_Id(colors_Id => [...colors_Id, value?.id])
+        })
+
+
+        setState({
+          ...state,
+          gender_Id: res?.product?.gender_id,
+          min_Age_Category: res?.product?.min_age_category,
+          max_Age_Category: res?.product?.max_age_category,
+          sku: res?.product?.sku,
+          category_Id: res?.product?.category_id,
+          filterTypeId: res?.product?.type_id,
+          producer_Id: res?.product?.producer_id,
+        })
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
+  console.log(section_Id, "section_Id");
+  console.log(subSection_Id, "subSection_Id");
+  console.log(season_Id, "season_Id");
+  console.log(colors_Id, "colors_Id");
+  console.log(state?.gender_Id, "state?.gender_Id");
   // ------------------------------------------------------------------------
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
@@ -243,12 +276,12 @@ const AddingProduct = () => {
 
   // ------------------------------------------------------------------------
 
-  const newArray = []
-  productsData?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
-    return data?.sub_sections?.map(item => {
-      newArray.push(item)
-    })
-  })
+  // const newArray = []
+  // productsData?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
+  //   return data?.sub_sections?.map(item => {
+  //     newArray.push(item)
+  //   })
+  // })
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -289,11 +322,11 @@ const AddingProduct = () => {
     setState({ ...state, sub_Section_Id: e })
   }
 
-  useEffect(() => {
-    if (!newArray?.length) {
-      setState({ ...state, sub_Section_Id: [] });
-    }
-  }, [newArray?.length])
+  // useEffect(() => {
+  //   if (!newArray?.length) {
+  //     setState({ ...state, sub_Section_Id: [] });
+  //   }
+  // }, [newArray?.length])
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -545,63 +578,65 @@ const AddingProduct = () => {
             </div>
 
             {/* ---------------------------------------- */}
-            {/* Clothing Section */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <ClothingSection onClick={ClothingSectionToggle} />
-            </section>
+            <div className="w-full h-full">
+              {/* Clothing Section */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <ClothingSection onClick={ClothingSectionToggle} />
+              </section>
 
-            {/*Sub Clothing Section */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <SubClothingSection onClick={SubClothingSectionToggle} />
-            </section>
-            {/*DressSeason */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <DressSeason onClick={DressSeasonToggle} />
-            </section>
-            {/*ColourList */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <ColourGroup onClick={ColourListToggle} />
-            </section>
-            {/*ColourList */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <GenderList onClick={GenderListToggle} />
-            </section>
-            {/*DressType */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <DressType onClick={DressTypeToggle} />
-            </section>
-            {/*MakeCountry */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <MakeCountry onClick={MakeCountryToggle} />
-            </section>
-            {/*ClothingCategory */}
-            <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <ClothingCategory onClick={ClothingCategoryToggle} />
-            </section>
+              {/*Sub Clothing Section */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <SubClothingSection onClick={SubClothingSectionToggle} />
+              </section>
+              {/*DressSeason */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <DressSeason onClick={DressSeasonToggle} />
+              </section>
+              {/*ColourList */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <ColourGroup onClick={ColourListToggle} />
+              </section>
+              {/*ColourList */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <GenderList onClick={GenderListToggle} />
+              </section>
+              {/*DressType */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <DressType onClick={DressTypeToggle} />
+              </section>
+              {/*MakeCountry */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <MakeCountry onClick={MakeCountryToggle} />
+              </section>
+              {/*ClothingCategory */}
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
+              >
+                <ClothingCategory onClick={ClothingCategoryToggle} />
+              </section>
+            </div>
             {/* ---------------------------------------- */}
 
             <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
@@ -756,8 +791,9 @@ const AddingProduct = () => {
                             mode="multiple"
                             placeholder="Выбрать"
                             optionLabelProp="label"
-                            // optionFilterProp="children"
-                            onChange={(e) => setState({ ...state, section_Id: e })}
+                            // optionFilterProp="children"section_Id
+                            value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
+                            onChange={(e) => setSection_Id(e)}
                             onSearch={onSearch}
                             size="large"
                             filterOption={(input, option) =>
@@ -786,11 +822,11 @@ const AddingProduct = () => {
                       {/* Input Select 2 */}
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
-                          <span className={`text-[13px] md:text-base font-AeonikProRegular ${newArray?.length ? "text-[#000]" : "text-[#b5b5b5]"}`}>
+                          <span className={`text-[13px] md:text-base font-AeonikProRegular ${true ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                             Подраздел товара
                           </span>
                           <span className="ml-[5px]">
-                            {newArray?.length ? (
+                            {true ? (
                               <StarLabel />
                             ) : null}
                           </span>
@@ -807,27 +843,17 @@ const AddingProduct = () => {
                           </label>
                           <ArrowRightIcon />
                         </button>
-                        {/* <button
-                      onClick={clearSelected}
-                      type="button"
-                      className="w-fit h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
-                    >
-                      <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#000]">
-                        clearSelected
-                      </label>
-                    </button> */}
+
                         <div className="w-full h-fit hidden md:flex">
                           <Select
-                            className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.sub_Section_Id?.length && newArray?.length ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
+                            className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.sub_Section_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
                             showSearch
-                            disabled={
-                              newArray?.length ? false : true
-                            }
+                            disabled={subSection_Id?.length === 0}
                             placeholder="Выбрать"
                             mode="multiple"
                             optionLabelProp="label"
-                            value={state?.sub_Section_Id}
-                            // onChange={(e) => setState({ ...state, sub_Section_Id: e })}
+                            // value={state?.sub_Section_Id}
+                            value={productsData?.sections?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                             onChange={handleChangeSubSection}
                             onSearch={onSearch}
                             size="large"
@@ -839,19 +865,19 @@ const AddingProduct = () => {
                             }
 
                           >
-                            {newArray?.map(item => {
-                              return (
-                                <Option
-                                  key={item.id}
-                                  value={item.id}
-                                  label={item.name_ru}
-                                >
-                                  <span>{item.name_ru}</span>
-                                </Option>
-                              );
+                            {/* {newArray?.map(item => {
+                            //   return (
+                            //     <Option
+                            //       key={item.id}
+                            //       value={item.id}
+                            //       label={item.name_ru}
+                            //     >
+                            //       <span>{item.name_ru}</span>
+                            //     </Option>
+                            //   );
 
-                            })
-                            }
+                            // })
+                            // } */}
 
                           </Select>
 
@@ -885,9 +911,9 @@ const AddingProduct = () => {
                               width: "100%",
                             }}
                             placeholder="Выбрать"
-                            // defaultValue={["china"]}
+                            value={productsData?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                             size="large"
-                            onChange={(e) => setState({ ...state, season_Id: e })}
+                            onChange={(e) => setSeason_Id(e)}
                             optionLabelProp="label"
                           >
                             {productsData?.seasons?.map((item) => {
@@ -930,7 +956,7 @@ const AddingProduct = () => {
                           ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
  rounded-lg  h-[42px] md:h-10 px-[12px]`}>
                           {productsData.colors
-                            ?.filter((e) => e?.id <= 1)
+                            ?.filter((e) => colors_Id?.includes(e?.id))
                             ?.map((data) => {
                               return (
                                 <div key={data?.id} className="block w-fit">
@@ -998,6 +1024,7 @@ const AddingProduct = () => {
                               showSearch
                               placeholder="Выбрать"
                               optionFilterProp="children"
+                              value={productsData?.gender?.filter(e => e?.id == state?.gender_Id)?.map((item) => { return item?.id })}
                               onChange={(e) => setState({ ...state, gender_Id: e })}
                               onSearch={onSearch}
                               size="large"
@@ -1084,21 +1111,22 @@ const AddingProduct = () => {
                           </span>
                         </div>
                         <div className="w-full h-fit">
-                          <button
-                            // onClick={toggleDropModalButton}
-                            type="button"
-                            className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
+                          <p
+                            className={`w-full overflow-hidden cursor-text h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                           >
-                            <span className="text-[#a1a1a1]"> Головные уборы</span>
-                          </button>
-                          <button
+                            {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map(item => {
+                              return <span className="text-[#a1a1a1]">{item?.name_ru}</span>
 
-                            type="button"
-                            className={`w-full overflow-hidden h-[40px] md:hidden flex items-center justify-between border border-borderColor rounded-lg p-3 `}
+                            })}
+                          </p>
+                          <p
+                            className={`w-full overflow-hidden cursor-text h-[40px] md:hidden flex items-center justify-between border border-borderColor rounded-lg p-3 `}
                           >
-                            <span className="text-[#a1a1a1]"> Головные уборы</span>
+                            {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map(item => {
+                              return <span className="text-[#a1a1a1]">{item?.name_ru}</span>
 
-                          </button>
+                            })}
+                          </p>
                         </div>
                       </div>
                       {/* Input Select 8 */}
@@ -1118,6 +1146,7 @@ const AddingProduct = () => {
                               showSearch
                               allowClear
                               placeholder="Выбрать"
+                              value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
                               optionFilterProp="children"
                               onChange={(value, attribute2) => {
                                 setState({ ...state, filterTypeId: value, type_Id: attribute2?.attribute2 })
@@ -1131,7 +1160,7 @@ const AddingProduct = () => {
                                   .includes(input.toLowerCase())
                               }
                             >
-                              {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
+                              {state?.category_Id ? productsData?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                                 return (
                                   <Option
                                     key={"item_" + item.id}
@@ -1171,6 +1200,7 @@ const AddingProduct = () => {
                               showSearch
                               placeholder="Выбрать"
                               optionFilterProp="children"
+                              value={productsData?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
                               onChange={(e) => setState({ ...state, producer_Id: e })}
                               onSearch={onSearch}
                               size="large"
@@ -1191,6 +1221,7 @@ const AddingProduct = () => {
                       </div>
                       {/* Input Select 9 mobile */}
                       <div className="w-full  flex md:hidden flex-col gap-y-[5px]">
+
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
                             Тип
@@ -1211,12 +1242,15 @@ const AddingProduct = () => {
                         </button>
                         <div className="w-full h-fit md:flex hidden">
                           <Select
-                            className={`block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
+                            className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : ""}`}
                             showSearch
+                            allowClear
                             placeholder="Выбрать"
+                            value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
                             optionFilterProp="children"
                             onChange={(value, attribute2) => {
                               setState({ ...state, filterTypeId: value, type_Id: attribute2?.attribute2 })
+                              // CategoryTypeId(value, attribute2?.attribute2)
                             }}
                             onSearch={onSearch}
                             size="large"
@@ -1225,14 +1259,8 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
-                          // options={productsData?.types?.map((item) => {
-                          //   return {
-                          //     value: item?.id,
-                          //     label: item?.name_ru,
-                          //   };
-                          // })}
                           >
-                            {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
+                            {state?.category_Id ? productsData?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                               return (
                                 <Option
                                   key={"item_" + item.id}
@@ -1281,10 +1309,11 @@ const AddingProduct = () => {
                         </button>
                         <div className="w-full h-fit md:flex hidden">
                           <Select
-                            className=" rounded-lg w-full h-11 md:h-10"
+                            className={`overflow-hidden rounded-lg w-full  h-full ${state?.isCheckValid && !state?.producer_Id ? "border border-[#FFB8B8] " : ""}`}
                             showSearch
                             placeholder="Выбрать"
                             optionFilterProp="children"
+                            value={productsData?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
                             onChange={(e) => setState({ ...state, producer_Id: e })}
                             onSearch={onSearch}
                             size="large"
