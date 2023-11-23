@@ -7,30 +7,32 @@ import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 
-export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
+export default function TextFormAdd({ productsEdit, handlCallBack }) {
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
-        titleInRu: null,
-        titleInUz: null,
-        descriptionInRu: null,
-        descriptionInUz: null,
-        qualityInRu: null,
-        qualityInUz: null,
-        noteValueRu: null,
-        noteValueUz: null,
+        titleInRu: productsEdit?.name_ru,
+        titleInUz: productsEdit?.name_uz,
+        descriptionInRu: productsEdit?.description_ru,
+        descriptionInUz: productsEdit?.description_uz,
+        qualityInRu: productsEdit?.quality_ru,
+        qualityInUz: productsEdit?.quality_uz,
+        noteValueRu: productsEdit?.composition_ru,
+        noteValueUz: productsEdit?.composition_uz,
         isCheckValid: false,
-        brand: null,
+        brand: productsEdit?.brand_id,
     })
-
-
+    console.log(productsEdit, "productsEdit");
+    useEffect(() => {
+        console.log();
+    }, [productsEdit])
 
 
     const { request } = useHttp()
     const [productsData, setProductsData] = useState({})
 
     const handleSelectQuality = (value) => {
-        productsData?.quality?.filter(e => e.name_ru == value).map(item => {
+        productsData?.quality?.filter(e => e.name_ru === value).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz })
             // console.log(item?.name_uz, "nameuz");
             // console.log(state?.qualityInUz, "qualityInUz");
@@ -92,7 +94,7 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
     // Категория одежды хлопок
     return (
-        <div className="flex py-[40px] md:py-[50px] ">
+        <div className="w-full  flex py-[40px] md:py-[50px] ">
             <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
                 <div className="text-[#007dca] text-2xl w-[45px] h-[45px] rounded-full flex items-center justify-center border-2 border-[#1e88e5] mb-[5px] font-AeonikProRegular">
                     1
@@ -251,6 +253,7 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         allowClear
+                                        value={productsData?.quality?.filter(e => e?.name_ru == state?.qualityInRu)?.map(item => { return item?.name_ru })}
                                         onChange={handleSelectQuality}
                                         options={
                                             productsData?.quality?.map(item => {
