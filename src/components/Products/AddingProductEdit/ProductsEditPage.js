@@ -24,28 +24,41 @@ export default function ProductEditPage() {
           <section className="w-full md:w-fit  flex justify-center md:justify-start">
 
             <section className=" w-full md:w-fit  flex justify-center md:justify-start">
-              {dressInfo?.productAddByIdForToggle ? <button
-                onClick={() => {
-                  navigate(-1);
-                }}
-                className="w-8 h-8 md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
-              >
-                <AiOutlineLeft />
-              </button> :
 
-                !dressInfo?.nextPageShowForm && <> <button
-                  button
-                  onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                  className="w-8 h-8 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+              {dressInfo?.productAddByIdForToggle && dressInfo?.nextPageShowForm ?
+                <button
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                  className="w-8 h-8 absolute md:relative left-4  md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
                 >
-                  <AiOutlineLeft />
+                  <GoBackIcons />
                 </button>
-                  <button
+                :
+                !dressInfo?.nextPageShowForm ?
+                  <><button
+                    button
                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                    className="  md:hidden absolute left-0 flex items-center cursor-pointer "
+                    className="w-8 h-8 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
                   >
                     <GoBackIcons />
-                  </button></>}
+                  </button>
+                    <button
+                      onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
+                      className="  md:hidden absolute left-0 flex items-center cursor-pointer "
+                    >
+                      <GoBackIcons />
+                    </button></>
+                  :
+                  <button
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                    className="w-8 h-8 absolute md:relative left-4  md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
+                  >
+                    <GoBackIcons />
+                  </button>
+              }
               <p className={`text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${!dressInfo?.nextPageShowForm && "md:ml-[30px]"} `}>
                 Добавить товара
               </p>

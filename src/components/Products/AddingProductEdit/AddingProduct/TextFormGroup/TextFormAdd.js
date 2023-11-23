@@ -11,21 +11,32 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
-        titleInRu: productsEdit?.name_ru,
-        titleInUz: productsEdit?.name_uz,
-        descriptionInRu: productsEdit?.description_ru,
-        descriptionInUz: productsEdit?.description_uz,
-        qualityInRu: productsEdit?.quality_ru,
-        qualityInUz: productsEdit?.quality_uz,
-        noteValueRu: productsEdit?.composition_ru,
-        noteValueUz: productsEdit?.composition_uz,
+        titleInRu: null,
+        titleInUz: null,
+        descriptionInRu: null,
+        descriptionInUz: null,
+        qualityInRu: null,
+        qualityInUz: null,
+        noteValueRu: null,
+        noteValueUz: null,
         isCheckValid: false,
-        brand: productsEdit?.brand_id,
+        brand: null,
     })
-    console.log(productsEdit, "productsEdit");
     useEffect(() => {
-        console.log();
-    }, [productsEdit])
+        console.log(productsEdit, "productsEdit");
+        setState({
+            ...state,
+            titleInRu: productsEdit?.name_ru,
+            titleInUz: productsEdit?.name_uz,
+            descriptionInRu: productsEdit?.description_ru,
+            descriptionInUz: productsEdit?.description_uz,
+            qualityInRu: productsEdit?.quality_ru,
+            qualityInUz: productsEdit?.quality_uz,
+            noteValueRu: productsEdit?.composition_ru,
+            noteValueUz: productsEdit?.composition_uz,
+            brand: productsEdit?.brand_id,
+        })
+    }, [dressInfo?.nextPageShowForm])
 
 
     const { request } = useHttp()
