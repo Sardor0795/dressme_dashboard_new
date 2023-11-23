@@ -1356,7 +1356,7 @@ const AddingProduct = () => {
                   <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ">
 
                     {/* Img Carousel */}
-                    <div className="w-full h-[510px] hidden md:flex flex-col gap-y-[120px]">
+                    <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px]">
                       <ProductCarouselEdit />
                     </div>
 
