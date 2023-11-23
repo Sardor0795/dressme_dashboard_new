@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
 
-function AddStore({ shopsList }) {
+function AddStore({ shopsList, onRefetch }) {
   const navigate = useNavigate();
   const { request } = useHttp();
   const url = "https://api.dressme.uz/api/seller";
@@ -96,6 +96,7 @@ function AddStore({ shopsList }) {
         if (res?.errors && res?.message) {
           setState({ ...state, errorGroup: res?.errors });
         } else if (res?.message) {
+          onRefetch()
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -108,6 +109,7 @@ function AddStore({ shopsList }) {
           });
           navigate("/store");
         }
+
       })
       .catch((err) => {
         toast.error(`${err}`, {

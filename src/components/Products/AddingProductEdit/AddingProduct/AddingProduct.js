@@ -217,6 +217,7 @@ const AddingProduct = () => {
       refetchOnWindowFocus: false,
     }
   );
+
   const { id } = useParams()
   const newProductId = id?.replace(":", "")
   const [productsDataId, setProductsDataId] = useState({});
@@ -254,10 +255,13 @@ const AddingProduct = () => {
           category_Id: res?.product?.category_id,
           filterTypeId: res?.product?.type_id,
           producer_Id: res?.product?.producer_id,
+          shopId: res?.product?.locations[0]?.shop_id,
+          shopLocationId: res?.product?.locations[0]?.id,
+
         })
       },
       keepPreviousData: true,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
     }
   );
   console.log(section_Id, "section_Id");
@@ -265,6 +269,8 @@ const AddingProduct = () => {
   console.log(season_Id, "season_Id");
   console.log(colors_Id, "colors_Id");
   console.log(state?.gender_Id, "state?.gender_Id");
+  console.log(state?.shopId, "state?.shopId");
+  console.log(state?.shopLocationId, "state?.shopLocationId");
   // ------------------------------------------------------------------------
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
@@ -276,12 +282,18 @@ const AddingProduct = () => {
 
   // ------------------------------------------------------------------------
 
-  // const newArray = []
-  // productsData?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
-  //   return data?.sub_sections?.map(item => {
-  //     newArray.push(item)
-  //   })
-  // })
+  const [newArray, setNewArray] = useState([])
+  useEffect(() => {
+    productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
+      return data?.sub_sections?.map(item => {
+        if (!newArray?.includes(item)) {
+          setNewArray(newArray => [...newArray, item])
+        }
+      })
+    })
+
+  }, [section_Id])
+  console.log(newArray, "newArray");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -319,7 +331,7 @@ const AddingProduct = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
   const handleChangeSubSection = (e) => {
-    setState({ ...state, sub_Section_Id: e })
+    setSubSection_Id(e)
   }
 
   // useEffect(() => {
@@ -345,6 +357,9 @@ const AddingProduct = () => {
       setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
     }
   }, [state?.PathnameToken]);
+
+
+
 
   return (
     <div className="w-full h-fit ">
@@ -664,36 +679,24 @@ const AddingProduct = () => {
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
-
-                          <Select
-                            className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
-                            showSearch
-                            placeholder="Выбрать"
-                            optionFilterProp="children"
-                            onChange={(e) => setState({ ...state, shopId: e })}
-                            onSearch={onSearch}
-                            size="large"
-                            filterOption={(input, option) =>
-                              (option?.label ?? "")
-                                .toLowerCase()
-                                .includes(input.toLowerCase())
-                            }
-
+                          <button
+                            type="button"
+                            className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                           >
-                            {productsData?.shops?.map((data) => {
-                              return (
-                                <>
-                                  {data?.shop_locations?.length >= 1 && <Option
-                                    key={data.id}
-                                    value={data?.id}
-                                  >
-                                    {data?.name}
-                                  </Option>}
-                                </>
-                              )
-                            })}
+                            <span>
+                              {productsData?.shops?.filter(e => e?.id == state?.shopId)?.map((item) => {
+                                return (
+                                  <span
+                                    className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                    {item?.name}
+                                  </span>
+                                )
+                              })}
 
-                          </Select>
+                            </span>
+                            <span className="rotate-[90deg]"><ArrowRightIcon /></span>
+                          </button>
+
                         </div>
                       </div>
                       {/* Input Select 2.1 */}
@@ -702,11 +705,7 @@ const AddingProduct = () => {
                           <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shopId ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                             Локация
                           </span>
-                          <span className="ml-[5px]">
-                            {state?.shopId ? (
-                              <StarLabel />
-                            ) : null}
-                          </span>
+
                         </div>
                         <button
 
@@ -721,45 +720,29 @@ const AddingProduct = () => {
 
                         <div className="w-full h-fit hidden md:flex">
                           <button
-                            onClick={() => setState({ ...state, openSelect: true })}
                             type="button"
-                            className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
-                             ${state?.isCheckValid && !state?.shopLocationId ? "border border-[#FFB8B8] " : "border border-borderColor"}
-  
-                             px-3`}
+                            className="w-full h-[40px] overflow-hidden bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                           >
-
-                            {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
-                              return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
-                                return (
-                                  <span
-                                    className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
-                                    key={data?.id}
-                                  >
-                                    <span className="w-full whitespace-nowrap flex items-center">{data?.address}</span>
-                                  </span>
-                                )
+                            <span>
+                              {productsData?.shops?.filter(e => e?.id == state?.shopId).map((item) => {
+                                return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
+                                  return (
+                                    <span
+                                      className="w-[85%] whitespace-nowrap  overflow-hidden	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
+                                      key={data?.id}
+                                    >
+                                      <span className="w-full whitespace-nowrap text-[#b5b5b5] flex items-center">{data?.address}</span>
+                                    </span>
+                                  )
+                                })
                               })
-                            })
-                              :
-                              <div className="w-full flex items-center">
-                                <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                  Выбрать
-                                </label>
-                                <span className="rotate-[90deg]">
-                                  <ArrowRightIcon />
-                                </span>
-                              </div>
-                            }
-                            <div className="w-full flex items-center justify-between ">
-                              <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
-                              </label>
-                              <span className="rotate-[90deg]">
-                                <ArrowRightIcon />
-                              </span>
-                            </div>
+
+                              }
+
+                            </span>
+                            <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                           </button>
+
                         </div>
                       </div>
                       {/* Input Select 1 */}
@@ -846,14 +829,18 @@ const AddingProduct = () => {
 
                         <div className="w-full h-fit hidden md:flex">
                           <Select
-                            className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.sub_Section_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
+                            className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !subSection_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
                             showSearch
                             disabled={subSection_Id?.length === 0}
                             placeholder="Выбрать"
                             mode="multiple"
                             optionLabelProp="label"
                             // value={state?.sub_Section_Id}
-                            value={productsData?.sections?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => { return item?.id })}
+                            value={newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => { return item?.id })}
+                            // value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
+                            //   return data?.sub_sections?.filter(e => subSection_Id?.includes(e?.id))?.map(item => { return item.id })
+                            // })
+                            // }
                             onChange={handleChangeSubSection}
                             onSearch={onSearch}
                             size="large"
@@ -865,19 +852,19 @@ const AddingProduct = () => {
                             }
 
                           >
-                            {/* {newArray?.map(item => {
-                            //   return (
-                            //     <Option
-                            //       key={item.id}
-                            //       value={item.id}
-                            //       label={item.name_ru}
-                            //     >
-                            //       <span>{item.name_ru}</span>
-                            //     </Option>
-                            //   );
+                            {newArray?.map(item => {
+                              return (
+                                <Option
+                                  key={item.id}
+                                  value={item.id}
+                                  label={item.name_ru}
+                                >
+                                  <span>{item.name_ru}</span>
+                                </Option>
+                              )
+                            })
+                            }
 
-                            // })
-                            // } */}
 
                           </Select>
 

@@ -12,7 +12,7 @@ export default function MarketIsStoreCheck() {
   const { request } = useHttp()
 
   // // ------------GET  Has Magazin ?-----------------
-  useQuery(["seller_shops"], () => { return request({ url: "/shops", token: true }) },
+  const { refetch } = useQuery(["seller_shops"], () => { return request({ url: "/shops", token: true }) },
     {
       onSuccess: (res) => {
         if (res?.shops) {
@@ -34,10 +34,10 @@ export default function MarketIsStoreCheck() {
       {loading ? (
         <LoadingForSeller />
       ) : (
-        <>
+        <div>
           {sellerShops?.shops?.data?.length >= 1 && <MyMarket shopsList={sellerShops} />}
-          {sellerShops?.shops?.data?.length == 0 && <AddStore shopsList={sellerShops} />}
-        </>
+          {sellerShops?.shops?.data?.length == 0 && <AddStore shopsList={sellerShops} onRefetch={refetch} />}
+        </div>
       )}
     </div>
   );
