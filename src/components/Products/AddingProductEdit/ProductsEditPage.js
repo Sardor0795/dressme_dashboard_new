@@ -30,7 +30,7 @@ export default function ProductEditPage() {
                   onClick={() => {
                     navigate(-1);
                   }}
-                  className="w-8 h-8 absolute md:relative left-4  md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
+                  className="w-8 h-8 absolute md:relative md:left-0 left-4  md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
                 >
                   <GoBackIcons />
                 </button>
@@ -54,7 +54,7 @@ export default function ProductEditPage() {
                     onClick={() => {
                       navigate(-1);
                     }}
-                    className="w-8 h-8 absolute md:relative left-4  md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
+                    className="w-8 h-8 absolute md:relative md:left-0 left-4  md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
                   >
                     <GoBackIcons />
                   </button>
