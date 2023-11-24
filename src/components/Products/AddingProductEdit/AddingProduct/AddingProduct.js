@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import {
   AddIconsCircle1,
   ArrowRightIcon,
+  DeleteIcon,
   DownloadIcon,
   InputCheckedTrueIcons,
   LoaderIcon,
@@ -221,6 +222,7 @@ const AddingProduct = () => {
   ); // Categories
   const [colorChecked, setColorChecked] = useState();
   const [colorAction, setColorAction] = useState(false);
+  const [colorDelete, setColorDelete] = useState(false);
   const [colorListForTest, setColorListForTest] = useState([]);
 
   const [productsDataIdEdit, setProductsDataIdEdit] = useState();
@@ -311,7 +313,11 @@ const AddingProduct = () => {
     }
   }
   function onHandleColorUnchecked(id) {
-    if (id) {
+    console.log(colorListForTest, "colorListForTest");
+    console.log(id, "id");
+    if (colorListForTest?.includes(id)) {
+      setColorDelete(true)
+    } else if (id) {
       setColors_Id(colors_Id?.filter(e => e !== id))
     }
   }
@@ -333,9 +339,9 @@ const AddingProduct = () => {
     }
 
   }, [colorChecked])
-  console.log(lastElement, "lastElement");
-  console.log(colorChecked, "colorChecked");
-  console.log(colorAction, "colorAction");
+  // console.log(lastElement, "lastElement");
+  // console.log(colorChecked, "colorChecked");
+  // console.log(colorAction, "colorAction");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -483,6 +489,7 @@ const AddingProduct = () => {
                 })
                 setAllSizeModalShow(false)
                 setOpenCategories(false)
+                setColorDelete(false)
 
               }
               }
@@ -498,14 +505,19 @@ const AddingProduct = () => {
                   state?.openSelect ||
                   state?.MakeCountryModal ||
                   allSizeModalShow ||
-                  openCategories
+                  openCategories ||
+                  colorDelete
                   ? ""
                   : "hidden"
                 }`}
             ></section>
+            <section
+              onClick={() => { setColorDelete(false) }}
+              className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${colorDelete ? "" : "hidden"}`}
+            ></section>
 
             {state?.showColor && (
-              <div className="max-w-[576px] w-full fixed z-[221]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ">
+              <div className="max-w-[650px] w-full fixed z-[221]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ">
                 {/* </div> */}
                 <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
                   <div
@@ -572,6 +584,64 @@ const AddingProduct = () => {
                 </div>
               </div>
             )}
+            {/* Color Delete Of Pop Confirm */}
+            <section
+              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${colorDelete ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+                }`}
+            >
+              <button
+                onClick={() => setColorDelete(false)}
+                type="button"
+                className="absolute  right-3 top-3 w-5 h-5 ">
+                <MenuCloseIcons
+                  className="w-full h-full"
+                  colors={"#a1a1a1"} />
+              </button>
+              {/* {hideDeleteIcons ?
+                <div className="w-full flex items-center justify-center">
+                  {loader && hideDeleteIcons ?
+                    <PuffLoader
+                      // className={styles.loader1}
+                      color={"#007DCA"}
+                      size={80}
+                      loading={true}
+                    />
+                    :
+                    <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2"><FaCheck size={30} color="#009B17" /></span>
+                      <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                    </div>
+                  }
+                </div>
+                : */}
+              <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+                <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                  <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                    <DeleteIcon width={30} />
+                  </span>
+                </span>
+                <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                  Вы уверены?
+                </span>
+              </div>
+
+              {/* } */}
+              <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+                <button
+                  onClick={() => setColorDelete(false)}
+                  type="button"
+                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                  Oтмена
+                </button>
+                <button
+                  onClick={() => setColorDelete(false)}
+                  type="button"
+                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                  Удалить из адреса</button>
+              </div>
+
+            </section>
             <section
               className={` max-w-[440px] md:max-w-[700px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[25px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
                 }`}
