@@ -24,12 +24,12 @@ import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
 import { BiCheck, BiCheckDouble } from "react-icons/bi";
-// import { DownOutlined } from '@ant-design/icons'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import AddSize from "./Details/AddSize/AddSize";
-import AllSizeModalEdit from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/AddingProduct/AllSizeModalEdit/AllSizeModalEdit";
+import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
+import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
 
@@ -55,7 +55,7 @@ const AddingProduct = () => {
     GenderModal: false,
     DressTypeModal: false,
     MakeCountryModal: false,
-    ClothingCategoryModal: false,
+    // ClothingCategoryModal: false,
     isCheckValid: false,
     errorList: null,
     errorListMessage: null,
@@ -166,16 +166,16 @@ const AddingProduct = () => {
     () => setState({ ...state, MakeCountryModal: false }),
     []
   ); // ClothingSection
-  const ClothingCategoryToggle = React.useCallback(
-    () => setState({ ...state, ClothingCategoryModal: false }),
-    []
-  ); // ClothingSection
+  // const ClothingCategoryToggle = React.useCallback(
+  //   () => setState({ ...state, ClothingCategoryModal: false }),
+  //   []
+  // ); // ClothingSection
 
   // ---------Callback----
   useEffect(() => {
     if (
       state?.showColor ||
-      state?.ClothingCategoryModal ||
+      // state?.ClothingCategoryModal ||
       state?.ClothingSection ||
       state?.Colour ||
       state?.DressSeason ||
@@ -189,7 +189,7 @@ const AddingProduct = () => {
     }
   }, [
     state?.showColor,
-    state?.ClothingCategoryModal,
+    // state?.ClothingCategoryModal,
     state?.ClothingSection,
     state?.Colour,
     state?.DressSeason,
@@ -213,6 +213,13 @@ const AddingProduct = () => {
 
   const { id } = useParams()
   const newProductId = id?.replace(":", "")
+
+  const [openCategories, setOpenCategories] = useState();
+  const toggleCategories = React.useCallback(
+    () => setOpenCategories(false),
+    []
+  ); // Categories
+
   const [productsDataIdEdit, setProductsDataIdEdit] = useState();
   const [section_Id, setSection_Id] = useState([]);
   const [subSection_Id, setSubSection_Id] = useState([]);
@@ -350,7 +357,7 @@ const AddingProduct = () => {
 
 
 
-
+  console.log(productsData.colors, "productsData.colors");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -429,11 +436,13 @@ const AddingProduct = () => {
                   GenderModal: false,
                   DressTypeModal: false,
                   MakeCountryModal: false,
-                  ClothingCategoryModal: false,
+                  // ClothingCategoryModal: false,
                   showColor: false,
                   openSelect: false,
                 })
                 setAllSizeModalShow(false)
+                setOpenCategories(false)
+
               }
               }
               className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
@@ -443,11 +452,12 @@ const AddingProduct = () => {
                   state?.Colour ||
                   state?.GenderModal ||
                   state?.DressTypeModal ||
-                  state?.ClothingCategoryModal ||
+                  // state?.ClothingCategoryModal ||
                   state?.showColor ||
                   state?.openSelect ||
                   state?.MakeCountryModal ||
-                  allSizeModalShow
+                  allSizeModalShow ||
+                  openCategories
                   ? ""
                   : "hidden"
                 }`}
@@ -583,6 +593,23 @@ const AddingProduct = () => {
             </div>
 
             {/* ---------------------------------------- */}
+            {/* Categories Mobile Bottom Modal Animation Section */}
+            <div className="">
+
+              <section
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${openCategories ? "bottom-0" : "bottom-[-800px] z-[-10]"
+                  }`}
+              >
+                {openCategories &&
+                  <CategoriesMobileDropUp
+                    onClick1={toggleCategories}
+                    colorGroup={productsData.colors}
+                    onClick2={toggleAllSizeModalShow}
+                    modalOpenColor={false}
+                  />
+                }
+              </section>
+            </div>
             {/* Clothing Section */}
             <section
               className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
@@ -634,12 +661,12 @@ const AddingProduct = () => {
               <MakeCountry onClick={MakeCountryToggle} />
             </section>
             {/*ClothingCategory */}
-            <section
+            {/* <section
               className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
                 }`}
             >
               <ClothingCategory onClick={ClothingCategoryToggle} />
-            </section>
+            </section> */}
             {/* ---------------------------------------- */}
 
             <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
@@ -1085,7 +1112,19 @@ const AddingProduct = () => {
                             <StarLabel />
                           </span>
                         </div>
-                        <div className="w-full h-fit">
+                        <button
+                          type="button"
+                          onClick={() => setOpenCategories(true)}
+                          className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
+                        >
+                          <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
+                            Выбрать
+                          </span>
+                          <span className="rotate-[90deg]">
+                            <ArrowRightIcon />
+                          </span>
+                        </button>
+                        <div className="w-full h-fit md:flex flex-col hidden">
                           <p
                             className={`w-full overflow-hidden cursor-text h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                           >
@@ -1094,14 +1133,15 @@ const AddingProduct = () => {
 
                             })}
                           </p>
-                          <p
+
+                          {/* <p
                             className={`w-full overflow-hidden cursor-text h-[40px] md:hidden flex items-center justify-between border border-borderColor rounded-lg p-3 `}
                           >
                             {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map(item => {
                               return <span className="text-[#a1a1a1]">{item?.name_ru}</span>
 
                             })}
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                       {/* Input Select 8 */}
@@ -1337,7 +1377,7 @@ const AddingProduct = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="w-full flex items-center gap-x-3" >
+                    <div className="w-full hidden md:flex items-center gap-x-3" >
                       <button
                         type="button"
                         onClick={() => setAllSizeModalShow(true)}
@@ -1348,7 +1388,6 @@ const AddingProduct = () => {
                       <button className=" w-fit">
                         <AddSize title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
                       </button>
-
                     </div>
 
 
@@ -1356,7 +1395,7 @@ const AddingProduct = () => {
                   <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ">
 
                     {/* Img Carousel */}
-                    <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px]">
+                    <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px] ">
                       <ProductCarouselEdit />
                     </div>
 

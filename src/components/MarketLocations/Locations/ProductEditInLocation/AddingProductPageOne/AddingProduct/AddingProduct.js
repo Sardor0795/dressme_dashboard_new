@@ -646,7 +646,9 @@ const AddingProduct = () => {
       },
     ],
   };
-  {/* <input  w-fit h-[510px] */ }
+  {/* <input  w-fit h-[510px] Категория одежды
+
+ */ }
 
   return (
     <div className="relative w-full px-4 md:px-0 flex items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor">

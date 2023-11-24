@@ -5,8 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function AddSize({ title, typeId, handleCallBack }) {
-    const [dressInfo, setDressInfo] = useContext(dressMainData);
+function AddSize({ handleCallBack }) {
     const [state, setState] = useState({
         minBreast: "",
         maxBreast: "",
@@ -29,7 +28,6 @@ function AddSize({ title, typeId, handleCallBack }) {
         onConcel: false
     })
     const [toggleShow, setToggleShow] = useState(false)
-    const [toggle, setToggle] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
         sizeList1: [
@@ -55,21 +53,13 @@ function AddSize({ title, typeId, handleCallBack }) {
     )
 
 
-    const SelectedNumber = 3
-    useEffect(() => {
-        if (typeId == SelectedNumber) {
-            setToggle(true)
-        } else {
-            setToggle(false)
-        }
-    }, [typeId])
+
     const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.minSize && state?.quantityNum && state?.priceNum) {
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
             setToggleShow(false)
             handleCallBack({
@@ -87,12 +77,10 @@ function AddSize({ title, typeId, handleCallBack }) {
                 price: state?.priceNum,
                 discountPercent: state?.salePercent,
                 discountPrice: state?.salePrice,
-                category_Id: SelectedNumber,
             })
         }
     }
     const cancelSendDetail = (e) => {
-        setDressInfo({ ...dressInfo, ProductFilterType: null })
         setState({
             ...state,
             minBreast: "",
@@ -117,7 +105,7 @@ function AddSize({ title, typeId, handleCallBack }) {
     }
 
 
-    const contentUnderWear = (
+    const AddSize = (
         <div className="w-[840px] h-fit">
             <div
                 className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
@@ -578,27 +566,15 @@ function AddSize({ title, typeId, handleCallBack }) {
         <Popover
             open={toggleShow}
             onOpenChange={handleOpenPopver}
-            className={`
-            ${dressInfo?.ProductFilterType || typeId ?
-                    dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ?
-                        "!bg-textBlueColor text-white" :
-                        "text-[#bababa]  border-[#bababa]" :
-                    "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"} 
+            className={`                 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor 
                     group px-[15px] h-[38px]  border-[1.5px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
                     `}
             trigger="click"
             options={["Hide"]}
             placement="bottom"
-            content={dressInfo?.ProductFilterType || typeId ? dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ? contentUnderWear : null : contentUnderWear}
+            content={AddSize}
         >
-            {
-                title?.filter(e => e?.id === SelectedNumber)?.map(item => {
-                    return (
-                        <span key={item?.id}>Добавить размер</span>
-                    )
-                })
-            }
-
+            <span>Добавить размер</span>
         </Popover>
     );
 }
