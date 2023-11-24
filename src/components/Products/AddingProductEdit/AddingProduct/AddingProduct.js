@@ -219,6 +219,8 @@ const AddingProduct = () => {
     () => setOpenCategories(false),
     []
   ); // Categories
+  const [colorChecked, setColorChecked] = useState();
+  const [colorAction, setColorAction] = useState(false);
 
   const [productsDataIdEdit, setProductsDataIdEdit] = useState();
   const [section_Id, setSection_Id] = useState([]);
@@ -240,10 +242,15 @@ const AddingProduct = () => {
           setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
         })
         res?.product?.seasons?.map(value => {
+
           setSeason_Id(season_Id => [...season_Id, value?.id])
         })
         res?.product?.colors?.map(value => {
-          setColors_Id(colors_Id => [...colors_Id, value?.id])
+
+          if (!colors_Id?.includes(value?.id)) {
+            setColors_Id(colors_Id => [...colors_Id, value?.id])
+            setColorChecked(value?.id)
+          }
         })
 
 
@@ -294,7 +301,26 @@ const AddingProduct = () => {
     })
 
   }, [section_Id])
-  // console.log(newArray, "newArray");
+  // -----------------------------------------------------------
+  // ColorHandle
+  // ------------------------------------------------------------------------
+  function onHanleColorList(e) {
+
+    if (!colors_Id?.includes(e)) {
+      setColors_Id(colors_Id => [...colors_Id, e])
+    }
+  }
+  function onHandleColorUnchecked(id) {
+    if (id) {
+      setColors_Id(colors_Id?.filter(e => e !== id))
+    }
+  }
+  // -----------------------------------------------------------
+  // ------------------------------------------------------------------------
+  // useEffect(()=>{
+  //   if()
+
+  // })
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -357,7 +383,7 @@ const AddingProduct = () => {
 
 
 
-  console.log(productsData.colors, "productsData.colors");
+  // console.log(productsData.colors, "productsData.colors");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -481,31 +507,32 @@ const AddingProduct = () => {
                       <MenuCloseIcons colors={"#000"} />
                     </button>
                   </div>
-                  <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
+                  <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
                     {productsData?.colors.map((data) => {
                       return (
                         <div className="flex flex-col items-center justify-center ">
                           <div
                             key={data?.id}
-                            onClick={() => setState({ ...state, color_Id: data?.id })}
+                            // onClick={() => setState({ ...state, color_Id: data?.id })}
+                            onClick={() => onHanleColorList(data?.id)}
                             style={{ background: `${data.hex}` }}
-                            className={`rounded-[12px] flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                            className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
                               }] cursor-pointer ${data?.id == 2
                                 ? "border border-setTexOpacity flex items-center justify-center"
                                 : ""
                               }
                      `}
                           >
-                            {data?.id === state?.color_Id && state?.color_Id !== 2 ? (
-                              <InputCheckedTrueIcons colors={"#fff"} />
+                            {colors_Id?.includes(data?.id) ? (
+                              <span onClick={() => onHandleColorUnchecked(data?.id)} className="w-[20px] h-[20px] rounded-b-md	 right-0 top-0 hover:opacity-70 absolute bg-black flex items-center justify-center p-[1px]"> <MenuCloseIcons colors={"#fff"} /></span>
                             ) : null}
 
-                            {state?.color_Id === 2 && data?.id === state?.color_Id ? (
+                            {/* {state?.color_Id === 2 && data?.id === state?.color_Id ? (
                               <InputCheckedTrueIcons colors={"#000"} />
-                            ) : null}
+                            ) : null} */}
                           </div>
                           <span
-                            className={`text-black text-center text-xs not-italic font-AeonikProRegular`}
+                            className={`text-black text-center text-[14px] not-italic font-AeonikProRegular ${colors_Id?.includes(data?.id) ? "border-b border-fullBlue" : ""}`}
                           >
                             {data?.name_ru}
                           </span>
@@ -966,17 +993,17 @@ const AddingProduct = () => {
                                     <label
                                       key={data?.id}
                                       htmlFor={data?.id}
-                                      onClick={() => setState({ ...state, color_Id: data?.id })}
+                                      onClick={() => setColorChecked(data?.id)}
 
                                       style={{ background: `${data.hex}` }}
                                       className={`rounded-full border  w-[22px] h-[22px] p-[2px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
                                     >
-                                      {data?.id === state?.color_Id && state?.color_Id !== 2 ? (
-                                        <BiCheck size={25} color={"#fff"} className="flex items-center justify-center" />
+                                      {data?.id === colorChecked && colorChecked !== 2 ? (
+                                        <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
                                       ) : null}
 
-                                      {state?.color_Id === 2 && data?.id === state?.color_Id ? (
-                                        <BiCheck size={25} color={"#000"} className="flex items-center justify-center" />
+                                      {colorChecked === 2 && data?.id === colorChecked ? (
+                                        <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
                                       ) : null}
                                     </label>
                                     <input
