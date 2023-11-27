@@ -8,7 +8,7 @@ import OutWearAdd from "../../../Details/OutWear/OutWearAdd";
 import ShoesAdd from "../../../Details/Shoes/ShoesAdd";
 import UnderAddWear from "../../../Details/UnderAddWear/UnderAddWear";
 
-function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList }) {
+function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfColor }) {
   // console.log(onClick, "onClick");
   // console.log(colorGroup, "colorGroup");
   // console.log(colorSelect, "colorSelect");
@@ -34,7 +34,7 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList }) {
       </div>
       <div className="hidden md:flex items-center pl-7 mt-2 ">
         <div className="w-fit flex items-center gap-x-2">
-          <span className="text-black text-md not-italic font-AeonikProRegular">Выбранный цвет:</span>
+          <span className="text-black text-md not-italic font-AeonikProRegular"> Цвет:</span>
           {colorGroup?.filter(e => colorSelect?.includes(e?.id))?.map((data) => {
             return (
               <div key={data?.id} style={{ background: `${data.hex}` }}
@@ -70,11 +70,11 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList }) {
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto VerticelScroll">
 
-            <AccessoriesAdd typeId={stateList?.category_Id} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <HeadWearAdd typeId={stateList?.category_Id} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <OutWearAdd typeId={stateList?.category_Id} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <ShoesAdd typeId={stateList?.category_Id} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <UnderAddWear typeId={stateList?.category_Id} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <AccessoriesAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <HeadWearAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <OutWearAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <ShoesAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <UnderAddWear typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
 
           </div>
         </div>

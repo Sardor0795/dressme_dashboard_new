@@ -4,7 +4,7 @@ import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function AccessoriesAdd({ colorGroup, colorSelect, typeId, handleCallBack }) {
+function AccessoriesAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         rowSize: null,
@@ -471,12 +471,12 @@ function AccessoriesAdd({ colorGroup, colorSelect, typeId, handleCallBack }) {
                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                         Цвет:
 
-                        {colorGroup?.filter(e => colorSelect?.includes(e?.id))?.map((data) => {
+                        {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                    className={`rounded-[15px]  text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                    className={`rounded-[15px] ml-3 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                 >
-                                    <span>{data?.name_ru} </span>
+                                    <span >{data?.name_ru} </span>
                                 </div>
                             );
                         })}
