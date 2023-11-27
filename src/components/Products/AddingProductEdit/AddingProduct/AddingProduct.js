@@ -816,10 +816,10 @@ const AddingProduct = () => {
                           </label>
                           <ArrowRightIcon />
                         </button>
-                        <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
+                        <div className={`w-full  cursor-not-allowed hidden md:flex rounded-lg overflow-hidden`}>
                           <button
                             type="button"
-                            className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                            className="w-full cursor-not-allowed h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                           >
                             <span>
                               {productsData?.shops?.filter(e => e?.id == state?.shopId)?.map((item) => {
@@ -856,10 +856,10 @@ const AddingProduct = () => {
                           <ArrowRightIcon />
                         </button>
 
-                        <div className="w-full h-fit hidden md:flex">
+                        <div className="w-full  cursor-not-allowed h-fit hidden md:flex">
                           <button
                             type="button"
-                            className="w-full h-[40px] overflow-hidden bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                            className="w-full cursor-not-allowed h-[40px] overflow-hidden bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                           >
                             <span>
                               {productsData?.shops?.filter(e => e?.id == state?.shopId).map((item) => {
@@ -1076,48 +1076,49 @@ const AddingProduct = () => {
                           </label>
                           <ArrowRightIcon />
                         </button>
-                        <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
-                          ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
- rounded-lg  h-[42px] md:h-10 px-[12px]`}>
-                          {productsData.colors
-                            ?.filter((e) => colors_Id?.includes(e?.id))
-                            ?.map((data) => {
-                              return (
-                                <div key={data?.id} className="block w-fit">
-                                  <div className="w-full ">
-                                    <label
-                                      key={data?.id}
-                                      htmlFor={data?.id}
-                                      onClick={() => setColorChecked(data?.id)}
+                        <div className={` w-fit ${colorAction ? "p-[2px] border border-yellow-500 rounded-lg " : ""}`}>
+                          <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
+                         border border-borderColor rounded-lg  h-[42px] md:h-10 px-[12px]`}>
+                            {productsData.colors
+                              ?.filter((e) => colors_Id?.includes(e?.id))
+                              ?.map((data) => {
+                                return (
+                                  <div key={data?.id} className="block w-fit">
+                                    <div className="w-full ">
+                                      <label
+                                        key={data?.id}
+                                        htmlFor={data?.id}
+                                        onClick={() => setColorChecked(data?.id)}
 
-                                      style={{ background: `${data.hex}` }}
-                                      className={`rounded-full border  w-[22px] h-[22px] p-[2px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
-                                    >
-                                      {data?.id === colorChecked && colorChecked !== 2 ? (
-                                        <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
-                                      ) : null}
+                                        style={{ background: `${data.hex}` }}
+                                        className={`rounded-full border  w-[22px] h-[22px] p-[2px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
+                                      >
+                                        {data?.id === colorChecked && colorChecked !== 1 ? (
+                                          <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                                        ) : null}
 
-                                      {colorChecked === 2 && data?.id === colorChecked ? (
-                                        <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
-                                      ) : null}
-                                    </label>
-                                    <input
-                                      type="radio"
-                                      id={data?.id}
-                                      name="checkStatus"
-                                      value={data?.id}
-                                      className={"hidden w-full h-full"}
-                                    />
+                                        {colorChecked === 1 && data?.id === colorChecked ? (
+                                          <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                                        ) : null}
+                                      </label>
+                                      <input
+                                        type="radio"
+                                        id={data?.id}
+                                        name="checkStatus"
+                                        value={data?.id}
+                                        className={"hidden w-full h-full"}
+                                      />
+                                    </div>
                                   </div>
-                                </div>
-                              );
-                            })}
-                          <button
-                            onClick={() => setState({ ...state, showColor: true })}
-                            type="button"
-                          >
-                            <AddIconsCircle1 />
-                          </button>
+                                );
+                              })}
+                            <button
+                              onClick={() => setState({ ...state, showColor: true })}
+                              type="button"
+                            >
+                              <AddIconsCircle1 />
+                            </button>
+                          </div>
                         </div>
                       </div>
                       {/* Input Select 5 */}
@@ -1177,7 +1178,7 @@ const AddingProduct = () => {
                             </span>
                           </div>
                           <div className="w-full h-fit flex items-center gap-x-2">
-                            {colorAction ? <span className={` outline-none w-[55px] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                            {colorAction ? <span className={` cursor-not-allowed outline-none w-[55px] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             >{state?.min_Age_Category}</span> :
                               <input
                                 type="text"
@@ -1188,7 +1189,7 @@ const AddingProduct = () => {
                                 className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                               />}
                             <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
-                            {colorAction ? <span className={` outline-none w-[55px] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                            {colorAction ? <span className={` cursor-not-allowed outline-none w-[55px] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             >{state?.max_Age_Category}</span> :
                               <input
                                 type="text"
@@ -1213,7 +1214,7 @@ const AddingProduct = () => {
                           </span>
                         </div>
                         <div className="w-full h-fit flex items-center justify-between gap-x-3">
-                          {colorAction ? <span className={` outline-none w-[calc(100%-42px)] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                          {colorAction ? <span className={` cursor-not-allowed px-3 outline-none w-[calc(100%-42px)] h-10 text-start text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center  rounded-lg font-AeonikProRegular `}
                           >{state?.sku}</span> :
                             <input
                               type="text"
@@ -1225,7 +1226,7 @@ const AddingProduct = () => {
                           {colorAction ?
                             <button
                               type={"button"}
-                              className={`w-[40px] h-[40px] active:scale-95  opacity-50 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
+                              className={`w-[40px] h-[40px] cursor-not-allowed  opacity-50 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
                             >
                               <LoaderIcon />
                             </button> :
@@ -1260,15 +1261,16 @@ const AddingProduct = () => {
                             <ArrowRightIcon />
                           </span>
                         </button>
-                        <div className="w-full h-fit md:flex flex-col hidden">
-                          <p
-                            className={`w-full overflow-hidden ${colorAction ? "text-[#b5b5b5] bg-[#F5F5F5]" : ""} cursor-text h-[40px] hidden md:flex items-center justify-between border border-borderColor  rounded-lg p-3 `}
+                        <div className="w-full  cursor-not-allowed h-fit md:flex flex-col hidden">
+                          <button
+                            type="button"
+                            className={`w-full cursor-not-allowed overflow-hidden ${colorAction ? "text-[#b5b5b5] bg-[#F5F5F5]" : ""} cursor-text h-[40px] hidden md:flex items-center justify-between border border-borderColor  rounded-lg p-3 `}
                           >
                             {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map(item => {
                               return <span className="text-[#a1a1a1]">{item?.name_ru}</span>
 
                             })}
-                          </p>
+                          </button>
 
                           {/* <p
                             className={`w-full overflow-hidden cursor-text h-[40px] md:hidden flex items-center justify-between border border-borderColor rounded-lg p-3 `}
@@ -1497,7 +1499,7 @@ const AddingProduct = () => {
                           </span>
                         </div>
                         <div className="w-full h-fit flex items-center justify-between gap-x-2">
-                          {colorAction ? <span className="inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                          {colorAction ? <span className=" cursor-not-allowed inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           >{state?.min_Age_Category}</span> :
                             <input
                               type="text"
@@ -1508,7 +1510,7 @@ const AddingProduct = () => {
                               className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                             />}
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
-                          {colorAction ? <span className="inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                          {colorAction ? <span className=" cursor-not-allowed inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           >{state?.min_Age_Category}</span> : <input
                             type="text"
                             name="age"
@@ -1519,31 +1521,31 @@ const AddingProduct = () => {
                           />}
                         </div>
                       </div>
+                      <div className={`w-full hidden md:flex items-center rounded-lg overflow-hidden  justify-between gap-x-3 ${colorAction ? "p-[2px] border border-yellow-500" : ""}`} >
+                        <button
+                          type="button"
+                          onClick={() => setAllSizeModalShow(true)}
+                          className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+                        >
+                          Все размеры{" "}
+                        </button>
+                        <button className=" w-fit">
+                          <AddSize title={productsData?.categories} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
+                        </button>
+                      </div>
                     </div>
-                    <div className="w-full hidden md:flex items-center gap-x-3" >
-                      <button
-                        type="button"
-                        onClick={() => setAllSizeModalShow(true)}
-                        className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
-                      >
-                        Все размеры{" "}
-                      </button>
-                      <section
-                        className={`fixed z-[115]  border border-red-500 w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
-                          }`}
-                      >
-                        {allSizeModalShow && (
-                          <AllSizeModalEdit colorGroup={productsData.colors} stateList={state} onClick={toggleAllSizeModalShow} colorSelect={colors_Id} />
-                        )}{" "}
-                      </section>
-                      <button className=" w-fit">
-                        <AddSize title={productsData?.categories} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
-                      </button>
-                    </div>
+                    <section
+                      className={`fixed z-[115]  border border-red-500 w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                        }`}
+                    >
+                      {allSizeModalShow && (
+                        <AllSizeModalEdit colorGroup={productsData.colors} stateList={state} onClick={toggleAllSizeModalShow} colorSelect={colors_Id} />
+                      )}{" "}
+                    </section>
 
 
                   </div>
-                  <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ">
+                  <div className={`w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[2px] border border-yellow-500 rounded-lg " : ""}`}>
 
                     {/* Img Carousel */}
                     <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px] ">
