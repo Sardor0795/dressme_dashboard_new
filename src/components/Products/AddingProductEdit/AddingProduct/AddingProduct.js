@@ -285,7 +285,9 @@ const AddingProduct = () => {
     if (colors_Id?.length === 2 && e) {
       setColors_Id(colors_Id?.filter(e => e !== lastElement))
       setColors_Id(colors_Id => [...colors_Id, e])
+      setColorChecked(e)
     } else {
+      setColorChecked(e)
       setColors_Id(colors_Id => [...colors_Id, e])
 
     }
@@ -294,7 +296,7 @@ const AddingProduct = () => {
     // if (!colors_Id?.includes(e) && colors_Id?.length < 2) {
     // }
   }
-  console.log(colors_Id, "colors_Id");
+  console.log(colorChecked, "colorChecked");
 
   function onHandleColorUnchecked(id) {
 
@@ -1076,7 +1078,7 @@ const AddingProduct = () => {
                           </label>
                           <ArrowRightIcon />
                         </button>
-                        <div className={` w-fit ${colorAction ? "p-[2px] border border-yellow-500 rounded-lg " : ""}`}>
+                        <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                           <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
                          border border-borderColor rounded-lg  h-[42px] md:h-10 px-[12px]`}>
                             {productsData.colors
@@ -1521,7 +1523,7 @@ const AddingProduct = () => {
                           />}
                         </div>
                       </div>
-                      <div className={`w-full hidden md:flex items-center rounded-lg overflow-hidden  justify-between gap-x-3 ${colorAction ? "p-[2px] border border-yellow-500" : ""}`} >
+                      <div className={`w-full hidden md:flex items-center rounded-lg overflow-hidden  justify-between gap-x-3 ${colorAction ? "p-[4px] border-[3px] border-yellow-500" : ""}`} >
                         <button
                           type="button"
                           onClick={() => setAllSizeModalShow(true)}
@@ -1545,7 +1547,7 @@ const AddingProduct = () => {
 
 
                   </div>
-                  <div className={`w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[2px] border border-yellow-500 rounded-lg " : ""}`}>
+                  <div className={`w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
 
                     {/* Img Carousel */}
                     <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px] ">
