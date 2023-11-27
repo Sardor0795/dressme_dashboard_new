@@ -325,10 +325,11 @@ const AddingProduct = () => {
   console.log(colors_Id, "colors_Id");
 
   function onHandleColorUnchecked(id) {
+
     console.log(id, "id");
     if (colorListForTest?.includes(id)) {
       setColorDelete(true)
-    } else if (id) {
+    } else {
       setColors_Id(colors_Id?.filter(e => e !== id))
     }
   }
@@ -551,9 +552,6 @@ const AddingProduct = () => {
                         <div className="flex flex-col items-center justify-center ">
                           <div
                             key={data?.id}
-                            // onClick={() => setState({ ...state, color_Id: data?.id })}
-                            onClick={() => onHanleColorList(data?.id)}
-                            style={{ background: `${data.hex}` }}
                             className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
                               }] cursor-pointer ${data?.id == 2
                                 ? "border border-setTexOpacity flex items-center justify-center"
@@ -561,8 +559,14 @@ const AddingProduct = () => {
                               }
                      `}
                           >
+                            <div
+                              onClick={() => onHanleColorList(data?.id)}
+                              style={{ background: `${data.hex}` }}
+                              className="w-full h-full ">
+
+                            </div>
                             {colors_Id?.includes(data?.id) ? (
-                              <span onClick={() => onHandleColorUnchecked(data?.id)} className="w-[20px] h-[20px] rounded-b-md	 right-0 top-0 hover:opacity-70 absolute bg-black flex items-center justify-center p-[1px]"> <MenuCloseIcons colors={"#fff"} /></span>
+                              <span onClick={() => onHandleColorUnchecked(data?.id)} className="absolute z-[221] w-[20px] h-[20px] rounded-b-md	 right-0 top-0 hover:opacity-70 absolute bg-black flex items-center justify-center p-[1px]"> <MenuCloseIcons colors={"#fff"} /></span>
                             ) : null}
 
                             {/* {state?.color_Id === 2 && data?.id === state?.color_Id ? (
