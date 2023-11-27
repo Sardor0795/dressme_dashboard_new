@@ -3,7 +3,9 @@ import AllSizeModalEdit from "./AllSizeModalEdit/AllSizeModalEdit";
 import { CheckIconsCircle, CloseAnswer, StarLabel } from "../../../../../../assets/icons";
 
 const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor }) => {
-  console.log(colorGroup, "colorGroup");
+  console.log(onClick1, "onClick1");
+  console.log(onClick2, "onClick2");
+  console.log(modalOpenColor, "modalOpenColor");
 
   const AddSizeWear = () => {
     const [decraseList, setDecraseList] = useState(false);
@@ -613,7 +615,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
 
   const [alldata, setAllData] = useState([
     { id: 1, action: false, BtnText: "Верхняя одежда", values: <OuterWear /> },
-    { id: 2, action: true, BtnText: "Все размеры", values: <AllSizeModalEdit onClick={onClick2} colorGroup={colorGroup} modalOpenColor={modalOpenColor} /> },
+    { id: 2, action: true, BtnText: "Все размеры", values: <AllSizeModalEdit /> },
     { id: 3, action: false, BtnText: "Добавить размер", values: <AddSizeWear /> },
 
   ])

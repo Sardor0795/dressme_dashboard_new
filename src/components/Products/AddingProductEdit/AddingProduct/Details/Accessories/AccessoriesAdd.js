@@ -4,7 +4,7 @@ import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function AccessoriesAdd({ title, typeId, handleCallBack }) {
+function AccessoriesAdd({ colorGroup, colorSelect, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         rowSize: null,
@@ -21,8 +21,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         onConcel: false,
         selected: null
     })
-    const [toggleShow, setToggleShow] = useState(false)
-    const [toggle, setToggle] = useState(false)
+
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
         sizeList1: [
@@ -49,17 +48,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
 
 
     const SelectedNumber = 5
-    useEffect(() => {
-        if (typeId == SelectedNumber) {
-            setToggle(true)
-        } else {
-            setToggle(false)
-        }
-    }, [typeId])
 
-    const handleOpenPopver = (newOpen) => {
-        setToggleShow(newOpen)
-    }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.priceNum) {
@@ -78,7 +67,6 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
             setState({ ...state, isCheckValid: false, onConcel: true })
-            setToggleShow(false)
         }
 
     }
@@ -99,14 +87,17 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             // ------
             onConcel: false
         })
-        setToggleShow(false)
         handleCallBack()
     }
 
-    const contentAccessories = (
-        <div className="w-[595px] h-fit">
+
+    return (
+        <div className={`w-full ${SelectedNumber == typeId ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+            <div className="flex items-center h-full">
+                <Checkbox />
+            </div>
             <div
-                className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                className={`w-full h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-fit flex flex-col">
@@ -390,8 +381,8 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     Возраст
                                 </label>
                                 {/* <span className="ml-[5px]">
-                  <StarLabel />
-                </span> */}
+              <StarLabel />
+            </span> */}
                             </div>
                             <div className="w-fit flex items-center">
                                 <input
@@ -476,43 +467,26 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                    {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Отменить
-                    </button>}
+                <div className="w-full h-fit  flex items-center justify-between px-3">
+                    <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
+                        Цвет:
+
+                        {colorGroup?.filter(e => colorSelect?.includes(e?.id))?.map((data) => {
+                            return (
+                                <div key={data?.id} style={{ background: `${data.hex}` }}
+                                    className={`rounded-[15px]  text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                >
+                                    <span>{data?.name_ru} </span>
+                                </div>
+                            );
+                        })}
+                    </span>
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Готово
+                        Сохранить
                     </button>
                 </div>
             </div>
         </div>
-    );
-    return (
-        <Popover
-            open={toggleShow}
-            onOpenChange={handleOpenPopver}
-
-            className={`
-            ${dressInfo?.ProductFilterType || typeId ?
-                    dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ?
-                        "!bg-textBlueColor text-white" :
-                        "text-[#bababa]  border-[#bababa]" :
-                    "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"} 
-                    group px-[15px] h-[38px]  border-[1.5px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
-                    `}
-            trigger="click"
-            options={["Hide"]}
-            placement="bottom"
-            content={dressInfo?.ProductFilterType || typeId ? dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ? contentAccessories : null : contentAccessories}
-        >
-            {
-                title?.filter(e => e?.id === SelectedNumber)?.map(item => {
-                    return (
-                        <span key={item?.id}>{item?.name_ru} </span>
-                    )
-                })
-            }
-        </Popover>
     );
 }
 export default React.memo(AccessoriesAdd)
