@@ -1537,7 +1537,7 @@ const AddingProduct = () => {
                         )}{" "}
                       </section>
                       <button className=" w-fit">
-                        <AddSize title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
+                        <AddSize title={productsData?.categories} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
                       </button>
                     </div>
 
