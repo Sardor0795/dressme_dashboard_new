@@ -172,34 +172,6 @@ const AddingProduct = () => {
   //   []
   // ); // ClothingSection
 
-  // ---------Callback----
-  useEffect(() => {
-    if (
-      state?.showColor ||
-      // state?.ClothingCategoryModal ||
-      state?.ClothingSection ||
-      state?.Colour ||
-      state?.DressSeason ||
-      state?.DressTypeModal ||
-      state?.GenderModal ||
-      state?.MakeCountryModal ||
-      state?.SubClothingSection) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [
-    state?.showColor,
-    // state?.ClothingCategoryModal,
-    state?.ClothingSection,
-    state?.Colour,
-    state?.DressSeason,
-    state?.DressTypeModal,
-    state?.GenderModal,
-    state?.MakeCountryModal,
-    state?.SubClothingSection,
-
-  ]);
 
   useQuery(
     ["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
@@ -415,6 +387,37 @@ const AddingProduct = () => {
   }, [state?.PathnameToken]);
 
 
+  // ---------Callback----
+  useEffect(() => {
+    if (
+      state?.showColor ||
+      // state?.ClothingCategoryModal ||
+      state?.ClothingSection ||
+      state?.Colour ||
+      state?.DressSeason ||
+      state?.DressTypeModal ||
+      state?.GenderModal ||
+      state?.MakeCountryModal ||
+      state?.SubClothingSection ||
+      allSizeModalShow
+    ) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [
+    state?.showColor,
+    // state?.ClothingCategoryModal,
+    state?.ClothingSection,
+    state?.Colour,
+    state?.DressSeason,
+    state?.DressTypeModal,
+    state?.GenderModal,
+    state?.MakeCountryModal,
+    state?.SubClothingSection,
+    allSizeModalShow
+
+  ]);
 
   // console.log(productsData.colors, "productsData.colors");
   return (
@@ -698,14 +701,7 @@ const AddingProduct = () => {
 
               </div>
             </section>
-            <section
-              className={`fixed z-[115]  w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
-                }`}
-            >
-              {allSizeModalShow && (
-                <AllSizeModalEdit colorGroup={productsData.colors} onClick={toggleAllSizeModalShow} modalOpenColor={false} />
-              )}{" "}
-            </section>
+
 
 
             <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
@@ -1532,6 +1528,14 @@ const AddingProduct = () => {
                       >
                         Все размеры{" "}
                       </button>
+                      <section
+                        className={`fixed z-[115]  border border-red-500 w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                          }`}
+                      >
+                        {allSizeModalShow && (
+                          <AllSizeModalEdit colorGroup={productsData.colors} stateList={state} onClick={toggleAllSizeModalShow} colorSelect={colors_Id} />
+                        )}{" "}
+                      </section>
                       <button className=" w-fit">
                         <AddSize title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
                       </button>
