@@ -281,22 +281,25 @@ const AddingProduct = () => {
   // ColorHandle
   // ------------------------------------------------------------------------
   function onHanleColorList(e) {
-    console.log(lastElement, "lastElement");
+    console.log(lastElement, "lastElement--1");
     if (colors_Id?.length === 2 && e) {
       setColors_Id(colors_Id?.filter(e => e !== lastElement))
       setColors_Id(colors_Id => [...colors_Id, e])
-      setColorChecked(e)
+      // setColorChecked(e)
     } else {
-      setColorChecked(e)
+      // setColorChecked(e)
       setColors_Id(colors_Id => [...colors_Id, e])
-
     }
+    // if (colors_Id?.length > colorListForTest?.length) {
+    //   setLastElement(colors_Id[colors_Id?.length - 1])
+    // }
     // if (colors_Id?.includes(lastElement)) {
     // }
     // if (!colors_Id?.includes(e) && colors_Id?.length < 2) {
     // }
   }
-  console.log(colorChecked, "colorChecked");
+  console.log(lastElement, "lastElement--2");
+  console.log(colorListForTest, "colorListForTest");
 
   function onHandleColorUnchecked(id) {
 
@@ -1541,7 +1544,7 @@ const AddingProduct = () => {
                         }`}
                     >
                       {allSizeModalShow && (
-                        <AllSizeModalEdit colorGroup={productsData.colors} stateList={state} onClick={toggleAllSizeModalShow} colorSelect={colors_Id} />
+                        <AllSizeModalEdit colorGroup={productsData.colors} stateList={state} onClick={toggleAllSizeModalShow} sizeOfColor={colorListForTest} colorSelect={colors_Id} />
                       )}{" "}
                     </section>
 
