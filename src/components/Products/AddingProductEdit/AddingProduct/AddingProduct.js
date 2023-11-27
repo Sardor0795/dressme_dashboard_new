@@ -103,7 +103,9 @@ const AddingProduct = () => {
     selectedUz: [],
     PathnameToken: '',
     // ------
-    sendingLoader: false
+    sendingLoader: false,
+    //productsDataIdEdit
+    sizeGetList: null
 
 
   });
@@ -241,6 +243,7 @@ const AddingProduct = () => {
           producer_Id: res?.product?.producer_id,
           shopId: res?.product?.locations[0]?.shop_id,
           shopLocationId: res?.product?.locations[0]?.id,
+          sizeGetList: res?.product?.sizes
 
         })
       },
@@ -299,7 +302,7 @@ const AddingProduct = () => {
     // }
   }
   console.log(lastElement, "lastElement--2");
-  console.log(colorListForTest, "colorListForTest");
+  console.log(productsDataIdEdit?.sizes, "productsDataIdEdit");
 
   function onHandleColorUnchecked(id) {
 
@@ -1540,7 +1543,7 @@ const AddingProduct = () => {
                       </div>
                     </div>
                     <section
-                      className={`fixed z-[115]  border border-red-500 w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
+                      className={`fixed z-[115]   w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
                         }`}
                     >
                       {allSizeModalShow && (

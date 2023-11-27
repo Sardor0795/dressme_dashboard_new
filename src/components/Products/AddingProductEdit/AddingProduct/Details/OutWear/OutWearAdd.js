@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function OutWearAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
+function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minBreast: null,
@@ -57,6 +57,16 @@ function OutWearAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
 
     const SelectedNumber = 2
 
+    useEffect(() => {
+        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+            setState({
+                ...state,
+                quantityNum: stateList?.sizeGetList[0]?.amount,
+                priceNum: stateList?.sizeGetList[0]?.price
+            })
+        }
+
+    }, [stateList?.sizeGetList[0]])
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.minSize && state?.quantityNum && state?.priceNum) {
@@ -107,7 +117,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     }
 
     return (
-        <div className={`w-full ${SelectedNumber == typeId ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>

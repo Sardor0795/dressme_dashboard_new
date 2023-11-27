@@ -3,7 +3,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Checkbox, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function ShoesAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
+function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minFootLength: "",
@@ -22,6 +22,16 @@ function ShoesAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
 
 
 
+    useEffect(() => {
+        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+            setState({
+                ...state,
+                quantityNum: stateList?.sizeGetList[0]?.amount,
+                priceNum: stateList?.sizeGetList[0]?.price
+            })
+        }
+
+    }, [stateList?.sizeGetList[0]])
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.minSize && state?.priceNum && state?.quantityNum) {
@@ -62,7 +72,7 @@ function ShoesAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     }
 
     return (
-        <div className={`w-full ${SelectedNumber == typeId ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>
