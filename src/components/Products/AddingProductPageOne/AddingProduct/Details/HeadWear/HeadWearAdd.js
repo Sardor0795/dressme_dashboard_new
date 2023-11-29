@@ -54,9 +54,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 oneSize: state?.sizeCheck,
                 amount: state?.amount,
                 age: state?.age,
-                price: state?.price,
+                price: state?.price?.split(",")?.join(""),
                 discountPercent: state?.discountPercent,
-                discountPrice: state?.discountPrice,
+                discountPrice: state?.discountPrice?.split(",")?.join(""),
                 category_Id: SelectedNumber,
 
             })
@@ -82,6 +82,29 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         })
         handleCallBack()
     }
+
+    const handleChangePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, price: formattedValue });
+    };
+    const handleChangeSalePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, discountPrice: formattedValue });
+    };
     const contentHat = (
         <div className="w-[520px] h-fit">
             <div
@@ -196,7 +219,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     id="enterPrice"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.price}
-                                    onChange={(e) => setState({ ...state, price: e.target.value })}
+                                    onChange={handleChangePrice}
                                     required
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -240,7 +263,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                             id="discountPrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.discountPrice}
-                                            onChange={(e) => setState({ ...state, discountPrice: e.target.value })}
+                                            onChange={handleChangeSalePrice}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум

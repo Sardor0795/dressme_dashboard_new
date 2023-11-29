@@ -60,9 +60,9 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                 oneSize: state?.sizeCheck,
                 amount: state?.amount,
                 age: state?.age,
-                price: state?.price,
+                price: state?.price?.split(",")?.join(""),
                 discountPercent: state?.discountPercent,
-                discountPrice: state?.discountPrice,
+                discountPrice: state?.discountPrice?.split(",")?.join(""),
                 // category_Id: SelectedNumber,
 
             })

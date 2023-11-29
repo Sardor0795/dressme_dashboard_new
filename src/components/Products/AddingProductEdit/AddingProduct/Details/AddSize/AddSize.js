@@ -88,9 +88,9 @@ function AddSize({ handleCallBack, typeId }) {
                 underWearLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum,
+                price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
             })
         }
     }
