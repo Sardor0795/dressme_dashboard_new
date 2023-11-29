@@ -88,6 +88,28 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         })
         handleCallBack()
     }
+    const handleChangePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, price: formattedValue });
+    };
+    const handleChangeSalePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, discountPrice: formattedValue });
+    };
 
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
@@ -205,8 +227,9 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     placeholder="0"
                                     id="enterPrice"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
+
                                     value={state?.price}
-                                    onChange={(e) => setState({ ...state, price: e.target.value })}
+                                    onChange={handleChangePrice}
                                     required
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -250,7 +273,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                             id="discountPrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.discountPrice}
-                                            onChange={(e) => setState({ ...state, discountPrice: e.target.value })}
+                                            onChange={handleChangeSalePrice}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
