@@ -27,7 +27,13 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             setState({
                 ...state,
                 quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: stateList?.sizeGetList[0]?.price
+                priceNum: stateList?.sizeGetList[0]?.price,
+                minFootLength: stateList?.sizeGetList[0]?.min_foot_length,
+                maxFootLength: stateList?.sizeGetList[0]?.max_foot_length,
+                minSize: stateList?.sizeGetList[0]?.wear_size,
+                ageNum: stateList?.sizeGetList[0]?.age,
+                salePercent: stateList?.sizeGetList[0]?.discountPercent,
+                salePrice: stateList?.sizeGetList[0]?.discountPrice,
             })
         }
 
@@ -256,8 +262,10 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                             );
                         })}
                     </span>
-                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Готово
+                    <button
+                        // onClick={handleSendDetail}
+                        className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                        Сохранить
                     </button>
                 </div>
             </div>
