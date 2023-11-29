@@ -4,7 +4,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Checkbox, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function HeadWearAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
+function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -25,7 +25,16 @@ function HeadWearAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     })
     const SelectedNumber = 1
 
+    useEffect(() => {
+        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+            setState({
+                ...state,
+                amount: stateList?.sizeGetList[0]?.amount,
+                price: stateList?.sizeGetList[0]?.price
+            })
+        }
 
+    }, [stateList?.sizeGetList[0]])
 
 
 
@@ -74,7 +83,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     }
 
     return (
-        <div className={`w-full ${SelectedNumber == typeId ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>

@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function UnderAddWear({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
+function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -53,7 +53,16 @@ function UnderAddWear({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     }
     )
 
+    useEffect(() => {
+        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+            setState({
+                ...state,
+                quantityNum: stateList?.sizeGetList[0]?.amount,
+                priceNum: stateList?.sizeGetList[0]?.price
+            })
+        }
 
+    }, [stateList?.sizeGetList[0]])
 
 
 
@@ -107,7 +116,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, typeId, handleCallBack }) {
     }
 
     return (
-        <div className={`w-full ${SelectedNumber == typeId ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>

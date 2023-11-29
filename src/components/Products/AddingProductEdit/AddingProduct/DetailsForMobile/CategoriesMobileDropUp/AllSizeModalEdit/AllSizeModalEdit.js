@@ -51,11 +51,11 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
 
       </div>
       {/* All Cards */}
-      <div className="md:h-[694px]  overflow-hidden h-500 border border-red-500 md:mt-6">
-        <div className="w-full h-full overflow-auto VerticelScroll  flex flex-col gap-y-2 border border-green-500  md:py-1 mb-5">
+      <div className="md:h-[694px]  overflow-hidden h-500  md:mt-6">
+        <div className="w-full h-full overflow-auto VerticelScroll  flex flex-col gap-y-2   md:py-1 mb-5">
 
 
-          <div className="md:flex hidden items-center justify-between mb-[10px] border border-red-500">
+          <div className="md:flex hidden items-center justify-between mb-[10px] ">
             <button className="flex items-center gap-x-[5px]">
               <span className="w-[22px] h-[22px] border border-borderColor rounded-lg"></span>
               <span className="text-gray-900 text-base not-italic font-AeonikProMedium">
@@ -69,13 +69,11 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
 
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto VerticelScroll">
-
-            <AccessoriesAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <HeadWearAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <OutWearAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <ShoesAdd typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
-            <UnderAddWear typeId={stateList?.category_Id} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
-
+            <AccessoriesAdd stateList={stateList} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <HeadWearAdd stateList={stateList} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <OutWearAdd stateList={stateList} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <ShoesAdd stateList={stateList} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
+            <UnderAddWear stateList={stateList} sizeOfColor={sizeOfColor} colorGroup={colorGroup} colorSelect={colorSelect} />
           </div>
         </div>
       </div>
