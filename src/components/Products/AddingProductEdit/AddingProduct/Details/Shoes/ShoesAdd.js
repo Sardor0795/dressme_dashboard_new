@@ -47,9 +47,9 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                 maxFootLength: state?.maxFootLength,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum,
+                price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
 
             })
             setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })

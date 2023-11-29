@@ -85,9 +85,9 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                 outWearLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum,
+                price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
                 category_Id: SelectedNumber,
 
             })
@@ -117,6 +117,28 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         })
         handleCallBack()
     }
+    const handleChangePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, priceNum: formattedValue });
+    };
+    const handleChangeSalePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, salePrice: formattedValue });
+    };
     const contentOutwear = (
         <div className="w-[855px] h-fit">
             <div
@@ -504,7 +526,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     id="priceOutWear"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
                                     value={state?.priceNum}
-                                    onChange={(e) => setState({ ...state, priceNum: e.target.value })}
+                                    onChange={handleChangePrice}
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
@@ -547,7 +569,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                             id="salePrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.salePrice}
-                                            onChange={(e) => setState({ ...state, salePrice: e.target.value })}
+                                            onChange={handleChangeSalePrice}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум

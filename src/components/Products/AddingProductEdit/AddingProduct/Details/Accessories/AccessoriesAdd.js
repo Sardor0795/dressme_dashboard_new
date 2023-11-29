@@ -76,9 +76,9 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                 accessoryLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum,
+                price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
                 category_Id: SelectedNumber,
 
             })
