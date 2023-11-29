@@ -13,7 +13,7 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
   // console.log(colorGroup, "colorGroup");
   // console.log(colorSelect, "colorSelect");
   console.log(stateList?.category_Id, "stateList");
-
+  console.log(sizeOfColor, "sizeOfColor");
   // --------------------------------------------------------
   // green black red inputРазмер Талии
   return (
@@ -38,7 +38,7 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
           {colorGroup?.filter(e => colorSelect?.includes(e?.id))?.map((data) => {
             return (
               <div key={data?.id} style={{ background: `${data.hex}` }}
-                className={`w-[22px] h-[22px] rounded-full `}
+                className={`w-[22px] h-[22px] rounded-full ${data?.id === 2 ? "border border-black" : ""}`}
               >
                 <span
                   className={`w-[22px] h-[22px] rounded-full `}

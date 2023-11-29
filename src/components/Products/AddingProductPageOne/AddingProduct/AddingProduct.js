@@ -156,8 +156,10 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
+    console.log(
+      childData, "childData"
+    );
   }
-
   function CallBackOutWear(childData) {
 
     setState({
@@ -336,6 +338,12 @@ const AddingProduct = () => {
   }
 
   const CallBackTextForm = (childData) => {
+    // console.log(
+    //   state?.headWearList?.oneSiz, "state?.headWearList?.oneSiz",
+    //   state?.headWearList?.minHeadGirth, "state?.headWearList?.minHeadGirth",
+    //   state?.headWearList?.maxHeadGirth, "state?.headWearList?.maxHeadGirth",
+    //   state?.discount_percent, " state?.discount_percent",
+    // );
     setState({ ...state, errorListMessage: '', sendingLoader: true })
 
 
@@ -381,7 +389,7 @@ const AddingProduct = () => {
     childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
     childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
     // HeadWear
-    state?.headWearList?.oneSiz && form.append("one_size", state?.headWearList?.oneSize);
+    state?.headWearList?.oneSize && form.append("one_size", state?.headWearList?.oneSize);
     state?.headWearList?.minHeadGirth && form.append("min_head_girth", state?.headWearList?.minHeadGirth);
     state?.headWearList?.maxHeadGirth && form.append("max_head_girth", state?.headWearList?.maxHeadGirth);
     // OutWear
@@ -448,7 +456,7 @@ const AddingProduct = () => {
             theme: "light",
           })
         }
-        console.log(res, "ProductStore");
+        console.log(res, "ProductStore---Added");
       })
       .catch((err) => console.log(err, "errImage"));
   };
