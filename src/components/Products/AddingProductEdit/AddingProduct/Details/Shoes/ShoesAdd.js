@@ -277,7 +277,7 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                             console.log(data?.id, "data?.color?.id");
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                    className={` ${data?.id ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                    className={` ${data?.id === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                 >
                                     <span >{data?.name_ru} </span>
                                 </div>
