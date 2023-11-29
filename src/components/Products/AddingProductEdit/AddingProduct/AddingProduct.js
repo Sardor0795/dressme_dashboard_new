@@ -428,6 +428,12 @@ const AddingProduct = () => {
   ]);
 
   // console.log(productsData.colors, "productsData.colors");
+  // var num = 1234567890
+  // const result = num.toLocaleString()?.split(",").join(" ")
+  // const priceSpace = result?.split(",").join(" ")
+
+  // console.log(result, "buResult");
+  // console.log(priceSpace, "priceSpace");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
