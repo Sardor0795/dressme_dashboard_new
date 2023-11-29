@@ -389,7 +389,7 @@ const AddingProduct = () => {
     childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
     childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
     // HeadWear
-    state?.headWearList?.oneSize && form.append("one_size", state?.headWearList?.oneSize);
+    form.append("one_size", state?.headWearList?.oneSize ? 1 : 0);
     state?.headWearList?.minHeadGirth && form.append("min_head_girth", state?.headWearList?.minHeadGirth);
     state?.headWearList?.maxHeadGirth && form.append("max_head_girth", state?.headWearList?.maxHeadGirth);
     // OutWear
