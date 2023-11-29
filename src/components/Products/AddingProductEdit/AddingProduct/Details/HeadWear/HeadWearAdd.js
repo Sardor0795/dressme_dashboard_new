@@ -29,8 +29,15 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
             setState({
                 ...state,
+                minHeadGirth: stateList?.sizeGetList[0]?.min_head_girth,
+                maxHeadGirth: stateList?.sizeGetList[0]?.max_head_girth,
+                sizeCheck: stateList?.sizeGetList[0]?.one_size,
                 amount: stateList?.sizeGetList[0]?.amount,
-                price: stateList?.sizeGetList[0]?.price
+                age: stateList?.sizeGetList[0]?.age,
+                price: stateList?.sizeGetList[0]?.price,
+                discountPercent: stateList?.sizeGetList[0]?.discount_percent,
+                discountPrice: stateList?.sizeGetList[0]?.discount_price,
+
             })
         }
 
@@ -268,7 +275,9 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                             );
                         })}
                     </span>
-                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                    <button
+                        // onClick={handleSendDetail}
+                        className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Сохранить
                     </button>
                 </div>

@@ -58,7 +58,19 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             setState({
                 ...state,
                 quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: stateList?.sizeGetList[0]?.price
+                priceNum: stateList?.sizeGetList[0]?.price,
+                minBreast: stateList?.sizeGetList[0]?.min_waist_girth,
+                maxBreast: stateList?.sizeGetList[0]?.max_waist_girth,
+                minSize: stateList?.sizeGetList[0]?.min_wear_size,
+                maxSize: stateList?.sizeGetList[0]?.max_wear_size,
+                minHeight: stateList?.sizeGetList[0]?.min_height,
+                maxHeight: stateList?.sizeGetList[0]?.max_height,
+                minHips: stateList?.sizeGetList[0]?.min_hip_girth,
+                maxHips: stateList?.sizeGetList[0]?.max_hip_girth,
+                ageNum: stateList?.sizeGetList[0]?.age,
+                salePercent: stateList?.sizeGetList[0]?.discountPercent,
+                salePrice: stateList?.sizeGetList[0]?.discountPrice,
+                sizeListCheck: stateList?.sizeGetList[0]?.letter_size
             })
         }
 
@@ -216,7 +228,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -247,7 +259,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                         type="checkbox"
                                                         id={data?.id}
                                                         name="size_Outwear"
-                                                        checked={data?.id === state?.selected}
+                                                        checked={data?.name === state?.sizeListCheck}
                                                         onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                         value={data?.name}
                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -290,7 +302,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -320,7 +332,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -361,7 +373,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -578,8 +590,10 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                             );
                         })}
                     </span>
-                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Готово
+                    <button
+                        // onClick={handleSendDetail}
+                        className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                        Сохранить
                     </button>
                 </div>
             </div>

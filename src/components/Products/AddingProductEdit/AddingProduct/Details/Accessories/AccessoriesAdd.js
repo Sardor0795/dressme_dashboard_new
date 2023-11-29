@@ -54,7 +54,14 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
             setState({
                 ...state,
                 quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: stateList?.sizeGetList[0]?.price
+                priceNum: stateList?.sizeGetList[0]?.price,
+                rowSize: stateList?.sizeGetList[0]?.length,
+                colSize: stateList?.sizeGetList[0]?.width,
+                minSize: stateList?.sizeGetList[0]?.wear_size,
+                ageNum: stateList?.sizeGetList[0]?.age,
+                salePercent: stateList?.sizeGetList[0]?.discountPercent,
+                salePrice: stateList?.sizeGetList[0]?.discountPrice,
+                sizeListCheck: stateList?.sizeGetList[0]?.letter_size,
             })
         }
 
@@ -152,7 +159,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -185,7 +192,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                                             type="checkbox"
                                                             id="m_outwear"
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -230,7 +237,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -260,7 +267,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
+                                                            checked={data?.name === state?.sizeListCheck}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -491,7 +498,9 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                             );
                         })}
                     </span>
-                    <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                    <button
+                        // onClick={handleSendDetail}
+                        className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Сохранить
                     </button>
                 </div>
