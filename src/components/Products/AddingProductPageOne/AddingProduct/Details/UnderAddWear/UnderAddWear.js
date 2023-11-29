@@ -43,13 +43,13 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             { id: 8, action: true, name: "3XL" },
         ],
         sizeList2: [
-            { id: 11, action: true, name: "5X" },
-            { id: 2, action: true, name: "7X" },
-            { id: 13, action: true, name: "9X" },
-            { id: 14, action: true, name: "10X" },
-            { id: 15, action: true, name: "4X" },
-            { id: 16, action: true, name: "6X" },
-            { id: 17, action: true, name: "8X" },
+            { id: 11, action: true, name: "5XL" },
+            { id: 12, action: true, name: "7XL" },
+            { id: 13, action: true, name: "9XL" },
+            { id: 14, action: true, name: "10XL" },
+            { id: 15, action: true, name: "4XL" },
+            { id: 16, action: true, name: "6XL" },
+            { id: 17, action: true, name: "8XL" },
         ]
     }
     )
@@ -251,7 +251,8 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     })}
 
                                 </div>
-                                <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 items-end">
+                                <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
+
                                     {decraseList && sizeList.sizeList2.map((data) => {
                                         return (
                                             <div
@@ -272,7 +273,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                                         value={data?.name}
                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                     />
-                                                    <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                    <span className="text-textLightColor   flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
                                                         {data?.name}
                                                     </span>
                                                 </label>}

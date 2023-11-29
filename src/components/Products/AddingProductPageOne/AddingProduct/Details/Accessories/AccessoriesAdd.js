@@ -36,13 +36,13 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             { id: 8, action: true, name: "3XL" },
         ],
         sizeList2: [
-            { id: 11, action: true, name: "5X" },
-            { id: 12, action: true, name: "7X" },
-            { id: 13, action: true, name: "9X" },
-            { id: 14, action: true, name: "10X" },
-            { id: 15, action: true, name: "4X" },
-            { id: 16, action: true, name: "6X" },
-            { id: 17, action: true, name: "8X" },
+            { id: 11, action: true, name: "5XL" },
+            { id: 12, action: true, name: "7XL" },
+            { id: 13, action: true, name: "9XL" },
+            { id: 14, action: true, name: "10XL" },
+            { id: 15, action: true, name: "4XL" },
+            { id: 16, action: true, name: "6XL" },
+            { id: 17, action: true, name: "8XL" },
         ]
     }
     )
@@ -70,9 +70,9 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 accessoryLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
+                price: state?.priceNum,
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
+                discountPrice: state?.salePrice,
                 category_Id: SelectedNumber,
 
             })
@@ -102,28 +102,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         setToggleShow(false)
         handleCallBack()
     }
-    const handleChangePrice = (event) => {
-        const { value } = event.target;
 
-        // Remove any existing commas from the input
-        const sanitizedValue = value.replace(/,/g, '');
-
-        // Format the number with commas
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-
-        setState({ ...state, priceNum: formattedValue });
-    };
-    const handleChangeSalePrice = (event) => {
-        const { value } = event.target;
-
-        // Remove any existing commas from the input
-        const sanitizedValue = value.replace(/,/g, '');
-
-        // Format the number with commas
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-
-        setState({ ...state, salePrice: formattedValue });
-    };
     const contentAccessories = (
         <div className="w-[595px] h-fit">
             <div
@@ -187,23 +166,21 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     })}
 
                                 </div>
-                                <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 items-end">
+                                <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
                                     {decraseList && sizeList.sizeList2.map((data) => {
                                         return (
                                             <div
                                                 key={data?.id}
                                                 className="flex "
                                             >
-
                                                 {data?.action &&
-
                                                     <label
-                                                        htmlFor="m_outwear"
+                                                        htmlFor={data?.id}
                                                         className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
                                                     >
                                                         <input
                                                             type="checkbox"
-                                                            id="m_outwear"
+                                                            id={data?.id}
                                                             name="size_Outwear"
                                                             checked={data?.id === state?.selected}
                                                             onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
@@ -443,7 +420,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     id="priceAccess"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.priceNum}
-                                    onChange={handleChangePrice}
+                                    onChange={(e) => setState({ ...state, priceNum: e.target.value })}
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
@@ -486,7 +463,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                             id="salePrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                                             value={state?.salePrice}
-                                            onChange={handleChangeSalePrice}
+                                            onChange={(e) => setState({ ...state, salePrice: e.target.value })}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
