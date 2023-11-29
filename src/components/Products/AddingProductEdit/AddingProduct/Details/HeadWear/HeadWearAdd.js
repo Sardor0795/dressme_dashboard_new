@@ -285,13 +285,15 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                     </div>
                 </div>
                 <div className="w-full h-fit  flex items-center justify-between px-3">
+
                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                         Цвет:
 
                         {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
+                            console.log(data?.id, "data?.color?.id");
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                    className={`rounded-[15px] ml-3 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                    className={` ${data?.id === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                 >
                                     <span >{data?.name_ru} </span>
                                 </div>
