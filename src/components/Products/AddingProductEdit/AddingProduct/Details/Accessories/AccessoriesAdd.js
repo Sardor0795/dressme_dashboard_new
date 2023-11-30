@@ -147,7 +147,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                         <div className="w-[83px] flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
@@ -365,7 +365,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                         <div className="flex items-center justify-between">
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                     value={state?.colSize}
                                     onChange={(e) => setState({ ...state, colSize: e.target.value })}
@@ -381,7 +381,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                         <div className="flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                     value={state?.rowSize}
                                     onChange={(e) => setState({ ...state, rowSize: e.target.value })}
@@ -400,7 +400,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
 
                         <div className="flex items-start justify-between ">
                             <input
-                                type="text"
+                                type="number"
                                 className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -424,7 +424,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                             </div>
                             <div className="w-fit flex items-center">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                                     placeholder=""
                                     value={state?.ageNum}
@@ -446,7 +446,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                             </div>
                             <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
-                                    type="text"
+                                    type="number"
                                     placeholder="0"
                                     id="priceAccess"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -476,7 +476,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                 <div className="w-[40%] md:w-[72px] flex items-start">
                                     <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                         <input
-                                            type="text"
+                                            type="number"
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                                             value={state?.salePercent}
@@ -489,7 +489,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                 <div className="w-[60%] md:w-[75%] flex items-center">
                                     <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
-                                            type="text"
+                                            type="number"
                                             placeholder="0"
                                             id="salePrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none "

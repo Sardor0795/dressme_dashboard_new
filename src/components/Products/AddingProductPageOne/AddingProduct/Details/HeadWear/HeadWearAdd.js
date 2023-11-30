@@ -147,7 +147,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         <div className="w-full flex items-center mt-[10px]">
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minHeadGirth}
@@ -158,7 +158,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <span className="mx-[5px]"><LineIcon /></span>
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                     placeholder="Макс"
                                     value={state?.maxHeadGirth}
@@ -196,7 +196,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         </p>
                         <div className="flex items-start justify-between mt-[10px]">
                             <input
-                                type="text"
+                                type="number"
                                 className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                 value={state?.amount}
                                 onChange={(e) => setState({ ...state, amount: e.target.value })}
@@ -217,7 +217,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <div className="w-full flex items-center">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                     placeholder="age"
                                     value={state?.age}
@@ -238,7 +238,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
-                                    type="text"
+                                    type="number"
                                     placeholder="0"
                                     id="enterPrice"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -269,7 +269,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                 <div className="w-[40%] md:w-[72px] flex items-start">
                                     <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                         <input
-                                            type="text"
+                                            type="number"
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.discountPercent}
@@ -282,7 +282,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                 <div className="w-[60%] md:w-[75%] flex items-center">
                                     <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
-                                            type="text"
+                                            type="number"
                                             placeholder="0"
                                             id="discountPrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"

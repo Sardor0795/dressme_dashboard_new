@@ -161,7 +161,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-full flex items-center mt-[10px]">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minHeadGirth}
@@ -172,7 +172,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="mx-[5px]"><LineIcon /></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                         placeholder="Макс"
                                         value={state?.maxHeadGirth}
@@ -210,7 +210,7 @@ function AddSize({ handleCallBack, typeId }) {
                             </p>
                             <div className="flex items-start justify-between mt-[10px]">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -231,7 +231,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <div className="w-full flex items-center">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                         placeholder="age"
                                         value={state?.ageNum}
@@ -252,7 +252,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="enterPrice"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -283,7 +283,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                         <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                                 value={state?.salePercent}
@@ -296,7 +296,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[60%] md:w-[75%] flex items-center">
                                         <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 id="discountPrice"
                                                 className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
@@ -339,7 +339,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minBreast}
@@ -349,7 +349,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxBreast}
@@ -369,7 +369,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minSize}
@@ -379,7 +379,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     {state?.maxSizeShow ? <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxSize}
@@ -601,7 +601,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minWaist}
@@ -612,7 +612,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxWaist}
@@ -630,7 +630,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                                         placeholder="Мин"
                                         value={state?.minHips}
@@ -640,7 +640,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                         placeholder="Макс"
                                         value={state?.maxHips}
@@ -659,7 +659,7 @@ function AddSize({ handleCallBack, typeId }) {
                             </p>
                             <div className="flex items-start justify-between ">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -683,7 +683,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <div className="w-fit flex items-center">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
                                         placeholder=""
                                         value={state?.ageNum}
@@ -703,7 +703,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <label htmlFor="priceOutWear" className={`w-full h-[40px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="priceOutWear"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
@@ -733,7 +733,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                         <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                                                 value={state?.salePercent}
@@ -746,7 +746,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[60%] md:w-[75%] flex items-center">
                                         <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 id="salePrice"
                                                 className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
@@ -790,7 +790,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minBreast}
@@ -800,7 +800,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxBreast}
@@ -821,7 +821,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <div className="flex items-center">
                                     <div className="flex flex-col">
                                         <input
-                                            type="text"
+                                            type="number"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                             placeholder="Мин"
                                             value={state?.minSize}
@@ -831,7 +831,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="flex flex-col">
                                         {state?.maxSizeShow ? <input
-                                            type="text"
+                                            type="number"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                             placeholder="Макс"
                                             value={state?.maxSize}
@@ -1055,7 +1055,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minHips}
@@ -1065,7 +1065,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxHips}
@@ -1083,7 +1083,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <div className="flex items-center">
                                     <div className="flex flex-col">
                                         <input
-                                            type="text"
+                                            type="number"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
                                             placeholder="Мин"
                                             value={state?.minHeight}
@@ -1093,7 +1093,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="flex flex-col">
                                         <input
-                                            type="text"
+                                            type="number"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
                                             placeholder="Макс"
                                             value={state?.maxHeight}
@@ -1113,7 +1113,7 @@ function AddSize({ handleCallBack, typeId }) {
                             </p>
                             <div className="flex items-start justify-between ">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -1137,7 +1137,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <div className="w-fit flex items-center">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className=" inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
                                         placeholder=""
                                         value={state?.ageNum}
@@ -1159,7 +1159,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <label htmlFor="priceNum" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -1189,7 +1189,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                         <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                                                 value={state?.salePercent}
@@ -1202,7 +1202,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[60%] md:w-[75%] flex items-center">
                                         <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 id="salePrice"
                                                 className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
@@ -1244,7 +1244,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-[58px] flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                         value={state?.minSize}
                                         onChange={(e) => setState({ ...state, minSize: e.target.value })}
@@ -1261,7 +1261,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center gap-x-1">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                                         placeholder="Мин"
                                         value={state?.minFootLength}
@@ -1271,7 +1271,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                         placeholder="Макс"
                                         value={state?.maxFootLength}
@@ -1290,7 +1290,7 @@ function AddSize({ handleCallBack, typeId }) {
                             </p>
                             <div className="flex items-start justify-between ">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -1314,7 +1314,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <div className="w-fit flex items-center">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                         placeholder=""
                                         value={state?.ageNum}
@@ -1336,7 +1336,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         id="priceShoes"
                                         placeholder="0"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -1366,7 +1366,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                         <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                                                 value={state?.salePercent}
@@ -1379,7 +1379,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[60%] md:w-[75%] flex items-center">
                                         <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 id="salePrice"
                                                 className="inputStyle w-[75%] font-AeonikProMedium outline-none "
@@ -1419,7 +1419,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-[83px] flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                         value={state?.minSize}
                                         onChange={(e) => setState({ ...state, minSize: e.target.value })}
@@ -1637,7 +1637,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center justify-between">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                         value={state?.colSize}
                                         onChange={(e) => setState({ ...state, colSize: e.target.value })}
@@ -1653,7 +1653,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                         value={state?.rowSize}
                                         onChange={(e) => setState({ ...state, rowSize: e.target.value })}
@@ -1672,7 +1672,7 @@ function AddSize({ handleCallBack, typeId }) {
 
                             <div className="flex items-start justify-between ">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -1696,7 +1696,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <div className="w-fit flex items-center">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                                         placeholder=""
                                         value={state?.ageNum}
@@ -1718,7 +1718,7 @@ function AddSize({ handleCallBack, typeId }) {
                                 </div>
                                 <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="priceAccess"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -1748,7 +1748,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[40%] md:w-[72px] flex items-start">
                                         <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                                                 value={state?.salePercent}
@@ -1761,7 +1761,7 @@ function AddSize({ handleCallBack, typeId }) {
                                     <div className="w-[60%] md:w-[75%] flex items-center">
                                         <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 placeholder="0"
                                                 id="salePrice"
                                                 className="inputStyle w-[75%] font-AeonikProMedium outline-none "

@@ -166,7 +166,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                         <div className="flex items-center">
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minBreast}
@@ -176,7 +176,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxBreast}
@@ -197,7 +197,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minSize}
@@ -207,7 +207,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     {state?.maxSizeShow ? <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxSize}
@@ -432,7 +432,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                         <div className="flex items-center">
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minHips}
@@ -442,7 +442,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxHips}
@@ -460,7 +460,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minHeight}
@@ -470,7 +470,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Макс"
                                         value={state?.maxHeight}
@@ -490,7 +490,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                         </p>
                         <div className="flex items-start justify-between ">
                             <input
-                                type="text"
+                                type="number"
                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
@@ -514,7 +514,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             </div>
                             <div className="w-fit flex items-center">
                                 <input
-                                    type="text"
+                                    type="number"
                                     className=" inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
                                     placeholder=""
                                     value={state?.ageNum}
@@ -536,7 +536,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             </div>
                             <label htmlFor="priceNum" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
-                                    type="text"
+                                    type="number"
                                     placeholder="0"
                                     id="priceNum"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -566,7 +566,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 <div className="w-[40%] md:w-[72px] flex items-start">
                                     <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                         <input
-                                            type="text"
+                                            type="number"
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.salePercent}
@@ -579,7 +579,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 <div className="w-[60%] md:w-[75%] flex items-center">
                                     <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
-                                            type="text"
+                                            type="number"
                                             placeholder="0"
                                             id="salePrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
