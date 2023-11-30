@@ -18,6 +18,16 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
         // ------
         onConcel: false
     })
+    useEffect(() => {
+        if (state?.salePercent > 0) {
+            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
+            console.log(sale, "sale");
+            setState({ ...state, salePrice: sale })
+        } else {
+            setState({ ...state, salePrice: '' })
+        }
+    }, [state?.salePercent || state?.priceNum])
+
     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
     const SelectedNumber = 4
@@ -232,15 +242,15 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
+                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.salePercent}
                                             onChange={(e) => setState({ ...state, salePercent: e.target.value })}
                                         />
-                                        <span className="text-textLightColor ml-2">%</span>
+                                        <span className="text-textLightColor ml-1">%</span>
                                     </div>
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
