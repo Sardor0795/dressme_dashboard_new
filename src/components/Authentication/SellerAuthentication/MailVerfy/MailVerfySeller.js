@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
@@ -9,12 +8,12 @@ import { SircleNext, UserMailIcon } from "../../../../assets/icons";
 export default function MailVerfySeller() {
   const [timer, setTimer] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
   const [state, setState] = useState({
     eyesShow: true,
     password: "",
     email: "",
     rememberCheck: "",
-    // get method
     getVerfyMessage: "",
     errorMessage: "",
     errorsGroup: null,
@@ -26,18 +25,14 @@ export default function MailVerfySeller() {
       setTimer(false);
     }, 3000);
   };
-
   const handleChange = (e) => {
     const { checked } = e.target;
     setState({ ...state, rememberCheck: checked });
   };
-
   const pathname = window.location.pathname;
   let PathnameToken = pathname.replace("/mail-verify-seller/:", "");
-
-  const [error, setError] = useState(false);
+  
   const url = "https://api.dressme.uz/api/seller";
-
   React.useEffect(() => {
     fetch(`${url}/email-verify/${PathnameToken ? PathnameToken : null}`)
       .then((results) => results.json())
@@ -95,26 +90,12 @@ export default function MailVerfySeller() {
     EnterTheSystem();
     setTimeForNotif();
   }
-
   useEffect(() => {
     document.title = "Подтвердить адрес электронной почты";
   }, []);
 
   return (
     <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex flex-col items-center justify-center">
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      /> */}
       <div className="max-w-[650px] w-[100%] flex flex-col items-center justify-center  h-fit mb-5 px-2">
         <div className="w-full flex items-center justify-center flex-col">
           <p className="mt-3 not-italic font-AeonikProRegular text-[20px] md:text-[25px] text-center leading-[30px]   tracking-[0,16px] text-black">
@@ -172,7 +153,7 @@ export default function MailVerfySeller() {
           </span>
           <div className="mt-[4px]  w-full flex items-center border border-searchBgColor rounded-lg overflow-hidden">
             <input
-              className="w-full px-2 xs:px-[16px] outline-none	bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+              className="w-full h-[42px] px-2 xs:px-[16px] outline-none	bg-white  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShow ? "password" : "text"}
               name="password"
               placeholder="Enter your password"
