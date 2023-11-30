@@ -33,40 +33,6 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         }
 
     }, [typeId])
-    const handleChangePrice = (event) => {
-        const { value } = event.target;
-
-        // Remove any existing commas from the input
-        const sanitizedValue = value.replace(/,/g, '');
-
-        // Format the number with commas
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-
-        setState({ ...state, price: formattedValue });
-    };
-    const handleChangeSalePrice = (event) => {
-        const { value } = event.target;
-
-        // Remove any existing commas from the input
-        const sanitizedValue = value.replace(/,/g, '');
-
-        // Format the number with commas
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-
-        setState({ ...state, discountPrice: formattedValue });
-    };
-
-    useEffect(() => {
-        if (state?.discountPercent > 0) {
-            const value = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
-
-            setState({ ...state, discountPrice: value })
-        } else {
-            setState({ ...state, discountPrice: '' })
-        }
-
-
-    }, [state?.discountPercent || state?.price])
 
     // useEffect(() => {
     //     if (state?.discountPrice > 0) {
@@ -80,7 +46,18 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
 
 
-
+    const handleChangePrice = (event) => {
+        const { value } = event.target;
+        const sanitizedValue = value.replace(/,/g, '');
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, price: formattedValue });
+    };
+    const handleChangeSalePrice = (event) => {
+        const { value } = event.target;
+        const sanitizedValue = value.replace(/,/g, '');
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, discountPrice: formattedValue });
+    };
 
     const onChangeSwitch = (checked) => {
         setState({ ...state, sizeCheck: checked })
@@ -129,6 +106,19 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     }
 
 
+
+    // useEffect(() => {
+    //     if (state?.discountPercent > 0) {
+    //         const value = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
+
+    //         setState({ ...state, discountPrice: value })
+    //     } else {
+    //         setState({ ...state, discountPrice: '' })
+    //     }
+
+
+    // }, [state?.discountPercent || state?.price])
+    console.log("ishladi Headwear");
     const contentHat = (
         <div className="w-[520px] h-fit">
             <div
