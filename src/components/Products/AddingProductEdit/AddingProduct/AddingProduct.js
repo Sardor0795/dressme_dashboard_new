@@ -194,6 +194,7 @@ const AddingProduct = () => {
     () => setOpenCategories(false),
     []
   ); // Categories
+  const [selectColorID, setSelectColorID] = useState()
   const [colorChecked, setColorChecked] = useState();
   const [colorAction, setColorAction] = useState(false);
   const [colorDelete, setColorDelete] = useState(false);
@@ -284,53 +285,41 @@ const AddingProduct = () => {
   // ColorHandle
   // ------------------------------------------------------------------------
   function onHanleColorList(e) {
-    console.log(lastElement, "lastElement--1");
+    setSelectColorID(e)
     if (colors_Id?.length === 2 && e) {
-      setColors_Id(colors_Id?.filter(e => e !== lastElement))
+      setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
       setColors_Id(colors_Id => [...colors_Id, e])
-      // setColorChecked(e)
     } else {
-      // setColorChecked(e)
       setColors_Id(colors_Id => [...colors_Id, e])
     }
-    // if (colors_Id?.length > colorListForTest?.length) {
-    //   setLastElement(colors_Id[colors_Id?.length - 1])
-    // }
-    // if (colors_Id?.includes(lastElement)) {
-    // }
-    // if (!colors_Id?.includes(e) && colors_Id?.length < 2) {
-    // }
   }
-  console.log(lastElement, "lastElement--2");
-  console.log(productsDataIdEdit?.sizes, "productsDataIdEdit");
 
   function onHandleColorUnchecked(id) {
-
-    console.log(id, "id");
     if (colorListForTest?.includes(id)) {
       setColorDelete(true)
     } else {
       setColors_Id(colors_Id?.filter(e => e !== id))
+      setSelectColorID()
     }
   }
   // -----------------------------------------------------------
   // ------------------------------------------------------------------------
-  useEffect(() => {
-    if (colors_Id?.length > colorListForTest?.length) {
-      setLastElement(colors_Id[colors_Id?.length - 1])
-    } else {
-      setLastElement('')
-    }
-  }, [colors_Id])
+  // useEffect(() => {
+  //   if (colors_Id?.length > colorListForTest?.length) {
+  //     setLastElement(colors_Id[colors_Id?.length - 1])
+  //   } else {
+  //     setLastElement('')
+  //   }
+  // }, [colors_Id])
 
   useEffect(() => {
-    if (colorChecked === lastElement) {
+    if (colorChecked !== selectColorID) {
       setColorAction(true)
     } else {
       setColorAction(false)
     }
 
-  }, [colorChecked])
+  }, [selectColorID])
   // console.log(lastElement, "lastElement");
   // console.log(colorChecked, "colorChecked");
   // console.log(colorAction, "colorAction");
@@ -433,7 +422,8 @@ const AddingProduct = () => {
   // const priceSpace = result?.split(",").join(" ")
 
   // console.log(result, "buResult");
-  // console.log(priceSpace, "priceSpace");
+  console.log(selectColorID, "selectColorID");
+  console.log(colorChecked, "colorChecked");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -1102,16 +1092,17 @@ const AddingProduct = () => {
                                       <label
                                         key={data?.id}
                                         htmlFor={data?.id}
-                                        onClick={() => setColorChecked(data?.id)}
+                                        onClick={() => setSelectColorID(data?.id)}
 
                                         style={{ background: `${data.hex}` }}
                                         className={`rounded-full border  w-[22px] h-[22px] p-[2px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
                                       >
-                                        {data?.id === colorChecked && colorChecked !== 1 ? (
+
+                                        {data?.id === (selectColorID || colorChecked) && (selectColorID || colorChecked) !== 1 ? (
                                           <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
                                         ) : null}
 
-                                        {colorChecked === 1 && data?.id === colorChecked ? (
+                                        {(selectColorID || colorChecked) === 1 && data?.id === (selectColorID || colorChecked) ? (
                                           <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
                                         ) : null}
                                       </label>
