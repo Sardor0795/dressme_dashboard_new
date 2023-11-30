@@ -156,9 +156,8 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
-    console.log(
-      childData, "childData"
-    );
+    console.log(childData, "CallBackHeadWear");
+
   }
   function CallBackOutWear(childData) {
 
@@ -172,6 +171,8 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
+    console.log(childData, "CallBackOutWear");
+
   }
   function CallBackUnderWear(childData) {
     setState({
@@ -184,6 +185,8 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
+    console.log(childData, "CallBackUnderWear");
+
   }
   function CallBackShoesWear(childData) {
 
@@ -197,6 +200,8 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
+    console.log(childData, "CallBackShoesWear");
+
   }
   function CallBackAccessoriesWear(childData) {
 
@@ -210,6 +215,7 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
+    console.log(childData, "CallBackAccessoriesWear");
   }
 
 

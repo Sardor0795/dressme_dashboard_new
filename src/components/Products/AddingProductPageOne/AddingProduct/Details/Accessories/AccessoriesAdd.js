@@ -57,6 +57,17 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         }
     }, [typeId])
 
+
+    useEffect(() => {
+        if (state?.salePercent > 0) {
+            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
+            console.log(sale, "sale");
+            setState({ ...state, salePrice: sale })
+        } else {
+            setState({ ...state, salePrice: '' })
+        }
+    }, [state?.salePercent || state?.priceNum])
+
     const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)
     }
@@ -70,9 +81,9 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 accessoryLetterSize: state?.sizeListCheck,
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum,
+                price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
                 category_Id: SelectedNumber,
 
             })
@@ -102,9 +113,30 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         setToggleShow(false)
         handleCallBack()
     }
+    const handleChangePrice = (event) => {
+        const { value } = event.target;
 
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, priceNum: formattedValue });
+    };
+    const handleChangeSalePrice = (event) => {
+        const { value } = event.target;
+
+        // Remove any existing commas from the input
+        const sanitizedValue = value.replace(/,/g, '');
+
+        // Format the number with commas
+        const formattedValue = Number(sanitizedValue).toLocaleString()
+
+        setState({ ...state, salePrice: formattedValue });
+    };
     const contentAccessories = (
-        <div className="w-[595px] h-fit">
+        <div className="w-[650px] h-fit">
             <div
                 className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
@@ -415,12 +447,12 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
-                                    type="text"
+                                    type="numner"
                                     placeholder="0"
                                     id="priceAccess"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.priceNum}
-                                    onChange={(e) => setState({ ...state, priceNum: e.target.value })}
+                                    onChange={handleChangePrice}
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
@@ -443,27 +475,27 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
+                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.salePercent}
                                             onChange={(e) => setState({ ...state, salePercent: e.target.value })}
                                         />
-                                        <span className="text-textLightColor ml-2">%</span>
+                                        <span className="text-textLightColor ml-1">%</span>
                                     </div>
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
                                     <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                         <input
-                                            type="text"
+                                            type="numner"
                                             placeholder="0"
                                             id="salePrice"
                                             className="inputStyle w-[75%] font-AeonikProMedium outline-none "
                                             value={state?.salePrice}
-                                            onChange={(e) => setState({ ...state, salePrice: e.target.value })}
+                                            onChange={handleChangeSalePrice}
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум

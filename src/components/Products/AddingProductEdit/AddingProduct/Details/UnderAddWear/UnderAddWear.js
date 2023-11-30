@@ -68,8 +68,8 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                 minHips: stateList?.sizeGetList[0]?.min_hip_girth,
                 maxHips: stateList?.sizeGetList[0]?.max_hip_girth,
                 ageNum: stateList?.sizeGetList[0]?.age,
-                salePercent: stateList?.sizeGetList[0]?.discountPercent,
-                salePrice: stateList?.sizeGetList[0]?.discountPrice,
+                salePercent: stateList?.sizeGetList[0]?.discount_percent,
+                salePrice: stateList?.sizeGetList[0]?.discount_price,
                 sizeListCheck: stateList?.sizeGetList[0]?.letter_size
             })
         }

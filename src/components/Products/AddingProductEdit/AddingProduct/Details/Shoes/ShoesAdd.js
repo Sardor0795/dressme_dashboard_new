@@ -32,12 +32,13 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                 maxFootLength: stateList?.sizeGetList[0]?.max_foot_length,
                 minSize: stateList?.sizeGetList[0]?.wear_size,
                 ageNum: stateList?.sizeGetList[0]?.age,
-                salePercent: stateList?.sizeGetList[0]?.discountPercent,
-                salePrice: stateList?.sizeGetList[0]?.discountPrice,
+                salePercent: stateList?.sizeGetList[0]?.discount_percent,
+                salePrice: stateList?.sizeGetList[0]?.discount_price,
             })
         }
 
     }, [stateList?.sizeGetList[0]])
+    console.log(stateList?.sizeGetList[0]?.discount_price, " stateList?.sizeGetList[0]?.discountPrice");
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (state?.minSize && state?.priceNum && state?.quantityNum) {
