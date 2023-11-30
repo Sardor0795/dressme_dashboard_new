@@ -567,13 +567,13 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             </span>
                         </div>
                         <div className="w-full flex items-center justify-center">
-                            <div className="w-full flex items-center gap-x-1">
+                            <div className="w-full flex items-center gap-x-1 ">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
+                                    <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
                                         <input
                                             type="number"
                                             placeholder="0"
-                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
+                                            className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.salePercent}
                                             onChange={handleChangePercent}
                                         />
@@ -582,7 +582,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                    <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                         <input
                                             type="text"
                                             placeholder="0"
