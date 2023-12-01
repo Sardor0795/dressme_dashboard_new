@@ -48,7 +48,14 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
 
 
     const SelectedNumber = 5
-
+    useEffect(() => {
+        if (state?.salePercent > 0) {
+            const sale = state?.price?.split(",")?.join("") * (100 - state?.salePercent) / 100
+            setState({ ...state, salePrice: Math.trunc(sale) })
+        } else {
+            setState({ ...state, salePrice: '' })
+        }
+    }, [state?.salePercent || state?.priceNum])
     useEffect(() => {
         if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
             setState({
@@ -481,7 +488,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                         <input
                                             type="number"
                                             placeholder="0"
-                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
+                                            className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                             value={state?.salePercent}
                                             onChange={handleChangePercent}
                                         />

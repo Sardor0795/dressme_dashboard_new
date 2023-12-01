@@ -28,7 +28,7 @@ export default function ReviewStoreWear() {
     {
       onSuccess: (res) => {
         setLoading(false);
-        setReviewsStore(res.shops.data.length);
+        setReviewsStore(res?.shops);
       },
       onError: (err) => {
         setLoading(false);
@@ -49,7 +49,7 @@ export default function ReviewStoreWear() {
       onSuccess: (res) => {
         if (res.products) {
           setLoading(false);
-          setReviewsProduct(res.products.data.length);
+          setReviewsProduct(res?.products);
         }
       },
       onError: (err) => {
@@ -117,7 +117,7 @@ export default function ReviewStoreWear() {
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               Товары
-              {reviewsProduct?.rated_users_count > 1 ? (reviewsProduct) : null}
+              {reviewsProduct?.data?.length?.rated_users_count > 1 ? (reviewsProduct) : null}
             </button>
             <button
               onClick={() => {
@@ -129,24 +129,22 @@ export default function ReviewStoreWear() {
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               Магазины
-              {reviewsStore?.rated_users_count > 1 ? (reviewsStore) : null}
+              {reviewsStore?.data?.length?.rated_users_count > 1 ? (reviewsStore) : null}
             </button>
           </div>
         </div>
-        {loading ?
-          <LoadingForSeller />
-          :
-          <div>
-            {dressInfo?.isItPorduct ? (
-              showSelectedButton === "shops" ? (
-                <ReviewStore />
-              ) : (
-                <ReviewWear />
-              )
+
+        <div>
+          {dressInfo?.isItPorduct ? (
+            showSelectedButton === "shops" ? (
+              <ReviewStore reviewsStore={reviewsStore} />
             ) : (
-              <NoReviewProduct />
-            )}
-          </div>}
+              <ReviewWear reviewsProduct={reviewsProduct} />
+            )
+          ) : (
+            <NoReviewProduct />
+          )}
+        </div>
       </div>
       {/* )} */}
     </>
