@@ -28,6 +28,8 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // ------
         onConcel: false,
         toggleShow: false,
+        // ---save
+        saveBtnDisable: false
 
     })
 
@@ -58,7 +60,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     const SelectedNumber = 2
     useEffect(() => {
         if (state?.salePercent > 0) {
-            const sale = state?.price?.split(",")?.join("") * (100 - state?.salePercent) / 100
+            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
             setState({ ...state, salePrice: Math.trunc(sale) })
         } else {
             setState({ ...state, salePrice: '' })
@@ -143,7 +145,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
 
-        setState({ ...state, priceNum: formattedValue });
+        setState({ ...state, priceNum: formattedValue, saveBtnDisable: true });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -153,12 +155,12 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
 
-        setState({ ...state, salePrice: formattedValue });
+        setState({ ...state, salePrice: formattedValue, saveBtnDisable: true });
     };
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
-            setState({ ...state, salePercent: value });
+            setState({ ...state, salePercent: value, saveBtnDisable: true });
         }
     };
     return (
@@ -186,7 +188,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minBreast}
-                                    onChange={(e) => setState({ ...state, minBreast: e.target.value })}
+                                    onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -196,7 +198,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxBreast}
-                                    onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                    onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                         </div>
@@ -216,7 +218,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minSize}
-                                    onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                    onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -226,7 +228,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxSize}
-                                    onChange={(e) => setState({ ...state, maxSize: e.target.value })}
+                                    onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
                                 /> :
                                     <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                         <BiPlus color="#007DCA" size={20} />
@@ -260,7 +262,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             id={data?.id}
                                                             name="size_Outwear"
                                                             checked={data?.name === state?.sizeListCheck}
-                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name })}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
@@ -292,7 +294,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             id={data?.id}
                                                             name="size_Outwear"
                                                             checked={data?.name === state?.sizeListCheck}
-                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name })}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
@@ -335,7 +337,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             id={data?.id}
                                                             name="size_Outwear"
                                                             checked={data?.name === state?.sizeListCheck}
-                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name })}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
@@ -365,7 +367,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                                             id={data?.id}
                                                             name="size_Outwear"
                                                             checked={data?.name === state?.sizeListCheck}
-                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name })}
+                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
@@ -448,7 +450,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minWaist}
-                                    onChange={(e) => setState({ ...state, minWaist: e.target.value })}
+                                    onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true })}
 
                                 />
                             </div>
@@ -459,7 +461,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
                                     value={state?.maxWaist}
-                                    onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
+                                    onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true })}
 
                                 />
                             </div>
@@ -477,7 +479,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                                     placeholder="Мин"
                                     value={state?.minHips}
-                                    onChange={(e) => setState({ ...state, minHips: e.target.value })}
+                                    onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -487,7 +489,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                     placeholder="Макс"
                                     value={state?.maxHips}
-                                    onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                    onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                         </div>
@@ -505,7 +507,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                 type="number"
                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 text-center  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
-                                onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
                             />
                         </div>
                     </div>
@@ -530,7 +532,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
                                     placeholder=""
                                     value={state?.ageNum}
-                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                         </div>
@@ -567,9 +569,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
                                 Скидка
                             </label>
-                            <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                                (необязательно)
-                            </span>
+
                         </div>
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
@@ -624,8 +624,8 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                             })}
                         </span>
                         <button
-                            // onClick={handleSendDetail}
-                            className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            type="button"
+                            className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg ${state?.saveBtnDisable ? "text-textBlueColor" : "text-[#b5b5b5]"}  px-3 py-2 font-AeonikProMedium pr-1`}>
                             Сохранить
                         </button>
                     </div>

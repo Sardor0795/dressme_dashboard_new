@@ -22,9 +22,10 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // ----
         isHasTypeId: false,
         // ---save
-        saveBtnDisable: true
+        saveBtnDisable: false
 
     })
+    console.log(state?.saveBtnDisable, "saveBtnDisable");
     const SelectedNumber = 1
     useEffect(() => {
         if (state?.discountPercent > 0) {
@@ -34,6 +35,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             setState({ ...state, discountPrice: '' })
         }
     }, [state?.discountPercent || state?.price])
+
     useEffect(() => {
         if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
             setState({
@@ -55,10 +57,9 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
 
     const onChangeSwitch = (checked) => {
-        setState({ ...state, sizeCheck: checked })
+        setState({ ...state, sizeCheck: checked, saveBtnDisable: true })
     };
 
-    console.log(state?.sizeCheck, "state?.sizeCheck ");
 
 
     const handleSendDetail = (e) => {
@@ -107,7 +108,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
 
-        setState({ ...state, price: formattedValue });
+        setState({ ...state, price: formattedValue, saveBtnDisable: true });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -117,26 +118,15 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
 
-        setState({ ...state, discountPrice: formattedValue });
+        setState({ ...state, discountPrice: formattedValue, saveBtnDisable: true });
     };
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
-            setState({ ...state, discountPercent: value });
+            setState({ ...state, discountPercent: value, saveBtnDisable: true });
         }
     };
 
-    // useEffect(() => {
-    //     setState({ ...state, saveBtnDisable: true })
-    // }, [
-    //     state?.minHeadGirth ||
-    //     state?.maxHeadGirth ||
-    //     state?.sizeCheck ||
-    //     state?.amount ||
-    //     state?.age ||
-    //     state?.price ||
-    //     state?.discountPercent ||
-    //     state?.discountPrice])
 
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
@@ -163,7 +153,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minHeadGirth}
-                                    onChange={(e) => setState({ ...state, minHeadGirth: e.target.value })}
+                                    onChange={(e) => setState({ ...state, minHeadGirth: e.target.value, saveBtnDisable: true })}
                                     required
                                 />
                             </div>
@@ -174,7 +164,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                     placeholder="Макс"
                                     value={state?.maxHeadGirth}
-                                    onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
+                                    onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true })}
                                     required
                                 />
                             </div>
@@ -211,7 +201,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                 type="number"
                                 className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                 value={state?.amount}
-                                onChange={(e) => setState({ ...state, amount: e.target.value })}
+                                onChange={(e) => setState({ ...state, amount: e.target.value, saveBtnDisable: true })}
                                 required
                             />
                         </div>
@@ -233,7 +223,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                     placeholder="age"
                                     value={state?.age}
-                                    onChange={(e) => setState({ ...state, age: e.target.value })}
+                                    onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true })}
                                 />
                             </div>
                         </div>
@@ -273,9 +263,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
                                 Скидка
                             </label>
-                            <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                                (необязательно)
-                            </span>
+
                         </div>
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
@@ -330,7 +318,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                     </span>
                     <button
                         type="button"
-                        className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                        className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg ${state?.saveBtnDisable ? "text-textBlueColor" : "text-[#b5b5b5]"}  px-3 py-2 font-AeonikProMedium pr-1`}>
                         Сохранить
                     </button>
                 </div>
