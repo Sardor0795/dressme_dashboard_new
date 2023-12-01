@@ -495,9 +495,10 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                                             type="text"
                                             placeholder="0"
                                             id="salePrice"
-                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none "
+                                            className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
                                             value={state?.salePrice}
                                             onChange={handleChangeSalePrice}
+                                            readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
