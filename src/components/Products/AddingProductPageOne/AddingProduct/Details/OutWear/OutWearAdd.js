@@ -95,7 +95,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                 age: state?.ageNum,
                 price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
+                discountPrice: state?.salePrice,
                 category_Id: SelectedNumber,
 
             })
@@ -582,9 +582,10 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                             type="text"
                                             placeholder="0"
                                             id="salePrice"
-                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
+                                            className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.salePrice}
                                             onChange={handleChangeSalePrice}
+                                            readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
