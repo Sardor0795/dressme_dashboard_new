@@ -473,9 +473,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
 
                                 Скидка
                             </label>
-                            <span className="font-AeonikProMedium text-[10px] md:text-[13px] text-textLightColor ml-[5px]">
-                                (необязательно)
-                            </span>
+
                         </div>
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
