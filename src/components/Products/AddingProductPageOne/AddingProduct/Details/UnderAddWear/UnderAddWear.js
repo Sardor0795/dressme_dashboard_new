@@ -574,7 +574,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                             <input
                                                 type="number"
                                                 placeholder="0"
-                                                className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
+                                                className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 value={state?.salePercent}
                                                 onChange={handleChangePercent}
                                             />
@@ -582,7 +582,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                             <input
                                                 type="number"
                                                 placeholder="0"
-                                                className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
+                                                className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 readOnly
                                             />}
                                         <span className="text-textLightColor ml-1">%</span>

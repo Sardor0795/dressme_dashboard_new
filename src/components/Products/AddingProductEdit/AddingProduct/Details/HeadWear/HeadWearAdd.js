@@ -20,11 +20,20 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // ------
         onConcel: false,
         // ----
-        isHasTypeId: false
+        isHasTypeId: false,
+        // ---save
+        saveBtnDisable: true
 
     })
     const SelectedNumber = 1
-
+    useEffect(() => {
+        if (state?.discountPercent > 0) {
+            const sale = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
+            setState({ ...state, discountPrice: Math.trunc(sale) })
+        } else {
+            setState({ ...state, discountPrice: '' })
+        }
+    }, [state?.discountPercent || state?.price])
     useEffect(() => {
         if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
             setState({
@@ -43,14 +52,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
     }, [stateList?.sizeGetList[0]])
 
-    // useEffect(() => {
-    //     if (state?.discountPercent > 0) {
-    //         const sale = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
-    //         setState({ ...state, discountPrice: Math.trunc(sale) })
-    //     } else {
-    //         setState({ ...state, discountPrice: '' })
-    //     }
-    // }, [state?.discountPercent || state?.price])
+
 
     const onChangeSwitch = (checked) => {
         setState({ ...state, sizeCheck: checked })
@@ -124,7 +126,17 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         }
     };
 
-
+    // useEffect(() => {
+    //     setState({ ...state, saveBtnDisable: true })
+    // }, [
+    //     state?.minHeadGirth ||
+    //     state?.maxHeadGirth ||
+    //     state?.sizeCheck ||
+    //     state?.amount ||
+    //     state?.age ||
+    //     state?.price ||
+    //     state?.discountPercent ||
+    //     state?.discountPrice])
 
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
@@ -272,7 +284,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                         <input
                                             type="number"
                                             placeholder="0"
-                                            className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
+                                            className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
                                             value={state?.discountPercent}
                                             onChange={handleChangePercent}
                                         />
@@ -317,7 +329,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                         })}
                     </span>
                     <button
-                        // onClick={handleSendDetail}
+                        type="button"
                         className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Сохранить
                     </button>
