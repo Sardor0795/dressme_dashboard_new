@@ -34,14 +34,6 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
     }, [typeId])
 
-    // useEffect(() => {
-    //     if (state?.discountPercent > 0) {
-    //         const sale = state?.price * 100 / state?.price?.split(",")?.join("")
-    //         setState({ ...state, discountPrice: Math.trunc(sale) })
-    //     } else {
-    //         setState({ ...state, discountPrice: '' })
-    //     }
-    // }, [state?.discountPercent])
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -92,7 +84,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 age: state?.age,
                 price: state?.price?.split(",")?.join(""),
                 discountPercent: state?.discountPercent,
-                discountPrice: state?.discountPrice?.split(",")?.join(""),
+                discountPrice: state?.discountPrice,
                 category_Id: SelectedNumber,
 
             })
@@ -286,9 +278,10 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                             type="text"
                                             placeholder="0"
                                             id="discountPrice"
-                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
+                                            className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.discountPrice}
                                             onChange={handleChangeSalePrice}
+                                            readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум
