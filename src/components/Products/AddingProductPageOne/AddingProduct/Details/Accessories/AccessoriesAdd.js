@@ -61,7 +61,8 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
     useEffect(() => {
         if (state?.salePercent > 0) {
             const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            setState({ ...state, salePrice: Math.trunc(sale) })
+            const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: formattedValue })
         } else {
             setState({ ...state, salePrice: '' })
         }
@@ -82,7 +83,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 age: state?.ageNum,
                 price: state?.priceNum?.split(",")?.join(""),
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
                 category_Id: SelectedNumber,
 
             })
