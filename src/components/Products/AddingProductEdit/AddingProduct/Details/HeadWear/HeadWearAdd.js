@@ -49,6 +49,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         setState({ ...state, sizeCheck: checked })
     };
 
+    console.log(state?.sizeCheck, "state?.sizeCheck ");
 
 
     const handleSendDetail = (e) => {
@@ -96,7 +97,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
 
-        setState({ ...state, priceNum: formattedValue });
+        setState({ ...state, price: formattedValue });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -106,9 +107,14 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
 
-        setState({ ...state, salePrice: formattedValue });
+        setState({ ...state, discountPrice: formattedValue });
     };
-
+    const handleChangePercent = (event) => {
+        const { value } = event.target
+        if (value >= 0 && value < 100) {
+            setState({ ...state, discountPercent: value });
+        }
+    };
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
@@ -164,7 +170,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                             <Switch
                                 className={`border border-borderColor bg-[#8B8B8B] `}
                                 onChange={onChangeSwitch}
-                                defaultChecked={state?.sizeCheck}
+                                checked={state?.sizeCheck == 1 ? true : false}
                             />
                         </div>
                     </div>
@@ -257,7 +263,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
                                             value={state?.discountPercent}
-                                            onChange={(e) => setState({ ...state, discountPercent: e.target.value })}
+                                            onChange={handleChangePercent}
                                         />
                                         <span className="text-textLightColor ml-1">%</span>
                                     </div>

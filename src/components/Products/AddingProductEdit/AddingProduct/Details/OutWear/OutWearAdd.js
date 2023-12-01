@@ -148,6 +148,12 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
         setState({ ...state, salePrice: formattedValue });
     };
+    const handleChangePercent = (event) => {
+        const { value } = event.target
+        if (value >= 0 && value < 100) {
+            setState({ ...state, salePercent: value });
+        }
+    };
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
@@ -567,7 +573,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                             placeholder="0"
                                             className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
                                             value={state?.salePercent}
-                                            onChange={(e) => setState({ ...state, salePercent: e.target.value })}
+                                            onChange={handleChangePercent}
                                         />
                                         <span className="text-textLightColor ml-2">%</span>
                                     </div>
