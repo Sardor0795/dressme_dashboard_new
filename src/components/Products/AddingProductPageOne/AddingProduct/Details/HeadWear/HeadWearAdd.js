@@ -84,7 +84,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 age: state?.age,
                 price: state?.price?.split(",")?.join(""),
                 discountPercent: state?.discountPercent,
-                discountPrice: state?.discountPrice,
+                discountPrice: state?.discountPrice?.split(",")?.join(""),
                 category_Id: SelectedNumber,
 
             })
@@ -115,7 +115,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         if (state?.discountPercent > 0) {
             const value = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
 
-            setState({ ...state, discountPrice: Math.trunc(value) })
+            const formattedValue = parseInt(value).toLocaleString()
+            setState({ ...state, discountPrice: formattedValue })
         } else {
             setState({ ...state, discountPrice: '' })
         }

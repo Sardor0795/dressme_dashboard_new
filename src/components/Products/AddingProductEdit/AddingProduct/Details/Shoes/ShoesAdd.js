@@ -26,7 +26,8 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     useEffect(() => {
         if (state?.salePercent > 0) {
             const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            setState({ ...state, salePrice: Math.trunc(sale) })
+            const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: formattedValue })
         } else {
             setState({ ...state, salePrice: '' })
         }

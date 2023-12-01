@@ -30,7 +30,8 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
     useEffect(() => {
         if (state?.discountPercent > 0) {
             const sale = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
-            setState({ ...state, discountPrice: Math.trunc(sale) })
+            const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, discountPrice: formattedValue })
         } else {
             setState({ ...state, discountPrice: '' })
         }
