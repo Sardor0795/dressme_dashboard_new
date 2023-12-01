@@ -43,7 +43,14 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
     }, [stateList?.sizeGetList[0]])
 
-
+    // useEffect(() => {
+    //     if (state?.discountPercent > 0) {
+    //         const sale = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
+    //         setState({ ...state, discountPrice: Math.trunc(sale) })
+    //     } else {
+    //         setState({ ...state, discountPrice: '' })
+    //     }
+    // }, [state?.discountPercent || state?.price])
 
     const onChangeSwitch = (checked) => {
         setState({ ...state, sizeCheck: checked })
@@ -89,6 +96,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         })
         handleCallBack()
     }
+
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         // Remove any existing commas from the input
@@ -115,6 +123,9 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             setState({ ...state, discountPercent: value });
         }
     };
+
+
+
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
@@ -275,9 +286,10 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                                             type="text"
                                             placeholder="0"
                                             id="discountPrice"
-                                            className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
+                                            className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.discountPrice}
                                             onChange={handleChangeSalePrice}
+                                            readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                             сум

@@ -261,13 +261,22 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
                                     <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.price?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                        <input
-                                            type="number"
-                                            placeholder="0"
-                                            className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
-                                            value={state?.discountPercent}
-                                            onChange={handleChangePercent}
-                                        />
+                                        {state?.price?.split(",")?.join("") > 0 ?
+                                            <input
+                                                type="number"
+                                                placeholder="0"
+                                                className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
+                                                value={state?.discountPercent}
+                                                onChange={handleChangePercent}
+                                            />
+                                            :
+                                            <input
+                                                type="number"
+                                                placeholder="0"
+                                                className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
+                                                readOnly
+                                            />}
+
                                         <span className="text-textLightColor ml-1">%</span>
                                     </div>
                                 </div>
