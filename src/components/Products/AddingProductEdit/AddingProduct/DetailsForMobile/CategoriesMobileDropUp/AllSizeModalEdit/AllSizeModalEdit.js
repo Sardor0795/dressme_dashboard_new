@@ -12,8 +12,8 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
   // console.log(onClick, "onClick");
   // console.log(colorGroup, "colorGroup");
   // console.log(colorSelect, "colorSelect");
-  console.log(stateList?.category_Id, "stateList");
-  console.log(stateList?.sizeGetList[0], "stateList");
+  // console.log(stateList?.category_Id, "stateList");
+  // console.log(stateList?.sizeGetList[0], "stateList");
   // --------------------------------------------------------
   // green black red inputРазмер Талии
   return (

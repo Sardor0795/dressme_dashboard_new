@@ -31,7 +31,8 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
 import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
-import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
+import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
+// import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
 
 const { Option } = Select;
@@ -352,7 +353,7 @@ const AddingProduct = () => {
   }, [screenSize]);
 
   const LocationAddSubmit = () => {
-    console.log(state?.textListOfFormList, " state?.textListOfFormList");
+    // console.log(state?.textListOfFormList, " state?.textListOfFormList");
   }
   const CallBackTextForm = (childData) => {
   };
@@ -422,8 +423,8 @@ const AddingProduct = () => {
   // const priceSpace = result?.split(",").join(" ")
 
   // console.log(result, "buResult");
-  console.log(selectColorID, "selectColorID");
-  console.log(colorChecked, "colorChecked");
+  // console.log(selectColorID, "selectColorID");
+  // console.log(colorChecked, "colorChecked");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -1554,7 +1555,7 @@ const AddingProduct = () => {
 
                     {/* Img Carousel */}
                     <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px] ">
-                      <ProductCarouselEdit />
+                      <CarouselEdit colorGroup={productsData.colors} colorSelect={colors_Id} />
                     </div>
 
                   </div>

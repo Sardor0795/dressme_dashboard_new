@@ -3,9 +3,9 @@ import AllSizeModalEdit from "./AllSizeModalEdit/AllSizeModalEdit";
 import { CheckIconsCircle, CloseAnswer, StarLabel } from "../../../../../../assets/icons";
 
 const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor }) => {
-  console.log(onClick1, "onClick1");
-  console.log(onClick2, "onClick2");
-  console.log(modalOpenColor, "modalOpenColor");
+  // console.log(onClick1, "onClick1");
+  // console.log(onClick2, "onClick2");
+  // console.log(modalOpenColor, "modalOpenColor");
 
   const AddSizeWear = () => {
     const [decraseList, setDecraseList] = useState(false);
