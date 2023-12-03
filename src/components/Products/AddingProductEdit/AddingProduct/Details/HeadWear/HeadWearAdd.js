@@ -25,7 +25,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         saveBtnDisable: false
 
     })
-    console.log(state?.saveBtnDisable, "saveBtnDisable");
+    // console.log(state?.saveBtnDisable, "saveBtnDisable");
     const SelectedNumber = 1
     useEffect(() => {
         if (state?.discountPercent > 0) {
@@ -307,7 +307,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                         Цвет:
 
                         {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
-                            console.log(data?.id, "data?.color?.id");
+                            // console.log(data?.id, "data?.color?.id");
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                     className={` ${data?.id === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
