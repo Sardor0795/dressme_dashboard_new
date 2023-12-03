@@ -64,7 +64,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
             setState({
                 ...state,
                 quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: stateList?.sizeGetList[0]?.price,
+                priceNum: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
                 rowSize: stateList?.sizeGetList[0]?.length,
                 colSize: stateList?.sizeGetList[0]?.width,
                 minSize: stateList?.sizeGetList[0]?.wear_size,

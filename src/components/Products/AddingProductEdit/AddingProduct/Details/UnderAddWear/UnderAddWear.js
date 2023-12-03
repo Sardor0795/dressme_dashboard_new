@@ -68,7 +68,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             setState({
                 ...state,
                 quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: stateList?.sizeGetList[0]?.price,
+                priceNum: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
                 minBreast: stateList?.sizeGetList[0]?.min_waist_girth,
                 maxBreast: stateList?.sizeGetList[0]?.max_waist_girth,
                 minSize: stateList?.sizeGetList[0]?.min_wear_size,

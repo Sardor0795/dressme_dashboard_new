@@ -37,6 +37,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         }
     }, [state?.discountPercent || state?.price])
 
+    // console.log(state?.discountPercent, state?.price, "state?.discountPercent || state?.price");
     useEffect(() => {
         if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
             setState({
@@ -46,7 +47,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                 sizeCheck: stateList?.sizeGetList[0]?.one_size,
                 amount: stateList?.sizeGetList[0]?.amount,
                 age: stateList?.sizeGetList[0]?.age,
-                price: stateList?.sizeGetList[0]?.price,
+                price: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
                 discountPercent: stateList?.sizeGetList[0]?.discount_percent,
                 discountPrice: stateList?.sizeGetList[0]?.discount_price,
 
@@ -103,22 +104,14 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, price: formattedValue, saveBtnDisable: true });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, discountPrice: formattedValue, saveBtnDisable: true });
     };
     const handleChangePercent = (event) => {

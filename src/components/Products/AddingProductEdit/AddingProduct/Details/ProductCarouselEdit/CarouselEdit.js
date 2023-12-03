@@ -29,9 +29,9 @@ const CarouselEdit = (props) => {
     // console.log("handleClickCarosuel", id);
     setModalOfCarsouel(true)
   }
-  console.log(colorGroup, "colorGroup---");
-  console.log(colorSelect, "colorSelectF---");
-  const [imgGroup] = useState([
+  // console.log(colorGroup, "colorGroup---");
+  // console.log(colorSelect, "colorSelectF---");
+  const [imgGroup, setImgGroup] = useState([
     {
       id: 1,
       action: true,
@@ -271,7 +271,7 @@ const CarouselEdit = (props) => {
               {imgGroup?.map((data) => {
                 return (
                   <article key={data?.id} onClick={() => handleClickCarosuel(data?.id)} className="flex flex-col ">
-                    <div className="flex h-[22px] items-center justify-between  mb-[4px]">
+                    {data.colors && <div className="flex h-[22px] items-center justify-between  mb-[4px]">
                       <span
                         className=" w-[22px] h-[22px] rounded-full border"
                         style={{ background: `${data.colors}` }}
@@ -285,7 +285,7 @@ const CarouselEdit = (props) => {
                       {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
                         {data?.status || "status"}
                       </td>}
-                    </div>
+                    </div>}
                     <img
                       className="w-[350px] h-[377px] object-top	object-cover cursor-pointer"
                       src={data?.img}
@@ -319,7 +319,7 @@ const CarouselEdit = (props) => {
                       src={data?.img}
                       alt="img"
                     />
-                    <div className="flex h-[22px] items-center justify-between mt-[4px] border rounded-[12px]">
+                    {data.colors && <div className="flex h-[22px] items-center justify-between mt-[4px] border rounded-[12px]">
                       <span
                         className=" w-[22px] h-[22px] rounded-full border"
                         style={{ background: `${data.colors}` }}
@@ -333,7 +333,7 @@ const CarouselEdit = (props) => {
                       {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
                         {data?.status || "status"}
                       </td>}
-                    </div>
+                    </div>}
                   </figure>
                 );
               })}

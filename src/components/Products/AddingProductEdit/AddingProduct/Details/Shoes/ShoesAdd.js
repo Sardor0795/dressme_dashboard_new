@@ -37,7 +37,7 @@ function ShoesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             setState({
                 ...state,
                 quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: stateList?.sizeGetList[0]?.price,
+                priceNum: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
                 minFootLength: stateList?.sizeGetList[0]?.min_foot_length,
                 maxFootLength: stateList?.sizeGetList[0]?.max_foot_length,
                 minSize: stateList?.sizeGetList[0]?.wear_size,
