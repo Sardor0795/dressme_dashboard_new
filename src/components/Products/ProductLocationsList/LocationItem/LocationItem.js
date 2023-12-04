@@ -498,7 +498,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                             <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
                             </td>
                             <td className="w-[15%] h-full  flex items-center  justify-center">
                               <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
