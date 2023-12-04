@@ -120,10 +120,9 @@ export default function ProductLocationsList() {
         } else if (res?.errors && res?.message) {
           setState({ ...state, onErrorMessage: res?.errors?.location_id, loader: false })
         } else if (res?.problems?.length == 0 && res?.message) {
-          refetch()
           setState({ ...state, onSuccessMessaage: res?.message, getShopLocationId: null, loader: false })
-          console.log("Ishladi");
           setTimeout(() => {
+            refetch()
             setState({ ...state, openSelectModal: false, })
           }, 2000);
         }
@@ -153,8 +152,8 @@ export default function ProductLocationsList() {
           setState({ ...state, onErrorMessage: res?.errors, loader: false })
         } else if (res?.message) {
           setState({ ...state, onSuccessMessaage: res?.message, loader: false })
-          refetch()
           setTimeout(() => {
+            refetch()
             setState({ ...state, openDeleteModal: false, })
             setHideProductList(false)
           }, 2000);
