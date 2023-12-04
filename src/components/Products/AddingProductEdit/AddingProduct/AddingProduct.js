@@ -214,7 +214,6 @@ const AddingProduct = () => {
     {
       onSuccess: (res) => {
         setProductsDataIdEdit(res?.product)
-        // console.log(res?.product, "product");
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
         })
@@ -425,6 +424,7 @@ const AddingProduct = () => {
   // console.log(result, "buResult");
   // console.log(selectColorID, "selectColorID");
   // console.log(colorChecked, "colorChecked");
+  // console.log(productsDataIdEdit, "productsDataIdEdit");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -1555,7 +1555,7 @@ const AddingProduct = () => {
 
                     {/* Img Carousel */}
                     <div className="w-full h-[510px] mx-auto flex flex-col gap-y-[120px] ">
-                      <CarouselEdit colorGroup={productsData.colors} colorSelect={colors_Id} />
+                      <CarouselEdit colorGroup={productsData.colors} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
                     </div>
 
                   </div>
