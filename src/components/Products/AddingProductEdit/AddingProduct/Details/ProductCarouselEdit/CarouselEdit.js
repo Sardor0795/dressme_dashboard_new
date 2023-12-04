@@ -283,11 +283,12 @@ const CarouselEdit = (props) => {
                             <div className="w-fit h-fit flex items-center">
                               {Number(item?.pivot?.product_id) === Number(data?.product_color_id) && (
                                 colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                                  console.log(value?.hex, "value?.hex");
                                   return (
                                     <button
                                       type="button"
-                                      className={`w-[22px] h-[22px] rounded-full border bg-[${value?.hex}]`}
-                                    // style={{ background: `${value?.hex}` }}
+                                      className={`w-[22px] h-[22px] rounded-full border `}
+                                      style={{ background: `${value?.hex}` }}
                                     ></button>
                                   )
                                 })
