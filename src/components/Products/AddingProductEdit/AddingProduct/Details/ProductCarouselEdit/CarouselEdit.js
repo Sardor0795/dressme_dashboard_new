@@ -29,8 +29,8 @@ const CarouselEdit = (props) => {
     // console.log("handleClickCarosuel", id);
     setModalOfCarsouel(true)
   }
-  console.log(colorGroup, "colorGroup---");
-  console.log(colorSelect, "colorSelectF---");
+  // console.log(colorGroup, "colorGroup---");
+  // console.log(colorSelect, "colorSelectF---");
   console.log(photos, "photosF---");
   colorSelect?.map(item => {
     console.log(item?.pivot, "ITEM-pivot");
@@ -278,10 +278,11 @@ const CarouselEdit = (props) => {
                     {data?.status &&
                       <div className="w-fit gap-x-4 flex h-[22px] items-center justify-between  mb-[2px]">
                         {colorSelect?.map(item => {
+
                           return (
                             <div className="w-fit h-fit flex items-center">
-                              {item?.pivot?.product_id === data?.product_color_id && (
-                                colorGroup?.filter(e => e?.id == item?.pivot?.id)?.map(value => {
+                              {Number(item?.pivot?.product_id) === Number(data?.product_color_id) && (
+                                colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
                                   return (
                                     <button
                                       type="button"
@@ -314,62 +315,64 @@ const CarouselEdit = (props) => {
               })}
             </Slider>
           </div>
-          {photos?.length > 1 && <div className="w-full items-center justify-between mt-[10px] ">
-            <Slider
-              asNavFor={nav1}
-              ref={slider2}
-              slidesToShow={photos?.length > 2 ? photos?.length - 1 : photos?.length}
-              swipeToSlide={true}
-              focusOnSelect={true}
-              vertical={false}
-              // {...settings1}
-              className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-            >
-              {photos?.map((data) => {
-                return (
-                  <figure
-                    key={data?.id}
-                    className="!w-[95%]  md:!w-[95%] !h-[124px] cursor-pointer bg-btnBgColor rounded-lg   "
-                  >
-                    <img
-                      className="w-fit h-full md:p-0 object-top	object-cover
+          {photos?.length > 1 &&
+            <div className="w-full items-center justify-between mt-[10px] ">
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                slidesToShow={photos?.length > 2 ? photos?.length - 1 : photos?.length}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                // {...settings1}
+                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+              >
+                {photos?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="!w-[95%]  md:!w-[95%] !h-[124px] cursor-pointer bg-btnBgColor rounded-lg   "
+                    >
+                      <img
+                        className="w-fit h-full md:p-0 object-top	object-cover
                        md:w-full md:h-[96px] flex items-center justify-center border border-searchBgColor rounded-lg"
-                      src={data?.url_photo}
-                      alt="img"
-                    />
-                    {data?.status && <div className="flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                      {colorSelect?.map(item => {
-                        return (
-                          <div className="w-fit h-fit flex items-center">
-                            {item?.pivot?.product_id === data?.product_color_id && (
-                              colorGroup?.filter(e => e?.id == item?.pivot?.id)?.map(value => {
-                                return (
-                                  <button
-                                    type="button"
-                                    className={`w-[22px] h-[22px] rounded-full border bg-[${value?.hex}]`}
-                                  // style={{ background: `${value?.hex}` }}
-                                  ></button>
-                                )
-                              })
-                            )}
-                          </div>
-                        )
-                      })}
-                      {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {data?.status || "status"}
-                      </td>}
-                      {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {data?.status || "status"}
-                      </td>}
-                      {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {data?.status || "status"}
-                      </td>}
-                    </div>}
-                  </figure>
-                );
-              })}
-            </Slider>
-          </div>}
+                        src={data?.url_photo}
+                        alt="img"
+                      />
+                      {data?.status && <div className="flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                        {colorSelect?.map(item => {
+
+                          return (
+                            <div className="w-fit h-fit flex items-center">
+                              {item?.pivot?.product_id === data?.product_color_id && (
+                                colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                                  return (
+                                    <button
+                                      type="button"
+                                      className={`w-[22px] h-[22px] rounded-full border bg-[${value?.hex}]`}
+                                    // style={{ background: `${value?.hex}` }}
+                                    ></button>
+                                  )
+                                })
+                              )}
+                            </div>
+                          )
+                        })}
+                        {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {data?.status || "status"}
+                        </td>}
+                        {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {data?.status || "status"}
+                        </td>}
+                        {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {data?.status || "status"}
+                        </td>}
+                      </div>}
+                    </figure>
+                  );
+                })}
+              </Slider>
+            </div>}
         </div>
       </section>
     </div>
