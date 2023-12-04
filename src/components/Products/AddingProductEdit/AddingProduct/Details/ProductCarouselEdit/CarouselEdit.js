@@ -5,7 +5,7 @@ import { MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
 import { img1, img2, img3, img4 } from "../../../../../../assets";
 
 const CarouselEdit = (props) => {
-  const { colorGroup, colorSelect } = props
+  const { colorGroup, colorSelect, photos } = props
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
   function getCurrentDimension() {
@@ -29,8 +29,12 @@ const CarouselEdit = (props) => {
     // console.log("handleClickCarosuel", id);
     setModalOfCarsouel(true)
   }
-  // console.log(colorGroup, "colorGroup---");
-  // console.log(colorSelect, "colorSelectF---");
+  console.log(colorGroup, "colorGroup---");
+  console.log(colorSelect, "colorSelectF---");
+  console.log(photos, "photosF---");
+  colorSelect?.map(item => {
+    console.log(item?.pivot, "ITEM-pivot");
+  })
   const [imgGroup, setImgGroup] = useState([
     {
       id: 1,
@@ -227,13 +231,13 @@ const CarouselEdit = (props) => {
               ref={slider1}
               {...settingsModal}
             >
-              {imgGroup?.map((data) => {
+              {photos?.map((data) => {
                 return (
 
                   <img
                     key={data?.id}
                     className="w-[670px] h-[80vh] object-top	object-cover cursor-pointer"
-                    src={data?.img}
+                    src={data?.url_photo}
                     alt=""
                   />
                 );
@@ -259,36 +263,50 @@ const CarouselEdit = (props) => {
         </div>
 
       </div>
-      <section className="w-full flex flex-col flex-wrap h-[404px] gap-x-[10px]">
+      <section className="w-full flex flex-col flex-wrap h-full gap-x-[10px]">
         <div className="w-full h-full flex flex-col">
-          <div className="w-full h-full flex items-center">
+          <div className="w-full h-[404px]  flex items-center">
             <Slider
-              className="w-full h-full rounded-lg "
+              className="w-full h-full rounded-lg border overflow-hidden"
               asNavFor={nav2}
               ref={slider1}
               {...settings}
             >
-              {imgGroup?.map((data) => {
+              {photos?.map((data) => {
                 return (
                   <article key={data?.id} onClick={() => handleClickCarosuel(data?.id)} className="flex flex-col ">
-                    {data.colors && <div className="flex h-[22px] items-center justify-between  mb-[4px]">
-                      <span
-                        className=" w-[22px] h-[22px] rounded-full border"
-                        style={{ background: `${data.colors}` }}
-                      ></span>
-                      {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {data?.status || "status"}
-                      </td>}
-                      {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {data?.status || "status"}
-                      </td>}
-                      {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {data?.status || "status"}
-                      </td>}
-                    </div>}
+                    {data?.status &&
+                      <div className="w-fit gap-x-4 flex h-[22px] items-center justify-between  mb-[2px]">
+                        {colorSelect?.map(item => {
+                          return (
+                            <div className="w-fit h-fit flex items-center">
+                              {item?.pivot?.product_id === data?.product_color_id && (
+                                colorGroup?.filter(e => e?.id == item?.pivot?.id)?.map(value => {
+                                  return (
+                                    <button
+                                      type="button"
+                                      className={`w-[22px] h-[22px] rounded-full border bg-[${value?.hex}]`}
+                                    // style={{ background: `${value?.hex}` }}
+                                    ></button>
+                                  )
+                                })
+                              )}
+                            </div>
+                          )
+                        })}
+                        {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {data?.status || "status"}
+                        </td>}
+                        {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {data?.status || "status"}
+                        </td>}
+                        {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {data?.status || "status"}
+                        </td>}
+                      </div>}
                     <img
                       className="w-[350px] h-[377px] object-top	object-cover cursor-pointer"
-                      src={data?.img}
+                      src={data?.url_photo}
                       alt=""
                     />
                   </article>
@@ -296,7 +314,7 @@ const CarouselEdit = (props) => {
               })}
             </Slider>
           </div>
-          <div className="w-full items-center justify-between mt-[10px] ">
+          {photos && <div className="w-full items-center justify-between mt-[10px] ">
             <Slider
               asNavFor={nav1}
               ref={slider2}
@@ -307,7 +325,7 @@ const CarouselEdit = (props) => {
               {...settings1}
               className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
             >
-              {imgGroup?.map((data) => {
+              {photos?.map((data) => {
                 return (
                   <figure
                     key={data?.id}
@@ -316,14 +334,27 @@ const CarouselEdit = (props) => {
                     <img
                       className="w-fit h-full md:p-0 object-top	object-cover
                        md:w-full h-[96px] flex items-center justify-center border border-searchBgColor rounded-lg"
-                      src={data?.img}
+                      src={data?.url_photo}
                       alt="img"
                     />
-                    {data.colors && <div className="flex h-[22px] items-center justify-between mt-[4px] border rounded-[12px]">
-                      <span
-                        className=" w-[22px] h-[22px] rounded-full border"
-                        style={{ background: `${data.colors}` }}
-                      ></span>
+                    {data?.status && <div className="flex h-[22px] items-center justify-between mt-[4px] border rounded-[12px]">
+                      {colorSelect?.map(item => {
+                        return (
+                          <div className="w-fit h-fit flex items-center">
+                            {item?.pivot?.product_id === data?.product_color_id && (
+                              colorGroup?.filter(e => e?.id == item?.pivot?.id)?.map(value => {
+                                return (
+                                  <button
+                                    type="button"
+                                    className={`w-[22px] h-[22px] rounded-full border bg-[${value?.hex}]`}
+                                  // style={{ background: `${value?.hex}` }}
+                                  ></button>
+                                )
+                              })
+                            )}
+                          </div>
+                        )
+                      })}
                       {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
                         {data?.status || "status"}
                       </td>}
@@ -338,7 +369,7 @@ const CarouselEdit = (props) => {
                 );
               })}
             </Slider>
-          </div>
+          </div>}
         </div>
       </section>
     </div>
