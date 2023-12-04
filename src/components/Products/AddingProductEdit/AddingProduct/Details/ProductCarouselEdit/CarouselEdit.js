@@ -145,21 +145,21 @@ const CarouselEdit = (props) => {
     speed: 500,
   };
   let settings1 = {
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -167,14 +167,14 @@ const CarouselEdit = (props) => {
       {
         breakpoint: 560,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -182,14 +182,14 @@ const CarouselEdit = (props) => {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 360,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -314,30 +314,30 @@ const CarouselEdit = (props) => {
               })}
             </Slider>
           </div>
-          {photos && <div className="w-full items-center justify-between mt-[10px] ">
+          {photos?.length > 1 && <div className="w-full items-center justify-between mt-[10px] ">
             <Slider
               asNavFor={nav1}
               ref={slider2}
-              // slidesToShow={5}
+              slidesToShow={photos?.length > 2 ? photos?.length - 1 : photos?.length}
               swipeToSlide={true}
               focusOnSelect={true}
               vertical={false}
-              {...settings1}
+              // {...settings1}
               className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
             >
               {photos?.map((data) => {
                 return (
                   <figure
                     key={data?.id}
-                    className="!w-[95%]  md:!w-[95%] !h-[122px] cursor-pointer bg-btnBgColor rounded-lg   "
+                    className="!w-[95%]  md:!w-[95%] !h-[124px] cursor-pointer bg-btnBgColor rounded-lg   "
                   >
                     <img
                       className="w-fit h-full md:p-0 object-top	object-cover
-                       md:w-full h-[96px] flex items-center justify-center border border-searchBgColor rounded-lg"
+                       md:w-full md:h-[96px] flex items-center justify-center border border-searchBgColor rounded-lg"
                       src={data?.url_photo}
                       alt="img"
                     />
-                    {data?.status && <div className="flex h-[22px] items-center justify-between mt-[4px] border rounded-[12px]">
+                    {data?.status && <div className="flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                       {colorSelect?.map(item => {
                         return (
                           <div className="w-fit h-fit flex items-center">
