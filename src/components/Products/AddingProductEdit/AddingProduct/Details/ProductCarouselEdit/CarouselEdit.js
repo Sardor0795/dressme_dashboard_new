@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
-import { MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
+import { DeleteIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
 import { img1, img2, img3, img4 } from "../../../../../../assets";
+import { useMutation } from "@tanstack/react-query";
+import { useHttp } from "../../../../../../hook/useHttp";
 
 const CarouselEdit = (props) => {
+  const { request } = useHttp()
   const { colorGroup, colorSelect, photos } = props
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [deleteImg, setDeleteImg] = useState(false);
 
   function getCurrentDimension() {
     return {
@@ -26,15 +30,15 @@ const CarouselEdit = (props) => {
 
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
   const handleClickCarosuel = (id) => {
-    // console.log("handleClickCarosuel", id);
+    console.log("handleClickCarosuel", id);
     setModalOfCarsouel(true)
   }
   // console.log(colorGroup, "colorGroup---");
   // console.log(colorSelect, "colorSelectF---");
   console.log(photos, "photosF---");
-  colorSelect?.map(item => {
-    console.log(item?.pivot, "ITEM-pivot");
-  })
+  // colorSelect?.map(item => {
+  //   console.log(item?.pivot, "ITEM-pivot");
+  // })
   const [imgGroup, setImgGroup] = useState([
     {
       id: 1,
@@ -144,66 +148,26 @@ const CarouselEdit = (props) => {
     dots: false,
     speed: 500,
   };
-  let settings1 = {
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 560,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
 
-      {
-        breakpoint: 390,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 360,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  const ref = useRef(null);
+  const { mutate } = useMutation(() => {
+    return request({ url: `/seller/products/:id/delete-product-photo`, method: "DELETE", token: true });
+  });
 
-  const handleNextSlide = () => {
-    ref.current.slickNext();
-  };
+  const onHandleDeleteImage = () => {
+    mutate({},
+      {
+        onSuccess: res => {
+          console.log(res, "location delte");
 
-  const handlePrevSlide = () => {
-    ref.current.slickPrev();
-  };
+          // navigate("/locations-store")
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+  }
+
+
   return (
     <div className="max-w-[350px] w-full h-fit ">
 
@@ -215,6 +179,50 @@ const CarouselEdit = (props) => {
           className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 ${modalOfCarsouel ? "" : "hidden"
             }`}
         ></section>
+        <section
+          onClick={() => { setDeleteImg(false) }}
+          className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${deleteImg ? "" : "hidden"}`}
+        ></section>
+        {/* Image Delete Of Pop Confirm   */}
+        <section
+          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteImg ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
+        >
+          <button
+            onClick={() => setDeleteImg(false)}
+            type="button"
+            className="absolute  right-3 top-3 w-5 h-5 ">
+            <MenuCloseIcons
+              className="w-full h-full"
+              colors={"#a1a1a1"} />
+          </button>
+
+          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+              <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                <DeleteIcon width={30} />
+              </span>
+            </span>
+
+          </div>
+
+          {/* } */}
+          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+            <button
+              onClick={() => setDeleteImg(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Oтмена
+            </button>
+            <button
+              onClick={onHandleDeleteImage}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Удалить </button>
+          </div>
+
+        </section>
         <section
           className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
             }`}
@@ -236,7 +244,7 @@ const CarouselEdit = (props) => {
 
                   <img
                     key={data?.id}
-                    className="w-[670px] h-[80vh] object-top	object-cover cursor-pointer"
+                    className="w-[670px] h-[80vh] 	object-contain cursor-pointer"
                     src={data?.url_photo}
                     alt=""
                   />
@@ -246,7 +254,9 @@ const CarouselEdit = (props) => {
           </div>
           <div className="w-full flex items-center justify-between px-5 py-[15px]">
             <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-            <button className="text-[#D50000] text-lg not-italic font-AeonikProMedium">Удалить</button>
+            <button
+              onClick={() => setDeleteImg(true)}
+              className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
           </div>
 
         </section>
