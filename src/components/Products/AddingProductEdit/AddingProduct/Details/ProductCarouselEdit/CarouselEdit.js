@@ -13,7 +13,49 @@ const CarouselEdit = (props) => {
   const [modalId, setModalId] = useState(null);
   const [deleteImg, setDeleteImg] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  const [imageOne, setImageOne] = useState({
+    id: null,
+    product_color_id: null,
+    product_id: null,
+    status: null,
+    status_reason: null,
+    status_update: null,
+    url_photo: null,
+    url_File: null
+  });
+  const [imageTwo, setImageTwo] = useState({
+    id: null,
+    product_color_id: null,
+    product_id: null,
+    status: null,
+    status_reason: null,
+    status_update: null,
+    url_photo: null,
+    url_File: null
+  });
+  const [imageThree, setImageThree] = useState({
+    id: null,
+    product_color_id: null,
+    product_id: null,
+    status: null,
+    status_reason: null,
+    status_update: null,
+    url_photo: null,
+    url_File: null
+  });
+  const [imageFour, setImageFour] = useState({
+    id: null,
+    product_color_id: null,
+    product_id: null,
+    status: null,
+    status_reason: null,
+    status_update: null,
+    url_photo: null,
+    url_File: null
+  });
+
   const [state, setState] = useState({
+    pictureBgStatus1: null,
     pictureBgFile1: null,
     pictureBgView1: null,
     pictureBgFile2: null,
@@ -23,7 +65,6 @@ const CarouselEdit = (props) => {
     pictureBgFile4: null,
     pictureBgView4: null,
   });
-
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -41,31 +82,86 @@ const CarouselEdit = (props) => {
   }, [screenSize]);
 
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
-  const handleClickCarosuel = (id) => {
-    setModalId(id)
+  function handleClickCarosuel() {
     setModalOfCarsouel(true)
   }
+
+  const handleLocationImage1 = (e) => {
+    setImageOne({
+      ...imageOne,
+      url_photo: e.target.files[0],
+      url_File: URL.createObjectURL(e.target.files[0])
+    })
+
+  };
   const handleLocationImage2 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile2: e.target.files[0],
-      pictureBgView2: URL.createObjectURL(e.target.files[0])
+    setImageTwo({
+      ...imageTwo,
+      url_photo: e.target.files[0],
+      url_File: URL.createObjectURL(e.target.files[0])
     })
   };
   const handleLocationImage3 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile3: e.target.files[0],
-      pictureBgView3: URL.createObjectURL(e.target.files[0])
+    setImageThree({
+      ...imageTwo,
+      url_photo: e.target.files[0],
+      url_File: URL.createObjectURL(e.target.files[0])
     })
   };
   const handleLocationImage4 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile4: e.target.files[0],
-      pictureBgView4: URL.createObjectURL(e.target.files[0])
+    setImageFour({
+      ...imageTwo,
+      url_photo: e.target.files[0],
+      url_File: URL.createObjectURL(e.target.files[0])
     })
+
   };
+  console.log(photos, "photo1-------");
+
+  useEffect(() => {
+    setImageOne({
+      ...imageOne,
+      id: photos && photos[0]?.id,
+      product_color_id: photos && photos[0]?.product_color_id,
+      product_id: photos && photos[0]?.product_id,
+      status: photos && photos[0]?.status,
+      status_reason: photos && photos[0]?.status_reason,
+      status_update: photos && photos[0]?.status_update,
+      url_photo: photos && photos[0]?.url_photo,
+    })
+    setImageTwo({
+      ...imageTwo,
+      id: photos && photos[1]?.id,
+      product_color_id: photos && photos[1]?.product_color_id,
+      product_id: photos && photos[1]?.product_id,
+      status: photos && photos[1]?.status,
+      status_reason: photos && photos[1]?.status_reason,
+      status_update: photos && photos[1]?.status_update,
+      url_photo: photos && photos[1]?.url_photo,
+    })
+    setImageThree({
+      ...imageThree,
+      id: photos && photos[2]?.id,
+      product_color_id: photos && photos[2]?.product_color_id,
+      product_id: photos && photos[2]?.product_id,
+      status: photos && photos[2]?.status,
+      status_reason: photos && photos[2]?.status_reason,
+      status_update: photos && photos[2]?.status_update,
+      url_photo: photos && photos[2]?.url_photo,
+    })
+    setImageFour({
+      ...imageFour,
+      id: photos && photos[3]?.id,
+      product_color_id: photos && photos[3]?.product_color_id,
+      product_id: photos && photos[3]?.product_id,
+      status: photos && photos[3]?.status,
+      status_reason: photos && photos[3]?.status_reason,
+      status_update: photos && photos[3]?.status_update,
+      url_photo: photos && photos[3]?.url_photo,
+    })
+
+  }, [photos])
+
   console.log(modalId, "modalId");
   const [imgGroup, setImgGroup] = useState([
     {
@@ -190,27 +286,139 @@ const CarouselEdit = (props) => {
             <div
               className="w-[670px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
             >
-              {photos?.filter(e => e?.id === modalId)?.map((data) => {
-                return (
-                  <div className="flex flex-col items-start ">
-                    <img
-                      key={data?.id}
-                      className="w-[670px] h-[80vh] 	object-contain cursor-pointer"
-                      src={data?.url_photo}
-                      alt=""
+              < div className="w-full  flex flex-col items-center justify-start ">
+                {modalId === Number(imageOne?.id) &&
+                  <label
+                    htmlFor={imageOne?.id}
+                    className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id={imageOne?.id}
+                      type="file"
+                      onChange={handleLocationImage1}
+                      accept=" image/*"
                     />
-                    <div className="w-full flex items-center justify-between px-5 py-[15px]">
-                      <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-                      <button
-                        onClick={() => {
-                          setDeleteImg(true)
-                          setDeleteId(data?.id)
-                        }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
+
+
+                    {!imageOne?.url_photo && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    )}
+                    {imageOne?.url_photo && (
+                      <img
+                        src={imageOne?.url_photo}
+                        alt="backImg"
+                        className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
+
+                  </label>}
+                {modalId === Number(imageTwo?.id) && <label
+                  htmlFor={imageTwo?.id}
+                  className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id={imageTwo?.id}
+                    type="file"
+                    onChange={handleLocationImage2}
+                    accept=" image/*"
+                  />
+
+
+                  {!imageTwo?.url_photo && (
+                    <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                      <DownloadIcon />
+                      <div className="text-[11px] text-textLightColor mt-[5px]">
+                        (необязательно)
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  )}
+                  {imageTwo?.url_photo && (
+                    <img
+                      src={imageTwo?.url_photo}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                  )}
+
+                </label>}
+                {modalId === Number(imageThree?.id) && <label
+                  htmlFor={imageThree?.id}
+                  className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id={imageThree?.id}
+                    type="file"
+                    onChange={handleLocationImage3}
+                    accept=" image/*"
+                  />
+
+
+                  {!imageThree?.url_photo && (
+                    <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                      <DownloadIcon />
+                      <div className="text-[11px] text-textLightColor mt-[5px]">
+                        (необязательно)
+                      </div>
+                    </div>
+                  )}
+                  {imageThree?.url_photo && (
+                    <img
+                      src={imageThree?.url_photo}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                  )}
+
+                </label>}
+                {modalId === Number(imageFour?.id) && <label
+                  htmlFor={imageFour?.id}
+                  className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id={imageFour?.id}
+                    type="file"
+                    onChange={handleLocationImage4}
+                    accept=" image/*"
+                  />
+
+
+                  {!imageFour?.url_photo && (
+                    <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                      <DownloadIcon />
+                      <div className="text-[11px] text-textLightColor mt-[5px]">
+                        (необязательно)
+                      </div>
+                    </div>
+                  )}
+                  {imageFour?.url_photo && (
+                    <img
+                      src={imageFour?.url_photo}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                  )}
+
+                </label>}
+              </div>
+
+              <div className="w-full flex items-center justify-between px-5 py-[15px]">
+                <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
+                <button
+                  onClick={() => {
+                    setDeleteImg(true)
+                    // setDeleteId(data?.id)
+                  }}
+                  className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
+              </div>
             </div>
           </div>
 
@@ -234,55 +442,54 @@ const CarouselEdit = (props) => {
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
-              {photos?.map((data, index) => {
-                return (
-                  <div className="">
-                    {index == 0 &&
-                      < article
-                        key={data?.id}
-                        onClick={() => handleClickCarosuel(data?.id)}
-                        className="flex flex-col ">
-                        {data?.status &&
-                          <div className="w-fit gap-x-4 flex h-[22px] items-center justify-between  mb-[2px]">
-                            {colorSelect?.map(item => {
+              <div className="">
+                < article
+                  onClick={() => {
+                    handleClickCarosuel()
+                    setModalId(imageOne?.id)
+                  }}
+                  className="flex flex-col ">
+                  {imageOne?.status &&
+                    <div className="w-fit flex h-[22px] items-center gap-x-3 border rounded-[12px]">
+                      {colorSelect?.map(item => {
 
-                              return (
-                                <div className="w-fit h-fit flex items-center">
-                                  {Number(item?.pivot?.product_id) === Number(data?.product_color_id) && (
-                                    colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                                      return (
-                                        <button
-                                          type="button"
-                                          className={`w-[22px] h-[22px] rounded-full border `}
-                                          style={{ background: `${value?.hex}` }}
-                                        ></button>
-                                      )
-                                    })
-                                  )}
-                                </div>
-                              )
-                            })}
-                            {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[12px] rounded-[10px] ">
-                              {data?.status || "status"}
+                        return (
+                          <div className="w-fit h-fit flex items-center">
+                            {
+                              colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                                return (
+                                  <button
+                                    type="button"
+                                    className={`w-[22px] h-[22px] rounded-full border `}
+                                    style={{ background: `${value?.hex}` }}
+                                  ></button>
+                                )
+                              })
+                            }
+                            {imageOne?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                              {imageOne?.status || "status"}
                             </td>}
-                            {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[12px] rounded-[10px] ">
-                              {data?.status || "status"}
+                            {imageOne?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                              {imageOne?.status || "status"}
                             </td>}
-                            {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[12px] rounded-[10px] ">
-                              {data?.status || "status"}
+                            {imageOne?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                              {imageOne?.status || "status"}
                             </td>}
-                          </div>}
-                        <div className="w-[350px] h-[377px] flex items-center">
-                          <img
-                            className=" object-contain cursor-pointer"
-                            src={data?.url_photo}
-                            alt=""
-                          />
-                        </div>
-                      </article>}
+                          </div>
+                        )
+                      })}
+
+                    </div>}
+                  <div className="w-[350px] h-[377px] flex items-center">
+                    <img
+                      className=" object-contain cursor-pointer"
+                      src={imageOne?.url_photo}
+                      alt=""
+                    />
                   </div>
-                );
-              })}
+                </article>
+              </div>
+
             </div>
           </div>
 
@@ -290,7 +497,7 @@ const CarouselEdit = (props) => {
             <div
               className="grid grid-cols-3 gap-x-[6px]   rounded-lg"
             >
-              {photos?.map((data, index) => {
+              {/* {photos?.map((data, index) => {
                 return (
 
                   <figure
@@ -336,26 +543,29 @@ const CarouselEdit = (props) => {
                       </div>}
                   </figure>
                 );
-              })}
-              {photos?.length <= 1 && < div className="w-full h-[124px] flex flex-col items-center justify-start ">
+              })} */}
+
+              < div className="w-full h-[124px] flex flex-col items-center justify-start ">
                 <button
                   type="button"
+                  onClick={() => {
+                    handleClickCarosuel()
+                    setModalId(imageTwo?.id)
+                  }}
                   className="h-[96px] w-full flex items-center justify-center "
                 >
                   <label
-                    htmlFor="DataImg2"
+                    htmlFor={imageTwo?.id}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
                     <input
                       className="hidden"
-                      id="DataImg2"
+                      id={imageTwo?.id}
                       type="file"
                       onChange={handleLocationImage2}
                       accept=" image/*"
                     />
-
-
-                    {!state?.pictureBgView2 && (
+                    {!imageTwo?.url_photo && (
                       <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                         <DownloadIcon />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -363,14 +573,13 @@ const CarouselEdit = (props) => {
                         </div>
                       </div>
                     )}
-                    {state?.pictureBgView2 && (
+                    {imageTwo?.url_photo && (
                       <img
-                        src={state?.pictureBgView2}
+                        src={imageTwo?.url_photo}
                         alt="backImg"
                         className="w-full h-full border border-searchBgColor object-contain rounded-lg"
                       />
                     )}
-
                   </label>
                 </button>
 
@@ -390,31 +599,44 @@ const CarouselEdit = (props) => {
                             )
                           })
                         }
+                        {imageTwo?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageTwo?.status || "status"}
+                        </td>}
+                        {imageTwo?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageTwo?.status || "status"}
+                        </td>}
+                        {imageTwo?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageTwo?.status || "status"}
+                        </td>}
                       </div>
                     )
                   })}
 
                 </div>
-              </div>}
-              {photos?.length <= 2 && <div className="w-full h-[124px] flex flex-col items-center justify-start ">
+              </div>
+              <div className="w-full h-[124px] flex flex-col items-center justify-start ">
                 <button
+                  onClick={() => {
+                    handleClickCarosuel()
+                    setModalId(imageThree?.id)
+                  }}
                   type="button"
                   className="h-[96px] w-full flex items-center justify-center "
                 >
                   <label
-                    htmlFor="DataImg3"
+                    htmlFor={imageThree?.id}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
                     <input
                       className="hidden"
-                      id="DataImg3"
+                      id={imageThree?.id}
                       type="file"
                       onChange={handleLocationImage3}
                       accept=" image/*"
                     />
 
 
-                    {!state?.pictureBgView3 && (
+                    {!imageThree?.url_photo && (
                       <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                         <DownloadIcon />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -422,9 +644,9 @@ const CarouselEdit = (props) => {
                         </div>
                       </div>
                     )}
-                    {state?.pictureBgView3 && (
+                    {imageThree?.url_photo && (
                       <img
-                        src={state?.pictureBgView3}
+                        src={imageThree?.url_photo}
                         alt="backImg"
                         className="w-full h-full border border-searchBgColor object-contain rounded-lg"
                       />
@@ -448,15 +670,28 @@ const CarouselEdit = (props) => {
                             )
                           })
                         }
+                        {imageThree?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageThree?.status || "status"}
+                        </td>}
+                        {imageThree?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageThree?.status || "status"}
+                        </td>}
+                        {imageThree?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageThree?.status || "status"}
+                        </td>}
                       </div>
                     )
                   })}
 
                 </div>
-              </div>}
-              {photos?.length <= 3 && <div className="w-full h-[124px] flex flex-col items-center justify-start  ">
+              </div>
+              <div className="w-full h-[124px] flex flex-col items-center justify-start  ">
                 <button
                   type="button"
+                  onClick={() => {
+                    handleClickCarosuel()
+                    setModalId(imageFour?.id)
+                  }}
                   className="h-[96px] w-full flex items-center justify-center "
                 >
                   <label
@@ -472,7 +707,7 @@ const CarouselEdit = (props) => {
                     />
 
 
-                    {!state?.pictureBgView4 && (
+                    {!imageFour?.url_photo && (
                       <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                         <DownloadIcon />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -480,9 +715,9 @@ const CarouselEdit = (props) => {
                         </div>
                       </div>
                     )}
-                    {state?.pictureBgView4 && (
+                    {imageFour?.url_photo && (
                       <img
-                        src={state?.pictureBgView4}
+                        src={imageFour?.url_photo}
                         alt="backImg"
                         className="w-full h-full border border-searchBgColor object-contain rounded-lg"
                       />
@@ -506,11 +741,20 @@ const CarouselEdit = (props) => {
                             )
                           })
                         }
+                        {imageFour?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageFour?.status || "status"}
+                        </td>}
+                        {imageFour?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageFour?.status || "status"}
+                        </td>}
+                        {imageFour?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageFour?.status || "status"}
+                        </td>}
                       </div>
                     )
                   })}
                 </div>
-              </div>}
+              </div>
             </div>
 
           </div>
