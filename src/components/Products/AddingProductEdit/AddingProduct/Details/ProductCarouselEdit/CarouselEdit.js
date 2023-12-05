@@ -14,7 +14,7 @@ const CarouselEdit = (props) => {
   const [deleteImg, setDeleteImg] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [imageOne, setImageOne] = useState({
-    id: null,
+    id: 1,
     product_color_id: null,
     product_id: null,
     status: null,
@@ -53,18 +53,8 @@ const CarouselEdit = (props) => {
     url_photo: null,
     url_File: null
   });
+  console.log(imageThree?.id, "image?.three----0");
 
-  const [state, setState] = useState({
-    pictureBgStatus1: null,
-    pictureBgFile1: null,
-    pictureBgView1: null,
-    pictureBgFile2: null,
-    pictureBgView2: null,
-    pictureBgFile3: null,
-    pictureBgView3: null,
-    pictureBgFile4: null,
-    pictureBgView4: null,
-  });
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -89,39 +79,40 @@ const CarouselEdit = (props) => {
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
-      url_photo: e.target.files[0],
-      url_File: URL.createObjectURL(e.target.files[0])
+      url_File: e.target.files[0],
+      url_photo: URL.createObjectURL(e.target.files[0])
     })
 
   };
   const handleLocationImage2 = (e) => {
     setImageTwo({
       ...imageTwo,
-      url_photo: e.target.files[0],
-      url_File: URL.createObjectURL(e.target.files[0])
+      url_File: e.target.files[0],
+      url_photo: URL.createObjectURL(e.target.files[0])
     })
   };
   const handleLocationImage3 = (e) => {
     setImageThree({
       ...imageTwo,
-      url_photo: e.target.files[0],
-      url_File: URL.createObjectURL(e.target.files[0])
+      url_File: e.target.files[0],
+      url_photo: URL.createObjectURL(e.target.files[0])
     })
   };
   const handleLocationImage4 = (e) => {
     setImageFour({
       ...imageTwo,
-      url_photo: e.target.files[0],
-      url_File: URL.createObjectURL(e.target.files[0])
+      url_File: e.target.files[0],
+      url_photo: URL.createObjectURL(e.target.files[0])
     })
 
   };
-  console.log(photos, "photo1-------");
+  // console.log(photos, "photo1-------");
+  console.log(imageThree?.id, "image?.three--1");
 
   useEffect(() => {
     setImageOne({
       ...imageOne,
-      id: photos && photos[0]?.id,
+      id: photos && photos[0]?.id || 1,
       product_color_id: photos && photos[0]?.product_color_id,
       product_id: photos && photos[0]?.product_id,
       status: photos && photos[0]?.status,
@@ -131,7 +122,7 @@ const CarouselEdit = (props) => {
     })
     setImageTwo({
       ...imageTwo,
-      id: photos && photos[1]?.id,
+      id: photos && photos[1]?.id || 2,
       product_color_id: photos && photos[1]?.product_color_id,
       product_id: photos && photos[1]?.product_id,
       status: photos && photos[1]?.status,
@@ -141,7 +132,7 @@ const CarouselEdit = (props) => {
     })
     setImageThree({
       ...imageThree,
-      id: photos && photos[2]?.id,
+      id: photos && photos[2]?.id || 3,
       product_color_id: photos && photos[2]?.product_color_id,
       product_id: photos && photos[2]?.product_id,
       status: photos && photos[2]?.status,
@@ -149,9 +140,10 @@ const CarouselEdit = (props) => {
       status_update: photos && photos[2]?.status_update,
       url_photo: photos && photos[2]?.url_photo,
     })
+
     setImageFour({
       ...imageFour,
-      id: photos && photos[3]?.id,
+      id: photos && photos[3]?.id || 4,
       product_color_id: photos && photos[3]?.product_color_id,
       product_id: photos && photos[3]?.product_id,
       status: photos && photos[3]?.status,
@@ -162,7 +154,6 @@ const CarouselEdit = (props) => {
 
   }, [photos])
 
-  console.log(modalId, "modalId");
   const [imgGroup, setImgGroup] = useState([
     {
       id: 1,
@@ -216,8 +207,13 @@ const CarouselEdit = (props) => {
         }
       })
   }
+  console.log(modalId, "modalId");
 
-
+  console.log(imageOne?.id, "image?.one");
+  console.log(imageTwo?.id, "image?.two");
+  console.log(imageThree?.id, "image?.three----3");
+  console.log(imageFour?.id, "image?.four");
+  console.log(' ----------------------------');
   return (
     <div className="max-w-[350px] w-full h-fit ">
 
@@ -318,96 +314,97 @@ const CarouselEdit = (props) => {
                     )}
 
                   </label>}
-                {modalId === Number(imageTwo?.id) && <label
-                  htmlFor={imageTwo?.id}
-                  className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                >
-                  <input
-                    className="hidden"
-                    id={imageTwo?.id}
-                    type="file"
-                    onChange={handleLocationImage2}
-                    accept=" image/*"
-                  />
-
-
-                  {!imageTwo?.url_photo && (
-                    <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
-                      </div>
-                    </div>
-                  )}
-                  {imageTwo?.url_photo && (
-                    <img
-                      src={imageTwo?.url_photo}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                {modalId === Number(imageTwo?.id) &&
+                  <label
+                    htmlFor={imageTwo?.id}
+                    className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id={imageTwo?.id}
+                      type="file"
+                      onChange={handleLocationImage2}
+                      accept=" image/*"
                     />
-                  )}
-
-                </label>}
-                {modalId === Number(imageThree?.id) && <label
-                  htmlFor={imageThree?.id}
-                  className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                >
-                  <input
-                    className="hidden"
-                    id={imageThree?.id}
-                    type="file"
-                    onChange={handleLocationImage3}
-                    accept=" image/*"
-                  />
-
-
-                  {!imageThree?.url_photo && (
-                    <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
+                    {!imageTwo?.url_photo && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {imageThree?.url_photo && (
-                    <img
-                      src={imageThree?.url_photo}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    )}
+                    {imageTwo?.url_photo && (
+                      <img
+                        src={imageTwo?.url_photo}
+                        alt="backImg"
+                        className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
+
+                  </label>}
+                {modalId === Number(imageThree?.id) &&
+                  <label
+                    htmlFor={imageThree?.id}
+                    className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id={imageThree?.id}
+                      type="file"
+                      onChange={handleLocationImage3}
+                      accept=" image/*"
                     />
-                  )}
-
-                </label>}
-                {modalId === Number(imageFour?.id) && <label
-                  htmlFor={imageFour?.id}
-                  className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                >
-                  <input
-                    className="hidden"
-                    id={imageFour?.id}
-                    type="file"
-                    onChange={handleLocationImage4}
-                    accept=" image/*"
-                  />
 
 
-                  {!imageFour?.url_photo && (
-                    <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
+                    {!imageThree?.url_photo && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {imageFour?.url_photo && (
-                    <img
-                      src={imageFour?.url_photo}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
-                  )}
+                    )}
+                    {imageThree?.url_photo && (
+                      <img
+                        src={imageThree?.url_photo}
+                        alt="backImg"
+                        className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
 
-                </label>}
+                  </label>}
+                {modalId === Number(imageFour?.id) &&
+                  <label
+                    htmlFor={imageFour?.id}
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id={imageFour?.id}
+                      type="file"
+                      onChange={handleLocationImage4}
+                      accept=" image/*"
+                    />
+
+
+                    {!imageFour?.url_photo && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    )}
+                    {imageFour?.url_photo && (
+                      <img
+                        src={imageFour?.url_photo}
+                        alt="backImg"
+                        className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
+
+                  </label>}
               </div>
 
               <div className="w-full flex items-center justify-between px-5 py-[15px]">
@@ -548,39 +545,41 @@ const CarouselEdit = (props) => {
               < div className="w-full h-[124px] flex flex-col items-center justify-start ">
                 <button
                   type="button"
-                  onClick={() => {
-                    handleClickCarosuel()
-                    setModalId(imageTwo?.id)
-                  }}
+
                   className="h-[96px] w-full flex items-center justify-center "
                 >
-                  <label
-                    htmlFor={imageTwo?.id}
+                  {!imageTwo?.url_photo ? <label
+                    htmlFor={"imageTwo?.id"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
                     <input
                       className="hidden"
-                      id={imageTwo?.id}
+                      id={"imageTwo?.id"}
                       type="file"
                       onChange={handleLocationImage2}
                       accept=" image/*"
                     />
-                    {!imageTwo?.url_photo && (
-                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                        <DownloadIcon />
-                        <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
-                        </div>
+
+                    <div
+                      onClick={() => setModalId(null)}
+                      className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                      <DownloadIcon />
+                      <div className="text-[11px] text-textLightColor mt-[5px]">
+                        (необязательно)
                       </div>
-                    )}
-                    {imageTwo?.url_photo && (
-                      <img
-                        src={imageTwo?.url_photo}
-                        alt="backImg"
-                        className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                      />
-                    )}
+                    </div>
                   </label>
+                    :
+                    <img
+                      onClick={() => {
+                        handleClickCarosuel()
+                        setModalId(imageTwo?.id)
+                      }}
+                      src={imageTwo?.url_photo}
+                      alt="backImg"
+                      className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
+                    />
+                  }
                 </button>
 
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
@@ -616,43 +615,40 @@ const CarouselEdit = (props) => {
               </div>
               <div className="w-full h-[124px] flex flex-col items-center justify-start ">
                 <button
-                  onClick={() => {
-                    handleClickCarosuel()
-                    setModalId(imageThree?.id)
-                  }}
                   type="button"
                   className="h-[96px] w-full flex items-center justify-center "
                 >
-                  <label
-                    htmlFor={imageThree?.id}
+                  {!imageThree?.url_photo ? <label
+                    htmlFor={"imageThree?.id"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
                     <input
                       className="hidden"
-                      id={imageThree?.id}
+                      id={"imageThree?.id"}
                       type="file"
                       onChange={handleLocationImage3}
                       accept=" image/*"
                     />
-
-
-                    {!imageThree?.url_photo && (
-                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                        <DownloadIcon />
-                        <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
-                        </div>
+                    <div onClick={() => setModalId(null)}
+                      className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                      <DownloadIcon />
+                      <div className="text-[11px] text-textLightColor mt-[5px]">
+                        (необязательно)
                       </div>
-                    )}
-                    {imageThree?.url_photo && (
-                      <img
-                        src={imageThree?.url_photo}
-                        alt="backImg"
-                        className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                      />
-                    )}
-
+                    </div>
                   </label>
+                    :
+                    <img
+                      onClick={() => {
+                        handleClickCarosuel()
+                        setModalId(imageThree?.id)
+                      }}
+                      src={imageThree?.url_photo}
+                      alt="backImg"
+                      className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
+                    />
+                  }
+
                 </button>
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                   {colorSelect?.map(item => {
@@ -688,42 +684,40 @@ const CarouselEdit = (props) => {
               <div className="w-full h-[124px] flex flex-col items-center justify-start  ">
                 <button
                   type="button"
-                  onClick={() => {
-                    handleClickCarosuel()
-                    setModalId(imageFour?.id)
-                  }}
+
                   className="h-[96px] w-full flex items-center justify-center "
                 >
-                  <label
-                    htmlFor="DataImg4"
+                  {!imageFour?.url_photo ? <label
+                    htmlFor={"imageFour?.id"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
                     <input
                       className="hidden"
-                      id="DataImg4"
+                      id={"imageFour?.id"}
                       type="file"
                       onChange={handleLocationImage4}
                       accept=" image/*"
                     />
-
-
-                    {!imageFour?.url_photo && (
-                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                        <DownloadIcon />
-                        <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
-                        </div>
+                    <div onClick={() => setModalId(null)}
+                      className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                      <DownloadIcon />
+                      <div className="text-[11px] text-textLightColor mt-[5px]">
+                        (необязательно)
                       </div>
-                    )}
-                    {imageFour?.url_photo && (
-                      <img
-                        src={imageFour?.url_photo}
-                        alt="backImg"
-                        className="w-full h-full border border-searchBgColor object-contain rounded-lg"
-                      />
-                    )}
-
+                    </div>
                   </label>
+                    :
+                    <img
+                      onClick={() => {
+                        handleClickCarosuel()
+                        setModalId(imageFour?.id)
+                      }}
+                      src={imageFour?.url_photo}
+                      alt="backImg"
+                      className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
+                    />
+                  }
+
                 </button>
 
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
