@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
-import { DeleteIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
+import { DeleteIcon, DownloadIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
 import { img1, img2, img3, img4 } from "../../../../../../assets";
 import { useMutation } from "@tanstack/react-query";
 import { useHttp } from "../../../../../../hook/useHttp";
@@ -10,7 +10,19 @@ const CarouselEdit = (props) => {
   const { request } = useHttp()
   const { colorGroup, colorSelect, photos } = props
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [modalId, setModalId] = useState(null);
   const [deleteImg, setDeleteImg] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [state, setState] = useState({
+    pictureBgFile1: null,
+    pictureBgView1: null,
+    pictureBgFile2: null,
+    pictureBgView2: null,
+    pictureBgFile3: null,
+    pictureBgView3: null,
+    pictureBgFile4: null,
+    pictureBgView4: null,
+  });
 
   function getCurrentDimension() {
     return {
@@ -30,15 +42,31 @@ const CarouselEdit = (props) => {
 
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
   const handleClickCarosuel = (id) => {
-    console.log("handleClickCarosuel", id);
+    setModalId(id)
     setModalOfCarsouel(true)
   }
-  // console.log(colorGroup, "colorGroup---");
-  // console.log(colorSelect, "colorSelectF---");
-  console.log(photos, "photosF---");
-  // colorSelect?.map(item => {
-  //   console.log(item?.pivot, "ITEM-pivot");
-  // })
+  const handleLocationImage2 = (e) => {
+    setState({
+      ...state,
+      pictureBgFile2: e.target.files[0],
+      pictureBgView2: URL.createObjectURL(e.target.files[0])
+    })
+  };
+  const handleLocationImage3 = (e) => {
+    setState({
+      ...state,
+      pictureBgFile3: e.target.files[0],
+      pictureBgView3: URL.createObjectURL(e.target.files[0])
+    })
+  };
+  const handleLocationImage4 = (e) => {
+    setState({
+      ...state,
+      pictureBgFile4: e.target.files[0],
+      pictureBgView4: URL.createObjectURL(e.target.files[0])
+    })
+  };
+  console.log(modalId, "modalId");
   const [imgGroup, setImgGroup] = useState([
     {
       id: 1,
@@ -70,87 +98,14 @@ const CarouselEdit = (props) => {
       colors: "#ffd700",
     },
   ]);
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
-  const slider1 = useRef(null);
-  const slider2 = useRef(null);
 
-  useEffect(() => {
-    setNav1(slider1.current);
-    setNav2(slider2.current);
-  }, []);
 
-  const NextArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <main
-        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  right-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
-        onClick={onClick}
-      >
-        <button className="next">
-          <GrFormNext size={20} />
-        </button>
-      </main>
-    );
-  };
 
-  const PrevArrow = (props) => {
-    const { onClick } = props;
-    return (
-      <main
-        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-10  left-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
-        onClick={onClick}
-      >
-        <button className="prev">
-          <GrFormPrevious size={20} />
-        </button>
-      </main>
-    );
-  };
-  const NextArrowModal = (props) => {
-    const { onClick } = props;
-    return (
-      <main
-        className={`absolute text-center cursor-pointer no-underline opacity-70 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  right-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
-        onClick={onClick}
-      >
-        <button className="next">
-          <GrFormNext size={20} />
-        </button>
-      </main>
-    );
-  };
 
-  const PrevArrowModal = (props) => {
-    const { onClick } = props;
-    return (
-      <main
-        className={`absolute text-center cursor-pointer no-underline opacity-70 w-[44px] h-[44px] flex items-center justify-center top-[50%] z-10  left-[-70px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
-        onClick={onClick}
-      >
-        <button className="prev">
-          <GrFormPrevious size={20} />
-        </button>
-      </main>
-    );
-  };
-  let settings = {
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    infinite: true,
-    dots: false,
-    speed: 500,
-  };
-  let settingsModal = {
-    nextArrow: <NextArrowModal />,
-    prevArrow: <PrevArrowModal />,
-    infinite: true,
-    dots: false,
-    speed: 500,
-  };
+
 
   const { mutate } = useMutation(() => {
-    return request({ url: `/seller/products/:id/delete-product-photo`, method: "DELETE", token: true });
+    return request({ url: `/seller/products/:${Number(deleteId)}/delete-product-photo`, method: "DELETE", token: true });
   });
 
   const onHandleDeleteImage = () => {
@@ -159,7 +114,6 @@ const CarouselEdit = (props) => {
         onSuccess: res => {
           console.log(res, "location delte");
 
-          // navigate("/locations-store")
         },
         onError: err => {
           console.log(err);
@@ -233,30 +187,31 @@ const CarouselEdit = (props) => {
             <MenuCloseIcons colors="#fff" />
           </button>
           <div>
-            <Slider
-              className="w-[670px] h-[80vh] bg-white rounded-lg mt-[-4px] p-0 m-0 "
-              asNavFor={nav2}
-              ref={slider1}
-              {...settingsModal}
+            <div
+              className="w-[670px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
             >
-              {photos?.map((data) => {
+              {photos?.filter(e => e?.id === modalId)?.map((data) => {
                 return (
-
-                  <img
-                    key={data?.id}
-                    className="w-[670px] h-[80vh] 	object-contain cursor-pointer"
-                    src={data?.url_photo}
-                    alt=""
-                  />
+                  <div className="flex flex-col items-start ">
+                    <img
+                      key={data?.id}
+                      className="w-[670px] h-[80vh] 	object-contain cursor-pointer"
+                      src={data?.url_photo}
+                      alt=""
+                    />
+                    <div className="w-full flex items-center justify-between px-5 py-[15px]">
+                      <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
+                      <button
+                        onClick={() => {
+                          setDeleteImg(true)
+                          setDeleteId(data?.id)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
+                    </div>
+                  </div>
                 );
               })}
-            </Slider>
-          </div>
-          <div className="w-full flex items-center justify-between px-5 py-[15px]">
-            <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-            <button
-              onClick={() => setDeleteImg(true)}
-              className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
+            </div>
           </div>
 
         </section>
@@ -276,80 +231,81 @@ const CarouselEdit = (props) => {
       <section className="w-full flex flex-col flex-wrap h-full gap-x-[10px]">
         <div className="w-full h-full flex flex-col">
           <div className="w-full h-[404px]  flex items-center">
-            <Slider
-              className="w-full h-full rounded-lg border overflow-hidden"
-              asNavFor={nav2}
-              ref={slider1}
-              {...settings}
+            <div
+              className="w-full h-full rounded-[12px] border overflow-hidden"
             >
-              {photos?.map((data) => {
+              {photos?.map((data, index) => {
                 return (
-                  <article key={data?.id} onClick={() => handleClickCarosuel(data?.id)} className="flex flex-col ">
-                    {data?.status &&
-                      <div className="w-fit gap-x-4 flex h-[22px] items-center justify-between  mb-[2px]">
-                        {colorSelect?.map(item => {
+                  <div className="">
+                    {index == 0 &&
+                      < article
+                        key={data?.id}
+                        onClick={() => handleClickCarosuel(data?.id)}
+                        className="flex flex-col ">
+                        {data?.status &&
+                          <div className="w-fit gap-x-4 flex h-[22px] items-center justify-between  mb-[2px]">
+                            {colorSelect?.map(item => {
 
-                          return (
-                            <div className="w-fit h-fit flex items-center">
-                              {Number(item?.pivot?.product_id) === Number(data?.product_color_id) && (
-                                colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                                  return (
-                                    <button
-                                      type="button"
-                                      className={`w-[22px] h-[22px] rounded-full border `}
-                                      style={{ background: `${value?.hex}` }}
-                                    ></button>
-                                  )
-                                })
-                              )}
-                            </div>
-                          )
-                        })}
-                        {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {data?.status || "status"}
-                        </td>}
-                        {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {data?.status || "status"}
-                        </td>}
-                        {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {data?.status || "status"}
-                        </td>}
-                      </div>}
-                    <img
-                      className="w-[350px] h-[377px] object-top	object-cover cursor-pointer"
-                      src={data?.url_photo}
-                      alt=""
-                    />
-                  </article>
+                              return (
+                                <div className="w-fit h-fit flex items-center">
+                                  {Number(item?.pivot?.product_id) === Number(data?.product_color_id) && (
+                                    colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                                      return (
+                                        <button
+                                          type="button"
+                                          className={`w-[22px] h-[22px] rounded-full border `}
+                                          style={{ background: `${value?.hex}` }}
+                                        ></button>
+                                      )
+                                    })
+                                  )}
+                                </div>
+                              )
+                            })}
+                            {data?.status === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[12px] rounded-[10px] ">
+                              {data?.status || "status"}
+                            </td>}
+                            {data?.status === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[12px] rounded-[10px] ">
+                              {data?.status || "status"}
+                            </td>}
+                            {data?.status === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[12px] rounded-[10px] ">
+                              {data?.status || "status"}
+                            </td>}
+                          </div>}
+                        <div className="w-[350px] h-[377px] flex items-center">
+                          <img
+                            className=" object-contain cursor-pointer"
+                            src={data?.url_photo}
+                            alt=""
+                          />
+                        </div>
+                      </article>}
+                  </div>
                 );
               })}
-            </Slider>
+            </div>
           </div>
-          {photos?.length > 1 &&
-            <div className="w-full items-center justify-between mt-[10px] ">
-              <Slider
-                asNavFor={nav1}
-                ref={slider2}
-                slidesToShow={photos?.length > 2 ? photos?.length - 1 : photos?.length}
-                swipeToSlide={true}
-                focusOnSelect={true}
-                vertical={false}
-                // {...settings1}
-                className="flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
-              >
-                {photos?.map((data) => {
-                  return (
-                    <figure
-                      key={data?.id}
-                      className="!w-[95%]  md:!w-[95%] !h-[124px] cursor-pointer bg-btnBgColor rounded-lg   "
-                    >
-                      <img
-                        className="w-fit h-full md:p-0 object-top	object-cover
-                       md:w-full md:h-[96px] flex items-center justify-center border border-searchBgColor rounded-lg"
-                        src={data?.url_photo}
-                        alt="img"
-                      />
-                      {data?.status && <div className="flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+
+          <div className="w-full mt-[10px] ">
+            <div
+              className="grid grid-cols-3 gap-x-[6px]   rounded-lg"
+            >
+              {photos?.map((data, index) => {
+                return (
+
+                  <figure
+                    key={data?.id}
+                    onClick={() => handleClickCarosuel(data?.id)}
+                    className={`w-full h-[124px] cursor-pointer bg-btnBgColor rounded-lg  ${index >= 1 ? "" : "hidden"}`}
+                  >
+                    <img
+                      className="w-full h-full md:p-0 object-top	object-contain
+                        md:h-[96px] flex items-center justify-center border border-searchBgColor rounded-lg"
+                      src={data?.url_photo}
+                      alt="img"
+                    />
+                    {data?.status &&
+                      <div className="flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                         {colorSelect?.map(item => {
 
                           return (
@@ -378,14 +334,189 @@ const CarouselEdit = (props) => {
                           {data?.status || "status"}
                         </td>}
                       </div>}
-                    </figure>
-                  );
-                })}
-              </Slider>
-            </div>}
+                  </figure>
+                );
+              })}
+              {photos?.length <= 1 && < div className="w-full h-[124px] flex flex-col items-center justify-start ">
+                <button
+                  type="button"
+                  className="h-[96px] w-full flex items-center justify-center "
+                >
+                  <label
+                    htmlFor="DataImg2"
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id="DataImg2"
+                      type="file"
+                      onChange={handleLocationImage2}
+                      accept=" image/*"
+                    />
+
+
+                    {!state?.pictureBgView2 && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    )}
+                    {state?.pictureBgView2 && (
+                      <img
+                        src={state?.pictureBgView2}
+                        alt="backImg"
+                        className="w-full h-full border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
+
+                  </label>
+                </button>
+
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                  {colorSelect?.map(item => {
+
+                    return (
+                      <div className="w-fit h-fit flex items-center">
+                        {
+                          colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                            return (
+                              <button
+                                type="button"
+                                className={`w-[22px] h-[22px] rounded-full border `}
+                                style={{ background: `${value?.hex}` }}
+                              ></button>
+                            )
+                          })
+                        }
+                      </div>
+                    )
+                  })}
+
+                </div>
+              </div>}
+              {photos?.length <= 2 && <div className="w-full h-[124px] flex flex-col items-center justify-start ">
+                <button
+                  type="button"
+                  className="h-[96px] w-full flex items-center justify-center "
+                >
+                  <label
+                    htmlFor="DataImg3"
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id="DataImg3"
+                      type="file"
+                      onChange={handleLocationImage3}
+                      accept=" image/*"
+                    />
+
+
+                    {!state?.pictureBgView3 && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    )}
+                    {state?.pictureBgView3 && (
+                      <img
+                        src={state?.pictureBgView3}
+                        alt="backImg"
+                        className="w-full h-full border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
+
+                  </label>
+                </button>
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                  {colorSelect?.map(item => {
+
+                    return (
+                      <div className="w-fit h-fit flex items-center">
+                        {
+                          colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                            return (
+                              <button
+                                type="button"
+                                className={`w-[22px] h-[22px] rounded-full border `}
+                                style={{ background: `${value?.hex}` }}
+                              ></button>
+                            )
+                          })
+                        }
+                      </div>
+                    )
+                  })}
+
+                </div>
+              </div>}
+              {photos?.length <= 3 && <div className="w-full h-[124px] flex flex-col items-center justify-start  ">
+                <button
+                  type="button"
+                  className="h-[96px] w-full flex items-center justify-center "
+                >
+                  <label
+                    htmlFor="DataImg4"
+                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                  >
+                    <input
+                      className="hidden"
+                      id="DataImg4"
+                      type="file"
+                      onChange={handleLocationImage4}
+                      accept=" image/*"
+                    />
+
+
+                    {!state?.pictureBgView4 && (
+                      <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    )}
+                    {state?.pictureBgView4 && (
+                      <img
+                        src={state?.pictureBgView4}
+                        alt="backImg"
+                        className="w-full h-full border border-searchBgColor object-contain rounded-lg"
+                      />
+                    )}
+
+                  </label>
+                </button>
+
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                  {colorSelect?.map(item => {
+                    return (
+                      <div className="w-fit h-fit flex items-center">
+                        {
+                          colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                            return (
+                              <button
+                                type="button"
+                                className={`w-[22px] h-[22px] rounded-full border `}
+                                style={{ background: `${value?.hex}` }}
+                              ></button>
+                            )
+                          })
+                        }
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>}
+            </div>
+
+          </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 };
 export { CarouselEdit };
