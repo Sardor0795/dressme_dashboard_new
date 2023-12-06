@@ -9,7 +9,6 @@ import { useHttp } from "../../../../../../hook/useHttp";
 const CarouselEdit = (props) => {
   const { request } = useHttp()
   const { colorGroup, colorSelect, photos } = props
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [modalId, setModalId] = useState(null);
   const [deleteImg, setDeleteImg] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -54,21 +53,6 @@ const CarouselEdit = (props) => {
     url_File4: null
   });
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-    };
-  }
-  useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
-
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-    };
-  }, [screenSize]);
 
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
   function handleClickCarosuel() {
@@ -143,14 +127,14 @@ const CarouselEdit = (props) => {
   };
   const handleLocationImage3 = (e) => {
     setImageThree({
-      ...imageTwo,
+      ...imageThree,
       url_File3: e.target.files[0],
       url_photo3: URL.createObjectURL(e.target.files[0])
     })
   };
   const handleLocationImage4 = (e) => {
     setImageFour({
-      ...imageTwo,
+      ...imageFour,
       url_File4: e.target.files[0],
       url_photo4: URL.createObjectURL(e.target.files[0])
     })
@@ -479,9 +463,9 @@ const CarouselEdit = (props) => {
                       })}
 
                     </div>}
-                  <div className="w-[350px] h-[375px] flex items-center ">
+                  <div className="w-[350px] h-[375px] flex items-center border border-red-500">
                     <img
-                      className="w-full h-full object-cover cursor-pointer "
+                      className="w-full h-full object-contain cursor-pointer border border-green-500"
                       src={imageOne?.url_photo1}
                       alt=""
                     />
