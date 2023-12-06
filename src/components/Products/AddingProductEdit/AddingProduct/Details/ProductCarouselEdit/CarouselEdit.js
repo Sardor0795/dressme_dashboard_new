@@ -271,12 +271,30 @@ const CarouselEdit = (props) => {
             >
               < div className="w-full  flex flex-col items-center justify-start ">
                 {modalId == imageOne?.id1 &&
-                  <div>
-                    <img
+                  <div className="w-full h-full">
+                    <div
+                      style={{
+                        backgroundImage: `url("${imageOne?.url_photo1}")`,
+                        backgroundPosition: "center center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundBlendMode: "darken",
+                        filter: "blur(1px)"
+                      }}
+                      className="BackgImageBLur  bg-opacity-70 bg-center bg-no-repeat bg-cover bg-blend-darken h-full  flex items-center justify-center ">
+                      <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                        <img
+                          src={imageOne?.url_photo1}
+                          alt="backImg"
+                          className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      </div>
+                    </div>
+                    {/* <img
                       src={imageOne?.url_photo1}
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                    /> */}
 
                     <label
                       htmlFor={"imageOne?.id"}
@@ -425,13 +443,13 @@ const CarouselEdit = (props) => {
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
-              <div className="">
+              <div className="h-full">
                 < article
                   onClick={() => {
                     handleClickCarosuel()
                     setModalId(imageOne?.id1)
                   }}
-                  className="flex flex-col ">
+                  className="w-full flex flex-col h-full ">
                   {imageOne?.status1 &&
                     <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
                       {colorSelect?.map(item => {
@@ -463,12 +481,54 @@ const CarouselEdit = (props) => {
                       })}
 
                     </div>}
-                  <div className="w-[350px] h-[375px] flex items-center border border-red-500">
+                  {/* <div class="image-frame-wrapper-_NvbY" data-title="Пуховик" data-url="https://70.img.avito.st/image/1/1.w2ct7La4b44bRa2LJ6vHZDxObYiTTe2GW0htjJ1FZ4Sb.m3Z0PMuAMD16devVYDgoRb9LjW_kfqTjCgRkMmY6gLs" data-image-id="3" data-marker="image-frame/image-wrapper">
+                    <span
+                      class="image-frame-cover-lQG1h"
+                      style="background-image: url(&quot;https://70.img.avito.st/image/1/1.w2ct7La4b44bRa2LJ6vHZDxObYiTTe2GW0htjJ1FZ4Sb.m3Z0PMuAMD16devVYDgoRb9LjW_kfqTjCgRkMmY6gLs&quot;);">
+                    </span>
+                    <img src="https://70.img.avito.st/image/1/1.w2ct7La4b44bRa2LJ6vHZDxObYiTTe2GW0htjJ1FZ4Sb.m3Z0PMuAMD16devVYDgoRb9LjW_kfqTjCgRkMmY6gLs" alt="Пуховик" class="desktop-1ky5g7j" />
+                  </div> */}
+                  {/* <div
+                    className="image-frame-wrapper-_NvbY"
+                    data-title="Пуховик"
+                    data-url={imageOne?.url_photo1}
+                    data-image-id="3"
+                    data-marker="image-frame/image-wrapper">
+                    <span
+                      className="image-frame-cover-lQG1h"
+                      style={{
+                        backgroundImage: `url("${imageOne?.url_photo1}")`
+                      }}
+                    >
+                    </span>
                     <img
-                      className="w-full h-full object-contain cursor-pointer border border-green-500"
+                      className="desktop-1ky5g7j border border-red-500 "
                       src={imageOne?.url_photo1}
                       alt=""
                     />
+                  </div> */}
+                  <div
+                    style={{
+                      backgroundImage: `url("${imageOne?.url_photo1}")`,
+                      backgroundPosition: "center center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundBlendMode: "darken",
+                      filter: "blur(1px)"
+                    }}
+                    className="BackgImageBLur  bg-opacity-70 bg-center bg-no-repeat bg-cover bg-blend-darken h-full  flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                      <img
+                        className="
+                        h-[100%]
+                        w-fit
+                        mx-auto 
+                        align-middle object-contain cursor-pointer "
+                        src={imageOne?.url_photo1}
+
+                        alt=""
+                      />
+                    </div>
                   </div>
                 </article>
               </div>

@@ -356,3 +356,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* --------------------Backgroun Oiamge */
+.BackgImageBLur {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  /* opacity: 01; */
+}
