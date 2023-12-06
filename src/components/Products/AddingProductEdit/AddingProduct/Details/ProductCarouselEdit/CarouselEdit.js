@@ -293,9 +293,10 @@ const CarouselEdit = (props) => {
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
+
                     <label
                       htmlFor={"imageOne?.id"}
-                      className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
                     >
                       <input
                         className="hidden"
@@ -303,17 +304,15 @@ const CarouselEdit = (props) => {
                         type="file"
                         onChange={handleLocationImage1}
                         accept=" image/*"
-                      /> data
-                      <div className="w-full flex items-center justify-between px-5 py-[15px]">
-                        <button
-                          className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-                        <button
-                          onClick={() => {
-                            setDeleteImg(true)
-                            // setDeleteId(data?.id)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
-                      </div>
+                      />
+                      Изменить фото
+                      <button
+                        onClick={() => {
+                          setDeleteImg(true)
+                          // setDeleteId(data?.id)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
                     </label>
                   </div>
                 }
@@ -325,9 +324,10 @@ const CarouselEdit = (props) => {
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
+
                     <label
                       htmlFor={"imageTwo?.id"}
-                      className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
                     >
                       <input
                         className="hidden"
@@ -335,16 +335,15 @@ const CarouselEdit = (props) => {
                         type="file"
                         onChange={handleLocationImage2}
                         accept=" image/*"
-                      />data
-                      <div className="w-full flex items-center justify-between px-5 py-[15px]">
-                        <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-                        <button
-                          onClick={() => {
-                            setDeleteImg(true)
-                            // setDeleteId(data?.id)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
-                      </div>
+                      />
+                      Изменить фото
+                      <button
+                        onClick={() => {
+                          setDeleteImg(true)
+                          // setDeleteId(data?.id)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
                     </label>
                   </div>
                 }
@@ -356,9 +355,10 @@ const CarouselEdit = (props) => {
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
+
                     <label
                       htmlFor={"imageThree?.id"}
-                      className="h-full  w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
                     >
                       <input
                         className="hidden"
@@ -367,16 +367,14 @@ const CarouselEdit = (props) => {
                         onChange={handleLocationImage3}
                         accept=" image/*"
                       />
-                      data
-                      <div className="w-full flex items-center justify-between px-5 py-[15px]">
-                        <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-                        <button
-                          onClick={() => {
-                            setDeleteImg(true)
-                            // setDeleteId(data?.id)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
-                      </div>
+                      Изменить фото
+                      <button
+                        onClick={() => {
+                          setDeleteImg(true)
+                          // setDeleteId(data?.id)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
                     </label>
                   </div>
                 }
@@ -451,11 +449,11 @@ const CarouselEdit = (props) => {
                   }}
                   className="flex flex-col ">
                   {imageOne?.status1 &&
-                    <div className="w-fit flex h-[22px] items-center gap-x-3 border rounded-[12px]">
+                    <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
                       {colorSelect?.map(item => {
 
                         return (
-                          <div className="w-fit h-fit flex items-center">
+                          <div className="w-fit h-fit flex items-center gap-x-3">
                             {
                               colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
                                 return (
@@ -481,9 +479,9 @@ const CarouselEdit = (props) => {
                       })}
 
                     </div>}
-                  <div className="w-[350px] h-[377px] flex items-center">
+                  <div className="w-[350px] h-[375px] flex items-center ">
                     <img
-                      className=" object-contain cursor-pointer"
+                      className="w-full h-full object-cover cursor-pointer "
                       src={imageOne?.url_photo1}
                       alt=""
                     />
@@ -579,13 +577,7 @@ const CarouselEdit = (props) => {
                     className="hidden"
                     id={"imageThree"}
                     type="file"
-                    onChange={(e) => {
-                      setImageThree({
-                        id3: 3,
-                        url_File3: e.target.files[0],
-                        url_photo3: URL.createObjectURL(e.target.files[0])
-                      })
-                    }}
+                    onChange={handleLocationImage3}
                     accept=" image/*"
                   />
                   <div onClick={() => setModalId(null)}
@@ -654,13 +646,7 @@ const CarouselEdit = (props) => {
                     className="hidden"
                     id={"imageFour"}
                     type="file"
-                    onChange={(e) => {
-                      setImageFour({
-                        id4: 4,
-                        url_File4: e.target.files[0],
-                        url_photo4: URL.createObjectURL(e.target.files[0])
-                      })
-                    }}
+                    onChange={handleLocationImage4}
                     accept=" image/*"
                   />
                   <div onClick={() => setModalId(null)}
