@@ -499,7 +499,7 @@ const CarouselEdit = (props) => {
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  h-full  flex items-center justify-center ">
+                    className="BackgImageBLur   h-full  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-[350px] h-[377px]  backdrop-blur-md">
                       <img
                         className="
@@ -524,7 +524,7 @@ const CarouselEdit = (props) => {
               <button
                 type="button"
 
-                className="h-[96px] w-full flex items-center justify-center "
+                className="h-[96px] w-full flex items-center justify-center overflow-hidden rounded-lg"
               >
                 {!imageTwo?.url_photo2 ? <label
                   htmlFor={"imageTwo"}
@@ -548,15 +548,43 @@ const CarouselEdit = (props) => {
                   </div>
                 </label>
                   :
-                  <img
+                  <div
                     onClick={() => {
                       handleClickCarosuel()
                       setModalId(imageTwo?.id2)
                     }}
-                    src={imageTwo?.url_photo2}
-                    alt="backImg"
-                    className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
-                  />
+                    style={{
+                      background: `rgba(0,0,0,0.6) url("${imageTwo?.url_photo2}")`,
+                      backgroundPosition: "center center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundBlendMode: "darken",
+                      // filter: "blur(1px)"
+                    }}
+                    className="BackgImageBLur overflow-hidden  w-full h-full rounded-lg flex items-center justify-center border ">
+                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                      <img
+                        className="
+                      h-full
+                      w-full
+                      mx-auto 
+                      align-middle object-contain cursor-pointer "
+                        src={imageTwo?.url_photo2}
+
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  // <img
+                  //   onClick={() => {
+                  //     handleClickCarosuel()
+                  //     setModalId(imageTwo?.id2)
+                  //   }}
+                  //   src={imageTwo?.url_photo2}
+                  //   alt="backImg"
+                  //   className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
+                  // />
+
                 }
               </button>
 
@@ -594,7 +622,7 @@ const CarouselEdit = (props) => {
             <div className="w-[30%] h-full flex flex-col items-center justify-start ">
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center justify-center "
+                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
                 {!imageThree?.url_photo3 ? <label
                   htmlFor={"imageThree"}
@@ -616,15 +644,42 @@ const CarouselEdit = (props) => {
                   </div>
                 </label>
                   :
-                  <img
+                  <div
                     onClick={() => {
                       handleClickCarosuel()
                       setModalId(imageThree?.id3)
                     }}
-                    src={imageThree?.url_photo3}
-                    alt="backImg"
-                    className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
-                  />
+                    style={{
+                      background: `rgba(0,0,0,0.6) url("${imageThree?.url_photo3}")`,
+                      backgroundPosition: "center center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundBlendMode: "darken",
+                      // filter: "blur(1px)"
+                    }}
+                    className="BackgImageBLur  overflow-hidden  w-full h-full rounded-lg flex items-center justify-center border  ">
+                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                      <img
+                        className="
+                    h-full
+                    w-full
+                    mx-auto 
+                    align-middle object-contain cursor-pointer "
+                        src={imageThree?.url_photo3}
+
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  // <img
+                  //   onClick={() => {
+                  //     handleClickCarosuel()
+                  //     setModalId(imageThree?.id3)
+                  //   }}
+                  //   src={imageThree?.url_photo3}
+                  //   alt="backImg"
+                  //   className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
+                  // />
                 }
 
               </button>
@@ -663,7 +718,7 @@ const CarouselEdit = (props) => {
               <button
                 type="button"
 
-                className="h-[96px] w-full flex items-center justify-center "
+                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
                 {!imageFour?.url_photo4 ? <label
                   htmlFor={"imageFour"}
@@ -685,15 +740,42 @@ const CarouselEdit = (props) => {
                   </div>
                 </label>
                   :
-                  <img
+                  <div
                     onClick={() => {
                       handleClickCarosuel()
                       setModalId(imageFour?.id4)
                     }}
-                    src={imageFour?.url_photo4}
-                    alt="backImg"
-                    className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
-                  />
+                    style={{
+                      background: `rgba(0,0,0,0.6) url("${imageFour?.url_photo4}")`,
+                      backgroundPosition: "center center",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundBlendMode: "darken",
+                      // filter: "blur(1px)"
+                    }}
+                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
+                      <img
+                        className="
+                    h-full
+                    w-full
+                    mx-auto 
+                    align-middle object-contain cursor-pointer "
+                        src={imageFour?.url_photo4}
+
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  // <img
+                  //   onClick={() => {
+                  //     handleClickCarosuel()
+                  //     setModalId(imageFour?.id4)
+                  //   }}
+                  //   src={imageFour?.url_photo4}
+                  //   alt="backImg"
+                  //   className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
+                  // />
                 }
 
               </button>
