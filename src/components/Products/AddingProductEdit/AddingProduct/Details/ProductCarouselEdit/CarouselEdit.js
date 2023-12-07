@@ -271,30 +271,13 @@ const CarouselEdit = (props) => {
             >
               < div className="w-full  flex flex-col items-center justify-start ">
                 {modalId == imageOne?.id1 &&
-                  <div className="w-full h-full">
-                    <div
-                      style={{
-                        backgroundImage: `url("${imageOne?.url_photo1}")`,
-                        backgroundPosition: "center center",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                        backgroundBlendMode: "darken",
-                        filter: "blur(1px)"
-                      }}
-                      className="BackgImageBLur  bg-opacity-70 bg-center bg-no-repeat bg-cover bg-blend-darken h-full  flex items-center justify-center ">
-                      <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
-                        <img
-                          src={imageOne?.url_photo1}
-                          alt="backImg"
-                          className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                        />
-                      </div>
-                    </div>
-                    {/* <img
+                  <div>
+                    <img
                       src={imageOne?.url_photo1}
                       alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    /> */}
+                      className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                    />
+
 
                     <label
                       htmlFor={"imageOne?.id"}
@@ -416,7 +399,7 @@ const CarouselEdit = (props) => {
                 <button
                   onClick={() => {
                     setDeleteImg(true)
-                    // setDeleteId(data?.id)
+                    // setDeleteId(data?.id) border-2
                   }}
                   className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
               </div> */}
@@ -509,19 +492,19 @@ const CarouselEdit = (props) => {
                   </div> */}
                   <div
                     style={{
-                      backgroundImage: `url("${imageOne?.url_photo1}")`,
+                      background: `rgba(0,0,0,0.6) url("${imageOne?.url_photo1}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
                       backgroundBlendMode: "darken",
                       filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  bg-opacity-70 bg-center bg-no-repeat bg-cover bg-blend-darken h-full  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                    className="BackgImageBLur  h-full  flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-[350px] h-[377px]  backdrop-blur-md">
                       <img
                         className="
-                        h-[100%]
-                        w-fit
+                        h-full
+                        w-full
                         mx-auto 
                         align-middle object-contain cursor-pointer "
                         src={imageOne?.url_photo1}
