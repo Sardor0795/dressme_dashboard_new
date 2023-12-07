@@ -7,6 +7,7 @@ import {
   SearchIcon,
   StarLabel,
   MapLocationIcon,
+  DeleteIcon,
 } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -25,7 +26,10 @@ import { clsx } from "clsx";
 import "../LocationAddById/yandexmapsStore.css"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PuffLoader from "react-spinners/PuffLoader";
+
 import { useHttp } from "../../../../hook/useHttp";
+import { FaCheck } from "react-icons/fa6";
 export default function LocationMapCity() {
   const { request } = useHttp()
   const [state, setState] = useState({
@@ -61,6 +65,11 @@ export default function LocationMapCity() {
     // ----
 
   })
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
+  const [SuccessMessage, setSuccessMessage] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const [openStoreList, setOpenStoreList] = useState(false);
   const handleLocationImageOne = (e) => {
     setState({
       ...state,
@@ -98,32 +107,60 @@ export default function LocationMapCity() {
   const url = "https://api.dressme.uz/api/seller"
 
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
-  const { mutate } = useMutation(() => {
+  // const { mutate } = useMutation(() => {
+  //   return request({ url: `/shops/locations/${NewId}`, method: "DELETE", token: true });
+  // });
+
+  // const onLocaTionDelete = () => {
+  //   mutate({},
+  //     {
+  //       onSuccess: res => {
+  //         console.log(res, "location delte");
+  //         toast.success(`${res?.message}`, {
+  //           position: "top-right",
+  //           autoClose: 5000,
+  //           hideProgressBar: false,
+  //           closeOnClick: true,
+  //           pauseOnHover: true,
+  //           draggable: true,
+  //           progress: undefined,
+  //           theme: "light",
+  //         });
+  //         navigate("/locations-store")
+  //       },
+  //       onError: err => {
+  //         console.log(err);
+  //       }
+  //     })
+  // }
+
+  const deleteProductByAddress = useMutation(() => {
     return request({ url: `/shops/locations/${NewId}`, method: "DELETE", token: true });
   });
 
-  const onLocaTionDelete = () => {
-    mutate({},
+  function onLocaTionDelete() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteProductByAddress.mutate({},
       {
         onSuccess: res => {
-          console.log(res, "location delte");
-          toast.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          navigate("/locations-store")
+          if (res?.message) {
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            // onRefetch()
+            setTimeout(() => {
+              setDeleteModal(false)
+              navigate("/locations-store");
+            }, 2000);
+          }
+
         },
         onError: err => {
           console.log(err);
         }
       })
   }
+
 
 
   // // ------------GET  location id?-----------------
@@ -169,7 +206,7 @@ export default function LocationMapCity() {
       refetchOnWindowFocus: false,
     }
   );
-
+  console.log(state, "BuLocationMapCity");
   // ------------GET METHOD Region-----------------
   useQuery(["getRegionList_map_city"], () => { return request({ url: "/regions", token: true }); },
     {
@@ -342,11 +379,86 @@ export default function LocationMapCity() {
       />
       <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
         <div
-          onClick={() => setOpenRegionModal(false)}
+          onClick={() => {
+
+            setOpenRegionModal(false)
+          }}
           className={`fixed inset-0 z-[99999] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
          ${openRegionModal ? "" : "hidden"
             }`}
         ></div>
+        <section
+          onClick={() => {
+            setDeleteModal(false)
+            setOpenStoreList(false)
+            setSuccessMessage(null)
+            // setDeleteMessage(null)
+            // setHideProductList(false)
+
+          }}
+          className={`fixed inset-0 z-[99999] duration-200 w-full h-[100vh] bg-black opacity-50
+         ${deleteModal || openStoreList ? "" : "hidden"}`}
+        ></section>
+        {/* Delete Product Of Pop Confirm */}
+        <section
+          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
+        >
+          <button
+            onClick={() => setDeleteModal(false)}
+            type="button"
+            className="absolute  right-3 top-3 w-5 h-5 ">
+            <MenuCloseIcons
+              className="w-full h-full"
+              colors={"#a1a1a1"} />
+          </button>
+          {hideDeleteIcons ?
+            <div className="w-full flex items-center justify-center">
+              {loader && hideDeleteIcons ?
+                <PuffLoader
+                  // className={styles.loader1}
+                  color={"#007DCA"}
+                  size={80}
+                  loading={true}
+                />
+                :
+                <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={30} color="#009B17" />
+                  </span>
+                  <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                </div>
+              }
+            </div>
+            :
+            <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
+              </span>
+              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+
+          }
+          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+            <button
+              onClick={() => setDeleteModal(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Oтмена
+            </button>
+            <button
+              onClick={() => onLocaTionDelete()}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Удалить </button>
+          </div>
+
+        </section>
         <div className="my-4 ">
           <div className="flex items-center justify-center mb-6">
             <button
@@ -379,7 +491,8 @@ export default function LocationMapCity() {
               </NavLink>
               <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
               <button
-                onClick={onLocaTionDelete}
+                onClick={() => setDeleteModal(true)}
+                // onClick={onLocaTionDelete}
                 className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
                 Удалить

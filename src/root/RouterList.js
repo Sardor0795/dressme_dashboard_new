@@ -87,15 +87,9 @@ export default function RouterList() {
 
         {/* ---------------------<Store>------------------------- */}
         <Route path="/store" element={<MarketStore />}>
-          {/* {dressInfo?.SellerMagazin?.shops?.data?.length >= 1 ? (
-            <Route index element={<MyMarket />} />
-          ) : (
-          <Route index element={<AddStore />} />
-        )} */}
           <Route index element={<MarketIsStoreCheck />} />
           <Route path="/store/market-add" element={<AddStore />} />
           <Route path="/store/market-list" element={<MyMarket />} />
-          {/* <Route path="/store/location-add" element={<AddLocation />} /> */}
           <Route path="/store/market-list/:id" element={<MarketEdit />} />
           <Route path="/store/locations/shop/:id" element={<LocationsByIdShow />} />
         </Route>

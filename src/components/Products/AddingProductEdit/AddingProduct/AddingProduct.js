@@ -209,7 +209,7 @@ const AddingProduct = () => {
   const [colors_Id, setColors_Id] = useState([]);
 
 
-  useQuery(
+  const { refetch } = useQuery(
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
@@ -1555,7 +1555,7 @@ const AddingProduct = () => {
 
                     {/* Img Carousel */}
                     <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                      <CarouselEdit colorGroup={productsData.colors} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
+                      <CarouselEdit colorGroup={productsData.colors} onRefetch={refetch} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
                     </div>
 
                   </div>
