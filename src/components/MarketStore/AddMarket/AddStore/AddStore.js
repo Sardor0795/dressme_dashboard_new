@@ -41,34 +41,24 @@ function AddStore({ shopsList, onRefetch }) {
   };
 
   // ------------GET METHOD Gender-type-----------------
-  useQuery(
-    ["get_genders"],
-    () => {
-      return request({ url: "/genders", token: true });
-    },
+  useQuery(["get_genders"], () => {
+    return request({ url: "/genders", token: true })
+  },
     {
       onSuccess: (res) => {
         setState({ ...state, genderType: res?.genders });
-      },
-      onError: (err) => {
-        console.log(err, "err getGenderlist-method");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   );
   // ------------GET METHOD delivery-method-----------------
-  useQuery(
-    ["get_delivery_method"],
-    () => {
-      return request({ url: "/delivery-method", token: true });
-    },
+  useQuery(["get_delivery_method"], () => {
+    return request({ url: "/delivery-method", token: true })
+  },
     {
       onSuccess: (res) => {
         setState({ ...state, deliverList: res?.delivery_methods });
-      },
-      onError: (err) => {
-        console.log(err, "err getDelivery-method");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -96,7 +86,7 @@ function AddStore({ shopsList, onRefetch }) {
         if (res?.errors && res?.message) {
           setState({ ...state, errorGroup: res?.errors });
         } else if (res?.message) {
-          onRefetch()
+          // onRefetch()
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -130,7 +120,9 @@ function AddStore({ shopsList, onRefetch }) {
       top: 0,
     });
   }, []);
-
+  console.log(state?.deliverList, "deliverList")
+  console.log(state?.genderType, "genderType")
+  console.log(state?.checkGender, "checkGender")
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
       <ToastContainer
@@ -316,7 +308,7 @@ function AddStore({ shopsList, onRefetch }) {
                         id={data?.id}
                         value={data?.id}
                         name="checkGender"
-                        checked={data?.id === state?.checkGender}
+                        checked={data?.id === Number(state?.checkGender)}
                         onChange={(e) =>
                           setState({ ...state, checkGender: e.target.value })
                         }
@@ -351,7 +343,7 @@ function AddStore({ shopsList, onRefetch }) {
                         id={data?.name_uz}
                         value={data?.id}
                         name="checkDeliver"
-                        checked={data?.id === state?.deliverCheck}
+                        checked={data?.id === Number(state?.deliverCheck)}
                         onChange={(e) =>
                           setState({ ...state, deliverCheck: e.target.value })
                         }

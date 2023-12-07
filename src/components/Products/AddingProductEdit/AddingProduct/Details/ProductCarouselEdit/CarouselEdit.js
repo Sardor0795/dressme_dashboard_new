@@ -8,7 +8,7 @@ import { useHttp } from "../../../../../../hook/useHttp";
 
 const CarouselEdit = (props) => {
   const { request } = useHttp()
-  const { colorGroup, colorSelect, photos } = props
+  const { colorGroup, colorSelect, photos, onRefetch } = props
   const [modalId, setModalId] = useState(null);
   const [deleteImg, setDeleteImg] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -177,7 +177,7 @@ const CarouselEdit = (props) => {
 
 
 
-
+  console.log(deleteId, "deleteId");
   const { mutate } = useMutation(() => {
     return request({ url: `/seller/products/:${Number(deleteId)}/delete-product-photo`, method: "DELETE", token: true });
   });
@@ -187,7 +187,7 @@ const CarouselEdit = (props) => {
       {
         onSuccess: res => {
           console.log(res, "location delte");
-
+          onRefetch()
         },
         onError: err => {
           console.log(err);
@@ -294,7 +294,7 @@ const CarouselEdit = (props) => {
                       <button
                         onClick={() => {
                           setDeleteImg(true)
-                          // setDeleteId(data?.id)
+                          setDeleteId(imageOne?.id1)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
@@ -325,7 +325,7 @@ const CarouselEdit = (props) => {
                       <button
                         onClick={() => {
                           setDeleteImg(true)
-                          // setDeleteId(data?.id)
+                          setDeleteId(imageTwo?.id2)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
@@ -356,7 +356,7 @@ const CarouselEdit = (props) => {
                       <button
                         onClick={() => {
                           setDeleteImg(true)
-                          // setDeleteId(data?.id)
+                          setDeleteId(imageThree?.id3)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
@@ -385,7 +385,7 @@ const CarouselEdit = (props) => {
                       <button
                         onClick={() => {
                           setDeleteImg(true)
-                          // setDeleteId(data?.id)
+                          setDeleteId(imageFour?.id3)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>

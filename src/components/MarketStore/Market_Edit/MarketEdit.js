@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoBackIcons, LocationIcon, StarLabel } from "../../../assets/icons";
+import { DeleteIcon, GoBackIcons, LocationIcon, MenuCloseIcons, StarLabel } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PuffLoader from "react-spinners/PuffLoader";
+
 import { useHttp } from "../../../hook/useHttp";
+import { FaCheck } from "react-icons/fa6";
 
 function MarketEdit() {
   const { request } = useHttp();
@@ -24,6 +27,13 @@ function MarketEdit() {
     genderList: null,
     deliverList: null,
   });
+
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
+  const [SuccessMessage, setSuccessMessage] = useState(null);
+  const [loader, setLoader] = useState(false);
+  const [openStoreList, setOpenStoreList] = useState(false);
+
 
   const handleLocationImageOne = (e) => {
     setState({
@@ -105,32 +115,34 @@ function MarketEdit() {
     }
   );
 
-  // -------Delete ----
-  const { mutate } = useMutation(() => {
+
+  const deleteProductByAddress = useMutation(() => {
     return request({ url: `/shops/${id}`, method: "DELETE", token: true });
   });
-  const onUserDelete = () => {
-    mutate(
-      {},
+
+  function onUserDelete() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteProductByAddress.mutate({},
       {
-        onSuccess: (res) => {
+        onSuccess: res => {
           if (res?.message) {
-            toast.success(`${res?.message}`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-            navigate("/store");
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            // onRefetch()
+            setTimeout(() => {
+              setDeleteModal(false)
+              navigate("/store");
+            }, 2000);
           }
+
         },
-      }
-    );
-  };
+        onError: err => {
+          console.log(err);
+        }
+      })
+  }
+
 
   // ---------Handle Edit---------
   const handleEditShops = () => {
@@ -195,7 +207,78 @@ function MarketEdit() {
         pauseOnHover
         theme="colored"
       />
+      <section
+        onClick={() => {
+          setDeleteModal(false)
+          setOpenStoreList(false)
+          setSuccessMessage(null)
+          // setDeleteMessage(null)
+          // setHideProductList(false)
 
+        }}
+        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
+         ${deleteModal || openStoreList ? "" : "hidden"}`}
+      ></section>
+      {/* Delete Product Of Pop Confirm */}
+      <section
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setDeleteModal(false)}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        {hideDeleteIcons ?
+          <div className="w-full flex items-center justify-center">
+            {loader && hideDeleteIcons ?
+              <PuffLoader
+                // className={styles.loader1}
+                color={"#007DCA"}
+                size={80}
+                loading={true}
+              />
+              :
+              <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                  <FaCheck size={30} color="#009B17" />
+                </span>
+                <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+              </div>
+            }
+          </div>
+          :
+          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+              <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                <DeleteIcon width={30} />
+              </span>
+            </span>
+            <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+              Вы уверены?
+            </span>
+          </div>
+
+        }
+        <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+          <button
+            onClick={() => setDeleteModal(false)}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            Oтмена
+          </button>
+          <button
+            onClick={() => onUserDelete()}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            Удалить </button>
+        </div>
+
+      </section>
       <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
         <div className="mt-6 flex items-center justify-center  ">
           <button
@@ -225,7 +308,7 @@ function MarketEdit() {
         </button>
         <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
           <button
-            onClick={onUserDelete}
+            onClick={() => setDeleteModal(true)}
             className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
           >
             Удалить
@@ -355,7 +438,7 @@ function MarketEdit() {
                         id={data?.id}
                         value={data?.id}
                         name="checkGender"
-                        checked={data?.id === state?.checkGender}
+                        checked={data?.id === Number(state?.checkGender)}
                         onChange={() =>
                           setState({ ...state, checkGender: data?.id })
                         }
@@ -390,7 +473,7 @@ function MarketEdit() {
                         id={data?.name_uz}
                         value={data?.id}
                         name="checkDeliver"
-                        checked={data?.id === state?.deliverCheck}
+                        checked={data?.id === Number(state?.deliverCheck)}
                         onChange={() =>
                           setState({ ...state, deliverCheck: data?.id })
                         }
