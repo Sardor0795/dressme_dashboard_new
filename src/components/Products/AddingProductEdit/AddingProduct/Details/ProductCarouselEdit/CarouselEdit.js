@@ -194,13 +194,13 @@ const CarouselEdit = (props) => {
         }
       })
   }
-  console.log(modalId, "modalId");
+  // console.log(modalId, "modalId");
 
-  console.log(imageOne, "image?.one");
-  console.log(imageTwo, "image?.two");
-  console.log(imageThree, "image?.three----3");
-  console.log(imageFour, "image?.four");
-  console.log(' ----------------------------');
+  // console.log(imageOne, "image?.one");
+  // console.log(imageTwo, "image?.two");
+  // console.log(imageThree, "image?.three----3");
+  // console.log(imageFour, "image?.four");
+  // console.log(' ----------------------------');
   return (
     <div className="max-w-[350px] w-full h-fit ">
 

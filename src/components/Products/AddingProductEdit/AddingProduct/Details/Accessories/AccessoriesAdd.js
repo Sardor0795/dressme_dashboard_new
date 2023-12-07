@@ -48,7 +48,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
     }
     )
 
-
+    console.log(stateList, "stateList");
     const SelectedNumber = 5
     useEffect(() => {
         if (state?.salePercent > 0) {

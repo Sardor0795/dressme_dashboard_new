@@ -381,7 +381,7 @@ const AddingProduct = () => {
     // detailsForAll
     form.append("price", state?.price);
     state?.amount && form.append("amount", state?.amount);
-    state?.age && form.append("age", state?.age);
+    state?.age && form.append("age", Number(state?.age));
     state?.discount_percent && form.append("discount_percent", state?.discount_percent);//no R
     state?.discount_price && form.append("discount_price", state?.discount_price);//no R
     // textListOfFormList

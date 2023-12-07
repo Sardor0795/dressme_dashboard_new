@@ -483,7 +483,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
             itemLayout="horizontal"
             dataSource={data?.products}
             className="w-full">
-            {data?.products?.map(itemValue => {
+            {data?.products?.map((itemValue, index) => {
 
               return (
                 <List.Item className="w-full "
@@ -496,7 +496,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                           <Checkbox value={itemValue?.id} checked={AllSelectCheckedAction || checked}
                             onClick={() => setShopId(data?.id)} />
                           <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                            <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
+                            <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
                             <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                               <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
                             </td>
