@@ -25,6 +25,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         saveBtnDisable: false
 
     })
+    console.log(stateList, "stateList--Head");
     // console.log(state?.saveBtnDisable, "saveBtnDisable");
     const SelectedNumber = 1
     useEffect(() => {
