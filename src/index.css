@@ -359,7 +359,8 @@ input[type=number] {
 
 /* --------------------Backgroun Oiamge */
 .BackgImageBLur {
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-  /* opacity: 01; */
+  /* filter: blur(8px); */
+  /* -webkit-filter: blur(8px); */
+  /* opacity: 0.4 */
+  /* background: rgba(255, 255, 255, 0.6) */
 }
