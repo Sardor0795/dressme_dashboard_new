@@ -497,7 +497,7 @@ const CarouselEdit = (props) => {
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
                       backgroundBlendMode: "darken",
-                      filter: "blur(1px)"
+                      // filter: "blur(1px)"
                     }}
                     className="BackgImageBLur  h-full  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-[350px] h-[377px]  backdrop-blur-md">
