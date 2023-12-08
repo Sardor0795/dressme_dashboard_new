@@ -9,9 +9,8 @@ import { PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 
-const CarouselEdit = (props) => {
+const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId }) => {
   const { request } = useHttp()
-  const { colorGroup, colorSelect, photos, onRefetch, productId } = props
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   // --------------
@@ -69,6 +68,41 @@ const CarouselEdit = (props) => {
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
   function handleClickCarosuel() {
     setModalOfCarsouel(true)
+  }
+  function onHandleDeleteImage() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteImageId.mutate({},
+      {
+        onSuccess: (res) => {
+          if (res?.message && res?.errors) {
+            setDeleteMessage(res?.message)
+            setLoader(false)
+
+          } else if (res?.message) {
+            setSuccessMessage(res?.message)
+            // setGetIdShopLocation('')
+            setLoader(false)
+            onRefetch()
+            setTimeout(() => {
+              setOpenStoreList(false)
+              setHideDeleteIcons(false)
+              setDeleteModal(false)
+              setModalOfCarsouel(false)
+              // setImageOne()
+              // setImageThree()
+              // setImageTwo()
+              // setImageFour()
+
+            }, 2000);
+            console.log(res, "getIdShopLocation -----POST");
+          }
+        },
+
+        onError: err => {
+          console.log(err);
+        }
+      })
   }
 
 
@@ -202,37 +236,6 @@ const CarouselEdit = (props) => {
     });
   });
 
-  function onHandleDeleteImage() {
-    setLoader(true)
-    setHideDeleteIcons(true)
-    deleteImageId.mutate({},
-      {
-        onSuccess: (res) => {
-          if (res?.message && res?.errors) {
-            setDeleteMessage(res?.message)
-            setLoader(false)
-
-          } else if (res?.message) {
-            setSuccessMessage(res?.message)
-            // setGetIdShopLocation('')
-            setLoader(false)
-            onRefetch()
-            setTimeout(() => {
-              setOpenStoreList(false)
-              setHideDeleteIcons(false)
-              setDeleteModal(false)
-              setModalOfCarsouel(false)
-
-            }, 2000);
-            console.log(res, "getIdShopLocation -----POST");
-          }
-        },
-
-        onError: err => {
-          console.log(err);
-        }
-      })
-  }
 
 
   console.log(imageOne, "image?.one");
@@ -465,7 +468,7 @@ const CarouselEdit = (props) => {
                       <button
                         onClick={() => {
                           setDeleteModal(true)
-                          setDeleteId(imageFour?.id3)
+                          setDeleteId(imageFour?.id4)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
@@ -564,7 +567,8 @@ const CarouselEdit = (props) => {
                   </div> */}
                   <div
                     style={{
-                      backgroundColor: `rgba(0,0,0,0.6) url("${imageOne?.url_photo1}")`,
+                      backgroundImage: ` url("${imageOne?.url_photo1}")`,
+                      backgroundColor: "rgba(0,0,0,0.6)",
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -626,7 +630,7 @@ const CarouselEdit = (props) => {
                       setModalId(imageTwo?.id2)
                     }}
                     style={{
-                      backgroundColor: `rgba(0,0,0,0.6) url("${imageTwo?.url_photo2}")`,
+                      background: `rgba(0,0,0,0.6) url("${imageTwo?.url_photo2}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -722,7 +726,7 @@ const CarouselEdit = (props) => {
                       setModalId(imageThree?.id3)
                     }}
                     style={{
-                      backgroundColor: `rgba(0,0,0,0.6) url("${imageThree?.url_photo3}")`,
+                      background: `rgba(0,0,0,0.6) url("${imageThree?.url_photo3}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -818,7 +822,7 @@ const CarouselEdit = (props) => {
                       setModalId(imageFour?.id4)
                     }}
                     style={{
-                      backgroundColor: `rgba(0,0,0,0.6) url("${imageFour?.url_photo4}")`,
+                      background: `rgba(0,0,0,0.6) url("${imageFour?.url_photo4}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -888,4 +892,5 @@ const CarouselEdit = (props) => {
     </div >
   );
 };
-export { CarouselEdit };
+export default React.memo(CarouselEdit)
+

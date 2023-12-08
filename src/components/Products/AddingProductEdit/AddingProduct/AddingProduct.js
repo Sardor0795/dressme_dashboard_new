@@ -31,7 +31,8 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
 import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
-import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
+import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
+// import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
 // import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
 
@@ -213,6 +214,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
+        console.log("Onrefetch Ishladi");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
