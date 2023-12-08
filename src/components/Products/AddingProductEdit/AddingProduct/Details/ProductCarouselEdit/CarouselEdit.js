@@ -5,13 +5,25 @@ import { DeleteIcon, DownloadIcon, MenuCloseIcons, StarLabel } from "../../../..
 import { img1, img2, img3, img4 } from "../../../../../../assets";
 import { useMutation } from "@tanstack/react-query";
 import { useHttp } from "../../../../../../hook/useHttp";
+import { PuffLoader } from "react-spinners";
+import { FaCheck } from "react-icons/fa6";
+import { MdError } from "react-icons/md";
 
 const CarouselEdit = (props) => {
   const { request } = useHttp()
-  const { colorGroup, colorSelect, photos, onRefetch } = props
+  const { colorGroup, colorSelect, photos, onRefetch, productId } = props
   const [modalId, setModalId] = useState(null);
-  const [deleteImg, setDeleteImg] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+  // --------------
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
+  const [SuccessMessage, setSuccessMessage] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState(null);
+
+  const [loader, setLoader] = useState(false);
+  const [openStoreList, setOpenStoreList] = useState(false);
+  // --------------
+
   const [imageOne, setImageOne] = useState({
     id1: 1,
     product_color_id1: null,
@@ -177,24 +189,51 @@ const CarouselEdit = (props) => {
 
 
 
+  console.log(productId, "productId");
   console.log(deleteId, "deleteId");
-  const { mutate } = useMutation(() => {
-    return request({ url: `/seller/products/:${Number(deleteId)}/delete-product-photo`, method: "DELETE", token: true });
+  const deleteImageId = useMutation(() => {
+    return request({
+      url: `/products/${Number(productId)}/delete-product-photo`,
+      method: "DELETE",
+      token: true,
+      body: {
+        photo_id: deleteId
+      }
+    });
   });
 
-  const onHandleDeleteImage = () => {
-    mutate({},
+  function onHandleDeleteImage() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteImageId.mutate({},
       {
-        onSuccess: res => {
-          console.log(res, "location delte");
-          onRefetch()
+        onSuccess: (res) => {
+          if (res?.message && res?.errors) {
+            setDeleteMessage(res?.message)
+            setLoader(false)
+
+          } else if (res?.message) {
+            setSuccessMessage(res?.message)
+            // setGetIdShopLocation('')
+            setLoader(false)
+            onRefetch()
+            setTimeout(() => {
+              setOpenStoreList(false)
+              setHideDeleteIcons(false)
+              setDeleteModal(false)
+              setModalOfCarsouel(false)
+
+            }, 2000);
+            console.log(res, "getIdShopLocation -----POST");
+          }
         },
+
         onError: err => {
           console.log(err);
         }
       })
   }
-  // console.log(modalId, "modalId");
+
 
   // console.log(imageOne, "image?.one");
   // console.log(imageTwo, "image?.two");
@@ -208,16 +247,111 @@ const CarouselEdit = (props) => {
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
       <div>
         <section
-          onClick={() => setModalOfCarsouel(false)}
-          className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 ${modalOfCarsouel ? "" : "hidden"
+          onClick={() => {
+            setModalOfCarsouel(false)
+          }}
+          className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 
+          ${modalOfCarsouel ? "" : "hidden"
             }`}
         ></section>
         <section
-          onClick={() => { setDeleteImg(false) }}
-          className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${deleteImg ? "" : "hidden"}`}
+          onClick={() => {
+            setDeleteModal(false)
+            setOpenStoreList(false)
+            setSuccessMessage(null)
+            setDeleteMessage(null)
+
+          }}
+          className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${deleteModal || openStoreList ? "" : "hidden"}`}
         ></section>
-        {/* Image Delete Of Pop Confirm   */}
+        {/* Delete Product Of Pop Confirm */}
         <section
+          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
+        >
+          <button
+            onClick={() => {
+              setOpenStoreList(false)
+              setDeleteMessage(null)
+              setSuccessMessage(null)
+              setDeleteModal(false)
+            }}
+            type="button"
+            className="absolute  right-3 top-3 w-5 h-5 ">
+            <MenuCloseIcons
+              className="w-full h-full"
+              colors={"#a1a1a1"} />
+          </button>
+          {hideDeleteIcons ?
+            <div className="w-full h-full flex items-center justify-center">
+              {loader && hideDeleteIcons ?
+                <PuffLoader
+                  // className={styles.loader1}
+                  color={"#007DCA"}
+                  size={80}
+                  loading={true}
+                />
+                :
+                <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                  {deleteMessage ?
+                    <span className="flex items-center justify-center p-2">
+                      <MdError size={35} color="#FF4343" />
+                    </span> :
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                      <FaCheck size={30} color="#009B17" />
+                    </span>}
+                  <span className="text-2xl not-italic font-AeonikProMedium">{deleteMessage ? deleteMessage : SuccessMessage}</span>
+                </div>
+              }
+            </div>
+            // <div className="w-full flex items-center justify-center">
+            //   {loader && hideDeleteIcons ?
+            //     <PuffLoader
+            //       // className={styles.loader1}
+            //       color={"#007DCA"}
+            //       size={80}
+            //       loading={true}
+            //     />
+            //     :
+            //     <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+            //       <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+            //         <FaCheck size={30} color="#009B17" />
+            //       </span>
+            //       <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+            //     </div>
+            //   }
+            // </div>
+            :
+            <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
+              </span>
+              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+
+          }
+          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+            <button
+              onClick={() => setDeleteModal(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Oтмена
+            </button>
+            <button
+              onClick={() => onHandleDeleteImage()}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Удалить </button>
+          </div>
+
+        </section>
+        {/* Image Delete Of Pop Confirm   */}
+        {/* <section
           className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteImg ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
             }`}
         >
@@ -239,7 +373,6 @@ const CarouselEdit = (props) => {
 
           </div>
 
-          {/* } */}
           <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
 
             <button
@@ -255,7 +388,7 @@ const CarouselEdit = (props) => {
               Удалить </button>
           </div>
 
-        </section>
+        </section> */}
         <section
           className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
             }`}
@@ -293,7 +426,7 @@ const CarouselEdit = (props) => {
                       Изменить фото
                       <button
                         onClick={() => {
-                          setDeleteImg(true)
+                          setDeleteModal(true)
                           setDeleteId(imageOne?.id1)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
@@ -324,7 +457,7 @@ const CarouselEdit = (props) => {
                       Изменить фото
                       <button
                         onClick={() => {
-                          setDeleteImg(true)
+                          setDeleteModal(true)
                           setDeleteId(imageTwo?.id2)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
@@ -355,7 +488,7 @@ const CarouselEdit = (props) => {
                       Изменить фото
                       <button
                         onClick={() => {
-                          setDeleteImg(true)
+                          setDeleteModal(true)
                           setDeleteId(imageThree?.id3)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
@@ -384,7 +517,7 @@ const CarouselEdit = (props) => {
                       Изменить фото
                       <button
                         onClick={() => {
-                          setDeleteImg(true)
+                          setDeleteModal(true)
                           setDeleteId(imageFour?.id3)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить

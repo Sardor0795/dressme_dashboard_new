@@ -1555,7 +1555,7 @@ const AddingProduct = () => {
 
                     {/* Img Carousel */}
                     <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                      <CarouselEdit colorGroup={productsData.colors} onRefetch={refetch} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
+                      <CarouselEdit colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
                     </div>
 
                   </div>
