@@ -235,10 +235,11 @@ const CarouselEdit = (props) => {
   }
 
 
-  // console.log(imageOne, "image?.one");
-  // console.log(imageTwo, "image?.two");
-  // console.log(imageThree, "image?.three----3");
-  // console.log(imageFour, "image?.four");
+  console.log(imageOne, "image?.one");
+  console.log(imageTwo, "image?.two");
+  console.log(imageThree, "image?.three----3");
+  console.log(imageFour, "image?.four");
+  console.log(modalId, "image--modalId");
   // console.log(' ----------------------------');
   return (
     <div className="max-w-[350px] w-full h-fit ">
@@ -304,23 +305,7 @@ const CarouselEdit = (props) => {
                 </div>
               }
             </div>
-            // <div className="w-full flex items-center justify-center">
-            //   {loader && hideDeleteIcons ?
-            //     <PuffLoader
-            //       // className={styles.loader1}
-            //       color={"#007DCA"}
-            //       size={80}
-            //       loading={true}
-            //     />
-            //     :
-            //     <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-            //       <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-            //         <FaCheck size={30} color="#009B17" />
-            //       </span>
-            //       <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
-            //     </div>
-            //   }
-            // </div>
+
             :
             <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
               <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
@@ -350,45 +335,7 @@ const CarouselEdit = (props) => {
           </div>
 
         </section>
-        {/* Image Delete Of Pop Confirm   */}
-        {/* <section
-          className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteImg ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-            }`}
-        >
-          <button
-            onClick={() => setDeleteImg(false)}
-            type="button"
-            className="absolute  right-3 top-3 w-5 h-5 ">
-            <MenuCloseIcons
-              className="w-full h-full"
-              colors={"#a1a1a1"} />
-          </button>
 
-          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-              <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                <DeleteIcon width={30} />
-              </span>
-            </span>
-
-          </div>
-
-          <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
-
-            <button
-              onClick={() => setDeleteImg(false)}
-              type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Oтмена
-            </button>
-            <button
-              onClick={onHandleDeleteImage}
-              type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Удалить </button>
-          </div>
-
-        </section> */}
         <section
           className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
             }`}
@@ -527,15 +474,7 @@ const CarouselEdit = (props) => {
                 }
               </div>
 
-              {/* <div className="w-full flex items-center justify-between px-5 py-[15px]">
-                <button className="text-weatherWinterColor text-lg not-italic font-AeonikProMedium">Изменить фото</button>
-                <button
-                  onClick={() => {
-                    setDeleteImg(true)
-                    // setDeleteId(data?.id) border-2
-                  }}
-                  className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить</button>
-              </div> */}
+
             </div>
           </div>
 
@@ -625,7 +564,7 @@ const CarouselEdit = (props) => {
                   </div> */}
                   <div
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageOne?.url_photo1}")`,
+                      backgroundColor: `rgba(0,0,0,0.6) url("${imageOne?.url_photo1}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -687,7 +626,7 @@ const CarouselEdit = (props) => {
                       setModalId(imageTwo?.id2)
                     }}
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageTwo?.url_photo2}")`,
+                      backgroundColor: `rgba(0,0,0,0.6) url("${imageTwo?.url_photo2}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -783,7 +722,7 @@ const CarouselEdit = (props) => {
                       setModalId(imageThree?.id3)
                     }}
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageThree?.url_photo3}")`,
+                      backgroundColor: `rgba(0,0,0,0.6) url("${imageThree?.url_photo3}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -879,7 +818,7 @@ const CarouselEdit = (props) => {
                       setModalId(imageFour?.id4)
                     }}
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageFour?.url_photo4}")`,
+                      backgroundColor: `rgba(0,0,0,0.6) url("${imageFour?.url_photo4}")`,
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
