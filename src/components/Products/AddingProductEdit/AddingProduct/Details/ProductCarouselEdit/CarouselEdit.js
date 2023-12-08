@@ -8,6 +8,7 @@ import { useHttp } from "../../../../../../hook/useHttp";
 import { PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
+const url = "https://api.dressme.uz/api/seller";
 
 const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId }) => {
   const { request } = useHttp()
@@ -22,6 +23,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
   const [loader, setLoader] = useState(false);
   const [openStoreList, setOpenStoreList] = useState(false);
   // --------------
+  // -----OnCHange Changed
+  const [editChanged, setEditChanged] = useState(false)
 
   const [imageOne, setImageOne] = useState({
     id1: 1,
@@ -69,41 +72,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
   function handleClickCarosuel() {
     setModalOfCarsouel(true)
   }
-  function onHandleDeleteImage() {
-    setLoader(true)
-    setHideDeleteIcons(true)
-    deleteImageId.mutate({},
-      {
-        onSuccess: (res) => {
-          if (res?.message && res?.errors) {
-            setDeleteMessage(res?.message)
-            setLoader(false)
 
-          } else if (res?.message) {
-            setSuccessMessage(res?.message)
-            // setGetIdShopLocation('')
-            setLoader(false)
-            onRefetch()
-            setTimeout(() => {
-              setOpenStoreList(false)
-              setHideDeleteIcons(false)
-              setDeleteModal(false)
-              setModalOfCarsouel(false)
-              // setImageOne()
-              // setImageThree()
-              // setImageTwo()
-              // setImageFour()
 
-            }, 2000);
-            console.log(res, "getIdShopLocation -----POST");
-          }
-        },
-
-        onError: err => {
-          console.log(err);
-        }
-      })
-  }
 
 
   useEffect(() => {
@@ -162,6 +132,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_File1: e.target.files[0],
       url_photo1: URL.createObjectURL(e.target.files[0])
     })
+    setEditChanged(true)
 
   };
   const handleLocationImage2 = (e) => {
@@ -170,6 +141,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_File2: e.target.files[0],
       url_photo2: URL.createObjectURL(e.target.files[0])
     })
+    setEditChanged(true)
+
   };
   const handleLocationImage3 = (e) => {
     setImageThree({
@@ -177,6 +150,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_File3: e.target.files[0],
       url_photo3: URL.createObjectURL(e.target.files[0])
     })
+    setEditChanged(true)
+
   };
   const handleLocationImage4 = (e) => {
     setImageFour({
@@ -184,6 +159,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_File4: e.target.files[0],
       url_photo4: URL.createObjectURL(e.target.files[0])
     })
+    setEditChanged(true)
+
 
   };
 
@@ -221,10 +198,33 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
 
 
 
-
-
-  console.log(productId, "productId");
   console.log(deleteId, "deleteId");
+  function UpadatePhoto(productId) {
+    let form = new FormData();
+    form.append("new_photo", imageOne?.url_File1);
+
+    return fetch(`${url}/products/${productId}/update-product-photo`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: form,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res?.errors && res?.message) {
+
+        } else if (res?.message) {
+
+        }
+        console.log(res, "ProductStore---Added");
+      })
+      .catch((err) => console.log(err, "errImage"));
+  }
+
+  // console.log(productId, "productId");
+  // console.log(deleteId, "deleteId");
   const deleteImageId = useMutation(() => {
     return request({
       url: `/products/${Number(productId)}/delete-product-photo`,
@@ -235,6 +235,43 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       }
     });
   });
+
+
+  function onHandleDeleteImage() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteImageId.mutate({},
+      {
+        onSuccess: (res) => {
+          if (res?.message && res?.errors) {
+            setDeleteMessage(res?.message)
+            setLoader(false)
+
+          } else if (res?.message) {
+            setSuccessMessage(res?.message)
+            // setGetIdShopLocation('')
+            setLoader(false)
+            onRefetch()
+            setTimeout(() => {
+              setOpenStoreList(false)
+              setHideDeleteIcons(false)
+              setDeleteModal(false)
+              setModalOfCarsouel(false)
+              // setImageOne()
+              // setImageThree()
+              // setImageTwo()
+              // setImageFour()
+
+            }, 2000);
+            console.log(res, "getIdShopLocation -----POST");
+          }
+        },
+
+        onError: err => {
+          console.log(err);
+        }
+      })
+  }
 
 
 
@@ -374,13 +411,25 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <button
-                        onClick={() => {
-                          setDeleteModal(true)
-                          setDeleteId(imageOne?.id1)
-                        }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                      </button>
+                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {editChanged && <button
+                          onClick={() => {
+                            setDeleteId(imageOne?.id1)
+                            UpadatePhoto(imageOne?.id1)
+                          }}
+                          type="button"
+                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </button>}
+                        <button
+                          onClick={() => {
+                            setDeleteModal(true)
+                            setDeleteId(imageOne?.id1)
+                          }}
+                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        </button>
+                      </div>
                     </label>
                   </div>
                 }
@@ -405,13 +454,25 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <button
-                        onClick={() => {
-                          setDeleteModal(true)
-                          setDeleteId(imageTwo?.id2)
-                        }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                      </button>
+                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {editChanged && <button
+                          onClick={() => {
+                            setDeleteId(imageTwo?.id2)
+                            UpadatePhoto(imageTwo?.id2)
+                          }}
+                          type="button"
+                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </button>}
+                        <button
+                          onClick={() => {
+                            setDeleteModal(true)
+                            setDeleteId(imageTwo?.id2)
+                          }}
+                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        </button>
+                      </div>
                     </label>
                   </div>
                 }
@@ -436,13 +497,25 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <button
-                        onClick={() => {
-                          setDeleteModal(true)
-                          setDeleteId(imageThree?.id3)
-                        }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                      </button>
+                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {editChanged && <button
+                          onClick={() => {
+                            setDeleteId(imageThree?.id3)
+                            UpadatePhoto(imageThree?.id3)
+                          }}
+                          type="button"
+                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </button>}
+                        <button
+                          onClick={() => {
+                            setDeleteModal(true)
+                            setDeleteId(imageThree?.id3)
+                          }}
+                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        </button>
+                      </div>
                     </label>
                   </div>
                 }
@@ -465,13 +538,25 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <button
-                        onClick={() => {
-                          setDeleteModal(true)
-                          setDeleteId(imageFour?.id4)
-                        }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                      </button>
+                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
+                        <button
+                          onClick={() => {
+                            setDeleteId(imageFour?.id4)
+                            UpadatePhoto(imageFour?.id4)
+                          }}
+                          type="button"
+                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </button>
+                        <button
+                          onClick={() => {
+                            setDeleteModal(true)
+                            setDeleteId(imageFour?.id4)
+                          }}
+                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        </button>
+                      </div>
                     </label>
                   </div>
                 }
