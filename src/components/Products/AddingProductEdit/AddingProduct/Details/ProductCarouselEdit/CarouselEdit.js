@@ -34,7 +34,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason1: null,
     status_update1: null,
     url_photo1: null,
-    url_File1: null
+    url_File1: null,
+    changed1: false
   });
   const [imageTwo, setImageTwo] = useState({
     id2: 2,
@@ -44,7 +45,9 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason2: null,
     status_update2: null,
     url_photo2: null,
-    url_File2: null
+    url_File2: null,
+    changed2: false
+
   });
   const [imageThree, setImageThree] = useState({
     id3: 3,
@@ -54,7 +57,9 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason3: null,
     status_update3: null,
     url_photo3: null,
-    url_File3: null
+    url_File3: null,
+    changed3: false
+
   });
   const [imageFour, setImageFour] = useState({
     id4: 4,
@@ -64,7 +69,9 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason4: null,
     status_update4: null,
     url_photo4: null,
-    url_File4: null
+    url_File4: null,
+    changed4: false
+
   });
 
 
@@ -77,52 +84,49 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
 
 
   useEffect(() => {
+    console.log("photos ishga tushdi");
+    console.log(photos, "photos");
     if (photos?.length) {
-      if (photos?.length >= 1) {
-        setImageOne({
-          id1: photos && photos[0]?.id || 1,
-          product_color_id1: photos && photos[0]?.product_color_id,
-          product_id1: photos && photos[0]?.product_id,
-          status1: photos && photos[0]?.status,
-          status_reason1: photos && photos[0]?.status_reason,
-          status_update1: photos && photos[0]?.status_update,
-          url_photo1: photos && photos[0]?.url_photo,
-        })
-      }
-      if (photos?.length === 4) {
-        setImageFour({
-          id4: photos && photos[3]?.id || 4,
-          product_color_id4: photos && photos[3]?.product_color_id,
-          product_id4: photos && photos[3]?.product_id,
-          status4: photos && photos[3]?.status,
-          status_reason4: photos && photos[3]?.status_reason,
-          status_update4: photos && photos[3]?.status_update,
-          url_photo4: photos && photos[3]?.url_photo,
-        })
-      }
-      if (photos?.length >= 3) {
-        setImageThree({
-          id3: photos && photos[2]?.id || 3,
-          product_color_id3: photos && photos[2]?.product_color_id,
-          product_id3: photos && photos[2]?.product_id,
-          status3: photos && photos[2]?.status,
-          status_reason3: photos && photos[2]?.status_reason,
-          status_update3: photos && photos[2]?.status_update,
-          url_photo3: photos && photos[2]?.url_photo,
-        })
-      }
-      if (photos?.length >= 2) {
+      setImageOne({
+        id1: photos && photos[0]?.id || 1,
+        product_color_id1: photos && photos[0]?.product_color_id,
+        product_id1: photos && photos[0]?.product_id,
+        status1: photos && photos[0]?.status,
+        status_reason1: photos && photos[0]?.status_reason,
+        status_update1: photos && photos[0]?.status_update,
+        url_photo1: photos && photos[0]?.url_photo,
+      })
 
-        setImageTwo({
-          id2: photos && photos[1]?.id || 2,
-          product_color_id2: photos && photos[1]?.product_color_id,
-          product_id2: photos && photos[1]?.product_id,
-          status2: photos && photos[1]?.status,
-          status_reason2: photos && photos[1]?.status_reason,
-          status_update2: photos && photos[1]?.status_update,
-          url_photo2: photos && photos[1]?.url_photo,
-        })
-      }
+      setImageFour({
+        id4: photos && photos[3]?.id || 4,
+        product_color_id4: photos && photos[3]?.product_color_id,
+        product_id4: photos && photos[3]?.product_id,
+        status4: photos && photos[3]?.status,
+        status_reason4: photos && photos[3]?.status_reason,
+        status_update4: photos && photos[3]?.status_update,
+        url_photo4: photos && photos[3]?.url_photo,
+      })
+
+      setImageThree({
+        id3: photos && photos[2]?.id || 3,
+        product_color_id3: photos && photos[2]?.product_color_id,
+        product_id3: photos && photos[2]?.product_id,
+        status3: photos && photos[2]?.status,
+        status_reason3: photos && photos[2]?.status_reason,
+        status_update3: photos && photos[2]?.status_update,
+        url_photo3: photos && photos[2]?.url_photo,
+      })
+
+      setImageTwo({
+        id2: photos && photos[1]?.id || 2,
+        product_color_id2: photos && photos[1]?.product_color_id,
+        product_id2: photos && photos[1]?.product_id,
+        status2: photos && photos[1]?.status,
+        status_reason2: photos && photos[1]?.status_reason,
+        status_update2: photos && photos[1]?.status_update,
+        url_photo2: photos && photos[1]?.url_photo,
+      })
+
     }
   }, [photos])
 
@@ -130,7 +134,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     setImageOne({
       ...imageOne,
       url_File1: e.target.files[0],
-      url_photo1: URL.createObjectURL(e.target.files[0])
+      url_photo1: URL.createObjectURL(e.target.files[0]),
+      changed1: true
     })
     setEditChanged(true)
 
@@ -139,7 +144,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     setImageTwo({
       ...imageTwo,
       url_File2: e.target.files[0],
-      url_photo2: URL.createObjectURL(e.target.files[0])
+      url_photo2: URL.createObjectURL(e.target.files[0]),
+      changed2: true
     })
     setEditChanged(true)
 
@@ -148,7 +154,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     setImageThree({
       ...imageThree,
       url_File3: e.target.files[0],
-      url_photo3: URL.createObjectURL(e.target.files[0])
+      url_photo3: URL.createObjectURL(e.target.files[0]),
+      changed3: true
     })
     setEditChanged(true)
 
@@ -157,7 +164,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     setImageFour({
       ...imageFour,
       url_File4: e.target.files[0],
-      url_photo4: URL.createObjectURL(e.target.files[0])
+      url_photo4: URL.createObjectURL(e.target.files[0]),
+      changed4: true,
     })
     setEditChanged(true)
 
@@ -201,7 +209,10 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
   console.log(deleteId, "deleteId");
   function UpadatePhoto(productId) {
     let form = new FormData();
-    form.append("new_photo", imageOne?.url_File1);
+    imageOne?.changed1 && form.append("new_photo", imageOne?.url_File1);
+    imageTwo?.changed2 && form.append("new_photo", imageTwo?.url_File2);
+    imageThree?.changed3 && form.append("new_photo", imageThree?.url_File3);
+    imageFour?.changed4 && form.append("new_photo", imageFour?.url_File4);
 
     return fetch(`${url}/products/${productId}/update-product-photo`, {
       method: "POST",
@@ -216,7 +227,6 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         if (res?.errors && res?.message) {
 
         } else if (res?.message) {
-
         }
         console.log(res, "ProductStore---Added");
       })
@@ -262,8 +272,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
               // setImageTwo()
               // setImageFour()
 
-            }, 2000);
-            console.log(res, "getIdShopLocation -----POST");
+            }, 1000);
+            // console.log(res, "getIdShopLocation -----POST");
           }
         },
 
@@ -411,8 +421,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {editChanged && <button
+                      <div className={`w-[55%]  ${imageOne?.changed1 ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {imageOne?.changed1 && <button
                           onClick={() => {
                             setDeleteId(imageOne?.id1)
                             UpadatePhoto(imageOne?.id1)
@@ -454,8 +464,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {editChanged && <button
+                      <div className={`w-[55%]  ${imageTwo?.changed2 ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {imageTwo?.changed2 && <button
                           onClick={() => {
                             setDeleteId(imageTwo?.id2)
                             UpadatePhoto(imageTwo?.id2)
@@ -497,8 +507,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {editChanged && <button
+                      <div className={`w-[55%]  ${imageThree?.changed3 ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {imageThree?.changed3 && <button
                           onClick={() => {
                             setDeleteId(imageThree?.id3)
                             UpadatePhoto(imageThree?.id3)
@@ -538,8 +548,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                         accept=" image/*"
                       />
                       Изменить фото
-                      <div className={`w-[55%]  ${editChanged ? "justify-between" : "justify-end"}  flex items-center`}>
-                        <button
+                      <div className={`w-[55%]  ${imageFour?.changed4 ? "justify-between" : "justify-end"}  flex items-center`}>
+                        {imageFour?.changed4 && <button
                           onClick={() => {
                             setDeleteId(imageFour?.id4)
                             UpadatePhoto(imageFour?.id4)
@@ -548,7 +558,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                           className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
-                        </button>
+                        </button>}
                         <button
                           onClick={() => {
                             setDeleteModal(true)
