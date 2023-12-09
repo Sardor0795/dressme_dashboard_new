@@ -409,7 +409,7 @@ const AddingProduct = () => {
   ]);
 
   function onHandleImageAdd(childData) {
-    console.log(childData, "childData");
+    // console.log(childData, "childData");
     setState({
       ...state,
       pictureBgFile1: childData?.image_File_1,
@@ -445,15 +445,72 @@ const AddingProduct = () => {
       });
       const res_1 = await res.json();
       if (res_1) {
-        refetch()
+        if (res?.errors && res?.message) {
+
+          toast.error(`${res_1?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+        } else if (res?.message) {
+          toast.success(`${res_1?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          setState({
+            ...state,
+            pictureBgFile1: null,
+            pictureBgFile2: null,
+            pictureBgFile3: null,
+            pictureBgFile4: null,
+          })
+          refetch()
+
+        }
         console.log(res_1, "ProductStore---Added");
       }
     } catch (err) {
+      toast.error(`${err}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
       return console.log(err, "errImage");
     }
   }
   return (
     <div className="w-full h-fit ">
+      <ToastContainer
+        style={{ zIndex: "1000", top: "80px" }}
+        position="top-right"
+        autoClose={5000}
+        limit={1}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+
+      />
       {state?.sendingLoader ? <LoadingForSeller /> :
         <div>
           <div className=" flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
@@ -519,6 +576,7 @@ const AddingProduct = () => {
 
           </div>
           <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"}  relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
+
             <section
               onClick={() => {
                 setState({
@@ -1600,13 +1658,23 @@ const AddingProduct = () => {
                     <div className="w-1/3 h-[1px] bg-borderColor"></div>
                   </div>
                   <div className=" flex items-center md:justify-end justify-between md:gap-x-4">
-                    <button
-                      type="button"
-                      onClick={onHandleAddImage}
-                      className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
+                    {state?.pictureBgFile1 ||
+                      state?.pictureBgFile2 ||
+                      state?.pictureBgFile3 ||
+                      state?.pictureBgFile4 ? <button
+                        type="button"
+                        onClick={onHandleAddImage}
+                        className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
                       Сохранить
                     </button>
+                      :
+                      <span
+                        className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] bg-[#f5f5f5] flex items-center justify-center cursor-not-allowed   py-3 border border-[#b5b5b5]  text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </span>
+                    }
                     <button
                       type="button"
                       // to="/products/add-detail"
