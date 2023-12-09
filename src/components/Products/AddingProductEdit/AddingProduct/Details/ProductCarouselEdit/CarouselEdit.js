@@ -8,6 +8,9 @@ import { useHttp } from "../../../../../../hook/useHttp";
 import { PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const url = "https://api.dressme.uz/api/seller";
 
 const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetch, productId }) => {
@@ -206,7 +209,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
 
 
-  console.log(deleteId, "deleteId");
+  // console.log(deleteId, "deleteId");
   function UpadatePhoto(productId) {
     let form = new FormData();
     imageOne?.changed1 && form.append("new_photo", imageOne?.url_File1);
@@ -228,7 +231,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
         } else if (res?.message) {
         }
-        console.log(res, "ProductStore---Added");
+        console.log(res, "ProductStoreUpdate");
       })
       .catch((err) => console.log(err, "errImage"));
   }
@@ -285,15 +288,29 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
 
 
-  console.log(imageOne, "image?.one");
-  console.log(imageTwo, "image?.two");
-  console.log(imageThree, "image?.three----3");
-  console.log(imageFour, "image?.four");
-  console.log(modalId, "image--modalId");
+  // console.log(imageOne, "image?.one");
+  // console.log(imageTwo, "image?.two");
+  // console.log(imageThree, "image?.three----3");
+  // console.log(imageFour, "image?.four");
+  // console.log(modalId, "image--modalId");
   // console.log(' ----------------------------');
   return (
     <div className="max-w-[350px] w-full h-fit ">
+      <ToastContainer
+        style={{ zIndex: "1000", top: "80px" }}
+        position="top-right"
+        autoClose={5000}
+        limit={1}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
 
+      />
       {/*------------------------- Modal Carosuel------------------------------------ */}
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
       <div>
@@ -725,7 +742,8 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       setModalId(imageTwo?.id2)
                     }}
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageTwo?.url_photo2}")`,
+                      backgroundImage: ` url("${imageTwo?.url_photo2}")`,
+                      backgroundColor: "rgba(0,0,0,0.6)",
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -821,7 +839,8 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       setModalId(imageThree?.id3)
                     }}
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageThree?.url_photo3}")`,
+                      backgroundImage: ` url("${imageThree?.url_photo3}")`,
+                      backgroundColor: "rgba(0,0,0,0.6)",
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
@@ -917,7 +936,8 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       setModalId(imageFour?.id4)
                     }}
                     style={{
-                      background: `rgba(0,0,0,0.6) url("${imageFour?.url_photo4}")`,
+                      backgroundImage: `url("${imageFour?.url_photo4}")`,
+                      backgroundColor: "rgba(0,0,0,0.6)",
                       backgroundPosition: "center center",
                       backgroundSize: "cover",
                       backgroundRepeat: "no-repeat",
