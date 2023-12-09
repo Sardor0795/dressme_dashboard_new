@@ -10,7 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 const url = "https://api.dressme.uz/api/seller";
 
-const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId }) => {
+const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetch, productId }) => {
   const { request } = useHttp()
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -34,6 +34,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason1: null,
     status_update1: null,
     url_photo1: null,
+    url_photo_change1: null,
     url_File1: null,
     changed1: false
   });
@@ -45,6 +46,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason2: null,
     status_update2: null,
     url_photo2: null,
+    url_photo_change2: null,
     url_File2: null,
     changed2: false
 
@@ -57,6 +59,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason3: null,
     status_update3: null,
     url_photo3: null,
+    url_photo_change3: null,
     url_File3: null,
     changed3: false
 
@@ -69,6 +72,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
     status_reason4: null,
     status_update4: null,
     url_photo4: null,
+    url_photo_change4: null,
     url_File4: null,
     changed4: false
 
@@ -84,8 +88,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
 
 
   useEffect(() => {
-    console.log("photos ishga tushdi");
-    console.log(photos, "photos");
+
     if (photos?.length) {
       setImageOne({
         id1: photos && photos[0]?.id || 1,
@@ -95,6 +98,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         status_reason1: photos && photos[0]?.status_reason,
         status_update1: photos && photos[0]?.status_update,
         url_photo1: photos && photos[0]?.url_photo,
+        url_photo_change1: photos && photos[0]?.url_photo,
       })
 
       setImageFour({
@@ -105,6 +109,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         status_reason4: photos && photos[3]?.status_reason,
         status_update4: photos && photos[3]?.status_update,
         url_photo4: photos && photos[3]?.url_photo,
+        url_photo_change4: photos && photos[3]?.url_photo,
       })
 
       setImageThree({
@@ -115,6 +120,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         status_reason3: photos && photos[2]?.status_reason,
         status_update3: photos && photos[2]?.status_update,
         url_photo3: photos && photos[2]?.url_photo,
+        url_photo_change3: photos && photos[2]?.url_photo,
       })
 
       setImageTwo({
@@ -125,10 +131,12 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         status_reason2: photos && photos[1]?.status_reason,
         status_update2: photos && photos[1]?.status_update,
         url_photo2: photos && photos[1]?.url_photo,
+        url_photo_change2: photos && photos[1]?.url_photo,
       })
 
     }
   }, [photos])
+
 
   const handleLocationImage1 = (e) => {
     setImageOne({
@@ -137,8 +145,12 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_photo1: URL.createObjectURL(e.target.files[0]),
       changed1: true
     })
-    setEditChanged(true)
-
+    onHandleImage({
+      image_File_1: e.target.files[0],
+      image_File_2: imageTwo?.url_File2,
+      image_File_3: imageThree?.url_File3,
+      image_File_4: imageFour?.url_File4
+    })
   };
   const handleLocationImage2 = (e) => {
     setImageTwo({
@@ -147,8 +159,12 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_photo2: URL.createObjectURL(e.target.files[0]),
       changed2: true
     })
-    setEditChanged(true)
-
+    onHandleImage({
+      image_File_1: imageOne?.url_File1,
+      image_File_2: e.target.files[0],
+      image_File_3: imageThree?.url_File3,
+      image_File_4: imageFour?.url_File4
+    })
   };
   const handleLocationImage3 = (e) => {
     setImageThree({
@@ -157,8 +173,12 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_photo3: URL.createObjectURL(e.target.files[0]),
       changed3: true
     })
-    setEditChanged(true)
-
+    onHandleImage({
+      image_File_1: imageOne?.url_File1,
+      image_File_2: imageTwo?.url_File2,
+      image_File_3: e.target.files[0],
+      image_File_4: imageFour?.url_File4
+    })
   };
   const handleLocationImage4 = (e) => {
     setImageFour({
@@ -167,42 +187,22 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
       url_photo4: URL.createObjectURL(e.target.files[0]),
       changed4: true,
     })
-    setEditChanged(true)
-
-
+    onHandleImage({
+      image_File_1: imageOne?.url_File1,
+      image_File_2: imageTwo?.url_File2,
+      image_File_3: imageThree?.url_File3,
+      image_File_4: e.target.files[0]
+    })
   };
+  // useEffect(() => {
+  //   onHandleImage({
+  //     image_File_1: imageOne?.url_File1,
+  //     image_File_2: imageTwo?.url_File2,
+  //     image_File_3: imageThree?.url_File3,
+  //     image_File_4: imageFour?.url_File4
+  //   })
+  // }, [imageOne?.url_File1 || imageTwo?.url_File2 || imageThree?.url_File3 || imageFour?.url_File4])
 
-  const [imgGroup, setImgGroup] = useState([
-    {
-      id: 1,
-      action: true,
-      img: img4,
-      status: "approved",
-      colors: "#f5f5dc",
-
-    },
-    {
-      id: 2,
-      action: false,
-      img: img2,
-      status: "declined",
-      colors: "#78866b",
-    },
-    {
-      id: 3,
-      action: false,
-      img: img3,
-      status: "pending",
-      colors: "#713f12",
-    },
-    {
-      id: 4,
-      action: false,
-      img: img1,
-      status: "pending",
-      colors: "#ffd700",
-    },
-  ]);
 
 
 

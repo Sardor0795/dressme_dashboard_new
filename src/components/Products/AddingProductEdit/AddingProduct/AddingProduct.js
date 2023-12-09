@@ -65,13 +65,9 @@ const AddingProduct = () => {
     type_Id: null,
     // --------------
     pictureBgFile1: null,
-    pictureBgView1: null,
     pictureBgFile2: null,
-    pictureBgView2: null,
     pictureBgFile3: null,
-    pictureBgView3: null,
     pictureBgFile4: null,
-    pictureBgView4: null,
     // ---------------
     shopId: null,
     shopLocationId: null,
@@ -254,13 +250,7 @@ const AddingProduct = () => {
       refetchOnWindowFocus: true,
     }
   );
-  // console.log(section_Id, "section_Id");
-  // console.log(subSection_Id, "subSection_Id");
-  // console.log(season_Id, "season_Id");
-  // console.log(colors_Id, "colors_Id");
-  // console.log(state?.gender_Id, "state?.gender_Id");
-  // console.log(state?.shopId, "state?.shopId");
-  // console.log(state?.shopLocationId, "state?.shopLocationId");
+
   // ------------------------------------------------------------------------ border-red-500
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
@@ -418,15 +408,50 @@ const AddingProduct = () => {
 
   ]);
 
-  // console.log(productsData.colors, "productsData.colors");
-  // var num = 1234567890
-  // const result = num.toLocaleString()?.split(",").join(" ")
-  // const priceSpace = result?.split(",").join(" ")
+  function onHandleImageAdd(childData) {
+    console.log(childData, "childData");
+    setState({
+      ...state,
+      pictureBgFile1: childData?.image_File_1,
+      pictureBgFile2: childData?.image_File_2,
+      pictureBgFile3: childData?.image_File_3,
+      pictureBgFile4: childData?.image_File_4,
+    })
+  }
+  // const onHandleAddImage = () => {
+  //   console.log(
+  //     state?.pictureBgFile1, "pictureBgFile1",
+  //     state?.pictureBgFile2, "pictureBgFile2",
+  //     state?.pictureBgFile3, "pictureBgFile3",
+  //     state?.pictureBgFile4, "pictureBgFile4",
+  //   );
+  // }
+  const onHandleAddImage = async () => {
+    let form = new FormData();
+    state?.pictureBgFile1 && form.append("photo", state?.pictureBgFile1);
+    state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
+    state?.pictureBgFile3 && form.append("photo", state?.pictureBgFile3);
+    state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
+    form.append("color_id", colorListForTest[0]);
 
-  // console.log(result, "buResult");
-  // console.log(selectColorID, "selectColorID");
-  // console.log(colorChecked, "colorChecked");
-  // console.log(productsDataIdEdit, "productsDataIdEdit");
+    try {
+      const res = await fetch(`${url}/products/${newProductId}/add-product-photo`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      });
+      const res_1 = await res.json();
+      if (res_1) {
+        refetch()
+        console.log(res_1, "ProductStore---Added");
+      }
+    } catch (err) {
+      return console.log(err, "errImage");
+    }
+  }
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -1557,7 +1582,7 @@ const AddingProduct = () => {
 
                     {/* Img Carousel */}
                     <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                      <CarouselEdit colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
+                      <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
                     </div>
 
                   </div>
@@ -1577,6 +1602,7 @@ const AddingProduct = () => {
                   <div className=" flex items-center md:justify-end justify-between md:gap-x-4">
                     <button
                       type="button"
+                      onClick={onHandleAddImage}
                       className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
                       Сохранить
