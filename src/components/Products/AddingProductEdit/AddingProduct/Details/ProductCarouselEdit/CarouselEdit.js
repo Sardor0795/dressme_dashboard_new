@@ -8,7 +8,7 @@ import { useHttp } from "../../../../../../hook/useHttp";
 import { PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiDownload } from "react-icons/fi";
 
@@ -272,6 +272,79 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
         }
       })
   }
+  console.log(
+    imageOne?.url_File1, "imageOne?.url_File1",
+    imageTwo?.url_File2, "imageTwo?.url_File2",
+    imageThree?.url_File3, "imageThree?.url_File3",
+    imageFour?.url_File4, "imageFour?.url_File4",
+  );
+  const onHandleAddImage = async () => {
+    // setState({ ...state, sendingLoader: true })
+    let form = new FormData();
+    imageOne?.url_File1 && form.append("photo", imageOne?.url_File1);
+    imageTwo?.url_File2 && form.append("photo", imageTwo?.url_File2);
+    imageThree?.url_File3 && form.append("photo", imageThree?.url_File3);
+    imageFour?.url_File4 && form.append("photo", imageFour?.url_File4);
+    form.append("color_id", colorSelect[0]?.id);
+
+    try {
+      const res = await fetch(`${url}/products/${Number(productId)}/add-product-photo`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      });
+      const res_1 = await res.json();
+      if (res_1) {
+        if (res_1?.errors && res_1?.message) {
+
+          toast.error(`${res_1?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          // setState({ ...state, sendingLoader: false })
+
+        } else if (res_1?.message) {
+          toast.success(`${res_1?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+
+          onRefetch()
+
+        }
+        console.log(res_1, "ProductStore---Added");
+      }
+    } catch (err) {
+      toast.error(`${err}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+      // setState({ ...state, sendingLoader: false })
+      throw new Error(err?.message || "something wrong");
+
+    }
+  }
 
 
   return (
@@ -369,7 +442,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
           </div>
 
         </section>
-
+        {/*  */}
         <section
           className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
             }`}
@@ -558,6 +631,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
             </div>
           </div>
         </section>
+        {/* Img Upload */}
         <section
           className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
             }`}
@@ -567,9 +641,9 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
             className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
-          <div className="w-[670px] h-[60vh]">
+          <div className="w-[670px] h-[60vh] overflow-hidden rounded-lg">
             {Number(modalId) === Number(imageTwo?.id2) &&
-              <div className="w-full h-full bg-white rounded-lg mt-[-4px] p-0 m-0 ">
+              <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
                 <div className="w-full h-[90%]">
 
                   {!imageTwo?.url_photo2 ?
@@ -600,7 +674,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
                     />}
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3 border ">
+                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                   <button
                     onClick={() => {
                       // setDeleteId(imageTwo?.id2)
@@ -613,6 +687,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                   </button>
                   <button
                     onClick={() => {
+                      onHandleAddImage()
                       // setDeleteId(imageTwo?.id2)
                       // UpadatePhoto(imageTwo?.id2)
                     }}
@@ -632,7 +707,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
               </div>
             }
             {Number(modalId) === Number(imageThree?.id3) &&
-              <div className="w-full h-full bg-white rounded-lg mt-[-4px] p-0 m-0 ">
+              <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
                 <div className="w-full h-[90%]">
 
                   {!imageThree?.url_photo3 ?
@@ -663,9 +738,10 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
                     />}
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3 border ">
+                <div className="w-full h-[10%] flex items-center justify-between px-3   border-t">
                   <button
                     onClick={() => {
+                      onHandleAddImage()
                       // setDeleteId(imageTwo?.id2)
                       // UpadatePhoto(imageTwo?.id2)
                     }}
@@ -695,7 +771,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
               </div>
             }
             {Number(modalId) === Number(imageFour?.id4) &&
-              <div className="w-full h-full bg-white rounded-lg mt-[-4px] p-0 m-0 ">
+              <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
                 <div className="w-full h-[90%]">
 
                   {!imageFour?.url_photo4 ?
@@ -726,9 +802,10 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
                     />}
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3 border ">
+                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t  ">
                   <button
                     onClick={() => {
+                      onHandleAddImage()
                       // setDeleteId(imageTwo?.id2)
                       // UpadatePhoto(imageTwo?.id2)
                     }}
