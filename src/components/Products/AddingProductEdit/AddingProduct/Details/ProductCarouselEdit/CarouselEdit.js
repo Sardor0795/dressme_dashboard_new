@@ -197,17 +197,6 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       image_File_4: e.target.files[0]
     })
   };
-  // useEffect(() => {
-  //   onHandleImage({
-  //     image_File_1: imageOne?.url_File1,
-  //     image_File_2: imageTwo?.url_File2,
-  //     image_File_3: imageThree?.url_File3,
-  //     image_File_4: imageFour?.url_File4
-  //   })
-  // }, [imageOne?.url_File1 || imageTwo?.url_File2 || imageThree?.url_File3 || imageFour?.url_File4])
-
-
-
 
   // console.log(deleteId, "deleteId");
   function UpadatePhoto(productId) {
@@ -236,8 +225,6 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       .catch((err) => console.log(err, "errImage"));
   }
 
-  // console.log(productId, "productId");
-  // console.log(deleteId, "deleteId");
   const deleteImageId = useMutation(() => {
     return request({
       url: `/products/${Number(productId)}/delete-product-photo`,
@@ -270,13 +257,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
               setHideDeleteIcons(false)
               setDeleteModal(false)
               setModalOfCarsouel(false)
-              // setImageOne()
-              // setImageThree()
-              // setImageTwo()
-              // setImageFour()
-
             }, 1000);
-            // console.log(res, "getIdShopLocation -----POST");
           }
         },
 
@@ -287,30 +268,9 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
   }
 
 
-
-  // console.log(imageOne, "image?.one");
-  // console.log(imageTwo, "image?.two");
-  // console.log(imageThree, "image?.three----3");
-  // console.log(imageFour, "image?.four");
-  // console.log(modalId, "image--modalId");
-  // console.log(' ----------------------------');
   return (
     <div className="max-w-[350px] w-full h-fit ">
-      {/* <ToastContainer
-        style={{ zIndex: "1000", top: "80px" }}
-        position="top-right"
-        autoClose={5000}
-        limit={1}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
 
-      /> */}
       {/*------------------------- Modal Carosuel------------------------------------ */}
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
       <div>
@@ -651,32 +611,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       })}
 
                     </div>}
-                  {/* <div class="image-frame-wrapper-_NvbY" data-title="Пуховик" data-url="https://70.img.avito.st/image/1/1.w2ct7La4b44bRa2LJ6vHZDxObYiTTe2GW0htjJ1FZ4Sb.m3Z0PMuAMD16devVYDgoRb9LjW_kfqTjCgRkMmY6gLs" data-image-id="3" data-marker="image-frame/image-wrapper">
-                    <span
-                      class="image-frame-cover-lQG1h"
-                      style="background-image: url(&quot;https://70.img.avito.st/image/1/1.w2ct7La4b44bRa2LJ6vHZDxObYiTTe2GW0htjJ1FZ4Sb.m3Z0PMuAMD16devVYDgoRb9LjW_kfqTjCgRkMmY6gLs&quot;);">
-                    </span>
-                    <img src="https://70.img.avito.st/image/1/1.w2ct7La4b44bRa2LJ6vHZDxObYiTTe2GW0htjJ1FZ4Sb.m3Z0PMuAMD16devVYDgoRb9LjW_kfqTjCgRkMmY6gLs" alt="Пуховик" class="desktop-1ky5g7j" />
-                  </div> */}
-                  {/* <div
-                    className="image-frame-wrapper-_NvbY"
-                    data-title="Пуховик"
-                    data-url={imageOne?.url_photo1}
-                    data-image-id="3"
-                    data-marker="image-frame/image-wrapper">
-                    <span
-                      className="image-frame-cover-lQG1h"
-                      style={{
-                        backgroundImage: `url("${imageOne?.url_photo1}")`
-                      }}
-                    >
-                    </span>
-                    <img
-                      className="desktop-1ky5g7j border border-red-500 "
-                      src={imageOne?.url_photo1}
-                      alt=""
-                    />
-                  </div> */}
+
                   <div
                     style={{
                       backgroundImage: ` url("${imageOne?.url_photo1}")`,
@@ -764,15 +699,6 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       />
                     </div>
                   </div>
-                  // <img
-                  //   onClick={() => {
-                  //     handleClickCarosuel()
-                  //     setModalId(imageTwo?.id2)
-                  //   }}
-                  //   src={imageTwo?.url_photo2}
-                  //   alt="backImg"
-                  //   className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
-                  // />
 
                 }
               </button>
@@ -861,15 +787,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       />
                     </div>
                   </div>
-                  // <img
-                  //   onClick={() => {
-                  //     handleClickCarosuel()
-                  //     setModalId(imageThree?.id3)
-                  //   }}
-                  //   src={imageThree?.url_photo3}
-                  //   alt="backImg"
-                  //   className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
-                  // />
+
                 }
 
               </button>
@@ -958,15 +876,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       />
                     </div>
                   </div>
-                  // <img
-                  //   onClick={() => {
-                  //     handleClickCarosuel()
-                  //     setModalId(imageFour?.id4)
-                  //   }}
-                  //   src={imageFour?.url_photo4}
-                  //   alt="backImg"
-                  //   className="w-full h-full border border-searchBgColor object-contain rounded-lg border border-red-500"
-                  // />
+
                 }
 
               </button>

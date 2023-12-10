@@ -418,12 +418,7 @@ const AddingProduct = () => {
       pictureBgFile4: childData?.image_File_4,
     })
   }
-  console.log(
-    state?.pictureBgFile1, "11pictureBgFile1----",
-    state?.pictureBgFile2, "11pictureBgFile2----",
-    state?.pictureBgFile3, "11pictureBgFile3----",
-    state?.pictureBgFile4, "11pictureBgFile4----",
-  );
+
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
@@ -494,8 +489,8 @@ const AddingProduct = () => {
         theme: "light",
       })
       setState({ ...state, sendingLoader: false })
+      throw new Error(err?.message || "something wrong");
 
-      return console.log(err, "errImage");
     }
   }
 
