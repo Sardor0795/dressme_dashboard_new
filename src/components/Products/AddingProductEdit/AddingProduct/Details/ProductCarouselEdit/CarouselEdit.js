@@ -722,11 +722,11 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       onClick={() => {
                         setImageTwo({ ...imageTwo, url_File2: null, url_photo2: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
                     </button> :
                     <span
 
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Удалить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
                     </span>}
                 </div>
               </div>
@@ -824,11 +824,11 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       onClick={() => {
                         setImageThree({ ...imageThree, url_File3: null, url_photo3: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
                     </button> :
                     <span
 
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Удалить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
                     </span>}
                 </div>
               </div>
@@ -925,11 +925,11 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       onClick={() => {
                         setImageFour({ ...imageFour, url_File4: null, url_photo4: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
                     </button> :
                     <span
 
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Удалить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
                     </span>}
                 </div>
               </div>
