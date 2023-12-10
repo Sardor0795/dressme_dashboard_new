@@ -587,7 +587,7 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
-                    <div className={`w-full  "justify-between px-3 h-[50px]  flex items-center`}>
+                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageFour1"}
                         className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
