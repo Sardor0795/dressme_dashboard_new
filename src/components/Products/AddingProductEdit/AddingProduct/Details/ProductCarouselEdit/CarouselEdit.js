@@ -446,65 +446,69 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       alt="backImg"
                       className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
                     />
-
-
-                    <label
-                      htmlFor={"imageOne?.id"}
-                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
-                    >
-                      <input
-                        className="hidden"
-                        id={"imageOne?.id"}
-                        type="file"
-                        onChange={handleLocationImage1}
-                        accept=" image/*"
-                      />
-                      Изменить фото
-                      <div className={`w-[55%]  ${imageOne?.changed1 ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {imageOne?.changed1 && <button
-                          onClick={() => {
-                            setDeleteId(imageOne?.id1)
-                            UpadatePhoto(imageOne?.id1)
-                          }}
-                          type="button"
-                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    <div className={`w-full justify-between flex items-center px-3 h-[50px]`}>
+                      <label
+                        htmlFor={"imageOne1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageOne1"}
+                          type="file"
+                          onChange={handleLocationImage1}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageOne?.changed1 ? <button
+                        onClick={() => {
+                          setDeleteId(imageOne?.id1)
+                          UpadatePhoto(imageOne?.id1)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> :
+                        <span
+                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
-                        </button>}
-                        <button
-                          onClick={() => {
-                            setDeleteModal(true)
-                            setDeleteId(imageOne?.id1)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                        </button>
-                      </div>
-                    </label>
+                        </span>
+                      }
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageOne?.id1)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
                   </div>
                 }
                 {modalId == imageTwo?.id2 &&
                   <div>
-
                     <img
                       src={imageTwo?.url_photo2}
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
-
-                    <label
-                      htmlFor={"imageTwo?.id"}
-                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
-                    >
-                      <input
-                        className="hidden"
-                        id={"imageTwo?.id"}
-                        type="file"
-                        onChange={handleLocationImage2}
-                        accept=" image/*"
-                      />
-                      Изменить фото
-                      <div className={`w-[55%]  ${imageTwo?.changed2 ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {imageTwo?.changed2 && <button
+                    <div className={`w-full  justify-between  flex items-center px-3 h-[50px]`}>
+                      <label
+                        htmlFor={"imageTwo1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageTwo1"}
+                          type="file"
+                          onChange={handleLocationImage2}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageTwo?.changed2 ?
+                        <button
                           onClick={() => {
                             setDeleteId(imageTwo?.id2)
                             UpadatePhoto(imageTwo?.id2)
@@ -513,16 +517,20 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                           className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
-                        </button>}
-                        <button
-                          onClick={() => {
-                            setDeleteModal(true)
-                            setDeleteId(imageTwo?.id2)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                        </button>
-                      </div>
-                    </label>
+                        </button> :
+                        <span
+                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageTwo?.id2)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
                   </div>
                 }
                 {modalId == imageThree?.id3 &&
@@ -533,39 +541,43 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
-
-                    <label
-                      htmlFor={"imageThree?.id"}
-                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
-                    >
-                      <input
-                        className="hidden"
-                        id={"imageThree?.id"}
-                        type="file"
-                        onChange={handleLocationImage3}
-                        accept=" image/*"
-                      />
-                      Изменить фото
-                      <div className={`w-[55%]  ${imageThree?.changed3 ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {imageThree?.changed3 && <button
-                          onClick={() => {
-                            setDeleteId(imageThree?.id3)
-                            UpadatePhoto(imageThree?.id3)
-                          }}
-                          type="button"
-                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    <div className={`w-full justify-between px-3 h-[50px] flex items-center`}>
+                      <label
+                        htmlFor={"imageThree1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageThree1"}
+                          type="file"
+                          onChange={handleLocationImage3}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageThree?.changed3 ? <button
+                        onClick={() => {
+                          setDeleteId(imageThree?.id3)
+                          UpadatePhoto(imageThree?.id3)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> :
+                        <span
+                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
-                        </button>}
-                        <button
-                          onClick={() => {
-                            setDeleteModal(true)
-                            setDeleteId(imageThree?.id3)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                        </button>
-                      </div>
-                    </label>
+                        </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageThree?.id3)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
                   </div>
                 }
                 {modalId == imageFour?.id4 &&
@@ -575,38 +587,42 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       alt="backImg"
                       className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
                     />
-                    <label
-                      htmlFor={"imageFour?.id"}
-                      className="h-full w-full cursor-pointer px-5  py-[15px] text-weatherWinterColor text-lg not-italic font-AeonikProMedium flex items-center  justify-between  "
-                    >
-                      <input
-                        className="hidden"
-                        id={"imageFour?.id"}
-                        type="file"
-                        onChange={handleLocationImage4}
-                        accept=" image/*"
-                      />
-                      Изменить фото
-                      <div className={`w-[55%]  ${imageFour?.changed4 ? "justify-between" : "justify-end"}  flex items-center`}>
-                        {imageFour?.changed4 && <button
-                          onClick={() => {
-                            setDeleteId(imageFour?.id4)
-                            UpadatePhoto(imageFour?.id4)
-                          }}
-                          type="button"
-                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                        >
-                          Сохранить
-                        </button>}
-                        <button
-                          onClick={() => {
-                            setDeleteModal(true)
-                            setDeleteId(imageFour?.id4)
-                          }}
-                          className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                        </button>
-                      </div>
-                    </label>
+                    <div className={`w-full  "justify-between px-3 h-[50px]  flex items-center`}>
+                      <label
+                        htmlFor={"imageFour1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageFour1"}
+                          type="file"
+                          onChange={handleLocationImage4}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageFour?.changed4 ? <button
+                        onClick={() => {
+                          setDeleteId(imageFour?.id4)
+                          UpadatePhoto(imageFour?.id4)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> : <span
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageFour?.id4)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
                   </div>
                 }
               </div>
@@ -685,21 +701,22 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       />
                   }
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
-                  <label
-                    htmlFor={"changeImageTwo"}
-                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    <input
-                      className="hidden"
-                      id={"changeImageTwo"}
-                      type="file"
-                      onChange={handleLocationImage2}
-                      accept=" image/*"
-                    />
-                    Изменить фото
-                  </label>
-                  {imageTwo?.url_File2 ?
+                {imageTwo?.url_File2 ?
+                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                    <label
+                      htmlFor={"changeImageTwo"}
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      <input
+                        className="hidden"
+                        id={"changeImageTwo"}
+                        type="file"
+                        onChange={handleLocationImage2}
+                        accept=" image/*"
+                      />
+                      Изменить фото
+                    </label>
+
                     <button
                       onClick={() => {
                         onHandleAddImage()
@@ -709,26 +726,29 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                     >
                       Сохранить
                     </button>
-                    :
-                    <span
-                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      Сохранить
-                    </span>
-                  }
-                  {imageTwo?.url_File2 ?
                     <button
                       type="button"
                       onClick={() => {
                         setImageTwo({ ...imageTwo, url_File2: null, url_photo2: null })
                       }}
                       className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
-                    </button> :
+                    </button>
+                  </div> :
+                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                     <span
-
+                      className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
+                    >
+                      Изменить фото
+                    </span>
+                    <span
+                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                    <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
-                    </span>}
-                </div>
+                    </span>
+                  </div>}
               </div>
             }
             {Number(modalId) === Number(imageThree?.id3) &&
@@ -787,21 +807,21 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       />
                   }
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
-                  <label
-                    htmlFor={"changeImageThree"}
-                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    <input
-                      className="hidden"
-                      id={"changeImageThree"}
-                      type="file"
-                      onChange={handleLocationImage3}
-                      accept=" image/*"
-                    />
-                    Изменить фото
-                  </label>
-                  {imageThree?.url_photo3 ?
+                {imageThree?.url_photo3 ?
+                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                    <label
+                      htmlFor={"changeImageThree"}
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      <input
+                        className="hidden"
+                        id={"changeImageThree"}
+                        type="file"
+                        onChange={handleLocationImage3}
+                        accept=" image/*"
+                      />
+                      Изменить фото
+                    </label>
                     <button
                       onClick={() => {
                         onHandleAddImage()
@@ -811,26 +831,30 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                     >
                       Сохранить
                     </button>
-                    :
-                    <span
-                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      Сохранить
-                    </span>
-                  }
-                  {imageThree?.url_photo3 ?
+
                     <button
                       type="button"
                       onClick={() => {
                         setImageThree({ ...imageThree, url_File3: null, url_photo3: null })
                       }}
                       className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
-                    </button> :
+                    </button>
+                  </div> :
+                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                     <span
-
+                      className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
+                    >
+                      Изменить фото
+                    </span>
+                    <span
+                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                    <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
-                    </span>}
-                </div>
+                    </span>
+                  </div>}
               </div>
             }
             {Number(modalId) === Number(imageFour?.id4) &&
@@ -888,21 +912,21 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                       />
                   }
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
-                  <label
-                    htmlFor={"changeImageFour"}
-                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    <input
-                      className="hidden"
-                      id={"changeImageFour"}
-                      type="file"
-                      onChange={handleLocationImage4}
-                      accept=" image/*"
-                    />
-                    Изменить фото
-                  </label>
-                  {imageFour?.url_photo4 ?
+                {imageFour?.url_photo4 ?
+                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                    <label
+                      htmlFor={"changeImageFour"}
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      <input
+                        className="hidden"
+                        id={"changeImageFour"}
+                        type="file"
+                        onChange={handleLocationImage4}
+                        accept=" image/*"
+                      />
+                      Изменить фото
+                    </label>
                     <button
                       onClick={() => {
                         onHandleAddImage()
@@ -912,31 +936,34 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
                     >
                       Сохранить
                     </button>
-                    :
-                    <span
-                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      Сохранить
-                    </span>
-                  }
-                  {imageFour?.url_photo4 ?
                     <button
                       type="button"
                       onClick={() => {
                         setImageFour({ ...imageFour, url_File4: null, url_photo4: null })
                       }}
                       className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
-                    </button> :
+                    </button>
+                  </div>
+                  :
+                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                     <span
-
+                      className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
+                    >
+                      Изменить фото
+                    </span>
+                    <span
+                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                    <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
-                    </span>}
-                </div>
+                    </span>
+                  </div>}
               </div>
             }
           </div>
         </section>
-
       </div >
       {/*------------------------- Modal Carosuel------------------------------------ */}
 
