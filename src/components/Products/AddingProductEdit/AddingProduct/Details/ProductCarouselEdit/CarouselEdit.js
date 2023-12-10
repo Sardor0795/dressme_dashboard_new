@@ -296,7 +296,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
   // console.log(' ----------------------------');
   return (
     <div className="max-w-[350px] w-full h-fit ">
-      <ToastContainer
+      {/* <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
         autoClose={5000}
@@ -310,7 +310,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
         pauseOnHover
         theme="colored"
 
-      />
+      /> */}
       {/*------------------------- Modal Carosuel------------------------------------ */}
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
       <div>
