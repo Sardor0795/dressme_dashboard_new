@@ -409,91 +409,6 @@ const AddingProduct = () => {
 
   ]);
 
-  function onHandleImageAdd(childData) {
-    setState({
-      ...state,
-      pictureBgFile1: childData?.image_File_1,
-      pictureBgFile2: childData?.image_File_2,
-      pictureBgFile3: childData?.image_File_3,
-      pictureBgFile4: childData?.image_File_4,
-    })
-  }
-
-  const onHandleAddImage = async () => {
-    setState({ ...state, sendingLoader: true })
-    let form = new FormData();
-    state?.pictureBgFile1 && form.append("photo", state?.pictureBgFile1);
-    state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
-    state?.pictureBgFile3 && form.append("photo", state?.pictureBgFile3);
-    state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
-    form.append("color_id", colorListForTest[0]);
-
-    try {
-      const res = await fetch(`${url}/products/${newProductId}/add-product-photo`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-        },
-        body: form,
-      });
-      const res_1 = await res.json();
-      if (res_1) {
-        if (res_1?.errors && res_1?.message) {
-
-          toast.error(`${res_1?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
-          setState({ ...state, sendingLoader: false })
-
-        } else if (res_1?.message) {
-          toast.success(`${res_1?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
-          setState({
-            ...state,
-            pictureBgFile1: null,
-            pictureBgFile2: null,
-            pictureBgFile3: null,
-            pictureBgFile4: null,
-            sendingLoader: false
-          })
-          refetch()
-
-        }
-        console.log(res_1, "ProductStore---Added");
-      }
-    } catch (err) {
-      toast.error(`${err}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      })
-      setState({ ...state, sendingLoader: false })
-      throw new Error(err?.message || "something wrong");
-
-    }
-  }
-
   return (
     <div className="w-full h-fit ">
 
@@ -1639,7 +1554,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
+                    <CarouselEdit colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
                   </div>
 
                 </div>
@@ -1657,31 +1572,17 @@ const AddingProduct = () => {
                   <div className="w-1/3 h-[1px] bg-borderColor"></div>
                 </div>
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4">
-                  {state?.pictureBgFile1 ||
-                    state?.pictureBgFile2 ||
-                    state?.pictureBgFile3 ||
-                    state?.pictureBgFile4 ?
 
-                    <button
-                      type="button"
-                      onClick={onHandleAddImage}
-                      className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      {state?.sendingLoader ?
-                        <PuffLoader
-                          color={"#007DCA"}
-                          size={50}
-                          loading={true}
-                        /> :
-                        "Сохранить"}
-                    </button>
-                    :
-                    <span
-                      className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] bg-[#f5f5f5] flex items-center justify-center cursor-not-allowed   py-3 border border-[#b5b5b5]  text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      Сохранить
-                    </span>
-                  }
+
+                  <button
+                    type="button"
+                    // onClick={onHandleAddImage}
+                    className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                  >
+
+                    Сохранить
+                  </button>
+
                   <button
                     type="button"
                     // to="/products/add-detail"

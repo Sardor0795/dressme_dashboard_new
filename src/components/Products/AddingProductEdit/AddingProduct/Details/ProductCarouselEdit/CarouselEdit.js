@@ -14,21 +14,17 @@ import { FiDownload } from "react-icons/fi";
 
 const url = "https://api.dressme.uz/api/seller";
 
-const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetch, productId }) => {
+const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId }) => {
   const { request } = useHttp()
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   // --------------
   const [deleteModal, setDeleteModal] = useState(false);
-  const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
+  const [hideToggleIcons, setHideToggleIcons] = useState(false);
   const [SuccessMessage, setSuccessMessage] = useState(null);
-  const [deleteMessage, setDeleteMessage] = useState(null);
-
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
-  const [openStoreList, setOpenStoreList] = useState(false);
-  // --------------
-  // -----OnCHange Changed
-  const [editChanged, setEditChanged] = useState(false)
+
 
   const [imageOne, setImageOne] = useState({
     id1: 1,
@@ -154,12 +150,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       url_photo1: URL.createObjectURL(e.target.files[0]),
       changed1: true
     })
-    onHandleImage({
-      image_File_1: e.target.files[0],
-      image_File_2: imageTwo?.url_File2,
-      image_File_3: imageThree?.url_File3,
-      image_File_4: imageFour?.url_File4
-    })
+
   };
   const handleLocationImage2 = (e) => {
     setImageTwo({
@@ -168,12 +159,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       url_photo2: URL.createObjectURL(e.target.files[0]),
       changed2: true
     })
-    onHandleImage({
-      image_File_1: imageOne?.url_File1,
-      image_File_2: e.target.files[0],
-      image_File_3: imageThree?.url_File3,
-      image_File_4: imageFour?.url_File4
-    })
+
   };
   const handleLocationImage3 = (e) => {
     setImageThree({
@@ -182,12 +168,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       url_photo3: URL.createObjectURL(e.target.files[0]),
       changed3: true
     })
-    onHandleImage({
-      image_File_1: imageOne?.url_File1,
-      image_File_2: imageTwo?.url_File2,
-      image_File_3: e.target.files[0],
-      image_File_4: imageFour?.url_File4
-    })
+
   };
   const handleLocationImage4 = (e) => {
     setImageFour({
@@ -196,12 +177,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       url_photo4: URL.createObjectURL(e.target.files[0]),
       changed4: true,
     })
-    onHandleImage({
-      image_File_1: imageOne?.url_File1,
-      image_File_2: imageTwo?.url_File2,
-      image_File_3: imageThree?.url_File3,
-      image_File_4: e.target.files[0]
-    })
+
   };
 
   // console.log(deleteId, "deleteId");
@@ -245,22 +221,21 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
   function onHandleDeleteImage() {
     setLoader(true)
-    setHideDeleteIcons(true)
+    setHideToggleIcons(true)
     deleteImageId.mutate({},
       {
         onSuccess: (res) => {
           if (res?.message && res?.errors) {
-            setDeleteMessage(res?.message)
+            setErrorMessage(res?.message)
             setLoader(false)
 
           } else if (res?.message) {
             setSuccessMessage(res?.message)
-            // setGetIdShopLocation('')
             setLoader(false)
             onRefetch()
             setTimeout(() => {
-              setOpenStoreList(false)
-              setHideDeleteIcons(false)
+              // setOpenStoreList(false)
+              setHideToggleIcons(false)
               setDeleteModal(false)
               setModalOfCarsouel(false)
             }, 1000);
@@ -279,7 +254,8 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
     imageFour?.url_File4, "imageFour?.url_File4",
   );
   const onHandleAddImage = async () => {
-    // setState({ ...state, sendingLoader: true })
+    setLoader(true)
+    setHideToggleIcons(true)
     let form = new FormData();
     imageOne?.url_File1 && form.append("photo", imageOne?.url_File1);
     imageTwo?.url_File2 && form.append("photo", imageTwo?.url_File2);
@@ -299,6 +275,8 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
       const res_1 = await res.json();
       if (res_1) {
         if (res_1?.errors && res_1?.message) {
+          setErrorMessage(res_1?.message)
+          setLoader(false)
 
           toast.error(`${res_1?.message}`, {
             position: "top-right",
@@ -321,10 +299,15 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
             progress: undefined,
             theme: "light",
           })
-          setFreeModalUploadImg(false)
-
+          setSuccessMessage(res_1?.message)
+          setLoader(false)
           onRefetch()
-
+          setTimeout(() => {
+            // setOpenStoreList(false)
+            setHideToggleIcons(false)
+            setFreeModalUploadImg(false)
+            onRefetch()
+          }, 1000);
         }
         console.log(res_1, "ProductStore---Added");
       }
@@ -355,21 +338,21 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
         <section
           onClick={() => {
             setModalOfCarsouel(false)
-            setFreeModalUploadImg(false)
           }}
           className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 
-          ${modalOfCarsouel || freeModalUploadImg ? "" : "hidden"
+          ${modalOfCarsouel ? "" : "hidden"
             }`}
         ></section>
         <section
           onClick={() => {
             setDeleteModal(false)
-            setOpenStoreList(false)
+            // setOpenStoreList(false)
             setSuccessMessage(null)
-            setDeleteMessage(null)
+            setErrorMessage(null)
+            setFreeModalUploadImg(false)
 
           }}
-          className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${deleteModal || openStoreList ? "" : "hidden"}`}
+          className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${deleteModal || freeModalUploadImg ? "" : "hidden"}`}
         ></section>
         {/* Delete Product Of Pop Confirm */}
         <section
@@ -378,8 +361,8 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
         >
           <button
             onClick={() => {
-              setOpenStoreList(false)
-              setDeleteMessage(null)
+              // setOpenStoreList(false)
+              setErrorMessage(null)
               setSuccessMessage(null)
               setDeleteModal(false)
             }}
@@ -389,9 +372,9 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
               className="w-full h-full"
               colors={"#a1a1a1"} />
           </button>
-          {hideDeleteIcons ?
+          {hideToggleIcons ?
             <div className="w-full h-full flex items-center justify-center">
-              {loader && hideDeleteIcons ?
+              {loader && hideToggleIcons ?
                 <PuffLoader
                   // className={styles.loader1}
                   color={"#007DCA"}
@@ -400,14 +383,14 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                 />
                 :
                 <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
-                  {deleteMessage ?
+                  {errorMessage ?
                     <span className="flex items-center justify-center p-2">
                       <MdError size={35} color="#FF4343" />
                     </span> :
                     <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                       <FaCheck size={30} color="#009B17" />
                     </span>}
-                  <span className="text-2xl not-italic font-AeonikProMedium">{deleteMessage ? deleteMessage : SuccessMessage}</span>
+                  <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                 </div>
               }
             </div>
@@ -632,11 +615,16 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
         </section>
         {/* Img Upload */}
         <section
-          className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
+          className={`fixed z-[223] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
             }`}
         >
           <button
-            onClick={() => setFreeModalUploadImg(false)}
+            onClick={() => {
+              // setOpenStoreList(false)
+              setErrorMessage(null)
+              setSuccessMessage(null)
+              setFreeModalUploadImg(false)
+            }}
             className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
@@ -667,11 +655,35 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       </div>
                     </label>
                     :
-                    <img
-                      src={imageTwo?.url_photo2}
-                      alt="backImg"
-                      className=" w-full h-full  object-contain "
-                    />}
+                    hideToggleIcons ?
+                      <div className="w-full h-full flex items-center justify-center">
+                        {loader && hideToggleIcons ?
+                          <PuffLoader
+                            // className={styles.loader1}
+                            color={"#007DCA"}
+                            size={80}
+                            loading={true}
+                          />
+                          :
+                          <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                            {errorMessage ?
+                              <span className="flex items-center justify-center p-2">
+                                <MdError size={35} color="#FF4343" />
+                              </span> :
+                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                <FaCheck size={30} color="#009B17" />
+                              </span>}
+                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                          </div>
+                        }
+                      </div>
+                      :
+                      <img
+                        src={imageTwo?.url_photo2}
+                        alt="backImg"
+                        className=" w-full h-full  object-contain "
+                      />
+                  }
                 </div>
                 <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                   <label
@@ -745,11 +757,35 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       </div>
                     </label>
                     :
-                    <img
-                      src={imageThree?.url_photo3}
-                      alt="backImg"
-                      className=" w-full h-full  object-contain "
-                    />}
+                    hideToggleIcons ?
+                      <div className="w-full h-full flex items-center justify-center">
+                        {loader && hideToggleIcons ?
+                          <PuffLoader
+                            // className={styles.loader1}
+                            color={"#007DCA"}
+                            size={80}
+                            loading={true}
+                          />
+                          :
+                          <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                            {errorMessage ?
+                              <span className="flex items-center justify-center p-2">
+                                <MdError size={35} color="#FF4343" />
+                              </span> :
+                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                <FaCheck size={30} color="#009B17" />
+                              </span>}
+                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                          </div>
+                        }
+                      </div>
+                      :
+                      <img
+                        src={imageThree?.url_photo3}
+                        alt="backImg"
+                        className=" w-full h-full  object-contain "
+                      />
+                  }
                 </div>
                 <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                   <label
@@ -822,11 +858,35 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       </div>
                     </label>
                     :
-                    <img
-                      src={imageFour?.url_photo4}
-                      alt="backImg"
-                      className=" w-full h-full  object-contain "
-                    />}
+                    hideToggleIcons ?
+                      <div className="w-full h-full flex items-center justify-center">
+                        {loader && hideToggleIcons ?
+                          <PuffLoader
+                            // className={styles.loader1}
+                            color={"#007DCA"}
+                            size={80}
+                            loading={true}
+                          />
+                          :
+                          <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                            {errorMessage ?
+                              <span className="flex items-center justify-center p-2">
+                                <MdError size={35} color="#FF4343" />
+                              </span> :
+                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                <FaCheck size={30} color="#009B17" />
+                              </span>}
+                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                          </div>
+                        }
+                      </div>
+                      :
+                      <img
+                        src={imageFour?.url_photo4}
+                        alt="backImg"
+                        className=" w-full h-full  object-contain "
+                      />
+                  }
                 </div>
                 <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
                   <label
