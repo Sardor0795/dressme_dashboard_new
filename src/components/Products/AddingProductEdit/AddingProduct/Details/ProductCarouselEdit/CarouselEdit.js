@@ -310,8 +310,6 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
             progress: undefined,
             theme: "light",
           })
-          // setState({ ...state, sendingLoader: false })
-
         } else if (res_1?.message) {
           toast.success(`${res_1?.message}`, {
             position: "top-right",
@@ -323,6 +321,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
             progress: undefined,
             theme: "light",
           })
+          setFreeModalUploadImg(false)
 
           onRefetch()
 
@@ -671,38 +670,52 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                     <img
                       src={imageTwo?.url_photo2}
                       alt="backImg"
-                      className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
+                      className=" w-full h-full  object-contain "
                     />}
                 </div>
                 <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
-                  <button
-                    onClick={() => {
-                      // setDeleteId(imageTwo?.id2)
-                      // UpadatePhoto(imageTwo?.id2)
-                    }}
-                    type="button"
-                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  <label
+                    htmlFor={"changeImageTwo"}
+                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                   >
+                    <input
+                      className="hidden"
+                      id={"changeImageTwo"}
+                      type="file"
+                      onChange={handleLocationImage2}
+                      accept=" image/*"
+                    />
                     Изменить фото
-                  </button>
-                  <button
-                    onClick={() => {
-                      onHandleAddImage()
-                      // setDeleteId(imageTwo?.id2)
-                      // UpadatePhoto(imageTwo?.id2)
-                    }}
-                    type="button"
-                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    Сохранить
-                  </button>
-                  <button
-                    onClick={() => {
-                      // setDeleteModal(true)
-                      // setDeleteId(imageTwo?.id2)
-                    }}
-                    className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                  </button>
+                  </label>
+                  {imageTwo?.url_File2 ?
+                    <button
+                      onClick={() => {
+                        onHandleAddImage()
+                      }}
+                      type="button"
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </button>
+                    :
+                    <span
+                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                  }
+                  {imageTwo?.url_File2 ?
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setImageTwo({ ...imageTwo, url_File2: null, url_photo2: null })
+                      }}
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                    </button> :
+                    <span
+
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Удалить
+                    </span>}
                 </div>
               </div>
             }
@@ -735,38 +748,52 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                     <img
                       src={imageThree?.url_photo3}
                       alt="backImg"
-                      className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
+                      className=" w-full h-full  object-contain "
                     />}
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3   border-t">
-                  <button
-                    onClick={() => {
-                      onHandleAddImage()
-                      // setDeleteId(imageTwo?.id2)
-                      // UpadatePhoto(imageTwo?.id2)
-                    }}
-                    type="button"
-                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <label
+                    htmlFor={"changeImageThree"}
+                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                   >
+                    <input
+                      className="hidden"
+                      id={"changeImageThree"}
+                      type="file"
+                      onChange={handleLocationImage3}
+                      accept=" image/*"
+                    />
                     Изменить фото
-                  </button>
-                  <button
-                    onClick={() => {
-                      // setDeleteId(imageTwo?.id2)
-                      // UpadatePhoto(imageTwo?.id2)
-                    }}
-                    type="button"
-                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    Сохранить
-                  </button>
-                  <button
-                    onClick={() => {
-                      // setDeleteModal(true)
-                      // setDeleteId(imageTwo?.id2)
-                    }}
-                    className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                  </button>
+                  </label>
+                  {imageThree?.url_photo3 ?
+                    <button
+                      onClick={() => {
+                        onHandleAddImage()
+                      }}
+                      type="button"
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </button>
+                    :
+                    <span
+                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                  }
+                  {imageThree?.url_photo3 ?
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setImageThree({ ...imageThree, url_File3: null, url_photo3: null })
+                      }}
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                    </button> :
+                    <span
+
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Удалить
+                    </span>}
                 </div>
               </div>
             }
@@ -786,7 +813,6 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                         onChange={handleLocationImage4}
                         accept=" image/*"
                       />
-
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
@@ -799,38 +825,52 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                     <img
                       src={imageFour?.url_photo4}
                       alt="backImg"
-                      className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
+                      className=" w-full h-full  object-contain "
                     />}
                 </div>
-                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t  ">
-                  <button
-                    onClick={() => {
-                      onHandleAddImage()
-                      // setDeleteId(imageTwo?.id2)
-                      // UpadatePhoto(imageTwo?.id2)
-                    }}
-                    type="button"
-                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <label
+                    htmlFor={"changeImageFour"}
+                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                   >
+                    <input
+                      className="hidden"
+                      id={"changeImageFour"}
+                      type="file"
+                      onChange={handleLocationImage4}
+                      accept=" image/*"
+                    />
                     Изменить фото
-                  </button>
-                  <button
-                    onClick={() => {
-                      // setDeleteId(imageTwo?.id2)
-                      // UpadatePhoto(imageTwo?.id2)
-                    }}
-                    type="button"
-                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    Сохранить
-                  </button>
-                  <button
-                    onClick={() => {
-                      // setDeleteModal(true)
-                      // setDeleteId(imageTwo?.id2)
-                    }}
-                    className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                  </button>
+                  </label>
+                  {imageFour?.url_photo4 ?
+                    <button
+                      onClick={() => {
+                        onHandleAddImage()
+                      }}
+                      type="button"
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </button>
+                    :
+                    <span
+                      className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                  }
+                  {imageFour?.url_photo4 ?
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setImageFour({ ...imageFour, url_File4: null, url_photo4: null })
+                      }}
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                    </button> :
+                    <span
+
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Удалить
+                    </span>}
                 </div>
               </div>
             }
