@@ -10,6 +10,7 @@ import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FiDownload } from "react-icons/fi";
 
 const url = "https://api.dressme.uz/api/seller";
 
@@ -83,6 +84,11 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
 
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
+  const [freeModalUploadImg, setFreeModalUploadImg] = useState(false)
+  function handleFreeModalUploadImg(id) {
+    setFreeModalUploadImg(true)
+    setModalId(id)
+  }
   function handleClickCarosuel() {
     setModalOfCarsouel(true)
   }
@@ -277,9 +283,10 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
         <section
           onClick={() => {
             setModalOfCarsouel(false)
+            setFreeModalUploadImg(false)
           }}
           className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 
-          ${modalOfCarsouel ? "" : "hidden"
+          ${modalOfCarsouel || freeModalUploadImg ? "" : "hidden"
             }`}
         ></section>
         <section
@@ -548,11 +555,209 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                   </div>
                 }
               </div>
-
-
             </div>
           </div>
+        </section>
+        <section
+          className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
+            }`}
+        >
+          <button
+            onClick={() => setFreeModalUploadImg(false)}
+            className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
+            <MenuCloseIcons colors="#fff" />
+          </button>
+          <div className="w-[670px] h-[60vh]">
+            {Number(modalId) === Number(imageTwo?.id2) &&
+              <div className="w-full h-full bg-white rounded-lg mt-[-4px] p-0 m-0 ">
+                <div className="w-full h-[90%]">
 
+                  {!imageTwo?.url_photo2 ?
+                    <label
+                      htmlFor={"imageTwo"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <input
+                        className="hidden"
+                        id={"imageTwo"}
+                        type="file"
+                        onChange={handleLocationImage2}
+                        accept=" image/*"
+                      />
+
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
+                        < FiDownload size={30} colors="" />
+                        <div className="text-xl text-textLightColor mt-[5px] ">
+                          Выберите фото
+                        </div>
+                      </div>
+                    </label>
+                    :
+                    <img
+                      src={imageTwo?.url_photo2}
+                      alt="backImg"
+                      className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
+                    />}
+                </div>
+                <div className="w-full h-[10%] flex items-center justify-between px-3 border ">
+                  <button
+                    onClick={() => {
+                      // setDeleteId(imageTwo?.id2)
+                      // UpadatePhoto(imageTwo?.id2)
+                    }}
+                    type="button"
+                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    Изменить фото
+                  </button>
+                  <button
+                    onClick={() => {
+                      // setDeleteId(imageTwo?.id2)
+                      // UpadatePhoto(imageTwo?.id2)
+                    }}
+                    type="button"
+                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    Сохранить
+                  </button>
+                  <button
+                    onClick={() => {
+                      // setDeleteModal(true)
+                      // setDeleteId(imageTwo?.id2)
+                    }}
+                    className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                  </button>
+                </div>
+              </div>
+            }
+            {Number(modalId) === Number(imageThree?.id3) &&
+              <div className="w-full h-full bg-white rounded-lg mt-[-4px] p-0 m-0 ">
+                <div className="w-full h-[90%]">
+
+                  {!imageThree?.url_photo3 ?
+                    <label
+                      htmlFor={"imageThree"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <input
+                        className="hidden"
+                        id={"imageThree"}
+                        type="file"
+                        onChange={handleLocationImage3}
+                        accept=" image/*"
+                      />
+
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
+                        < FiDownload size={30} colors="" />
+                        <div className="text-xl text-textLightColor mt-[5px] ">
+                          Выберите фото
+                        </div>
+                      </div>
+                    </label>
+                    :
+                    <img
+                      src={imageThree?.url_photo3}
+                      alt="backImg"
+                      className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
+                    />}
+                </div>
+                <div className="w-full h-[10%] flex items-center justify-between px-3 border ">
+                  <button
+                    onClick={() => {
+                      // setDeleteId(imageTwo?.id2)
+                      // UpadatePhoto(imageTwo?.id2)
+                    }}
+                    type="button"
+                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    Изменить фото
+                  </button>
+                  <button
+                    onClick={() => {
+                      // setDeleteId(imageTwo?.id2)
+                      // UpadatePhoto(imageTwo?.id2)
+                    }}
+                    type="button"
+                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    Сохранить
+                  </button>
+                  <button
+                    onClick={() => {
+                      // setDeleteModal(true)
+                      // setDeleteId(imageTwo?.id2)
+                    }}
+                    className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                  </button>
+                </div>
+              </div>
+            }
+            {Number(modalId) === Number(imageFour?.id4) &&
+              <div className="w-full h-full bg-white rounded-lg mt-[-4px] p-0 m-0 ">
+                <div className="w-full h-[90%]">
+
+                  {!imageFour?.url_photo4 ?
+                    <label
+                      htmlFor={"imageFour"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <input
+                        className="hidden"
+                        id={"imageFour"}
+                        type="file"
+                        onChange={handleLocationImage4}
+                        accept=" image/*"
+                      />
+
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
+                        < FiDownload size={30} colors="" />
+                        <div className="text-xl text-textLightColor mt-[5px] ">
+                          Выберите фото
+                        </div>
+                      </div>
+                    </label>
+                    :
+                    <img
+                      src={imageFour?.url_photo4}
+                      alt="backImg"
+                      className=" w-full h-full 	 border border-searchBgColor object-contain rounded-lg"
+                    />}
+                </div>
+                <div className="w-full h-[10%] flex items-center justify-between px-3 border ">
+                  <button
+                    onClick={() => {
+                      // setDeleteId(imageTwo?.id2)
+                      // UpadatePhoto(imageTwo?.id2)
+                    }}
+                    type="button"
+                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    Изменить фото
+                  </button>
+                  <button
+                    onClick={() => {
+                      // setDeleteId(imageTwo?.id2)
+                      // UpadatePhoto(imageTwo?.id2)
+                    }}
+                    type="button"
+                    className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    Сохранить
+                  </button>
+                  <button
+                    onClick={() => {
+                      // setDeleteModal(true)
+                      // setDeleteId(imageTwo?.id2)
+                    }}
+                    className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
         </section>
 
       </div >
@@ -649,7 +854,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
                 className="h-[96px] w-full flex items-center justify-center overflow-hidden rounded-lg"
               >
-                {!imageTwo?.url_photo2 ? <label
+                {/* {!imageTwo?.url_photo2 ? <label
                   htmlFor={"imageTwo"}
                   className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                 >
@@ -669,7 +874,17 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       (необязательно)
                     </div>
                   </div>
-                </label>
+                </label> */}
+                {!imageTwo?.url_photo2 ? <div
+                  onClick={() => {
+                    handleFreeModalUploadImg(imageTwo?.id2)
+                  }}
+                  className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                  <DownloadIcon />
+                  <div className="text-[11px] text-textLightColor mt-[5px]">
+                    (необязательно)
+                  </div>
+                </div>
                   :
                   <div
                     onClick={() => {
@@ -739,7 +954,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                 type="button"
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
-                {!imageThree?.url_photo3 ? <label
+                {/* {!imageThree?.url_photo3 ? <label
                   htmlFor={"imageThree"}
                   className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                 >
@@ -757,7 +972,17 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       (необязательно)
                     </div>
                   </div>
-                </label>
+                </label> */}
+                {!imageThree?.url_photo3 ? <div
+                  onClick={() => {
+                    handleFreeModalUploadImg(imageThree?.id3)
+                  }}
+                  className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                  <DownloadIcon />
+                  <div className="text-[11px] text-textLightColor mt-[5px]">
+                    (необязательно)
+                  </div>
+                </div>
                   :
                   <div
                     onClick={() => {
@@ -828,7 +1053,7 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
 
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
-                {!imageFour?.url_photo4 ? <label
+                {/* {!imageFour?.url_photo4 ? <label
                   htmlFor={"imageFour"}
                   className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                 >
@@ -846,7 +1071,17 @@ const CarouselEdit = ({ onHandleImage, colorGroup, colorSelect, photos, onRefetc
                       (необязательно)
                     </div>
                   </div>
-                </label>
+                </label> */}
+                {!imageFour?.url_photo4 ? <div
+                  onClick={() => {
+                    handleFreeModalUploadImg(imageFour?.id4)
+                  }}
+                  className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                  <DownloadIcon />
+                  <div className="text-[11px] text-textLightColor mt-[5px]">
+                    (необязательно)
+                  </div>
+                </div>
                   :
                   <div
                     onClick={() => {
