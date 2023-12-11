@@ -352,6 +352,11 @@ const AddingProduct = () => {
   const handleNextPage = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
+  // const location = useLocation();
+  // useEffect(() => {
+  //   setDressInfo({ ...dressInfo, nextPageShowForm: false })
+  // }, [location.pathname]);
+
   const handleChangeSubSection = (e) => {
     setSubSection_Id(e)
   }
@@ -370,6 +375,7 @@ const AddingProduct = () => {
       setState({ ...state, PathnameToken: pathname.replace("/products/location/:", "") })
 
   }, [location.pathname]);
+
   useEffect(() => {
     if (state?.PathnameToken) {
       setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
