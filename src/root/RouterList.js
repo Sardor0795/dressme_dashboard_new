@@ -29,7 +29,6 @@ import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
 // -------------------Authentication----------
 import { EditProfilePage } from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
-import { UserProfile } from "../components/Authentication/UserProfile/ProfilePage/UserProfile";
 import SignUpSeller from "../components/Authentication/SellerAuthentication/SignUp/SignUpSeller";
 import SignInSeller from "../components/Authentication/SellerAuthentication/SignIn/SignInSeller";
 import ForgotPasswordSeller from "../components/Authentication/SellerAuthentication/forgotPassword/ForgotPasswordSeller";
@@ -64,12 +63,8 @@ export default function RouterList() {
   return (
     <div className="w-full h-full">
       {/* <NavbarForSetting /> */}
-
-
       <Routes>
         {/* ---------------------<Authentification>------------------------- */}
-
-        <Route path={"/sign-up"} element={<UserProfile />} />
         <Route path={"/edit-profile"} element={<EditProfilePage />} />
         {/* ---------------------<Store>------------------------- */}
         <Route path="/reviews" element={<Reviews1 />}>
