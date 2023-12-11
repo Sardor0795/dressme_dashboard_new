@@ -22,11 +22,10 @@ export default function Sidebar({ name, surName }) {
 
       <div className="flex flex-wrap content-between w-full h-full pb-10">
         <div className="w-full pt-5  px-2 flex flex-wrap gap-y-[44px]">
-          <NavLink
-            to={"/sign-up"}
-            className="w-full h-fit  flex items-center gap-x-4 pl-2 cursor-pointer"
+          <div
+            className="w-full h-fit select-none  flex items-center gap-x-4 pl-2 cursor-pointer"
           >
-            <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white flex items-center justify-center cursor-pointer">
+            <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white flex items-center justify-center">
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
@@ -35,7 +34,7 @@ export default function Sidebar({ name, surName }) {
               {/* <span>Ism familiya</span> */}
 
             </span>
-          </NavLink>
+          </div>
 
           {/* Links */}
           {dressInfo?.isAuthen ? (
