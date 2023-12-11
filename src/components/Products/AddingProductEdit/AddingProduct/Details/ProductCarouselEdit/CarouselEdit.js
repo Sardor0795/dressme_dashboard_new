@@ -277,7 +277,9 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         if (res_1?.errors && res_1?.message) {
           setErrorMessage(res_1?.message)
           setLoader(false)
+
         } else if (res_1?.message) {
+
           setSuccessMessage(res_1?.message)
           setLoader(false)
           onRefetch()
@@ -291,9 +293,10 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         console.log(res_1, "ProductStore---Added");
       }
     } catch (err) {
-      setLoader(false)
-      setErrorMessage(res_1?.message)
+      setErrorMessage(err)
+
       throw new Error(err?.message || "something wrong");
+
     }
   }
 
