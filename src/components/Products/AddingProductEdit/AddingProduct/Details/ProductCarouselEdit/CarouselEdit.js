@@ -278,27 +278,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
           setErrorMessage(res_1?.message)
           setLoader(false)
 
-          toast.error(`${res_1?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
         } else if (res_1?.message) {
-          toast.success(`${res_1?.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
+
           setSuccessMessage(res_1?.message)
           setLoader(false)
           onRefetch()
@@ -312,17 +293,8 @@ const CarouselEdit = ({ colorGroup, colorSelect, photos, onRefetch, productId })
         console.log(res_1, "ProductStore---Added");
       }
     } catch (err) {
-      toast.error(`${err}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      })
-      // setState({ ...state, sendingLoader: false })
+      setErrorMessage(err)
+
       throw new Error(err?.message || "something wrong");
 
     }
