@@ -198,6 +198,7 @@ export default function ProductLocationsList() {
   // console.log(locationAllId, "locationAllId");
   // console.log(productAllId, "productAllId");
   // console.log(allCheckedAction, "allCheckedAction");
+
   return (
     <div>
       <section

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import AddingProduct from "./AddingProduct/AddingProduct";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineLeft } from "react-icons/ai";
 import { GoBackIcons } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
