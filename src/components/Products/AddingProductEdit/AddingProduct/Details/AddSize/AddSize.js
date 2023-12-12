@@ -12,26 +12,27 @@ function AddSize({ handleCallBack, typeId }) {
         maxHeadGirth: null,
         sizeCheck: false,
         // outWear
-        minBreast: "",
-        maxBreast: "",
-        minSize: "",
-        maxSize: "",
-        minHeight: "",
-        maxHeight: "",
-        minHips: "",
-        maxHips: "",
+        minBreast: null,
+        maxBreast: null,
+        minSize: null,
+        maxSize: null,
+        minHeight: null,
+        maxHeight: null,
+        minHips: null,
+        maxHips: null,
         // shoesWear
-        minFootLength: "",
-        maxFootLength: "",
+        minFootLength: null,
+        maxFootLength: null,
+        one_size: null,
         // Accessuar
-        rowSize: '',
-        colSize: '',
+        rowSize: null,
+        colSize: null,
         //Universal
-        quantityNum: "",
-        ageNum: "",
-        priceNum: "",
-        salePercent: "",
-        salePrice: "",
+        quantityNum: null,
+        ageNum: null,
+        priceNum: null,
+        salePercent: null,
+        salePrice: null,
         sizeListCheck: null,
         selected: null,
         maxSizeShow: false,
@@ -73,45 +74,97 @@ function AddSize({ handleCallBack, typeId }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.quantityNum && state?.priceNum) {
-            setState({ ...state, isCheckValid: false, onConcel: true })
-            setToggleShow(false)
-            handleCallBack({
-                minUnderwearWaistGirth: state?.minBreast,
-                maxUnderwearWaistGirth: state?.maxBreast,
-                minUnderWearSize: state?.minSize,
-                maxUnderWearSize: state?.maxSize,
-                minUnderWearHipGirth: state?.minHips,
-                maxUnderWearHipGirth: state?.maxHips,
-                minHeight: state?.minHeight,
-                maxHeight: state?.maxHeight,
-                underWearLetterSize: state?.sizeListCheck,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-            })
-        }
+        // if (state?.minSize && state?.quantityNum && state?.priceNum) {
+        setState({ ...state, isCheckValid: false, })
+        setToggleShow(false)
+        handleCallBack({
+            // Accessuary
+            accessorySize: state?.minSize,
+            legnthAcc: state?.rowSize,
+            widthAcc: state?.colSize,
+            accessoryLetterSize: state?.sizeListCheck,
+            // Shoes
+            footWearSize: state?.minSize,
+            minFootLength: state?.minFootLength,
+            maxFootLength: state?.maxFootLength,
+            // UnderWear
+            minUnderwearWaistGirth: state?.minBreast,
+            maxUnderwearWaistGirth: state?.maxBreast,
+            minUnderWearSize: state?.minSize,
+            maxUnderWearSize: state?.maxSize,
+            minUnderWearHipGirth: state?.minHips,
+            maxUnderWearHipGirth: state?.maxHips,
+            minHeight: state?.minHeight,
+            maxHeight: state?.maxHeight,
+            underWearLetterSize: state?.sizeListCheck,
+            // OutWear
+            minChestGirth: state?.minBreast,
+            maxChestGirth: state?.maxBreast,
+            minOutWearSize: state?.minSize,
+            maxOutWearSize: state?.maxSize,
+            minOutWearWaistGirth: state?.minWaist,
+            maxOutWearWaistGirth: state?.maxWaist,
+            minOutWearHipGirth: state?.minHips,
+            maxOutWearHipGirth: state?.maxHips,
+            outWearLetterSize: state?.sizeListCheck,
+            // HeadWear
+            minHeadGirth: state?.minHeadGirth,
+            maxHeadGirth: state?.maxHeadGirth,
+            sizeCheck: state?.sizeCheck,
+            // All of Category
+            amount: state?.quantityNum,
+            age: state?.ageNum,
+            price: state?.priceNum?.split(",")?.join(""),
+            discountPercent: state?.salePercent,
+            discountPrice: state?.salePrice?.split(",")?.join(""),
+        })
+        // }
     }
     const cancelSendDetail = (e) => {
         setState({
             ...state,
-
             // 
-            minBreast: "",
-            maxBreast: "",
-            minSize: "",
-            maxSize: "",
-            minHeight: "",
-            maxHeight: "",
-            minHips: "",
-            maxHips: "",
-            quantityNum: "",
-            ageNum: "",
-            priceNum: "",
-            salePercent: "",
-            salePrice: "",
+            // Accessuary
+            accessorySize: null,
+            legnthAcc: null,
+            widthAcc: null,
+            accessoryLetterSize: null,
+            // Shoes
+            footWearSize: null,
+            minFootLength: null,
+            maxFootLength: null,
+            // UnderWear
+            minUnderwearWaistGirth: null,
+            maxUnderwearWaistGirth: null,
+            minUnderWearSize: null,
+            maxUnderWearSize: null,
+            minUnderWearHipGirth: null,
+            maxUnderWearHipGirth: null,
+            minHeight: null,
+            maxHeight: null,
+            underWearLetterSize: null,
+            // OutWear
+            minChestGirth: null,
+            maxChestGirth: null,
+            minOutWearSize: null,
+            maxOutWearSize: null,
+            minOutWearWaistGirth: null,
+            maxOutWearWaistGirth: null,
+            minOutWearHipGirth: null,
+            maxOutWearHipGirth: null,
+            outWearLetterSize: null,
+            // HeadWear
+            minHeadGirth: null,
+            maxHeadGirth: null,
+            sizeCheck: false,
+            // All of Category
+            amount: null,
+            age: null,
+            price: null,
+            discountPercent: null,
+            discountPrice: null,
+
+            // ----
             isCheckValid: false,
             onConcel: false,
             selected: null,
@@ -121,25 +174,32 @@ function AddSize({ handleCallBack, typeId }) {
     }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, priceNum: formattedValue });
     };
     const handleChangeSalePrice = (event) => {
-        const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
-        const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-
-        setState({ ...state, salePrice: formattedValue });
+        // const result = event.target.value.replace(/\D/g, '')
+        // const sanitizedValue = result.replace(/,/g, '');
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        // setState({ ...state, salePrice: formattedValue });
     };
 
+    useEffect(() => {
+        if (state?.salePercent > 0) {
+            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
+            const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: formattedValue })
+        } else {
+            setState({ ...state, salePrice: '' })
+        }
+    }, [state?.salePercent || state?.priceNum])
+    const handleChangePercent = (event) => {
+        const { value } = event.target
+        if (value >= 0 && value < 100) {
+            setState({ ...state, salePercent: value });
+        }
+    };
     const AddSize = (
         <div className="w-[840px] h-fit">
             {typeId == 1 &&
@@ -209,7 +269,7 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="flex items-start justify-between mt-[10px]">
                                 <input
                                     type="number"
-                                    className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                     required
@@ -277,27 +337,36 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
-                                            <input
-                                                type="number"
-                                                placeholder="0"
-                                                className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none flex items-center justify-center mx-auto"
-                                                value={state?.salePercent}
-                                                onChange={(e) => setState({ ...state, salePercent: e.target.value })}
-                                            />
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    value={state?.salePercent}
+                                                    onChange={handleChangePercent}
+                                                />
+                                                :
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    readOnly
+                                                />}
                                             <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
-                                                id="discountPrice"
-                                                className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
+                                                id="salePrice"
+                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
+                                                readOnly
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -309,9 +378,7 @@ function AddSize({ handleCallBack, typeId }) {
                         </div>
                     </div>
                     <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                        {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                            Отменить
-                        </button>}
+
                         <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                             Готово
                         </button>
@@ -725,27 +792,36 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                            <input
-                                                type="number"
-                                                placeholder="0"
-                                                className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
-                                                value={state?.salePercent}
-                                                onChange={(e) => setState({ ...state, salePercent: e.target.value })}
-                                            />
-                                            <span className="text-textLightColor ml-2">%</span>
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    value={state?.salePercent}
+                                                    onChange={handleChangePercent}
+                                                />
+                                                :
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    readOnly
+                                                />}
+                                            <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice"
-                                                className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
+                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
+                                                readOnly
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -758,9 +834,7 @@ function AddSize({ handleCallBack, typeId }) {
                     </div>
 
                     <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                        {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                            Отменить
-                        </button>}
+
                         <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                             Готово
                         </button>
@@ -1179,27 +1253,36 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                            <input
-                                                type="number"
-                                                placeholder="0"
-                                                className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
-                                                value={state?.salePercent}
-                                                onChange={(e) => setState({ ...state, salePercent: e.target.value })}
-                                            />
-                                            <span className="text-textLightColor ml-2">%</span>
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    value={state?.salePercent}
+                                                    onChange={handleChangePercent}
+                                                />
+                                                :
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    readOnly
+                                                />}
+                                            <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice"
-                                                className="inputStyle w-[75%] font-AeonikProMedium outline-none bg-transparent"
+                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
+                                                readOnly
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -1211,9 +1294,7 @@ function AddSize({ handleCallBack, typeId }) {
                         </div>
                     </div>
                     <div className="w-full h-fit flex items-center justify-end gap-x-5">
-                        {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                            Отменить
-                        </button>}
+
                         <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                             Готово
                         </button>
@@ -1237,9 +1318,9 @@ function AddSize({ handleCallBack, typeId }) {
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
-                                        className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
-                                        value={state?.minSize}
-                                        onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                        className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.one_size ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
+                                        value={state?.one_size}
+                                        onChange={(e) => setState({ ...state, one_size: e.target.value })}
                                     />
                                 </div>
                             </div>
@@ -1354,27 +1435,36 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                            <input
-                                                type="number"
-                                                placeholder="0"
-                                                className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
-                                                value={state?.salePercent}
-                                                onChange={(e) => setState({ ...state, salePercent: e.target.value })}
-                                            />
-                                            <span className="text-textLightColor ml-2">%</span>
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    value={state?.salePercent}
+                                                    onChange={handleChangePercent}
+                                                />
+                                                :
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    readOnly
+                                                />}
+                                            <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice"
-                                                className="inputStyle w-[75%] font-AeonikProMedium outline-none "
+                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
+                                                readOnly
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -1386,9 +1476,7 @@ function AddSize({ handleCallBack, typeId }) {
                         </div>
                     </div>
                     <div className="w-full h-fit flex items-center justify-end gap-x-5">
-                        {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                            Отменить
-                        </button>}
+
                         <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                             Готово
                         </button>
@@ -1411,8 +1499,8 @@ function AddSize({ handleCallBack, typeId }) {
                                     <input
                                         type="number"
                                         className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
-                                        value={state?.minSize}
-                                        onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                        value={state?.one_size}
+                                        onChange={(e) => setState({ ...state, one_size: e.target.value })}
                                     />
                                 </div>
                             </div>
@@ -1734,27 +1822,36 @@ function AddSize({ handleCallBack, typeId }) {
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                            <input
-                                                type="number"
-                                                placeholder="0"
-                                                className="inputStyle w-[70%] font-AeonikProMedium text-start outline-none "
-                                                value={state?.salePercent}
-                                                onChange={(e) => setState({ ...state, salePercent: e.target.value })}
-                                            />
-                                            <span className="text-textLightColor ml-2">%</span>
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    value={state?.salePercent}
+                                                    onChange={handleChangePercent}
+                                                />
+                                                :
+                                                <input
+                                                    type="number"
+                                                    placeholder="0"
+                                                    className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
+                                                    readOnly
+                                                />}
+                                            <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice"
-                                                className="inputStyle w-[75%] font-AeonikProMedium outline-none "
+                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
+                                                readOnly
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -1766,9 +1863,7 @@ function AddSize({ handleCallBack, typeId }) {
                         </div>
                     </div>
                     <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                        {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                            Отменить
-                        </button>}
+
                         <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                             Готово
                         </button>
