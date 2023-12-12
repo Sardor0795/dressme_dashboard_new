@@ -47,8 +47,6 @@ const AddingProduct = () => {
   const navigate = useNavigate()
   const { request } = useHttp();
   const [state, setState] = useState({
-    buttonReviews: false,
-    openDropModalButton: true,
     showColor: false,
     openSelect: false,
     // --------------
@@ -67,8 +65,7 @@ const AddingProduct = () => {
     // --------------
     pictureBgFile1: null,
     pictureBgFile2: null,
-    pictureBgFile3: null,
-    pictureBgFile4: null,
+
     // ---------------
     shopId: null,
     shopLocationId: null,
@@ -104,23 +101,20 @@ const AddingProduct = () => {
     // ------
     sendingLoader: false,
     //productsDataIdEdit
-    sizeGetList: null
-
-
+    sizeGetList: null,
+    //---------------
+    newColorByAddSizes: null
   });
-
-  const [productsData, setProductsData] = useState({});
-
-
 
 
   function CallBackHeadWear(childData) {
     console.log(childData, "childData");
+    setState({ ...state, newColorByAddSizes: childData })
   }
 
 
 
-
+  const [productsData, setProductsData] = useState({});
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     setState({
@@ -202,7 +196,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        console.log("Onrefetch Ishladi");
+        // console.log("Onrefetch Ishladi");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
@@ -287,14 +281,6 @@ const AddingProduct = () => {
     }
   }
   // -----------------------------------------------------------
-  // ------------------------------------------------------------------------
-  // useEffect(() => {
-  //   if (colors_Id?.length > colorListForTest?.length) {
-  //     setLastElement(colors_Id[colors_Id?.length - 1])
-  //   } else {
-  //     setLastElement('')
-  //   }
-  // }, [colors_Id])
 
   useEffect(() => {
     if (colorChecked !== selectColorID && selectColorID > 0) {
@@ -302,11 +288,15 @@ const AddingProduct = () => {
     } else {
       setColorAction(false)
     }
+    if (colors_Id?.length >= 2) {
+      setLastElement(colors_Id[colors_Id?.length - 1])
+    } else {
+      setLastElement('')
+
+    }
 
   }, [selectColorID])
-  // console.log(lastElement, "lastElement");
-  // console.log(colorChecked, "colorChecked");
-  // console.log(colorAction, "colorAction");
+
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -343,10 +333,7 @@ const AddingProduct = () => {
   const handleNextPage = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
-  // const location = useLocation();
-  // useEffect(() => {
-  //   setDressInfo({ ...dressInfo, nextPageShowForm: false })
-  // }, [location.pathname]);
+
 
   const handleChangeSubSection = (e) => {
     setSubSection_Id(e)
@@ -405,6 +392,123 @@ const AddingProduct = () => {
     allSizeModalShow
 
   ]);
+  function onHandleImageAdd(childData) {
+    setState({
+      ...state,
+      pictureBgFile1: childData?.image_File_5,
+      pictureBgFile2: childData?.image_File_6,
+
+    })
+  }
+  console.log(productsDataIdEdit?.locations[0]?.id, "productsDataIdEdit");
+  console.log(state?.newColorByAddSizes, "newColorByAddSizes");
+  const onHandleAddImage = async () => {
+    // setState({ ...state, sendingLoader: true })
+    let form = new FormData();
+    state?.pictureBgFile1 && form.append("photo", state?.pictureBgFile1);
+    // state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
+    form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
+    form.append("color_id", lastElement);
+    form.append("price", state?.newColorByAddSizes?.price);
+    state?.newColorByAddSizes?.amount && form.append("amount", state?.newColorByAddSizes?.amount);
+    state?.newColorByAddSizes?.age && form.append("age", Number(state?.newColorByAddSizes?.age));
+    state?.newColorByAddSizes?.discount_percent && form.append("discount_percent", state?.newColorByAddSizes?.discount_percent);//no R
+    state?.newColorByAddSizes?.discount_price && form.append("discount_price", state?.newColorByAddSizes?.discount_price);//no R
+
+    // // HeadWear
+    form.append("one_size", state?.newColorByAddSizes?.sizeCheck ? 1 : 0);
+    state?.newColorByAddSizes?.minHeadGirth && form.append("min_head_girth", state?.newColorByAddSizes?.minHeadGirth);
+    state?.newColorByAddSizes?.maxHeadGirth && form.append("max_head_girth", state?.newColorByAddSizes?.maxHeadGirth);
+    // // OutWear
+    state?.newColorByAddSizes?.outWearLetterSize && form.append("outwear_letter_size", state?.newColorByAddSizes?.outWearLetterSize);
+    state?.newColorByAddSizes?.minOutWearSize && form.append("min_outwear_size", state?.newColorByAddSizes?.minOutWearSize);
+    state?.newColorByAddSizes?.maxOutWearSize && form.append("max_outwear_size", state?.newColorByAddSizes?.maxOutWearSize);
+    state?.newColorByAddSizes?.minChestGirth && form.append("min_chest_girth", state?.newColorByAddSizes?.minChestGirth);
+    state?.newColorByAddSizes?.maxChestGirth && form.append("max_chest_girth", state?.newColorByAddSizes?.maxChestGirth);
+    state?.newColorByAddSizes?.minOutWearWaistGirth && form.append("min_outwear_waist_girth", state?.newColorByAddSizes?.minOutWearWaistGirth);
+    state?.newColorByAddSizes?.maxOutWearWaistGirth && form.append("max_outwear_waist_girth", state?.newColorByAddSizes?.maxOutWearWaistGirth);
+    state?.newColorByAddSizes?.minOutWearHipGirth && form.append("min_outwear_hip_girth", state?.newColorByAddSizes?.minOutWearHipGirth);
+    state?.newColorByAddSizes?.maxOutWearHipGirth && form.append("max_outwear_hip_girth", state?.newColorByAddSizes?.maxOutWearHipGirth);
+    // // UnderWear
+    state?.newColorByAddSizes?.underWearLetterSize && form.append("underwear_letter_size", state?.newColorByAddSizes?.underWearLetterSize);
+    state?.newColorByAddSizes?.minHeight && form.append("min_height", state?.newColorByAddSizes?.minHeight);
+    state?.newColorByAddSizes?.maxHeight && form.append("max_height", state?.newColorByAddSizes?.maxHeight);
+    state?.newColorByAddSizes?.minUnderWearSize && form.append("min_underwear_size", state?.newColorByAddSizes?.minUnderWearSize);
+    state?.newColorByAddSizes?.maxUnderWearSize && form.append("max_underwear_size", state?.newColorByAddSizes?.maxUnderWearSize);
+    state?.newColorByAddSizes?.minUnderwearWaistGirth && form.append("min_underwear_waist_girth", state?.newColorByAddSizes?.minUnderwearWaistGirth);
+    state?.newColorByAddSizes?.maxUnderwearWaistGirth && form.append("max_underwear_waist_girth", state?.newColorByAddSizes?.maxUnderwearWaistGirth);
+    state?.newColorByAddSizes?.minUnderWearHipGirth && form.append("min_underwear_hip_girth", state?.newColorByAddSizes?.minUnderWearHipGirth);
+    state?.newColorByAddSizes?.maxUnderWearHipGirth && form.append("max_underwear_hip_girth", state?.newColorByAddSizes?.maxUnderWearHipGirth);
+    // // FooterSize
+    state?.newColorByAddSizes?.footWearSize && form.append("footwear_size", state?.newColorByAddSizes?.footWearSize);
+    state?.newColorByAddSizes?.minFootLength && form.append("min_foot_length", state?.newColorByAddSizes?.minFootLength);
+    state?.newColorByAddSizes?.maxFootLength && form.append("max_foot_length", state?.newColorByAddSizes?.maxFootLength);
+    // // Accessory
+    state?.newColorByAddSizes?.accessoryLetterSize && form.append("accessory_letter_size", state?.newColorByAddSizes?.accessoryLetterSize);
+    state?.newColorByAddSizes?.accessorySize && form.append("accessory_size", state?.newColorByAddSizes?.accessorySize);
+    state?.newColorByAddSizes?.legnthAcc && form.append("length", state?.newColorByAddSizes?.legnthAcc);
+    state?.newColorByAddSizes?.widthAcc && form.append("width", state?.newColorByAddSizes?.widthAcc)
+    try {
+      const res = await fetch(`${url}/products/${newProductId}/add-product-color`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      });
+      const res_1 = await res.json();
+      if (res_1) {
+        if (res_1?.errors && res_1?.message) {
+          // toast.error(`${res_1?.message}`, {
+          //   position: "top-right",
+          //   autoClose: 5000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "light",
+          // })
+          // setState({ ...state, sendingLoader: false })
+        } else if (res_1?.message) {
+          // toast.success(`${res_1?.message}`, {
+          //   position: "top-right",
+          //   autoClose: 5000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "light",
+          // })
+          // setState({
+          //   ...state,
+          //   pictureBgFile1: null,
+          //   pictureBgFile2: null,
+          //   pictureBgFile3: null,
+          //   pictureBgFile4: null,
+          //   sendingLoader: false
+          // })
+          refetch()
+        }
+        console.log(res_1, "Product--Store--Added");
+      }
+    } catch (err) {
+      // toast.error(`${err}`, {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // })
+      // setState({ ...state, sendingLoader: false })
+      throw new Error(err?.message || "something wrong");
+    }
+  }
 
   return (
     <div className="w-full h-fit ">
@@ -1538,7 +1642,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                    <CarouselEdit colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colorSelect={productsDataIdEdit?.colors} photos={productsDataIdEdit?.photos} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} selectColorID={lastElement} productData={productsDataIdEdit} />
                   </div>
 
                 </div>
@@ -1560,7 +1664,7 @@ const AddingProduct = () => {
 
                   <button
                     type="button"
-                    // onClick={onHandleAddImage}
+                    onClick={onHandleAddImage}
                     className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
 
