@@ -115,16 +115,7 @@ const AddingProduct = () => {
 
 
   function CallBackHeadWear(childData) {
-    setState({
-      ...state,
-      headWearList: childData,
-      category_Id: childData?.category_Id,
-      amount: childData?.amount,
-      age: childData?.age,
-      price: childData?.price,
-      discount_price: childData?.discountPrice,
-      discount_percent: childData?.discountPercent,
-    })
+    console.log(childData, "childData");
   }
 
 

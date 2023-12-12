@@ -69,9 +69,9 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                 colSize: stateList?.sizeGetList[0]?.width,
                 minSize: stateList?.sizeGetList[0]?.wear_size,
                 ageNum: stateList?.sizeGetList[0]?.age,
+                sizeListCheck: stateList?.sizeGetList[0]?.letter_size,
                 salePercent: stateList?.sizeGetList[0]?.discount_percent,
                 salePrice: stateList?.sizeGetList[0]?.discount_price,
-                sizeListCheck: stateList?.sizeGetList[0]?.letter_size,
             })
         }
 
