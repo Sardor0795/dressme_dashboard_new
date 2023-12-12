@@ -6,7 +6,7 @@ import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
 function AddSize({ handleCallBack, typeId }) {
-    console.log(typeId, "typeIdAddSize");
+    // console.log(typeId, "typeIdAddSize");
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
