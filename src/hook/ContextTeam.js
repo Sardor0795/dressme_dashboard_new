@@ -9,15 +9,15 @@ export default function ContextTeam({ children }) {
     ConfirmAuthen: false,
     logOutSeller: false,
     // AccessTokenSeller: localStorage.getItem('DressmeUserToken'),
-    SellerName: "",
-    SellerSurName: "",
+    IsAuthenticated: false,
     SellerMagazin: "",
     SellerMagazinLocation: "",
     // ------Product----
     ProductFilterType: null,
     nextPageShowForm: true,
     productAddByIdForToggle: '',
-    isCheckPoructList: null
+    isCheckPoructList: null,
+    sellerUser: "",
   });
 
 
