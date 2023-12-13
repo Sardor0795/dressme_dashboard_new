@@ -122,12 +122,13 @@ export default function NavbarDashboard() {
 
       <div className="relative w-full h-full flex justify-between ">
         {
-          localStorage.getItem("DressmeUserToken") ? <div className="hidden fixed md:flex md:w-[300px] h-full">
-            <Sidebar name={name} surName={surName} />
-          </div> : null
+          dressInfo?.IsAuthenticated ?
+            <div className="hidden fixed md:flex md:w-[300px] h-full">
+              <Sidebar name={name} surName={surName} />
+            </div> : null
 
         }
-        <div className={`${localStorage.getItem("DressmeUserToken") ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "w-full"} h-full `}>
+        <div className={`${dressInfo?.IsAuthenticated ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "w-full"} h-full `}>
           <RouterList />
         </div>
       </div>

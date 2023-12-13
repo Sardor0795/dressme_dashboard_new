@@ -115,26 +115,8 @@ export default function RouterList() {
           <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
         </Route>
 
-        {/* <Route path="/store-location" element={<Clothes />} /> */}
-        {/* <Route path="/review-details/:id" element={<ReviewDetail />} /> */}
-
-        {/* {!dressInfo?.isAuthen ? (
-              locationWindow !== "/edit-profile" ? (
-                <Route path="/" element={<Navigate to={"/edit-profile"} />} />
-              ) : (
-                <Route path="/" element={<Navigate to={"/edit-profile"} />} />
-              )
-            ) : (
-              <Route path="/" element={<Navigate to={"/edit-profile"} />} />
-            )} */}
         <Route path="/" element={<Navigate to={"/signup-seller"} />} />
-        {/* {
-          dressInfo?.AccessTokenSeller ?
-            :
-            <>
-              <Route path="/" element={<Navigate to={"/signup-seller"} />} />
-            </>
-        } */}
+
         <Route path={"/signup-seller"} element={<SignUpSeller />} />
         <Route path={"/login-seller"} element={<SignInSeller />} />
         <Route path={"/forgot-password-seller"} element={<ForgotPasswordSeller />} />
