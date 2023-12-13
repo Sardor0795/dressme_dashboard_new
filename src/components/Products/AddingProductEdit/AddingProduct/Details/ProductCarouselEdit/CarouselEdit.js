@@ -748,6 +748,187 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                     </div>
                   </div>
                 }
+                {modalId == imageFive?.id5 &&
+                  <div>
+                    <img
+                      src={imageFive?.url_photo5}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                      <label
+                        htmlFor={"imageFive1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageFive1"}
+                          type="file"
+                          onChange={handleLocationImage5}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageFive?.changed5 ? <button
+                        onClick={() => {
+                          setDeleteId(imageFive?.id5)
+                          UpadatePhoto(imageFive?.id5)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> : <span
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageFive?.id5)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
+                  </div>
+                }
+                {modalId == imageSix?.id6 &&
+                  <div>
+                    <img
+                      src={imageSix?.url_photo6}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                      <label
+                        htmlFor={"imageSix1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageSix1"}
+                          type="file"
+                          onChange={handleLocationImage6}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageSix?.changed6 ? <button
+                        onClick={() => {
+                          setDeleteId(imageSix?.id6)
+                          UpadatePhoto(imageSix?.id6)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> : <span
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageSix?.id6)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
+                  </div>
+                }
+                {modalId == imageSeven?.id7 &&
+                  <div>
+                    <img
+                      src={imageSeven?.url_photo7}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                      <label
+                        htmlFor={"imageSeven1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageSeven1"}
+                          type="file"
+                          onChange={handleLocationImage7}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageSeven?.changed7 ? <button
+                        onClick={() => {
+                          setDeleteId(imageSeven?.id7)
+                          UpadatePhoto(imageSeven?.id7)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> : <span
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageSeven?.id7)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
+                  </div>
+                }
+                {modalId == imageEight?.id8 &&
+                  <div>
+                    <img
+                      src={imageEight?.url_photo8}
+                      alt="backImg"
+                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
+                    />
+                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                      <label
+                        htmlFor={"imageEight1"}
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        <input
+                          className="hidden"
+                          id={"imageEight1"}
+                          type="file"
+                          onChange={handleLocationImage8}
+                          accept=" image/*"
+                        />
+                        Изменить фото
+                      </label>
+                      {imageEight?.changed8 ? <button
+                        onClick={() => {
+                          setDeleteId(imageEight?.id8)
+                          UpadatePhoto(imageEight?.id8)
+                        }}
+                        type="button"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </button> : <span
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        Сохранить
+                      </span>}
+                      <button
+                        onClick={() => {
+                          setDeleteModal(true)
+                          setDeleteId(imageEight?.id8)
+                        }}
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                      </button>
+                    </div>
+                  </div>
+                }
+
               </div>
             </div>
           </div>
@@ -1889,31 +2070,44 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
               </button>
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                {colors_Id?.length === productData?.colors ?
+                  productData?.colors?.filter(e => e?.id == colors_Id[1])?.map(item => {
+                    return (
+                      <div className="w-fit h-fit flex items-center">
+                        {
+                          colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                            return (
+                              <button
+                                type="button"
+                                className={`w-[22px] h-[22px] rounded-full border `}
+                                style={{ background: `${value?.hex}` }}
+                              ></button>
+                            )
+                          })
+                        }
+                        {imageFive?.status5 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageFive?.status5 || "status"}
+                        </td>}
+                        {imageFive?.status5 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageFive?.status5 || "status"}
+                        </td>}
+                        {imageFive?.status5 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageFive?.status5 || "status"}
+                        </td>}
+                      </div>
+                    )
+                  }) :
+                  colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
+                    return (
+                      <button
+                        type="button"
+                        className={`w-[22px] h-[22px] rounded-full border `}
+                        style={{ background: `${value?.hex}` }}
+                      ></button>
+                    )
+                  })
 
-                <div className="w-fit h-fit flex items-center">
-                  {
-                    colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
-                      console.log(value, "value");
-                      return (
-                        <button
-                          type="button"
-                          className={`w-[22px] h-[22px] rounded-full border `}
-                          style={{ background: `${value?.hex}` }}
-                        ></button>
-                      )
-                    })
-                  }
-                  {imageFive?.status5 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageFive?.status5 || "status"}
-                  </td>}
-                  {imageFive?.status5 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageFive?.status5 || "status"}
-                  </td>}
-                  {imageFive?.status5 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageFive?.status5 || "status"}
-                  </td>}
-                </div>
-
+                }
               </div>
             </div>
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
@@ -1968,8 +2162,34 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
               </button>
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                <div className="w-fit h-fit flex items-center">
-                  {
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                  {colors_Id?.length === productData?.colors ?
+                    productData?.colors?.filter(e => e?.id == colors_Id[1])?.map(item => {
+                      return (
+                        <div className="w-fit h-fit flex items-center">
+                          {
+                            colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                              return (
+                                <button
+                                  type="button"
+                                  className={`w-[22px] h-[22px] rounded-full border `}
+                                  style={{ background: `${value?.hex}` }}
+                                ></button>
+                              )
+                            })
+                          }
+                          {imageSix?.status6 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageSix?.status6 || "status"}
+                          </td>}
+                          {imageSix?.status6 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageSix?.status6 || "status"}
+                          </td>}
+                          {imageSix?.status6 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageSix?.status6 || "status"}
+                          </td>}
+                        </div>
+                      )
+                    }) :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
                       return (
                         <button
@@ -1980,15 +2200,6 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                       )
                     })
                   }
-                  {imageSix?.status6 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageSix?.status6 || "status"}
-                  </td>}
-                  {imageSix?.status6 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageSix?.status6 || "status"}
-                  </td>}
-                  {imageSix?.status6 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageSix?.status6 || "status"}
-                  </td>}
                 </div>
 
               </div>
@@ -2029,13 +2240,8 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
-                        className="
-                    h-full
-                    w-full
-                    mx-auto 
-                    align-middle object-contain cursor-pointer "
+                        className=" h-full w-full mx-auto align-middle object-contain cursor-pointer "
                         src={imageSeven?.url_photo7}
-
                         alt=""
                       />
                     </div>
@@ -2046,11 +2252,35 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
               </button>
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-
-                <div className="w-fit h-fit flex items-center">
-                  {
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                  {colors_Id?.length === productData?.colors ?
+                    productData?.colors?.filter(e => e?.id == colors_Id[2])?.map(item => {
+                      return (
+                        <div className="w-fit h-fit flex items-center">
+                          {
+                            colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                              return (
+                                <button
+                                  type="button"
+                                  className={`w-[22px] h-[22px] rounded-full border `}
+                                  style={{ background: `${value?.hex}` }}
+                                ></button>
+                              )
+                            })
+                          }
+                          {imageSeven?.status7 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageSeven?.status7 || "status"}
+                          </td>}
+                          {imageSeven?.status7 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageSeven?.status7 || "status"}
+                          </td>}
+                          {imageSeven?.status7 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageSeven?.status7 || "status"}
+                          </td>}
+                        </div>
+                      )
+                    }) :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[2]))?.map(value => {
-                      console.log(value, "value");
                       return (
                         <button
                           type="button"
@@ -2059,25 +2289,15 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                         ></button>
                       )
                     })
-                  }
-                  {imageSeven?.status7 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageSeven?.status7 || "status"}
-                  </td>}
-                  {imageSeven?.status7 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageSeven?.status7 || "status"}
-                  </td>}
-                  {imageSeven?.status7 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageSeven?.status7 || "status"}
-                  </td>}
-                </div>
 
+                  }
+                </div>
               </div>
             </div>
             {/*  color-4*/}
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
 
@@ -2115,7 +2335,6 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                     mx-auto 
                     align-middle object-contain cursor-pointer "
                         src={imageEight?.url_photo8}
-
                         alt=""
                       />
                     </div>
@@ -2123,11 +2342,35 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                 }
               </button>
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-
-                <div className="w-fit h-fit flex items-center">
-                  {
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                  {colors_Id?.length === productData?.colors ?
+                    productData?.colors?.filter(e => e?.id == colors_Id[3])?.map(item => {
+                      return (
+                        <div className="w-fit h-fit flex items-center">
+                          {
+                            colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
+                              return (
+                                <button
+                                  type="button"
+                                  className={`w-[22px] h-[22px] rounded-full border `}
+                                  style={{ background: `${value?.hex}` }}
+                                ></button>
+                              )
+                            })
+                          }
+                          {imageEight?.status8 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageEight?.status8 || "status"}
+                          </td>}
+                          {imageEight?.status8 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageEight?.status8 || "status"}
+                          </td>}
+                          {imageEight?.status8 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                            {imageEight?.status8 || "status"}
+                          </td>}
+                        </div>
+                      )
+                    }) :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[3]))?.map(value => {
-                      console.log(value, "value");
                       return (
                         <button
                           type="button"
@@ -2137,17 +2380,7 @@ const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRef
                       )
                     })
                   }
-                  {imageEight?.status8 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageEight?.status8 || "status"}
-                  </td>}
-                  {imageEight?.status8 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageEight?.status8 || "status"}
-                  </td>}
-                  {imageEight?.status8 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageEight?.status8 || "status"}
-                  </td>}
                 </div>
-
               </div>
             </div>
           </div>
