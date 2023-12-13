@@ -1,4 +1,4 @@
-import { Popover, Select, Space, Switch, TreeSelect } from "antd";
+import { Popover, Select, Space, Switch, TreeSelect, message } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import {
   AddIconsCircle1,
@@ -262,13 +262,22 @@ const AddingProduct = () => {
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
+  console.log(colors_Id, "colors_Id");
+  console.log(colorListForTest, "colorListForTest");
   function onHanleColorList(e) {
+    console.log(e, "SelectEd--ID");
     setSelectColorID(e)
-    if (colors_Id?.length === 2 && e) {
-      setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
-      setColors_Id(colors_Id => [...colors_Id, e])
-    } else {
-      setColors_Id(colors_Id => [...colors_Id, e])
+    if (!colorListForTest?.includes(e)) {
+      if (colors_Id?.length <= 4) {
+        if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
+          setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
+          setColors_Id(colors_Id => [...colors_Id, e])
+        } else {
+          setColors_Id(colors_Id => [...colors_Id, e])
+        }
+      } else {
+        // message("Colorlar soni oshib ketdi")
+      }
     }
   }
 
@@ -400,8 +409,8 @@ const AddingProduct = () => {
 
     })
   }
-  console.log(productsDataIdEdit?.locations[0]?.id, "productsDataIdEdit");
-  console.log(state?.newColorByAddSizes, "newColorByAddSizes");
+  // console.log(productsDataIdEdit, "productsDataIdEdit");
+  // console.log(state?.newColorByAddSizes, "newColorByAddSizes");
   const onHandleAddImage = async () => {
     // setState({ ...state, sendingLoader: true })
     let form = new FormData();
@@ -1642,7 +1651,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} selectColorID={lastElement} productData={productsDataIdEdit} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} selectColorID={lastElement} productData={productsDataIdEdit} />
                   </div>
 
                 </div>
