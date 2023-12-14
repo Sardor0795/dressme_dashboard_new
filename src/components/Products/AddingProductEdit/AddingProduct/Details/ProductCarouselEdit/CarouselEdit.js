@@ -14,7 +14,7 @@ import { FiDownload } from "react-icons/fi";
 
 const url = "https://api.dressme.uz/api/seller";
 
-const CarouselEdit = ({ productData, selectColorID, colors_Id, colorGroup, onRefetch, productId, onHandleImage }) => {
+const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
