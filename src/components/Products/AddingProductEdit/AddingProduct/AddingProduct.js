@@ -65,7 +65,8 @@ const AddingProduct = () => {
     // --------------
     pictureBgFile1: null,
     pictureBgFile2: null,
-
+    pictureBgFile3: null,
+    pictureBgFile4: null,
     // ---------------
     shopId: null,
     shopLocationId: null,
@@ -279,6 +280,7 @@ const AddingProduct = () => {
         // message("Colorlar soni oshib ketdi")
       }
     }
+
   }
 
   function onHandleColorUnchecked(id) {
@@ -292,20 +294,29 @@ const AddingProduct = () => {
   // -----------------------------------------------------------
 
   useEffect(() => {
-    if (colorChecked !== selectColorID && selectColorID > 0) {
+    colors_Id?.filter(e => !colorListForTest?.includes(e))?.map(item => {
+      console.log(item, "NuItem");
+    })
+  }, [colors_Id])
+  useEffect(() => {
+    if (!colorListForTest?.includes(selectColorID) && selectColorID > 0) {
       setColorAction(true)
     } else {
       setColorAction(false)
     }
-    if (colors_Id?.length >= 2) {
-      setLastElement(colors_Id[colors_Id?.length - 1])
-    } else {
-      setLastElement('')
+    // if (colorChecked !== selectColorID && selectColorID > 0) {
+    // } else {
+    //   setColorAction(false)
+    // }
+    // if (colors_Id?.length >= 2) {
+    //   setLastElement(colors_Id[colors_Id?.length - 1])
+    // } else {
+    //   setLastElement('')
 
-    }
+    // }
 
   }, [selectColorID])
-
+  console.log(selectColorID, "selectColorID");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -406,6 +417,10 @@ const AddingProduct = () => {
       ...state,
       pictureBgFile1: childData?.image_File_5,
       pictureBgFile2: childData?.image_File_6,
+      pictureBgFile3: childData?.image_File_7,
+      pictureBgFile4: childData?.image_File_8,
+
+
 
     })
   }
@@ -415,7 +430,9 @@ const AddingProduct = () => {
     // setState({ ...state, sendingLoader: true })
     let form = new FormData();
     state?.pictureBgFile1 && form.append("photo", state?.pictureBgFile1);
-    // state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
+    state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
+    state?.pictureBgFile3 && form.append("photo", state?.pictureBgFile3);
+    state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
     form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
     form.append("color_id", lastElement);
     form.append("price", state?.newColorByAddSizes?.price);
@@ -518,7 +535,7 @@ const AddingProduct = () => {
       throw new Error(err?.message || "something wrong");
     }
   }
-
+  // console.log(lastElement, "lastElement");
   return (
     <div className="w-full h-fit ">
 
@@ -1651,7 +1668,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} selectColorID={lastElement} productData={productsDataIdEdit} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 
                 </div>
