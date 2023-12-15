@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   ClothesIcons,
@@ -10,10 +10,22 @@ import {
   UserIcon,
 } from "../../assets/icons";
 import { dressMainData } from "../../hook/ContextTeam";
+import { useHttp } from "../../hook/useHttp";
+import { useQuery } from "@tanstack/react-query";
 
-export default function Sidebar({ name, surName }) {
+function Sidebar() {
+  const { request } = useHttp()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
+  const [userData, setUserData] = useState(null)
+  useQuery(["Get_Seller_Profile_dash"], () => { return request({ url: "/profile", token: true }); },
+    {
+      onSuccess: (res) => {
+        setUserData(res)
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
   return (
     <div
       className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
@@ -29,8 +41,8 @@ export default function Sidebar({ name, surName }) {
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-              <span>{name || "Ism"}</span>
-              <span>{surName || "Familiya"}</span>
+              <span>{userData?.name || "Ism"}</span>
+              <span>{userData?.surname || "Familiya"}</span>
               {/* <span>Ism familiya</span> */}
 
             </span>
@@ -299,3 +311,4 @@ export default function Sidebar({ name, surName }) {
     </div >
   );
 }
+export default React.memo(Sidebar)

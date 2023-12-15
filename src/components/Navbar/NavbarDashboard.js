@@ -19,16 +19,7 @@ export default function NavbarDashboard() {
 
   // ----------------Get Seller Profile-------------
   // ------------GET  Has Location ?-----------------
-  useQuery(["Get_Seller_Profile_dash"], () => { return request({ url: "/profile", token: true }); },
-    {
-      onSuccess: (res) => {
-        setName(res?.name)
-        setSurName(res?.surname)
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+
 
   // -----------------------Seller Delete---------------
   const HandleLogOutSeller = useMutation(() => {
@@ -40,7 +31,7 @@ export default function NavbarDashboard() {
         if (res?.message) {
           localStorage.clear();
           navigate("/login-seller")
-          window.location.reload();
+          // window.location.reload();
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 5000,
@@ -124,7 +115,7 @@ export default function NavbarDashboard() {
         {
           dressInfo?.IsAuthenticated ?
             <div className="hidden fixed md:flex md:w-[300px] h-full">
-              <Sidebar name={name} surName={surName} />
+              <Sidebar />
             </div> : null
 
         }

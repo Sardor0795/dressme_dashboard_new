@@ -263,7 +263,7 @@ const AddingProduct = () => {
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
-  console.log(colors_Id, "colors_Id");
+  // console.log(colors_Id, "colors_Id");
   console.log(colorListForTest, "colorListForTest");
   function onHanleColorList(e) {
     console.log(e, "SelectEd--ID");
@@ -293,16 +293,18 @@ const AddingProduct = () => {
   }
   // -----------------------------------------------------------
 
-  useEffect(() => {
-    colors_Id?.filter(e => !colorListForTest?.includes(e))?.map(item => {
-      console.log(item, "NuItem");
-    })
-  }, [colors_Id])
+  // useEffect(() => {
+  //   colors_Id?.filter(e => !colorListForTest?.includes(e))?.map(item => {
+  //     console.log(item, "NuItem");
+  //   })
+  // }, [colors_Id])
   useEffect(() => {
     if (!colorListForTest?.includes(selectColorID) && selectColorID > 0) {
       setColorAction(true)
+      setLastElement(selectColorID)
     } else {
       setColorAction(false)
+      setLastElement()
     }
     // if (colorChecked !== selectColorID && selectColorID > 0) {
     // } else {
@@ -312,11 +314,10 @@ const AddingProduct = () => {
     //   setLastElement(colors_Id[colors_Id?.length - 1])
     // } else {
     //   setLastElement('')
-
     // }
 
   }, [selectColorID])
-  console.log(selectColorID, "selectColorID");
+  // console.log(selectColorID, "selectColorID");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -498,24 +499,26 @@ const AddingProduct = () => {
           // })
           // setState({ ...state, sendingLoader: false })
         } else if (res_1?.message) {
-          // toast.success(`${res_1?.message}`, {
-          //   position: "top-right",
-          //   autoClose: 5000,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "light",
-          // })
-          // setState({
-          //   ...state,
-          //   pictureBgFile1: null,
-          //   pictureBgFile2: null,
-          //   pictureBgFile3: null,
-          //   pictureBgFile4: null,
-          //   sendingLoader: false
-          // })
+          toast.success(`${res_1?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          setState({
+            ...state,
+            pictureBgFile1: null,
+            pictureBgFile2: null,
+            pictureBgFile3: null,
+            pictureBgFile4: null,
+            sendingLoader: false
+          })
+          setLastElement()
+          setSelectColorID()
           refetch()
         }
         console.log(res_1, "Product--Store--Added");
