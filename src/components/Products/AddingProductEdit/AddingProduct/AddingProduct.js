@@ -214,6 +214,7 @@ const AddingProduct = () => {
             setColors_Id(colors_Id => [...colors_Id, value?.id])
             setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
             setColorChecked(value?.id)
+            setSelectColorID(value?.id)
           }
         })
 
@@ -538,7 +539,8 @@ const AddingProduct = () => {
       throw new Error(err?.message || "something wrong");
     }
   }
-  // console.log(lastElement, "lastElement");
+  console.log(selectColorID, "selectColorID");
+  console.log(colorChecked, "colorChecked");
   return (
     <div className="w-full h-fit ">
 
@@ -1671,7 +1673,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
-                    <CarouselEdit onHandleImage={onHandleImageAdd} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} activeColor={selectColorID} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 
                 </div>

@@ -14,7 +14,7 @@ import { FiDownload } from "react-icons/fi";
 
 const url = "https://api.dressme.uz/api/seller";
 
-const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId, onHandleImage }) => {
+const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -24,7 +24,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
-  console.log(productData, "productData");
+  // console.log(productData, "productData");
   const [colorPivotOne, setColorPivotOne] = useState('');
   const [colorPivotTwo, setColorPivotTwo] = useState('');
   const [colorPivotThree, setColorPivotThree] = useState('');
@@ -410,16 +410,16 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
     colorPivotTwo,
     colorPivotThree,
     colorPivotFour, productData])
-
-  console.log(photsArrTwo[1]?.status, " photsArrTwo[1]?.status");
-  console.log(imageFive?.status5, " imageFive[1]?.status5");
-  console.log(imageTwo?.status2, " imagetwo[1]?.status2");
-  console.log(
-    colorPivotOne,
-    colorPivotTwo,
-    colorPivotThree,
-    colorPivotFour,
-  );
+  console.log(productData, "productData");
+  // console.log(photsArrTwo[1]?.status, " photsArrTwo[1]?.status");
+  // console.log(imageFive?.status5, " imageFive[1]?.status5");
+  // console.log(imageTwo?.status2, " imagetwo[1]?.status2");
+  // console.log(
+  //   colorPivotOne,
+  //   colorPivotTwo,
+  //   colorPivotThree,
+  //   colorPivotFour,
+  // );
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
@@ -536,7 +536,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
         } else if (res?.message) {
         }
-        console.log(res, "ProductStoreUpdate");
+        // console.log(res, "ProductStoreUpdate");
       })
       .catch((err) => console.log(err, "errImage"));
   }
@@ -635,8 +635,8 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
     }
   }
-  console.log(imageFive, "imageFive");
-
+  // console.log(imageFive, "imageFive");
+  // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
   return (
     <div className="max-w-[350px] w-full h-fit ">
 
@@ -1891,7 +1891,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
-              <div className="h-full">
+              <div className={`h-full ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"}`}>
                 < article
                   onClick={() => {
                     handleClickCarosuel()
@@ -1900,36 +1900,24 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
                   className="w-full flex flex-col h-full ">
                   {imageOne?.status1 &&
                     <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
-                      {productData?.colors?.filter(e => e?.id == colors_Id[0])?.map(item => {
+                      <div className="w-fit h-fit flex items-center gap-x-3">
+                        <button
+                          type="button"
+                          className={`w-[22px] h-[22px] rounded-full border `}
+                          style={{ background: `${productData?.colors[0]?.hex}` }}
+                        ></button>
 
-                        return (
-                          <div className="w-fit h-fit flex items-center gap-x-3">
-                            {
-                              colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                                return (
-                                  <button
-                                    type="button"
-                                    className={`w-[22px] h-[22px] rounded-full border `}
-                                    style={{ background: `${value?.hex}` }}
-                                  ></button>
-                                )
-                              })
-                            }
-                            {imageOne?.status1 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                              {imageOne?.status1 || "status"}
-                            </td>}
-                            {imageOne?.status1 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                              {imageOne?.status1 || "status"}
-                            </td>}
-                            {imageOne?.status1 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                              {imageOne?.status1 || "status"}
-                            </td>}
-                          </div>
-                        )
-                      })}
-
+                        {imageOne?.status1 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageOne?.status1 || "status"}
+                        </td>}
+                        {imageOne?.status1 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageOne?.status1 || "status"}
+                        </td>}
+                        {imageOne?.status1 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                          {imageOne?.status1 || "status"}
+                        </td>}
+                      </div>
                     </div>}
-
                   <div
                     style={{
                       backgroundImage: ` url("${imageOne?.url_photo1}")`,
@@ -1959,9 +1947,8 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
             </div>
           </div>
-
           <div className="w-full mt-[10px] h-[124px] flex justify-between gap-x-[6px]   rounded-lg">
-            < div className={`w-[30%] h-full flex-col items-center justify-start ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
+            <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
 
@@ -2010,39 +1997,26 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
                 }
               </button>
-
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                {productData?.colors?.filter(e => e?.id == colors_Id[0])?.map(item => {
-
-                  return (
-                    <div className="w-fit h-fit flex items-center">
-                      {
-                        colorGroup?.filter(e => e?.id == colors_Id[0])?.map(value => {
-                          return (
-                            <button
-                              type="button"
-                              className={`w-[22px] h-[22px] rounded-full border `}
-                              style={{ background: `${value?.hex}` }}
-                            ></button>
-                          )
-                        })
-                      }
-                      {imageTwo?.status2 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageTwo?.status2 || "status"}
-                      </td>}
-                      {imageTwo?.status2 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageTwo?.status2 || "status"}
-                      </td>}
-                      {imageTwo?.status2 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageTwo?.status2 || "status"}
-                      </td>}
-                    </div>
-                  )
-                })}
-
+                <div className="w-fit h-fit flex items-center">
+                  <button
+                    type="button"
+                    className={`w-[22px] h-[22px] rounded-full border `}
+                    style={{ background: `${productData?.colors[0]?.hex}` }}
+                  ></button>
+                  {imageTwo?.status2 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageTwo?.status2 || "status"}
+                  </td>}
+                  {imageTwo?.status2 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageTwo?.status2 || "status"}
+                  </td>}
+                  {imageTwo?.status2 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageTwo?.status2 || "status"}
+                  </td>}
+                </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
@@ -2092,37 +2066,27 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
               </button>
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                {productData?.colors?.filter(e => e?.id == colors_Id[0])?.map(item => {
+                <div className="w-fit h-fit flex items-center">
 
-                  return (
-                    <div className="w-fit h-fit flex items-center">
-                      {
-                        colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                          return (
-                            <button
-                              type="button"
-                              className={`w-[22px] h-[22px] rounded-full border `}
-                              style={{ background: `${value?.hex}` }}
-                            ></button>
-                          )
-                        })
-                      }
-                      {imageThree?.status3 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageThree?.status3 || "status"}
-                      </td>}
-                      {imageThree?.status3 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageThree?.status3 || "status"}
-                      </td>}
-                      {imageThree?.status3 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageThree?.status3 || "status"}
-                      </td>}
-                    </div>
-                  )
-                })}
-
+                  {/* {Number(productData?.colors[0]?.pivot?.id) === Number(imageThree?.product_color_id3) } */}
+                  <button
+                    type="button"
+                    className={`w-[22px] h-[22px] rounded-full border `}
+                    style={{ background: `${productData?.colors[0]?.hex}` }}
+                  ></button>
+                  {imageThree?.status3 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageThree?.status3 || "status"}
+                  </td>}
+                  {imageThree?.status3 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageThree?.status3 || "status"}
+                  </td>}
+                  {imageThree?.status3 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageThree?.status3 || "status"}
+                  </td>}
+                </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
 
@@ -2174,36 +2138,26 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
               </button>
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                {productData?.colors?.filter(e => e?.id == colors_Id[0])?.map(item => {
-                  return (
-                    <div className="w-fit h-fit flex items-center">
-                      {
-                        colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                          return (
-                            <button
-                              type="button"
-                              className={`w-[22px] h-[22px] rounded-full border `}
-                              style={{ background: `${value?.hex}` }}
-                            ></button>
-                          )
-                        })
-                      }
-                      {imageFour?.status4 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageFour?.status4 || "status"}
-                      </td>}
-                      {imageFour?.status4 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageFour?.status4 || "status"}
-                      </td>}
-                      {imageFour?.status4 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageFour?.status4 || "status"}
-                      </td>}
-                    </div>
-                  )
-                })}
+                <div className="w-fit h-fit flex items-center">
+                  <button
+                    type="button"
+                    className={`w-[22px] h-[22px] rounded-full border `}
+                    style={{ background: `${productData?.colors[0]?.hex}` }}
+                  ></button>
+                  {imageFour?.status4 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageFour?.status4 || "status"}
+                  </td>}
+                  {imageFour?.status4 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageFour?.status4 || "status"}
+                  </td>}
+                  {imageFour?.status4 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                    {imageFour?.status4 || "status"}
+                  </td>}
+                </div>
               </div>
             </div>
             {/*  color-2 */}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2256,32 +2210,23 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 {productData?.colors?.length >= 2 ?
-                  productData?.colors?.filter(e => e?.id == colors_Id[1])?.map(item => {
-                    return (
-                      <div className="w-fit h-fit flex items-center">
-                        {
-                          colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                            return (
-                              <button
-                                type="button"
-                                className={`w-[22px] h-[22px] rounded-full border `}
-                                style={{ background: `${value?.hex}` }}
-                              ></button>
-                            )
-                          })
-                        }
-                        {imageFive?.status5 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {imageFive?.status5 || "status"}
-                        </td>}
-                        {imageFive?.status5 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {imageFive?.status5 || "status"}
-                        </td>}
-                        {imageFive?.status5 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {imageFive?.status5 || "status"}
-                        </td>}
-                      </div>
-                    )
-                  }) :
+                  <div className="w-fit h-fit flex items-center">
+                    <button
+                      type="button"
+                      className={`w-[22px] h-[22px] rounded-full border `}
+                      style={{ background: `${productData?.colors[1]?.hex}` }}
+                    ></button>
+                    {imageFive?.status5 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                      {imageFive?.status5 || "status"}
+                    </td>}
+                    {imageFive?.status5 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                      {imageFive?.status5 || "status"}
+                    </td>}
+                    {imageFive?.status5 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                      {imageFive?.status5 || "status"}
+                    </td>}
+                  </div>
+                  :
                   colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
                     return (
                       <button
@@ -2295,7 +2240,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
                 }
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor ? "" : "opacity-60"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2345,36 +2290,26 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
                 }
 
               </button>
-
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                   {productData?.colors?.length >= 2 ?
-                    productData?.colors?.filter(e => e?.id == colors_Id[1])?.map(item => {
-                      return (
-                        <div className="w-fit h-fit flex items-center">
-                          {
-                            colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                              return (
-                                <button
-                                  type="button"
-                                  className={`w-[22px] h-[22px] rounded-full border `}
-                                  style={{ background: `${value?.hex}` }}
-                                ></button>
-                              )
-                            })
-                          }
-                          {imageSix?.status6 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageSix?.status6 || "status"}
-                          </td>}
-                          {imageSix?.status6 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageSix?.status6 || "status"}
-                          </td>}
-                          {imageSix?.status6 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageSix?.status6 || "status"}
-                          </td>}
-                        </div>
-                      )
-                    }) :
+                    <div className="w-fit h-fit flex items-center">
+                      <button
+                        type="button"
+                        className={`w-[22px] h-[22px] rounded-full border `}
+                        style={{ background: `${productData?.colors[1]?.hex}` }}
+                      ></button>
+                      {imageSix?.status6 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageSix?.status6 || "status"}
+                      </td>}
+                      {imageSix?.status6 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageSix?.status6 || "status"}
+                      </td>}
+                      {imageSix?.status6 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageSix?.status6 || "status"}
+                      </td>}
+                    </div>
+                    :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
                       return (
                         <button
@@ -2390,7 +2325,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
               </div>
             </div>
             {/*  color-3*/}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2439,32 +2374,23 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                   {productData?.colors?.length >= 3 ?
-                    productData?.colors?.filter(e => e?.id == colors_Id[2])?.map(item => {
-                      return (
-                        <div className="w-fit h-fit flex items-center">
-                          {
-                            colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                              return (
-                                <button
-                                  type="button"
-                                  className={`w-[22px] h-[22px] rounded-full border `}
-                                  style={{ background: `${value?.hex}` }}
-                                ></button>
-                              )
-                            })
-                          }
-                          {imageSeven?.status7 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageSeven?.status7 || "status"}
-                          </td>}
-                          {imageSeven?.status7 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageSeven?.status7 || "status"}
-                          </td>}
-                          {imageSeven?.status7 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageSeven?.status7 || "status"}
-                          </td>}
-                        </div>
-                      )
-                    }) :
+                    <div className="w-fit h-fit flex items-center">
+                      <button
+                        type="button"
+                        className={`w-[22px] h-[22px] rounded-full border `}
+                        style={{ background: `${productData?.colors[2]?.hex}` }}
+                      ></button>
+                      {imageSeven?.status7 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageSeven?.status7 || "status"}
+                      </td>}
+                      {imageSeven?.status7 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageSeven?.status7 || "status"}
+                      </td>}
+                      {imageSeven?.status7 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageSeven?.status7 || "status"}
+                      </td>}
+                    </div>
+                    :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[2]))?.map(value => {
                       return (
                         <button
@@ -2474,18 +2400,16 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
                         ></button>
                       )
                     })
-
                   }
                 </div>
               </div>
             </div>
             {/*  color-4*/}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
-
                 {!imageEight?.url_photo8 ? <div
                   onClick={() => {
                     handleFreeModalUploadImg(imageEight?.id8)
@@ -2529,32 +2453,23 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                   {productData?.colors?.legnth === 4 ?
-                    productData?.colors?.filter(e => e?.id == colors_Id[3])?.map(item => {
-                      return (
-                        <div className="w-fit h-fit flex items-center">
-                          {
-                            colorGroup?.filter(e => e?.id == Number(item?.pivot?.color_id))?.map(value => {
-                              return (
-                                <button
-                                  type="button"
-                                  className={`w-[22px] h-[22px] rounded-full border `}
-                                  style={{ background: `${value?.hex}` }}
-                                ></button>
-                              )
-                            })
-                          }
-                          {imageEight?.status8 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageEight?.status8 || "status"}
-                          </td>}
-                          {imageEight?.status8 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageEight?.status8 || "status"}
-                          </td>}
-                          {imageEight?.status8 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                            {imageEight?.status8 || "status"}
-                          </td>}
-                        </div>
-                      )
-                    }) :
+                    <div className="w-fit h-fit flex items-center">
+                      <button
+                        type="button"
+                        className={`w-[22px] h-[22px] rounded-full border `}
+                        style={{ background: `${productData?.colors[3]?.hex}` }}
+                      ></button>
+                      {imageEight?.status8 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageEight?.status8 || "status"}
+                      </td>}
+                      {imageEight?.status8 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageEight?.status8 || "status"}
+                      </td>}
+                      {imageEight?.status8 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
+                        {imageEight?.status8 || "status"}
+                      </td>}
+                    </div>
+                    :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[3]))?.map(value => {
                       return (
                         <button
