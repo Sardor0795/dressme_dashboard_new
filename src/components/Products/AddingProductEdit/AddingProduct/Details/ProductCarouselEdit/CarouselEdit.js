@@ -32,24 +32,28 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
   const [photsArrOne, setPhotsArrOne] = useState([{
     id: "",
     productColorId: "",
+    productId: "",
     status: "",
     urlPhoto: ""
   }]);
   const [photsArrTwo, setPhotsArrTwo] = useState([{
     id: "",
     productColorId: "",
+    productId: "",
     status: "",
     urlPhoto: ""
   }]);
   const [photsArrThree, setPhotsArrThree] = useState([{
     id: "",
     productColorId: "",
+    productId: "",
     status: "",
     urlPhoto: ""
   }]);
   const [photsArrFour, setPhotsArrFour] = useState([{
     id: "",
     productColorId: "",
+    productId: "",
     status: "",
     urlPhoto: ""
   }]);
@@ -183,87 +187,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
   //     console.log(item, "BUCorousel--0");
   //   })
   // }
-  useEffect(() => {
-    if (productData) {
-      if (productData?.photos) {
-        setColorPivotOne(productData?.colors[0]?.pivot?.id)
-        setColorPivotTwo(productData?.colors[1]?.pivot?.id)
-        setColorPivotThree(productData?.colors[2]?.pivot?.id)
-        setColorPivotFour(productData?.colors[3]?.pivot?.id)
-      }
-      productData?.photos?.map(item => {
-        if (item?.product_color_id == colorPivotOne) {
-          if (photsArrOne?.length === 1) {
-            setPhotsArrOne((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          } else if (!photsArrOne?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrOne((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          }
-        }
-        if (item?.product_color_id == colorPivotTwo) {
-          if (photsArrTwo?.length === 1) {
-            setPhotsArrTwo((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          } else if (!photsArrTwo?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrTwo((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          }
-        }
-        if (item?.product_color_id == colorPivotThree) {
-          if (photsArrThree?.length === 1) {
-            setPhotsArrThree((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          } else if (!photsArrThree?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrThree((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          }
-        }
-        if (item?.product_color_id == colorPivotFour) {
-          if (photsArrFour?.length === 1) {
-            setPhotsArrFour((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          } else if (!photsArrFour?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrFour((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
-          }
-        }
 
-      })
-    }
-  }, [productData])
 
   useEffect(() => {
     if (productData) {
@@ -279,6 +203,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrOne((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -286,6 +211,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrOne((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -296,6 +222,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrTwo((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -303,6 +230,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrTwo((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -313,6 +241,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrThree((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -320,6 +249,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrThree((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -330,6 +260,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrFour((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
@@ -337,16 +268,18 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             setPhotsArrFour((current) => [...current, {
               id: item?.id,
               productColorId: item?.product_color_id,
+              productId: item?.product_id,
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
           }
         }
       })
-
+      // console.log(photsArrOne, "photsArrOne", photsArrTwo, "photsArrTwo", photsArrThree, "photsArrThree", photsArrFour, "photsArrFour");
       setImageOne({
         id1: photsArrOne[1]?.id && photsArrOne[1]?.id || 1,
         product_color_id1: photsArrOne[1]?.productColorId && photsArrOne[1]?.productColorId,
+        product_id1: photsArrOne[1]?.productId && photsArrOne[1]?.productId,
         status1: photsArrOne[1]?.status && photsArrOne[1]?.status,
         url_photo1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto,
         url_photo_change1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto,
@@ -355,6 +288,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageFour({
         id4: photsArrOne[4]?.id && photsArrOne[4]?.id || 4,
         product_color_id4: photsArrOne[4]?.productColorId && photsArrOne[4]?.productColorId,
+        product_id4: photsArrOne[4]?.productId && photsArrOne[4]?.productId,
         status4: photsArrOne[4]?.status && photsArrOne[4]?.status,
         url_photo4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto,
         url_photo_change4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto,
@@ -363,6 +297,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageThree({
         id3: photsArrOne[3]?.id && photsArrOne[3]?.id || 3,
         product_color_id3: photsArrOne[3]?.productColorId && photsArrOne[3]?.productColorId,
+        product_id3: photsArrOne[3]?.productId && photsArrOne[3]?.productId,
         status3: photsArrOne[3]?.status && photsArrOne[3]?.status,
         url_photo3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto,
         url_photo_change3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto,
@@ -371,6 +306,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageTwo({
         id2: photsArrOne[2]?.id && photsArrOne[2]?.id || 2,
         product_color_id2: photsArrOne[2]?.productColorId && photsArrOne[2]?.productColorId,
+        product_id2: photsArrOne[2]?.productId && photsArrOne[2]?.productId,
         status2: photsArrOne[2]?.status && photsArrOne[2]?.status,
         url_photo2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto,
         url_photo_change2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto,
@@ -379,6 +315,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageFive({
         id5: photsArrTwo[1]?.id && photsArrTwo[1]?.id || 5,
         product_color_id5: photsArrTwo[1]?.productColorId && photsArrTwo[1]?.productColorId,
+        product_id5: photsArrTwo[1]?.productId && photsArrTwo[1]?.productId,
         status5: photsArrTwo[1]?.status && photsArrTwo[1]?.status,
         url_photo5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto,
         url_photo_change5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto,
@@ -386,6 +323,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageSix({
         id6: photsArrTwo[2]?.id && photsArrTwo[2]?.id || 6,
         product_color_id6: photsArrTwo[2]?.productColorId && photsArrTwo[2]?.productColorId,
+        product_id6: photsArrTwo[2]?.productId && photsArrTwo[2]?.productId,
         status6: photsArrTwo[2]?.status && photsArrTwo[2]?.status,
         url_photo6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto,
         url_photo_change6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto,
@@ -393,6 +331,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageSeven({
         id7: photsArrThree[1]?.id && photsArrThree[1]?.id || 7,
         product_color_id7: photsArrThree[1]?.productColorId && photsArrThree[1]?.productColorId,
+        product_id7: photsArrThree[1]?.productId && photsArrThree[1]?.productId,
         status7: photsArrThree[1]?.status && photsArrThree[1]?.status,
         url_photo7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto,
         url_photo_change7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto,
@@ -400,6 +339,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       setImageEight({
         id8: photsArrFour[1]?.id && photsArrFour[1]?.id || 8,
         product_color_id8: photsArrFour[1]?.productColorId && photsArrFour[1]?.productColorId,
+        product_id8: photsArrFour[1]?.productId && photsArrFour[1]?.productId,
         status8: photsArrFour[1]?.status && photsArrFour[1]?.status,
         url_photo8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto,
         url_photo_change8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto,
@@ -411,15 +351,18 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
     colorPivotThree,
     colorPivotFour, productData])
   console.log(productData, "productData");
+  console.log(
+
+    // imageOne?.product_id1,
+    // imageTwo?.product_id2,
+    // imageThree?.product_id3,
+    // imageFour?.product_id4,
+    // imageFive?.product_id5
+  );
   // console.log(photsArrTwo[1]?.status, " photsArrTwo[1]?.status");
   // console.log(imageFive?.status5, " imageFive[1]?.status5");
   // console.log(imageTwo?.status2, " imagetwo[1]?.status2");
-  // console.log(
-  //   colorPivotOne,
-  //   colorPivotTwo,
-  //   colorPivotThree,
-  //   colorPivotFour,
-  // );
+  console.log(imageEight?.product_id8);
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
@@ -1975,10 +1918,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageTwo?.id2)
-                        } : null
+                        imageTwo?.product_id2 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageTwo?.id2)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageTwo?.id2)
+                          } : null
                     }
                     style={{
                       backgroundImage: ` url("${imageTwo?.url_photo2}")`,
@@ -2048,10 +1996,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageThree?.id3)
-                        } : null
+                        imageThree?.product_id3 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageThree?.id3)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageThree?.id3)
+                          } : null
                     }
                     style={{
                       backgroundImage: ` url("${imageThree?.url_photo3}")`,
@@ -2125,10 +2078,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageFour?.id4)
-                        } : null
+                        imageFour?.product_id4 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageFour?.id4)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageFour?.id4)
+                          } : null
                     }
                     style={{
                       backgroundImage: `url("${imageFour?.url_photo4}")`,
@@ -2201,10 +2159,16 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageFive?.id5)
-                        } : null
+                        imageFive?.product_id5 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageFive?.id5)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageFive?.id5)
+                          }
+                        : null
                     }
                     style={{
                       backgroundImage: `url("${imageFive?.url_photo5}")`,
@@ -2291,10 +2255,16 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageSix?.id6)
-                        } : null
+                        imageSix?.product_id6 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageSix?.id6)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageSix?.id6)
+                          }
+                        : null
                     }
                     style={{
                       backgroundImage: `url("${imageSix?.url_photo6}")`,
@@ -2382,10 +2352,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageSeven?.id7)
-                        } : null
+                        imageSeven?.product_id7 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageSeven?.id7)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageSeven?.id7)
+                          } : null
                     }
                     style={{
                       backgroundImage: `url("${imageSeven?.url_photo7}")`,
@@ -2466,10 +2441,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   <div
                     onClick={
                       productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ?
-                        () => {
-                          handleClickCarosuel()
-                          setModalId(imageEight?.id8)
-                        } : null
+                        imageEight?.product_id8 ?
+                          () => {
+                            handleClickCarosuel()
+                            setModalId(imageEight?.id8)
+                          }
+                          :
+                          () => {
+                            handleFreeModalUploadImg(imageEight?.id8)
+                          } : null
                     }
                     style={{
                       backgroundImage: `url("${imageEight?.url_photo8}")`,
