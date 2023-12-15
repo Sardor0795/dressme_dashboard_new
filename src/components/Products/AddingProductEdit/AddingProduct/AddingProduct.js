@@ -213,9 +213,12 @@ const AddingProduct = () => {
           if (!colors_Id?.includes(value?.id)) {
             setColors_Id(colors_Id => [...colors_Id, value?.id])
             setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
-            setColorChecked(value?.id)
-            setSelectColorID(value?.id)
           }
+          // if (!colorChecked?.length) {
+          // console.log(res?.product?.colors, "dddd");
+          setColorChecked(res?.product?.colors[0]?.id)
+          setSelectColorID(res?.product?.colors[0]?.id)
+          // }
         })
 
 

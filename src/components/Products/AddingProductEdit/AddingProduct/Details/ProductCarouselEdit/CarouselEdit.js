@@ -1891,12 +1891,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
-              <div className={`h-full ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"}`}>
+              <div className={`h-full ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"}`}>
                 < article
-                  onClick={() => {
-                    handleClickCarosuel()
-                    setModalId(imageOne?.id1)
-                  }}
+                  onClick={
+                    productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                      () => {
+                        handleClickCarosuel()
+                        setModalId(imageOne?.id1)
+                      } : null
+                  }
                   className="w-full flex flex-col h-full ">
                   {imageOne?.status1 &&
                     <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
@@ -1948,7 +1951,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             </div>
           </div>
           <div className="w-full mt-[10px] h-[124px] flex justify-between gap-x-[6px]   rounded-lg">
-            <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
+            <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
 
@@ -1956,9 +1959,12 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               >
 
                 {!imageTwo?.url_photo2 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageTwo?.id2)
-                  }}
+                  onClick={
+                    productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageTwo?.id2)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -1967,10 +1973,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
                   :
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageTwo?.id2)
-                    }}
+                    onClick={
+                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageTwo?.id2)
+                        } : null
+                    }
                     style={{
                       backgroundImage: ` url("${imageTwo?.url_photo2}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
@@ -2016,16 +2025,19 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
 
                 {!imageThree?.url_photo3 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageThree?.id3)
-                  }}
+                  onClick={
+                    productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageThree?.id3)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -2034,10 +2046,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
                   :
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageThree?.id3)
-                    }}
+                    onClick={
+                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageThree?.id3)
+                        } : null
+                    }
                     style={{
                       backgroundImage: ` url("${imageThree?.url_photo3}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
@@ -2086,7 +2101,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
 
@@ -2094,9 +2109,12 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               >
 
                 {!imageFour?.url_photo4 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageFour?.id4)
-                  }}
+                  onClick={
+                    productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageFour?.id4)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -2105,10 +2123,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
                   :
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageFour?.id4)
-                    }}
+                    onClick={
+                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageFour?.id4)
+                        } : null
+                    }
                     style={{
                       backgroundImage: `url("${imageFour?.url_photo4}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
@@ -2136,7 +2157,6 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 }
 
               </button>
-
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-fit h-fit flex items-center">
                   <button
@@ -2157,17 +2177,19 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               </div>
             </div>
             {/*  color-2 */}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
-
                 {!imageFive?.url_photo5 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageFive?.id5)
-                  }}
+                  onClick={
+                    productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageFive?.id5)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -2175,11 +2197,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 </div>
                   :
+
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageFive?.id5)
-                    }}
+                    onClick={
+                      productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageFive?.id5)
+                        } : null
+                    }
                     style={{
                       backgroundImage: `url("${imageFive?.url_photo5}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
@@ -2240,7 +2266,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 }
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor ? "" : "opacity-60"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-60"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2248,9 +2274,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               >
 
                 {!imageSix?.url_photo6 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageSix?.id6)
-                  }}
+
+                  onClick={
+                    productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageSix?.id6)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -2259,10 +2289,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
                   :
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageSix?.id6)
-                    }}
+                    onClick={
+                      productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageSix?.id6)
+                        } : null
+                    }
                     style={{
                       backgroundImage: `url("${imageSix?.url_photo6}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
@@ -2325,7 +2358,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               </div>
             </div>
             {/*  color-3*/}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2333,9 +2366,12 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               >
 
                 {!imageSeven?.url_photo7 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageSeven?.id7)
-                  }}
+                  onClick={
+                    productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageSeven?.id7)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -2344,10 +2380,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
                   :
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageSeven?.id7)
-                    }}
+                    onClick={
+                      productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageSeven?.id7)
+                        } : null
+                    }
                     style={{
                       backgroundImage: `url("${imageSeven?.url_photo7}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
@@ -2405,15 +2444,18 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               </div>
             </div>
             {/*  color-4*/}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor ? "" : "opacity-60"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-60"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
               >
                 {!imageEight?.url_photo8 ? <div
-                  onClick={() => {
-                    handleFreeModalUploadImg(imageEight?.id8)
-                  }}
+                  onClick={
+                    productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ?
+                      () => {
+                        handleFreeModalUploadImg(imageEight?.id8)
+                      } : null
+                  }
                   className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                   <DownloadIcon />
                   <div className="text-[11px] text-textLightColor mt-[5px]">
@@ -2422,10 +2464,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
                   :
                   <div
-                    onClick={() => {
-                      handleClickCarosuel()
-                      setModalId(imageEight?.id8)
-                    }}
+                    onClick={
+                      productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ?
+                        () => {
+                          handleClickCarosuel()
+                          setModalId(imageEight?.id8)
+                        } : null
+                    }
                     style={{
                       backgroundImage: `url("${imageEight?.url_photo8}")`,
                       backgroundColor: "rgba(0,0,0,0.6)",
