@@ -24,7 +24,35 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
-
+  console.log(productData, "productData");
+  const [colorPivotOne, setColorPivotOne] = useState('');
+  const [colorPivotTwo, setColorPivotTwo] = useState('');
+  const [colorPivotThree, setColorPivotThree] = useState('');
+  const [colorPivotFour, setColorPivotFour] = useState('');
+  const [photsArrOne, setPhotsArrOne] = useState([{
+    id: "",
+    productColorId: "",
+    status: "",
+    urlPhoto: ""
+  }]);
+  const [photsArrTwo, setPhotsArrTwo] = useState([{
+    id: "",
+    productColorId: "",
+    status: "",
+    urlPhoto: ""
+  }]);
+  const [photsArrThree, setPhotsArrThree] = useState([{
+    id: "",
+    productColorId: "",
+    status: "",
+    urlPhoto: ""
+  }]);
+  const [photsArrFour, setPhotsArrFour] = useState([{
+    id: "",
+    productColorId: "",
+    status: "",
+    urlPhoto: ""
+  }]);
 
   const [imageOne, setImageOne] = useState({
     id1: 1,
@@ -141,100 +169,257 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
     setModalOfCarsouel(true)
   }
 
+  // console.log(colors_Id, "colors_Id");
+  // useEffect(() => {
+  //   if (productData?.photos) {
+  //     productData?.photos?.filter(e => e?.product_color_id == colors_Id[0])?.map(value => {
+  //       console.log(value, "item?.id")
+  //     })
+  //   }
+  // }, [productData?.photos])
 
+  // {
+  //   colors_Id?.length >= 2 && productData?.photos?.filter(e => e?.product_color_id == colors_Id[1])?.map(item => {
+  //     console.log(item, "BUCorousel--0");
+  //   })
+  // }
+  useEffect(() => {
+    if (productData) {
+      if (productData?.photos) {
+        setColorPivotOne(productData?.colors[0]?.pivot?.id)
+        setColorPivotTwo(productData?.colors[1]?.pivot?.id)
+        setColorPivotThree(productData?.colors[2]?.pivot?.id)
+        setColorPivotFour(productData?.colors[3]?.pivot?.id)
+      }
+      productData?.photos?.map(item => {
+        if (item?.product_color_id == colorPivotOne) {
+          if (photsArrOne?.length === 1) {
+            setPhotsArrOne((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrOne?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrOne((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+        if (item?.product_color_id == colorPivotTwo) {
+          if (photsArrTwo?.length === 1) {
+            setPhotsArrTwo((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrTwo?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrTwo((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+        if (item?.product_color_id == colorPivotThree) {
+          if (photsArrThree?.length === 1) {
+            setPhotsArrThree((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrThree?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrThree((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+        if (item?.product_color_id == colorPivotFour) {
+          if (photsArrFour?.length === 1) {
+            setPhotsArrFour((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrFour?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrFour((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
 
+      })
+    }
+  }, [productData])
 
   useEffect(() => {
+    if (productData) {
+      if (productData?.photos) {
+        setColorPivotOne(productData?.colors[0]?.pivot?.id)
+        setColorPivotTwo(productData?.colors[1]?.pivot?.id)
+        setColorPivotThree(productData?.colors[2]?.pivot?.id)
+        setColorPivotFour(productData?.colors[3]?.pivot?.id)
+      }
+      productData?.photos?.map(item => {
+        if (item?.product_color_id == colorPivotOne) {
+          if (photsArrOne?.length === 1) {
+            setPhotsArrOne((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrOne?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrOne((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+        if (item?.product_color_id == colorPivotTwo) {
+          if (photsArrTwo?.length === 1) {
+            setPhotsArrTwo((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrTwo?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrTwo((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+        if (item?.product_color_id == colorPivotThree) {
+          if (photsArrThree?.length === 1) {
+            setPhotsArrThree((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrThree?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrThree((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+        if (item?.product_color_id == colorPivotFour) {
+          if (photsArrFour?.length === 1) {
+            setPhotsArrFour((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          } else if (!photsArrFour?.filter(e => item?.product_color_id?.includes(e?.id))) {
+            setPhotsArrFour((current) => [...current, {
+              id: item?.id,
+              productColorId: item?.product_color_id,
+              status: item?.status,
+              urlPhoto: item?.url_photo,
+            }])
+          }
+        }
+      })
 
-    if (productData?.photos?.length) {
       setImageOne({
-        id1: productData?.photos && productData?.photos[0]?.id || 1,
-        product_color_id1: productData?.photos && productData?.photos[0]?.product_color_id,
-        product_id1: productData?.photos && productData?.photos[0]?.product_id,
-        status1: productData?.photos && productData?.photos[0]?.status,
-        status_reason1: productData?.photos && productData?.photos[0]?.status_reason,
-        status_update1: productData?.photos && productData?.photos[0]?.status_update,
-        url_photo1: productData?.photos && productData?.photos[0]?.url_photo,
-        url_photo_change1: productData?.photos && productData?.photos[0]?.url_photo,
+        id1: photsArrOne[1]?.id && photsArrOne[1]?.id || 1,
+        product_color_id1: photsArrOne[1]?.productColorId && photsArrOne[1]?.productColorId,
+        status1: photsArrOne[1]?.status && photsArrOne[1]?.status,
+        url_photo1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto,
+        url_photo_change1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto,
       })
 
       setImageFour({
-        id4: productData?.photos && productData?.photos[3]?.id || 4,
-        product_color_id4: productData?.photos && productData?.photos[3]?.product_color_id,
-        product_id4: productData?.photos && productData?.photos[3]?.product_id,
-        status4: productData?.photos && productData?.photos[3]?.status,
-        status_reason4: productData?.photos && productData?.photos[3]?.status_reason,
-        status_update4: productData?.photos && productData?.photos[3]?.status_update,
-        url_photo4: productData?.photos && productData?.photos[3]?.url_photo,
-        url_photo_change4: productData?.photos && productData?.photos[3]?.url_photo,
+        id4: photsArrOne[4]?.id && photsArrOne[4]?.id || 4,
+        product_color_id4: photsArrOne[4]?.productColorId && photsArrOne[4]?.productColorId,
+        status4: photsArrOne[4]?.status && photsArrOne[4]?.status,
+        url_photo4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto,
+        url_photo_change4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto,
       })
 
       setImageThree({
-        id3: productData?.photos && productData?.photos[2]?.id || 3,
-        product_color_id3: productData?.photos && productData?.photos[2]?.product_color_id,
-        product_id3: productData?.photos && productData?.photos[2]?.product_id,
-        status3: productData?.photos && productData?.photos[2]?.status,
-        status_reason3: productData?.photos && productData?.photos[2]?.status_reason,
-        status_update3: productData?.photos && productData?.photos[2]?.status_update,
-        url_photo3: productData?.photos && productData?.photos[2]?.url_photo,
-        url_photo_change3: productData?.photos && productData?.photos[2]?.url_photo,
+        id3: photsArrOne[3]?.id && photsArrOne[3]?.id || 3,
+        product_color_id3: photsArrOne[3]?.productColorId && photsArrOne[3]?.productColorId,
+        status3: photsArrOne[3]?.status && photsArrOne[3]?.status,
+        url_photo3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto,
+        url_photo_change3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto,
       })
 
       setImageTwo({
-        id2: productData?.photos && productData?.photos[1]?.id || 2,
-        product_color_id2: productData?.photos && productData?.photos[1]?.product_color_id,
-        product_id2: productData?.photos && productData?.photos[1]?.product_id,
-        status2: productData?.photos && productData?.photos[1]?.status,
-        status_reason2: productData?.photos && productData?.photos[1]?.status_reason,
-        status_update2: productData?.photos && productData?.photos[1]?.status_update,
-        url_photo2: productData?.photos && productData?.photos[1]?.url_photo,
-        url_photo_change2: productData?.photos && productData?.photos[1]?.url_photo,
+        id2: photsArrOne[2]?.id && photsArrOne[2]?.id || 2,
+        product_color_id2: photsArrOne[2]?.productColorId && photsArrOne[2]?.productColorId,
+        status2: photsArrOne[2]?.status && photsArrOne[2]?.status,
+        url_photo2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto,
+        url_photo_change2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto,
       })
+
       setImageFive({
-        id5: productData?.photos && productData?.photos[4]?.id || 5,
-        product_color_id5: productData?.photos && productData?.photos[4]?.product_color_id,
-        product_id5: productData?.photos && productData?.photos[4]?.product_id,
-        status5: productData?.photos && productData?.photos[4]?.status,
-        status_reason5: productData?.photos && productData?.photos[4]?.status_reason,
-        status_update5: productData?.photos && productData?.photos[4]?.status_update,
-        url_photo5: productData?.photos && productData?.photos[4]?.url_photo,
-        url_photo_change5: productData?.photos && productData?.photos[4]?.url_photo,
+        id5: photsArrTwo[1]?.id && photsArrTwo[1]?.id || 5,
+        product_color_id5: photsArrTwo[1]?.productColorId && photsArrTwo[1]?.productColorId,
+        status5: photsArrTwo[1]?.status && photsArrTwo[1]?.status,
+        url_photo5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto,
+        url_photo_change5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto,
       })
       setImageSix({
-        id6: productData?.photos && productData?.photos[5]?.id || 6,
-        product_color_id6: productData?.photos && productData?.photos[5]?.product_color_id,
-        product_id6: productData?.photos && productData?.photos[5]?.product_id,
-        status6: productData?.photos && productData?.photos[5]?.status,
-        status_reason6: productData?.photos && productData?.photos[5]?.status_reason,
-        status_update6: productData?.photos && productData?.photos[5]?.status_update,
-        url_photo6: productData?.photos && productData?.photos[5]?.url_photo,
-        url_photo_change6: productData?.photos && productData?.photos[5]?.url_photo,
+        id6: photsArrTwo[2]?.id && photsArrTwo[2]?.id || 6,
+        product_color_id6: photsArrTwo[2]?.productColorId && photsArrTwo[2]?.productColorId,
+        status6: photsArrTwo[2]?.status && photsArrTwo[2]?.status,
+        url_photo6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto,
+        url_photo_change6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto,
       })
       setImageSeven({
-        id7: productData?.photos && productData?.photos[6]?.id || 7,
-        product_color_id7: productData?.photos && productData?.photos[6]?.product_color_id,
-        product_id7: productData?.photos && productData?.photos[6]?.product_id,
-        status7: productData?.photos && productData?.photos[6]?.status,
-        status_reason7: productData?.photos && productData?.photos[6]?.status_reason,
-        status_update7: productData?.photos && productData?.photos[6]?.status_update,
-        url_photo7: productData?.photos && productData?.photos[6]?.url_photo,
-        url_photo_change7: productData?.photos && productData?.photos[6]?.url_photo,
+        id7: photsArrThree[1]?.id && photsArrThree[1]?.id || 7,
+        product_color_id7: photsArrThree[1]?.productColorId && photsArrThree[1]?.productColorId,
+        status7: photsArrThree[1]?.status && photsArrThree[1]?.status,
+        url_photo7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto,
+        url_photo_change7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto,
       })
       setImageEight({
-        id8: productData?.photos && productData?.photos[7]?.id || 8,
-        product_color_id8: productData?.photos && productData?.photos[7]?.product_color_id,
-        product_id8: productData?.photos && productData?.photos[7]?.product_id,
-        status8: productData?.photos && productData?.photos[7]?.status,
-        status_reason8: productData?.photos && productData?.photos[7]?.status_reason,
-        status_update8: productData?.photos && productData?.photos[7]?.status_update,
-        url_photo8: productData?.photos && productData?.photos[7]?.url_photo,
-        url_photo_change8: productData?.photos && productData?.photos[7]?.url_photo,
+        id8: photsArrFour[1]?.id && photsArrFour[1]?.id || 8,
+        product_color_id8: photsArrFour[1]?.productColorId && photsArrFour[1]?.productColorId,
+        status8: photsArrFour[1]?.status && photsArrFour[1]?.status,
+        url_photo8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto,
+        url_photo_change8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto,
       })
 
     }
-  }, [productData?.photos])
+  }, [photsArrOne,
+    colorPivotTwo,
+    colorPivotThree,
+    colorPivotFour, productData])
 
-
+  console.log(photsArrTwo[1]?.status, " photsArrTwo[1]?.status");
+  console.log(imageFive?.status5, " imageFive[1]?.status5");
+  console.log(imageTwo?.status2, " imagetwo[1]?.status2");
+  console.log(
+    colorPivotOne,
+    colorPivotTwo,
+    colorPivotThree,
+    colorPivotFour,
+  );
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
@@ -450,7 +635,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
     }
   }
-
+  console.log(imageFive, "imageFive");
 
   return (
     <div className="max-w-[350px] w-full h-fit ">
@@ -2070,7 +2255,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
               </button>
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                {colors_Id?.length === productData?.colors ?
+                {productData?.colors?.length >= 2 ?
                   productData?.colors?.filter(e => e?.id == colors_Id[1])?.map(item => {
                     return (
                       <div className="w-fit h-fit flex items-center">
@@ -2163,7 +2348,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                  {colors_Id?.length === productData?.colors ?
+                  {productData?.colors?.length >= 2 ?
                     productData?.colors?.filter(e => e?.id == colors_Id[1])?.map(item => {
                       return (
                         <div className="w-fit h-fit flex items-center">
@@ -2253,7 +2438,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                  {colors_Id?.length === productData?.colors ?
+                  {productData?.colors?.length >= 3 ?
                     productData?.colors?.filter(e => e?.id == colors_Id[2])?.map(item => {
                       return (
                         <div className="w-fit h-fit flex items-center">
@@ -2343,7 +2528,7 @@ const CarouselEdit = ({ productData, colors_Id, colorGroup, onRefetch, productId
               </button>
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                  {colors_Id?.length === productData?.colors ?
+                  {productData?.colors?.legnth === 4 ?
                     productData?.colors?.filter(e => e?.id == colors_Id[3])?.map(item => {
                       return (
                         <div className="w-fit h-fit flex items-center">
