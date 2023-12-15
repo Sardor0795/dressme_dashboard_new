@@ -1897,7 +1897,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center justify-center overflow-hidden rounded-lg"
+                className="h-[96px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
               >
                 {!imageTwo?.url_photo2 ?
                   <label
@@ -1913,7 +1913,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                         accept=" image/*"
                       /> : null}
                     <div
-                      className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center  justify-center">
+                      className="w-full h-full overflow-hidden   bg-photoBg  flex flex-col items-center  justify-center">
                       <span><DownloadIcon /></span>
                       <div className="text-[11px] text-textLightColor mt-[5px]">
                         (необязательно)
@@ -1943,7 +1943,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur overflow-hidden  w-full h-full rounded-lg flex items-center justify-center border ">
+                    className="BackgImageBLur overflow-hidden  w-full h-full rounded-lg flex items-center justify-center  ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                       <img
                         className="
@@ -1980,7 +1980,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
+                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageThree?.url_photo3 ?
                   <label
@@ -2026,7 +2026,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  overflow-hidden  w-full h-full rounded-lg flex items-center justify-center border  ">
+                    className="BackgImageBLur  overflow-hidden  w-full h-full rounded-lg flex items-center justify-center   ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                       <img
                         className="
@@ -2064,7 +2064,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
+                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFour?.url_photo4 ?
                   <label
@@ -2110,7 +2110,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
                         className="
@@ -2149,7 +2149,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               <button
                 type="button"
 
-                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
+                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFive?.url_photo5 ?
                   <label
@@ -2196,7 +2196,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
                         className="
@@ -2246,7 +2246,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-60"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
+                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageSix?.url_photo6 ?
                   <label
@@ -2293,7 +2293,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
                         className="
@@ -2347,12 +2347,12 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               <button
                 type="button"
 
-                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
+                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
 
                 {!imageSeven?.url_photo7 ? <div
 
-                  className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                  className="w-full h-full overflow-hidden   rounded-lg flex flex-col items-center justify-center">
                   <label
                     htmlFor={"imageSeven"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
@@ -2396,7 +2396,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
                         className=" h-full w-full mx-auto align-middle object-contain cursor-pointer "
@@ -2447,10 +2447,10 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-60"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center rounded-lg overflow-hidden justify-center "
+                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageEight?.url_photo8 ? <div
-                  className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                  className="w-full h-full overflow-hidden    rounded-lg flex flex-col items-center justify-center">
                   <label
                     htmlFor={"imageEight"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
@@ -2495,7 +2495,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       backgroundBlendMode: "darken",
                       // filter: "blur(1px)"
                     }}
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg border flex items-center justify-center ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
                         className="
