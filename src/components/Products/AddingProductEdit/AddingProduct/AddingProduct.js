@@ -214,11 +214,11 @@ const AddingProduct = () => {
             setColors_Id(colors_Id => [...colors_Id, value?.id])
             setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
           }
-          // if (!colorChecked?.length) {
-          // console.log(res?.product?.colors, "dddd");
-          setColorChecked(res?.product?.colors[0]?.id)
-          setSelectColorID(res?.product?.colors[0]?.id)
-          // }
+          if (!colorChecked && !selectColorID) {
+            // console.log(res?.product?.colors, "dddd");
+            setColorChecked(res?.product?.colors[0]?.id)
+            setSelectColorID(res?.product?.colors[0]?.id)
+          }
         })
 
 
@@ -241,7 +241,9 @@ const AddingProduct = () => {
       refetchOnWindowFocus: true,
     }
   );
-
+  // useEffect(() => {
+  //   setSelectColorID(colorChecked)
+  // }, [])
   // ------------------------------------------------------------------------ border-red-500
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
