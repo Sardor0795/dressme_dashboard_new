@@ -197,7 +197,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        // console.log("Onrefetch Ishladi");
+        console.log("Onrefetch Ishladi");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
@@ -284,8 +284,9 @@ const AddingProduct = () => {
         // message("Colorlar soni oshib ketdi")
       }
     }
-
   }
+  // const queryParameters = new URLSearchParams(window.location.search)
+  // const name = queryParameters.get("name")
 
   function onHandleColorUnchecked(id) {
     if (colorListForTest?.includes(id)) {
@@ -294,6 +295,7 @@ const AddingProduct = () => {
       setColors_Id(colors_Id?.filter(e => e !== id))
       setSelectColorID()
     }
+
   }
   // -----------------------------------------------------------
 
