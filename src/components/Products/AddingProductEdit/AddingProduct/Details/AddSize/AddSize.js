@@ -1876,8 +1876,8 @@ function AddSize({ handleCallBack, typeId }) {
         <Popover
             open={toggleShow}
             onOpenChange={handleOpenPopver}
-            className={`                 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor 
-                    group px-[15px] h-[38px]  border-[1.5px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
+            className={`text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white 
+                    group px-[15px] h-[38px]   select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
                     `}
             trigger="click"
             options={["Hide"]}

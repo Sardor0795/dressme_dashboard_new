@@ -32,7 +32,7 @@ import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
 import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
-import { PuffLoader } from "react-spinners";
+import { ClipLoader, PuffLoader } from "react-spinners";
 // import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
 // import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
@@ -101,6 +101,7 @@ const AddingProduct = () => {
     PathnameToken: '',
     // ------
     sendingLoader: false,
+    imageAddError: null,
     //productsDataIdEdit
     sizeGetList: null,
     //---------------
@@ -433,10 +434,10 @@ const AddingProduct = () => {
 
     })
   }
-  // console.log(productsDataIdEdit, "productsDataIdEdit");
+  console.log(lastElement, "lastElement");
   // console.log(state?.newColorByAddSizes, "newColorByAddSizes");
   const onHandleAddImage = async () => {
-    // setState({ ...state, sendingLoader: true })
+    setState({ ...state, sendingLoader: true })
     let form = new FormData();
     state?.pictureBgFile1 && form.append("photo", state?.pictureBgFile1);
     state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
@@ -495,17 +496,17 @@ const AddingProduct = () => {
       const res_1 = await res.json();
       if (res_1) {
         if (res_1?.errors && res_1?.message) {
-          // toast.error(`${res_1?.message}`, {
-          //   position: "top-right",
-          //   autoClose: 5000,
-          //   hideProgressBar: false,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "light",
-          // })
-          // setState({ ...state, sendingLoader: false })
+          toast.error(`${res_1?.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          setState({ ...state, sendingLoader: false, imageAddError: res_1?.errors })
         } else if (res_1?.message) {
           toast.success(`${res_1?.message}`, {
             position: "top-right",
@@ -532,22 +533,27 @@ const AddingProduct = () => {
         console.log(res_1, "Product--Store--Added");
       }
     } catch (err) {
-      // toast.error(`${err}`, {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // })
-      // setState({ ...state, sendingLoader: false })
+      toast.error(`${err}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+      setState({ ...state, sendingLoader: false })
       throw new Error(err?.message || "something wrong");
     }
   }
   console.log(selectColorID, "selectColorID");
   console.log(colorChecked, "colorChecked");
+  console.log(
+    state?.imageAddError?.color_id,
+    state?.imageAddError?.price,
+    state?.imageAddError?.photo,
+  );
   return (
     <div className="w-full h-fit ">
 
@@ -1208,7 +1214,7 @@ const AddingProduct = () => {
                       </button>
                       <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                         <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
-                         border border-borderColor rounded-lg  h-[42px] md:h-10 px-[12px]`}>
+                        ${state?.imageAddError?.color_id && !lastElement ? "border border-[#FFB8B8] " : "border border-borderColor"}   rounded-lg  h-[42px] md:h-10 px-[12px]`}>
                           {productsData.colors
                             ?.filter((e) => colors_Id?.includes(e?.id))
                             ?.map((data) => {
@@ -1660,7 +1666,7 @@ const AddingProduct = () => {
                       >
                         Все размеры{" "}
                       </button>
-                      <button className=" w-fit">
+                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[#FFB8B8]" : "border-textBlueColor"} rounded-lg  border w-fit `}>
                         <AddSize title={productsData?.categories} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
                       </button>
                     </div>
@@ -1679,7 +1685,7 @@ const AddingProduct = () => {
                 <div className={`w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
 
                   {/* Img Carousel */}
-                  <div className="w-full h-fit mx-auto flex flex-col gap-y-[120px] ">
+                  <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-[#FFB8B8] border" : ""}`}>
                     <CarouselEdit onHandleImage={onHandleImageAdd} activeColor={selectColorID} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 
@@ -1705,8 +1711,15 @@ const AddingProduct = () => {
                     onClick={onHandleAddImage}
                     className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
+                    {state?.sendingLoader ?
+                      <ClipLoader
+                        className="h-full py-[2px]"
+                        color={"#007DCA"}
+                        size={40}
+                        loading={true}
+                      /> : "Сохранить"}
 
-                    Сохранить
+
                   </button>
 
                   <button
