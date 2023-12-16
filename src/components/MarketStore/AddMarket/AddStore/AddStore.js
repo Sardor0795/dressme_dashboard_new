@@ -89,7 +89,7 @@ function AddStore({ shopsList, onRefetch }) {
           // onRefetch()
           toast.success(`${res?.message}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -104,7 +104,7 @@ function AddStore({ shopsList, onRefetch }) {
       .catch((err) => {
         toast.error(`${err}`, {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

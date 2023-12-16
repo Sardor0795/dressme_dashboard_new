@@ -187,10 +187,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
   //     console.log(item, "BUCorousel--0");
   //   })
   // }
-
-
   useEffect(() => {
     if (productData) {
+
       if (productData?.photos) {
         setColorPivotOne(productData?.colors[0]?.pivot?.id)
         setColorPivotTwo(productData?.colors[1]?.pivot?.id)
@@ -275,6 +274,12 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
           }
         }
       })
+    }
+  }, [productData?.photos])
+  console.log();
+  useEffect(() => {
+    if (productData) {
+
       // console.log(photsArrOne, "photsArrOne", photsArrTwo, "photsArrTwo", photsArrThree, "photsArrThree", photsArrFour, "photsArrFour");
       setImageOne({
         id1: photsArrOne[1]?.id && photsArrOne[1]?.id || 1,
@@ -346,13 +351,10 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       })
 
     }
-  }, [photsArrOne,
-    colorPivotTwo,
-    colorPivotThree,
-    colorPivotFour, productData])
+  }, [colorPivotOne])
   console.log(productData, "productData");
   console.log(
-
+    imageEight?.status8, "status8"
     // imageOne?.product_id1,
     // imageTwo?.product_id2,
     // imageThree?.product_id3,
@@ -362,7 +364,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
   // console.log(photsArrTwo[1]?.status, " photsArrTwo[1]?.status");
   // console.log(imageFive?.status5, " imageFive[1]?.status5");
   // console.log(imageTwo?.status2, " imagetwo[1]?.status2");
-  console.log(imageEight?.product_id8);
+  // console.log(imageEight?.product_id8);
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
@@ -2410,7 +2412,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
 
               </button>
 
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                   {productData?.colors?.length >= 3 ?
                     <div className="w-fit h-fit flex items-center">
@@ -2510,9 +2512,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
-                  {productData?.colors?.legnth === 4 ?
+                  {productData?.colors?.length === 4 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
                         type="button"
