@@ -167,7 +167,7 @@ function MarketEdit() {
         if (res?.fields || res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

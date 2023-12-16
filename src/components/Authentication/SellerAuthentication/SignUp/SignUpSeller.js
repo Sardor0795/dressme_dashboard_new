@@ -155,7 +155,7 @@ const SignUpSeller = () => {
           setState({ ...state, errorGroup: res })
           // toast.error(`${res?.message}`, {
           //   position: "top-right",
-          //   autoClose: 5000,
+          //   autoClose: 3000,
           //   hideProgressBar: false,
           //   closeOnClick: true,
           //   pauseOnHover: true,
@@ -182,7 +182,7 @@ const SignUpSeller = () => {
           });
           toast.success(`${res?.message}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -198,7 +198,7 @@ const SignUpSeller = () => {
         console.log(err, "Error");
         toast.error("Serverda xatolik", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

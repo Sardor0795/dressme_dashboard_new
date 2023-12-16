@@ -72,7 +72,7 @@ export default function ResetPasswordSeller() {
 
                             toast.success("Вы успешно вошли в", {
                                 position: "top-right",
-                                autoClose: 5000,
+                                autoClose: 3000,
                                 hideProgressBar: false,
                                 closeOnClick: true,
                                 pauseOnHover: true,
@@ -84,7 +84,7 @@ export default function ResetPasswordSeller() {
                         } else {
                             toast.success(`${res?.status}`, {
                                 position: "top-right",
-                                autoClose: 5000,
+                                autoClose: 3000,
                                 hideProgressBar: false,
                                 closeOnClick: true,
                                 pauseOnHover: true,
@@ -98,7 +98,7 @@ export default function ResetPasswordSeller() {
                         console.log(err, "err");
                         toast.error(`ошибка ${err}`, {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 3000,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -111,7 +111,7 @@ export default function ResetPasswordSeller() {
             } else {
                 toast.error(`Заполните все поля`, {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,

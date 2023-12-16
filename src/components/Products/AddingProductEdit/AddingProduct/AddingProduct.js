@@ -498,7 +498,7 @@ const AddingProduct = () => {
         if (res_1?.errors && res_1?.message) {
           toast.error(`${res_1?.message}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -510,7 +510,7 @@ const AddingProduct = () => {
         } else if (res_1?.message) {
           toast.success(`${res_1?.message}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -535,7 +535,7 @@ const AddingProduct = () => {
     } catch (err) {
       toast.error(`${err}`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -1214,7 +1214,7 @@ const AddingProduct = () => {
                       </button>
                       <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                         <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
-                        ${state?.imageAddError?.color_id && !lastElement ? "border border-[#FFB8B8] " : "border border-borderColor"}   rounded-lg  h-[42px] md:h-10 px-[12px]`}>
+                        ${state?.imageAddError?.color_id && !lastElement ? "border-[2px] border-textRedColor " : "border border-borderColor"}   rounded-lg  h-[42px] md:h-10 px-[12px]`}>
                           {productsData.colors
                             ?.filter((e) => colors_Id?.includes(e?.id))
                             ?.map((data) => {
@@ -1666,7 +1666,7 @@ const AddingProduct = () => {
                       >
                         Все размеры{" "}
                       </button>
-                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[#FFB8B8]" : "border-textBlueColor"} rounded-lg  border w-fit `}>
+                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-lg   w-fit `}>
                         <AddSize title={productsData?.categories} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
                       </button>
                     </div>
@@ -1685,7 +1685,7 @@ const AddingProduct = () => {
                 <div className={`w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
 
                   {/* Img Carousel */}
-                  <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-[#FFB8B8] border" : ""}`}>
+                  <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
                     <CarouselEdit onHandleImage={onHandleImageAdd} activeColor={selectColorID} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 

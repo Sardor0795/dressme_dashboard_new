@@ -34,7 +34,7 @@ export default function ForgotPasswordSeller() {
                     if (res?.status == 200 || res?.ok) {
                         toast.success("Успешный  вход в систему", {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 3000,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -47,7 +47,7 @@ export default function ForgotPasswordSeller() {
                     } else {
                         toast.error("введите правильный адрес электронной почты", {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 3000,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -62,7 +62,7 @@ export default function ForgotPasswordSeller() {
                     console.log(err, "err");
                     toast.error("введите правильный адрес электронной почты", {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 3000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -75,7 +75,7 @@ export default function ForgotPasswordSeller() {
         } else {
             toast.warning("Заполните все поля", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

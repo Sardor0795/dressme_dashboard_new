@@ -118,7 +118,7 @@ export default function LocationMapCity() {
   //         console.log(res, "location delte");
   //         toast.success(`${res?.message}`, {
   //           position: "top-right",
-  //           autoClose: 5000,
+  //           autoClose: 3000,
   //           hideProgressBar: false,
   //           closeOnClick: true,
   //           pauseOnHover: true,
@@ -336,7 +336,7 @@ export default function LocationMapCity() {
         if (res?.message) {
           toast.success(`Успешно обновлено!`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

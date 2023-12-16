@@ -49,7 +49,7 @@ export default function SignInSeller() {
               setState({ ...state, errorGroup: res?.message })
               toast.error(`${res?.message}`, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -63,16 +63,16 @@ export default function SignInSeller() {
               localStorage.setItem("DressmeUserToken", res?.access_token)
               navigate("/edit-profile")
               // window.location.reload();
-              toast.success(`Успешный  вход в систему`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
+              // toast.success(`Успешный  вход в систему`, {
+              //   position: "top-right",
+              //   autoClose: 3000,
+              //   hideProgressBar: false,
+              //   closeOnClick: true,
+              //   pauseOnHover: true,
+              //   draggable: true,
+              //   progress: undefined,
+              //   theme: "light",
+              // });
               // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
               setState({ ...state, email: "", password: "", errorGroup: "" });
             }
@@ -80,7 +80,7 @@ export default function SignInSeller() {
           onError: (err) => {
             toast.error("Serverda xatolik", {
               position: "top-right",
-              autoClose: 5000,
+              autoClose: 3000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -94,7 +94,7 @@ export default function SignInSeller() {
     } else {
       toast.error(`Заполните все поля`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
