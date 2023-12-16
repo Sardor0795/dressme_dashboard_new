@@ -215,7 +215,7 @@ const AddingProduct = () => {
             setColors_Id(colors_Id => [...colors_Id, value?.id])
             setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
           }
-          if (!colorChecked && !selectColorID) {
+          if (!selectColorID) {
             // console.log(res?.product?.colors, "dddd");
             setColorChecked(res?.product?.colors[0]?.id)
             setSelectColorID(res?.product?.colors[0]?.id)
