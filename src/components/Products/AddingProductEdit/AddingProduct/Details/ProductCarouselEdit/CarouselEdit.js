@@ -275,8 +275,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
         }
       })
     }
-  }, [productData?.photos])
-  console.log();
+  }, [productData?.photos, colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour])
+  console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
+  console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
   useEffect(() => {
     if (productData) {
 
@@ -351,7 +352,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       })
 
     }
-  }, [colorPivotOne])
+  }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour])
   console.log(productData, "productData");
   console.log(
     imageEight?.status8, "status8"

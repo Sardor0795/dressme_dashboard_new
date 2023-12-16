@@ -524,7 +524,8 @@ const AddingProduct = () => {
             pictureBgFile2: null,
             pictureBgFile3: null,
             pictureBgFile4: null,
-            sendingLoader: false
+            sendingLoader: false,
+            imageAddError: null,
           })
           setLastElement()
           setSelectColorID()
