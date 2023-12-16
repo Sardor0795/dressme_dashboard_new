@@ -188,14 +188,15 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
   //   })
   // }
   useEffect(() => {
+    if (productData?.photos) {
+      setColorPivotOne(productData?.colors[0]?.pivot?.id)
+      setColorPivotTwo(productData?.colors[1]?.pivot?.id)
+      setColorPivotThree(productData?.colors[2]?.pivot?.id)
+      setColorPivotFour(productData?.colors[3]?.pivot?.id)
+    }
+  }, [productData])
+  useEffect(() => {
     if (productData) {
-
-      if (productData?.photos) {
-        setColorPivotOne(productData?.colors[0]?.pivot?.id)
-        setColorPivotTwo(productData?.colors[1]?.pivot?.id)
-        setColorPivotThree(productData?.colors[2]?.pivot?.id)
-        setColorPivotFour(productData?.colors[3]?.pivot?.id)
-      }
       productData?.photos?.map(item => {
         if (item?.product_color_id == colorPivotOne) {
           if (photsArrOne?.length === 1) {
@@ -275,9 +276,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
         }
       })
     }
-  }, [productData?.photos, colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour])
-  console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
-  console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
+  }, [, colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour])
+  // console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
+  // console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
   useEffect(() => {
     if (productData) {
 
@@ -355,7 +356,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
   }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour])
   console.log(productData, "productData");
   console.log(
-    imageEight?.status8, "status8"
+    // imageEight?.status8, "status8"
     // imageOne?.product_id1,
     // imageTwo?.product_id2,
     // imageThree?.product_id3,
