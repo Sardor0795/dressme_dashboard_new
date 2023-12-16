@@ -434,6 +434,9 @@ const AddingProduct = () => {
 
     })
   }
+  useEffect(() => {
+    setState({ ...state, imageAddError: null })
+  }, [lastElement])
   console.log(lastElement, "lastElement");
   // console.log(state?.newColorByAddSizes, "newColorByAddSizes");
   const onHandleAddImage = async () => {
@@ -1706,22 +1709,29 @@ const AddingProduct = () => {
                 </div>
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4">
 
+                  {lastElement ?
+                    <button
+                      type="button"
+                      onClick={onHandleAddImage}
+                      className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      {state?.sendingLoader ?
+                        <ClipLoader
+                          className="h-full py-[2px]"
+                          color={"#007DCA"}
+                          size={40}
+                          loading={true}
+                        /> : "Сохранить"}
 
-                  <button
-                    type="button"
-                    onClick={onHandleAddImage}
-                    className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
-                  >
-                    {state?.sendingLoader ?
-                      <ClipLoader
-                        className="h-full py-[2px]"
-                        color={"#007DCA"}
-                        size={40}
-                        loading={true}
-                      /> : "Сохранить"}
 
-
-                  </button>
+                    </button>
+                    :
+                    <span
+                      className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    >
+                      Сохранить
+                    </span>
+                  }
 
                   <button
                     type="button"
