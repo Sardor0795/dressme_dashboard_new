@@ -46,7 +46,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
         productsData?.quality?.filter(e => e.name_ru === value).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz })
             // console.log(item?.name_uz, "nameuz");
-            // console.log(state?.qualityInUz, "qualityInUz");
+            // console.log(state?.qualityInUz, "qualityInUz"); 
         })
         setState({ ...state, qualityInRu: value, qualityInUz: value })
 
