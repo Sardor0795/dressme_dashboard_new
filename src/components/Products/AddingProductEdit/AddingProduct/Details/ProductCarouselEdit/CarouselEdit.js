@@ -14,7 +14,7 @@ import { FiDownload } from "react-icons/fi";
 
 const url = "https://api.dressme.uz/api/seller";
 
-const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefetch, productId, onHandleImage }) => {
+const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -463,12 +463,17 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
 
   // console.log(selectColorID, "selectColorID");
   function UpadatePhoto(productId) {
+    setLoader(true)
+    setHideToggleIcons(true)
     let form = new FormData();
-    imageOne?.changed1 && form.append("new_photo", imageOne?.url_File1);
-    imageTwo?.changed2 && form.append("new_photo", imageTwo?.url_File2);
-    imageThree?.changed3 && form.append("new_photo", imageThree?.url_File3);
-    imageFour?.changed4 && form.append("new_photo", imageFour?.url_File4);
-
+    imageOne?.id1 == productId && form.append("new_photo", imageOne?.url_File1);
+    imageTwo?.id2 == productId && form.append("new_photo", imageTwo?.url_File2);
+    imageThree?.id3 == productId && form.append("new_photo", imageThree?.url_File3);
+    imageFour?.id4 == productId && form.append("new_photo", imageFour?.url_File4);
+    imageFive?.id5 == productId && form.append("new_photo", imageFive?.url_File5);
+    imageSix?.id6 == productId && form.append("new_photo", imageSix?.url_File6);
+    imageSeven?.id7 == productId && form.append("new_photo", imageSeven?.url_File7);
+    imageEight?.id8 == productId && form.append("new_photo", imageEight?.url_File8);
     return fetch(`${url}/products/${productId}/update-product-photo`, {
       method: "POST",
       headers: {
@@ -480,12 +485,25 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       .then((res) => res.json())
       .then((res) => {
         if (res?.errors && res?.message) {
-
+          setErrorMessage(res?.message)
+          setLoader(false)
         } else if (res?.message) {
+          setSuccessMessage(res?.message)
+          setLoader(false)
+          onRefetch()
+          setTimeout(() => {
+            setHideToggleIcons(false)
+            setModalOfCarsouel(false)
+            onRefetch()
+          }, 1000);
         }
         // console.log(res, "ProductStoreUpdate");
       })
-      .catch((err) => console.log(err, "errImage"));
+      .catch((err) => {
+        setErrorMessage(err)
+        setLoader(false)
+        console.log(err, "errImage")
+      });
   }
 
   const deleteImageId = useMutation(() => {
@@ -544,8 +562,18 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
     imageTwo?.url_File2 && form.append("photo", imageTwo?.url_File2);
     imageThree?.url_File3 && form.append("photo", imageThree?.url_File3);
     imageFour?.url_File4 && form.append("photo", imageFour?.url_File4);
-    form.append("color_id", productData?.colors[0]?.id);
-
+    imageOne?.url_File1 ||
+      imageTwo?.url_File2 ||
+      imageThree?.url_File3 ||
+      imageFour?.url_File4 || form.append("color_id", productData?.colors[0]?.id);
+    imageFive?.url_File5 && form.append("photo", imageFive?.url_File5);
+    imageSix?.url_File6 && form.append("photo", imageSix?.url_File6);
+    imageFive?.url_File5 ||
+      imageSix?.url_File6 || form.append("color_id", productData?.colors[1]?.id);
+    imageSeven?.url_File7 && form.append("photo", imageSeven?.url_File7);
+    imageSeven?.url_File7 || form.append("color_id", productData?.colors[2]?.id);
+    imageEight?.url_File8 && form.append("photo", imageEight?.url_File8);
+    imageEight?.url_File8 || form.append("color_id", productData?.colors[2]?.id);
     try {
       const res = await fetch(`${url}/products/${Number(productId)}/add-product-photo`, {
         method: "POST",
@@ -560,9 +588,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
         if (res_1?.errors && res_1?.message) {
           setErrorMessage(res_1?.message)
           setLoader(false)
-
         } else if (res_1?.message) {
-
           setSuccessMessage(res_1?.message)
           setLoader(false)
           onRefetch()
@@ -577,12 +603,11 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
       }
     } catch (err) {
       setErrorMessage(err)
-
       throw new Error(err?.message || "something wrong");
-
     }
   }
-  // console.log(imageFive, "imageFive");
+  console.log(colorListForTest, "colorListForTest");
+  console.log(colors_Id?.length, "colors_Id?.length");
   // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
   return (
     <div className="max-w-[350px] w-full h-fit ">
@@ -593,6 +618,8 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
         <section
           onClick={() => {
             setModalOfCarsouel(false)
+            setSuccessMessage(null)
+            setErrorMessage(null)
           }}
           className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 
           ${modalOfCarsouel ? "" : "hidden"
@@ -649,7 +676,6 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 </div>
               }
             </div>
-
             :
             <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
               <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
@@ -661,7 +687,6 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                 Вы уверены?
               </span>
             </div>
-
           }
           <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
 
@@ -695,12 +720,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             >
               < div className="w-full  flex flex-col items-center justify-start ">
                 {modalId == imageOne?.id1 &&
-                  <div>
-                    <img
-                      src={imageOne?.url_photo1}
-                      alt="backImg"
-                      className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageOne?.url_photo1}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full justify-between flex items-center px-3 h-[50px]`}>
                       <label
                         htmlFor={"imageOne1"}
@@ -742,12 +792,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageTwo?.id2 &&
-                  <div>
-                    <img
-                      src={imageTwo?.url_photo2}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageTwo?.url_photo2}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full  justify-between  flex items-center px-3 h-[50px]`}>
                       <label
                         htmlFor={"imageTwo1"}
@@ -789,13 +864,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageThree?.id3 &&
-                  <div>
-
-                    <img
-                      src={imageThree?.url_photo3}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageThree?.url_photo3}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full justify-between px-3 h-[50px] flex items-center`}>
                       <label
                         htmlFor={"imageThree1"}
@@ -836,12 +935,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageFour?.id4 &&
-                  <div>
-                    <img
-                      src={imageFour?.url_photo4}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageFour?.url_photo4}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageFour1"}
@@ -881,12 +1005,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageFive?.id5 &&
-                  <div>
-                    <img
-                      src={imageFive?.url_photo5}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageFive?.url_photo5}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageFive1"}
@@ -926,12 +1075,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageSix?.id6 &&
-                  <div>
-                    <img
-                      src={imageSix?.url_photo6}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageSix?.url_photo6}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageSix1"}
@@ -971,12 +1145,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageSeven?.id7 &&
-                  <div>
-                    <img
-                      src={imageSeven?.url_photo7}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageSeven?.url_photo7}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageSeven1"}
@@ -1016,12 +1215,37 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                   </div>
                 }
                 {modalId == imageEight?.id8 &&
-                  <div>
-                    <img
-                      src={imageEight?.url_photo8}
-                      alt="backImg"
-                      className=" w-[670px] h-[80vh] 	 border border-searchBgColor object-contain rounded-lg"
-                    />
+                  <div className="w-full">
+                    <div className="w-full h-[80vh] flex items-center">
+                      {hideToggleIcons ?
+                        <div className="w-full h-full flex items-center justify-center">
+                          {loader && hideToggleIcons ?
+                            <PuffLoader
+                              color={"#007DCA"}
+                              size={80}
+                              loading={true}
+                            />
+                            :
+                            <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                              {errorMessage ?
+                                <span className="flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span> :
+                                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>}
+                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                            </div>
+                          }
+                        </div>
+                        :
+                        <img
+                          src={imageEight?.url_photo8}
+                          alt="backImg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                        />
+                      }
+                    </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageEight1"}
@@ -1468,7 +1692,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       />
                       Изменить фото
                     </label>
-                    {false && <button
+                    {colorListForTest?.length >= 2 && <button
                       onClick={() => {
                         onHandleAddImage()
                       }}
@@ -1573,7 +1797,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       />
                       Изменить фото
                     </label>
-                    {false && <button
+                    {colorListForTest?.length >= 2 && <button
                       onClick={() => {
                         onHandleAddImage()
                       }}
@@ -1678,7 +1902,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       />
                       Изменить фото
                     </label>
-                    {false && <button
+                    {colorListForTest?.length >= 3 && < button
                       onClick={() => {
                         onHandleAddImage()
                       }}
@@ -1783,7 +2007,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                       />
                       Изменить фото
                     </label>
-                    {false && <button
+                    {colorListForTest?.length === 4 && <button
                       onClick={() => {
                         onHandleAddImage()
                       }}
@@ -1807,7 +2031,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                     >
                       Изменить фото
                     </span>
-                    {false && <span
+                    {colors_Id?.length === 4 && <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
                       Сохранить
@@ -1932,11 +2156,10 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                           () => {
                             handleClickCarosuel()
                             setModalId(imageTwo?.id2)
-                          }
-                          :
-                          () => {
-                            handleFreeModalUploadImg(imageTwo?.id2)
-                          } : null
+                          } :
+                          () => handleFreeModalUploadImg(imageTwo?.id2)
+
+                        : null
                     }
                     style={{
                       backgroundImage: ` url("${imageTwo?.url_photo2}")`,
@@ -2012,14 +2235,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                     onClick={
                       productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
                         imageThree?.product_id3 ?
+
                           () => {
                             handleClickCarosuel()
                             setModalId(imageThree?.id3)
-                          }
-                          :
-                          () => {
-                            handleFreeModalUploadImg(imageThree?.id3)
-                          } : null
+                          } :
+                          () => handleFreeModalUploadImg(imageThree?.id3)
+                        : null
                     }
                     style={{
                       backgroundImage: ` url("${imageThree?.url_photo3}")`,
@@ -2099,11 +2321,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                           () => {
                             handleClickCarosuel()
                             setModalId(imageFour?.id4)
-                          }
-                          :
-                          () => {
-                            handleFreeModalUploadImg(imageFour?.id4)
-                          } : null
+                          } :
+                          () => handleFreeModalUploadImg(imageFour?.id4)
+                        : null
                     }
                     style={{
                       backgroundImage: `url("${imageFour?.url_photo4}")`,
@@ -2184,11 +2404,8 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                           () => {
                             handleClickCarosuel()
                             setModalId(imageFive?.id5)
-                          }
-                          :
-                          () => {
-                            handleFreeModalUploadImg(imageFive?.id5)
-                          }
+                          } :
+                          () => handleFreeModalUploadImg(imageFive?.id5)
                         : null
                     }
                     style={{
@@ -2281,11 +2498,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                           () => {
                             handleClickCarosuel()
                             setModalId(imageSix?.id6)
-                          }
-                          :
-                          () => {
-                            handleFreeModalUploadImg(imageSix?.id6)
-                          }
+                          } :
+                          () => handleFreeModalUploadImg(imageSix?.id6)
+
                         : null
                     }
                     style={{
@@ -2350,10 +2565,8 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
-
                 {!imageSeven?.url_photo7 ? <div
 
                   className="w-full h-full overflow-hidden   rounded-lg flex flex-col items-center justify-center">
@@ -2387,9 +2600,8 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                             setModalId(imageSeven?.id7)
                           }
                           :
-                          () => {
-                            handleFreeModalUploadImg(imageSeven?.id7)
-                          } : null
+                          () => handleFreeModalUploadImg(imageSeven?.id7)
+                        : null
                     }
                     style={{
                       backgroundImage: `url("${imageSeven?.url_photo7}")`,
@@ -2484,11 +2696,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
                           () => {
                             handleClickCarosuel()
                             setModalId(imageEight?.id8)
-                          }
-                          :
-                          () => {
-                            handleFreeModalUploadImg(imageEight?.id8)
-                          } : null
+                          } :
+                          () => handleFreeModalUploadImg(imageEight?.id8)
+                        : null
                     }
                     style={{
                       backgroundImage: `url("${imageEight?.url_photo8}")`,
@@ -2548,7 +2758,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorGroup, onRefet
               </div>
             </div>
           </div>
-        </div>
+        </div >
       </section >
     </div >
   );
