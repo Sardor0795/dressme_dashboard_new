@@ -24,6 +24,8 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [reRender, setReRender] = useState(false);
+
   // console.log(productData, "productData");
   const [colorPivotOne, setColorPivotOne] = useState('');
   const [colorPivotTwo, setColorPivotTwo] = useState('');
@@ -189,14 +191,95 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
   // }
   useEffect(() => {
     if (productData?.photos) {
+      console.log("ishladi 1");
       setColorPivotOne(productData?.colors[0]?.pivot?.id)
       setColorPivotTwo(productData?.colors[1]?.pivot?.id)
       setColorPivotThree(productData?.colors[2]?.pivot?.id)
       setColorPivotFour(productData?.colors[3]?.pivot?.id)
     }
-  }, [productData])
+    productData?.photos?.map(item => {
+      if (item?.product_color_id == colorPivotOne) {
+        if (photsArrOne?.length === 1) {
+          setPhotsArrOne((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        } else if (!photsArrOne?.filter(e => item?.product_color_id?.includes(e?.id))) {
+          setPhotsArrOne((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        }
+      }
+      if (item?.product_color_id == colorPivotTwo) {
+        if (photsArrTwo?.length === 1) {
+          setPhotsArrTwo((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        } else if (!photsArrTwo?.filter(e => item?.product_color_id?.includes(e?.id))) {
+          setPhotsArrTwo((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        }
+      }
+      if (item?.product_color_id == colorPivotThree) {
+        if (photsArrThree?.length === 1) {
+          setPhotsArrThree((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        } else if (!photsArrThree?.filter(e => item?.product_color_id?.includes(e?.id))) {
+          setPhotsArrThree((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        }
+      }
+      if (item?.product_color_id == colorPivotFour) {
+        if (photsArrFour?.length === 1) {
+          setPhotsArrFour((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        } else if (!photsArrFour?.filter(e => item?.product_color_id?.includes(e?.id))) {
+          setPhotsArrFour((current) => [...current, {
+            id: item?.id,
+            productColorId: item?.product_color_id,
+            productId: item?.product_id,
+            status: item?.status,
+            urlPhoto: item?.url_photo,
+          }])
+        }
+      }
+    })
+  }, [productData?.colors, productData?.photos])
   useEffect(() => {
     if (productData) {
+      console.log("ishladi 2");
+
       productData?.photos?.map(item => {
         if (item?.product_color_id == colorPivotOne) {
           if (photsArrOne?.length === 1) {
@@ -276,97 +359,85 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
         }
       })
     }
-  }, [, colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour])
-  // console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
-  // console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
+  }, [colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, productData])
+
   useEffect(() => {
     if (productData) {
-
-      // console.log(photsArrOne, "photsArrOne", photsArrTwo, "photsArrTwo", photsArrThree, "photsArrThree", photsArrFour, "photsArrFour");
+      console.log("ishladi 3");
       setImageOne({
         id1: photsArrOne[1]?.id && photsArrOne[1]?.id || 1,
-        product_color_id1: photsArrOne[1]?.productColorId && photsArrOne[1]?.productColorId,
-        product_id1: photsArrOne[1]?.productId && photsArrOne[1]?.productId,
-        status1: photsArrOne[1]?.status && photsArrOne[1]?.status,
-        url_photo1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto,
-        url_photo_change1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto,
+        product_color_id1: photsArrOne[1]?.productColorId && photsArrOne[1]?.productColorId || null,
+        product_id1: photsArrOne[1]?.productId && photsArrOne[1]?.productId || null,
+        status1: photsArrOne[1]?.status && photsArrOne[1]?.status || null,
+        url_photo1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto || null,
+        url_photo_change1: photsArrOne[1]?.urlPhoto && photsArrOne[1]?.urlPhoto || null,
       })
 
       setImageFour({
         id4: photsArrOne[4]?.id && photsArrOne[4]?.id || 4,
-        product_color_id4: photsArrOne[4]?.productColorId && photsArrOne[4]?.productColorId,
-        product_id4: photsArrOne[4]?.productId && photsArrOne[4]?.productId,
-        status4: photsArrOne[4]?.status && photsArrOne[4]?.status,
-        url_photo4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto,
-        url_photo_change4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto,
+        product_color_id4: photsArrOne[4]?.productColorId && photsArrOne[4]?.productColorId || null,
+        product_id4: photsArrOne[4]?.productId && photsArrOne[4]?.productId || null,
+        status4: photsArrOne[4]?.status && photsArrOne[4]?.status || null,
+        url_photo4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto || null,
+        url_photo_change4: photsArrOne[4]?.urlPhoto && photsArrOne[4]?.urlPhoto || null,
       })
 
       setImageThree({
         id3: photsArrOne[3]?.id && photsArrOne[3]?.id || 3,
-        product_color_id3: photsArrOne[3]?.productColorId && photsArrOne[3]?.productColorId,
-        product_id3: photsArrOne[3]?.productId && photsArrOne[3]?.productId,
-        status3: photsArrOne[3]?.status && photsArrOne[3]?.status,
-        url_photo3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto,
-        url_photo_change3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto,
+        product_color_id3: photsArrOne[3]?.productColorId && photsArrOne[3]?.productColorId || null,
+        product_id3: photsArrOne[3]?.productId && photsArrOne[3]?.productId || null,
+        status3: photsArrOne[3]?.status && photsArrOne[3]?.status || null,
+        url_photo3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto || null,
+        url_photo_change3: photsArrOne[3]?.urlPhoto && photsArrOne[3]?.urlPhoto || null,
       })
 
       setImageTwo({
         id2: photsArrOne[2]?.id && photsArrOne[2]?.id || 2,
-        product_color_id2: photsArrOne[2]?.productColorId && photsArrOne[2]?.productColorId,
-        product_id2: photsArrOne[2]?.productId && photsArrOne[2]?.productId,
-        status2: photsArrOne[2]?.status && photsArrOne[2]?.status,
-        url_photo2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto,
-        url_photo_change2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto,
+        product_color_id2: photsArrOne[2]?.productColorId && photsArrOne[2]?.productColorId || null,
+        product_id2: photsArrOne[2]?.productId && photsArrOne[2]?.productId || null,
+        status2: photsArrOne[2]?.status && photsArrOne[2]?.status || null,
+        url_photo2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto || null,
+        url_photo_change2: photsArrOne[2]?.urlPhoto && photsArrOne[2]?.urlPhoto || null,
       })
 
       setImageFive({
         id5: photsArrTwo[1]?.id && photsArrTwo[1]?.id || 5,
-        product_color_id5: photsArrTwo[1]?.productColorId && photsArrTwo[1]?.productColorId,
-        product_id5: photsArrTwo[1]?.productId && photsArrTwo[1]?.productId,
-        status5: photsArrTwo[1]?.status && photsArrTwo[1]?.status,
-        url_photo5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto,
-        url_photo_change5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto,
+        product_color_id5: photsArrTwo[1]?.productColorId && photsArrTwo[1]?.productColorId || null,
+        product_id5: photsArrTwo[1]?.productId && photsArrTwo[1]?.productId || null,
+        status5: photsArrTwo[1]?.status && photsArrTwo[1]?.status || null,
+        url_photo5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto || null,
+        url_photo_change5: photsArrTwo[1]?.urlPhoto && photsArrTwo[1]?.urlPhoto || null,
       })
       setImageSix({
         id6: photsArrTwo[2]?.id && photsArrTwo[2]?.id || 6,
-        product_color_id6: photsArrTwo[2]?.productColorId && photsArrTwo[2]?.productColorId,
-        product_id6: photsArrTwo[2]?.productId && photsArrTwo[2]?.productId,
-        status6: photsArrTwo[2]?.status && photsArrTwo[2]?.status,
-        url_photo6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto,
-        url_photo_change6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto,
+        product_color_id6: photsArrTwo[2]?.productColorId && photsArrTwo[2]?.productColorId || null,
+        product_id6: photsArrTwo[2]?.productId && photsArrTwo[2]?.productId || null,
+        status6: photsArrTwo[2]?.status && photsArrTwo[2]?.status || null,
+        url_photo6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto || null,
+        url_photo_change6: photsArrTwo[2]?.urlPhoto && photsArrTwo[2]?.urlPhoto || null,
       })
       setImageSeven({
         id7: photsArrThree[1]?.id && photsArrThree[1]?.id || 7,
-        product_color_id7: photsArrThree[1]?.productColorId && photsArrThree[1]?.productColorId,
-        product_id7: photsArrThree[1]?.productId && photsArrThree[1]?.productId,
-        status7: photsArrThree[1]?.status && photsArrThree[1]?.status,
-        url_photo7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto,
-        url_photo_change7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto,
+        product_color_id7: photsArrThree[1]?.productColorId && photsArrThree[1]?.productColorId || null,
+        product_id7: photsArrThree[1]?.productId && photsArrThree[1]?.productId || null,
+        status7: photsArrThree[1]?.status && photsArrThree[1]?.status || null,
+        url_photo7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto || null,
+        url_photo_change7: photsArrThree[1]?.urlPhoto && photsArrThree[1]?.urlPhoto || null,
       })
       setImageEight({
         id8: photsArrFour[1]?.id && photsArrFour[1]?.id || 8,
-        product_color_id8: photsArrFour[1]?.productColorId && photsArrFour[1]?.productColorId,
-        product_id8: photsArrFour[1]?.productId && photsArrFour[1]?.productId,
-        status8: photsArrFour[1]?.status && photsArrFour[1]?.status,
-        url_photo8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto,
-        url_photo_change8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto,
+        product_color_id8: photsArrFour[1]?.productColorId && photsArrFour[1]?.productColorId || null,
+        product_id8: photsArrFour[1]?.productId && photsArrFour[1]?.productId || null,
+        status8: photsArrFour[1]?.status && photsArrFour[1]?.status || null,
+        url_photo8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto || null,
+        url_photo_change8: photsArrFour[1]?.urlPhoto && photsArrFour[1]?.urlPhoto || null,
       })
 
     }
-  }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour])
-  console.log(productData, "productData");
-  console.log(
-    // imageEight?.status8, "status8"
-    // imageOne?.product_id1,
-    // imageTwo?.product_id2,
-    // imageThree?.product_id3,
-    // imageFour?.product_id4,
-    // imageFive?.product_id5
-  );
-  // console.log(photsArrTwo[1]?.status, " photsArrTwo[1]?.status");
-  // console.log(imageFive?.status5, " imageFive[1]?.status5");
-  // console.log(imageTwo?.status2, " imagetwo[1]?.status2");
-  // console.log(imageEight?.product_id8);
+  }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour, productData])
+  console.log(productData);
+  console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
+  console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
@@ -492,10 +563,10 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
           setSuccessMessage(res?.message)
           setLoader(false)
           onRefetch()
+
           setTimeout(() => {
             setHideToggleIcons(false)
             setModalOfCarsouel(false)
-            onRefetch()
           }, 1000);
         }
         // console.log(res, "ProductStoreUpdate");
@@ -529,13 +600,19 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
             setErrorMessage(res?.message)
             setLoader(false)
             onRefetch()
-
           } else if (res?.message) {
             setSuccessMessage(res?.message)
             setLoader(false)
+
+            // setImageTwo({ ...imageTwo, url_photo2: null, status2: null, })
+            // setImageThree({ ...imageThree, url_photo3: null, status3: null, })
+            // setImageFour({ ...imageFour, url_photo4: null, status4: null, })
+            // setImageFive({ ...imageFive, url_photo5: null, status5: null, })
+            // setImageSix({ ...imageSix, url_photo6: null, status6: null, })
+            // setImageSeven({ ...imageSeven, url_photo7: null, status7: null, })
+            // setImageEight({ ...imageEight, url_photo8: null, status8: null, })
             onRefetch()
             setTimeout(() => {
-              // setOpenStoreList(false)
               setHideToggleIcons(false)
               setDeleteModal(false)
               setModalOfCarsouel(false)
@@ -588,11 +665,11 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
           setSuccessMessage(res_1?.message)
           setLoader(false)
           onRefetch()
+
           setTimeout(() => {
             // setOpenStoreList(false)
             setHideToggleIcons(false)
             setFreeModalUploadImg(false)
-            onRefetch()
           }, 1000);
         }
         console.log(res_1, "ProductStore---Added");
@@ -602,8 +679,8 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
       throw new Error(err?.message || "something wrong");
     }
   }
-  console.log(colorListForTest, "colorListForTest");
-  console.log(colors_Id?.length, "colors_Id?.length");
+  // console.log(colorListForTest, "colorListForTest");
+  // console.log(colors_Id?.length, "colors_Id?.length");
   // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
   return (
     <div className="max-w-[350px] w-full h-fit ">
@@ -769,6 +846,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                         type="button"
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                       >
+
                         Сохранить
                       </button> :
                         <span
@@ -1060,13 +1138,13 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                       >
                         Сохранить
                       </span>}
-                      <button
+                      {imageSix?.url_photo6 && <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageFive?.id5)
                         }}
                         className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
-                      </button>
+                      </button>}
                     </div>
                   </div>
                 }
@@ -1205,7 +1283,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                           setDeleteModal(true)
                           setDeleteId(imageSeven?.id7)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="hidden text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
@@ -1275,7 +1353,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                           setDeleteModal(true)
                           setDeleteId(imageEight?.id8)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className=" hidden text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>

@@ -110,7 +110,7 @@ const AddingProduct = () => {
 
 
   function CallBackHeadWear(childData) {
-    console.log(childData, "childData");
+    // console.log(childData, "childData");
     setState({ ...state, newColorByAddSizes: childData })
   }
 
@@ -271,7 +271,7 @@ const AddingProduct = () => {
   // ColorHandle
   // ------------------------------------------------------------------------
   // console.log(colors_Id, "colors_Id");
-  console.log(colorListForTest, "colorListForTest");
+  // console.log(colorListForTest, "colorListForTest");
   function onHanleColorList(e) {
     console.log(e, "SelectEd--ID");
     setSelectColorID(e)
@@ -548,8 +548,8 @@ const AddingProduct = () => {
       throw new Error(err?.message || "something wrong");
     }
   }
-  console.log(selectColorID, "selectColorID");
-  console.log(colorChecked, "colorChecked");
+  // console.log(selectColorID, "selectColorID");
+  // console.log(colorChecked, "colorChecked");
   // console.log(
   //   state?.imageAddError?.color_id,
   //   state?.imageAddError?.price,
@@ -675,12 +675,17 @@ const AddingProduct = () => {
                 <div
                   className={`flex items-center justify-between border-b border-searchBgColor pb-3`}
                 >
-                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
-                    Выберите цвет
-                  </span>
+                  <div className="w-fit flex items-center">
+                    <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                      Выберите цвет
+                    </span>
+                    <span className="text-sm ml-[10px] text-[#a1a1a1] font-AeonikProRegular">
+                      (Можно добавить максимум 4 цвета)
+                    </span>
+                  </div>
                   <button
                     className="py-2"
-                    type=""
+                    type="button"
                     onClick={() => setState({ ...state, showColor: false })}
                   >
                     <MenuCloseIcons colors={"#000"} />
@@ -689,9 +694,10 @@ const AddingProduct = () => {
                 <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
                   {productsData?.colors.map((data) => {
                     return (
-                      <div className="flex flex-col items-center justify-center ">
+                      <div
+                        key={data?.id}
+                        className={`flex flex-col items-center justify-center ${colors_Id?.length === 4 ? colors_Id?.includes(data?.id) ? "" : "opacity-50" : ""} `}>
                         <div
-                          key={data?.id}
                           className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
                             }] cursor-pointer ${data?.id == 2
                               ? "border border-setTexOpacity flex items-center justify-center"
