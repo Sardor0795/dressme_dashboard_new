@@ -429,9 +429,6 @@ const AddingProduct = () => {
       pictureBgFile2: childData?.image_File_6,
       pictureBgFile3: childData?.image_File_7,
       pictureBgFile4: childData?.image_File_8,
-
-
-
     })
   }
   useEffect(() => {
@@ -553,11 +550,11 @@ const AddingProduct = () => {
   }
   console.log(selectColorID, "selectColorID");
   console.log(colorChecked, "colorChecked");
-  console.log(
-    state?.imageAddError?.color_id,
-    state?.imageAddError?.price,
-    state?.imageAddError?.photo,
-  );
+  // console.log(
+  //   state?.imageAddError?.color_id,
+  //   state?.imageAddError?.price,
+  //   state?.imageAddError?.photo,
+  // );
   return (
     <div className="w-full h-fit ">
 
@@ -1690,7 +1687,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
-                    <CarouselEdit onHandleImage={onHandleImageAdd} activeColor={selectColorID} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 
                 </div>
