@@ -487,6 +487,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
         if (res?.errors && res?.message) {
           setErrorMessage(res?.message)
           setLoader(false)
+          onRefetch()
         } else if (res?.message) {
           setSuccessMessage(res?.message)
           setLoader(false)
@@ -527,6 +528,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
           if (res?.message && res?.errors) {
             setErrorMessage(res?.message)
             setLoader(false)
+            onRefetch()
 
           } else if (res?.message) {
             setSuccessMessage(res?.message)
@@ -546,14 +548,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
         }
       })
   }
-  // console.log(
-  //   // imageOne?.url_File1, "imageOne?.url_File1",
-  //   // imageTwo?.url_File2, "imageTwo?.url_File2",
-  //   // imageThree?.url_File3, "imageThree?.url_File3",
-  //   // imageFour?.url_File4, "imageFour?.url_File4",
-  //   imageFive?.url_File5, "imageFive?.url_File5",
-  //   imageSix?.url_File6, "imageSix?.url_File6",
-  // );
+
   const onHandleAddImage = async () => {
     setLoader(true)
     setHideToggleIcons(true)
@@ -562,18 +557,18 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
     imageTwo?.url_File2 && form.append("photo", imageTwo?.url_File2);
     imageThree?.url_File3 && form.append("photo", imageThree?.url_File3);
     imageFour?.url_File4 && form.append("photo", imageFour?.url_File4);
-    imageOne?.url_File1 ||
+    (imageOne?.url_File1 ||
       imageTwo?.url_File2 ||
       imageThree?.url_File3 ||
-      imageFour?.url_File4 || form.append("color_id", productData?.colors[0]?.id);
+      imageFour?.url_File4) && form.append("color_id", productData?.colors[0]?.id);
     imageFive?.url_File5 && form.append("photo", imageFive?.url_File5);
     imageSix?.url_File6 && form.append("photo", imageSix?.url_File6);
     imageFive?.url_File5 ||
-      imageSix?.url_File6 || form.append("color_id", productData?.colors[1]?.id);
+      imageSix?.url_File6 && form.append("color_id", productData?.colors[1]?.id);
     imageSeven?.url_File7 && form.append("photo", imageSeven?.url_File7);
-    imageSeven?.url_File7 || form.append("color_id", productData?.colors[2]?.id);
+    imageSeven?.url_File7 && form.append("color_id", productData?.colors[2]?.id);
     imageEight?.url_File8 && form.append("photo", imageEight?.url_File8);
-    imageEight?.url_File8 || form.append("color_id", productData?.colors[2]?.id);
+    imageEight?.url_File8 && form.append("color_id", productData?.colors[3]?.id);
     try {
       const res = await fetch(`${url}/products/${Number(productId)}/add-product-photo`, {
         method: "POST",
@@ -588,6 +583,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
         if (res_1?.errors && res_1?.message) {
           setErrorMessage(res_1?.message)
           setLoader(false)
+          onRefetch()
         } else if (res_1?.message) {
           setSuccessMessage(res_1?.message)
           setLoader(false)
@@ -2527,7 +2523,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
                 <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
                   {productData?.colors?.length >= 2 ?
                     <div className="w-fit h-fit flex items-center">
