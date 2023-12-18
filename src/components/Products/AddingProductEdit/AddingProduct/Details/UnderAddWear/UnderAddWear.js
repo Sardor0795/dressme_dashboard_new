@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
+function UnderAddWear({ stateList, colorsList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -64,54 +64,54 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         }
     }, [state?.salePercent || state?.priceNum])
     useEffect(() => {
-        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+        if (stateList?.category_id == SelectedNumber) {
             setState({
                 ...state,
-                quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
-                minBreast: stateList?.sizeGetList[0]?.min_waist_girth,
-                maxBreast: stateList?.sizeGetList[0]?.max_waist_girth,
-                minSize: stateList?.sizeGetList[0]?.min_wear_size,
-                maxSize: stateList?.sizeGetList[0]?.max_wear_size,
-                minHeight: stateList?.sizeGetList[0]?.min_height,
-                maxHeight: stateList?.sizeGetList[0]?.max_height,
-                minHips: stateList?.sizeGetList[0]?.min_hip_girth,
-                maxHips: stateList?.sizeGetList[0]?.max_hip_girth,
-                ageNum: stateList?.sizeGetList[0]?.age,
-                salePercent: stateList?.sizeGetList[0]?.discount_percent,
-                salePrice: stateList?.sizeGetList[0]?.discount_price,
-                sizeListCheck: stateList?.sizeGetList[0]?.letter_size
+                quantityNum: stateList?.amount || null,
+                priceNum: Number(stateList?.price)?.toLocaleString(),
+                minBreast: stateList?.min_waist_girth || null,
+                maxBreast: stateList?.max_waist_girth || null,
+                minSize: stateList?.min_wear_size || null,
+                maxSize: stateList?.max_wear_size || null,
+                minHeight: stateList?.min_height || null,
+                maxHeight: stateList?.max_height || null,
+                minHips: stateList?.min_hip_girth || null,
+                maxHips: stateList?.max_hip_girth || null,
+                ageNum: stateList?.age || null,
+                salePercent: stateList?.discount_percent || null,
+                salePrice: stateList?.discount_price || null,
+                sizeListCheck: stateList?.letter_size || null
             })
         }
 
-    }, [stateList?.sizeGetList[0]])
+    }, [stateList])
 
 
 
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.quantityNum && state?.priceNum) {
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true })
+        // if (state?.minSize && state?.quantityNum && state?.priceNum) {
+        //     setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+        //     setState({ ...state, isCheckValid: false, onConcel: true })
 
-            handleCallBack({
-                minUnderwearWaistGirth: state?.minBreast,
-                maxUnderwearWaistGirth: state?.maxBreast,
-                minUnderWearSize: state?.minSize,
-                maxUnderWearSize: state?.maxSize,
-                minUnderWearHipGirth: state?.minHips,
-                maxUnderWearHipGirth: state?.maxHips,
-                minHeight: state?.minHeight,
-                maxHeight: state?.maxHeight,
-                underWearLetterSize: state?.sizeListCheck,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-                // category_Id: SelectedNumber,
-            })
-        }
+        //     handleCallBack({
+        //         minUnderwearWaistGirth: state?.minBreast,
+        //         maxUnderwearWaistGirth: state?.maxBreast,
+        //         minUnderWearSize: state?.minSize,
+        //         maxUnderWearSize: state?.maxSize,
+        //         minUnderWearHipGirth: state?.minHips,
+        //         maxUnderWearHipGirth: state?.maxHips,
+        //         minHeight: state?.minHeight,
+        //         maxHeight: state?.maxHeight,
+        //         underWearLetterSize: state?.sizeListCheck,
+        //         amount: state?.quantityNum,
+        //         age: state?.ageNum,
+        //         price: state?.priceNum?.split(",")?.join(""),
+        //         discountPercent: state?.salePercent,
+        //         discountPrice: state?.salePrice?.split(",")?.join(""),
+        //         // category_Id: SelectedNumber,
+        //     })
+        // }
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
@@ -134,7 +134,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             onConcel: false,
             selected: null,
         })
-        handleCallBack()
+        // handleCallBack()
     }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -163,7 +163,7 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         }
     };
     return (
-        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>
@@ -613,11 +613,11 @@ function UnderAddWear({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                 <div className="w-full h-fit  flex items-center justify-between px-3">
                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                         Цвет:
-
-                        {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
+                        {colorsList.filter(e => e?.pivot?.id == stateList?.product_color_id)?.map((data) => {
+                            console.log(data, "data-color");
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                    className={`rounded-[15px] ml-3 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                    className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                 >
                                     <span >{data?.name_ru} </span>
                                 </div>

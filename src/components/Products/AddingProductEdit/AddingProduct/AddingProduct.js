@@ -226,7 +226,7 @@ const AddingProduct = () => {
           producer_Id: res?.product?.producer_id,
           shopId: res?.product?.locations[0]?.shop_id,
           shopLocationId: res?.product?.locations[0]?.id,
-          sizeGetList: res?.product?.sizes
+          sizeGetList: res?.product
 
         })
       },
