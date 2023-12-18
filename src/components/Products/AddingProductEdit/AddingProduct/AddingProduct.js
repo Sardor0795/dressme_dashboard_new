@@ -81,27 +81,14 @@ const AddingProduct = () => {
     category_Id: null,
     filterTypeId: null,
     producer_Id: null,
-    photos1: [],
-    amount: null,
-    age: null,
-    price: null,
-    discount_percent: null,
-    discount_price: null,
+
 
     // -----Details-----
-    textListOfFormList: null,
-    headWearList: null,
-    outWearList: null,
-    underWearList: null,
-    shoesList: null,
-    AccessoriesList: null,
-    titleUz: null,
-    titleRu: null,
-    selectedUz: [],
     PathnameToken: '',
     // ------
     sendingLoader: false,
     imageAddError: null,
+    clearAddSize: false,
     //productsDataIdEdit
     sizeGetList: null,
     //---------------
@@ -114,7 +101,8 @@ const AddingProduct = () => {
     setState({ ...state, newColorByAddSizes: childData })
   }
 
-
+  // console.log(state?.newColorByAddSizes?.amount, "newColorByAddSizes1");
+  // console.log(state?.newColorByAddSizes?.price, "newColorByAddSizes2");
 
   const [productsData, setProductsData] = useState({});
   function randomCode(len) {
@@ -198,7 +186,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        console.log("Onrefetch Ishladi");
+        // console.log("Onrefetch Ishladi");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
@@ -330,8 +318,8 @@ const AddingProduct = () => {
     // }
 
   }, [selectColorID, productsDataIdEdit?.colors])
-  console.log(colorListForTest, "colorListForTest");
-  console.log(selectColorID, "selectColorID");
+  // console.log(colorListForTest, "colorListForTest");
+  // console.log(selectColorID, "selectColorID");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -439,7 +427,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  console.log(lastElement, "lastElement");
+  // console.log(lastElement, "lastElement"); handleCallBack
   // console.log(state?.newColorByAddSizes, "newColorByAddSizes");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
@@ -531,6 +519,7 @@ const AddingProduct = () => {
             pictureBgFile4: null,
             sendingLoader: false,
             imageAddError: null,
+            clearAddSize: true
           })
           setLastElement()
           setSelectColorID()
@@ -1678,8 +1667,8 @@ const AddingProduct = () => {
                       >
                         Все размеры{" "}
                       </button>
-                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-lg   w-fit `}>
-                        <AddSize title={productsData?.categories} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
+                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[12px]   w-fit `}>
+                        <AddSize title={productsData?.categories} clearInput={state?.clearAddSize} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
                       </button>
                     </div>
                   </div>
@@ -1703,7 +1692,7 @@ const AddingProduct = () => {
 
                 </div>
               </div>
-              <div className="md:relative w-full mt-[60px]  md:mt-[200px] ">
+              <div className="md:relative w-full mt-[60px]  md:mt-[150px] ">
                 <div className="flex md:hidden items-center justify-between mb-[40px]">
                   <div className="w-1/3 h-[1px] bg-borderColor"></div>
                   <div className="w-1/3 flex items-center justify-around">
@@ -1717,7 +1706,8 @@ const AddingProduct = () => {
                 </div>
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4">
 
-                  {lastElement ?
+                  {/* {lastElement ? */}
+                  {lastElement && state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
                     <button
                       type="button"
                       onClick={onHandleAddImage}

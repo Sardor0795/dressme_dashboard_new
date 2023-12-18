@@ -5,8 +5,8 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function AddSize({ handleCallBack, typeId }) {
-    // console.log(typeId, "typeIdAddSize");
+function AddSize({ handleCallBack, typeId, clearInput }) {
+    console.log(typeId, "typeIdAddSize");
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
@@ -74,104 +74,192 @@ function AddSize({ handleCallBack, typeId }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
+        if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
+            setToggleShow(false)
+            handleCallBack({
+                minHeadGirth: state?.minHeadGirth,
+                maxHeadGirth: state?.maxHeadGirth,
+                sizeCheck: state?.sizeCheck,
+                // All of Category
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum?.split(",")?.join(""),
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
+            })
+        }
+        if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
+            setToggleShow(false)
+            handleCallBack({
+                // OutWear
+                minChestGirth: state?.minBreast,
+                maxChestGirth: state?.maxBreast,
+                minOutWearSize: state?.minSize,
+                maxOutWearSize: state?.maxSize,
+                minOutWearWaistGirth: state?.minWaist,
+                maxOutWearWaistGirth: state?.maxWaist,
+                minOutWearHipGirth: state?.minHips,
+                maxOutWearHipGirth: state?.maxHips,
+                outWearLetterSize: state?.sizeListCheck,
+                // All of Category
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum?.split(",")?.join(""),
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
+            })
+        }
+        if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
+            setToggleShow(false)
+            handleCallBack({
+                // UnderWear
+                minUnderwearWaistGirth: state?.minBreast,
+                maxUnderwearWaistGirth: state?.maxBreast,
+                minUnderWearSize: state?.minSize,
+                maxUnderWearSize: state?.maxSize,
+                minUnderWearHipGirth: state?.minHips,
+                maxUnderWearHipGirth: state?.maxHips,
+                minHeight: state?.minHeight,
+                maxHeight: state?.maxHeight,
+                underWearLetterSize: state?.sizeListCheck,
+                // All of Category
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum?.split(",")?.join(""),
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
+            })
+        }
+        if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.minSize) {
+            setToggleShow(false)
+            handleCallBack({
+                // Shoes
+                footWearSize: state?.minSize,
+                minFootLength: state?.minFootLength,
+                maxFootLength: state?.maxFootLength,
+                // All of Category
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum?.split(",")?.join(""),
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
+            })
+        }
+        if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
+            setToggleShow(false)
+            handleCallBack({
+                // Accessuary
+                accessorySize: state?.minSize,
+                legnthAcc: state?.rowSize,
+                widthAcc: state?.colSize,
+                accessoryLetterSize: state?.sizeListCheck,
+                // All of Category
+                amount: state?.quantityNum,
+                age: state?.ageNum,
+                price: state?.priceNum?.split(",")?.join(""),
+                discountPercent: state?.salePercent,
+                discountPrice: state?.salePrice?.split(",")?.join(""),
+            })
+        }
         // if (state?.minSize && state?.quantityNum && state?.priceNum) {
-        setState({ ...state, isCheckValid: false, })
-        setToggleShow(false)
-        handleCallBack({
-            // Accessuary
-            accessorySize: state?.minSize,
-            legnthAcc: state?.rowSize,
-            widthAcc: state?.colSize,
-            accessoryLetterSize: state?.sizeListCheck,
-            // Shoes
-            footWearSize: state?.minSize,
-            minFootLength: state?.minFootLength,
-            maxFootLength: state?.maxFootLength,
-            // UnderWear
-            minUnderwearWaistGirth: state?.minBreast,
-            maxUnderwearWaistGirth: state?.maxBreast,
-            minUnderWearSize: state?.minSize,
-            maxUnderWearSize: state?.maxSize,
-            minUnderWearHipGirth: state?.minHips,
-            maxUnderWearHipGirth: state?.maxHips,
-            minHeight: state?.minHeight,
-            maxHeight: state?.maxHeight,
-            underWearLetterSize: state?.sizeListCheck,
-            // OutWear
-            minChestGirth: state?.minBreast,
-            maxChestGirth: state?.maxBreast,
-            minOutWearSize: state?.minSize,
-            maxOutWearSize: state?.maxSize,
-            minOutWearWaistGirth: state?.minWaist,
-            maxOutWearWaistGirth: state?.maxWaist,
-            minOutWearHipGirth: state?.minHips,
-            maxOutWearHipGirth: state?.maxHips,
-            outWearLetterSize: state?.sizeListCheck,
-            // HeadWear
-            minHeadGirth: state?.minHeadGirth,
-            maxHeadGirth: state?.maxHeadGirth,
-            sizeCheck: state?.sizeCheck,
-            // All of Category
-            amount: state?.quantityNum,
-            age: state?.ageNum,
-            price: state?.priceNum?.split(",")?.join(""),
-            discountPercent: state?.salePercent,
-            discountPrice: state?.salePrice?.split(",")?.join(""),
-        })
+        // setState({ ...state, isCheckValid: false, })
+        // setToggleShow(false)
+        // handleCallBack({
+        //     // Accessuary
+        //     accessorySize: state?.minSize,
+        //     legnthAcc: state?.rowSize,
+        //     widthAcc: state?.colSize,
+        //     accessoryLetterSize: state?.sizeListCheck,
+        //     // Shoes
+        //     footWearSize: state?.minSize,
+        //     minFootLength: state?.minFootLength,
+        //     maxFootLength: state?.maxFootLength,
+        //     // UnderWear
+        //     minUnderwearWaistGirth: state?.minBreast,
+        //     maxUnderwearWaistGirth: state?.maxBreast,
+        //     minUnderWearSize: state?.minSize,
+        //     maxUnderWearSize: state?.maxSize,
+        //     minUnderWearHipGirth: state?.minHips,
+        //     maxUnderWearHipGirth: state?.maxHips,
+        //     minHeight: state?.minHeight,
+        //     maxHeight: state?.maxHeight,
+        //     underWearLetterSize: state?.sizeListCheck,
+        //     // OutWear
+        //     minChestGirth: state?.minBreast,
+        //     maxChestGirth: state?.maxBreast,
+        //     minOutWearSize: state?.minSize,
+        //     maxOutWearSize: state?.maxSize,
+        //     minOutWearWaistGirth: state?.minWaist,
+        //     maxOutWearWaistGirth: state?.maxWaist,
+        //     minOutWearHipGirth: state?.minHips,
+        //     maxOutWearHipGirth: state?.maxHips,
+        //     outWearLetterSize: state?.sizeListCheck,
+        //     // HeadWear
+        //     minHeadGirth: state?.minHeadGirth,
+        //     maxHeadGirth: state?.maxHeadGirth,
+        //     sizeCheck: state?.sizeCheck,
+        //     // All of Category
+        //     amount: state?.quantityNum,
+        //     age: state?.ageNum,
+        //     price: state?.priceNum?.split(",")?.join(""),
+        //     discountPercent: state?.salePercent,
+        //     discountPrice: state?.salePrice?.split(",")?.join(""),
+        // })
         // }
     }
-    const cancelSendDetail = (e) => {
-        setState({
-            ...state,
-            // 
-            // Accessuary
-            accessorySize: null,
-            legnthAcc: null,
-            widthAcc: null,
-            accessoryLetterSize: null,
-            // Shoes
-            footWearSize: null,
-            minFootLength: null,
-            maxFootLength: null,
-            // UnderWear
-            minUnderwearWaistGirth: null,
-            maxUnderwearWaistGirth: null,
-            minUnderWearSize: null,
-            maxUnderWearSize: null,
-            minUnderWearHipGirth: null,
-            maxUnderWearHipGirth: null,
-            minHeight: null,
-            maxHeight: null,
-            underWearLetterSize: null,
-            // OutWear
-            minChestGirth: null,
-            maxChestGirth: null,
-            minOutWearSize: null,
-            maxOutWearSize: null,
-            minOutWearWaistGirth: null,
-            maxOutWearWaistGirth: null,
-            minOutWearHipGirth: null,
-            maxOutWearHipGirth: null,
-            outWearLetterSize: null,
-            // HeadWear
-            minHeadGirth: null,
-            maxHeadGirth: null,
-            sizeCheck: false,
-            // All of Category
-            amount: null,
-            age: null,
-            price: null,
-            discountPercent: null,
-            discountPrice: null,
+    // useEffect(() => {
+    //     setState({
+    //         ...state,
+    //         // 
+    //         // Accessuary
+    //         accessorySize: null,
+    //         legnthAcc: null,
+    //         widthAcc: null,
+    //         accessoryLetterSize: null,
+    //         // Shoes
+    //         footWearSize: null,
+    //         minFootLength: null,
+    //         maxFootLength: null,
+    //         // UnderWear
+    //         minUnderwearWaistGirth: null,
+    //         maxUnderwearWaistGirth: null,
+    //         minUnderWearSize: null,
+    //         maxUnderWearSize: null,
+    //         minUnderWearHipGirth: null,
+    //         maxUnderWearHipGirth: null,
+    //         minHeight: null,
+    //         maxHeight: null,
+    //         underWearLetterSize: null,
+    //         // OutWear
+    //         minChestGirth: null,
+    //         maxChestGirth: null,
+    //         minOutWearSize: null,
+    //         maxOutWearSize: null,
+    //         minOutWearWaistGirth: null,
+    //         maxOutWearWaistGirth: null,
+    //         minOutWearHipGirth: null,
+    //         maxOutWearHipGirth: null,
+    //         outWearLetterSize: null,
+    //         // HeadWear
+    //         minHeadGirth: null,
+    //         maxHeadGirth: null,
+    //         sizeCheck: false,
+    //         // All of Category
+    //         amount: null,
+    //         age: null,
+    //         price: null,
+    //         discountPercent: null,
+    //         discountPrice: null,
 
-            // ----
-            isCheckValid: false,
-            onConcel: false,
-            selected: null,
-        })
-        handleCallBack()
-        setToggleShow(false)
-    }
+    //         // ----
+    //         isCheckValid: false,
+    //         onConcel: false,
+    //         selected: null,
+    //     })
+    //     handleCallBack()
+    //     setToggleShow(false)
+    // }, [clearInput])
+
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');

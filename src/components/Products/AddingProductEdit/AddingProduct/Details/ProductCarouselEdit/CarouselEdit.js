@@ -191,7 +191,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
   // }
   useEffect(() => {
     if (productData?.photos) {
-      console.log("ishladi 1");
+      // console.log("ishladi 1");
       setColorPivotOne(productData?.colors[0]?.pivot?.id)
       setColorPivotTwo(productData?.colors[1]?.pivot?.id)
       setColorPivotThree(productData?.colors[2]?.pivot?.id)
@@ -337,7 +337,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
 
   useEffect(() => {
     if (productData) {
-      console.log("ishladi 3");
+      // console.log("ishladi 3");
       setImageOne({
         id1: photsArrOne[1]?.id && photsArrOne[1]?.id || 1,
         product_color_id1: photsArrOne[1]?.productColorId && photsArrOne[1]?.productColorId || null,
@@ -422,9 +422,9 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
     // console.log(photsArrOne, "photsArrOne");
   }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour, productData])
 
-  console.log(productData, "Ishladi");
-  console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
-  console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
+  // console.log(productData, "Ishladi");
+  // console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
+  // console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
   const handleLocationImage1 = (e) => {
     setImageOne({
       ...imageOne,
