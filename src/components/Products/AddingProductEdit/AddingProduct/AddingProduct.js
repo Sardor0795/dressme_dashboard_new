@@ -213,6 +213,10 @@ const AddingProduct = () => {
 
           if (!colors_Id?.includes(value?.id)) {
             setColors_Id(colors_Id => [...colors_Id, value?.id])
+            // setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
+          }
+          if (!colorListForTest?.includes(value?.id)) {
+            // setColors_Id(colors_Id => [...colors_Id, value?.id])
             setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
           }
           if (!selectColorID) {
@@ -325,8 +329,9 @@ const AddingProduct = () => {
     //   setLastElement('')
     // }
 
-  }, [selectColorID])
-  // console.log(selectColorID, "selectColorID");
+  }, [selectColorID, productsDataIdEdit?.colors])
+  console.log(colorListForTest, "colorListForTest");
+  console.log(selectColorID, "selectColorID");
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
