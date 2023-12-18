@@ -2563,7 +2563,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                         <DownloadIcon />
-                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
                       </div>
