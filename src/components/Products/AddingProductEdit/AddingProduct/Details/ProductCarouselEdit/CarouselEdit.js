@@ -197,89 +197,46 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
       setColorPivotThree(productData?.colors[2]?.pivot?.id)
       setColorPivotFour(productData?.colors[3]?.pivot?.id)
     }
-    productData?.photos?.map(item => {
-      if (item?.product_color_id == colorPivotOne) {
-        if (photsArrOne?.length === 1) {
-          setPhotsArrOne((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        } else if (!photsArrOne?.filter(e => item?.product_color_id?.includes(e?.id))) {
-          setPhotsArrOne((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        }
-      }
-      if (item?.product_color_id == colorPivotTwo) {
-        if (photsArrTwo?.length === 1) {
-          setPhotsArrTwo((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        } else if (!photsArrTwo?.filter(e => item?.product_color_id?.includes(e?.id))) {
-          setPhotsArrTwo((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        }
-      }
-      if (item?.product_color_id == colorPivotThree) {
-        if (photsArrThree?.length === 1) {
-          setPhotsArrThree((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        } else if (!photsArrThree?.filter(e => item?.product_color_id?.includes(e?.id))) {
-          setPhotsArrThree((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        }
-      }
-      if (item?.product_color_id == colorPivotFour) {
-        if (photsArrFour?.length === 1) {
-          setPhotsArrFour((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        } else if (!photsArrFour?.filter(e => item?.product_color_id?.includes(e?.id))) {
-          setPhotsArrFour((current) => [...current, {
-            id: item?.id,
-            productColorId: item?.product_color_id,
-            productId: item?.product_id,
-            status: item?.status,
-            urlPhoto: item?.url_photo,
-          }])
-        }
-      }
-    })
-  }, [productData?.colors, productData?.photos])
+
+  }, [productData?.colors])
   useEffect(() => {
     if (productData) {
-      console.log("ishladi 2");
-
+      setPhotsArrOne([
+        {
+          id: null,
+          productColorId: null,
+          productId: null,
+          status: null,
+          urlPhoto: null,
+        }
+      ]);
+      setPhotsArrThree([
+        {
+          id: null,
+          productColorId: null,
+          productId: null,
+          status: null,
+          urlPhoto: null,
+        }
+      ]);
+      setPhotsArrThree([
+        {
+          id: null,
+          productColorId: null,
+          productId: null,
+          status: null,
+          urlPhoto: null,
+        }
+      ]);
+      setPhotsArrTwo([
+        {
+          id: null,
+          productColorId: null,
+          productId: null,
+          status: null,
+          urlPhoto: null,
+        }
+      ]);
       productData?.photos?.map(item => {
         if (item?.product_color_id == colorPivotOne) {
           if (photsArrOne?.length === 1) {
@@ -290,17 +247,22 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
-          } else if (!photsArrOne?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrOne((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              productId: item?.product_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
+          }
+          if (photsArrOne?.length >= 2) {
+            setPhotsArrOne(current => [
+              ...current,
+              {
+                id: item.id,
+                productColorId: item.product_color_id,
+                productId: item.product_id,
+                status: item.status,
+                urlPhoto: item.url_photo,
+              }
+            ]);
           }
         }
         if (item?.product_color_id == colorPivotTwo) {
+
           if (photsArrTwo?.length === 1) {
             setPhotsArrTwo((current) => [...current, {
               id: item?.id,
@@ -309,17 +271,21 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
-          } else if (!photsArrTwo?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrTwo((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              productId: item?.product_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
+          }
+          if (photsArrTwo?.length >= 2) {
+            setPhotsArrTwo(current => [
+              ...current,
+              {
+                id: item?.id,
+                productColorId: item?.product_color_id,
+                productId: item?.product_id,
+                status: item?.status,
+                urlPhoto: item?.url_photo,
+              }])
           }
         }
         if (item?.product_color_id == colorPivotThree) {
+
           if (photsArrThree?.length === 1) {
             setPhotsArrThree((current) => [...current, {
               id: item?.id,
@@ -328,14 +294,17 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
-          } else if (!photsArrThree?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrThree((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              productId: item?.product_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
+          }
+          if (photsArrThree?.length >= 2) {
+            setPhotsArrThree(current => [
+              ...current,
+              {
+                id: item?.id,
+                productColorId: item?.product_color_id,
+                productId: item?.product_id,
+                status: item?.status,
+                urlPhoto: item?.url_photo,
+              }])
           }
         }
         if (item?.product_color_id == colorPivotFour) {
@@ -347,19 +316,24 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
               status: item?.status,
               urlPhoto: item?.url_photo,
             }])
-          } else if (!photsArrFour?.filter(e => item?.product_color_id?.includes(e?.id))) {
-            setPhotsArrFour((current) => [...current, {
-              id: item?.id,
-              productColorId: item?.product_color_id,
-              productId: item?.product_id,
-              status: item?.status,
-              urlPhoto: item?.url_photo,
-            }])
+          }
+          if (photsArrFour?.length >= 2) {
+            setPhotsArrFour(current => [
+              ...current,
+              {
+                id: item?.id,
+                productColorId: item?.product_color_id,
+                productId: item?.product_id,
+                status: item?.status,
+                urlPhoto: item?.url_photo,
+              }])
           }
         }
       })
     }
-  }, [colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, productData])
+
+
+  }, [colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, productData?.photos])
 
   useEffect(() => {
     if (productData) {
@@ -434,8 +408,21 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
       })
 
     }
+    // const filterSimilarObjects = (array) => {
+    //   const uniqueIds = new Set();
+    //   return array.filter(obj => {
+    //     if (!uniqueIds.has(obj.id)) {
+    //       uniqueIds.add(obj.id);
+    //       return true;
+    //     }
+    //     return false;
+    //   });
+    // };
+    // console.log(filterSimilarObjects(photsArrOne), "ishladi filterSimilarObjects(photsArrOne);");
+    // console.log(photsArrOne, "photsArrOne");
   }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour, productData])
-  console.log(productData);
+
+  console.log(productData, "Ishladi");
   console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
   console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
   const handleLocationImage1 = (e) => {
