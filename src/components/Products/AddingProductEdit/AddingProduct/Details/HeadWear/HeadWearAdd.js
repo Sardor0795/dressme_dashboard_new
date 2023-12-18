@@ -4,7 +4,7 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Checkbox, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
+function HeadWearAdd({ stateList, colorsList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -25,7 +25,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         saveBtnDisable: false
 
     })
-    console.log(stateList, "stateList--Head");
+    // console.log(stateList, "stateList--Head");
     // console.log(state?.saveBtnDisable, "saveBtnDisable");
     const SelectedNumber = 1
     useEffect(() => {
@@ -40,22 +40,22 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
     // console.log(state?.discountPercent, state?.price, "state?.discountPercent || state?.price");
     useEffect(() => {
-        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+        if (stateList?.category_id == SelectedNumber) {
             setState({
                 ...state,
-                minHeadGirth: stateList?.sizeGetList[0]?.min_head_girth,
-                maxHeadGirth: stateList?.sizeGetList[0]?.max_head_girth,
-                sizeCheck: stateList?.sizeGetList[0]?.one_size,
-                amount: stateList?.sizeGetList[0]?.amount,
-                age: stateList?.sizeGetList[0]?.age,
-                price: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
-                discountPercent: stateList?.sizeGetList[0]?.discount_percent,
-                discountPrice: stateList?.sizeGetList[0]?.discount_price,
+                minHeadGirth: stateList?.min_head_girth || null,
+                maxHeadGirth: stateList?.max_head_girth || null,
+                sizeCheck: stateList?.one_size || null,
+                amount: stateList?.amount || null,
+                age: stateList?.age || null,
+                price: Number(stateList?.price)?.toLocaleString(),
+                discountPercent: stateList?.discount_percent || null,
+                discountPrice: stateList?.discount_price || null,
 
             })
         }
 
-    }, [stateList?.sizeGetList[0]])
+    }, [stateList])
 
 
 
@@ -67,22 +67,22 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.amount && state?.price) {
-            handleCallBack({
-                minHeadGirth: state?.minHeadGirth,
-                maxHeadGirth: state?.maxHeadGirth,
-                oneSize: state?.sizeCheck,
-                amount: state?.amount,
-                age: state?.age,
-                price: state?.price?.split(",")?.join(""),
-                discountPercent: state?.discountPercent,
-                discountPrice: state?.discountPrice?.split(",")?.join(""),
-                // category_Id: SelectedNumber,
+        // if (state?.amount && state?.price) {
+        //     handleCallBack({
+        //         minHeadGirth: state?.minHeadGirth,
+        //         maxHeadGirth: state?.maxHeadGirth,
+        //         oneSize: state?.sizeCheck,
+        //         amount: state?.amount,
+        //         age: state?.age,
+        //         price: state?.price?.split(",")?.join(""),
+        //         discountPercent: state?.discountPercent,
+        //         discountPrice: state?.discountPrice?.split(",")?.join(""),
+        //         // category_Id: SelectedNumber,
 
-            })
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true, })
-        }
+        //     })
+        //     setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+        //     setState({ ...state, isCheckValid: false, onConcel: true, })
+        // }
 
     }
     const cancelSendDetail = (e) => {
@@ -100,7 +100,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             onConcel: false,
             toggleShow: false
         })
-        handleCallBack()
+        // handleCallBack()
     }
 
     const handleChangePrice = (event) => {
@@ -124,7 +124,7 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
 
     return (
-        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>
@@ -299,12 +299,11 @@ function HeadWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
 
                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                         Цвет:
-
-                        {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
-                            // console.log(data?.id, "data?.color?.id");
+                        {colorsList.filter(e => e?.pivot?.id == stateList?.product_color_id)?.map((data) => {
+                            console.log(data, "data-color");
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                    className={` ${data?.id === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                    className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                 >
                                     <span >{data?.name_ru} </span>
                                 </div>

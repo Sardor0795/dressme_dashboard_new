@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
+function OutWearAdd({ stateList, colorsList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minBreast: null,
@@ -68,53 +68,51 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         }
     }, [state?.salePercent || state?.priceNum])
     useEffect(() => {
-        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+        if (stateList?.category_id == SelectedNumber) {
             setState({
                 ...state,
-                quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
-                minBreast: stateList?.sizeGetList[0]?.min_chest_girth,
-                maxBreast: stateList?.sizeGetList[0]?.max_chest_girth,
-                minSize: stateList?.sizeGetList[0]?.min_wear_size,
-                maxSize: stateList?.sizeGetList[0]?.max_wear_size,
-                minWaist: stateList?.sizeGetList[0]?.min_waist_girth,
-                maxWaist: stateList?.sizeGetList[0]?.max_waist_girth,
-                minHips: stateList?.sizeGetList[0]?.min_hip_girth,
-                maxHips: stateList?.sizeGetList[0]?.max_hip_girth,
-                ageNum: stateList?.sizeGetList[0]?.age,
-                salePercent: stateList?.sizeGetList[0]?.discount_percent,
-                salePrice: stateList?.sizeGetList[0]?.discount_price,
-                sizeListCheck: stateList?.sizeGetList[0]?.letter_size,
-                // selected: stateList?.sizeGetList[0]?.letter_size,
+                quantityNum: stateList?.amount || null,
+                priceNum: Number(stateList?.price)?.toLocaleString(),
+                minBreast: stateList?.min_chest_girth || null,
+                maxBreast: stateList?.max_chest_girth || null,
+                minSize: stateList?.min_wear_size || null,
+                maxSize: stateList?.max_wear_size || null,
+                minWaist: stateList?.min_waist_girth || null,
+                maxWaist: stateList?.max_waist_girth || null,
+                minHips: stateList?.min_hip_girth || null,
+                maxHips: stateList?.max_hip_girth || null,
+                ageNum: stateList?.age || null,
+                salePercent: stateList?.discount_percent || null,
+                salePrice: stateList?.discount_price || null,
+                sizeListCheck: stateList?.letter_size || null,
             })
         }
-
-    }, [stateList?.sizeGetList[0]])
-    console.log(state?.priceNum, "priceNum");
+    }, [stateList])
+    // console.log(state?.priceNum, "priceNum");
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.quantityNum && state?.priceNum) {
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true, })
-            handleCallBack({
-                minChestGirth: state?.minBreast,
-                maxChestGirth: state?.maxBreast,
-                minOutWearSize: state?.minSize,
-                maxOutWearSize: state?.maxSize,
-                minOutWearWaistGirth: state?.minWaist,
-                maxOutWearWaistGirth: state?.maxWaist,
-                minOutWearHipGirth: state?.minHips,
-                maxOutWearHipGirth: state?.maxHips,
-                outWearLetterSize: state?.sizeListCheck,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-                // category_Id: SelectedNumber,
+        // if (state?.minSize && state?.quantityNum && state?.priceNum) {
+        //     setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+        //     setState({ ...state, isCheckValid: false, onConcel: true, })
+        //     handleCallBack({
+        //         minChestGirth: state?.minBreast,
+        //         maxChestGirth: state?.maxBreast,
+        //         minOutWearSize: state?.minSize,
+        //         maxOutWearSize: state?.maxSize,
+        //         minOutWearWaistGirth: state?.minWaist,
+        //         maxOutWearWaistGirth: state?.maxWaist,
+        //         minOutWearHipGirth: state?.minHips,
+        //         maxOutWearHipGirth: state?.maxHips,
+        //         outWearLetterSize: state?.sizeListCheck,
+        //         amount: state?.quantityNum,
+        //         age: state?.ageNum,
+        //         price: state?.priceNum?.split(",")?.join(""),
+        //         discountPercent: state?.salePercent,
+        //         discountPrice: state?.salePrice?.split(",")?.join(""),
+        //         // category_Id: SelectedNumber,
 
-            })
-        }
+        //     })
+        // }
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
@@ -137,7 +135,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
             selected: null,
             isCheckValid: false,
         })
-        handleCallBack()
+        // handleCallBack()
     }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -166,7 +164,7 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
         }
     };
     return (
-        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>
@@ -613,12 +611,11 @@ function OutWearAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
                     <div className="w-full h-fit  flex items-center justify-between px-3">
                         <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                             Цвет:
-
-                            {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
-                                console.log(data?.id, "data?.color?.id");
+                            {colorsList.filter(e => e?.pivot?.id == stateList?.product_color_id)?.map((data) => {
+                                console.log(data, "data-color");
                                 return (
                                     <div key={data?.id} style={{ background: `${data.hex}` }}
-                                        className={` ${data?.id === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                        className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                     >
                                         <span >{data?.name_ru} </span>
                                     </div>

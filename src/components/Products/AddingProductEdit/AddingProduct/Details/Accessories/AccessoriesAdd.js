@@ -4,7 +4,7 @@ import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) {
+function AccessoriesAdd({ stateList, colorsList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         rowSize: null,
@@ -23,7 +23,6 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
         // ---save
         saveBtnDisable: false
     })
-
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
         sizeList1: [
@@ -48,7 +47,6 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
     }
     )
 
-    console.log(stateList, "stateList");
     const SelectedNumber = 5
     useEffect(() => {
         if (state?.salePercent > 0) {
@@ -59,42 +57,44 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
             setState({ ...state, salePrice: '' })
         }
     }, [state?.salePercent || state?.priceNum])
+
     useEffect(() => {
-        if (stateList?.sizeGetList[0]?.category_id == SelectedNumber) {
+        if (stateList?.category_id == SelectedNumber) {
             setState({
                 ...state,
-                quantityNum: stateList?.sizeGetList[0]?.amount,
-                priceNum: Number(stateList?.sizeGetList[0]?.price)?.toLocaleString(),
-                rowSize: stateList?.sizeGetList[0]?.length,
-                colSize: stateList?.sizeGetList[0]?.width,
-                minSize: stateList?.sizeGetList[0]?.wear_size,
-                ageNum: stateList?.sizeGetList[0]?.age,
-                sizeListCheck: stateList?.sizeGetList[0]?.letter_size,
-                salePercent: stateList?.sizeGetList[0]?.discount_percent,
-                salePrice: stateList?.sizeGetList[0]?.discount_price,
+                quantityNum: stateList?.amount || null,
+                priceNum: Number(stateList?.price)?.toLocaleString(),
+                rowSize: stateList?.length || null,
+                colSize: stateList?.width || null,
+                minSize: stateList?.wear_size || null,
+                ageNum: stateList?.age || null,
+                sizeListCheck: stateList?.letter_size || null,
+                salePercent: stateList?.discount_percent || null,
+                salePrice: stateList?.discount_price || null,
             })
         }
 
-    }, [stateList?.sizeGetList[0]])
+    }, [stateList])
+
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.priceNum) {
-            handleCallBack({
-                accessorySize: state?.minSize,
-                legnthAcc: state?.rowSize,
-                widthAcc: state?.colSize,
-                accessoryLetterSize: state?.sizeListCheck,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-                category_Id: SelectedNumber,
+        // if (state?.priceNum) {
+        //     handleCallBack({
+        //         accessorySize: state?.minSize,
+        //         legnthAcc: state?.rowSize,
+        //         widthAcc: state?.colSize,
+        //         accessoryLetterSize: state?.sizeListCheck,
+        //         amount: state?.quantityNum,
+        //         age: state?.ageNum,
+        //         price: state?.priceNum?.split(",")?.join(""),
+        //         discountPercent: state?.salePercent,
+        //         discountPrice: state?.salePrice?.split(",")?.join(""),
+        //         category_Id: SelectedNumber,
 
-            })
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true })
-        }
+        //     })
+        //     setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+        //     setState({ ...state, isCheckValid: false, onConcel: true })
+        // }
 
     }
     const cancelSendDetail = (e) => {
@@ -114,7 +114,7 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
             // ------
             onConcel: false
         })
-        handleCallBack()
+        // handleCallBack()
     }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -142,8 +142,9 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
             setState({ ...state, salePercent: value, saveBtnDisable: true });
         }
     };
+    console.log(colorsList, "colorsList");
     return (
-        <div className={`w-full ${SelectedNumber == stateList?.category_Id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>
@@ -520,12 +521,11 @@ function AccessoriesAdd({ colorGroup, sizeOfColor, stateList, handleCallBack }) 
                 <div className="w-full h-fit  flex items-center justify-between px-3">
                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                         Цвет:
-
-                        {colorGroup?.filter(e => sizeOfColor?.includes(e?.id))?.map((data) => {
-                            console.log(data?.id, "data?.color?.id");
+                        {colorsList.filter(e => e?.pivot?.id == stateList?.product_color_id)?.map((data) => {
+                            console.log(data, "data-color");
                             return (
                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                    className={`border border-black ${data?.id === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                    className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                 >
                                     <span >{data?.name_ru} </span>
                                 </div>
