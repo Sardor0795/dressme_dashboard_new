@@ -2189,18 +2189,21 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 className="h-[96px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
               >
                 {!imageTwo?.url_photo2 ?
-                  <label
-                    htmlFor={"imageTwo"}
+                  <div
+                    // htmlFor={"imageTwo"}
+                    onClick={
+                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                        () => handleFreeModalUploadImg(imageTwo?.id2) : null}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
-                    {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                    {/* {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
                       <input
                         className="hidden"
                         id={"imageTwo"}
                         type="file"
                         onChange={handleLocationImage2}
                         accept=" image/*"
-                      /> : null}
+                      /> : null} */}
                     <div
                       className="w-full h-full overflow-hidden   bg-photoBg  flex flex-col items-center  justify-center">
                       <span><DownloadIcon /></span>
@@ -2208,7 +2211,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                         (необязательно)
                       </div>
                     </div>
-                  </label>
+                  </div>
                   :
                   <div
                     onClick={
@@ -2271,18 +2274,21 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageThree?.url_photo3 ?
-                  <label
-                    htmlFor={"imageThree"}
+                  <div
+                    onClick={
+                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                        () => handleFreeModalUploadImg(imageThree?.id3) : null}
+                    // htmlFor={"imageThree"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
-                    {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                    {/* {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
                       <input
                         className="hidden"
                         id={"imageThree"}
                         type="file"
                         onChange={handleLocationImage3}
                         accept=" image/*"
-                      /> : null}
+                      /> : null} */}
                     <div
                       className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
                       <DownloadIcon />
@@ -2290,13 +2296,12 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                         (необязательно)
                       </div>
                     </div>
-                  </label>
+                  </div>
                   :
                   <div
                     onClick={
                       productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
                         imageThree?.product_id3 ?
-
                           () => {
                             handleClickCarosuel()
                             setModalId(imageThree?.id3)
@@ -2354,18 +2359,20 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFour?.url_photo4 ?
-                  <label
-                    htmlFor={"imageFour"}
+                  <div
+                    onClick={
+                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                        () => handleFreeModalUploadImg(imageFour?.id4) : null}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
-                    {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                    {/* {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
                       <input
                         className="hidden"
                         id={"imageFour"}
                         type="file"
                         onChange={handleLocationImage4}
                         accept="image/*"
-                      /> : null}
+                      /> : null} */}
                     <div
                       className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
                       <DownloadIcon />
@@ -2373,7 +2380,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                         (необязательно)
                       </div>
                     </div>
-                  </label>
+                  </div>
                   :
                   <div
                     onClick={
@@ -2437,26 +2444,42 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFive?.url_photo5 ?
-                  <label
-                    htmlFor={"imageFive"}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
-                    {productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
-                      <input
-                        className="hidden"
-                        id={"imageFive"}
-                        type="file"
-                        onChange={handleLocationImage5}
-                        accept=" image/*"
-                      /> : null}
-                    <div
-                      className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                        (необязательно)
+                  colorListForTest?.length >= 2 ?
+                    <div onClick={
+                      productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                        () => handleFreeModalUploadImg(imageFive?.id5) : null}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
                     </div>
-                  </label>
+                    :
+                    <label
+                      htmlFor={"imageFive"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      {productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                        <input
+                          className="hidden"
+                          id={"imageFive"}
+                          type="file"
+                          onChange={handleLocationImage5}
+                          accept=" image/*"
+                        /> : null}
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    </label>
                   :
                   <div
                     onClick={
@@ -2531,26 +2554,41 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageSix?.url_photo6 ?
-                  <label
-                    htmlFor={"imageSix"}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
-                    {productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
-                      <input
-                        className="hidden"
-                        id={"imageSix"}
-                        type="file"
-                        onChange={handleLocationImage6}
-                        accept=" image/*"
-                      /> : null}
-                    <div
-                      className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
+                  colorListForTest?.length >= 2 ?
+                    <div onClick={
+                      productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                        () => handleFreeModalUploadImg(imageSix?.id6) : null}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
                     </div>
-                  </label>
+                    :
+                    <label
+                      htmlFor={"imageSix"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      {productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                        <input
+                          className="hidden"
+                          id={"imageSix"}
+                          type="file"
+                          onChange={handleLocationImage6}
+                          accept=" image/*"
+                        /> : null}
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    </label>
                   :
                   <div
                     onClick={
@@ -2628,29 +2666,42 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 type="button"
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
-                {!imageSeven?.url_photo7 ? <div
-
-                  className="w-full h-full overflow-hidden   rounded-lg flex flex-col items-center justify-center">
-                  <label
-                    htmlFor={"imageSeven"}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
-                    {productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? <input
-                      className="hidden"
-                      id={"imageSeven"}
-                      type="file"
-                      onChange={handleLocationImage7}
-                      accept=" image/*"
-                    /> : null}
+                {!imageSeven?.url_photo7 ?
+                  colorListForTest?.length >= 3 ?
                     <div
-                      className="w-full h-full overflow-hidden  flex flex-col items-center  justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                        (необязательно)
+                      onClick={
+                        productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ?
+                          () => handleFreeModalUploadImg(imageSeven?.id7) : null}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
                     </div>
-                  </label>
-                </div>
+                    :
+                    <label
+                      htmlFor={"imageSeven"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      {productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? <input
+                        className="hidden"
+                        id={"imageSeven"}
+                        type="file"
+                        onChange={handleLocationImage7}
+                        accept=" image/*"
+                      /> : null}
+                      <div
+                        className="w-full h-full overflow-hidden  flex flex-col items-center  justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    </label>
                   :
                   <div
                     onClick={
@@ -2726,29 +2777,43 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
                 type="button"
                 className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
-                {!imageEight?.url_photo8 ? <div
-                  className="w-full h-full overflow-hidden    rounded-lg flex flex-col items-center justify-center">
-                  <label
-                    htmlFor={"imageEight"}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
-                    {productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? <input
-                      className="hidden"
-                      id={"imageEight"}
-                      type="file"
-                      onChange={handleLocationImage8}
-                      accept=" image/*"
-                    /> : null}
+                {!imageEight?.url_photo8 ?
+                  colorListForTest?.length >= 4 ?
                     <div
-                      className="w-full h-full overflow-hidden   flex flex-col items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                        (необязательно)
+                      onClick={
+                        productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ?
+                          () => handleFreeModalUploadImg(imageEight?.id8) : null}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
-
                     </div>
-                  </label>
-                </div>
+                    :
+                    <label
+                      htmlFor={"imageEight"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      {productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? <input
+                        className="hidden"
+                        id={"imageEight"}
+                        type="file"
+                        onChange={handleLocationImage8}
+                        accept=" image/*"
+                      /> : null}
+                      <div
+                        className="w-full h-full overflow-hidden   flex flex-col items-center justify-center">
+                        <DownloadIcon />
+                        <div className="text-[11px] invisible text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
+
+                      </div>
+                    </label>
                   :
                   <div
                     onClick={
