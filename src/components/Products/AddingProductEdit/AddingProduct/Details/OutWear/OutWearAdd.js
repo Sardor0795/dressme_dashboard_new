@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StarLabel } from "../../../../../../assets/icons";
+import { DeleteIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
@@ -171,7 +171,7 @@ function OutWearAdd({ stateList, colorsList }) {
             <div
                 className={`w-full h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
-                <div className="w-full flex  gap-x-10 px-3 pt-5">
+                <div className="relative w-full flex  gap-x-10 px-3 pt-5">
                     <div className="w-[20%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
@@ -431,6 +431,9 @@ function OutWearAdd({ stateList, colorsList }) {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
+                        <DeleteIcon width={30} />
                     </div>
                 </div>
                 <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">

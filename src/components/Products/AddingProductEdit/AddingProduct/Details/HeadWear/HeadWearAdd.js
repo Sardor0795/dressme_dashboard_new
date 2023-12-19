@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
-import { LineIcon, StarLabel } from "../../../../../../assets/icons";
+import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
 import { Checkbox, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
@@ -22,7 +22,9 @@ function HeadWearAdd({ stateList, colorsList }) {
         // ----
         isHasTypeId: false,
         // ---save
-        saveBtnDisable: false
+        saveBtnDisable: false,
+        // Size Delete Modal
+        sizeDeleteModal: false,
 
     })
     // console.log(stateList, "stateList--Head");
@@ -125,13 +127,55 @@ function HeadWearAdd({ stateList, colorsList }) {
 
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "flex items-center gap-x-1" : "hidden"}  h-fitoverflow-hidden  my-2`}>
+            {/* <section
+                onClick={() => { setState({ ...state, sizeDeleteModal: false }) }}
+                className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.sizeDeleteModal ? "" : "hidden"}`}
+            ></section>
+            <section
+                className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeDeleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+                    }`}
+            >
+                <button
+                    onClick={() => setState({ ...state, sizeDeleteModal: false })}
+                    type="button"
+                    className="absolute  right-3 top-3 w-5 h-5 ">
+                    <MenuCloseIcons
+                        className="w-full h-full"
+                        colors={"#a1a1a1"} />
+                </button>
+                
+                <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+                    <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                        <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                            <DeleteIcon width={30} />
+                        </span>
+                    </span>
+                    <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                        Вы уверены?
+                    </span>
+                </div>
+                <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+                    <button
+                        onClick={() => setState({ ...state, sizeDeleteModal: false })}
+                        type="button"
+                        className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                        Oтмена
+                    </button>
+                    <button
+                        onClick={() => setState({ ...state, sizeDeleteModal: false })}
+                        type="button"
+                        className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                        Удалить из адреса</button>
+                </div>
+            </section> */}
             <div className="flex items-center h-full">
                 <Checkbox />
             </div>
             <div
                 className={`w-full h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
             >
-                <div className="w-full flex justify-start px-3  gap-x-10  pt-5 ">
+                <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
@@ -200,6 +244,11 @@ function HeadWearAdd({ stateList, colorsList }) {
                                 required
                             />
                         </div>
+                    </div>
+                    <div className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
+                        <DeleteIcon
+                            onClick={() => setState({ ...state, sizeDeleteModal: true })}
+                            width={30} />
                     </div>
                 </div>
                 <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mt-[15px]">
