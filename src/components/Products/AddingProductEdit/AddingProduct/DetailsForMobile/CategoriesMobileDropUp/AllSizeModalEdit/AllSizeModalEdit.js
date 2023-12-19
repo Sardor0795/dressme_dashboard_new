@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputCheckedTrueIcons, MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
+import { DeleteIcon, InputCheckedTrueIcons, MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
 import { ColourCard } from "../../../../../../../assets";
 import AllSizeListForWear from "../../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
 import AccessoriesAdd from "../../../Details/Accessories/AccessoriesAdd";
@@ -10,56 +10,58 @@ import UnderAddWear from "../../../Details/UnderAddWear/UnderAddWear";
 import { BiCheck } from "react-icons/bi";
 
 function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfColor }) {
-  // console.log(onClick, "onClick");
-  // console.log(colorGroup, "colorGroup");
-  // console.log(colorSelect, "colorSelect");
-  // console.log(stateList?.category_Id, "stateList");
-  // console.log(stateList?.sizeGetList[0], "stateList");
-  // console.log(stateList?.sizeGetList?.colors, "sizes --- stateList");
+
   const [checkColor, setCheckColor] = useState(stateList?.sizeGetList?.colors[0]?.pivot?.id)
   const [addSizeColorById, setAddSizeColorById] = useState(false)
   const [openColorModal, setOpenColorModal] = useState(false)
-  // console.log(stateList?.sizeGetList?.colors[0]?.pivot?.id, "stateList?.sizeGetList?.colors[0]?.pivot?.id");
+  const [sizedeleteModal, setSizedeleteModal] = useState(false)
+
+  const onHanldeColorModal = React.useCallback(
+    () => setOpenColorModal(true),
+    []
+  );
+  const onHandleDeleteSize = React.useCallback(
+    () => setSizedeleteModal(true),
+    []
+  );
+
   function onHandleCheckColor(id) {
     if (!checkColor) {
       setCheckColor(id)
     }
-    if (checkColor === id) {
-      setCheckColor()
-    }
     if (checkColor !== id) {
       setCheckColor(id)
     }
-    console.log(id, "id");
   }
   function onHandleAddColorSize(id) {
-    console.log(id, "onHandleAddColorSize");
     if (!addSizeColorById) {
       setAddSizeColorById(id)
     }
-
     if (addSizeColorById !== id) {
       setAddSizeColorById(id)
     }
-    // setAddSizeColorById(id)
-  }
+  } console.log(sizedeleteModal, "sizedeleteModal");
   // --------------------------------------------------------
   // green black red inputРазмер Талии
   console.log(stateList?.sizeGetList, "stateList?.sizeGetList");
   return (
     <div className="w-full md:w-[780px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
       <section
-        onClick={() => { setOpenColorModal(false) }}
-        className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColorModal ? "" : "hidden"}`}
+        onClick={() => {
+          setOpenColorModal(false)
+          setSizedeleteModal(false)
+        }}
+        className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColorModal || sizedeleteModal ? "" : "hidden"}`}
       ></section>
-      <div className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+      <div
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
         <div className="flex items-center justify-end">
           <button
             className="py-2"
             type="button"
             onClick={() => setOpenColorModal(false)}
           >
-            <MenuCloseIcons colors={"#000"} />
+            <MenuCloseIcons colors={"#a2a2a2"} />
           </button></div>
         <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
           {stateList?.sizeGetList?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
@@ -103,24 +105,50 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
           </button>
         </div>
       </div>
+      {/* Color Delete Of Pop Confirm */}
+      <section
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${sizedeleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+
+        <button
+          onClick={() => setSizedeleteModal(false)}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a2a2a2"} />
+        </button>
+
+        <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+          <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+            <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+              <DeleteIcon width={30} />
+            </span>
+          </span>
+          <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+            Вы уверены?
+          </span>
+        </div>
+
+        {/* } */}
+        <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+
+          <button
+            onClick={() => setSizedeleteModal(false)}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            Oтмена
+          </button>
+          <button
+            onClick={() => setSizedeleteModal(false)}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            Удалить</button>
+        </div>
+
+      </section>
       <div className="w-full flex items-center justify-between md:pl-7 ">
         <div className="w-fit flex items-center gap-x-2">
           <span className="text-black text-md not-italic font-AeonikProRegular"> Цветa:</span>
-          {/* {colorGroup?.filter(e => colorSelect?.includes(e?.id))?.map((data) => {
-            return (
-              <div onClick={() => onHandleCheckColor(data?.id)} key={data?.id} style={{ background: `${data.hex}` }}
-                className={`w-[22px] h-[22px] rounded-full ${data?.id === 2 ? "border border-black" : ""}`}
-              >
-                <span
-                  className={`w-[22px] h-[22px] rounded-full flex items-center justify-center`}
-                >
-                  {data?.id === checkColor &&
-                    <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
-                  }
-                </span>
-              </div>
-            );
-          })} */}
           {stateList?.sizeGetList?.colors?.map((data) => {
             return (
               <div onClick={() => onHandleCheckColor(data?.pivot?.id)} key={data?.id} style={{ background: `${data.hex}` }}
@@ -135,11 +163,6 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
                   {data?.pivot?.id === checkColor && data?.id === 1 &&
                     < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
                   }
-
-                  {/* {(
-                    <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
-                  ) : null} */}
-
                 </span>
               </div>
             );
@@ -156,29 +179,28 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
 
       {/* All Cards */}
       <div className="md:h-[694px]  overflow-hidden h-500  md:mt-6">
-        <div className="w-full h-full overflow-auto VerticelScroll  flex flex-col gap-y-2   md:py-1 mb-5">
-          <div className="md:flex hidden items-center justify-between mb-[10px] ">
+        <div className="w-full h-full overflow-auto   flex flex-col gap-y-2   md:py-1 mb-5">
+          {/* <div className="md:flex hidden items-center justify-between mb-[10px] ">
             <button type="button" className="flex items-center gap-x-[5px]">
               <span className="w-[22px] h-[22px] border border-borderColor rounded-lg"></span>
               <span className="text-gray-900 text-base not-italic font-AeonikProMedium">
                 Выбрать все
               </span>
             </button>
-
             <button type="button" onClick={() => setOpenColorModal(true)} className="text-textBlueColor hover:underline text-base not-italic font-AeonikProMedium">
-              Добавить цвету
+              Добавить к цвету
             </button>
-          </div>
+          </div> */}
 
           {/* Filter Area */}
-          <div className="w-full h-full overflow-auto VerticelScroll">
+          <div className="w-full h-full overflow-auto ">
+            <HeadWearAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
             {
               stateList?.sizeGetList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
                 return (
                   <div className="">
                     <AccessoriesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
                     <ShoesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
-                    <HeadWearAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
                     <OutWearAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
                     <UnderAddWear stateList={item} colorsList={stateList?.sizeGetList?.colors} />
                   </div>
