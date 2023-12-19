@@ -368,7 +368,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor
                                                 <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
                                                     Цвет:
                                                     {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
-                                                        console.log(data, "data-color");
                                                         return (
                                                             <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                 className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
