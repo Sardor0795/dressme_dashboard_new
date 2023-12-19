@@ -1663,11 +1663,11 @@ const AddingProduct = () => {
                       <button
                         type="button"
                         onClick={() => setAllSizeModalShow(true)}
-                        className="group w-[165px] flex items-center justify-center h-[38px] whitespace-nowrap border-textBlueColor text-textBlueColor border-[1.5px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+                        className="group w-[168px] flex items-center justify-center px-[15px] h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
                       >
                         Все размеры{" "}
                       </button>
-                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[12px]   w-fit `}>
+                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
                         <AddSize title={productsData?.categories} clearInput={state?.clearAddSize} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
                       </button>
                     </div>
@@ -1704,7 +1704,7 @@ const AddingProduct = () => {
                   </div>
                   <div className="w-1/3 h-[1px] bg-borderColor"></div>
                 </div>
-                <div className=" flex items-center md:justify-end justify-between md:gap-x-4">
+                <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
 
                   {/* {lastElement ? */}
                   {lastElement && state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?

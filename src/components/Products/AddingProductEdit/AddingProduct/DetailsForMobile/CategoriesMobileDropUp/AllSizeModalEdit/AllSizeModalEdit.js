@@ -53,6 +53,14 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
         className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColorModal ? "" : "hidden"}`}
       ></section>
       <div className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+        <div className="flex items-center justify-end">
+          <button
+            className="py-2"
+            type="button"
+            onClick={() => setOpenColorModal(false)}
+          >
+            <MenuCloseIcons colors={"#000"} />
+          </button></div>
         <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
           {stateList?.sizeGetList?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
             return (
@@ -89,14 +97,6 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
           })}
         </div>
         <div className="flex items-center justify-end  gap-x-5">
-
-          {/* {state?.color_Id &&
-            <button
-              onClick={() => setOpenColorModal(false)}
-              className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-              Отключить
-            </button>
-          } */}
           <button onClick={() => setOpenColorModal(false)}
             className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
             Готово
@@ -166,7 +166,7 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
             </button>
 
             <button type="button" onClick={() => setOpenColorModal(true)} className="text-textBlueColor hover:underline text-base not-italic font-AeonikProMedium">
-              Добавить выбранные к цвету
+              Добавить цвету
             </button>
           </div>
 
