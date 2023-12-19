@@ -195,14 +195,18 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
             <HeadWearAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
+            <OutWearAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
+            <UnderAddWear stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
+            <ShoesAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
+            <AccessoriesAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
             {
               stateList?.sizeGetList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
                 return (
                   <div className="">
-                    <AccessoriesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
-                    <ShoesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
-                    <OutWearAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} />
-                    <UnderAddWear stateList={item} colorsList={stateList?.sizeGetList?.colors} />
+                    {/* <AccessoriesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
+                    {/* <ShoesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
+                    {/* <OutWearAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
+                    {/* <UnderAddWear stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
                   </div>
                 )
               })
