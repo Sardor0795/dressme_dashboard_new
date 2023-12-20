@@ -27,6 +27,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
         sizeDeleteModal: false,
 
     })
+    const [getSizesIds, setGetSizesIds] = useState([]);
+
     const [checked, setChecked] = useState([]);
     const [indeterminate, setIndeterminate] = useState(false);
     const [checkAll, setCheckAll] = useState(false);
@@ -109,16 +111,24 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
             setState({ ...state, discountPercent: value, saveBtnDisable: true });
         }
     };
+
+    useEffect(() => {
+        setGetSizesIds([])
+        stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
+            setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
+        })
+    }, [checkColor])
+    console.log(getSizesIds, "getSizesIds");
     useEffect(() => {
         if (stateList?.sizes?.length) {
-            setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
-            setCheckAll(checked.length === stateList?.sizes?.length);
+            setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
+            setCheckAll(checked.length === getSizesIds?.length);
             handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 
     const onCheckAllChange = (e) => {
-        setChecked(e.target.checked ? stateList?.sizes?.map((item) => item.id) : []);
+        setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
         setCheckAll(e.target.checked);
     };
     useEffect(() => {
@@ -126,7 +136,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
-    // console.log(checkColor, "checkColor");
 
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>

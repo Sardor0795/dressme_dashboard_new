@@ -31,6 +31,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onDeleteI
         // ---save
         saveBtnDisable: false
     })
+    const [getSizesIds, setGetSizesIds] = useState([]);
+
     const [checked, setChecked] = useState([]);
     const [indeterminate, setIndeterminate] = useState(false);
     const [checkAll, setCheckAll] = useState(false);
@@ -119,22 +121,14 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onDeleteI
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, priceNum: formattedValue, saveBtnDisable: true });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, salePrice: formattedValue, saveBtnDisable: true });
     };
     const handleChangePercent = (event) => {
@@ -144,15 +138,21 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onDeleteI
         }
     };
     useEffect(() => {
+        setGetSizesIds([])
+        stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
+            setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
+        })
+    }, [checkColor])
+    useEffect(() => {
         if (stateList?.sizes?.length) {
-            setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
-            setCheckAll(checked.length === stateList?.sizes?.length);
+            setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
+            setCheckAll(checked.length === getSizesIds?.length);
             handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 
     const onCheckAllChange = (e) => {
-        setChecked(e.target.checked ? stateList?.sizes?.map((item) => item.id) : []);
+        setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
         setCheckAll(e.target.checked);
     };
     useEffect(() => {
@@ -160,7 +160,6 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onDeleteI
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
-    // console.log(checkColor, "checkColor");
 
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
