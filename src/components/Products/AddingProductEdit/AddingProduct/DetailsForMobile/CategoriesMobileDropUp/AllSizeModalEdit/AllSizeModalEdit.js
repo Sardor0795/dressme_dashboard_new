@@ -53,9 +53,13 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
         }}
         className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColorModal || sizedeleteModal ? "" : "hidden"}`}
       ></section>
+      {/* Color Modal */}
       <div
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-between">
+          <p>
+            Выберите цвет
+          </p>
           <button
             className="py-2"
             type="button"
@@ -167,7 +171,6 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
               </div>
             );
           })}
-          {/* <span className="w-[18px] h-[18px] flex items-center mt-[2px]"><MenuCloseIcons colors={"#007dca"} /></span> */}
         </div>
         <button className="md:flex hidden" type="button " onClick={onClick}>
           <MenuCloseIcons colors={"#000"} />
@@ -180,17 +183,6 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
       {/* All Cards */}
       <div className="md:h-[694px]  overflow-hidden h-500  md:mt-6">
         <div className="w-full h-full overflow-auto   flex flex-col gap-y-2   md:py-1 mb-5">
-          {/* <div className="md:flex hidden items-center justify-between mb-[10px] ">
-            <button type="button" className="flex items-center gap-x-[5px]">
-              <span className="w-[22px] h-[22px] border border-borderColor rounded-lg"></span>
-              <span className="text-gray-900 text-base not-italic font-AeonikProMedium">
-                Выбрать все
-              </span>
-            </button>
-            <button type="button" onClick={() => setOpenColorModal(true)} className="text-textBlueColor hover:underline text-base not-italic font-AeonikProMedium">
-              Добавить к цвету
-            </button>
-          </div> */}
 
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
@@ -199,18 +191,7 @@ function AllSizeModalEdit({ onClick, colorGroup, colorSelect, stateList, sizeOfC
             <UnderAddWear stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
             <ShoesAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
             <AccessoriesAdd stateList={stateList?.sizeGetList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
-            {
-              stateList?.sizeGetList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
-                return (
-                  <div className="">
-                    {/* <AccessoriesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
-                    {/* <ShoesAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
-                    {/* <OutWearAdd stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
-                    {/* <UnderAddWear stateList={item} colorsList={stateList?.sizeGetList?.colors} /> */}
-                  </div>
-                )
-              })
-            }
+
           </div>
         </div>
       </div>
