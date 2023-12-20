@@ -21,8 +21,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onDelet
         onConcel: false,
         selected: null,
         // ---save
-        saveBtnDisable: false
+        saveBtnDisable: false,
+        // ----GetSizesIds
+        // getSizesIds: []
+
     })
+    const [getSizesIds, setGetSizesIds] = useState([]);
     const [checked, setChecked] = useState([]);
     const [indeterminate, setIndeterminate] = useState(false);
     const [checkAll, setCheckAll] = useState(false);
@@ -103,22 +107,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onDelet
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, priceNum: formattedValue, saveBtnDisable: true });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, salePrice: formattedValue, saveBtnDisable: true });
     };
     const handleChangePercent = (event) => {
@@ -127,16 +123,24 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onDelet
             setState({ ...state, salePercent: value, saveBtnDisable: true });
         }
     };
+
+    useEffect(() => {
+        setGetSizesIds([])
+        stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
+            setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
+        })
+    }, [checkColor])
+    console.log(getSizesIds, "getSizesIds");
     useEffect(() => {
         if (stateList?.sizes?.length) {
-            setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
-            setCheckAll(checked.length === stateList?.sizes?.length);
+            setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
+            setCheckAll(checked.length === getSizesIds?.length);
             handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 
     const onCheckAllChange = (e) => {
-        setChecked(e.target.checked ? stateList?.sizes?.map((item) => item.id) : []);
+        setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
         setCheckAll(e.target.checked);
     };
     useEffect(() => {
