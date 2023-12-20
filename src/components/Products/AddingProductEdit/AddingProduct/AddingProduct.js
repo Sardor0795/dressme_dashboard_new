@@ -234,6 +234,7 @@ const AddingProduct = () => {
       refetchOnWindowFocus: true,
     }
   );
+
   // useEffect(() => {
   //   setSelectColorID(colorChecked)
   // }, [])
@@ -288,7 +289,7 @@ const AddingProduct = () => {
       setColorDelete(true)
     } else {
       setColors_Id(colors_Id?.filter(e => e !== id))
-      setSelectColorID()
+      setSelectColorID(colorListForTest[0])
     }
 
   }
@@ -325,7 +326,6 @@ const AddingProduct = () => {
   const onSearch = (value) => {
     // console.log("search:", value);
   };
-
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   function getCurrentDimension() {
@@ -1668,7 +1668,8 @@ const AddingProduct = () => {
                         Все размеры{" "}
                       </button>
                       <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
-                        <AddSize title={productsData?.categories} clearInput={state?.clearAddSize} typeId={state?.category_Id} handleCallBack={CallBackHeadWear} />
+                        <AddSize typeId={state?.category_Id} onRefetch={refetch} handleCallBack={CallBackHeadWear} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
+
                       </button>
                     </div>
                   </div>

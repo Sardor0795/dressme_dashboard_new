@@ -243,7 +243,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                                                 placeholder="Мин"
-                                                                value={state?.minBreast}
+                                                                value={item?.min_chest_girth}
                                                                 onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
@@ -253,7 +253,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                                                 placeholder="Макс"
-                                                                value={state?.maxBreast}
+                                                                value={item?.max_chest_girth}
                                                                 onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
@@ -273,17 +273,17 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                                                 placeholder="Мин"
-                                                                value={state?.minSize}
+                                                                value={item?.min_wear_size}
                                                                 onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
                                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                         <div className="flex flex-col">
-                                                            {state?.maxSizeShow || state?.maxSize ? <input
+                                                            {state?.maxSizeShow || item?.max_wear_size ? <input
                                                                 type="number"
                                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
                                                                 placeholder="Макс"
-                                                                value={state?.maxSize}
+                                                                value={item?.max_wear_size}
                                                                 onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
                                                             /> :
                                                                 <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
@@ -317,7 +317,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                                         type="checkbox"
                                                                                         id={data?.id}
                                                                                         name="size_Outwear"
-                                                                                        checked={data?.name === state?.sizeListCheck}
+                                                                                        checked={data?.name === item?.letter_size}
                                                                                         onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                                                         value={data?.name}
                                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -349,7 +349,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                                         type="checkbox"
                                                                                         id={data?.id}
                                                                                         name="size_Outwear"
-                                                                                        checked={data?.name === state?.sizeListCheck}
+                                                                                        checked={data?.name === item?.letter_size}
                                                                                         onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                                                         value={data?.name}
                                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -392,7 +392,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                                         type="checkbox"
                                                                                         id={data?.id}
                                                                                         name="size_Outwear"
-                                                                                        checked={data?.name === state?.sizeListCheck}
+                                                                                        checked={data?.name === item?.letter_size}
                                                                                         onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                                                         value={data?.name}
                                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -422,7 +422,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                                         type="checkbox"
                                                                                         id={data?.id}
                                                                                         name="size_Outwear"
-                                                                                        checked={data?.name === state?.sizeListCheck}
+                                                                                        checked={data?.name === item?.letter_size}
                                                                                         onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
                                                                                         value={data?.name}
                                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
@@ -508,7 +508,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                                                 placeholder="Мин"
-                                                                value={state?.minWaist}
+                                                                value={item?.min_waist_girth}
                                                                 onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true })}
 
                                                             />
@@ -519,7 +519,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                                                 placeholder="Макс"
-                                                                value={state?.maxWaist}
+                                                                value={item?.max_waist_girth}
                                                                 onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true })}
 
                                                             />
@@ -537,7 +537,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                                                                 placeholder="Мин"
-                                                                value={state?.minHips}
+                                                                value={item?.min_hip_girth}
                                                                 onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
@@ -547,7 +547,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                                                 placeholder="Макс"
-                                                                value={state?.maxHips}
+                                                                value={item?.max_hip_girth}
                                                                 onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
@@ -565,7 +565,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                         <input
                                                             type="number"
                                                             className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 text-center  rounded-lg  font-AeonikProRegular `}
-                                                            value={state?.quantityNum}
+                                                            value={item?.amount}
                                                             onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
                                                         />
                                                     </div>
@@ -590,7 +590,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 type="number"
                                                                 className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
                                                                 placeholder=""
-                                                                value={state?.ageNum}
+                                                                value={item?.age}
                                                                 onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
@@ -611,7 +611,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                 placeholder="0"
                                                                 id="priceOutWear"
                                                                 className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
-                                                                value={state?.priceNum}
+                                                                value={item?.price}
                                                                 onChange={handleChangePrice}
                                                             />
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -638,7 +638,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                         type="number"
                                                                         placeholder="0"
                                                                         className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                        value={state?.salePercent}
+                                                                        value={item?.discount_percent}
                                                                         onChange={handleChangePercent}
                                                                     />
                                                                     <span className="text-textLightColor ml-2">%</span>
@@ -652,7 +652,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor 
                                                                         placeholder="0"
                                                                         id="salePrice"
                                                                         className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                        value={state?.salePrice}
+                                                                        value={item?.discount_price}
                                                                         onChange={handleChangeSalePrice}
                                                                         readOnly
                                                                     />
