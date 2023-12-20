@@ -3,7 +3,7 @@ import { DeleteIcon, LineIcon, StarLabel } from "../../../../../../assets/icons"
 import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor }) {
+function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minFootLength: null,
@@ -71,24 +71,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor })
 
 
     }
-    const cancelSendDetail = (e) => {
-        setDressInfo({ ...dressInfo, ProductFilterType: null })
-        setState({
-            ...state,
-            minFootLength: "",
-            maxFootLength: "",
-            minSize: "",
-            ageNum: "",
-            priceNum: "",
-            salePercent: "",
-            salePrice: "",
-            isCheckValid: false,
-            // ------
-            onConcel: false
-        })
-        // handleCallBack()
 
-    }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         // Remove any existing commas from the input
@@ -120,7 +103,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor })
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
             setCheckAll(checked.length === stateList?.sizes?.length);
-            // handleGetCheckAll(checked, locationId)
+            handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 

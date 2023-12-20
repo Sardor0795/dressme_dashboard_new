@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, checkColor }) {
+function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -116,29 +116,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, checkColo
         //     })
         // }
     }
-    const cancelSendDetail = (e) => {
-        setDressInfo({ ...dressInfo, ProductFilterType: null })
-        setState({
-            ...state,
-            minBreast: "",
-            maxBreast: "",
-            minSize: "",
-            maxSize: "",
-            minHeight: "",
-            maxHeight: "",
-            minHips: "",
-            maxHips: "",
-            quantityNum: "",
-            ageNum: "",
-            priceNum: "",
-            salePercent: "",
-            salePrice: "",
-            isCheckValid: false,
-            onConcel: false,
-            selected: null,
-        })
-        // handleCallBack()
-    }
+
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         // Remove any existing commas from the input
@@ -169,7 +147,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, checkColo
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
             setCheckAll(checked.length === stateList?.sizes?.length);
-            // handleGetCheckAll(checked, locationId)
+            handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 

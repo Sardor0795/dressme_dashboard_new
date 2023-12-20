@@ -10,10 +10,10 @@ import "react-toastify/dist/ReactToastify.css";
 const url = "https://api.dressme.uz/api/seller";
 
 function AddSize({ handleCallBack, typeId, onRefetch, colorListForTest, selectColorID, productsDataIdEdit }) {
-    console.log(typeId, "typeIdAddSize");
-    console.log(colorListForTest, "colorListForTest-------AddSize");
-    console.log(selectColorID, "selectColorID-------AddSize");
-    console.log("productsDataIdEdit-------AddSize");
+    // console.log(typeId, "typeIdAddSize");
+    // console.log(colorListForTest, "colorListForTest-------AddSize");
+    // console.log(selectColorID, "selectColorID-------AddSize");
+    // console.log("productsDataIdEdit-------AddSize");
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
