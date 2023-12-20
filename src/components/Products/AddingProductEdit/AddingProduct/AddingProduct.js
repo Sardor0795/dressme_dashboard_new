@@ -1678,7 +1678,7 @@ const AddingProduct = () => {
                       }`}
                   >
                     {allSizeModalShow && (
-                      <AllSizeModalEdit colorGroup={productsData.colors} stateList={state} onClick={toggleAllSizeModalShow} sizeOfColor={colorListForTest} colorSelect={colors_Id} />
+                      <AllSizeModalEdit stateList={state} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
 

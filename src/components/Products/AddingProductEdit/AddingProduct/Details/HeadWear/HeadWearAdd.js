@@ -4,7 +4,7 @@ import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../
 import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor }) {
+function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -90,23 +90,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor
         // }
 
     }
-    const cancelSendDetail = (e) => {
-        setDressInfo({ ...dressInfo, ProductFilterType: null })
-        setState({
-            ...state,
-            minHeadGirth: '',
-            maxHeadGirth: '',
-            sizeCheck: false,
-            amount: '',
-            age: '',
-            price: '',
-            discountPercent: '',
-            discountPrice: '',
-            onConcel: false,
-            toggleShow: false
-        })
-        // handleCallBack()
-    }
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -130,7 +113,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
             setCheckAll(checked.length === stateList?.sizes?.length);
-            // handleGetCheckAll(checked, locationId)
+            handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 

@@ -4,7 +4,7 @@ import { List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor }) {
+function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         rowSize: null,
@@ -100,25 +100,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkCo
         // }
 
     }
-    const cancelSendDetail = (e) => {
-        setDressInfo({ ...dressInfo, ProductFilterType: null })
-        setState({
-            ...state,
-            rowSize: '',
-            colSize: '',
-            minSize: '',
-            ageNum: '',
-            quantityNum: '',
-            priceNum: '',
-            salePercent: '',
-            salePrice: '',
-            selected: null,
-            isCheckValid: false,
-            // ------
-            onConcel: false
-        })
-        // handleCallBack()
-    }
+
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         // Remove any existing commas from the input
@@ -149,7 +131,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkCo
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== stateList?.sizes?.length);
             setCheckAll(checked.length === stateList?.sizes?.length);
-            // handleGetCheckAll(checked, locationId)
+            handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 
