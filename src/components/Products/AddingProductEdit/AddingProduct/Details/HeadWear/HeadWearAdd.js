@@ -4,7 +4,7 @@ import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../
 import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
+function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId, checkColor, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -247,7 +247,11 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor
                                                     </div>
                                                 </div>
                                                 <div
-                                                    onClick={DeleteSize}
+                                                    onClick={() => {
+                                                        DeleteSize()
+                                                        onDeleteId(item?.id)
+                                                    }
+                                                    }
                                                     className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
                                                     <DeleteIcon
                                                         width={30} />

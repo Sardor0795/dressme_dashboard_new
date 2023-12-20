@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 import { BiPlus } from "react-icons/bi";
 
-function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
+function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId, checkColor, handleGetSizeCheckedList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -472,7 +472,12 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, checkColo
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div onClick={DeleteSize} className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
+                                                <div
+                                                    onClick={() => {
+                                                        DeleteSize()
+                                                        onDeleteId()
+                                                    }}
+                                                    className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
                                                     <DeleteIcon width={30} />
                                                 </div>
                                             </div>
