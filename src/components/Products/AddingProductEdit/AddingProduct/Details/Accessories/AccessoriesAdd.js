@@ -4,7 +4,7 @@ import { List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
 
-function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
+function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId, checkColor, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         rowSize: null,
@@ -409,7 +409,11 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkCo
                                                     </div>
                                                 </div>
                                                 <div
-                                                    onClick={DeleteSize}
+                                                    onClick={() => {
+                                                        DeleteSize()
+                                                        onDeleteId()
+                                                    }
+                                                    }
                                                     className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
                                                     <DeleteIcon width={30} />
                                                 </div>

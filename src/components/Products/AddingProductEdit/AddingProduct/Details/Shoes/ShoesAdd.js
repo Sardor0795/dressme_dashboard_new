@@ -3,7 +3,7 @@ import { DeleteIcon, LineIcon, StarLabel } from "../../../../../../assets/icons"
 import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 
-function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, handleGetSizeCheckedList }) {
+function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId, checkColor, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minFootLength: null,
@@ -230,7 +230,11 @@ function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, checkColor, h
                                                         />
                                                     </div>
                                                 </div>
-                                                <div onClick={DeleteSize} className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
+                                                <div onClick={() => {
+                                                    DeleteSize()
+                                                    onDeleteId()
+                                                }}
+                                                    className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
                                                     <DeleteIcon width={30} />
                                                 </div>
                                             </div>
