@@ -793,7 +793,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                                                 placeholder="Мин"
                                                                 value={item?.min_chest_girth}
                                                                 onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
@@ -803,7 +803,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                                                className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                                                 placeholder="Макс"
                                                                 value={item?.max_chest_girth}
                                                                 onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
@@ -823,7 +823,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
+                                                                className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                                                 placeholder="Мин"
                                                                 value={item?.min_wear_size}
                                                                 onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
@@ -833,7 +833,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             {state?.maxSizeShow || item?.max_wear_size ? <input
                                                                 type="number"
-                                                                className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
+                                                                className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
                                                                 placeholder="Макс"
                                                                 value={item?.max_wear_size}
                                                                 onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
@@ -1063,7 +1063,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
+                                                                className={`inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                                                 placeholder="Мин"
                                                                 value={item?.min_waist_girth}
                                                                 onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true })}
@@ -1074,7 +1074,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
+                                                                className={`inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                                                 placeholder="Макс"
                                                                 value={item?.max_waist_girth}
                                                                 onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true })}
@@ -1092,7 +1092,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
+                                                                className="inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                                                                 placeholder="Мин"
                                                                 value={item?.min_hip_girth}
                                                                 onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
@@ -1102,7 +1102,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
-                                                                className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
+                                                                className="inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                                                 placeholder="Макс"
                                                                 value={item?.max_hip_girth}
                                                                 onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
@@ -1121,7 +1121,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                     <div className="flex items-start justify-between ">
                                                         <input
                                                             type="number"
-                                                            className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 text-center  rounded-lg  font-AeonikProRegular `}
+                                                            className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 text-center  rounded-lg  font-AeonikProRegular `}
                                                             value={item?.amount}
                                                             onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
                                                         />
@@ -1145,7 +1145,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                         <div className="w-fit flex items-center">
                                                             <input
                                                                 type="number"
-                                                                className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
+                                                                className="inputStyle  cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
                                                                 placeholder=""
                                                                 value={item?.age}
                                                                 onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
@@ -1167,8 +1167,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="priceOutWear"
-                                                                className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
-                                                                value={item?.price}
+                                                                className="inputStyle  cursor-default w-[70%] font-AeonikProMedium outline-none bg-transparent "
+                                                                value={Number(item?.price)?.toLocaleString()}
                                                                 onChange={handleChangePrice}
                                                             />
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -1190,15 +1190,15 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                     <div className="w-full flex items-center justify-center">
                                                         <div className="w-full flex items-center gap-x-1">
                                                             <div className="w-[40%] md:w-[72px] flex items-start">
-                                                                <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                                                <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
                                                                     <input
                                                                         type="number"
                                                                         placeholder="0"
-                                                                        className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
+                                                                        className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
                                                                         value={item?.discount_percent}
                                                                         onChange={handleChangePercent}
                                                                     />
-                                                                    <span className="text-textLightColor ml-2">%</span>
+                                                                    <span className="text-textLightColor ml-1">%</span>
                                                                 </div>
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1208,8 +1208,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
                                                                         type="text"
                                                                         placeholder="0"
                                                                         id="salePrice"
-                                                                        className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                        value={item?.discount_price}
+                                                                        className="inputStyle  cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
+                                                                        value={Number(item?.discount_price)?.toLocaleString()}
                                                                         onChange={handleChangeSalePrice}
                                                                         readOnly
                                                                     />
