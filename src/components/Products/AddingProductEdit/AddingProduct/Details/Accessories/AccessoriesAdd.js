@@ -130,7 +130,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onDelet
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
         })
     }, [checkColor])
-    console.log(getSizesIds, "getSizesIds");
+    // console.log(getSizesIds, "getSizesIds");
     useEffect(() => {
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);

@@ -23,7 +23,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
         brand: null,
     })
     useEffect(() => {
-        console.log(productsEdit, "productsEdit");
+        // console.log(productsEdit, "productsEdit");
         setState({
             ...state,
             titleInRu: productsEdit?.name_ru,

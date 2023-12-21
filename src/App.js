@@ -27,7 +27,7 @@ function App() {
   //     navigate('/login-seller')
   //   }
   // }, [localStorage.getItem("DressmeUserToken")])
-  console.log(dressInfo?.IsAuthenticated);
+  // console.log(dressInfo?.IsAuthenticated);
   // ------------GET  Has Location ?-----------------
   useQuery(["magazin_location"], () => { return request({ url: "/shops/locations/index", token: true }); },
     {

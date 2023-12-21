@@ -22,6 +22,7 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
   const [openColorModal, setOpenColorModal] = useState(false)
   const [sendingLoader, setSendingLoader] = useState(false)
   const [allSizeOfListId, setAllSizeOfListId] = useState([])
+  const [handlePivotColorId, setHandlePivotColorId] = useState(stateList?.sizeGetList?.colors[0]?.pivot?.color_id)
 
   // ------------Delete------
   const [deleteId, setDeleteId] = useState(null)
@@ -60,7 +61,14 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
   }
   // console.log(allSizeOfListId, "allSizeOfListId");
   const deleteSizeId = useMutation(() => {
-    return request({ url: `/products/${deleteId}/delete-product-size`, method: "POST", token: true, });
+    return request({
+      url: `/products/${deleteId}/delete-product-size`, method: "POST",
+      body: {
+        product_id: productsDataIdEdit?.locations[0]?.pivot?.product_id,
+        color_id: handlePivotColorId
+      },
+      token: true,
+    });
   });
   function onHandleDeleteSizeById() {
     setLoader(true)
@@ -306,7 +314,12 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
           <span className="text-black text-md not-italic font-AeonikProRegular"> Цветa:</span>
           {stateList?.sizeGetList?.colors?.map((data) => {
             return (
-              <div onClick={() => onHandleCheckColor(data?.pivot?.id)} key={data?.id} style={{ background: `${data.hex}` }}
+              <div onClick={() => {
+                onHandleCheckColor(data?.pivot?.id)
+                setHandlePivotColorId(data?.pivot?.color_id)
+              }}
+                key={data?.id}
+                style={{ background: `${data.hex}` }}
                 className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
               >
                 <span
@@ -337,11 +350,11 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
 
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
-            <HeadWearAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
-            <OutWearAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
-            <UnderAddWear stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
-            <ShoesAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
-            <AccessoriesAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} checkColor={checkColor} />
+            <HeadWearAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <OutWearAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <UnderAddWear stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <ShoesAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <AccessoriesAdd stateList={stateList?.sizeGetList} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
 
           </div>
         </div>
