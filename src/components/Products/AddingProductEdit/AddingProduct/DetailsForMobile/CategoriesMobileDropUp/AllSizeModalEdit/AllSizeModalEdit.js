@@ -129,8 +129,6 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
           // setState({ ...state, isCheckValid: false, sendingLoader: false })
           setSendingLoader(false)
           setOpenColorModal(false)
-
-
         } else if (res_1?.message) {
           toast.success(`${res_1?.message}`, {
             position: "top-right",

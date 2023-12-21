@@ -5,6 +5,7 @@ import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
 function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -29,6 +30,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
         sizeDeleteModal: false,
         // Size Edit Modal
         sizeEditModal: false,
+        sendingLoader: false,
         editSizeId: null,
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
@@ -87,7 +89,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
     // console.log(state?.editSizeId, "editSizeId");
     // console.log(pivotColorId, "pivotColorId");
     function saveEditData() {
-        console.log("ishladi");
+        setState({ ...state, sendingLoader: true })
         let form = new FormData();
         form.append("one_size", state?.sizeCheck ? 1 : 0);
         form.append("min_head_girth", state?.minHeadGirth);
@@ -112,69 +114,50 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
         })
             .then(res => res?.json())
             .then(res => {
-                console.log(res, "Edit-----Res");
-                onRefetch()
+                if (res?.errors && res?.message) {
+                    toast.error(`${res?.message}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, sendingLoader: false, sizeEditModal: false })
+                } else if (res?.message) {
+                    toast.success(`${res?.message}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, sendingLoader: false, sizeEditModal: false })
+                } onRefetch()
             })
             .catch(err => {
-                console.log(err, "Error");
+                toast.error(`${err}`, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+                onRefetch()
+                setState({ ...state, sendingLoader: false, sizeEditModal: false })
+                throw new Error(err?.message || "something wrong");
             })
 
-        // try {
-        //     const res = await fetch(`${url}/products/${Number(stateList?.locations[0]?.pivot?.product_id)}/update-product-size`, {
-        //         method: "POST",
-        //         headers: {
-        //             Accept: "application/json",
-        //             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-        //         },
-        //         body: form,
-        //     });
-        //     const res_1 = await res.json();
-        //     if (res_1) {
-        //         if (res_1?.errors && res_1?.message) {
-        //             // toast.error(`${res_1?.message}`, {
-        //             //     position: "top-right",
-        //             //     autoClose: 3000,
-        //             //     hideProgressBar: false,
-        //             //     closeOnClick: true,
-        //             //     pauseOnHover: true,
-        //             //     draggable: true,
-        //             //     progress: undefined,
-        //             //     theme: "light",
-        //             // })
-        //             // onRefetch()
-        //             // setState({ ...state, isCheckValid: false, sendingLoader: false })
-        //         } else if (res_1?.message) {
-        //             // toast.success(`${res_1?.message}`, {
-        //             //     position: "top-right",
-        //             //     autoClose: 3000,
-        //             //     hideProgressBar: false,
-        //             //     closeOnClick: true,
-        //             //     pauseOnHover: true,
-        //             //     draggable: true,
-        //             //     progress: undefined,
-        //             //     theme: "light",
-        //             // })
-        //             // onRefetch()
-        //             // setToggleShow(false)
-        //             // setState({ ...state, isCheckValid: false, sendingLoader: false })
-        //         }
-        //         console.log(res_1, "Product--Store--Added");
-        //     }
-        // } catch (err) {
-        //     // toast.error(`${err}`, {
-        //     //     position: "top-right",
-        //     //     autoClose: 3000,
-        //     //     hideProgressBar: false,
-        //     //     closeOnClick: true,
-        //     //     pauseOnHover: true,
-        //     //     draggable: true,
-        //     //     progress: undefined,
-        //     //     theme: "light",
-        //     // })
-        //     // onRefetch()
-        //     // setState({ ...state, isCheckValid: false, sendingLoader: false })
-        //     throw new Error(err?.message || "something wrong");
-        // }
 
     }
 
@@ -455,7 +438,13 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                                     onClick={() => saveEditData()}
                                     type="button"
                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
-                                    Сохранить
+                                    {state?.sendingLoader ?
+                                        <ClipLoader
+                                            className="h-full py-[2px]"
+                                            color={"#007DCA"}
+                                            size={40}
+                                            loading={true}
+                                        /> : "Сохранить"}
                                 </button> :
                                 <button
                                     type="button"
