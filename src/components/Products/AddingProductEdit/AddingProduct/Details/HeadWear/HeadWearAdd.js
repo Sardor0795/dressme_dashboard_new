@@ -20,6 +20,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
         discountPercent: null,
         discountPrice: null,
         isCheckValid: false,
+        productColorId: null,
         // ------
         // onConcel: false,
         // ----
@@ -59,35 +60,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
         setState({ ...state, sizeCheck: id, saveBtnDisable: true })
     };
 
-
-
-    const handleSendDetail = (e) => {
-        setState({ ...state, isCheckValid: true })
-        // if (state?.amount && state?.price) {
-        //     handleCallBack({
-        //         minHeadGirth: state?.minHeadGirth,
-        //         maxHeadGirth: state?.maxHeadGirth,
-        //         oneSize: state?.sizeCheck,
-        //         amount: state?.amount,
-        //         age: state?.age,
-        //         price: state?.price?.split(",")?.join(""),
-        //         discountPercent: state?.discountPercent,
-        //         discountPrice: state?.discountPrice?.split(",")?.join(""),
-        //         // category_Id: SelectedNumber,
-
-        //     })
-        //     setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-        //     setState({ ...state, isCheckValid: false, onConcel: true, })
-        // }
-    }
-    // const editSize = (id) => {
-    //     console.log(id, "edit size");
-    //     setState({ ...state, sizeEditModal: true, editSizeId: id })
-
-    // }
-
-    // console.log(state?.editSizeId, "editSizeId");
-    // console.log(pivotColorId, "pivotColorId");
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
