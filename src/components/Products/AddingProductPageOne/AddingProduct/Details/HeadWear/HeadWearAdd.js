@@ -37,23 +37,14 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, price: formattedValue });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, discountPrice: formattedValue });
     };
 
@@ -120,7 +111,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         } else {
             setState({ ...state, discountPrice: '' })
         }
-    }, [state?.discountPercent || state?.price])
+    }, [state?.discountPercent, state?.price])
 
     const contentHat = (
         <div className="w-[520px] h-fit">

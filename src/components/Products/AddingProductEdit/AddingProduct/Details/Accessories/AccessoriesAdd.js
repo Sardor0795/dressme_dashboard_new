@@ -26,7 +26,6 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefet
         selected: null,
         // ---save
         saveBtnDisable: false,
-        // ----GetSizesIds
         // Size Edit Modal
         sizeEditModal: false,
         sendingLoader: false,
@@ -61,15 +60,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefet
     )
 
     const SelectedNumber = 5
-    useEffect(() => {
-        if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
-        } else {
-            setState({ ...state, salePrice: '' })
-        }
-    }, [state?.salePercent || state?.priceNum])
+
 
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
@@ -140,8 +131,6 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefet
                 setState({ ...state, sendingLoader: false, sizeEditModal: false })
                 throw new Error(err?.message || "something wrong");
             })
-
-
     }
 
     useEffect(() => {
@@ -189,12 +178,22 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefet
         const formattedValue = Number(sanitizedValue).toLocaleString()
         setState({ ...state, salePrice: formattedValue, saveBtnDisable: true });
     };
+
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value, saveBtnDisable: true });
         }
     };
+    useEffect(() => {
+        if (state?.salePercent > 0) {
+            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
+            const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: formattedValue })
+        } else {
+            setState({ ...state, salePrice: '' })
+        }
+    }, [state?.priceNum, state?.salePercent])
 
     useEffect(() => {
         setGetSizesIds([])
@@ -202,7 +201,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefet
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
         })
     }, [checkColor])
-    // console.log(getSizesIds, "getSizesIds");
+
     useEffect(() => {
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);

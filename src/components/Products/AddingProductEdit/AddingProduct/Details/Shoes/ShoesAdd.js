@@ -42,7 +42,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, on
         } else {
             setState({ ...state, salePrice: '' })
         }
-    }, [state?.salePercent || state?.priceNum])
+    }, [state?.salePercent, state?.priceNum])
 
     function saveEditData() {
         setState({ ...state, sendingLoader: true })

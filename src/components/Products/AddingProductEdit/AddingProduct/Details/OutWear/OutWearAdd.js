@@ -77,7 +77,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, 
         } else {
             setState({ ...state, salePrice: '' })
         }
-    }, [state?.salePercent || state?.priceNum])
+    }, [state?.salePercent, state?.priceNum])
 
     function saveEditData() {
         setState({ ...state, sendingLoader: true })

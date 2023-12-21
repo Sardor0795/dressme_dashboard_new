@@ -66,7 +66,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
         } else {
             setState({ ...state, salePrice: '' })
         }
-    }, [state?.salePercent || state?.priceNum])
+    }, [state?.salePercent, state?.priceNum])
 
     const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)

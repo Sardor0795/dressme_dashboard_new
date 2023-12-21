@@ -26,7 +26,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
         } else {
             setState({ ...state, salePrice: '' })
         }
-    }, [state?.salePercent || state?.priceNum])
+    }, [state?.salePercent, state?.priceNum])
 
     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)
@@ -85,24 +85,14 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
     }
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, priceNum: formattedValue });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
-
-        // Remove any existing commas from the input
         const sanitizedValue = result.replace(/,/g, '');
-
-        // Format the number with commas
         const formattedValue = Number(sanitizedValue).toLocaleString()
-
         setState({ ...state, salePrice: formattedValue });
     };
     const handleChangePercent = (event) => {
