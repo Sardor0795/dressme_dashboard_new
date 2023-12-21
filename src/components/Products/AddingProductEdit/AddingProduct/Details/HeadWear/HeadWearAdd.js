@@ -49,7 +49,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
         } else {
             setState({ ...state, discountPrice: '' })
         }
-    }, [state?.discountPercent || state?.price])
+    }, [state?.discountPercent, state?.price])
 
     // console.log(state?.discountPercent, state?.price, "state?.discountPercent || state?.price");
 

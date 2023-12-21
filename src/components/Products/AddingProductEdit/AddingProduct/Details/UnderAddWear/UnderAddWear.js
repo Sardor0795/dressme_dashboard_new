@@ -74,7 +74,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onRefetch
         } else {
             setState({ ...state, salePrice: '' })
         }
-    }, [state?.salePercent || state?.priceNum])
+    }, [state?.salePercent, state?.priceNum])
     useEffect(() => {
         if (stateList?.category_id == SelectedNumber) {
             // setState({

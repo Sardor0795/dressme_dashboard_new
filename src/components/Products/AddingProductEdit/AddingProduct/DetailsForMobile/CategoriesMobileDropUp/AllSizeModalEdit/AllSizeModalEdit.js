@@ -62,10 +62,10 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
   // console.log(allSizeOfListId, "allSizeOfListId");
   const deleteSizeId = useMutation(() => {
     return request({
-      url: `/products/${deleteId}/delete-product-size`, method: "POST",
+      url: `/products/${Number(deleteId)}/delete-product-size`, method: "POST",
       body: {
-        product_id: productsDataIdEdit?.locations[0]?.pivot?.product_id,
-        color_id: handlePivotColorId
+        product_id: Number(productsDataIdEdit?.locations[0]?.pivot?.product_id),
+        color_id: Number(handlePivotColorId)
       },
       token: true,
     });
@@ -126,7 +126,6 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
             theme: "light",
           })
           onRefetch()
-          // setState({ ...state, isCheckValid: false, sendingLoader: false })
           setSendingLoader(false)
           setOpenColorModal(false)
         } else if (res_1?.message) {
@@ -141,12 +140,8 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
             theme: "light",
           })
           onRefetch()
-          // setToggleShow(false)
-          // setState({ ...state, isCheckValid: false, sendingLoader: false })
           setSendingLoader(false)
           setOpenColorModal(false)
-
-
         }
         console.log(res_1, "Product--Store--Added");
       }
@@ -164,8 +159,6 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
       onRefetch()
       setSendingLoader(false)
       setOpenColorModal(false)
-
-      // setState({ ...state, isCheckValid: false, sendingLoader: false })
       throw new Error(err?.message || "something wrong");
     }
 
