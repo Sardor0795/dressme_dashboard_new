@@ -56,7 +56,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
 
 
     const onChangeSwitch = (id) => {
-        setState({ ...state, sizeCheck: id, })
+        setState({ ...state, sizeCheck: id, saveBtnDisable: true })
     };
 
 
@@ -248,15 +248,19 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                     className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.sizeEditModal ? "" : "hidden"}`}
                 ></section>
                 <section
-                    className={` max-w-[780px]  mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
-                    <button
-                        type="button"
-                        className="absolute  right-3 top-3 w-5 h-5 ">
-                        <MenuCloseIcons
+                    className={` max-w-[780px]  mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-3 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+                    <div className="flex justify-end">
+
+                        <button
+                            type="button"
                             onClick={() => setState({ ...state, sizeEditModal: false })}
-                            className="w-full h-full border"
-                            colors={"#a2a2a2"} />
-                    </button>
+                        // className="absolute border right-3 top-3 w-5 h-5 "
+                        >
+                            <MenuCloseIcons
+                                className="w-full h-full "
+                                colors={"#b2b2b2"} />
+                        </button>
+                    </div>
                     <div
                         className={`w-full h-fit flex flex-col items-center justify-center   rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                     >
@@ -495,12 +499,12 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                             return (
                                 <List.Item className="w-full "
                                 >
-                                    <div className="flex items-center gap-x-1">
+                                    <div className="w-full flex items-center gap-x-1">
                                         <div className="flex items-center h-full">
                                             <Checkbox value={item?.id} checked={checked} />
                                         </div>
                                         <div
-                                            className={`w-full h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                                            className={`w-full  h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                         >
                                             <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
                                                 <div className="w-fit flex flex-col">
@@ -513,42 +517,28 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                             </span> */}
                                                     </p>
                                                     <div className="w-full flex items-center mt-[10px]">
-                                                        <div className="flex flex-col">
-                                                            <input
-                                                                type="number"
-                                                                className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                                placeholder="Мин"
-                                                                value={item?.min_head_girth || null}
-                                                                // onChange={(e) => setState({ ...state, minHeadGirth: e.target.value, })}
-                                                                required
-                                                            />
+                                                        <div className="flex flex-col items-center">
+                                                            <p
+                                                                className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                            >{item?.min_head_girth || "Мин"}
+                                                            </p>
                                                         </div>
                                                         <span className="mx-[5px]"><LineIcon /></span>
                                                         <div className="flex flex-col">
-                                                            <input
-                                                                type="number"
-                                                                className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                                placeholder="Макс"
-                                                                value={item?.max_head_girth || null}
-                                                                // onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, })}
-                                                                required
-                                                            />
+                                                            <p
+                                                                className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                                            >{item?.max_head_girth || "Макс"}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                         One Size
                                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                                        {/* <span className="ml-[5px]">
-                                <StarLabel />
-                            </span> */}
                                                     </p>
                                                     <div className="flex items-center justify-center mt-[10px]">
                                                         <Switch
-                                                            className={`border border-borderColor bg-[#8B8B8B] `}
-                                                            // // onChange={onChangeSwitch}
+                                                            className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
                                                             checked={item?.one_size == 1 ? true : false}
                                                         />
                                                     </div>
@@ -563,13 +553,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                                                         </span>
                                                     </p>
                                                     <div className="flex items-start justify-between mt-[10px]">
-                                                        <input
-                                                            type="number"
-                                                            className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                                            value={item?.amount || null}
-                                                            // onChange={(e) => setState({ ...state, amount: e.target.value, })}
-                                                            required
-                                                        />
+                                                        <p
+                                                            className={`inputStyle flex items-center justify-center cursor-default w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                                        >{item?.amount || null}</p>
                                                     </div>
                                                 </div>
                                                 <div
@@ -594,13 +580,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                                                             </label>
                                                         </div>
                                                         <div className="w-full flex items-center">
-                                                            <input
-                                                                type="number"
-                                                                className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                                                placeholder="age"
-                                                                value={item?.age || null}
-                                                            // onChange={(e) => setState({ ...state, age: e.target.value, })}
-                                                            />
+                                                            <p
+                                                                className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                                            >{item?.age || "age"}</p>
                                                         </div>
                                                     </div>
                                                     <div className="w-full md:w-[90%]">
@@ -615,15 +597,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                                                             </span>
                                                         </div>
                                                         <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
-                                                            <input
-                                                                type="text"
-                                                                placeholder="0"
-                                                                id="enterPrice"
-                                                                className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                                value={item?.price || null}
-                                                                // onChange={handleChangePrice}
-                                                                required
-                                                            />
+                                                            <p
+                                                                className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
+                                                            >{Number(item?.price)?.toLocaleString() || "0"}</p>
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                 сум
                                                             </span>
@@ -644,28 +620,18 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch,
                                                         <div className="w-full flex items-center gap-x-1">
                                                             <div className="w-[40%] md:w-[72px] flex items-start">
                                                                 <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
-                                                                    <input
-                                                                        type="number"
-                                                                        placeholder="0"
-                                                                        className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                        value={item?.discount_percent || null}
-                                                                    // onChange={handleChangePercent}
-                                                                    />
+                                                                    <p
+                                                                        className="inputStyle w-[70%] flex items-center justify-center cursor-default  text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
+                                                                    >{item?.discount_percent || "0"}</p>
                                                                     <span className="text-textLightColor ml-1">%</span>
                                                                 </div>
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                             <div className="w-[60%] md:w-[75%] flex items-center">
                                                                 <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                                    <input
-                                                                        type="text"
-                                                                        placeholder="0"
-                                                                        id="discountPrice"
-                                                                        className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                        value={item?.discount_price || null}
-                                                                        // onChange={handleChangeSalePrice}
-                                                                        readOnly
-                                                                    />
+                                                                    <p
+                                                                        className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
+                                                                    >{Number(item?.discount_price)?.toLocaleString() || "0"}</p>
                                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                         сум
                                                                     </span>

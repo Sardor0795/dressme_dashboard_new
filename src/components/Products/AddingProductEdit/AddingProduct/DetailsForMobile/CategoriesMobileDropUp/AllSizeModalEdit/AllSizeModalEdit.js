@@ -186,7 +186,7 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
       <div
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-2 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
         <div className="flex items-center justify-between">
-          <p>
+          <p className="pl-2">
             Выберите цвет
           </p>
           <button
