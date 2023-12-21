@@ -6,7 +6,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const url = "https://api.dressme.uz/api/seller";
-function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -84,36 +84,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
 
     // }
 
-    useEffect(() => {
-        setState({
-            ...state,
-            minHeadGirth: null,
-            maxHeadGirth: null,
-            sizeCheck: null,
-            amount: null,
-            age: null,
-            price: null,
-            discountPercent: null,
-            discountPrice: null,
-            productColorId: null,
-        })
-        stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-            setState({
-                ...state,
-                minHeadGirth: data?.min_head_girth || null,
-                maxHeadGirth: data?.max_head_girth || null,
-                sizeCheck: data?.one_size || null,
-                amount: data?.amount || null,
-                age: data?.age || null,
-                price: Number(data?.price)?.toLocaleString(),
-                discountPercent: data?.discount_percent || null,
-                discountPrice: data?.discount_price || null,
-                productColorId: data?.product_color_id || null,
-            })
-        })
-    }, [state?.editSizeId])
-    console.log(stateList, "headWear");
-    console.log(pivotColorId, "pivotColorId");
+    // console.log(state?.editSizeId, "editSizeId");
+    // console.log(pivotColorId, "pivotColorId");
     function saveEditData() {
         console.log("ishladi");
         let form = new FormData();
@@ -127,9 +99,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
         form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
-        form.append("product_id", state?.editSizeId);
+        form.append("product_id", Number(stateList?.locations[0]?.pivot?.product_id));
+        // form.append("product_id", state?.editSizeId);
 
-        return fetch(`${url}/products/${Number(stateList?.locations[0]?.pivot?.product_id)}/update-product-size`, {
+        return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -140,6 +113,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
             .then(res => res?.json())
             .then(res => {
                 console.log(res, "Edit-----Res");
+                onRefetch()
             })
             .catch(err => {
                 console.log(err, "Error");
@@ -204,8 +178,40 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
 
     }
 
+    useEffect(() => {
+        setState({
+            ...state,
+            minHeadGirth: null,
+            maxHeadGirth: null,
+            sizeCheck: null,
+            amount: null,
+            age: null,
+            price: null,
+            discountPercent: null,
+            discountPrice: null,
+            productColorId: null,
+            saveBtnDisable: false
+        })
+        stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
+            // console.log(data, "bu--Data");
+            setState({
+                ...state,
+                minHeadGirth: data?.min_head_girth || null,
+                maxHeadGirth: data?.max_head_girth || null,
+                sizeCheck: data?.one_size || null,
+                amount: data?.amount || null,
+                age: data?.age || null,
+                price: Number(data?.price)?.toLocaleString(),
+                discountPercent: data?.discount_percent || null,
+                discountPrice: data?.discount_price || null,
+                productColorId: data?.product_color_id || null,
+            })
+        })
+        // setState({ ...state, saveBtnDisable: false });
+        // console.log("ishladi useEffect");
+    }, [state?.editSizeId, checkColor])
 
-    console.log(state?.editSizeId, "state?.editSizeId");
+    // console.log(state?.editSizeId, "state?.editSizeId");
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
@@ -248,7 +254,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
-
+    // console.log('--------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
@@ -261,10 +267,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                 <section
                     className={` max-w-[780px]  mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
                     <button
-                        onClick={() => setState({ ...state, sizeEditModal: false })}
                         type="button"
                         className="absolute  right-3 top-3 w-5 h-5 ">
                         <MenuCloseIcons
+                            onClick={() => setState({ ...state, sizeEditModal: false })}
                             className="w-full h-full border"
                             colors={"#a2a2a2"} />
                     </button>
@@ -496,7 +502,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                         dataSource={stateList?.sizes}
                         className="w-full">
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
-
+                            // console.log(item, "item--Map");
                             return (
                                 <List.Item className="w-full "
                                 >
@@ -523,7 +529,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                                 type="number"
                                                                 className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                                 placeholder="Мин"
-                                                                value={item?.min_head_girth}
+                                                                value={item?.min_head_girth || null}
                                                                 // onChange={(e) => setState({ ...state, minHeadGirth: e.target.value, })}
                                                                 required
                                                             />
@@ -534,7 +540,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                                 type="number"
                                                                 className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                                                 placeholder="Макс"
-                                                                value={item?.max_head_girth}
+                                                                value={item?.max_head_girth || null}
                                                                 // onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, })}
                                                                 required
                                                             />
@@ -571,7 +577,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                         <input
                                                             type="number"
                                                             className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                                            value={item?.amount}
+                                                            value={item?.amount || null}
                                                             // onChange={(e) => setState({ ...state, amount: e.target.value, })}
                                                             required
                                                         />
@@ -603,7 +609,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                                 type="number"
                                                                 className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                                                 placeholder="age"
-                                                                value={item?.age}
+                                                                value={item?.age || null}
                                                             // onChange={(e) => setState({ ...state, age: e.target.value, })}
                                                             />
                                                         </div>
@@ -625,7 +631,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                                 placeholder="0"
                                                                 id="enterPrice"
                                                                 className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                                value={item?.price}
+                                                                value={item?.price || null}
                                                                 // onChange={handleChangePrice}
                                                                 required
                                                             />
@@ -653,7 +659,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                                         type="number"
                                                                         placeholder="0"
                                                                         className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                        value={item?.discount_percent}
+                                                                        value={item?.discount_percent || null}
                                                                     // onChange={handleChangePercent}
                                                                     />
                                                                     <span className="text-textLightColor ml-1">%</span>
@@ -667,7 +673,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                                         placeholder="0"
                                                                         id="discountPrice"
                                                                         className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                        value={item?.discount_price}
+                                                                        value={item?.discount_price || null}
                                                                         // onChange={handleChangeSalePrice}
                                                                         readOnly
                                                                     />
@@ -696,7 +702,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onDeleteId
                                                 </span>
                                                 <button
                                                     type="button"
-                                                    onClick={() => setState({ ...state, sizeEditModal: true, editSizeId: item?.id })
+                                                    onClick={() => {
+                                                        // console.log(item?.id, "Bu Selected id")
+                                                        setState({ ...state, sizeEditModal: true, editSizeId: item?.id })
+                                                    }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
                                                     Изменить
