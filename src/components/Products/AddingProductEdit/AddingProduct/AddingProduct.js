@@ -270,7 +270,7 @@ const AddingProduct = () => {
   // console.log(colors_Id, "colors_Id");
   // console.log(colorListForTest, "colorListForTest");
   function onHanleColorList(e) {
-    if (!colorListForTest?.includes(e) && colors_Id?.length < 4) {
+    if (!colorListForTest?.includes(e)) {
       setSelectColorID(e)
       if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
         setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
@@ -296,7 +296,7 @@ const AddingProduct = () => {
   }
 
   useEffect(() => {
-    if (!colorListForTest?.includes(selectColorID) && selectColorID > 0 && colors_Id?.length < 4) {
+    if (!colorListForTest?.includes(selectColorID) && selectColorID > 0) {
       setColorAction(true)
       setLastElement(selectColorID)
     } else {
