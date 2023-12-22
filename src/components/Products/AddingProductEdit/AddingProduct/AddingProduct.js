@@ -266,23 +266,20 @@ const AddingProduct = () => {
   // console.log(colors_Id, "colors_Id");
   // console.log(colorListForTest, "colorListForTest");
   function onHanleColorList(e) {
-    console.log(e, "SelectEd--ID");
-    setSelectColorID(e)
-    if (!colorListForTest?.includes(e)) {
-      if (colors_Id?.length <= 4) {
-        if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
-          setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
-          setColors_Id(colors_Id => [...colors_Id, e])
-        } else {
-          setColors_Id(colors_Id => [...colors_Id, e])
-        }
+    if (!colorListForTest?.includes(e) && colors_Id?.length < 4) {
+      setSelectColorID(e)
+      console.log("bu ishladi");
+      if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
+        setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
+        setColors_Id(colors_Id => [...colors_Id, e])
       } else {
-        // message("Colorlar soni oshib ketdi")
+        setColors_Id(colors_Id => [...colors_Id, e])
       }
+
     }
   }
-  // const queryParameters = new URLSearchParams(window.location.search)
-  // const name = queryParameters.get("name")
+  console.log(colors_Id?.length, "colors_Id?.length ");
+
 
   function onHandleColorUnchecked(id) {
     if (colorListForTest?.includes(id)) {
@@ -293,34 +290,18 @@ const AddingProduct = () => {
     }
 
   }
-  // -----------------------------------------------------------
 
-  // useEffect(() => {
-  //   colors_Id?.filter(e => !colorListForTest?.includes(e))?.map(item => {
-  //     console.log(item, "NuItem");
-  //   })
-  // }, [colors_Id])
   useEffect(() => {
-    if (!colorListForTest?.includes(selectColorID) && selectColorID > 0) {
+    if (!colorListForTest?.includes(selectColorID) && selectColorID > 0 && colors_Id?.length < 4) {
       setColorAction(true)
       setLastElement(selectColorID)
     } else {
       setColorAction(false)
       setLastElement()
     }
-    // if (colorChecked !== selectColorID && selectColorID > 0) {
-    // } else {
-    //   setColorAction(false)
-    // }
-    // if (colors_Id?.length >= 2) {
-    //   setLastElement(colors_Id[colors_Id?.length - 1])
-    // } else {
-    //   setLastElement('')
-    // }
 
   }, [selectColorID, productsDataIdEdit?.colors])
-  // console.log(colorListForTest, "colorListForTest");
-  // console.log(selectColorID, "selectColorID");
+
   // -----------------------------------------------------------
 
   const onSearch = (value) => {
@@ -700,7 +681,9 @@ const AddingProduct = () => {
                      `}
                         >
                           <div
-                            onClick={() => onHanleColorList(data?.id)}
+                            onClick={
+                              colors_Id?.length < 4 ? () => onHanleColorList(data?.id) : null
+                            }
                             style={{ background: `${data.hex}` }}
                             className="w-full h-full ">
 
@@ -793,7 +776,7 @@ const AddingProduct = () => {
                 onClick={() => setColorDelete(false)}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-                Удалить из адреса</button>
+                Удалить </button>
             </div>
 
           </section>
