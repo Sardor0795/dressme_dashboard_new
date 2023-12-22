@@ -14,7 +14,7 @@ import { FiDownload } from "react-icons/fi";
 
 const url = "https://api.dressme.uz/api/seller";
 
-const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, colorGroup, onRefetch, productId, onHandleImage }) => {
+const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorListForTest, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -331,9 +331,7 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
         }
       })
     }
-
-
-  }, [colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, productData?.photos])
+  }, [colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, clearSize, productData?.photos])
 
   useEffect(() => {
     if (productData) {
@@ -420,8 +418,10 @@ const CarouselEdit = ({ productData, activeColor, colors_Id, colorListForTest, c
     // };
     // console.log(filterSimilarObjects(photsArrOne), "ishladi filterSimilarObjects(photsArrOne);");
     // console.log(photsArrOne, "photsArrOne");
-  }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour, productData])
-
+  }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour, clearSize, productData])
+  // console.log(productData?.photos, "productData?.photos");
+  // console.log(imageSeven, "imageSeven---photos");
+  // console.log(imageEight, "imageEight---photos");
   // console.log(productData, "Ishladi");
   // console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
   // console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
