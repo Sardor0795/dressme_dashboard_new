@@ -34,6 +34,7 @@ import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/Ca
 import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
+import { MdError } from "react-icons/md";
 // import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
 // import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
@@ -504,8 +505,9 @@ const AddingProduct = () => {
             pictureBgFile4: null,
             sendingLoader: false,
             imageAddError: null,
-            clearAddSize: true
+            clearAddSize: !state?.clearAddSize
           })
+          setProductsDataIdEdit()
           setLastElement()
           setSelectColorID()
           refetch()
@@ -527,6 +529,7 @@ const AddingProduct = () => {
       throw new Error(err?.message || "something wrong");
     }
   }
+  // -------Delete Color ID
   const deleteColor = useMutation(() => {
     return request({
       url: `/products/${Number(newProductId)}/delete-product-color`,
@@ -537,7 +540,7 @@ const AddingProduct = () => {
       }
     });
   });
-  console.log(deleteColorId, "deleteColorId");
+  // console.log(deleteColorId, "deleteColorId");
 
   function onHandleDeleteColor() {
     setLoader(true)
@@ -548,8 +551,11 @@ const AddingProduct = () => {
           if (res?.message && res?.errors) {
             setErrorMessage(res?.message)
             setLoader(false)
-            setColorDelete(false)
             refetch()
+            setTimeout(() => {
+              setHideToggleIcons(false)
+              setColorDelete(false)
+            }, 3000);
           } else if (res?.message) {
             setSuccessMessage(res?.message)
             setLoader(false)
@@ -561,7 +567,6 @@ const AddingProduct = () => {
             refetch()
             setTimeout(() => {
               setHideToggleIcons(false)
-              setColorDelete(false)
               setColorDelete(false)
               setState({ ...state, showColor: false, })
             }, 1000);
@@ -575,7 +580,7 @@ const AddingProduct = () => {
         }
       })
   }
-  console.log(state?.sizeGetList, "sizeGetList");
+  // console.log(state?.sizeGetList, "sizeGetList");
   return (
     <div className="w-full h-fit ">
 
@@ -782,18 +787,23 @@ const AddingProduct = () => {
                 colors={"#a1a1a1"} />
             </button>
             {hideToggleIcons ?
-              <div className="w-full flex items-center justify-center">
+              <div className="w-full h-full flex items-center justify-center">
                 {loader && hideToggleIcons ?
                   <PuffLoader
-                    // className={styles.loader1}
                     color={"#007DCA"}
                     size={80}
                     loading={true}
                   />
                   :
-                  <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2"><FaCheck size={30} color="#009B17" /></span>
-                    <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                  <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
+                    {errorMessage ?
+                      <span className="flex items-center justify-center p-2">
+                        <MdError size={35} color="#FF4343" />
+                      </span> :
+                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                        <FaCheck size={30} color="#009B17" />
+                      </span>}
+                    <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                   </div>
                 }
               </div>
@@ -1699,8 +1709,7 @@ const AddingProduct = () => {
                         Все размеры{" "}
                       </button>
                       <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
-                        <AddSize typeId={state?.category_Id} onRefetch={refetch} handleCallBack={CallBackHeadWear} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
-
+                        <AddSize typeId={state?.category_Id} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
                       </button>
                     </div>
                   </div>
@@ -1709,7 +1718,7 @@ const AddingProduct = () => {
                       }`}
                   >
                     {allSizeModalShow && (
-                      <AllSizeModalEdit stateList={state} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
+                      <AllSizeModalEdit lastElement={lastElement} allColor={productsData?.colors} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
 
@@ -1719,7 +1728,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
-                    <CarouselEdit onHandleImage={onHandleImageAdd} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 
                 </div>

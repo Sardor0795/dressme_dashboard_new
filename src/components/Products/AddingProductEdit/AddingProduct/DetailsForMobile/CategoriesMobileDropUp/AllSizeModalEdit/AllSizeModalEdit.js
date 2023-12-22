@@ -15,7 +15,7 @@ import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 const url = "https://api.dressme.uz/api/seller";
 
-function AllSizeModalEdit({ onClick, onRefetch, productsDataIdEdit }) {
+function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsDataIdEdit }) {
   const { request } = useHttp()
   const [checkColor, setCheckColor] = useState(productsDataIdEdit?.colors[0]?.pivot?.id)
   const [addSizeColorById, setAddSizeColorById] = useState(false)
@@ -37,8 +37,9 @@ function AllSizeModalEdit({ onClick, onRefetch, productsDataIdEdit }) {
   const onHandleDeleteSize = React.useCallback(() => setSizedeleteModal(true), [])
   function onDeleteId(childData) {
     setDeleteId(childData)
-    // console.log(childData, "deleteID")
   }
+  console.log(lastElement, "lastElement");
+  console.log(allColor, "allColor");
   function handleGetSizeCheckedList(childData) {
     setAllSizeOfListId(childData)
   }
@@ -191,51 +192,101 @@ function AllSizeModalEdit({ onClick, onRefetch, productsDataIdEdit }) {
             <MenuCloseIcons colors={"#a2a2a2"} />
           </button></div>
         <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-          {productsDataIdEdit?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
-            return (
-              <div
-                key={data?.id}
-                className={`flex flex-col items-center justify-center `}>
-                <div
-                  className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
-                    }] cursor-pointer ${data?.id == 2
-                      ? "border border-setTexOpacity flex items-center justify-center"
-                      : ""
-                    }
-                     `}
-                >
+          {lastElement ?
+            <div className="w-full">
+              {allColor?.filter(e => e?.id == lastElement)?.map((data) => {
+                return (
                   <div
-                    onClick={() => onHandleAddColorSize(data?.pivot?.color_id)}
-                    style={{ background: `${data.hex}` }}
-                    className="w-full h-full flex items-center justify-center">
-                    {data?.pivot?.color_id == addSizeColorById && data?.color_id !== 1 ?
-                      <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
-                      : null}
-                    {data?.pivot?.color_id == addSizeColorById && data?.color_id === 1 ?
-                      <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
-                      : null}
+                    key={data?.id}
+                    className={`flex flex-col items-center justify-center `}>
+                    <div
+                      className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                        }] cursor-pointer ${data?.id == 2
+                          ? "border border-setTexOpacity flex items-center justify-center"
+                          : ""
+                        }
+                     `}
+                    >
+                      <div
+                        onClick={() => onHandleAddColorSize(data?.pivot?.color_id)}
+                        style={{ background: `${data.hex}` }}
+                        className="w-full h-full flex items-center justify-center">
+                        {data?.pivot?.color_id == addSizeColorById && data?.color_id !== 1 ?
+                          <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                          : null}
+                        {data?.pivot?.color_id == addSizeColorById && data?.color_id === 1 ?
+                          <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                          : null}
+                      </div>
+                    </div>
+                    <span
+                      className={`text-black text-center text-[14px] not-italic font-AeonikProRegular  `}
+                    >
+                      {data?.name_ru}
+                    </span>
                   </div>
+                );
+              })}
+            </div>
+            :
+            productsDataIdEdit?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
+              return (
+                <div
+                  key={data?.id}
+                  className={`flex flex-col items-center justify-center `}>
+                  <div
+                    className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                      }] cursor-pointer ${data?.id == 2
+                        ? "border border-setTexOpacity flex items-center justify-center"
+                        : ""
+                      }
+                     `}
+                  >
+                    <div
+                      onClick={() => onHandleAddColorSize(data?.pivot?.color_id)}
+                      style={{ background: `${data.hex}` }}
+                      className="w-full h-full flex items-center justify-center">
+                      {data?.pivot?.color_id == addSizeColorById && data?.color_id !== 1 ?
+                        <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                        : null}
+                      {data?.pivot?.color_id == addSizeColorById && data?.color_id === 1 ?
+                        <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                        : null}
+                    </div>
+                  </div>
+                  <span
+                    className={`text-black text-center text-[14px] not-italic font-AeonikProRegular  `}
+                  >
+                    {data?.name_ru}
+                  </span>
                 </div>
-                <span
-                  className={`text-black text-center text-[14px] not-italic font-AeonikProRegular  `}
-                >
-                  {data?.name_ru}
-                </span>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
         <div className="flex items-center justify-end  gap-x-5">
-          <button onClick={onHandleCopyAddSize}
-            className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-            {sendingLoader ?
-              <ClipLoader
-                className="h-full py-[2px]"
-                color={"#007DCA"}
-                size={40}
-                loading={true}
-              /> : "Добавить"}
-          </button>
+          {lastElement ?
+            <button onClick={onHandleCopyAddSize}
+              className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+              {sendingLoader ?
+                <ClipLoader
+                  className="h-full py-[2px]"
+                  color={"#007DCA"}
+                  size={40}
+                  loading={true}
+                /> : "Добавить"}
+            </button>
+            :
+            <button
+              // onClick={onHandleCopyAddSize}
+              className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+              {sendingLoader ?
+                <ClipLoader
+                  className="h-full py-[2px]"
+                  color={"#007DCA"}
+                  size={40}
+                  loading={true}
+                /> : "Сохранить"}
+            </button>}
         </div>
       </div>
       {/* Color Delete Of Pop Confirm */}

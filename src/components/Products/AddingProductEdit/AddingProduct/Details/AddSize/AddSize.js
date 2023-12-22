@@ -9,11 +9,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const url = "https://api.dressme.uz/api/seller";
 
-function AddSize({ handleCallBack, typeId, onRefetch, colorListForTest, selectColorID, productsDataIdEdit }) {
+function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTest, selectColorID, productsDataIdEdit }) {
     // console.log(typeId, "typeIdAddSize");
     // console.log(colorListForTest, "colorListForTest-------AddSize");
     // console.log(selectColorID, "selectColorID-------AddSize");
-    // console.log("productsDataIdEdit-------AddSize");
+    // console.log(clearSize, "clearSize-------AddSize");
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
@@ -82,6 +82,57 @@ function AddSize({ handleCallBack, typeId, onRefetch, colorListForTest, selectCo
     const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)
     }
+    useEffect(() => {
+        // console.log(clearSize, "Useefecccet");
+        setState({
+            ...state,
+            // Accessuary
+            accessorySize: null,
+            legnthAcc: null,
+            widthAcc: null,
+            accessoryLetterSize: null,
+            // Shoes
+            footWearSize: null,
+            minFootLength: null,
+            maxFootLength: null,
+            // UnderWear
+            minUnderwearWaistGirth: null,
+            maxUnderwearWaistGirth: null,
+            minUnderWearSize: null,
+            maxUnderWearSize: null,
+            minUnderWearHipGirth: null,
+            maxUnderWearHipGirth: null,
+            minHeight: null,
+            maxHeight: null,
+            underWearLetterSize: null,
+            // OutWear
+            minChestGirth: null,
+            maxChestGirth: null,
+            minOutWearSize: null,
+            maxOutWearSize: null,
+            minOutWearWaistGirth: null,
+            maxOutWearWaistGirth: null,
+            minOutWearHipGirth: null,
+            maxOutWearHipGirth: null,
+            outWearLetterSize: null,
+            // HeadWear
+            minHeadGirth: null,
+            maxHeadGirth: null,
+            sizeCheck: false,
+            // All of Category
+            amount: null,
+            age: null,
+            price: null,
+            discountPercent: null,
+            discountPrice: null,
+
+            // ----
+            isCheckValid: false,
+            onConcel: false,
+            selected: null,
+        })
+        handleCallBack()
+    }, [clearSize])
     const onHandleAddSize = async () => {
         setState({ ...state, isCheckValid: true, sendingLoader: true })
         let form = new FormData();
@@ -353,58 +404,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, colorListForTest, selectCo
         // })
         // }
     }
-    // useEffect(() => {
-    //     setState({
-    //         ...state,
-    //         // 
-    //         // Accessuary
-    //         accessorySize: null,
-    //         legnthAcc: null,
-    //         widthAcc: null,
-    //         accessoryLetterSize: null,
-    //         // Shoes
-    //         footWearSize: null,
-    //         minFootLength: null,
-    //         maxFootLength: null,
-    //         // UnderWear
-    //         minUnderwearWaistGirth: null,
-    //         maxUnderwearWaistGirth: null,
-    //         minUnderWearSize: null,
-    //         maxUnderWearSize: null,
-    //         minUnderWearHipGirth: null,
-    //         maxUnderWearHipGirth: null,
-    //         minHeight: null,
-    //         maxHeight: null,
-    //         underWearLetterSize: null,
-    //         // OutWear
-    //         minChestGirth: null,
-    //         maxChestGirth: null,
-    //         minOutWearSize: null,
-    //         maxOutWearSize: null,
-    //         minOutWearWaistGirth: null,
-    //         maxOutWearWaistGirth: null,
-    //         minOutWearHipGirth: null,
-    //         maxOutWearHipGirth: null,
-    //         outWearLetterSize: null,
-    //         // HeadWear
-    //         minHeadGirth: null,
-    //         maxHeadGirth: null,
-    //         sizeCheck: false,
-    //         // All of Category
-    //         amount: null,
-    //         age: null,
-    //         price: null,
-    //         discountPercent: null,
-    //         discountPrice: null,
 
-    //         // ----
-    //         isCheckValid: false,
-    //         onConcel: false,
-    //         selected: null,
-    //     })
-    //     handleCallBack()
-    //     setToggleShow(false)
-    // }, [clearInput])
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
