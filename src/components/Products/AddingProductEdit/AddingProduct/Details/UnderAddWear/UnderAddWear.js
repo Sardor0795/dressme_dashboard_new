@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
-function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function UnderAddWear({ stateList, colorsList, ColorModal, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -75,28 +75,6 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onRefetch
             setState({ ...state, salePrice: '' })
         }
     }, [state?.salePercent, state?.priceNum])
-    useEffect(() => {
-        if (stateList?.category_id == SelectedNumber) {
-            // setState({
-            //     ...state,
-            //     quantityNum: stateList?.amount || null,
-            //     priceNum: Number(stateList?.price)?.toLocaleString(),
-            //     minBreast: stateList?.min_waist_girth || null,
-            //     maxBreast: stateList?.max_waist_girth || null,
-            //     minSize: stateList?.min_wear_size || null,
-            //     maxSize: stateList?.max_wear_size || null,
-            //     minHeight: stateList?.min_height || null,
-            //     maxHeight: stateList?.max_height || null,
-            //     minHips: stateList?.min_hip_girth || null,
-            //     maxHips: stateList?.max_hip_girth || null,
-            //     ageNum: stateList?.age || null,
-            //     salePercent: stateList?.discount_percent || null,
-            //     salePrice: stateList?.discount_price || null,
-            //     sizeListCheck: stateList?.letter_size || null
-            // })
-        }
-
-    }, [stateList])
 
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
@@ -772,8 +750,12 @@ function UnderAddWear({ stateList, colorsList, ColorModal, DeleteSize, onRefetch
                 </div>
                 {checked?.length ?
                     <button type="button" onClick={ColorModal} className="text-textBlueColor hover:underline text-base not-italic font-AeonikProMedium">
-                        Добавить к цвету
-                    </button>
+                        <span> Добавить к цвету</span>
+                        <div
+                            style={{ background: `${addNewColor.hex}` }}
+                            className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                        >
+                        </div>                    </button>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
                         Добавить к цвету
