@@ -15,14 +15,14 @@ import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 const url = "https://api.dressme.uz/api/seller";
 
-function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit }) {
+function AllSizeModalEdit({ onClick, onRefetch, productsDataIdEdit }) {
   const { request } = useHttp()
-  const [checkColor, setCheckColor] = useState(stateList?.sizeGetList?.colors[0]?.pivot?.id)
+  const [checkColor, setCheckColor] = useState(productsDataIdEdit?.colors[0]?.pivot?.id)
   const [addSizeColorById, setAddSizeColorById] = useState(false)
   const [openColorModal, setOpenColorModal] = useState(false)
   const [sendingLoader, setSendingLoader] = useState(false)
   const [allSizeOfListId, setAllSizeOfListId] = useState([])
-  const [handlePivotColorId, setHandlePivotColorId] = useState(stateList?.sizeGetList?.colors[0]?.pivot?.color_id)
+  const [handlePivotColorId, setHandlePivotColorId] = useState(productsDataIdEdit?.colors[0]?.pivot?.color_id)
 
   // ------------Delete------
   const [deleteId, setDeleteId] = useState(null)
@@ -165,7 +165,8 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
   }
   // --------------------------------------------------------
   // green black red inputРазмер Талии
-  // console.log(stateList?.sizeGetList, "stateList?.sizeGetList");
+  // console.log(productsDataIdEdit, "productsDataIdEdit");
+  // console.log(productsDataIdEdit, "productsDataIdEdit");
   return (
     <div className="w-full md:w-[780px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
       <section
@@ -190,7 +191,7 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
             <MenuCloseIcons colors={"#a2a2a2"} />
           </button></div>
         <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-          {stateList?.sizeGetList?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
+          {productsDataIdEdit?.colors?.filter(e => e?.pivot?.id !== checkColor)?.map((data) => {
             return (
               <div
                 key={data?.id}
@@ -303,7 +304,7 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
       <div className="w-full flex items-center justify-between md:pl-7 ">
         <div className="w-fit flex items-center gap-x-2">
           <span className="text-black text-md not-italic font-AeonikProRegular"> Цветa:</span>
-          {stateList?.sizeGetList?.colors?.map((data) => {
+          {productsDataIdEdit?.colors?.map((data) => {
             return (
               <div onClick={() => {
                 onHandleCheckColor(data?.pivot?.id)
@@ -341,11 +342,11 @@ function AllSizeModalEdit({ onClick, stateList, onRefetch, productsDataIdEdit })
 
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
-            <HeadWearAdd stateList={stateList?.sizeGetList} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <OutWearAdd stateList={stateList?.sizeGetList} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <UnderAddWear stateList={stateList?.sizeGetList} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <ShoesAdd stateList={stateList?.sizeGetList} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <AccessoriesAdd stateList={stateList?.sizeGetList} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={stateList?.sizeGetList?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <HeadWearAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <OutWearAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <UnderAddWear stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <ShoesAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <AccessoriesAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
 
           </div>
         </div>

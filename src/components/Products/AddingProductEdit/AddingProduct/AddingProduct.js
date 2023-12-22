@@ -191,7 +191,6 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        console.log("Onrefetch Ishladi");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
@@ -558,12 +557,13 @@ const AddingProduct = () => {
             setColorListForTest([])
             setColorChecked()
             setSelectColorID()
+            setProductsDataIdEdit()
             refetch()
             setTimeout(() => {
               setHideToggleIcons(false)
               setColorDelete(false)
               setColorDelete(false)
-              setState({ ...state, showColor: false })
+              setState({ ...state, showColor: false, })
             }, 1000);
           }
         },
@@ -575,7 +575,7 @@ const AddingProduct = () => {
         }
       })
   }
-
+  console.log(state?.sizeGetList, "sizeGetList");
   return (
     <div className="w-full h-fit ">
 
