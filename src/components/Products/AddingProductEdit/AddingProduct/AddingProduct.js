@@ -11,7 +11,7 @@ import {
   StarLabel,
 } from "../../../../assets/icons";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import ClothingSection from "./DetailsForMobile/ClothesSection/ClothingSection";
 import SubClothingSection from "./DetailsForMobile/SubClothesSection/SubClothingSection";
@@ -33,6 +33,7 @@ import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeM
 import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
 import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
+import { FaCheck } from "react-icons/fa6";
 // import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
 // import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 
@@ -94,7 +95,11 @@ const AddingProduct = () => {
     //---------------
     newColorByAddSizes: null
   });
-
+  const [deleteColorId, setDeleteColorId] = useState(null);
+  const [hideToggleIcons, setHideToggleIcons] = useState(false);
+  const [SuccessMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loader, setLoader] = useState(false);
 
   function CallBackHeadWear(childData) {
     // console.log(childData, "childData");
@@ -186,7 +191,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        // console.log("Onrefetch Ishladi");
+        console.log("Onrefetch Ishladi");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           setSection_Id(section_Id => [...section_Id, value?.id])
@@ -268,7 +273,6 @@ const AddingProduct = () => {
   function onHanleColorList(e) {
     if (!colorListForTest?.includes(e) && colors_Id?.length < 4) {
       setSelectColorID(e)
-      console.log("bu ishladi");
       if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
         setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
         setColors_Id(colors_Id => [...colors_Id, e])
@@ -278,11 +282,12 @@ const AddingProduct = () => {
 
     }
   }
-  console.log(colors_Id?.length, "colors_Id?.length ");
+  // console.log(colors_Id?.length, "colors_Id?.length ");
 
 
   function onHandleColorUnchecked(id) {
     if (colorListForTest?.includes(id)) {
+      setDeleteColorId(id)
       setColorDelete(true)
     } else {
       setColors_Id(colors_Id?.filter(e => e !== id))
@@ -523,13 +528,54 @@ const AddingProduct = () => {
       throw new Error(err?.message || "something wrong");
     }
   }
-  // console.log(selectColorID, "selectColorID");
-  // console.log(colorChecked, "colorChecked");
-  // console.log(
-  //   state?.imageAddError?.color_id,
-  //   state?.imageAddError?.price,
-  //   state?.imageAddError?.photo,
-  // );
+  const deleteColor = useMutation(() => {
+    return request({
+      url: `/products/${Number(newProductId)}/delete-product-color`,
+      method: "POST",
+      token: true,
+      body: {
+        color_id: deleteColorId
+      }
+    });
+  });
+  console.log(deleteColorId, "deleteColorId");
+
+  function onHandleDeleteColor() {
+    setLoader(true)
+    setHideToggleIcons(true)
+    deleteColor.mutate({},
+      {
+        onSuccess: (res) => {
+          if (res?.message && res?.errors) {
+            setErrorMessage(res?.message)
+            setLoader(false)
+            setColorDelete(false)
+            refetch()
+          } else if (res?.message) {
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            setColors_Id([])
+            setColorListForTest([])
+            setColorChecked()
+            setSelectColorID()
+            refetch()
+            setTimeout(() => {
+              setHideToggleIcons(false)
+              setColorDelete(false)
+              setColorDelete(false)
+              setState({ ...state, showColor: false })
+            }, 1000);
+          }
+        },
+
+        onError: err => {
+          console.log(err);
+          refetch()
+
+        }
+      })
+  }
+
   return (
     <div className="w-full h-fit ">
 
@@ -735,35 +781,36 @@ const AddingProduct = () => {
                 className="w-full h-full"
                 colors={"#a1a1a1"} />
             </button>
-            {/* {hideDeleteIcons ?
-                <div className="w-full flex items-center justify-center">
-                  {loader && hideDeleteIcons ?
-                    <PuffLoader
-                      // className={styles.loader1}
-                      color={"#007DCA"}
-                      size={80}
-                      loading={true}
-                    />
-                    :
-                    <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2"><FaCheck size={30} color="#009B17" /></span>
-                      <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
-                    </div>
-                  }
-                </div>
-                : */}
-            <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-                <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                  <DeleteIcon width={30} />
+            {hideToggleIcons ?
+              <div className="w-full flex items-center justify-center">
+                {loader && hideToggleIcons ?
+                  <PuffLoader
+                    // className={styles.loader1}
+                    color={"#007DCA"}
+                    size={80}
+                    loading={true}
+                  />
+                  :
+                  <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2"><FaCheck size={30} color="#009B17" /></span>
+                    <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                  </div>
+                }
+              </div>
+              :
+              <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+                <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                  <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                    <DeleteIcon width={30} />
+                  </span>
                 </span>
-              </span>
-              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                Вы уверены?
-              </span>
-            </div>
-
-            {/* } */}
+                <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                  Вы уверены?
+                </span>
+                <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
+                  Если вы удалите цвет, то удалятся все фото и размеры выбранного цвета!
+                </span>
+              </div>}
             <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
 
               <button
@@ -773,10 +820,11 @@ const AddingProduct = () => {
                 Oтмена
               </button>
               <button
-                onClick={() => setColorDelete(false)}
+                onClick={() => onHandleDeleteColor()}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-                Удалить </button>
+                Удалить
+              </button>
             </div>
 
           </section>
@@ -1746,7 +1794,7 @@ const AddingProduct = () => {
           />
           <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={CallBackTextForm} />
         </div>
-      </div>
+      </div >
     </div >
   );
 };
