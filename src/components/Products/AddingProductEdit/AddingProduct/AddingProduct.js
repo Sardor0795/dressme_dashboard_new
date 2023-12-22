@@ -94,7 +94,9 @@ const AddingProduct = () => {
     //productsDataIdEdit
     sizeGetList: null,
     //---------------
-    newColorByAddSizes: null
+    newColorByAddSizes: null,
+    // AllChekcedSizeList
+    checkedSizeList: []
   });
   const [deleteColorId, setDeleteColorId] = useState(null);
   const [hideToggleIcons, setHideToggleIcons] = useState(false);
@@ -105,6 +107,11 @@ const AddingProduct = () => {
   function CallBackHeadWear(childData) {
     // console.log(childData, "childData");
     setState({ ...state, newColorByAddSizes: childData })
+  }
+  function AllCheckedSizeList(childData) {
+    // console.log(childData, "AllCheckedSizeList");
+
+    setState({ ...state, checkedSizeList: childData })
   }
 
   // console.log(state?.newColorByAddSizes?.amount, "newColorByAddSizes1");
@@ -413,7 +420,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  // console.log(lastElement, "lastElement"); handleCallBack
+  console.log(state?.checkedSizeList, "checkedSizeList");
   // console.log(state?.newColorByAddSizes, "newColorByAddSizes");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
@@ -424,14 +431,17 @@ const AddingProduct = () => {
     state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
     form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
     form.append("color_id", lastElement);
-    form.append("price", state?.newColorByAddSizes?.price);
+    state?.checkedSizeList?.map((e, index) => {
+      form.append("product_size_ids[]", state?.checkedSizeList[index]);
+    })
+    state?.newColorByAddSizes?.price && form.append("price", state?.newColorByAddSizes?.price);
     state?.newColorByAddSizes?.amount && form.append("amount", state?.newColorByAddSizes?.amount);
     state?.newColorByAddSizes?.age && form.append("age", Number(state?.newColorByAddSizes?.age));
     state?.newColorByAddSizes?.discount_percent && form.append("discount_percent", state?.newColorByAddSizes?.discount_percent);//no R
     state?.newColorByAddSizes?.discount_price && form.append("discount_price", state?.newColorByAddSizes?.discount_price);//no R
 
     // // HeadWear
-    form.append("one_size", state?.newColorByAddSizes?.sizeCheck ? 1 : 0);
+    state?.newColorByAddSizes?.sizeCheck && form.append("one_size", state?.newColorByAddSizes?.sizeCheck ? 1 : 0);
     state?.newColorByAddSizes?.minHeadGirth && form.append("min_head_girth", state?.newColorByAddSizes?.minHeadGirth);
     state?.newColorByAddSizes?.maxHeadGirth && form.append("max_head_girth", state?.newColorByAddSizes?.maxHeadGirth);
     // // OutWear
@@ -1718,7 +1728,7 @@ const AddingProduct = () => {
                       }`}
                   >
                     {allSizeModalShow && (
-                      <AllSizeModalEdit lastElement={lastElement} allColor={productsData?.colors} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
+                      <AllSizeModalEdit lastElement={lastElement} allColor={productsData?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
 
@@ -1748,7 +1758,7 @@ const AddingProduct = () => {
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
 
                   {/* {lastElement ? */}
-                  {lastElement && state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
+                  {lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.checkedSizeList) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
                     <button
                       type="button"
                       onClick={onHandleAddImage}

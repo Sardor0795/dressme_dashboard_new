@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
-function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function ShoesAdd({ stateList, colorsList, ColorModal, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minFootLength: null,
@@ -427,8 +427,12 @@ function ShoesAdd({ stateList, colorsList, ColorModal, DeleteSize, onRefetch, on
                 </div>
                 {checked?.length ?
                     <button type="button" onClick={ColorModal} className="text-textBlueColor hover:underline text-base not-italic font-AeonikProMedium">
-                        Добавить к цвету
-                    </button>
+                        <span> Добавить к цвету</span>
+                        <div
+                            style={{ background: `${addNewColor.hex}` }}
+                            className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                        >
+                        </div>                    </button>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
                         Добавить к цвету

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DeleteIcon, InputCheckedTrueIcons, MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
 import AccessoriesAdd from "../../../Details/Accessories/AccessoriesAdd";
 import HeadWearAdd from "../../../Details/HeadWear/HeadWearAdd";
@@ -15,7 +15,7 @@ import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 const url = "https://api.dressme.uz/api/seller";
 
-function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsDataIdEdit }) {
+function AllSizeModalEdit({ onClick, lastElement, AllCheckedSizeList, allColor, onRefetch, productsDataIdEdit }) {
   const { request } = useHttp()
   const [checkColor, setCheckColor] = useState(productsDataIdEdit?.colors[0]?.pivot?.id)
   const [addSizeColorById, setAddSizeColorById] = useState(false)
@@ -32,16 +32,24 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
   const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
   // ------------Delete------
+  const [addNewColor, setAddNewColor] = useState(null);
+
 
   const onHanldeColorModal = React.useCallback(() => setOpenColorModal(true), [])
   const onHandleDeleteSize = React.useCallback(() => setSizedeleteModal(true), [])
   function onDeleteId(childData) {
     setDeleteId(childData)
   }
-  console.log(lastElement, "lastElement");
+  // console.log(lastElement, "lastElement");
   console.log(allColor, "allColor");
+  useEffect(() => {
+    allColor?.filter(e => e?.id === lastElement)?.map(item => {
+      setAddNewColor(item)
+    })
+  }, [lastElement])
   function handleGetSizeCheckedList(childData) {
     setAllSizeOfListId(childData)
+    AllCheckedSizeList(childData)
   }
 
   function onHandleCheckColor(id) {
@@ -166,7 +174,7 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
   }
   // --------------------------------------------------------
   // green black red inputРазмер Талии
-  // console.log(productsDataIdEdit, "productsDataIdEdit");
+  console.log(addSizeColorById, "addSizeColorById");
   // console.log(productsDataIdEdit, "productsDataIdEdit");
   return (
     <div className="w-full md:w-[780px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
@@ -188,6 +196,7 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
             className="py-2"
             type="button"
             onClick={() => setOpenColorModal(false)}
+          // className="text"
           >
             <MenuCloseIcons colors={"#a2a2a2"} />
           </button></div>
@@ -208,13 +217,13 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
                      `}
                     >
                       <div
-                        onClick={() => onHandleAddColorSize(data?.pivot?.color_id)}
+                        onClick={() => onHandleAddColorSize(data?.id)}
                         style={{ background: `${data.hex}` }}
                         className="w-full h-full flex items-center justify-center">
-                        {data?.pivot?.color_id == addSizeColorById && data?.color_id !== 1 ?
+                        {data?.id == addSizeColorById && data?.id !== 1 ?
                           <BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
                           : null}
-                        {data?.pivot?.color_id == addSizeColorById && data?.color_id === 1 ?
+                        {data?.id == addSizeColorById && data?.id === 1 ?
                           <BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
                           : null}
                       </div>
@@ -265,7 +274,30 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
         </div>
         <div className="flex items-center justify-end  gap-x-5">
           {lastElement ?
-            <button onClick={onHandleCopyAddSize}
+
+            addSizeColorById
+              ?
+              <button
+                type="button"
+                // onClick={onHandleCopyAddSize}
+                className="w-fit h-fit flex items-end justify-end select-none  active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                {sendingLoader ?
+                  <ClipLoader
+                    className="h-full py-[2px]"
+                    color={"#007DCA"}
+                    size={40}
+                    loading={true}
+                  /> : "Готово"}
+              </button>
+              :
+              <span
+                className="w-fit h-fit flex items-end justify-end select-none text-[#b2b2b2] px-3 py-2 font-AeonikProMedium pr-1">
+                Готово
+              </span>
+            :
+            <button
+              type="button"
+              onClick={onHandleCopyAddSize}
               className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
               {sendingLoader ?
                 <ClipLoader
@@ -275,18 +307,7 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
                   loading={true}
                 /> : "Добавить"}
             </button>
-            :
-            <button
-              // onClick={onHandleCopyAddSize}
-              className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-              {sendingLoader ?
-                <ClipLoader
-                  className="h-full py-[2px]"
-                  color={"#007DCA"}
-                  size={40}
-                  loading={true}
-                /> : "Сохранить"}
-            </button>}
+          }
         </div>
       </div>
       {/* Color Delete Of Pop Confirm */}
@@ -380,7 +401,7 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
           })}
         </div>
         <button className="md:flex hidden" type="button " onClick={onClick}>
-          <MenuCloseIcons colors={"#000"} />
+          <MenuCloseIcons colors={"#a2a2a2"} />
         </button>
         <label className="md:hidden flex items-center border border-borderColor rounded-lg overflow-hidden">
           <input type="checkbox" className="w-[20px] h-[20px] rounded-lg" />
@@ -393,11 +414,11 @@ function AllSizeModalEdit({ onClick, lastElement, allColor, onRefetch, productsD
 
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
-            <HeadWearAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <OutWearAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <UnderAddWear stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <ShoesAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
-            <AccessoriesAdd stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <HeadWearAdd addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <OutWearAdd addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <UnderAddWear addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <ShoesAdd addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
+            <AccessoriesAdd addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />
 
           </div>
         </div>
