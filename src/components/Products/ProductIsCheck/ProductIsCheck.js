@@ -15,15 +15,15 @@ export default function ProductIsCheck() {
 
     const { request } = useHttp()
     const [state, setState] = useState({
-        isLocation: "",
-        isCheckLocation: null,
+        // isLocation: "",
+        // isCheckLocation: null,
         isMarket: "",
         isMarketCheck: false,
         loading: true,
     })
 
 
-    const { isLoading, data } = useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
+    useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
         {
             onSuccess: (res) => {
                 if (res?.shops) {
@@ -39,56 +39,30 @@ export default function ProductIsCheck() {
         }
     );
 
-    // ------------GET  Has Magazin ?-----------------
-    const { isFetched, refetch } = useQuery(["location_index"], () => {
-        return request({ url: "/shops/locations/index", token: true });
-    },
-        {
-            onSuccess: (res) => {
-                if (res?.locations) {
-                    setState({ ...state, isCheckLocation: res?.locations_exist, isLocation: res?.locations?.data, loading: false })
-                }
-            },
-            onError: (err) => {
-                setState({ ...state, loading: false })
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
-        }
-    );
-    console.log(state?.isMarket, "isMarket");
-    console.log(state?.isLocation, "isLocation");
+
+    // console.log(state?.isMarket, "isMarket");
+    // console.log(state?.isLocation, "isLocation");
+    // console.log(dressInfo?.SellerMagazinLocation?.locations_exist, "SellerMagazinLocation");
     // console.log(state?.isLocation, state?.isMarket);
 
     return (
         <div>
-            {state?.loading || isLoading ? <LoadingForSeller /> :
-                <div>  {
-                    state?.isMarket?.length ?
-                        <div>
-                            {isFetched && state?.isLocation?.length ?
-                                <div>
-                                    {state?.isCheckLocation ?
-                                        <ProductsPageOne /> : <NoLocationProduct />
-                                    }
-                                </div>
-                                :
-                                <LoadingForSeller />}
-                        </div>
+            {state?.loading ? <LoadingForSeller /> :
+                state?.isMarket?.length > 0 ?
+                    dressInfo?.SellerMagazinLocation?.locations_exist ?
+                        dressInfo?.SellerMagazinLocation?.locations_exist ? <ProductsPageOne /> : <NoLocationProduct />
                         :
-                        <div className="flex items-center h-[100vh] justify-center">
-                            <Link
-                                to="/store"
-                                className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                            >
-                                Сначала создайте магазин!
-                            </Link>
-                        </div >
-                }
-                </div>
+                        <LoadingForSeller />
+                    :
+                    <div className="flex items-center h-[100vh] justify-center">
+                        <Link
+                            to="/store"
+                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                        >
+                            Сначала создайте магазин!
+                        </Link>
+                    </div >
             }
-
-
         </div >
     )
 }
