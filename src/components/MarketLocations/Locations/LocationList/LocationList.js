@@ -30,15 +30,13 @@ function LocationList({ marketList, locationList }) {
   return (
     <div className={`w-full h-full  px-4  md:px-10 `}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${
-          openSelect ? "" : "hidden"
-        }`}
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"
+          }`}
         onClick={() => setOpenSelect(false)}
       ></div>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setOpenSelect(false)}
@@ -62,7 +60,6 @@ function LocationList({ marketList, locationList }) {
                   className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
                 >
                   <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
-                    {" "}
                     {item?.name}
                   </span>
                 </button>

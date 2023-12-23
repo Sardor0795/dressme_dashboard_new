@@ -59,7 +59,7 @@ export default function RouterList() {
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
-
+  console.log(dressInfo?.isCheckPoructList?.length, "dressInfo?.isCheckPoructList?.length");
   return (
     <div className="w-full h-full">
       {/* <NavbarForSetting /> */}
@@ -106,9 +106,11 @@ export default function RouterList() {
 
         {/* ---------------------<LocationsProduct>------------------------- */}
         <Route path="/products" element={<Products />}>
-          {dressInfo?.isCheckPoructList?.length !== 0 ?
+          {dressInfo?.isCheckPoructList?.length >= 1 ?
             <Route path="/products" element={<Navigate to={"/products/location"} />} />
-            : <Route index element={<ProductIsCheck />} />}
+            :
+            <Route index element={<ProductIsCheck />} />
+          }
 
           <Route path="/products/location/:id" element={<ProductEditPage />} />
           <Route path="/products/location" element={<ProductLocationsList />} />
