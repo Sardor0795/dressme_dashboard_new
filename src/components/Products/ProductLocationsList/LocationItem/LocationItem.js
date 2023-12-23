@@ -531,17 +531,17 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                 {itemValue?.cost?.discount_price || itemValue?.cost?.price}
                               </td>
                               <td className="w-[10%] h-full  flex items-center justify-center ">
-                                <button
+                                {/* <button
                                   onClick={() => goProductDetailEdit(itemValue?.id)}
                                   className="text-[18px] text-weatherWinterColor w-full text-center"
                                 >
                                   Подробнее
-                                </button>
+                                </button> */}
                                 <button
                                   onClick={() => goProductDetailEdit1(itemValue?.id)}
                                   className="text-[18px] text-weatherWinterColor w-full text-center"
                                 >
-                                  --1Подробнее
+                                  Подробнее
                                 </button>
                               </td>
                               <td className="w-[9%] h-full  flex items-center justify-center ">
