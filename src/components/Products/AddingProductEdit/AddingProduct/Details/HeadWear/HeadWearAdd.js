@@ -496,14 +496,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColo
                                                         <div className="flex flex-col items-center">
                                                             <p
                                                                 className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                            >{item?.min_head_girth || "Мин"}
+                                                            >{item?.min_head_girth || null}
                                                             </p>
                                                         </div>
                                                         <span className="mx-[5px]"><LineIcon /></span>
                                                         <div className="flex flex-col">
                                                             <p
                                                                 className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                            >{item?.max_head_girth || "Макс"}</p>
+                                                            >{item?.max_head_girth || null}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -558,7 +558,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColo
                                                         <div className="w-full flex items-center">
                                                             <p
                                                                 className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                                            >{item?.age || "age"}</p>
+                                                            >{item?.age || null}</p>
                                                         </div>
                                                     </div>
                                                     <div className="w-full md:w-[90%]">
@@ -575,7 +575,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColo
                                                         <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                                             <p
                                                                 className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                            >{Number(item?.price)?.toLocaleString() || "0"}</p>
+                                                            >{Number(item?.price)?.toLocaleString() || null}</p>
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                 сум
                                                             </span>
@@ -598,7 +598,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColo
                                                                 <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                                                     <p
                                                                         className="inputStyle w-[70%] flex items-center justify-center cursor-default  text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                    >{item?.discount_percent || "0"}</p>
+                                                                    >{item?.discount_percent || null}</p>
                                                                     <span className="text-textLightColor ml-1">%</span>
                                                                 </div>
                                                             </div>
@@ -607,7 +607,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColo
                                                                 <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                                                     <p
                                                                         className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                    >{Number(item?.discount_price)?.toLocaleString() || "0"}</p>
+                                                                    >{Number(item?.discount_price)?.toLocaleString() || null}</p>
                                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                         сум
                                                                     </span>

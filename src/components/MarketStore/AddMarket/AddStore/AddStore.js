@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
+import { ClipLoader } from "react-spinners";
 
 function AddStore({ shopsList, onRefetch }) {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ function AddStore({ shopsList, onRefetch }) {
     pictureBgView: "",
     pictureLogoFile: "",
     pictureLogoView: "",
+    // Loader
+    sendingLoader: false,
   });
 
   const handleChange = (e) => {
@@ -41,7 +44,7 @@ function AddStore({ shopsList, onRefetch }) {
   };
 
   // ------------GET METHOD Gender-type-----------------
-  useQuery(["get_genders"], () => {
+  useQuery(["get_genders_market"], () => {
     return request({ url: "/genders", token: true })
   },
     {
@@ -66,6 +69,7 @@ function AddStore({ shopsList, onRefetch }) {
   );
 
   const sendFunc = () => {
+    setState({ ...state, sendingLoader: true })
     let form = new FormData();
     state?.magazinName && form.append("name", state?.magazinName);
     state?.pictureBgFile &&
@@ -84,9 +88,8 @@ function AddStore({ shopsList, onRefetch }) {
       .then((res) => res.json())
       .then((res) => {
         if (res?.errors && res?.message) {
-          setState({ ...state, errorGroup: res?.errors });
+          setState({ ...state, errorGroup: res?.errors, sendingLoader: false });
         } else if (res?.message) {
-          // onRefetch()
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 3000,
@@ -98,6 +101,9 @@ function AddStore({ shopsList, onRefetch }) {
             theme: "light",
           });
           navigate("/store");
+          onRefetch()
+
+          setState({ ...state, sendingLoader: false })
         }
 
       })
@@ -112,6 +118,8 @@ function AddStore({ shopsList, onRefetch }) {
           progress: undefined,
           theme: "light",
         });
+        setState({ ...state, sendingLoader: false })
+
       });
   };
 
@@ -120,12 +128,12 @@ function AddStore({ shopsList, onRefetch }) {
       top: 0,
     });
   }, []);
-  console.log(state?.deliverList, "deliverList")
-  console.log(state?.genderType, "genderType")
-  console.log(state?.checkGender, "checkGender")
+  // console.log(state?.deliverList, "deliverList")
+  // console.log(state?.genderType, "genderType")
+  // console.log(state?.checkGender, "checkGender")
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
-      <ToastContainer
+      {/* <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
         autoClose={5000}
@@ -138,7 +146,7 @@ function AddStore({ shopsList, onRefetch }) {
         draggable
         pauseOnHover
         theme="colored"
-      />
+      /> */}
       <div className="w-full flex items-center">
         {/* {shopsList?.shops?.data?.length >= 1 && ( */}
         <div className="flex md:hidden items-start">
@@ -367,7 +375,14 @@ function AddStore({ shopsList, onRefetch }) {
           onClick={sendFunc}
           className="w-full md:w-fit text xs:px-[100px] flex items-center justify-center h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
-          Создать магазин
+
+          {state?.sendingLoader ?
+            <ClipLoader
+              className="h-full py-[2px]"
+              color={"#fff"}
+              size={40}
+              loading={true}
+            /> : " Создать магазин "}
         </button>
       </div>
     </div>
