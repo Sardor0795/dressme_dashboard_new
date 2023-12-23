@@ -421,7 +421,6 @@ const AddingProduct = () => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
   console.log(state?.checkedSizeList, "checkedSizeList");
-  // console.log(state?.newColorByAddSizes, "newColorByAddSizes");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();

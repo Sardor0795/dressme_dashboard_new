@@ -41,7 +41,7 @@ function AllSizeModalEdit({ onClick, lastElement, AllCheckedSizeList, allColor, 
     setDeleteId(childData)
   }
   // console.log(lastElement, "lastElement");
-  console.log(allColor, "allColor");
+  // console.log(allColor, "allColor");
   useEffect(() => {
     allColor?.filter(e => e?.id === lastElement)?.map(item => {
       setAddNewColor(item)
@@ -174,7 +174,7 @@ function AllSizeModalEdit({ onClick, lastElement, AllCheckedSizeList, allColor, 
   }
   // --------------------------------------------------------
   // green black red inputРазмер Талии
-  console.log(addSizeColorById, "addSizeColorById");
+  // console.log(addSizeColorById, "addSizeColorById");
   // console.log(productsDataIdEdit, "productsDataIdEdit");
   return (
     <div className="w-full md:w-[780px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">

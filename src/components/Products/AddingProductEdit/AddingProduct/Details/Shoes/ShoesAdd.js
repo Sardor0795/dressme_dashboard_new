@@ -426,7 +426,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, addNewColor, DeleteSize, 
                     </p>
                 </div>
                 {checked?.length ?
-                    <button type="button" onClick={ColorModal} className="text-textBlueColor hover:underline text-base not-italic font-AeonikProMedium">
+                    <button type="button" onClick={ColorModal} className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
                         <span> Добавить к цвету</span>
                         <div
                             style={{ background: `${addNewColor.hex}` }}
