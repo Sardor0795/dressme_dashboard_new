@@ -96,7 +96,9 @@ const AddingProduct = () => {
     //---------------
     newColorByAddSizes: null,
     // AllChekcedSizeList
-    checkedSizeList: []
+    checkedSizeList: [],
+    // ----
+    newProductId: null
   });
   const [deleteColorId, setDeleteColorId] = useState(null);
   const [hideToggleIcons, setHideToggleIcons] = useState(false);
@@ -175,6 +177,10 @@ const AddingProduct = () => {
 
   const { id } = useParams()
   const newProductId = id?.replace(":", "")
+  // useEffect(()=>{
+  //   setState({ ...state, newProductId:  id?.replace(":", "") })
+
+  // },[id])
 
   const [openCategories, setOpenCategories] = useState();
   const toggleCategories = React.useCallback(
@@ -420,7 +426,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
+  // console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
@@ -473,7 +479,7 @@ const AddingProduct = () => {
     state?.newColorByAddSizes?.legnthAcc && form.append("length", state?.newColorByAddSizes?.legnthAcc);
     state?.newColorByAddSizes?.widthAcc && form.append("width", state?.newColorByAddSizes?.widthAcc)
     try {
-      const res = await fetch(`${url}/products/${newProductId}/add-product-color`, {
+      const res = await fetch(`${url}/products/${state?.newProductId}/add-product-color`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -1727,7 +1733,7 @@ const AddingProduct = () => {
                       }`}
                   >
                     {allSizeModalShow && (
-                      <AllSizeModalEdit lastElement={lastElement} allColor={productsData?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
+                      <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={productsData?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
 
@@ -1770,8 +1776,6 @@ const AddingProduct = () => {
                           size={40}
                           loading={true}
                         /> : "Сохранить"}
-
-
                     </button>
                     :
                     <span

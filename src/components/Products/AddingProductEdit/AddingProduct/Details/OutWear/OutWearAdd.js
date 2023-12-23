@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
-function OutWearAdd({ stateList, colorsList, ColorModal, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minBreast: null,
@@ -222,12 +222,15 @@ function OutWearAdd({ stateList, colorsList, ColorModal, addNewColor, DeleteSize
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
         })
+        // setGetSizesIds(getSizesIds.filter((x, i, a) => a.indexOf(x) == i))
+
     }, [checkColor])
+
     useEffect(() => {
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
             setCheckAll(checked.length === getSizesIds?.length);
-            handleGetSizeCheckedList(checked)
+            // handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 
@@ -235,11 +238,16 @@ function OutWearAdd({ stateList, colorsList, ColorModal, addNewColor, DeleteSize
         setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
         setCheckAll(e.target.checked);
     };
-    useEffect(() => {
-        setChecked([])
-        setIndeterminate(false)
-        setCheckAll(false)
-    }, [checkColor])
+    // useEffect(() => {
+    //     setChecked([])
+    //     setIndeterminate(false)
+    //     setCheckAll(false)
+    // }, [checkColor])
+    // console.log(checkColor, "checkColor2");
+    // console.log(getSizesIds, "getSizesIds2");
+    // console.log(checked, "checked2");
+    // console.log(checkAll, "checkAll2");
+
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div>
@@ -750,14 +758,19 @@ function OutWearAdd({ stateList, colorsList, ColorModal, addNewColor, DeleteSize
                     </p>
                 </div>
                 {checked?.length ?
-                    <button type="button" onClick={ColorModal} className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
-                        <span> Добавить к цвету</span>
-                        {addNewColor && <div
-                            style={{ background: `${addNewColor?.hex}` }}
-                            className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
-                        >
-                        </div>}
-                    </button>
+                    <div className="w-fit flex items-center gap-x-1">
+                        <button type="button" onClick={!addNewColor?.id ? ColorModal : null} className="text-textBlueColor  hover:underline text-base not-italic font-AeonikProMedium">
+                            <span> Добавить к цвету</span>
+                        </button>
+                        {addNewColor &&
+                            <button
+                                type="button"
+                                onClick={onHandleAddProductSize()}
+                                style={{ background: `${addNewColor?.hex}` }}
+                                className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                            >
+                            </button>}
+                    </div>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
                         Добавить к цвету

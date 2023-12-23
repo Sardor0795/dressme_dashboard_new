@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
-function UnderAddWear({ stateList, colorsList, ColorModal, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function UnderAddWear({ stateList, colorsList, ColorModal, addNewColor, onHandleAddProductSize, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -235,12 +235,12 @@ function UnderAddWear({ stateList, colorsList, ColorModal, addNewColor, DeleteSi
         setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
         setCheckAll(e.target.checked);
     };
-    useEffect(() => {
-        setChecked([])
-        setIndeterminate(false)
-        setCheckAll(false)
-    }, [checkColor])
-
+    // useEffect(() => {
+    //     setChecked([])
+    //     setIndeterminate(false)
+    //     setCheckAll(false)
+    // }, [checkColor])
+    console.log(checked, "checked3");
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div>
@@ -749,14 +749,18 @@ function UnderAddWear({ stateList, colorsList, ColorModal, addNewColor, DeleteSi
                     </p>
                 </div>
                 {checked?.length ?
-                    <button type="button" onClick={ColorModal} className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
-                        <span> Добавить к цвету</span>
-                        {addNewColor && <div
+                    <div className="w-fit flex items-center gap-x-1">
+                        <button type="button" onClick={!addNewColor?.id ? ColorModal : null} className="text-textBlueColor  hover:underline text-base not-italic font-AeonikProMedium">
+                            <span> Добавить к цвету</span>
+                        </button>
+                        {addNewColor && <button
+                            onClick={onHandleAddProductSize}
+
                             style={{ background: `${addNewColor?.hex}` }}
                             className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
                         >
-                        </div>}
-                    </button>
+                        </button>}
+                    </div>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
                         Добавить к цвету
