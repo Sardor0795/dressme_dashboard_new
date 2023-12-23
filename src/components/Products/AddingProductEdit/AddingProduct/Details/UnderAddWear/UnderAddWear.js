@@ -751,11 +751,11 @@ function UnderAddWear({ stateList, colorsList, ColorModal, addNewColor, DeleteSi
                 {checked?.length ?
                     <button type="button" onClick={ColorModal} className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
                         <span> Добавить к цвету</span>
-                        <div
-                            style={{ background: `${addNewColor.hex}` }}
+                        {addNewColor && <div
+                            style={{ background: `${addNewColor?.hex}` }}
                             className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
                         >
-                        </div>
+                        </div>}
                     </button>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
