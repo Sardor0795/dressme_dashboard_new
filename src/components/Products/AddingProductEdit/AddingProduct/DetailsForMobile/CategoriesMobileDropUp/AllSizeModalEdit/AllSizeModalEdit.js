@@ -40,13 +40,12 @@ function AllSizeModalEdit({ onClick, lastElement, AllCheckedSizeList, allColor, 
   function onDeleteId(childData) {
     setDeleteId(childData)
   }
-  // console.log(lastElement, "lastElement");
-  // console.log(allColor, "allColor");
   useEffect(() => {
     allColor?.filter(e => e?.id === lastElement)?.map(item => {
       setAddNewColor(item)
     })
   }, [lastElement])
+  console.log(lastElement, "lastElement");
   function handleGetSizeCheckedList(childData) {
     setAllSizeOfListId(childData)
     AllCheckedSizeList(childData)
@@ -274,12 +273,10 @@ function AllSizeModalEdit({ onClick, lastElement, AllCheckedSizeList, allColor, 
         </div>
         <div className="flex items-center justify-end  gap-x-5">
           {lastElement ?
-
             addSizeColorById
               ?
               <button
                 type="button"
-                // onClick={onHandleCopyAddSize}
                 className="w-fit h-fit flex items-end justify-end select-none  active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                 {sendingLoader ?
                   <ClipLoader
