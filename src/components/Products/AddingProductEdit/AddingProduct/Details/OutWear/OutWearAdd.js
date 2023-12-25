@@ -230,7 +230,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
             setCheckAll(checked.length === getSizesIds?.length);
-            // handleGetSizeCheckedList(checked)
+            handleGetSizeCheckedList(checked)
         }
     }, [checked]);
 
@@ -765,7 +765,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
                         {addNewColor &&
                             <button
                                 type="button"
-                                onClick={onHandleAddProductSize()}
+                                onClick={onHandleAddProductSize}
                                 style={{ background: `${addNewColor?.hex}` }}
                                 className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
                             >

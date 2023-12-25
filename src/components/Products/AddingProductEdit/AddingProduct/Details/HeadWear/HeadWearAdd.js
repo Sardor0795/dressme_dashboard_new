@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
-function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAddProductSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -450,11 +450,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, addNewColo
                         <button type="button" onClick={!addNewColor?.id ? ColorModal : null} className="text-textBlueColor  hover:underline text-base not-italic font-AeonikProMedium">
                             <span> Добавить к цвету</span>
                         </button>
-                        {addNewColor && <div
-                            style={{ background: `${addNewColor?.hex}` }}
-                            className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
-                        >
-                        </div>}
+                        {addNewColor &&
+                            <button
+                                type="button"
+                                onClick={onHandleAddProductSize}
+                                style={{ background: `${addNewColor?.hex}` }}
+                                className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                            >
+                            </button>}
                     </div>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
