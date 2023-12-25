@@ -248,7 +248,7 @@ export default function AddingProduct() {
                   <div className="mt-[10px]">
                     <div className="flex items-center text-white w-fit px-2 py-[5px] text-[16px] rounded-md font-AeonikProRegular bg-[#007dca]">
                       хлопок{" "}
-                      <Link className="flex items-center justify-center active:translate-y-[2px] w-4 h-4 rounded-full bg-white ml-[10px]">
+                      <Link className="flex items-center justify-center active:scale-95  active:opacity-70 w-4 h-4 rounded-full bg-white ml-[10px]">
                         <XIcon />
                       </Link>
                     </div>
@@ -335,13 +335,13 @@ export default function AddingProduct() {
                   onClick={() => {
                     navigate(-1);
                   }}
-                  className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                  className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
                 >
                   Назад
                 </button>
                 <button
                   onClick={success}
-                  className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                  className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
                 >
                   Сохранить
                 </button>
