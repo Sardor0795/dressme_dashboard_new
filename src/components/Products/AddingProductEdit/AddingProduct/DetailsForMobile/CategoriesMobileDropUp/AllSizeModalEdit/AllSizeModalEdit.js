@@ -46,9 +46,10 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     })
   }, [lastElement])
   // console.log(lastElement, "lastElement");
-  function handleGetSizeCheckedList(childData) {
+  function handleGetSizeCheckedList(childData, lastElementColorId) {
+    // console.log(lastElementColorId, "lastElementColorId");
     setAllSizeOfListId(childData)
-    AllCheckedSizeList(childData)
+    AllCheckedSizeList(childData, lastElementColorId)
   }
 
   function onHandleCheckColor(id) {
@@ -174,90 +175,90 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
   // allSizeOfListId?.forEach((index) => {
   //   console.log(index, " allSizeOfListId");
   // })
-  function onHandleAddProductSize(checkedList) {
-    console.log(checkedList, "checkedList");
-    let form = new FormData();
-    ThisState?.pictureBgFile1 && form.append("photo", ThisState?.pictureBgFile1);
-    ThisState?.pictureBgFile2 && form.append("photo", ThisState?.pictureBgFile2);
-    ThisState?.pictureBgFile3 && form.append("photo", ThisState?.pictureBgFile3);
-    ThisState?.pictureBgFile4 && form.append("photo", ThisState?.pictureBgFile4);
-    allSizeOfListId?.forEach((e) => {
-      form.append("product_size_ids[]", e);
-      console.log(e, "this is e");
-    })
-    form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
-    form.append("color_id", lastElement);
-    return fetch(`${url}/products/${newProductId}/add-product-color`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-      body: form,
-    })
-      .then(res => res?.json())
-      .then(res => {
-        if (res) {
-          if (res?.errors && res?.message) {
-            toast.error(`${res?.message}`, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            })
-            // onRefetch()
-            // setState({ ...state, sendingLoader: false, imageAddError: res?.errors })
-          } else if (res?.message) {
-            toast.success(`${res?.message}`, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            })
-            onRefetch()
-            // setState({
-            //   ...state,
-            //   pictureBgFile1: null,
-            //   pictureBgFile2: null,
-            //   pictureBgFile3: null,
-            //   pictureBgFile4: null,
-            //   sendingLoader: false,
-            //   imageAddError: null,
-            //   clearAddSize: !state?.clearAddSize
-            // })
-            // setProductsDataIdEdit()
-            // setLastElement()
-            // setSelectColorID()
-            // refetch()
-          }
-          console.log(res, "Product--Store--Added");
-        }
-      })
-      .catch(err => {
-        toast.error(`${err}`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
-        // onRefetch()
-        // setState({ ...state, sendingLoader: false })
-        throw new Error(err?.message || "something wrong");
-      })
+  // function onHandleAddProductSize(checkedList) {
+  //   console.log(checkedList, "checkedList");
+  //   let form = new FormData();
+  //   ThisState?.pictureBgFile1 && form.append("photo", ThisState?.pictureBgFile1);
+  //   ThisState?.pictureBgFile2 && form.append("photo", ThisState?.pictureBgFile2);
+  //   ThisState?.pictureBgFile3 && form.append("photo", ThisState?.pictureBgFile3);
+  //   ThisState?.pictureBgFile4 && form.append("photo", ThisState?.pictureBgFile4);
+  //   allSizeOfListId?.forEach((e) => {
+  //     form.append("product_size_ids[]", e);
+  //     console.log(e, "this is e");
+  //   })
+  //   form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
+  //   form.append("color_id", lastElement);
+  //   return fetch(`${url}/products/${newProductId}/add-product-color`, {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     },
+  //     body: form,
+  //   })
+  //     .then(res => res?.json())
+  //     .then(res => {
+  //       if (res) {
+  //         if (res?.errors && res?.message) {
+  //           toast.error(`${res?.message}`, {
+  //             position: "top-right",
+  //             autoClose: 3000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //             theme: "light",
+  //           })
+  //           // onRefetch()
+  //           // setState({ ...state, sendingLoader: false, imageAddError: res?.errors })
+  //         } else if (res?.message) {
+  //           toast.success(`${res?.message}`, {
+  //             position: "top-right",
+  //             autoClose: 3000,
+  //             hideProgressBar: false,
+  //             closeOnClick: true,
+  //             pauseOnHover: true,
+  //             draggable: true,
+  //             progress: undefined,
+  //             theme: "light",
+  //           })
+  //           onRefetch()
+  //           // setState({
+  //           //   ...state,
+  //           //   pictureBgFile1: null,
+  //           //   pictureBgFile2: null,
+  //           //   pictureBgFile3: null,
+  //           //   pictureBgFile4: null,
+  //           //   sendingLoader: false,
+  //           //   imageAddError: null,
+  //           //   clearAddSize: !state?.clearAddSize
+  //           // })
+  //           // setProductsDataIdEdit()
+  //           // setLastElement()
+  //           // setSelectColorID()
+  //           // refetch()
+  //         }
+  //         console.log(res, "Product--Store--Added");
+  //       }
+  //     })
+  //     .catch(err => {
+  //       toast.error(`${err}`, {
+  //         position: "top-right",
+  //         autoClose: 3000,
+  //         hideProgressBar: false,
+  //         closeOnClick: true,
+  //         pauseOnHover: true,
+  //         draggable: true,
+  //         progress: undefined,
+  //         theme: "light",
+  //       })
+  //       // onRefetch()
+  //       // setState({ ...state, sendingLoader: false })
+  //       throw new Error(err?.message || "something wrong");
+  //     })
 
-  }
+  // }
 
   // --------------------------------------------------------
   // green black red inputРазмер Талии
@@ -501,11 +502,11 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
 
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
-            {Number(productsDataIdEdit?.category_id) === 1 && <HeadWearAdd onHandleAddProductSize={onHandleAddProductSize} addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
-            {Number(productsDataIdEdit?.category_id) === 2 && <OutWearAdd onHandleAddProductSize={onHandleAddProductSize} addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
-            {Number(productsDataIdEdit?.category_id) === 3 && <UnderAddWear onHandleAddProductSize={onHandleAddProductSize} addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
-            {Number(productsDataIdEdit?.category_id) === 4 && <ShoesAdd onHandleAddProductSize={onHandleAddProductSize} addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
-            {Number(productsDataIdEdit?.category_id) === 5 && <AccessoriesAdd onHandleAddProductSize={onHandleAddProductSize} addNewColor={addNewColor} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
+            {Number(productsDataIdEdit?.category_id) === 1 && <HeadWearAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
+            {Number(productsDataIdEdit?.category_id) === 2 && <OutWearAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
+            {Number(productsDataIdEdit?.category_id) === 3 && <UnderAddWear addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
+            {Number(productsDataIdEdit?.category_id) === 4 && <ShoesAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
+            {Number(productsDataIdEdit?.category_id) === 5 && <AccessoriesAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 const url = "https://api.dressme.uz/api/seller";
-function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minBreast: null,
@@ -232,9 +232,9 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
             setCheckAll(checked.length === getSizesIds?.length);
-            handleGetSizeCheckedList(checked)
+            handleGetSizeCheckedList(checked, state?.addnewColorIdIcons)
         }
-    }, [checked]);
+    }, [checked, state?.addnewColorIdIcons]);
 
     const onCheckAllChange = (e) => {
         setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
@@ -249,8 +249,16 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
     // console.log(getSizesIds, "getSizesIds2");
     // console.log(checked, "checked2");
     // console.log(checkAll, "checkAll2");
-    function sendCheckListItem() {
-        onHandleAddProductSize(checked)
+    function sendCheckListItem(id) {
+        if (state?.addnewColorIdIcons) {
+            setState({ ...state, addnewColorIdIcons: null })
+        }
+        if (!state?.addnewColorIdIcons) {
+            setState({ ...state, addnewColorIdIcons: id })
+            setTimeout(() => {
+                onClick()
+            }, 1000);
+        }
     }
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
@@ -763,26 +771,22 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
                 </div>
                 {checked?.length ?
                     <div className="w-fit flex items-center gap-x-1">
-                        <button type="button" onClick={!addNewColor?.id ? ColorModal : null} className="text-textBlueColor  hover:underline text-base not-italic font-AeonikProMedium">
+                        <button type="button" onClick={addNewColor?.id ? () => sendCheckListItem(addNewColor?.id) : ColorModal}
+                            className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
                             <span> Добавить к цвету</span>
+                            {addNewColor &&
+                                <span
+                                    style={{ background: `${addNewColor?.hex}` }}
+                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                                >
+                                    {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
+                                        < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                                    }
+                                    {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
+                                        < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                                    }
+                                </span>}
                         </button>
-                        {addNewColor &&
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    sendCheckListItem()
-                                    setState({ ...state, addnewColorIdIcons: addNewColor?.id })
-                                }}
-                                style={{ background: `${addNewColor?.hex}` }}
-                                className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
-                            >
-                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
-                                    < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
-                                }
-                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
-                                    < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
-                                }
-                            </button>}
                     </div>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">

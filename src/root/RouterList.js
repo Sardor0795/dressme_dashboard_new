@@ -59,7 +59,7 @@ export default function RouterList() {
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
-  console.log(dressInfo?.isCheckPoructList?.length, "dressInfo?.isCheckPoructList?.length");
+  // console.log(dressInfo?.isCheckPoructList?.length, "dressInfo?.isCheckPoructList?.length");
   return (
     <div className="w-full h-full">
       {/* <NavbarForSetting /> */}
