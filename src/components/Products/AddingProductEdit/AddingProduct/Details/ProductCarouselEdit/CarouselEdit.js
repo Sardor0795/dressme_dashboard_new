@@ -739,7 +739,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             :
             <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
               <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-                <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
                   <DeleteIcon width={30} />
                 </span>
               </span>

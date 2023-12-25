@@ -113,7 +113,7 @@ const AddingProduct = () => {
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
-  console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
+  // console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
   const [productsData, setProductsData] = useState({});
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -344,8 +344,8 @@ const AddingProduct = () => {
   const LocationAddSubmit = () => {
     // console.log(state?.textListOfFormList, " state?.textListOfFormList");
   }
-  const CallBackTextForm = (childData) => {
-  };
+  // const CallBackTextForm = (childData) => {
+  // };
   const handleNextPage = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
@@ -589,7 +589,92 @@ const AddingProduct = () => {
         }
       })
   }
-  // console.log(state?.sizeGetList, "sizeGetList");
+
+  // const showme = (childData) => {
+  //   console.log(childData, "childData");
+  //   console.log(
+  //     state?.gender_Id, "gender_Id",
+  //     section_Id, "section_Id",
+  //     subSection_Id, "subSection_Id",
+  //     season_Id, "season_Id",
+  //     state?.min_Age_Category, "min_Age_Category",
+  //     state?.max_Age_Category, "max_Age_Category",
+  //     state?.sku, "sku",
+  //     state?.filterTypeId, "filterTypeId",
+  //     state?.producer_Id, "producer_Id",
+  //   );
+
+  // }
+
+  const productUpdate = (childData) => {
+    console.log(section_Id, "section_Id");
+    let form = new FormData();
+    // form.append("shop_id", state?.shopId);
+    // form.append("shop_location_id", state?.shopLocationId);
+    // section_Id && section_Id?.forEach((index) => {
+    //   form.append("section_ids[]", index);
+    // })
+    // subSection_Id && subSection_Id?.forEach((index) => {
+    //   form.append("sub_section_ids[]", index);
+    // })
+    // season_Id && season_Id?.forEach((index) => {
+    //   form.append("season_ids[]", index);
+    // })
+    state?.gender_Id && form.append("gender_id", state?.gender_Id);
+    state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
+    state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
+    state?.sku && form.append("sku", state?.sku);
+    state?.filterTypeId && form.append("type_id", parseFloat(state?.filterTypeId));
+    state?.producer_Id && form.append("producer_id", state?.producer_Id);
+    childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
+    childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
+    childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
+    childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
+    childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
+    childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
+    childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
+    childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
+    childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
+
+    return fetch(`${url}/products/${Number(newProductId)}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: form,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+        } else if (res?.message) {
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          refetch()
+        }
+        console.log(res, "ProductStore---Added");
+      })
+      .catch((err) => console.log(err, "errImage"));
+  };
+
   return (
     <div className="w-full h-fit ">
 
@@ -819,7 +904,7 @@ const AddingProduct = () => {
               :
               <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
                 <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-                  <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
                     <DeleteIcon width={30} />
                   </span>
                 </span>
@@ -1779,9 +1864,16 @@ const AddingProduct = () => {
                     </span>
                   }
 
+
                   <button
                     type="button"
-                    // to="/products/add-detail"
+                    onClick={productUpdate}
+                    className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                  >
+                    productUpdate
+                  </button>
+                  <button
+                    type="button"
                     onClick={handleNextPage}
                     className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
@@ -1808,7 +1900,7 @@ const AddingProduct = () => {
             theme="colored"
 
           />
-          <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={CallBackTextForm} />
+          <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={productUpdate} />
         </div>
       </div >
     </div >

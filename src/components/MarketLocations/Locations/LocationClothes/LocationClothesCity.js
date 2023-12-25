@@ -154,7 +154,7 @@ export default function LocationClothesCity() {
           </p>
           <Link
             to="/products/add-wear"
-            className="active:translate-y-[2px] flex items-center gap-x-[4px]"
+            className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
           >
             <span>
               <AddIconsCircle />
@@ -170,7 +170,7 @@ export default function LocationClothesCity() {
           </div>
           <button
             className={`w-fit pr-1 ll:pr-3 border-r-[2px] border-addLocBorderRight flex items-center justify-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg ${someChecked
-              ? "text-addLocationTextcolor active:translate-y-[2px]"
+              ? "text-addLocationTextcolor active:scale-95  active:opacity-70"
               : "text-[#D2D2D2] cursor-not-allowed"
               }`}
           >
@@ -184,7 +184,7 @@ export default function LocationClothesCity() {
           </button>
           <button
             className={`pl-1 ll:pl-3 flex items-center font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg  ${someChecked
-              ? "text-deleteColor active:translate-y-[2px]"
+              ? "text-deleteColor active:scale-95  active:opacity-70"
               : "text-[#D2D2D2] cursor-not-allowed"
               }`}
           >
@@ -274,7 +274,7 @@ export default function LocationClothesCity() {
                 </p>
                 <Link
                   to="/products/add-wear"
-                  className="active:translate-y-[2px] flex items-center gap-x-[4px]"
+                  className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
                 >
                   <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
                     Добавить одежду

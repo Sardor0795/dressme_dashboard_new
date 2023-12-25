@@ -45,8 +45,6 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
     const handleSelectQuality = (value) => {
         productsData?.quality?.filter(e => e.name_ru === value).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz })
-            // console.log(item?.name_uz, "nameuz");
-            // console.log(state?.qualityInUz, "qualityInUz"); 
         })
         setState({ ...state, qualityInRu: value, qualityInUz: value })
 
@@ -418,7 +416,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
                                 <button
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
                                 >
                                     Назад
                                 </button>
@@ -426,8 +424,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
                                     type="button"
                                     onClick={send}
                                     // onClick={onClick}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:translate-y-[2px] rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
-                                    Добавить
+                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
+                                    Сохранить
                                 </button>
                             </div>
                         </div>

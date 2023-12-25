@@ -344,15 +344,7 @@ const AddingProduct = () => {
   }
 
   const CallBackTextForm = (childData) => {
-    // console.log(
-    //   state?.headWearList?.oneSiz, "state?.headWearList?.oneSiz",
-    //   state?.headWearList?.minHeadGirth, "state?.headWearList?.minHeadGirth",
-    //   state?.headWearList?.maxHeadGirth, "state?.headWearList?.maxHeadGirth",
-    //   state?.discount_percent, " state?.discount_percent",
-    // );
     setState({ ...state, errorListMessage: '', sendingLoader: true })
-
-
     let form = new FormData();
     form.append("shop_id", state?.shopId);
     form.append("shop_location_id", state?.shopLocationId);

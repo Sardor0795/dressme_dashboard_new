@@ -16,7 +16,7 @@ export default function AddBtn() {
 
   return (
     <Link
-      className="w-[22px]  h-[22px] rounded-[4px]  active:translate-y-[2px] flex items-center justify-end"
+      className="w-[22px]  h-[22px] rounded-[4px]  active:scale-95  active:opacity-70 flex items-center justify-end"
       onClick={onClick}
     >
       {pressed ? (

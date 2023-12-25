@@ -93,13 +93,13 @@ export default function LocationItem({ data, click, index }) {
           <button className="w-[9%] flex justify-center cursor-auto">
             <span
               onClick={() => setOpenStoreList(true)}
-              className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+              className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
             >
               <AddLocationIcon width={30} />
             </span>
           </button>
           <button className="w-[9%] flex justify-center cursor-auto">
-            <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+            <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
               <DeleteIcon width={30} />
             </span>
           </button>
@@ -221,7 +221,7 @@ export default function LocationItem({ data, click, index }) {
           >
             {toggleMobileMenu ? "Больше..." : "Меньше..."}
           </button>
-          <button className="text-red-600 text-[13px] font-AeonikProMedium active:translate-y-[2px]">
+          <button className="text-red-600 text-[13px] font-AeonikProMedium active:scale-95  active:opacity-70">
             Удалить
           </button>
         </div>

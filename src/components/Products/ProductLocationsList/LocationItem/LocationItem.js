@@ -307,7 +307,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
             :
             <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
               <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-                <span className="cursor-pointer active:translate-y-[2px] text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
                   <DeleteIcon width={30} />
                 </span>
               </span>
@@ -550,7 +550,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                   type="button" className="w-full flex justify-center cursor-auto">
                                   <span
                                     onClick={() => setOpenStoreList(true)}
-                                    className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                    className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
                                   >
                                     <AddLocationIcon width={30} />
                                   </span>
@@ -564,7 +564,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                     setGetIdShopLocation(data?.id)
                                   }}
                                   className="w-fit flex justify-center cursor-auto">
-                                  <span className="cursor-pointer active:translate-y-[2px] text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+                                  <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
                                     <DeleteIcon width={30} />
                                   </span>
                                 </button>
