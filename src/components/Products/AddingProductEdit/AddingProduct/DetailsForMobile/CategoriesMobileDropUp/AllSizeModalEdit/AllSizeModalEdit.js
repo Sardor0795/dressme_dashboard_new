@@ -171,18 +171,20 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
 
   }
-  console.log(ThisState, "ThisState");
+  allSizeOfListId?.forEach((index) => {
+    console.log(index, " allSizeOfListId");
+  })
   const onHandleAddProductSize = useCallback(() => {
     let form = new FormData();
     ThisState?.pictureBgFile1 && form.append("photo", ThisState?.pictureBgFile1);
     ThisState?.pictureBgFile2 && form.append("photo", ThisState?.pictureBgFile2);
     ThisState?.pictureBgFile3 && form.append("photo", ThisState?.pictureBgFile3);
     ThisState?.pictureBgFile4 && form.append("photo", ThisState?.pictureBgFile4);
+    allSizeOfListId?.forEach((e) => {
+      form.append("product_size_ids[]", e);
+    })
     form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
     form.append("color_id", lastElement);
-    allSizeOfListId?.map((e, index) => {
-      form.append("product_size_ids[]", allSizeOfListId[index]);
-    })
     return fetch(`${url}/products/${newProductId}/add-product-color`, {
       method: "POST",
       headers: {
@@ -195,28 +197,30 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       .then(res => {
         if (res) {
           if (res?.errors && res?.message) {
-            // toast.error(`${res?.message}`, {
-            //   position: "top-right",
-            //   autoClose: 3000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            // })
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+            // onRefetch()
             // setState({ ...state, sendingLoader: false, imageAddError: res?.errors })
           } else if (res?.message) {
-            // toast.success(`${res?.message}`, {
-            //   position: "top-right",
-            //   autoClose: 3000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            // })
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+            onRefetch()
             // setState({
             //   ...state,
             //   pictureBgFile1: null,
@@ -236,16 +240,17 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         }
       })
       .catch(err => {
-        // toast.error(`${err}`, {
-        //   position: "top-right",
-        //   autoClose: 3000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // })
+        toast.error(`${err}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+        // onRefetch()
         // setState({ ...state, sendingLoader: false })
         throw new Error(err?.message || "something wrong");
       })
