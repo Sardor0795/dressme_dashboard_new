@@ -6,6 +6,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
+import { BiCheck } from "react-icons/bi";
 const url = "https://api.dressme.uz/api/seller";
 function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAddProductSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -33,6 +34,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
         sizeEditModal: false,
         sendingLoader: false,
         editSizeId: null,
+        addnewColorIdIcons: null,
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
 
@@ -209,6 +211,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
+    function sendCheckListItem() {
+        onHandleAddProductSize(checked)
+    }
     // console.log('--------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
@@ -453,10 +458,19 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
                         {addNewColor &&
                             <button
                                 type="button"
-                                onClick={onHandleAddProductSize}
+                                onClick={() => {
+                                    sendCheckListItem()
+                                    setState({ ...state, addnewColorIdIcons: addNewColor?.id })
+                                }}
                                 style={{ background: `${addNewColor?.hex}` }}
                                 className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
                             >
+                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
+                                    < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                                }
+                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
+                                    < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                                }
                             </button>}
                     </div>
                     :

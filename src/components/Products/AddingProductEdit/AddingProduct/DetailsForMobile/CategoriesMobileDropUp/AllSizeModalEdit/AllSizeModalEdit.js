@@ -171,10 +171,11 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
 
   }
-  allSizeOfListId?.forEach((index) => {
-    console.log(index, " allSizeOfListId");
-  })
-  const onHandleAddProductSize = useCallback(() => {
+  // allSizeOfListId?.forEach((index) => {
+  //   console.log(index, " allSizeOfListId");
+  // })
+  function onHandleAddProductSize(checkedList) {
+    console.log(checkedList, "checkedList");
     let form = new FormData();
     ThisState?.pictureBgFile1 && form.append("photo", ThisState?.pictureBgFile1);
     ThisState?.pictureBgFile2 && form.append("photo", ThisState?.pictureBgFile2);
@@ -182,6 +183,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     ThisState?.pictureBgFile4 && form.append("photo", ThisState?.pictureBgFile4);
     allSizeOfListId?.forEach((e) => {
       form.append("product_size_ids[]", e);
+      console.log(e, "this is e");
     })
     form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
     form.append("color_id", lastElement);
@@ -255,7 +257,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         throw new Error(err?.message || "something wrong");
       })
 
-  }, [])
+  }
 
   // --------------------------------------------------------
   // green black red inputРазмер Талии

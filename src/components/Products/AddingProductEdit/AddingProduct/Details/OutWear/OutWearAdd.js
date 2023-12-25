@@ -3,7 +3,7 @@ import { DeleteIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/
 import { List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
-import { BiPlus } from "react-icons/bi";
+import { BiCheck, BiPlus } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
@@ -37,6 +37,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
         sizeEditModal: false,
         sendingLoader: false,
         editSizeId: null,
+        addnewColorIdIcons: null,
+
 
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
@@ -238,16 +240,18 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
         setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
         setCheckAll(e.target.checked);
     };
-    // useEffect(() => {
-    //     setChecked([])
-    //     setIndeterminate(false)
-    //     setCheckAll(false)
-    // }, [checkColor])
+    useEffect(() => {
+        setChecked([])
+        setIndeterminate(false)
+        setCheckAll(false)
+    }, [checkColor])
     // console.log(checkColor, "checkColor2");
     // console.log(getSizesIds, "getSizesIds2");
     // console.log(checked, "checked2");
     // console.log(checkAll, "checkAll2");
-
+    function sendCheckListItem() {
+        onHandleAddProductSize(checked)
+    }
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div>
@@ -765,10 +769,19 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onHandleAddProductSize,
                         {addNewColor &&
                             <button
                                 type="button"
-                                onClick={onHandleAddProductSize}
+                                onClick={() => {
+                                    sendCheckListItem()
+                                    setState({ ...state, addnewColorIdIcons: addNewColor?.id })
+                                }}
                                 style={{ background: `${addNewColor?.hex}` }}
                                 className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
                             >
+                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
+                                    < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                                }
+                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
+                                    < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                                }
                             </button>}
                     </div>
                     :
