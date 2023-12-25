@@ -430,7 +430,7 @@ const AddingProduct = () => {
     state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
     form.append("shop_location_id", Number(productsDataIdEdit?.locations[0]?.id));
     form.append("color_id", Number(lastElement));
-    state?.checkedSizeList?.map((index) => {
+    state?.checkedSizeList?.forEach((index) => {
       form.append("product_size_ids[]", Number(index));
     })
     state?.newColorByAddSizes?.price && form.append("price", state?.newColorByAddSizes?.price);
