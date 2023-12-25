@@ -97,8 +97,8 @@ const AddingProduct = () => {
     newColorByAddSizes: null,
     // AllChekcedSizeList
     checkedSizeList: [],
+    lastElementColorId: null,
     // ----
-    newProductId: null
   });
   const [deleteColorId, setDeleteColorId] = useState(null);
   const [hideToggleIcons, setHideToggleIcons] = useState(false);
@@ -110,15 +110,10 @@ const AddingProduct = () => {
     // console.log(childData, "childData");
     setState({ ...state, newColorByAddSizes: childData })
   }
-  function AllCheckedSizeList(childData) {
-    // console.log(childData, "AllCheckedSizeList");
-
-    setState({ ...state, checkedSizeList: childData })
+  function AllCheckedSizeList(childData, lastElementColorId) {
+    setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
-
-  // console.log(state?.newColorByAddSizes?.amount, "newColorByAddSizes1");
-  // console.log(state?.newColorByAddSizes?.price, "newColorByAddSizes2");
-
+  console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
   const [productsData, setProductsData] = useState({});
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -317,7 +312,6 @@ const AddingProduct = () => {
       setColorAction(false)
       setLastElement()
     }
-
   }, [selectColorID, productsDataIdEdit?.colors])
 
   // -----------------------------------------------------------
@@ -434,10 +428,10 @@ const AddingProduct = () => {
     state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
     state?.pictureBgFile3 && form.append("photo", state?.pictureBgFile3);
     state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
-    form.append("shop_location_id", productsDataIdEdit?.locations[0]?.id);
-    form.append("color_id", lastElement);
-    state?.checkedSizeList?.map((e, index) => {
-      form.append("product_size_ids[]", state?.checkedSizeList[index]);
+    form.append("shop_location_id", Number(productsDataIdEdit?.locations[0]?.id));
+    form.append("color_id", Number(lastElement));
+    state?.checkedSizeList?.map((index) => {
+      form.append("product_size_ids[]", Number(index));
     })
     state?.newColorByAddSizes?.price && form.append("price", state?.newColorByAddSizes?.price);
     state?.newColorByAddSizes?.amount && form.append("amount", state?.newColorByAddSizes?.amount);
@@ -479,7 +473,7 @@ const AddingProduct = () => {
     state?.newColorByAddSizes?.legnthAcc && form.append("length", state?.newColorByAddSizes?.legnthAcc);
     state?.newColorByAddSizes?.widthAcc && form.append("width", state?.newColorByAddSizes?.widthAcc)
     try {
-      const res = await fetch(`${url}/products/${state?.newProductId}/add-product-color`, {
+      const res = await fetch(`${url}/products/${Number(newProductId)}/add-product-color`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -1763,7 +1757,7 @@ const AddingProduct = () => {
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
 
                   {/* {lastElement ? */}
-                  {lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.checkedSizeList) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
+                  {lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
                     <button
                       type="button"
                       onClick={onHandleAddImage}

@@ -10,10 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 const url = "https://api.dressme.uz/api/seller";
 
 function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTest, selectColorID, productsDataIdEdit }) {
-    // console.log(typeId, "typeIdAddSize");
-    // console.log(colorListForTest, "colorListForTest-------AddSize");
-    // console.log(selectColorID, "selectColorID-------AddSize");
-    // console.log(clearSize, "clearSize-------AddSize");
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
@@ -50,40 +46,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
         // ------
         onConcel: false
     })
-    const [toggleShow, setToggleShow] = useState(false)
-    const [decraseList, setDecraseList] = useState(false)
-    const [sizeList, setSizeList] = useState({
-        sizeList1: [
-            { id: 1, action: true, name: "XXS" },
-            { id: 2, action: true, name: "XS" },
-            { id: 3, action: true, name: "S" },
-            { id: 4, action: true, name: "M" },
-            { id: 5, action: true, name: "L" },
-            { id: 6, action: true, name: "XL" },
-            { id: 7, action: true, name: "2XL" },
-            { id: 8, action: true, name: "3XL" },
-        ],
-        sizeList2: [
-            { id: 11, action: true, name: "5XL" },
-            { id: 12, action: true, name: "7XL" },
-            { id: 13, action: true, name: "9XL" },
-            { id: 14, action: true, name: "10XL" },
-            { id: 15, action: true, name: "4XL" },
-            { id: 16, action: true, name: "6XL" },
-            { id: 17, action: true, name: "8XL" },
-        ]
-    }
-    )
-
-    const onChangeSwitch = (checked) => {
-        setState({ ...state, sizeCheck: checked })
-    };
-
-    const handleOpenPopver = (newOpen) => {
-        setToggleShow(newOpen)
-    }
     useEffect(() => {
-        // console.log(clearSize, "Useefecccet");
         setState({
             ...state,
             // Accessuary
@@ -132,7 +95,42 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
             selected: null,
         })
         handleCallBack()
-    }, [clearSize])
+    }, [productsDataIdEdit?.sizes])
+
+    // console.log(productsDataIdEdit, "productsDataIdEdit");
+    const [toggleShow, setToggleShow] = useState(false)
+    const [decraseList, setDecraseList] = useState(false)
+    const [sizeList, setSizeList] = useState({
+        sizeList1: [
+            { id: 1, action: true, name: "XXS" },
+            { id: 2, action: true, name: "XS" },
+            { id: 3, action: true, name: "S" },
+            { id: 4, action: true, name: "M" },
+            { id: 5, action: true, name: "L" },
+            { id: 6, action: true, name: "XL" },
+            { id: 7, action: true, name: "2XL" },
+            { id: 8, action: true, name: "3XL" },
+        ],
+        sizeList2: [
+            { id: 11, action: true, name: "5XL" },
+            { id: 12, action: true, name: "7XL" },
+            { id: 13, action: true, name: "9XL" },
+            { id: 14, action: true, name: "10XL" },
+            { id: 15, action: true, name: "4XL" },
+            { id: 16, action: true, name: "6XL" },
+            { id: 17, action: true, name: "8XL" },
+        ]
+    }
+    )
+
+    const onChangeSwitch = (checked) => {
+        setState({ ...state, sizeCheck: checked })
+    };
+
+    const handleOpenPopver = (newOpen) => {
+        setToggleShow(newOpen)
+    }
+
     const onHandleAddSize = async () => {
         setState({ ...state, isCheckValid: true, sendingLoader: true })
         let form = new FormData();
@@ -427,13 +425,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
         } else {
             setState({ ...state, salePrice: '' })
         }
-    }, [state?.salePercent || state?.priceNum])
+    }, [state?.salePercent, state?.priceNum])
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value });
         }
     };
+
     const AddSize = (
         <div className="w-[840px] h-fit">
             {typeId == 1 &&

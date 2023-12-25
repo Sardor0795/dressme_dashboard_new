@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import { BiCheck } from "react-icons/bi";
 const url = "https://api.dressme.uz/api/seller";
-function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAddProductSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
+function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
@@ -164,8 +164,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
                 productColorId: data?.product_color_id || null,
             })
         })
-        // setState({ ...state, saveBtnDisable: false });
-        // console.log("ishladi useEffect");
+
     }, [state?.editSizeId, checkColor])
 
     // console.log(state?.editSizeId, "state?.editSizeId");
@@ -198,9 +197,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
             setCheckAll(checked.length === getSizesIds?.length);
-            handleGetSizeCheckedList(checked)
+            handleGetSizeCheckedList(checked, state?.addnewColorIdIcons)
         }
-    }, [checked]);
+    }, [checked, state?.addnewColorIdIcons]);
 
     const onCheckAllChange = (e) => {
         setChecked(e.target.checked ? stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item) => item.id) : []);
@@ -211,10 +210,18 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
-    function sendCheckListItem() {
-        onHandleAddProductSize(checked)
+    function sendCheckListItem(id) {
+        if (state?.addnewColorIdIcons) {
+            setState({ ...state, addnewColorIdIcons: null })
+        }
+        if (!state?.addnewColorIdIcons) {
+            setState({ ...state, addnewColorIdIcons: id })
+            setTimeout(() => {
+                onClick()
+            }, 1000);
+        }
     }
-    // console.log('--------------');
+    // console.log(stateList, 'stateList   --------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
@@ -451,27 +458,23 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, DeleteSize, onHandleAd
                     </p>
                 </div>
                 {checked?.length ?
-                    <div className="w-fit flex items-center gap-x-1">
-                        <button type="button" onClick={!addNewColor?.id ? ColorModal : null} className="text-textBlueColor  hover:underline text-base not-italic font-AeonikProMedium">
+                    <div className="w-fit ">
+                        <button type="button" onClick={addNewColor?.id ? () => sendCheckListItem(addNewColor?.id) : ColorModal}
+                            className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
                             <span> Добавить к цвету</span>
+                            {addNewColor &&
+                                <span
+                                    style={{ background: `${addNewColor?.hex}` }}
+                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                                >
+                                    {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
+                                        < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                                    }
+                                    {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
+                                        < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                                    }
+                                </span>}
                         </button>
-                        {addNewColor &&
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    sendCheckListItem()
-                                    setState({ ...state, addnewColorIdIcons: addNewColor?.id })
-                                }}
-                                style={{ background: `${addNewColor?.hex}` }}
-                                className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
-                            >
-                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
-                                    < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
-                                }
-                                {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
-                                    < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
-                                }
-                            </button>}
                     </div>
                     :
                     <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
