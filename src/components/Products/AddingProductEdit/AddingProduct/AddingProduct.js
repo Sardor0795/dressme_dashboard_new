@@ -286,10 +286,13 @@ const AddingProduct = () => {
     productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
       // console.log(data, "data-0");
       return data?.sub_sections?.map(item => {
-        console.log(item, "item?.id-1");
-        setNewArray(newArray => [...newArray, item])
+        // console.log(item, "item?.id-1");
+        if (!newArray) {
+          setNewArray(newArray => [...newArray, item])
+        } else if (!newArray?.includes(item)) {
+          setNewArray(newArray => [...newArray, item])
+        }
         // if (!newArray) {
-        //   setNewArray(newArray => [...newArray, item?.id])
         // }
         // if (!newArray?.includes(item?.id)) {
         //   console.log(item?.id, "item?.id-2");
