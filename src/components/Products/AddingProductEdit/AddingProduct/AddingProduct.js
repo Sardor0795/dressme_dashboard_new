@@ -681,6 +681,7 @@ const AddingProduct = () => {
           })
           refetch()
           setState({ ...state, onEditInput: false, sendingLoader: false })
+          setDressInfo({ ...dressInfo, nextPageShowForm: true })
 
         }
         console.log(res, "ProductStore---Added");
@@ -1949,7 +1950,7 @@ const AddingProduct = () => {
         </div>
         <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"} `}>
 
-          <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={productUpdate} />
+          <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={productUpdate} loading={state?.sendingLoader} />
         </div>
       </div >
     </div >

@@ -6,8 +6,9 @@ import { useHttp } from "../../../../../hook/useHttp";
 import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
+import { ClipLoader } from "react-spinners";
 
-export default function TextFormAdd({ productsEdit, handlCallBack }) {
+export default function TextFormAdd({ productsEdit, handlCallBack, loading }) {
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -193,7 +194,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
                                 </div>
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
                                     <textarea
-                                        className="block w-full h-full text-[#666] text-[16px] resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
+                                        className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
 
@@ -223,7 +224,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
                                     <textarea
-                                        className="block w-full h-full text-[#666] text-[16px] resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
+                                        className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
 
@@ -422,10 +423,14 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
                                 <button
                                     type="button"
                                     onClick={send}
-                                    // onClick={onClick}
                                     className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular">
-                                    Сохранить
-
+                                    {loading ?
+                                        <ClipLoader
+                                            className="h-full py-[2px]"
+                                            color={"#fff"}
+                                            size={40}
+                                            loading={true}
+                                        /> : "Сохранить"}
                                 </button>
                             </div>
                         </div>
