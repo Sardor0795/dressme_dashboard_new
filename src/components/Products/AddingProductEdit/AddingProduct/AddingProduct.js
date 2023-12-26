@@ -201,7 +201,7 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        console.log("setProductsDataIdEdit---worked");
+        // console.log("setProductsDataIdEdit---worked");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           // setSection_Id(section_Id => [...section_Id, value?.id])
@@ -284,14 +284,25 @@ const AddingProduct = () => {
   const [newArray, setNewArray] = useState([])
   useEffect(() => {
     productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
+      // console.log(data, "data-0");
       return data?.sub_sections?.map(item => {
-        if (!newArray?.includes(item)) {
+        // console.log(item, "item?.id-1");
+        if (!newArray) {
+          setNewArray(newArray => [...newArray, item])
+        } else if (!newArray?.includes(item)) {
           setNewArray(newArray => [...newArray, item])
         }
+        // if (!newArray) {
+        // }
+        // if (!newArray?.includes(item?.id)) {
+        //   console.log(item?.id, "item?.id-2");
+        //   setNewArray(newArray => [...newArray, item?.id])
+        // }
       })
     })
 
   }, [section_Id])
+  console.log(newArray, "newArray");
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
@@ -334,7 +345,7 @@ const AddingProduct = () => {
   }, [selectColorID, productsDataIdEdit?.colors])
 
   // -----------------------------------------------------------
-
+  // console.log(selectColorID, "selectColorID");
   const onSearch = (value) => {
     // console.log("search:", value);
   };
@@ -371,10 +382,13 @@ const AddingProduct = () => {
 
 
   const handleChangeSubSection = (e) => {
+    // console.log(e, "setSubSection_Id");
     setSubSection_Id(e)
     setState({ ...state, onEditInput: true })
-
   }
+  useEffect(() => {
+    setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
+  }, [newArray, section_Id])
   function onHandleChangeSeason(e) {
     // setSeason_Id([])
     setState({ ...state, onEditInput: true })
@@ -451,7 +465,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  console.log(state?.checkedSizeList, "state?.checkedSizeList");
+  // console.log(state?.checkedSizeList, "state?.checkedSizeList");
   // console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
@@ -623,10 +637,16 @@ const AddingProduct = () => {
   }
 
 
-  console.log(season_Id, "season_Id");
+  // console.log(season_Id, "season_Id");
   const productUpdate = (childData) => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
+    section_Id && section_Id?.forEach((index) => {
+      form.append("section_ids[]", index);
+    })
+    subSection_Id && subSection_Id?.forEach((index) => {
+      form.append("sub_section_ids[]", index);
+    })
     season_Id && season_Id?.forEach((index) => {
       form.append("season_ids[]", index);
     })
@@ -693,9 +713,9 @@ const AddingProduct = () => {
   // useEffect(() => {
   //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
   // }, [season_Id])
-
-
-  // console.log(season_Id, "season_Id");
+  // console.log(ClothingSection, "ClothingSection");
+  console.log(section_Id, "section_Id");
+  console.log(subSection_Id, "subSection_Id");
   return (
     <div className="w-full h-fit ">
 
@@ -1277,7 +1297,7 @@ const AddingProduct = () => {
                         <Select
                           className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !subSection_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
                           showSearch
-                          disabled={subSection_Id?.length === 0 || colorAction ? true : false}
+                          disabled={newArray?.length === 0 || colorAction ? true : false}
                           placeholder="Выбрать"
                           mode="multiple"
                           optionLabelProp="label"
