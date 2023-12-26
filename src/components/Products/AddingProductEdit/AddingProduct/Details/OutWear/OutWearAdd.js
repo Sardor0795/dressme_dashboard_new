@@ -424,7 +424,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 onClick={() => {
                                                     setDecraseList(!decraseList)
                                                 }}
-                                                className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                                                className="text-textBlueColor h-[50px] select-none text-[10px]  ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                             >
                                                 {decraseList ? "Меньше" : "Больше"}
                                             </button>
@@ -604,7 +604,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-fit flex flex-col md:ml-5">
+                            <div className="w-fit flex flex-col ">
                                 <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                     Количество
@@ -789,9 +789,27 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         </button>
                     </div>
                     :
-                    <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
-                        Добавить к цвету
-                    </span>
+                    <div className="w-fit flex items-center gap-x-1">
+                        <button
+                            className=" flex items-center gap-x-1 text-base not-italic font-AeonikProMedium">
+                            <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
+                                Добавить к цвету
+                            </span>
+                            {addNewColor &&
+                                <span
+                                    style={{ background: `${addNewColor?.hex}` }}
+                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${addNewColor?.id === 2 ? "border " : ""}`}
+                                >
+                                    {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id !== 1 &&
+                                        < BiCheck size={28} color={"#000"} className="flex items-center justify-center" />
+                                    }
+                                    {state?.addnewColorIdIcons === addNewColor?.id && addNewColor?.id === 1 &&
+                                        < BiCheck size={28} color={"#fff"} className="flex items-center justify-center" />
+                                    }
+                                </span>}
+                        </button>
+                    </div>
+
                 }
             </div>
             <div className="w-full h-[640px] VerticelScroll overflow-auto ">

@@ -265,7 +265,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
   // console.log(addSizeColorById, "addSizeColorById");
   // console.log(productsDataIdEdit, "productsDataIdEdit");
   return (
-    <div className="w-full md:w-[780px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
+    <div className="w-full md:w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
       <section
         onClick={() => {
           setOpenColorModal(false)
