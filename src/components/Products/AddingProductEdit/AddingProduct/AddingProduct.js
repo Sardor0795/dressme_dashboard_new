@@ -209,7 +209,12 @@ const AddingProduct = () => {
           setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
         })
         res?.product?.seasons?.map(value => {
-          setSeason_Id(season_Id => [...season_Id, value?.id])
+          if (!season_Id) {
+            setSeason_Id(season_Id => [...season_Id, value?.id])
+          }
+          if (!season_Id?.includes(value?.id)) {
+            setSeason_Id(season_Id => [...season_Id, value?.id])
+          }
         })
         res?.product?.colors?.map(value => {
 
@@ -357,7 +362,17 @@ const AddingProduct = () => {
     setState({ ...state, onEditInput: true })
 
   }
+  function onHandleChangeSeason(e) {
+    // setSeason_Id([])
+    setState({ ...state, onEditInput: true })
+    setSeason_Id(e)
+    // setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
 
+  }
+
+  // useEffect(() => {
+  //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
+  // }, [])
 
   useEffect(() => {
     window.scrollTo({
@@ -423,6 +438,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
+  console.log(state?.checkedSizeList, "state?.checkedSizeList");
   // console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
@@ -594,11 +610,8 @@ const AddingProduct = () => {
   }
 
 
-  useEffect(() => {
-    setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
-  }, [season_Id])
+  console.log(season_Id, "season_Id");
   const productUpdate = (childData) => {
-    console.log(section_Id, "section_Id");
     let form = new FormData();
     season_Id && season_Id?.forEach((index) => {
       form.append("season_ids[]", index);
@@ -660,7 +673,14 @@ const AddingProduct = () => {
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  console.log(state?.onEditInput, "onEditInput");
+  // console.log(state?.onEditInput, "onEditInput");
+
+  // useEffect(() => {
+  //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
+  // }, [season_Id])
+
+
+  // console.log(season_Id, "season_Id");
   return (
     <div className="w-full h-fit ">
 
@@ -1310,8 +1330,7 @@ const AddingProduct = () => {
                           value={productsData?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                           size="large"
                           onChange={(e) => {
-                            setState({ ...state, onEditInput: true })
-                            setSeason_Id(e)
+                            onHandleChangeSeason(e)
                           }}
                           optionLabelProp="label"
                         >
@@ -1847,31 +1866,60 @@ const AddingProduct = () => {
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
 
                   {/* {lastElement ? */}
-                  {state?.onEditInput || lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
-                    <button
-                      type="button"
-                      onClick={
-                        state?.onEditInput ?
-                          productUpdate
-                          :
-                          onHandleAddImage
-                      }
-                      className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      {state?.sendingLoader ?
-                        <ClipLoader
-                          className="h-full py-[2px]"
-                          color={"#007DCA"}
-                          size={40}
-                          loading={true}
-                        /> : "Сохранить"}
-                    </button>
-                    :
-                    <span
-                      className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      Сохранить
-                    </span>
+                  {
+                    lastElement ?
+
+                      lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
+                        <button
+                          type="button"
+                          onClick={
+                            state?.onEditInput ?
+                              () => {
+                                productUpdate()
+                                onHandleAddImage()
+                              }
+                              :
+                              () => onHandleAddImage()
+                          }
+                          className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        >
+                          {state?.sendingLoader ?
+                            <ClipLoader
+                              className="h-full py-[2px]"
+                              color={"#007DCA"}
+                              size={40}
+                              loading={true}
+                            /> : "Сохранить"}
+                        </button>
+                        :
+                        <span
+                          className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </span>
+                      :
+                      state?.onEditInput ?
+                        <button
+                          type="button"
+                          onClick={
+                            productUpdate
+                          }
+                          className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        >
+                          {state?.sendingLoader ?
+                            <ClipLoader
+                              className="h-full py-[2px]"
+                              color={"#007DCA"}
+                              size={40}
+                              loading={true}
+                            /> : "Сохранить"}
+                        </button>
+                        :
+                        <span
+                          className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        >
+                          Сохранить
+                        </span>
                   }
                   <button
                     type="button"

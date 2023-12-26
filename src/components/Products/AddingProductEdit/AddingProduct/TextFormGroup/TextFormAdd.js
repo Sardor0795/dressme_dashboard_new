@@ -416,16 +416,16 @@ export default function TextFormAdd({ productsEdit, handlCallBack }) {
                                 <button
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
-                                >
+                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular"                                >
                                     Назад
                                 </button>
                                 <button
                                     type="button"
                                     onClick={send}
                                     // onClick={onClick}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
+                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular">
                                     Сохранить
+
                                 </button>
                             </div>
                         </div>
