@@ -216,8 +216,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         }
         if (!state?.addnewColorIdIcons) {
             setState({ ...state, addnewColorIdIcons: id })
-            onClick()
             setTimeout(() => {
+                onClick()
             }, 1000);
         }
     }

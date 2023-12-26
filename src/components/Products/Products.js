@@ -25,7 +25,7 @@ export default function Products() {
       refetchOnWindowFocus: false,
     }
   );
-  console.log(dressInfo?.isCheckPoructList?.length, "dressInfo?.isCheckPoructList?.length");
+  // console.log(dressInfo?.isCheckPoructList?.length, "dressInfo?.isCheckPoructList?.length");
 
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">

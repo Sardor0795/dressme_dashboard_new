@@ -413,17 +413,17 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading }) {
                                 <div className="w-1/3 h-[1px] bg-borderColor"></div>
                             </div>
 
-                            <div className="flex justify-center md:justify-end gap-[20px] mt-auto">
+                            <div className=" flex justify-center md:justify-end gap-[20px] mt-auto">
                                 <button
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular"                                >
+                                    className="md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg  font-AeonikProMedium"                                >
                                     Назад
                                 </button>
                                 <button
                                     type="button"
                                     onClick={send}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular">
+                                    className="md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg font-AeonikProMedium">
                                     {loading ?
                                         <ClipLoader
                                             className="h-full py-[2px]"
