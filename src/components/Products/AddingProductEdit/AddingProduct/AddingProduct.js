@@ -201,12 +201,25 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
+        console.log("setProductsDataIdEdit---worked");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
-          setSection_Id(section_Id => [...section_Id, value?.id])
+          // setSection_Id(section_Id => [...section_Id, value?.id])
+          if (!section_Id) {
+            setSection_Id(section_Id => [...section_Id, value?.id])
+          }
+          if (!section_Id?.includes(value?.id)) {
+            setSection_Id(section_Id => [...section_Id, value?.id])
+          }
         })
         res?.product?.sub_sections?.map(value => {
-          setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
+          // setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
+          if (!subSection_Id) {
+            setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
+          }
+          if (!subSection_Id?.includes(value?.id)) {
+            setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
+          }
         })
         res?.product?.seasons?.map(value => {
           if (!season_Id) {
@@ -233,21 +246,21 @@ const AddingProduct = () => {
           }
         })
 
-
-        setState({
-          ...state,
-          gender_Id: res?.product?.gender_id,
-          min_Age_Category: res?.product?.min_age_category,
-          max_Age_Category: res?.product?.max_age_category,
-          sku: res?.product?.sku,
-          category_Id: res?.product?.category_id,
-          filterTypeId: res?.product?.type_id,
-          producer_Id: res?.product?.producer_id,
-          shopId: res?.product?.locations[0]?.shop_id,
-          shopLocationId: res?.product?.locations[0]?.id,
-          sizeGetList: res?.product
-
-        })
+        if (!state?.gender_Id && !state?.min_Age_Category && !state?.max_Age_Category && !state?.sku && !state?.filterTypeId && !state?.producer_Id) {
+          setState({
+            ...state,
+            gender_Id: res?.product?.gender_id,
+            min_Age_Category: res?.product?.min_age_category,
+            max_Age_Category: res?.product?.max_age_category,
+            sku: res?.product?.sku,
+            category_Id: res?.product?.category_id,
+            filterTypeId: res?.product?.type_id,
+            producer_Id: res?.product?.producer_id,
+            shopId: res?.product?.locations[0]?.shop_id,
+            shopLocationId: res?.product?.locations[0]?.id,
+            sizeGetList: res?.product
+          })
+        }
       },
       keepPreviousData: true,
       refetchOnWindowFocus: true,
@@ -612,6 +625,7 @@ const AddingProduct = () => {
 
   console.log(season_Id, "season_Id");
   const productUpdate = (childData) => {
+    setState({ ...state, sendingLoader: true })
     let form = new FormData();
     season_Id && season_Id?.forEach((index) => {
       form.append("season_ids[]", index);
@@ -653,7 +667,7 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
-          setState({ ...state, onEditInput: false })
+          setState({ ...state, onEditInput: false, sendingLoader: false })
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -666,7 +680,7 @@ const AddingProduct = () => {
             theme: "light",
           })
           refetch()
-          setState({ ...state, onEditInput: false })
+          setState({ ...state, onEditInput: false, sendingLoader: false })
 
         }
         console.log(res, "ProductStore---Added");
