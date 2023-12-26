@@ -99,6 +99,7 @@ const AddingProduct = () => {
     checkedSizeList: [],
     lastElementColorId: null,
     // ----
+    onEditInput: false,
   });
   const [deleteColorId, setDeleteColorId] = useState(null);
   const [hideToggleIcons, setHideToggleIcons] = useState(false);
@@ -353,6 +354,8 @@ const AddingProduct = () => {
 
   const handleChangeSubSection = (e) => {
     setSubSection_Id(e)
+    setState({ ...state, onEditInput: true })
+
   }
 
 
@@ -590,36 +593,16 @@ const AddingProduct = () => {
       })
   }
 
-  // const showme = (childData) => {
-  //   console.log(childData, "childData");
-  //   console.log(
-  //     state?.gender_Id, "gender_Id",
-  //     section_Id, "section_Id",
-  //     subSection_Id, "subSection_Id",
-  //     season_Id, "season_Id",
-  //     state?.min_Age_Category, "min_Age_Category",
-  //     state?.max_Age_Category, "max_Age_Category",
-  //     state?.sku, "sku",
-  //     state?.filterTypeId, "filterTypeId",
-  //     state?.producer_Id, "producer_Id",
-  //   );
 
-  // }
-
+  useEffect(() => {
+    setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
+  }, [season_Id])
   const productUpdate = (childData) => {
     console.log(section_Id, "section_Id");
     let form = new FormData();
-    // form.append("shop_id", state?.shopId);
-    // form.append("shop_location_id", state?.shopLocationId);
-    // section_Id && section_Id?.forEach((index) => {
-    //   form.append("section_ids[]", index);
-    // })
-    // subSection_Id && subSection_Id?.forEach((index) => {
-    //   form.append("sub_section_ids[]", index);
-    // })
-    // season_Id && season_Id?.forEach((index) => {
-    //   form.append("season_ids[]", index);
-    // })
+    season_Id && season_Id?.forEach((index) => {
+      form.append("season_ids[]", index);
+    })
     state?.gender_Id && form.append("gender_id", state?.gender_Id);
     state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
     state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
@@ -657,6 +640,7 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
+          setState({ ...state, onEditInput: false })
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -669,12 +653,14 @@ const AddingProduct = () => {
             theme: "light",
           })
           refetch()
+          setState({ ...state, onEditInput: false })
+
         }
         console.log(res, "ProductStore---Added");
       })
       .catch((err) => console.log(err, "errImage"));
   };
-
+  console.log(state?.onEditInput, "onEditInput");
   return (
     <div className="w-full h-fit ">
 
@@ -743,7 +729,20 @@ const AddingProduct = () => {
 
         </div>
         <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"}  relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
-
+          {/* <ToastContainer
+            style={{ zIndex: "1000", top: "80px" }}
+            position="top-right"
+            autoClose={3000}
+            limit={1}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          /> */}
           <section
             onClick={() => {
               setState({
@@ -974,8 +973,6 @@ const AddingProduct = () => {
             </div>
           </section>
 
-
-
           <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
             <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
               1
@@ -1187,7 +1184,10 @@ const AddingProduct = () => {
                           disabled={colorAction ? true : false}
                           // optionFilterProp="children"section_Id
                           value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
-                          onChange={(e) => setSection_Id(e)}
+                          onChange={(e) => {
+                            setState({ ...state, onEditInput: true })
+                            setSection_Id(e)
+                          }}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -1309,7 +1309,10 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           value={productsData?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                           size="large"
-                          onChange={(e) => setSeason_Id(e)}
+                          onChange={(e) => {
+                            setState({ ...state, onEditInput: true })
+                            setSeason_Id(e)
+                          }}
                           optionLabelProp="label"
                         >
                           {productsData?.seasons?.map((item) => {
@@ -1424,7 +1427,7 @@ const AddingProduct = () => {
                             optionFilterProp="children"
                             disabled={colorAction ? true : false}
                             value={productsData?.gender?.filter(e => e?.id == state?.gender_Id)?.map((item) => { return item?.id })}
-                            onChange={(e) => setState({ ...state, gender_Id: e })}
+                            onChange={(e) => setState({ ...state, gender_Id: e, onEditInput: true })}
                             onSearch={onSearch}
                             size="large"
                             filterOption={(input, option) =>
@@ -1458,7 +1461,7 @@ const AddingProduct = () => {
                               name="age"
                               placeholder="Мин"
                               value={state?.min_Age_Category}
-                              onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
+                              onChange={(e) => setState({ ...state, onEditInput: true, min_Age_Category: e.target.value })}
                               className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             />}
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
@@ -1469,7 +1472,7 @@ const AddingProduct = () => {
                               name="age"
                               placeholder="Мах"
                               value={state?.max_Age_Category}
-                              onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
+                              onChange={(e) => setState({ ...state, onEditInput: true, max_Age_Category: e.target.value })}
                               className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             />}
                         </div>
@@ -1492,7 +1495,7 @@ const AddingProduct = () => {
                           <input
                             type="text"
                             value={state?.sku}
-                            onChange={(e) => setState({ ...state, sku: e.target.value })}
+                            onChange={(e) => setState({ ...state, onEditInput: true, sku: e.target.value })}
                             placeholder=""
                             className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] " : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
                           />}
@@ -1504,7 +1507,10 @@ const AddingProduct = () => {
                             <LoaderIcon />
                           </button> :
                           <button
-                            onClick={() => randomCode(17)}
+                            onClick={() => {
+                              setState({ ...state, onEditInput: true, })
+                              randomCode(17)
+                            }}
                             type={"button"}
                             className={`w-[40px] h-[40px] active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
                           >
@@ -1576,8 +1582,7 @@ const AddingProduct = () => {
                             value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
                             optionFilterProp="children"
                             onChange={(value, attribute2) => {
-                              setState({ ...state, filterTypeId: value, type_Id: attribute2?.attribute2 })
-                              // CategoryTypeId(value, attribute2?.attribute2)
+                              setState({ ...state, filterTypeId: value, onEditInput: true, type_Id: attribute2?.attribute2 })
                             }}
                             onSearch={onSearch}
                             size="large"
@@ -1659,7 +1664,7 @@ const AddingProduct = () => {
                         </span>
                       </div>
                       <button
-                        onClick={() => setState({ ...state, DressTypeModal: true })}
+                        onClick={() => setState({ ...state, onEditInput: true, DressTypeModal: true })}
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
@@ -1842,10 +1847,15 @@ const AddingProduct = () => {
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
 
                   {/* {lastElement ? */}
-                  {lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
+                  {state?.onEditInput || lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
                     <button
                       type="button"
-                      onClick={onHandleAddImage}
+                      onClick={
+                        state?.onEditInput ?
+                          productUpdate
+                          :
+                          onHandleAddImage
+                      }
                       className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
                       {state?.sendingLoader ?
@@ -1863,15 +1873,6 @@ const AddingProduct = () => {
                       Сохранить
                     </span>
                   }
-
-
-                  <button
-                    type="button"
-                    onClick={productUpdate}
-                    className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
-                  >
-                    productUpdate
-                  </button>
                   <button
                     type="button"
                     onClick={handleNextPage}
@@ -1885,21 +1886,7 @@ const AddingProduct = () => {
           </div>
         </div>
         <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"} `}>
-          <ToastContainer
-            style={{ zIndex: "1000", top: "80px" }}
-            position="top-right"
-            autoClose={5000}
-            limit={1}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
 
-          />
           <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={productUpdate} />
         </div>
       </div >

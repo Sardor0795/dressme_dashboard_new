@@ -6,8 +6,9 @@ import { useHttp } from "../../../../../hook/useHttp";
 import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
-
-export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -93,6 +94,20 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
     // Категория одежды хлопок
     return (
         <div className="flex py-[40px] md:py-[50px] ">
+            {/* <ToastContainer
+                style={{ zIndex: "1000", top: "80px" }}
+                position="top-right"
+                autoClose={5000}
+                limit={1}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            /> */}
             <div className="hidden md:flex flex-col items-center justify-center mr-[50px]">
                 <div className="text-[#007dca] text-2xl w-[45px] h-[45px] rounded-full flex items-center justify-center border-2 border-[#1e88e5] mb-[5px] font-AeonikProRegular">
                     1
@@ -404,7 +419,7 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 <button
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg  active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular"
                                 >
                                     Назад
                                 </button>
@@ -412,9 +427,10 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     type="button"
                                     onClick={send}
                                     // onClick={onClick}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">
+                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg max-w-[130px] w-full font-AeonikProRegular">
                                     Добавить
                                 </button>
+
                             </div>
                         </div>
                     </div>
@@ -433,3 +449,4 @@ export default function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
         </div>
     );
 }
+export default React.memo(TextFormAdd)
