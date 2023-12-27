@@ -120,7 +120,8 @@ const AddingProduct = () => {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     setState({
       ...state,
-      sku: [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], "")
+      sku: [...Array(len)].reduce((a) => a + p[~~(Math.random() * p.length)], ""),
+      onEditInput: true
     }
     )
   }
@@ -204,13 +205,13 @@ const AddingProduct = () => {
         // console.log("setProductsDataIdEdit---worked");
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
-          // setSection_Id(section_Id => [...section_Id, value?.id])
           if (!section_Id) {
             setSection_Id(section_Id => [...section_Id, value?.id])
           }
           if (!section_Id?.includes(value?.id)) {
             setSection_Id(section_Id => [...section_Id, value?.id])
           }
+          setSection_Id(section_Id?.filter((x, i, a) => a.indexOf(x) == i))
         })
         res?.product?.sub_sections?.map(value => {
           // setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
@@ -266,7 +267,7 @@ const AddingProduct = () => {
       refetchOnWindowFocus: true,
     }
   );
-
+  console.log(section_Id, "section_Id");
   // useEffect(() => {
   //   setSelectColorID(colorChecked)
   // }, [])
@@ -1563,10 +1564,7 @@ const AddingProduct = () => {
                             <LoaderIcon />
                           </button> :
                           <button
-                            onClick={() => {
-                              setState({ ...state, onEditInput: true, })
-                              randomCode(17)
-                            }}
+                            onClick={() => randomCode(17)}
                             type={"button"}
                             className={`w-[40px] h-[40px] active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
                           >
