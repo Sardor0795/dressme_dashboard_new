@@ -302,7 +302,7 @@ const AddingProduct = () => {
       })
     })
 
-  }, [section_Id])
+  }, [section_Id, productsData])
   // console.log(newArray, "newArray");
   // console.log(section_Id, "section_Id");
 
@@ -645,13 +645,13 @@ const AddingProduct = () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
     section_Id && section_Id?.forEach((index) => {
-      form.append("section_ids[]", index);
+      form.append("section_ids[]", Number(index));
     })
     subSection_Id && subSection_Id?.forEach((index) => {
-      form.append("sub_section_ids[]", index);
+      form.append("sub_section_ids[]", Number(index));
     })
     season_Id && season_Id?.forEach((index) => {
-      form.append("season_ids[]", index);
+      form.append("season_ids[]", Number(index));
     })
     state?.gender_Id && form.append("gender_id", state?.gender_Id);
     state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
@@ -711,7 +711,7 @@ const AddingProduct = () => {
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  // console.log(state?.onEditInput, "onEditInput");
+  console.log(newArray, "newArray");
 
   // useEffect(() => {
   //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
@@ -1159,9 +1159,7 @@ const AddingProduct = () => {
                             })}
 
                           </span>
-                          <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                         </button>
-
                       </div>
                     </div>
                     {/* Input Select 2.1 */}
@@ -1193,10 +1191,10 @@ const AddingProduct = () => {
                               return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
                                 return (
                                   <span
-                                    className="w-[85%] whitespace-nowrap  overflow-hidden	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
+                                    className="w-[95%]  	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
                                     key={data?.id}
                                   >
-                                    <span className="w-full overflow-hidden whitespace-nowrap text-[#b5b5b5] flex items-center">{data?.address}</span>
+                                    <span className="w-full leading-[15px]	 text-start  overflow-hidden text-[#b5b5b5] flex items-center">{data?.address}</span>
                                   </span>
                                 )
                               })
@@ -1205,7 +1203,6 @@ const AddingProduct = () => {
                             }
 
                           </span>
-                          <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                         </button>
 
                       </div>
@@ -1300,7 +1297,7 @@ const AddingProduct = () => {
                         <Select
                           className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !subSection_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
                           showSearch
-                          disabled={newArray?.length === 0 || colorAction ? true : false}
+                          disabled={colorAction ? true : (newArray?.length === 0 || subSection_Id?.length === 0)}
                           placeholder="Выбрать"
                           mode="multiple"
                           optionLabelProp="label"
