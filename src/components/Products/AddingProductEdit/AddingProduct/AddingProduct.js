@@ -100,6 +100,8 @@ const AddingProduct = () => {
     lastElementColorId: null,
     // ----
     onEditInput: false,
+    // -----
+    subSectionToggle: false
   });
   const [deleteColorId, setDeleteColorId] = useState(null);
   const [hideToggleIcons, setHideToggleIcons] = useState(false);
@@ -719,6 +721,15 @@ const AddingProduct = () => {
   // console.log(ClothingSection, "ClothingSection");
   // console.log(section_Id, "section_Id");
   // console.log(subSection_Id, "subSection_Id");
+  useEffect(() => {
+    if (newArray?.length || subSection_Id?.length) {
+      console.log("ishladi");
+      setState({ ...state, subSectionToggle: true })
+    } else {
+      setState({ ...state, subSectionToggle: false })
+    }
+  }, [newArray?.length, subSection_Id?.length])
+  console.log(state?.subSectionToggle, "subSectionToggle");
   return (
     <div className="w-full h-fit ">
 
@@ -1297,7 +1308,7 @@ const AddingProduct = () => {
                         <Select
                           className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !subSection_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
                           showSearch
-                          disabled={colorAction ? true : (newArray?.length === 0 || subSection_Id?.length === 0)}
+                          disabled={colorAction || !state?.subSectionToggle}
                           placeholder="Выбрать"
                           mode="multiple"
                           optionLabelProp="label"
