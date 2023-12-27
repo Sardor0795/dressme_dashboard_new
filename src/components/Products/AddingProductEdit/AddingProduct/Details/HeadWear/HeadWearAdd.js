@@ -65,12 +65,12 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
-        form.append("one_size", state?.sizeCheck ? 1 : 0);
-        form.append("min_head_girth", state?.minHeadGirth);
-        form.append("max_head_girth", state?.maxHeadGirth);
-        form.append("discount_percent", state?.discountPercent);
-        form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
-        form.append("age", Number(state?.age));
+        state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
+        state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
+        state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
+        state?.discountPercent && form.append("discount_percent", state?.discountPercent);
+        state?.discountPrice && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
+        state?.age && form.append("age", Number(state?.age));
         form.append("amount", state?.amount);
         form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.locations[0]?.pivot?.shop_location_id);

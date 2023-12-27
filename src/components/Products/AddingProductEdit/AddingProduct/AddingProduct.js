@@ -173,7 +173,7 @@ const AddingProduct = () => {
       refetchOnWindowFocus: false,
     }
   );
-
+  // console.log(productsData?.sections, "productsData");
   const { id } = useParams()
   const newProductId = id?.replace(":", "")
   // useEffect(()=>{
@@ -283,30 +283,39 @@ const AddingProduct = () => {
 
 
   // ------------------------------------------------------------------------
-
+  const handleChangeSection = (e) => {
+    // console.log(e, "newArray4");
+    if (e?.length < section_Id?.length) {
+      if (section_Id?.length > 1) {
+        setSection_Id(e)
+        setState({ ...state, onEditInput: true })
+      }
+    } else {
+      setSection_Id(e)
+      setState({ ...state, onEditInput: true })
+    }
+  }
   const [newArray, setNewArray] = useState([])
   useEffect(() => {
-    productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
-      // console.log(data, "data-0");
-      return data?.sub_sections?.map(item => {
-        // console.log(item, "item?.id-1");
-        if (!newArray) {
-          setNewArray(newArray => [...newArray, item])
-        } else if (!newArray?.includes(item)) {
-          setNewArray(newArray => [...newArray, item])
-        }
-        // if (!newArray) {
-        // }
-        // if (!newArray?.includes(item?.id)) {
-        //   console.log(item?.id, "item?.id-2");
-        //   setNewArray(newArray => [...newArray, item?.id])
-        // }
+    if (productsData?.sections) {
+
+      setNewArray([])
+      productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
+        console.log(data?.sub_sections, "data--")
+        data?.sub_sections?.map(item => {
+          if (!newArray) {
+            setNewArray(newArray => [...newArray, item])
+          } else if (!newArray?.includes(item)) {
+            setNewArray(newArray => [...newArray, item])
+          }
+        })
       })
-    })
+    }
 
   }, [section_Id, productsData])
-  // console.log(newArray, "newArray");
-  // console.log(section_Id, "section_Id");
+  console.log(newArray, "newArray--newArray");
+  console.log(section_Id, "newArray--section_Id");
+  console.log(subSection_Id, "newArray--subSection_Id");
 
   // -----------------------------------------------------------
   // ColorHandle
@@ -385,8 +394,17 @@ const AddingProduct = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
 
+  // {handleChangeSection
+
+  //   section_Id?.length >= 1 ?
+  //     (e) => {
+  //       setState({ ...state, onEditInput: true })
+  //       setSection_Id(e)
+  //     } : null
+
 
   const handleChangeSubSection = (e) => {
+    console.log(e, "newArray5");
     if (e?.length < subSection_Id?.length) {
       if (subSection_Id?.length > 1) {
         setSubSection_Id(e)
@@ -401,11 +419,21 @@ const AddingProduct = () => {
     setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
   }, [newArray, section_Id])
   function onHandleChangeSeason(e) {
-    // setSeason_Id([])
-    if (season_Id?.length > 1) {
-      setState({ ...state, onEditInput: true })
+    if (e?.length < season_Id?.length) {
+      if (season_Id?.length > 1) {
+        setSeason_Id(e)
+        setState({ ...state, onEditInput: true })
+      }
+    } else {
       setSeason_Id(e)
+      setState({ ...state, onEditInput: true })
     }
+
+
+    // if (season_Id?.length > 1) {
+    //   setState({ ...state, onEditInput: true })
+    //   setSeason_Id(e)
+    // }
     // setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
 
   }
@@ -721,7 +749,7 @@ const AddingProduct = () => {
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  console.log(newArray, "newArray");
+  // console.log(newArray, "newArray");
 
   // useEffect(() => {
   //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
@@ -731,13 +759,14 @@ const AddingProduct = () => {
   // console.log(subSection_Id, "subSection_Id");
   useEffect(() => {
     if (newArray?.length || subSection_Id?.length) {
-      console.log("ishladi");
+      // console.log("ishladi");
       setState({ ...state, subSectionToggle: true })
-    } else {
+    }
+    if (!newArray && !subSection_Id) {
       setState({ ...state, subSectionToggle: false })
     }
   }, [newArray?.length, subSection_Id?.length])
-  console.log(state?.subSectionToggle, "subSectionToggle");
+  // console.log(state?.subSectionToggle, "subSectionToggle");
   return (
     <div className="w-full h-fit ">
 
@@ -1257,13 +1286,7 @@ const AddingProduct = () => {
                           optionLabelProp="label"
                           disabled={colorAction ? true : false}
                           value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
-                          onChange={
-                            section_Id?.length > 1 ?
-                              (e) => {
-                                setState({ ...state, onEditInput: true })
-                                setSection_Id(e)
-                              } : null
-                          }
+                          onChange={(e) => handleChangeSection(e)}
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -1291,11 +1314,11 @@ const AddingProduct = () => {
                     {/* Input Select 2 */}
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
-                        <span className={`text-[13px] md:text-base font-AeonikProRegular ${true ? "text-[#000]" : "text-[#b5b5b5]"}`}>
+                        <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.subSectionToggle ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                           Подраздел товара
                         </span>
                         <span className="ml-[5px]">
-                          {true ? (
+                          {state?.subSectionToggle ? (
                             <StarLabel />
                           ) : null}
                         </span>
