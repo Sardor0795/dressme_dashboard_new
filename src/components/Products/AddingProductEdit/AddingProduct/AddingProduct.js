@@ -387,17 +387,25 @@ const AddingProduct = () => {
 
 
   const handleChangeSubSection = (e) => {
-    // console.log(e, "setSubSection_Id");
-    setSubSection_Id(e)
-    setState({ ...state, onEditInput: true })
+    if (e?.length < subSection_Id?.length) {
+      if (subSection_Id?.length > 1) {
+        setSubSection_Id(e)
+        setState({ ...state, onEditInput: true })
+      }
+    } else {
+      setSubSection_Id(e)
+      setState({ ...state, onEditInput: true })
+    }
   }
   useEffect(() => {
     setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
   }, [newArray, section_Id])
   function onHandleChangeSeason(e) {
     // setSeason_Id([])
-    setState({ ...state, onEditInput: true })
-    setSeason_Id(e)
+    if (season_Id?.length > 1) {
+      setState({ ...state, onEditInput: true })
+      setSeason_Id(e)
+    }
     // setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
 
   }
@@ -1248,12 +1256,14 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           optionLabelProp="label"
                           disabled={colorAction ? true : false}
-                          // optionFilterProp="children"section_Id
                           value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
-                          onChange={(e) => {
-                            setState({ ...state, onEditInput: true })
-                            setSection_Id(e)
-                          }}
+                          onChange={
+                            section_Id?.length > 1 ?
+                              (e) => {
+                                setState({ ...state, onEditInput: true })
+                                setSection_Id(e)
+                              } : null
+                          }
                           onSearch={onSearch}
                           size="large"
                           filterOption={(input, option) =>
@@ -1261,7 +1271,6 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-
                         >
                           {productsData?.sections?.map((item) => {
                             return (
@@ -1303,21 +1312,15 @@ const AddingProduct = () => {
                         </label>
                         <ArrowRightIcon />
                       </button>
-
                       <div className="w-full h-fit hidden md:flex">
                         <Select
-                          className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !subSection_Id?.length && true ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
+                          className={` rounded-lg w-full ${state?.isCheckValid && !subSection_Id?.length ? "  border border-[#FFB8B8] " : ""}`}
                           showSearch
                           disabled={colorAction || !state?.subSectionToggle}
                           placeholder="Выбрать"
                           mode="multiple"
                           optionLabelProp="label"
-                          // value={state?.sub_Section_Id}
                           value={newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => { return item?.id })}
-                          // value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
-                          //   return data?.sub_sections?.filter(e => subSection_Id?.includes(e?.id))?.map(item => { return item.id })
-                          // })
-                          // }
                           onChange={handleChangeSubSection}
                           onSearch={onSearch}
                           size="large"
@@ -1336,15 +1339,14 @@ const AddingProduct = () => {
                                 value={item.id}
                                 label={item.name_ru}
                               >
-                                <span>{item.name_ru}</span>
+                                <Space>
+                                  <span>{item.name_ru}</span>
+                                </Space>
                               </Option>
                             )
                           })
                           }
-
-
                         </Select>
-
                       </div>
                     </div>
                     {/* Input Select 3 */}
