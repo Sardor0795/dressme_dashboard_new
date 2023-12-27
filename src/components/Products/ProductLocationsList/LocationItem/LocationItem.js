@@ -4,7 +4,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 
-import StoreListModal from "./StoreListModal";
+// import StoreListModal from "./StoreListModal";
 import {
   AddIconsCircle,
   AddLocationIcon,
@@ -241,8 +241,8 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   // console.log(checked?.length, "checkedlength");
   // console.log(getIdProduct, "getIdProduct");
   // console.log(getIdShopLocation, "getIdShopLocation");
-  console.log("------------------------------");
-
+  // console.log("------------------------------");
+  // const num = 1000000
   return (
     <div className="w-full">
       {/* <button onClick={ProductToggleOnclick}>ProductToggleOnclick {ProductToggleState}</button> */}
@@ -528,7 +528,8 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                 {itemValue?.status || "status"}
                               </td>}
                               <td className="w-[10%] h-full  flex items-center justify-center ">
-                                {itemValue?.cost?.discount_price || itemValue?.cost?.price}
+                                {itemValue?.cost?.discount_price && itemValue?.cost?.discount_price?.toLocaleString() ||
+                                  itemValue?.cost?.price && itemValue?.cost?.price?.toLocaleString()}
                               </td>
                               <td className="w-[10%] h-full  flex items-center justify-center ">
                                 {/* <button

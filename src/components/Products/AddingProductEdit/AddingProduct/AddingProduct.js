@@ -302,7 +302,9 @@ const AddingProduct = () => {
     })
 
   }, [section_Id])
-  console.log(newArray, "newArray");
+  // console.log(newArray, "newArray");
+  // console.log(section_Id, "section_Id");
+
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
@@ -714,8 +716,8 @@ const AddingProduct = () => {
   //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
   // }, [season_Id])
   // console.log(ClothingSection, "ClothingSection");
-  console.log(section_Id, "section_Id");
-  console.log(subSection_Id, "subSection_Id");
+  // console.log(section_Id, "section_Id");
+  // console.log(subSection_Id, "subSection_Id");
   return (
     <div className="w-full h-fit ">
 

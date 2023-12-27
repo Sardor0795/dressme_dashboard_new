@@ -38,7 +38,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading }) {
             brand: productsEdit?.brand_id,
         })
     }, [dressInfo?.nextPageShowForm])
-
+    console.log(productsEdit?.brand_id, "productsEdit?.brand_id");
+    console.log(state?.brand, "state?.brand");
 
     const { request } = useHttp()
     const [productsData, setProductsData] = useState({})
@@ -384,6 +385,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading }) {
                                         className="font-AeonikProMedium"
                                         placeholder={"Выбрать"}
                                         style={{ width: "100%" }}
+                                        value={productsData?.brands?.filter(e => state?.brand?.includes(e?.id))?.map((item) => { return item?.name || null })}
                                         onChange={handleBrand}
                                         options={
                                             productsData?.brands?.map(item => {
