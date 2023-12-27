@@ -439,16 +439,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full flex justify-start items-center gap-x-2 px-3">
-                        <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                    <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data) => {
                             return (
-                                <div
-                                    key={data?.id}
-                                    style={{ background: `${data.hex}` }}
-                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
-                                >
-
+                                <div className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <div
+                                        key={data?.id}
+                                        style={{ background: `${data.hex}` }}
+                                        className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
+                                    >
+                                    </div>
                                 </div>
                             );
                         })}
@@ -648,16 +649,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 <div
                     className={`w-full h-fit flex flex-col items-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full flex justify-start items-center gap-x-2 px-3">
-                        <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                    <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data) => {
                             return (
-                                <div
-                                    key={data?.id}
-                                    style={{ background: `${data.hex}` }}
-                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
-                                >
-
+                                <div className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <div
+                                        key={data?.id}
+                                        style={{ background: `${data.hex}` }}
+                                        className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
+                                    >
+                                    </div>
                                 </div>
                             );
                         })}
@@ -1130,16 +1132,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full flex justify-start items-center gap-x-2 px-3">
-                        <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                    <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data) => {
                             return (
-                                <div
-                                    key={data?.id}
-                                    style={{ background: `${data.hex}` }}
-                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
-                                >
-
+                                <div className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <div
+                                        key={data?.id}
+                                        style={{ background: `${data.hex}` }}
+                                        className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
+                                    >
+                                    </div>
                                 </div>
                             );
                         })}
@@ -1616,16 +1619,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full flex justify-start items-center gap-x-2 px-3">
-                        <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                    <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data) => {
                             return (
-                                <div
-                                    key={data?.id}
-                                    style={{ background: `${data.hex}` }}
-                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
-                                >
-
+                                <div className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <div
+                                        key={data?.id}
+                                        style={{ background: `${data.hex}` }}
+                                        className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
+                                    >
+                                    </div>
                                 </div>
                             );
                         })}
@@ -1823,16 +1827,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 <div
                     className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full flex justify-start items-center gap-x-2 px-3">
-                        <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                    <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data) => {
                             return (
-                                <div
-                                    key={data?.id}
-                                    style={{ background: `${data.hex}` }}
-                                    className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
-                                >
-
+                                <div className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <div
+                                        key={data?.id}
+                                        style={{ background: `${data.hex}` }}
+                                        className={`w-[22px] h-[22px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
+                                    >
+                                    </div>
                                 </div>
                             );
                         })}
