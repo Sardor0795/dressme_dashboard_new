@@ -211,7 +211,7 @@ const AddingProduct = () => {
           if (!section_Id?.includes(value?.id)) {
             setSection_Id(section_Id => [...section_Id, value?.id])
           }
-          setSection_Id(section_Id?.filter((x, i, a) => a.indexOf(x) == i))
+          // setSection_Id(section_Id?.filter((x, i, a) => a.indexOf(x) == i))
         })
         res?.product?.sub_sections?.map(value => {
           // setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
