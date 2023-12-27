@@ -528,8 +528,15 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                 {itemValue?.status || "status"}
                               </td>}
                               <td className="w-[10%] h-full  flex items-center justify-center ">
-                                {itemValue?.cost?.discount_price && itemValue?.cost?.discount_price?.toLocaleString() ||
-                                  itemValue?.cost?.price && itemValue?.cost?.price?.toLocaleString()}
+                                {itemValue?.cost?.discount_price > 999 ?
+                                  Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
+                                  itemValue?.cost?.discount_price
+                                    ||
+                                    itemValue?.cost?.price > 999 ?
+                                    Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
+                                    : itemValue?.cost?.price
+                                }
+                                <span className="ml-[6px] text-[14px]">Сум</span>
                               </td>
                               <td className="w-[10%] h-full  flex items-center justify-center ">
                                 {/* <button
