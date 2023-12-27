@@ -204,8 +204,8 @@ const AddingProduct = () => {
     ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
     {
       onSuccess: (res) => {
-        // console.log("setProductsDataIdEdit---worked");
         setProductsDataIdEdit(res?.product)
+
         res?.product?.sections?.map(value => {
           if (!section_Id) {
             setSection_Id(section_Id => [...section_Id, value?.id])
@@ -213,10 +213,9 @@ const AddingProduct = () => {
           if (!section_Id?.includes(value?.id)) {
             setSection_Id(section_Id => [...section_Id, value?.id])
           }
-          // setSection_Id(section_Id?.filter((x, i, a) => a.indexOf(x) == i))
         })
+
         res?.product?.sub_sections?.map(value => {
-          // setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
           if (!subSection_Id) {
             setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
           }
@@ -224,6 +223,7 @@ const AddingProduct = () => {
             setSubSection_Id(subSection_Id => [...subSection_Id, value?.id])
           }
         })
+
         res?.product?.seasons?.map(value => {
           if (!season_Id) {
             setSeason_Id(season_Id => [...season_Id, value?.id])
@@ -232,18 +232,15 @@ const AddingProduct = () => {
             setSeason_Id(season_Id => [...season_Id, value?.id])
           }
         })
-        res?.product?.colors?.map(value => {
 
+        res?.product?.colors?.map(value => {
           if (!colors_Id?.includes(value?.id)) {
             setColors_Id(colors_Id => [...colors_Id, value?.id])
-            // setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
           }
           if (!colorListForTest?.includes(value?.id)) {
-            // setColors_Id(colors_Id => [...colors_Id, value?.id])
             setColorListForTest(colorListForTest => [...colorListForTest, value?.id])
           }
           if (!selectColorID) {
-            // console.log(res?.product?.colors, "dddd");
             setColorChecked(res?.product?.colors[0]?.id)
             setSelectColorID(res?.product?.colors[0]?.id)
           }
@@ -269,10 +266,7 @@ const AddingProduct = () => {
       refetchOnWindowFocus: true,
     }
   );
-  console.log(section_Id, "section_Id");
-  // useEffect(() => {
-  //   setSelectColorID(colorChecked)
-  // }, [])
+
   // ------------------------------------------------------------------------ border-red-500
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
@@ -284,7 +278,6 @@ const AddingProduct = () => {
 
   // ------------------------------------------------------------------------
   const handleChangeSection = (e) => {
-    // console.log(e, "newArray4");
     if (e?.length < section_Id?.length) {
       if (section_Id?.length > 1) {
         setSection_Id(e)
@@ -297,31 +290,24 @@ const AddingProduct = () => {
   }
   const [newArray, setNewArray] = useState([])
   useEffect(() => {
-    if (productsData?.sections) {
-
-      setNewArray([])
-      productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((data) => {
-        console.log(data?.sub_sections, "data--")
-        data?.sub_sections?.map(item => {
-          if (!newArray) {
-            setNewArray(newArray => [...newArray, item])
-          } else if (!newArray?.includes(item)) {
-            setNewArray(newArray => [...newArray, item])
-          }
-        })
+    setNewArray([])
+    productsData?.sections?.map(item => {
+      item?.sub_sections?.filter(e => section_Id?.includes(Number(e?.section_id)))?.map(item => {
+        // console.log(item, "newArray--nima");
+        if (!newArray?.length) {
+          setNewArray(newArray => [...newArray, item])
+        } else if (newArray?.includes(item)) {
+          setNewArray(newArray => [...newArray, item])
+        }
       })
-    }
-
+    })
   }, [section_Id, productsData])
-  console.log(newArray, "newArray--newArray");
-  console.log(section_Id, "newArray--section_Id");
-  console.log(subSection_Id, "newArray--subSection_Id");
+
 
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
-  // console.log(colors_Id, "colors_Id");
-  // console.log(colorListForTest, "colorListForTest");
+
   function onHanleColorList(e) {
     if (!colorListForTest?.includes(e)) {
       setSelectColorID(e)
@@ -394,19 +380,15 @@ const AddingProduct = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
 
-  // {handleChangeSection
-
-  //   section_Id?.length >= 1 ?
-  //     (e) => {
-  //       setState({ ...state, onEditInput: true })
-  //       setSection_Id(e)
-  //     } : null
-
-
   const handleChangeSubSection = (e) => {
-    console.log(e, "newArray5");
+    // console.log(e, "newArray5");
     if (e?.length < subSection_Id?.length) {
-      if (subSection_Id?.length > 1) {
+      if (newArray) {
+        if (subSection_Id?.length > 1) {
+          setSubSection_Id(e)
+          setState({ ...state, onEditInput: true })
+        }
+      } else {
         setSubSection_Id(e)
         setState({ ...state, onEditInput: true })
       }
@@ -418,6 +400,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
   }, [newArray, section_Id])
+
   function onHandleChangeSeason(e) {
     if (e?.length < season_Id?.length) {
       if (season_Id?.length > 1) {
@@ -428,19 +411,8 @@ const AddingProduct = () => {
       setSeason_Id(e)
       setState({ ...state, onEditInput: true })
     }
-
-
-    // if (season_Id?.length > 1) {
-    //   setState({ ...state, onEditInput: true })
-    //   setSeason_Id(e)
-    // }
-    // setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
-
   }
 
-  // useEffect(() => {
-  //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
-  // }, [])
 
   useEffect(() => {
     window.scrollTo({
@@ -636,7 +608,6 @@ const AddingProduct = () => {
       }
     });
   });
-  // console.log(deleteColorId, "deleteColorId");
 
   function onHandleDeleteColor() {
     setLoader(true)
@@ -677,8 +648,6 @@ const AddingProduct = () => {
       })
   }
 
-
-  // console.log(season_Id, "season_Id");
   const productUpdate = (childData) => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
@@ -749,24 +718,19 @@ const AddingProduct = () => {
       })
       .catch((err) => console.log(err, "errImage"));
   };
-  // console.log(newArray, "newArray");
 
-  // useEffect(() => {
-  //   setSeason_Id(season_Id.filter((x, i, a) => a.indexOf(x) == i))
-  // }, [season_Id])
-  // console.log(ClothingSection, "ClothingSection");
-  // console.log(section_Id, "section_Id");
-  // console.log(subSection_Id, "subSection_Id");
   useEffect(() => {
-    if (newArray?.length || subSection_Id?.length) {
-      // console.log("ishladi");
+    if (newArray?.length) {
       setState({ ...state, subSectionToggle: true })
-    }
-    if (!newArray && !subSection_Id) {
+    } else {
       setState({ ...state, subSectionToggle: false })
     }
   }, [newArray?.length, subSection_Id?.length])
   // console.log(state?.subSectionToggle, "subSectionToggle");
+  // console.log(newArray?.length, "newArray?.length");
+  // console.log(subSection_Id?.length, "subSection_Id?.length");
+  // console.log(subSection_Id, "subSection_Id");
+  // console.log("---------------------------------------------");
   return (
     <div className="w-full h-fit ">
 
