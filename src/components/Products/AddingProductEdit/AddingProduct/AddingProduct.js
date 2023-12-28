@@ -405,7 +405,9 @@ const AddingProduct = () => {
   }
 
   useEffect(() => {
-    setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
+    if (subSection_Id?.length > 1) {
+      setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
+    }
   }, [newArray, section_Id])
 
   useEffect(() => {
