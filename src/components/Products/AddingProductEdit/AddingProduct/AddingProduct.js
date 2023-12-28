@@ -310,7 +310,7 @@ const AddingProduct = () => {
       })
     })
   }, [section_Id, productsData])
-
+  console.log(productsData, "productsData");
   // console.log(section_Id, "section_Id");
   // -----------------------------------------------------------
   // ColorHandle
@@ -1432,7 +1432,12 @@ const AddingProduct = () => {
                                 label={item.name_ru}
                               >
                                 <Space>
-                                  <span>{item.name_ru}</span>
+                                  {productsData?.sections?.filter(e => e?.id == item?.section_id)?.map(data => {
+                                    return <div className=" flex items-center">
+                                      <p className="flex  items-center">{item.name_ru} </p>
+                                      <p className="text-[12px] pt-[4px] flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">({data?.name_ru})</p>
+                                    </div>
+                                  })}
                                 </Space>
                               </Option>
                             )
