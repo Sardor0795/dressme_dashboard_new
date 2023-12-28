@@ -517,10 +517,10 @@ const AddingProduct = () => {
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
-    state?.pictureBgFile1 && form.append("photo", state?.pictureBgFile1);
-    state?.pictureBgFile2 && form.append("photo", state?.pictureBgFile2);
-    state?.pictureBgFile3 && form.append("photo", state?.pictureBgFile3);
-    state?.pictureBgFile4 && form.append("photo", state?.pictureBgFile4);
+    state?.pictureBgFile1 && form.append("photos[]", state?.pictureBgFile1);
+    state?.pictureBgFile2 && form.append("photos[]", state?.pictureBgFile2);
+    state?.pictureBgFile3 && form.append("photos[]", state?.pictureBgFile3);
+    state?.pictureBgFile4 && form.append("photos[]", state?.pictureBgFile4);
     form.append("shop_location_id", Number(productsDataIdEdit?.locations[0]?.id));
     form.append("color_id", Number(lastElement));
     state?.checkedSizeList?.forEach((index) => {
