@@ -129,6 +129,10 @@ const AddingProduct = () => {
   }
 
   // ---------Callback----
+  const onEdittextForm = React.useCallback(
+    () => setState({ ...state, onEditInput: true }),
+    []
+  ); // ClothingSection
   const ClothingSectionToggle = React.useCallback(
     () => setState({ ...state, ClothingSection: false }),
     []
@@ -198,6 +202,7 @@ const AddingProduct = () => {
   const [subSection_Id, setSubSection_Id] = useState([]);
   const [season_Id, setSeason_Id] = useState([]);
   const [colors_Id, setColors_Id] = useState([]);
+  const [arrDat, setArrData] = useState([])
 
 
   const { refetch } = useQuery(
@@ -294,8 +299,6 @@ const AddingProduct = () => {
     productsData?.sections?.map(item => {
       item?.sub_sections?.map(item => {
         if (section_Id?.includes(Number(item?.section_id))) {
-          console.log(item, "buIetm");
-          console.log(item?.section_id, "item?.section_id");
           if (!newArray) {
             setNewArray(newArray => [...newArray, item])
           } else {
@@ -306,7 +309,7 @@ const AddingProduct = () => {
     })
   }, [section_Id, productsData])
 
-  console.log(section_Id, "section_Id");
+  // console.log(section_Id, "section_Id");
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
@@ -400,9 +403,36 @@ const AddingProduct = () => {
       setState({ ...state, onEditInput: true })
     }
   }
+
   useEffect(() => {
     setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
   }, [newArray, section_Id])
+
+  useEffect(() => {
+    if (!newArray?.length) {
+      setSubSection_Id([])
+    }
+  }, [newArray])
+
+  // useEffect(() => {
+  //   // if (!newArray) {
+  //   //   setSubSection_Id([])
+  //   // }
+  //   if (newArray) {
+  //     setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
+  //     newArray?.filter(e => subSection_Id?.includes(e?.id))?.map(data => {
+  //       setArrData(dat => [...dat, data?.id])
+  //     })
+  //   }
+  //   // if (arrDat) {
+  //   //   setArrData(arrDat.filter((x, i, a) => a.indexOf(x) == i))
+  //   // }
+  // }, [newArray])
+  // useEffect(() => {
+  //   // setArrData(arrDat.filter((x, i, a) => a.indexOf(x) == i))
+  // }, [section_Id])
+
+  // console.log(arrDat, "arrDat");
 
   function onHandleChangeSeason(e) {
     if (e?.length < season_Id?.length) {
@@ -467,7 +497,6 @@ const AddingProduct = () => {
     state?.MakeCountryModal,
     state?.SubClothingSection,
     allSizeModalShow
-
   ]);
   function onHandleImageAdd(childData) {
     setState({
@@ -652,74 +681,144 @@ const AddingProduct = () => {
   }
 
   const productUpdate = (childData) => {
-    setState({ ...state, sendingLoader: true })
-    let form = new FormData();
-    section_Id && section_Id?.forEach((index) => {
-      form.append("section_ids[]", Number(index));
-    })
-    subSection_Id && subSection_Id?.forEach((index) => {
-      form.append("sub_section_ids[]", Number(index));
-    })
-    season_Id && season_Id?.forEach((index) => {
-      form.append("season_ids[]", Number(index));
-    })
-    state?.gender_Id && form.append("gender_id", state?.gender_Id);
-    state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
-    state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
-    state?.sku && form.append("sku", state?.sku);
-    state?.filterTypeId && form.append("type_id", parseFloat(state?.filterTypeId));
-    state?.producer_Id && form.append("producer_id", state?.producer_Id);
-    childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
-    childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
-    childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
-    childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
-    childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
-    childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
-    childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
-    childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
-    childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
-
-    return fetch(`${url}/products/${Number(newProductId)}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-      },
-      body: form,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res?.errors && res?.message) {
-          toast.error(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
-          setState({ ...state, onEditInput: false, sendingLoader: false })
-        } else if (res?.message) {
-          toast.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
-          refetch()
-          setState({ ...state, onEditInput: false, sendingLoader: false })
-          setDressInfo({ ...dressInfo, nextPageShowForm: true })
-
-        }
-        console.log(res, "ProductStore---Added");
+    setState({ ...state, isCheckValid: true })
+    if (newArray?.length && subSection_Id?.length) {
+      setState({ ...state, sendingLoader: true, })
+      let form = new FormData();
+      section_Id && section_Id?.forEach((index) => {
+        form.append("section_ids[]", Number(index));
       })
-      .catch((err) => console.log(err, "errImage"));
+      subSection_Id && subSection_Id?.forEach((index) => {
+        form.append("sub_section_ids[]", Number(index));
+      })
+      season_Id && season_Id?.forEach((index) => {
+        form.append("season_ids[]", Number(index));
+      })
+      state?.gender_Id && form.append("gender_id", state?.gender_Id);
+      state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
+      state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
+      state?.sku && form.append("sku", state?.sku);
+      state?.filterTypeId && form.append("type_id", parseFloat(state?.filterTypeId));
+      state?.producer_Id && form.append("producer_id", state?.producer_Id);
+      childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
+      childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
+      childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
+      childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
+      childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
+      childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
+      childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
+      childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
+      childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
+
+      return fetch(`${url}/products/${Number(newProductId)}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.errors && res?.message) {
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+            setState({ ...state, onEditInput: false, sendingLoader: false, isCheckValid: false })
+          } else if (res?.message) {
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+            refetch()
+            setState({ ...state, onEditInput: false, sendingLoader: false })
+          }
+          console.log(res, "ProductStore---Added");
+        })
+        .catch((err) => console.log(err, "errImage"));
+    }
+    if (!newArray?.length) {
+      setState({ ...state, sendingLoader: true, })
+      let form = new FormData();
+      section_Id && section_Id?.forEach((index) => {
+        form.append("section_ids[]", Number(index));
+      })
+      subSection_Id && subSection_Id?.forEach((index) => {
+        form.append("sub_section_ids[]", Number(index));
+      })
+      season_Id && season_Id?.forEach((index) => {
+        form.append("season_ids[]", Number(index));
+      })
+      state?.gender_Id && form.append("gender_id", state?.gender_Id);
+      state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
+      state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
+      state?.sku && form.append("sku", state?.sku);
+      state?.filterTypeId && form.append("type_id", parseFloat(state?.filterTypeId));
+      state?.producer_Id && form.append("producer_id", state?.producer_Id);
+      childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
+      childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
+      childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
+      childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
+      childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
+      childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
+      childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
+      childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
+      childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
+
+      return fetch(`${url}/products/${Number(newProductId)}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.errors && res?.message) {
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+            setState({ ...state, onEditInput: false, sendingLoader: false, isCheckValid: false, })
+          } else if (res?.message) {
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+            refetch()
+            setState({ ...state, onEditInput: false, sendingLoader: false, isCheckValid: false })
+
+          }
+          console.log(res, "ProductStore---Added");
+        })
+        .catch((err) => console.log(err, "errImage"));
+    }
   };
 
   useEffect(() => {
@@ -730,9 +829,11 @@ const AddingProduct = () => {
     }
   }, [newArray?.length, subSection_Id?.length])
   // console.log(state?.subSectionToggle, "subSectionToggle");
-  console.log(newArray, "newArray?.length");
+  console.log(state?.isCheckValid, "isCheckValid");
+  console.log(newArray, "newArray");
   // console.log(subSection_Id?.length, "subSection_Id?.length");
-  // console.log(subSection_Id, "subSection_Id");
+  console.log(subSection_Id, "subSection_Id");
+  console.log(state?.onEditInput, "onEditInput");
   // console.log("---------------------------------------------");
   return (
     <div className="w-full h-fit ">
@@ -1183,10 +1284,8 @@ const AddingProduct = () => {
                         <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shopId ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                           Локация
                         </span>
-
                       </div>
                       <button
-
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
@@ -1195,7 +1294,6 @@ const AddingProduct = () => {
                         </label>
                         <ArrowRightIcon />
                       </button>
-
                       <div className="w-full  cursor-not-allowed h-fit hidden md:flex">
                         <button
                           type="button"
@@ -1214,12 +1312,9 @@ const AddingProduct = () => {
                                 )
                               })
                             })
-
                             }
-
                           </span>
                         </button>
-
                       </div>
                     </div>
                     {/* Input Select 1 */}
@@ -1246,7 +1341,7 @@ const AddingProduct = () => {
                       </button>
                       <div className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}>
                         <Select
-                          className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                          className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                           showSearch
                           mode="multiple"
                           placeholder="Выбрать"
@@ -1304,7 +1399,7 @@ const AddingProduct = () => {
                       </button>
                       <div className="w-full h-fit hidden md:flex">
                         <Select
-                          className={` rounded-lg w-full ${state?.isCheckValid && !subSection_Id?.length ? "  border border-[#FFB8B8] " : ""}`}
+                          className={`rounded-lg w-full  ${newArray?.length && state?.isCheckValid && !subSection_Id?.length ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " border-borderColor bg-white"}`}
                           showSearch
                           disabled={colorAction || !state?.subSectionToggle}
                           placeholder="Выбрать"
@@ -1320,7 +1415,6 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-
                         >
                           {newArray?.map(item => {
                             return (
@@ -1361,7 +1455,7 @@ const AddingProduct = () => {
                       </button>
                       <div className="w-full h-fit hidden md:flex">
                         <Select
-                          className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.season_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                          className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !season_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                           mode="multiple"
                           disabled={colorAction ? true : false}
                           placeholder="Выбрать"
@@ -1970,7 +2064,7 @@ const AddingProduct = () => {
         </div>
         <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"} `}>
 
-          <TextFormAdd productsEdit={productsDataIdEdit} handlCallBack={productUpdate} loading={state?.sendingLoader} />
+          <TextFormAdd productsEdit={productsDataIdEdit} onClick={onEdittextForm} onEdit={state?.onEditInput} handlCallBack={productUpdate} loading={state?.sendingLoader} />
         </div>
       </div >
     </div >

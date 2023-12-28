@@ -88,7 +88,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
             price: null,
             discountPercent: null,
             discountPrice: null,
-
             // ----
             isCheckValid: false,
             onConcel: false,
@@ -132,141 +131,144 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
     }
 
     const onHandleAddSize = async () => {
-        setState({ ...state, isCheckValid: true, sendingLoader: true })
-        let form = new FormData();
+        setState({ ...state, isCheckValid: true, })
+        if (state?.priceNum && state?.quantityNum) {
+            setState({ ...state, sendingLoader: true })
+            let form = new FormData();
 
-        if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
-            state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
-            state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
-            state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-            state?.salePercent && form.append("discount_percent", state?.salePercent);
-            state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-            state?.ageNum && form.append("age", Number(state?.ageNum));
-            form.append("amount", state?.quantityNum);
-            form.append("price", state?.priceNum?.split(",")?.join(""));
-            form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
-            form.append("color_id", selectColorID);
-        }
-        if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
-            state?.sizeListCheck && form.append("outwear_letter_size", state?.sizeListCheck);
-            state?.minSize && form.append("min_outwear_size", state?.minSize);
-            state?.maxSize && form.append("max_outwear_size", state?.maxSize);
-            state?.minBreast && form.append("min_chest_girth", state?.minBreast);
-            state?.maxBreast && form.append("max_chest_girth", state?.maxBreast);
-            state?.minWaist && form.append("min_outwear_waist_girth", state?.minWaist);
-            state?.maxWaist && form.append("max_outwear_waist_girth", state?.maxWaist);
-            state?.minHips && form.append("min_outwear_hip_girth", state?.minHips);
-            state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
-            state?.ageNum && form.append("age", Number(state?.ageNum));
-            state?.salePercent && form.append("discount_percent", state?.salePercent);
-            state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-            form.append("amount", state?.quantityNum);
-            form.append("price", state?.priceNum?.split(",")?.join(""));
-            form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
-            form.append("color_id", selectColorID);
-        }
-        if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
-            state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
-            state?.minHeight && form.append("min_height", state?.minHeight);
-            state?.maxHeight && form.append("max_height", state?.maxHeight);
-            state?.minSize && form.append("min_underwear_size", state?.minSize);
-            state?.maxSize && form.append("max_underwear_size", state?.maxSize);
-            state?.minBreast && form.append("min_underwear_waist_girth", state?.minBreast);
-            state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
-            state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
-            state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
-            state?.ageNum && form.append("age", Number(state?.ageNum));
-            state?.salePercent && form.append("discount_percent", state?.salePercent);
-            state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-            form.append("amount", state?.quantityNum);
-            form.append("price", state?.priceNum?.split(",")?.join(""));
-            form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
-            form.append("color_id", selectColorID);
-        }
-        if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
-            state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
-            state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
-            state?.ageNum && form.append("age", Number(state?.ageNum));
-            state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-            state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
-            form.append("footwear_size", state?.one_size);
-            form.append("amount", state?.quantityNum);
-            form.append("price", state?.priceNum?.split(",")?.join(""));
-            form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
-            form.append("color_id", selectColorID);
-        }
-        if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
-            state?.sizeListCheck && form.append("accessory_letter_size", state?.sizeListCheck);
-            state?.minSize && form.append("accessory_size", state?.minSize);
-            state?.rowSize && form.append("length", state?.rowSize);
-            state?.colSize && form.append("width", state?.colSize);
-            state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-            state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
-            state?.ageNum && form.append("age", Number(state?.ageNum));
-            form.append("amount", state?.quantityNum);
-            form.append("price", state?.priceNum?.split(",")?.join(""));
-            form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
-            form.append("color_id", selectColorID);
-        }
-
-        try {
-            const res = await fetch(`${url}/products/${Number(productsDataIdEdit?.locations[0]?.pivot?.product_id)}/add-product-size`, {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-                },
-                body: form,
-            });
-            const res_1 = await res.json();
-            if (res_1) {
-                if (res_1?.errors && res_1?.message) {
-                    toast.error(`${res_1?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setState({ ...state, isCheckValid: false, sendingLoader: false })
-                } else if (res_1?.message) {
-                    toast.success(`${res_1?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setToggleShow(false)
-                    setState({ ...state, isCheckValid: false, sendingLoader: false })
-                }
-                console.log(res_1, "Product--Store--Added");
+            if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
+                state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
+                state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
+                state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
+                state?.salePercent && form.append("discount_percent", state?.salePercent);
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("color_id", selectColorID);
             }
-        } catch (err) {
-            toast.error(`${err}`, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            })
-            onRefetch()
-            setState({ ...state, isCheckValid: false, sendingLoader: false })
-            throw new Error(err?.message || "something wrong");
-        }
+            if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
+                state?.sizeListCheck && form.append("outwear_letter_size", state?.sizeListCheck);
+                state?.minSize && form.append("min_outwear_size", state?.minSize);
+                state?.maxSize && form.append("max_outwear_size", state?.maxSize);
+                state?.minBreast && form.append("min_chest_girth", state?.minBreast);
+                state?.maxBreast && form.append("max_chest_girth", state?.maxBreast);
+                state?.minWaist && form.append("min_outwear_waist_girth", state?.minWaist);
+                state?.maxWaist && form.append("max_outwear_waist_girth", state?.maxWaist);
+                state?.minHips && form.append("min_outwear_hip_girth", state?.minHips);
+                state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                state?.salePercent && form.append("discount_percent", state?.salePercent);
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("color_id", selectColorID);
+            }
+            if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
+                state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
+                state?.minHeight && form.append("min_height", state?.minHeight);
+                state?.maxHeight && form.append("max_height", state?.maxHeight);
+                state?.minSize && form.append("min_underwear_size", state?.minSize);
+                state?.maxSize && form.append("max_underwear_size", state?.maxSize);
+                state?.minBreast && form.append("min_underwear_waist_girth", state?.minBreast);
+                state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
+                state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
+                state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                state?.salePercent && form.append("discount_percent", state?.salePercent);
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("color_id", selectColorID);
+            }
+            if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
+                state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
+                state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                form.append("footwear_size", state?.one_size);
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("color_id", selectColorID);
+            }
+            if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
+                state?.sizeListCheck && form.append("accessory_letter_size", state?.sizeListCheck);
+                state?.minSize && form.append("accessory_size", state?.minSize);
+                state?.rowSize && form.append("length", state?.rowSize);
+                state?.colSize && form.append("width", state?.colSize);
+                state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("color_id", selectColorID);
+            }
 
+            try {
+                const res = await fetch(`${url}/products/${Number(productsDataIdEdit?.locations[0]?.pivot?.product_id)}/add-product-size`, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                    },
+                    body: form,
+                });
+                const res_1 = await res.json();
+                if (res_1) {
+                    if (res_1?.errors && res_1?.message) {
+                        toast.error(`${res_1?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setState({ ...state, isCheckValid: false, sendingLoader: false })
+                    } else if (res_1?.message) {
+                        toast.success(`${res_1?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setToggleShow(false)
+                        setState({ ...state, isCheckValid: false, sendingLoader: false })
+                    }
+                    console.log(res_1, "Product--Store--Added");
+                }
+            } catch (err) {
+                toast.error(`${err}`, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+                onRefetch()
+                setState({ ...state, isCheckValid: false, sendingLoader: false })
+                throw new Error(err?.message || "something wrong");
+            }
+        }
     }
+
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
         if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
