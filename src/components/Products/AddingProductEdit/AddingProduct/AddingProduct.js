@@ -292,18 +292,21 @@ const AddingProduct = () => {
   useEffect(() => {
     setNewArray([])
     productsData?.sections?.map(item => {
-      item?.sub_sections?.filter(e => section_Id?.includes(Number(e?.section_id)))?.map(item => {
-        // console.log(item, "newArray--nima");
-        if (!newArray?.length) {
-          setNewArray(newArray => [...newArray, item])
-        } else if (newArray?.includes(item)) {
-          setNewArray(newArray => [...newArray, item])
+      item?.sub_sections?.map(item => {
+        if (section_Id?.includes(Number(item?.section_id))) {
+          console.log(item, "buIetm");
+          console.log(item?.section_id, "item?.section_id");
+          if (!newArray) {
+            setNewArray(newArray => [...newArray, item])
+          } else {
+            setNewArray(newArray => [...newArray, item])
+          }
         }
       })
     })
   }, [section_Id, productsData])
 
-
+  console.log(section_Id, "section_Id");
   // -----------------------------------------------------------
   // ColorHandle
   // ------------------------------------------------------------------------
@@ -727,7 +730,7 @@ const AddingProduct = () => {
     }
   }, [newArray?.length, subSection_Id?.length])
   // console.log(state?.subSectionToggle, "subSectionToggle");
-  // console.log(newArray?.length, "newArray?.length");
+  console.log(newArray, "newArray?.length");
   // console.log(subSection_Id?.length, "subSection_Id?.length");
   // console.log(subSection_Id, "subSection_Id");
   // console.log("---------------------------------------------");
