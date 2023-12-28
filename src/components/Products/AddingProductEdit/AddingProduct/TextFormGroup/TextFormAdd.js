@@ -22,7 +22,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
         noteValueUz: null,
         isCheckValid: false,
         brand: null,
-        onEditInput: false
+        onEditTextForm: false
     })
     useEffect(() => {
         // console.log(productsEdit, "productsEdit");
@@ -47,19 +47,19 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
     const handleSelectQuality = (value) => {
         productsData?.quality?.filter(e => e.name_ru === value).map(item => {
-            setState({ ...state, qualityInUz: item?.name_uz, onEditInput: true })
+            setState({ ...state, qualityInUz: item?.name_uz, onEditTextForm: true })
         })
-        onClick()
-        setState({ ...state, qualityInRu: value, qualityInUz: value, onEditInput: true })
+
+        setState({ ...state, qualityInRu: value, qualityInUz: value, onEditTextForm: true })
     }
     const handleSelectQualityUz = (value) => {
-        setState({ ...state, onEditInput: true })
-        onClick()
+        setState({ ...state, onEditTextForm: true })
+
     }
     const handleBrand = (value) => {
         console.log(value, "value");
-        setState({ ...state, brand: value, onEditInput: true })
-        onClick()
+        setState({ ...state, brand: value, onEditTextForm: true })
+
     }
     useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
         {
@@ -83,7 +83,12 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
             top: 0,
         });
     }, [dressInfo?.nextPageShowForm]);
-
+    useEffect(() => {
+        if (!loading) {
+            setState({ ...state, onEditTextForm: false })
+        }
+    }, [loading]);
+    console.log(loading, "loading");
 
     const send = () => {
         setState({ ...state, isCheckValid: true })
@@ -150,8 +155,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         name="title"
                                         value={state?.titleInRu}
                                         onChange={(e) => {
-                                            onClick()
-                                            setState({ ...state, titleInRu: e.target.value, onEditInput: true })
+
+                                            setState({ ...state, titleInRu: e.target.value, onEditTextForm: true })
                                         }}
 
                                     />
@@ -181,8 +186,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
                                         value={state?.titleInUz}
                                         onChange={(e) => {
-                                            onClick()
-                                            setState({ ...state, titleInUz: e.target.value, onEditInput: true })
+
+                                            setState({ ...state, titleInUz: e.target.value, onEditTextForm: true })
                                         }}
                                     />
                                     <button
@@ -210,8 +215,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
                                         value={state?.descriptionInRu}
                                         onChange={(e) => {
-                                            onClick()
-                                            setState({ ...state, descriptionInRu: e.target.value, onEditInput: true })
+
+                                            setState({ ...state, descriptionInRu: e.target.value, onEditTextForm: true })
                                         }}
 
                                     ></textarea>
@@ -243,8 +248,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
                                         value={state?.descriptionInUz}
                                         onChange={(e) => {
-                                            onClick()
-                                            setState({ ...state, descriptionInUz: e.target.value, onEditInput: true })
+
+                                            setState({ ...state, descriptionInUz: e.target.value, onEditTextForm: true })
                                         }}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
@@ -352,8 +357,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
                                             value={state?.noteValueRu}
                                             onChange={(e) => {
-                                                onClick()
-                                                setState({ ...state, noteValueRu: e.target.value, onEditInput: true })
+
+                                                setState({ ...state, noteValueRu: e.target.value, onEditTextForm: true })
                                             }}
                                         />
 
@@ -380,8 +385,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
                                             value={state?.noteValueUz}
                                             onChange={(e) => {
-                                                onClick()
-                                                setState({ ...state, noteValueUz: e.target.value, onEditInput: true })
+
+                                                setState({ ...state, noteValueUz: e.target.value, onEditTextForm: true })
                                             }}
                                         />
                                         <button
@@ -443,7 +448,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     className="md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg  font-AeonikProMedium"                                >
                                     Назад
                                 </button>
-                                {onEdit ? <button
+                                {state?.onEditTextForm ? <button
                                     type="button"
                                     onClick={send}
                                     className="md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg font-AeonikProMedium">
