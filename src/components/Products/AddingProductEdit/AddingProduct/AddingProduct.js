@@ -100,6 +100,7 @@ const AddingProduct = () => {
     lastElementColorId: null,
     // ----
     onEditInput: false,
+    onEditTextForm: false,
     // -----
     subSectionToggle: false
   });
@@ -129,10 +130,11 @@ const AddingProduct = () => {
   }
 
   // ---------Callback----
-  const onEdittextForm = React.useCallback(
-    () => setState({ ...state, onEditInput: true }),
+  const onEditTextFormCall = React.useCallback(
+    () => setState({ ...state, onEditTextForm: true }),
     []
-  ); // ClothingSection
+  ); // onEdittextForm
+  console.log(state?.onEditTextForm, "onEditTextForm");
   const ClothingSectionToggle = React.useCallback(
     () => setState({ ...state, ClothingSection: false }),
     []
@@ -369,9 +371,7 @@ const AddingProduct = () => {
       }
       setScreenSize(getCurrentDimension());
     };
-
     window.addEventListener("resize", updateDimension);
-
     return () => {
       window.removeEventListener("resize", updateDimension);
     };
@@ -403,6 +403,12 @@ const AddingProduct = () => {
       setState({ ...state, onEditInput: true })
     }
   }
+
+  useEffect(() => {
+    if (section_Id?.length > 1) {
+      setSection_Id(section_Id.filter((x, i, a) => a.indexOf(x) == i))
+    }
+  }, [productsData])
 
   useEffect(() => {
     if (subSection_Id?.length > 1) {
@@ -2066,7 +2072,7 @@ const AddingProduct = () => {
         </div>
         <div className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"} `}>
 
-          <TextFormAdd productsEdit={productsDataIdEdit} onClick={onEdittextForm} onEdit={state?.onEditInput} handlCallBack={productUpdate} loading={state?.sendingLoader} />
+          <TextFormAdd productsEdit={productsDataIdEdit} onClick={onEditTextFormCall} onEdit={state?.onEditTextForm} handlCallBack={productUpdate} loading={state?.sendingLoader} />
         </div>
       </div >
     </div >
