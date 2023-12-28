@@ -410,11 +410,11 @@ const AddingProduct = () => {
     }
   }, [newArray, section_Id])
 
-  useEffect(() => {
-    if (!newArray?.length) {
-      setSubSection_Id([])
-    }
-  }, [newArray])
+  // useEffect(() => {
+  //   if (!newArray?.length) {
+  //     setSubSection_Id([])
+  //   }
+  // }, [newArray])
 
   // useEffect(() => {
   //   // if (!newArray) {
