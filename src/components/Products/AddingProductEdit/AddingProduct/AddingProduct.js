@@ -766,7 +766,7 @@ const AddingProduct = () => {
           // console.log(res, "ProductStore---Added");
         })
         .catch((err) => {
-          toast.error(`${res?.message}`, {
+          toast.error(`${err?.message}`, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -846,7 +846,7 @@ const AddingProduct = () => {
           // console.log(res, "ProductStore---Added");
         })
         .catch((err) => {
-          toast.error(`${res?.message}`, {
+          toast.error(`${err?.message}`, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
