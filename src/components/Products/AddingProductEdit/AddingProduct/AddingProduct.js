@@ -134,7 +134,7 @@ const AddingProduct = () => {
     () => setState({ ...state, onEditTextForm: true }),
     []
   ); // onEdittextForm
-  console.log(state?.onEditTextForm, "onEditTextForm");
+  // console.log(state?.onEditTextForm, "onEditTextForm");
   const ClothingSectionToggle = React.useCallback(
     () => setState({ ...state, ClothingSection: false }),
     []
@@ -310,7 +310,7 @@ const AddingProduct = () => {
       })
     })
   }, [section_Id, productsData])
-  console.log(productsData, "productsData");
+  // console.log(productsData, "productsData");
   // console.log(section_Id, "section_Id");
   // -----------------------------------------------------------
   // ColorHandle
@@ -620,7 +620,7 @@ const AddingProduct = () => {
           setSelectColorID()
           refetch()
         }
-        console.log(res_1, "Product--Store--Added");
+        // console.log(res_1, "Product--Store--Added");
       }
     } catch (err) {
       toast.error(`${err}`, {
@@ -681,8 +681,17 @@ const AddingProduct = () => {
         },
 
         onError: err => {
-          console.log(err);
-          refetch()
+          toast.error(`${err?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+          // refetch()
 
         }
       })
@@ -754,9 +763,20 @@ const AddingProduct = () => {
             refetch()
             setState({ ...state, onEditInput: false, sendingLoader: false })
           }
-          console.log(res, "ProductStore---Added");
+          // console.log(res, "ProductStore---Added");
         })
-        .catch((err) => console.log(err, "errImage"));
+        .catch((err) => {
+          toast.error(`${err?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+        });
     }
     if (!newArray?.length) {
       setState({ ...state, sendingLoader: true, })
@@ -823,9 +843,20 @@ const AddingProduct = () => {
             setState({ ...state, onEditInput: false, sendingLoader: false, isCheckValid: false })
 
           }
-          console.log(res, "ProductStore---Added");
+          // console.log(res, "ProductStore---Added");
         })
-        .catch((err) => console.log(err, "errImage"));
+        .catch((err) => {
+          toast.error(`${err?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+        });
     }
   };
 
@@ -837,11 +868,11 @@ const AddingProduct = () => {
     }
   }, [newArray?.length, subSection_Id?.length])
   // console.log(state?.subSectionToggle, "subSectionToggle");
-  console.log(state?.isCheckValid, "isCheckValid");
-  console.log(newArray, "newArray");
+  // console.log(state?.isCheckValid, "isCheckValid");
+  // console.log(newArray, "newArray");
   // console.log(subSection_Id?.length, "subSection_Id?.length");
-  console.log(subSection_Id, "subSection_Id");
-  console.log(state?.onEditInput, "onEditInput");
+  // console.log(subSection_Id, "subSection_Id");
+  // console.log(state?.onEditInput, "onEditInput");
   // console.log("---------------------------------------------");
   return (
     <div className="w-full h-fit ">
@@ -1434,8 +1465,8 @@ const AddingProduct = () => {
                                 <Space>
                                   {productsData?.sections?.filter(e => e?.id == item?.section_id)?.map(data => {
                                     return <div className=" flex items-center">
-                                      <p className="flex  items-center">{item.name_ru} </p>
-                                      <p className="text-[12px] pt-[4px] flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">({data?.name_ru})</p>
+                                      <p className="flex  items-center font-AeonikProRegular">{item.name_ru} </p>
+                                      <p className="text-[12px]  flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">({data?.name_ru})</p>
                                     </div>
                                   })}
                                 </Space>
