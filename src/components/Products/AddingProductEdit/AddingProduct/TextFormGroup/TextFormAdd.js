@@ -283,7 +283,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         className={`rounded-[6px] overflow-hidden ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
-                                        allowClear
+                                        // allowClear
                                         value={productsData?.quality?.filter(e => e?.name_ru == state?.qualityInRu)?.map(item => { return item?.name_ru })}
                                         onChange={handleSelectQuality}
                                         options={
@@ -326,7 +326,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             //         : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
                                         }
                                         onChange={handleSelectQualityUz}
-                                        allowClear
+                                        // allowClear
                                         options={
                                             productsData?.quality?.map(item => {
                                                 return (

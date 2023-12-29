@@ -1417,7 +1417,7 @@ const AddingProduct = () => {
                           onChange={handleChangeSubSection}
                           onSearch={onSearch}
                           size="large"
-                          allowClear
+                          // allowClear
                           filterOption={(input, option) =>
                             (option?.label ?? "")
                               .toLowerCase()
@@ -1737,7 +1737,7 @@ const AddingProduct = () => {
                           <Select
                             className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : ""}`}
                             showSearch
-                            allowClear
+                            // allowClear
                             disabled={colorAction ? true : false}
                             placeholder="Выбрать"
                             value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
@@ -1838,7 +1838,7 @@ const AddingProduct = () => {
                         <Select
                           className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : ""}`}
                           showSearch
-                          allowClear
+                          // allowClear
                           disabled={colorAction ? true : false}
                           placeholder="Выбрать"
                           value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
