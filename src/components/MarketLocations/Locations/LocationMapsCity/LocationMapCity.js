@@ -196,7 +196,7 @@ export default function LocationMapCity() {
         setForMaps({
           ...forMaps,
           title: res?.location?.address,
-          center: [parseFloat(res?.location?.longitude?.slice(0, 9)), parseFloat(res?.location?.latitude?.slice(0, 9))]
+          center: [parseFloat(res?.location?.latitude?.slice(0, 9)), parseFloat(res?.location?.longitude?.slice(0, 9))]
         })
       },
       onError: (err) => {
@@ -307,8 +307,8 @@ export default function LocationMapCity() {
   const handleEditLocation = () => {
     let form = new FormData()
     form.append("address", forMaps?.title);
-    form.append("longitude", forMaps?.center[0]);
-    form.append("latitude", forMaps?.center[1]);
+    form.append("latitude", forMaps?.center[0]);
+    form.append("longitude", forMaps?.center[1]);
     form.append("shop_id", state?.idShopId);
     form.append("region_id", state?.idRegionId);
     form.append("sub_region_id", state?.idSupRregionId);
