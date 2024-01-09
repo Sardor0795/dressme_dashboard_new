@@ -81,8 +81,8 @@ export default function LocationAddById() {
     setState({
       ...state,
       shopCenterAddress: childData?.title,
-      shopLongitude: childData?.center[0],
-      shopLatitude: childData?.center[1],
+      shopLatitude: childData?.center[0],
+      shopLongitude: childData?.center[1],
     });
   }
 
