@@ -65,7 +65,6 @@ export default function RouterList() {
       {/* <NavbarForSetting /> */}
       <Routes>
         {/* ---------------------<Authentification>------------------------- */}
-        <Route path={"/edit-profile"} element={<EditProfilePage />} />
         {/* ---------------------<Store>------------------------- */}
         <Route path="/reviews" element={<Reviews1 />}>
           <Route index element={<ReviewStoreWear />} />
@@ -116,9 +115,16 @@ export default function RouterList() {
           <Route path="/products/location" element={<ProductLocationsList />} />
           <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
         </Route>
+        {
+          localStorage.getItem("DressmeUserToken") ?
+            <Route path="/" element={<Navigate to={"/edit-profile"} />} />
+            :
+            <Route path="/" element={<Navigate to={"/signup-seller"} />} />
 
-        <Route path="/" element={<Navigate to={"/signup-seller"} />} />
+        }
 
+
+        <Route path={"/edit-profile"} element={<EditProfilePage />} />
         <Route path={"/signup-seller"} element={<SignUpSeller />} />
         <Route path={"/login-seller"} element={<SignInSeller />} />
         <Route path={"/forgot-password-seller"} element={<ForgotPasswordSeller />} />

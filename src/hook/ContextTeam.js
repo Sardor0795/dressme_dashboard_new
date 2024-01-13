@@ -18,8 +18,12 @@ export default function ContextTeam({ children }) {
     productAddByIdForToggle: '',
     isCheckPoructList: null,
     sellerUser: "",
+    // -----------
+    // isAuthenticated: false,
+    accessToken: null,
+    refreshToken: null,
+    expiresAt: null,
   });
-
 
 
   return (
