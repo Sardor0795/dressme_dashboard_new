@@ -96,7 +96,7 @@ const EditProfilePage = () => {
     keepPreviousData: true,
     refetchOnWindowFocus: true,
   });
-  console.log(data, "data");
+  // console.log(data, "data");
   useEffect(() => {
     if (localStorage?.getItem("DressmeUserToken")) {
       if (data?.error?.code === "ERR_NETWORK") {
@@ -236,9 +236,9 @@ const EditProfilePage = () => {
     mutate({}, {
       onSuccess: res => {
         if (res?.message) {
-          // localStorage.clear();
-          // navigate("/signup-seller")
-          // window.location.reload();
+          localStorage.clear();
+          navigate("/signup-seller")
+          window.location.reload();
           setState({ ...state, popConfirmDelete: false })
           console.log(res, "Delete");
           toast.warn(`${res?.message}`, {
