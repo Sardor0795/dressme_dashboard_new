@@ -16,6 +16,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../../hook/ContextTeam";
+import axios from "axios";
 
 const EditProfilePage = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData)
@@ -72,43 +73,105 @@ const EditProfilePage = () => {
 
 
   // ----------------Get Seller Profile-------------
-  useQuery(["Get-Seller-Profile"], () => {
-    return fetch(`${url}/profile`, {
-      method: "GET",
-      headers: {
-        // "Content-Type": "application/json",
-        // "Accept": "application/json",
-        'Content-type': 'application/json; charset=UTF-8',
-        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  const fetchData = async (customHeaders) => {
+    try {
+      const response = await axios.get(`${url}/profile`, {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+
+  const { data, status, error } = useQuery(['get_profile_axios'], () => fetchData(customHeaders), {
+    keepPreviousData: true,
+    refetchOnWindowFocus: true,
+  });
+  console.log(data, "data");
+  useEffect(() => {
+    if (localStorage?.getItem("DressmeUserToken")) {
+      if (data?.error?.code === "ERR_NETWORK") {
+        toast.error(`${data?.error?.message}`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
-    }).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        console.log(res, "Response in Profile")
-        // setDressInfo({ ...dressInfo, SellerName: res?.name, SellerSurName: res?.surname })
+      if (data?.status === 200) {
         setState({
           ...state,
-          sellerFname: res?.name,
-          sellerLname: res?.surname,
-          sellerEmail: res?.email,
-          sellerCardNumber: res?.card_number,
-          sellerRegionId: res?.region_id,
-          sellerSubRegionId: res?.sub_region_id,
-          sellerTypeId: res?.seller_type_id,
-          sellerStatus: res?.status,
-          sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
-          sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
+          sellerFname: data?.data?.name,
+          sellerLname: data?.data?.surname,
+          sellerEmail: data?.data?.email,
+          sellerCardNumber: data?.data?.card_number,
+          sellerRegionId: data?.data?.region_id,
+          sellerSubRegionId: data?.data?.sub_region_id,
+          sellerTypeId: data?.data?.seller_type_id,
+          sellerStatus: data?.data?.status,
+          sellerPhoneCode: data?.data?.phone && data?.data?.phone.slice(0, 3),
+          sellerPhoneNum: data?.data?.phone && data?.data?.phone.slice(3, 12),
         })
-      },
-      onError: (err) => {
-        console.log(err, "err get profile");
-      },
-
-      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+      }
+      if (data?.status === 401) {
+        localStorage?.removeItem("DressmeUserToken")
+        navigate("/login-seller")
+      }
+    } else {
+      navigate("/login-seller")
     }
-  )
+
+  }, [data]);
+  // useQuery(["Get-Seller-Profile"], () => {
+  //   return fetch(`${url}/profile`, {
+  //     method: "GET",
+  //     headers: {
+  //       // "Content-Type": "application/json",
+  //       // "Accept": "application/json",
+  //       'Content-type': 'application/json; charset=UTF-8',
+  //       "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //     }
+  //   }).then(res => res.json())
+  // },
+  //   {
+  //     onSuccess: (res) => {
+  //       console.log(res, "Response in Profile")
+  //       // setDressInfo({ ...dressInfo, SellerName: res?.name, SellerSurName: res?.surname })
+  //       setState({
+  //         ...state,
+  //         sellerFname: res?.name,
+  //         sellerLname: res?.surname,
+  //         sellerEmail: res?.email,
+  //         sellerCardNumber: res?.card_number,
+  //         sellerRegionId: res?.region_id,
+  //         sellerSubRegionId: res?.sub_region_id,
+  //         sellerTypeId: res?.seller_type_id,
+  //         sellerStatus: res?.status,
+  //         sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
+  //         sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
+  //       })
+  //     },
+  //     onError: (err) => {
+  //       console.log(err, "err get profile");
+  //     },
+
+  //     keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
+  //     refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
+  //   }
+  // )
   // ------------GET METHOD Region-----------------
 
   useQuery(["get region"], () => {
@@ -173,9 +236,9 @@ const EditProfilePage = () => {
     mutate({}, {
       onSuccess: res => {
         if (res?.message) {
-          localStorage.clear();
-          navigate("/signup-seller")
-          window.location.reload();
+          // localStorage.clear();
+          // navigate("/signup-seller")
+          // window.location.reload();
           setState({ ...state, popConfirmDelete: false })
           console.log(res, "Delete");
           toast.warn(`${res?.message}`, {
