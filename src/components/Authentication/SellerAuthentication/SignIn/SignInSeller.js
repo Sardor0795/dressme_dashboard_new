@@ -13,7 +13,9 @@ export default function SignInSeller() {
     password: "",
     email: "",
     rememberCheck: "",
-    errorGroup: ""
+    errorGroup: "",
+    isLoadingSent: false,
+
 
   });
 
@@ -40,14 +42,14 @@ export default function SignInSeller() {
     // console.log(state?.password, "password");
     // console.log(state?.rememberCheck, "rememberCheck");
     if (state.email?.length && state.password?.length) {
-
+      setState({ ...state, isLoadingSent: true })
       dataMutate.mutate(
         {},
         {
           onSuccess: (res) => {
             console.log(res, "SignInSeller");
             if (res?.message && res?.errors) {
-              setState({ ...state, errorGroup: res?.message })
+              setState({ ...state, errorGroup: res?.message, isLoadingSent: false })
               toast.error(`${res?.message}`, {
                 position: "top-right",
                 autoClose: 3000,
@@ -78,11 +80,12 @@ export default function SignInSeller() {
               //   theme: "light",
               // });
               // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
-              setState({ ...state, email: "", password: "", errorGroup: "" });
+              setState({ ...state, email: "", password: "", errorGroup: "", isLoadingSent: false });
             }
           },
           onError: (err) => {
-            toast.error("Serverda xatolik", {
+            setState({ ...state, isLoadingSent: false })
+            toast.error(`${err}`, {
               position: "top-right",
               autoClose: 3000,
               hideProgressBar: false,
@@ -116,7 +119,6 @@ export default function SignInSeller() {
       top: 0,
     });
     document.title = "Войти в систему продавца";
-
   }, []);
   return (
     <div className=" w-full h-full md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
