@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import RouterList from "../../root/RouterList";
 import Sidebar from "../Sidebar/Sidebar";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { dressMainData } from "../../hook/ContextTeam";
 import { useContext } from "react";
 import { MenuCloseIcons, UserExitIcon } from "../../assets/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../hook/useHttp";
@@ -50,6 +50,12 @@ export default function NavbarDashboard() {
       }
     })
   }
+  const location = useLocation();
+
+  const [locationWindow, setLocationWindow] = useState("");
+  useEffect(() => {
+    setLocationWindow(location.pathname);
+  }, [location.pathname]);
   return (
     <div className="flex flex-col w-full h-[100vh] ">
       <ToastContainer
@@ -112,13 +118,18 @@ export default function NavbarDashboard() {
       </section>
 
       <div className="relative w-full h-full flex justify-between ">
-        {
-          localStorage.getItem("DressmeUserToken") ?
-            <div className="hidden fixed md:flex md:w-[300px] h-full">
-              <Sidebar />
-            </div> : null
 
-        }
+        {locationWindow !== "/signup-seller" &&
+          locationWindow !== "/signup-seller" &&
+          locationWindow !== "/forgot-password-seller" &&
+          locationWindow !== "/reset-password-seller/:id" &&
+          locationWindow !== "/mail-verify-seller/:id" &&
+          locationWindow !== "/login-seller" ?
+
+          <div className="hidden fixed md:flex md:w-[300px] h-full">
+            <Sidebar />
+          </div> : null}
+
         <div className={`${localStorage.getItem("DressmeUserToken") ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "w-full"} h-full `}>
           <RouterList />
         </div>

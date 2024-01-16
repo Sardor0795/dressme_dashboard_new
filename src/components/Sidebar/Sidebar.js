@@ -16,16 +16,16 @@ import { useQuery } from "@tanstack/react-query";
 function Sidebar() {
   const { request } = useHttp()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [userData, setUserData] = useState(null)
-  useQuery(["Get_Seller_Profile_dash"], () => { return request({ url: "/profile", token: true }); },
-    {
-      onSuccess: (res) => {
-        setUserData(res)
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+  // const [userData, setUserData] = useState(null)
+  // useQuery(["Get_Seller_Profile_dash"], () => { return request({ url: "/profile", token: true }); },
+  //   {
+  //     onSuccess: (res) => {
+  //       setUserData(res)
+  //     },
+  //     keepPreviousData: true,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
   return (
     <div
       className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
@@ -41,8 +41,8 @@ function Sidebar() {
               <NavbarUserIcon colors="#c5c5c5" />
             </button>
             <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-              <span>{userData?.name || "Ism"}</span>
-              <span>{userData?.surname || "Familiya"}</span>
+              <span>{dressInfo?.userData?.name || "Ism"}</span>
+              <span>{dressInfo?.userData?.surname || "Familiya"}</span>
               {/* <span>Ism familiya</span> */}
 
             </span>

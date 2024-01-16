@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
+import Cookies from "js-cookie";
 
 export default function MailVerfySeller() {
   const [timer, setTimer] = useState(false);
@@ -31,7 +32,7 @@ export default function MailVerfySeller() {
   };
   const pathname = window.location.pathname;
   let PathnameToken = pathname.replace("/mail-verify-seller/:", "");
-  
+
   const url = "https://api.dressme.uz/api/seller";
   React.useEffect(() => {
     fetch(`${url}/email-verify/${PathnameToken ? PathnameToken : null}`)
@@ -73,6 +74,9 @@ export default function MailVerfySeller() {
             });
           } else if (res?.access_token) {
             localStorage.setItem("DressmeUserToken", res?.access_token);
+            localStorage.setItem("RefreshUserToken", res?.refresh_token)
+            Cookies.set("DressmeUserToken", res?.access_token, { expires: 1 / 30 });
+
             navigate("/");
             window.location.reload();
             setState({ ...state, email: "", password: "", errorsGroup: "" });

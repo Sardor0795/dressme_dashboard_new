@@ -19,8 +19,8 @@ import MarketLocations from "../components/MarketLocations";
 import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
 import LocationMapCity from "../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity";
 import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
-import ProductEditDetailLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation";
-import ProductEditTitleLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation";
+// import ProductEditDetailLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/ProductEditDetailLocation";
+// import ProductEditTitleLocation from "../components/MarketLocations/Locations/ProductEditInLocation/AddingProductPageTwo/ProductEditTitleLocation";
 import MarketIsCheck from "../components/MarketLocations/MarketIsCheck/MarketIsCheck";
 // -------------------Reviews1----------
 import Reviews1 from "../components/Reviews1";
@@ -28,7 +28,7 @@ import ReviewComment from "../components/Reviews1/ReviewComment/ReviewStoreComme
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
 // -------------------Authentication----------
-import { EditProfilePage } from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
+// import { EditProfilePage } from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
 import SignUpSeller from "../components/Authentication/SellerAuthentication/SignUp/SignUpSeller";
 import SignInSeller from "../components/Authentication/SellerAuthentication/SignIn/SignInSeller";
 import ForgotPasswordSeller from "../components/Authentication/SellerAuthentication/forgotPassword/ForgotPasswordSeller";
@@ -41,6 +41,7 @@ import LoadingForSeller from "../components/Loading/LoadingFor";
 import LocationsByIdShow from "../components/MarketStore/LocationsById/LocationsById";
 import ProductIsCheck from "../components/Products/ProductIsCheck/ProductIsCheck";
 import ProductEditPage from "../components/Products/AddingProductEdit/ProductsEditPage";
+import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
 
 // -------------------------Location---------------------
 // const MarketLocations = React.lazy(() => import("../components/MarketLocations"));
@@ -97,8 +98,8 @@ export default function RouterList() {
           <Route path="/locations-store/city/:id" element={<LocationMapCity />} />
           <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
           {/* <Route path="/locations-store/wears/:id" element={<MarketLocations />} /> */}
-          <Route path="/locations-store/edit-detail/:id" element={<ProductEditDetailLocation />} />
-          <Route path="/locations-store/edit-title/:id" element={<ProductEditTitleLocation />} />
+          {/* <Route path="/locations-store/edit-detail/:id" element={<ProductEditDetailLocation />} />
+          <Route path="/locations-store/edit-title/:id" element={<ProductEditTitleLocation />} /> */}
         </Route>
 
 
@@ -119,7 +120,7 @@ export default function RouterList() {
           localStorage.getItem("DressmeUserToken") ?
             <Route path="/" element={<Navigate to={"/edit-profile"} />} />
             :
-            <Route path="/" element={<Navigate to={"/signup-seller"} />} />
+            <Route path="/" element={<Navigate to={"/login-seller"} />} />
 
         }
 

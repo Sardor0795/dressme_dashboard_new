@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
 
-const EditProfilePage = () => {
+function EditProfilePage() {
   const [dressInfo, setDressInfo] = useContext(dressMainData)
 
   const navigate = useNavigate()
@@ -87,6 +87,7 @@ const EditProfilePage = () => {
       return { error, status };
     }
   };
+
   const customHeaders = {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
@@ -94,9 +95,9 @@ const EditProfilePage = () => {
 
   const { data, status, error } = useQuery(['get_profile_axios'], () => fetchData(customHeaders), {
     keepPreviousData: true,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
   });
-  // console.log(data, "data");
+
   useEffect(() => {
     if (localStorage?.getItem("DressmeUserToken")) {
       if (data?.error?.code === "ERR_NETWORK") {
@@ -112,29 +113,49 @@ const EditProfilePage = () => {
         });
       }
       if (data?.status === 200) {
-        setState({
-          ...state,
-          sellerFname: data?.data?.name,
-          sellerLname: data?.data?.surname,
-          sellerEmail: data?.data?.email,
-          sellerCardNumber: data?.data?.card_number,
-          sellerRegionId: data?.data?.region_id,
-          sellerSubRegionId: data?.data?.sub_region_id,
-          sellerTypeId: data?.data?.seller_type_id,
-          sellerStatus: data?.data?.status,
-          sellerPhoneCode: data?.data?.phone && data?.data?.phone.slice(0, 3),
-          sellerPhoneNum: data?.data?.phone && data?.data?.phone.slice(3, 12),
-        })
+        // setState({
+        //   ...state,
+        //   sellerFname: data?.data?.name,
+        //   sellerLname: data?.data?.surname,
+        //   sellerEmail: data?.data?.email,
+        //   sellerCardNumber: data?.data?.card_number,
+        //   sellerRegionId: data?.data?.region_id,
+        //   sellerSubRegionId: data?.data?.sub_region_id,
+        //   sellerTypeId: data?.data?.seller_type_id,
+        //   sellerStatus: data?.data?.status,
+        //   sellerPhoneCode: data?.data?.phone && data?.data?.phone.slice(0, 3),
+        //   sellerPhoneNum: data?.data?.phone && data?.data?.phone.slice(3, 12),
+        // })
       }
       if (data?.status === 401) {
-        localStorage?.removeItem("DressmeUserToken")
-        navigate("/login-seller")
+        // localStorage?.removeItem("DressmeUserToken")
+        // navigate("/login-seller")
       }
     } else {
       navigate("/login-seller")
     }
-
+    // console.log("ishga tushdi");
   }, [data]);
+  useEffect(() => {
+
+    setState({
+      ...state,
+      sellerFname: dressInfo?.userData?.name,
+      sellerLname: dressInfo?.userData?.surname,
+      sellerEmail: dressInfo?.userData?.email,
+      sellerCardNumber: dressInfo?.userData?.card_number,
+      sellerRegionId: dressInfo?.userData?.region_id,
+      sellerSubRegionId: dressInfo?.userData?.sub_region_id,
+      sellerTypeId: dressInfo?.userData?.seller_type_id,
+      sellerStatus: dressInfo?.userData?.status,
+      sellerPhoneCode: dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(0, 3),
+      sellerPhoneNum: dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(3, 12),
+    })
+  }, [dressInfo?.userData])
+  // console.log(data, "data");
+  // console.log(state, "state");
+  // console.log('-----------------------------------');
+  // console.log(data, data);
   // useQuery(["Get-Seller-Profile"], () => {
   //   return fetch(`${url}/profile`, {
   //     method: "GET",
@@ -196,8 +217,6 @@ const EditProfilePage = () => {
     {
       onSuccess: (res) => {
         setState({ ...state, getSellerList: res, })
-
-
       },
       onError: (err) => {
         console.log(err, "err get seller-type");
@@ -207,7 +226,7 @@ const EditProfilePage = () => {
     }
   )
 
-
+  // console.log(state?.getSellerList, "bu getSellerList");
   // const changeTip = () => {
   //   state?.getSellerList?.individual?.forEach(e => {
   //     if (e?.id == state?.sellerTypeId)
@@ -714,4 +733,4 @@ const EditProfilePage = () => {
     </div >
   );
 };
-export { EditProfilePage };
+export default React.memo(EditProfilePage);
