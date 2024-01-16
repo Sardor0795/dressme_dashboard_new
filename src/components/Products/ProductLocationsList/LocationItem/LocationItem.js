@@ -52,10 +52,10 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
   // console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
   const navigate = useNavigate();
+  // const goProductDetailEdit = (id) => {
+  //   // navigate(`/locations-store/edit-detail/:${id}`);
+  // };
   const goProductDetailEdit = (id) => {
-    navigate(`/locations-store/edit-detail/:${id}`);
-  };
-  const goProductDetailEdit1 = (id) => {
     navigate(`/products/location/:${id}`);
   };
 
@@ -546,7 +546,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                   Подробнее
                                 </button> */}
                                 <button
-                                  onClick={() => goProductDetailEdit1(itemValue?.id)}
+                                  onClick={() => goProductDetailEdit(itemValue?.id)}
                                   className="text-[18px] text-weatherWinterColor w-full text-center"
                                 >
                                   Подробнее

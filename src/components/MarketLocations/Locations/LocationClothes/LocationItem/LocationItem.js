@@ -18,7 +18,7 @@ export default function LocationItem({ data, click, index }) {
 
   const navigate = useNavigate();
   const goProductDetailEdit = (id) => {
-    navigate(`/locations-store/edit-detail/:${id}`);
+    // navigate(`/locations-store/edit-detail/:${id}`);
   };
 
   const goMapCity = (id) => {
@@ -88,7 +88,7 @@ export default function LocationItem({ data, click, index }) {
             onClick={() => goProductDetailEdit(data?.id)}
             className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium w-[15%] "
           >
-            Подробнее
+            Подробнее 11
           </button>
           <button className="w-[9%] flex justify-center cursor-auto">
             <span

@@ -20,6 +20,7 @@ export default function ContextTeam({ children }) {
     sellerUser: "",
     // -----------
     // isAuthenticated: false,
+    userData: null,
     accessToken: null,
     refreshToken: null,
     expiresAt: null,
