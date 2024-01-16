@@ -52,7 +52,7 @@ function App() {
 
       axiosInstance.get('/profile')
         .then(response => {
-          console.log(response, "bu-app");
+          // console.log(response, "bu-app");
           if (response) {
             setStatusUser()
             setDressInfo({ ...dressInfo, IsAuthenticated: true, userData: response?.data })
@@ -64,9 +64,9 @@ function App() {
 
             postDataWithHeaders()
           }
-          console.error(error?.message, "bu app error");
+          // console.error(error?.message, "bu app error");
         });
-      console.log('Window focused');
+      // console.log('Window focused');
     };
 
 
@@ -174,7 +174,7 @@ function App() {
       setDressInfo({
         ...dressInfo, IsAuthenticated: true, userData: data?.data
       });
-      console.log(data, "data, bu-----");
+      // console.log(data, "data, bu-----");
       if (data?.status === 401) {
         postDataWithHeaders();
       }
@@ -184,12 +184,12 @@ function App() {
         setStatusUser(error?.response?.status);
         postDataWithHeaders();
       }
-      console.error(error?.message, "Error occurred in the app");
+      // console.error(error?.message, "Error occurred in the app");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: true,
   });
-  console.log(dressInfo?.userData, "userDta");
+  // console.log(dressInfo?.userData, "userDta");
   return (
     <div>
       <NavbarDashboard />

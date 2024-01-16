@@ -38,7 +38,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   const [getIdProduct, setGetIdProduct] = useState(null);
   const [hideProductList, setHideProductList] = useState(false);
 
-
+  // console.log(data, "data--LocationItem");
   const [getProductCategory, setGetProductCategory] = useState(null);
   useQuery(["getProductOfCategory"], () => { return request({ url: "/products/get-product-info", token: true }) },
     {
