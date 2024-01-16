@@ -26,7 +26,7 @@ function LocationList({ marketList, locationList }) {
       top: 0,
     });
   }, []);
-
+  console.log(locationList, "locationList");
   return (
     <div className={`w-full h-full  px-4  md:px-10 `}>
       <div
@@ -238,7 +238,7 @@ function LocationList({ marketList, locationList }) {
                             </li>
                             <li className="md:w-[15%] h-full flex items-center justify-center text-center">
                               <button
-                                onClick={() => goMapWear(value?.shop_id)}
+                                onClick={() => goMapWear(value?.id)}
                                 className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                               >
                                 {/* value?.wearLink */}

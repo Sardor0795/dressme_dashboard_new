@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import LocationItem from "./LocationItem/LocationItem";
@@ -9,8 +9,12 @@ import {
   GoBackIcons,
   SearchIcon,
 } from "../../../../assets/icons";
+import { useQuery } from '@tanstack/react-query'
+
+import { useHttp } from "../../../../hook/useHttp";
 
 export default function LocationClothesCity() {
+  const { request } = useHttp()
   const navigate = useNavigate();
 
   const [data, setData] = useState([
@@ -107,6 +111,27 @@ export default function LocationClothesCity() {
       setSomeChecked(false);
     }
   }, [data]);
+  const { id } = useParams();
+  const NewId = id.replace(":", "");
+  // ------------GET  Has Magazin ?-----------------
+  const [getListItem, setGetListItem] = useState()
+  useQuery(["location_store_id"], () => {
+    return request({ url: `/shops/locations/${NewId}/show-products-by-location`, token: true });
+  },
+    {
+      onSuccess: (res) => {
+
+        setGetListItem(res?.location)
+        console.log(res?.location, "BURES");
+      },
+      onError: (err) => {
+        // setState({ ...state, loading: false })
+        console.log(err, "BU -- HOC -- Error");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <div className=" px-4 md:px-10  ">
@@ -149,8 +174,10 @@ export default function LocationClothesCity() {
 
       <div className="mt-[10px] md:mt-[35px] flex justify-end items-center md:justify-between mx-auto pb-6">
         <section className="hidden md:flex gap-x-4">
-          <p className="text-black text-2xl not-italic font-AeonikProMedium">
-            Юнусабад (3)
+          <p className="text-black text-xl not-italic font-AeonikProMedium">
+            {getListItem?.address}
+            {getListItem?.products?.length > 1 &&
+              <span>({getListItem?.products?.length})</span>}
           </p>
           <Link
             to="/products/add-wear"
@@ -201,36 +228,6 @@ export default function LocationClothesCity() {
 
       <div className="mx-auto font-AeonikProRegular text-[16px]">
         <div className="mb-[10px] flex items-center text-tableTextTitle">
-          <div
-            onClick={() => {
-              onCheck(checkIndicator);
-              setAllChecked(!allChecked);
-            }}
-            className={`cursor-pointer min-w-[24px] min-h-[24px] border border-checkboxBorder ${allChecked
-              ? "bg-[#007DCA] border-[#007DCA]"
-              : "bg-white border-checkboxBorder"
-              } hidden md:flex items-center justify-center rounded mr-[8px]`}
-          >
-            <span
-              className={`${allChecked ? "flex items-center justify-center" : "hidden"
-                }`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="11"
-                height="13"
-                viewBox="0 0 11 13"
-                fill="none"
-              >
-                <path
-                  d="M1 9.5L5.88235 11L10 1"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-          </div>
 
           <div className="w-full block  md:hidden ">
             <div className="flex items-center md:hidden justify-end w-full mb-[25px]">
@@ -286,28 +283,11 @@ export default function LocationClothesCity() {
               </section>
             </div>
           </div>
-
-          <div className="hidden border-lightBorderColor border rounded-[12px] bg-lightBgColor pl-[30px] py-[8px] md:flex items-center gap-x-[5px] w-full">
-            <div className="w-[45px] text-[#3F6175] text-base not-italic font-AeonikProMedium">No:</div>
-            <div className="mr-[75px] text-[#3F6175] text-base not-italic font-AeonikProMedium">Фото</div>
-            <div className="flex w-full">
-              <div className="w-[18%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Наименование товара</div>
-              <div className="w-[12%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Артикул</div>
-              <div className="w-[11%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Тип</div>
-              <div className="w-[10%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Дата</div>
-              <div className="w-[14%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Статус</div>
-              <div className="w-[12%] text-[#3F6175] text-base not-italic font-AeonikProMedium">Цена товара</div>
-              <div className="w-[15%]"></div>
-              <div className="w-[9%] text-center text-[#3F6175] text-base not-italic font-AeonikProMedium">Добавить</div>
-              <div className="w-[9%] text-center text-[#3F6175] text-base not-italic font-AeonikProMedium">Удалить</div>
-            </div>
-          </div>
         </div>
 
         <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-          {data.map((data, i) => {
-            return <LocationItem data={data} click={onCheck} />;
-          })}
+          <LocationItem data={getListItem} />;
+
         </div>
       </div>
     </div>
