@@ -15,8 +15,8 @@ export default function ProductIsCheck() {
 
     const { request } = useHttp()
     const [state, setState] = useState({
-        // isLocation: "",
-        // isCheckLocation: null,
+        isLocation: "",
+        isCheckLocation: null,
         isMarket: "",
         isMarketCheck: false,
         loading: true,
@@ -38,21 +38,48 @@ export default function ProductIsCheck() {
             refetchOnWindowFocus: false,
         }
     );
+    useQuery(["location_index-product"], () => {
+        return request({ url: "/shops/locations/index", token: true });
+    },
+        {
+            onSuccess: (res) => {
+                if (res?.locations) {
+                    setState({ ...state, isCheckLocation: res?.locations_exist, isLocation: res, loading: false })
+                }
+            },
+            onError: (err) => {
+                setState({ ...state, loading: false })
+                // console.log(err, "BU -- HOC -- Error");
+            },
+            keepPreviousData: true,
+            refetchOnWindowFocus: false,
+        }
+    );
 
 
-    // console.log(state?.isMarket, "isMarket");
-    // console.log(state?.isLocation, "isLocation");
-    // console.log(dressInfo?.SellerMagazinLocation?.locations_exist, "SellerMagazinLocation");
+    // console.log(state?.isMarket, "check----isMarket");
+    // console.log(state?.isLocation, "check----isLocation");
+    // console.log(dressInfo?.SellerMagazinLocation, "check----SellerMagazinLocation");
     // console.log(state?.isLocation, state?.isMarket);
 
     return (
         <div>
-            {state?.loading ? <LoadingForSeller /> :
-                state?.isMarket?.length > 0 ?
-                    dressInfo?.SellerMagazinLocation?.locations_exist ?
-                        dressInfo?.SellerMagazinLocation?.locations_exist ? <ProductsPageOne /> : <NoLocationProduct />
+
+            {
+                state?.isMarket?.length > 0
+                    ?
+                    state?.isCheckLocation
+                        ?
+                        <ProductsPageOne />
                         :
-                        <LoadingForSeller />
+                        <div className="flex items-center h-[100vh] justify-center">
+                            <Link
+                                to="/locations-store"
+                                className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                            >
+                                У вас пока нет локации !
+                            </Link>
+                        </div >
                     :
                     <div className="flex items-center h-[100vh] justify-center">
                         <Link

@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { dressMainData } from "../../hook/ContextTeam";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../hook/useHttp";
+import LoadingForSeller from "../Loading/LoadingFor";
 
 
 export default function Products() {
@@ -14,12 +15,17 @@ export default function Products() {
     if (pathname !== 'products/location/:id') {
       setDressInfo({ ...dressInfo, nextPageShowForm: true })
     }
-
   }, [location.pathname]);
-  useQuery(["products"], () => { return request({ url: "/products/locations", token: true }) },
+
+  const { isLoading } = useQuery(["products_list"], () => { return request({ url: "/products/locations", token: true }) },
     {
       onSuccess: (res) => {
-        setDressInfo({ ...dressInfo, isCheckPoructList: res?.products_locations })
+        console.log(res, "bures");
+        res?.products_locations?.map(item => {
+          if (item?.shop_locations?.length >= 1) {
+            setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })
+          }
+        })
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -29,7 +35,10 @@ export default function Products() {
 
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
-      <Outlet />{" "}
+      {isLoading ?
+        <LoadingForSeller />
+        :
+        <Outlet />}
     </main>
   );
 }
