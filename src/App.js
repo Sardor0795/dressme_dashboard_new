@@ -82,10 +82,6 @@ function App() {
     };
   }, []); // useEffect faqat bir marta chaqiriladi
 
-  // -----------------------------------------------------
-  // -----------------------------------------------------
-
-
 
   useEffect(() => {
     const postDataWithHeaders = async () => {
@@ -118,8 +114,6 @@ function App() {
     };
   }, []);
 
-  console.log(dressInfo?.userData, dressInfo?.IsAuthenticated, "bu dressInfo?.userData");
-
   // ------------GET  Has Location ?-----------------
   useQuery(["magazin_location"], () => { return request({ url: "/shops/locations/index", token: true }); },
     {
@@ -131,6 +125,71 @@ function App() {
     }
   );
 
+  // -----------------------------------------------------
+  // -----------------------------------------------------
+  const fetchData = async (customHeaders) => {
+    try {
+      const response = await axios.get(`${url}/profile`, {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+  const postDataWithHeaders = async () => {
+    try {
+      const headers = {
+        'Content-type': 'application/json; charset=UTF-8',
+        "Authorization": `Bearer ${localStorage.getItem("RefreshUserToken")}`,
+      };
+      const data = {
+        refresh_token: localStorage.getItem("RefreshUserToken"),
+      };
+      const response = await axios.post(`${url}/refresh-token`, data, { headers });
+      // console.log('bu-Response:', response);
+      if (response?.status == 200) {
+        localStorage.setItem("DressmeUserToken", response?.data?.access_token)
+      }
+
+    } catch (error) {
+      setDressInfo({ ...dressInfo, IsAuthenticated: false })
+      navigate("/login-seller")
+      // console.error('Error:', error);
+    }
+  };
+  useQuery(['get_profile_axios11'], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      // Assuming response.data contains the user data
+      setStatusUser();
+      setDressInfo({
+        ...dressInfo, IsAuthenticated: true, userData: data?.data
+      });
+      console.log(data, "data, bu-----");
+      if (data?.status === 401) {
+        postDataWithHeaders();
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+        setStatusUser(error?.response?.status);
+        postDataWithHeaders();
+      }
+      console.error(error?.message, "Error occurred in the app");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: true,
+  });
+  console.log(dressInfo?.userData, "userDta");
   return (
     <div>
       <NavbarDashboard />
