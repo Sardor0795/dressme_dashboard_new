@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SearchIcon} from "../../../assets/icons";
+import { SearchIcon } from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { useQuery } from "@tanstack/react-query";
@@ -69,7 +69,7 @@ function MyMarket({ shopsList }) {
                   className="w-full h-full outline-0 px-[10px]"
                   placeholder="Поиск"
                 />
-                <span  className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                   <SearchIcon />
                 </span>
               </label>
@@ -87,11 +87,12 @@ function MyMarket({ shopsList }) {
       </div>
       <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
         {shopsList?.shops?.data?.map((data, index) => {
+          // console.log(data, "buList");
           return (
             <div
               key={data?.id}
               className="w-full h-fit md:h-[100px] border border-borderColor md:pr-10  p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
-            >  
+            >
               <div className="w-full md:w-fit flex flex-col md:flex-row items-center md:justify-start  md:border-0 border-b border-borderColor">
                 <div className="w-full md:w-fit flex items-center justify-between  md:pr-7 md:pl-5 text-xl font-AeonikProRegular ">
                   <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
@@ -134,15 +135,15 @@ function MyMarket({ shopsList }) {
                     </div>
                   </div>
                 </div>
-              </div>      
+              </div>
               <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[130px] mt-3 md:mt-0">
                 <div className="flex items-center gap-x-1 ">
-                  <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                  {(Number(data?.gender_id) === 3 || Number(data?.gender_id) == 1) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                     <img src={man} alt="" />
-                  </div>
-                  <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                  </div>}
+                  {(Number(data?.gender_id) === 3 || Number(data?.gender_id) == 2) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                     <img src={woman} alt="" />
-                  </div>
+                  </div>}
                 </div>
                 <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                   <img src={deliveryIcon} alt="" />
@@ -178,7 +179,7 @@ function MyMarket({ shopsList }) {
           );
         })}
       </div>
-    </div>
+    </div >
   );
 }
 export default React.memo(MyMarket);
