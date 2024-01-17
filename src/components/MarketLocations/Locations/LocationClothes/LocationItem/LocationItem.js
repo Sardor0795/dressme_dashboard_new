@@ -63,18 +63,30 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList 
   function addNewProductId(locationId, shopId) {
     navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
   };
+
   // const [locationId, setLocationId] = useState();
   const [shopId, setShopId] = useState();
   const [checked, setChecked] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
-
+  useEffect(() => {
+    data?.products?.map(item => {
+      if (checked?.length >= 1) {
+        if (checked.includes(item?.id)) {
+          allCheckedList(checked, data?.id)
+        }
+      }
+      if (checked?.length < 1) {
+        allCheckedList(checked, null)
+      }
+    })
+  }, [checked])
 
   useEffect(() => {
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
-      allCheckedList(checked)
+      // allCheckedList(checked)
     }
   }, [checked]);
 
@@ -141,13 +153,13 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList 
           setSuccessMessage(res?.message)
           setGetIdShopLocation('')
           setLoader(false)
-          // onRefetch()
+          onRefetch()
           setTimeout(() => {
             setOpenStoreList(false)
             setHideProductList(false)
 
           }, 1000);
-          console.log(res, "getIdShopLocation -----POST");
+          // console.log(res, "getIdShopLocation -----POST");
         }
       },
       onError: err => {
