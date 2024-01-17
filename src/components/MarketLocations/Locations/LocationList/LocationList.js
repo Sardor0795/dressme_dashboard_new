@@ -242,7 +242,7 @@ function LocationList({ marketList, locationList }) {
                                 className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                               >
                                 {/* value?.wearLink */}
-                                Одежда
+                                Товары
                               </button>
                             </li>
                             <li className="md:w-[22%] h-full flex items-center justify-center text-center">
