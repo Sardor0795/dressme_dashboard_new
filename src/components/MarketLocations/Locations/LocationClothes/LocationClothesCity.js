@@ -48,8 +48,8 @@ export default function LocationClothesCity() {
   const [someChecked, setSomeChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(false);
 
-  function handleAllCheckList(childData) {
-    setState({ ...state, getCheckListItem: childData })
+  function handleAllCheckList(childData, shopId) {
+    setState({ ...state, getCheckListItem: childData, shopId: shopId })
   }
   const { id } = useParams();
   const NewId = id.replace(":", "");
@@ -122,7 +122,7 @@ export default function LocationClothesCity() {
     setState({ ...state, loader: true, hideProductList: true })
     setHideProductList(true)
     let form = new FormData();
-    form.append("location_ids[]", state?.shopId?.shopId);
+    form.append("location_ids[]", state?.shopId);
     state?.getCheckListItem?.map((e, index) => {
       form.append("product_ids[]", state?.getCheckListItem[index]);
     })
