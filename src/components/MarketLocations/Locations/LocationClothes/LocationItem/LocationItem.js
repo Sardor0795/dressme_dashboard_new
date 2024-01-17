@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../../hook/useHttp";
 const url = "https://api.dressme.uz/api/seller";
 
-function LocationItem({ data }) {
+function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList }) {
   const { request } = useHttp()
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -74,6 +74,7 @@ function LocationItem({ data }) {
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
+      allCheckedList(checked)
     }
   }, [checked]);
 
@@ -83,37 +84,14 @@ function LocationItem({ data }) {
   };
   // console.log(checked, "checked");
 
-  console.log(data, "data");
+  // console.log(data, "data");
 
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
-  const deleteProductById = useMutation(() => {
-    return request({ url: `/products/${deleteId}/${0}`, method: "DELETE", token: true });
-  });
 
-  function onProductDelete() {
-    setLoader(true)
-    setHideDeleteIcons(true)
-    deleteProductById.mutate({},
-      {
-        onSuccess: res => {
-          if (res?.message) {
-            setSuccessMessage(res?.message)
-            setLoader(false)
-            // onRefetch()
-            setTimeout(() => {
-              setDeleteModal(false)
-            }, 1000);
-
-          }
-        },
-        onError: err => {
-          console.log(err);
-        }
-      })
-  }
   const deleteProductByAddress = useMutation(() => {
     return request({ url: `/products/${deleteId}/${getIdShopLocation}`, method: "DELETE", token: true });
   });
+
 
   function onProductAddressDelete() {
     setLoader(true)
@@ -124,7 +102,7 @@ function LocationItem({ data }) {
           if (res?.message) {
             setSuccessMessage(res?.message)
             setLoader(false)
-            // onRefetch()
+            onRefetch()
             setTimeout(() => {
               setDeleteModal(false)
             }, 1000);
@@ -268,14 +246,15 @@ function LocationItem({ data }) {
           <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
 
             <button
-              onClick={() => onProductDelete()}
+              onClick={() => setDeleteModal(false)}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Удалить везде</button>
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px]  text-center text-base not-italic font-AeonikProMedium">
+              Oтмена
+            </button>
             <button
               onClick={() => onProductAddressDelete()}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor hover:text-white text-[#FF4747] bg-white hover:bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
               Удалить из адреса</button>
           </div>
 
@@ -327,8 +306,7 @@ function LocationItem({ data }) {
               </div>
               :
               <div className="w-full h-full overflow-y-auto VerticelScroll">
-                allProductLocationList
-                {/* {allProductLocationList?.map(item => {
+                {allProductLocationList?.map(item => {
                   return (
                     <div className="w-full cursor-pointer mt-2">
                       {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
@@ -349,7 +327,7 @@ function LocationItem({ data }) {
                       </div>}
                     </div>
                   )
-                })} */}
+                })}
               </div>
             }
           </div>

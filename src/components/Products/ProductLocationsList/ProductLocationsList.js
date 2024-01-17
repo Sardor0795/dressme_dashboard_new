@@ -182,7 +182,7 @@ export default function ProductLocationsList() {
       state?.getProductList?.products_locations?.map(item => {
         // console.log(item, "item");
         return item?.shop_locations?.map(value => {
-          console.log(value?.id, "value");
+          // console.log(value?.id, "value");
           setLocationAllId(locationAllId => [...locationAllId, value?.id]);
           return value?.products?.map(data => {
             setProductAllId(productAllId => [...productAllId, data?.id]);
@@ -285,7 +285,8 @@ export default function ProductLocationsList() {
 
                 </div>
               }
-            </div> :
+            </div>
+            :
             <div className="w-full h-full overflow-y-auto VerticelScroll">
               {state?.getProductList?.products_locations?.map(item => {
                 return (
