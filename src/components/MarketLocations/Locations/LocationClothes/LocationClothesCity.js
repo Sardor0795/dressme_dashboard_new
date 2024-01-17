@@ -521,7 +521,7 @@ export default function LocationClothesCity() {
             data={getListItem}
             onRefetch={refetch}
             allCheckedList={handleAllCheckList}
-            allProductLocationList={state?.getProductList?.products_locations} />;
+            allProductLocationList={state?.getProductList?.products_locations} />
 
         </div>
       </div>

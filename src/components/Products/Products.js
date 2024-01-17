@@ -20,7 +20,6 @@ export default function Products() {
   const { isLoading } = useQuery(["products_list"], () => { return request({ url: "/products/locations", token: true }) },
     {
       onSuccess: (res) => {
-        console.log(res, "bures");
         res?.products_locations?.map(item => {
           if (item?.shop_locations?.length >= 1) {
             setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })
@@ -35,10 +34,11 @@ export default function Products() {
 
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
-      {isLoading ?
-        <LoadingForSeller />
+      {dressInfo?.isCheckPoructList ?
+        <Outlet />
         :
-        <Outlet />}
+        <LoadingForSeller />
+      }
     </main>
   );
 }
