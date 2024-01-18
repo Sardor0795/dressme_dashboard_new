@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
@@ -20,9 +20,11 @@ import { useHttp } from "../../../../hook/useHttp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import { dressMainData } from "../../../../hook/ContextTeam";
 const url = "https://api.dressme.uz/api/seller";
 
-function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSelectCheckedAction, onRefetch }) {
+function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSelectCheckedAction, onRefetch, searchName }) {
+
   const { request } = useHttp()
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -484,7 +486,9 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
               itemLayout="horizontal"
               dataSource={data?.products}
               className="w-full">
-              {data?.products?.map((itemValue, index) => {
+              {data?.products?.filter(e =>
+                e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+              )?.map((itemValue, index) => {
 
                 return (
                   <List.Item className="w-full "

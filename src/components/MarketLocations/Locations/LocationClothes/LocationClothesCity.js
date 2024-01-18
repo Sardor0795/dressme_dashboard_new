@@ -34,7 +34,9 @@ export default function LocationClothesCity() {
     hideProductList: false,
     // -----------
     openDeleteModal: false,
-    shopId: null
+    shopId: null,
+    // ---SearchName
+    searchName: ''
 
 
   });
@@ -368,6 +370,8 @@ export default function LocationClothesCity() {
                 type="text"
                 name="s"
                 id="searchStore"
+                value={state?.searchName}
+                onChange={(e) => setState({ ...state, searchName: e?.target?.value })}
                 className="w-full h-full   outline-0 	pl-[10px]"
                 placeholder="Поиск"
               />
@@ -520,6 +524,7 @@ export default function LocationClothesCity() {
           <LocationItem
             data={getListItem}
             onRefetch={refetch}
+            searchName={state?.searchName}
             allCheckedList={handleAllCheckList}
             allProductLocationList={state?.getProductList?.products_locations} />
 

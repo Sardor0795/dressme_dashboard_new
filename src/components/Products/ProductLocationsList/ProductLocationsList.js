@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from "react";
+import React, { useState, useEffect, useCallback, memo, useContext } from "react";
 import LocationItem from "./LocationItem/LocationItem";
 import {
   AddLocationIcon,
@@ -16,6 +16,7 @@ import LoadingForSeller from "../../Loading/LoadingFor";
 import PuffLoader from "react-spinners/PuffLoader";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
+import { dressMainData } from "../../../hook/ContextTeam";
 
 const { RangePicker } = DatePicker;
 const url = "https://api.dressme.uz/api/seller";
@@ -23,6 +24,7 @@ const url = "https://api.dressme.uz/api/seller";
 export default function ProductLocationsList() {
   const { request } = useHttp()
 
+  const [searchName, setSearchName] = useState('')
   const [state, setState] = useState({
     getProductList: null,
     getProductCategory: null,
@@ -415,23 +417,26 @@ export default function ProductLocationsList() {
             </p>
           </div>
         </section>
-        <section className="w-fit hidden md:flex items-center gap-x-[15px]">
-          <form className="max-w-[400px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
-            <input
-              type="text"
-              name="s"
-              className="w-full h-full  outline-0	"
-              placeholder="Поиск"
-            />
-            <button>
-              <SearchIcon />
-            </button>
-          </form>
-          <section className="mobileDate flex items-center gap-x-[30px]">
-            <Space direction="vertical" size={12}>
-              <RangePicker placeholder={["от", "до"]} />
-            </Space>
-          </section>
+        <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
+          <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
+            <label
+              htmlFor="searchStore"
+              className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+            >
+              <input
+                type="text"
+                name="s"
+                id="searchStore"
+                value={searchName}
+                onChange={(e) => setSearchName(e?.target?.value)}
+                className="w-full h-full outline-0 px-[10px]"
+                placeholder="Поиск"
+              />
+              <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                <SearchIcon />
+              </span>
+            </label>
+          </div>
         </section>
       </div>
 
@@ -453,7 +458,7 @@ export default function ProductLocationsList() {
               <SearchIcon />
             </span>
           </label>
-          <section className=" flex items-center gap-x-[30px] ">
+          {/* <section className=" flex items-center gap-x-[30px] ">
             <span>
               <CalendarIcons />
             </span>
@@ -462,7 +467,7 @@ export default function ProductLocationsList() {
                 <RangePicker className="" placeholder={["от", "до"]} />
               </Space>
             </span>
-          </section>
+          </section> */}
         </section>
       </div>
       {isLoading ? <LoadingForSeller /> :
@@ -515,24 +520,6 @@ export default function ProductLocationsList() {
             <Checkbox onChange={handleGetValueAll} />
           </div>
           <div className="w-full my-4">
-            {/* <table className="w-full  mb-[10px] hidden md:flex flex-col items-center text-tableTextTitle">
-              <thead className="w-full  h-[70px] flex items-center">
-                <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
-                <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                  <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
-                  <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
-                  <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
-                  <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
-                  <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
-                  <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
-                  <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
-                  <th className="w-[10%] h-full flex items-center justify-center"></th>
-                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
-                  <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
-                </tr>
-              </thead>
-            </table> */}
 
           </div>
           {state?.getProductList?.products_locations?.map((item, index1) => {
@@ -570,6 +557,7 @@ export default function ProductLocationsList() {
                                 onRefetch={refetch}
                                 data={resData}
                                 AllSelectCheckedAction={allCheckedAction}
+                                searchName={searchName}
                               />
                               :
                               ""

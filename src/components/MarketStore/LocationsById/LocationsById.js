@@ -11,7 +11,8 @@ export default function LocationsByIdShow() {
   const [state, setState] = useState({
     locationListId: "",
     locationIsCheck: false,
-    loading: true
+    loading: true,
+    searchName: '',
   });
 
   const { id } = useParams();
@@ -72,7 +73,7 @@ export default function LocationsByIdShow() {
                 </p>
                 <div className="w-[30px]"></div>
               </div>
-              <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+              {/* <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
                 <label
                   htmlFor="searchStore"
                   className="w-full md:max-w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg"
@@ -81,14 +82,16 @@ export default function LocationsByIdShow() {
                     type="text"
                     name="s"
                     id="searchStore"
+                    value={state?.searchName}
+                    onChange={(e) => setState({ ...state, searchName: e?.target?.value })}
                     className="w-full h-full outline-0 px-[10px]"
                     placeholder="Поиск"
                   />
-                  <span  className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                  <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                     <SearchIcon />
                   </span>
                 </label>
-              </section>
+              </section> */}
               <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
                 <div className="flex justify-end items-center md:justify-between">
                   <section className="hidden md:flex items-center">
@@ -104,11 +107,13 @@ export default function LocationsByIdShow() {
                       Локации
                     </p>
                   </section>
-                  <div className="w-fit flex items-center gap-x-[15px]">
+                  {/* <div className="w-fit flex items-center gap-x-[15px]">
                     <form className="w-[100%] md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
                       <input
                         type="text"
                         name="s"
+                        value={state?.searchName}
+                        onChange={(e) => setState({ ...state, searchName: e?.target?.value })}
                         className="w-full h-full outline-0 px-[10px]"
                         placeholder="Поиск"
                       />
@@ -116,14 +121,14 @@ export default function LocationsByIdShow() {
                         <SearchIcon />
                       </button>
                     </form>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {state?.locationListId?.locations?.data[0]?.shop?.name}{" "}
                   <span className="hidden md:inline">
-                    ({state?.locationListId?.locations?.data?.length})
+                    {state?.locationListId?.locations?.data?.length > 1 && (state?.locationListId?.locations?.data?.length)}
                   </span>
                 </p>
                 <button
@@ -179,7 +184,9 @@ export default function LocationsByIdShow() {
                   </ul>
                 </div>
 
-                {/* table product */}
+                {/* table product filter(e =>
+                    e?.region?.name_ru?.toLowerCase()?.includes(state?.searchName?.toLowerCase())
+                  )?*/}
                 <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
                   {state?.locationListId?.locations?.data?.map((data, index) => {
                     return (

@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import { ProductImg } from "../../assets";
 import { MenuCloseIcons, SearchIcon } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
+import { dressMainData } from "../../../../hook/ContextTeam";
 
 function LocationList({ marketList, locationList }) {
   const [openSelect, setOpenSelect] = useState(false);
+  const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
+
 
   const handleShopsOfLocation = (id) => {
     navigate(`/locations-store/:${id}`);
@@ -83,7 +86,7 @@ function LocationList({ marketList, locationList }) {
           </p>
           <div className="w-[30px]"></div>
         </div>
-        <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
+        {/* <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
           <label
             htmlFor="searchStore"
             className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
@@ -92,6 +95,8 @@ function LocationList({ marketList, locationList }) {
               type="text"
               name="s"
               id="searchStore"
+              value={searchName}
+              onChange={(e) => setSearchName(e?.target?.value)}
               className="w-full h-full outline-0 px-[10px]"
               placeholder="Поиск"
             />
@@ -99,7 +104,7 @@ function LocationList({ marketList, locationList }) {
               <SearchIcon />
             </span>
           </label>
-        </section>
+        </section> */}
         <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
           <div className="flex justify-end items-center md:justify-between">
             <section className="hidden md:flex">
@@ -107,19 +112,25 @@ function LocationList({ marketList, locationList }) {
                 Все локации
               </p>
             </section>
-            <div className="w-fit flex items-center gap-x-[15px]">
-              <form className="w-full md:w-[400px] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
+            {/* <div className="w-full md:max-w-[400px] flex items-center gap-x-[15px]">
+              <label
+                htmlFor="searchStore"
+                className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
+              >
                 <input
                   type="text"
                   name="s"
-                  className="w-full h-full outline-0 px-[10px] "
+                  id="searchStore"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e?.target?.value)}
+                  className="w-full h-full outline-0 px-[10px]"
                   placeholder="Поиск"
                 />
-                <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                   <SearchIcon />
-                </button>
-              </form>
-            </div>
+                </span>
+              </label>
+            </div> */}
           </div>
         </div>
       </>
@@ -167,8 +178,7 @@ function LocationList({ marketList, locationList }) {
           </li>
         </ul>
       </div>
-
-      {locationList?.locations?.data?.map((item) => {
+      {locationList?.locations?.data?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
         return (
           <div key={item?.id}>
             {item?.shop_locations?.length ? (
