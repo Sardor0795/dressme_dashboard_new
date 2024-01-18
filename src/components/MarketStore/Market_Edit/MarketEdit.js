@@ -384,7 +384,7 @@ function MarketEdit() {
                     />
                     :
                     <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                      Фото
+                      Фоновое фото
                     </span>
                 }
               </div>
@@ -470,7 +470,7 @@ function MarketEdit() {
             {!state?.pictureBgView1 ?
               <div className="w-fit h-fit flex items-center">
                 <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                  Фото
+                  Фоновое фото
                 </span>
 
               </div>
