@@ -360,7 +360,7 @@ export default function LocationMapCity() {
       document.body.style.overflow = "auto";
     }
   }, [openRegionModal]);
-
+  // length
   return (
     <div className="w-full md:px-10 ">
       <ToastContainer
@@ -531,16 +531,16 @@ export default function LocationMapCity() {
                           ref={searchRef}
                           placeholder="Введите адрес"
                           id="ForSearch"
-                          className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps.title.length) ? "" : "hidden"
+                          className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps?.title?.length) ? "" : "hidden"
                             }`}
                         />
 
                         <div
                           className={clsx(["titleBox"], {
-                            ["titleBox_show"]: Boolean(forMaps.title.length),
+                            ["titleBox_show"]: Boolean(forMaps?.title?.length),
                           })}
                         >
-                          <p className=" w-[90%] "> {forMaps.title} </p>
+                          <p className=" w-[90%] "> {forMaps?.title} </p>
                         </div>
 
 
