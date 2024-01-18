@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../../hook/useHttp";
 const url = "https://api.dressme.uz/api/seller";
 
-function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList }) {
+function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList, searchName }) {
   const { request } = useHttp()
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -407,7 +407,9 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList 
               itemLayout="horizontal"
               dataSource={data?.products}
               className="w-full">
-              {data?.products?.map((itemValue, index) => {
+              {data?.products?.filter(e =>
+                e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+              )?.map((itemValue, index) => {
 
                 return (
                   <List.Item className="w-full "

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SearchIcon } from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
@@ -6,9 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 import { deliveryIcon, man, woman } from "../../../assets";
 import { useHttp } from "../../../hook/useHttp";
 import { StarIcon } from "../../../assets/icons";
+import { dressMainData } from "../../../hook/ContextTeam";
 
 function MyMarket({ shopsList }) {
   const [deliverList, setDeliverList] = useState();
+  // const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [searchName, setSearchName] = useState('');
+
   const { request } = useHttp();
   const navigate = useNavigate();
 
@@ -66,6 +70,8 @@ function MyMarket({ shopsList }) {
                   type="text"
                   name="s"
                   id="searchStore"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e?.target?.value)}
                   className="w-full h-full outline-0 px-[10px]"
                   placeholder="Поиск"
                 />
@@ -86,7 +92,7 @@ function MyMarket({ shopsList }) {
         </Link>
       </div>
       <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-        {shopsList?.shops?.data?.map((data, index) => {
+        {shopsList?.shops?.data?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
           // console.log(data, "buList");
           return (
             <div
