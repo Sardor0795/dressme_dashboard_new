@@ -138,8 +138,8 @@ function MarketEdit() {
             setLoader(false)
             // onRefetch()
             setTimeout(() => {
-              setBackImgUploadModal(false)
-              // navigate("/store");
+              setDeleteModal(false)
+              navigate("/store");
             }, 2000);
           }
 
@@ -164,7 +164,7 @@ function MarketEdit() {
             setLoader(false)
             refetch()
             setTimeout(() => {
-              setDeleteModal(false)
+              setBackImgUploadModal(false)
               // navigate("/store");
             }, 2000);
           }
