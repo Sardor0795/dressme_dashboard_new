@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BgSelectSkin, GoBackIcons, StarLabel } from "../../../../assets/icons";
+import { BgSelectSkin, GoBackIcons, MenuCloseIcons, StarLabel } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, PuffLoader } from "react-spinners";
+import { MdError } from "react-icons/md";
+import { FaCheck } from "react-icons/fa6";
 
 function AddStore({ shopsList, onRefetch }) {
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ function AddStore({ shopsList, onRefetch }) {
     // Loader
     sendingLoader: false,
   });
+  const [backImgUploadModal, setBackImgUploadModal] = useState(false)
 
   const handleChange = (e) => {
     setState({
@@ -35,6 +38,13 @@ function AddStore({ shopsList, onRefetch }) {
       pictureBgView: URL.createObjectURL(e.target.files[0]),
     });
   };
+  const clearBgImg = () => {
+    setState({
+      ...state,
+      pictureBgFile: null,
+      pictureBgView: null,
+    });
+  }
   const handleChangeBrand = (e) => {
     setState({
       ...state,
@@ -128,25 +138,87 @@ function AddStore({ shopsList, onRefetch }) {
       top: 0,
     });
   }, []);
-  // console.log(state?.deliverList, "deliverList")
-  // console.log(state?.genderType, "genderType")
-  // console.log(state?.checkGender, "checkGender")
+
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
-      {/* <ToastContainer
-        style={{ zIndex: "1000", top: "80px" }}
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      /> */}
+      <section
+        onClick={() => { setBackImgUploadModal(false) }}
+        className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${backImgUploadModal ? "" : "hidden"}`}
+      ></section>
+      {backImgUploadModal && (
+        <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
+          {/* </div> */}
+          <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+            <div
+              className={`flex items-center justify-between  pb-3`}
+            >
+              <div className="w-fit flex items-center">
+                <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                  Выберите фото
+                </span>
+              </div>
+              <button
+                className="py-2"
+                type="button"
+                onClick={() => setBackImgUploadModal(false)}
+              >
+                <MenuCloseIcons colors={"#000"} />
+              </button>
+            </div>
+            <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+
+              {state?.pictureBgView ? (
+                <img
+                  src={state?.pictureBgView}
+                  alt="backImg"
+                  className="w-full h-full object-contain rounded-lg"
+                />
+              ) :
+                <span className=" text-xl font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor ">
+                  Фото
+                </span>}
+            </div>
+            <div className="flex items-center justify-between  pt-2">
+              <label
+                htmlFor={"imageThree1"}
+                className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+              >
+                <input
+                  className="hidden"
+                  id={"imageThree1"}
+                  type="file"
+                  onChange={handleChange}
+                  accept=" image/*"
+                />
+                {state?.pictureBgView ?
+                  "Изменить фото" :
+                  "Загрузить фото"
+                }
+
+              </label>
+
+              {state?.pictureBgView && <button
+                onClick={() => setBackImgUploadModal(false)}
+                className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                Сохранить
+              </button>}
+              {state?.pictureBgView ?
+                <button
+                  onClick={() => clearBgImg()}
+                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                  Удалить
+                </button>
+                :
+                <button
+                  onClick={() => setBackImgUploadModal(false)}
+                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                  Oтмена
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      )}
       <div className="w-full flex items-center">
         {/* {shopsList?.shops?.data?.length >= 1 && ( */}
         <div className="flex md:hidden items-start">
@@ -177,8 +249,20 @@ function AddStore({ shopsList, onRefetch }) {
       </div>
       {/* )} */}
       <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-[69px]'} relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg md:mb-20`}>
-        <button className="h-full w-full flex items-center justify-center ">
-          <label
+        <button type="button" onClick={() => setBackImgUploadModal(true)} className="h-full w-full flex items-center justify-center ">
+          {state?.pictureBgView ? (
+            <img
+              src={state?.pictureBgView}
+              alt="backImg"
+              className="w-full h-full object-contain rounded-lg"
+            />
+          )
+            :
+            <span className=" text-xl font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor ">
+              Фото
+            </span>
+          }
+          {/* <label
             htmlFor="DataImg"
             className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
           >
@@ -191,9 +275,8 @@ function AddStore({ shopsList, onRefetch }) {
             />
             {!state?.pictureBgView && (
               <>
-                <span className="flex items-center flex-col justify-center">
-                  Выберите облошка
-                  <BgSelectSkin />
+                <span className="flex text-xl items-center flex-col justify-center">
+                  Фото
                 </span>
                 {state?.errorGroup?.background_photo &&
                   !state?.pictureBgView && (
@@ -210,10 +293,10 @@ function AddStore({ shopsList, onRefetch }) {
                 className="w-full h-full object-contain rounded-lg"
               />
             )}
-          </label>
+          </label> */}
         </button>
         <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
-          <button className="h-full w-full rounded-full flex items-center justify-center ">
+          <button className="h-full w-full  rounded-full flex items-center justify-center ">
             <label
               htmlFor="DataImgBrand"
               className="h-full w-full flex items-center flex-col justify-center  text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor"

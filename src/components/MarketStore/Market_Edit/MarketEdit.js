@@ -33,6 +33,7 @@ function MarketEdit() {
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [loader, setLoader] = useState(false);
   const [openStoreList, setOpenStoreList] = useState(false);
+  const [backImgUploadModal, setBackImgUploadModal] = useState(false);
 
 
   const handleLocationImageOne = (e) => {
@@ -42,6 +43,13 @@ function MarketEdit() {
       pictureBgView1: URL.createObjectURL(e.target.files[0]),
     });
   };
+  // const clearBgImg = () => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile: null,
+  //     pictureBgView: null,
+  //   });
+  // }
   const handleLocationImageTwo = (e) => {
     setState({
       ...state,
@@ -56,7 +64,7 @@ function MarketEdit() {
   const url = "https://api.dressme.uz/api/seller";
 
   // // ------------GET  Has Magazin ?-----------------
-  useQuery(
+  const { refetch } = useQuery(
     ["magazin"],
     () => {
       return request({ url: `/shops/${id}`, token: true });
@@ -119,7 +127,6 @@ function MarketEdit() {
   const deleteProductByAddress = useMutation(() => {
     return request({ url: `/shops/${id}`, method: "DELETE", token: true });
   });
-
   function onUserDelete() {
     setLoader(true)
     setHideDeleteIcons(true)
@@ -131,8 +138,34 @@ function MarketEdit() {
             setLoader(false)
             // onRefetch()
             setTimeout(() => {
+              setBackImgUploadModal(false)
+              // navigate("/store");
+            }, 2000);
+          }
+
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+  }
+  const deleteProductByImage = useMutation(() => {
+    return request({ url: `/shops/${id}/delete-shop-background-photo`, method: "DELETE", token: true });
+  });
+
+  function onUserDeleteBackgroundImg() {
+    setLoader(true)
+    setHideDeleteIcons(true)
+    deleteProductByImage.mutate({},
+      {
+        onSuccess: res => {
+          if (res?.message) {
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            refetch()
+            setTimeout(() => {
               setDeleteModal(false)
-              navigate("/store");
+              // navigate("/store");
             }, 2000);
           }
 
@@ -175,7 +208,7 @@ function MarketEdit() {
             progress: undefined,
             theme: "light",
           });
-          navigate("/store");
+          // navigate("/store");
         }
       })
       .catch((err) => console.log(err, "errImage"));
@@ -214,10 +247,11 @@ function MarketEdit() {
           setSuccessMessage(null)
           // setDeleteMessage(null)
           // setHideProductList(false)
+          setBackImgUploadModal(false)
 
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${deleteModal || openStoreList ? "" : "hidden"}`}
+         ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
       ></section>
       {/* Delete Product Of Pop Confirm */}
       <section
@@ -279,6 +313,99 @@ function MarketEdit() {
         </div>
 
       </section>
+      {/* Background Img Edit */}
+
+      {backImgUploadModal && (
+        <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
+          {/* </div> */}
+          <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+            <div
+              className={`flex items-center justify-between  pb-3`}
+            >
+              <div className="w-fit flex items-center">
+                <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                  Выберите фото
+                </span>
+              </div>
+              <button
+                className="py-2"
+                type="button"
+                onClick={() => setBackImgUploadModal(false)}
+              >
+                <MenuCloseIcons colors={"#000"} />
+              </button>
+            </div>
+            <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+              {hideDeleteIcons ?
+                <div className="w-full flex items-center justify-center">
+                  {loader && hideDeleteIcons ?
+                    <PuffLoader
+                      color={"#007DCA"}
+                      size={80}
+                      loading={true}
+                    />
+                    :
+                    <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                        <FaCheck size={30} color="#009B17" />
+                      </span>
+                      <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                    </div>
+                  }
+                </div>
+                :
+                state?.pictureBgView1 ?
+                  <img
+                    src={state?.pictureBgView1}
+                    alt="backImg"
+                    className="w-full h-full object-contain rounded-lg"
+                  />
+                  :
+                  <span className=" text-xl font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor ">
+                    Фото
+                  </span>}
+            </div>
+            <div className="flex items-center justify-between  pt-2">
+              <label
+                htmlFor={"imageThree1"}
+                className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+              >
+                <input
+                  className="hidden"
+                  id={"imageThree1"}
+                  type="file"
+                  onChange={handleLocationImageOne}
+                  accept=" image/*"
+                />
+                {state?.pictureBgView1 ?
+                  "Изменить фото" :
+                  "Загрузить фото"
+                }
+
+              </label>
+
+              {state?.pictureBgView1 && <button
+                onClick={() => setBackImgUploadModal(false)}
+                className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                Сохранить
+              </button>}
+              {state?.pictureBgView1 ?
+                <button
+                  onClick={() => onUserDeleteBackgroundImg()}
+                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                  Удалить
+                </button>
+                :
+                <button
+                  onClick={() => setBackImgUploadModal(false)}
+                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                  Oтмена
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      )}
       <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
         <div className="mt-6 flex items-center justify-center  ">
           <button
@@ -316,36 +443,24 @@ function MarketEdit() {
         </div>
       </div>
       <div className="relative w-full md:h-[360px] h-[200px] flex items-center  border border-[#f2f2f2]  justify-center rounded-lg ">
-        <button className="h-full w-full  rounded-lg overflow-hidden flex items-center justify-center ">
-          <label
-            htmlFor="DataImg1"
-            className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-          >
-            <input
-              className="hidden"
-              id="DataImg1"
-              type="file"
-              onChange={handleLocationImageOne}
-              accept=" image/*"
+        <button
+          type="button"
+          onClick={() => setBackImgUploadModal(true)}
+          className="h-full w-full  rounded-lg overflow-hidden flex items-center justify-center ">
+
+          {!state?.pictureBgView1 ?
+            <div className="w-fit h-fit flex items-center">
+              <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                Фото локации
+              </span>
+            </div>
+            :
+            <img
+              src={state?.pictureBgView1}
+              alt="backImg"
+              className="w-full h-full object-contain rounded-lg"
             />
-            {!state?.pictureBgView1 && (
-              <div className="w-fit h-fit flex items-center">
-                <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                  Фото локации
-                </span>
-                <span className=" ml-[2px] md:ml-[5px]">
-                  <StarLabel />
-                </span>
-              </div>
-            )}
-            {state?.pictureBgView1 && (
-              <img
-                src={state?.pictureBgView1}
-                alt="backImg"
-                className="w-full h-full object-contain rounded-lg"
-              />
-            )}
-          </label>
+          }
         </button>
         <div className="absolute bottom-[-30px] ll:-bottom-11 overflow-hidden border border-searchBgColor md:bottom-[-60px] z-[20] bg-white left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full ">
           <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center">
