@@ -41,8 +41,8 @@ function AddStore({ shopsList, onRefetch }) {
   const clearBgImg = () => {
     setState({
       ...state,
-      pictureBgFile: null,
-      pictureBgView: null,
+      pictureBgFile: '',
+      pictureBgView: '',
     });
   }
   const handleChangeBrand = (e) => {
@@ -174,9 +174,10 @@ function AddStore({ shopsList, onRefetch }) {
                   className="w-full h-full object-contain rounded-lg"
                 />
               ) :
-                <span className=" text-xl font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor ">
+                <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                   Фото
-                </span>}
+                </span>
+              }
             </div>
             <div className="flex items-center justify-between  pt-2">
               <label
@@ -197,11 +198,6 @@ function AddStore({ shopsList, onRefetch }) {
 
               </label>
 
-              {state?.pictureBgView && <button
-                onClick={() => setBackImgUploadModal(false)}
-                className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                Сохранить
-              </button>}
               {state?.pictureBgView ?
                 <button
                   onClick={() => clearBgImg()}
@@ -258,7 +254,7 @@ function AddStore({ shopsList, onRefetch }) {
             />
           )
             :
-            <span className=" text-xl font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor ">
+            <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
               Фото
             </span>
           }

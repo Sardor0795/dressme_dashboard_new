@@ -19,6 +19,7 @@ function MarketEdit() {
     marketId: "",
     pictureBgFile1: "",
     pictureBgView1: "",
+    pictureBgViewTest: "",
     picturelogoFile2: "",
     picturelogoView2: "",
     checkGender: "",
@@ -78,6 +79,7 @@ function MarketEdit() {
           checkGender: res?.shop?.gender_id,
           marketId: res?.shop?.id,
           pictureBgView1: res?.shop?.url_background_photo,
+          pictureBgViewTest: res?.shop?.url_background_photo,
           picturelogoView2: res?.shop?.url_logo_photo,
         });
       },
@@ -154,26 +156,35 @@ function MarketEdit() {
   });
 
   function onUserDeleteBackgroundImg() {
-    setLoader(true)
-    setHideDeleteIcons(true)
-    deleteProductByImage.mutate({},
-      {
-        onSuccess: res => {
-          if (res?.message) {
-            setSuccessMessage(res?.message)
-            setLoader(false)
-            refetch()
-            setTimeout(() => {
-              setBackImgUploadModal(false)
-              // navigate("/store");
-            }, 2000);
-          }
+    if (state?.pictureBgViewTest) {
+      setLoader(true)
+      setHideDeleteIcons(true)
+      deleteProductByImage.mutate({},
+        {
+          onSuccess: res => {
+            if (res?.message) {
+              setSuccessMessage(res?.message)
+              setLoader(false)
+              refetch()
+              setTimeout(() => {
+                setBackImgUploadModal(false)
+                setHideDeleteIcons(false)
+              }, 2000);
+            }
 
-        },
-        onError: err => {
-          console.log(err);
-        }
-      })
+          },
+          onError: err => {
+            console.log(err);
+          }
+        })
+    }
+    if (!state?.pictureBgViewTest) {
+      setState({
+        ...state,
+        pictureBgFile1: '',
+        pictureBgView1: '',
+      });
+    }
   }
 
 
@@ -226,7 +237,7 @@ function MarketEdit() {
 
   return (
     <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12  px-4 md:px-0">
-      {/* <ToastContainer
+      <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
         autoClose={5000}
@@ -239,7 +250,7 @@ function MarketEdit() {
         draggable
         pauseOnHover
         theme="colored"
-      /> */}
+      />
       <section
         onClick={() => {
           setDeleteModal(false)
@@ -361,9 +372,10 @@ function MarketEdit() {
                     className="w-full h-full object-contain rounded-lg"
                   />
                   :
-                  <span className=" text-xl font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor ">
+                  <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Фото
-                  </span>}
+                  </span>
+              }
             </div>
             <div className="flex items-center justify-between  pt-2">
               <label
@@ -384,11 +396,7 @@ function MarketEdit() {
 
               </label>
 
-              {state?.pictureBgView1 && <button
-                onClick={() => setBackImgUploadModal(false)}
-                className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                Сохранить
-              </button>}
+
               {state?.pictureBgView1 ?
                 <button
                   onClick={() => onUserDeleteBackgroundImg()}
@@ -450,9 +458,10 @@ function MarketEdit() {
 
           {!state?.pictureBgView1 ?
             <div className="w-fit h-fit flex items-center">
-              <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                Фото локации
+              <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                Фото
               </span>
+
             </div>
             :
             <img
