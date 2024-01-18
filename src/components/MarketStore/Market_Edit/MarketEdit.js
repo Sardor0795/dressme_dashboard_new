@@ -226,7 +226,7 @@ function MarketEdit() {
 
   return (
     <div className="w-full mx-auto md:max-w-[1120px]   md:mt-12  px-4 md:px-0">
-      <ToastContainer
+      {/* <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
         autoClose={5000}
@@ -239,7 +239,7 @@ function MarketEdit() {
         draggable
         pauseOnHover
         theme="colored"
-      />
+      /> */}
       <section
         onClick={() => {
           setDeleteModal(false)
