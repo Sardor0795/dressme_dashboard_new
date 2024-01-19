@@ -58,10 +58,12 @@ export default function LocationMapCity() {
     //------forImg
     pictureBgFile1: "",
     pictureBgView1: "",
-    picturelogoFile2: "",
-    picturelogoView2: "",
-    pictureLastFile3: "",
-    pictureLastView3: "",
+    pictureBgView2: "",
+    pictureBgFile2: "",
+    pictureBgTest2: "",
+    pictureBgView3: "",
+    pictureBgFile3: "",
+    pictureBgTest3: "",
     // ----
 
   })
@@ -77,18 +79,24 @@ export default function LocationMapCity() {
       pictureBgView1: URL.createObjectURL(e.target.files[0])
     });
   }
+
+  const [pictureFile2, setPictureFile2] = useState('');
+  const [pictureView2, setPictureView2] = useState('');
+  const [pictureTest2, setPictureTest2] = useState('');
   const handleLocationImageTwo = (e) => {
-    setState({
-      ...state,
-      picturelogoFile2: e.target.files[0],
-      picturelogoView2: URL.createObjectURL(e.target.files[0])
-    });
+    // setState({
+    //   ...state,
+    //   pictureBgFile2: e.target.files[0],
+    //   pictureBgView2: URL.createObjectURL(e.target.files[0])
+    // });
+    setPictureFile2(e.target.files[0])
+    setPictureView2(URL.createObjectURL(e.target.files[0]))
   }
   const handleLocationImageThree = (e) => {
     setState({
       ...state,
-      pictureLastFile3: e.target.files[0],
-      pictureLastView3: URL.createObjectURL(e.target.files[0])
+      pictureBgFile3: e.target.files[0],
+      pictureBgView3: URL.createObjectURL(e.target.files[0])
     });
   }
 
@@ -164,40 +172,48 @@ export default function LocationMapCity() {
 
 
   // // ------------GET  location id?-----------------
-  useQuery(["location_index_id"], () => { return request({ url: `/shops/locations/${NewId}`, token: true }); },
+  const { refetch } = useQuery(["location_index_id"], () => { return request({ url: `/shops/locations/${NewId}`, token: true }); },
     {
       onSuccess: (res) => {
-        setState({
-          ...state,
-          idAddress: res?.location?.address,
-          idAssistantMessenger: res?.location?.assistant_messenger,
-          idAssistantName: res?.location?.assistant_name,
-          idSecondAssistantMessegner: res?.location?.second_assistant_messenger,
-          idSecondAssistantName: res?.location?.second_assistant_name,
-          idLecondAssistantPhone: res?.location?.second_assistant_phone,
-          idLongitudeById: res?.location?.longitude,
-          idLatitudeById: res?.location?.latitude,
-          idShopId: res?.location?.shop_id,
-          idRegionId: res?.location?.region_id,
-          idSupRregionId: res?.location?.sub_region_id,
-          idWorkTimeFrom: res?.location?.work_time_from,
-          idWorkTimeTo: res?.location?.work_time_to,
-          // -
-          idAssistantPhoneCode: res?.location?.assistant_phone && res?.location?.assistant_phone?.slice(0, 3),
-          idAssistantPhone: res?.location?.assistant_phone && res?.location?.assistant_phone?.slice(3, 12),
-          // -
-          idSecondAssistantPhoneCode: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(0, 3),
-          idSecondAssistantPhone: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(3, 12),
-          // --------ForImg
-          pictureBgView1: res?.location?.url_image_path_one,
-          picturelogoView2: res?.location?.url_image_path_two,
-          pictureLastView3: res?.location?.url_image_path_three,
-        })
-        setForMaps({
-          ...forMaps,
-          title: res?.location?.address,
-          center: [parseFloat(res?.location?.latitude?.slice(0, 9)), parseFloat(res?.location?.longitude?.slice(0, 9))]
-        })
+        console.log(res, "res_id");
+        if (res?.errors && res?.message) {
+          // setLoader(false)
+        } else if (res?.location) {
+          setState({
+            ...state,
+            idAddress: res?.location?.address,
+            idAssistantMessenger: res?.location?.assistant_messenger,
+            idAssistantName: res?.location?.assistant_name,
+            idSecondAssistantMessegner: res?.location?.second_assistant_messenger,
+            idSecondAssistantName: res?.location?.second_assistant_name,
+            idLecondAssistantPhone: res?.location?.second_assistant_phone,
+            idLongitudeById: res?.location?.longitude,
+            idLatitudeById: res?.location?.latitude,
+            idShopId: res?.location?.shop_id,
+            idRegionId: res?.location?.region_id,
+            idSupRregionId: res?.location?.sub_region_id,
+            idWorkTimeFrom: res?.location?.work_time_from,
+            idWorkTimeTo: res?.location?.work_time_to,
+            // -
+            idAssistantPhoneCode: res?.location?.assistant_phone && res?.location?.assistant_phone?.slice(0, 3),
+            idAssistantPhone: res?.location?.assistant_phone && res?.location?.assistant_phone?.slice(3, 12),
+            // -
+            idSecondAssistantPhoneCode: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(0, 3),
+            idSecondAssistantPhone: res?.location?.second_assistant_phone && res?.location?.second_assistant_phone?.slice(3, 12),
+            // --------ForImg
+            pictureBgView1: res?.location?.url_image_path_one,
+            // pictureBgView2: res?.location?.url_image_path_two,
+            pictureBgTest2: res?.location?.url_image_path_two,
+            pictureBgView3: res?.location?.url_image_path_three,
+            pictureBgTest3: res?.location?.url_image_path_three,
+          })
+          setPictureView2(res?.location?.url_image_path_two)
+          setForMaps({
+            ...forMaps,
+            title: res?.location?.address,
+            center: [parseFloat(res?.location?.latitude?.slice(0, 9)), parseFloat(res?.location?.longitude?.slice(0, 9))]
+          })
+        }
       },
       onError: (err) => {
         console.log(err, "BU -- LocationMapCity -- Error");
@@ -206,7 +222,7 @@ export default function LocationMapCity() {
       refetchOnWindowFocus: false,
     }
   );
-  console.log(state, "BuLocationMapCity");
+  // console.log(state, "BuLocationMapCity");
   // ------------GET METHOD Region-----------------
   useQuery(["getRegionList_map_city"], () => { return request({ url: "/regions", token: true }); },
     {
@@ -227,6 +243,8 @@ export default function LocationMapCity() {
     });
   }, []);
 
+  const [backImgUploadModal, setBackImgUploadModal] = useState(false);
+  const [backImgOrder, setBackImgOrder] = useState('');
   const [openRegionModal, setOpenRegionModal] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
@@ -319,9 +337,9 @@ export default function LocationMapCity() {
     state?.idSecondAssistantName && form.append("second_assistant_name", state?.idSecondAssistantName);
     state?.idSecondAssistantPhone && state?.idSecondAssistantPhoneCode && form.append("second_assistant_phone", assistantPhoneNumberSecond);
     state?.pictureBgFile1 && form.append("shop_photo_one", state?.pictureBgFile1);
-    state?.picturelogoFile2 && form.append("shop_photo_two", state?.picturelogoFile2);
-    state?.pictureLastFile3 && form.append("shop_photo_three", state?.pictureLastFile3);
-
+    // state?.pictureBgFile2 && form.append("shop_photo_two", state?.pictureBgFile2);
+    pictureFile2 && form.append("shop_photo_two", pictureFile2);
+    state?.pictureBgFile3 && form.append("shop_photo_three", state?.pictureBgFile3);
     return fetch(`${url}/shops/locations/edit/${NewId}`, {
       method: "POST",
       headers: {
@@ -334,7 +352,7 @@ export default function LocationMapCity() {
       .then(res => {
         console.log(res, "editL=City");
         if (res?.message) {
-          toast.success(`Успешно обновлено!`, {
+          toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -344,13 +362,102 @@ export default function LocationMapCity() {
             progress: undefined,
             theme: "light",
           });
-          navigate('/locations-store')
-
+          refetch()
+          // navigate('/locations-store')
         }
-
       })
       .catch(err => console.log(err, "errImage"))
   }
+  // const deleteProductByImage = useMutation(() => {
+  //   return request({ url: `/shops/locations/${NewId}/delete-location-photo`, method: "DELETE", token: true });
+  // }); locations/store
+  console.log(pictureFile2, "pictureFile2,");
+  console.log(pictureView2, "pictureView2,");
+  console.log(state?.pictureBgTest2, "state?.pictureBgTest2,");
+  function onUserDeleteBackgroundImg() {
+
+    if (state?.pictureBgTest2) {
+      let form = new FormData();
+      setLoader(true)
+      setHideDeleteIcons(true)
+      pictureView2 &&
+        form.append("image_two", pictureView2);
+      return fetch(`${url}/shops/locations/${NewId}/delete-location-photo`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.errors && res?.message) {
+            setLoader(false)
+          } else if (res?.message) {
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            refetch()
+            setTimeout(() => {
+              setBackImgUploadModal(false)
+              setHideDeleteIcons(false)
+            }, 1000);
+          }
+        })
+        .catch((err) => console.log(err, "errImage"));
+    }
+    if (state?.pictureBgTest3) {
+      let form = new FormData();
+      setLoader(true)
+      setHideDeleteIcons(true)
+      state?.pictureBgView3 &&
+        form.append("image_three", state?.pictureBgView3);
+      return fetch(`${url}/shops/locations/${NewId}/delete-location-photo`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.errors && res?.message) {
+            setLoader(false)
+          } else if (res?.message) {
+            setSuccessMessage(res?.message)
+            setLoader(false)
+            refetch()
+            setTimeout(() => {
+              setBackImgUploadModal(false)
+              setHideDeleteIcons(false)
+            }, 1000);
+          }
+        })
+        .catch((err) => console.log(err, "errImage"));
+    }
+    console.log("ishga tushdi 1");
+    if (!state?.pictureBgTest2) {
+      // setState({
+      //   ...state,
+      //   pictureBgFile2: '',
+      //   pictureBgView2: ''
+      // });
+      setPictureView2('')
+      setPictureTest2('')
+      setBackImgUploadModal(false)
+      console.log("ishga tushdi 2");
+
+    }
+    if (!state?.pictureBgTest3) {
+      setState({ ...state, pictureBgFile3: '', pictureBgView3: '' })
+    }
+  }
+  // console.log(state?.pictureBgView2, "state?.pictureBgView2");
+  // console.log(state?.pictureBgTest2, "state?.pictureBgTest2");
+  // console.log(state?.pictureBgView3, "state?.pictureBgView3");
+  // console.log(state?.pictureBgTest3, "state?.pictureBgTest3");
+
 
   // For DropUp
   useEffect(() => {
@@ -360,6 +467,7 @@ export default function LocationMapCity() {
       document.body.style.overflow = "auto";
     }
   }, [openRegionModal]);
+
   // length
   return (
     <div className="w-full md:px-10 ">
@@ -394,10 +502,11 @@ export default function LocationMapCity() {
             setSuccessMessage(null)
             // setDeleteMessage(null)
             // setHideProductList(false)
+            setBackImgUploadModal(false)
 
           }}
           className={`fixed inset-0 z-[99999] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${deleteModal || openStoreList ? "" : "hidden"}`}
+         ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
         ></section>
         {/* Delete Product Of Pop Confirm */}
         <section
@@ -459,6 +568,245 @@ export default function LocationMapCity() {
           </div>
 
         </section>
+        {/* Background Img Edit */}
+        {backImgUploadModal && backImgOrder && (
+          <div className="max-w-[650px] h-fit w-full fixed z-[100000]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
+            {/* </div> */}
+
+            {backImgOrder === 1 && <div className="relative z-[100001]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div
+                className={`flex items-center justify-between  pb-3`}
+              >
+                <div className="w-fit flex items-center">
+                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    Выберите фото
+                  </span>
+                </div>
+                <button
+                  className="py-2"
+                  type="button"
+                  onClick={() => setBackImgUploadModal(false)}
+                >
+                  <MenuCloseIcons colors={"#000"} />
+                </button>
+              </div>
+              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                {hideDeleteIcons ?
+                  <div className="w-full flex items-center justify-center">
+                    {loader && hideDeleteIcons ?
+                      <PuffLoader
+                        color={"#007DCA"}
+                        size={80}
+                        loading={true}
+                      />
+                      :
+                      <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                          <FaCheck size={30} color="#009B17" />
+                        </span>
+                        <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                      </div>
+                    }
+                  </div>
+                  :
+                  state?.pictureBgView1 ?
+                    <img
+                      src={state?.pictureBgView1}
+                      alt="backImg"
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                    :
+                    <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                      Фото
+                    </span>
+                }
+              </div>
+              <div className="flex items-center justify-between  pt-2">
+                <label
+                  htmlFor={"imageOne1"}
+                  className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                >
+                  <input
+                    className="hidden"
+                    id={"imageOne1"}
+                    type="file"
+                    onChange={handleLocationImageOne}
+                    accept=" image/*"
+                  />
+                  {state?.pictureBgView1 ?
+                    "Изменить фото" :
+                    "Загрузить фото"
+                  }
+                </label>
+                <button
+                  onClick={() => setBackImgUploadModal(false)}
+                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                  Oтмена
+                </button>
+              </div>
+            </div>}
+            {backImgOrder === 2 && <div className="relative z-[100001]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div
+                className={`flex items-center justify-between  pb-3`}
+              >
+                <div className="w-fit flex items-center">
+                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    Выберите фото
+                  </span>
+                </div>
+                <button
+                  className="py-2"
+                  type="button"
+                  onClick={() => setBackImgUploadModal(false)}
+                >
+                  <MenuCloseIcons colors={"#000"} />
+                </button>
+              </div>
+              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                {hideDeleteIcons ?
+                  <div className="w-full flex items-center justify-center">
+                    {loader && hideDeleteIcons ?
+                      <PuffLoader
+                        color={"#007DCA"}
+                        size={80}
+                        loading={true}
+                      />
+                      :
+                      <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                          <FaCheck size={30} color="#009B17" />
+                        </span>
+                        <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                      </div>
+                    }
+                  </div>
+                  :
+                  pictureView2 ?
+                    <img
+                      src={pictureView2}
+                      alt="backImg"
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                    :
+                    <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                      Фото
+                    </span>
+                }
+              </div>
+              <div className="flex items-center justify-between  pt-2">
+                <label
+                  htmlFor={"imageTwo2"}
+                  className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                >
+                  <input
+                    className="hidden"
+                    id={"imageTwo2"}
+                    type="file"
+                    onChange={handleLocationImageTwo}
+                    accept=" image/*"
+                  />
+                  {pictureView2 ?
+                    "Изменить фото" :
+                    "Загрузить фото"
+                  }
+                </label>
+                {pictureView2 ?
+                  <button
+                    onClick={() => onUserDeleteBackgroundImg()}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Удалить
+                  </button>
+                  :
+                  <button
+                    onClick={() => setBackImgUploadModal(false)}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Oтмена
+                  </button>
+                }
+              </div>
+            </div>}
+            {backImgOrder === 3 && <div className="relative z-[100001]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div
+                className={`flex items-center justify-between  pb-3`}
+              >
+                <div className="w-fit flex items-center">
+                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    Выберите фото
+                  </span>
+                </div>
+                <button
+                  className="py-2"
+                  type="button"
+                  onClick={() => setBackImgUploadModal(false)}
+                >
+                  <MenuCloseIcons colors={"#000"} />
+                </button>
+              </div>
+              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                {hideDeleteIcons ?
+                  <div className="w-full flex items-center justify-center">
+                    {loader && hideDeleteIcons ?
+                      <PuffLoader
+                        color={"#007DCA"}
+                        size={80}
+                        loading={true}
+                      />
+                      :
+                      <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                          <FaCheck size={30} color="#009B17" />
+                        </span>
+                        <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                      </div>
+                    }
+                  </div>
+                  :
+                  state?.pictureBgView3 ?
+                    <img
+                      src={state?.pictureBgView3}
+                      alt="backImg"
+                      className="w-full h-full object-contain rounded-lg"
+                    />
+                    :
+                    <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                      Фото
+                    </span>
+                }
+              </div>
+              <div className="flex items-center justify-between  pt-2">
+                <label
+                  htmlFor={"imagethree3"}
+                  className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                >
+                  <input
+                    className="hidden"
+                    id={"imagethree3"}
+                    type="file"
+                    onChange={handleLocationImageThree}
+                    accept=" image/*"
+                  />
+                  {state?.pictureBgView3 ?
+                    "Изменить фото" :
+                    "Загрузить фото"
+                  }
+                </label>
+                {state?.pictureBgView3 ?
+                  <button
+                    onClick={() => onUserDeleteBackgroundImg()}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Удалить
+                  </button>
+                  :
+                  <button
+                    onClick={() => setBackImgUploadModal(false)}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Oтмена
+                  </button>
+                }
+              </div>
+            </div>}
+          </div>
+        )}
         <div className="my-4 ">
           <div className="flex items-center justify-center mb-6">
             <button
@@ -614,88 +962,56 @@ export default function LocationMapCity() {
           </div>
           <div className=" px-4 md:px-0  flex mt-[10px] justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
-              <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center ">
-                <label
-                  htmlFor="DataImg1"
-                  className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-                >
-                  <input
-                    className="hidden"
-                    id="DataImg1"
-                    type="file"
-                    onChange={handleLocationImageOne}
-                    accept=" image/*"
-                  />
-                  {
-                    !state?.pictureBgView1 &&
-                    <div className="w-fit h-fit flex items-center">
-                      <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        Фото локации
-                      </span>
-                      <span className=" ml-[2px] md:ml-[5px]">
-                        <StarLabel />
-                      </span>
-                    </div>
-                  }
-                  {state?.pictureBgView1 &&
-                    <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
-                </label>
-              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setBackImgOrder(1)
+                  setBackImgUploadModal(true)
+                }}
+                className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center ">
 
+                {state?.pictureBgView1 ?
+                  <img src={state?.pictureBgView1} alt="backImg" className="w-full h-full object-contain rounded-lg" />
+                  :
+                  <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                    Фото локации
+                  </span>
+                }
+              </button>
             </div>
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
-              <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center">
-                <label
-                  htmlFor="DataImg2"
-                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-                >
-                  <input
-                    className="hidden"
-                    id="DataImg2"
-                    type="file"
-                    onChange={handleLocationImageTwo}
-                    accept=" image/*"
-                  />
-                  {
-                    !state?.picturelogoView2 &&
-                    <div className="w-fit h-fit flex items-center">
-                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        <span className="hidden md:flex">Второе</span> фото локации
-                      </span>
-                    </div>
-                  }
-                  {state?.picturelogoView2 &&
-                    <img src={state?.picturelogoView2} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
-                </label>
+              <button
+                type="button"
+                onClick={() => {
+                  setBackImgOrder(2)
+                  setBackImgUploadModal(true)
+                }}
+                className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center">
+                {pictureView2 ?
+                  <img src={pictureView2} alt="backImg" className="w-full h-full object-contain rounded-lg" />
+                  :
+                  <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                    Фото локации
+                  </span>
+                }
               </button>
-
             </div>
             <div className=" w-full md:w-[31%]  h-[75px] md:h-[130px] flex items-center justify-center rounded-lg">
-              <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center ">
-                <label
-                  htmlFor="DataImg3"
-                  className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-                >
-                  <input
-                    className="hidden"
-                    id="DataImg3"
-                    type="file"
-                    onChange={handleLocationImageThree}
-                    accept=" image/*"
-                  />
-                  {
-                    !state?.pictureLastView3 &&
-                    <div className="w-fit h-fit flex items-center">
-                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        <span className="hidden md:flex"> Третье</span> фото локации
-                      </span>
-                    </div>
-                  }
-                  {state?.pictureLastView3 &&
-                    <img src={state?.pictureLastView3} alt="backImg" className="w-full h-full object-contain rounded-lg" />}
-                </label>
+              <button
+                onClick={() => {
+                  setBackImgOrder(3)
+                  setBackImgUploadModal(true)
+                }}
+                type="button"
+                className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center ">
+                {state?.pictureBgView3 ?
+                  <img src={state?.pictureBgView3} alt="backImg" className="w-full h-full object-contain rounded-lg" />
+                  :
+                  <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                    Фото локации
+                  </span>
+                }
               </button>
-
             </div>
           </div>
           <div className="w-full  px-4 md:px-0  ">
@@ -933,7 +1249,7 @@ export default function LocationMapCity() {
           </div>
           <div className="flex justify-center mt-[50px]  px-4 md:px-0 ">
             <button
-              onClick={handleEditLocation}
+              onClick={() => handleEditLocation()}
 
               className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
             >
