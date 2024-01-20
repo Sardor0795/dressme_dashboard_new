@@ -93,10 +93,10 @@ function MarketEdit() {
     };
     reader.readAsDataURL(files[0]);
   };
-  const ClearBrandImg = () => {
-    setImage('')
-    setCropData('')
-  }
+  // const ClearBrandImg = () => {
+  //   setImage('')
+  //   // setCropData('')
+  // }
   const dataURLtoFile = (dataUrl, fileName) => {
     const arr = dataUrl.split(',');
     const mime = arr[0].match(/:(.*?);/)[1];
@@ -549,19 +549,19 @@ function MarketEdit() {
                     Обрезать
                   </button>}
 
-                  {image ?
+                  {/* {image ?
                     <button
                       onClick={() => ClearBrandImg()}
                       className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                       Удалить
                     </button>
-                    :
-                    <button
-                      onClick={() => setBackImgUploadModal(false)}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                      Oтмена
-                    </button>
-                  }
+                    : */}
+                  <button
+                    onClick={() => setBackImgUploadModal(false)}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Oтмена
+                  </button>
+                  {/* } */}
                 </div>
               </div>
             }
