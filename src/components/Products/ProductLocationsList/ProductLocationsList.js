@@ -289,25 +289,48 @@ export default function ProductLocationsList() {
             <div className="w-full h-full overflow-y-auto VerticelScroll">
               {state?.getProductList?.products_locations?.map(item => {
                 return (
-                  <div className="w-full cursor-pointer mt-2">
-                    {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                      <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                        {" "}
-                        {item?.name}
-                      </span>
-                      {item?.shop_locations?.map((data, index) => {
-                        return (
-                          <div onClick={() => setState({ ...state, getShopLocationId: data?.id })
-                          } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                            <span className="text-[17px]">{index + 1}</span>)
-                            <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                              {data?.address}
-                            </p>
-                          </div>
-                        )
-                      })}
+                  <>  {state?.getCheckListItem?.length ?
+                    state?.shopMarketId == item?.id &&
+                    <div className="w-full cursor-pointer mt-2">
+                      {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
+                        <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                          {" "}
+                          {item?.name}
+                        </span>
+                        {item?.shop_locations?.map((data, index) => {
+                          return (
+                            <div onClick={() => setState({ ...state, getShopLocationId: data?.id })
+                            } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                              <span className="text-[17px]">{index + 1}</span>)
+                              <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                {data?.address}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>}
+                    </div>
+                    :
+                    <div className="w-full cursor-pointer mt-2">
+                      {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
+                        <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                          {" "}
+                          {item?.name}
+                        </span>
+                        {item?.shop_locations?.map((data, index) => {
+                          return (
+                            <div onClick={() => setState({ ...state, getShopLocationId: data?.id })
+                            } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                              <span className="text-[17px]">{index + 1}</span>)
+                              <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                {data?.address}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>}
                     </div>}
-                  </div>
+                  </>
                 )
               })}
             </div>}
@@ -474,9 +497,7 @@ export default function ProductLocationsList() {
             <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
               Общее количество: {state?.getProductList?.products_locations?.length}
             </p>
-            {/* <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-            Nike Store Official Dealer
-          </p> */}
+
             <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
               <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
                 Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
@@ -521,65 +542,102 @@ export default function ProductLocationsList() {
           </div>
           {state?.getProductList?.products_locations?.map((item, index1) => {
             return (
-              <div className="flex items-center w-full">
-                {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
-                  <button
-                    type="button"
-                    onClick={() => openMarketEditPage(item?.id)}
-                    className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
-                    <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                      {state?.getCheckListItem?.length ?
-                        state?.shopMarketId == item?.id && item?.name : item?.name}                    </p>
-                  </button>
-                  {item?.shop_locations?.map((resData, index) => {
-                    return (
-                      <div className="w-full">
-                        <div className="w-full  mt-5">
-                          <div className="flex justify-end items-center md:justify-between mx-auto ">
-                            <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
-                              <p className="flex md:hidden text-sm font-AeonikProMedium">
-                                Общее количество: 6
-                              </p>
+              <>
+                {state?.getCheckListItem?.length ?
+                  state?.shopMarketId == item?.id &&
+                  <div className="flex items-center w-full">
+                    {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
+                      <button
+                        type="button"
+                        onClick={() => openMarketEditPage(item?.id)}
+                        className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
+                        <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                          {item?.name}                    </p>
+                      </button>
+                      {item?.shop_locations?.map((resData, index) => {
+                        return (
+                          <div className="w-full">
+                            <div className="w-full  mt-5">
+                              <div className="flex justify-end items-center md:justify-between mx-auto ">
+                                <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
+                                  <p className="flex md:hidden text-sm font-AeonikProMedium">
+                                    Общее количество: 6
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
+                                {item?.name}
+                              </div>
+                              <div className="mx-auto font-AeonikProRegular text-[16px] ">
+                                {item?.shop_locations?.length !== 0 ?
+
+                                  <LocationItem
+                                    allProductLocationList={state?.getProductList?.products_locations}
+                                    handleGetCheckAll={handleChekListItem}
+                                    handleCheckAllBtn={handleAllCheckList}
+                                    onRefetch={refetch}
+                                    data={resData}
+                                    AllSelectCheckedAction={allCheckedAction}
+                                    searchName={searchName}
+                                  />
+                                  :
+                                  ""
+                                }
+                              </div>
                             </div>
                           </div>
-                          <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
-                            {state?.getCheckListItem?.length ?
-                              state?.shopId == resData?.id && item?.name : item?.name}
+                        )
+                      })}
+                    </div>
+                    }
+                  </div>
+                  :
+                  <div className="flex items-center w-full ">
+                    {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
+                      <button
+                        type="button"
+                        onClick={() => openMarketEditPage(item?.id)}
+                        className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
+                        <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                          {item?.name}                    </p>
+                      </button>
+                      {item?.shop_locations?.map((resData, index) => {
+                        return (
+                          <div className="w-full">
+                            <div className="w-full  mt-5">
+                              <div className="flex justify-end items-center md:justify-between mx-auto ">
+                                <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
+                                  <p className="flex md:hidden text-sm font-AeonikProMedium">
+                                    Общее количество: 6
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
+                                {item?.name}
+                              </div>
+                              <div className="mx-auto font-AeonikProRegular text-[16px] ">
+                                {item?.shop_locations?.length !== 0 ?
+                                  <LocationItem
+                                    allProductLocationList={state?.getProductList?.products_locations}
+                                    handleGetCheckAll={handleChekListItem}
+                                    handleCheckAllBtn={handleAllCheckList}
+                                    onRefetch={refetch}
+                                    data={resData}
+                                    AllSelectCheckedAction={allCheckedAction}
+                                    searchName={searchName}
+                                  />
+                                  :
+                                  ""
+                                }
+                              </div>
+                            </div>
                           </div>
-                          <div className="mx-auto font-AeonikProRegular text-[16px]">
-                            {item?.shop_locations?.length !== 0 ?
-                              state?.getCheckListItem?.length ?
-                                state?.shopId == resData?.id &&
-                                < LocationItem
-                                  allProductLocationList={state?.getProductList?.products_locations}
-                                  handleGetCheckAll={handleChekListItem}
-                                  handleCheckAllBtn={handleAllCheckList}
-                                  onRefetch={refetch}
-                                  data={resData}
-                                  AllSelectCheckedAction={allCheckedAction}
-                                  searchName={searchName}
-                                />
-                                :
-                                <LocationItem
-                                  allProductLocationList={state?.getProductList?.products_locations}
-                                  handleGetCheckAll={handleChekListItem}
-                                  handleCheckAllBtn={handleAllCheckList}
-                                  onRefetch={refetch}
-                                  data={resData}
-                                  AllSelectCheckedAction={allCheckedAction}
-                                  searchName={searchName}
-                                />
-                              :
-                              ""
-                            }
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-                }
-              </div>
+                        )
+                      })}
+                    </div>
+                    }
+                  </div>}
+              </>
             )
           })
           }
