@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BgSelectSkin, GoBackIcons, MenuCloseIcons, StarLabel } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -9,6 +9,8 @@ import { useHttp } from "../../../../hook/useHttp";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
+import Cropper, { ReactCropperElement } from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 function AddStore({ shopsList, onRefetch }) {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ function AddStore({ shopsList, onRefetch }) {
     sendingLoader: false,
   });
   const [backImgUploadModal, setBackImgUploadModal] = useState(false)
+  const [backImgOrder, setBackImgOrder] = useState('')
 
   const handleChange = (e) => {
     setState({
@@ -52,6 +55,13 @@ function AddStore({ shopsList, onRefetch }) {
       pictureLogoView: URL.createObjectURL(e.target.files[0]),
     });
   };
+  // const ClearBrandImg = () => {
+  //   setState({
+  //     ...state,
+  //     pictureLogoFile: '',
+  //     pictureLogoView: '',
+  //   });
+  // }
 
   // ------------GET METHOD Gender-type-----------------
   useQuery(["get_genders_market"], () => {
@@ -78,13 +88,72 @@ function AddStore({ shopsList, onRefetch }) {
     }
   );
 
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+  const [image, setImage] = useState();
+  const [cropData, setCropData] = useState("#");
+  const [cropFile, setCropFile] = useState("#");
+  const cropperRef = createRef();
+  const onChange = (e) => {
+    // console.log(e, "state-----111pictureLogoFile");
+    e.preventDefault();
+    setState({
+      ...state,
+      pictureLogoFile: e.target.files[0],
+      pictureLogoView: URL.createObjectURL(e.target.files[0]),
+    });
+
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
+  };
+  const ClearBrandImg = () => {
+    setImage('')
+  }
+  const dataURLtoFile = (dataUrl, fileName) => {
+    const arr = dataUrl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new Blob([u8arr], { type: mime, name: fileName });
+  };
+
+  // console.log(state?.pictureLogoFile, "state-----222pictureLogoFile");
+  const getCropData = () => {
+    // console.log(cropperRef.current?.cropper?.getCroppedCanvas(), "state-----333cropperRef.current?.cropper");
+    if (typeof cropperRef.current?.cropper !== "undefined") {
+      const croppedData = cropperRef.current?.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+      setCropFile(dataURLtoFile(croppedData, 'cropped_image.jpg'))
+      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+      setBackImgUploadModal(false)
+    }
+  };
+
   const sendFunc = () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
     state?.magazinName && form.append("name", state?.magazinName);
     state?.pictureBgFile &&
       form.append("background_photo", state?.pictureBgFile);
-    form.append("logo_photo", state?.pictureLogoFile);
+    form.append("logo_photo", cropFile);
     form.append("gender_id", state?.checkGender);
     form.append("delivery_id", state?.deliverCheck);
     return fetch(`${url}/shops/store`, {
@@ -132,13 +201,8 @@ function AddStore({ shopsList, onRefetch }) {
 
       });
   };
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-    });
-  }, []);
-
+  console.log(cropData, "cropData");
+  console.log(image, "cropData---image");
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
       <section
@@ -148,13 +212,80 @@ function AddStore({ shopsList, onRefetch }) {
       {backImgUploadModal && (
         <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
           {/* </div> */}
-          <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+          {
+            backImgOrder == 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div
+                className={`flex items-center justify-between  pb-3`}
+              >
+                <div className="w-fit flex items-center">
+                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    Выберите фото
+                  </span>
+                </div>
+                <button
+                  className="py-2"
+                  type="button"
+                  onClick={() => setBackImgUploadModal(false)}
+                >
+                  <MenuCloseIcons colors={"#000"} />
+                </button>
+              </div>
+              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+
+                {state?.pictureBgView ? (
+                  <img
+                    src={state?.pictureBgView}
+                    alt="backImg"
+                    className="w-full h-full object-contain rounded-lg"
+                  />
+                ) :
+                  <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                    Фоновое фото
+                  </span>
+                }
+              </div>
+              <div className="flex items-center justify-between  pt-2">
+                <label
+                  htmlFor={"imageThree1"}
+                  className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                >
+                  <input
+                    className="hidden"
+                    id={"imageThree1"}
+                    type="file"
+                    onChange={handleChange}
+                    accept=" image/*"
+                  />
+                  {state?.pictureBgView ?
+                    "Изменить фото" :
+                    "Загрузить фото"
+                  }
+
+                </label>
+
+                {state?.pictureBgView ?
+                  <button
+                    onClick={() => clearBgImg()}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Удалить
+                  </button>
+                  :
+                  <button
+                    onClick={() => setBackImgUploadModal(false)}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Oтмена
+                  </button>
+                }
+              </div>
+            </div>}
+
+          {backImgOrder == 2 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
             <div
               className={`flex items-center justify-between  pb-3`}
             >
               <div className="w-fit flex items-center">
                 <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
-                  Выберите фото
+                  Выберите логотип
                 </span>
               </div>
               <button
@@ -167,40 +298,60 @@ function AddStore({ shopsList, onRefetch }) {
             </div>
             <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
-              {state?.pictureBgView ? (
-                <img
-                  src={state?.pictureBgView}
-                  alt="backImg"
-                  className="w-full h-full object-contain rounded-lg"
+              {image ? (
+                <Cropper
+                  ref={cropperRef}
+                  style={{ height: 400, width: "100%" }}
+                  zoomTo={0.5}
+                  initialAspectRatio={1}
+                  preview=".img-preview"
+                  src={image}
+                  viewMode={1}
+                  minCropBoxHeight={10}
+                  minCropBoxWidth={10}
+                  background={false}
+                  responsive={true}
+                  autoCropArea={1}
+                  checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                  guides={true}
                 />
+                // <img
+                //   src={state?.pictureLogoView}
+                //   alt="backImg"
+                //   className="w-full h-full object-contain rounded-lg"
+                // />
               ) :
                 <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                  Фоновое фото
-                </span>
+                  Выберите логотип                </span>
               }
             </div>
             <div className="flex items-center justify-between  pt-2">
               <label
-                htmlFor={"imageThree1"}
+                htmlFor={"logoBrand"}
                 className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
               >
                 <input
                   className="hidden"
-                  id={"imageThree1"}
+                  id={"logoBrand"}
                   type="file"
-                  onChange={handleChange}
+                  onChange={onChange}
                   accept=" image/*"
                 />
-                {state?.pictureBgView ?
+                {image ?
                   "Изменить фото" :
                   "Загрузить фото"
                 }
-
               </label>
 
-              {state?.pictureBgView ?
+              <button
+                className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                onClick={getCropData}>
+                Save
+              </button>
+
+              {image ?
                 <button
-                  onClick={() => clearBgImg()}
+                  onClick={() => ClearBrandImg()}
                   className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                   Удалить
                 </button>
@@ -213,6 +364,8 @@ function AddStore({ shopsList, onRefetch }) {
               }
             </div>
           </div>
+          }
+
         </div>
       )}
       <div className="w-full flex items-center">
@@ -245,7 +398,13 @@ function AddStore({ shopsList, onRefetch }) {
       </div>
       {/* )} */}
       <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-[69px]'} relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg md:mb-20`}>
-        <button type="button" onClick={() => setBackImgUploadModal(true)} className="h-full w-full flex items-center justify-center ">
+        <button
+          type="button"
+          onClick={() => {
+            setBackImgOrder(1)
+            setBackImgUploadModal(true)
+          }}
+          className="h-full w-full flex items-center justify-center ">
           {state?.pictureBgView ? (
             <img
               src={state?.pictureBgView}
@@ -258,90 +417,42 @@ function AddStore({ shopsList, onRefetch }) {
               Фоновое фото
             </span>
           }
-          {/* <label
-            htmlFor="DataImg"
-            className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-          >
-            <input
-              className="hidden"
-              id="DataImg"
-              type="file"
-              onChange={handleChange}
-              accept=" image/*"
-            />
-            {!state?.pictureBgView && (
-              <>
-                <span className="flex text-xl items-center flex-col justify-center">
-                  Фото
-                </span>
-                {state?.errorGroup?.background_photo &&
-                  !state?.pictureBgView && (
-                    <p className="text-[#D50000] text-[12px] ll:text-[12px] md:text-base">
-                      {state?.errorGroup?.background_photo}
-                    </p>
-                  )}
-              </>
-            )}
-            {state?.pictureBgView && (
+        </button>
+        <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
+          <button
+            type="button"
+            onClick={() => {
+              setBackImgOrder(2)
+              setBackImgUploadModal(true)
+            }
+            }
+            className="h-full w-full  rounded-full flex items-center justify-center ">
+            {cropData !== '#' ? (
               <img
-                src={state?.pictureBgView}
+                src={cropData}
                 alt="backImg"
                 className="w-full h-full object-contain rounded-lg"
               />
-            )}
-          </label> */}
-        </button>
-        <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
-          <button className="h-full w-full  rounded-full flex items-center justify-center ">
-            <label
-              htmlFor="DataImgBrand"
-              className="h-full w-full flex items-center flex-col justify-center  text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor"
-            >
-              <input
-                className="hidden"
-                id="DataImgBrand"
-                type="file"
-                onChange={handleChangeBrand}
-                accept=" image/*"
-              />
-              {!state?.pictureLogoView && (
-                <>
-                  <span className="flex items-center flex-col justify-center px-2">
-                    <div className="flex items-center md:w-[85px]">
-                      Выберите логотип
-                      <span className="hidden md:block">
-                        <StarLabel />
-                      </span>
-                    </div>
-                    <BgSelectSkin />
-                  </span>
-                  {state?.errorGroup?.logo_photo && !state?.pictureLogoView && (
-                    <p className="hidden md:block text-[#D50000] text-[12px] ll:text-[12px] ">
-                      {state?.errorGroup?.logo_photo}
-                    </p>
-                  )}
-                </>
-              )}
-              {state?.pictureLogoView && (
-                <img
-                  src={state?.pictureLogoView}
-                  alt="backImg"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              )}
-            </label>
+            )
+              :
+              <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                Выберите логотип
+              </span>
+            }
           </button>
         </div>
       </div>
-      {!state?.pictureBgView && (
-        <>
-          {state?.errorGroup?.logo_photo && !state?.pictureLogoView && (
-            <p className="w-full flex mb-5 pl-6 md:hidden text-[#D50000] text-[12px] ll:text-[12px] ">
-              {state?.errorGroup?.logo_photo}
-            </p>
-          )}
-        </>
-      )}
+      {
+        !state?.pictureBgView && (
+          <>
+            {state?.errorGroup?.logo_photo && !state?.pictureLogoView && (
+              <p className="w-full flex mb-5 pl-6 md:hidden text-[#D50000] text-[12px] ll:text-[12px] ">
+                {state?.errorGroup?.logo_photo}
+              </p>
+            )}
+          </>
+        )
+      }
 
       {/* Form */}
       <div className="w-full flex flex-col items-center justify-between">
@@ -464,7 +575,7 @@ function AddStore({ shopsList, onRefetch }) {
             /> : " Создать магазин "}
         </button>
       </div>
-    </div>
+    </div >
   );
 }
 export default React.memo(AddStore);
