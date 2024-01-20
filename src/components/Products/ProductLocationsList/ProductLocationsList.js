@@ -38,7 +38,8 @@ export default function ProductLocationsList() {
     hideProductList: false,
     // -----------
     openDeleteModal: false,
-    shopId: null
+    shopId: null,
+    shopMarketId: ""
 
 
   });
@@ -56,28 +57,24 @@ export default function ProductLocationsList() {
     }
   );
   const [locationId, setLocationId] = useState([]);
-  function handleChekListItem(childData, shopId) {
-    setState({ ...state, getCheckListItem: { childData }, shopId: { shopId } })
+  function handleChekListItem(childData, shopId, shopMarketId) {
+    // console.log(childData, shopId, "childData, shopId,");
+    setState({ ...state, getCheckListItem: childData, shopId: shopId, shopMarketId: shopMarketId })
     // console.log(shopId, "shopId");
-    if (shopId > 0) {
-      if (locationId?.length !== 0) {
-        setLocationId(locationId.filter((x, i, a) => a.indexOf(x) == i))
-        // console.log("1");
-        // console.log(shopId, "shopId1");
-        if (!locationId.includes(shopId)) {
-          // console.log(shopId, "shopId2");
-          // console.log("2");
-          setLocationId(locationId => [...locationId, shopId]);
-        }
-      } else {
-        // console.log("3");
-        setLocationId(locationId => [...locationId, shopId]);
-      }
-    } else if (shopId < 0 && locationId?.length !== 0) {
-      setLocationId(locationId?.filter(e => e !== Math.abs(shopId)))
-      // console.log(shopId, "Minus-ShopID");
-    }
+    // if (shopId > 0) {
+    //   if (locationId?.length !== 0) {
+    //     setLocationId(locationId.filter((x, i, a) => a.indexOf(x) == i))
+    //     if (!locationId.includes(shopId)) {
+    //       setLocationId(locationId => [...locationId, shopId]);
+    //     }
+    //   } else {
+    //     setLocationId(locationId => [...locationId, shopId]);
+    //   }
+    // } else if (shopId < 0 && locationId?.length !== 0) {
+    //   setLocationId(locationId?.filter(e => e !== Math.abs(shopId)))
+    // }
   }
+  // console.log(state?.getCheckListItem, "getCheckListItem");
   // useEffect(() => {
 
   // }, [shopId])
@@ -94,7 +91,7 @@ export default function ProductLocationsList() {
   // console.log(newarray, "newarray");
   // console.log(locationId, "locationId-----");
   function handleAllCheckList(childData) {
-    console.log(childData, "childData");
+    // console.log(childData, "childData");
   }
   // console.log(state?.getCheckListItem, "getCheckListItem?--shopId");
 
@@ -103,8 +100,8 @@ export default function ProductLocationsList() {
     setHideProductList(true)
     let form = new FormData();
     form.append("location_id", state?.getShopLocationId);
-    state?.getCheckListItem?.childData?.map((e, index) => {
-      form.append("product_ids[]", state?.getCheckListItem?.childData[index]);
+    state?.getCheckListItem?.map((e, index) => {
+      form.append("product_ids[]", state?.getCheckListItem[index]);
     })
     return fetch(`${url}/shops/locations/products/add-selected`, {
       method: "POST",
@@ -136,9 +133,9 @@ export default function ProductLocationsList() {
     setState({ ...state, loader: true, hideProductList: true })
     setHideProductList(true)
     let form = new FormData();
-    form.append("location_ids[]", state?.shopId?.shopId);
-    state?.getCheckListItem?.childData?.map((e, index) => {
-      form.append("product_ids[]", state?.getCheckListItem?.childData[index]);
+    form.append("location_ids[]", state?.shopId);
+    state?.getCheckListItem?.map((e, index) => {
+      form.append("product_ids[]", state?.getCheckListItem[index]);
     })
     return fetch(`${url}/products/massive-delete-products`, {
       method: "POST",
@@ -200,7 +197,7 @@ export default function ProductLocationsList() {
   // console.log(locationAllId, "locationAllId");
   // console.log(productAllId, "productAllId");
   // console.log(allCheckedAction, "allCheckedAction");
-
+  // console.log(state?.shopMarketId, "shopMarketId");
   return (
     <div>
       <section
@@ -487,7 +484,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openSelectModal: true })}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || state?.getCheckListItem?.childData?.length >= 2
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || state?.getCheckListItem?.length >= 2
                   ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -500,7 +497,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openDeleteModal: true })}
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || state?.getCheckListItem?.childData?.length >= 2
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || state?.getCheckListItem?.length >= 2
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -531,8 +528,8 @@ export default function ProductLocationsList() {
                     onClick={() => openMarketEditPage(item?.id)}
                     className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
                     <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                      {item?.name}
-                    </p>
+                      {state?.getCheckListItem?.length ?
+                        state?.shopMarketId == item?.id && item?.name : item?.name}                    </p>
                   </button>
                   {item?.shop_locations?.map((resData, index) => {
                     return (
@@ -546,19 +543,32 @@ export default function ProductLocationsList() {
                             </div>
                           </div>
                           <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
-                            {item?.name}
+                            {state?.getCheckListItem?.length ?
+                              state?.shopId == resData?.id && item?.name : item?.name}
                           </div>
                           <div className="mx-auto font-AeonikProRegular text-[16px]">
                             {item?.shop_locations?.length !== 0 ?
-                              <LocationItem
-                                allProductLocationList={state?.getProductList?.products_locations}
-                                handleGetCheckAll={handleChekListItem}
-                                handleCheckAllBtn={handleAllCheckList}
-                                onRefetch={refetch}
-                                data={resData}
-                                AllSelectCheckedAction={allCheckedAction}
-                                searchName={searchName}
-                              />
+                              state?.getCheckListItem?.length ?
+                                state?.shopId == resData?.id &&
+                                < LocationItem
+                                  allProductLocationList={state?.getProductList?.products_locations}
+                                  handleGetCheckAll={handleChekListItem}
+                                  handleCheckAllBtn={handleAllCheckList}
+                                  onRefetch={refetch}
+                                  data={resData}
+                                  AllSelectCheckedAction={allCheckedAction}
+                                  searchName={searchName}
+                                />
+                                :
+                                <LocationItem
+                                  allProductLocationList={state?.getProductList?.products_locations}
+                                  handleGetCheckAll={handleChekListItem}
+                                  handleCheckAllBtn={handleAllCheckList}
+                                  onRefetch={refetch}
+                                  data={resData}
+                                  AllSelectCheckedAction={allCheckedAction}
+                                  searchName={searchName}
+                                />
                               :
                               ""
                             }

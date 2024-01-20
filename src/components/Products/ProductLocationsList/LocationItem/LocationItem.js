@@ -91,7 +91,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
       if (checked?.length >= 1) {
         if (checked.includes(item?.id)) {
           // setLocationId(data?.id);
-          handleGetCheckAll(checked, data?.id)
+          handleGetCheckAll(checked, data?.id, data?.shop_id)
           // console.log("log-1");
 
         } else {
@@ -99,7 +99,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
           // setLocationId(-data?.id);
         }
       } else {
-        handleGetCheckAll(checked, -data?.id)
+        handleGetCheckAll([], '', '')
         // setLocationId()
       }
     })
