@@ -194,10 +194,11 @@ export default function ProductLocationsList() {
       setProductAllId([])
     }
   }
-  // console.log(locationAllId, "locationAllId");
+  // console.log(state?.shopMarketId, state?.shopId, "state--shopMarketId--shopId");
   // console.log(productAllId, "productAllId");
   // console.log(allCheckedAction, "allCheckedAction");
   // console.log(state?.shopMarketId, "shopMarketId");
+  console.log(state?.getCheckListItem, state?.shopId, "state----state?.getCheckListItem");
   return (
     <div>
       <section
@@ -299,13 +300,16 @@ export default function ProductLocationsList() {
                         </span>
                         {item?.shop_locations?.map((data, index) => {
                           return (
-                            <div onClick={() => setState({ ...state, getShopLocationId: data?.id })
-                            } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                              <span className="text-[17px]">{index + 1}</span>)
-                              <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                {data?.address}
-                              </p>
-                            </div>
+                            <>
+                              {data?.id !== state?.shopId && <div
+                                onClick={() => setState({ ...state, getShopLocationId: data?.id })}
+                                className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                                <span className="text-[17px]">{index + 1}</span>)
+                                <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                  {data?.address}
+                                </p>
+                              </div>}
+                            </>
                           )
                         })}
                       </div>}
@@ -505,7 +509,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openSelectModal: true })}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || state?.getCheckListItem?.length >= 2
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || state?.getCheckListItem?.length >= 1
                   ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -518,7 +522,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openDeleteModal: true })}
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || state?.getCheckListItem?.length >= 2
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || state?.getCheckListItem?.length >= 1
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -541,6 +545,7 @@ export default function ProductLocationsList() {
 
           </div>
           {state?.getProductList?.products_locations?.map((item, index1) => {
+            // console.log(item, "state--item");
             return (
               <>
                 {state?.getCheckListItem?.length ?

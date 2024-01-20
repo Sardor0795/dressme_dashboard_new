@@ -815,13 +815,6 @@ export default function LocationMapCity() {
                   <AiOutlineLeft />
                 </button>
                 <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
-                  <NavLink
-                    to="/store/market-add"
-                    className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
-                  >
-                    Одежда{" "}
-                  </NavLink>
-                  <span className="w-[2px] h-[12px] xs:h-[14px] bg-borderColor"></span>
                   <button
                     onClick={() => setDeleteModal(true)}
                     // onClick={onLocaTionDelete}

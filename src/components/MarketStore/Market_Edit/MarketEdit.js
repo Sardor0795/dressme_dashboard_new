@@ -301,8 +301,8 @@ function MarketEdit() {
       top: 0,
     });
   }, []);
-  console.log(image, "state----image,");
-  console.log(cropData, "state----cropData,");
+  // console.log(image, "state----image,");
+  // console.log(cropData, "state----cropData,");
   return (
     <div className="w-full  h-full ">
       {loaderEdit ? <LoadingForSeller /> : <div className="w-full   h-full mx-auto md:max-w-[1120px]  md:mt-12   md:px-0 px-4">
