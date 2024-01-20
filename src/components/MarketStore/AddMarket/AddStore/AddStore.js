@@ -94,9 +94,9 @@ function AddStore({ shopsList, onRefetch }) {
       top: 0,
     });
   }, []);
-  const [image, setImage] = useState();
-  const [cropData, setCropData] = useState("#");
-  const [cropFile, setCropFile] = useState("#");
+  const [cropData, setCropData] = useState();
+  const [image, setImage] = useState(cropData ? cropData : "");
+  const [cropFile, setCropFile] = useState();
   const cropperRef = createRef();
   const onChange = (e) => {
     // console.log(e, "state-----111pictureLogoFile");
@@ -121,6 +121,7 @@ function AddStore({ shopsList, onRefetch }) {
   };
   const ClearBrandImg = () => {
     setImage('')
+    setCropData('')
   }
   const dataURLtoFile = (dataUrl, fileName) => {
     const arr = dataUrl.split(',');
@@ -203,6 +204,7 @@ function AddStore({ shopsList, onRefetch }) {
   };
   console.log(cropData, "cropData");
   console.log(image, "cropData---image");
+  console.log(state?.errorGroup?.logo_photo, "state?.errorGroup?.logo_photo");
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
       <section
@@ -239,7 +241,7 @@ function AddStore({ shopsList, onRefetch }) {
                     className="w-full h-full object-contain rounded-lg"
                   />
                 ) :
-                  <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                  <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Фоновое фото
                   </span>
                 }
@@ -279,91 +281,87 @@ function AddStore({ shopsList, onRefetch }) {
               </div>
             </div>}
 
-          {backImgOrder == 2 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
-            <div
-              className={`flex items-center justify-between  pb-3`}
-            >
-              <div className="w-fit flex items-center">
-                <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
-                  Выберите логотип
-                </span>
-              </div>
-              <button
-                className="py-2"
-                type="button"
-                onClick={() => setBackImgUploadModal(false)}
+          {backImgOrder == 2 &&
+            <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div
+                className={`flex items-center justify-between  pb-3`}
               >
-                <MenuCloseIcons colors={"#000"} />
-              </button>
-            </div>
-            <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
-
-              {image ? (
-                <Cropper
-                  ref={cropperRef}
-                  style={{ height: 400, width: "100%" }}
-                  zoomTo={0.5}
-                  initialAspectRatio={1}
-                  preview=".img-preview"
-                  src={image}
-                  viewMode={1}
-                  minCropBoxHeight={10}
-                  minCropBoxWidth={10}
-                  background={false}
-                  responsive={true}
-                  autoCropArea={1}
-                  checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
-                  guides={true}
-                />
-                // <img
-                //   src={state?.pictureLogoView}
-                //   alt="backImg"
-                //   className="w-full h-full object-contain rounded-lg"
-                // />
-              ) :
-                <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                  Выберите логотип                </span>
-              }
-            </div>
-            <div className="flex items-center justify-between  pt-2">
-              <label
-                htmlFor={"logoBrand"}
-                className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-              >
-                <input
-                  className="hidden"
-                  id={"logoBrand"}
-                  type="file"
-                  onChange={onChange}
-                  accept=" image/*"
-                />
-                {image ?
-                  "Изменить фото" :
-                  "Загрузить фото"
-                }
-              </label>
-
-              <button
-                className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                onClick={getCropData}>
-                Save
-              </button>
-
-              {image ?
+                <div className="w-fit flex items-center">
+                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    Выберите логотип
+                  </span>
+                </div>
                 <button
-                  onClick={() => ClearBrandImg()}
-                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                  Удалить
-                </button>
-                :
-                <button
+                  className="py-2"
+                  type="button"
                   onClick={() => setBackImgUploadModal(false)}
-                  className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                  Oтмена
+                >
+                  <MenuCloseIcons colors={"#000"} />
                 </button>
-              }
+              </div>
+              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+
+                {image ? (
+                  <Cropper
+                    ref={cropperRef}
+                    style={{ height: 400, width: "100%" }}
+                    zoomTo={0.5}
+                    initialAspectRatio={1}
+                    preview=".img-preview"
+                    src={image}
+                    viewMode={1}
+                    minCropBoxHeight={10}
+                    minCropBoxWidth={10}
+                    background={false}
+                    responsive={true}
+                    autoCropArea={1}
+                    checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                    guides={true}
+                  />
+                ) :
+                  <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                    Выберите логотип                </span>
+                }
+              </div>
+              <div className="flex items-center justify-between  pt-2">
+                <label
+                  htmlFor={"logoBrand"}
+                  className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                >
+                  <input
+                    className="hidden"
+                    id={"logoBrand"}
+                    type="file"
+                    onChange={onChange}
+                    accept=" image/*"
+                  />
+                  {image ?
+                    "Изменить фото" :
+                    "Загрузить фото"
+                  }
+                </label>
+
+                {image && <button
+                  className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  onClick={getCropData}>
+                  Обрезать
+                </button>}
+
+                {image ?
+                  <button
+                    onClick={() => ClearBrandImg()}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Удалить
+                  </button>
+                  :
+                  <button
+                    onClick={() => setBackImgUploadModal(false)}
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    Oтмена
+                  </button>
+                }
+              </div>
             </div>
-          </div>
           }
 
         </div>
@@ -427,7 +425,7 @@ function AddStore({ shopsList, onRefetch }) {
             }
             }
             className="h-full w-full  rounded-full flex items-center justify-center ">
-            {cropData !== '#' ? (
+            {cropData ? (
               <img
                 src={cropData}
                 alt="backImg"
@@ -435,24 +433,26 @@ function AddStore({ shopsList, onRefetch }) {
               />
             )
               :
-              <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                Выберите логотип
-              </span>
+              <div className="flex flex-col item-center">
+                <span className="flex items-center flex-col justify-center px-2">
+                  <div className="flex items-center md:w-[85px] text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
+                    Выберите логотип
+                    <span className="hidden md:block">
+                      <StarLabel />
+                    </span>
+                  </div>
+                </span>
+                {state?.errorGroup?.logo_photo && (
+                  <p className="hidden md:block text-[#D50000] text-[12px] ll:text-[12px] ">
+                    {state?.errorGroup?.logo_photo[0]}
+                  </p>
+                )}
+              </div>
             }
           </button>
         </div>
       </div>
-      {
-        !state?.pictureBgView && (
-          <>
-            {state?.errorGroup?.logo_photo && !state?.pictureLogoView && (
-              <p className="w-full flex mb-5 pl-6 md:hidden text-[#D50000] text-[12px] ll:text-[12px] ">
-                {state?.errorGroup?.logo_photo}
-              </p>
-            )}
-          </>
-        )
-      }
+
 
       {/* Form */}
       <div className="w-full flex flex-col items-center justify-between">

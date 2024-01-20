@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DeleteIcon, GoBackIcons, LocationIcon, MenuCloseIcons, StarLabel } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -6,7 +6,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PuffLoader from "react-spinners/PuffLoader";
-
+import Cropper, { ReactCropperElement } from "react-cropper";
+import "cropperjs/dist/cropper.css";
 import { useHttp } from "../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../Loading/LoadingFor";
@@ -37,6 +38,7 @@ function MarketEdit() {
   const [loader, setLoader] = useState(false);
   const [openStoreList, setOpenStoreList] = useState(false);
   const [backImgUploadModal, setBackImgUploadModal] = useState(false);
+  const [backImgOrder, setBackImgOrder] = useState();
 
 
   const handleLocationImageOne = (e) => {
@@ -65,6 +67,61 @@ function MarketEdit() {
   const pathname = window.location.pathname;
   let id = pathname.replace("/store/market-list/:", "");
   const url = "https://api.dressme.uz/api/seller";
+  // ------------------------------------------------------------
+  const [cropData, setCropData] = useState();
+  const [image, setImage] = useState(cropData ? cropData : "");
+  const [cropFile, setCropFile] = useState();
+  const cropperRef = createRef();
+  const onChange = (e) => {
+    // console.log(e, "state-----111pictureLogoFile");
+    e.preventDefault();
+    setState({
+      ...state,
+      pictureLogoFile: e.target.files[0],
+      pictureLogoView: URL.createObjectURL(e.target.files[0]),
+    });
+
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
+  };
+  const ClearBrandImg = () => {
+    setImage('')
+    setCropData('')
+  }
+  const dataURLtoFile = (dataUrl, fileName) => {
+    const arr = dataUrl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new Blob([u8arr], { type: mime, name: fileName });
+  };
+
+  // console.log(state?.pictureLogoFile, "state-----222pictureLogoFile");
+  const getCropData = () => {
+    // console.log(cropperRef.current?.cropper?.getCroppedCanvas(), "state-----333cropperRef.current?.cropper");
+    if (typeof cropperRef.current?.cropper !== "undefined") {
+      const croppedData = cropperRef.current?.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+      setCropFile(dataURLtoFile(croppedData, 'cropped_image.jpg'))
+      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+      setBackImgUploadModal(false)
+    }
+  };
+  // ------------------------------------------------------------
 
   // // ------------GET  Has Magazin ?-----------------
   const { refetch } = useQuery(
@@ -84,6 +141,8 @@ function MarketEdit() {
           pictureBgViewTest: res?.shop?.url_background_photo,
           picturelogoView2: res?.shop?.url_logo_photo,
         });
+        setCropData(res?.shop?.url_logo_photo)
+        // setImage(res?.shop?.url_logo_photo)
       },
       onError: (err) => {
         console.log(err, "err getDelivery-method");
@@ -198,8 +257,7 @@ function MarketEdit() {
     form.append("delivery_id", state?.deliverCheck);
     state?.pictureBgFile1 &&
       form.append("background_photo", state?.pictureBgFile1);
-    state?.picturelogoFile2 &&
-      form.append("logo_photo", state?.picturelogoFile2);
+    cropFile && form.append("logo_photo", cropFile);
     return fetch(`${url}/shops/edit/${id}`, {
       method: "POST",
       headers: {
@@ -223,6 +281,7 @@ function MarketEdit() {
             theme: "light",
           });
           refetch()
+          // setImage('')
 
           // navigate("/store");
         }
@@ -242,7 +301,8 @@ function MarketEdit() {
       top: 0,
     });
   }, []);
-
+  console.log(image, "state----image,");
+  console.log(cropData, "state----cropData,");
   return (
     <div className="w-full  h-full ">
       {loaderEdit ? <LoadingForSeller /> : <div className="w-full   h-full mx-auto md:max-w-[1120px]  md:mt-12   md:px-0 px-4">
@@ -340,7 +400,7 @@ function MarketEdit() {
         {backImgUploadModal && (
           <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
             {/* </div> */}
-            <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+            {backImgOrder === 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
               <div
                 className={`flex items-center justify-between  pb-3`}
               >
@@ -422,7 +482,89 @@ function MarketEdit() {
                   </button>
                 }
               </div>
-            </div>
+            </div>}
+            {backImgOrder === 2 &&
+              <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+                <div
+                  className={`flex items-center justify-between  pb-3`}
+                >
+                  <div className="w-fit flex items-center">
+                    <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                      Выберите логотип
+                    </span>
+                  </div>
+                  <button
+                    className="py-2"
+                    type="button"
+                    onClick={() => setBackImgUploadModal(false)}
+                  >
+                    <MenuCloseIcons colors={"#000"} />
+                  </button>
+                </div>
+                <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+
+                  {image ? (
+                    <Cropper
+                      ref={cropperRef}
+                      style={{ height: 400, width: "100%" }}
+                      zoomTo={0.5}
+                      initialAspectRatio={1}
+                      preview=".img-preview"
+                      src={image}
+                      viewMode={1}
+                      minCropBoxHeight={10}
+                      minCropBoxWidth={10}
+                      background={false}
+                      responsive={true}
+                      autoCropArea={1}
+                      checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                      guides={true}
+                    />
+                  ) :
+                    <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                      Выберите логотип                </span>
+                  }
+                </div>
+                <div className="flex items-center justify-between  pt-2">
+                  <label
+                    htmlFor={"logoBrand"}
+                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                  >
+                    <input
+                      className="hidden"
+                      id={"logoBrand"}
+                      type="file"
+                      onChange={onChange}
+                      accept=" image/*"
+                    />
+                    {image ?
+                      "Изменить фото" :
+                      "Загрузить фото"
+                    }
+                  </label>
+
+                  {image && <button
+                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    onClick={getCropData}>
+                    Обрезать
+                  </button>}
+
+                  {image ?
+                    <button
+                      onClick={() => ClearBrandImg()}
+                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                      Удалить
+                    </button>
+                    :
+                    <button
+                      onClick={() => setBackImgUploadModal(false)}
+                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                      Oтмена
+                    </button>
+                  }
+                </div>
+              </div>
+            }
           </div>
         )}
         <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
@@ -464,7 +606,10 @@ function MarketEdit() {
         <div className="relative w-full md:h-[360px] h-[200px] flex items-center  border border-[#f2f2f2]  justify-center rounded-lg ">
           <button
             type="button"
-            onClick={() => setBackImgUploadModal(true)}
+            onClick={() => {
+              setBackImgOrder(1)
+              setBackImgUploadModal(true)
+            }}
             className="h-full w-full  rounded-lg overflow-hidden flex items-center justify-center ">
 
             {!state?.pictureBgView1 ?
@@ -483,7 +628,36 @@ function MarketEdit() {
             }
           </button>
           <div className="absolute bottom-[-30px] ll:-bottom-11 overflow-hidden border border-searchBgColor md:bottom-[-60px] z-[20] bg-white left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full ">
-            <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center">
+            <button
+              type="button"
+              onClick={() => {
+                setBackImgOrder(2)
+                setBackImgUploadModal(true)
+              }
+              }
+              className="h-full w-full  rounded-full flex items-center justify-center ">
+              {cropData ? (
+                <img
+                  src={cropData}
+                  alt="backImg"
+                  className="w-full h-full object-contain rounded-lg"
+                />
+              )
+                :
+                <div className="flex flex-col item-center">
+                  <span className="flex items-center flex-col justify-center px-2">
+                    <div className="flex items-center md:w-[85px] text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
+                      Выберите логотип
+                      <span className="hidden md:block">
+                        <StarLabel />
+                      </span>
+                    </div>
+                  </span>
+
+                </div>
+              }
+            </button>
+            {/* <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center">
               <label
                 htmlFor="DataImg2"
                 className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
@@ -510,7 +684,7 @@ function MarketEdit() {
                   />
                 )}
               </label>
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="w-full flex items-center justify-end mb-[24px] md:mb-20 mt-4">
