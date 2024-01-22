@@ -418,7 +418,7 @@ function AddStore({ shopsList, onRefetch }) {
         </button>
       </div>
       {/* )} */}
-      <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-[69px]'} relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg md:mb-20`}>
+      <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-10'} relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg md:mb-20`}>
         <button
           type="button"
           onClick={() => {
@@ -439,7 +439,7 @@ function AddStore({ shopsList, onRefetch }) {
             </span>
           }
         </button>
-        <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center rounded-full border border-dashed">
+        <div className="absolute  -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center rounded-full border border-dashed ">
           <button
             type="button"
             onClick={() => {
@@ -465,15 +465,19 @@ function AddStore({ shopsList, onRefetch }) {
                     </span>
                   </div>
                 </span>
-                {state?.errorGroup?.logo_photo && (
-                  <p className="hidden md:block text-[#D50000] text-[12px] ll:text-[12px] ">
-                    {state?.errorGroup?.logo_photo[0]}
-                  </p>
-                )}
+
               </div>
             }
           </button>
         </div>
+      </div>
+      <div className="w-full flex items-center">
+        {state?.errorGroup?.logo_photo && (
+          <p className="hidden md:block text-[#D50000] text-[14px] ll:text-[14px] ">
+            {state?.errorGroup?.logo_photo[0]}
+            {state?.errorGroup?.logo_photo[1]}
+          </p>
+        )}
       </div>
 
 
@@ -586,7 +590,7 @@ function AddStore({ shopsList, onRefetch }) {
       <div className="flex items-center justify-center mb-10 md:mb-24">
         <button
           onClick={sendFunc}
-          className="w-full md:w-fit text xs:px-[100px] flex items-center justify-center h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
+          className="w-full md:w-[320px]   flex items-center justify-center h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
         >
 
           {state?.sendingLoader ?
