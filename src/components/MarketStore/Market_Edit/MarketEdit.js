@@ -71,7 +71,14 @@ function MarketEdit() {
   const [cropData, setCropData] = useState();
   const [image, setImage] = useState(cropData ? cropData : "");
   const [cropFile, setCropFile] = useState();
+  const [scale, setScale] = useState(1);
+
   const cropperRef = createRef();
+  const onScale = e => {
+    const scaleValue = parseFloat(e.target.value);
+    setScale(scaleValue);
+    cropperRef.current.cropper.scale(scaleValue);
+  };
   const onChange = (e) => {
     // console.log(e, "state-----111pictureLogoFile");
     e.preventDefault();
@@ -504,22 +511,36 @@ function MarketEdit() {
                 <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
                   {image ? (
-                    <Cropper
-                      ref={cropperRef}
-                      style={{ height: 400, width: "100%" }}
-                      zoomTo={0.5}
-                      initialAspectRatio={1}
-                      preview=".img-preview"
-                      src={image}
-                      viewMode={1}
-                      minCropBoxHeight={10}
-                      minCropBoxWidth={10}
-                      background={false}
-                      responsive={true}
-                      autoCropArea={1}
-                      checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
-                      guides={true}
-                    />
+                    <div clasName="app w-full flex flex-col">
+                      <Cropper
+                        ref={cropperRef}
+                        style={{ height: 400, width: "100%" }}
+                        src={image}
+                        // initialAspectRatio={16 / 9}
+                        guides={false}
+                        background={false}
+                        initialAspectRatio={2}
+                        viewMode={1}
+                        responsive={true}
+                        minCropBoxHeight={10}
+                        minCropBoxWidth={10}
+                        checkOrientation={false}
+                      // guides={true}
+                      />
+                      <div className="controls">
+                        <input
+                          type="range"
+                          min="1"
+                          max="10"
+                          step="1"
+                          value={scale}
+                          aria-label="scale"
+                          id="scale"
+                          onChange={onScale}
+                          className="zoom-range"
+                        />
+                      </div>
+                    </div>
                   ) :
                     <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                       Выберите логотип                </span>
@@ -627,7 +648,7 @@ function MarketEdit() {
               />
             }
           </button>
-          <div className="absolute bottom-[-30px] ll:-bottom-11 overflow-hidden border border-searchBgColor md:bottom-[-60px] z-[20] bg-white left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full ">
+          <div className="absolute bottom-[-30px] ll:-bottom-11 overflow-hidden border border-searchBgColor md:bottom-[-60px] z-[20] bg-white left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center rounded-full ">
             <button
               type="button"
               onClick={() => {
@@ -657,34 +678,7 @@ function MarketEdit() {
                 </div>
               }
             </button>
-            {/* <button className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center">
-              <label
-                htmlFor="DataImg2"
-                className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-              >
-                <input
-                  className="hidden"
-                  id="DataImg2"
-                  type="file"
-                  onChange={handleLocationImageTwo}
-                  accept=" image/*"
-                />
-                {!state?.picturelogoView2 && (
-                  <div className="w-fit h-fit flex items-center">
-                    <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                      Фото локации
-                    </span>
-                  </div>
-                )}
-                {state?.picturelogoView2 && (
-                  <img
-                    src={state?.picturelogoView2}
-                    alt="backImg"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                )}
-              </label>
-            </button> */}
+
           </div>
         </div>
         <div className="w-full flex items-center justify-end mb-[24px] md:mb-20 mt-4">
