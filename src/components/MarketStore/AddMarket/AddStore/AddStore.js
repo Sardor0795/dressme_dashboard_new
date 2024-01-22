@@ -97,14 +97,9 @@ function AddStore({ shopsList, onRefetch }) {
   const [cropData, setCropData] = useState();
   const [image, setImage] = useState(cropData ? cropData : "");
   const [cropFile, setCropFile] = useState();
-  const [scale, setScale] = useState(1);
 
   const cropperRef = createRef();
-  const onScale = e => {
-    const scaleValue = parseFloat(e.target.value);
-    setScale(scaleValue);
-    cropperRef.current.cropper.scale(scaleValue);
-  };
+
 
   const onChange = (e) => {
     e.preventDefault();
@@ -310,39 +305,24 @@ function AddStore({ shopsList, onRefetch }) {
               <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
                 {image ? (
-                  <div clasName="app w-full flex flex-col">
-                    <Cropper
-                      ref={cropperRef}
-                      style={{ height: 400, width: "100%" }}
-                      src={image}
-                      // initialAspectRatio={16 / 9}
-                      guides={false}
-                      background={false}
-                      // initialAspectRatio={scale}
-                      viewMode={1}
-                      responsive={true}
-                      minCropBoxHeight={10}
-                      minCropBoxWidth={10}
-                      checkOrientation={false}
-                      dragMode="move"
-                      aspectRatio={1}
-                    // guides={true}
-                    />
-                    <div className="controls">
-                      <input
-                        type="range"
-                        min="1"
-                        max="10"
-                        step="1"
-                        value={scale}
-                        aria-label="scale"
-                        id="scale"
-                        onChange={onScale}
-                        className="zoom-range"
+                  <Cropper
+                    ref={cropperRef}
+                    style={{ height: 400, width: "100%" }}
+                    zoomTo={0.5}
+                    preview=".img-preview"
+                    src={image}
+                    viewMode={1}
+                    minCropBoxHeight={10}
+                    minCropBoxWidth={10}
+                    background={false}
+                    responsive={true}
+                    autoCropArea={1}
+                    checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                    guides={true}
+                    dragMode="move"
+                    aspectRatio={1}
+                  />
 
-                      />
-                    </div>
-                  </div>
                 ) :
                   <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Выберите логотип                </span>
