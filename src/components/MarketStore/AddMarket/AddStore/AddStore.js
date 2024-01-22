@@ -97,9 +97,16 @@ function AddStore({ shopsList, onRefetch }) {
   const [cropData, setCropData] = useState();
   const [image, setImage] = useState(cropData ? cropData : "");
   const [cropFile, setCropFile] = useState();
+  const [scale, setScale] = useState(1);
+
   const cropperRef = createRef();
+  const onScale = e => {
+    const scaleValue = parseFloat(e.target.value);
+    setScale(scaleValue);
+    cropperRef.current.cropper.scale(scaleValue);
+  };
+
   const onChange = (e) => {
-    // console.log(e, "state-----111pictureLogoFile");
     e.preventDefault();
     setState({
       ...state,
@@ -147,6 +154,7 @@ function AddStore({ shopsList, onRefetch }) {
       setBackImgUploadModal(false)
     }
   };
+
 
   const sendFunc = () => {
     setState({ ...state, sendingLoader: true })
@@ -302,22 +310,37 @@ function AddStore({ shopsList, onRefetch }) {
               <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
                 {image ? (
-                  <Cropper
-                    ref={cropperRef}
-                    style={{ height: 400, width: "100%" }}
-                    zoomTo={0.5}
-                    initialAspectRatio={1}
-                    preview=".img-preview"
-                    src={image}
-                    viewMode={1}
-                    minCropBoxHeight={10}
-                    minCropBoxWidth={10}
-                    background={false}
-                    responsive={true}
-                    autoCropArea={1}
-                    checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
-                    guides={true}
-                  />
+                  <div clasName="app w-full flex flex-col">
+                    <Cropper
+                      ref={cropperRef}
+                      style={{ height: 400, width: "100%" }}
+                      src={image}
+                      // initialAspectRatio={16 / 9}
+                      guides={false}
+                      background={false}
+                      initialAspectRatio={scale}
+                      viewMode={1}
+                      responsive={true}
+                      minCropBoxHeight={10}
+                      minCropBoxWidth={10}
+                      checkOrientation={false}
+                    // guides={true}
+                    />
+                    <div className="controls">
+                      <input
+                        type="range"
+                        min="1"
+                        max="10"
+                        step="1"
+                        value={scale}
+                        aria-label="scale"
+                        id="scale"
+                        onChange={onScale}
+                        className="zoom-range"
+
+                      />
+                    </div>
+                  </div>
                 ) :
                   <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Выберите логотип                </span>
@@ -416,7 +439,7 @@ function AddStore({ shopsList, onRefetch }) {
             </span>
           }
         </button>
-        <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[130px] md:h-[130px] flex items-center justify-center text-center rounded-full border border-dashed">
+        <div className="absolute -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center rounded-full border border-dashed">
           <button
             type="button"
             onClick={() => {
