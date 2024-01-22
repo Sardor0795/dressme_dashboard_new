@@ -318,12 +318,14 @@ function AddStore({ shopsList, onRefetch }) {
                       // initialAspectRatio={16 / 9}
                       guides={false}
                       background={false}
-                      initialAspectRatio={scale}
+                      // initialAspectRatio={scale}
                       viewMode={1}
                       responsive={true}
                       minCropBoxHeight={10}
                       minCropBoxWidth={10}
                       checkOrientation={false}
+                      dragMode="move"
+                      aspectRatio={1}
                     // guides={true}
                     />
                     <div className="controls">
