@@ -33,7 +33,7 @@ export default function ForgotPasswordSeller() {
                 onSuccess: res => {
                     setState({ ...state, isLoadingSent: false })
 
-                    console.log(res, "forgotPassword");
+                    // console.log(res, "forgotPassword");
                     if (res?.status == 200) {
                         toast.success("Успешный  вход в систему", {
                             position: "top-right",
@@ -65,7 +65,7 @@ export default function ForgotPasswordSeller() {
                 },
                 onError: err => {
                     setState({ ...state, isLoadingSent: false })
-                    console.log(err, "err");
+                    // console.log(err, "err");
                     toast.error("введите правильный адрес электронной почты", {
                         position: "top-right",
                         autoClose: 3000,
