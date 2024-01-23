@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MenuCloseIcons, SircleNext, SuccessIconsForMail, UserMailIcon } from "../../../../assets/icons";
+import { ClipLoader } from "react-spinners";
 
 export default function ForgotPasswordSeller() {
     const navigate = useNavigate()
@@ -11,7 +12,8 @@ export default function ForgotPasswordSeller() {
     const [state, setState] = useState({
         email: "",
         passwordEye: false,
-        openModalEmailMessage: false
+        openModalEmailMessage: false,
+        isLoadingSent: false
     })
     const forgotPasswordMutate = useMutation(() => {
         return fetch(`${url}/forgot-password`, {
@@ -26,10 +28,13 @@ export default function ForgotPasswordSeller() {
     })
     const onSubmit = () => {
         if (state?.email?.length) {
+            setState({ ...state, isLoadingSent: true })
             forgotPasswordMutate.mutate({}, {
                 onSuccess: res => {
+                    setState({ ...state, isLoadingSent: false })
+
                     console.log(res, "forgotPassword");
-                    if (res?.status == 200 || res?.ok) {
+                    if (res?.status == 200) {
                         toast.success("Успешный  вход в систему", {
                             position: "top-right",
                             autoClose: 3000,
@@ -40,7 +45,10 @@ export default function ForgotPasswordSeller() {
                             progress: undefined,
                             theme: "light",
                         });
-                        setState({ ...state, openModalEmailMessage: true, email: "" })
+                        setState({ ...state, openModalEmailMessage: true, })
+                        setTimeout(() => {
+                            setState({ ...state, openModalEmailMessage: false, email: "" })
+                        }, 3000);
                         // navigate('/reset-password-seller')
                     } else {
                         toast.error("введите правильный адрес электронной почты", {
@@ -56,7 +64,7 @@ export default function ForgotPasswordSeller() {
                     }
                 },
                 onError: err => {
-                    // message.error("введите правильный адрес электронной почты")
+                    setState({ ...state, isLoadingSent: false })
                     console.log(err, "err");
                     toast.error("введите правильный адрес электронной почты", {
                         position: "top-right",
@@ -166,30 +174,33 @@ export default function ForgotPasswordSeller() {
 
                 </div>
 
-                <button
-                    type="button"
-                    onClick={onSubmit}
-                    // to="/enter_password_validate"
-                    className="mt-8  border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-textBlueColor select-none rounded-lg active:scale-95	active:opacity-70 "
-                >
-                    <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
-                        Сбросит пароль{" "}
-                    </span>
-                    <span>
-                        <SircleNext colors={"#fff"} />
-                    </span>{" "}
-                </button>
-                {/* <NavLink
-                    to="/reset-password-seller"
-                    className="mt-8  border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-SignInBgColor select-none rounded-lg active:scale-95	active:opacity-70 "
-                >
-                    <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
-                        Сбросит пароль{" "}
-                    </span>
-                    <span>
-                        <SircleNext colors={"#fff"} />
-                    </span>{" "}
-                </NavLink> */}
+                {state?.isLoadingSent ?
+                    <button
+                        type="button"
+                        className="mt-8  border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-textBlueColor select-none rounded-lg active:scale-95	active:opacity-70 "
+                    >
+                        <ClipLoader
+                            className="h-full py-[2px]"
+                            color={"#fff"}
+                            size={40}
+                            loading={true}
+                        />
+                    </button>
+
+                    : <button
+                        type="button"
+                        onClick={onSubmit}
+                        className="mt-8  border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-textBlueColor select-none rounded-lg active:scale-95	active:opacity-70 "
+                    >
+                        <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
+                            Сбросит пароль{" "}
+                        </span>
+                        <span>
+                            <SircleNext colors={"#fff"} />
+                        </span>{" "}
+                    </button>}
+
+
             </div>
         </div>
     );

@@ -31,61 +31,61 @@ function App() {
   }, [location.pathname]);
 
 
-  // useEffect(() => {
-  //   // Component yaratilib turilganda bir marta ishlaydi
+  useEffect(() => {
+    // Component yaratilib turilganda bir marta ishlaydi
 
-  //   const postDataWithHeaders = async () => {
-  //     try {
-  //       const headers = {
-  //         'Content-type': 'application/json; charset=UTF-8',
-  //         "Authorization": `Bearer ${localStorage.getItem("RefreshUserToken")}`,
-  //       };
-  //       const data = {
-  //         refresh_token: localStorage.getItem("RefreshUserToken"),
-  //       };
-  //       const response = await axios.post(`${url}/refresh-token`, data, { headers });
-  //       // console.log('bu-401-Response:', response);
-  //       if (response?.status == 200) {
-  //         localStorage.setItem("DressmeUserToken", response?.data?.access_token)
-  //         setDressInfo({ ...dressInfo, IsAuthenticated: true })
-  //       }
+    const postDataWithHeaders = async () => {
+      try {
+        const headers = {
+          'Content-type': 'application/json; charset=UTF-8',
+          "Authorization": `Bearer ${localStorage.getItem("RefreshUserToken")}`,
+        };
+        const data = {
+          refresh_token: localStorage.getItem("RefreshUserToken"),
+        };
+        const response = await axios.post(`${url}/refresh-token`, data, { headers });
+        // console.log('bu-401-Response:', response);
+        if (response?.status == 200) {
+          localStorage.setItem("DressmeUserToken", response?.data?.access_token)
+          setDressInfo({ ...dressInfo, IsAuthenticated: true })
+        }
 
-  //     } catch (error) {
-  //       if (error) {
-  //         setDressInfo({ ...dressInfo, IsAuthenticated: false })
-  //         if (locationWindow !== "/signup-seller" &&
-  //           locationWindow !== "/signup-seller" &&
-  //           locationWindow !== "/forgot-password-seller" &&
-  //           locationWindow !== `/reset-password-seller/:${pathnameMaResetPassword}` &&
-  //           locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
-  //           locationWindow !== "/login-seller") {
-  //           // navigate("/login-seller")
-  //           console.log("work 1");
-  //           navigate("/login-seller")
-  //         } else {
-  //         }
-  //       }
-  //     }
-  //   };
+      } catch (error) {
+        if (error) {
+          setDressInfo({ ...dressInfo, IsAuthenticated: false })
+          if (locationWindow !== "/signup-seller" &&
+            locationWindow !== "/signup-seller" &&
+            locationWindow !== "/forgot-password-seller" &&
+            locationWindow !== `/reset-password-seller/:${pathnameMaResetPassword}` &&
+            locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
+            locationWindow !== "/login-seller") {
+            // navigate("/login-seller")
+            console.log("work 1");
+            navigate("/login-seller")
+          } else {
+          }
+        }
+      }
+    };
 
-  //   axiosInstance.get('/profile')
-  //     .then(response => {
-  //       // console.log(response, "bu-app");
-  //       if (response) {
-  //         setStatusUser()
-  //         setDressInfo({ ...dressInfo, IsAuthenticated: true, userData: response?.data })
-  //       }
-  //     })
-  //     .catch(error => {
-  //       if (error?.response?.status === 401) {
-  //         setStatusUser(error?.response?.status)
+    axiosInstance.get('/profile')
+      .then(response => {
+        // console.log(response, "bu-app");
+        if (response) {
+          setStatusUser()
+          setDressInfo({ ...dressInfo, IsAuthenticated: true, userData: response?.data })
+        }
+      })
+      .catch(error => {
+        if (error?.response?.status === 401) {
+          setStatusUser(error?.response?.status)
 
-  //         postDataWithHeaders()
-  //       }
-  //       // console.error(error?.message, "bu app error");
-  //     });
+          postDataWithHeaders()
+        }
+        // console.error(error?.message, "bu app error");
+      });
 
-  // }, []); // useEffect faqat bir marta chaqiriladi
+  }, [pathname == '/edit-profile']); // useEffect faqat bir marta chaqiriladi
 
 
   useEffect(() => {

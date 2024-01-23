@@ -6,6 +6,7 @@ import { message } from 'antd';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { SircleNext } from "../../../../assets/icons";
+import { ClipLoader } from "react-spinners";
 
 
 export default function ResetPasswordSeller() {
@@ -16,7 +17,8 @@ export default function ResetPasswordSeller() {
         newPasswordConfirm: "",
         newPasswordEye: false,
         newConfirmPasswordEye: false,
-        btnDisable: false
+        btnDisable: false,
+        isLoadingSent: false
     })
     // ------------Password Confirm----------
     const [confirmError, setConfirmError] = useState('');
@@ -47,7 +49,7 @@ export default function ResetPasswordSeller() {
 
     const pathname = window.location.pathname;
     let digitalToken = pathname.replace("/reset-password-seller/:", "")
-
+    // console.log(digitalToken, "digitalToken");
     const resetPasswordMutate = useMutation(() => {
         return fetch(`${url}/reset-password`, {
             method: "POST",
@@ -63,13 +65,43 @@ export default function ResetPasswordSeller() {
         })
     })
     const onSubmit = () => {
+        setState({ ...state, isLoadingSent: true })
         if (state?.btnDisable) {
             resetPasswordMutate.mutate({}, {
                 onSuccess: res => {
-                    console.log(res, "resetpassword");
+                    setState({ ...state, isLoadingSent: false })
+
+                    if (res?.status === 200) {
+                        toast.success(`Ваш пароль был успешно сброшен`, {
+                            position: "top-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        navigate('/login-seller')
+                    }
+                    if (res?.status === 403) {
+                        toast.error(`Неверный токен электронной почты!`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                    }
+                    console.log(res?.status, "resetpassword");
 
                 },
                 onError: err => {
+                    setState({ ...state, isLoadingSent: false })
+
                     console.log(err, "err");
                     toast.error(`ошибка ${err}`, {
                         position: "top-right",
@@ -129,6 +161,7 @@ export default function ResetPasswordSeller() {
                                 className=" outline-none w-full h-[42px] pl-2 xs:pl-[16px]   placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
                                 type={state?.newPasswordEye ? "text" : "password"}
                                 name="Пароль"
+                                placeholder="Новый пароль"
                                 value={state?.newPassword}
                                 onChange={(e) => setState({ ...state, newPassword: e.target.value })}
                                 required
@@ -165,6 +198,7 @@ export default function ResetPasswordSeller() {
                                 name="Пароль"
                                 value={state?.newPasswordConfirm}
                                 onChange={(e) => setState({ ...state, newPasswordConfirm: e.target.value })}
+                                placeholder="Повторите новый пароль"
                                 required
                             />
                             <span className="cursor-pointer pr-2">
@@ -188,20 +222,34 @@ export default function ResetPasswordSeller() {
 
                     </div>
                 </div>
+                {state?.isLoadingSent ?
 
-                <button
-                    type="button"
-                    onClick={onSubmit}
-                    className={`mt-4 border flex items-center justify-center border-searchBgColor bg-textBlueColor w-full h-12  select-none rounded-lg 
-                     ${state?.btnDisable ? " cursor-pointer active:scale-95	active:opacity-50 " : "opacity-50 bg-[#007dca]"}`}
-                >
-                    <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
-                        Сохранить пароль
-                    </span>
-                    <span>
-                        <SircleNext colors={"#fff"} />
-                    </span>{" "}
-                </button>
+                    <button
+                        type="button"
+                        className={`mt-4 border flex items-center justify-center border-searchBgColor bg-textBlueColor w-full h-12  select-none rounded-lg 
+              cursor-pointer active:scale-95	active:opacity-50 `}
+                    >
+                        <ClipLoader
+                            className="h-full py-[2px]"
+                            color={"#fff"}
+                            size={40}
+                            loading={true}
+                        />
+                    </button>
+                    : <button
+                        type="button"
+                        onClick={onSubmit}
+                        className={`mt-4 border flex items-center justify-center border-searchBgColor bg-textBlueColor w-full h-12  select-none rounded-lg 
+             ${state?.btnDisable ? " cursor-pointer active:scale-95	active:opacity-50 " : "opacity-50 bg-[#007dca]"}`}
+                    >
+                        <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
+                            Сохранить пароль
+                        </span>
+                        <span>
+                            <SircleNext colors={"#fff"} />
+                        </span>{" "}
+                    </button>}
+
             </div>
         </div>
     );
