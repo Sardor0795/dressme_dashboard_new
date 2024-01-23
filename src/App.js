@@ -19,7 +19,16 @@ function App() {
   const url = "https://api.dressme.uz/api/seller"
 
   const location = useLocation();
-
+  const pathname = window.location.pathname;
+  // console.log(pathname, "pathname");
+  let pathnameMailVerif = pathname.replace("/mail-verify-seller/:", "");
+  let pathnameMaResetPassword = pathname.replace("/reset-password-seller/:", "");
+  // console.log(pathnameMailVerif, "pathnameMailVerif");
+  // console.log(pathnameMaResetPassword, "pathnameMaResetPassword");
+  const [locationWindow, setLocationWindow] = useState("");
+  useEffect(() => {
+    setLocationWindow(location.pathname);
+  }, [location.pathname]);
 
 
   useEffect(() => {
@@ -45,7 +54,17 @@ function App() {
         } catch (error) {
           if (error) {
             setDressInfo({ ...dressInfo, IsAuthenticated: false })
-            navigate("/login-seller")
+            if (locationWindow !== "/signup-seller" &&
+              locationWindow !== "/signup-seller" &&
+              locationWindow !== "/forgot-password-seller" &&
+              locationWindow !== `/reset-password-seller/:${pathnameMaResetPassword}` &&
+              locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
+              locationWindow !== "/login-seller") {
+              // navigate("/login-seller")
+              console.log("work 1");
+              navigate("/login-seller")
+            } else {
+            }
           }
         }
       };
@@ -101,7 +120,17 @@ function App() {
 
       } catch (error) {
         setDressInfo({ ...dressInfo, IsAuthenticated: false })
-        navigate("/login-seller")
+        if (locationWindow !== "/signup-seller" &&
+          locationWindow !== "/signup-seller" &&
+          locationWindow !== "/forgot-password-seller" &&
+          locationWindow !== `/reset-password-seller/:${pathnameMaResetPassword}` &&
+          locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
+          locationWindow !== "/login-seller") {
+          // navigate("/login-seller")
+          console.log("work 2");
+          navigate("/login-seller")
+        } else {
+        }
         // console.error('Error:', error);
       }
     };
@@ -163,10 +192,21 @@ function App() {
 
     } catch (error) {
       setDressInfo({ ...dressInfo, IsAuthenticated: false })
-      navigate("/login-seller")
+      if (locationWindow !== "/signup-seller" &&
+        locationWindow !== "/signup-seller" &&
+        locationWindow !== "/forgot-password-seller" &&
+        locationWindow !== `/reset-password-seller/:${pathnameMaResetPassword}` &&
+        locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
+        locationWindow !== "/login-seller") {
+        // console.log("work 3");
+
+        navigate("/login-seller")
+      } else {
+      }
       // console.error('Error:', error);
     }
   };
+  console.log(locationWindow, "locationWindow");
   useQuery(['get_profile_axios11'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       // Assuming response.data contains the user data
