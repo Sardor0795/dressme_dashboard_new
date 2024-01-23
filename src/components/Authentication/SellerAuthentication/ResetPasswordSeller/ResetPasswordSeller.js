@@ -96,13 +96,13 @@ export default function ResetPasswordSeller() {
                             theme: "light",
                         });
                     }
-                    console.log(res?.status, "resetpassword");
+                    // console.log(res?.status, "resetpassword");
 
                 },
                 onError: err => {
                     setState({ ...state, isLoadingSent: false })
 
-                    console.log(err, "err");
+                    // console.log(err, "err");
                     toast.error(`ошибка ${err}`, {
                         position: "top-right",
                         autoClose: 3000,

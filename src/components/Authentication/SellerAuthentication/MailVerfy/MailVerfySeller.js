@@ -39,7 +39,7 @@ export default function MailVerfySeller() {
       .then((results) => results.json())
       .then((data) => {
         setState({ ...state, getVerfyMessage: data });
-        console.log(data, "Return Get method");
+        // console.log(data, "Return Get method");
       });
   }, []);
 
@@ -63,7 +63,7 @@ export default function MailVerfySeller() {
       {},
       {
         onSuccess: (res) => {
-          console.log(res, "RES-AUTH");
+          // console.log(res, "RES-AUTH");
           if (res?.message && !res.errors) {
             setState({ ...state, errorsGroup: res });
           } else if (res?.message && res?.errors) {
@@ -83,7 +83,7 @@ export default function MailVerfySeller() {
           }
         },
         onError: (err) => {
-          console.log(err, "ERR");
+          // console.log(err, "ERR");
           setState({ ...state, errorMessage: err?.message });
         },
       }
