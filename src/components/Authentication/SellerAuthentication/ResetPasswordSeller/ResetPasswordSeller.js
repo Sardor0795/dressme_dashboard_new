@@ -68,31 +68,7 @@ export default function ResetPasswordSeller() {
                 resetPasswordMutate.mutate({}, {
                     onSuccess: res => {
                         console.log(res, "resetpassword");
-                        if (res?.status == 200) {
 
-                            toast.success("Вы успешно вошли в", {
-                                position: "top-right",
-                                autoClose: 3000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true,
-                                progress: undefined,
-                                theme: "light",
-                            });
-                            navigate('/login-seller')
-                        } else {
-                            toast.success(`${res?.status}`, {
-                                position: "top-right",
-                                autoClose: 3000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: true,
-                                draggable: true,
-                                progress: undefined,
-                                theme: "light",
-                            });
-                        }
                     },
                     onError: err => {
                         console.log(err, "err");
@@ -163,7 +139,7 @@ export default function ResetPasswordSeller() {
                         </div>
                         <div className="mt-1 xs:mt-[6px] overflow-hidden w-full flex items-center bg-white border border-searchBgColor rounded-lg ">
                             <input
-                                className="w-full h-[42px] pl-2 xs:pl-[16px]   placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
+                                className=" outline-none w-full h-[42px] pl-2 xs:pl-[16px]   placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
                                 type={state?.newPasswordEye ? "text" : "password"}
                                 name="Пароль"
                                 value={state?.newPassword}
@@ -197,7 +173,7 @@ export default function ResetPasswordSeller() {
                         </div>
                         <div className="mt-1 xs:mt-[6px] overflow-hidden  w-full flex items-center bg-white border border-searchBgColor rounded-lg ">
                             <input
-                                className="w-full h-[42px] pl-2 xs:pl-[16px]  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
+                                className="outline-none w-full h-[42px] pl-2 xs:pl-[16px]  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
                                 type={state?.newConfirmPasswordEye ? "text" : "password"}
                                 name="Пароль"
                                 value={state?.newPasswordConfirm}
@@ -229,7 +205,7 @@ export default function ResetPasswordSeller() {
                 <button
                     type="button"
                     onClick={onSubmit}
-                    className={`mt-4 border flex items-center justify-center border-searchBgColor bg-SignInBgColor w-full h-12  select-none rounded-lg 
+                    className={`mt-4 border flex items-center justify-center border-searchBgColor bg-textBlueColor w-full h-12  select-none rounded-lg 
                      ${state?.btnDisable ? " cursor-pointer active:scale-95	active:opacity-50 " : "opacity-50 bg-[#007dca]"}`}
                 >
                     <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">

@@ -20,6 +20,9 @@ export default function NavbarDashboard() {
   // ----------------Get Seller Profile-------------
   // ------------GET  Has Location ?-----------------
 
+  const pathname = window.location.pathname;
+  let pathnameMailVerif = pathname.replace("/mail-verify-seller/:", "");
+  let pathnameMaResetPassword = pathname.replace("/reset-password-seller/:", "");
 
   // -----------------------Seller Delete---------------
   const HandleLogOutSeller = useMutation(() => {
@@ -122,13 +125,13 @@ export default function NavbarDashboard() {
         {locationWindow !== "/signup-seller" &&
           locationWindow !== "/signup-seller" &&
           locationWindow !== "/forgot-password-seller" &&
+          locationWindow !== `/reset-password-seller/:${pathnameMaResetPassword}` &&
+          locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
+          locationWindow !== "/login-seller" &&
           locationWindow !== "/reset-password-seller/:id" &&
-          locationWindow !== "/mail-verify-seller/:id" &&
-          locationWindow !== "/login-seller" ?
-
           <div className="hidden fixed md:flex md:w-[300px] h-full">
             <Sidebar />
-          </div> : null}
+          </div>}
 
         <div className={`${localStorage.getItem("DressmeUserToken") ? "w-full md:w-[calc(100%-300px)] md:ml-[300px]" : "w-full"} h-full `}>
           <RouterList />
