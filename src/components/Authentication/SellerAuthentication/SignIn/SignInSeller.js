@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
 import Cookies from "js-cookie";
+import { ClipLoader } from "react-spinners";
 
 export default function SignInSeller() {
   const [state, setState] = useState({
@@ -15,6 +16,7 @@ export default function SignInSeller() {
     rememberCheck: "",
     errorGroup: "",
     isLoadingSent: false,
+
 
 
   });
@@ -218,17 +220,29 @@ export default function SignInSeller() {
             Забыли пароль?
           </NavLink>
         </div>
-        <div
-          onClick={EnterTheSystem}
-          className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
-        >
-          <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
-            Войти в систему
-          </span>
-          <span>
-            <SircleNext colors={"#fff"} />
-          </span>
-        </div>
+        {state?.isLoadingSent ?
+          <button
+            className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
+          >
+            <ClipLoader
+              className="h-full py-[2px]"
+              color={"#fff"}
+              size={40}
+              loading={true}
+            />
+          </button>
+          : <button
+            onClick={EnterTheSystem}
+            className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
+          >
+            <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
+              Войти в систему
+            </span>
+            <span>
+              <SircleNext colors={"#fff"} />
+            </span>
+          </button>}
+
         <div className=" mt-6 text-center">
           {" "}
           Если у вас еще нету аккаунта
