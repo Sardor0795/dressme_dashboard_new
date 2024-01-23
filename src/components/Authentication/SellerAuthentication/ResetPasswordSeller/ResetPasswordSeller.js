@@ -58,45 +58,32 @@ export default function ResetPasswordSeller() {
             body: JSON.stringify({
                 password: state?.newPassword,
                 password_confirmation: state?.newPasswordConfirm,
-                digital_token: digitalToken
+                password_token: digitalToken
             })
         })
     })
     const onSubmit = () => {
         if (state?.btnDisable) {
-            if (state?.newPassword?.length && state?.newPasswordConfirm?.length) {
-                resetPasswordMutate.mutate({}, {
-                    onSuccess: res => {
-                        console.log(res, "resetpassword");
+            resetPasswordMutate.mutate({}, {
+                onSuccess: res => {
+                    console.log(res, "resetpassword");
 
-                    },
-                    onError: err => {
-                        console.log(err, "err");
-                        toast.error(`ошибка ${err}`, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                        });
-                    }
-                })
-            } else {
-                toast.error(`Заполните все поля`, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-                message.error("Заполните все поля")
-            }
+                },
+                onError: err => {
+                    console.log(err, "err");
+                    toast.error(`ошибка ${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+            })
+
         }
     }
     useEffect(() => {
