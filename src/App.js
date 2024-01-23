@@ -52,7 +52,7 @@ function App() {
 
       } catch (error) {
         if (error) {
-          setDressInfo({ ...dressInfo, IsAuthenticated: false })
+          // setDressInfo({ ...dressInfo, IsAuthenticated: false })
           if (locationWindow !== "/signup-seller" &&
             locationWindow !== "/signup-seller" &&
             locationWindow !== "/forgot-password-seller" &&
@@ -60,8 +60,8 @@ function App() {
             locationWindow !== `/mail-verify-seller/:${pathnameMailVerif}` &&
             locationWindow !== "/login-seller") {
             // navigate("/login-seller")
-            console.log("work 1");
-            navigate("/login-seller")
+            // console.log("work 1");
+            // navigate("/login-seller")
           } else {
           }
         }
@@ -84,8 +84,8 @@ function App() {
         }
         // console.error(error?.message, "bu app error");
       });
-
-  }, [pathname == '/edit-profile']); // useEffect faqat bir marta chaqiriladi
+    console.log("effectin");
+  }, []); // useEffect faqat bir marta chaqiriladi
 
 
   useEffect(() => {
