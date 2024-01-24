@@ -171,6 +171,16 @@ function AddStore({ shopsList, onRefetch }) {
       .then((res) => res.json())
       .then((res) => {
         if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           setState({ ...state, errorGroup: res?.errors, sendingLoader: false });
         } else if (res?.message) {
           toast.success(`${res?.message}`, {
@@ -191,16 +201,7 @@ function AddStore({ shopsList, onRefetch }) {
 
       })
       .catch((err) => {
-        toast.error(`${err}`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+
         setState({ ...state, sendingLoader: false })
 
       });
