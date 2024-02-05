@@ -263,13 +263,10 @@ export default function RouterList() {
           } />
         </Route>
 
-        {
-          localStorage.getItem("DressmeUserToken") ?
-            <Route path="/" element={<Navigate to={"/edit-profile"} />} />
-            :
-            <Route path="/" element={<Navigate to={"/login-seller"} />} />
 
-        }
+        <Route path="/" element={<Navigate to={"/login-seller"} />} />
+
+
 
         {/* 
         <Route path={"/edit-profile"} element={<EditProfilePage />} />
