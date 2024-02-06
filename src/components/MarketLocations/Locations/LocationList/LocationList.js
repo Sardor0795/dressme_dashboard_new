@@ -180,7 +180,7 @@ function LocationList() {
           </li>
         </ul>
       </div>
-      {dressInfo?.locationList?.locations?.data?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
+      {dressInfo?.locationList?.data?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
         return (
           <div key={item?.id}>
             {item?.shop_locations?.length ? (

@@ -68,6 +68,7 @@ export default function ProductLocationsList() {
   };
   const { isLoading, refetch } = useQuery(['seller_getProductList_list'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
+      console.log(data, "data");
       if (data?.status >= 200 && data?.status < 300) {
         setDressInfo({ ...dressInfo, getProductList: data?.data })
       }
@@ -188,7 +189,7 @@ export default function ProductLocationsList() {
   }
 
   return (
-    <div>
+    <div className="w-full px-4 md:px-10">
       <section
         onClick={() => {
           setState({
