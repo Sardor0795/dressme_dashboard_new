@@ -19,9 +19,9 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
 
 function EditProfilePage() {
-  const [dressInfo, setDressInfo] = useContext(dressMainData)
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     sellerFname: "",
@@ -50,91 +50,15 @@ function EditProfilePage() {
     popConfirmDelete: false,
   });
 
-
   const [openEditModal, setOpenEditModal] = useState(false);
 
   // -------------------------------------
   const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   // -------------------------------------
-// ------------------
-  const url = "https://api.dressme.uz/api/seller"
-
-
-  // ----------------Get Seller Profile-------------
-  const fetchData = async (customHeaders) => {
-    try {
-      const response = await axios.get(`${url}/profile`, {
-        headers: customHeaders,
-      });
-      const status = response.status;
-      const data = response.data;
-
-      return { data, status };
-    } catch (error) {
-      const status = error.response ? error.response.status : null;
-      return { error, status };
-    }
-  };
-
-  const customHeaders = {
-    'Content-type': 'application/json; charset=UTF-8',
-    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
-  };
-
-  const { data, status, error } = useQuery(['get_profile_axios22'], () => fetchData(customHeaders), {
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  });
+  // ------------------
+  const url = "https://api.dressme.uz/api/seller";
 
   useEffect(() => {
-    const postDataWithHeaders = async () => {
-      try {
-        const headers = {
-          'Content-type': 'application/json; charset=UTF-8',
-          "Authorization": `Bearer ${localStorage.getItem("RefreshUserToken")}`,
-        };
-        const data = {
-          refresh_token: localStorage.getItem("RefreshUserToken"),
-        };
-        const response = await axios.post(`${url}/refresh-token`, data, { headers });
-        // console.log('bu-Response:', response);
-        if (response?.status == 200) {
-          localStorage.setItem("DressmeUserToken", response?.data?.access_token)
-        }
-
-      } catch (error) {
-        setDressInfo({ ...dressInfo, IsAuthenticated: false })
-        navigate("/login-seller")
-      }
-    };
-    if (localStorage?.getItem("DressmeUserToken")) {
-      if (data?.error?.code === "ERR_NETWORK") {
-        toast.error(`${data?.error?.message}`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-      if (data?.status === 200) {
-        console.log("bu 200");
-        setDressInfo({ ...dressInfo, IsAuthenticated: true, userData: data?.data })
-      }
-      if (data?.status === 401) {
-        postDataWithHeaders()
-        console.log("bu profile page 401");
-      }
-    } else {
-      navigate("/login-seller")
-    }
-    // console.log("ishga tushdi");
-  }, [data]);
-  useEffect(() => {
-
     setState({
       ...state,
       sellerFname: dressInfo?.userData?.name,
@@ -145,12 +69,13 @@ function EditProfilePage() {
       sellerSubRegionId: dressInfo?.userData?.sub_region_id,
       sellerTypeId: dressInfo?.userData?.seller_type_id,
       sellerStatus: dressInfo?.userData?.status,
-      sellerPhoneCode: dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(0, 3),
-      sellerPhoneNum: dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(3, 12),
-    })
-  }, [dressInfo?.userData])
+      sellerPhoneCode:
+        dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(0, 3),
+      sellerPhoneNum:
+        dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(3, 12),
+    });
+  }, [dressInfo?.userData]);
 
-  
   // console.log(data, "data");
   // console.log(state, "state");
   // console.log('-----------------------------------');
@@ -194,12 +119,14 @@ function EditProfilePage() {
   // )
   // ------------GET METHOD Region-----------------
 
-  useQuery(["get region"], () => {
-    return fetch(`${url}/regions`).then(res => res.json())
-  },
+  useQuery(
+    ["get region"],
+    () => {
+      return fetch(`${url}/regions`).then((res) => res.json());
+    },
     {
       onSuccess: (res) => {
-        setState({ ...state, getRegionList: res, })
+        setState({ ...state, getRegionList: res });
       },
       onError: (err) => {
         console.log(err, "err get region");
@@ -207,15 +134,17 @@ function EditProfilePage() {
       keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
       refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
     }
-  )
+  );
 
   // ------------GET METHOD seller-types-----------------
-  useQuery(["get seller-type"], () => {
-    return fetch(`${url}/seller-types`).then(res => res.json())
-  },
+  useQuery(
+    ["get seller-type"],
+    () => {
+      return fetch(`${url}/seller-types`).then((res) => res.json());
+    },
     {
       onSuccess: (res) => {
-        setState({ ...state, getSellerList: res, })
+        setState({ ...state, getSellerList: res });
       },
       onError: (err) => {
         console.log(err, "err get seller-type");
@@ -223,7 +152,7 @@ function EditProfilePage() {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  )
+  );
 
   // console.log(state?.getSellerList, "bu getSellerList");
   // const changeTip = () => {
@@ -234,69 +163,62 @@ function EditProfilePage() {
   // }
   // ------------GET METHOD Profile-----------------
 
-
-
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
     return fetch(`${url}/delete`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
     }).then((res) => res.json());
   });
 
   const onUserDelete = () => {
     // setState({ ...state, popConfirmDelete: false })
-    mutate({}, {
-      onSuccess: res => {
-        if (res?.message) {
-          localStorage.clear();
-          navigate("/signup-seller")
-          window.location.reload();
-          setState({ ...state, popConfirmDelete: false })
-          console.log(res, "Delete");
-          toast.warn(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-      },
-      onError: err => {
-
+    mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          if (res?.message) {
+            localStorage.clear();
+            navigate("/signup-seller");
+            window.location.reload();
+            setState({ ...state, popConfirmDelete: false });
+            console.log(res, "Delete");
+            toast.warn(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        },
+        onError: (err) => {},
       }
-    })
-  }
-
-
+    );
+  };
 
   const [activeIndex, setActiveIndex] = useState();
   const accordionCityList = (id) => {
     if (activeIndex == id) {
-      setActiveIndex(0)
+      setActiveIndex(0);
     } else {
-      setActiveIndex(id)
+      setActiveIndex(id);
     }
-  }
-
+  };
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
     document.title = "Pедактировать профиль";
-
   }, []);
-
 
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
@@ -322,29 +244,35 @@ function EditProfilePage() {
       <div
         onClick={() => {
           setOpenEditModal(false);
-          setState({ ...state, popConfirmDelete: false, openModalRegions: false })
-          setDressInfo({ ...dressInfo, logOutSeller: false })
+          setState({
+            ...state,
+            popConfirmDelete: false,
+            openModalRegions: false,
+          });
+          setDressInfo({ ...dressInfo, logOutSeller: false });
           // setState({...state, openModalRegions: false })
         }}
         className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions ? "" : "hidden"
-          }`}
+         ${
+           state?.popConfirmDelete || openEditModal || state?.openModalRegions
+             ? ""
+             : "hidden"
+         }`}
       ></div>
-
-
       {/* Delete Account Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
-
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+          state?.popConfirmDelete
+            ? " bottom-0 md:flex"
+            : "md:hidden bottom-[-800px] z-[-10]"
+        }`}
       >
         <button
           onClick={() => setState({ ...state, popConfirmDelete: false })}
           type="button"
-          className="absolute  right-3 top-3 w-5 h-5 ">
-          <MenuCloseIcons
-            className="w-full h-full"
-            colors={"#a1a1a1"} />
+          className="absolute  right-3 top-3 w-5 h-5 "
+        >
+          <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
           <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
@@ -356,37 +284,42 @@ function EditProfilePage() {
             Вы уверены?
           </span>
           <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
-            Если вы удалите аккаунт все ваши товары и магазины удалятся, если они имеются
+            Если вы удалите аккаунт все ваши товары и магазины удалятся, если
+            они имеются
           </span>
         </div>
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
           <button
             onClick={() => setState({ ...state, popConfirmDelete: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Oтмена</button>
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+          >
+            Oтмена
+          </button>
           <button
             onClick={onUserDelete}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">Удалить</button>
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+          >
+            Удалить
+          </button>
         </div>
-
       </section>
       {/* ---password change----- */}
       <section
-        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
-          }`}
+        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
+          openEditModal ? "" : "hidden z-0"
+        }`}
       >
         <EditPassword onClick={togglePassword} />
       </section>
-      {
-        state?.sellerStatus == "pending" &&
+      {state?.sellerStatus == "pending" && (
         <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
           <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
             Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
           </span>
         </div>
-      }
-
+      )}
       <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">
         {/* title */}
         <div className="w-full flex items-center justify-between ">
@@ -395,7 +328,8 @@ function EditProfilePage() {
           </span>
           <button
             onClick={() => setState({ ...state, popConfirmDelete: true })}
-            className="h-5 flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5">
+            className="h-5 flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5"
+          >
             {/* <VerticalMenuIcons className="h-full" /> */}
             <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
               <DeleteIcon width={30} />
@@ -415,7 +349,9 @@ function EditProfilePage() {
                 name="fname"
                 placeholder="Имя"
                 value={state?.sellerFname || null}
-                onChange={(e) => setState({ ...state, sellerFname: e.target.value })}
+                onChange={(e) =>
+                  setState({ ...state, sellerFname: e.target.value })
+                }
                 required
               />
             </div>
@@ -432,14 +368,15 @@ function EditProfilePage() {
                 name="lname"
                 placeholder="Фамилия"
                 value={state?.sellerLname || null}
-                onChange={(e) => setState({ ...state, sellerLname: e.target.value })}
+                onChange={(e) =>
+                  setState({ ...state, sellerLname: e.target.value })
+                }
                 required
               />
             </div>
           </div>
           {/* Имя организации */}
-          {
-            state?.sellerTypeId >= 3 &&
+          {state?.sellerTypeId >= 3 && (
             <div className="w-full h-fit  ">
               <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
                 Имя организации{" "}
@@ -452,7 +389,8 @@ function EditProfilePage() {
                   required
                 />
               </div>
-            </div>}
+            </div>
+          )}
           {/* Mail */}
           <div className="w-full h-fit  ">
             <div className=" flex items-center justify-between w-full">
@@ -467,7 +405,9 @@ function EditProfilePage() {
                 name="email"
                 placeholder="Адрес электронной почты"
                 value={state?.sellerEmail || null}
-                onChange={(e) => setState({ ...state, sellerEmail: e.target.value })}
+                onChange={(e) =>
+                  setState({ ...state, sellerEmail: e.target.value })
+                }
                 required
               />
               <span>
@@ -495,9 +435,12 @@ function EditProfilePage() {
                   mask="(99) 999-99-99"
                   name="phone"
                   value={state?.sellerPhoneNum || null}
-                  onChange={(e) => setState({ ...state, sellerPhoneNum: e.target.value })}
-                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
-                    } text-base leading-4 text-black`}
+                  onChange={(e) =>
+                    setState({ ...state, sellerPhoneNum: e.target.value })
+                  }
+                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
+                    state?.sellerPhoneNum ? "font-AeonikProMedium" : null
+                  } text-base leading-4 text-black`}
                   placeholder={"(99) 999-99-99"}
                 ></InputMask>
               </div>
@@ -505,23 +448,29 @@ function EditProfilePage() {
           </div>
           {/* Выберите регион, */}
           <div className="w-full h-fit flex justify-center ">
-            <div className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
+            <div
+              className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
+                state?.openModalRegions
+                  ? " bottom-0 md:flex flex-col"
+                  : "md:hidden bottom-[-1500px] z-[-10]"
+              }`}
+            >
               <div className="w-full flex items-center justify-between  ">
-                <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
+                <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">
+                  Выберите регион
+                </span>
                 <span
                   className="select-none cursor-pointer"
                   onClick={() => {
                     setState({ ...state, openModalRegions: false });
                   }}
                 >
-                  <MenuCloseIcons colors="#000" /></span>
+                  <MenuCloseIcons colors="#000" />
+                </span>
               </div>
 
-
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-
-
-                {state?.getRegionList?.regions ?
+                {state?.getRegionList?.regions ? (
                   state?.getRegionList?.regions?.map((data, index) => {
                     return (
                       <div key={data?.id} className="w-full  h-fit  ">
@@ -533,7 +482,11 @@ function EditProfilePage() {
                             {data?.name_ru}
                           </span>
                           <span
-                            className={`${activeIndex == data?.id ? "rotate-[0deg]" : "rotate-[180deg]"} `}
+                            className={`${
+                              activeIndex == data?.id
+                                ? "rotate-[0deg]"
+                                : "rotate-[180deg]"
+                            } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
                           </span>
@@ -541,11 +494,18 @@ function EditProfilePage() {
 
                         <div
                           className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id ? "openAccardion" : "CloseAccardion"} `}
+                             ${
+                               activeIndex == data?.id
+                                 ? "openAccardion"
+                                 : "CloseAccardion"
+                             } `}
                         >
                           {data?.sub_regions?.map((item) => {
                             return (
-                              <div key={item?.id} className="flex items-center px-[2px] gap-x-[4px] cursor-pointer">
+                              <div
+                                key={item?.id}
+                                className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
+                              >
                                 <label
                                   htmlFor={item?.name_ru}
                                   className="flex items-center gap-x-[6px]"
@@ -555,38 +515,51 @@ function EditProfilePage() {
                                     id={item?.name_ru}
                                     name="type_work"
                                     value={item?.region_id}
-                                    checked={state?.sellerSubRegionId == item?.id}
+                                    checked={
+                                      state?.sellerSubRegionId == item?.id
+                                    }
                                     className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                     onChange={(e) => {
-                                      setState({ ...state, sellerRegionId: e.target.value, sellerSubRegionId: item?.id })
+                                      setState({
+                                        ...state,
+                                        sellerRegionId: e.target.value,
+                                        sellerSubRegionId: item?.id,
+                                      });
                                     }}
                                     required
-
                                   />
-                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular"
-                                  >{item?.name_ru}</span>
+                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                    {item?.name_ru}
+                                  </span>
                                 </label>
                               </div>
-
                             );
                           })}
                         </div>
                       </div>
                     );
-                  }) :
-                  <p className="w-full h-full flex flex-col items-center justify-center">Malumotlar yuklanyapti...</p>}
-
+                  })
+                ) : (
+                  <p className="w-full h-full flex flex-col items-center justify-center">
+                    Malumotlar yuklanyapti...
+                  </p>
+                )}
               </div>
               <div className="w-full flex items-center justify-end  mt-2">
-                <span onClick={() => {
-                  setState({ ...state, openModalRegions: false });
-                }} className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium">Готово</span>
+                <span
+                  onClick={() => {
+                    setState({ ...state, openModalRegions: false });
+                  }}
+                  className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium"
+                >
+                  Готово
+                </span>
               </div>
             </div>
 
             {/* Region INput  */}
             <div className={"w-full"}>
-              <label htmlFor="" >
+              <label htmlFor="">
                 <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                   Выберите регион
                 </span>
@@ -594,24 +567,34 @@ function EditProfilePage() {
                   onClick={() => {
                     setState({ ...state, openModalRegions: true });
                   }}
-                  className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor">
+                  className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                >
                   <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
-                    {!state?.sellerRegionId && !state?.sellerSubRegionId && "Выберите регион"}
+                    {!state?.sellerRegionId &&
+                      !state?.sellerSubRegionId &&
+                      "Выберите регион"}
 
-                    {state?.getRegionList?.regions?.filter(e => e.id == state?.sellerRegionId).map(item => {
-                      return <span className="flex items-center text-[#000] text-[14px] sm:text-base">
-                        {item?.name_ru},
-                        {item?.sub_regions?.filter(i => i.id == state?.sellerSubRegionId).map(item => {
-                          return <span className="ml-1">{item?.name_ru}</span>
-                        })}
-                      </span>
-                    })
-                    }
+                    {state?.getRegionList?.regions
+                      ?.filter((e) => e.id == state?.sellerRegionId)
+                      .map((item) => {
+                        return (
+                          <span className="flex items-center text-[#000] text-[14px] sm:text-base">
+                            {item?.name_ru},
+                            {item?.sub_regions
+                              ?.filter((i) => i.id == state?.sellerSubRegionId)
+                              .map((item) => {
+                                return (
+                                  <span className="ml-1">{item?.name_ru}</span>
+                                );
+                              })}
+                          </span>
+                        );
+                      })}
                   </span>
-                  <span className="rotate-[180deg]"><ArrowTopIcons colors={"#a1a1a1"} /></span>
+                  <span className="rotate-[180deg]">
+                    <ArrowTopIcons colors={"#a1a1a1"} />
+                  </span>
                 </div>
-
-
               </label>
             </div>
           </div>
@@ -629,65 +612,63 @@ function EditProfilePage() {
               />
             </div>
           </div> */}
-          {
-            state?.sellerTypeId >= 3 ?
-
-              <div className="select relative w-full flex items-center ">
-                <Select
-                  className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
-                  placeholder="Тип предприятия"
-                  optionFilterProp="children"
-                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
-                  suffixIcon={null}
-                  size="large"
-                  options={
-                    state?.getSellerList?.company?.map(item => {
-                      return (
-                        {
-                          value: item?.id,
-                          label: item?.name_ru,
-                        }
-                      )
-                    })
+          {state?.sellerTypeId >= 3 ? (
+            <div className="select relative w-full flex items-center ">
+              <Select
+                className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                placeholder="Тип предприятия"
+                optionFilterProp="children"
+                onChange={(e) => setState({ ...state, sellerTypeId: e })}
+                suffixIcon={null}
+                size="large"
+                options={state?.getSellerList?.company?.map((item) => {
+                  return {
+                    value: item?.id,
+                    label: item?.name_ru,
+                  };
+                })}
+              />
+              <span
+                className={`data absolute right-[10px] top- h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}
+              >
+                <ArrowTopIcons colors="#a1a1a1" />
+              </span>
+            </div>
+          ) : (
+            <div className="w-full h-fit ">
+              <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+                Тип
+              </div>
+              <div className="relative z-10 mt-[6px] flex items-center justify-between ">
+                <select
+                  id="changeIcons"
+                  // className="text-[#a1a1a1]"
+                  className="w-full h-[42px]  outline-none  px-[16px] w-full flex items-center border border-searchBgColor rounded-lg"
+                  value={state?.sellerTypeId}
+                  // onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
+                  onChange={(e) =>
+                    setState({ ...state, sellerTypeId: e.target.value })
                   }
-                />
-                <span className={`data absolute right-[10px] top- h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}>
+                  placeholder="Тип предприятия"
+                  required
+                >
+                  {state?.getSellerList?.individual?.map((data) => {
+                    return (
+                      <option key={data.id} value={data.id}>
+                        {" "}
+                        {data.name_ru}{" "}
+                      </option>
+                    );
+                  })}
+                </select>
+                <span
+                  className={`data absolute right-[10px]  h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}
+                >
                   <ArrowTopIcons colors="#a1a1a1" />
                 </span>
               </div>
-              :
-
-              <div className="w-full h-fit ">
-                <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-                  Тип
-                </div>
-                <div className="relative z-10 mt-[6px] flex items-center justify-between ">
-                  <select
-                    id="changeIcons"
-                    // className="text-[#a1a1a1]"
-                    className="w-full h-[42px]  outline-none  px-[16px] w-full flex items-center border border-searchBgColor rounded-lg"
-                    value={state?.sellerTypeId}
-                    // onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
-                    onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
-
-                    placeholder="Тип предприятия"
-                    required
-                  >
-                    {
-                      state?.getSellerList?.individual?.map(data => {
-                        return (
-                          <option key={data.id} value={data.id}> {data.name_ru} </option>
-                        )
-                      })
-                    }
-
-                  </select>
-                  <span className={`data absolute right-[10px]  h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}>
-                    <ArrowTopIcons colors="#a1a1a1" />
-                  </span>
-                </div>
-              </div>
-          }
+            </div>
+          )}
           {/*  CardNumber */}
           <div className="w-full  h-fit   ">
             <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
@@ -695,16 +676,19 @@ function EditProfilePage() {
             </span>
             <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               {/* CredtCardicons */}
-              <span><CreditCardNumber /></span>
+              <span>
+                <CreditCardNumber />
+              </span>
               <InputMask
                 value={state?.sellerCardNumber}
-                mask='9999-9999-9999-9999'
+                mask="9999-9999-9999-9999"
                 className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
-                onChange={(e) => setState({ ...state, sellerCardNumber: e.target.value })}
+                onChange={(e) =>
+                  setState({ ...state, sellerCardNumber: e.target.value })
+                }
                 placeholder="0000-0000-0000-0000"
               />
             </div>
-
           </div>
           {/* EditPassword */}
           <div className="w-full  flex items-center xs:justify-start justify-end xs:mt-5 ">
@@ -721,9 +705,7 @@ function EditProfilePage() {
 
         {/* Button */}
         <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
-          <button
-            className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
-          >
+          <button className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor">
             <span className="text-center text-base text-white not-italic font-AeonikProMedium">
               Сохранить данные
             </span>
@@ -733,7 +715,7 @@ function EditProfilePage() {
           </button>
         </div>
       </div>
-    </div >
+    </div>
   );
-};
+}
 export default React.memo(EditProfilePage);
