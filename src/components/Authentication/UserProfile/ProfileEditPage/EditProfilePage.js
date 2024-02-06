@@ -56,7 +56,7 @@ function EditProfilePage() {
   // -------------------------------------
   const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   // -------------------------------------
-
+// ------------------
   const url = "https://api.dressme.uz/api/seller"
 
 
@@ -149,6 +149,8 @@ function EditProfilePage() {
       sellerPhoneNum: dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(3, 12),
     })
   }, [dressInfo?.userData])
+
+  
   // console.log(data, "data");
   // console.log(state, "state");
   // console.log('-----------------------------------');
@@ -285,6 +287,8 @@ function EditProfilePage() {
       setActiveIndex(id)
     }
   }
+
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -292,6 +296,8 @@ function EditProfilePage() {
     document.title = "Pедактировать профиль";
 
   }, []);
+
+
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
