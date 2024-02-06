@@ -375,13 +375,13 @@ export default function LocationAddById() {
                       ?.filter((e) => e.id == state?.regionIdShops)
                       .map((item) => {
                         return (
-                          <span className="flex items-center text-[#000] text-[14px] sm:text-base">
+                          <span key={item?.name_ru} className="flex items-center text-[#000] text-[14px] sm:text-base">
                             {item?.name_ru},
                             {item?.sub_regions
                               ?.filter((i) => i.id == state?.subRegionIdShops)
-                              .map((item) => {
+                              .map((data) => {
                                 return (
-                                  <span className="ml-1">{item?.name_ru}</span>
+                                  <span key={data?.name_ru}  className="ml-1">{data?.name_ru}</span>
                                 );
                               })}
                           </span>
@@ -731,14 +731,14 @@ export default function LocationAddById() {
                         ?.filter((e) => e.id == state?.regionIdShops)
                         .map((item) => {
                           return (
-                            <span className="flex items-center text-[#000] text-[14px] sm:text-base">
+                            <span key={item?.name_ru}  className="flex items-center text-[#000] text-[14px] sm:text-base">
                               {item?.name_ru},
                               {item?.sub_regions
                                 ?.filter((i) => i.id == state?.subRegionIdShops)
-                                .map((item) => {
+                                .map((data) => {
                                   return (
-                                    <span className="ml-1">
-                                      {item?.name_ru}
+                                    <span key={data?.name_ru}  className="ml-1">
+                                      {data?.name_ru}
                                     </span>
                                   );
                                 })}

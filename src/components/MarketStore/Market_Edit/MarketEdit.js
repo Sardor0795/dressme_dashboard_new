@@ -728,9 +728,11 @@ function MarketEdit() {
                     </span>
                   </label>
                   <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                    {dressInfo?.genderList?.map((data) => {
+                    {dressInfo?.genderList?.map((data, index) => {
                       return (
-                        <>
+                        <div
+                          key={index}
+                        >
                           <input
                             type="radio"
                             id={data?.id}
@@ -747,7 +749,7 @@ function MarketEdit() {
                           >
                             <span>{data?.name_ru}</span>
                           </label>
-                        </>
+                        </div>
                       );
                     })}
                   </div>
@@ -763,9 +765,10 @@ function MarketEdit() {
                     </span>
                   </label>
                   <div className="w-[65%] md:w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                    {dressInfo?.deliveryList?.map((data) => {
+                    {dressInfo?.deliveryList?.map((data, index) => {
                       return (
-                        <>
+                        <div
+                          key={index}>
                           <input
                             type="radio"
                             id={data?.name_uz}
@@ -782,7 +785,7 @@ function MarketEdit() {
                           >
                             <span className="leading-normal">{data?.name_ru}</span>
                           </label>
-                        </>
+                        </div>
                       );
                     })}
                   </div>

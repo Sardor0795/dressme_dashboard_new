@@ -513,7 +513,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
                             // console.log(item, "item--Map");
                             return (
-                                <List.Item className="w-full "
+                                <List.Item key={index} className="w-full "
                                 >
                                     <div className="w-full flex items-center gap-x-1">
                                         <div className="flex items-center h-full">

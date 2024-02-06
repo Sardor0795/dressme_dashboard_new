@@ -1203,11 +1203,12 @@ export default function LocationMapCity() {
                             <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-xs md:text-base leading-4 ">
                               {!state?.idRegionId && !state?.idSupRregionId && "Выберите регион"}
 
-                              {state?.getRegionList?.regions?.filter(e => e.id == state?.idRegionId).map(item => {
-                                return <span className="flex items-center text-[#000] text-xs md:text-base">
+                              {state?.getRegionList?.regions?.filter(e => e.id == state?.idRegionId).map((item, index) => {
+                                return <span key={index}
+                                  className="flex items-center text-[#000] text-xs md:text-base">
                                   {item?.name_ru},
-                                  {item?.sub_regions?.filter(i => i.id == state?.idSupRregionId).map(item => {
-                                    return <span className="ml-1">{item?.name_ru}</span>
+                                  {item?.sub_regions?.filter(i => i.id == state?.idSupRregionId).map((data, index) => {
+                                    return <span key={index} className="ml-1">{data?.name_ru}</span>
                                   })}
                                 </span>
                               })

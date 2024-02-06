@@ -8,7 +8,7 @@ import {
 import EditComponent from "./EditComment";
 
 const CommentTitle = ({ titleStore, handleRefetch }) => {
-  
+
   const [state, setState] = useState({
     startReviews: true,
   });
@@ -86,7 +86,6 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
       )}
 
       {titleStore?.locationListId?.shop?.ratings?.map((item, id) => {
-        console.log(titleStore?.locationListId?.shop?.ratings, "DATA");
         return (
           <div key={id}>
             <EditComponent
