@@ -71,6 +71,7 @@ export default function ProductLocationsList() {
       console.log(data, "data");
       if (data?.status >= 200 && data?.status < 300) {
         setDressInfo({ ...dressInfo, getProductList: data?.data })
+
       }
       if (data?.status === 401) {
 
