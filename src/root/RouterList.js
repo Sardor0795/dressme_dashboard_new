@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { dressMainData } from "../hook/ContextTeam";
 import LoadingForSeller from "../components/Loading/LoadingFor";
+import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
 
 // ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
@@ -33,7 +34,7 @@ const ProductLocationsList = lazy(() => import('../components/Products/ProductLo
 const ProductsPageOne = lazy(() => import('../components/Products/AddingProductPageOne/ProductsPageOne'));
 
 // -----------------------------Authentication-----------------
-const EditProfilePage = lazy(() => import('../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage'));
+// const EditProfilePage = lazy(() => import('../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage'));
 const SignUpSeller = lazy(() => import('../components/Authentication/SellerAuthentication/SignUp/SignUpSeller'));
 const SignInSeller = lazy(() => import('../components/Authentication/SellerAuthentication/SignIn/SignInSeller'));
 const ForgotPasswordSeller = lazy(() => import('../components/Authentication/SellerAuthentication/forgotPassword/ForgotPasswordSeller'));
@@ -188,12 +189,12 @@ export default function RouterList() {
 
 
         <Route path="/" element={<Navigate to={"/login-seller"} />} />
-
-        <Route path="/edit-profile" element={
+        <Route path={"/edit-profile"} element={<EditProfilePage />} />
+        {/* <Route path="/edit-profile" element={
           <Suspense fallback={<div>Loading...</div>}>
             <EditProfilePage />
           </Suspense>
-        } />
+        } /> */}
         <Route path="/signup-seller" element={
           <Suspense fallback={<div>Loading...</div>}>
             <SignUpSeller />
