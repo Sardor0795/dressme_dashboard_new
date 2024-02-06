@@ -24,6 +24,10 @@ export default function ContextTeam({ children }) {
     accessToken: null,
     refreshToken: null,
     expiresAt: null,
+    // ------MarketStore
+    shopsList: null,
+    locationList: null,
+    getProductList: null,
   });
 
 

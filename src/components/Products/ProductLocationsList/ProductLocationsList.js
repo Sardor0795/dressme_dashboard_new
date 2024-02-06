@@ -17,8 +17,9 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { dressMainData } from "../../../hook/ContextTeam";
+import axios from "axios";
 
-const { RangePicker } = DatePicker;
+const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
 
 export default function ProductLocationsList() {
@@ -40,68 +41,63 @@ export default function ProductLocationsList() {
     openDeleteModal: false,
     shopId: null,
     shopMarketId: ""
-
-
   });
   // ------------
   const [hideProductList, setHideProductList] = useState(false);
 
 
-  const { isLoading, refetch } = useQuery(["productList"], () => { return request({ url: "/products/locations", token: true }) },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getProductList: res })
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const fetchData = async (customHeaders) => {
+    try {
+      const response = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
     }
-  );
-  const [locationId, setLocationId] = useState([]);
+  };
+
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+  const { isLoading, refetch } = useQuery(['seller_getProductList_list'], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setDressInfo({ ...dressInfo, getProductList: data?.data })
+      }
+      if (data?.status === 401) {
+
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+
+      }
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
   function handleChekListItem(childData, shopId, shopMarketId) {
-    // console.log(childData, shopId, "childData, shopId,");
     setState({ ...state, getCheckListItem: childData, shopId: shopId, shopMarketId: shopMarketId })
-    // console.log(shopId, "shopId");
-    // if (shopId > 0) {
-    //   if (locationId?.length !== 0) {
-    //     setLocationId(locationId.filter((x, i, a) => a.indexOf(x) == i))
-    //     if (!locationId.includes(shopId)) {
-    //       setLocationId(locationId => [...locationId, shopId]);
-    //     }
-    //   } else {
-    //     setLocationId(locationId => [...locationId, shopId]);
-    //   }
-    // } else if (shopId < 0 && locationId?.length !== 0) {
-    //   setLocationId(locationId?.filter(e => e !== Math.abs(shopId)))
-    // }
   }
-  // console.log(state?.getCheckListItem, "getCheckListItem");
-  // useEffect(() => {
 
-  // }, [shopId])
-  // const dataList11 = locationId.filter((x, i, a) => a.indexOf(x) == i)
-  // console.log(dataList11, "dataList11");
-
-  // var newarray = locationId?.reduce(function (a, b) {
-  //   if (a.indexOf(b) == -1) {
-  //     a.push(b)
-  //   }
-  //   return a;
-  // }, []);
-
-  // console.log(newarray, "newarray");
-  // console.log(locationId, "locationId-----");
   function handleAllCheckList(childData) {
-    // console.log(childData, "childData");
   }
-  // console.log(state?.getCheckListItem, "getCheckListItem?--shopId");
 
   const onSendPeoductSeveralSelect = () => {
     setState({ ...state, loader: true, hideProductList: true })
     setHideProductList(true)
     let form = new FormData();
     form.append("location_id", state?.getShopLocationId);
-    state?.getCheckListItem?.map((e, index) => {
-      form.append("product_ids[]", state?.getCheckListItem[index]);
+    dressInfo?.getProductList?.map((e, index) => {
+      form.append("product_ids[]", dressInfo?.getProductList[index]);
     })
     return fetch(`${url}/shops/locations/products/add-selected`, {
       method: "POST",
@@ -134,8 +130,8 @@ export default function ProductLocationsList() {
     setHideProductList(true)
     let form = new FormData();
     form.append("location_ids[]", state?.shopId);
-    state?.getCheckListItem?.map((e, index) => {
-      form.append("product_ids[]", state?.getCheckListItem[index]);
+    dressInfo?.getProductList?.map((e, index) => {
+      form.append("product_ids[]", dressInfo?.getProductList[index]);
     })
     return fetch(`${url}/products/massive-delete-products`, {
       method: "POST",
@@ -168,9 +164,7 @@ export default function ProductLocationsList() {
     navigate(`/store/market-list/:${id}`);
   };
 
-  // console.log(state?.onSuccessMessaage, 'onSuccessMessaage');
-  // console.log(state?.onErrorMessage, 'onErrorMessage');
-  // console.log(state?.getProductList, 'getProductList');
+
   const [locationAllId, setLocationAllId] = useState([]);
   const [productAllId, setProductAllId] = useState([]);
   const [allCheckedAction, setAllCheckedAction] = useState(null);
@@ -178,10 +172,8 @@ export default function ProductLocationsList() {
   const handleGetValueAll = (e) => {
     setAllCheckedAction(e.target.checked)
     if (e.target.checked) {
-      state?.getProductList?.products_locations?.map(item => {
-        // console.log(item, "item");
+      dressInfo?.getProductList?.products_locations?.map(item => {
         return item?.shop_locations?.map(value => {
-          // console.log(value?.id, "value");
           setLocationAllId(locationAllId => [...locationAllId, value?.id]);
           return value?.products?.map(data => {
             setProductAllId(productAllId => [...productAllId, data?.id]);
@@ -194,11 +186,7 @@ export default function ProductLocationsList() {
       setProductAllId([])
     }
   }
-  // console.log(state?.shopMarketId, state?.shopId, "state--shopMarketId--shopId");
-  // console.log(productAllId, "productAllId");
-  // console.log(allCheckedAction, "allCheckedAction");
-  // console.log(state?.shopMarketId, "shopMarketId");
-  console.log(state?.getCheckListItem, state?.shopId, "state----state?.getCheckListItem");
+
   return (
     <div>
       <section
@@ -288,9 +276,9 @@ export default function ProductLocationsList() {
             </div>
             :
             <div className="w-full h-full overflow-y-auto VerticelScroll">
-              {state?.getProductList?.products_locations?.map(item => {
+              {dressInfo?.getProductList?.products_locations?.map(item => {
                 return (
-                  <>  {state?.getCheckListItem?.length ?
+                  <>  {dressInfo?.getProductList?.length ?
                     state?.shopMarketId == item?.id &&
                     <div className="w-full cursor-pointer mt-2">
                       {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
@@ -499,7 +487,7 @@ export default function ProductLocationsList() {
           {/* Up Title */}
           <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
             <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
-              Общее количество: {state?.getProductList?.products_locations?.length}
+              Общее количество: {dressInfo?.getProductList?.products_locations?.length}
             </p>
 
             <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
@@ -509,7 +497,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openSelectModal: true })}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || state?.getCheckListItem?.length >= 1
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || dressInfo?.getProductList?.length >= 1
                   ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -522,7 +510,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openDeleteModal: true })}
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || state?.getCheckListItem?.length >= 1
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || dressInfo?.getProductList?.length >= 1
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -544,11 +532,11 @@ export default function ProductLocationsList() {
           <div className="w-full my-4">
 
           </div>
-          {state?.getProductList?.products_locations?.map((item, index1) => {
+          {dressInfo?.getProductList?.products_locations?.map((item, index1) => {
             // console.log(item, "state--item");
             return (
               <>
-                {state?.getCheckListItem?.length ?
+                {dressInfo?.getProductList?.length ?
                   state?.shopMarketId == item?.id &&
                   <div className="flex items-center w-full">
                     {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
@@ -577,7 +565,7 @@ export default function ProductLocationsList() {
                                 {item?.shop_locations?.length !== 0 ?
 
                                   <LocationItem
-                                    allProductLocationList={state?.getProductList?.products_locations}
+                                    allProductLocationList={dressInfo?.getProductList?.products_locations}
                                     handleGetCheckAll={handleChekListItem}
                                     handleCheckAllBtn={handleAllCheckList}
                                     onRefetch={refetch}
@@ -623,7 +611,7 @@ export default function ProductLocationsList() {
                               <div className="mx-auto font-AeonikProRegular text-[16px] ">
                                 {item?.shop_locations?.length !== 0 ?
                                   <LocationItem
-                                    allProductLocationList={state?.getProductList?.products_locations}
+                                    allProductLocationList={dressInfo?.getProductList?.products_locations}
                                     handleGetCheckAll={handleChekListItem}
                                     handleCheckAllBtn={handleAllCheckList}
                                     onRefetch={refetch}

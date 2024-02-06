@@ -1,18 +1,16 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { BgSelectSkin, GoBackIcons, MenuCloseIcons, StarLabel } from "../../../../assets/icons";
+import { useNavigate } from "react-router-dom";
+import { GoBackIcons, MenuCloseIcons, StarLabel } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
-import { ClipLoader, PuffLoader } from "react-spinners";
-import { MdError } from "react-icons/md";
-import { FaCheck } from "react-icons/fa6";
+import { ClipLoader } from "react-spinners";
 import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
-function AddStore({ shopsList, onRefetch }) {
+function AddStore({ onRefetch }) {
   const navigate = useNavigate();
   const { request } = useHttp();
   const url = "https://api.dressme.uz/api/seller";

@@ -1,70 +1,99 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import LocationList from '../Locations/LocationList/LocationList'
 import NoLocations from '../NoLocations/NoLocations'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoadingForSeller from '../../Loading/LoadingFor'
 import { useHttp } from '../../../hook/useHttp'
+import axios from 'axios'
+import { dressMainData } from '../../../hook/ContextTeam'
+const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsCheck() {
-    const { request } = useHttp()
-    const [state, setState] = useState({
-        isLocation: "",
-        isCheckLocation: null,
-        isMarket: "",
-        isMarketCheck: false,
-        loading: true,
-    })
+    const [dressInfo, setDressInfo] = useContext(dressMainData);
 
+    const fetchDataShop = async (customHeaders) => {
+        try {
+            const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+                headers: customHeaders,
+            });
+            const status = response.status;
+            const data = response.data;
 
-    const { isLoading, data } = useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
-        {
-            onSuccess: (res) => {
-                if (res?.shops) {
-                    setState({ ...state, isMarketCheck: true, isMarket: res, loading: false })
-                    console.log(res?.shops, "merkat is checl location");
-                }
-            },
-            onError: (err) => {
-                setState({ ...state, loading: false })
-                console.log(err, "BU -- HOC -- Error");
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            return { data, status };
+        } catch (error) {
+            const status = error.response ? error.response.status : null;
+            return { error, status };
         }
-    );
+    };
 
-    // ------------GET  Has Magazin ?-----------------
-    const { isFetched, refetch } = useQuery(["location_index"], () => {
-        return request({ url: "/shops/locations/index", token: true });
-    },
-        {
-            onSuccess: (res) => {
-                if (res?.locations) {
-                    setState({ ...state, isCheckLocation: res?.locations_exist, isLocation: res, loading: false })
-                }
-            },
-            onError: (err) => {
-                setState({ ...state, loading: false })
-                console.log(err, "BU -- HOC -- Error");
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
+    const customHeadersShop = {
+        'Content-type': 'application/json; charset=UTF-8',
+        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    };
+    useQuery(['seller_shops_list'], () => fetchDataShop(customHeadersShop), {
+        onSuccess: (data) => {
+            if (data?.status >= 200 && data?.status < 300) {
+                setDressInfo({ ...dressInfo, shopsList: data?.data })
+            }
+            if (data?.status === 401) {
+
+            }
+        },
+        onError: (error) => {
+            if (error?.response?.status === 401) {
+
+            }
+        },
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+    });
+
+    const fetchData = async (customHeaders) => {
+        try {
+            const response = await axios.get(`${REACT_APP_BASE_URL}/shops/locations/index`, {
+                headers: customHeaders,
+            });
+            const status = response.status;
+            const data = response.data;
+
+            return { data, status };
+        } catch (error) {
+            const status = error.response ? error.response.status : null;
+            return { error, status };
         }
-    );
+    };
+
+    const customHeaders = {
+        'Content-type': 'application/json; charset=UTF-8',
+        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    };
+    useQuery(['seller_location_list'], () => fetchData(customHeaders), {
+        onSuccess: (data) => {
+            if (data?.status >= 200 && data?.status < 300) {
+                setDressInfo({ ...dressInfo, locationList: data?.data })
+            }
+            if (data?.status === 401) {
+
+            }
+        },
+        onError: (error) => {
+            if (error?.response?.status === 401) {
+
+            }
+        },
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+    });
 
     return (
         <div>
-            {state?.loading || isLoading ? <LoadingForSeller /> :
-                data ?
-                    isFetched && state?.isLocation?.locations?.data ?
-                        state?.isCheckLocation ?
-                            <LocationList marketList={state?.isMarket} locationList={state?.isLocation} />
-                            :
-                            <NoLocations marketList={state?.isMarket} locationList={state?.isLocation} />
+            {
+                dressInfo?.shopsList?.shops ?
+                    dressInfo?.locationList?.locations_exist ?
+                        <LocationList />
                         :
-                        <LoadingForSeller />
+                        <NoLocations />
                     :
                     <div className="flex items-center h-[100vh] justify-center">
                         <Link

@@ -8,20 +8,18 @@ import { useHttp } from "../../../hook/useHttp";
 import { StarIcon } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 
-function MyMarket({ shopsList }) {
+function MyMarket() {
   const [deliverList, setDeliverList] = useState();
-  // const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [searchName, setSearchName] = useState('');
 
   const { request } = useHttp();
   const navigate = useNavigate();
 
   // ------------GET METHOD delivery-method-----------------
-  useQuery(
-    ["get_delivery_method"],
-    () => {
-      return request({ url: "/delivery-method", token: true });
-    },
+  useQuery(["get_delivery_method"], () => {
+    return request({ url: "/delivery-method", token: true });
+  },
     {
       onSuccess: (res) => {
         setDeliverList(res?.delivery_methods);
@@ -92,8 +90,7 @@ function MyMarket({ shopsList }) {
         </Link>
       </div>
       <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-        {shopsList?.shops?.data?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
-          // console.log(data, "buList");
+        {dressInfo?.shopsList?.shops?.data?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
           return (
             <div
               key={data?.id}
