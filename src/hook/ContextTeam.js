@@ -29,7 +29,9 @@ export default function ContextTeam({ children }) {
     locationList: null,
     getProductList: null,
     getReviewProduct: null,
-    showSelectedButton: 'products'
+    showSelectedButton: 'products',
+    deliveryList: null,
+    genderList: null,
   });
 
 

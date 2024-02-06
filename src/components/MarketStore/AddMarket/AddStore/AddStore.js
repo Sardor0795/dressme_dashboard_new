@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoBackIcons, MenuCloseIcons, StarLabel } from "../../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -9,16 +9,18 @@ import { useHttp } from "../../../../hook/useHttp";
 import { ClipLoader } from "react-spinners";
 import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import axios from "axios";
+import { dressMainData } from "../../../../hook/ContextTeam";
+const { REACT_APP_BASE_URL } = process.env;
 
 function AddStore({ onRefetch }) {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const navigate = useNavigate();
-  const { request } = useHttp();
   const url = "https://api.dressme.uz/api/seller";
   const [state, setState] = useState({
     magazinName: null,
-    genderType: null,
     checkGender: 1,
-    deliverList: null,
     deliverCheck: 1,
     errorGroup: "",
     // ---ForImg
@@ -61,31 +63,49 @@ function AddStore({ onRefetch }) {
   //   });
   // }
 
-  // ------------GET METHOD Gender-type-----------------
-  useQuery(["get_genders_market"], () => {
-    return request({ url: "/genders", token: true })
-  },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, genderType: res?.genders });
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-  // ------------GET METHOD delivery-method-----------------
-  useQuery(["get_delivery_method"], () => {
-    return request({ url: "/delivery-method", token: true })
-  },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, deliverList: res?.delivery_methods });
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
 
+  // ------------GET METHOD delivery-method-----------------
+
+  useEffect(() => {
+    const fetchGender = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/genders`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, genderList: data?.data?.genders })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.genderList) {
+      fetchGender();
+    }
+    const fetchDelivery = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/delivery-method`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.deliveryList) {
+      fetchDelivery();
+    }
+  }, []);
 
   useEffect(() => {
     window.scrollTo({
@@ -506,7 +526,7 @@ function AddStore({ onRefetch }) {
                 </span>
               </label>
               <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                {state?.genderType?.map((data) => {
+                {dressInfo?.genderList?.map((data) => {
                   return (
                     <>
                       <input
@@ -541,7 +561,7 @@ function AddStore({ onRefetch }) {
                 </span>
               </label>
               <div className="w-[65%] md:w-[70%] radio-toolbar flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                {state?.deliverList?.map((data) => {
+                {dressInfo?.deliveryList?.map((data) => {
                   return (
                     <>
                       <input
