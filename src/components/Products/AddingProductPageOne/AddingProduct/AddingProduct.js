@@ -460,22 +460,7 @@ const AddingProduct = () => {
   };
   const handleNextPage = () => {
     setState({ ...state, isCheckValid: true })
-    // console.log(
-    //   state?.shopId, "state?.shopId",
-    //   state?.shopLocationId, "state?.shopLocationId",
-    //   state?.section_Id, "state?.section_Id",
-    //   state?.color_Id, "state?.color_Id",
-    //   state?.gender_Id, "state?.gender_Id",
-    //   state?.min_Age_Category, "state?.min_Age_Category",
-    //   state?.max_Age_Category, "state?.max_Age_Category",
-    //   state?.sku, "state?.sku",
-    //   state?.type_Id, "state?.type_Id",
-    //   state?.price, "state?.price",
-    //   state?.filterTypeId, "state?.filterTypeId",
-    //   state?.producer_Id, "state?.producer_Id",
-    //   state?.season_Id, "state?.season_Id",
-    //   state?.pictureBgFile1, "state?.pictureBgFile1",
-    // );
+
     if (
       state?.shopId &&
       state?.shopLocationId &&

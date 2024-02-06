@@ -1,59 +1,63 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import MyMarket from "../MyMarket/MyMarket";
 import AddStore from "../AddMarket/AddStore/AddStore";
 import LoadingForSeller from "../../Loading/LoadingFor";
-import { useHttp } from "../../../hook/useHttp";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { dressMainData } from "../../../hook/ContextTeam";
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
+
 export default function MarketIsStoreCheck() {
-  const [sellerShops, setSellerShops] = useState("");
-  const [loading, setLoading] = useState(true);
-  const { request } = useHttp()
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
-  // // ------------GET  Has Magazin ?-----------------
-  const { refetch } = useQuery(["seller_shops"], () => { return request({ url: "/shops", token: true }) },
-    {
-      onSuccess: (res) => {
-        if (res?.shops) {
-          setSellerShops(res);
-          setLoading(false)
-          console.log(res, "MerketIsCheck");
+  const fetchData = async (customHeaders) => {
+    try {
+      const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
 
-        }
-      },
-      onError: (err) => {
-        setLoading(false)
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
     }
-  );
-  console.log(sellerShops, "sellerShops marketCheck");
+  };
+
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+  const { refetch, isLoading } = useQuery(['seller_shops_list'], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setDressInfo({ ...dressInfo, shopsList: data?.data })
+      }
+      if (data?.status === 401) {
+
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+
+      }
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
 
   return (
     <div>
-      {/* <ToastContainer
-        style={{ zIndex: "1000", top: "80px" }}
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      /> */}
-      {loading ? (
+
+      {isLoading ? (
         <LoadingForSeller />
       ) : (
         <div>
-          {sellerShops?.shops?.data?.length >= 1 && <MyMarket shopsList={sellerShops} onRefetch={refetch} />}
-          {sellerShops?.shops?.data?.length == 0 && <AddStore shopsList={sellerShops} onRefetch={refetch} />}
+          {dressInfo?.shopsList?.shops?.data?.length >= 1 && <MyMarket onRefetch={refetch} />}
+          {dressInfo?.shopsList?.shops?.data?.length === 0 && <AddStore onRefetch={refetch} />}
         </div>
       )}
     </div>

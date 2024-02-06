@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
-import { Outlet, Link } from "react-router-dom";
-import { DatePicker, Space } from "antd";
-import { SearchIcon } from "../../assets/icons";
-
-const { RangePicker } = DatePicker;
 
 export default function MarketStore() {
   useEffect(() => {

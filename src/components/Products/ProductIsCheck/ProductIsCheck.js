@@ -1,75 +1,96 @@
-import React, { useContext, useEffect } from 'react'
-
+import React, { useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
-import LoadingForSeller from '../../Loading/LoadingFor'
-import { useHttp } from '../../../hook/useHttp'
 import ProductsPageOne from '../AddingProductPageOne/ProductsPageOne'
-import NoLocationProduct from '../NoLocationsProduct/NoLocationsProduct'
 import { dressMainData } from '../../../hook/ContextTeam'
+import axios from 'axios'
+const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
 
-    const { request } = useHttp()
-    const [state, setState] = useState({
-        isLocation: "",
-        isCheckLocation: null,
-        isMarket: "",
-        isMarketCheck: false,
-        loading: true,
-    })
 
+    const fetchDataShop = async (customHeadersShop) => {
+        try {
+            const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+                headers: customHeaders,
+            });
+            const status = response.status;
+            const data = response.data;
 
-    useQuery(["shops_index"], () => { return request({ url: "/shops", token: true }) },
-        {
-            onSuccess: (res) => {
-                if (res?.shops) {
-                    setState({ ...state, isMarketCheck: true, isMarket: res?.shops?.data, loading: false })
-                }
-            },
-            onError: (err) => {
-                setState({ ...state, loading: false })
-                // console.log(err, "BU -- HOC -- Error");
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            return { data, status };
+        } catch (error) {
+            const status = error.response ? error.response.status : null;
+            return { error, status };
         }
-    );
-    useQuery(["location_index-product"], () => {
-        return request({ url: "/shops/locations/index", token: true });
-    },
-        {
-            onSuccess: (res) => {
-                if (res?.locations) {
-                    setState({ ...state, isCheckLocation: res?.locations_exist, isLocation: res, loading: false })
-                }
-            },
-            onError: (err) => {
-                setState({ ...state, loading: false })
-                // console.log(err, "BU -- HOC -- Error");
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
+    };
+
+    const customHeadersShop = {
+        'Content-type': 'application/json; charset=UTF-8',
+        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    };
+    useQuery(['seller_shops_list'], () => fetchDataShop(customHeadersShop), {
+        onSuccess: (data) => {
+            if (data?.status >= 200 && data?.status < 300) {
+                setDressInfo({ ...dressInfo, shopsList: data?.data })
+            }
+            if (data?.status === 401) {
+
+            }
+        },
+        onError: (error) => {
+            if (error?.response?.status === 401) {
+
+            }
+        },
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+    });
+
+    const fetchData = async (customHeaders) => {
+        try {
+            const response = await axios.get(`${REACT_APP_BASE_URL}/shops/locations/index`, {
+                headers: customHeaders,
+            });
+            const status = response.status;
+            const data = response.data;
+
+            return { data, status };
+        } catch (error) {
+            const status = error.response ? error.response.status : null;
+            return { error, status };
         }
-    );
+    };
 
+    const customHeaders = {
+        'Content-type': 'application/json; charset=UTF-8',
+        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    };
+    useQuery(['seller_location_list'], () => fetchData(customHeaders), {
+        onSuccess: (data) => {
+            if (data?.status >= 200 && data?.status < 300) {
+                setDressInfo({ ...dressInfo, locationList: data?.data })
+            }
+            if (data?.status === 401) {
 
+            }
+        },
+        onError: (error) => {
+            if (error?.response?.status === 401) {
 
-    // console.log(state?.isMarket, "check----isMarket");
-    // console.log(state?.isLocation, "check----isLocation");
-    // console.log(dressInfo?.SellerMagazinLocation, "check----SellerMagazinLocation");
-    // console.log(state?.isLocation, state?.isMarket);
+            }
+        },
+        keepPreviousData: true,
+        refetchOnWindowFocus: false,
+    });
+
 
     return (
         <div>
-
             {
-                state?.isMarket?.length > 0
+                dressInfo?.shopsList?.shops?.data?.length > 0
                     ?
-                    state?.isCheckLocation
+                    dressInfo?.locationList?.locations_exist
                         ?
                         <ProductsPageOne />
                         :

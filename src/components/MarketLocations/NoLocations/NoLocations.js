@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { GrClose } from "react-icons/gr";
+import React, { useContext, useState } from "react";
 import { MenuCloseIcons } from "../../../assets/icons";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useHttp } from "../../../hook/useHttp";
+import { useNavigate } from "react-router-dom";
 
-function NoLocations({ marketList }) {
+import { dressMainData } from "../../../hook/ContextTeam";
+
+function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true)
+  const [dressInfo] = useContext(dressMainData);
 
   const navigate = useNavigate()
 
@@ -53,7 +53,8 @@ function NoLocations({ marketList }) {
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
                 {
-                  marketList?.shops?.data?.map(item => {
+
+                  dressInfo?.shopsList?.shops?.data?.map(item => {
                     return (
                       <button
                         onClick={() => handleShopsOfLocation(item?.id)}

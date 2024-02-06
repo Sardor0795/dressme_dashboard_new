@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { dressMainData } from "../../../../hook/ContextTeam";
 
-function LocationList({ marketList, locationList }) {
+function LocationList() {
   const [openSelect, setOpenSelect] = useState(false);
   const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
+  const [dressInfo] = useContext(dressMainData);
+
 
 
   const handleShopsOfLocation = (id) => {
@@ -29,7 +31,7 @@ function LocationList({ marketList, locationList }) {
       top: 0,
     });
   }, []);
-  console.log(locationList, "locationList");
+
   return (
     <div className={`w-full h-full  px-4  md:px-10 mb-10`}>
       <div
@@ -54,8 +56,8 @@ function LocationList({ marketList, locationList }) {
           </p>
         </div>
         <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-          {marketList?.shops?.data ? (
-            marketList?.shops?.data?.map((item) => {
+          {dressInfo?.shopsList?.shops?.data ? (
+            dressInfo?.shopsList?.shops?.data?.map((item) => {
               return (
                 <button
                   onClick={() => handleShopsOfLocation(item?.id)}
@@ -178,7 +180,7 @@ function LocationList({ marketList, locationList }) {
           </li>
         </ul>
       </div>
-      {locationList?.locations?.data?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
+      {dressInfo?.locationList?.locations?.data?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
         return (
           <div key={item?.id}>
             {item?.shop_locations?.length ? (
