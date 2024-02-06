@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { SearchIcon } from "../../assets/icons";
-import { Space, DatePicker } from "antd";
-const { RangePicker } = DatePicker;
 
 export default function Reviews1() {
   useEffect(() => {

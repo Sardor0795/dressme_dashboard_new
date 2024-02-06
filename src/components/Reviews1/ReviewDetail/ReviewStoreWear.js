@@ -3,64 +3,10 @@ import ReviewStore from "./ReviewStore/ReviewStore";
 import ReviewWear from "./ReviewWear/ReviewWear";
 import { SearchIcon } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
-import NoReviewProduct from "../NoReview/NoReview";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import { useQuery } from "@tanstack/react-query";
-import { useHttp } from "../../../hook/useHttp";
-import LoadingForSeller from "../../Loading/LoadingFor";
-import { SelectedButtonContext } from "../../../hook/SelectedButtonContext";
 
 export default function ReviewStoreWear() {
-  const [showSelectedButton, setShowSelectedButton] = useContext(
-    SelectedButtonContext
-  );
-  const { request } = useHttp();
-  const [loading, setLoading] = useState(true);
-  const [storeOrWear, setStoreOrWear] = useState(false);
-  const [reviewsStore, setReviewsStore] = useState();
-  const [reviewsProduct, setReviewsProduct] = useState();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
-  // -------------  GET ALL SHOPS LENGTH --------------
-  useQuery(["get_revies_all_store"], () => {
-    return request({ url: "/shops", token: true })
-  },
-    {
-      onSuccess: (res) => {
-        setLoading(false);
-        setReviewsStore(res?.shops);
-      },
-      onError: (err) => {
-        setLoading(false);
-        console.log(err, "err getAll Shops");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  // -------------  GET ALL PRODUCTS LENGTH --------------
-  useQuery(
-    ["get_revies_all_products"],
-    () => {
-      return request({ url: "/products", token: true });
-    },
-    {
-      onSuccess: (res) => {
-        if (res.products) {
-          setLoading(false);
-          setReviewsProduct(res?.products);
-        }
-      },
-      onError: (err) => {
-        setLoading(false);
-        console.log(err, "err getAll Products");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -109,41 +55,38 @@ export default function ReviewStoreWear() {
           <div className="w-fit h-[44px] bg-lightBorderColor flex items-center justify-center rounded-lg overflow-hidden">
             <button
               onClick={() => {
-                setShowSelectedButton("products");
+                setDressInfo({ ...dressInfo, showSelectedButton: "products" });
               }}
-              className={`w-[260px] ${showSelectedButton === "products"
+              className={`w-[260px] ${dressInfo?.showSelectedButton === "products"
                 ? "text-textBlueColor border rounded-lg border-textBlueColor"
                 : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               Товары
-              {reviewsProduct?.data?.length?.rated_users_count > 1 ? (reviewsProduct) : null}
+              {dressInfo?.getReviewProduct?.data?.length?.rated_users_count > 1 ? (dressInfo?.getReviewProduct) : null}
             </button>
             <button
               onClick={() => {
-                setShowSelectedButton("shops");
+                setDressInfo({ ...dressInfo, showSelectedButton: "shops" });
               }}
-              className={`w-[260px] ${showSelectedButton === "shops"
+              className={`w-[260px] ${dressInfo?.showSelectedButton === "shops"
                 ? "text-textBlueColor border rounded-lg border-textBlueColor"
                 : "text-black"
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               Магазины
-              {reviewsStore?.data?.length?.rated_users_count > 1 ? (reviewsStore) : null}
+              {dressInfo?.shopsList?.shops?.data?.length?.rated_users_count > 1 ? (dressInfo?.shopsList?.shops) : null}
             </button>
           </div>
         </div>
 
         <div>
-          {dressInfo?.isItPorduct ? (
-            showSelectedButton === "shops" ? (
-              <ReviewStore reviewsStore={reviewsStore} />
-            ) : (
-              <ReviewWear reviewsProduct={reviewsProduct} />
-            )
+          {dressInfo?.showSelectedButton === "shops" ? (
+            <ReviewStore />
           ) : (
-            <NoReviewProduct />
-          )}
+            <ReviewWear />
+          )
+          }
         </div>
       </div>
       {/* )} */}
