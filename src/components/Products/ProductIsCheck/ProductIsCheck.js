@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import ProductsPageOne from '../AddingProductPageOne/ProductsPageOne'
 import { dressMainData } from '../../../hook/ContextTeam'
 import axios from 'axios'
+import LoadingForSeller from '../../Loading/LoadingFor'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
@@ -13,7 +14,7 @@ export default function ProductIsCheck() {
     const fetchDataShop = async (customHeadersShop) => {
         try {
             const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
-                headers: customHeaders,
+                headers: customHeadersShop,
             });
             const status = response.status;
             const data = response.data;
@@ -29,7 +30,7 @@ export default function ProductIsCheck() {
         'Content-type': 'application/json; charset=UTF-8',
         "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
     };
-    useQuery(['seller_shops_list'], () => fetchDataShop(customHeadersShop), {
+    const { isFetched } = useQuery(['seller_shops_list_product'], () => fetchDataShop(customHeadersShop), {
         onSuccess: (data) => {
             if (data?.status >= 200 && data?.status < 300) {
                 setDressInfo({ ...dressInfo, shopsList: data?.data })
@@ -66,10 +67,10 @@ export default function ProductIsCheck() {
         'Content-type': 'application/json; charset=UTF-8',
         "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
     };
-    useQuery(['seller_location_list'], () => fetchData(customHeaders), {
+    const { isLoading } = useQuery(['seller_location_list-product'], () => fetchData(customHeaders), {
         onSuccess: (data) => {
             if (data?.status >= 200 && data?.status < 300) {
-                setDressInfo({ ...dressInfo, locationList: data?.data })
+                setDressInfo({ ...dressInfo, locationList: data?.data?.locations })
             }
             if (data?.status === 401) {
 
@@ -84,13 +85,14 @@ export default function ProductIsCheck() {
         refetchOnWindowFocus: false,
     });
 
-
     return (
         <div>
-            {
+            {isLoading && isFetched ?
+                <LoadingForSeller />
+                :
                 dressInfo?.shopsList?.shops?.data?.length > 0
                     ?
-                    dressInfo?.locationList?.locations_exist
+                    dressInfo?.locationList?.data?.length > 0
                         ?
                         <ProductsPageOne />
                         :

@@ -6,7 +6,7 @@ export default function NoLocationProduct() {
 
 
   return (
-    <div className="w-full h-[90vh] flex items-center justify-center">
+    <div className="w-full h-[90vh] flex items-center justify-center px-4 md:px-10">
       <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
         <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
           У вас пока нет локации !

@@ -204,11 +204,11 @@ function AddStore({ onRefetch }) {
 
       });
   };
-  console.log(cropData, "cropData");
-  console.log(image, "cropData---image");
-  console.log(state?.errorGroup?.logo_photo, "state?.errorGroup?.logo_photo");
+  // console.log(cropData, "cropData");
+  // console.log(image, "cropData---image");
+  // console.log(state?.errorGroup?.logo_photo, "state?.errorGroup?.logo_photo");
   return (
-    <div className="w-full md:max-w-[1120px] md:mx-auto px-4 mt-6 md:mt-12">
+    <div className="w-full md:max-w-[1120px] md:mx-auto md:px-10 px-4 mt-6 md:mt-12">
       <section
         onClick={() => { setBackImgUploadModal(false) }}
         className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${backImgUploadModal ? "" : "hidden"}`}
