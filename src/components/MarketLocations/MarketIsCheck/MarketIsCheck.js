@@ -50,43 +50,67 @@ export default function MarketIsCheck() {
     });
 
 
-    const fetchDataShop = async (customHeadersShop) => {
-        try {
-            const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
-                headers: customHeadersShop,
-            });
-            const status = response.status;
-            const data = response.data;
+    // const fetchDataShop = async (customHeadersShop) => {
+    //     try {
+    //         const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+    //             headers: customHeadersShop,
+    //         });
+    //         const status = response.status;
+    //         const data = response.data;
 
-            return { data, status };
-        } catch (error) {
-            const status = error.response ? error.response.status : null;
-            return { error, status };
+    //         return { data, status };
+    //     } catch (error) {
+    //         const status = error.response ? error.response.status : null;
+    //         return { error, status };
+    //     }
+    // };
+
+    // const customHeadersShop = {
+    //     'Content-type': 'application/json; charset=UTF-8',
+    //     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    // };
+    // useQuery(['seller_shops_list'], () => fetchDataShop(customHeadersShop), {
+    //     onSuccess: (data) => {
+    //         if (data?.status >= 200 && data?.status < 300) {
+    //             setDressInfo({ ...dressInfo, shopsList: data?.data })
+    //         }
+    //         if (data?.status === 401) {
+
+    //         }
+    //     },
+    //     onError: (error) => {
+    //         if (error?.response?.status === 401) {
+
+    //         }
+    //     },
+    //     keepPreviousData: true,
+    //     refetchOnWindowFocus: false,
+    // });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // setLoading(true); // Set loading state to true before making the request
+                const data = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                    }
+                });
+                if (data?.status >= 200 && data?.status < 300) {
+                    setDressInfo({ ...dressInfo, shopsList: data?.data })
+                }
+
+            } catch (error) {
+
+            }
+        };
+        if (!dressInfo?.shopsList?.shops) {
+            fetchData();
         }
-    };
+    }, []);
 
-    const customHeadersShop = {
-        'Content-type': 'application/json; charset=UTF-8',
-        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
-    };
-    useQuery(['seller_shops_list'], () => fetchDataShop(customHeadersShop), {
-        onSuccess: (data) => {
-            if (data?.status >= 200 && data?.status < 300) {
-                setDressInfo({ ...dressInfo, shopsList: data?.data })
-            }
-            if (data?.status === 401) {
-
-            }
-        },
-        onError: (error) => {
-            if (error?.response?.status === 401) {
-
-            }
-        },
-        keepPreviousData: true,
-        refetchOnWindowFocus: false,
-    });
-
+    // console.log(dressInfo?.shopsList, "shopsList");
     return (
         <div>
             {!dressInfo?.locationList ?

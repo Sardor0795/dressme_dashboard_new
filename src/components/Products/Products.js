@@ -22,7 +22,6 @@ export default function Products() {
   // const { isLoading } = useQuery(["products_list"], () => { return request({ url: "/products/locations", token: true }) },
   //   {
   //     onSuccess: (res) => {
-  //       console.log(res, "res");
   //       res?.products_locations?.map(item => {
   //         if (item?.shop_locations?.length >= 1) {
   //           setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })
@@ -33,51 +32,35 @@ export default function Products() {
   //     refetchOnWindowFocus: false,
   //   }
   // );
-
-  const fetchData = async (customHeaders) => {
-    try {
-      const response = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
-        headers: customHeaders,
-      });
-      const status = response.status;
-      const data = response.data;
-
-      return { data, status };
-    } catch (error) {
-      const status = error.response ? error.response.status : null;
-      return { error, status };
-    }
-  };
-
-  const customHeaders = {
-    'Content-type': 'application/json; charset=UTF-8',
-    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
-  };
-  useQuery(['seller_getProductList_list_product'], () => fetchData(customHeaders), {
-    onSuccess: (data) => {
-      console.log(data, "data");
-      if (data?.status >= 200 && data?.status < 300) {
-        setDressInfo({ ...dressInfo, getProductList: data?.data })
-        data?.data?.products_locations?.map(item => {
-          if (item?.shop_locations?.length >= 1) {
-            setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })
+  useEffect(() => {
+    const fetchDataLocations = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
           }
-        })
-      }
-      if (data?.status === 401) {
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, getProductList: data?.data })
+          data?.data?.products_locations?.map(item => {
+            if (item?.shop_locations?.length >= 1) {
+              setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })
+            }
+          })
+        }
+        console.log(data?.data, "data?.data");
+      } catch (error) {
 
       }
-    },
-    onError: (error) => {
-      if (error?.response?.status === 401) {
+    };
+    if (!dressInfo?.isCheckPoructList) {
+      fetchDataLocations();
+    }
+  }, [])
 
-      }
-    },
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  });
   return (
-    <main className="products w-full  md:pb-5">
+    <main className="products w-full px-4 md:px-10 md:pb-5">
       {dressInfo?.isCheckPoructList ?
         <Outlet />
         :
