@@ -155,9 +155,8 @@ export default function RouterList() {
 
 
         {/* ---------------------<LocationsProduct>------------------------- */}
-
         <Route path="/products" element={
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
             <Products />
           </Suspense>
         }>
@@ -165,23 +164,23 @@ export default function RouterList() {
             <Route path="/products" element={<Navigate to="/products/location" />} />
             :
             <Route index element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
                 <ProductIsCheck />
               </Suspense>
             } />
           }
           <Route path="/products/location/:id" element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ProductEditPage />
             </Suspense>
           } />
           <Route path="/products/location" element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ProductLocationsList />
             </Suspense>
           } />
           <Route path="/products/location/add/:id" element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ProductsPageOne />
             </Suspense>
           } />

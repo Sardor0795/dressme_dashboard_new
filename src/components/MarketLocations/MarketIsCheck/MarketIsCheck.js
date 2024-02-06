@@ -86,8 +86,7 @@ export default function MarketIsCheck() {
         keepPreviousData: true,
         refetchOnWindowFocus: false,
     });
-    console.log(dressInfo?.locationList, "dressInfo?.locationList");
-    console.log(dressInfo?.shopsList, "dressInfo?.shopsList");
+
     return (
         <div>
             {!dressInfo?.locationList ?
