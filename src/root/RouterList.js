@@ -61,22 +61,22 @@ export default function RouterList() {
           </Suspense>
         }>
           <Route index element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ReviewStoreWear />
             </Suspense>
           } />
           <Route path="review/store-wear" element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ReviewStoreWear />
             </Suspense>
           } />
           <Route path="review/comment-store/:id" element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ReviewComment />
             </Suspense>
           } />
           <Route path="review/comment-wear/:id" element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ReviewWearComment />
             </Suspense>
           } />
@@ -189,11 +189,7 @@ export default function RouterList() {
 
         <Route path="/" element={<Navigate to={"/login-seller"} />} />
         <Route path={"/edit-profile"} element={<EditProfilePage />} />
-        {/* <Route path="/edit-profile" element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <EditProfilePage />
-          </Suspense>
-        } /> */}
+
         <Route path="/signup-seller" element={
           <Suspense fallback={<div>Loading...</div>}>
             <SignUpSeller />

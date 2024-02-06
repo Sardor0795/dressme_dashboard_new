@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DeleteIcon, GoBackIcons, LocationIcon, MenuCloseIcons, StarLabel } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -11,9 +11,14 @@ import "cropperjs/dist/cropper.css";
 import { useHttp } from "../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../Loading/LoadingFor";
+import axios from "axios";
+import { dressMainData } from "../../../hook/ContextTeam";
+const { REACT_APP_BASE_URL } = process.env;
 
 function MarketEdit() {
   const { request } = useHttp();
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const [state, setState] = useState({
     marketName: "",
     marketDeliverId: "",
@@ -153,40 +158,47 @@ function MarketEdit() {
       refetchOnWindowFocus: false,
     }
   );
-  // ------------GET METHOD Gender-type-----------------
-  useQuery(
-    ["get_genders"],
-    () => {
-      return request({ url: "/genders", token: true });
-    },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, genderList: res?.genders });
-      },
-      onError: (err) => {
-        console.log(err, "err getGenderlist-method");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+
   // ------------GET METHOD delivery-method-----------------
-  useQuery(
-    ["get_delivery_method"],
-    () => {
-      return request({ url: "/delivery-method", token: true });
-    },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, deliverList: res?.delivery_methods });
-      },
-      onError: (err) => {
-        console.log(err, "err getDelivery-method");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+  useEffect(() => {
+    const fetchGender = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/genders`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, genderList: data?.data?.genders })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.genderList) {
+      fetchGender();
     }
-  );
+    const fetchDelivery = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/delivery-method`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+        }
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.deliveryList) {
+      fetchDelivery();
+    }
+  }, []);
 
 
   const deleteProductByAddress = useMutation(() => {
@@ -716,7 +728,7 @@ function MarketEdit() {
                     </span>
                   </label>
                   <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
-                    {state?.genderList?.map((data) => {
+                    {dressInfo?.genderList?.map((data) => {
                       return (
                         <>
                           <input
@@ -751,7 +763,7 @@ function MarketEdit() {
                     </span>
                   </label>
                   <div className="w-[65%] md:w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                    {state?.deliverList?.map((data) => {
+                    {dressInfo?.deliveryList?.map((data) => {
                       return (
                         <>
                           <input

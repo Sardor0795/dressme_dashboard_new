@@ -8,7 +8,7 @@ export default function Reviews1() {
     });
   }, []);
   return (
-    <div className="w-full h-full px-4 md:px-10 py-1">
+    <div className="w-full h-full ">
       <div>
         <Outlet />
       </div>{" "}

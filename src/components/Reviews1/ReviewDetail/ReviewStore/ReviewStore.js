@@ -11,10 +11,7 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
-  const { request } = useHttp();
-  // const [loading, setLoading] = useState(true);
-  // const [sellerShops, setSellerShops] = useState("");
-  const [deliverList, setDeliverList] = useState();
+
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   // // ------------GET  Has Magazin ?-----------------
@@ -55,22 +52,26 @@ const ReviewStore = () => {
     refetchOnWindowFocus: false,
   });
   // ------------GET METHOD delivery-method-----------------
-  useQuery(
-    ["get_delivery_method"],
-    () => {
-      return request({ url: "/delivery-method", token: true });
-    },
-    {
-      onSuccess: (res) => {
-        setDeliverList(res?.delivery_methods);
-      },
-      onError: (err) => {
-        console.log(err, "err getDelivery-method");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+  useEffect(() => {
+    const fetchDelivery = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/delivery-method`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+        }
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.deliveryList) {
+      fetchDelivery();
     }
-  );
+  }, []);
 
   const navigate = useNavigate();
   const goDetail = (id) => {
@@ -92,7 +93,7 @@ const ReviewStore = () => {
 
         // <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
-        <div className="w-full h-fit  flex flex-col gap-y-[30px]">
+        <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
           {dressInfo?.shopsList?.shops?.length > 0 && dressInfo?.shopsList?.shops?.rated_users_count > 0
             ?
             dressInfo?.shopsList?.shops?.map((data, i) => {
@@ -150,7 +151,7 @@ const ReviewStore = () => {
                     </section>
                     <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[20%] ll:px-5 active:opacity-70 border border-borderColor rounded-lg hidden md:flex items-center justify-center gap-x-1 ll:gap-x-3">
                       <img src={deliveryIcon} alt="" />
-                      {deliverList
+                      {dressInfo?.deliveryList
                         ?.filter((e) => e.id == data?.delivery_id)
                         ?.map((item) => {
                           return (

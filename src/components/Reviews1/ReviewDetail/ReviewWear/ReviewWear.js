@@ -72,7 +72,7 @@ export default function ReviewWear() {
         </div>
         // <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
-        <div className="w-full h-full   ">
+        <div className="w-full h-full px-4 md:px-10 py-1">
           {dressInfo?.getReviewProduct?.length > 0 && dressInfo?.getReviewProduct?.rated_users_count > 0
             ?
             <div className="w-full h-fit md:mt-7">

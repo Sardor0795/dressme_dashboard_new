@@ -7,30 +7,36 @@ import { deliveryIcon, man, woman } from "../../../assets";
 import { useHttp } from "../../../hook/useHttp";
 import { StarIcon } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 function MyMarket() {
-  const [deliverList, setDeliverList] = useState();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [searchName, setSearchName] = useState('');
-
-  const { request } = useHttp();
   const navigate = useNavigate();
 
   // ------------GET METHOD delivery-method-----------------
-  useQuery(["get_delivery_method"], () => {
-    return request({ url: "/delivery-method", token: true });
-  },
-    {
-      onSuccess: (res) => {
-        setDeliverList(res?.delivery_methods);
-      },
-      onError: (err) => {
-        console.log(err, "err getDelivery-method");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+  useEffect(() => {
+    const fetchDelivery = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/delivery-method`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+        }
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.deliveryList) {
+      fetchDelivery();
     }
-  );
+  }, []);
+
 
   const goDetail = (id) => {
     navigate(`/store/market-list/:${id}`);
@@ -150,7 +156,7 @@ function MyMarket() {
                 </div>
                 <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                   <img src={deliveryIcon} alt="" />
-                  {deliverList
+                  {dressInfo?.deliveryList
                     ?.filter((e) => e.id == data?.delivery_id)
                     ?.map((item) => {
                       return (
