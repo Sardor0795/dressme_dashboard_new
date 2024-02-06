@@ -826,7 +826,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
 
                             return (
-                                <List.Item className="w-full " >
+                                <List.Item key={index} className="w-full " >
                                     <div className="flex items-center gap-x-1">
                                         <div className="flex items-center h-full">
                                             <Checkbox value={item?.id} checked={checked} />

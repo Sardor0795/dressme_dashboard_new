@@ -83,9 +83,8 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
       ) : (
         ""
       )}
-      
+
       {titleProduct?.locationListId?.product?.ratings?.map((item, id) => {
-        console.log(titleProduct?.locationListId?.product?.ratings, "DATA");
         return (
           <div key={id}>
             <EditComponent
@@ -96,7 +95,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
           </div>
         );
       })}
-  
+
 
     </div>
   );

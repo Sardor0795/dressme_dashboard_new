@@ -190,9 +190,10 @@ export default function LocationsByIdShow() {
                 <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
                   {state?.locationListId?.locations?.data?.map((data, index) => {
                     return (
-                      <>
+                      <div
+                        key={index}
+                      >
                         <ul
-                          key={data?.id}
                           className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor"
                         >
                           <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
@@ -364,7 +365,7 @@ export default function LocationsByIdShow() {
                             </button>
                           </div>
                         </div>
-                      </>
+                      </div>
                     );
                   })}
                 </div>

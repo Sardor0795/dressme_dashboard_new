@@ -256,7 +256,7 @@ export default function ProductLocationsList() {
 
                         {state?.onErrorMessage?.problems?.products?.map((item, index) => {
                           return (
-                            <div className={`w-min-[200px] w-full  mx-auto my-1 flex items-center p-[2px] rounded-[4px]  justify-start gap-x-1   `}>
+                            <div key={index} className={`w-min-[200px] w-full  mx-auto my-1 flex items-center p-[2px] rounded-[4px]  justify-start gap-x-1   `}>
                               <span className="text-[16px]">{index + 1}</span>)
                               <p className="text-black text-[16px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                 {item?.name_ru}
@@ -278,53 +278,54 @@ export default function ProductLocationsList() {
             </div>
             :
             <div className="w-full h-full overflow-y-auto VerticelScroll">
-              {dressInfo?.getProductList?.products_locations?.map(item => {
+              {dressInfo?.getProductList?.products_locations?.map((item, index) => {
                 return (
-                  <>  {dressInfo?.getProductList?.length ?
-                    state?.shopMarketId == item?.id &&
-                    <div className="w-full cursor-pointer mt-2">
-                      {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                        <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                          {" "}
-                          {item?.name}
-                        </span>
-                        {item?.shop_locations?.map((data, index) => {
-                          return (
-                            <>
-                              {data?.id !== state?.shopId && <div
-                                onClick={() => setState({ ...state, getShopLocationId: data?.id })}
-                                className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                  <div key={index}>
+                    {dressInfo?.getProductList?.length ?
+                      state?.shopMarketId == item?.id &&
+                      <div className="w-full cursor-pointer mt-2">
+                        {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
+                          <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                            {" "}
+                            {item?.name}
+                          </span>
+                          {item?.shop_locations?.map((data, index) => {
+                            return (
+                              <div key={index}>
+                                {data?.id !== state?.shopId && <div
+                                  onClick={() => setState({ ...state, getShopLocationId: data?.id })}
+                                  className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                                  <span className="text-[17px]">{index + 1}</span>)
+                                  <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                    {data?.address}
+                                  </p>
+                                </div>}
+                              </div>
+                            )
+                          })}
+                        </div>}
+                      </div>
+                      :
+                      <div className="w-full cursor-pointer mt-2">
+                        {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
+                          <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                            {" "}
+                            {item?.name}
+                          </span>
+                          {item?.shop_locations?.map((data, index) => {
+                            return (
+                              <div key={index} onClick={() => setState({ ...state, getShopLocationId: data?.id })
+                              } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
                                 <span className="text-[17px]">{index + 1}</span>)
                                 <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                   {data?.address}
                                 </p>
-                              </div>}
-                            </>
-                          )
-                        })}
+                              </div>
+                            )
+                          })}
+                        </div>}
                       </div>}
-                    </div>
-                    :
-                    <div className="w-full cursor-pointer mt-2">
-                      {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                        <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                          {" "}
-                          {item?.name}
-                        </span>
-                        {item?.shop_locations?.map((data, index) => {
-                          return (
-                            <div onClick={() => setState({ ...state, getShopLocationId: data?.id })
-                            } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                              <span className="text-[17px]">{index + 1}</span>)
-                              <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                {data?.address}
-                              </p>
-                            </div>
-                          )
-                        })}
-                      </div>}
-                    </div>}
-                  </>
+                  </div>
                 )
               })}
             </div>}
@@ -534,10 +535,9 @@ export default function ProductLocationsList() {
           <div className="w-full my-4">
 
           </div>
-          {dressInfo?.getProductList?.products_locations?.map((item, index1) => {
-            // console.log(item, "state--item");
+          {dressInfo?.getProductList?.products_locations?.map((item, index) => {
             return (
-              <>
+              <div key={index}>
                 {dressInfo?.getProductList?.length ?
                   state?.shopMarketId == item?.id &&
                   <div className="flex items-center w-full">
@@ -551,7 +551,7 @@ export default function ProductLocationsList() {
                       </button>
                       {item?.shop_locations?.map((resData, index) => {
                         return (
-                          <div className="w-full">
+                          <div key={index} className="w-full">
                             <div className="w-full  mt-5">
                               <div className="flex justify-end items-center md:justify-between mx-auto ">
                                 <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
@@ -598,7 +598,7 @@ export default function ProductLocationsList() {
                       </button>
                       {item?.shop_locations?.map((resData, index) => {
                         return (
-                          <div className="w-full">
+                          <div key={index} className="w-full">
                             <div className="w-full  mt-5">
                               <div className="flex justify-end items-center md:justify-between mx-auto ">
                                 <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
@@ -632,7 +632,7 @@ export default function ProductLocationsList() {
                     </div>
                     }
                   </div>}
-              </>
+              </div>
             )
           })
           }

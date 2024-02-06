@@ -306,7 +306,6 @@ const SignUpSeller = () => {
                 <div className="w-full  max-w-[370px]  mx-auto flex flex-col gap-y-4">
                   {
                     state?.getSellerList?.individual?.map(data => {
-
                       return (
                         <div key={data?.id}>
                           <div className="flex items-center">

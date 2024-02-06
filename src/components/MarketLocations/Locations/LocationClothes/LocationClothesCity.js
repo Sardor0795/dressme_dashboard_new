@@ -245,7 +245,7 @@ export default function LocationClothesCity() {
             <div className="w-full h-full overflow-y-auto VerticelScroll">
               {state?.getProductList?.products_locations?.map(item => {
                 return (
-                  <div className="w-full cursor-pointer mt-2">
+                  <div key={item?.id} className="w-full cursor-pointer mt-2">
                     {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
                       <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
                         {" "}
@@ -253,8 +253,10 @@ export default function LocationClothesCity() {
                       </span>
                       {item?.shop_locations?.map((data, index) => {
                         return (
-                          <div onClick={() => setState({ ...state, getShopLocationId: data?.id })
-                          } className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                          <div
+                            key={data?.id}
+                            onClick={() => setState({ ...state, getShopLocationId: data?.id })}
+                            className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
                             <span className="text-[17px]">{index + 1}</span>)
                             <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                               {data?.address}

@@ -442,9 +442,9 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <p className="flex text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                       Цвет:{" "}
                     </p>
-                    {colorGroup?.map((data) => {
+                    {colorGroup?.map((data,index) => {
                       return (
-                        <div className="flex items-center">
+                        <div key={index}  className="flex items-center">
                           {data?.action && (
                             <button
                               className={`rounded-[15px] pt-1 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular bg-${data?.colors}`}
@@ -546,16 +546,16 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
               {" "}
               <div className=" flex items-center gap-x-[10px] text-base not-italic font-AeonikProMedium">
                 <span className="text-gray-800 text-base not-italic font-AeonikProRegular">Цвет:</span>
-                {colorGroup.map((data) => {
+                {colorGroup.map((data,index) => {
                   return (
-                    <>
+                    <div key={index} >
                       {data?.action && (
                         <button
                           className={`h-[22px] rounded-[15px] text-white px-3  flex items-center justify-center text-md not-italic font-AeonikProRegular bg-${data?.colors}`}
                         >{data?.colorName}</button>
                       )}
 
-                    </>
+                    </div>
                   );
                 })}
               </div>
@@ -663,10 +663,10 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
 
 
 
-      {alldata?.map(item => {
+      {alldata?.map((item,index) => {
         return (
           item?.action &&
-          <section className="w-full h-[65%] overflow-auto AllSizeModalScroll flex flex-col flex-nowrap rounded-lg border border-borderColor mt-6">
+          <section key={index}  className="w-full h-[65%] overflow-auto AllSizeModalScroll flex flex-col flex-nowrap rounded-lg border border-borderColor mt-6">
             {item?.values}
           </section>
 

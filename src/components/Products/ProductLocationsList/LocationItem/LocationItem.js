@@ -380,9 +380,9 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                 }
               </div> :
               <div className="w-full h-full overflow-y-auto VerticelScroll">
-                {allProductLocationList?.map(item => {
+                {allProductLocationList?.map((item, index) => {
                   return (
-                    <div className="w-full cursor-pointer mt-2">
+                    <div key={index} className="w-full cursor-pointer mt-2">
                       {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
                         <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
                           {" "}
@@ -390,7 +390,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                         </span>
                         {item?.shop_locations?.map((data, index) => {
                           return (
-                            <div onClick={() => setGetIdShopLocation(data?.id)} className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
+                            <div key={index} onClick={() => setGetIdShopLocation(data?.id)} className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
                               <span className="text-[17px]">{index + 1}</span>)
                               <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                 {data?.address}
@@ -491,7 +491,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
               )?.map((itemValue, index) => {
 
                 return (
-                  <List.Item className="w-full "
+                  <List.Item key={index} className="w-full "
                   >
 
                     <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
@@ -513,9 +513,9 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                               <td className="w-[15%] h-full  flex items-center justify-center ">
                                 {itemValue?.sku || "sku"}
                               </td>
-                              {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map(valueType => {
+                              {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                 return (
-                                  <td className="w-[8%] h-full  flex items-center justify-center ">
+                                  <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
                                     {valueType?.name_ru || "type_id"}
                                   </td>
                                 )

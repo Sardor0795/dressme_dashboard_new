@@ -634,9 +634,9 @@ const AddingProduct = () => {
                     </button>
                   </div>
                   <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-                    {productsData?.colors.map((data) => {
+                    {productsData?.colors.map((data, index) => {
                       return (
-                        <div className="flex flex-col items-center justify-center ">
+                        <div key={index} className="flex flex-col items-center justify-center ">
                           <div
                             key={data?.id}
                             onClick={() => setState({ ...state, color_Id: data?.id })}
@@ -826,9 +826,10 @@ const AddingProduct = () => {
                               className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                             >
                               <span>
-                                {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data) => {
+                                {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data, index) => {
                                   return (
                                     <span
+                                      key={index}
                                       className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                       {data?.name}
                                     </span>
@@ -853,16 +854,14 @@ const AddingProduct = () => {
                               }
 
                             >
-                              {productsData?.shops?.map((data) => {
+                              {productsData?.shops?.map((data, index) => {
                                 return (
-                                  <>
-                                    {data?.shop_locations?.length >= 1 && <Option
-                                      key={data.id}
-                                      value={data?.id}
-                                    >
-                                      {data?.name}
-                                    </Option>}
-                                  </>
+                                  <Option
+                                    key={data.id}
+                                    value={data?.id}
+                                  >
+                                    {data?.shop_locations?.length >= 1 && data?.name}
+                                  </Option>
                                 )
                               })}
 
@@ -902,9 +901,10 @@ const AddingProduct = () => {
                             >
                               <span>
                                 {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
-                                  return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map(data => {
+                                  return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map((data, index) => {
                                     return (
                                       <span
+                                        key={index}
                                         className="w-[95%] overflow-hidden whitespace-nowrap text-[#b5b5b5]	flex items-center  text-[14px] not-italic font-AeonikProRegular"     >
                                         {data?.address}
                                       </span>
@@ -1328,9 +1328,9 @@ const AddingProduct = () => {
                             className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                           >
                             {state?.type_Id ?
-                              productsData?.categories?.filter(e => e?.id == state?.type_Id)?.map((item) => {
+                              productsData?.categories?.filter(e => e?.id == state?.type_Id)?.map((item, index) => {
                                 return (
-                                  <span className="text-[#000]">{item?.name_ru}</span>
+                                  <span key={index} className="text-[#000]">{item?.name_ru}</span>
                                 )
                               })
                               : <span className="text-[#a1a1a1]"> Выбрать</span>

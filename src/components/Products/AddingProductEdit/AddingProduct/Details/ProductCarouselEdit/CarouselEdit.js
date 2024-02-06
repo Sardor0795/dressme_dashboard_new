@@ -175,20 +175,6 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
     setModalOfCarsouel(true)
   }
 
-  // console.log(colors_Id, "colors_Id");
-  // useEffect(() => {
-  //   if (productData?.photos) {
-  //     productData?.photos?.filter(e => e?.product_color_id == colors_Id[0])?.map(value => {
-  //       console.log(value, "item?.id")
-  //     })
-  //   }
-  // }, [productData?.photos])
-
-  // {
-  //   colors_Id?.length >= 2 && productData?.photos?.filter(e => e?.product_color_id == colors_Id[1])?.map(item => {
-  //     console.log(item, "BUCorousel--0");
-  //   })
-  // }
   useEffect(() => {
     if (productData?.photos) {
       // console.log("ishladi 1");
@@ -2535,9 +2521,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </td>}
                   </div>
                   :
-                  colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
+                  colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map((value, index) => {
                     return (
                       <button
+                        key={index}
                         type="button"
                         className={`w-[22px] h-[22px] rounded-full border `}
                         style={{ background: `${value?.hex}` }}
@@ -2646,9 +2633,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       </td>}
                     </div>
                     :
-                    colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map(value => {
+                    colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map((value, index) => {
                       return (
                         <button
+                          key={index}
                           type="button"
                           className={`w-[22px] h-[22px] rounded-full border `}
                           style={{ background: `${value?.hex}` }}
@@ -2758,9 +2746,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       </td>}
                     </div>
                     :
-                    colorGroup?.filter(e => e?.id == Number(colors_Id[2]))?.map(value => {
+                    colorGroup?.filter(e => e?.id == Number(colors_Id[2]))?.map((value, index) => {
                       return (
                         <button
+                          key={index}
                           type="button"
                           className={`w-[22px] h-[22px] rounded-full border `}
                           style={{ background: `${value?.hex}` }}
@@ -2870,9 +2859,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       </td>}
                     </div>
                     :
-                    colorGroup?.filter(e => e?.id == Number(colors_Id[3]))?.map(value => {
+                    colorGroup?.filter(e => e?.id == Number(colors_Id[3]))?.map((value, index) => {
                       return (
                         <button
+                          key={index}
                           type="button"
                           className={`w-[22px] h-[22px] rounded-full border `}
                           style={{ background: `${value?.hex}` }}

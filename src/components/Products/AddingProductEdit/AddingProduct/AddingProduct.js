@@ -416,31 +416,6 @@ const AddingProduct = () => {
     }
   }, [newArray, section_Id])
 
-  // useEffect(() => {
-  //   if (!newArray?.length) {
-  //     setSubSection_Id([])
-  //   }
-  // }, [newArray])
-
-  // useEffect(() => {
-  //   // if (!newArray) {
-  //   //   setSubSection_Id([])
-  //   // }
-  //   if (newArray) {
-  //     setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
-  //     newArray?.filter(e => subSection_Id?.includes(e?.id))?.map(data => {
-  //       setArrData(dat => [...dat, data?.id])
-  //     })
-  //   }
-  //   // if (arrDat) {
-  //   //   setArrData(arrDat.filter((x, i, a) => a.indexOf(x) == i))
-  //   // }
-  // }, [newArray])
-  // useEffect(() => {
-  //   // setArrData(arrDat.filter((x, i, a) => a.indexOf(x) == i))
-  // }, [section_Id])
-
-  // console.log(arrDat, "arrDat");
 
   function onHandleChangeSeason(e) {
     if (e?.length < season_Id?.length) {
@@ -1304,9 +1279,10 @@ const AddingProduct = () => {
                           className="w-full cursor-not-allowed h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
                           <span>
-                            {productsData?.shops?.filter(e => e?.id == state?.shopId)?.map((item) => {
+                            {productsData?.shops?.filter(e => e?.id == state?.shopId)?.map((item, index) => {
                               return (
                                 <span
+                                  key={index}
                                   className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                   {item?.name}
                                 </span>
@@ -1463,8 +1439,8 @@ const AddingProduct = () => {
                                 label={item.name_ru}
                               >
                                 <Space>
-                                  {productsData?.sections?.filter(e => e?.id == item?.section_id)?.map(data => {
-                                    return <div className=" flex items-center">
+                                  {productsData?.sections?.filter(e => e?.id == item?.section_id)?.map((data, index) => {
+                                    return <div key={index} className=" flex items-center">
                                       <p className="flex  items-center font-AeonikProRegular">{item.name_ru} </p>
                                       <p className="text-[12px]  flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">({data?.name_ru})</p>
                                     </div>
@@ -1737,20 +1713,11 @@ const AddingProduct = () => {
                           type="button"
                           className={`w-full cursor-not-allowed overflow-hidden ${colorAction ? "text-[#b5b5b5] bg-[#F5F5F5]" : ""} cursor-text h-[40px] hidden md:flex items-center justify-between border border-borderColor  rounded-lg p-3 `}
                         >
-                          {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map(item => {
-                            return <span className="text-[#a1a1a1]">{item?.name_ru}</span>
+                          {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map((item, index) => {
+                            return <span key={index} className="text-[#a1a1a1]">{item?.name_ru}</span>
 
                           })}
                         </button>
-
-                        {/* <p
-                            className={`w-full overflow-hidden cursor-text h-[40px] md:hidden flex items-center justify-between border border-borderColor rounded-lg p-3 `}
-                          >
-                            {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map(item => {
-                              return <span className="text-[#a1a1a1]">{item?.name_ru}</span>
-
-                            })}
-                          </p> */}
                       </div>
                     </div>
                     {/* Input Select 8 */}

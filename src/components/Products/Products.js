@@ -19,19 +19,7 @@ export default function Products() {
     }
   }, [location.pathname]);
 
-  // const { isLoading } = useQuery(["products_list"], () => { return request({ url: "/products/locations", token: true }) },
-  //   {
-  //     onSuccess: (res) => {
-  //       res?.products_locations?.map(item => {
-  //         if (item?.shop_locations?.length >= 1) {
-  //           setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })
-  //         }
-  //       })
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+
   useEffect(() => {
     const fetchDataLocations = async () => {
       try {
