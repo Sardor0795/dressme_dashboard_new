@@ -381,6 +381,7 @@ const SignUpSeller = () => {
                   <input
                     className="w-full h-[42px] placeholder-text-[#b5b5b5] px-2 md:px-4 border border-searchBgColor rounded-lg outline-none	bg-white placeholder-bg-white  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4"
                     type="text"
+                    name="companyName"
                     value={state?.company_name}
                     onChange={(e) => setState({ ...state, company_name: e.target.value })}
                     placeholder="Наименование организации..."
@@ -537,6 +538,7 @@ const SignUpSeller = () => {
                     <InputMask
                       value={state?.cardNumber}
                       mask='9999-9999-9999-9999'
+                      name="credit-card-number"
                       className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
                       onChange={(e) => setState({ ...state, cardNumber: e.target.value })}
                       placeholder="0000-0000-0000-0000"
@@ -651,7 +653,6 @@ const SignUpSeller = () => {
                       <div className="w-[30%] sm:w-[35%] md:w-[100px] h-[40px] xs:h-[42px] flex items-center justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div
                           className=" outline-none flex items-center	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
-
                         >{state.phoneCode}</div>
                       </div>
                       <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-[42px] overflow-hidden">
@@ -731,7 +732,7 @@ const SignUpSeller = () => {
                         // type="Повторите пароль"
                         type={`${state?.confirmPasswordEye ? "text" : "password"}`}
 
-                        name="Повторите пароль"
+                        name="confirmPassword"
                         placeholder=""
                         value={state?.confirmPassword}
                         onChange={(e) => setState({ ...state, confirmPassword: e.target.value })}

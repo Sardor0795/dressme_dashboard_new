@@ -614,6 +614,7 @@ export default function LocationMapCity() {
                         className="hidden"
                         id={"imageOne1"}
                         type="file"
+                        name="fileUpload1"
                         onChange={handleLocationImageOne}
                         accept=" image/*"
                       />
@@ -686,6 +687,7 @@ export default function LocationMapCity() {
                         className="hidden"
                         id={"imageTwo2"}
                         type="file"
+                        name="fileUpload2"
                         onChange={handleLocationImageTwo}
                         accept=" image/*"
                       />
@@ -766,6 +768,7 @@ export default function LocationMapCity() {
                         className="hidden"
                         id={"imagethree3"}
                         type="file"
+                        name="fileUpload3"
                         onChange={handleLocationImageThree}
                         accept=" image/*"
                       />
@@ -856,6 +859,7 @@ export default function LocationMapCity() {
                               ref={searchRef}
                               placeholder="Введите адрес"
                               id="ForSearch"
+                              name="search"
                               className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps?.title?.length) ? "" : "hidden"
                                 }`}
                             />
@@ -1018,7 +1022,7 @@ export default function LocationMapCity() {
                     <div className="w-full flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
                       <input
                         type="text"
-                        name="fname"
+                        name="fname2"
                         value={state?.idSecondAssistantName}
                         onChange={(e) => setState({ ...state, idSecondAssistantName: e.target.value })}
                         placeholder=" Имя администратора"
@@ -1043,6 +1047,7 @@ export default function LocationMapCity() {
                         type="time"
                         min="00:00"
                         max="23:59"
+                        name="startTime"
                         pattern="[0-2][0-9]:[0-5][0-9]"
                         value={state?.idWorkTimeFrom}
                         onChange={(e) => setState({ ...state, idWorkTimeFrom: e.target.value })}
@@ -1056,6 +1061,7 @@ export default function LocationMapCity() {
                         type="time"
                         min="00:00"
                         max="23:59"
+                        name="endTime"
                         pattern="[0-2][0-9]:[0-5][0-9]"
                         value={state?.idWorkTimeTo}
                         onChange={(e) => setState({ ...state, idWorkTimeTo: e.target.value })}
@@ -1104,7 +1110,7 @@ export default function LocationMapCity() {
                       <div className="w-[65%] md:w-[70%] h-8 md:h-11 overflow-hidden">
                         <InputMask
                           mask="(99) 999-99-99"
-                          name="phone"
+                          name="phone2"
                           value={state?.idSecondAssistantPhone || null}
                           onChange={(e) => setState({ ...state, idSecondAssistantPhone: e.target.value })}
                           className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone ? "font-AeonikProMedium" : null

@@ -121,6 +121,7 @@ export default function YandexMapStore({ handleCallback }) {
                   ref={searchRef}
                   placeholder="Введите адрес"
                   id="ForSearch"
+                  name="search"
                   className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(state.title.length) ? "" : "hidden"
                     }`}
                 />

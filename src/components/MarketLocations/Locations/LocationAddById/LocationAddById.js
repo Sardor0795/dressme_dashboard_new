@@ -258,6 +258,7 @@ export default function LocationAddById() {
                   className="hidden"
                   id="DataImg1"
                   type="file"
+                  name="fileUpload1"
                   onChange={handleLocationImageOne}
                   accept=" image/*"
                 />
@@ -296,6 +297,7 @@ export default function LocationAddById() {
                   className="hidden"
                   id="DataImg2"
                   type="file"
+                  name="fileUpload2"
                   onChange={handleLocationImageTwo}
                   accept=" image/*"
                 />
@@ -327,6 +329,7 @@ export default function LocationAddById() {
                   className="hidden"
                   id="DataImg3"
                   type="file"
+                  name="fileUpload3"
                   onChange={handleLocationImageThree}
                   accept=" image/*"
                 />
@@ -432,7 +435,7 @@ export default function LocationAddById() {
               <div className="flex flex-col items-center h-10 md:h-[70px] w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
-                  name="fname"
+                  name="fname2"
                   placeholder=" (не обезательно)"
                   value={state?.assistantNameSecond}
                   onChange={(e) =>
@@ -465,6 +468,7 @@ export default function LocationAddById() {
                     type="time"
                     min="00:00"
                     max="23:59"
+                    name="startTime"
                     pattern="[0-2][0-9]:[0-5][0-9]"
                     value={state?.workTimeFrom || "09:00"}
                     onChange={(e) =>
@@ -488,6 +492,7 @@ export default function LocationAddById() {
                     type="time"
                     min="00:00"
                     max="23:59"
+                    name="endTime"
                     pattern="[0-2][0-9]:[0-5][0-9]"
                     value={state?.workTimeTo || "18:00"}
                     onChange={(e) =>
@@ -515,7 +520,7 @@ export default function LocationAddById() {
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                    name="phone"
+                    name="phoneCode"
                     type="text"
                     value={state.phoneCode}
                     readOnly
@@ -559,6 +564,7 @@ export default function LocationAddById() {
                     className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium 
                     text-xs md:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
                     type="text"
+                    name="phoneCode2"
                     value={state.phoneCode}
                     readOnly
                   />
@@ -567,7 +573,7 @@ export default function LocationAddById() {
                   <InputMask
                     mask="(99) 999-99-99"
                     value={state?.assistantPhoneSecond || null}
-                    name="phone"
+                    name="phone2"
                     placeholder={"(77) 777-77-77"}
                     onChange={(e) =>
                       setState({
@@ -663,7 +669,7 @@ export default function LocationAddById() {
                                       <input
                                         type="radio"
                                         id={item?.name_ru}
-                                        name="type_work"
+                                        name="type_work_2"
                                         value={item?.region_id}
                                         checked={
                                           item?.id == state?.subRegionIdShops

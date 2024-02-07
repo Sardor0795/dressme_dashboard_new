@@ -277,6 +277,7 @@ function AddStore({ onRefetch }) {
                     className="hidden"
                     id={"imageThree1"}
                     type="file"
+                    name="fileUpload1"
                     onChange={handleChange}
                     accept=" image/*"
                   />
@@ -358,6 +359,7 @@ function AddStore({ onRefetch }) {
                     className="hidden"
                     id={"logoBrand"}
                     type="file"
+                    name="fileUpload2"
                     onChange={onChange}
                     accept=" image/*"
                   />

@@ -26,7 +26,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     })
     const SelectedNumber = 1
     useEffect(() => {
-        if (typeId == SelectedNumber) {
+        if (Number(typeId) === SelectedNumber) {
             setState({ ...state, isHasTypeId: true })
         } else {
             setState({ ...state, isHasTypeId: false })
@@ -113,6 +113,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         }
     }, [state?.discountPercent, state?.price])
 
+    console.log(dressInfo?.ProductFilterType, "head--dressInfo?.ProductFilterType");
+    console.log(typeId, "head--typeId");
     const contentHat = (
         <div className="w-[520px] h-fit">
             <div
