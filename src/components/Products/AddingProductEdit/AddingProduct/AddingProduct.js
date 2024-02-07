@@ -1629,7 +1629,7 @@ const AddingProduct = () => {
                           >{state?.min_Age_Category}</span> :
                             <input
                               type="text"
-                              name="age"
+                              name="minAge"
                               placeholder="Мин"
                               value={state?.min_Age_Category}
                               onChange={(e) => setState({ ...state, onEditInput: true, min_Age_Category: e.target.value })}
@@ -1640,7 +1640,7 @@ const AddingProduct = () => {
                           >{state?.max_Age_Category}</span> :
                             <input
                               type="text"
-                              name="age"
+                              name="maxAge"
                               placeholder="Мах"
                               value={state?.max_Age_Category}
                               onChange={(e) => setState({ ...state, onEditInput: true, max_Age_Category: e.target.value })}
@@ -1667,6 +1667,7 @@ const AddingProduct = () => {
                             type="text"
                             value={state?.sku}
                             onChange={(e) => setState({ ...state, onEditInput: true, sku: e.target.value })}
+                            name="artikul"
                             placeholder=""
                             className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] " : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
                           />}
@@ -1940,7 +1941,7 @@ const AddingProduct = () => {
                         >{state?.min_Age_Category}</span> :
                           <input
                             type="text"
-                            name="age"
+                            name="minAge1"
                             placeholder="Мин"
                             value={state?.min_Age_Category}
                             onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
@@ -1950,7 +1951,7 @@ const AddingProduct = () => {
                         {colorAction ? <span className=" cursor-not-allowed inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                         >{state?.min_Age_Category}</span> : <input
                           type="text"
-                          name="age"
+                          name="maxAge1"
                           placeholder="Мах"
                           value={state?.max_Age_Category}
                           onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}

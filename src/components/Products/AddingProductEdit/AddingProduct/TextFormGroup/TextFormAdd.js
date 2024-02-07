@@ -354,7 +354,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
-
+                                            name="noteValueRu"
                                             value={state?.noteValueRu}
                                             onChange={(e) => {
 
@@ -382,7 +382,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
-
+                                            name="noteValueUz"
                                             value={state?.noteValueUz}
                                             onChange={(e) => {
 

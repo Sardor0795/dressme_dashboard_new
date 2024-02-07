@@ -806,6 +806,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageOne1"}
                           type="file"
+                          name="fileUpload1"
                           onChange={handleLocationImage1}
                           accept=" image/*"
                         />
@@ -879,6 +880,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageTwo1"}
                           type="file"
+                          name="fileUpload2"
                           onChange={handleLocationImage2}
                           accept=" image/*"
                         />
@@ -951,6 +953,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageThree1"}
                           type="file"
+                          name="fileUpload3"
                           onChange={handleLocationImage3}
                           accept=" image/*"
                         />
@@ -1022,6 +1025,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageFour1"}
                           type="file"
+                          name="fileUpload4"
                           onChange={handleLocationImage4}
                           accept=" image/*"
                         />
@@ -1092,6 +1096,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageFive1"}
                           type="file"
+                          name="fileUpload5"
                           onChange={handleLocationImage5}
                           accept=" image/*"
                         />
@@ -1162,6 +1167,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageSix1"}
                           type="file"
+                          name="fileUpload6"
                           onChange={handleLocationImage6}
                           accept=" image/*"
                         />
@@ -1232,6 +1238,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageSeven1"}
                           type="file"
+                          name="fileUpload7"
                           onChange={handleLocationImage7}
                           accept=" image/*"
                         />
@@ -1302,6 +1309,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageEight1"}
                           type="file"
+                          name="fileUpload8"
                           onChange={handleLocationImage8}
                           accept=" image/*"
                         />
@@ -1365,6 +1373,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageTwo"}
                         type="file"
+                        name="fileUpload2"
                         onChange={handleLocationImage2}
                         accept=" image/*"
                       />
@@ -1418,6 +1427,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeImageTwo"}
                         type="file"
+                        name="fileUpload2"
                         onChange={handleLocationImage2}
                         accept=" image/*"
                       />
@@ -1471,6 +1481,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageThree"}
                         type="file"
+                        name="fileUpload3"
                         onChange={handleLocationImage3}
                         accept=" image/*"
                       />
@@ -1524,6 +1535,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeImageThree"}
                         type="file"
+                        name="fileUpload3"
                         onChange={handleLocationImage3}
                         accept=" image/*"
                       />
@@ -1577,6 +1589,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageFour"}
                         type="file"
+                        name="fileUpload4"
                         onChange={handleLocationImage4}
                         accept=" image/*"
                       />
@@ -1629,6 +1642,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeImageFour"}
                         type="file"
+                        name="fileUpload4"
                         onChange={handleLocationImage4}
                         accept=" image/*"
                       />
@@ -1682,6 +1696,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageFive"}
                         type="file"
+                        name="fileUpload5"
                         onChange={handleLocationImage5}
                         accept=" image/*"
                       />
@@ -1734,6 +1749,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeimageFive"}
                         type="file"
+                        name="fileUpload5"
                         onChange={handleLocationImage4}
                         accept=" image/*"
                       />
@@ -1787,6 +1803,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageSix"}
                         type="file"
+                        name="fileUpload6"
                         onChange={handleLocationImage6}
                         accept=" image/*"
                       />
@@ -1839,6 +1856,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeimageSix"}
                         type="file"
+                        name="fileUpload6"
                         onChange={handleLocationImage6}
                         accept=" image/*"
                       />
@@ -1892,6 +1910,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageSeven"}
                         type="file"
+                        name="fileUpload7"
                         onChange={handleLocationImage7}
                         accept=" image/*"
                       />
@@ -1944,6 +1963,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeimageSeven"}
                         type="file"
+                        name="fileUpload7"
                         onChange={handleLocationImage7}
                         accept=" image/*"
                       />
@@ -1997,6 +2017,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageEight"}
                         type="file"
+                        name="fileUpload8"
                         onChange={handleLocationImage8}
                         accept=" image/*"
                       />
@@ -2049,6 +2070,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"changeimageEight"}
                         type="file"
+                        name="fileUpload8"
                         onChange={handleLocationImage8}
                         accept=" image/*"
                       />
@@ -2455,6 +2477,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageFive"}
                           type="file"
+                          name="fileUpload5"
                           onChange={handleLocationImage5}
                           accept=" image/*"
                         /> : null}
@@ -2565,6 +2588,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="hidden"
                           id={"imageSix"}
                           type="file"
+                          name="fileUpload6"
                           onChange={handleLocationImage6}
                           accept=" image/*"
                         /> : null}
@@ -2679,6 +2703,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageSeven"}
                         type="file"
+                        name="fileUpload7"
                         onChange={handleLocationImage7}
                         accept=" image/*"
                       /> : null}
@@ -2791,6 +2816,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="hidden"
                         id={"imageEight"}
                         type="file"
+                        name="fileUpload8"
                         onChange={handleLocationImage8}
                         accept=" image/*"
                       /> : null}

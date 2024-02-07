@@ -1250,7 +1250,7 @@ const AddingProduct = () => {
                           <div className="w-full h-fit flex items-center gap-x-2">
                             <input
                               type="text"
-                              name="age"
+                              name="minAge"
                               placeholder="Мин"
                               value={state?.min_Age_Category}
                               onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
@@ -1259,7 +1259,7 @@ const AddingProduct = () => {
                             <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                             <input
                               type="text"
-                              name="age"
+                              name="maxAge"
                               placeholder="Мах"
                               value={state?.max_Age_Category}
                               onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
@@ -1282,6 +1282,7 @@ const AddingProduct = () => {
                         <div className="w-full h-fit flex items-center justify-between gap-x-3">
                           <input
                             type="text"
+                            name="artikul"
                             value={state?.sku}
                             onChange={(e) => setState({ ...state, sku: e.target.value })}
                             placeholder=""
@@ -1567,7 +1568,7 @@ const AddingProduct = () => {
                         <div className="w-full h-fit flex items-center justify-between gap-x-2">
                           <input
                             type="text"
-                            name="age"
+                            name="minAge"
                             placeholder="Мин"
                             value={state?.min_Age_Category}
                             onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
@@ -1576,7 +1577,7 @@ const AddingProduct = () => {
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                           <input
                             type="text"
-                            name="age"
+                            name="maxAge"
                             placeholder="Мах"
                             value={state?.max_Age_Category}
                             onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
@@ -1618,6 +1619,7 @@ const AddingProduct = () => {
                             className="hidden"
                             id="DataImg1"
                             type="file"
+                            name="fileUpload1"
                             onChange={handleLocationImage1}
                             accept=" image/*"
                           />
@@ -1656,6 +1658,7 @@ const AddingProduct = () => {
                               className="hidden"
                               id="DataImg2"
                               type="file"
+                              name="fileUpload2"
                               onChange={handleLocationImage2}
                               accept=" image/*"
                             />
@@ -1693,6 +1696,7 @@ const AddingProduct = () => {
                               className="hidden"
                               id="DataImg3"
                               type="file"
+                              name="fileUpload3"
                               onChange={handleLocationImage3}
                               accept=" image/*"
                             />
@@ -1730,6 +1734,7 @@ const AddingProduct = () => {
                               className="hidden"
                               id="DataImg4"
                               type="file"
+                              name="fileUpload4"
                               onChange={handleLocationImage4}
                               accept=" image/*"
                             />
