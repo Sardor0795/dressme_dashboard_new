@@ -152,12 +152,12 @@ function EditPassword({ onClick }) {
           <span className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
             Новый пароль{" "}
           </span>
-          <label htmlFor="password" className="mt-[6px] pr-2 overflow-hidden  w-full flex items-center border border-searchBgColor rounded-lg ">
+          <label htmlFor="newPassword" className="mt-[6px] pr-2 overflow-hidden  w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none w-full pl-2 h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowNew ? "text" : "password"}
               placeholder="Ввести старый пароль"
-              name="password"
+              name="newPassword"
               value={state?.newPassword}
               onChange={(e) => setState({ ...state, newPassword: e.target.value })}
               autoComplete="off"
@@ -194,12 +194,12 @@ function EditPassword({ onClick }) {
           <span className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
             Подтвердить пароль{" "}
           </span>
-          <label htmlFor="confirm-password" className="mt-[6px] pr-2  overflow-hidden w-full flex items-center border border-searchBgColor rounded-lg ">
+          <label htmlFor="confirmPassword" className="mt-[6px] pr-2  overflow-hidden w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none pl-2 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowConfirm ? "text" : "password"}
               placeholder="Ввести старый пароль"
-              name="confirm-password"
+              name="confirmPassword"
               value={state?.newConfirmPassword}
               onChange={(e) => setState({ ...state, newConfirmPassword: e.target.value })}
               autoComplete="off"

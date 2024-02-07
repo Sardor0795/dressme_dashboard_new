@@ -156,7 +156,6 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
-    console.log(childData, "CallBackHeadWear");
 
   }
   function CallBackOutWear(childData) {
@@ -171,7 +170,6 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
-    console.log(childData, "CallBackOutWear");
 
   }
   function CallBackUnderWear(childData) {
@@ -185,7 +183,6 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
-    console.log(childData, "CallBackUnderWear");
 
   }
   function CallBackShoesWear(childData) {
@@ -200,7 +197,6 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
-    console.log(childData, "CallBackShoesWear");
 
   }
   function CallBackAccessoriesWear(childData) {
@@ -215,7 +211,6 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     })
-    console.log(childData, "CallBackAccessoriesWear");
   }
 
 
@@ -420,7 +415,6 @@ const AddingProduct = () => {
     state?.AccessoriesList?.legnthAcc && form.append("length", state?.AccessoriesList?.legnthAcc);
     state?.AccessoriesList?.widthAcc && form.append("width", state?.AccessoriesList?.widthAcc);
 
-
     return fetch(`${url}/products/store`, {
       method: "POST",
       headers: {
@@ -441,8 +435,7 @@ const AddingProduct = () => {
         } else if (res?.message) {
           setState({ ...state, sendingLoader: false })
           navigate("/products/location")
-          setDressInfo({ ...dressInfo, nextPageShowForm: true })
-          // window.location.reload();
+          setDressInfo({ ...dressInfo, nextPageShowForm: true, ProductFilterType: null })
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 3000,
@@ -515,7 +508,7 @@ const AddingProduct = () => {
       setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
     }
   }, [state?.PathnameToken]);
-
+  console.log(state?.type_Id, "state?.type_Id");
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -1390,7 +1383,7 @@ const AddingProduct = () => {
                                   .includes(input.toLowerCase())
                               }
                             >
-                              {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
+                              {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => Number(e?.category_id) === Number(dressInfo?.ProductFilterType))?.map((item) => {
                                 return (
                                   <Option
                                     key={"item_" + item.id}

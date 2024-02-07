@@ -50,7 +50,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
 
     const SelectedNumber = 5
     useEffect(() => {
-        if (typeId == SelectedNumber) {
+        if (Number(typeId) === SelectedNumber) {
             setToggle(true)
         } else {
             setToggle(false)
@@ -530,6 +530,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             </div>
         </div>
     );
+
     return (
         <Popover
             open={toggleShow}
@@ -537,7 +538,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
 
             className={`
             ${dressInfo?.ProductFilterType || typeId ?
-                    dressInfo?.ProductFilterType == SelectedNumber || toggle && typeId ?
+                    dressInfo?.ProductFilterType === SelectedNumber || toggle && typeId ?
                         "!bg-textBlueColor text-white" :
                         "text-[#bababa]  border-[#bababa]" :
                     "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"} 

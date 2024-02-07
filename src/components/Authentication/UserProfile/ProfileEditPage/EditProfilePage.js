@@ -261,8 +261,8 @@ function EditProfilePage() {
       {/* Delete Account Of Pop Confirm */}
       <section
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
           }`}
       >
         <button
@@ -382,6 +382,7 @@ function EditProfilePage() {
                 <input
                   className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                   type="text"
+                  name="companyName"
                   placeholder="Имя организации"
                   required
                 />
@@ -422,6 +423,7 @@ function EditProfilePage() {
                 <input
                   className="w-[40px] outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
                   type="text"
+                  name="phoneCode"
                   value={"+" + state?.sellerPhoneCode || ""}
                   // readOnly
                   placeholder="998"
@@ -446,8 +448,8 @@ function EditProfilePage() {
           <div className="w-full h-fit flex justify-center ">
             <div
               className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
-                  ? " bottom-0 md:flex flex-col"
-                  : "md:hidden bottom-[-1500px] z-[-10]"
+                ? " bottom-0 md:flex flex-col"
+                : "md:hidden bottom-[-1500px] z-[-10]"
                 }`}
             >
               <div className="w-full flex items-center justify-between  ">
@@ -478,8 +480,8 @@ function EditProfilePage() {
                           </span>
                           <span
                             className={`${activeIndex == data?.id
-                                ? "rotate-[0deg]"
-                                : "rotate-[180deg]"
+                              ? "rotate-[0deg]"
+                              : "rotate-[180deg]"
                               } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
@@ -500,12 +502,12 @@ function EditProfilePage() {
                                 className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
                               >
                                 <label
-                                  htmlFor={item?.name_ru}
+                                  htmlFor={item?.name_uz}
                                   className="flex items-center gap-x-[6px]"
                                 >
                                   <input
                                     type="radio"
-                                    id={item?.name_ru}
+                                    id={item?.name_uz}
                                     name="type_work"
                                     value={item?.region_id}
                                     checked={
@@ -675,6 +677,7 @@ function EditProfilePage() {
               <InputMask
                 value={state?.sellerCardNumber}
                 mask="9999-9999-9999-9999"
+                name="credit-card-number"
                 className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
                 onChange={(e) =>
                   setState({ ...state, sellerCardNumber: e.target.value })
