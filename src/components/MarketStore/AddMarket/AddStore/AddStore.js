@@ -237,7 +237,7 @@ function AddStore({ onRefetch }) {
         <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
           {/* </div> */}
           {
-            backImgOrder == 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+            backImgOrder === 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
               <div
                 className={`flex items-center justify-between  pb-3`}
               >
@@ -303,7 +303,7 @@ function AddStore({ onRefetch }) {
               </div>
             </div>}
 
-          {backImgOrder == 2 &&
+          {backImgOrder === 2 &&
             <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
               <div
                 className={`flex items-center justify-between  pb-3`}
@@ -340,6 +340,8 @@ function AddStore({ onRefetch }) {
                     guides={true}
                     dragMode="move"
                     aspectRatio={1}
+                  // aspectRatio={1}
+                  // containerStyle={{ borderRadius: '50%' }}
                   />
 
                 ) :
@@ -516,20 +518,20 @@ function AddStore({ onRefetch }) {
               )}
             </div>
             <div className="w-full flex items-center justify-between md:gap-x-[30px] my-5">
-              <label
-                htmlFor="shopName"
+              <div
                 className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
               >
                 Пол
                 <span className="ml-[5px] hidden md:block">
                   <StarLabel />{" "}
                 </span>
-              </label>
+              </div>
               <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                 {dressInfo?.genderList?.map((data, index) => {
                   return (
                     <div
                       key={index}
+                      className="w-[30%]"
                     >
                       <input
                         type="radio"
@@ -553,19 +555,18 @@ function AddStore({ onRefetch }) {
               </div>
             </div>
             <div className="w-full flex items-center justify-between md:gap-x-[30px] ">
-              <label
-                htmlFor="shopName"
+              <div
                 className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
               >
                 Метод доставки
                 <span className="ml-[5px] hidden md:block">
                   <StarLabel />
                 </span>
-              </label>
-              <div className="w-[65%] md:w-[70%] radio-toolbar flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+              </div>
+              <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 gap-x-4 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                 {dressInfo?.deliveryList?.map((data, index) => {
                   return (
-                    <div key={index}>
+                    <div className="w-full " key={index} >
                       <input
                         type="radio"
                         id={data?.name_uz}
@@ -578,7 +579,7 @@ function AddStore({ onRefetch }) {
                       />
                       <label
                         htmlFor={data?.name_uz}
-                        className={`w-1/2 h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
+                        className={`w-full h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                       >
                         <span className="leading-none">{data?.name_ru}</span>
                       </label>

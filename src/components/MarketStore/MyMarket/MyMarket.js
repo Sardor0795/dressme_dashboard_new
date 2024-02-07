@@ -147,10 +147,10 @@ function MyMarket() {
               </div>
               <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[130px] mt-3 md:mt-0">
                 <div className="flex items-center gap-x-1 ">
-                  {(Number(data?.gender_id) === 3 || Number(data?.gender_id) == 1) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                  {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 1) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                     <img src={man} alt="" />
                   </div>}
-                  {(Number(data?.gender_id) === 3 || Number(data?.gender_id) == 2) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                  {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 2) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                     <img src={woman} alt="" />
                   </div>}
                 </div>
