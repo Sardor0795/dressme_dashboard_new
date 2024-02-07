@@ -50,10 +50,11 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <StarLabel />
                   </span>
                 </p>
-                <label className="w-[95px] xs:w-[120px]  flex h-[35px] md:h-[38px] border border-borderColor rounded-lg overflow-hidden flex items-center">
+                <label htmlFor="price" className="w-[95px] xs:w-[120px]  flex h-[35px] md:h-[38px] border border-borderColor rounded-lg overflow-hidden flex items-center">
                   <input
                     type="text"
                     placeholder="Цена"
+                    name="price"
                     value={"1300000"}
                     className="inputStyle w-full   pl-1 xs:pl-2 h-full rounded-lg font-AeonikProRegular  outline-none"
                   />
@@ -87,10 +88,11 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                   <span className=" w-2 h-[1px] border border-borderColor overflow-hidden text-borderColor mx-1">
 
                   </span>
-                  <label className="w-[95px] xs:w-[120px]  flex h-[35px] md:h-[38px] rounded-lg overflow-hidden border border-borderColor flex items-center">
+                  <label htmlFor="price1" className="w-[95px] xs:w-[120px]  flex h-[35px] md:h-[38px] rounded-lg overflow-hidden border border-borderColor flex items-center">
                     <input
                       type="text"
                       value="1 300 000"
+                      name="price1"
                       className="inputStyle w-full   pl-1 xs:pl-2 h-full rounded-lg font-AeonikProRegular  outline-none"
                     />
                     <span className="text-textLightColor text-[12px] not-italic font-AeonikProRegular pr-1 xs:pr-2">
@@ -442,9 +444,9 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <p className="flex text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                       Цвет:{" "}
                     </p>
-                    {colorGroup?.map((data,index) => {
+                    {colorGroup?.map((data, index) => {
                       return (
-                        <div key={index}  className="flex items-center">
+                        <div key={index} className="flex items-center">
                           {data?.action && (
                             <button
                               className={`rounded-[15px] pt-1 text-white px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular bg-${data?.colors}`}
@@ -495,10 +497,11 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <StarLabel />
                   </span>
                 </p>
-                <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
+                <label htmlFor="price2" className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                   <input
                     type="text"
                     placeholder="Цена"
+                    name="price2"
                     className="inputStyle  w-full px-2 md:px-3 h-full rounded-lg font-AeonikProRegular  outline-none"
                   />
                   <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
@@ -529,10 +532,11 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     />
                   </div>
                   <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                  <label className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
+                  <label htmlFor="price3" className="w-[210]  flex h-[35px] md:h-[38px] border border-borderColor flex items-center">
                     <input
                       type="number"
                       value="1 300 000"
+                      name="price3"
                       className="inputStyle w-full  px-2 md:px-3 h-full rounded-lg font-AeonikProRegular  outline-none"
                     />
                     <span className="text-gray-600 text-base not-italic font-AeonikProRegular pr-3">
@@ -546,7 +550,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
               {" "}
               <div className=" flex items-center gap-x-[10px] text-base not-italic font-AeonikProMedium">
                 <span className="text-gray-800 text-base not-italic font-AeonikProRegular">Цвет:</span>
-                {colorGroup.map((data,index) => {
+                {colorGroup.map((data, index) => {
                   return (
                     <div key={index} >
                       {data?.action && (
@@ -663,10 +667,10 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
 
 
 
-      {alldata?.map((item,index) => {
+      {alldata?.map((item, index) => {
         return (
           item?.action &&
-          <section key={index}  className="w-full h-[65%] overflow-auto AllSizeModalScroll flex flex-col flex-nowrap rounded-lg border border-borderColor mt-6">
+          <section key={index} className="w-full h-[65%] overflow-auto AllSizeModalScroll flex flex-col flex-nowrap rounded-lg border border-borderColor mt-6">
             {item?.values}
           </section>
 

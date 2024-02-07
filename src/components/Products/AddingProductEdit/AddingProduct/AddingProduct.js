@@ -1268,9 +1268,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className={`w-full  cursor-not-allowed hidden md:flex rounded-lg overflow-hidden`}>
@@ -1304,9 +1304,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full  cursor-not-allowed h-fit hidden md:flex">
@@ -1349,9 +1349,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}>
@@ -1407,9 +1407,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full h-fit hidden md:flex">
@@ -1468,9 +1468,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full h-fit hidden md:flex">
@@ -1517,9 +1517,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-2"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
@@ -1584,9 +1584,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className="w-full h-fit md:flex hidden">
@@ -1827,9 +1827,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full h-fit md:flex hidden">
@@ -1895,9 +1895,9 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                           Выбрать
-                        </label>
+                        </div>
                         <ArrowRightIcon />
                       </button>
                       <div className="w-full h-fit md:flex hidden">

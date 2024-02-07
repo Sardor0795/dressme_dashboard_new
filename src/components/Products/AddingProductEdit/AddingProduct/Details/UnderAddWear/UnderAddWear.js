@@ -650,11 +650,11 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <StarLabel />
                                         </span>
                                     </div>
-                                    <label htmlFor="priceNum" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
+                                    <label htmlFor="priceNum1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
                                         <input
                                             type="text"
                                             placeholder="0"
-                                            id="priceNum"
+                                            id="priceNum1"
                                             className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.priceNum}
                                             onChange={handleChangePrice}
@@ -691,11 +691,11 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         </div>
                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                         <div className="w-[60%] md:w-[75%] flex items-center">
-                                            <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                            <label htmlFor="salePrice1" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                                 <input
                                                     type="text"
                                                     placeholder="0"
-                                                    id="salePrice"
+                                                    id="salePrice1"
                                                     className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                     value={state?.salePrice}
                                                     onChange={handleChangeSalePrice}

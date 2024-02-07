@@ -491,8 +491,8 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         <button className="md:flex hidden" type="button " onClick={onClick}>
           <MenuCloseIcons colors={"#a2a2a2"} />
         </button>
-        <label className="md:hidden flex items-center border border-borderColor rounded-lg overflow-hidden">
-          <input type="checkbox" className="w-[20px] h-[20px] rounded-lg" />
+        <label htmlFor="checkList" className="md:hidden flex items-center border border-borderColor rounded-lg overflow-hidden">
+          <input name="checkList" type="checkbox" className="w-[20px] h-[20px] rounded-lg" />
         </label>
       </div>
 
