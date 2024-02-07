@@ -472,6 +472,7 @@ function MarketEdit() {
                       className="hidden"
                       id={"imageThree1"}
                       type="file"
+                      name="fileUpload1"
                       onChange={handleLocationImageOne}
                       accept=" image/*"
                     />
@@ -550,6 +551,7 @@ function MarketEdit() {
                         className="hidden"
                         id={"logoBrand"}
                         type="file"
+                        name="fileUploadLogo"
                         onChange={onChange}
                         accept=" image/*"
                       />

@@ -244,6 +244,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="minSize"
                                             className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                             value={state?.minSize}
                                             onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
@@ -261,6 +262,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="minFootLength"
                                             className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                                             placeholder="Мин"
                                             value={state?.minFootLength}
@@ -271,6 +273,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="maxFootLength"
                                             className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                             placeholder="Макс"
                                             value={state?.maxFootLength}
@@ -290,6 +293,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                 <div className="flex items-start justify-between ">
                                     <input
                                         type="number"
+                                        name="quantityNum"
                                         className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                         value={state?.quantityNum}
                                         onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
@@ -302,15 +306,15 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                             <div className="w-fit flex items-center gap-x-[25px]">
                                 <div className="w-fit hidden md:flex flex-col items-start">
                                     <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                             Возраст
-                                        </label>
+                                        </div>
                                     </div>
                                     <div className="w-fit flex items-center">
                                         <input
                                             type="number"
+                                            name="ageNum"
                                             className="inputStyle w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                             placeholder=""
                                             value={state?.ageNum}
@@ -320,11 +324,10 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                 </div>
                                 <div className="w-full md:w-[55%]">
                                     <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                             Цена
-                                        </label>
+                                        </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
                                         </span>
@@ -334,6 +337,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                             type="text"
                                             id="priceShoes1"
                                             placeholder="0"
+                                            name="priceNum"
                                             className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.priceNum}
                                             onChange={handleChangePrice}
@@ -346,11 +350,10 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                             </div>
                             <div className="w-fit flex flex-col items-start">
                                 <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                    <label
-                                        htmlFor=""
+                                    <div
                                         className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                         Скидка
-                                    </label>
+                                    </div>
 
                                 </div>
                                 <div className="w-full flex items-center justify-center">
@@ -359,6 +362,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                             <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                                 <input
                                                     type="number"
+                                                    name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                     value={state?.salePercent}
@@ -374,6 +378,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     type="text"
                                                     placeholder="0"
                                                     id="salePrice1"
+                                                    name="salePrice"
                                                     className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
                                                     value={state?.salePrice}
                                                     onChange={handleChangeSalePrice}
@@ -516,6 +521,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="wear_size"
                                                                 className={`inputStyle cursor-default outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                                                 value={item?.wear_size}
                                                                 onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
@@ -533,6 +539,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="minFootLength"
                                                                 className="inputStyle  cursor-default outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
                                                                 placeholder="Мин"
                                                                 value={item?.min_foot_length}
@@ -543,6 +550,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="maxFootLength"
                                                                 className="inputStyle  cursor-default outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                                                 placeholder="Макс"
                                                                 value={item?.max_foot_length}
@@ -562,6 +570,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <div className="flex items-start justify-between ">
                                                         <input
                                                             type="number"
+                                                            name="quantityNum"
                                                             className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                                             value={item?.amount}
                                                             onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
@@ -580,19 +589,15 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 <div className="w-fit flex items-center gap-x-[25px]">
                                                     <div className="w-fit hidden md:flex flex-col items-start">
                                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                                 Возраст
-                                                            </label>
-                                                            {/* <span className="ml-[5px]">
-                  <StarLabel />
-                </span> */}
+                                                            </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">
                                                             <input
                                                                 type="number"
+                                                                name="ageNum"
                                                                 className="inputStyle  cursor-default w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                                                 placeholder=""
                                                                 value={item?.age}
@@ -602,12 +607,10 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     </div>
                                                     <div className="w-full md:w-[55%]">
                                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                                 Цена
-                                                            </label>
+                                                            </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -617,6 +620,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                 type="text"
                                                                 id="priceShoes"
                                                                 placeholder="0"
+                                                                name="price"
                                                                 className="inputStyle  cursor-default w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                                 value={Number(item?.price)?.toLocaleString()}
                                                                 onChange={handleChangePrice}
@@ -629,12 +633,10 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 </div>
                                                 <div className="w-fit flex flex-col items-start">
                                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                        <label
-                                                            htmlFor=""
+                                                        <div
                                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                                             Скидка
-                                                        </label>
-
+                                                        </div>
                                                     </div>
                                                     <div className="w-full flex items-center justify-center">
                                                         <div className="w-full flex items-center gap-x-1">
@@ -642,6 +644,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                 <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
                                                                     <input
                                                                         type="number"
+                                                                        name="discount_percent"
                                                                         placeholder="0"
                                                                         className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
                                                                         value={item?.discount_percent}
@@ -657,6 +660,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                         type="text"
                                                                         placeholder="0"
                                                                         id="salePrice"
+                                                                        name="discount_price"
                                                                         className="inputStyle  cursor-default w-[75%] select-none font-AeonikProMedium outline-none "
                                                                         value={Number(item?.discount_price)?.toLocaleString()}
                                                                         onChange={handleChangeSalePrice}

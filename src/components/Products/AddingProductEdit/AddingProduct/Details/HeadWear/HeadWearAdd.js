@@ -261,6 +261,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             type="number"
                                             className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                             placeholder="Мин"
+                                            name="minHeadGirth"
                                             value={state?.minHeadGirth}
                                             onChange={(e) => setState({ ...state, minHeadGirth: e.target.value, saveBtnDisable: true })}
                                             required
@@ -272,6 +273,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             type="number"
                                             className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                             placeholder="Макс"
+                                            name="maxHeadGirth"
                                             value={state?.maxHeadGirth}
                                             onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true })}
                                             required
@@ -310,6 +312,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         type="number"
                                         className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                         value={state?.amount}
+                                        name="amount"
                                         onChange={(e) => setState({ ...state, amount: e.target.value, saveBtnDisable: true })}
                                         required
                                     />
@@ -320,11 +323,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                             <div className="w-1/2 flex items-center gap-x-[25px]">
                                 <div className="w-fit hidden md:flex flex-col items-start">
                                     <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                             Возраст
-                                        </label>
+                                        </div>
                                     </div>
                                     <div className="w-full flex items-center">
                                         <input
@@ -332,17 +334,17 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                             placeholder="age"
                                             value={state?.age}
+                                            name="age"
                                             onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true })}
                                         />
                                     </div>
                                 </div>
                                 <div className="w-full md:w-[90%]">
                                     <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                             Цена
-                                        </label>
+                                        </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
                                         </span>
@@ -353,7 +355,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             placeholder="0"
                                             id="enterPrice1"
                                             className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-
+                                            name="price"
                                             value={state?.price}
                                             onChange={handleChangePrice}
                                             required
@@ -366,11 +368,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                             </div>
                             <div className="w-1/2 flex flex-col items-start">
                                 <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                    <label
-                                        htmlFor=""
+                                    <div
                                         className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                         Скидка
-                                    </label>
+                                    </div>
                                 </div>
                                 <div className="w-full flex items-center justify-center">
                                     <div className="w-full flex items-center gap-x-1">
@@ -379,6 +380,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <input
                                                     type="number"
                                                     placeholder="0"
+                                                    name="discountPercent"
                                                     className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
                                                     value={state?.discountPercent}
                                                     onChange={handleChangePercent}
@@ -393,6 +395,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     type="text"
                                                     placeholder="0"
                                                     id="discountPrice1"
+                                                    name="discountPrice"
                                                     className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                     value={state?.discountPrice}
                                                     onChange={handleChangeSalePrice}
@@ -589,11 +592,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div className="w-1/2 flex items-center gap-x-[25px]">
                                                     <div className="w-fit hidden md:flex flex-col items-start">
                                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                                                 Возраст
-                                                            </label>
+                                                            </div>
                                                         </div>
                                                         <div className="w-full flex items-center">
                                                             <p
@@ -603,33 +605,30 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     </div>
                                                     <div className="w-full md:w-[90%]">
                                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                                                 Цена
-                                                            </label>
+                                                            </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
                                                         </div>
-                                                        <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                                                        <div className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                                             <p
                                                                 className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                             >{Number(item?.price)?.toLocaleString() || null}</p>
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                 сум
                                                             </span>
-                                                        </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="w-1/2 flex flex-col items-start">
                                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                        <label
-                                                            htmlFor=""
+                                                        <div
                                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                             Скидка
-                                                        </label>
+                                                        </div>
 
                                                     </div>
                                                     <div className="w-full flex items-center justify-center">
@@ -644,14 +643,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                             <div className="w-[60%] md:w-[75%] flex items-center">
-                                                                <label htmlFor="discountPrice" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                                                <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                                                     <p
                                                                         className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                                     >{Number(item?.discount_price)?.toLocaleString() || null}</p>
                                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                         сум
                                                                     </span>
-                                                                </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

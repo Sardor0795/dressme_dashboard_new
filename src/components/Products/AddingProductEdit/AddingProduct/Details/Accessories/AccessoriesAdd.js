@@ -266,6 +266,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="minSize"
                                             className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                             value={state?.minSize}
                                             onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
@@ -484,6 +485,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="colSize"
                                             className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                             value={state?.colSize}
                                             onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true })}
@@ -500,6 +502,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="rowSize"
                                             className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                             value={state?.rowSize}
                                             onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true })}
@@ -519,6 +522,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                 <div className="flex items-start justify-between ">
                                     <input
                                         type="number"
+                                        name="quantityNum"
                                         className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                         value={state?.quantityNum}
                                         onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
@@ -530,15 +534,15 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                             <div className="w-[45%] flex items-center gap-x-[25px]">
                                 <div className="w-fit hidden md:flex flex-col items-start">
                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                             Возраст
-                                        </label>
+                                        </div>
                                     </div>
                                     <div className="w-fit flex items-center">
                                         <input
                                             type="number"
+                                            name="ageNum"
                                             className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                                             placeholder=""
                                             value={state?.ageNum}
@@ -548,11 +552,10 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                 </div>
                                 <div className="w-full md:w-[55%]">
                                     <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                             Цена
-                                        </label>
+                                        </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
                                         </span>
@@ -562,6 +565,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             type="text"
                                             placeholder="0"
                                             id="priceAccess"
+                                            name="priceNum"
                                             className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.priceNum}
                                             onChange={handleChangePrice}
@@ -574,11 +578,10 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                             </div>
                             <div className="w-[40%] flex flex-col items-start">
                                 <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                    <label
-                                        htmlFor=""
+                                    <div
                                         className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                         Скидка
-                                    </label>
+                                    </div>
                                 </div>
                                 <div className="w-full flex items-center justify-center">
                                     <div className="w-full flex items-center gap-x-1">
@@ -587,6 +590,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 <input
                                                     type="number"
                                                     placeholder="0"
+                                                    name="salePercent"
                                                     className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                     value={state?.salePercent}
                                                     onChange={handleChangePercent}
@@ -601,6 +605,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     type="text"
                                                     placeholder="0"
                                                     id="salePrice"
+                                                    name="salePrice"
                                                     className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
                                                     value={state?.salePrice}
                                                     onChange={handleChangeSalePrice}
@@ -740,6 +745,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="minSize"
                                                                 className="inputStyle cursor-default outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                                                 value={item?.wear_size}
                                                                 onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
@@ -966,6 +972,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="colSize"
                                                                 className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                                                 value={item?.width}
                                                                 onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true })}
@@ -982,6 +989,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="rowSize"
                                                                 className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                                                 value={item?.length}
                                                                 onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true })}
@@ -1001,6 +1009,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="flex items-start justify-between ">
                                                         <input
                                                             type="number"
+                                                            name="quantityNum"
                                                             className={`inputStyle cursor-default outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                                             value={item?.amount}
                                                             onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
@@ -1012,15 +1021,15 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 <div className="w-[45%] flex items-center gap-x-[25px]">
                                                     <div className="w-fit hidden md:flex flex-col items-start">
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                                                 Возраст
-                                                            </label>
+                                                            </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">
                                                             <input
                                                                 type="number"
+                                                                name="ageNum"
                                                                 className="inputStyle cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                                                                 placeholder=""
                                                                 value={item?.age}
@@ -1030,11 +1039,10 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     </div>
                                                     <div className="w-full md:w-[55%]">
                                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                                                 Цена
-                                                            </label>
+                                                            </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1044,6 +1052,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="priceAccess1"
+                                                                name="price"
                                                                 className="inputStyle cursor-default w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                                 value={Number(item?.price)?.toLocaleString()}
                                                                 onChange={handleChangePrice}
@@ -1071,6 +1080,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     <input
                                                                         type="number"
                                                                         placeholder="0"
+                                                                        name="discount_percent"
                                                                         className="inputStyle cursor-default w-[80%] font-AeonikProMedium text-center outline-none "
                                                                         value={item?.discount_percent}
                                                                         onChange={handleChangePercent}
@@ -1085,6 +1095,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         type="text"
                                                                         placeholder="0"
                                                                         id="salePrice1"
+                                                                        name="discount_price"
                                                                         className="inputStyle cursor-default w-[75%] select-none font-AeonikProMedium outline-none "
                                                                         value={Number(item?.discount_price)?.toLocaleString()}
                                                                         onChange={handleChangeSalePrice}

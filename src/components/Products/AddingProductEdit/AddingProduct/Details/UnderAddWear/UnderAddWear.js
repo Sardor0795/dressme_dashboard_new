@@ -292,6 +292,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             type="number"
                                             className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                             placeholder="Мин"
+                                            name="minBreast"
                                             value={state?.minBreast}
                                             onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
                                         />
@@ -302,6 +303,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             type="number"
                                             className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                             placeholder="Макс"
+                                            name="maxBreast"
                                             value={state?.maxBreast}
                                             onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
                                         />
@@ -324,6 +326,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                                 placeholder="Мин"
                                                 value={state?.minSize}
+                                                name="minSize"
                                                 onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
                                             />
                                         </div>
@@ -333,6 +336,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 type="number"
                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                                 placeholder="Макс"
+                                                name="maxSize"
                                                 value={state?.maxSize}
                                                 onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
                                             /> :
@@ -545,11 +549,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                         <div className="w-full flex gap-x-10 px-3 pt-5">
                             <div className="w-fit flex flex-col">
                                 <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                     Размер Бедер
-                                    {/* <span className="ml-[5px]">
-                            <StarLabel />
-                        </span> */}
                                 </p>
                                 <div className="flex items-center">
                                     <div className="flex flex-col">
@@ -557,6 +557,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             type="number"
                                             className={`inputStyle outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                             placeholder="Мин"
+                                            name="minHips"
                                             value={state?.minHips}
                                             onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
                                         />
@@ -565,6 +566,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
+                                            name="maxHips"
                                             className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                             placeholder="Макс"
                                             value={state?.maxHips}
@@ -582,6 +584,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         <div className="flex flex-col">
                                             <input
                                                 type="number"
+                                                name="minHeight"
                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
                                                 placeholder="Мин"
                                                 value={state?.minHeight}
@@ -592,6 +595,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         <div className="flex flex-col">
                                             <input
                                                 type="number"
+                                                name="maxHeight"
                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
                                                 placeholder="Макс"
                                                 value={state?.maxHeight}
@@ -612,6 +616,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                 <div className="flex items-start justify-between ">
                                     <input
                                         type="number"
+                                        name="quantityNum"
                                         className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                         value={state?.quantityNum}
                                         onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
@@ -623,15 +628,15 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                             <div className="w-fit flex items-center gap-x-[25px]">
                                 <div className="w-fit hidden md:flex flex-col items-start">
                                     <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                        <label
-                                            htmlFor=""
+                                        <div
                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                             Возраст
-                                        </label>
+                                        </div>
                                     </div>
                                     <div className="w-fit flex items-center">
                                         <input
                                             type="number"
+                                            name="ageNum"
                                             className=" inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
                                             placeholder=""
                                             value={state?.ageNum}
@@ -655,6 +660,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             type="text"
                                             placeholder="0"
                                             id="priceNum1"
+                                            name="priceNum"
                                             className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.priceNum}
                                             onChange={handleChangePrice}
@@ -667,13 +673,10 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                             </div>
                             <div className="w-fit flex flex-col items-start">
                                 <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                    <label
-                                        htmlFor=""
+                                    <div
                                         className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-
                                         Скидка
-                                    </label>
-
+                                    </div>
                                 </div>
                                 <div className="w-full flex items-center justify-center">
                                     <div className="w-full flex items-center gap-x-1">
@@ -681,6 +684,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
                                                 <input
                                                     type="number"
+                                                    name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                     value={state?.salePercent}
@@ -696,6 +700,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     type="text"
                                                     placeholder="0"
                                                     id="salePrice1"
+                                                    name="salePrice"
                                                     className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                     value={state?.salePrice}
                                                     onChange={handleChangeSalePrice}
@@ -835,6 +840,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="minBreast"
                                                                 className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                                                 placeholder="Мин"
                                                                 value={item?.min_waist_girth}
@@ -845,6 +851,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="maxBreast"
                                                                 className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                                                 placeholder="Макс"
                                                                 value={item?.max_waist_girth}
@@ -866,6 +873,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             <div className="flex flex-col">
                                                                 <input
                                                                     type="number"
+                                                                    name="minSize"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                                                     placeholder="Мин"
                                                                     value={item?.min_wear_size}
@@ -876,6 +884,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             <div className="flex flex-col">
                                                                 {state?.maxSizeShow || item?.max_wear_size ? <input
                                                                     type="number"
+                                                                    name="maxSize"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                                                     placeholder="Макс"
                                                                     value={item?.max_wear_size}
@@ -1098,16 +1107,13 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <div className="w-full flex gap-x-10 px-3 pt-5">
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                         Размер Бедер
-                                                        {/* <span className="ml-[5px]">
-                            <StarLabel />
-                        </span> */}
                                                     </p>
                                                     <div className="flex items-center">
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="minHips"
                                                                 className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
                                                                 placeholder="Мин"
                                                                 value={item?.min_hip_girth}
@@ -1118,6 +1124,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex flex-col">
                                                             <input
                                                                 type="number"
+                                                                name="maxHips"
                                                                 className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                                                 placeholder="Макс"
                                                                 value={item?.max_hip_girth}
@@ -1135,6 +1142,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             <div className="flex flex-col">
                                                                 <input
                                                                     type="number"
+                                                                    name="minHeight"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
                                                                     placeholder="Мин"
                                                                     value={item?.min_height}
@@ -1145,6 +1153,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             <div className="flex flex-col">
                                                                 <input
                                                                     type="number"
+                                                                    name="maxHeight"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
                                                                     placeholder="Макс"
                                                                     value={item?.max_height}
@@ -1165,6 +1174,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <div className="flex items-start justify-between ">
                                                         <input
                                                             type="number"
+                                                            name="quantityNum"
                                                             className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                                             value={item?.amount}
                                                             onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
@@ -1176,15 +1186,15 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <div className="w-fit flex items-center gap-x-[25px]">
                                                     <div className="w-fit hidden md:flex flex-col items-start">
                                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                                                 Возраст
-                                                            </label>
+                                                            </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">
                                                             <input
                                                                 type="number"
+                                                                name="ageNum"
                                                                 className=" inputStyle  cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
                                                                 placeholder=""
                                                                 value={item?.age}
@@ -1194,11 +1204,10 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     </div>
                                                     <div className="w-full md:w-[55%]">
                                                         <div className="flex items-center  mb-2 ll:mb-[10px]">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                                                 Цена
-                                                            </label>
+                                                            </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1208,6 +1217,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="priceNum"
+                                                                name="price"
                                                                 className="inputStyle  cursor-default w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                                 value={Number(item?.price)?.toLocaleString()}
                                                                 onChange={handleChangePrice}
@@ -1220,13 +1230,10 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 </div>
                                                 <div className="w-fit flex flex-col items-start">
                                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                        <label
-                                                            htmlFor=""
+                                                        <div
                                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                             Скидка
-                                                        </label>
-
+                                                        </div>
                                                     </div>
                                                     <div className="w-full flex items-center justify-center">
                                                         <div className="w-full flex items-center gap-x-1">
@@ -1234,6 +1241,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                 <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
                                                                     <input
                                                                         type="number"
+                                                                        name="discount_percent"
                                                                         placeholder="0"
                                                                         className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
                                                                         value={item?.discount_percent}
@@ -1249,6 +1257,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                         type="text"
                                                                         placeholder="0"
                                                                         id="salePrice"
+                                                                        name="discount_price"
                                                                         className="inputStyle  cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                                         value={Number(item?.discount_price)?.toLocaleString()}
                                                                         onChange={handleChangeSalePrice}

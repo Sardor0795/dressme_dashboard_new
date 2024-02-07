@@ -134,6 +134,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
+                                    name="minHeadGirth"
                                     className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minHeadGirth}
@@ -145,6 +146,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
+                                    name="maxHeadGirth"
                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                     placeholder="Макс"
                                     value={state?.maxHeadGirth}
@@ -183,6 +185,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         <div className="flex items-start justify-between mt-[10px]">
                             <input
                                 type="number"
+                                name="amount"
                                 className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                 value={state?.amount}
                                 onChange={(e) => setState({ ...state, amount: e.target.value })}
@@ -195,15 +198,15 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     <div className="w-1/2 flex items-center gap-x-[25px]">
                         <div className="w-fit hidden md:flex flex-col items-start">
                             <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                <label
-                                    htmlFor=""
+                                <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                     Возраст
-                                </label>
+                                </div>
                             </div>
                             <div className="w-full flex items-center">
                                 <input
                                     type="number"
+                                    name="age"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
                                     placeholder="age"
                                     value={state?.age}
@@ -213,11 +216,10 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         </div>
                         <div className="w-full md:w-[90%]">
                             <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                <label
-                                    htmlFor=""
+                                <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                     Цена
-                                </label>
+                                </div>
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
@@ -227,6 +229,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="text"
                                     placeholder="0"
                                     id="enterPrice"
+                                    name="price"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.price}
                                     onChange={handleChangePrice}
@@ -240,13 +243,10 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-1/2 flex flex-col items-start">
                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                            <label
-                                htmlFor=""
+                            <div
                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Скидка
-                            </label>
-
+                            </div>
                         </div>
 
                         <div className="w-full flex items-center justify-center">
@@ -256,6 +256,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                         {state?.price?.split(",")?.join("") > 0 ?
                                             <input
                                                 type="number"
+                                                name="discountPercent"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 value={state?.discountPercent}
@@ -264,6 +265,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                             :
                                             <input
                                                 type="number"
+                                                name="discountPercent"
                                                 placeholder="0"
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 readOnly
@@ -279,6 +281,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                             type="text"
                                             placeholder="0"
                                             id="discountPrice"
+                                            name="discountPrice"
                                             className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.discountPrice}
                                             onChange={handleChangeSalePrice}
@@ -308,13 +311,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         <Popover
             open={state?.toggleShow}
             onOpenChange={handleOpenPopver}
-            // className={`
-            // ${dressInfo?.ProductFilterType ?
-            //         dressInfo?.ProductFilterType == SelectedNumber ? "!bg-textBlueColor text-white" : "text-[#bababa]  border-[#bababa]"
-            //         :
-            //         toggle ? " !bg-textBlueColor text-white" : "text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white border-textBlueColor"}
-            //         group px-[15px] h-[38px]  border-[1.5px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer  rounded-lg transition duration-300
-            // `}
+
             className={`
             ${dressInfo?.ProductFilterType || typeId ?
                     dressInfo?.ProductFilterType == SelectedNumber || state?.isHasTypeId && typeId ?

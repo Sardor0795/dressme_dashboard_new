@@ -53,8 +53,8 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                 <label htmlFor="price" className="w-[95px] xs:w-[120px]  flex h-[35px] md:h-[38px] border border-borderColor rounded-lg overflow-hidden flex items-center">
                   <input
                     type="text"
-                    placeholder="Цена"
                     name="price"
+                    placeholder="Цена"
                     value={"1300000"}
                     className="inputStyle w-full   pl-1 xs:pl-2 h-full rounded-lg font-AeonikProRegular  outline-none"
                   />
@@ -80,6 +80,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                   <div className="flex flex-col">
                     <input
                       type="text"
+                      name="price"
                       value={"13 %"}
                       className="inputStyle w-[40px] xs:w-[60px] h-[35px] md:h-[38px] border border-borderColor pl-1 xs:pl-2  rounded-lg  font-AeonikProRegular  outline-none"
                       placeholder=""
@@ -118,6 +119,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px]  text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value={"5"}
@@ -127,6 +129,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс" value={"9"}
 
@@ -145,6 +148,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value={"18"}
@@ -154,6 +158,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс"
                         value={"19"}
@@ -173,6 +178,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин"
                         value="11"
@@ -182,6 +188,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] ll:w-[60px]  text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс"
                         value="11"
@@ -199,6 +206,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular  outline-none"
                         placeholder="Мин" value={"7"}
 
@@ -208,6 +216,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         className="inputStyle w-[50px] ll:w-[60px] h-[35px] md:h-[38px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular  outline-none"
                         placeholder="Макс" value={"8"}
 
@@ -420,6 +429,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col">
                       <input
                         type="text"
+                        name="price"
                         value={1}
                         className="inputStyle w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                       />
@@ -435,6 +445,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                     <div className="flex flex-col items-center">
                       <input
                         type="text"
+                        name="price"
                         value={1}
                         className="inputStyle w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3  rounded-lg font-AeonikProRegular  outline-none"
                       />
@@ -484,6 +495,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                 <div className="flex flex-col items-center">
                   <input
                     type="text"
+                    name="price"
                     value={1}
                     className="inputStyle w-[60px] text-center h-[35px] md:h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular  outline-none"
                   />
@@ -526,6 +538,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                   <div className="flex flex-col">
                     <input
                       type="number"
+                      name="price"
                       value={"13 %"}
                       className="inputStyle  w-[60px] px-3  h-[35px] md:h-[38px] border border-borderColor px-3rounded-lg  font-AeonikProRegular  outline-none"
                       placeholder=""

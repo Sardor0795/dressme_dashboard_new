@@ -45,6 +45,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="w-full flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-full h-[38px] border border-borderColor px-2 rounded-lg   outline-none"
                     placeholder="0"
                   />
@@ -61,6 +62,7 @@ const ClothingCategory = ({ onClick, title }) => {
                   <div className="w-[35%] h-[38px] flex items-center justify-between border border-borderColor pl-2 rounded-lg">
                     <input
                       type="text"
+                      name="price"
                       className=" inputStyle w-[50%]  outline-none"
                       placeholder="0"
                     />
@@ -70,6 +72,7 @@ const ClothingCategory = ({ onClick, title }) => {
                   <div className="w-[65%] h-[38px] px-2 flex items-center justify-between border border-borderColor rounded-lg  ">
                     <input
                       type="text"
+                      name="price"
                       className="w-[62%] inputStyle  outline-none"
                       placeholder="0"
                     />
@@ -90,6 +93,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Мин"
                   />
@@ -98,6 +102,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
@@ -112,6 +117,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg   outline-none font-AeonikProRegular "
                     placeholder="Мин"
                   />
@@ -120,6 +126,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
@@ -138,6 +145,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Мин"
                   />
@@ -146,6 +154,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
@@ -161,6 +170,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className=" inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Мин"
                   />
@@ -169,6 +179,7 @@ const ClothingCategory = ({ onClick, title }) => {
                 <div className="flex flex-col">
                   <input
                     type="text"
+                    name="price"
                     className="inputStyle w-[60px] h-[38px] text-center border border-borderColor px-2 rounded-lg  font-AeonikProRegular  outline-none"
                     placeholder="Макс"
                   />
