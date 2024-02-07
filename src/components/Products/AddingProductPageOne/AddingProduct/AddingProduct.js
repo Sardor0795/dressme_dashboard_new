@@ -814,9 +814,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
@@ -887,9 +887,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
 
@@ -938,9 +938,9 @@ const AddingProduct = () => {
                                   })
                                 })
                                   :
-                                  <label className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                  <div className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                     Выбрать
-                                  </label>
+                                  </div>
                                 }
 
                                 <span className="rotate-[90deg]">
@@ -953,9 +953,9 @@ const AddingProduct = () => {
                                 type="button"
                                 className="w-full h-11 md:h-10  bg-[#F5F5F5] rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
                               >
-                                <label className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
+                                <div className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
                                   Выбрать
-                                </label>
+                                </div>
                                 <span className="rotate-[90deg]">
                                   <ArrowRightIcon />
                                 </span>
@@ -982,9 +982,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}>
@@ -1040,20 +1040,12 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
-                        {/* <button
-                      onClick={clearSelected}
-                      type="button"
-                      className="w-fit h-[40px] rounded-lg flex items-center justify-between border border-borderColor px-3"
-                    >
-                      <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#000]">
-                        clearSelected
-                      </label>
-                    </button> */}
+
                         <div className="w-full h-fit hidden md:flex">
                           <Select
                             className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid && !state?.sub_Section_Id?.length && newArray?.length ? " overflow-hidden border border-[#FFB8B8] " : ""}`}
@@ -1110,9 +1102,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className="w-full h-fit hidden md:flex">
@@ -1159,9 +1151,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-2"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex items-center gap-x-1 justify-between  overflow-hidden                   
@@ -1224,9 +1216,9 @@ const AddingProduct = () => {
                             type="button"
                             className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                           >
-                            <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                            <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                               Выбрать
-                            </label>
+                            </div>
                             <ArrowRightIcon />
                           </button>
                           <div className="w-full h-fit md:flex hidden">
@@ -1471,9 +1463,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className="w-full h-fit md:flex hidden">
@@ -1541,9 +1533,9 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <label className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                             Выбрать
-                          </label>
+                          </div>
                           <ArrowRightIcon />
                         </button>
                         <div className="w-full h-fit md:flex hidden">

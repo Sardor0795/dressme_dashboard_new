@@ -489,7 +489,7 @@ const SignUpSeller = () => {
                   }
                   {/* Region INput  */}
                   <div className={"w-full"}>
-                    <label htmlFor="" >
+                    <label htmlFor="selectRegion" >
                       <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                         Выберите регион
 

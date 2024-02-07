@@ -20,9 +20,9 @@ export default function ReviewStoreWear() {
         <div className="w-full block pb-4 md:py-4 md:border-b border-lightBorderColor">
           <div className="w-full md:py-0 py-6 border-lightBorderColor ">
             <div className="w-full flex items-center justify-center md:justify-start">
-              <button className="absolute left-4 ">
+              <div className="absolute left-4 ">
                 <MobileHumburgerMenu />
-              </button>
+              </div>
               <span className="text-2xl not-italic font-AeonikProMedium">
                 Отзывы
               </span>

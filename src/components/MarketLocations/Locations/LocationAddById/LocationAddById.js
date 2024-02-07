@@ -353,7 +353,7 @@ export default function LocationAddById() {
           <div className="flex flex-wrap items-center justify-between gap-x-3 md:gap-4 ">
             {/* INPUT DATA */}
             <div className={"w-full block md:hidden mb-3 md:mb-0"}>
-              <label htmlFor="">
+              <label htmlFor="selectRegion">
                 <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                   Выберите регион
                   <span className="ml-[5px]">
@@ -381,7 +381,7 @@ export default function LocationAddById() {
                               ?.filter((i) => i.id == state?.subRegionIdShops)
                               .map((data) => {
                                 return (
-                                  <span key={data?.name_ru}  className="ml-1">{data?.name_ru}</span>
+                                  <span key={data?.name_ru} className="ml-1">{data?.name_ru}</span>
                                 );
                               })}
                           </span>
@@ -399,7 +399,7 @@ export default function LocationAddById() {
                 )}
               </label>
             </div>
-            <label className="w-full md:w-[31%] mb-3 md:mb-0">
+            <label htmlFor="fname" className="w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя администратора{" "}
                 <span className="ml-[5px]">
@@ -425,7 +425,7 @@ export default function LocationAddById() {
                   )}
               </div>
             </label>
-            <label className="w-full md:w-[31%] mb-3 md:mb-0">
+            <label htmlFor="fname2" className="w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя второго администратора{" "}
               </div>
@@ -503,7 +503,7 @@ export default function LocationAddById() {
                 </div>
               </div>
             </div>
-            <label className="w-full md:w-[31%] mb-3 md:mb-0 ">
+            <label htmlFor="phone1" className="w-full md:w-[31%] mb-3 md:mb-0 ">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер администратора
                 <span className="ml-[5px]">
@@ -548,7 +548,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label className="w-full md:w-[31%]">
+            <label htmlFor="phone2" className="w-full md:w-[31%]">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Номер второго администратора
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
@@ -709,7 +709,7 @@ export default function LocationAddById() {
               }
               {/* Region Input  */}
               <div className={"w-full hidden md:block"}>
-                <label htmlFor="">
+                <label htmlFor="selectRegion2">
                   <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                     Выберите регион
                     <span className="ml-[5px]">
@@ -731,13 +731,13 @@ export default function LocationAddById() {
                         ?.filter((e) => e.id == state?.regionIdShops)
                         .map((item) => {
                           return (
-                            <span key={item?.name_ru}  className="flex items-center text-[#000] text-[14px] sm:text-base">
+                            <span key={item?.name_ru} className="flex items-center text-[#000] text-[14px] sm:text-base">
                               {item?.name_ru},
                               {item?.sub_regions
                                 ?.filter((i) => i.id == state?.subRegionIdShops)
                                 .map((data) => {
                                   return (
-                                    <span key={data?.name_ru}  className="ml-1">
+                                    <span key={data?.name_ru} className="ml-1">
                                       {data?.name_ru}
                                     </span>
                                   );

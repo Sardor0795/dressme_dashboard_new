@@ -111,12 +111,12 @@ function EditPassword({ onClick }) {
           <span className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
             Старый пароль
           </span>
-          <label className="mt-[6px]  overflow-hidden pr-2 w-full flex items-center border border-searchBgColor rounded-lg ">
+          <label htmlFor="oldPassword" className="mt-[6px]  overflow-hidden pr-2 w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none w-full h-[40px] pl-2 xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowOld ? "text" : "password"}
               placeholder="Старый пароль"
-              name="password"
+              name="oldPassword"
               value={state?.oldPassword}
               onChange={(e) => setState({ ...state, oldPassword: e.target.value })}
               autoComplete="off"
@@ -152,7 +152,7 @@ function EditPassword({ onClick }) {
           <span className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
             Новый пароль{" "}
           </span>
-          <label className="mt-[6px] pr-2 overflow-hidden  w-full flex items-center border border-searchBgColor rounded-lg ">
+          <label htmlFor="password" className="mt-[6px] pr-2 overflow-hidden  w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none w-full pl-2 h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowNew ? "text" : "password"}
@@ -194,7 +194,7 @@ function EditPassword({ onClick }) {
           <span className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
             Подтвердить пароль{" "}
           </span>
-          <label className="mt-[6px] pr-2  overflow-hidden w-full flex items-center border border-searchBgColor rounded-lg ">
+          <label htmlFor="confirm-password" className="mt-[6px] pr-2  overflow-hidden w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none pl-2 w-full h-[40px] xs:h-12 placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShowConfirm ? "text" : "password"}

@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 
-// import StoreListModal from "./StoreListModal";
 import {
   AddIconsCircle,
   AddLocationIcon,
-  BgNoImgIcon,
   CheckIcons,
-  CheckTrue,
   DeleteIcon,
   MenuCloseIcons,
 } from "../../../../assets/icons";
@@ -19,9 +16,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../../hook/useHttp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingForSeller from "../../../Loading/LoadingFor";
-import { dressMainData } from "../../../../hook/ContextTeam";
-const url = "https://api.dressme.uz/api/seller";
+
 
 function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSelectCheckedAction, onRefetch, searchName }) {
 
@@ -51,12 +46,9 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
       refetchOnWindowFocus: false,
     }
   );
-  // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
-  // console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
+
   const navigate = useNavigate();
-  // const goProductDetailEdit = (id) => {
-  //   // navigate(`/locations-store/edit-detail/:${id}`);
-  // };
+
   const goProductDetailEdit = (id) => {
     navigate(`/products/location/:${id}`);
   };
@@ -70,42 +62,22 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   function addNewProductId(locationId, shopId) {
     navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
   };
-  // const [locationId, setLocationId] = useState();
-  const [shopId, setShopId] = useState();
   const [checked, setChecked] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
-  // data?.map(item => {
-  //   console.log(item, "BU_data_item");
-  // })
-  // console.log(data, "BU_data_item");
-  // console.log(locationId?.some(e => e == data?.id), "some")
-  // setLocationId(locationId => [...locationId, data?.id]);
-  // if (true) {
-  //   // console.log(locationId && locationId?.indexof(3), "locationId.indexof(data?.id)")
-  //   console.log(data?.id, "buFilterId");
-  //   // setBooks(books => [....books, ...x]);
-  // }
+
   useEffect(() => {
-    data?.products?.map(item => {
+    data?.products?.map((item) => {
       if (checked?.length >= 1) {
         if (checked.includes(item?.id)) {
-          // setLocationId(data?.id);
           handleGetCheckAll(checked, data?.id, data?.shop_id)
-          // console.log("log-1");
-
-        } else {
-          // console.log("log-2");
-          // setLocationId(-data?.id);
         }
       } else {
         handleGetCheckAll([], '', '')
-        // setLocationId()
       }
     })
 
   }, [checked])
-  // console.log(locationId, "locationIdChikldz");
   useEffect(() => {
     if (AllSelectCheckedAction) {
 
@@ -121,7 +93,6 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     if (data?.products?.length) {
       setIndeterminate(checked.length && checked.length !== data?.products?.length);
       setCheckAll(checked.length === data?.products?.length);
-      // handleGetCheckAll(checked, locationId)
     }
   }, [checked]);
 
@@ -129,11 +100,10 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
-  // console.log(checked, "checked");
 
 
 
-  // // ------------GET  Has Magazin ?-----------shops/locations/:id------
+  // // ------------GET  Has Magazin ?----------
   const deleteProductById = useMutation(() => {
     return request({ url: `/products/${deleteId}/${0}`, method: "DELETE", token: true });
   });
@@ -239,15 +209,9 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     setHideProductList(false)
   }, [deleteModal, openStoreList]);
 
-  // console.log(ProductToggleState, "ProductToggleState");
-  // console.log(checked?.length, "checkedlength");
-  // console.log(getIdProduct, "getIdProduct");
-  // console.log(getIdShopLocation, "getIdShopLocation");
-  // console.log("------------------------------");
-  // const num = 1000000
+
   return (
     <div className="w-full">
-      {/* <button onClick={ProductToggleOnclick}>ProductToggleOnclick {ProductToggleState}</button> */}
       <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
@@ -430,7 +394,6 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                 onChange={onCheckAllChange}
                 checked={checkAll}
                 style={{ width: "26px", height: "26px" }}
-                onClick={() => setShopId(data?.id)}
                 className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}>
               </Checkbox>
               <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{data?.address}
@@ -477,7 +440,6 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
         {data?.products?.length !== 0 ?
           <Checkbox.Group
             style={{ width: "100%" }}
-            // checked={AllSelectCheckedAction || checked}
             value={checked}
             onChange={(checkedValues) => {
               setChecked(checkedValues);
@@ -497,98 +459,98 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                     <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
                       <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                         <div className="flex flex-col w-full">
-                          <div className="w-full flex h-[120px]  items-center">
-                            <Checkbox value={itemValue?.id} checked={AllSelectCheckedAction || checked}
-                              onClick={() => setShopId(data?.id)} />
-                            <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                              <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
-                              <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
-                              </td>
-                              <td className="w-[15%] h-full  flex items-center  justify-center">
-                                <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
-                                  {itemValue?.name_ru || "namrRu"}
-                                </p>
-                              </td>
-                              <td className="w-[15%] h-full  flex items-center justify-center ">
-                                {itemValue?.sku || "sku"}
-                              </td>
-                              {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
-                                return (
-                                  <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
-                                    {valueType?.name_ru || "type_id"}
-                                  </td>
-                                )
-                              })}
-                              <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
+                          <table className="w-full flex h-[120px]  items-center">
+                            <tbody className="w-full h-full flex items-center">
+                              <tr>
+                                <td>
+                                  <Checkbox value={itemValue?.id} checked={AllSelectCheckedAction || checked} />
+                                </td>
+                              </tr>
+                              <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
+                                <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
+                                <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                  <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
+                                </td>
+                                <td className="w-[15%] h-full  flex items-center  justify-center">
+                                  <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
+                                    {itemValue?.name_ru || "namrRu"}
+                                  </p>
+                                </td>
+                                <td className="w-[15%] h-full  flex items-center justify-center ">
+                                  {itemValue?.sku || "sku"}
+                                </td>
+                                {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                  return (
+                                    <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
+                                      {valueType?.name_ru || "type_id"}
+                                    </td>
+                                  )
+                                })}
+                                <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                              {itemValue?.status === "approved" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                                {itemValue?.status || "status"}
-                              </td>}
-                              {itemValue?.status === "declined" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                                {itemValue?.status || "status"}
-                              </td>}
-                              {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                                {itemValue?.status || "status"}
-                              </td>}
-                              <td className="w-[10%] h-full  flex items-center justify-center ">
-                                {itemValue?.cost?.discount_price > 999 ?
-                                  Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
-                                  itemValue?.cost?.discount_price
-                                    ||
-                                    itemValue?.cost?.price > 999 ?
-                                    Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
-                                    : itemValue?.cost?.price
-                                }
-                                <span className="ml-[6px] text-[14px]">Сум</span>
-                              </td>
-                              <td className="w-[10%] h-full  flex items-center justify-center ">
-                                {/* <button
-                                  onClick={() => goProductDetailEdit(itemValue?.id)}
-                                  className="text-[18px] text-weatherWinterColor w-full text-center"
-                                >
-                                  Подробнее
-                                </button> */}
-                                <button
-                                  onClick={() => goProductDetailEdit(itemValue?.id)}
-                                  className="text-[18px] text-weatherWinterColor w-full text-center"
-                                >
-                                  Подробнее
-                                </button>
-                              </td>
-                              <td className="w-[9%] h-full  flex items-center justify-center ">
-                                <button
-                                  onClick={() => setGetIdProduct(itemValue?.id)}
-                                  type="button" className="w-full flex justify-center cursor-auto">
-                                  <span
-                                    onClick={() => setOpenStoreList(true)}
-                                    className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                {itemValue?.status === "approved" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                                  {itemValue?.status || "status"}
+                                </td>}
+                                {itemValue?.status === "declined" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                                  {itemValue?.status || "status"}
+                                </td>}
+                                {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                                  {itemValue?.status || "status"}
+                                </td>}
+                                <td className="w-[10%] h-full  flex items-center justify-center ">
+                                  {itemValue?.cost?.discount_price > 999 ?
+                                    Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
+                                    itemValue?.cost?.discount_price
+                                      ||
+                                      itemValue?.cost?.price > 999 ?
+                                      Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
+                                      : itemValue?.cost?.price
+                                  }
+                                  <span className="ml-[6px] text-[14px]">Сум</span>
+                                </td>
+                                <td className="w-[10%] h-full  flex items-center justify-center ">
+
+                                  <button
+                                    onClick={() => goProductDetailEdit(itemValue?.id)}
+                                    className="text-[18px] text-weatherWinterColor w-full text-center"
                                   >
-                                    <AddLocationIcon width={30} />
-                                  </span>
-                                </button>
-                              </td>
-                              <td className="w-[9%] h-full  flex items-center justify-center ">
-                                <button type="button"
-                                  onClick={() => {
-                                    setDeleteModal(true)
-                                    setDeleteId(itemValue?.id)
-                                    setGetIdShopLocation(data?.id)
-                                  }}
-                                  className="w-fit flex justify-center cursor-auto">
-                                  <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
-                                    <DeleteIcon width={30} />
-                                  </span>
-                                </button>
-                              </td>
-                            </tr>
-                          </div>
+                                    Подробнее
+                                  </button>
+                                </td>
+                                <td className="w-[9%] h-full  flex items-center justify-center ">
+                                  <button
+                                    onClick={() => setGetIdProduct(itemValue?.id)}
+                                    type="button" className="w-full flex justify-center cursor-auto">
+                                    <span
+                                      onClick={() => setOpenStoreList(true)}
+                                      className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                    >
+                                      <AddLocationIcon width={30} />
+                                    </span>
+                                  </button>
+                                </td>
+                                <td className="w-[9%] h-full  flex items-center justify-center ">
+                                  <button type="button"
+                                    onClick={() => {
+                                      setDeleteModal(true)
+                                      setDeleteId(itemValue?.id)
+                                      setGetIdShopLocation(data?.id)
+                                    }}
+                                    className="w-fit flex justify-center cursor-auto">
+                                    <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+                                      <DeleteIcon width={30} />
+                                    </span>
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                           {/* For Mobile Device */}
                           <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
                             <div className="mb-2">
                               <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                                 <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                <span className="text-checkboxBorder">0{itemValue?.id}</span>
+                                <span className="text-checkboxBorder">{index + 1}</span>
                                 <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                               </div>
                             </div>
@@ -630,9 +592,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
 
                             <div className="w-full flex items-center justify-between mt-[18px]">
                               <div
-                                // onClick={() => {
-                                //   click(itemValue?.id);
-                                // }}
+
                                 className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${itemValue?.isCheck
                                   ? "bg-[#007DCA] border-[#007DCA]"
                                   : "bg-white border-checkboxBorder"

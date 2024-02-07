@@ -50,9 +50,9 @@ function MyMarket() {
     <div className="w-full h-full  py-1 px-4 md:px-10">
       <div className="w-full pt-6 pb-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="w-full flex items-center justify-center md:hidden">
-          <button className="absolute left-4 ">
+          <div className="absolute left-4 ">
             <MobileHumburgerMenu />
-          </button>
+          </div>
           <span className="text-2xl not-italic font-AeonikProMedium">
             Все магазины
           </span>

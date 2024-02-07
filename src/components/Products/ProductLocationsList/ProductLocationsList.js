@@ -363,7 +363,6 @@ export default function ProductLocationsList() {
           <div className="w-full flex items-center justify-center">
             {state?.loader && hideProductList ?
               <PuffLoader
-                // className={styles.loader1}
                 color={"#007DCA"}
                 size={80}
                 loading={true}
@@ -391,11 +390,7 @@ export default function ProductLocationsList() {
         }
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
 
-          {/* <button
-            onClick={() => onProductDelete()}
-            type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-            Удалить везде</button> */}
+
           <button
             onClick={() => setState({ ...state, openDeleteModal: false })}
             type="button"
@@ -473,16 +468,7 @@ export default function ProductLocationsList() {
               <SearchIcon />
             </span>
           </label>
-          {/* <section className=" flex items-center gap-x-[30px] ">
-            <span>
-              <CalendarIcons />
-            </span>
-            <span className="hidden md:flex items-center">
-              <Space direction="vertical" size={12}>
-                <RangePicker className="" placeholder={["от", "до"]} />
-              </Space>
-            </span>
-          </section> */}
+
         </section>
       </div>
       {isLoading ? <LoadingForSeller /> :
@@ -490,7 +476,7 @@ export default function ProductLocationsList() {
           {/* Up Title */}
           <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
             <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
-              Общее количество: {dressInfo?.getProductList?.products_locations?.length}
+              Общее количество: ({dressInfo?.getProductList?.products_locations?.length})
             </p>
 
             <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
@@ -539,7 +525,7 @@ export default function ProductLocationsList() {
             return (
               <div key={index}>
                 {dressInfo?.getProductList?.length ?
-                  state?.shopMarketId == item?.id &&
+                  Number(state?.shopMarketId) === Number(item?.id) &&
                   <div className="flex items-center w-full">
                     {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
                       <button
@@ -556,7 +542,7 @@ export default function ProductLocationsList() {
                               <div className="flex justify-end items-center md:justify-between mx-auto ">
                                 <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                                   <p className="flex md:hidden text-sm font-AeonikProMedium">
-                                    Общее количество: 6
+                                    Общее количество: ({dressInfo?.getProductList?.products_locations?.length})
                                   </p>
                                 </div>
                               </div>
@@ -603,7 +589,7 @@ export default function ProductLocationsList() {
                               <div className="flex justify-end items-center md:justify-between mx-auto ">
                                 <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                                   <p className="flex md:hidden text-sm font-AeonikProMedium">
-                                    Общее количество: 6
+                                    Общее количество: ({dressInfo?.getProductList?.products_locations?.length})
                                   </p>
                                 </div>
                               </div>

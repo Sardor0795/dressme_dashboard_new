@@ -558,11 +558,11 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <label htmlFor="enterPrice" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                                <label htmlFor="enterPrice1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
                                         type="text"
                                         placeholder="0"
-                                        id="enterPrice"
+                                        id="enterPrice1"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                         value={state?.priceNum}
                                         onChange={handleChangePrice}
@@ -608,11 +608,11 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice1" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
-                                                id="salePrice"
+                                                id="salePrice1"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
@@ -1090,11 +1090,11 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice2" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
-                                                id="salePrice"
+                                                id="salePrice2"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
@@ -1578,11 +1578,11 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice3" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
-                                                id="salePrice"
+                                                id="salePrice3"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
@@ -1787,11 +1787,11 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice4" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
-                                                id="salePrice"
+                                                id="salePrice4"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
@@ -2200,11 +2200,11 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice5" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
-                                                id="salePrice"
+                                                id="salePrice5"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}

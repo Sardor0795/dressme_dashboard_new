@@ -993,7 +993,7 @@ export default function LocationMapCity() {
               </div>
               <div className="w-full  px-4 md:px-0  ">
                 <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
-                  <label className="w-full md:w-[31%] xs:w-[48%]   ">
+                  <label htmlFor="fname" className="w-full md:w-[31%] xs:w-[48%]   ">
                     <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
                       Имя администратора{" "}
                       <span className="ml-[5px]">
@@ -1011,7 +1011,7 @@ export default function LocationMapCity() {
                       />
                     </div>
                   </label>
-                  <label className="w-full md:w-[31%] xs:w-[48%]  ">
+                  <label htmlFor="fname1" className="w-full md:w-[31%] xs:w-[48%]  ">
                     <div className="w-full text-[12px] md:text-base flex items-center mb-[10px]">
                       Имя второго администратора{" "}
                     </div>
@@ -1063,7 +1063,7 @@ export default function LocationMapCity() {
 
                     </div>
                   </div>
-                  <label className="w-full md:w-[31%] xs:w-[48%]">
+                  <label htmlFor="phone1" className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="text-xs md:text-base flex items-center mb-[10px]">
                       Номер администратора
                       <span className="ml-[5px]"><StarLabel /></span>
@@ -1088,7 +1088,7 @@ export default function LocationMapCity() {
                     </div>
 
                   </label>
-                  <label className="w-full md:w-[31%] xs:w-[48%]">
+                  <label htmlFor="phone2" className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="text-[12px] md:text-base flex items-center mb-[10px]">
                       Номер второго администратора{" "}
                       <span className="ml-[5px]">{/* <StarLabel /> */}</span>
@@ -1193,7 +1193,7 @@ export default function LocationMapCity() {
 
                       {/* Region INput  */}
                       <div className={"w-full"}>
-                        <label htmlFor="" >
+                        <label htmlFor="selectRegion" >
                           <span className="flex items-center text-[#303030] text-xs md:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                             Выберите регион
                           </span>

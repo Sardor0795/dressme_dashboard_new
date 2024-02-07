@@ -199,7 +199,7 @@ function EditProfilePage() {
             });
           }
         },
-        onError: (err) => {},
+        onError: (err) => { },
       }
     );
   };
@@ -253,19 +253,17 @@ function EditProfilePage() {
           // setState({...state, openModalRegions: false })
         }}
         className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
-         ${
-           state?.popConfirmDelete || openEditModal || state?.openModalRegions
-             ? ""
-             : "hidden"
-         }`}
+         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions
+            ? ""
+            : "hidden"
+          }`}
       ></div>
       {/* Delete Account Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.popConfirmDelete
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete
             ? " bottom-0 md:flex"
             : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+          }`}
       >
         <button
           onClick={() => setState({ ...state, popConfirmDelete: false })}
@@ -307,9 +305,8 @@ function EditProfilePage() {
       </section>
       {/* ---password change----- */}
       <section
-        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
-          openEditModal ? "" : "hidden z-0"
-        }`}
+        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
+          }`}
       >
         <EditPassword onClick={togglePassword} />
       </section>
@@ -438,9 +435,8 @@ function EditProfilePage() {
                   onChange={(e) =>
                     setState({ ...state, sellerPhoneNum: e.target.value })
                   }
-                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                    state?.sellerPhoneNum ? "font-AeonikProMedium" : null
-                  } text-base leading-4 text-black`}
+                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
+                    } text-base leading-4 text-black`}
                   placeholder={"(99) 999-99-99"}
                 ></InputMask>
               </div>
@@ -449,11 +445,10 @@ function EditProfilePage() {
           {/* Выберите регион, */}
           <div className="w-full h-fit flex justify-center ">
             <div
-              className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                state?.openModalRegions
+              className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
                   ? " bottom-0 md:flex flex-col"
                   : "md:hidden bottom-[-1500px] z-[-10]"
-              }`}
+                }`}
             >
               <div className="w-full flex items-center justify-between  ">
                 <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">
@@ -482,11 +477,10 @@ function EditProfilePage() {
                             {data?.name_ru}
                           </span>
                           <span
-                            className={`${
-                              activeIndex == data?.id
+                            className={`${activeIndex == data?.id
                                 ? "rotate-[0deg]"
                                 : "rotate-[180deg]"
-                            } `}
+                              } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
                           </span>
@@ -494,11 +488,10 @@ function EditProfilePage() {
 
                         <div
                           className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                              ? "openAccardion"
+                              : "CloseAccardion"
+                            } `}
                         >
                           {data?.sub_regions?.map((item) => {
                             return (
@@ -559,7 +552,7 @@ function EditProfilePage() {
 
             {/* Region INput  */}
             <div className={"w-full"}>
-              <label htmlFor="">
+              <label htmlFor="selectRegion">
                 <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                   Выберите регион
                 </span>

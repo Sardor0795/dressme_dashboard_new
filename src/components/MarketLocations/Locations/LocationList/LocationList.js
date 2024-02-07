@@ -191,7 +191,7 @@ function LocationList() {
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {item?.name}{" "}
                   <span className="hidden md:inline">
-                    {item?.shop_locations?.length > 1 && (item?.shop_locations?.length)}
+                    ({item?.shop_locations?.length > 1 && item?.shop_locations?.length})
                   </span>
                 </p>
 
