@@ -488,13 +488,13 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                                 })}
                                 <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                                {itemValue?.status === "approved" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                                {itemValue?.status === "approved" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                                   {itemValue?.status || "status"}
                                 </td>}
-                                {itemValue?.status === "declined" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                                {itemValue?.status === "declined" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
                                   {itemValue?.status || "status"}
                                 </td>}
-                                {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
+                                {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                   {itemValue?.status || "status"}
                                 </td>}
                                 <td className="w-[10%] h-full  flex items-center justify-center ">
