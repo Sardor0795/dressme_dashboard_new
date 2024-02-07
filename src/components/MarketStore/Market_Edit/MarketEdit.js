@@ -718,19 +718,19 @@ function MarketEdit() {
                   />
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-2 md:gap-x-[30px] mb-5">
-                  <label
-                    htmlFor="shopName"
+                  <div
                     className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
                   >
                     Пол
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />{" "}
                     </span>
-                  </label>
+                  </div>
                   <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                     {dressInfo?.genderList?.map((data, index) => {
                       return (
                         <div
+                          className="w-[30%]"
                           key={index}
                         >
                           <input
@@ -755,20 +755,18 @@ function MarketEdit() {
                   </div>
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-2 md:gap-x-[30px] ">
-                  <label
-                    htmlFor="shopName"
+                  <div
                     className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
                   >
                     Метод доставки
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />
                     </span>
-                  </label>
-                  <div className="w-[65%] md:w-[70%] radio-toolbar  flex items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+                  </div>
+                  <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 gap-x-4 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                     {dressInfo?.deliveryList?.map((data, index) => {
                       return (
-                        <div
-                          key={index}>
+                        <div className="w-full " key={index} >
                           <input
                             type="radio"
                             id={data?.name_uz}
@@ -781,7 +779,7 @@ function MarketEdit() {
                           />
                           <label
                             htmlFor={data?.name_uz}
-                            className={`w-1/2 h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
+                            className={`w-full h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                           >
                             <span className="leading-normal">{data?.name_ru}</span>
                           </label>
@@ -789,6 +787,7 @@ function MarketEdit() {
                       );
                     })}
                   </div>
+
                 </div>
               </div>
             </div>
