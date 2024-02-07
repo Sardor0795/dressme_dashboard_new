@@ -19,3 +19,7 @@ export { default as img4 } from "./imgs/img4.svg";
 export { default as ColourCard } from "./imgs/ColourCard.svg";
 //Location Img
 export { default as pdpImg } from "./imgs/pdpImg.svg";
+// ---------------Language-----------------
+export { default as EnglishFlag } from "./Language/English.svg";
+export { default as RussianFlag } from "./Language/Russian.svg";
+export { default as UzbekFlag } from "./Language/Uzbek.svg";

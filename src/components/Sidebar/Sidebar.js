@@ -12,20 +12,51 @@ import {
 import { dressMainData } from "../../hook/ContextTeam";
 import { useHttp } from "../../hook/useHttp";
 import { useQuery } from "@tanstack/react-query";
+import { RussianFlag, UzbekFlag } from "../../assets";
+import { Popover } from "antd";
 
 function Sidebar() {
   const { request } = useHttp()
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   // const [userData, setUserData] = useState(null)
-  // useQuery(["Get_Seller_Profile_dash"], () => { return request({ url: "/profile", token: true }); },
-  //   {
-  //     onSuccess: (res) => {
-  //       setUserData(res)
-  //     },
-  //     keepPreviousData: true,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+  const [selectLang, setselectLang] = useState(1);
+  const LanguageList = [
+    { id: 1, type: "Русский", icons: RussianFlag },
+    { id: 2, type: "O'zbekcha", icons: UzbekFlag },
+  ];
+  const [openLang, setOpenLang] = useState(false);
+  const handleOpenChangeWear = (newOpen) => {
+    setOpenLang(newOpen);
+  };
+  const handleLangValue = (value) => {
+    setselectLang(value);
+    setOpenLang(false);
+  };
+  const contentLang = (
+    <section className="w-[250px] h-fit m-0 p-0">
+      {LanguageList.map((data) => {
+        return (
+          <article
+            key={data?.id}
+            className={`p-2 gap-x-2 text-sm cursor-pointer hover:bg-bgColor flex items-center justify-start  ${dressInfo?.ColorSeason}`}
+            onClick={() => {
+              handleLangValue(data?.id);
+            }}
+          >
+            <figure className="mr-[6px]  w-5 h-5">
+              <img className="w-full h-full" src={data?.icons} alt="" />
+            </figure>
+            <article
+              className={`text-lg not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
+            >
+              {data?.type}
+            </article>
+          </article>
+        );
+      })}
+    </section>
+  );
+
   return (
     <div
       className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
@@ -220,54 +251,11 @@ function Sidebar() {
                   </span>
                 </p>
               </div>)}
-
-
-          {/* <div className="w-full">
-            <div className="w-full flex items-center justify-center">
-              {dressInfo.isItPorduct ? (
-                <button
-                  onClick={() =>
-                    setDressInfo({ ...dressInfo, isItPorduct: false })
-                  }
-                  className="w-full py-3 px-5 mx-auto mt-10 rounded-lg flex items-center justify-center bg-green-400"
-                >
-                  has Product
-                </button>
-              ) : (
-                <button
-                  onClick={() =>
-                    setDressInfo({ ...dressInfo, isItPorduct: true })
-                  }
-                  className="w-full py-3 px-5 mx-auto mt-10 rounded-lg flex items-center justify-center bg-red-400"
-                >
-                  no Product
-                </button>
-              )}
-            </div>
-            <div className=" w-full">
-              {dressInfo.isAuthen ? (
-                <button
-                  onClick={() =>
-                    setDressInfo({ ...dressInfo, isAuthen: false })
-                  }
-                  className="w-full py-3 px-5 mx-auto mt-10 rounded-lg flex items-center justify-center bg-green-400"
-                >
-                  has authentication
-                </button>
-              ) : (
-                <button
-                  onClick={() => setDressInfo({ ...dressInfo, isAuthen: true })}
-                  className="w-full py-3 px-5 mx-auto mt-10 rounded-lg flex items-center justify-center bg-red-400"
-                >
-                  no authentication
-                </button>
-              )}
-            </div>
-          </div> */}
-
         </div>
 
         <div className="w-full px-2  flex flex-col gap-y-1">
+
+
           <NavLink
             className={
               "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
@@ -295,6 +283,31 @@ function Sidebar() {
               )
             }
           </NavLink>
+          <section className="w-full hover:bg-lightBorderColor   rounded-lg  bg-transparent  h-fit font-AeonikProMedium select-none cursor-pointer">
+            {LanguageList.filter((data) => data.id === selectLang).map(
+              (data) => {
+                return (
+                  <Popover
+                    key={data?.id}
+                    open={openLang}
+                    onOpenChange={handleOpenChangeWear}
+                    className="w-full  h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize "
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="top"
+                    content={contentLang}
+                  >
+                    <span className="mr-[6px] ">
+                      <img src={data?.icons} alt="" />
+                    </span>
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
+                      {data?.type}
+                    </p>
+                  </Popover>
+                );
+              }
+            )}
+          </section>
           <button
             onClick={() => setDressInfo({ ...dressInfo, logOutSeller: true })}
             className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
