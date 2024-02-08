@@ -32,6 +32,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
         <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
           <input
             type="text"
+            name="s"
             className="w-full h-full text-[13px] outline-0 px-[10px]"
             placeholder="Поиск"
           />

@@ -34,6 +34,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
             type="text"
             className="w-full h-full text-[13px] px-[10px] outline-0"
             placeholder="Поиск"
+            name="s"
           />
           <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
             <SearchIcon />

@@ -17,6 +17,7 @@ import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 function EditProfilePage() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -119,42 +120,39 @@ function EditProfilePage() {
   // )
   // ------------GET METHOD Region-----------------
 
-  useQuery(
-    ["get region"],
-    () => {
-      return fetch(`${url}/regions`).then((res) => res.json());
-    },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getRegionList: res });
-      },
-      onError: (err) => {
-        console.log(err, "err get region");
-      },
-      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-      refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
-    }
-  );
+  useEffect(() => {
+    const fetchDataRegions = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`)
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, regionList: data?.data })
+        }
 
-  // ------------GET METHOD seller-types-----------------
-  useQuery(
-    ["get seller-type"],
-    () => {
-      return fetch(`${url}/seller-types`).then((res) => res.json());
-    },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getSellerList: res });
-      },
-      onError: (err) => {
-        console.log(err, "err get seller-type");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+      } catch (error) {
 
-  // console.log(state?.getSellerList, "bu getSellerList");
+      }
+    };
+    const fetchDataTypes = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/seller-types`)
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, typeList: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.regionList) {
+      fetchDataRegions();
+    }
+    if (!dressInfo?.typeList) {
+      fetchDataTypes();
+    }
+  }, []);
+
+
+
   // const changeTip = () => {
   //   state?.getSellerList?.individual?.forEach(e => {
   //     if (e?.id == state?.sellerTypeId)
@@ -467,8 +465,8 @@ function EditProfilePage() {
               </div>
 
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                {state?.getRegionList?.regions ? (
-                  state?.getRegionList?.regions?.map((data, index) => {
+                {dressInfo?.regionList?.regions ? (
+                  dressInfo?.regionList?.regions?.map((data, index) => {
                     return (
                       <div key={data?.id} className="w-full  h-fit  ">
                         <div
@@ -569,7 +567,7 @@ function EditProfilePage() {
                       !state?.sellerSubRegionId &&
                       "Выберите регион"}
 
-                    {state?.getRegionList?.regions
+                    {dressInfo?.regionList?.regions
                       ?.filter((e) => e.id == state?.sellerRegionId)
                       .map((item) => {
                         return (
@@ -616,7 +614,7 @@ function EditProfilePage() {
                 onChange={(e) => setState({ ...state, sellerTypeId: e })}
                 suffixIcon={null}
                 size="large"
-                options={state?.getSellerList?.company?.map((item) => {
+                options={dressInfo?.typeList?.company?.map((item) => {
                   return {
                     value: item?.id,
                     label: item?.name_ru,
@@ -647,7 +645,7 @@ function EditProfilePage() {
                   placeholder="Тип предприятия"
                   required
                 >
-                  {state?.getSellerList?.individual?.map((data) => {
+                  {dressInfo?.typeList?.individual?.map((data) => {
                     return (
                       <option key={data.id} value={data.id}>
                         {" "}

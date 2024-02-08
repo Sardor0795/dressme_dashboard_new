@@ -102,6 +102,7 @@ export default function ReviewWear() {
                     <div className="max-w-[350px] w-[100%] h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
                       <input
                         type="text"
+                        name="s"
                         className="w-full h-full px-[10px] outline-0	"
                         placeholder="Поиск"
                       />
