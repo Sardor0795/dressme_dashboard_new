@@ -59,9 +59,9 @@ export default function ProductIsCheck() {
             {loading ?
                 <LoadingForSeller />
                 :
-                dressInfo?.shopsList?.shops?.data?.length > 0
+                dressInfo?.shopsList?.shops?.length > 0
                     ?
-                    dressInfo?.locationList?.data?.length > 0
+                    dressInfo?.locationList?.length > 0
                         ?
                         <ProductsPageOne />
                         :

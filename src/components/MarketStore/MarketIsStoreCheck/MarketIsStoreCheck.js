@@ -48,7 +48,6 @@ export default function MarketIsStoreCheck() {
     refetchOnWindowFocus: false,
   });
 
-
   return (
     <div>
 
@@ -56,8 +55,8 @@ export default function MarketIsStoreCheck() {
         <LoadingForSeller />
       ) : (
         <div>
-          {dressInfo?.shopsList?.shops?.data?.length >= 1 && <MyMarket onRefetch={refetch} />}
-          {dressInfo?.shopsList?.shops?.data?.length === 0 && <AddStore onRefetch={refetch} />}
+          {dressInfo?.shopsList?.shops?.length >= 1 && <MyMarket onRefetch={refetch} />}
+          {dressInfo?.shopsList?.shops?.length === 0 && <AddStore onRefetch={refetch} />}
         </div>
       )}
     </div>
