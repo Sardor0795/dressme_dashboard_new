@@ -337,6 +337,8 @@ function AddStore({ onRefetch }) {
                     background={false}
                     responsive={true}
                     autoCropArea={1}
+                    cropShape="round"
+
                     checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
                     guides={true}
                     dragMode="move"
@@ -444,7 +446,7 @@ function AddStore({ onRefetch }) {
             </span>
           }
         </button>
-        <div className="absolute  -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center rounded-full border border-dashed ">
+        <div className="absolute  -bottom-11 overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center  border border-dashed ">
           <button
             type="button"
             onClick={() => {
@@ -452,7 +454,7 @@ function AddStore({ onRefetch }) {
               setBackImgUploadModal(true)
             }
             }
-            className="h-full w-full  rounded-full flex items-center justify-center ">
+            className="h-full w-full   flex items-center justify-center ">
             {cropData ? (
               <img
                 src={cropData}
