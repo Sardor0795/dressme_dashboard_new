@@ -165,6 +165,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Мин"
+                                    name="minBreast"
                                     value={state?.minBreast}
                                     onChange={(e) => setState({ ...state, minBreast: e.target.value })}
                                 />
@@ -175,6 +176,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
+                                    name="maxBreast"
                                     value={state?.maxBreast}
                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
                                 />
@@ -195,6 +197,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Мин"
+                                    name="minSize"
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
                                 />
@@ -205,6 +208,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
+                                    name="maxSize"
                                     value={state?.maxSize}
                                     onChange={(e) => setState({ ...state, maxSize: e.target.value })}
                                 /> :
@@ -428,6 +432,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
+                                    name="minWaist"
                                     value={state?.minWaist}
                                     onChange={(e) => setState({ ...state, minWaist: e.target.value })}
 
@@ -439,6 +444,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Макс"
+                                    name="maxWaist"
                                     value={state?.maxWaist}
                                     onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
 
@@ -457,6 +463,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
                                     placeholder="Мин"
+                                    name="minHips"
                                     value={state?.minHips}
                                     onChange={(e) => setState({ ...state, minHips: e.target.value })}
                                 />
@@ -467,6 +474,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                     placeholder="Макс"
+                                    name="maxHips"
                                     value={state?.maxHips}
                                     onChange={(e) => setState({ ...state, maxHips: e.target.value })}
                                 />
@@ -486,6 +494,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                 type="number"
                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
+                                name="quantityNum"
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                             />
                         </div>
@@ -495,21 +504,17 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                     <div className="w-fit flex items-center gap-x-[25px]">
                         <div className="w-fit hidden md:flex flex-col items-start">
                             <div className="flex items-center justify-center ">
-                                <label
-                                    htmlFor=""
+                                <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                     Возраст
-                                </label>
-                                {/* <span className="ml-[5px]">
-                  <StarLabel />
-                </span> */}
+                                </div>
                             </div>
                             <div className="w-fit flex items-center">
                                 <input
                                     type="number"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
                                     placeholder=""
+                                    name="ageNum"
                                     value={state?.ageNum}
                                     onChange={(e) => setState({ ...state, ageNum: e.target.value })}
                                 />
@@ -530,6 +535,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     type="text"
                                     placeholder="0"
                                     id="priceOutWear"
+                                    name="priceNum"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
                                     value={state?.priceNum}
                                     onChange={handleChangePrice}
@@ -542,13 +548,10 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-fit flex flex-col items-start">
                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                            <label
-                                htmlFor=""
+                            <div
                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Скидка
-                            </label>
-
+                            </div>
                         </div>
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
@@ -558,6 +561,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                             <input
                                                 type="number"
                                                 placeholder="0"
+                                                name="salePercent"
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 value={state?.salePercent}
                                                 onChange={handleChangePercent}
@@ -566,6 +570,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                             <input
                                                 type="number"
                                                 placeholder="0"
+                                                name="salePercent"
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 readOnly
                                             />}
@@ -581,6 +586,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                             id="salePrice"
                                             className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                             value={state?.salePrice}
+                                            name="salePrice"
                                             onChange={handleChangeSalePrice}
                                             readOnly
                                         />

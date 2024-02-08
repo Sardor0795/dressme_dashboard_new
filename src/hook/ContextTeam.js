@@ -32,6 +32,8 @@ export default function ContextTeam({ children }) {
     showSelectedButton: 'products',
     deliveryList: null,
     genderList: null,
+    regionList: null,
+    typeList: null,
   });
 
 

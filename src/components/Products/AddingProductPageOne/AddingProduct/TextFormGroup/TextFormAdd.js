@@ -173,7 +173,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
-                                        name="title"
+                                        name="titleInUz"
 
                                         value={state?.titleInUz}
                                         onChange={(e) => setState({ ...state, titleInUz: e.target.value })}
@@ -335,7 +335,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
-
+                                            name="noteValueRu"
                                             value={state?.noteValueRu}
                                             onChange={(e) => setState({ ...state, noteValueRu: e.target.value })}
                                         />
@@ -360,7 +360,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
-
+                                            name="noteValueUz"
                                             value={state?.noteValueUz}
                                             onChange={(e) => setState({ ...state, noteValueUz: e.target.value })}
                                         />

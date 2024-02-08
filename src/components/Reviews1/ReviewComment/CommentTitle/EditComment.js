@@ -19,7 +19,7 @@ export default function EditComponent({
     editComment: false,
   });
 
-  console.log(state?.editComment,'editComment');
+  console.log(state?.editComment, 'editComment');
 
   const url = "https://api.dressme.uz/api/seller/reply";
 
@@ -37,7 +37,7 @@ export default function EditComponent({
       }),
     })
       .then((res) => {
-        console.log(res,"RES");
+        console.log(res, "RES");
         return res.json();
       })
       .then((data) => {
@@ -68,7 +68,7 @@ export default function EditComponent({
       .then((data) => {
         setState({ ...state, getComment: data });
         handleRefetch();
-        setState({...state,  editComment: false,})
+        setState({ ...state, editComment: false, })
       })
       .catch((data) => {
         console.log(data);
@@ -143,9 +143,8 @@ export default function EditComponent({
       {!item?.reply && (
         <form
           onSubmit={(e) => e.preventDefault()}
-          className={`${
-            sendText ? "hidden" : "flex"
-          } w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
+          className={`${sendText ? "hidden" : "flex"
+            } w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
         >
           {state?.sendAnswer ? (
             <div className="w-full flex flex-col md:flex-row items-center justify-between">

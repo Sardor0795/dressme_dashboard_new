@@ -87,11 +87,10 @@ export default function ReviewComment() {
               className="w-full h-5 flex items-center cursor-pointer"
             >
               <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
-                  data?.checked
+                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
                     ? "border border-textBlueColor bg-textBlueColor"
                     : "border border-lightBorderColor"
-                }`}
+                  }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
               </button>
@@ -173,9 +172,8 @@ export default function ReviewComment() {
               <BiChevronDown
                 size={20}
                 style={{ color: "#c2c2c2" }}
-                className={`${
-                  state?.openwear ? "rotate-[-180deg]" : ""
-                } duration-200`}
+                className={`${state?.openwear ? "rotate-[-180deg]" : ""
+                  } duration-200`}
               />
             </span>
           </Popover>
@@ -184,6 +182,7 @@ export default function ReviewComment() {
               type="text"
               className="w-full h-full px-[10px] outline-0	"
               placeholder="Поиск"
+              name="s"
             />
             <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
               <SearchIcon />

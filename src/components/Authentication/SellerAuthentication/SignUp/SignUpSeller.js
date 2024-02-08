@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import "./style.css";
 import InputMask from "react-input-mask";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -11,11 +11,17 @@ import { ArrowTopIcons, CreditCardNumber, DashboardList, DashboardUser, MenuClos
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import axios from "axios";
+import { dressMainData } from "../../../../hook/ContextTeam";
+const { REACT_APP_BASE_URL } = process.env;
+
 const SignUpSeller = () => {
   // const { REACT_APP_BASE_URL: url } = process.env;
   const url = "https://api.dressme.uz/api/seller"
   const navigate = useNavigate()
   const [naturalPerson, setNaturalPerson] = useState(true);
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const [api, contextHolder] = notification.useNotification();
   const [state, setState] = useState({
     firstName: "",
@@ -93,39 +99,37 @@ const SignUpSeller = () => {
   const sendMessagePhoneNumber = data5 + data4;
 
 
+  useEffect(() => {
+    const fetchDataRegions = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`)
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, regionList: data?.data })
+        }
 
-  // ------------GET METHOD seller-types-----------------
-  useQuery(["get_seller_type_signup"], () => {
-    return fetch(`${url}/seller-types`).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getSellerList: res })
-      },
-      onError: (err) => {
-        console.log(err, "err");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: true,
+      } catch (error) {
+
+      }
+    };
+    const fetchDataTypes = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/seller-types`)
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, typeList: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.regionList) {
+      fetchDataRegions();
     }
-  )
-  // ------------GET METHOD Region-----------------
-  useQuery(["get_region_signup"], () => {
-    return fetch(`${url}/regions`).then(res => res.json())
-  },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getRegionList: res })
-      },
-      onError: (err) => {
-        console.log(err, "err");
-      },
-      keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-      refetchOnWindowFocus: true, // bu ham focus bolgan vaqti malumot olib kelish
+    if (!dressInfo?.typeList) {
+      fetchDataTypes();
     }
-  )
-  // console.log(state?.getSellerList, "signup--getSellerList");
-  // console.log(state?.getRegionList, "signup--getRegionList");
+  }, []);
+
   // ------------POST METHOD-----------------
   const { mutate } = useMutation(() => {
     return fetch(`${url}/register`, {
@@ -305,7 +309,7 @@ const SignUpSeller = () => {
               <div className="w-full  flex flex-col justify-center items-center">
                 <div className="w-full  max-w-[370px]  mx-auto flex flex-col gap-y-4">
                   {
-                    state?.getSellerList?.individual?.map(data => {
+                    dressInfo?.typeList?.individual?.map(data => {
                       return (
                         <div key={data?.id}>
                           <div className="flex items-center">
@@ -353,7 +357,7 @@ const SignUpSeller = () => {
                     suffixIcon={null}
                     size="large"
                     options={
-                      state?.getSellerList?.company?.map(item => {
+                      dressInfo?.typeList?.company?.map(item => {
                         return (
                           {
                             value: item?.id,
@@ -425,8 +429,8 @@ const SignUpSeller = () => {
                           <MenuCloseIcons colors="#000" /></span>
                       </div>
                       <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                        {state?.getRegionList?.regions ?
-                          state?.getRegionList?.regions?.map((data, index) => {
+                        {dressInfo?.regionList?.regions ?
+                          dressInfo?.regionList?.regions?.map((data, index) => {
                             return (
                               <div key={data?.id} className="w-full  h-fit  ">
                                 <div
@@ -504,7 +508,7 @@ const SignUpSeller = () => {
                         <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                           {!state?.region && !state?.sub_region && "Выберите регион"}
 
-                          {state?.getRegionList?.regions?.filter(e => e.id == state?.region).map(item => {
+                          {dressInfo?.regionList?.regions?.filter(e => e.id == state?.region).map(item => {
                             return <span key={item?.id} className="flex items-center text-[#000] text-[14px] sm:text-base">
                               {item?.name_ru},
                               {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {
