@@ -69,7 +69,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
   useEffect(() => {
     data?.products?.map((item) => {
       if (checked?.length >= 1) {
-        if (checked.includes(item?.id)) {
+        if (checked?.includes(item?.id)) {
           handleGetCheckAll(checked, data?.id, data?.shop_id)
         }
       } else {
@@ -78,21 +78,21 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
     })
 
   }, [checked])
-  useEffect(() => {
-    if (AllSelectCheckedAction) {
+  // useEffect(() => {
+  //   if (AllSelectCheckedAction) {
 
-      setChecked(AllSelectCheckedAction ? data?.products?.map((item) => item.id) : []);
-      setCheckAll(AllSelectCheckedAction);
-    } else {
-      setChecked(AllSelectCheckedAction ? data?.products?.map((item) => item.id) : []);
-      setCheckAll(AllSelectCheckedAction);
-    }
-  }, [AllSelectCheckedAction]);
+  //     setChecked(AllSelectCheckedAction ? data?.products?.map((item) => item.id) : []);
+  //     setCheckAll(AllSelectCheckedAction);
+  //   } else {
+  //     setChecked(AllSelectCheckedAction ? data?.products?.map((item) => item.id) : []);
+  //     setCheckAll(AllSelectCheckedAction);
+  //   }
+  // }, [AllSelectCheckedAction]);
 
   useEffect(() => {
     if (data?.products?.length) {
-      setIndeterminate(checked.length && checked.length !== data?.products?.length);
-      setCheckAll(checked.length === data?.products?.length);
+      setIndeterminate(checked?.length && checked?.length !== data?.products?.length);
+      setCheckAll(checked?.length === data?.products?.length);
     }
   }, [checked]);
 
@@ -463,7 +463,7 @@ function LocationItem({ allProductLocationList, data, handleGetCheckAll, AllSele
                             <tbody className="w-full h-full flex items-center">
                               <tr>
                                 <td>
-                                  <Checkbox value={itemValue?.id} checked={AllSelectCheckedAction || checked} />
+                                  <Checkbox value={itemValue?.id} checked={checked} />
                                 </td>
                               </tr>
                               <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">

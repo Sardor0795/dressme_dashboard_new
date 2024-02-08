@@ -33,7 +33,7 @@ function LocationList() {
   }, []);
 
   return (
-    <div className={`w-full h-full  px-4  md:px-10 `}>
+    <div className={`w-full h-full  px-4  md:px-10 border border-red-500  pb-[100px]`}>
       <div
         className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"
           }`}
@@ -56,8 +56,8 @@ function LocationList() {
           </p>
         </div>
         <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-          {dressInfo?.shopsList?.shops?.data ? (
-            dressInfo?.shopsList?.shops?.data?.map((item) => {
+          {dressInfo?.shopsList?.shops ? (
+            dressInfo?.shopsList?.shops?.map((item) => {
               return (
                 <button
                   onClick={() => handleShopsOfLocation(item?.id)}
@@ -71,8 +71,8 @@ function LocationList() {
               );
             })
           ) : (
-            <div className="flex items-center jsutify-center">
-              Malumotlar yuklanyapti...
+            <div className="w-full h-[150px] flex items-center jsutify-center">
+              Ничего не найдено
             </div>
           )}
         </div>
@@ -180,6 +180,7 @@ function LocationList() {
           </li>
         </ul>
       </div>
+      {console.log(dressInfo?.locationList, "dressInfo?.locationList")}
       {dressInfo?.locationList?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
         return (
           <div key={item?.id}>
@@ -190,9 +191,9 @@ function LocationList() {
               >
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {item?.name}{" "}
-                  <span className="hidden md:inline">
-                    ({item?.shop_locations?.length > 1 && item?.shop_locations?.length})
-                  </span>
+                  {item?.shop_locations?.length > 1 && <span className="hidden md:inline">
+                    ({item?.shop_locations?.length})
+                  </span>}
                 </p>
 
                 <button

@@ -205,7 +205,7 @@ export default function LocationAddById() {
   // console.log(state?.workTimeTo, "workTimeTo");
 
   return (
-    <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 md:px-10 ">
+    <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 md:px-10 pb-10">
       <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
