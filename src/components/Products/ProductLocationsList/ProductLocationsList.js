@@ -91,6 +91,7 @@ export default function ProductLocationsList() {
   }
 
   function handleAllCheckList(childData) {
+    console.log(childData, "childData");
   }
 
   const onSendPeoductSeveralSelect = () => {
@@ -98,8 +99,8 @@ export default function ProductLocationsList() {
     setHideProductList(true)
     let form = new FormData();
     form.append("location_id", state?.getShopLocationId);
-    dressInfo?.getProductList?.map((e, index) => {
-      form.append("product_ids[]", dressInfo?.getProductList[index]);
+    state?.getCheckListItem?.map((e, index) => {
+      form.append("product_ids[]", state?.getCheckListItem[index]);
     })
     return fetch(`${url}/shops/locations/products/add-selected`, {
       method: "POST",
@@ -132,8 +133,8 @@ export default function ProductLocationsList() {
     setHideProductList(true)
     let form = new FormData();
     form.append("location_ids[]", state?.shopId);
-    dressInfo?.getProductList?.map((e, index) => {
-      form.append("product_ids[]", dressInfo?.getProductList[index]);
+    state?.getCheckListItem?.map((e, index) => {
+      form.append("product_ids[]", state?.getCheckListItem[index]);
     })
     return fetch(`${url}/products/massive-delete-products`, {
       method: "POST",
@@ -171,24 +172,24 @@ export default function ProductLocationsList() {
   const [productAllId, setProductAllId] = useState([]);
   const [allCheckedAction, setAllCheckedAction] = useState(null);
 
-  const handleGetValueAll = (e) => {
-    setAllCheckedAction(e.target.checked)
-    if (e.target.checked) {
-      dressInfo?.getProductList?.products_locations?.map(item => {
-        return item?.shop_locations?.map(value => {
-          setLocationAllId(locationAllId => [...locationAllId, value?.id]);
-          return value?.products?.map(data => {
-            setProductAllId(productAllId => [...productAllId, data?.id]);
-          })
-        })
-      })
+  // const handleGetValueAll = (e) => {
+  //   setAllCheckedAction(e.target.checked)
+  //   if (e.target.checked) {
+  //     dressInfo?.getProductList?.products_locations?.map(item => {
+  //       return item?.shop_locations?.map(value => {
+  //         setLocationAllId(locationAllId => [...locationAllId, value?.id]);
+  //         return value?.products?.map(data => {
+  //           setProductAllId(productAllId => [...productAllId, data?.id]);
+  //         })
+  //       })
+  //     })
 
-    } else {
-      setLocationAllId([])
-      setProductAllId([])
-    }
-  }
-
+  //   } else {
+  //     setLocationAllId([])
+  //     setProductAllId([])
+  //   }
+  // }
+  console.log(dressInfo?.getProductList, "dressInfo?.getProductList");
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -281,7 +282,7 @@ export default function ProductLocationsList() {
               {dressInfo?.getProductList?.products_locations?.map((item, index) => {
                 return (
                   <div key={index}>
-                    {dressInfo?.getProductList?.length ?
+                    {state?.getCheckListItem?.length > 0 ?
                       state?.shopMarketId == item?.id &&
                       <div className="w-full cursor-pointer mt-2">
                         {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
@@ -486,7 +487,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openSelectModal: true })}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${allCheckedAction || dressInfo?.getProductList?.length >= 1
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${state?.getCheckListItem?.length >= 1
                   ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -499,7 +500,7 @@ export default function ProductLocationsList() {
               <button
                 type="button"
                 onClick={() => setState({ ...state, openDeleteModal: true })}
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${allCheckedAction || dressInfo?.getProductList?.length >= 1
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${state?.getCheckListItem?.length >= 1
                   ? "text-deleteColor active:scale-95  active:opacity-70"
                   : "text-[#D2D2D2] cursor-not-allowed"
                   }`}
@@ -511,20 +512,20 @@ export default function ProductLocationsList() {
               </button>
             </div>
           </div>
-          <div className="w-full justify-end  cursor-pointer bg-white flex items-center gap-x-2"
+          {/* <div className="w-full justify-end  cursor-pointer bg-white flex items-center gap-x-2"
           >
             <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
               Выбрать все
             </span>
             <Checkbox onChange={handleGetValueAll} />
-          </div>
+          </div> */}
           <div className="w-full my-4">
 
           </div>
           {dressInfo?.getProductList?.products_locations?.map((item, index) => {
             return (
               <div key={index}>
-                {dressInfo?.getProductList?.length ?
+                {state?.getCheckListItem?.length > 0 ?
                   Number(state?.shopMarketId) === Number(item?.id) &&
                   <div className="flex items-center w-full">
                     {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
@@ -558,7 +559,7 @@ export default function ProductLocationsList() {
                                     handleCheckAllBtn={handleAllCheckList}
                                     onRefetch={refetch}
                                     data={resData}
-                                    AllSelectCheckedAction={allCheckedAction}
+                                    // AllSelectCheckedAction={allCheckedAction}
                                     searchName={searchName}
                                   />
                                   :
