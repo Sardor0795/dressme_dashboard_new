@@ -19,14 +19,15 @@ export default function SellerRefreshContext({ children }) {
             };
             const response = await axios.post(`${REACT_APP_BASE_URL}/refresh-token`, data, { headers });
             if (response?.status >= 200 && response?.status < 300) {
-                // console.log(response, 'response');
+                console.log('refresh Success');
                 localStorage.setItem("DressmeUserToken", response?.data?.access_token)
             }
 
         } catch (error) {
+            console.log(error, "error");
             if (error?.response?.status === 401) {
                 localStorage.removeItem("DressmeUserToken");
-                window.location.reload();
+                // window.location.reload();
                 navigate("/login-seller");
             }
             if (error?.response?.status === 403) {
@@ -40,6 +41,7 @@ export default function SellerRefreshContext({ children }) {
     useEffect(() => {
         const intervalId = setInterval(() => {
             sellerRefreshToken();
+            // }, 5 * 10000);
         }, 2 * 59 * 60 * 1000);
         return () => {
             clearInterval(intervalId);
