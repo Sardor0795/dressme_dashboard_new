@@ -5,19 +5,22 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import ContextTeam from "./hook/ContextTeam";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ProfileContextProvider from "./context/profilePageContext";
+import SellerUserContext from "./hook/SellerUserContext";
+import SellerRefreshContext from "./hook/SellerRefreshToken";
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <QueryClientProvider client={queryClient}>
+  <BrowserRouter>
     <ContextTeam>
-      <BrowserRouter>
-        <ProfileContextProvider>
-          <App />
-        </ProfileContextProvider>
-      </BrowserRouter>
+      <SellerRefreshContext>
+        <SellerUserContext>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider >
+        </SellerUserContext>
+      </SellerRefreshContext>
     </ContextTeam>
-  </QueryClientProvider>
+  </BrowserRouter>
 );

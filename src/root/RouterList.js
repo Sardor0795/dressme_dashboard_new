@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { dressMainData } from "../hook/ContextTeam";
 import LoadingForSeller from "../components/Loading/LoadingFor";
 import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 // ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
@@ -54,142 +55,132 @@ export default function RouterList() {
       <Routes>
         {/* ---------------------<Store>------------------------- */}
 
-
-        <Route path="/reviews" element={
-          <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-            <Reviews1 />
-          </Suspense>
-        }>
-          <Route index element={
+        <Route element={<Sidebar />}>
+          <Route path="/reviews" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ReviewStoreWear />
+              <Reviews1 />
             </Suspense>
-          } />
-          <Route path="review/store-wear" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ReviewStoreWear />
-            </Suspense>
-          } />
-          <Route path="review/comment-store/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ReviewComment />
-            </Suspense>
-          } />
-          <Route path="review/comment-wear/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ReviewWearComment />
-            </Suspense>
-          } />
-        </Route>
-
-
-        {/* ---------------------<Store>------------------------- */}
-
-        <Route path="/store" element={
-          <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-            <MarketStore />
-          </Suspense>
-        }>
-          <Route index element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <MarketIsStoreCheck />
-            </Suspense>
-          } />
-          <Route path="/store/market-add" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <AddStore />
-            </Suspense>
-          } />
-          <Route path="/store/market-list" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <MyMarket />
-            </Suspense>
-          } />
-          <Route path="/store/market-list/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <MarketEdit />
-            </Suspense>
-          } />
-          <Route path="/store/locations/shop/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <LocationsByIdShow />
-            </Suspense>
-          } />
-        </Route>
-
-        {/* ---------------------<Locations>------------------------- */}
-
-
-        <Route path="/locations-store" element={
-          <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-            <MarketStore />
-          </Suspense>
-        }>
-          <Route index element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <MarketIsCheck />
-            </Suspense>
-          } />
-          <Route path="/locations-store/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <LocationAddById />
-            </Suspense>
-          } />
-          <Route path="/locations-store/list" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <LocationList />
-            </Suspense>
-          } />
-          <Route path="/locations-store/city/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <LocationMapCity />
-            </Suspense>
-          } />
-          <Route path="/locations-store/wears/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <LocationClothesCity />
-            </Suspense>
-          } />
-        </Route>
-
-
-
-        {/* ---------------------<LocationsProduct>------------------------- */}
-        <Route path="/products" element={
-          <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-            <Products />
-          </Suspense>
-        }>
-          {dressInfo?.isCheckPoructList?.length >= 1 ?
-            <Route path="/products" element={<Navigate to="/products/location" />} />
-            :
+          }>
             <Route index element={
               <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ProductIsCheck />
+                <ReviewStoreWear />
               </Suspense>
             } />
-          }
-          <Route path="/products/location/:id" element={
+            <Route path="review/store-wear" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <ReviewStoreWear />
+              </Suspense>
+            } />
+            <Route path="review/comment-store/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <ReviewComment />
+              </Suspense>
+            } />
+            <Route path="review/comment-wear/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <ReviewWearComment />
+              </Suspense>
+            } />
+          </Route>
+          {/* ---------------------<Store>------------------------- */}
+          <Route path="/store" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ProductEditPage />
+              <MarketStore />
             </Suspense>
-          } />
+          }>
+            <Route index element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <MarketIsStoreCheck />
+              </Suspense>
+            } />
+            <Route path="/store/market-add" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <AddStore />
+              </Suspense>
+            } />
+            <Route path="/store/market-list" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <MyMarket />
+              </Suspense>
+            } />
+            <Route path="/store/market-list/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <MarketEdit />
+              </Suspense>
+            } />
+            <Route path="/store/locations/shop/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <LocationsByIdShow />
+              </Suspense>
+            } />
+          </Route>
+          {/* ---------------------<Locations>------------------------- */}
+          <Route path="/locations-store" element={
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+              <MarketStore />
+            </Suspense>
+          }>
+            <Route index element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <MarketIsCheck />
+              </Suspense>
+            } />
+            <Route path="/locations-store/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <LocationAddById />
+              </Suspense>
+            } />
+            <Route path="/locations-store/list" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <LocationList />
+              </Suspense>
+            } />
+            <Route path="/locations-store/city/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <LocationMapCity />
+              </Suspense>
+            } />
+            <Route path="/locations-store/wears/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <LocationClothesCity />
+              </Suspense>
+            } />
+          </Route>
+          {/* ---------------------<LocationsProduct>------------------------- */}
+          <Route path="/products" element={
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+              <Products />
+            </Suspense>
+          }>
+            {dressInfo?.isCheckPoructList?.length >= 1 ?
+              <Route path="/products" element={<Navigate to="/products/location" />} />
+              :
+              <Route index element={
+                <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                  <ProductIsCheck />
+                </Suspense>
+              } />
+            }
+            <Route path="/products/location/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <ProductEditPage />
+              </Suspense>
+            } />
 
-          <Route path="/products/location" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ProductLocationsList />
-            </Suspense>
-          } />
-          <Route path="/products/location/add/:id" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ProductsPageOne />
-            </Suspense>
-          } />
+            <Route path="/products/location" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <ProductLocationsList />
+              </Suspense>
+            } />
+            <Route path="/products/location/add/:id" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <ProductsPageOne />
+              </Suspense>
+            } />
+          </Route>
+          <Route path={"/edit-profile"} element={<EditProfilePage />} />
         </Route>
 
-
-        <Route path="/" element={<Navigate to={"/login-seller"} />} />
-        <Route path={"/edit-profile"} element={<EditProfilePage />} />
 
         <Route path="/signup-seller" element={
           <Suspense fallback={<div>Loading...</div>}>
@@ -201,6 +192,7 @@ export default function RouterList() {
             <SignInSeller />
           </Suspense>
         } />
+        <Route path="/" element={<Navigate to={"/login-seller"} />} />
         <Route path="/forgot-password-seller" element={
           <Suspense fallback={<div>Loading...</div>}>
             <ForgotPasswordSeller />

@@ -17,10 +17,14 @@ import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
+import { SellerMainData } from "../../../../hook/SellerUserContext";
+import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
 const { REACT_APP_BASE_URL } = process.env;
 
 function EditProfilePage() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+  const [sellerRefreshToken] = useContext(SellerRefresh)
 
   const navigate = useNavigate();
 
@@ -50,7 +54,7 @@ function EditProfilePage() {
     // ----popConfirmDelete
     popConfirmDelete: false,
   });
-
+  console.log(sellerInformation, "sellerInformation");
   const [openEditModal, setOpenEditModal] = useState(false);
 
   // -------------------------------------
@@ -62,62 +66,22 @@ function EditProfilePage() {
   useEffect(() => {
     setState({
       ...state,
-      sellerFname: dressInfo?.userData?.name,
-      sellerLname: dressInfo?.userData?.surname,
-      sellerEmail: dressInfo?.userData?.email,
-      sellerCardNumber: dressInfo?.userData?.card_number,
-      sellerRegionId: dressInfo?.userData?.region_id,
-      sellerSubRegionId: dressInfo?.userData?.sub_region_id,
-      sellerTypeId: dressInfo?.userData?.seller_type_id,
-      sellerStatus: dressInfo?.userData?.status,
+      sellerFname: sellerInformation?.sellerUserData?.name,
+      sellerLname: sellerInformation?.sellerUserData?.surname,
+      sellerEmail: sellerInformation?.sellerUserData?.email,
+      sellerCardNumber: sellerInformation?.sellerUserData?.card_number,
+      sellerRegionId: sellerInformation?.sellerUserData?.region_id,
+      sellerSubRegionId: sellerInformation?.sellerUserData?.sub_region_id,
+      sellerTypeId: sellerInformation?.sellerUserData?.seller_type_id,
+      sellerStatus: sellerInformation?.sellerUserData?.status,
       sellerPhoneCode:
-        dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(0, 3),
+        sellerInformation?.sellerUserData?.phone && sellerInformation?.sellerUserData?.phone.slice(0, 3),
       sellerPhoneNum:
-        dressInfo?.userData?.phone && dressInfo?.userData?.phone.slice(3, 12),
+        sellerInformation?.sellerUserData?.phone && sellerInformation?.sellerUserData?.phone.slice(3, 12),
     });
-  }, [dressInfo?.userData]);
+  }, [sellerInformation?.sellerUserData]);
 
-  // console.log(data, "data");
-  // console.log(state, "state");
-  // console.log('-----------------------------------');
-  // console.log(data, data);
-  // useQuery(["Get-Seller-Profile"], () => {
-  //   return fetch(`${url}/profile`, {
-  //     method: "GET",
-  //     headers: {
-  //       // "Content-Type": "application/json",
-  //       // "Accept": "application/json",
-  //       'Content-type': 'application/json; charset=UTF-8',
-  //       "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-  //     }
-  //   }).then(res => res.json())
-  // },
-  //   {
-  //     onSuccess: (res) => {
-  //       console.log(res, "Response in Profile")
-  //       // setDressInfo({ ...dressInfo, SellerName: res?.name, SellerSurName: res?.surname })
-  //       setState({
-  //         ...state,
-  //         sellerFname: res?.name,
-  //         sellerLname: res?.surname,
-  //         sellerEmail: res?.email,
-  //         sellerCardNumber: res?.card_number,
-  //         sellerRegionId: res?.region_id,
-  //         sellerSubRegionId: res?.sub_region_id,
-  //         sellerTypeId: res?.seller_type_id,
-  //         sellerStatus: res?.status,
-  //         sellerPhoneCode: res?.phone && res?.phone.slice(0, 3),
-  //         sellerPhoneNum: res?.phone && res?.phone.slice(3, 12),
-  //       })
-  //     },
-  //     onError: (err) => {
-  //       console.log(err, "err get profile");
-  //     },
 
-  //     keepPreviousData: true, // bu browserdan tashqariga chiqib yana kirsa, yana yurishni oldini olish uchun
-  //     refetchOnWindowFocus: false, // bu ham focus bolgan vaqti malumot olib kelish
-  //   }
-  // )
   // ------------GET METHOD Region-----------------
 
   useEffect(() => {
@@ -152,14 +116,45 @@ function EditProfilePage() {
   }, []);
 
 
+  const fetchData = async (customHeaders) => {
+    try {
+      const response = await axios.get(`${url}/profile`, {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
 
-  // const changeTip = () => {
-  //   state?.getSellerList?.individual?.forEach(e => {
-  //     if (e?.id == state?.sellerTypeId)
-  //       setState({ ...state, selectSellerType: e?.name_ru })
-  //   })
-  // }
-  // ------------GET METHOD Profile-----------------
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+
+  useQuery(['get_profile_axios11'], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
+      }
+      if (data?.status === 401) {
+        setSellerInformation({ ...sellerInformation, sellerUserData: [] })
+        sellerRefreshToken()
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+        sellerRefreshToken()
+        setSellerInformation({ ...sellerInformation, sellerUserData: [] })
+      }
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
 
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
@@ -418,14 +413,9 @@ function EditProfilePage() {
             </div>
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
               <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                <input
-                  className="w-[40px] outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
-                  type="text"
-                  name="phoneCode"
-                  value={"+" + state?.sellerPhoneCode || ""}
-                  // readOnly
-                  placeholder="998"
-                />
+                <div
+                  className="w-[40px] outline-none flex items-center h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
+                >+998</div>
               </div>
               <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                 <InputMask
