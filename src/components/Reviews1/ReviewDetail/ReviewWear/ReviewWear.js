@@ -7,6 +7,7 @@ import { Rate } from "antd";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
+import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ReviewWear() {
@@ -15,6 +16,7 @@ export default function ReviewWear() {
 
   // ------------GET  Has Reviews ?-----------------
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [sellerRefreshToken] = useContext(SellerRefresh)
 
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
@@ -42,11 +44,12 @@ export default function ReviewWear() {
         setDressInfo({ ...dressInfo, getReviewProduct: data?.data?.products?.data })
       }
       if (data?.status === 401) {
-
+        sellerRefreshToken()
       }
     },
     onError: (error) => {
       if (error?.response?.status === 401) {
+        sellerRefreshToken()
 
       }
     },

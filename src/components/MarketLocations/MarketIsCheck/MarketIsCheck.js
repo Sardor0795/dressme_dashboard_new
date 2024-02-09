@@ -7,10 +7,12 @@ import LoadingForSeller from '../../Loading/LoadingFor'
 import { useHttp } from '../../../hook/useHttp'
 import axios from 'axios'
 import { dressMainData } from '../../../hook/ContextTeam'
+import { SellerRefresh } from '../../../hook/SellerRefreshToken'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const [sellerRefreshToken] = useContext(SellerRefresh)
 
     const fetchData = async (customHeaders) => {
         try {
@@ -37,12 +39,13 @@ export default function MarketIsCheck() {
                 setDressInfo({ ...dressInfo, locationList: data?.data?.locations })
             }
             if (data?.status === 401) {
+                sellerRefreshToken()
 
             }
         },
         onError: (error) => {
             if (error?.response?.status === 401) {
-
+                sellerRefreshToken()
             }
         },
         keepPreviousData: true,

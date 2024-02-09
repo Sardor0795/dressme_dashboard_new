@@ -8,11 +8,13 @@ import { Rate } from "antd";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [sellerRefreshToken] = useContext(SellerRefresh)
 
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
@@ -40,11 +42,12 @@ const ReviewStore = () => {
         setDressInfo({ ...dressInfo, shopsList: data?.data })
       }
       if (data?.status === 401) {
-
+        sellerRefreshToken()
       }
     },
     onError: (error) => {
       if (error?.response?.status === 401) {
+        sellerRefreshToken()
 
       }
     },
