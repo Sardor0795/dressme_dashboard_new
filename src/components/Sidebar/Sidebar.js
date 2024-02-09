@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import {
   ClothesIcons,
   LocationIcon,
@@ -14,12 +14,16 @@ import { useHttp } from "../../hook/useHttp";
 import { useQuery } from "@tanstack/react-query";
 import { RussianFlag, UzbekFlag } from "../../assets";
 import { Popover } from "antd";
+import ExitModal from "./exitModal";
+import { SellerMainData } from "../../hook/SellerUserContext";
 
 function Sidebar() {
   const { request } = useHttp()
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-  // const [userData, setUserData] = useState(null)
+  const [dressInfo] = useContext(dressMainData);
+  const [modalOpen, setModalOpen] = useState(false);
   const [selectLang, setselectLang] = useState(1);
+  const [sellerInformation] = useContext(SellerMainData);
+
   const LanguageList = [
     { id: 1, type: "Русский", icons: RussianFlag },
     { id: 2, type: "O'zbekcha", icons: UzbekFlag },
@@ -58,268 +62,274 @@ function Sidebar() {
   );
 
   return (
-    <div
-      className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
+    <div className="w-full h-full flex ">
+      <div
+        className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
     `}
-    >
+      >
+        <div className="flex flex-wrap content-between w-full h-full pb-10">
+          <div className="w-full pt-5  px-2 flex flex-wrap gap-y-[44px]">
+            <div
+              className="w-full h-fit select-none  flex items-center gap-x-4 pl-2 cursor-pointer"
+            >
+              <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white flex items-center justify-center">
+                <NavbarUserIcon colors="#c5c5c5" />
+              </button>
+              <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
+                <span>{sellerInformation?.sellerUserData?.name || "Ism"}</span>
+                <span>{sellerInformation?.sellerUserData?.surname || "Familiya"}</span>
+                {/* <span>Ism familiya</span> */}
 
-      <div className="flex flex-wrap content-between w-full h-full pb-10">
-        <div className="w-full pt-5  px-2 flex flex-wrap gap-y-[44px]">
-          <div
-            className="w-full h-fit select-none  flex items-center gap-x-4 pl-2 cursor-pointer"
-          >
-            <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white flex items-center justify-center">
-              <NavbarUserIcon colors="#c5c5c5" />
-            </button>
-            <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-              <span>{dressInfo?.userData?.name || "Ism"}</span>
-              <span>{dressInfo?.userData?.surname || "Familiya"}</span>
-              {/* <span>Ism familiya</span> */}
-
-            </span>
-          </div>
-
-          {/* Links */}
-          {dressInfo?.isAuthen ? (
-            <div className="w-full flex flex-wrap gap-y-2">
-              {" "}
-              <NavLink
-                className={
-                  "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
-                }
-                style={({ isActive }) => ({
-                  background: isActive ? "#f2f2f2" : "#fcfcfc",
-                })}
-                to={"/reviews"}
-              >
-                {({ isActive }) =>
-                  isActive ? (
-                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
-                      <NavbarReviewIcon colors={"#007dca"} />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Отзывы
-                      </p>
-                    </figure>
-                  ) : (
-                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
-                      <NavbarReviewIcon colors={"#2c2c2c"} />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Отзывы
-                      </p>
-                    </figure>
-                  )
-                }
-              </NavLink>
-              <NavLink
-                className={
-                  "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
-                }
-                style={({ isActive }) => ({
-                  background: isActive ? "#f2f2f2" : "#fcfcfc",
-                })}
-                to={"/store"}
-              >
-                {({ isActive }) =>
-                  isActive ? (
-                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
-                      <NavbarMarketIcon colors={"#007dca"} />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Магазины
-                      </p>
-                    </figure>
-                  ) : (
-                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
-                      <NavbarMarketIcon colors={"#2c2c2c"} />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Магазины
-                      </p>
-                    </figure>
-                  )
-                }
-              </NavLink>
-              <NavLink
-                className={
-                  "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
-                }
-                style={({ isActive }) => ({
-                  background: isActive ? "#f2f2f2" : "#fcfcfc",
-                })}
-                to={"/locations-store"}
-              >
-                {({ isActive }) =>
-                  isActive ? (
-                    <figure className="flex h-full gap-x-[15px] items-center justify-center">
-                      <LocationIcon colors={"#007dca"} />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Локации
-                      </p>
-                    </figure>
-                  ) : (
-                    <figure className=" flex h-full gap-x-[15px] items-center justify-center">
-                      <LocationIcon colors={"#2c2c2c"} />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Локации
-                      </p>
-                    </figure>
-                  )
-                }
-              </NavLink>
-              <NavLink
-                className={
-                  "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
-                }
-                style={({ isActive }) => ({
-                  background: isActive ? "#f2f2f2" : "#fcfcfc",
-                })}
-                to={"/products"}
-              >
-                {({ isActive }) =>
-                  isActive ? (
-                    <figure className="flex h-full gap-x-[15px] items-center justify-center pl-1">
-                      <ClothesIcons
-                        colors={"#007dca"}
-                        className="ml-[2px] "
-                      />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Товары
-                      </p>
-                    </figure>
-                  ) : (
-                    <figure className=" flex h-full gap-x-[15px] items-center justify-center pl-1">
-                      <ClothesIcons
-                        colors={"#2c2c2c"}
-                        className="ml-[2px] "
-                      />
-                      <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                        Товары
-                      </p>
-                    </figure>
-                  )
-                }
-              </NavLink>
+              </span>
             </div>
-          )
-            : (
+
+            {/* Links */}
+            {dressInfo?.isAuthen ? (
               <div className="w-full flex flex-wrap gap-y-2">
                 {" "}
-                <p
+                <NavLink
                   className={
-                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                   }
+                  style={({ isActive }) => ({
+                    background: isActive ? "#f2f2f2" : "#fcfcfc",
+                  })}
+                  to={"/reviews"}
                 >
-                  <span>
-                    <NavbarReviewIcon colors="#c5c5c5" />
-                  </span>
-                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                    Отзывы
-                  </span>
-                </p>
-                <p
+                  {({ isActive }) =>
+                    isActive ? (
+                      <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                        <NavbarReviewIcon colors={"#007dca"} />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Отзывы
+                        </p>
+                      </figure>
+                    ) : (
+                      <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                        <NavbarReviewIcon colors={"#2c2c2c"} />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Отзывы
+                        </p>
+                      </figure>
+                    )
+                  }
+                </NavLink>
+                <NavLink
                   className={
-                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                   }
+                  style={({ isActive }) => ({
+                    background: isActive ? "#f2f2f2" : "#fcfcfc",
+                  })}
+                  to={"/store"}
                 >
-                  <span>
-                    <NavbarMarketIcon colors="#c5c5c5" />
-                  </span>
-                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                    Магазины
-                  </span>
-                </p>
-                <p
+                  {({ isActive }) =>
+                    isActive ? (
+                      <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                        <NavbarMarketIcon colors={"#007dca"} />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Магазины
+                        </p>
+                      </figure>
+                    ) : (
+                      <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                        <NavbarMarketIcon colors={"#2c2c2c"} />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Магазины
+                        </p>
+                      </figure>
+                    )
+                  }
+                </NavLink>
+                <NavLink
                   className={
-                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    "w-full  hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                   }
+                  style={({ isActive }) => ({
+                    background: isActive ? "#f2f2f2" : "#fcfcfc",
+                  })}
+                  to={"/locations-store"}
                 >
-                  <span>
-                    <LocationIcon colors="#c5c5c5" />
-                  </span>
-                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                    Локации
-                  </span>
-                </p>
-                <p
+                  {({ isActive }) =>
+                    isActive ? (
+                      <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                        <LocationIcon colors={"#007dca"} />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Локации
+                        </p>
+                      </figure>
+                    ) : (
+                      <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                        <LocationIcon colors={"#2c2c2c"} />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Локации
+                        </p>
+                      </figure>
+                    )
+                  }
+                </NavLink>
+                <NavLink
                   className={
-                    "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
                   }
+                  style={({ isActive }) => ({
+                    background: isActive ? "#f2f2f2" : "#fcfcfc",
+                  })}
+                  to={"/products"}
                 >
-                  <span>
-                    <ClothesIcons colors="#c5c5c5" />
-                  </span>
-                  <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                    Одежда
-                  </span>
-                </p>
-              </div>)}
-        </div>
-
-        <div className="w-full px-2  flex flex-col gap-y-1">
-
-
-          <NavLink
-            className={
-              "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
-            }
-            style={({ isActive }) => ({
-              background: isActive ? "#f2f2f2" : "#fcfcfc",
-            })}
-            to="/edit-profile"
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <figure className="flex h-full gap-x-[15px] items-center justify-center">
-                  <UserIcon colors={"#007dca"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Профиль
-                  </p>
-                </figure>
-              ) : (
-                <figure className=" flex h-full gap-x-[15px] items-center justify-center">
-                  <UserIcon colors={"#2c2c2c"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Профиль
-                  </p>
-                </figure>
-              )
-            }
-          </NavLink>
-          <section className="w-full hover:bg-lightBorderColor   rounded-lg  bg-transparent  h-fit font-AeonikProMedium select-none cursor-pointer">
-            {LanguageList.filter((data) => data.id === selectLang).map(
-              (data) => {
-                return (
-                  <Popover
-                    key={data?.id}
-                    open={openLang}
-                    onOpenChange={handleOpenChangeWear}
-                    className="w-full  h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize "
-                    trigger="click"
-                    options={["Hide"]}
-                    placement="top"
-                    content={contentLang}
+                  {({ isActive }) =>
+                    isActive ? (
+                      <figure className="flex h-full gap-x-[15px] items-center justify-center pl-1">
+                        <ClothesIcons
+                          colors={"#007dca"}
+                          className="ml-[2px] "
+                        />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Товары
+                        </p>
+                      </figure>
+                    ) : (
+                      <figure className=" flex h-full gap-x-[15px] items-center justify-center pl-1">
+                        <ClothesIcons
+                          colors={"#2c2c2c"}
+                          className="ml-[2px] "
+                        />
+                        <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                          Товары
+                        </p>
+                      </figure>
+                    )
+                  }
+                </NavLink>
+              </div>
+            )
+              : (
+                <div className="w-full flex flex-wrap gap-y-2">
+                  {" "}
+                  <p
+                    className={
+                      "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    }
                   >
-                    <span className="mr-[6px] ">
-                      <img src={data?.icons} alt="" />
+                    <span>
+                      <NavbarReviewIcon colors="#c5c5c5" />
                     </span>
-                    <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
-                      {data?.type}
-                    </p>
-                  </Popover>
-                );
-              }
-            )}
-          </section>
-          <button
-            onClick={() => setDressInfo({ ...dressInfo, logOutSeller: true })}
-            className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
-            <UserExitIcon colors={"#FF4343"} />{" "}
-            <span
-              className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
-            >
-              Выйти
-            </span>
-          </button>
+                    <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                      Отзывы
+                    </span>
+                  </p>
+                  <p
+                    className={
+                      "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    }
+                  >
+                    <span>
+                      <NavbarMarketIcon colors="#c5c5c5" />
+                    </span>
+                    <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                      Магазины
+                    </span>
+                  </p>
+                  <p
+                    className={
+                      "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    }
+                  >
+                    <span>
+                      <LocationIcon colors="#c5c5c5" />
+                    </span>
+                    <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                      Локации
+                    </span>
+                  </p>
+                  <p
+                    className={
+                      "w-full h-[54px] gap-x-[15px] text-borderColor2 px-[25px]  flex items-center justify-start capitalize"
+                    }
+                  >
+                    <span>
+                      <ClothesIcons colors="#c5c5c5" />
+                    </span>
+                    <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                      Одежда
+                    </span>
+                  </p>
+                </div>)}
+          </div>
 
+          <div className="w-full px-2  flex flex-col gap-y-1">
+            <section className="w-full hover:bg-lightBorderColor   rounded-lg  bg-transparent  h-fit font-AeonikProMedium select-none cursor-pointer">
+              {LanguageList.filter((data) => data.id === selectLang).map(
+                (data) => {
+                  return (
+                    <Popover
+                      key={data?.id}
+                      open={openLang}
+                      onOpenChange={handleOpenChangeWear}
+                      className="w-full  h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize "
+                      trigger="click"
+                      options={["Hide"]}
+                      placement="top"
+                      content={contentLang}
+                    >
+                      <span className="mr-[6px] ">
+                        <img src={data?.icons} alt="" />
+                      </span>
+                      <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
+                        {data?.type}
+                      </p>
+                    </Popover>
+                  );
+                }
+              )}
+            </section>
+            <NavLink
+              className={
+                "w-full hover:bg-lightBgColor h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start capitalize"
+              }
+              style={({ isActive }) => ({
+                background: isActive ? "#f2f2f2" : "#fcfcfc",
+              })}
+              to="/edit-profile"
+            >
+              {({ isActive }) =>
+                isActive ? (
+                  <figure className="flex h-full gap-x-[15px] items-center justify-center">
+                    <UserIcon colors={"#007dca"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                      Профиль
+                    </p>
+                  </figure>
+                ) : (
+                  <figure className=" flex h-full gap-x-[15px] items-center justify-center">
+                    <UserIcon colors={"#2c2c2c"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                      Профиль
+                    </p>
+                  </figure>
+                )
+              }
+            </NavLink>
+
+            <button
+              // onClick={() => setDressInfo({ ...dressInfo, logOutSeller: true })}
+              onClick={() => setModalOpen(true)}
+
+              className="w-full group h-fit cursor-pointer py-3 px-[25px] hover:bg-lightBorderColor rounded-lg  flex items-center gap-x-4">
+              <UserExitIcon colors={"#FF4343"} />{" "}
+              <span
+                className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
+              >
+                Выйти
+              </span>
+            </button>
+            <ExitModal setModalOpen={setModalOpen} modalOpen={modalOpen} />
+
+          </div>
         </div>
+      </div >
+      <div className=" w-full md:w-[calc(100%-300px)] ">
+        <Outlet />
       </div>
     </div >
   );
