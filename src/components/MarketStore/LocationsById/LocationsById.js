@@ -126,9 +126,9 @@ export default function LocationsByIdShow() {
               </div>
               <div className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
-                  {state?.locationListId?.locations?.data[0]?.shop?.name}{" "}
+                  {state?.locationListId?.locations[0]?.shop?.name}{" "}
                   <span className="hidden md:inline">
-                    {state?.locationListId?.locations?.data?.length > 1 && (state?.locationListId?.locations?.data?.length)}
+                    {state?.locationListId?.locations?.length > 1 && (state?.locationListId?.locations?.length)}
                   </span>
                 </p>
                 <button
@@ -188,7 +188,7 @@ export default function LocationsByIdShow() {
                     e?.region?.name_ru?.toLowerCase()?.includes(state?.searchName?.toLowerCase())
                   )?*/}
                 <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
-                  {state?.locationListId?.locations?.data?.map((data, index) => {
+                  {state?.locationListId?.locations?.map((data, index) => {
                     return (
                       <div
                         key={index}
