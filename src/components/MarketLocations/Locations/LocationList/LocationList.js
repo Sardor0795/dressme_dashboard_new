@@ -33,7 +33,7 @@ function LocationList() {
   }, []);
 
   return (
-    <div className={`w-full h-full  px-4  md:px-10 border border-red-500  pb-[100px]`}>
+    <div className={`w-full h-full  px-4  md:px-10   pb-10`}>
       <div
         className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"
           }`}
@@ -180,7 +180,6 @@ function LocationList() {
           </li>
         </ul>
       </div>
-      {console.log(dressInfo?.locationList, "dressInfo?.locationList")}
       {dressInfo?.locationList?.filter(e => e?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((item) => {
         return (
           <div key={item?.id}>
@@ -189,7 +188,7 @@ function LocationList() {
                 key={item?.id}
                 className="md:mt-[16px] flex justify-between items-center"
               >
-                <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
+                <p className="text-black  text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {item?.name}{" "}
                   {item?.shop_locations?.length > 1 && <span className="hidden md:inline">
                     ({item?.shop_locations?.length})
