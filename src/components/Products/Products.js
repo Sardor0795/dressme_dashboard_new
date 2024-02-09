@@ -5,11 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../hook/useHttp";
 import LoadingForSeller from "../Loading/LoadingFor";
 import axios from "axios";
+import { SellerRefresh } from "../../hook/SellerRefreshToken";
 const { REACT_APP_BASE_URL } = process.env;
 
 
 export default function Products() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [sellerRefreshToken] = useContext(SellerRefresh)
+
   const { request } = useHttp()
   const location = useLocation();
   const pathname = window.location.pathname;
@@ -37,9 +40,13 @@ export default function Products() {
             }
           })
         }
-        console.log(data?.data, "data?.data");
+        if (data.status === 401) {
+          sellerRefreshToken()
+        }
       } catch (error) {
-
+        if (error?.response?.status === 401) {
+          sellerRefreshToken()
+        }
       }
     };
     if (!dressInfo?.isCheckPoructList) {

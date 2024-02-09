@@ -19,7 +19,7 @@ export default function SellerRefreshContext({ children }) {
             };
             const response = await axios.post(`${REACT_APP_BASE_URL}/refresh-token`, data, { headers });
             if (response?.status >= 200 && response?.status < 300) {
-                console.log(response, 'response');
+                // console.log(response, 'response');
                 localStorage.setItem("DressmeUserToken", response?.data?.access_token)
             }
 

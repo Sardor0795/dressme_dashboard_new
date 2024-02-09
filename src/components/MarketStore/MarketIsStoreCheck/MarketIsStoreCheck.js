@@ -6,10 +6,12 @@ import LoadingForSeller from "../../Loading/LoadingFor";
 import "react-toastify/dist/ReactToastify.css";
 import { dressMainData } from "../../../hook/ContextTeam";
 import axios from "axios";
+import { SellerRefresh } from "../../../hook/SellerRefreshToken";
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsStoreCheck() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [sellerRefreshToken] = useContext(SellerRefresh)
 
   const fetchData = async (customHeaders) => {
     try {
@@ -35,13 +37,19 @@ export default function MarketIsStoreCheck() {
       if (data?.status >= 200 && data?.status < 300) {
         setDressInfo({ ...dressInfo, shopsList: data?.data })
       }
-      if (data?.status === 401) {
 
+      if (data?.status === 401) {
+        // setDressInfo({ ...dressInfo, shopsList: [] })
+        sellerRefreshToken()
+        fetchData()
       }
+      console.log(data, "Data");
     },
     onError: (error) => {
+      console.log(error, "error");
       if (error?.response?.status === 401) {
-
+        // setDressInfo({ ...dressInfo, shopsList: [] })
+        sellerRefreshToken()
       }
     },
     keepPreviousData: true,

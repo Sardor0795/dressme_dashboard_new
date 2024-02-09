@@ -54,7 +54,6 @@ function EditProfilePage() {
     // ----popConfirmDelete
     popConfirmDelete: false,
   });
-  console.log(sellerInformation, "sellerInformation");
   const [openEditModal, setOpenEditModal] = useState(false);
 
   // -------------------------------------

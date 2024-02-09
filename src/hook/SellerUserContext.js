@@ -22,8 +22,11 @@ export default function SellerUserContext({ children }) {
             if (data?.status >= 200 && data?.status < 300) {
                 setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
             }
+            // console.log(data, "data in sellerUsercontext out Hook");
 
         } catch (error) {
+            // console.log(error, "error in sellerUsercontext out Hook");
+
             if (error?.response === 401) {
                 sellerRefreshToken()
             }
@@ -41,8 +44,10 @@ export default function SellerUserContext({ children }) {
                     });
                     if (data?.status >= 200 && data?.status < 300) {
                         setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
+                        // console.log(data, "data in sellerUsercontext in hook");
                     }
                 } catch (error) {
+                    // console.log(error, "err0r in sellerUsercontext in hook");
                     if (error?.response === 401) {
                         fetchDataSeller()
                         sellerRefreshToken()
@@ -52,7 +57,7 @@ export default function SellerUserContext({ children }) {
             fetchDatProfile()
         }
     }, [])
-    console.log("sellerdatamain");
+    // console.log("sellerdatamain");
     return (
         <SellerMainData.Provider value={[sellerInformation, setSellerInformation]}>
             {children}
