@@ -43,6 +43,7 @@ export default function ProductLocationsList() {
     shopMarketId: ""
   });
   // ------------
+
   const [hideProductList, setHideProductList] = useState(false);
 
 
@@ -208,6 +209,7 @@ export default function ProductLocationsList() {
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${state?.openSelectModal || state?.openDeleteModal ? "" : "hidden"}`}
       ></section>
+
       {/* Add the Several selected products to the new one */}
       <section
         className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelectModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
@@ -450,6 +452,8 @@ export default function ProductLocationsList() {
           </div>
         </section>
       </div>
+      {/* ------- */}
+
 
       {/* Search Section For Mobile */}
       <div className="flex md:hidden items-center justify-between border-t md:border-0 border-borderColor pt-3 md:pt-0 md:mt-3">

@@ -31,6 +31,7 @@ const Products = lazy(() => import('../components/Products/Products'));
 const ProductIsCheck = lazy(() => import('../components/Products/ProductIsCheck/ProductIsCheck'));
 const ProductEditPage = lazy(() => import('../components/Products/AddingProductEdit/ProductsEditPage'));
 const ProductLocationsList = lazy(() => import('../components/Products/ProductLocationsList/ProductLocationsList'));
+const ProductLocationsCopy = lazy(() => import('../components/Products/productListCopy/ProductLocationsCopy'));
 const ProductsPageOne = lazy(() => import('../components/Products/AddingProductPageOne/ProductsPageOne'));
 
 // -----------------------------Authentication-----------------
@@ -176,9 +177,14 @@ export default function RouterList() {
           } />
           <Route path="/products/location" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <ProductLocationsList />
+              <ProductLocationsCopy />
             </Suspense>
           } />
+          {/* <Route path="/products/location" element={
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+              <ProductLocationsList />
+            </Suspense>
+          } /> */}
           <Route path="/products/location/add/:id" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <ProductsPageOne />
