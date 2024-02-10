@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
+import { AiOutlineLeft } from "react-icons/ai";
 export default function LocationAddById() {
   const url = "https://api.dressme.uz/api/seller";
   const navigate = useNavigate();
@@ -234,7 +235,18 @@ export default function LocationAddById() {
             Добавить локацию магазина
           </div>
         </div>
+        <div className="flex items-center mb-2">
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
+          >
+            <AiOutlineLeft />
+          </button>
+        </div>
         <div>
+
           <YandexMapStore
             handleCallback={CallBackYandex}
           // errorLat={state?.errorGroup?.latitude}

@@ -9,7 +9,7 @@ import {
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
@@ -337,12 +337,13 @@ const AddingProduct = () => {
   const LocationAddSubmit = () => {
     console.log(state?.textListOfFormList, " state?.textListOfFormList");
   }
-
+  const { id } = useParams()
+  const newId = id.replace(":", "")
   const CallBackTextForm = (childData) => {
     setState({ ...state, errorListMessage: '', sendingLoader: true })
     let form = new FormData();
-    form.append("shop_id", state?.shopId);
-    form.append("shop_location_id", state?.shopLocationId);
+    form.append("shop_id", newId);
+    form.append("shop_location_id", Number(dressInfo?.locationIdAddProduct));
     state?.section_Id?.map((e, index) => {
       form.append("section_ids[]", state?.section_Id[index]);
     })
@@ -455,8 +456,8 @@ const AddingProduct = () => {
     setState({ ...state, isCheckValid: true })
 
     if (
-      state?.shopId &&
-      state?.shopLocationId &&
+      newId &&
+      Number(dressInfo?.locationIdAddProduct) &&
       state?.section_Id &&
       state?.color_Id &&
       state?.gender_Id &&
@@ -497,18 +498,26 @@ const AddingProduct = () => {
       setState({ ...state, PathnameToken: pathname.replace("/products/location/add/:", "") })
 
   }, [location.pathname]);
-
-  let locationIdList = state?.PathnameToken?.split('')
-  let locationIdRoute = locationIdList[0] + locationIdList[1]
-  let shopIdList = state?.PathnameToken?.split('')
-  let shopIdRoute = shopIdList[2] + shopIdList[3]
   useEffect(() => {
-    if (shopIdRoute) {
-      setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
-      setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
-    }
-  }, [state?.PathnameToken]);
-  console.log(state?.type_Id, "state?.type_Id");
+    if (!dressInfo?.locationIdAddProduct)
+      navigate('/products/location')
+  }, [dressInfo?.locationIdAddProduct]);
+
+
+  // let locationIdList = state?.PathnameToken?.split('')
+  // let locationIdRoute = locationIdList[0] + locationIdList[1]
+  // let shopIdList = state?.PathnameToken?.split('')
+  // let newId = shopIdList[2] + shopIdList[3]
+  // console.log(state?.PathnameToken, "state?.PathnameToken");
+  // console.log(shopIdRoute, "shopIdRoute");
+  // console.log(locationIdRoute, "locationIdRoute");
+  // useEffect(() => {
+  //   if (shopIdRoute) {
+  //     setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
+  //     setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
+  //   }
+  // }, [state?.PathnameToken]);
+  // console.log(state?.type_Id, "state?.type_Id"); Number(dressInfo?.locationIdAddProduct) navigate()
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -692,20 +701,20 @@ const AddingProduct = () => {
                 </p>
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-                {productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+                {productsData?.shops?.filter(e => e?.id === newId).map((item) => {
                   return item?.shop_locations?.map(data => {
                     return (
                       <button
                         onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
                         key={data?.id}
-                        className={`w-full py-[10px] px-[20px] flex items-center justify-between rounded-[8px] ${data?.id == state?.shopLocationId ? "bg-LocationSelectBg" : "bg-white"} hover:bg-LocationSelectBg focus:bg-LocationSelectBg`}
+                        className={`w-full py-[10px] px-[20px] flex items-center justify-between rounded-[8px] ${Number(data?.id) === Number(dressInfo?.locationIdAddProduct) ? "bg-LocationSelectBg" : "bg-white"} hover:bg-LocationSelectBg focus:bg-LocationSelectBg`}
                       >
                         <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
                           {" "}
                           {data?.address}
                         </span>
                         {
-                          data?.id == state?.shopLocationId &&
+                          Number(data?.id) === Number(dressInfo?.locationIdAddProduct) &&
                           <BiCheckDouble size={25} color={"#007dca"} />
                         }
                       </button>
@@ -813,13 +822,13 @@ const AddingProduct = () => {
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex rounded-lg overflow-hidden`}>
-                          {shopIdRoute ?
+                          {newId ?
                             <button
                               type="button"
                               className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                             >
                               <span>
-                                {productsData?.shops?.filter(e => e?.id == shopIdRoute)?.map((data, index) => {
+                                {productsData?.shops?.filter(e => e?.id == newId)?.map((data, index) => {
                                   return (
                                     <span
                                       key={index}
@@ -833,7 +842,7 @@ const AddingProduct = () => {
                             </button>
                             :
                             <Select
-                              className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.shopId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                              className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !newId ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                               showSearch
                               placeholder="Выбрать"
                               optionFilterProp="children"
@@ -864,11 +873,11 @@ const AddingProduct = () => {
                       {/* Input Select 2.1 */}
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
-                          <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shopId ? "text-[#000]" : "text-[#b5b5b5]"}`}>
+                          <span className={`text-[13px] md:text-base font-AeonikProRegular ${newId ? "text-[#000]" : "text-[#b5b5b5]"}`}>
                             Локация
                           </span>
                           <span className="ml-[5px]">
-                            {state?.shopId ? (
+                            {newId ? (
                               <StarLabel />
                             ) : null}
                           </span>
@@ -887,14 +896,14 @@ const AddingProduct = () => {
                         </button>
 
                         <div className="w-full h-fit hidden md:flex">
-                          {locationIdRoute ?
+                          {dressInfo?.locationIdAddProduct ?
                             <button
                               type="button"
                               className="w-full overflow-hidden h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
                             >
                               <span>
-                                {productsData?.shops?.filter(e => e?.id == shopIdRoute).map((item) => {
-                                  return item?.shop_locations?.filter(e => e?.id == parseInt(locationIdRoute))?.map((data, index) => {
+                                {productsData?.shops?.filter(e => e?.id == newId).map((item) => {
+                                  return item?.shop_locations?.filter(e => e?.id == parseInt(dressInfo?.locationIdAddProduct))?.map((data, index) => {
                                     return (
                                       <span
                                         key={index}
@@ -908,18 +917,18 @@ const AddingProduct = () => {
                               <span className="rotate-[90deg]"><ArrowRightIcon /></span>
                             </button>
                             :
-                            state?.shopId ?
+                            newId ?
                               <button
                                 onClick={() => setState({ ...state, openSelect: true })}
                                 type="button"
                                 className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
-                             ${state?.isCheckValid && !state?.shopLocationId ? "border border-[#FFB8B8] " : "border border-borderColor"}
+                             ${state?.isCheckValid && !Number(dressInfo?.locationIdAddProduct) ? "border border-[#FFB8B8] " : "border border-borderColor"}
   
                              px-3`}
                               >
 
-                                {state?.shopLocationId ? productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
-                                  return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
+                                {Number(dressInfo?.locationIdAddProduct) ? productsData?.shops?.filter(e => e?.id === newId).map((item) => {
+                                  return item?.shop_locations?.filter(e => Number(e?.id) === Number(dressInfo?.locationIdAddProduct))?.map(data => {
                                     return (
                                       <span
                                         className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}

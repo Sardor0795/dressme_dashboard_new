@@ -345,7 +345,9 @@ export default function ProductLocationsList() {
   // console.log(addresNewId, 'addressId-addresNewId');
   // console.log(checkedList, 'addressId-');
   function addNewProductId(locationId, shopId) {
-    navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
+    setDressInfo({ ...dressInfo, locationIdAddProduct: locationId })
+    navigate(`/products/location/add/:${shopId}`);
+
   };
   const goProductDetailEdit = (id) => {
     navigate(`/products/location/:${id}`);

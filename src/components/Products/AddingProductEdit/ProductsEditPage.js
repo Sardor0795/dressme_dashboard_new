@@ -25,7 +25,7 @@ export default function ProductEditPage() {
 
             <section className=" w-full md:w-fit  flex justify-center md:justify-start">
 
-              {dressInfo?.productAddByIdForToggle && dressInfo?.nextPageShowForm ?
+              {dressInfo?.isCheckPoructList?.length >= 1 && dressInfo?.nextPageShowForm ?
                 <button
                   onClick={() => {
                     navigate(-1);
