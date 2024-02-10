@@ -75,7 +75,7 @@ export default function MailVerfySeller() {
           } else if (res?.access_token) {
             localStorage.setItem("DressmeUserToken", res?.access_token);
             localStorage.setItem("RefreshUserToken", res?.refresh_token)
-            Cookies.set("DressmeUserToken", res?.access_token, { expires: 1 / 30 });
+            // Cookies.set("DressmeUserToken", res?.access_token, { expires: 1 / 30 });
 
             navigate("/");
             window.location.reload();
