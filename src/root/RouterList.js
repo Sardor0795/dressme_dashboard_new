@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { dressMainData } from "../hook/ContextTeam";
 import LoadingForSeller from "../components/Loading/LoadingFor";
 import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
+import SignInSeller from "../components/Authentication/SellerAuthentication/SignIn/SignInSeller";
 import Sidebar from "../components/Sidebar/Sidebar";
 
 // ---------------------Review-------------------------
@@ -37,7 +38,7 @@ const ProductsPageOne = lazy(() => import('../components/Products/AddingProductP
 // -----------------------------Authentication-----------------
 // const EditProfilePage = lazy(() => import('../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage'));
 const SignUpSeller = lazy(() => import('../components/Authentication/SellerAuthentication/SignUp/SignUpSeller'));
-const SignInSeller = lazy(() => import('../components/Authentication/SellerAuthentication/SignIn/SignInSeller'));
+// const SignInSeller = lazy(() => import('../components/Authentication/SellerAuthentication/SignIn/SignInSeller'));
 const ForgotPasswordSeller = lazy(() => import('../components/Authentication/SellerAuthentication/forgotPassword/ForgotPasswordSeller'));
 const ResetPasswordSeller = lazy(() => import('../components/Authentication/SellerAuthentication/ResetPasswordSeller/ResetPasswordSeller'));
 const MailVerfySeller = lazy(() => import('../components/Authentication/SellerAuthentication/MailVerfy/MailVerfySeller'));
@@ -187,11 +188,12 @@ export default function RouterList() {
             <SignUpSeller />
           </Suspense>
         } />
-        <Route path="/login-seller" element={
+        <Route path={"/login-seller"} element={<SignInSeller />} />
+        {/* <Route path="/login-seller" element={
           <Suspense fallback={<div>Loading...</div>}>
             <SignInSeller />
           </Suspense>
-        } />
+        } /> */}
         <Route path="/" element={<Navigate to={"/login-seller"} />} />
         <Route path="/forgot-password-seller" element={
           <Suspense fallback={<div>Loading...</div>}>

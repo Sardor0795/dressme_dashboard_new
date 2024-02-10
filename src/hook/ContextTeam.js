@@ -18,6 +18,7 @@ export default function ContextTeam({ children }) {
     productAddByIdForToggle: '',
     isCheckPoructList: null,
     sellerUser: "",
+    locationIdAddProduct: null,
     // -----------
     // isAuthenticated: false,
     userData: null,
