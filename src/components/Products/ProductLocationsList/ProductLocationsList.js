@@ -136,9 +136,9 @@ export default function ProductLocationsList() {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
-  const { isLoading, refetch } = useQuery(['seller_getProductList_list'], () => fetchData(customHeaders), {
+  const { isLoading, refetch } = useQuery(['seller_getProductList_list1'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
-      console.log(data, "data");
+      // console.log(data, "data");
       if (data?.status >= 200 && data?.status < 300) {
         setDressInfo({ ...dressInfo, getProductList: data?.data })
       }
@@ -152,10 +152,8 @@ export default function ProductLocationsList() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
+  // console.log(dressInfo?.getProductList, "dressInfo?.getProductList");
 
-  // function handleChekListItem(childData, shopId, shopMarketId) {
-  //   setState({ ...state, getCheckListItem: childData, shopId: shopId, shopMarketId: shopMarketId })
-  // }
   function addByLocation(itemId, locationId, shopId) {
     setState({ ...state, shopMarketId: shopId })
     setAddresNewId(locationId)
@@ -185,7 +183,7 @@ export default function ProductLocationsList() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res?.problems?.length);
+        // console.log(res?.problems?.length);
         if (res?.problems?.length !== 0 && res?.message) {
           setState({ ...state, onErrorMessage: res, onErrorTitle: res?.message, loader: false })
         } else if (res?.errors && res?.message) {
@@ -197,7 +195,7 @@ export default function ProductLocationsList() {
             setState({ ...state, openSelectModal: false, })
           }, 2000);
         }
-        console.log(res, "Success - ThisIsSeveralSelected");
+        // console.log(res, "Success - ThisIsSeveralSelected");
       })
       .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
   };
@@ -229,32 +227,12 @@ export default function ProductLocationsList() {
             setHideProductList(false)
           }, 2000);
         }
-        console.log(res, "Success - ThisIsSeveralSelected");
+        // console.log(res, "Success - ThisIsSeveralSelected");
       })
       .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
-        });
-        if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
-        }
 
-      } catch (error) {
-
-      }
-    };
-    if (!dressInfo?.getProductInfo) {
-      fetchData();
-    }
-  }, []);
   // ----------------------ListItem--------
   const deleteProductById = useMutation(() => {
     return request({ url: `/products/${deleteId}/${0}`, method: "DELETE", token: true });
@@ -339,7 +317,6 @@ export default function ProductLocationsList() {
             setHideProductList(false)
 
           }, 1000);
-          console.log(res, "getIdShopLocation -----POST");
         }
       },
       onError: err => {
@@ -371,7 +348,7 @@ export default function ProductLocationsList() {
   const goMapWear = (id) => {
     navigate(`/locations-store/wears/:${id}`);
   };
-  // console.log(dressInfo?.getProductList, "dressInfo?.getProductList");
+  // console.log(dressInfo?.regionList?.regions, "dressInfo?.regionList?.regions");
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -644,7 +621,6 @@ export default function ProductLocationsList() {
           </div>
         </section>
       </div>
-      {/* ---------------------------- */}
       {/* ---------------------------------------- */}
       {/* Delete Product Of Pop Confirm */}
       <section
@@ -911,9 +887,26 @@ export default function ProductLocationsList() {
                                             className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
                                           </button>
                                       }
-                                      <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{resData?.address}
+                                      <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                        {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
+                                          return (
+                                            <div>
+                                              {values?.name_uz},
+                                              {values?.sub_regions?.filter(e => e?.id == resData?.sub_region_id)?.map(valueSub => {
+                                                return (
+                                                  <span className="px-1">
+                                                    {valueSub?.name_uz},
+                                                  </span>
+                                                )
+                                              })}
+                                            </div>
+                                          )
+                                        })}
+                                        {resData?.address}
                                         {resData?.products?.length > 1 &&
-                                          <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
+                                          <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
+                                            ({resData?.products?.length})
+                                          </span>}
                                       </p>
                                     </div>
                                     <button
@@ -958,9 +951,7 @@ export default function ProductLocationsList() {
                                   )?.map((itemValue, index) => {
 
                                     return (
-                                      <div key={index} className="w-full "
-                                      >
-
+                                      <div key={index} className="w-full " >
                                         <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
                                           <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                                             <div className="flex flex-col w-full">
@@ -1195,7 +1186,22 @@ export default function ProductLocationsList() {
                                               className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
                                             </button>
                                         }
-                                        <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">{resData?.address}
+                                        <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                          {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
+                                            return (
+                                              <div>
+                                                {values?.name_uz},
+                                                {values?.sub_regions?.filter(e => e?.id == resData?.sub_region_id)?.map(valueSub => {
+                                                  return (
+                                                    <span className="px-1">
+                                                      {valueSub?.name_uz},
+                                                    </span>
+                                                  )
+                                                })}
+                                              </div>
+                                            )
+                                          })}
+                                          {resData?.address}
                                           {resData?.products?.length > 1 &&
                                             <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
                                         </p>
