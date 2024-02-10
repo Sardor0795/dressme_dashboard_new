@@ -172,27 +172,27 @@ const AddingProduct = () => {
 
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
-        });
-        if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
-        }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+  //         headers: {
+  //           'Content-type': 'application/json; charset=UTF-8',
+  //           "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //         }
+  //       });
+  //       if (data?.status >= 200 && data?.status < 300) {
+  //         setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+  //       }
 
-      } catch (error) {
+  //     } catch (error) {
 
-      }
-    };
-    if (!dressInfo?.getProductInfo) {
-      fetchData();
-    }
-  }, []);
+  //     }
+  //   };
+  //   if (!dressInfo?.getProductInfo) {
+  //     fetchData();
+  //   }
+  // }, []);
 
 
   const [openCategories, setOpenCategories] = useState();
@@ -283,7 +283,7 @@ const AddingProduct = () => {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
-  );
+  )
 
   // ------------------------------------------------------------------------ border-red-500
   // allSizeModalShow

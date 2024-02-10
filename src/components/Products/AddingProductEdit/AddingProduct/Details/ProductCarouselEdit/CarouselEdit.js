@@ -2127,7 +2127,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       </div >
       <section className="w-full flex flex-col flex-wrap h-full gap-x-[10px]">
         <div className="w-full h-full flex flex-col">
-          <div className="w-full h-[404px]  flex items-center">
+          <div className={`w-full h-[404px]   flex items-center `}>
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
@@ -2141,7 +2141,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       } : null
                   }
                   className="w-full flex flex-col h-full ">
-                  {imageOne?.status1 &&
+                  {
                     <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
                       <div className="w-fit h-fit flex items-center gap-x-3">
                         <button
@@ -2150,15 +2150,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           style={{ background: `${productData?.colors[0]?.hex}` }}
                         ></button>
 
-                        {imageOne?.status1 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {imageOne?.status1 || "status"}
-                        </td>}
-                        {imageOne?.status1 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {imageOne?.status1 || "status"}
-                        </td>}
-                        {imageOne?.status1 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                          {imageOne?.status1 || "status"}
-                        </td>}
+
                       </div>
                     </div>}
                   <div

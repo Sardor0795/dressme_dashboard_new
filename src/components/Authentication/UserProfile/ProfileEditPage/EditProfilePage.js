@@ -95,6 +95,9 @@ function EditProfilePage() {
 
       }
     };
+    if (!dressInfo?.regionList) {
+      fetchDataRegions();
+    }
     const fetchDataTypes = async () => {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/seller-types`)
@@ -106,13 +109,10 @@ function EditProfilePage() {
 
       }
     };
-    if (!dressInfo?.regionList) {
-      fetchDataRegions();
-    }
     if (!dressInfo?.typeList) {
       fetchDataTypes();
     }
-  }, []);
+  }, [dressInfo?.regionList, dressInfo?.typeLis]);
 
 
   const fetchData = async (customHeaders) => {
@@ -454,78 +454,79 @@ function EditProfilePage() {
               </div>
 
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                {dressInfo?.regionList?.regions ? (
-                  dressInfo?.regionList?.regions?.map((data, index) => {
-                    return (
-                      <div key={data?.id} className="w-full  h-fit  ">
-                        <div
-                          onClick={() => accordionCityList(data?.id)}
-                          className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
-                        >
-                          <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                            {data?.name_ru}
-                          </span>
-                          <span
-                            className={`${activeIndex == data?.id
-                              ? "rotate-[0deg]"
-                              : "rotate-[180deg]"
+                {dressInfo?.regionList?.regions ?
+                  (
+                    dressInfo?.regionList?.regions?.map((data, index) => {
+                      return (
+                        <div key={data?.id} className="w-full  h-fit  ">
+                          <div
+                            onClick={() => accordionCityList(data?.id)}
+                            className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                          >
+                            <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                              {data?.name_ru}
+                            </span>
+                            <span
+                              className={`${activeIndex == data?.id
+                                ? "rotate-[0deg]"
+                                : "rotate-[180deg]"
+                                } `}
+                            >
+                              <ArrowTopIcons colors={"#a1a1a1"} />
+                            </span>
+                          </div>
+
+                          <div
+                            className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                             ${activeIndex == data?.id
+                                ? "openAccardion"
+                                : "CloseAccardion"
                               } `}
                           >
-                            <ArrowTopIcons colors={"#a1a1a1"} />
-                          </span>
-                        </div>
-
-                        <div
-                          className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id
-                              ? "openAccardion"
-                              : "CloseAccardion"
-                            } `}
-                        >
-                          {data?.sub_regions?.map((item) => {
-                            return (
-                              <div
-                                key={item?.id}
-                                className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
-                              >
-                                <label
-                                  htmlFor={item?.name_uz}
-                                  className="flex items-center gap-x-[6px]"
+                            {data?.sub_regions?.map((item) => {
+                              return (
+                                <div
+                                  key={item?.id}
+                                  className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
                                 >
-                                  <input
-                                    type="radio"
-                                    id={item?.name_uz}
-                                    name="type_work"
-                                    value={item?.region_id}
-                                    checked={
-                                      state?.sellerSubRegionId == item?.id
-                                    }
-                                    className="border border-borderColor  cursor-pointer  flex items-center justify-center"
-                                    onChange={(e) => {
-                                      setState({
-                                        ...state,
-                                        sellerRegionId: e.target.value,
-                                        sellerSubRegionId: item?.id,
-                                      });
-                                    }}
-                                    required
-                                  />
-                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
-                                    {item?.name_ru}
-                                  </span>
-                                </label>
-                              </div>
-                            );
-                          })}
+                                  <label
+                                    htmlFor={item?.name_uz}
+                                    className="flex items-center gap-x-[6px]"
+                                  >
+                                    <input
+                                      type="radio"
+                                      id={item?.name_uz}
+                                      name="type_work"
+                                      value={item?.region_id}
+                                      checked={
+                                        state?.sellerSubRegionId == item?.id
+                                      }
+                                      className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                      onChange={(e) => {
+                                        setState({
+                                          ...state,
+                                          sellerRegionId: e.target.value,
+                                          sellerSubRegionId: item?.id,
+                                        });
+                                      }}
+                                      required
+                                    />
+                                    <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                      {item?.name_ru}
+                                    </span>
+                                  </label>
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p className="w-full h-full flex flex-col items-center justify-center">
-                    Malumotlar yuklanyapti...
-                  </p>
-                )}
+                      );
+                    })
+                  ) : (
+                    <p className="w-full h-full flex flex-col items-center justify-center">
+                      Malumotlar yuklanyapti...
+                    </p>
+                  )}
               </div>
               <div className="w-full flex items-center justify-end  mt-2">
                 <span
