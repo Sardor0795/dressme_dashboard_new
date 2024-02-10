@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
 import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
+import "../SignUp/style.css";
 
 export default function SignInSeller() {
   const [state, setState] = useState({
@@ -149,7 +150,7 @@ export default function SignInSeller() {
           </div>
           <div className="mt-[6px] px-2 md:px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
-              className="outline-none  w-full h-[42px] text-base  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black focus:bg-white placeholder-bg-white"
+              className="outline-none !bg-white  w-full h-[42px] text-base  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black focus:bg-white placeholder-bg-white"
               type="email"
               name="email"
               value={state.email}
@@ -170,7 +171,7 @@ export default function SignInSeller() {
           </div>
           <div className="mt-[6px] px-2 md:px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
-              className=" outline-none w-full h-[42px] text-base placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+              className=" outline-none w-full bg-white h-[42px] text-base placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShow ? "password" : "text"}
               placeholder="Enter your password"
               name="password"
