@@ -50,6 +50,8 @@ const url = "https://api.dressme.uz/api/seller";
 const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const navigate = useNavigate()
+  const { id } = useParams()
+  const newProductId = id?.replace(":", "")
   const { request } = useHttp();
   const [state, setState] = useState({
     showColor: false,
@@ -215,8 +217,7 @@ const AddingProduct = () => {
   const [arrDat, setArrData] = useState([])
   // console.log(newProductId, "newProductId");
 
-  const { id } = useParams()
-  const newProductId = id?.replace(":", "")
+
   const { refetch } = useQuery(["products_id"], () => {
     return request({ url: `/products/${newProductId}`, token: true })
   },
