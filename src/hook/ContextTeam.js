@@ -19,6 +19,7 @@ export default function ContextTeam({ children }) {
     isCheckPoructList: null,
     sellerUser: "",
     locationIdAddProduct: null,
+    getProductInfo: null,
     // -----------
     // isAuthenticated: false,
     userData: null,

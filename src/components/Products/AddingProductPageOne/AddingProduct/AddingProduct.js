@@ -32,6 +32,8 @@ import { BiCheck, BiCheckDouble } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
@@ -107,7 +109,6 @@ const AddingProduct = () => {
 
   });
 
-  const [productsData, setProductsData] = useState({});
 
 
   const handleLocationImage1 = (e) => {
@@ -286,22 +287,34 @@ const AddingProduct = () => {
 
   ]);
 
-  useQuery(
-    ["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
-    {
-      onSuccess: (res) => {
-        setProductsData(res);
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.getProductInfo) {
+      fetchData();
     }
-  );
+  }, []);
 
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
   };
   const newArray = []
-  productsData?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
+  dressInfo?.getProductInfo?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((data) => {
     return data?.sub_sections?.map(item => {
       newArray.push(item)
     })
@@ -636,7 +649,7 @@ const AddingProduct = () => {
                     </button>
                   </div>
                   <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-                    {productsData?.colors.map((data, index) => {
+                    {dressInfo?.getProductInfo?.colors.map((data, index) => {
                       return (
                         <div key={index} className="flex flex-col items-center justify-center ">
                           <div
@@ -701,7 +714,7 @@ const AddingProduct = () => {
                 </p>
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-                {productsData?.shops?.filter(e => e?.id === newId).map((item) => {
+                {dressInfo?.getProductInfo?.shops?.filter(e => e?.id === newId).map((item) => {
                   return item?.shop_locations?.map(data => {
                     return (
                       <button
@@ -828,7 +841,7 @@ const AddingProduct = () => {
                               className="w-full h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                             >
                               <span>
-                                {productsData?.shops?.filter(e => e?.id == newId)?.map((data, index) => {
+                                {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == newId)?.map((data, index) => {
                                   return (
                                     <span
                                       key={index}
@@ -856,7 +869,7 @@ const AddingProduct = () => {
                               }
 
                             >
-                              {productsData?.shops?.map((data, index) => {
+                              {dressInfo?.getProductInfo?.shops?.map((data, index) => {
                                 return (
                                   <Option
                                     key={data.id}
@@ -902,7 +915,7 @@ const AddingProduct = () => {
                               className="w-full overflow-hidden h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
                             >
                               <span>
-                                {productsData?.shops?.filter(e => e?.id == newId).map((item) => {
+                                {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == newId).map((item) => {
                                   return item?.shop_locations?.filter(e => e?.id == parseInt(dressInfo?.locationIdAddProduct))?.map((data, index) => {
                                     return (
                                       <span
@@ -927,7 +940,7 @@ const AddingProduct = () => {
                              px-3`}
                               >
 
-                                {Number(dressInfo?.locationIdAddProduct) ? productsData?.shops?.filter(e => e?.id === newId).map((item) => {
+                                {Number(dressInfo?.locationIdAddProduct) ? dressInfo?.getProductInfo?.shops?.filter(e => e?.id === newId).map((item) => {
                                   return item?.shop_locations?.filter(e => Number(e?.id) === Number(dressInfo?.locationIdAddProduct))?.map(data => {
                                     return (
                                       <span
@@ -1007,7 +1020,7 @@ const AddingProduct = () => {
                             }
 
                           >
-                            {productsData?.sections?.map((item) => {
+                            {dressInfo?.getProductInfo?.sections?.map((item) => {
                               return (
                                 <Option
                                   key={item.id}
@@ -1122,7 +1135,7 @@ const AddingProduct = () => {
                             onChange={(e) => setState({ ...state, season_Id: e })}
                             optionLabelProp="label"
                           >
-                            {productsData?.seasons?.map((item) => {
+                            {dressInfo?.getProductInfo?.seasons?.map((item) => {
                               return (
                                 <Option
                                   key={item.id}
@@ -1161,7 +1174,7 @@ const AddingProduct = () => {
                         <div className={`w-full hidden md:flex items-center gap-x-1 justify-between  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
  rounded-lg  h-[42px] md:h-10 px-[12px]`}>
-                          {productsData.colors
+                          {dressInfo?.getProductInfo.colors
                             ?.filter((e) => e?.id <= 9)
                             ?.map((data) => {
                               return (
@@ -1238,7 +1251,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={productsData?.gender?.map((item) => {
+                              options={dressInfo?.getProductInfo?.gender?.map((item) => {
                                 return {
                                   value: item?.id,
                                   label: item?.name_ru,
@@ -1323,7 +1336,7 @@ const AddingProduct = () => {
                             className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.price ? "border border-[#FFB8B8] " : "border border-borderColor"}  rounded-lg p-3 `}
                           >
                             {state?.type_Id ?
-                              productsData?.categories?.filter(e => e?.id == state?.type_Id)?.map((item, index) => {
+                              dressInfo?.getProductInfo?.categories?.filter(e => e?.id == state?.type_Id)?.map((item, index) => {
                                 return (
                                   <span key={index} className="text-[#000]">{item?.name_ru}</span>
                                 )
@@ -1393,7 +1406,7 @@ const AddingProduct = () => {
                                   .includes(input.toLowerCase())
                               }
                             >
-                              {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => Number(e?.category_id) === Number(dressInfo?.ProductFilterType))?.map((item) => {
+                              {dressInfo?.ProductFilterType ? dressInfo?.getProductInfo?.types?.filter(e => Number(e?.category_id) === Number(dressInfo?.ProductFilterType))?.map((item) => {
                                 return (
                                   <Option
                                     key={"item_" + item.id}
@@ -1403,7 +1416,7 @@ const AddingProduct = () => {
                                     {item.name_ru}
                                   </Option>
                                 )
-                              }) : productsData?.types?.map((item) => {
+                              }) : dressInfo?.getProductInfo?.types?.map((item) => {
                                 return (
                                   <Option
                                     key={"item_" + item.id}
@@ -1441,7 +1454,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={productsData?.producers?.map((item) => {
+                              options={dressInfo?.getProductInfo?.producers?.map((item) => {
                                 return {
                                   value: item?.id,
                                   label: item?.name_ru,
@@ -1487,14 +1500,14 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
-                          // options={productsData?.types?.map((item) => {
+                          // options={dressInfo?.getProductInfo?.types?.map((item) => {
                           //   return {
                           //     value: item?.id,
                           //     label: item?.name_ru,
                           //   };
                           // })}
                           >
-                            {dressInfo?.ProductFilterType ? productsData?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
+                            {dressInfo?.ProductFilterType ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == dressInfo?.ProductFilterType)?.map((item) => {
                               return (
                                 <Option
                                   key={"item_" + item.id}
@@ -1504,7 +1517,7 @@ const AddingProduct = () => {
                                   {item.name_ru}
                                 </Option>
                               )
-                            }) : productsData?.types?.map((item) => {
+                            }) : dressInfo?.getProductInfo?.types?.map((item) => {
                               return (
                                 <Option
                                   key={"item_" + item.id}
@@ -1555,7 +1568,7 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
-                            options={productsData?.producers?.map((item) => {
+                            options={dressInfo?.getProductInfo?.producers?.map((item) => {
                               return {
                                 value: item?.id,
                                 label: item?.name_ru,
@@ -1599,11 +1612,11 @@ const AddingProduct = () => {
                     <div>
                       {state.openDropModalButton ? (
                         <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                          <HeadWearAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
-                          <OutWearAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackOutWear} />
-                          <UnderAddWear title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackUnderWear} />
-                          <ShoesAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackShoesWear} />
-                          <AccessoriesAdd title={productsData?.categories} typeId={state?.type_Id} handleCallBack={CallBackAccessoriesWear} />
+                          <HeadWearAdd title={dressInfo?.getProductInfo?.categories} typeId={state?.type_Id} handleCallBack={CallBackHeadWear} />
+                          <OutWearAdd title={dressInfo?.getProductInfo?.categories} typeId={state?.type_Id} handleCallBack={CallBackOutWear} />
+                          <UnderAddWear title={dressInfo?.getProductInfo?.categories} typeId={state?.type_Id} handleCallBack={CallBackUnderWear} />
+                          <ShoesAdd title={dressInfo?.getProductInfo?.categories} typeId={state?.type_Id} handleCallBack={CallBackShoesWear} />
+                          <AccessoriesAdd title={dressInfo?.getProductInfo?.categories} typeId={state?.type_Id} handleCallBack={CallBackAccessoriesWear} />
                         </div>
                       ) : null}
                     </div>

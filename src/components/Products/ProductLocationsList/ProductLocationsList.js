@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   AddIconsCircle,
   AddLocationIcon,
@@ -233,16 +233,28 @@ export default function ProductLocationsList() {
       })
       .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
   };
-  const [getProductCategory, setGetProductCategory] = useState(null);
-  useQuery(["getProductOfCategory"], () => { return request({ url: "/products/get-product-info", token: true }) },
-    {
-      onSuccess: (res) => {
-        setGetProductCategory(res?.types)
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.getProductInfo) {
+      fetchData();
     }
-  );
+  }, []);
   // ----------------------ListItem--------
   const deleteProductById = useMutation(() => {
     return request({ url: `/products/${deleteId}/${0}`, method: "DELETE", token: true });
@@ -982,7 +994,7 @@ export default function ProductLocationsList() {
                                                     <td className="w-[15%] h-full  flex items-center justify-center ">
                                                       {itemValue?.sku || "sku"}
                                                     </td>
-                                                    {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                    {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                                       return (
                                                         <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
                                                           {valueType?.name_ru || "type_id"}
@@ -1266,7 +1278,7 @@ export default function ProductLocationsList() {
                                                       <td className="w-[15%] h-full  flex items-center justify-center ">
                                                         {itemValue?.sku || "sku"}
                                                       </td>
-                                                      {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                      {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                                         return (
                                                           <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
                                                             {valueType?.name_ru || "type_id"}

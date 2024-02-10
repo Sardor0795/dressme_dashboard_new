@@ -35,8 +35,11 @@ import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
+import axios from "axios";
+
 // import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
 // import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
+const { REACT_APP_BASE_URL } = process.env;
 
 
 const { Option } = Select;
@@ -118,7 +121,6 @@ const AddingProduct = () => {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
   // console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
-  const [productsData, setProductsData] = useState({});
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     setState({
@@ -169,23 +171,29 @@ const AddingProduct = () => {
   // ); // ClothingSection
 
 
-  useQuery(
-    ["products_get"], () => { return request({ url: "/products/get-product-info", token: true }) },
-    {
-      onSuccess: (res) => {
-        setProductsData(res);
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-  // console.log(productsData?.sections, "productsData");
-  const { id } = useParams()
-  const newProductId = id?.replace(":", "")
-  // useEffect(()=>{
-  //   setState({ ...state, newProductId:  id?.replace(":", "") })
 
-  // },[id])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.getProductInfo) {
+      fetchData();
+    }
+  }, []);
+
 
   const [openCategories, setOpenCategories] = useState();
   const toggleCategories = React.useCallback(
@@ -205,10 +213,13 @@ const AddingProduct = () => {
   const [season_Id, setSeason_Id] = useState([]);
   const [colors_Id, setColors_Id] = useState([]);
   const [arrDat, setArrData] = useState([])
+  // console.log(newProductId, "newProductId");
 
-
-  const { refetch } = useQuery(
-    ["products_id"], () => { return request({ url: `/products/${newProductId}`, token: true }) },
+  const { id } = useParams()
+  const newProductId = id?.replace(":", "")
+  const { refetch } = useQuery(["products_id"], () => {
+    return request({ url: `/products/${newProductId}`, token: true })
+  },
     {
       onSuccess: (res) => {
         setProductsDataIdEdit(res?.product)
@@ -270,7 +281,7 @@ const AddingProduct = () => {
         }
       },
       keepPreviousData: true,
-      refetchOnWindowFocus: true,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -298,7 +309,7 @@ const AddingProduct = () => {
   const [newArray, setNewArray] = useState([])
   useEffect(() => {
     setNewArray([])
-    productsData?.sections?.map(item => {
+    dressInfo?.getProductInfo?.sections?.map(item => {
       item?.sub_sections?.map(item => {
         if (section_Id?.includes(Number(item?.section_id))) {
           if (!newArray) {
@@ -309,7 +320,7 @@ const AddingProduct = () => {
         }
       })
     })
-  }, [section_Id, productsData])
+  }, [section_Id, dressInfo?.getProductInfo])
   // console.log(productsData, "productsData");
   // console.log(section_Id, "section_Id");
   // -----------------------------------------------------------
@@ -408,7 +419,8 @@ const AddingProduct = () => {
     if (section_Id?.length > 1) {
       setSection_Id(section_Id.filter((x, i, a) => a.indexOf(x) == i))
     }
-  }, [productsData])
+  }, [dressInfo?.getProductInfo])
+  // }, [productsData])
 
   useEffect(() => {
     if (subSection_Id?.length > 1) {
@@ -849,6 +861,7 @@ const AddingProduct = () => {
   // console.log(subSection_Id, "subSection_Id");
   // console.log(state?.onEditInput, "onEditInput");
   // console.log("---------------------------------------------");
+  console.log(dressInfo?.getProductInfo, "dressInfo?.getProductInfo");
   return (
     <div className="w-full h-fit ">
 
@@ -999,7 +1012,7 @@ const AddingProduct = () => {
                   </button>
                 </div>
                 <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
-                  {productsData?.colors.map((data) => {
+                  {dressInfo?.getProductInfo?.colors.map((data) => {
                     return (
                       <div
                         key={data?.id}
@@ -1136,7 +1149,7 @@ const AddingProduct = () => {
               </p>
             </div>
             <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-              {productsData?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+              {dressInfo?.getProductInfo?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
                 return item?.shop_locations?.map(data => {
                   return (
                     <button
@@ -1183,7 +1196,7 @@ const AddingProduct = () => {
               {openCategories &&
                 <CategoriesMobileDropUp
                   onClick1={toggleCategories}
-                  colorGroup={productsData.colors}
+                  colorGroup={dressInfo?.getProductInfo?.colors}
                   onClick2={toggleAllSizeModalShow}
                   modalOpenColor={false}
                 />
@@ -1279,7 +1292,7 @@ const AddingProduct = () => {
                           className="w-full cursor-not-allowed h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
                           <span>
-                            {productsData?.shops?.filter(e => e?.id == state?.shopId)?.map((item, index) => {
+                            {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == state?.shopId)?.map((item, index) => {
                               return (
                                 <span
                                   key={index}
@@ -1315,7 +1328,7 @@ const AddingProduct = () => {
                           className="w-full cursor-not-allowed h-[40px] overflow-hidden bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
                           <span>
-                            {productsData?.shops?.filter(e => e?.id == state?.shopId).map((item) => {
+                            {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == state?.shopId).map((item) => {
                               return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
                                 return (
                                   <span
@@ -1362,7 +1375,7 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           optionLabelProp="label"
                           disabled={colorAction ? true : false}
-                          value={productsData?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
+                          value={dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                           onChange={(e) => handleChangeSection(e)}
                           onSearch={onSearch}
                           size="large"
@@ -1372,7 +1385,7 @@ const AddingProduct = () => {
                               .includes(input.toLowerCase())
                           }
                         >
-                          {productsData?.sections?.map((item) => {
+                          {dressInfo?.getProductInfo?.sections?.map((item) => {
                             return (
                               <Option
                                 key={item.id}
@@ -1439,7 +1452,7 @@ const AddingProduct = () => {
                                 label={item.name_ru}
                               >
                                 <Space>
-                                  {productsData?.sections?.filter(e => e?.id == item?.section_id)?.map((data, index) => {
+                                  {dressInfo?.getProductInfo?.sections?.filter(e => e?.id == item?.section_id)?.map((data, index) => {
                                     return <div key={index} className=" flex items-center">
                                       <p className="flex  items-center font-AeonikProRegular">{item.name_ru} </p>
                                       <p className="text-[12px]  flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">({data?.name_ru})</p>
@@ -1479,14 +1492,14 @@ const AddingProduct = () => {
                           mode="multiple"
                           disabled={colorAction ? true : false}
                           placeholder="Выбрать"
-                          value={productsData?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => { return item?.id })}
+                          value={dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                           size="large"
                           onChange={(e) => {
                             onHandleChangeSeason(e)
                           }}
                           optionLabelProp="label"
                         >
-                          {productsData?.seasons?.map((item) => {
+                          {dressInfo?.getProductInfo?.seasons?.map((item) => {
                             return (
                               <Option
                                 key={item.id}
@@ -1525,7 +1538,7 @@ const AddingProduct = () => {
                       <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                         <div className={`w-fit hidden md:flex items-center gap-x-2 justify-start  overflow-hidden                   
                         ${state?.imageAddError?.color_id && !lastElement ? "border-[2px] border-textRedColor " : "border border-borderColor"}   rounded-lg  h-[42px] md:h-10 px-[12px]`}>
-                          {productsData.colors
+                          {dressInfo?.getProductInfo?.colors
                             ?.filter((e) => colors_Id?.includes(e?.id))
                             ?.map((data) => {
                               return (
@@ -1597,7 +1610,7 @@ const AddingProduct = () => {
                             placeholder="Выбрать"
                             optionFilterProp="children"
                             disabled={colorAction ? true : false}
-                            value={productsData?.gender?.filter(e => e?.id == state?.gender_Id)?.map((item) => { return item?.id })}
+                            value={dressInfo?.getProductInfo?.gender?.filter(e => e?.id == state?.gender_Id)?.map((item) => { return item?.id })}
                             onChange={(e) => setState({ ...state, gender_Id: e, onEditInput: true })}
                             onSearch={onSearch}
                             size="large"
@@ -1606,7 +1619,7 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
-                            options={productsData?.gender?.map((item) => {
+                            options={dressInfo?.getProductInfo?.gender?.map((item) => {
                               return {
                                 value: item?.id,
                                 label: item?.name_ru,
@@ -1714,7 +1727,7 @@ const AddingProduct = () => {
                           type="button"
                           className={`w-full cursor-not-allowed overflow-hidden ${colorAction ? "text-[#b5b5b5] bg-[#F5F5F5]" : ""} cursor-text h-[40px] hidden md:flex items-center justify-between border border-borderColor  rounded-lg p-3 `}
                         >
-                          {productsData?.categories?.filter(e => e?.id == state?.category_Id)?.map((item, index) => {
+                          {dressInfo?.getProductInfo?.categories?.filter(e => e?.id == state?.category_Id)?.map((item, index) => {
                             return <span key={index} className="text-[#a1a1a1]">{item?.name_ru}</span>
 
                           })}
@@ -1739,7 +1752,7 @@ const AddingProduct = () => {
                             // allowClear
                             disabled={colorAction ? true : false}
                             placeholder="Выбрать"
-                            value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
+                            value={dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
                             optionFilterProp="children"
                             onChange={(value, attribute2) => {
                               setState({ ...state, filterTypeId: value, onEditInput: true, type_Id: attribute2?.attribute2 })
@@ -1752,7 +1765,7 @@ const AddingProduct = () => {
                                 .includes(input.toLowerCase())
                             }
                           >
-                            {state?.category_Id ? productsData?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
+                            {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                               return (
                                 <Option
                                   key={"item_" + item.id}
@@ -1762,7 +1775,7 @@ const AddingProduct = () => {
                                   {item.name_ru}
                                 </Option>
                               )
-                            }) : productsData?.types?.map((item) => {
+                            }) : dressInfo?.getProductInfo?.types?.map((item) => {
                               return (
                                 <Option
                                   key={"item_" + item.id}
@@ -1793,7 +1806,7 @@ const AddingProduct = () => {
                             disabled={colorAction ? true : false}
                             placeholder="Выбрать"
                             optionFilterProp="children"
-                            value={productsData?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
+                            value={dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
                             onChange={(e) => setState({ ...state, producer_Id: e })}
                             onSearch={onSearch}
                             size="large"
@@ -1802,7 +1815,7 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
-                            options={productsData?.producers?.map((item) => {
+                            options={dressInfo?.getProductInfo?.producers?.map((item) => {
                               return {
                                 value: item?.id,
                                 label: item?.name_ru,
@@ -1840,7 +1853,7 @@ const AddingProduct = () => {
                           // allowClear
                           disabled={colorAction ? true : false}
                           placeholder="Выбрать"
-                          value={productsData?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
+                          value={dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
                           optionFilterProp="children"
                           onChange={(value, attribute2) => {
                             setState({ ...state, filterTypeId: value, type_Id: attribute2?.attribute2 })
@@ -1854,7 +1867,7 @@ const AddingProduct = () => {
                               .includes(input.toLowerCase())
                           }
                         >
-                          {state?.category_Id ? productsData?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
+                          {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                             return (
                               <Option
                                 key={"item_" + item.id}
@@ -1864,7 +1877,7 @@ const AddingProduct = () => {
                                 {item.name_ru}
                               </Option>
                             )
-                          }) : productsData?.types?.map((item) => {
+                          }) : dressInfo?.getProductInfo?.types?.map((item) => {
                             return (
                               <Option
                                 key={"item_" + item.id}
@@ -1908,7 +1921,7 @@ const AddingProduct = () => {
                           placeholder="Выбрать"
                           disabled={colorAction ? true : false}
                           optionFilterProp="children"
-                          value={productsData?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
+                          value={dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
                           onChange={(e) => setState({ ...state, producer_Id: e })}
                           onSearch={onSearch}
                           size="large"
@@ -1917,7 +1930,7 @@ const AddingProduct = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-                          options={productsData?.producers?.map((item) => {
+                          options={dressInfo?.getProductInfo?.producers?.map((item) => {
                             return {
                               value: item?.id,
                               label: item?.name_ru,
@@ -1977,7 +1990,7 @@ const AddingProduct = () => {
                       }`}
                   >
                     {allSizeModalShow && (
-                      <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={productsData?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
+                      <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
 
@@ -1987,7 +2000,7 @@ const AddingProduct = () => {
 
                   {/* Img Carousel */}
                   <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
-                    <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={productsData.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
+                    <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
 
                 </div>

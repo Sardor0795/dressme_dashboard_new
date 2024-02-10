@@ -18,7 +18,7 @@ export default function ProductEditPage() {
 
   return (
     <div>
-      <div className="w-full pt-6 md:pb-4 px-4 md:px-10 md:py-4 md:border-b border-lightBorderColor block">
+      <div className="w-full pt-6 md:pb-4  md:py-4 md:border-b border-lightBorderColor block">
 
         <div className="flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit  flex justify-center md:justify-start">

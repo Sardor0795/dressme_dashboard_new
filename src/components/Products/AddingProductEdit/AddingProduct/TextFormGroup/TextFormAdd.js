@@ -7,6 +7,8 @@ import { StarLabel, XIcon } from "../../../../../assets/icons";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 import { ClipLoader } from "react-spinners";
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 export default function TextFormAdd({ productsEdit, handlCallBack, loading, onClick, onEdit }) {
 
@@ -39,14 +41,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
             brand: productsEdit?.brand_id,
         })
     }, [dressInfo?.nextPageShowForm])
-    // console.log(productsEdit?.brand_id, "productsEdit?.brand_id");
-    // console.log(state?.brand, "state?.brand");
 
-    const { request } = useHttp()
-    const [productsData, setProductsData] = useState({})
 
     const handleSelectQuality = (value) => {
-        productsData?.quality?.filter(e => e.name_ru === value).map(item => {
+        dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru === value).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz, onEditTextForm: true })
         })
 
@@ -57,25 +55,31 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
     }
     const handleBrand = (value) => {
-        console.log(value, "value");
         setState({ ...state, brand: value, onEditTextForm: true })
 
     }
-    useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
-        {
-            onSuccess: (res) => {
-                if (res) {
-                    setProductsData(res)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                    }
+                });
+                if (data?.status >= 200 && data?.status < 300) {
+                    setDressInfo({ ...dressInfo, getProductInfo: data?.data })
                 }
-            },
-            onError: (err) => {
-                console.log(err, "ERR PRODUCTS_NEXT_PAGE");
-                ;
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
+
+            } catch (error) {
+
+            }
+        };
+        if (!dressInfo?.getProductInfo) {
+            fetchData();
         }
-    );
+    }, []);
 
 
     useEffect(() => {
@@ -284,10 +288,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         // allowClear
-                                        value={productsData?.quality?.filter(e => e?.name_ru == state?.qualityInRu)?.map(item => { return item?.name_ru })}
+                                        value={dressInfo?.getProductInfo?.quality?.filter(e => e?.name_ru == state?.qualityInRu)?.map(item => { return item?.name_ru })}
                                         onChange={handleSelectQuality}
                                         options={
-                                            productsData?.quality?.map(item => {
+                                            dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (
                                                     {
                                                         value: item.name_ru,
@@ -314,7 +318,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
                                         style={{ width: "100%" }}
                                         value={
-                                            productsData?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
+                                            dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
                                                 return item?.name_uz
                                             })
                                             // lang === ''
@@ -328,7 +332,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         onChange={handleSelectQualityUz}
                                         // allowClear
                                         options={
-                                            productsData?.quality?.map(item => {
+                                            dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (
                                                     {
                                                         value: item?.name_uz,
@@ -411,10 +415,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         className="font-AeonikProMedium"
                                         placeholder={"Выбрать"}
                                         style={{ width: "100%" }}
-                                        value={productsData?.brands?.filter(e => state?.brand == (e?.id))?.map((item) => { return item?.name || null })}
+                                        value={dressInfo?.getProductInfo?.brands?.filter(e => state?.brand == (e?.id))?.map((item) => { return item?.name || null })}
                                         onChange={handleBrand}
                                         options={
-                                            productsData?.brands?.map(item => {
+                                            dressInfo?.getProductInfo?.brands?.map(item => {
                                                 return (
                                                     {
                                                         value: item?.id,
