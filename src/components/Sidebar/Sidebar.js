@@ -64,7 +64,7 @@ function Sidebar() {
   return (
     <div className="w-full h-full flex ">
       <div
-        className={`relative hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
+        className={`fixed  hidden md:block w-[300px] h-[100vh] fixed top-0 left-0  border border-lightBorderColor bg-lightBgColor
     `}
       >
         <div className="flex flex-wrap content-between w-full h-full pb-10">
@@ -328,7 +328,7 @@ function Sidebar() {
           </div>
         </div>
       </div >
-      <div className=" w-full md:w-[calc(100%-300px)] ">
+      <div className=" w-full md:w-[calc(100%-300px)] md:ml-[300px]">
         <Outlet />
       </div>
     </div >
