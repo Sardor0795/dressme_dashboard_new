@@ -8,6 +8,9 @@ import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
+
 function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -25,16 +28,9 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
     })
 
 
-
-
-    const { request } = useHttp()
-    const [productsData, setProductsData] = useState({})
-
     const handleSelectQuality = (value) => {
-        productsData?.quality?.filter(e => e.name_ru == value).map(item => {
+        dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == value).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz })
-            // console.log(item?.name_uz, "nameuz");
-            // console.log(state?.qualityInUz, "qualityInUz");
         })
         setState({ ...state, qualityInRu: value, qualityInUz: value })
 
@@ -46,22 +42,27 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
     }
 
-    useQuery(["products_get_page_next"], () => { return request({ url: "/products/get-product-info", token: true }) },
-        {
-            onSuccess: (res) => {
-                if (res) {
-                    setProductsData(res)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                    }
+                });
+                if (data?.status >= 200 && data?.status < 300) {
+                    setDressInfo({ ...dressInfo, getProductInfo: data?.data })
                 }
-            },
-            onError: (err) => {
-                console.log(err, "ERR PRODUCTS_NEXT_PAGE");
-                ;
-            },
-            keepPreviousData: true,
-            refetchOnWindowFocus: false,
-        }
-    );
 
+            } catch (error) {
+
+            }
+        };
+        if (!dressInfo?.getProductInfo) {
+            fetchData();
+        }
+    }, []);
 
     useEffect(() => {
         window.scrollTo({
@@ -268,7 +269,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         allowClear
                                         onChange={handleSelectQuality}
                                         options={
-                                            productsData?.quality?.map(item => {
+                                            dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (
                                                     {
                                                         value: item.name_ru,
@@ -295,7 +296,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
 
                                         style={{ width: "100%" }}
                                         value={
-                                            productsData?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
+                                            dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
                                                 return item?.name_uz
                                             })
                                             // lang === ''
@@ -309,7 +310,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         onChange={handleSelectQualityUz}
                                         allowClear
                                         options={
-                                            productsData?.quality?.map(item => {
+                                            dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (
                                                     {
                                                         value: item?.name_uz,
@@ -388,7 +389,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         style={{ width: "100%" }}
                                         onChange={handleBrand}
                                         options={
-                                            productsData?.brands?.map(item => {
+                                            dressInfo?.getProductInfo?.brands?.map(item => {
                                                 return (
                                                     {
                                                         value: item?.id,

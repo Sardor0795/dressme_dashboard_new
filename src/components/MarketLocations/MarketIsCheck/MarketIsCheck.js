@@ -56,7 +56,6 @@ export default function MarketIsCheck() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // setLoading(true); // Set loading state to true before making the request
                 const data = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',

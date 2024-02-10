@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
@@ -15,9 +15,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../../hook/useHttp";
+import axios from "axios";
+import { dressMainData } from "../../../../../hook/ContextTeam";
 const url = "https://api.dressme.uz/api/seller";
+const { REACT_APP_BASE_URL } = process.env;
 
 function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList, searchName }) {
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const { request } = useHttp()
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -33,17 +38,28 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
   const [getIdProduct, setGetIdProduct] = useState(null);
   const [hideProductList, setHideProductList] = useState(false);
 
-  // console.log(data, "data--LocationItem");
-  const [getProductCategory, setGetProductCategory] = useState(null);
-  useQuery(["getProductOfCategory"], () => { return request({ url: "/products/get-product-info", token: true }) },
-    {
-      onSuccess: (res) => {
-        setGetProductCategory(res?.types)
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.getProductInfo) {
+      fetchData();
     }
-  );
+  }, []);
   // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
   // console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
   const navigate = useNavigate();
@@ -438,7 +454,7 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
                               <td className="w-[15%] h-full  flex items-center justify-center ">
                                 {itemValue?.sku || "sku"}
                               </td>
-                              {getProductCategory && getProductCategory?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                              {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                 return (
                                   <td
                                     key={index}

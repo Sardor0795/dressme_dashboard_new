@@ -39,16 +39,12 @@ export default function MarketIsStoreCheck() {
       }
 
       if (data?.status === 401) {
-        // setDressInfo({ ...dressInfo, shopsList: [] })
         sellerRefreshToken()
         fetchData()
       }
-      console.log(data, "Data");
     },
     onError: (error) => {
-      console.log(error, "error");
       if (error?.response?.status === 401) {
-        // setDressInfo({ ...dressInfo, shopsList: [] })
         sellerRefreshToken()
       }
     },
