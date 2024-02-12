@@ -131,7 +131,6 @@ export default function ProductLocationsList() {
       return { error, status };
     }
   };
-
   const customHeaders = {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
@@ -152,18 +151,12 @@ export default function ProductLocationsList() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-  // console.log(dressInfo?.getProductList, "dressInfo?.getProductList");
 
   function addByLocation(itemId, locationId, shopId) {
     setState({ ...state, shopMarketId: shopId })
     setAddresNewId(locationId)
     setGetIdProduct(itemId)
-
   }
-  // state?.getCheckListItem
-  // function handleAllCheckList(childData) {
-  //   console.log(childData, "childData");
-  // }
 
   const onSendPeoductSeveralSelect = () => {
     setState({ ...state, loader: true, hideProductList: true })
@@ -231,8 +224,6 @@ export default function ProductLocationsList() {
       })
       .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
   };
-
-
   // ----------------------ListItem--------
   const deleteProductById = useMutation(() => {
     return request({ url: `/products/${deleteId}/${0}`, method: "DELETE", token: true });
@@ -285,7 +276,6 @@ export default function ProductLocationsList() {
       })
   }
 
-
   const postAddProductId = useMutation(() => {
     return request({
       url: `/shops/locations/products/add`,
@@ -330,9 +320,6 @@ export default function ProductLocationsList() {
     navigate(`/store/market-list/:${id}`);
   };
 
-
-  // console.log(addresNewId, 'addressId-addresNewId');
-  // console.log(checkedList, 'addressId-');
   function addNewProductId(locationId, shopId) {
     setDressInfo({ ...dressInfo, locationIdAddProduct: locationId })
     navigate(`/products/location/add/:${shopId}`);
@@ -348,7 +335,27 @@ export default function ProductLocationsList() {
   const goMapWear = (id) => {
     navigate(`/locations-store/wears/:${id}`);
   };
-  // console.log(dressInfo?.regionList?.regions, "dressInfo?.regionList?.regions");
+  useEffect(() => {
+    if (!openStoreList) {
+      setDeleteMessage(null)
+      setSuccessMessage(null)
+    }
+  }, [openStoreList])
+  useEffect(() => {
+    if (!state?.openSelectModal) {
+      setState({ ...state, onSuccessMessaage: null, onErrorTitle: null, onErrorMessage: null, })
+      setHideProductList(false)
+    }
+  }, [state?.openSelectModal])
+
+  useEffect(() => {
+    if (!deleteModal) {
+      setHideDeleteIcons(false)
+    }
+  }, [deleteModal])
+
+  // console.log(!state?.onErrorMessage, !state?.onSuccessMessaage, !state?.onErrorTitle, "!state?.onErrorMessage , !state?.onSuccessMessaage ,!state?.onErrorTitle ");
+  // Общее количество:
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -358,13 +365,6 @@ export default function ProductLocationsList() {
           setDeleteMessage(null)
           setSuccessMessage(null)
           setHideProductList(false)
-
-        }}
-        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${deleteModal || openStoreList ? "" : "hidden"}`}
-      ></section>
-      <section
-        onClick={() => {
           setState({
             ...state,
             onSuccessMessaage: null,
@@ -374,11 +374,12 @@ export default function ProductLocationsList() {
             hideProductList: false,
             openDeleteModal: false
           })
-          setHideProductList(false)
+          // setHideProductList(false)
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.openSelectModal || state?.openDeleteModal ? "" : "hidden"}`}
+         ${deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal ? "" : "hidden"}`}
       ></section>
+
       {/* Add the Several selected products to the new one */}
       <section
         className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelectModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
@@ -467,10 +468,10 @@ export default function ProductLocationsList() {
                                 {data?.id !== addresNewId && <div
                                   onClick={() => setState({ ...state, getShopLocationId: data?.id })}
                                   className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                                  <span className="text-[17px]">{index + 1}</span>)
-                                  <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                  <span className="text-[17px] mr-1">{index + 1}</span>)
+                                  <span className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                     {data?.address}
-                                  </p>
+                                  </span>
                                 </div>}
                               </div>
                             )
@@ -737,11 +738,11 @@ export default function ProductLocationsList() {
                         {item?.shop_locations?.map((data, index) => {
                           return (
                             <div key={index} onClick={() => setGetIdShopLocation(data?.id)} className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                              {data?.id !== addresNewId && <div className="flex items-center">
+                              {data?.id !== addresNewId && <div className="flex items-center gap-x-1 ">
                                 <span className="text-[17px]">{index + 1}</span>)
-                                <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                <span className="text-black text-[17px] not-italic leading-4 flex items-center font-AeonikProMedium mr-[20px]">
                                   {data?.address}
-                                </p>
+                                </span>
                               </div>}
                             </div>
                           )
@@ -791,7 +792,9 @@ export default function ProductLocationsList() {
 
         </section>
       </div>
-      {isLoading ? <LoadingForSeller /> :
+      {isLoading ?
+        <LoadingForSeller />
+        :
         <div className=" w-full">
           {/* Up Title */}
           <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
@@ -831,16 +834,10 @@ export default function ProductLocationsList() {
               </button>
             </div>
           </div>
-          {/* <div className="w-full justify-end  cursor-pointer bg-white flex items-center gap-x-2"
-          >
-            <span className="md:mr-[10px] select-none text-sm md:text-base font-AeonikProMedium md:font-AeonikProMedium text-mobileTextColor">
-              Выбрать все
-            </span>
-            <Checkbox onChange={handleGetValueAll} />
-          </div> */}
           <div className="w-full my-4">
-
           </div>
+          {/* filter(e =>e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())) */}
+
           {dressInfo?.getProductList?.products_locations?.map((item, index) => {
             return (
               <div key={index}>
