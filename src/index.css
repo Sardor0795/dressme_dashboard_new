@@ -412,3 +412,24 @@ input[type=number] {
   box-shadow: 0 0 0 1px #39f;
   outline: 0;
 }
+
+/* ----Icons Style */
+
+.iconArrow {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.25);
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  inset-inline-start: auto;
+  inset-inline-end: 11px;
+  height: 12px;
+  font-size: 12px;
+  pointer-events: none;
+
+}
