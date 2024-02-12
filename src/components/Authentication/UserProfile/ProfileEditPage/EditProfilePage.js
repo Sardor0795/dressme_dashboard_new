@@ -5,6 +5,7 @@ import {
   CircleNextIcon,
   CreditCardNumber,
   DeleteIcon,
+  DownArrowAntd,
   MenuCloseIcons,
   UserMailIcon,
 } from "../../../../assets/icons";
@@ -257,13 +258,13 @@ function EditProfilePage() {
           : "md:hidden bottom-[-800px] z-[-10]"
           }`}
       >
-        <button
+
+        <span
+          className="select-none iconArrow cursor-pointer"
           onClick={() => setState({ ...state, popConfirmDelete: false })}
-          type="button"
-          className="absolute  right-3 top-3 w-5 h-5 "
         >
-          <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
-        </button>
+          <MenuCloseIcons colors="#000" />
+        </span>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
           <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
             <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
@@ -444,7 +445,7 @@ function EditProfilePage() {
                   Выберите регион
                 </span>
                 <span
-                  className="select-none cursor-pointer"
+                  className="select-none iconArrow cursor-pointer"
                   onClick={() => {
                     setState({ ...state, openModalRegions: false });
                   }}
@@ -574,8 +575,9 @@ function EditProfilePage() {
                         );
                       })}
                   </span>
-                  <span className="rotate-[180deg]">
-                    <ArrowTopIcons colors={"#a1a1a1"} />
+                  <span className=" iconArrow ">
+
+                    <DownArrowAntd colors={"#a1a1a1"} />
                   </span>
                 </div>
               </label>
@@ -596,13 +598,12 @@ function EditProfilePage() {
             </div>
           </div> */}
           {state?.sellerTypeId >= 3 ? (
-            <div className="select relative w-full flex items-center ">
+            <div className="  w-full flex items-center ">
               <Select
-                className="select flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                className=" flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
                 placeholder="Тип предприятия"
                 optionFilterProp="children"
                 onChange={(e) => setState({ ...state, sellerTypeId: e })}
-                suffixIcon={null}
                 size="large"
                 options={dressInfo?.typeList?.company?.map((item) => {
                   return {
@@ -611,44 +612,27 @@ function EditProfilePage() {
                   };
                 })}
               />
-              <span
-                className={`data absolute right-[10px] top- h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}
-              >
-                <ArrowTopIcons colors="#a1a1a1" />
-              </span>
             </div>
           ) : (
             <div className="w-full h-fit ">
               <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
                 Тип
               </div>
-              <div className="relative z-10 mt-[6px] flex items-center justify-between ">
-                <select
-                  id="changeIcons"
-                  // className="text-[#a1a1a1]"
-                  className="w-full h-[42px]  outline-none  px-[16px] w-full flex items-center border border-searchBgColor rounded-lg"
-                  value={state?.sellerTypeId}
-                  // onChange={(e) => setState({ ...state, sellerTypeId: e.target.value })}
-                  onChange={(e) =>
-                    setState({ ...state, sellerTypeId: e.target.value })
-                  }
+              <div className="w-full flex items-center mt-[6px] ">
+                <Select
+                  className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
                   placeholder="Тип предприятия"
-                  required
-                >
-                  {dressInfo?.typeList?.individual?.map((data) => {
-                    return (
-                      <option key={data.id} value={data.id}>
-                        {" "}
-                        {data.name_ru}{" "}
-                      </option>
-                    );
+                  optionFilterProp="children"
+                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
+                  value={dressInfo?.typeList?.individual?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
+                  size="large"
+                  options={dressInfo?.typeList?.individual?.map((item) => {
+                    return {
+                      value: item?.id,
+                      label: item?.name_ru,
+                    };
                   })}
-                </select>
-                <span
-                  className={`data absolute right-[10px]  h-full flex items-center select-focus:rotate-[90deg] rotate-[180deg] `}
-                >
-                  <ArrowTopIcons colors="#a1a1a1" />
-                </span>
+                />
               </div>
             </div>
           )}
