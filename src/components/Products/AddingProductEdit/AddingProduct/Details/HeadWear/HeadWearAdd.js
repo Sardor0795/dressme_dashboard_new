@@ -53,11 +53,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         }
     }, [state?.discountPercent, state?.price])
 
-    // console.log(state?.discountPercent, state?.price, "state?.discountPercent || state?.price");
-
-
-
-
     const onChangeSwitch = (id) => {
         setState({ ...state, sizeCheck: id, saveBtnDisable: true })
     };
