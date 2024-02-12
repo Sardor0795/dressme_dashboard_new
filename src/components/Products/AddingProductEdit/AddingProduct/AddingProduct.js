@@ -1,16 +1,14 @@
-import { Popover, Select, Space, Switch, TreeSelect, message } from "antd";
+import { Select, Space, message } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import {
   AddIconsCircle1,
   ArrowRightIcon,
   DeleteIcon,
-  DownloadIcon,
-  InputCheckedTrueIcons,
   LoaderIcon,
   MenuCloseIcons,
   StarLabel,
 } from "../../../../assets/icons";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import ClothingSection from "./DetailsForMobile/ClothesSection/ClothingSection";
@@ -20,14 +18,12 @@ import ColourGroup from "./DetailsForMobile/ColourList/ColourGroup";
 import GenderList from "./DetailsForMobile/GenderList/GenderList";
 import DressType from "./DetailsForMobile/DressType/DressType";
 import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
-import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCategory";
 import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
 import { BiCheck, BiCheckDouble } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingForSeller from "../../../Loading/LoadingFor";
 import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
 import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
@@ -36,22 +32,21 @@ import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import axios from "axios";
-
-// import { CarouselEdit } from "./Details/ProductCarouselEdit/CarouselEdit";
-// import { ProductCarouselEdit } from "../../../MarketLocations/Locations/ProductEditInLocation/AddingProductPageOne/MobileDropUpSides/ProductCarouselEdit/ProductCarouselEdit";
 const { REACT_APP_BASE_URL } = process.env;
 
 
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
 
-
+// Все размеры
 
 const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const navigate = useNavigate()
+
   const { id } = useParams()
-  const newProductId = id?.replace(":", "")
+  const newProductId = id
+
   const { request } = useHttp();
   const [state, setState] = useState({
     showColor: false,
@@ -75,19 +70,19 @@ const AddingProduct = () => {
     pictureBgFile3: null,
     pictureBgFile4: null,
     // ---------------
-    shopId: null,
-    shopLocationId: null,
+    shopId: '',
+    shopLocationId: '',
     section_Id: [],
     sub_Section_Id: [],
     season_Id: [],
-    color_Id: null,
-    gender_Id: null,
-    min_Age_Category: null,
-    max_Age_Category: null,
-    sku: null,
-    category_Id: null,
-    filterTypeId: null,
-    producer_Id: null,
+    color_Id: '',
+    gender_Id: '',
+    min_Age_Category: '',
+    max_Age_Category: '',
+    sku: '',
+    category_Id: '',
+    filterTypeId: '',
+    producer_Id: '',
 
 
     // -----Details-----
@@ -97,12 +92,12 @@ const AddingProduct = () => {
     imageAddError: null,
     clearAddSize: false,
     //productsDataIdEdit
-    sizeGetList: null,
+    sizeGetList: '',
     //---------------
-    newColorByAddSizes: null,
+    newColorByAddSizes: '',
     // AllChekcedSizeList
     checkedSizeList: [],
-    lastElementColorId: null,
+    lastElementColorId: '',
     // ----
     onEditInput: false,
     onEditTextForm: false,
@@ -167,34 +162,7 @@ const AddingProduct = () => {
     () => setState({ ...state, MakeCountryModal: false }),
     []
   ); // ClothingSection
-  // const ClothingCategoryToggle = React.useCallback(
-  //   () => setState({ ...state, ClothingCategoryModal: false }),
-  //   []
-  // ); // ClothingSection
 
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
-  //         headers: {
-  //           'Content-type': 'application/json; charset=UTF-8',
-  //           "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-  //         }
-  //       });
-  //       if (data?.status >= 200 && data?.status < 300) {
-  //         setDressInfo({ ...dressInfo, getProductInfo: data?.data })
-  //       }
-
-  //     } catch (error) {
-
-  //     }
-  //   };
-  //   if (!dressInfo?.getProductInfo) {
-  //     fetchData();
-  //   }
-  // }, []);
 
 
   const [openCategories, setOpenCategories] = useState();
@@ -855,18 +823,9 @@ const AddingProduct = () => {
       setState({ ...state, subSectionToggle: false })
     }
   }, [newArray?.length, subSection_Id?.length])
-  // console.log(state?.subSectionToggle, "subSectionToggle");
-  // console.log(state?.isCheckValid, "isCheckValid");
-  // console.log(newArray, "newArray");
-  // console.log(subSection_Id?.length, "subSection_Id?.length");
-  // console.log(subSection_Id, "subSection_Id");
-  // console.log(state?.onEditInput, "onEditInput");
-  // console.log("---------------------------------------------");
-  console.log(dressInfo?.getProductInfo, "dressInfo?.getProductInfo");
+
   return (
     <div className="w-full h-fit ">
-
-
       <div>
         <div className=" flex items-center grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
           {state?.errorListMessage && <div className="w-full  flex items-center gap-x-2 ">

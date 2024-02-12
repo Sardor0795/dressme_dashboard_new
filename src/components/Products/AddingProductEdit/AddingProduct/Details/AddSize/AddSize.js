@@ -46,6 +46,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
         // ------
         onConcel: false
     })
+    console.log(state, "state");
     useEffect(() => {
         setState({
             ...state,
@@ -358,51 +359,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 discountPrice: state?.salePrice?.split(",")?.join(""),
             })
         }
-        // if (state?.minSize && state?.quantityNum && state?.priceNum) {
-        // setState({ ...state, isCheckValid: false, })
-        // setToggleShow(false)
-        // handleCallBack({
-        //     // Accessuary
-        //     accessorySize: state?.minSize,
-        //     legnthAcc: state?.rowSize,
-        //     widthAcc: state?.colSize,
-        //     accessoryLetterSize: state?.sizeListCheck,
-        //     // Shoes
-        //     footWearSize: state?.minSize,
-        //     minFootLength: state?.minFootLength,
-        //     maxFootLength: state?.maxFootLength,
-        //     // UnderWear
-        //     minUnderwearWaistGirth: state?.minBreast,
-        //     maxUnderwearWaistGirth: state?.maxBreast,
-        //     minUnderWearSize: state?.minSize,
-        //     maxUnderWearSize: state?.maxSize,
-        //     minUnderWearHipGirth: state?.minHips,
-        //     maxUnderWearHipGirth: state?.maxHips,
-        //     minHeight: state?.minHeight,
-        //     maxHeight: state?.maxHeight,
-        //     underWearLetterSize: state?.sizeListCheck,
-        //     // OutWear
-        //     minChestGirth: state?.minBreast,
-        //     maxChestGirth: state?.maxBreast,
-        //     minOutWearSize: state?.minSize,
-        //     maxOutWearSize: state?.maxSize,
-        //     minOutWearWaistGirth: state?.minWaist,
-        //     maxOutWearWaistGirth: state?.maxWaist,
-        //     minOutWearHipGirth: state?.minHips,
-        //     maxOutWearHipGirth: state?.maxHips,
-        //     outWearLetterSize: state?.sizeListCheck,
-        //     // HeadWear
-        //     minHeadGirth: state?.minHeadGirth,
-        //     maxHeadGirth: state?.maxHeadGirth,
-        //     sizeCheck: state?.sizeCheck,
-        //     // All of Category
-        //     amount: state?.quantityNum,
-        //     age: state?.ageNum,
-        //     price: state?.priceNum?.split(",")?.join(""),
-        //     discountPercent: state?.salePercent,
-        //     discountPrice: state?.salePrice?.split(",")?.join(""),
-        // })
-        // }
+
     }
 
 
@@ -413,10 +370,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
         setState({ ...state, priceNum: formattedValue });
     };
     const handleChangeSalePrice = (event) => {
-        // const result = event.target.value.replace(/\D/g, '')
-        // const sanitizedValue = result.replace(/,/g, '');
-        // const formattedValue = Number(sanitizedValue).toLocaleString()
-        // setState({ ...state, salePrice: formattedValue });
+
     };
 
     useEffect(() => {
@@ -437,12 +391,12 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
 
     const AddSize = (
         <div className="w-[840px] h-fit">
-            {typeId == 1 &&
+            {Number(typeId) === 1 &&
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
                     <div className="w-full ">
-                        {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
+                        {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
                                     <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
@@ -462,9 +416,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
 
                                 Обхват головы
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                {/* <span className="ml-[5px]">
-                             <StarLabel />
-                         </span> */}
+
                             </p>
                             <div className="w-full flex items-center mt-[10px]">
                                 <div className="flex flex-col">
@@ -497,15 +449,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
 
                                 One Size
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                {/* <span className="ml-[5px]">
-                             <StarLabel />
-                         </span> */}
+
                             </p>
                             <div className="flex items-center justify-center mt-[10px]">
                                 <Switch
                                     className={`border border-borderColor bg-[#8B8B8B] `}
                                     onChange={onChangeSwitch}
-                                    defaultChecked={state?.sizeCheck}
+                                    checked={state?.sizeCheck}
+                                // defaultChecked={state?.sizeCheck}
                                 />
                             </div>
                         </div>
@@ -1140,7 +1091,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                     </div>
                 </div>
             }
-            {Number(typeId) == 3 &&
+            {Number(typeId) === 3 &&
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >

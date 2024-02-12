@@ -326,7 +326,7 @@ export default function ProductLocationsList() {
 
   };
   const goProductDetailEdit = (id) => {
-    navigate(`/products/location/:${id}`);
+    navigate(`/products/location/${id}`);
   };
 
   const goMapCity = (id) => {
