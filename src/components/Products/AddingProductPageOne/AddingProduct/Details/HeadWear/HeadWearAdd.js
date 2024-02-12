@@ -177,7 +177,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
                             Количество
-                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
                             <span className="ml-[5px]">
                                 <StarLabel />
                             </span>
