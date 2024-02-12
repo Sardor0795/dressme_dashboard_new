@@ -46,7 +46,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
         // ------
         onConcel: false
     })
-    console.log(state, "state");
     useEffect(() => {
         setState({
             ...state,
