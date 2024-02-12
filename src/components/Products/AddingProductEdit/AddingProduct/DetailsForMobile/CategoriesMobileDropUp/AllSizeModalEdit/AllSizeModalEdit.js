@@ -151,7 +151,6 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
           setSendingLoader(false)
           setOpenColorModal(false)
         }
-        console.log(res_1, "Product--Store--Added");
       }
     } catch (err) {
       toast.error(`${err}`, {
