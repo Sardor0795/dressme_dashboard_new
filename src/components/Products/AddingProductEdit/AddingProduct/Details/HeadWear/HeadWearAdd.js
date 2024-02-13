@@ -37,7 +37,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         editSizeId: null,
         addnewColorIdIcons: null,
         disableSizes: null,
-        disablePrices: false,
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
 
@@ -256,7 +255,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             <div>
                 <section
                     onClick={() => {
-                        setState({ ...state, sizeEditModal: false, successChanged: false, errorMessage: '', successMessage: '' })
+                        setState({ ...state, sizeEditModal: false, successChanged: false, editSizeId: null, errorMessage: '', successMessage: '' })
                     }}
                     className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.sizeEditModal ? "" : "hidden"}`}
                 ></section>
@@ -266,7 +265,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
 
                         <button
                             type="button"
-                            onClick={() => setState({ ...state, sizeEditModal: false, successChanged: false, errorMessage: '', successMessage: '' })}
+                            onClick={() => setState({ ...state, sizeEditModal: false, successChanged: false, editSizeId: null, errorMessage: '', successMessage: '' })}
                         >
                             <MenuCloseIcons
                                 className="w-full h-full "
