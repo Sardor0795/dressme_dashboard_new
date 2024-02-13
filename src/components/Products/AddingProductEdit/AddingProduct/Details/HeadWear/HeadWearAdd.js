@@ -250,7 +250,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         }
     }
 
-    console.log(state?.sizeCheck, 'stateList   --------------');
+    // console.log(state?.sizeCheck, 'stateList   --------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
@@ -299,16 +299,16 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         Обхват головы
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
-                                    <div className="w-full flex items-center mt-[10px]">
-                                        <div className="flex flex-col">
+                                    <div className="w-full flex items-center mt-[10px] ">
+                                        <div className="flex flex-col border border-borderColor rounded-lg">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 ?
                                                 <span
-                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minHeadGirth}</span>
                                                 :
                                                 <input
                                                     type="number"
-                                                    className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[55px] h-[38px] text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     name="minHeadGirth"
                                                     value={state?.minHeadGirth}
@@ -320,14 +320,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             }
                                         </div>
                                         <span className="mx-[5px]"><LineIcon /></span>
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col border border-borderColor rounded-lg">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 ?
                                                 <span
-                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.maxHeadGirth}</span>
                                                 : <input
                                                     type="number"
-                                                    className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                                    className={`inputStyle w-[55px] h-[38px] text-center   bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
                                                     placeholder="Макс"
                                                     name="maxHeadGirth"
                                                     value={state?.maxHeadGirth}
@@ -345,7 +345,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="flex items-center justify-center mt-[10px]">
                                         {state?.disableSizes === 1 || state?.disableSizes === 2 ?
                                             <Switch
-                                                className={`border opacity-50 border-borderColor bg-[#8B8B8B] `}
+                                                className={`border opacity-20 border-borderColor bg-[#8B8B8B] `}
                                                 checked={state?.sizeCheck}
                                             /> :
                                             <Switch
@@ -364,14 +364,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <StarLabel />
                                         </span>
                                     </p>
-                                    <div className="flex items-start justify-between mt-[10px]">
+                                    <div className="flex items-start justify-between mt-[10px] border border-borderColor rounded-lg">
                                         {state?.disableSizes === 1 || state?.disableSizes === 0 ?
                                             <span
-                                                className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                             >{state?.amount}</span>
                                             : <input
                                                 type="number"
-                                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.amount}
                                                 name="amount"
                                                 onChange={(e) => setState({ ...state, amount: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
@@ -389,14 +389,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 Возраст
                                             </div>
                                         </div>
-                                        <div className="w-full flex items-center">
+                                        <div className="w-full flex items-center border border-borderColor rounded-lg">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 ?
                                                 <span
-                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.age}</span>
                                                 : <input
                                                     type="number"
-                                                    className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                                    className="inputStyle w-[58px] h-[42px] text-center fon  rounded-lg px-[12px]  outline-none "
                                                     placeholder="age"
                                                     value={state?.age}
                                                     name="age"
@@ -417,7 +417,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <label htmlFor="enterPrice1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                             {state?.disableSizes === 0 || state?.disableSizes === 2 ?
                                                 <span
-                                                    className="inputStyle w-[70%] flex items-center justify-start opacity-50 font-AeonikProMedium outline-none bg-transparent"
+                                                    className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                 >{state?.price}</span>
                                                 :
                                                 <input
@@ -449,7 +449,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
                                                     {state?.disableSizes === 0 || state?.disableSizes === 2 ?
                                                         <span
-                                                            className="inputStyle w-[70%] flex items-center justify-start opacity-50 text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
+                                                            className="inputStyle w-[70%] flex items-center justify-start opacity-20 text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
                                                         >{state?.discountPercent}</span>
                                                         :
                                                         <input
@@ -468,7 +468,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <label htmlFor="discountPrice1" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
                                                     {state?.disableSizes === 0 || state?.disableSizes === 2 ?
                                                         <span
-                                                            className="inputStyle w-[75%] flex items-center justify-start opacity-50 select-none font-AeonikProMedium outline-none bg-transparent"
+                                                            className="inputStyle w-[75%] flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                         >{state?.discountPrice}</span>
                                                         : <input
                                                             type="text"

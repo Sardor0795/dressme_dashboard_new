@@ -823,7 +823,7 @@ const AddingProduct = () => {
       setState({ ...state, subSectionToggle: false })
     }
   }, [newArray?.length, subSection_Id?.length])
-
+  console.log(dressInfo?.getProductInfo, "dressInfo?.getProductInfo");
   return (
     <div className="w-full h-fit ">
       <div>
