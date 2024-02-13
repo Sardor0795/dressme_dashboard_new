@@ -70,7 +70,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_price", null);//no R
         state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
         state?.age && form.append("age", Number(state?.age));
-        state?.disableSizes === 2 && form.append("amount", state?.amount);
+        form.append("amount", state?.amount);
         state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
