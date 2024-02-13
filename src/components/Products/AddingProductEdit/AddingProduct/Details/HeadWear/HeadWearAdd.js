@@ -66,12 +66,12 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
         form.append("discount_percent", state?.discountPercent);
-        state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
-        state?.discountPercent?.length === 0 && form.append("discount_price", null);//no R
-        state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
+        state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
         state?.age && form.append("age", Number(state?.age));
-        form.append("amount", state?.amount);
-        form.append("price", state?.price?.split(",")?.join(""));
+        state?.disableSizes === 2 && form.append("amount", state?.amount);
+        state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
         form.append("product_id", Number(stateList?.shop_locations[0]?.pivot?.product_id));
