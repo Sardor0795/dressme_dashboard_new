@@ -38,6 +38,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         sendingLoader: false,
         editSizeId: null,
         addnewColorIdIcons: null,
+        disableSizes: null,
+
 
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
@@ -78,14 +80,16 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         state?.minSize && form.append("accessory_size", state?.minSize);
         state?.rowSize && form.append("length", state?.rowSize);
         state?.colSize && form.append("width", state?.colSize);
-        state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-        state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
+        // state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
         state?.ageNum && form.append("age", Number(state?.ageNum));
-        form.append("amount", state?.quantityNum);
-        form.append("price", state?.priceNum?.split(",")?.join(""));
-        form.append("shop_location_id", stateList?.locations[0]?.pivot?.shop_location_id);
+        state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
+        state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
+        form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
-        form.append("product_id", Number(stateList?.locations[0]?.pivot?.product_id));
+        form.append("product_id", Number(stateList?.shop_locations[0]?.pivot?.product_id));
 
         return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
             method: "POST",
@@ -185,19 +189,19 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: formattedValue, saveBtnDisable: true });
+        setState({ ...state, priceNum: formattedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, salePrice: formattedValue, saveBtnDisable: true });
+        setState({ ...state, salePrice: formattedValue, saveBtnDisable: true, disableSizes: 1 });
     };
 
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
-            setState({ ...state, salePercent: value, saveBtnDisable: true });
+            setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
     };
     useEffect(() => {
@@ -250,7 +254,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             <div>
                 <section
                     onClick={() => {
-                        setState({ ...state, sizeEditModal: false, successChanged: false, errorMessage: '', successMessage: '' })
+                        setState({ ...state, sizeEditModal: false, successChanged: false, editSizeId: null, errorMessage: '', successMessage: '' })
                     }}
                     className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.sizeEditModal ? "" : "hidden"}`}
                 ></section>
@@ -259,7 +263,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                     <div className="flex justify-end">
                         <button
                             type="button"
-                            onClick={() => setState({ ...state, sizeEditModal: false, successChanged: false, errorMessage: '', successMessage: '' })}
+                            onClick={() => setState({ ...state, sizeEditModal: false, successChanged: false, editSizeId: null, errorMessage: '', successMessage: '' })}
                         >
                             <MenuCloseIcons className="w-full h-full " colors={"#b2b2b2"} />
                         </button>
@@ -291,14 +295,18 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
                                     <div className="w-[83px] flex items-center justify-between gap-x-1">
-                                        <div className="flex flex-col">
-                                            <input
-                                                type="number"
-                                                name="minSize"
-                                                className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
-                                                value={state?.minSize}
-                                                onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
-                                            />
+                                        <div className="flex flex-col border border-borderColor rounded-lg">
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle outline-none w-[80px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center  opacity-20`}
+                                                >{state?.minSize}</span>
+                                                : <input
+                                                    type="number"
+                                                    name="minSize"
+                                                    className="inputStyle outline-none w-full text-start h-[42px]  px-3 rounded-lg  font-AeonikProRegular "
+                                                    value={state?.minSize}
+                                                    onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                />}
                                         </div>
                                     </div>
                                 </div>
@@ -308,83 +316,160 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </p>
                                     <div className='w-full '>
                                         {/* -----------------Desktop--------------------- */}
-                                        <div className="w-full hidden md:flex flex-row">
-                                            <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
-                                                {sizeList.sizeList1.map((data) => {
-                                                    return (
-                                                        <div
-                                                            key={data?.id}
-                                                            className="flex "
-                                                        >
+                                        {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            <div className="w-full hidden opacity-20 md:flex flex-row">
+                                                <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
+                                                    {sizeList.sizeList1.map((data) => {
+                                                        return (
+                                                            <div
+                                                                key={data?.id}
+                                                                className="flex "
+                                                            >
 
-                                                            {data?.action &&
-                                                                <label
-                                                                    htmlFor={data?.id}
-                                                                    className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                                >
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        id={data?.id}
-                                                                        name="size_Outwear"
-                                                                        checked={data?.name === state?.sizeListCheck}
-                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true })}
-                                                                        value={data?.name}
-                                                                        className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                                    />
-                                                                    <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                        {data?.name}
-                                                                    </span>
-                                                                </label>
-                                                            }
-                                                        </div>
-                                                    );
-                                                })}
+                                                                {data?.action &&
+                                                                    <label
+                                                                        htmlFor={data?.id}
+                                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                                    >
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id={data?.id}
+                                                                            name="size_Outwear"
+                                                                            checked={data?.name === state?.sizeListCheck}
 
+                                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                                        />
+                                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                                            {data?.name}
+                                                                        </span>
+                                                                    </label>
+                                                                }
+                                                            </div>
+                                                        );
+                                                    })}
+
+                                                </div>
+                                                <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
+                                                    {decraseList && sizeList.sizeList2.map((data) => {
+                                                        return (
+                                                            <div
+                                                                key={data?.id}
+                                                                className="flex "
+                                                            >
+
+                                                                {data?.action &&
+
+                                                                    <label
+                                                                        htmlFor="m_outwear"
+                                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                                    >
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="m_outwear"
+                                                                            name="size_Outwear"
+                                                                            checked={data?.name === state?.sizeListCheck}
+
+                                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                                        />
+                                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                                            {data?.name}
+                                                                        </span>
+                                                                    </label>
+
+                                                                }
+                                                            </div>
+                                                        );
+                                                    })}
+
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setDecraseList(!decraseList)
+                                                        }}
+                                                        className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                                                    >
+                                                        {decraseList ? "Меньше" : "Больше"}
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
-                                                {decraseList && sizeList.sizeList2.map((data) => {
-                                                    return (
-                                                        <div
-                                                            key={data?.id}
-                                                            className="flex "
-                                                        >
+                                            :
+                                            <div className="w-full hidden md:flex flex-row">
+                                                <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
+                                                    {sizeList.sizeList1.map((data) => {
+                                                        return (
+                                                            <div
+                                                                key={data?.id}
+                                                                className="flex "
+                                                            >
 
-                                                            {data?.action &&
+                                                                {data?.action &&
+                                                                    <label
+                                                                        htmlFor={data?.id}
+                                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                                    >
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id={data?.id}
+                                                                            name="size_Outwear"
+                                                                            checked={data?.name === state?.sizeListCheck}
+                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            value={data?.name}
+                                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                                        />
+                                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                                            {data?.name}
+                                                                        </span>
+                                                                    </label>
+                                                                }
+                                                            </div>
+                                                        );
+                                                    })}
 
-                                                                <label
-                                                                    htmlFor="m_outwear"
-                                                                    className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                                >
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        id="m_outwear"
-                                                                        name="size_Outwear"
-                                                                        checked={data?.name === state?.sizeListCheck}
-                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true })}
-                                                                        value={data?.name}
-                                                                        className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                                    />
-                                                                    <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                        {data?.name}
-                                                                    </span>
-                                                                </label>
+                                                </div>
+                                                <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
+                                                    {decraseList && sizeList.sizeList2.map((data) => {
+                                                        return (
+                                                            <div
+                                                                key={data?.id}
+                                                                className="flex "
+                                                            >
 
-                                                            }
-                                                        </div>
-                                                    );
-                                                })}
+                                                                {data?.action &&
 
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        setDecraseList(!decraseList)
-                                                    }}
-                                                    className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
-                                                >
-                                                    {decraseList ? "Меньше" : "Больше"}
-                                                </button>
-                                            </div>
-                                        </div>
+                                                                    <label
+                                                                        htmlFor="m_outwear"
+                                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
+                                                                    >
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id="m_outwear"
+                                                                            name="size_Outwear"
+                                                                            checked={data?.name === state?.sizeListCheck}
+                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            value={data?.name}
+                                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
+                                                                        />
+                                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
+                                                                            {data?.name}
+                                                                        </span>
+                                                                    </label>
+
+                                                                }
+                                                            </div>
+                                                        );
+                                                    })}
+
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setDecraseList(!decraseList)
+                                                        }}
+                                                        className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                                                    >
+                                                        {decraseList ? "Меньше" : "Больше"}
+                                                    </button>
+                                                </div>
+                                            </div>}
                                         {/* -----------------Mobile--------------------- */}
                                         <div className="w-full flex md:flex-row flex-col md:hidden">
                                             <div className="w-fit md:w-[222px]  md:h-[50px] flex md:block flex-wrap md:grid md:grid-cols-4 gap-1 md:gap-2 ">
@@ -405,7 +490,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         id={data?.id}
                                                                         name="size_Outwear"
                                                                         checked={data?.name === state?.sizeListCheck}
-                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true })}
+                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
                                                                         value={data?.name}
                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                     />
@@ -435,7 +520,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         id={data?.id}
                                                                         name="size_Outwear"
                                                                         checked={data?.name === state?.sizeListCheck}
-                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true })}
+                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
                                                                         value={data?.name}
                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                     />
@@ -510,14 +595,18 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
                                     <div className="flex items-center justify-between">
-                                        <div className="flex flex-col">
-                                            <input
-                                                type="number"
-                                                name="colSize"
-                                                className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
-                                                value={state?.colSize}
-                                                onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true })}
-                                            />
+                                        <div className="flex flex-col border border-borderColor rounded-lg">
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle outline-none w-[130px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center  opacity-20`}
+                                                >{state?.minSize}</span>
+                                                : <input
+                                                    type="number"
+                                                    name="colSize"
+                                                    className="inputStyle outline-none w-full h-[42px] text-start  px-3 rounded-lg   font-AeonikProRegular "
+                                                    value={state?.colSize}
+                                                    onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                />}
                                         </div>
                                     </div>
                                 </div>
@@ -527,14 +616,18 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         Ширина
                                     </p>
                                     <div className="flex items-center justify-between gap-x-1">
-                                        <div className="flex flex-col">
-                                            <input
-                                                type="number"
-                                                name="rowSize"
-                                                className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                                value={state?.rowSize}
-                                                onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true })}
-                                            />
+                                        <div className="flex flex-col border border-borderColor rounded-lg">
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle outline-none  w-[130px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center opacity-20`}
+                                                >{state?.minSize}</span>
+                                                : <input
+                                                    type="number"
+                                                    name="rowSize"
+                                                    className="inputStyle outline-none w-full h-[42px] text-start  px-3  rounded-lg  font-AeonikProRegular "
+                                                    value={state?.rowSize}
+                                                    onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                />}
                                         </div>
                                     </div>
                                 </div>
@@ -547,14 +640,18 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         </span>
                                     </p>
 
-                                    <div className="flex items-start justify-between ">
-                                        <input
-                                            type="number"
-                                            name="quantityNum"
-                                            className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
-                                            value={state?.quantityNum}
-                                            onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
-                                        />
+                                    <div className="w-fit flex items-start justify-between border border-borderColor rounded-lg">
+                                        {state?.disableSizes === 1 || state?.disableSizes === 0 ?
+                                            <span
+                                                className={`inputStyle outline-none w-[60px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
+                                            >{state?.minSize}</span>
+                                            : <input
+                                                type="number"
+                                                name="quantityNum"
+                                                className={`inputStyle outline-none w-[60px] h-[42px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
+                                                value={state?.quantityNum}
+                                                onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
+                                            />}
                                     </div>
                                 </div>
                             </div>
@@ -567,15 +664,19 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 Возраст
                                             </div>
                                         </div>
-                                        <div className="w-fit flex items-center">
-                                            <input
-                                                type="number"
-                                                name="ageNum"
-                                                className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
-                                                placeholder=""
-                                                value={state?.ageNum}
-                                                onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
-                                            />
+                                        <div className="w-fit flex items-center border border-borderColor rounded-lg">
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle outline-none w-[58px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
+                                                >{state?.minSize}</span>
+                                                : <input
+                                                    type="number"
+                                                    name="ageNum"
+                                                    className="inputStyle w-[58px] h-[42px] text-center fon rounded-lg px-[12px] outline-none "
+                                                    placeholder=""
+                                                    value={state?.ageNum}
+                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                />}
                                         </div>
                                     </div>
                                     <div className="w-full md:w-[55%]">
@@ -589,15 +690,19 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             </span>
                                         </div>
                                         <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
-                                            <input
-                                                type="text"
-                                                placeholder="0"
-                                                id="priceAccess"
-                                                name="priceNum"
-                                                className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.priceNum}
-                                                onChange={handleChangePrice}
-                                            />
+                                            {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
+                                                >{state?.minSize}</span>
+                                                : <input
+                                                    type="text"
+                                                    placeholder="0"
+                                                    id="priceAccess"
+                                                    name="priceNum"
+                                                    className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
+                                                    value={state?.priceNum}
+                                                    onChange={handleChangePrice}
+                                                />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
                                             </span>
@@ -615,30 +720,38 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="w-full flex items-center gap-x-1">
                                             <div className="w-[40%] md:w-[72px] flex items-start">
                                                 <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                                    <input
-                                                        type="number"
-                                                        placeholder="0"
-                                                        name="salePercent"
-                                                        className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
-                                                        value={state?.salePercent}
-                                                        onChange={handleChangePercent}
-                                                    />
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                        <span
+                                                            className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
+                                                        >{state?.minSize}</span>
+                                                        : <input
+                                                            type="number"
+                                                            placeholder="0"
+                                                            name="salePercent"
+                                                            className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
+                                                            value={state?.salePercent}
+                                                            onChange={handleChangePercent}
+                                                        />}
                                                     <span className="text-textLightColor ml-2">%</span>
                                                 </div>
                                             </div>
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="w-[60%] md:w-[75%] flex items-center">
                                                 <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="0"
-                                                        id="salePrice"
-                                                        name="salePrice"
-                                                        className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
-                                                        value={state?.salePrice}
-                                                        onChange={handleChangeSalePrice}
-                                                        readOnly
-                                                    />
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                        <span
+                                                            className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
+                                                        >{state?.minSize}</span>
+                                                        : <input
+                                                            type="text"
+                                                            placeholder="0"
+                                                            id="salePrice"
+                                                            name="salePrice"
+                                                            className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
+                                                            value={state?.salePrice}
+                                                            onChange={handleChangeSalePrice}
+                                                            readOnly
+                                                        />}
                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                         сум
                                                     </span>
@@ -1155,7 +1268,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     type="button"
                                                     onClick={() => {
                                                         // console.log(item?.id, "Bu Selected id")
-                                                        setState({ ...state, sizeEditModal: true, editSizeId: item?.id })
+                                                        setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
                                                     }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
