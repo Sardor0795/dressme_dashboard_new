@@ -36,6 +36,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         sendingLoader: false,
         editSizeId: null,
         addnewColorIdIcons: null,
+        disableSizes: null,
+        disablePrices: false,
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
 
@@ -55,7 +57,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     }, [state?.discountPercent, state?.price])
 
     const onChangeSwitch = (id) => {
-        setState({ ...state, sizeCheck: id, saveBtnDisable: true })
+        setState({ ...state, sizeCheck: id, saveBtnDisable: true, disableSizes: 0 })
     };
 
     function saveEditData() {
@@ -64,15 +66,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-        state?.discountPercent && form.append("discount_percent", state?.discountPercent);
-        state?.discountPrice && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
+        state?.disableSizes === 1 && state?.discountPercent && form.append("discount_percent", state?.discountPercent);
+        state?.disableSizes === 1 && state?.discountPrice && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
         state?.age && form.append("age", Number(state?.age));
         form.append("amount", state?.amount);
-        form.append("price", state?.price?.split(",")?.join(""));
+        state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
         form.append("product_id", Number(stateList?.locations[0]?.pivot?.product_id));
-        // form.append("product_id", state?.editSizeId);
 
         return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
             method: "POST",
@@ -151,8 +152,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             productColorId: null,
             saveBtnDisable: false
         })
-        stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-            // console.log(data, "bu--Data");
+        stateList?.sizes?.filter(e => Number(e?.id) === state?.editSizeId)?.map(data => {
             setState({
                 ...state,
                 minHeadGirth: data?.min_head_girth || null,
@@ -166,26 +166,52 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 productColorId: data?.product_color_id || null,
             })
         })
-
     }, [state?.editSizeId, checkColor])
 
+    // useEffect(() => {
+    //     stateList?.sizes?.filter(e => Number(e?.id) === state?.editSizeId)?.map(data => {
+    //         if (data?.discount_price === state?.discountPrice ||
+    //             data?.discount_percent === state?.discountPercent ||
+    //             data?.discount_percent === state?.price?.split(",")?.join("")) {
+
+    //             console.log("this is Price");
+    //         } else {
+
+    //             console.log("this is size");
+    //         }
+
+    //     })
+    // }, [
+    //     state?.minHeadGirth,
+    //     state?.maxHeadGirth,
+    //     state?.sizeCheck,
+    //     state?.amount,
+    //     state?.age,
+    //     state?.price,
+    //     state?.discountPercent,
+    //     state?.discountPrice,
+    //     state?.productColorId,
+    // ])
+
     // console.log(state?.editSizeId, "state?.editSizeId");
+    // console.log(state?.price, "state?.price");
     const handleChangePrice = (event) => {
+
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, price: formattedValue, saveBtnDisable: true });
+        setState({ ...state, price: formattedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, discountPrice: formattedValue, saveBtnDisable: true });
+        setState({ ...state, discountPrice: formattedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
-            setState({ ...state, discountPercent: value, saveBtnDisable: true });
+            setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
     };
 
@@ -223,12 +249,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             }, 1000);
         }
     }
-    // useEffect(() => {
-    //     if (!state?.sizeEditModal) {
-    //         setState({ ...state, successChanged: false, successMessage: '', errorMessage: '' })
-    //     }
-    // }, [state?.sizeEditModal])
-    // console.log(stateList, 'stateList   --------------');
+
+    console.log(state?.sizeCheck, 'stateList   --------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
@@ -245,7 +267,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         <button
                             type="button"
                             onClick={() => setState({ ...state, sizeEditModal: false, successChanged: false, errorMessage: '', successMessage: '' })}
-                        // className="absolute border right-3 top-3 w-5 h-5 "
                         >
                             <MenuCloseIcons
                                 className="w-full h-full "
@@ -280,45 +301,58 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     </p>
                                     <div className="w-full flex items-center mt-[10px]">
                                         <div className="flex flex-col">
-                                            <input
-                                                type="number"
-                                                className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                placeholder="Мин"
-                                                name="minHeadGirth"
-                                                value={state?.minHeadGirth}
-                                                onChange={(e) => setState({ ...state, minHeadGirth: e.target.value, saveBtnDisable: true })}
-                                                required
-                                            />
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                >{state?.minHeadGirth}</span>
+                                                :
+                                                <input
+                                                    type="number"
+                                                    className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    placeholder="Мин"
+                                                    name="minHeadGirth"
+                                                    value={state?.minHeadGirth}
+                                                    onChange={(e) => {
+                                                        setState({ ...state, minHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 })
+                                                    }}
+                                                    required
+                                                />
+                                            }
                                         </div>
                                         <span className="mx-[5px]"><LineIcon /></span>
                                         <div className="flex flex-col">
-                                            <input
-                                                type="number"
-                                                className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                placeholder="Макс"
-                                                name="maxHeadGirth"
-                                                value={state?.maxHeadGirth}
-                                                onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true })}
-                                                required
-                                            />
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                >{state?.maxHeadGirth}</span>
+                                                : <input
+                                                    type="number"
+                                                    className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                                    placeholder="Макс"
+                                                    name="maxHeadGirth"
+                                                    value={state?.maxHeadGirth}
+                                                    onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    required
+                                                />}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="w-fit flex flex-col">
                                     <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
                                         One Size
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                        {/* <span className="ml-[5px]">
-                                <StarLabel />
-                            </span> */}
                                     </p>
                                     <div className="flex items-center justify-center mt-[10px]">
-                                        <Switch
-                                            className={`border border-borderColor bg-[#8B8B8B] `}
-                                            onChange={onChangeSwitch}
-                                            checked={state?.sizeCheck === 1 ? true : false}
-                                        />
+                                        {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            <Switch
+                                                className={`border opacity-50 border-borderColor bg-[#8B8B8B] `}
+                                                checked={state?.sizeCheck}
+                                            /> :
+                                            <Switch
+                                                className={`border border-borderColor bg-[#8B8B8B] `}
+                                                onChange={onChangeSwitch}
+                                                checked={state?.sizeCheck}
+                                            />}
                                     </div>
                                 </div>
                                 <div className="w-fit flex flex-col items-center">
@@ -331,14 +365,18 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         </span>
                                     </p>
                                     <div className="flex items-start justify-between mt-[10px]">
-                                        <input
-                                            type="number"
-                                            className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                            value={state?.amount}
-                                            name="amount"
-                                            onChange={(e) => setState({ ...state, amount: e.target.value, saveBtnDisable: true })}
-                                            required
-                                        />
+                                        {state?.disableSizes === 1 || state?.disableSizes === 0 ?
+                                            <span
+                                                className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                            >{state?.amount}</span>
+                                            : <input
+                                                type="number"
+                                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                                value={state?.amount}
+                                                name="amount"
+                                                onChange={(e) => setState({ ...state, amount: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
+                                                required
+                                            />}
                                     </div>
                                 </div>
                             </div>
@@ -352,14 +390,18 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center">
-                                            <input
-                                                type="number"
-                                                className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                                placeholder="age"
-                                                value={state?.age}
-                                                name="age"
-                                                onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true })}
-                                            />
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-50 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                >{state?.age}</span>
+                                                : <input
+                                                    type="number"
+                                                    className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                                    placeholder="age"
+                                                    value={state?.age}
+                                                    name="age"
+                                                    onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                />}
                                         </div>
                                     </div>
                                     <div className="w-full md:w-[90%]">
@@ -373,16 +415,21 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             </span>
                                         </div>
                                         <label htmlFor="enterPrice1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
-                                            <input
-                                                type="text"
-                                                placeholder="0"
-                                                id="enterPrice1"
-                                                className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                name="price"
-                                                value={state?.price}
-                                                onChange={handleChangePrice}
-                                                required
-                                            />
+                                            {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                <span
+                                                    className="inputStyle w-[70%] flex items-center justify-start opacity-50 font-AeonikProMedium outline-none bg-transparent"
+                                                >{state?.price}</span>
+                                                :
+                                                <input
+                                                    type="text"
+                                                    placeholder="0"
+                                                    id="enterPrice1"
+                                                    className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
+                                                    name="price"
+                                                    value={state?.price}
+                                                    onChange={handleChangePrice}
+                                                    required
+                                                />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
                                             </span>
@@ -400,30 +447,39 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <div className="w-full flex items-center gap-x-1">
                                             <div className="w-[40%] md:w-[72px] flex items-start">
                                                 <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
-                                                    <input
-                                                        type="number"
-                                                        placeholder="0"
-                                                        name="discountPercent"
-                                                        className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                        value={state?.discountPercent}
-                                                        onChange={handleChangePercent}
-                                                    />
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                        <span
+                                                            className="inputStyle w-[70%] flex items-center justify-start opacity-50 text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
+                                                        >{state?.discountPercent}</span>
+                                                        :
+                                                        <input
+                                                            type="number"
+                                                            placeholder="0"
+                                                            name="discountPercent"
+                                                            className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
+                                                            value={state?.discountPercent}
+                                                            onChange={handleChangePercent}
+                                                        />}
                                                     <span className="text-textLightColor ml-1">%</span>
                                                 </div>
                                             </div>
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="w-[60%] md:w-[75%] flex items-center">
                                                 <label htmlFor="discountPrice1" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                    <input
-                                                        type="text"
-                                                        placeholder="0"
-                                                        id="discountPrice1"
-                                                        name="discountPrice"
-                                                        className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.discountPrice}
-                                                        onChange={handleChangeSalePrice}
-                                                        readOnly
-                                                    />
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                        <span
+                                                            className="inputStyle w-[75%] flex items-center justify-start opacity-50 select-none font-AeonikProMedium outline-none bg-transparent"
+                                                        >{state?.discountPrice}</span>
+                                                        : <input
+                                                            type="text"
+                                                            placeholder="0"
+                                                            id="discountPrice1"
+                                                            name="discountPrice"
+                                                            className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
+                                                            value={state?.discountPrice}
+                                                            onChange={handleChangeSalePrice}
+                                                            readOnly
+                                                        />}
                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                         сум
                                                     </span>
@@ -462,7 +518,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     </button> :
                                     <button
                                         type="button"
-                                        className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-[#b5b5b5]  px-3 py-2 font-AeonikProMedium pr-1`}>
+                                        className={`w-fit h-fit flex items-end justify-end select-none  text-lg text-[#b5b5b5]  px-3 py-2 font-AeonikProMedium pr-1`}>
                                         Сохранить
                                     </button>
                                 }
@@ -581,7 +637,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <div className="flex items-center justify-center mt-[10px]">
                                                         <Switch
                                                             className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
-                                                            checked={item?.one_size == 1 ? true : false}
+                                                            checked={item?.one_size}
                                                         />
                                                     </div>
                                                 </div>
@@ -696,8 +752,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        // console.log(item?.id, "Bu Selected id")
-                                                        setState({ ...state, sizeEditModal: true, editSizeId: item?.id })
+                                                        setState({ ...state, sizeEditModal: true, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
                                                     }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

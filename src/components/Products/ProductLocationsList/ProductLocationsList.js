@@ -375,7 +375,6 @@ export default function ProductLocationsList() {
 
 
   }, [dressInfo?.getProductList?.products_locations, searchName])
-  console.log(shopIdList, "shopIdList");
 
   // console.log(!state?.onErrorMessage, !state?.onSuccessMessaage, !state?.onErrorTitle, "!state?.onErrorMessage , !state?.onSuccessMessaage ,!state?.onErrorTitle ");
   // Общее количество:
