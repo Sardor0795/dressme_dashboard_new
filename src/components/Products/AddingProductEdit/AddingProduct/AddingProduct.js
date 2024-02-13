@@ -243,8 +243,8 @@ const AddingProduct = () => {
             category_Id: res?.product?.category_id,
             filterTypeId: res?.product?.type_id,
             producer_Id: res?.product?.producer_id,
-            shopId: res?.product?.locations[0]?.shop_id,
-            shopLocationId: res?.product?.locations[0]?.id,
+            shopId: res?.product?.shop_locations[0]?.shop_id,
+            shopLocationId: res?.product?.shop_locations[0]?.id,
             sizeGetList: res?.product
           })
         }

@@ -71,9 +71,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         state?.age && form.append("age", Number(state?.age));
         form.append("amount", state?.amount);
         state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
-        form.append("shop_location_id", stateList?.locations[0]?.pivot?.shop_location_id);
+        form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
-        form.append("product_id", Number(stateList?.locations[0]?.pivot?.product_id));
+        form.append("product_id", Number(stateList?.shop_locations[0]?.pivot?.product_id));
 
         return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
             method: "POST",
@@ -752,7 +752,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        setState({ ...state, sizeEditModal: true, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
+                                                        setState({ ...state, sizeEditModal: true, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
                                                     }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
