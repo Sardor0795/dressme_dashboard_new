@@ -20,7 +20,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         amount: null,
         age: null,
         price: null,
-        discountPercent: null,
+        discountPercent: 0,
         discountPrice: null,
         isCheckValid: false,
         productColorId: null,
@@ -51,23 +51,23 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, discountPrice: formattedValue })
         } else {
-            setState({ ...state, discountPrice: '' })
+            setState({ ...state, discountPrice: 0 })
         }
     }, [state?.discountPercent, state?.price])
 
     const onChangeSwitch = (id) => {
         setState({ ...state, sizeCheck: id, saveBtnDisable: true, disableSizes: 0 })
     };
-    console.log(state?.sizeCheck, "state?.sizeCheck");
+    console.log(state?.discountPercent?.length, "state?.discountPercent");
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
         form.append("one_size", state?.sizeCheck ? 1 : 0);
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-        state?.disableSizes === 1 && state?.discountPercent && form.append("discount_percent", state?.discountPercent);
-        // state?.disableSizes === 1 && state?.discountPrice && form.append("discount_price", state?.discountPercent === 0 ? null : state?.discountPrice?.split(",")?.join(""));
-        state?.disableSizes === 1 && (state?.discountPercent === 0 || state?.discountPercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && form.append("discount_percent", state?.discountPercent);
+        state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
+        state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_price", null);//no R
         state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
         state?.age && form.append("age", Number(state?.age));
         state?.disableSizes === 2 && form.append("amount", state?.amount);
@@ -185,9 +185,11 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     };
     const handleChangePercent = (event) => {
         const { value } = event.target
+        console.log(value, 'value');
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
+
     };
 
     useEffect(() => {
@@ -225,7 +227,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         }
     }
 
-    // console.log(state?.sizeCheck, 'stateList   --------------');
+    // console.log(state?.discountPercentstate?.sizeCheck, 'stateList   --------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
@@ -433,6 +435,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                             name="discountPercent"
                                                             className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
                                                             value={state?.discountPercent}
+                                                            defaultValue={0}
                                                             onChange={handleChangePercent}
                                                         />}
                                                     <span className="text-textLightColor ml-1">%</span>
