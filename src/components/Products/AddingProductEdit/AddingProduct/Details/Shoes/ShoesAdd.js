@@ -17,7 +17,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
         minSize: null,
         ageNum: null,
         priceNum: null,
-        salePercent: null,
+        salePercent: 0,
         salePrice: null,
         quantityNum: null,
         isCheckValid: false,
@@ -61,9 +61,10 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
         state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
         state?.ageNum && form.append("age", Number(state?.ageNum));
         state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-        state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
         form.append("footwear_size", state?.minSize);
-        form.append("amount", state?.quantityNum);
+        state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
@@ -128,10 +129,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                 setState({ ...state, sendingLoader: false, sizeEditModal: false })
                 throw new Error(err?.message || "something wrong");
             })
-
-
     }
-
+    console.log(state?.salePercent, "state?.salePercent");
     useEffect(() => {
         setState({
             ...state,
@@ -753,7 +752,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     type="button"
                                                     onClick={() => {
                                                         // console.log(item?.id, "Bu Selected id")
-                                                        setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, editSizeId: item?.id })
+                                                        setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
                                                     }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

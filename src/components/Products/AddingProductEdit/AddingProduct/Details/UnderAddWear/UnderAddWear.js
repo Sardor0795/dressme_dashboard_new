@@ -99,8 +99,10 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
         state?.ageNum && form.append("age", Number(state?.ageNum));
         state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);
-        state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-        form.append("amount", state?.quantityNum);
+        // state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePercent === 0 ? null : state?.salePrice?.split(",")?.join(""));
+        state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
@@ -1446,7 +1448,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, editSizeId: item?.id })
+                                                        setState({ ...state, sizeEditModal: true, disableSizes: null, saveBtnDisable: false, sendingLoader: false, editSizeId: item?.id })
                                                     }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

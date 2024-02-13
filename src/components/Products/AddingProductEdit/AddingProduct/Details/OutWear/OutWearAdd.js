@@ -101,9 +101,11 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
         state?.ageNum && form.append("age", Number(state?.ageNum));
         state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);
-        state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+        // state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePercent === 0 ? null : state?.salePrice?.split(",")?.join(""));
+        state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
         form.append("min_outwear_size", state?.minSize);
-        form.append("amount", state?.quantityNum);
+        state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
@@ -1464,7 +1466,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <button
                                                         type="button"
                                                         onClick={() => {
-                                                            setState({ ...state, sizeEditModal: true, sendingLoader: false, disableSizes: null, editSizeId: item?.id })
+                                                            setState({ ...state, sizeEditModal: true, sendingLoader: false, saveBtnDisable: false, disableSizes: null, editSizeId: item?.id })
                                                         }
                                                         }
                                                         className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

@@ -58,17 +58,19 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const onChangeSwitch = (id) => {
         setState({ ...state, sizeCheck: id, saveBtnDisable: true, disableSizes: 0 })
     };
-
+    console.log(state?.sizeCheck, "state?.sizeCheck");
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
-        state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
+        form.append("one_size", state?.sizeCheck ? 1 : 0);
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
         state?.disableSizes === 1 && state?.discountPercent && form.append("discount_percent", state?.discountPercent);
-        state?.disableSizes === 1 && state?.discountPrice && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
+        // state?.disableSizes === 1 && state?.discountPrice && form.append("discount_price", state?.discountPercent === 0 ? null : state?.discountPrice?.split(",")?.join(""));
+        state?.disableSizes === 1 && (state?.discountPercent === 0 || state?.discountPercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
         state?.age && form.append("age", Number(state?.age));
-        form.append("amount", state?.amount);
+        state?.disableSizes === 2 && form.append("amount", state?.amount);
         state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
         form.append("color_id", pivotColorId);
@@ -156,7 +158,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 ...state,
                 minHeadGirth: data?.min_head_girth || null,
                 maxHeadGirth: data?.max_head_girth || null,
-                sizeCheck: data?.one_size || null,
+                sizeCheck: Number(data?.one_size) || null,
                 amount: data?.amount || null,
                 age: data?.age || null,
                 price: Number(data?.price)?.toLocaleString(),
@@ -167,33 +169,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         })
     }, [state?.editSizeId, checkColor])
 
-    // useEffect(() => {
-    //     stateList?.sizes?.filter(e => Number(e?.id) === state?.editSizeId)?.map(data => {
-    //         if (data?.discount_price === state?.discountPrice ||
-    //             data?.discount_percent === state?.discountPercent ||
-    //             data?.discount_percent === state?.price?.split(",")?.join("")) {
 
-    //             console.log("this is Price");
-    //         } else {
-
-    //             console.log("this is size");
-    //         }
-
-    //     })
-    // }, [
-    //     state?.minHeadGirth,
-    //     state?.maxHeadGirth,
-    //     state?.sizeCheck,
-    //     state?.amount,
-    //     state?.age,
-    //     state?.price,
-    //     state?.discountPercent,
-    //     state?.discountPrice,
-    //     state?.productColorId,
-    // ])
-
-    // console.log(state?.editSizeId, "state?.editSizeId");
-    // console.log(state?.price, "state?.price");
     const handleChangePrice = (event) => {
 
         const result = event.target.value.replace(/\D/g, '')
@@ -636,7 +612,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <div className="flex items-center justify-center mt-[10px]">
                                                         <Switch
                                                             className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
-                                                            checked={item?.one_size}
+                                                            checked={Number(item?.one_size)}
                                                         />
                                                     </div>
                                                 </div>
