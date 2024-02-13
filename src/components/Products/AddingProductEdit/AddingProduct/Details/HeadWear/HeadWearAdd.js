@@ -58,16 +58,16 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const onChangeSwitch = (id) => {
         setState({ ...state, sizeCheck: id, saveBtnDisable: true, disableSizes: 0 })
     };
-    console.log(state?.sizeCheck, "state?.sizeCheck");
+    console.log(state?.discountPercent, "state?.discountPercent");
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
         form.append("one_size", state?.sizeCheck ? 1 : 0);
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-        state?.disableSizes === 1 && state?.discountPercent && form.append("discount_percent", state?.discountPercent);
+        state?.disableSizes === 1 && form.append("discount_percent", state?.discountPercent);
         // state?.disableSizes === 1 && state?.discountPrice && form.append("discount_price", state?.discountPercent === 0 ? null : state?.discountPrice?.split(",")?.join(""));
-        state?.disableSizes === 1 && (state?.discountPercent === 0 || state?.discountPercent === '') && form.append("discount_price", null);//no R
+        state?.disableSizes === 1 && state?.discountPercent === 0 && form.append("discount_price", null);//no R
         state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
         state?.age && form.append("age", Number(state?.age));
         state?.disableSizes === 2 && form.append("amount", state?.amount);
@@ -188,6 +188,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
+        if (!value) {
+            setState({ ...state, discountPercent: 0, saveBtnDisable: true, disableSizes: 1 });
+        }
     };
 
     useEffect(() => {
@@ -225,7 +228,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         }
     }
 
-    // console.log(state?.sizeCheck, 'stateList   --------------');
+    // console.log(state?.discountPercentstate?.sizeCheck, 'stateList   --------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
             <div>
