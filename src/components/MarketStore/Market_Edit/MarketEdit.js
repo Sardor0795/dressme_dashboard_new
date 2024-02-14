@@ -13,11 +13,14 @@ import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../hook/ContextTeam";
+import { SellerMainData } from "../../../hook/SellerUserContext";
+import { HelperData } from "../../../hook/HelperDataStore";
 const { REACT_APP_BASE_URL } = process.env;
 
 function MarketEdit() {
   const { request } = useHttp();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
   const [state, setState] = useState({
     marketName: "",
@@ -189,13 +192,14 @@ function MarketEdit() {
           }
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+          setHelperDatainform({ ...helperDatainform, deliveryList: data?.data?.delivery_methods })
+
         }
       } catch (error) {
 
       }
     };
-    if (!dressInfo?.deliveryList) {
+    if (!helperDatainform?.deliveryList) {
       fetchDelivery();
     }
   }, []);
@@ -766,7 +770,7 @@ function MarketEdit() {
                     </span>
                   </div>
                   <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 gap-x-4 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                    {dressInfo?.deliveryList?.map((data, index) => {
+                    {helperDatainform?.deliveryList?.map((data, index) => {
                       return (
                         <div className="w-full " key={index} >
                           <input

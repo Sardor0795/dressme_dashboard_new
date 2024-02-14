@@ -11,10 +11,13 @@ import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
+import { SellerMainData } from "../../../../hook/SellerUserContext";
+import { HelperData } from "../../../../hook/HelperDataStore";
 const { REACT_APP_BASE_URL } = process.env;
 
 function AddStore({ onRefetch }) {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
   const navigate = useNavigate();
   const url = "https://api.dressme.uz/api/seller";
@@ -95,14 +98,14 @@ function AddStore({ onRefetch }) {
           }
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+          setHelperDatainform({ ...helperDatainform, deliveryList: data?.data?.delivery_methods })
         }
 
       } catch (error) {
 
       }
     };
-    if (!dressInfo?.deliveryList) {
+    if (!helperDatainform?.deliveryList) {
       fetchDelivery();
     }
   }, []);
@@ -568,7 +571,7 @@ function AddStore({ onRefetch }) {
                 </span>
               </div>
               <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 gap-x-4 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
-                {dressInfo?.deliveryList?.map((data, index) => {
+                {helperDatainform?.deliveryList?.map((data, index) => {
                   return (
                     <div className="w-full " key={index} >
                       <input

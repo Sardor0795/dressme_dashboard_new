@@ -4,11 +4,11 @@ import ReviewWear from "./ReviewWear/ReviewWear";
 import { SearchIcon } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import { SellerMainData } from "../../../hook/SellerUserContext";
+import { HelperData } from "../../../hook/HelperDataStore";
 
 export default function ReviewStoreWear() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+  const [helperDatainform] = useContext(HelperData);
 
   useEffect(() => {
     window.scrollTo({
@@ -75,7 +75,7 @@ export default function ReviewStoreWear() {
                 } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               Магазины
-              {sellerInformation?.shopsList?.shops?.data?.length?.rated_users_count > 1 ? (sellerInformation?.shopsList?.shops) : null}
+              {helperDatainform?.shopsList?.shops?.data?.length?.rated_users_count > 1 ? (helperDatainform?.shopsList?.shops) : null}
             </button>
           </div>
         </div>

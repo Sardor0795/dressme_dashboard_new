@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
 import { MenuCloseIcons } from "../../../assets/icons";
 import { useNavigate } from "react-router-dom";
-
-import { dressMainData } from "../../../hook/ContextTeam";
-import { SellerMainData } from "../../../hook/SellerUserContext";
+import { HelperData } from "../../../hook/HelperDataStore";
 
 function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true)
-  const [dressInfo] = useContext(dressMainData);
-  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+  const [helperDatainform] = useContext(HelperData);
 
   const navigate = useNavigate()
 
@@ -55,7 +52,7 @@ function NoLocations() {
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
                 {
 
-                  sellerInformation?.shopsList?.shops?.data?.map(item => {
+                  helperDatainform?.shopsList?.shops?.data?.map(item => {
                     return (
                       <button
                         onClick={() => handleShopsOfLocation(item?.id)}

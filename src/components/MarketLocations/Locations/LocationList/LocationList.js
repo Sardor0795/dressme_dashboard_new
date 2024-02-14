@@ -6,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import { SellerMainData } from "../../../../hook/SellerUserContext";
+import { HelperData } from "../../../../hook/HelperDataStore";
 
 function LocationList() {
   const [openSelect, setOpenSelect] = useState(false);
   const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
   const [dressInfo] = useContext(dressMainData);
-  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+  const [helperDatainform] = useContext(HelperData);
 
 
 
@@ -58,8 +59,8 @@ function LocationList() {
           </p>
         </div>
         <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-          {sellerInformation?.shopsList?.shops ? (
-            sellerInformation?.shopsList?.shops?.map((item) => {
+          {helperDatainform?.shopsList?.shops ? (
+            helperDatainform?.shopsList?.shops?.map((item) => {
               return (
                 <button
                   onClick={() => handleShopsOfLocation(item?.id)}

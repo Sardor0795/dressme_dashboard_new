@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import ProductsPageOne from '../AddingProductPageOne/ProductsPageOne'
 import { dressMainData } from '../../../hook/ContextTeam'
 import axios from 'axios'
 import LoadingForSeller from '../../Loading/LoadingFor'
-import { SellerMainData } from '../../../hook/SellerUserContext'
+import { HelperData } from '../../../hook/HelperDataStore'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [loading, setLoading] = useState(true);
-    const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+    const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
 
     useEffect(() => {
@@ -25,7 +24,7 @@ export default function ProductIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                    setSellerInformation({ ...sellerInformation, shopsList: data?.data })
+                    setHelperDatainform({ ...helperDatainform, shopsList: data?.data })
 
                 }
                 setLoading(false)
@@ -49,7 +48,7 @@ export default function ProductIsCheck() {
 
             }
         };
-        if (!sellerInformation?.shopsList) {
+        if (!helperDatainform?.shopsList) {
             fetchDataShop();
         }
         if (!dressInfo?.locationList) {
@@ -61,7 +60,7 @@ export default function ProductIsCheck() {
             {loading ?
                 <LoadingForSeller />
                 :
-                sellerInformation?.shopsList?.shops?.length > 0
+                helperDatainform?.shopsList?.shops?.length > 0
                     ?
                     dressInfo?.locationList?.length > 0
                         ?
