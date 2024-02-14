@@ -9,7 +9,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const url = "https://api.dressme.uz/api/seller";
 
-function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTest, selectColorID, productsDataIdEdit }) {
+function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListForTest, selectColorID, productsDataIdEdit }) {
+    const [dressInfo, setDressInfo] = useContext(dressMainData);
+
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
@@ -145,7 +147,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 form.append("amount", state?.quantityNum);
                 form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("shop_location_id", newProductId);
                 form.append("color_id", selectColorID);
             }
             if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
@@ -163,7 +165,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
                 form.append("amount", state?.quantityNum);
                 form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("shop_location_id", newProductId);
                 form.append("color_id", selectColorID);
             }
             if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
@@ -181,7 +183,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
                 form.append("amount", state?.quantityNum);
                 form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("shop_location_id", newProductId);
                 form.append("color_id", selectColorID);
             }
             if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
@@ -193,7 +195,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 form.append("footwear_size", state?.one_size);
                 form.append("amount", state?.quantityNum);
                 form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("shop_location_id", newProductId);
                 form.append("color_id", selectColorID);
             }
             if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
@@ -206,12 +208,12 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 form.append("amount", state?.quantityNum);
                 form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+                form.append("shop_location_id", newProductId);
                 form.append("color_id", selectColorID);
             }
 
             try {
-                const res = await fetch(`${url}/products/${Number(productsDataIdEdit?.locations[0]?.pivot?.product_id)}/add-product-size`, {
+                const res = await fetch(`${url}/products/${newProductId}/add-product-size`, {
                     method: "POST",
                     headers: {
                         Accept: "application/json",
@@ -249,7 +251,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                         setToggleShow(false)
                         setState({ ...state, isCheckValid: false, sendingLoader: false })
                     }
-                    console.log(res_1, "Product--Store--Added");
                 }
             } catch (err) {
                 toast.error(`${err}`, {
@@ -358,7 +359,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, clearSize, colorListForTes
                 discountPrice: state?.salePrice?.split(",")?.join(""),
             })
         }
-
     }
 
 
