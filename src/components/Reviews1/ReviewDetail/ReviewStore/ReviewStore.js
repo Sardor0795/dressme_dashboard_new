@@ -2,21 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useHttp } from "../../../../hook/useHttp";
 import { Rate } from "antd";
-// import LoadingForSeller from "../../../Loading/LoadingFor";
-import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
-import { SellerMainData } from "../../../../hook/SellerUserContext";
+import { HelperData } from "../../../../hook/HelperDataStore";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
 
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerRefreshToken] = useContext(SellerRefresh)
-  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
@@ -41,7 +37,7 @@ const ReviewStore = () => {
   const { isLoading } = useQuery(['seller_shops_list_review'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setSellerInformation({ ...sellerInformation, shopsList: data?.data })
+        setHelperDatainform({ ...helperDatainform, shopsList: data?.data })
       }
       if (data?.status === 401) {
         sellerRefreshToken()
@@ -67,13 +63,13 @@ const ReviewStore = () => {
           }
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+          setHelperDatainform({ ...helperDatainform, deliveryList: data?.data?.delivery_methods })
         }
       } catch (error) {
 
       }
     };
-    if (!dressInfo?.deliveryList) {
+    if (!helperDatainform?.deliveryList) {
       fetchDelivery();
     }
   }, []);
@@ -99,9 +95,9 @@ const ReviewStore = () => {
         // <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
-          {sellerInformation?.shopsList?.shops?.length > 0 && sellerInformation?.shopsList?.shops?.rated_users_count > 0
+          {helperDatainform?.shopsList?.shops?.length > 0 && helperDatainform?.shopsList?.shops?.rated_users_count > 0
             ?
-            sellerInformation?.shopsList?.shops?.map((data, i) => {
+            helperDatainform?.shopsList?.shops?.map((data, i) => {
               return (
                 <div
                   key={data?.id}
@@ -156,7 +152,7 @@ const ReviewStore = () => {
                     </section>
                     <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[20%] ll:px-5 active:opacity-70 border border-borderColor rounded-lg hidden md:flex items-center justify-center gap-x-1 ll:gap-x-3">
                       <img src={deliveryIcon} alt="" />
-                      {dressInfo?.deliveryList
+                      {helperDatainform?.deliveryList
                         ?.filter((e) => e.id == data?.delivery_id)
                         ?.map((item) => {
                           return (

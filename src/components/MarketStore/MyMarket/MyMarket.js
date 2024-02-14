@@ -2,20 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { SearchIcon } from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
-import { useQuery } from "@tanstack/react-query";
 import { deliveryIcon, man, woman } from "../../../assets";
-import { useHttp } from "../../../hook/useHttp";
 import { StarIcon } from "../../../assets/icons";
-import { dressMainData } from "../../../hook/ContextTeam";
 import axios from "axios";
-import { SellerMainData } from "../../../hook/SellerUserContext";
+import { HelperData } from "../../../hook/HelperDataStore";
 const { REACT_APP_BASE_URL } = process.env;
 
 function MyMarket() {
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
-  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
+  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
   // ------------GET METHOD delivery-method-----------------
   useEffect(() => {
@@ -28,13 +24,14 @@ function MyMarket() {
           }
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, deliveryList: data?.data?.delivery_methods })
+          setHelperDatainform({ ...helperDatainform, deliveryList: data?.data?.delivery_methods })
+
         }
       } catch (error) {
 
       }
     };
-    if (!dressInfo?.deliveryList) {
+    if (!helperDatainform?.deliveryList) {
       fetchDelivery();
     }
   }, []);
@@ -97,9 +94,9 @@ function MyMarket() {
           Создать новый магазин
         </Link>
       </div>
-      {sellerInformation?.shopsList ?
+      {helperDatainform?.shopsList ?
         <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-          {sellerInformation?.shopsList?.shops?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
+          {helperDatainform?.shopsList?.shops?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
             return (
               <div
                 key={data?.id}
@@ -159,7 +156,7 @@ function MyMarket() {
                   </div>
                   <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                     <img src={deliveryIcon} alt="" />
-                    {dressInfo?.deliveryList
+                    {helperDatainform?.deliveryList
                       ?.filter((e) => e.id == data?.delivery_id)
                       ?.map((item) => {
                         return (

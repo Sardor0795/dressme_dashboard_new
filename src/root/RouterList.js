@@ -5,6 +5,13 @@ import LoadingForSeller from "../components/Loading/LoadingFor";
 import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
 import SignInSeller from "../components/Authentication/SellerAuthentication/SignIn/SignInSeller";
 import Sidebar from "../components/Sidebar/Sidebar";
+// --------------------MarketStore-----------------------
+import MarketIsStoreCheck from "../components/MarketStore/MarketIsStoreCheck/MarketIsStoreCheck";
+import AddStore from "../components/MarketStore/AddMarket/AddStore/AddStore";
+import MyMarket from "../components/MarketStore/MyMarket/MyMarket";
+import MarketEdit from "../components/MarketStore/Market_Edit/MarketEdit";
+import LocationsByIdShow from "../components/MarketStore/LocationsById/LocationsById";
+
 // ---------------------Location----------------
 import MarketIsLocationCheck from "../components/MarketLocations/MarketIsCheck/MarketIsLocationCheck";
 import LocationAddById from "../components/MarketLocations/Locations/LocationAddById/LocationAddById";
@@ -19,18 +26,22 @@ import ProductLocationsList from "../components/Products/ProductLocationsList/Pr
 import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
 
 // ---------------------Review-------------------------
+import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
+import ReviewComment from "../components/Reviews1/ReviewComment/ReviewStoreComment";
+import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
+// ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
-const ReviewStoreWear = lazy(() => import('../components/Reviews1/ReviewDetail/ReviewStoreWear'));
-const ReviewComment = lazy(() => import('../components/Reviews1/ReviewComment/ReviewStoreComment'));
-const ReviewWearComment = lazy(() => import('../components/Reviews1/ReviewWearComment/ReviewWearComment'));
+// const ReviewStoreWear = lazy(() => import('../components/Reviews1/ReviewDetail/ReviewStoreWear'));
+// const ReviewComment = lazy(() => import('../components/Reviews1/ReviewComment/ReviewStoreComment'));
+// const ReviewWearComment = lazy(() => import('../components/Reviews1/ReviewWearComment/ReviewWearComment'));
 
 // --------------------MarketStore-----------------------
 const MarketStore = lazy(() => import('../components/MarketStore'));
-const MarketIsStoreCheck = lazy(() => import('../components/MarketStore/MarketIsStoreCheck/MarketIsStoreCheck'));
-const AddStore = lazy(() => import('../components/MarketStore/AddMarket/AddStore/AddStore'));
-const MyMarket = lazy(() => import('../components/MarketStore/MyMarket/MyMarket'));
-const MarketEdit = lazy(() => import('../components/MarketStore/Market_Edit/MarketEdit'));
-const LocationsByIdShow = lazy(() => import('../components/MarketStore/LocationsById/LocationsById'));
+// const MarketIsStoreCheck = lazy(() => import('../components/MarketStore/MarketIsStoreCheck/MarketIsStoreCheck'));
+// const AddStore = lazy(() => import('../components/MarketStore/AddMarket/AddStore/AddStore'));
+// const MyMarket = lazy(() => import('../components/MarketStore/MyMarket/MyMarket'));
+// const MarketEdit = lazy(() => import('../components/MarketStore/Market_Edit/MarketEdit'));
+// const LocationsByIdShow = lazy(() => import('../components/MarketStore/LocationsById/LocationsById'));
 
 // ------------------------Location----------------------------
 const MarketLocations = lazy(() => import('../components/MarketLocations'));
@@ -74,26 +85,11 @@ export default function RouterList() {
               <Reviews1 />
             </Suspense>
           }>
-            <Route index element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ReviewStoreWear />
-              </Suspense>
-            } />
-            <Route path="review/store-wear" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ReviewStoreWear />
-              </Suspense>
-            } />
-            <Route path="review/comment-store/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ReviewComment />
-              </Suspense>
-            } />
-            <Route path="review/comment-wear/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ReviewWearComment />
-              </Suspense>
-            } />
+
+            <Route index element={<ReviewStoreWear />} />
+            <Route path="review/store-wear" element={<ReviewStoreWear />} />
+            <Route path="review/comment-store/:id" element={<ReviewComment />} />
+            <Route path="review/comment-wear/:id" element={<ReviewWearComment />} />
           </Route>
           {/* ---------------------<Store>------------------------- */}
           <Route path="/store" element={
@@ -101,32 +97,13 @@ export default function RouterList() {
               <MarketStore />
             </Suspense>
           }>
-            <Route index element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <MarketIsStoreCheck />
-              </Suspense>
-            } />
-            <Route path="/store/market-add" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <AddStore />
-              </Suspense>
-            } />
-            <Route path="/store/market-list" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <MyMarket />
-              </Suspense>
-            } />
-            <Route path="/store/market-list/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <MarketEdit />
-              </Suspense>
-            } />
-            <Route path="/store/locations/shop/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <LocationsByIdShow />
-              </Suspense>
-            } />
+            <Route index element={<MarketIsStoreCheck />} />
+            <Route path="/store/market-add" element={<AddStore />} />
+            <Route path="/store/market-list" element={<MyMarket />} />
+            <Route path="/store/market-list/:id" element={<MarketEdit />} />
+            <Route path="/store/locations/shop/:id" element={<LocationsByIdShow />} />
           </Route>
+
           {/* ---------------------<Locations>------------------------- */}
           <Route path="/locations-store" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>

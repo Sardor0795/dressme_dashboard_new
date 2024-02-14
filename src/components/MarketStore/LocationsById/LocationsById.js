@@ -23,13 +23,11 @@ export default function LocationsByIdShow() {
     {
       onSuccess: (res) => {
         if (res) {
-          console.log(res, "LOCATIONS");
           setState({ ...state, locationListId: res, locationIsCheck: res?.locations_exist, loading: false })
         }
       },
       onError: (err) => {
         setState({ ...state, loading: false })
-        console.log(err, "err In MarketStore");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -127,9 +125,9 @@ export default function LocationsByIdShow() {
               <div className="md:mt-[16px] flex justify-between items-center">
                 <p className="text-black text-[18px] md:text-2xl not-italic font-AeonikProMedium my-4">
                   {state?.locationListId?.locations[0]?.shop?.name}{" "}
-                  <span className="hidden md:inline">
-                    {state?.locationListId?.locations?.length > 1 && (state?.locationListId?.locations?.length)}
-                  </span>
+                  {state?.locationListId?.locations?.length > 1 && <span className="hidden md:inline">
+                    ({state?.locationListId?.locations?.length})
+                  </span>}
                 </p>
                 <button
                   onClick={addLocationByMarket}
