@@ -58,17 +58,17 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const onChangeSwitch = (id) => {
         setState({ ...state, sizeCheck: id, saveBtnDisable: true, disableSizes: 0 })
     };
-    console.log(state?.discountPercent?.length, "state?.discountPercent");
+    console.log(state?.discountPercent, "state?.discountPercent");
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
         form.append("one_size", state?.sizeCheck ? 1 : 0);
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-        state?.disableSizes === 1 && form.append("discount_percent", state?.discountPercent);
+        state?.disableSizes === 1 && state?.discountPercent?.length > 0 && form.append("discount_percent", state?.discountPercent);
         state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
-        state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_price", null);//no R
-        state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && (state?.discountPercent?.length === 0 || Number(state?.discountPercent) === 0) && form.append("discount_price", null);
+        state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
         state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
         state?.disableSizes === 2 && form.append("amount", state?.amount);
         state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
@@ -138,7 +138,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
 
 
     }
-
     useEffect(() => {
         setState({
             ...state,

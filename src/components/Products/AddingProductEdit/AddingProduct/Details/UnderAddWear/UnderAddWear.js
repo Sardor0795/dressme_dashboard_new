@@ -97,7 +97,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
         state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
         state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
-        state?.ageNum && form.append("age", Number(state?.ageNum));
+        state?.disableSizes === 3 && state?.ageNum && form.append("age", Number(state?.ageNum));
         state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);
         // state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePercent === 0 ? null : state?.salePrice?.split(",")?.join(""));
         state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
@@ -320,7 +320,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     </p>
                                     <div className="flex items-center">
                                         <div className="flex flex-col  border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minBreast}</span>
@@ -335,7 +335,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         </div>
                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                         <div className="flex flex-col border border-borderColor rounded-lg ">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.maxBreast}</span>
@@ -361,7 +361,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     <div className="flex items-center justify-between gap-x-1">
                                         <div className="flex items-center">
                                             <div className="flex flex-col border border-borderColor  rounded-lg">
-                                                {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                     >{state?.minSize}</span>
@@ -377,7 +377,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="flex flex-col border border-borderColor  rounded-lg">
                                                 {state?.maxSizeShow || state?.maxSize ?
-                                                    state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                    state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                         >{state?.maxSize}</span>
@@ -389,7 +389,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             value={state?.maxSize}
                                                             onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                         /> :
-                                                    state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                    state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <button className=" bg-white opacity-20 rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                                             <BiPlus color="#007DCA" size={20} />
                                                         </button>
@@ -409,7 +409,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
 
                                     <div className='w-full '>
                                         {/* -----------------Desktop--------------------- */}
-                                        {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                        {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                             <div className="w-full opacity-20 hidden md:flex flex-row ">
                                                 <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
                                                     {sizeList.sizeList1.map((data) => {
@@ -678,7 +678,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     </p>
                                     <div className="flex items-center">
                                         <div className="flex flex-col border border-borderColor  rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minHips}</span>
@@ -693,7 +693,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         </div>
                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                         <div className="flex flex-col border border-borderColor  rounded-lg  ">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.maxHips}</span>
@@ -715,7 +715,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     <div className="flex items-center justify-between gap-x-1">
                                         <div className="flex items-center">
                                             <div className="flex flex-col border border-borderColor rounded-lg">
-                                                {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className={`inputStyle w-[60px]  flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                     >{state?.minHeight}</span>
@@ -730,7 +730,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             </div>
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="flex flex-col border border-borderColor rounded-lg">
-                                                {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                                {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                     >{state?.maxHeight}</span>
@@ -755,7 +755,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         </span>
                                     </p>
                                     <div className="flex items-start justify-between border border-borderColor rounded-lg">
-                                        {state?.disableSizes === 1 || state?.disableSizes === 0 ?
+                                        {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                             <span
                                                 className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                             >{state?.quantityNum}</span>
@@ -779,7 +779,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             </div>
                                         </div>
                                         <div className="w-fit flex items-center border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 0 ?
                                                 <span
                                                     className={`inputStyle w-[58px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.ageNum}</span>
@@ -789,7 +789,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     className=" inputStyle w-[58px] h-[42px] text-center fon rounded-lg px-[12px]  outline-none"
                                                     placeholder=""
                                                     value={state?.ageNum}
-                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
                                     </div>
@@ -804,7 +804,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             </span>
                                         </div>
                                         <label htmlFor="priceNum1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
-                                            {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className="inputStyle w-[70%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                 >{state?.priceNum}</span>
@@ -834,7 +834,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         <div className="w-full flex items-center gap-x-1">
                                             <div className="w-[40%] md:w-[72px] flex items-start">
                                                 <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[70%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                         >{state?.salePercent}</span>
@@ -852,7 +852,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="w-[60%] md:w-[75%] flex items-center">
                                                 <label htmlFor="salePrice1" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[75%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                         >{state?.salePrice}</span>

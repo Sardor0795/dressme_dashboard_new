@@ -84,7 +84,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         // state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
         state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
         state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
-        state?.ageNum && form.append("age", Number(state?.ageNum));
+        state?.disableSizes === 3 && state?.ageNum && form.append("age", Number(state?.ageNum));
         state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
@@ -296,7 +296,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </p>
                                     <div className="w-[83px] flex items-center justify-between gap-x-1">
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle outline-none w-[80px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center  opacity-20`}
                                                 >{state?.minSize}</span>
@@ -316,7 +316,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </p>
                                     <div className='w-full '>
                                         {/* -----------------Desktop--------------------- */}
-                                        {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                        {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                             <div className="w-full hidden opacity-20 md:flex flex-row">
                                                 <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
                                                     {sizeList.sizeList1.map((data) => {
@@ -596,7 +596,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </p>
                                     <div className="flex items-center justify-between">
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle outline-none w-[130px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center  opacity-20`}
                                                 >{state?.minSize}</span>
@@ -617,7 +617,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </p>
                                     <div className="flex items-center justify-between gap-x-1">
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle outline-none  w-[130px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center opacity-20`}
                                                 >{state?.minSize}</span>
@@ -641,7 +641,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </p>
 
                                     <div className="w-fit flex items-start justify-between border border-borderColor rounded-lg">
-                                        {state?.disableSizes === 1 || state?.disableSizes === 0 ?
+                                        {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                             <span
                                                 className={`inputStyle outline-none w-[60px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
                                             >{state?.minSize}</span>
@@ -665,7 +665,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             </div>
                                         </div>
                                         <div className="w-fit flex items-center border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 0 ?
                                                 <span
                                                     className={`inputStyle outline-none w-[58px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
                                                 >{state?.minSize}</span>
@@ -675,7 +675,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     className="inputStyle w-[58px] h-[42px] text-center fon rounded-lg px-[12px] outline-none "
                                                     placeholder=""
                                                     value={state?.ageNum}
-                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
                                     </div>
@@ -690,7 +690,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             </span>
                                         </div>
                                         <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
-                                            {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                 >{state?.minSize}</span>
@@ -720,7 +720,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="w-full flex items-center gap-x-1">
                                             <div className="w-[40%] md:w-[72px] flex items-start">
                                                 <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
-                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                         >{state?.minSize}</span>
@@ -738,7 +738,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="w-[60%] md:w-[75%] flex items-center">
                                                 <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                         >{state?.minSize}</span>
