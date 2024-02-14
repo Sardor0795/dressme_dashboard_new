@@ -274,8 +274,7 @@ export default function LocationClothesCity() {
             :
             <button
               type="button"
-              onClick={() => setState({ ...state, openDeleteModal: true })}
-              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
+              className={`pl-[6px]  flex items-center font-AeonikProRegular text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
             >
               <span className="mr-[5px]">
                 <DeleteIcon width={20} />
