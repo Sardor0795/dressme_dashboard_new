@@ -1963,7 +1963,7 @@ const AddingProduct = () => {
                         Все размеры{" "}
                       </button>
                       <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
-                        <AddSize typeId={state?.category_Id} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
+                        <AddSize typeId={state?.category_Id} newProductId={newProductId} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
                       </button>
                     </div>
                   </div>
@@ -2077,5 +2077,5 @@ const AddingProduct = () => {
     </div >
   );
 };
-
+// Добавить
 export default AddingProduct;
