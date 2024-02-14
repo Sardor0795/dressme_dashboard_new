@@ -154,22 +154,27 @@ function LocationList() {
           </li>
           <li className="w-[calc(100%-230px)]  flex items-center justify-between">
             <ul className="flex items-center w-full">
-              <li className="w-[23%]">
+              <li className="w-[20%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Регион{" "}
                 </span>
               </li>
-              <li className="w-[29%]">
+              <li className="w-[28%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Адрес
                 </span>
               </li>
-              <li className="w-[16%]">
+              <li className="w-[14%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Рабочее время
                 </span>
               </li>
-              <li className="w-[32%] flex items-center justify-end ">
+              <li className="w-[12%] ">
+                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
+                  Статус
+                </span>
+              </li>
+              <li className="w-[26%] flex items-center justify-end ">
                 <button
                   onClick={() => setOpenSelect(true)}
                   className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
@@ -233,25 +238,39 @@ function LocationList() {
                           />
                         </li>
                         <li className="w-[calc(100%-230px)] flex items-center justify-between">
-                          <ul className="flex items-center w-full">
-                            <li className="md:w-[24%] h-full pr-10">
+                          <ul className="flex items-center w-full ">
+                            <li className="md:w-[20%] h-full pr-10 ">
                               <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
                                 {value?.region?.name_ru || "city"},{" "}
                                 {value?.sub_region?.name_ru || "sub_region"}
                               </span>
                             </li>
-                            <li className="md:w-[30%] h-full pr-10">
+                            <li className="md:w-[28%] h-full pr-10 ">
                               <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
                                 {value?.address || "address"}
                               </span>{" "}
                             </li>
-                            <li className="md:w-[13%] h-full">
+                            <li className="md:w-[14%] h-full ">
                               <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
                                 {value?.work_time_from || "startTime"} -{" "}
                                 {value?.work_time_to || "endTime"}
                               </span>
                             </li>
-                            <li className="md:w-[15%] h-full flex items-center justify-center text-center">
+                            <li className="md:w-[12%] h-full  flex items-center ">
+                              {value?.status === "approved" &&
+                                <span className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </span>}
+                              {value?.status === "declined" &&
+                                <span className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </span>}
+                              {value?.status === "pending" &&
+                                <span className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </span>}
+                            </li>
+                            <li className="md:w-[12%] h-full  flex items-center justify-center text-center">
                               <button
                                 onClick={() => goMapWear(value?.id)}
                                 className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
@@ -260,7 +279,7 @@ function LocationList() {
                                 Товары
                               </button>
                             </li>
-                            <li className="md:w-[22%] h-full flex items-center justify-center text-center">
+                            <li className="md:w-[14%] h-full  flex items-center justify-center text-center">
                               <button
                                 onClick={() => goMapCity(value?.id)}
                                 className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
