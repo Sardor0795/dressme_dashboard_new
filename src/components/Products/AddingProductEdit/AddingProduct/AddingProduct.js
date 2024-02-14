@@ -826,7 +826,7 @@ const AddingProduct = () => {
 
   useEffect(() => {
     if (!dressInfo?.locationIdAddProduct) {
-      navigate('/products/location')
+      navigate(-1)
     }
   }, [])
   return (

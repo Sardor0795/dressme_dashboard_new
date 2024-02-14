@@ -498,6 +498,7 @@ const AddingProduct = () => {
       setState({ ...state, sub_Section_Id: [] });
     }
   }, [newArray?.length])
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -509,11 +510,11 @@ const AddingProduct = () => {
   useEffect(() => {
     if (pathname !== '/products')
       setState({ ...state, PathnameToken: pathname.replace("/products/location/add/:", "") })
-
   }, [location.pathname]);
+
   useEffect(() => {
     if (!dressInfo?.locationIdAddProduct)
-      navigate('/products/location')
+      navigate(-1)
   }, [dressInfo?.locationIdAddProduct]);
 
   return (
