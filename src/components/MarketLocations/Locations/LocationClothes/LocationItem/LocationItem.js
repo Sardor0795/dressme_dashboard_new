@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
-import { MdError } from "react-icons/md";
 import {
-  AddIconsCircle,
-  AddLocationIcon,
+
   CheckIcons,
   DeleteIcon,
   MenuCloseIcons,
 } from "../../../../../assets/icons";
 import { Checkbox, List } from "antd";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../../hook/useHttp";
@@ -20,7 +18,7 @@ import { dressMainData } from "../../../../../hook/ContextTeam";
 const url = "https://api.dressme.uz/api/seller";
 const { REACT_APP_BASE_URL } = process.env;
 
-function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList, searchName }) {
+function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   const { request } = useHttp()
@@ -60,14 +58,11 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
       fetchData();
     }
   }, []);
-  // const storeToggle = React.useCallback(() => setOpenStoreList(false), []);
-  // console.log(AllSelectCheckedAction, "AllSelectCheckedAction");
+
   const navigate = useNavigate();
-  // const goProductDetailEdit = (id) => {
-  //   // navigate(`/locations-store/edit-detail/:${id}`);
-  // };
-  const goProductDetailEdit = (id) => {
-    navigate(`/products/location/:${id}`);
+  const goProductDetailEdit = (id, locationId) => {
+    setDressInfo({ ...dressInfo, locationIdAddProduct: locationId })
+    navigate(`/products/location/${id}`);
   };
 
   const goMapCity = (id) => {
@@ -76,12 +71,7 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
   const goMapWear = (id) => {
     navigate(`/locations-store/wears/:${id}`);
   };
-  function addNewProductId(locationId, shopId) {
-    navigate(`/products/location/add/:${`${locationId}` + `${shopId}`}`);
-  };
 
-  // const [locationId, setLocationId] = useState();
-  const [shopId, setShopId] = useState();
   const [checked, setChecked] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
   const [checkAll, setCheckAll] = useState(false);
@@ -110,17 +100,10 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
     setChecked(e.target.checked ? data?.products?.map((item) => item.id) : []);
     setCheckAll(e.target.checked);
   };
-  // console.log(checked, "checked");
-
-  // console.log(data, "data");
-
   // // ------------GET  Has Magazin ?-----------shops/locations/:id------
-
   const deleteProductByAddress = useMutation(() => {
     return request({ url: `/products/${deleteId}/${getIdShopLocation}`, method: "DELETE", token: true });
   });
-
-
   function onProductAddressDelete() {
     setLoader(true)
     setHideDeleteIcons(true)
@@ -141,47 +124,6 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
           console.log(err);
         }
       })
-  }
-
-  // add-selected
-  const postAddProductId = useMutation(() => {
-    return request({
-      url: `/shops/locations/products/add`,
-      method: "POST",
-      token: true,
-      body: {
-        product_id: getIdProduct,
-        shop_location_id: getIdShopLocation,
-      }
-    });
-  });
-
-  const sendAddProductById = () => {
-    setLoader(true)
-    setHideProductList(true)
-    postAddProductId?.mutate({}, {
-      onSuccess: (res) => {
-        if (res?.message && res?.errors) {
-          setDeleteMessage(res?.message)
-          setLoader(false)
-
-        } else if (res?.message) {
-          setSuccessMessage(res?.message)
-          setGetIdShopLocation('')
-          setLoader(false)
-          onRefetch()
-          setTimeout(() => {
-            setOpenStoreList(false)
-            setHideProductList(false)
-
-          }, 1000);
-          // console.log(res, "getIdShopLocation -----POST");
-        }
-      },
-      onError: err => {
-        console.log(err, "POSTID");
-      }
-    })
   }
 
   // ---------Callback----
@@ -287,98 +229,6 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
           </div>
 
         </section>
-        {/* Add the selected products to the new one */}
-        <section
-          className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-            }`}
-        >
-          <button
-            onClick={() => {
-              setOpenStoreList(false)
-              setDeleteMessage(null)
-              setSuccessMessage(null)
-            }}
-            type="button"
-            className="absolute  right-3 top-3 w-5 h-5 ">
-            <MenuCloseIcons
-              className="w-full h-full"
-              colors={"#a1a1a1"} />
-          </button>
-          <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
-            <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-              Добавить локацию
-            </p>
-          </div>
-          <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
-            {hideProductList ?
-              <div className="w-full h-full flex items-center justify-center">
-                {loader && hideProductList ?
-                  <PuffLoader
-                    // className={styles.loader1}
-                    color={"#007DCA"}
-                    size={80}
-                    loading={true}
-                  />
-                  :
-                  <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
-                    {deleteMessage ?
-                      <span className="flex items-center justify-center p-2">
-                        <MdError size={35} color="#FF4343" />
-                      </span> :
-                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                        <FaCheck size={30} color="#009B17" />
-                      </span>}
-                    <span className="text-2xl not-italic font-AeonikProMedium">{deleteMessage ? deleteMessage : SuccessMessage}</span>
-                  </div>
-                }
-              </div>
-              :
-              <div className="w-full h-full overflow-y-auto VerticelScroll">
-                {allProductLocationList?.map(item => {
-                  return (
-                    <div key={item?.id}
-                      className="w-full cursor-pointer mt-2">
-                      {item?.shop_locations?.length >= 1 && <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                        <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                          {" "}
-                          {item?.name}
-                        </span>
-                        {item?.shop_locations?.map((data, index) => {
-                          return (
-                            <div
-                              key={index}
-                              onClick={() => setGetIdShopLocation(data?.id)} className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id ? "bg-LocationSelectBg bg-LocationSelectBg" : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"}  `}>
-                              <span className="text-[17px]">{index + 1}</span>)
-                              <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                {data?.address}
-                              </p>
-                            </div>
-                          )
-                        })}
-                      </div>}
-                    </div>
-                  )
-                })}
-              </div>
-            }
-          </div>
-          {!deleteMessage && !SuccessMessage &&
-            <div className="w-full flex items-center justify-between mt-5 gap-x-2">
-              <button
-                onClick={() => setOpenStoreList(false)}
-                type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
-                Oтмена
-              </button>
-              <button
-                onClick={sendAddProductById}
-                type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
-                Готово
-              </button>
-
-            </div>}
-        </section>
 
         <section className="hidden md:flex items-center justify-between">
 
@@ -394,7 +244,6 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
                   onChange={onCheckAllChange}
                   checked={checkAll}
                   style={{ width: "26px", height: "26px" }}
-                  onClick={() => setShopId(data?.id)}
                   className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}>
                 </Checkbox>
                 <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
@@ -407,7 +256,6 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
                   <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                   <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                   <th className="w-[10%] h-full flex items-center justify-center"></th>
-                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
                   <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
                 </tr>
               </div>
@@ -439,8 +287,7 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
                       <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                         <div className="flex flex-col w-full">
                           <div className="w-full flex h-[120px]  items-center">
-                            <Checkbox value={itemValue?.id} checked={checked}
-                              onClick={() => setShopId(data?.id)} />
+                            <Checkbox value={itemValue?.id} checked={checked} />
                             <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                               <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
                               <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
@@ -486,31 +333,15 @@ function LocationItem({ data, onRefetch, allCheckedList, allProductLocationList,
                                 <span className="ml-[6px] text-[14px]">Сум</span>
                               </td>
                               <td className="w-[10%] h-full  flex items-center justify-center ">
-                                {/* <button
-                                  onClick={() => goProductDetailEdit(itemValue?.id)}
-                                  className="text-[18px] text-weatherWinterColor w-full text-center"
-                                >
-                                  Подробнее
-                                </button> */}
+
                                 <button
-                                  onClick={() => goProductDetailEdit(itemValue?.id)}
+                                  onClick={() => goProductDetailEdit(itemValue?.id, data?.id)}
                                   className="text-[18px] text-weatherWinterColor w-full text-center"
                                 >
                                   Подробнее
                                 </button>
                               </td>
-                              <td className="w-[9%] h-full  flex items-center justify-center ">
-                                <button
-                                  onClick={() => setGetIdProduct(itemValue?.id)}
-                                  type="button" className="w-full flex justify-center cursor-auto">
-                                  <span
-                                    onClick={() => setOpenStoreList(true)}
-                                    className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
-                                  >
-                                    <AddLocationIcon width={30} />
-                                  </span>
-                                </button>
-                              </td>
+
                               <td className="w-[9%] h-full  flex items-center justify-center ">
                                 <button type="button"
                                   onClick={() => {
