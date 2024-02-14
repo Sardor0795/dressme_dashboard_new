@@ -65,11 +65,11 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         form.append("one_size", state?.sizeCheck ? 1 : 0);
         state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-        form.append("discount_percent", state?.discountPercent);
+        state?.disableSizes === 1 && form.append("discount_percent", state?.discountPercent);
         state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
         state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_price", null);//no R
         state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));//no R
-        state?.age && form.append("age", Number(state?.age));
+        state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
         state?.disableSizes === 2 && form.append("amount", state?.amount);
         state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
         form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
@@ -278,7 +278,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     </p>
                                     <div className="w-full flex items-center mt-[10px] ">
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minHeadGirth}</span>
@@ -298,7 +298,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         </div>
                                         <span className="mx-[5px]"><LineIcon /></span>
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.maxHeadGirth}</span>
@@ -320,7 +320,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
                                     <div className="flex items-center justify-center mt-[10px]">
-                                        {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                        {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                             <Switch
                                                 className={`border opacity-20 border-borderColor bg-[#8B8B8B] `}
                                                 checked={state?.sizeCheck}
@@ -342,7 +342,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         </span>
                                     </p>
                                     <div className="flex items-start justify-between mt-[10px] border border-borderColor rounded-lg">
-                                        {state?.disableSizes === 1 || state?.disableSizes === 0 ?
+                                        {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                             <span
                                                 className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                             >{state?.amount}</span>
@@ -367,7 +367,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 0 ?
                                                 <span
                                                     className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.age}</span>
@@ -377,7 +377,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     placeholder="age"
                                                     value={state?.age}
                                                     name="age"
-                                                    onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
                                     </div>
@@ -392,7 +392,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             </span>
                                         </div>
                                         <label htmlFor="enterPrice1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
-                                            {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                            {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                 >{state?.price}</span>
@@ -424,7 +424,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <div className="w-full flex items-center gap-x-1">
                                             <div className="w-[40%] md:w-[72px] flex items-start">
                                                 <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
-                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[70%] flex items-center justify-start opacity-20 text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
                                                         >{state?.discountPercent}</span>
@@ -444,7 +444,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="w-[60%] md:w-[75%] flex items-center">
                                                 <label htmlFor="discountPrice1" className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 ?
+                                                    {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[75%] flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                         >{state?.discountPrice}</span>
