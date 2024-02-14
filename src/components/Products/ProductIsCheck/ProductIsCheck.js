@@ -5,11 +5,13 @@ import ProductsPageOne from '../AddingProductPageOne/ProductsPageOne'
 import { dressMainData } from '../../../hook/ContextTeam'
 import axios from 'axios'
 import LoadingForSeller from '../../Loading/LoadingFor'
+import { SellerMainData } from '../../../hook/SellerUserContext'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [loading, setLoading] = useState(true);
+    const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
 
 
     useEffect(() => {
@@ -23,7 +25,7 @@ export default function ProductIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                    setDressInfo({ ...dressInfo, shopsList: data?.data })
+                    setSellerInformation({ ...sellerInformation, shopsList: data?.data })
 
                 }
                 setLoading(false)
@@ -47,7 +49,7 @@ export default function ProductIsCheck() {
 
             }
         };
-        if (!dressInfo?.shopsList) {
+        if (!sellerInformation?.shopsList) {
             fetchDataShop();
         }
         if (!dressInfo?.locationList) {
@@ -59,7 +61,7 @@ export default function ProductIsCheck() {
             {loading ?
                 <LoadingForSeller />
                 :
-                dressInfo?.shopsList?.shops?.length > 0
+                sellerInformation?.shopsList?.shops?.length > 0
                     ?
                     dressInfo?.locationList?.length > 0
                         ?
