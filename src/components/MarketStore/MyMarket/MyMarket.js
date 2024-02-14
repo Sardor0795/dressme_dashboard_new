@@ -115,37 +115,36 @@ function MyMarket() {
                     <figure className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] overflow-hidden md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
                       <img
                         src={data?.url_logo_photo}
-                        alt=""
+                        alt="url_logo_photo"
                         className="w-full h-full object-cover"
                       />
                     </figure>
-                    <div className="w-fit flex flex-col ml-5 md:ml-8">
-                      <p className="w-fit text-[13px] md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular  mb-3">
-                        {data?.name || null}
-                      </p>
-                      <div className="w-full flex items-center">
+                    <div className="w-fit flex items-center gap-y-3 flex-col ml-5 md:ml-8">
+                      <div className="h-fit flex items-center  ">
+                        <p className="w-fit text-[13px] flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                          {data?.name || null}
+                        </p>
+                      </div>
+                      {data?.overall_rating && <div className="w-full flex items-center">
                         <div className="w-fit flex items-center ">
                           <div className="w-fit flex items-center mr-[6px]">
                             <StarIcon />
                           </div>
                           <div className="not-italic font-AeonikProRegular  text-[10px] ls:text-xs leading-4 text-right text-gray-500 md:ml-1 flex items-center text-sm">
                             <p className="font-AeonikProRegular text-[12px] md:text-[14px] ls:font-AeonikProMedium text-black mr-1">
-                              5.0
+                              {data?.overall_rating}
                             </p>
-                            <p className="text-setTexOpacity font-AeonikProRegular text-[10px] ls:text-[12px] md:text-[14px] ">
-                              (859 votes){" "}
-                              <span className="ml-[5px] ll:ml-[10px]">|</span>{" "}
-                            </p>
-                            <p className="font-AeonikProRegular ml-[5px] ll:ml-[10px]  text-[10px] ls:text-[12px] md:text-[14px]  text-setTexOpacity">
-                              4937 orders
-                            </p>
+                            {data?.rated_users_count && <p className="text-setTexOpacity flex font-AeonikProRegular text-[10px] ls:text-[12px] md:text-[14px] ">
+                              (голосов: {data?.rated_users_count}){" "}
+
+                            </p>}
                           </div>
                         </div>
-                      </div>
+                      </div>}
                     </div>
                   </div>
                 </div>
-                <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[130px] mt-3 md:mt-0">
+                <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[50px] mt-3 md:mt-0">
                   <div className="flex items-center gap-x-1 ">
                     {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 1) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                       <img src={man} alt="" />
@@ -154,7 +153,7 @@ function MyMarket() {
                       <img src={woman} alt="" />
                     </div>}
                   </div>
-                  <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[260px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
+                  <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[240px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                     <img src={deliveryIcon} alt="" />
                     {helperDatainform?.deliveryList
                       ?.filter((e) => e.id == data?.delivery_id)
@@ -168,6 +167,20 @@ function MyMarket() {
                           </span>
                         );
                       })}
+                  </div>
+                  <div className="w-[100px] flex items-center">
+                    {data?.status === "approved" &&
+                      <span className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </span>}
+                    {data?.status === "declined" &&
+                      <span className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </span>}
+                    {data?.status === "pending" &&
+                      <span className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </span>}
                   </div>
                 </div>
                 <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
