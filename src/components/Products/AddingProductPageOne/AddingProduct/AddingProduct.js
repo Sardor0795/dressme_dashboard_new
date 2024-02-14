@@ -516,21 +516,6 @@ const AddingProduct = () => {
       navigate('/products/location')
   }, [dressInfo?.locationIdAddProduct]);
 
-
-  // let locationIdList = state?.PathnameToken?.split('')
-  // let locationIdRoute = locationIdList[0] + locationIdList[1]
-  // let shopIdList = state?.PathnameToken?.split('')
-  // let newId = shopIdList[2] + shopIdList[3]
-  // console.log(state?.PathnameToken, "state?.PathnameToken");
-  // console.log(shopIdRoute, "shopIdRoute");
-  // console.log(locationIdRoute, "locationIdRoute");
-  // useEffect(() => {
-  //   if (shopIdRoute) {
-  //     setDressInfo({ ...dressInfo, productAddByIdForToggle: state?.PathnameToken })
-  //     setState({ ...state, shopId: shopIdRoute, shopLocationId: locationIdRoute })
-  //   }
-  // }, [state?.PathnameToken]);
-  // console.log(state?.type_Id, "state?.type_Id"); Number(dressInfo?.locationIdAddProduct) navigate()
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? <LoadingForSeller /> :
@@ -1172,9 +1157,8 @@ const AddingProduct = () => {
                           <ArrowRightIcon />
                         </button>
                         <div className={`w-full hidden md:flex items-center gap-x-1 justify-between  overflow-hidden                   
-                          ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"}
- rounded-lg  h-[42px] md:h-10 px-[12px]`}>
-                          {dressInfo?.getProductInfo.colors
+                          ${state?.isCheckValid && !state?.color_Id ? "border border-[#FFB8B8] " : "border border-borderColor"} rounded-lg  h-[42px] md:h-10 px-[12px]`}>
+                          {dressInfo?.getProductInfo?.colors
                             ?.filter((e) => e?.id <= 9)
                             ?.map((data) => {
                               return (
