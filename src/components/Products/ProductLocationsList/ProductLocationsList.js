@@ -325,7 +325,8 @@ export default function ProductLocationsList() {
     navigate(`/products/location/add/:${shopId}`);
 
   };
-  const goProductDetailEdit = (id) => {
+  const goProductDetailEdit = (id, locationId) => {
+    setDressInfo({ ...dressInfo, locationIdAddProduct: locationId })
     navigate(`/products/location/${id}`);
   };
 
@@ -372,12 +373,8 @@ export default function ProductLocationsList() {
         }
       })
     })
-
-
   }, [dressInfo?.getProductList?.products_locations, searchName])
 
-  // console.log(!state?.onErrorMessage, !state?.onSuccessMessaage, !state?.onErrorTitle, "!state?.onErrorMessage , !state?.onSuccessMessaage ,!state?.onErrorTitle ");
-  // Общее количество:
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -858,10 +855,9 @@ export default function ProductLocationsList() {
           </div>
           <div className="w-full my-4">
           </div>
-          {/* filter(e =>e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())) */}
 
           {dressInfo?.getProductList?.products_locations?.filter(e => shopIdList?.includes(e?.id))?.map((item, index) => {
-            // console.log(item, "item");
+
             return (
               <div key={index}>
                 <div >
@@ -1041,7 +1037,7 @@ export default function ProductLocationsList() {
                                                           <td className="w-[10%] h-full  flex items-center justify-center ">
 
                                                             <button
-                                                              onClick={() => goProductDetailEdit(itemValue?.id)}
+                                                              onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
                                                               className="text-[18px] text-weatherWinterColor w-full text-center"
                                                             >
                                                               Подробнее
@@ -1229,7 +1225,7 @@ export default function ProductLocationsList() {
                                                 </div>
                                               )
                                             })}
-                                            {resData?.address}
+                                            {resData?.address}--{resData?.id}
                                             {resData?.products?.length > 1 &&
                                               <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
                                           </p>
@@ -1300,7 +1296,7 @@ export default function ProductLocationsList() {
                                                         </td>
                                                       </tr>
                                                       <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                                        <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
+                                                        <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
                                                         <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                                           <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
                                                         </td>
@@ -1344,7 +1340,7 @@ export default function ProductLocationsList() {
                                                         <td className="w-[10%] h-full  flex items-center justify-center ">
 
                                                           <button
-                                                            onClick={() => goProductDetailEdit(itemValue?.id)}
+                                                            onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
                                                             className="text-[18px] text-weatherWinterColor w-full text-center"
                                                           >
                                                             Подробнее

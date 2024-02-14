@@ -26,7 +26,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   const [loader, setLoader] = useState(false);
   const [reRender, setReRender] = useState(false);
 
-  // console.log(productData, "productData");
+  console.log(productData, "productData");
   const [colorPivotOne, setColorPivotOne] = useState('');
   const [colorPivotTwo, setColorPivotTwo] = useState('');
   const [colorPivotThree, setColorPivotThree] = useState('');
@@ -177,14 +177,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
   useEffect(() => {
     if (productData?.photos) {
-      // console.log("ishladi 1");
       setColorPivotOne(productData?.colors[0]?.pivot?.id)
       setColorPivotTwo(productData?.colors[1]?.pivot?.id)
       setColorPivotThree(productData?.colors[2]?.pivot?.id)
       setColorPivotFour(productData?.colors[3]?.pivot?.id)
     }
-
   }, [productData?.colors])
+
   useEffect(() => {
     if (productData) {
       setPhotsArrOne([
