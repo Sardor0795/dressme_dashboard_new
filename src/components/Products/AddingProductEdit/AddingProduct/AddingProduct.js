@@ -243,7 +243,7 @@ const AddingProduct = () => {
             category_Id: res?.product?.category_id,
             filterTypeId: res?.product?.type_id,
             producer_Id: res?.product?.producer_id,
-            shopId: res?.product?.shop_locations[0]?.shop_id,
+            shopId: res?.product?.shop[0]?.id,
             shopLocationId: res?.product?.shop_locations[0]?.id,
             sizeGetList: res?.product
           })
@@ -483,7 +483,7 @@ const AddingProduct = () => {
     state?.pictureBgFile2 && form.append("photos[]", state?.pictureBgFile2);
     state?.pictureBgFile3 && form.append("photos[]", state?.pictureBgFile3);
     state?.pictureBgFile4 && form.append("photos[]", state?.pictureBgFile4);
-    form.append("shop_location_id", Number(productsDataIdEdit?.locations[0]?.id));
+    form.append("shop_location_id", dressInfo?.locationIdAddProduct);
     form.append("color_id", Number(lastElement));
     state?.checkedSizeList?.forEach((index) => {
       form.append("product_size_ids[]", Number(index));
@@ -823,7 +823,12 @@ const AddingProduct = () => {
       setState({ ...state, subSectionToggle: false })
     }
   }, [newArray?.length, subSection_Id?.length])
-  console.log(dressInfo?.getProductInfo, "dressInfo?.getProductInfo");
+
+  useEffect(() => {
+    if (!dressInfo?.locationIdAddProduct) {
+      navigate('/products/location')
+    }
+  }, [])
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1109,20 +1114,20 @@ const AddingProduct = () => {
               </p>
             </div>
             <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-              {dressInfo?.getProductInfo?.shops?.filter(e => e?.id === state?.shopId).map((item) => {
+              {dressInfo?.getProductInfo?.shops?.filter(e => Number(e?.id) === Number(state?.shopId)).map((item) => {
                 return item?.shop_locations?.map(data => {
                   return (
                     <button
                       onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
                       key={data?.id}
-                      className={`w-full py-[10px] px-[20px] flex items-center justify-between rounded-[8px] ${data?.id == state?.shopLocationId ? "bg-LocationSelectBg" : "bg-white"} hover:bg-LocationSelectBg focus:bg-LocationSelectBg`}
+                      className={`w-full py-[10px] px-[20px] flex items-center justify-between rounded-[8px] ${data?.id == dressInfo?.locationIdAddProduct ? "bg-LocationSelectBg" : "bg-white"} hover:bg-LocationSelectBg focus:bg-LocationSelectBg`}
                     >
                       <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
                         {" "}
                         {data?.address}
                       </span>
                       {
-                        data?.id == state?.shopLocationId &&
+                        Number(data?.id) === Number(dressInfo?.locationIdAddProduct) &&
                         <BiCheckDouble size={25} color={"#007dca"} />
                       }
                     </button>
@@ -1252,7 +1257,12 @@ const AddingProduct = () => {
                           className="w-full cursor-not-allowed h-[40px]  bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
                           <span>
-                            {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == state?.shopId)?.map((item, index) => {
+                            <span
+                              className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              {productsDataIdEdit?.shop?.name}
+                            </span>
+
+                            {/* {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == state?.shopId)?.map((item, index) => {
                               return (
                                 <span
                                   key={index}
@@ -1260,7 +1270,7 @@ const AddingProduct = () => {
                                   {item?.name}
                                 </span>
                               )
-                            })}
+                            })} */}
 
                           </span>
                         </button>
@@ -1288,8 +1298,20 @@ const AddingProduct = () => {
                           className="w-full cursor-not-allowed h-[40px] overflow-hidden bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                         >
                           <span>
-                            {dressInfo?.getProductInfo?.shops?.filter(e => e?.id == state?.shopId).map((item) => {
-                              return item?.shop_locations?.filter(e => e?.id == state?.shopLocationId)?.map(data => {
+                            <span
+                              className="w-[95%]  	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"
+                            >
+                              {productsDataIdEdit?.shop_locations?.filter(e => e?.id == dressInfo?.locationIdAddProduct)?.map(item => {
+                                return (
+                                  <span className="w-full leading-[15px]	 text-start  overflow-hidden text-[#b5b5b5] flex items-center">
+                                    {item?.address}
+                                  </span>
+                                )
+                              })}
+                            </span>
+
+                            {/* {dressInfo?.getProductInfo?.shops?.filter(e => Number(e?.id) === Number(state?.shopId)).map((item) => {
+                              return item?.shop_locations?.filter(e => Number(e?.id) === Number(dressInfo?.locationIdAddProduct))?.map(data => {
                                 return (
                                   <span
                                     className="w-[95%]  	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular"                                  // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
@@ -1300,7 +1322,7 @@ const AddingProduct = () => {
                                 )
                               })
                             })
-                            }
+                            } */}
                           </span>
                         </button>
                       </div>
