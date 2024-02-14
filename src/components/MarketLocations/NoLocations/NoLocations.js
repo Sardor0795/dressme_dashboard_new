@@ -3,15 +3,16 @@ import { MenuCloseIcons } from "../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 
 import { dressMainData } from "../../../hook/ContextTeam";
+import { SellerMainData } from "../../../hook/SellerUserContext";
 
 function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true)
   const [dressInfo] = useContext(dressMainData);
+  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
 
   const navigate = useNavigate()
 
 
-  console.log("NoLocation Is Render");
   const handleShopsOfLocation = (id) => {
     setOpenSelect(true)
     navigate(`/locations-store/:${id}`)
@@ -54,7 +55,7 @@ function NoLocations() {
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
                 {
 
-                  dressInfo?.shopsList?.shops?.data?.map(item => {
+                  sellerInformation?.shopsList?.shops?.data?.map(item => {
                     return (
                       <button
                         onClick={() => handleShopsOfLocation(item?.id)}

@@ -8,11 +8,13 @@ import { useHttp } from '../../../hook/useHttp'
 import axios from 'axios'
 import { dressMainData } from '../../../hook/ContextTeam'
 import { SellerRefresh } from '../../../hook/SellerRefreshToken'
+import { SellerMainData } from '../../../hook/SellerUserContext'
 const { REACT_APP_BASE_URL } = process.env;
 
-export default function MarketIsCheck() {
+export default function MarketIsLocationCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [sellerRefreshToken] = useContext(SellerRefresh)
+    const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
 
     const fetchData = async (customHeaders) => {
         try {
@@ -63,25 +65,26 @@ export default function MarketIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                    setDressInfo({ ...dressInfo, shopsList: data?.data })
+                    setSellerInformation({ ...sellerInformation, shopsList: data?.data })
                 }
 
             } catch (error) {
 
             }
         };
-        if (!dressInfo?.shopsList?.shops) {
+        if (!sellerInformation?.shopsList) {
             fetchData();
         }
     }, []);
 
-    // console.log(dressInfo?.shopsList, "shopsList");
+    console.log(dressInfo?.locationList, "dressInfo--locationList");
+    console.log(sellerInformation?.shopsList, "dressInfo--shopsList");
     return (
         <div>
             {!dressInfo?.locationList ?
                 <LoadingForSeller />
                 :
-                dressInfo?.shopsList?.shops ?
+                sellerInformation?.shopsList?.shops ?
                     dressInfo?.locationList ?
                         <LocationList />
                         :

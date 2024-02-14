@@ -7,11 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { dressMainData } from "../../../hook/ContextTeam";
 import axios from "axios";
 import { SellerRefresh } from "../../../hook/SellerRefreshToken";
+import { SellerMainData } from "../../../hook/SellerUserContext";
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsStoreCheck() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerRefreshToken] = useContext(SellerRefresh)
+  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
 
   const fetchData = async (customHeaders) => {
     try {
@@ -35,7 +37,7 @@ export default function MarketIsStoreCheck() {
   const { refetch, isLoading } = useQuery(['seller_shops_list'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setDressInfo({ ...dressInfo, shopsList: data?.data })
+        setSellerInformation({ ...sellerInformation, shopsList: data?.data })
       }
 
       if (data?.status === 401) {
@@ -59,8 +61,8 @@ export default function MarketIsStoreCheck() {
         <LoadingForSeller />
       ) : (
         <div>
-          {dressInfo?.shopsList?.shops?.length >= 1 && <MyMarket onRefetch={refetch} />}
-          {dressInfo?.shopsList?.shops?.length === 0 && <AddStore onRefetch={refetch} />}
+          {sellerInformation?.shopsList?.shops?.length >= 1 && <MyMarket onRefetch={refetch} />}
+          {sellerInformation?.shopsList?.shops?.length === 0 && <AddStore onRefetch={refetch} />}
         </div>
       )}
     </div>

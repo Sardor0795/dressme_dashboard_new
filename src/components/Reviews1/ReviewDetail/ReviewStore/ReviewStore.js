@@ -9,12 +9,14 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
+import { SellerMainData } from "../../../../hook/SellerUserContext";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerRefreshToken] = useContext(SellerRefresh)
+  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
 
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
@@ -39,7 +41,7 @@ const ReviewStore = () => {
   const { isLoading } = useQuery(['seller_shops_list_review'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setDressInfo({ ...dressInfo, shopsList: data?.data })
+        setSellerInformation({ ...sellerInformation, shopsList: data?.data })
       }
       if (data?.status === 401) {
         sellerRefreshToken()
@@ -97,9 +99,9 @@ const ReviewStore = () => {
         // <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
-          {dressInfo?.shopsList?.shops?.length > 0 && dressInfo?.shopsList?.shops?.rated_users_count > 0
+          {sellerInformation?.shopsList?.shops?.length > 0 && sellerInformation?.shopsList?.shops?.rated_users_count > 0
             ?
-            dressInfo?.shopsList?.shops?.map((data, i) => {
+            sellerInformation?.shopsList?.shops?.map((data, i) => {
               return (
                 <div
                   key={data?.id}

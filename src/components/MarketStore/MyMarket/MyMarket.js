@@ -8,12 +8,14 @@ import { useHttp } from "../../../hook/useHttp";
 import { StarIcon } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import axios from "axios";
+import { SellerMainData } from "../../../hook/SellerUserContext";
 const { REACT_APP_BASE_URL } = process.env;
 
 function MyMarket() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
+  const [sellerInformation, setSellerInformation] = useContext(SellerMainData);
 
   // ------------GET METHOD delivery-method-----------------
   useEffect(() => {
@@ -95,9 +97,9 @@ function MyMarket() {
           Создать новый магазин
         </Link>
       </div>
-      {dressInfo?.shopsList ?
+      {sellerInformation?.shopsList ?
         <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-          {dressInfo?.shopsList?.shops?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
+          {sellerInformation?.shopsList?.shops?.filter(item => item?.name?.toLowerCase()?.includes(searchName?.toLowerCase()))?.map((data, index) => {
             return (
               <div
                 key={data?.id}

@@ -6,7 +6,8 @@ const { REACT_APP_BASE_URL } = process.env;
 
 export default function SellerUserContext({ children }) {
     const [sellerInformation, setSellerInformation] = useState({
-        sellerUserData: []
+        sellerUserData: [],
+        shopsList: null
 
     });
     const [sellerRefreshToken] = useContext(SellerRefresh)

@@ -5,6 +5,13 @@ import LoadingForSeller from "../components/Loading/LoadingFor";
 import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
 import SignInSeller from "../components/Authentication/SellerAuthentication/SignIn/SignInSeller";
 import Sidebar from "../components/Sidebar/Sidebar";
+// ---------------------Location----------------
+import MarketIsLocationCheck from "../components/MarketLocations/MarketIsCheck/MarketIsLocationCheck";
+import LocationAddById from "../components/MarketLocations/Locations/LocationAddById/LocationAddById";
+import LocationList from "../components/MarketLocations/Locations/LocationList/LocationList";
+import LocationMapCity from "../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity";
+import LocationClothesCity from "../components/MarketLocations/Locations/LocationClothes/LocationClothesCity";
+
 // ---------------------Product----------------
 import ProductIsCheck from "../components/Products/ProductIsCheck/ProductIsCheck";
 import ProductEditPage from "../components/Products/AddingProductEdit/ProductsEditPage";
@@ -26,12 +33,12 @@ const MarketEdit = lazy(() => import('../components/MarketStore/Market_Edit/Mark
 const LocationsByIdShow = lazy(() => import('../components/MarketStore/LocationsById/LocationsById'));
 
 // ------------------------Location----------------------------
-// const MarketStore = lazy(() => import('../components/MarketStore'));
-const MarketIsCheck = lazy(() => import('../components/MarketLocations/MarketIsCheck/MarketIsCheck'));
-const LocationAddById = lazy(() => import('../components/MarketLocations/Locations/LocationAddById/LocationAddById'));
-const LocationList = lazy(() => import('../components/MarketLocations/Locations/LocationList/LocationList'));
-const LocationMapCity = lazy(() => import('../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity'));
-const LocationClothesCity = lazy(() => import('../components/MarketLocations/Locations/LocationClothes/LocationClothesCity'));
+const MarketLocations = lazy(() => import('../components/MarketLocations'));
+// const MarketIsCheck = lazy(() => import('../components/MarketLocations/MarketIsCheck/MarketIsCheck'));
+// const LocationAddById = lazy(() => import('../components/MarketLocations/Locations/LocationAddById/LocationAddById'));
+// const LocationList = lazy(() => import('../components/MarketLocations/Locations/LocationList/LocationList'));
+// const LocationMapCity = lazy(() => import('../components/MarketLocations/Locations/LocationMapsCity/LocationMapCity'));
+// const LocationClothesCity = lazy(() => import('../components/MarketLocations/Locations/LocationClothes/LocationClothesCity'));
 
 // -------------------------Product-----------------------------
 const Products = lazy(() => import('../components/Products/Products'));
@@ -123,34 +130,14 @@ export default function RouterList() {
           {/* ---------------------<Locations>------------------------- */}
           <Route path="/locations-store" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <MarketStore />
+              <MarketLocations />
             </Suspense>
           }>
-            <Route index element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <MarketIsCheck />
-              </Suspense>
-            } />
-            <Route path="/locations-store/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <LocationAddById />
-              </Suspense>
-            } />
-            <Route path="/locations-store/list" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <LocationList />
-              </Suspense>
-            } />
-            <Route path="/locations-store/city/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <LocationMapCity />
-              </Suspense>
-            } />
-            <Route path="/locations-store/wears/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <LocationClothesCity />
-              </Suspense>
-            } />
+            <Route index element={<MarketIsLocationCheck />} />
+            <Route path="/locations-store/:id" element={<LocationAddById />} />
+            <Route path="/locations-store/list" element={<LocationList />} />
+            <Route path="/locations-store/city/:id" element={<LocationMapCity />} />
+            <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
           </Route>
           {/* ---------------------<LocationsProduct>------------------------- */}
           <Route path="/products" element={
