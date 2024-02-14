@@ -47,10 +47,10 @@ export default function ProductIsCheck() {
 
             }
         };
-        if (!dressInfo?.shopsList?.shops) {
+        if (!dressInfo?.shopsList) {
             fetchDataShop();
         }
-        if (!dressInfo?.locationList?.data) {
+        if (!dressInfo?.locationList) {
             fetchDataLocations();
         }
     }, []);

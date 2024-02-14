@@ -5,6 +5,11 @@ import LoadingForSeller from "../components/Loading/LoadingFor";
 import EditProfilePage from "../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage";
 import SignInSeller from "../components/Authentication/SellerAuthentication/SignIn/SignInSeller";
 import Sidebar from "../components/Sidebar/Sidebar";
+// ---------------------Product----------------
+import ProductIsCheck from "../components/Products/ProductIsCheck/ProductIsCheck";
+import ProductEditPage from "../components/Products/AddingProductEdit/ProductsEditPage";
+import ProductLocationsList from "../components/Products/ProductLocationsList/ProductLocationsList";
+import ProductsPageOne from "../components/Products/AddingProductPageOne/ProductsPageOne";
 
 // ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
@@ -30,10 +35,10 @@ const LocationClothesCity = lazy(() => import('../components/MarketLocations/Loc
 
 // -------------------------Product-----------------------------
 const Products = lazy(() => import('../components/Products/Products'));
-const ProductIsCheck = lazy(() => import('../components/Products/ProductIsCheck/ProductIsCheck'));
-const ProductEditPage = lazy(() => import('../components/Products/AddingProductEdit/ProductsEditPage'));
-const ProductLocationsList = lazy(() => import('../components/Products/ProductLocationsList/ProductLocationsList'));
-const ProductsPageOne = lazy(() => import('../components/Products/AddingProductPageOne/ProductsPageOne'));
+// const ProductIsCheck = lazy(() => import('../components/Products/ProductIsCheck/ProductIsCheck'));
+// const ProductEditPage = lazy(() => import('../components/Products/AddingProductEdit/ProductsEditPage'));
+// const ProductLocationsList = lazy(() => import('../components/Products/ProductLocationsList/ProductLocationsList'));
+// const ProductsPageOne = lazy(() => import('../components/Products/AddingProductPageOne/ProductsPageOne'));
 
 // -----------------------------Authentication-----------------
 // const EditProfilePage = lazy(() => import('../components/Authentication/UserProfile/ProfileEditPage/EditProfilePage'));
@@ -156,28 +161,11 @@ export default function RouterList() {
             {dressInfo?.isCheckPoructList?.length >= 1 ?
               <Route path="/products" element={<Navigate to="/products/location" />} />
               :
-              <Route index element={
-                <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                  <ProductIsCheck />
-                </Suspense>
-              } />
+              <Route index element={<ProductIsCheck />} />
             }
-            <Route path="/products/location/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ProductEditPage />
-              </Suspense>
-            } />
-
-            <Route path="/products/location" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ProductLocationsList />
-              </Suspense>
-            } />
-            <Route path="/products/location/add/:id" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <ProductsPageOne />
-              </Suspense>
-            } />
+            <Route path="/products/location/:id" element={<ProductEditPage />} />
+            <Route path="/products/location" element={<ProductLocationsList />} />
+            <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
           </Route>
           <Route path={"/edit-profile"} element={<EditProfilePage />} />
         </Route>
