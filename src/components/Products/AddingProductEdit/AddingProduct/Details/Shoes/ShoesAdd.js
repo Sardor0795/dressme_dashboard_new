@@ -60,9 +60,13 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
         state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
         state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
         state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
-        state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-        state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
-        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        // state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
+        // state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
+        // state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
+        state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
+        state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
         form.append("footwear_size", state?.minSize);
         state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));

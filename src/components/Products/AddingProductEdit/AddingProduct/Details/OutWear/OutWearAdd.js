@@ -99,10 +99,14 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         state?.maxWaist && form.append("max_outwear_waist_girth", state?.maxWaist);
         state?.minHips && form.append("min_outwear_hip_girth", state?.minHips);
         state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
-        state?.disableSizes === 3 && state?.ageNum && form.append("age", Number(state?.ageNum));
-        state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);
-        state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
-        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
+        // state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);
+        // state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
+        // state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+        state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
+        state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
+        state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
         form.append("min_outwear_size", state?.minSize);
         state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));

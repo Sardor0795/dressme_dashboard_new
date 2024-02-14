@@ -67,7 +67,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
         state?.disableSizes === 1 && state?.discountPercent?.length > 0 && form.append("discount_percent", state?.discountPercent);
         state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
-        state?.disableSizes === 1 && (state?.discountPercent?.length === 0 || Number(state?.discountPercent) === 0) && form.append("discount_price", null);
+        state?.disableSizes === 1 && (state?.discountPercent?.length === 0 || Number(state?.discountPercent) === 0) && form.append("discount_price", 0);
         state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
         state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
         state?.disableSizes === 2 && form.append("amount", state?.amount);
