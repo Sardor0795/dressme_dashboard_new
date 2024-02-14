@@ -1172,7 +1172,7 @@ export default function ProductLocationsList() {
                           onClick={() => openMarketEditPage(item?.id)}
                           className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
                           <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                            {item?.name}                    </p>
+                            {item?.name} </p>
                         </button>
                         {item?.shop_locations?.filter((location) =>
                           searchName ? location?.products?.some(item =>
@@ -1225,7 +1225,7 @@ export default function ProductLocationsList() {
                                               </div>
                                             )
                                           })}
-                                          {resData?.address}--{resData?.id}
+                                          {resData?.address}
                                           {resData?.products?.length > 1 &&
                                             <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
                                         </p>
@@ -1296,7 +1296,7 @@ export default function ProductLocationsList() {
                                                       </td>
                                                     </tr>
                                                     <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                                      <td className="w-[5%] h-full  flex items-center justify-center " >{itemValue?.id}</td>
+                                                      <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
                                                       <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                                         <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
                                                       </td>
