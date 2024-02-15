@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchIcon } from "../../../assets/icons";
+import { MenuCloseIcons, SearchIcon } from "../../../assets/icons";
 import { Link, useNavigate } from "react-router-dom";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { deliveryIcon, man, woman } from "../../../assets";
@@ -12,7 +12,10 @@ function MyMarket() {
   const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
-
+  // ------------
+  const [statusModal, setStatusModal] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+  // ------------
   // ------------GET METHOD delivery-method-----------------
   useEffect(() => {
     const fetchDelivery = async () => {
@@ -45,8 +48,47 @@ function MyMarket() {
       top: 0,
     });
   }, []);
+  function onHandleStatus(id) {
+    setStatusModal(true)
+    helperDatainform?.shopsList?.shops?.map(data => {
+      if (data?.id == id) {
+        setStatusMessage(data?.status_reason)
+      }
+    })
+  }
   return (
     <div className="w-full h-full  py-1 px-4 md:px-10">
+      <section
+        onClick={() => setStatusModal(false)}
+        className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
+         ${statusModal ? "" : "hidden"}`}
+      ></section>
+      {/*status Modal */}
+      <section
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setStatusModal(false)}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        <div className="w-full h-fit flex items-center justify-center mb-2">
+          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+            Причина
+          </p>
+        </div>
+        {statusMessage ?
+          <div className="w-full p-4 border border-borderColor rounded-lg flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
+            {statusMessage}
+          </div> :
+          <div className="w-full flex text-[#b5b5b5] items-center justify-center border border-borderColor rounded-lg  h-[300px]  overflow-hidden  ">
+            Нет причин
+          </div>}
+      </section>
       <div className="w-full pt-6 pb-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="w-full flex items-center justify-center md:hidden">
           <div className="absolute left-4 ">
@@ -170,17 +212,23 @@ function MyMarket() {
                   </div>
                   <div className="w-[100px] flex items-center">
                     {data?.status === "approved" &&
-                      <span className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                      <button
+                        type="button" className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                         {data?.status || "status"}
-                      </span>}
+                      </button>}
                     {data?.status === "declined" &&
-                      <span className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                      <button onClick={() => onHandleStatus(data?.id)}
+                        type="button" className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
                         {data?.status || "status"}
-                      </span>}
+                      </button>}
                     {data?.status === "pending" &&
-                      <span className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                      <button type="button" className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                         {data?.status || "status"}
-                      </span>}
+                      </button>}
+                    {data?.status === "updated" &&
+                      <button type="button" className="w-full h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </button>}
                   </div>
                 </div>
                 <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">

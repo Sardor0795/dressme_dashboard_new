@@ -78,8 +78,7 @@ export default function MarketIsLocationCheck() {
         }
     }, []);
 
-    console.log(dressInfo?.locationList, "dressInfo--locationList");
-    console.log(helperDatainform?.shopsList, "dressInfo--shopsList");
+
     return (
         <div>
             {!dressInfo?.locationList ?

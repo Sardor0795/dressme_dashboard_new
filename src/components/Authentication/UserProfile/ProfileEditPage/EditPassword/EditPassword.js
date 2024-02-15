@@ -95,12 +95,13 @@ function EditPassword({ onClick }) {
       <div className="flex justify-end items-center md:mr-[-30px] md:mt-[-15px]">
         {" "}
 
-        <span
-          className="select-none iconArrow cursor-pointer"
+        <button
+          type="button"
+          className="select-none  cursor-pointer"
           onClick={onClick}
         >
           <MenuCloseIcons colors="#000" />
-        </span>
+        </button>
       </div>
       <div className="w-full flex items-center justify-center">
         <span className="text-gray-800 text-center text-2xl not-italic font-AeonikProMedium">

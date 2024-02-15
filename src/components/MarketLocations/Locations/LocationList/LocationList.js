@@ -14,7 +14,10 @@ function LocationList() {
   const navigate = useNavigate();
   const [dressInfo] = useContext(dressMainData);
   const [helperDatainform] = useContext(HelperData);
-
+  // ------------
+  const [statusModal, setStatusModal] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+  // ------------
 
 
   const handleShopsOfLocation = (id) => {
@@ -34,14 +37,54 @@ function LocationList() {
       top: 0,
     });
   }, []);
-
+  function onHandleStatus(locationid, shopId) {
+    setStatusModal(true)
+    dressInfo?.locationList?.map(value1 => {
+      if (value1?.id == shopId) {
+        value1?.shop_locations?.map(value2 => {
+          if (value2?.id == locationid) {
+            setStatusMessage(value2?.status_reason)
+          }
+        })
+      }
+    })
+  }
   return (
     <div className={`w-full h-full  px-4  md:px-10   pb-10`}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect ? "" : "hidden"
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect || statusModal ? "" : "hidden"
           }`}
-        onClick={() => setOpenSelect(false)}
+        onClick={() => {
+          setStatusModal(false)
+          setOpenSelect(false)
+        }}
       ></div>
+      {/*status Modal */}
+      <section
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setStatusModal(false)}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        <div className="w-full h-fit flex items-center justify-center mb-2">
+          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+            Причина
+          </p>
+        </div>
+        {statusMessage ?
+          <div className="w-full p-4 border border-borderColor rounded-lg flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
+            {statusMessage}
+          </div> :
+          <div className="w-full flex text-[#b5b5b5] items-center justify-center border border-borderColor rounded-lg  h-[300px]  overflow-hidden  ">
+            Нет причин
+          </div>}
+      </section>
       <section
         className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
           }`}
@@ -258,17 +301,25 @@ function LocationList() {
                             </li>
                             <li className="md:w-[12%] h-full  flex items-center ">
                               {value?.status === "approved" &&
-                                <span className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                <button
+                                  type="button" className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                                   {value?.status || "status"}
-                                </span>}
+                                </button>}
                               {value?.status === "declined" &&
-                                <span className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                <button
+                                  onClick={() => onHandleStatus(value?.id, item?.id)}
+                                  type="button"
+                                  className="w-[100px] cursor-pointer h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
                                   {value?.status || "status"}
-                                </span>}
+                                </button>}
                               {value?.status === "pending" &&
-                                <span className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                <button type="button" className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                   {value?.status || "status"}
-                                </span>}
+                                </button>}
+                              {value?.status === "updated" &&
+                                <button type="button" className="w-[100px] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </button>}
                             </li>
                             <li className="md:w-[12%] h-full  flex items-center justify-center text-center">
                               <button
