@@ -42,6 +42,9 @@ export default function ProductLocationsList() {
     shopMarketId: ""
   });
   // ------------
+  const [statusModal, setStatusModal] = useState(false);
+  const [statusMessage, setStatusMessage] = useState(null);
+  // ------------
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -375,7 +378,25 @@ export default function ProductLocationsList() {
       })
     })
   }, [dressInfo?.getProductList?.products_locations, searchName])
-  console.log(deleteMessage, SuccessMessage, "deleteMessage && !SuccessMessage");
+
+  function onHandleStatus(productId, locationid, shopId) {
+    setStatusModal(true)
+
+    dressInfo?.getProductList?.products_locations?.map(value1 => {
+      if (value1?.id == shopId) {
+        value1?.shop_locations?.map(value2 => {
+          if (value2?.id == locationid) {
+            value2?.products?.map(value3 => {
+              if (value3?.id == productId) {
+                setStatusMessage(value3?.status_reason)
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -385,6 +406,7 @@ export default function ProductLocationsList() {
           setDeleteMessage(null)
           setSuccessMessage(null)
           setHideProductList(false)
+          setStatusModal(false)
           setState({
             ...state,
             onSuccessMessaage: null,
@@ -397,9 +419,35 @@ export default function ProductLocationsList() {
           // setHideProductList(false)
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal ? "" : "hidden"}`}
+         ${deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal || statusModal ? "" : "hidden"}`}
       ></section>
 
+      {/*status Modal */}
+      <section
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setStatusModal(false)}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 ">
+          <MenuCloseIcons
+            className="w-full h-full"
+            colors={"#a1a1a1"} />
+        </button>
+        <div className="w-full h-fit flex items-center justify-center mb-2">
+          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+            Причина
+          </p>
+        </div>
+        {statusMessage ?
+          <div className="w-full p-4 border border-borderColor rounded-lg flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
+            {statusMessage}
+          </div> :
+          <div className="w-full flex text-[#b5b5b5] items-center justify-center border border-borderColor rounded-lg  h-[300px]  overflow-hidden  ">
+            Нет причин
+          </div>}
+      </section>
       {/* Add the Several selected products to the new one */}
       <section
         className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelectModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
@@ -930,18 +978,18 @@ export default function ProductLocationsList() {
                                             {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
                                               return (
                                                 <div>
-                                                  {values?.name_uz},
+                                                  {values?.name_ru},
                                                   {values?.sub_regions?.filter(e => e?.id == resData?.sub_region_id)?.map(valueSub => {
                                                     return (
                                                       <span className="px-1">
-                                                        {valueSub?.name_uz},
+                                                        {valueSub?.name_ru},
                                                       </span>
                                                     )
                                                   })}
                                                 </div>
                                               )
                                             })}
-                                            {resData?.address}
+                                            ({resData?.address})
                                             {resData?.products?.length > 1 &&
                                               <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
                                                 ({resData?.products?.length})
@@ -1032,13 +1080,22 @@ export default function ProductLocationsList() {
                                                         })}
                                                         <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                                                        {itemValue?.status === "approved" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                          {itemValue?.status || "status"}
-                                                        </td>}
-                                                        {itemValue?.status === "declined" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
-                                                          {itemValue?.status || "status"}
-                                                        </td>}
+                                                        {itemValue?.status === "approved" &&
+                                                          <td
+                                                            className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                            {itemValue?.status || "status"}
+                                                          </td>}
+                                                        {itemValue?.status === "declined" &&
+                                                          <td
+                                                            onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+
+                                                            className="w-[7%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                                            {itemValue?.status || "status"}
+                                                          </td>}
                                                         {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                          {itemValue?.status || "status"}
+                                                        </td>}
+                                                        {itemValue?.status === "updated" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                           {itemValue?.status || "status"}
                                                         </td>}
                                                         <td className="w-[10%] h-full  flex items-center justify-center ">
@@ -1232,18 +1289,18 @@ export default function ProductLocationsList() {
                                           {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
                                             return (
                                               <div>
-                                                {values?.name_uz},
+                                                {values?.name_ru},
                                                 {values?.sub_regions?.filter(e => e?.id == resData?.sub_region_id)?.map(valueSub => {
                                                   return (
                                                     <span className="px-1">
-                                                      {valueSub?.name_uz},
+                                                      {valueSub?.name_ru},
                                                     </span>
                                                   )
                                                 })}
                                               </div>
                                             )
                                           })}
-                                          {resData?.address}
+                                          <span className="flex items-center ml-1">({resData?.address})</span>
                                           {resData?.products?.length > 1 &&
                                             <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
                                         </p>
@@ -1335,13 +1392,21 @@ export default function ProductLocationsList() {
                                                       })}
                                                       <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                                                      {itemValue?.status === "approved" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                        {itemValue?.status || "status"}
-                                                      </td>}
-                                                      {itemValue?.status === "declined" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
-                                                        {itemValue?.status || "status"}
-                                                      </td>}
+                                                      {itemValue?.status === "approved" &&
+                                                        <td
+                                                          className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                          {itemValue?.status || "status"}
+                                                        </td>}
+                                                      {itemValue?.status === "declined" &&
+                                                        <td
+                                                          onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                          className="w-[7%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                                          {itemValue?.status || "status"}
+                                                        </td>}
                                                       {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                        {itemValue?.status || "status"}
+                                                      </td>}
+                                                      {itemValue?.status === "updated" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                         {itemValue?.status || "status"}
                                                       </td>}
                                                       <td className="w-[10%] h-full  flex items-center justify-center ">

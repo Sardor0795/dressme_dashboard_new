@@ -57,6 +57,7 @@ module.exports = {
         bgApproved: 'rgba(79, 180, 89, 0.10)',
         bgDecline: 'rgba(255, 0, 0, 0.10)',
         bgPending: 'rgba(241, 193, 22, 0.10)',
+        bgUpdate: 'rgba(0, 125, 202, 0.1)',
       },
       fontFamily: {
         // 500
