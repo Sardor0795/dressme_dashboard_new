@@ -119,7 +119,7 @@ const AddingProduct = () => {
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
-  console.log();
+  // console.log();
   // console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -844,10 +844,10 @@ const AddingProduct = () => {
       setAddSizeDisable(null)
     }
   }, [state?.checkedSizeList?.length, state?.lastElementColorId, addSizeDisable, colorAction, state?.newColorByAddSizes?.price, state?.newColorByAddSizes?.amount])
-  console.log(colorAction, "111111-colorAction");
-  console.log(addSizeDisable, "111111-addSizeDisable");
-  console.log(state?.checkedSizeList?.length, state?.lastElementColorId, "111111-state?.checkedSizeList?.length && state?.lastElementColorId");
-  console.log(state?.newColorByAddSizes, "111111-state?.newColorByAddSizes?.priceNum && state?.newColorByAddSizes?.quantityNum");
+  // console.log(colorAction, "111111-colorAction");
+  // console.log(addSizeDisable, "111111-addSizeDisable");
+  // console.log(state?.checkedSizeList?.length, state?.lastElementColorId, "111111-state?.checkedSizeList?.length && state?.lastElementColorId");
+  // console.log(state?.newColorByAddSizes, "111111-state?.newColorByAddSizes?.priceNum && state?.newColorByAddSizes?.quantityNum");
   useEffect(() => {
     if (!dressInfo?.locationIdAddProduct) {
       navigate(-1)
