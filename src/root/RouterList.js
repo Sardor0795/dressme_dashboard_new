@@ -117,20 +117,29 @@ export default function RouterList() {
             <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
           </Route>
           {/* ---------------------<LocationsProduct>------------------------- */}
-          <Route path="/products" element={
-            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-              <Products />
-            </Suspense>
-          }>
-            {dressInfo?.isCheckPoructList?.length >= 1 ?
-              <Route path="/products" element={<Navigate to="/products/location" />} />
-              :
+          {dressInfo?.isCheckPoructList?.length >= 1
+            ?
+            <Route path="/products" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <Products />
+              </Suspense>
+            }>
+              <Route index element={<ProductLocationsList />} />
+              <Route path="/products/location/:id" element={<ProductEditPage />} />
+              <Route path="/products/location" element={<ProductLocationsList />} />
+              <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
+            </Route> :
+            <Route path="/products" element={
+              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+                <Products />
+              </Suspense>
+            }>
               <Route index element={<ProductIsCheck />} />
-            }
-            <Route path="/products/location/:id" element={<ProductEditPage />} />
-            <Route path="/products/location" element={<ProductLocationsList />} />
-            <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
-          </Route>
+              <Route path="/products/location/:id" element={<ProductEditPage />} />
+              <Route path="/products/location" element={<ProductLocationsList />} />
+              <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
+            </Route>}
+
           <Route path={"/edit-profile"} element={<EditProfilePage />} />
         </Route>
 

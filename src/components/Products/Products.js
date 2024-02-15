@@ -26,7 +26,6 @@ export default function Products() {
   useEffect(() => {
     const fetchDataLocations = async () => {
       try {
-        setLoader(true)
         const data = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
@@ -34,8 +33,6 @@ export default function Products() {
           }
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setLoader(false)
-
           setDressInfo({ ...dressInfo, getProductList: data?.data })
           data?.data?.products_locations?.map(item => {
             if (item?.shop_locations?.length >= 1) {
@@ -45,18 +42,17 @@ export default function Products() {
         }
         if (data.status === 401) {
           sellerRefreshToken()
-          setLoader(false)
 
         }
       } catch (error) {
         if (error?.response?.status === 401) {
           sellerRefreshToken()
-          setLoader(false)
-
         }
       }
     };
-    fetchDataLocations();
+    if (!dressInfo?.isCheckPoructList) {
+      fetchDataLocations();
+    }
     const fetchData = async () => {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
@@ -76,13 +72,13 @@ export default function Products() {
     fetchData();
 
   }, [])
-
+  console.log(dressInfo?.isCheckPoructList, "dressInfo?.isCheckPoructList");
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
-      {loader ?
-        <LoadingForSeller />
-        :
+      {dressInfo?.isCheckPoructList ?
         <Outlet />
+        :
+        <LoadingForSeller />
       }
     </main>
   );
