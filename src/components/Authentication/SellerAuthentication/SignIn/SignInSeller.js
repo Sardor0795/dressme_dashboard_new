@@ -5,7 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
-import Cookies from "js-cookie";
 import { ClipLoader } from "react-spinners";
 import "../SignUp/style.css";
 
@@ -68,7 +67,6 @@ export default function SignInSeller() {
 
               localStorage.setItem("DressmeUserToken", res?.access_token)
               localStorage.setItem("RefreshUserToken", res?.refresh_token)
-              // Cookies.set("DressmeUserToken", res?.access_token, { expires: 1 / 30 });
 
               navigate("/edit-profile")
               // window.location.reload();

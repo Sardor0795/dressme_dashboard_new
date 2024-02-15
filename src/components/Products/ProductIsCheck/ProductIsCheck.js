@@ -57,32 +57,34 @@ export default function ProductIsCheck() {
     }, []);
     return (
         <div>
-            {loading ?
-                <LoadingForSeller />
-                :
-                helperDatainform?.shopsList?.shops?.length > 0
-                    ?
-                    dressInfo?.locationList?.length > 0
+            {
+
+                loading ?
+                    <LoadingForSeller />
+                    :
+                    helperDatainform?.shopsList?.shops?.length > 0
                         ?
-                        <ProductsPageOne />
+                        dressInfo?.locationList?.length > 0
+                            ?
+                            <ProductsPageOne />
+                            :
+                            <div className="flex items-center h-[100vh] justify-center">
+                                <Link
+                                    to="/locations-store"
+                                    className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                                >
+                                    У вас пока нет локации !
+                                </Link>
+                            </div >
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link
-                                to="/locations-store"
+                                to="/store"
                                 className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                             >
-                                У вас пока нет локации !
+                                Сначала создайте магазин!
                             </Link>
                         </div >
-                    :
-                    <div className="flex items-center h-[100vh] justify-center">
-                        <Link
-                            to="/store"
-                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                        >
-                            Сначала создайте магазин!
-                        </Link>
-                    </div >
             }
         </div >
     )

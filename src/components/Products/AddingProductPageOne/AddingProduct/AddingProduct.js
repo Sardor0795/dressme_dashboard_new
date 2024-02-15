@@ -351,7 +351,7 @@ const AddingProduct = () => {
     console.log(state?.textListOfFormList, " state?.textListOfFormList");
   }
   const { id } = useParams()
-  const newId = id.replace(":", "")
+  const newId = id?.replace(":", "")
   const CallBackTextForm = (childData) => {
     setState({ ...state, errorListMessage: '', sendingLoader: true })
     let form = new FormData();
