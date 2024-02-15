@@ -825,32 +825,50 @@ export default function ProductLocationsList() {
             <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
               Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
-            <button
+            {checkedList?.length >= 1 ? <button
               type="button"
               onClick={() => setState({ ...state, openSelectModal: true })}
-              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg ${checkedList?.length >= 1
-                ? "text-addLocationTextcolor  active:scale-95  active:opacity-70"
-                : "text-[#D2D2D2] cursor-not-allowed"
-                }`}
+              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
+                
+                `}
             >
               <span className="mr-[5px]">
                 <AddLocationIcon width={20} />
               </span>
               Добавить в локацию
             </button>
-            <button
+              :
+              <button
+                type="button"
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
+              >
+                <span className="mr-[5px]">
+                  <AddLocationIcon width={20} />
+                </span>
+                Добавить в локацию
+              </button>
+            }
+
+            {checkedList?.length >= 1 ? <button
               type="button"
               onClick={() => setState({ ...state, openDeleteModal: true })}
-              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg  ${checkedList?.length >= 1
-                ? "text-deleteColor active:scale-95  active:opacity-70"
-                : "text-[#D2D2D2] cursor-not-allowed"
-                }`}
+              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor active:scale-95  active:opacity-70`}
             >
               <span className="mr-[5px]">
                 <DeleteIcon width={20} />
               </span>
               Удалить
             </button>
+              :
+              <button
+                type="button"
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
+              >
+                <span className="mr-[5px]">
+                  <DeleteIcon width={20} />
+                </span>
+                Удалить
+              </button>}
           </div>
         </div>
         <div className="w-full my-4">
