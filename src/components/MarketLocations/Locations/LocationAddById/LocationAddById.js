@@ -414,14 +414,14 @@ export default function LocationAddById() {
                 )}
               </label>
             </div>
-            <label htmlFor="fname" className="w-full md:w-[31%] mb-3 md:mb-0">
+            <label htmlFor="fname" className=" w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя администратора{" "}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex flex-col items-center h-10 md:h-[70px] w-full text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center h-10 w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
@@ -440,11 +440,11 @@ export default function LocationAddById() {
                   )}
               </div>
             </label>
-            <label htmlFor="fname2" className="w-full md:w-[31%] mb-3 md:mb-0">
+            <label htmlFor="fname2" className=" w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Имя второго администратора{" "}
               </div>
-              <div className="flex flex-col items-center h-10 md:h-[70px] w-full text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname2"
@@ -463,154 +463,8 @@ export default function LocationAddById() {
                   )}
               </div>
             </label>
-            <div className="block w-full md:w-[31%]">
-              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Рабочее время
-                <span className="ml-[5px]">
-                  <StarLabel />
-                </span>
-              </div>
-              <div className="w-full flex items-start mb-3 md:mb-0">
-                <span className="w-fit text-[12px] md:text-base flex items-center mt-[6px] md:mt-2">
-                  от
-                </span>
-                <div className="flex flex-col items-center h-[32px] md:h-[70px]">
-                  <input
-                    className="without_ampm mr-5 ml-[5px] outline-none w-[70%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[42px] rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                    type="time"
-                    min="00:00"
-                    max="23:59"
-                    name="startTime"
-                    pattern="[0-2][0-9]:[0-5][0-9]"
-                    value={state?.workTimeFrom || "09:00"}
-                    onChange={(e) =>
-                      setState({ ...state, workTimeFrom: e.target.value })
-                    }
-                    required
-                  />
-                  {state?.errorGroup?.work_time_from &&
-                    !state?.workTimeFrom && (
-                      <p className="text-[#D50000] text-[12px] w-full">
-                        {state?.errorGroup?.work_time_from}
-                      </p>
-                    )}
-                </div>
-                <span className="w-fit text-[12px] md:text-base flex items-center mt-[6px] md:mt-2">
-                  до
-                </span>
-                <div className="flex flex-col items-center md:h-[70px]">
-                  <input
-                    className="without_ampm w-[70%] md:w-[80px] xs:w-[40%] h-[32px] md:h-[42px] mr-5 ml-[5px] outline-none border border-borderColor text-center flex items-center justify-center rounded-lg text-[12px] md:text-[14px] font-AeonikProRegular "
-                    type="time"
-                    min="00:00"
-                    max="23:59"
-                    name="endTime"
-                    pattern="[0-2][0-9]:[0-5][0-9]"
-                    value={state?.workTimeTo || "18:00"}
-                    onChange={(e) =>
-                      setState({ ...state, workTimeTo: e.target.value })
-                    }
-                    required
-                  />
-                  {state?.errorGroup?.work_time_to && !state?.workTimeTo && (
-                    <p className="text-[#D50000] text-[12px]   w-full ">
-                      {state?.errorGroup?.work_time_to}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-            <label htmlFor="phone1" className="w-full md:w-[31%] mb-3 md:mb-0 ">
-              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Номер администратора
-                <span className="ml-[5px]">
-                  <StarLabel />
-                </span>
-              </div>
 
-              <div className="h-10 md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
-                <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
-                  <input
-                    className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                    name="phoneCode"
-                    type="text"
-                    value={state.phoneCode}
-                    readOnly
-                  />
-                </div>
-                <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
-                  <InputMask
-                    mask="(99) 999-99-99"
-                    value={state?.assistantPhoneFirst || null}
-                    name="phone"
-                    onChange={(e) =>
-                      setState({
-                        ...state,
-                        assistantPhoneFirst: e.target.value,
-                      })
-                    }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
-                      } text-xs md:text-base leading-4 text-black`}
-                    placeholder={"(77) 777-77-77"}
-                  ></InputMask>
-                  <span className="mr-[12px]">
-                    <TelIcon />
-                  </span>
-                </div>
-              </div>
-              {state?.errorGroup?.assistant_phone &&
-                !state?.assistantPhoneFirst && (
-                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
-                    {state?.errorGroup?.assistant_phone}
-                  </p>
-                )}
-            </label>
-            <label htmlFor="phone2" className="w-full md:w-[31%]">
-              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Номер второго администратора
-                <span className="ml-[5px]">{/* <StarLabel /> */}</span>
-              </div>
-              <div className="h-10 md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
-                <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
-                  <input
-                    className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium 
-                    text-xs md:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                    type="text"
-                    name="phoneCode2"
-                    value={state.phoneCode}
-                    readOnly
-                  />
-                </div>
-                <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
-                  <InputMask
-                    mask="(99) 999-99-99"
-                    value={state?.assistantPhoneSecond || null}
-                    name="phone2"
-                    placeholder={"(77) 777-77-77"}
-                    onChange={(e) =>
-                      setState({
-                        ...state,
-                        assistantPhoneSecond: e.target.value,
-                      })
-                    }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond
-                      ? "font-AeonikProMedium"
-                      : null
-                      } text-xs md:text-[16px] leading-4 text-black`}
-                  ></InputMask>
-                  <span className="mr-[12px]">
-                    <TelIcon />
-                  </span>
-                </div>
-              </div>
-              {state?.errorGroup?.second_assistant_phone &&
-                !state?.assistantPhoneSecond && (
-                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
-                    {state?.errorGroup?.second_assistant_phone}
-                  </p>
-                )}
-            </label>
-            <div className="flex w-full md:w-[31%]">
+            <div className=" flex w-full md:w-[31%]">
               <div
                 onClick={() => {
                   setState({ ...state, openStoreList: false });
@@ -776,23 +630,114 @@ export default function LocationAddById() {
                 </label>
               </div>
             </div>
-            {/* <div className="hidden md:block w-full md:w-[31%]">
+            <label htmlFor="phone1" className=" w-full md:w-[31%] mb-3 md:mb-0 ">
+              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
+                Номер администратора
+                <span className="ml-[5px]">
+                  <StarLabel />
+                </span>
+              </div>
+
+              <div className="h-10 md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
+                <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
+                  <input
+                    className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                    name="phoneCode"
+                    type="text"
+                    value={state.phoneCode}
+                    readOnly
+                  />
+                </div>
+                <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
+                  <InputMask
+                    mask="(99) 999-99-99"
+                    value={state?.assistantPhoneFirst || null}
+                    name="phone"
+                    onChange={(e) =>
+                      setState({
+                        ...state,
+                        assistantPhoneFirst: e.target.value,
+                      })
+                    }
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
+                      } text-xs md:text-base leading-4 text-black`}
+                    placeholder={"(77) 777-77-77"}
+                  ></InputMask>
+                  <span className="mr-[12px]">
+                    <TelIcon />
+                  </span>
+                </div>
+              </div>
+              {state?.errorGroup?.assistant_phone &&
+                !state?.assistantPhoneFirst && (
+                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                    {state?.errorGroup?.assistant_phone}
+                  </p>
+                )}
+            </label>
+            <label htmlFor="phone2" className=" w-full md:w-[31%]">
+              <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
+                Номер второго администратора
+                <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+              </div>
+              <div className="h-10 md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
+                <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
+                  <input
+                    className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium 
+                    text-xs md:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                    type="text"
+                    name="phoneCode2"
+                    value={state.phoneCode}
+                    readOnly
+                  />
+                </div>
+                <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
+                  <InputMask
+                    mask="(99) 999-99-99"
+                    value={state?.assistantPhoneSecond || null}
+                    name="phone2"
+                    placeholder={"(77) 777-77-77"}
+                    onChange={(e) =>
+                      setState({
+                        ...state,
+                        assistantPhoneSecond: e.target.value,
+                      })
+                    }
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond
+                      ? "font-AeonikProMedium"
+                      : null
+                      } text-xs md:text-[16px] leading-4 text-black`}
+                  ></InputMask>
+                  <span className="mr-[12px]">
+                    <TelIcon />
+                  </span>
+                </div>
+              </div>
+              {state?.errorGroup?.second_assistant_phone &&
+                !state?.assistantPhoneSecond && (
+                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                    {state?.errorGroup?.second_assistant_phone}
+                  </p>
+                )}
+            </label>
+            <div className=" w-full md:w-[31%]">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 Рабочее время
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="w-full flex items-start mb-3 md:mb-0">
-                <span className="w-fit text-[12px] md:text-base flex items-center mt-[6px] md:mt-2">
+              <div className="w-full flex items-center md:mb-0">
+                <span className="w-fit text-[12px] md:text-base flex items-center ">
                   от
                 </span>
-                <div className="flex flex-col items-center h-[32px] md:h-[70px]">
+                <div className="flex flex-col items-center h-[42px] ">
                   <input
-                    className="without_ampm mr-5 ml-[5px] outline-none w-[70%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[32px] md:h-[42px] rounded md:rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="without_ampm mr-5 ml-[5px] outline-none w-[70%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[42px] md:h-[42px] rounded-lg  md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
                     type="time"
                     min="00:00"
                     max="23:59"
+                    name="startTime"
                     pattern="[0-2][0-9]:[0-5][0-9]"
                     value={state?.workTimeFrom || "09:00"}
                     onChange={(e) =>
@@ -807,15 +752,16 @@ export default function LocationAddById() {
                       </p>
                     )}
                 </div>
-                <span className="w-fit text-[12px] md:text-base flex items-center mt-[6px] md:mt-2">
+                <span className="w-fit text-[12px] md:text-base flex items-center ">
                   до
                 </span>
-                <div className="flex flex-col items-center md:h-[70px]">
+                <div className="flex flex-col items-center  h-[42px]">
                   <input
-                    className="without_ampm w-[70%] md:w-[80px] xs:w-[40%] h-[32px] md:h-[42px] mr-5 ml-[5px] outline-none border border-borderColor text-center flex items-center justify-center  rounded md:rounded-lg text-[12px] md:text-[14px] font-AeonikProRegular "
+                    className="without_ampm w-[70%] md:w-[80px] xs:w-[40%] h-[42px] md:h-[42px] mr-5 ml-[5px] outline-none border border-borderColor text-center flex items-center justify-center rounded-lg text-[12px] md:text-[14px] font-AeonikProRegular "
                     type="time"
                     min="00:00"
                     max="23:59"
+                    name="endTime"
                     pattern="[0-2][0-9]:[0-5][0-9]"
                     value={state?.workTimeTo || "18:00"}
                     onChange={(e) =>
@@ -830,7 +776,8 @@ export default function LocationAddById() {
                   )}
                 </div>
               </div>
-            </div> */}
+            </div>
+
           </div>
         </div>
         <div className="flex justify-center mt-[50px]  px-4 md:px-0">
