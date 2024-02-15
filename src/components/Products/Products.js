@@ -33,7 +33,7 @@ export default function Products() {
           }
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductList: data?.data })
+          // setDressInfo({ ...dressInfo, getProductList: data?.data })
           data?.data?.products_locations?.map(item => {
             if (item?.shop_locations?.length >= 1) {
               setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations })

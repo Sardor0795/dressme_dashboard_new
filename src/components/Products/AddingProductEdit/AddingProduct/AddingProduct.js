@@ -110,6 +110,7 @@ const AddingProduct = () => {
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [addSizeDisable, setAddSizeDisable] = useState(null);
 
   function CallBackHeadWear(childData) {
     // console.log(childData, "childData");
@@ -118,6 +119,7 @@ const AddingProduct = () => {
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
+  // console.log();
   // console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -476,7 +478,6 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  console.log(state?.shopLocationIds, "state?.shopLocationIds");
   // console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
@@ -830,6 +831,23 @@ const AddingProduct = () => {
     }
   }, [newArray?.length, subSection_Id?.length])
 
+  useEffect(() => {
+    if (colorAction) {
+      if (state?.checkedSizeList?.length && state?.lastElementColorId) {
+        setAddSizeDisable('AllSize')
+      }
+      if (state?.newColorByAddSizes?.price && state?.newColorByAddSizes?.amount) {
+        setAddSizeDisable('AddSize')
+      }
+    }
+    if (!colorAction) {
+      setAddSizeDisable(null)
+    }
+  }, [state?.checkedSizeList?.length, state?.lastElementColorId, addSizeDisable, colorAction, state?.newColorByAddSizes?.price, state?.newColorByAddSizes?.amount])
+  // console.log(colorAction, "111111-colorAction");
+  // console.log(addSizeDisable, "111111-addSizeDisable");
+  // console.log(state?.checkedSizeList?.length, state?.lastElementColorId, "111111-state?.checkedSizeList?.length && state?.lastElementColorId");
+  // console.log(state?.newColorByAddSizes, "111111-state?.newColorByAddSizes?.priceNum && state?.newColorByAddSizes?.quantityNum");
   useEffect(() => {
     if (!dressInfo?.locationIdAddProduct) {
       navigate(-1)
@@ -1815,7 +1833,6 @@ const AddingProduct = () => {
                     </div>
                     {/* Input Select 9 mobile */}
                     <div className="w-full  flex md:hidden flex-col gap-y-[5px]">
-
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
                           Тип
@@ -1961,23 +1978,37 @@ const AddingProduct = () => {
                       </div>
                     </div>
                     <div className={`w-full hidden md:flex items-center rounded-lg overflow-hidden  justify-between gap-x-3 ${colorAction ? "p-[4px] border-[3px] border-yellow-500" : ""}`} >
-                      <button
-                        type="button"
-                        onClick={() => setAllSizeModalShow(true)}
-                        className="group w-[168px] flex items-center justify-center px-[15px] h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
-                      >
-                        Все размеры{" "}
-                      </button>
-                      <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
-                        <AddSize typeId={state?.category_Id} newProductId={newProductId} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
-                      </button>
+                      {addSizeDisable == 'AddSize' ?
+                        <button
+                          type="button"
+                          className="group w-[168px] flex items-center justify-center px-[15px] h-[38px]  whitespace-nowrap text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg  "
+                        >
+                          Все размеры{" "}
+                        </button> :
+                        <button
+                          type="button"
+                          onClick={() => setAllSizeModalShow(true)}
+                          className="group w-[168px] flex items-center justify-center px-[15px] h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+                        >
+                          Все размеры{" "}
+                        </button>}
+                      {addSizeDisable == 'AllSize' ?
+                        <div
+                          className={`text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] group px-[15px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300`}
+                        >
+                          <span>Добавить размер</span>
+                        </div>
+                        :
+                        <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
+                          <AddSize typeId={state?.category_Id} newProductId={newProductId} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
+                        </button>}
                     </div>
                   </div>
                   <section
                     className={`fixed z-[115]   w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
                       }`}
                   >
-                    {allSizeModalShow && (
+                    {(
                       <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
