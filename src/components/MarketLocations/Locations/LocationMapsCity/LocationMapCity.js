@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
@@ -31,8 +31,14 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { useHttp } from "../../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import axios from "axios";
+import { dressMainData } from "../../../../hook/ContextTeam";
+const { REACT_APP_BASE_URL } = process.env;
+
 export default function LocationMapCity() {
   const { request } = useHttp()
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const [state, setState] = useState({
     idAddress: "",
     idAssistantMessenger: "",
@@ -198,19 +204,24 @@ export default function LocationMapCity() {
     }
   );
 
-  // ------------GET METHOD Region-----------------
-  useQuery(["getRegionList_map_city"], () => { return request({ url: "/regions", token: true }); },
-    {
-      onSuccess: (res) => {
-        setState({ ...state, getRegionList: res, })
-      },
-      onError: (err) => {
-        console.log(err, "err get region");
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
+
+  useEffect(() => {
+    const fetchDataRegions = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`)
+        if (data?.status >= 200 && data?.status < 300) {
+          setDressInfo({ ...dressInfo, regionList: data?.data })
+        }
+
+      } catch (error) {
+
+      }
+    };
+    if (!dressInfo?.regionList) {
+      fetchDataRegions();
     }
-  );
+  }, [dressInfo?.regionList]);
+
 
   useEffect(() => {
     window.scrollTo({
@@ -1021,96 +1032,7 @@ export default function LocationMapCity() {
                       />
                     </div>
                   </label>
-                  <div className="w-full md:w-[31%] xs:w-[48%]">
-                    <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                      Рабочее время
-                      <span className="ml-[5px]">
-                        <StarLabel />
-                      </span>
-                    </div>
-                    <div className="w-full flex  items-center">
-                      {" "}
-                      <span className="w-fit text-[12px] md:text-base flex items-center">
-                        от
-                      </span>
-                      <input
-                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded md:rounded-lg md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                        type="time"
-                        min="00:00"
-                        max="23:59"
-                        name="startTime"
-                        pattern="[0-2][0-9]:[0-5][0-9]"
-                        value={state?.idWorkTimeFrom}
-                        onChange={(e) => setState({ ...state, idWorkTimeFrom: e.target.value })}
-                        required />
 
-                      <span className="w-fit text-[12px] md:text-base flex items-center ">
-                        до
-                      </span>
-                      <input
-                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded-lg md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
-                        type="time"
-                        min="00:00"
-                        max="23:59"
-                        name="endTime"
-                        pattern="[0-2][0-9]:[0-5][0-9]"
-                        value={state?.idWorkTimeTo}
-                        onChange={(e) => setState({ ...state, idWorkTimeTo: e.target.value })}
-                        required />
-
-                    </div>
-                  </div>
-                  <label htmlFor="phone1" className="w-full md:w-[31%] xs:w-[48%]">
-                    <div className="text-xs md:text-base flex items-center mb-[10px]">
-                      Номер администратора
-                      <span className="ml-[5px]"><StarLabel /></span>
-                    </div>
-                    <div className="mt-[6px] h-8 md:h-11 flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg">
-                      <div className="ss:w-[35%] md:w-[30%] h-8 md:h-11 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                        <div
-                          className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-xs md:text-base leading-4 text-black"
-                        > +998</div>
-                      </div>
-                      <div className="w-[65%] md:w-[70%] h-[42px] overflow-hidden">
-                        <InputMask
-                          mask="(99) 999-99-99"
-                          name="phone"
-                          value={state?.idAssistantPhone || null}
-                          onChange={(e) => setState({ ...state, idAssistantPhone: e.target.value })}
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone ? "font-AeonikProMedium" : null
-                            } text-xs md:text-base leading-4 text-black`}
-                          placeholder={"(99) 999-99-99"}
-                        ></InputMask>
-                      </div>
-                    </div>
-
-                  </label>
-                  <label htmlFor="phone2" className="w-full md:w-[31%] xs:w-[48%]">
-                    <div className="text-[12px] md:text-base flex items-center mb-[10px]">
-                      Номер второго администратора{" "}
-                      <span className="ml-[5px]">{/* <StarLabel /> */}</span>
-                    </div>
-
-                    <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg h-8 md:h-11">
-                      <div className="w-[35%] md:w-[30%] flex items-center justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
-                        <div
-                          className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular leading-4 text-black text-xs md:text-base"
-
-                        > +998</div>
-                      </div>
-                      <div className="w-[65%] md:w-[70%] h-8 md:h-11 overflow-hidden">
-                        <InputMask
-                          mask="(99) 999-99-99"
-                          name="phone2"
-                          value={state?.idSecondAssistantPhone || null}
-                          onChange={(e) => setState({ ...state, idSecondAssistantPhone: e.target.value })}
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone ? "font-AeonikProMedium" : null
-                            } text-xs md:text-base leading-4 text-black`}
-                          placeholder={"(99) 999-99-99"}
-                        ></InputMask>
-                      </div>
-                    </div>
-                  </label>
                   <div className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="w-full h-fit flex justify-center ">
                       <div className={`max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
@@ -1125,8 +1047,8 @@ export default function LocationMapCity() {
 
 
                         <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                          {state?.getRegionList?.regions ?
-                            state?.getRegionList?.regions?.map((data, index) => {
+                          {dressInfo?.regionList?.regions ?
+                            dressInfo?.regionList?.regions?.map((data, index) => {
                               return (
                                 <div key={data?.id} className="w-full  h-fit  ">
                                   <div
@@ -1200,7 +1122,7 @@ export default function LocationMapCity() {
                             <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-xs md:text-base leading-4 ">
                               {!state?.idRegionId && !state?.idSupRregionId && "Выберите регион"}
 
-                              {state?.getRegionList?.regions?.filter(e => e.id == state?.idRegionId).map((item, index) => {
+                              {dressInfo?.regionList?.regions?.filter(e => e.id == state?.idRegionId).map((item, index) => {
                                 return <span key={index}
                                   className="flex items-center text-[#000] text-xs md:text-base">
                                   {item?.name_ru},
@@ -1219,6 +1141,96 @@ export default function LocationMapCity() {
                       </div>
                     </div>
 
+                  </div>
+                  <label htmlFor="phone1" className="w-full md:w-[31%] xs:w-[48%]">
+                    <div className="text-xs md:text-base flex items-center mb-[10px]">
+                      Номер администратора
+                      <span className="ml-[5px]"><StarLabel /></span>
+                    </div>
+                    <div className="mt-[6px] h-8 md:h-11 flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg">
+                      <div className="ss:w-[35%] md:w-[30%] h-8 md:h-11 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+                        <div
+                          className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-xs md:text-base leading-4 text-black"
+                        > +998</div>
+                      </div>
+                      <div className="w-[65%] md:w-[70%] h-[42px] overflow-hidden">
+                        <InputMask
+                          mask="(99) 999-99-99"
+                          name="phone"
+                          value={state?.idAssistantPhone || null}
+                          onChange={(e) => setState({ ...state, idAssistantPhone: e.target.value })}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone ? "font-AeonikProMedium" : null
+                            } text-xs md:text-base leading-4 text-black`}
+                          placeholder={"(99) 999-99-99"}
+                        ></InputMask>
+                      </div>
+                    </div>
+
+                  </label>
+                  <label htmlFor="phone2" className="w-full md:w-[31%] xs:w-[48%]">
+                    <div className="text-[12px] md:text-base flex items-center mb-[10px]">
+                      Номер второго администратора{" "}
+                      <span className="ml-[5px]">{/* <StarLabel /> */}</span>
+                    </div>
+
+                    <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg h-8 md:h-11">
+                      <div className="w-[35%] md:w-[30%] flex items-center justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
+                        <div
+                          className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular leading-4 text-black text-xs md:text-base"
+
+                        > +998</div>
+                      </div>
+                      <div className="w-[65%] md:w-[70%] h-8 md:h-11 overflow-hidden">
+                        <InputMask
+                          mask="(99) 999-99-99"
+                          name="phone2"
+                          value={state?.idSecondAssistantPhone || null}
+                          onChange={(e) => setState({ ...state, idSecondAssistantPhone: e.target.value })}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone ? "font-AeonikProMedium" : null
+                            } text-xs md:text-base leading-4 text-black`}
+                          placeholder={"(99) 999-99-99"}
+                        ></InputMask>
+                      </div>
+                    </div>
+                  </label>
+                  <div className="w-full md:w-[31%] xs:w-[48%]">
+                    <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
+                      Рабочее время
+                      <span className="ml-[5px]">
+                        <StarLabel />
+                      </span>
+                    </div>
+                    <div className="w-full flex  items-center">
+                      {" "}
+                      <span className="w-fit text-[12px] md:text-base flex items-center">
+                        от
+                      </span>
+                      <input
+                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded md:rounded-lg md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                        type="time"
+                        min="00:00"
+                        max="23:59"
+                        name="startTime"
+                        pattern="[0-2][0-9]:[0-5][0-9]"
+                        value={state?.idWorkTimeFrom}
+                        onChange={(e) => setState({ ...state, idWorkTimeFrom: e.target.value })}
+                        required />
+
+                      <span className="w-fit text-[12px] md:text-base flex items-center ">
+                        до
+                      </span>
+                      <input
+                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded-lg md:w-[80px] text-[12px] md:text-[14px] font-AeonikProRegular "
+                        type="time"
+                        min="00:00"
+                        max="23:59"
+                        name="endTime"
+                        pattern="[0-2][0-9]:[0-5][0-9]"
+                        value={state?.idWorkTimeTo}
+                        onChange={(e) => setState({ ...state, idWorkTimeTo: e.target.value })}
+                        required />
+
+                    </div>
                   </div>
                 </div>
               </div>
