@@ -9,9 +9,11 @@ import { ClipLoader } from "react-spinners";
 import { BiCheck } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
+import { HelperData } from "../../../../../../hook/HelperDataStore";
 const url = "https://api.dressme.uz/api/seller";
 function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
     const [state, setState] = useState({
         minHeadGirth: null,
@@ -58,7 +60,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const onChangeSwitch = (id) => {
         setState({ ...state, sizeCheck: id, saveBtnDisable: true, disableSizes: 0 })
     };
-    console.log(state?.discountPercent, "state?.discountPercent");
+
     function saveEditData() {
         setState({ ...state, sendingLoader: true })
         let form = new FormData();
@@ -135,8 +137,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 setState({ ...state, sendingLoader: false, sizeEditModal: false })
                 throw new Error(err?.message || "something wrong");
             })
-
-
     }
     useEffect(() => {
         setState({
@@ -168,9 +168,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         })
     }, [state?.editSizeId, checkColor])
 
-
     const handleChangePrice = (event) => {
-
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
@@ -188,9 +186,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
-
     };
-
     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
@@ -214,7 +210,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
+
     function sendCheckListItem(id) {
+        console.log(id, "bucolorId");
         if (state?.addnewColorIdIcons) {
             setState({ ...state, addnewColorIdIcons: null })
         }
@@ -518,7 +516,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 </div>
                 {checked?.length ?
                     <div className="w-fit ">
-                        <button type="button" onClick={addNewColor?.id ? () => sendCheckListItem(addNewColor?.id) : ColorModal}
+                        <button type="button"
+                            onClick={addNewColor?.id ? () => sendCheckListItem(addNewColor?.id) : ColorModal}
                             className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
                             <span> Добавить к цвету</span>
                             {addNewColor &&

@@ -45,6 +45,10 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       setAddNewColor(item)
     })
   }, [lastElement])
+  useEffect(() => {
+    setCheckColor(productsDataIdEdit?.colors[0]?.pivot?.id)
+  }, [productsDataIdEdit])
+
   function handleGetSizeCheckedList(childData, lastElementColorId) {
     setAllSizeOfListId(childData)
     AllCheckedSizeList(childData, lastElementColorId)
@@ -170,7 +174,6 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
 
   }
-
   return (
     <div className="w-full md:w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
       <section
@@ -354,7 +357,6 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       {/* All Cards */}
       <div className="md:h-[694px]  overflow-hidden h-500  md:mt-6">
         <div className="w-full h-full overflow-auto   flex flex-col gap-y-2   md:py-1 mb-5">
-
           {/* Filter Area */}
           <div className="w-full h-full overflow-auto ">
             {Number(productsDataIdEdit?.category_id) === 1 && <HeadWearAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
