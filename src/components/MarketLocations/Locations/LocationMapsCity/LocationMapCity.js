@@ -197,7 +197,7 @@ export default function LocationMapCity() {
       refetchOnWindowFocus: false,
     }
   );
-  // console.log(state, "BuLocationMapCity");
+
   // ------------GET METHOD Region-----------------
   useQuery(["getRegionList_map_city"], () => { return request({ url: "/regions", token: true }); },
     {
@@ -353,12 +353,6 @@ export default function LocationMapCity() {
         console.log(err, "errImage")
       })
   }
-  // const deleteProductByImage = useMutation(() => {
-  //   return request({ url: `/shops/locations/${NewId}/delete-location-photo`, method: "DELETE", token: true });
-  // }); locations/store
-  // console.log(pictureFile2, "pictureFile2,");
-  // console.log(pictureView2, "pictureView2,");
-  // console.log(state?.pictureBgTest2, "state?.pictureBgTest2,");
   function onUserDeleteBackgroundImg2() {
 
     if (state?.pictureBgTest2) {
@@ -435,10 +429,7 @@ export default function LocationMapCity() {
       setState({ ...state, pictureBgFile3: '', pictureBgView3: '' })
     }
   }
-  // console.log(state?.pictureBgView2, "state?.pictureBgView2");
-  // console.log(state?.pictureBgTest2, "state?.pictureBgTest2");
-  // console.log(state?.pictureBgView3, "state?.pictureBgView3");
-  // console.log(state?.pictureBgTest3, "state?.pictureBgTest3");
+
 
 
   // For DropUp
@@ -1078,7 +1069,7 @@ export default function LocationMapCity() {
                       <div className="ss:w-[35%] md:w-[30%] h-8 md:h-11 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div
                           className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-xs md:text-base leading-4 text-black"
-                        > {state?.idAssistantPhoneCode ? "+" + state?.idAssistantPhoneCode : "+998"}</div>
+                        > +998</div>
                       </div>
                       <div className="w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                         <InputMask
@@ -1105,7 +1096,7 @@ export default function LocationMapCity() {
                         <div
                           className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular leading-4 text-black text-xs md:text-base"
 
-                        > {state?.idSecondAssistantPhoneCode ? "+" + state?.idSecondAssistantPhoneCode : "+998"}</div>
+                        > +998</div>
                       </div>
                       <div className="w-[65%] md:w-[70%] h-8 md:h-11 overflow-hidden">
                         <InputMask

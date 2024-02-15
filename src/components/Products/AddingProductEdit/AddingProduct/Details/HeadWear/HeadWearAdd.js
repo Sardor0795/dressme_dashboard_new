@@ -373,7 +373,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 : <input
                                                     type="number"
                                                     className="inputStyle w-[58px] h-[42px] text-center fon  rounded-lg px-[12px]  outline-none "
-                                                    placeholder="age"
+                                                    placeholder="0"
                                                     value={state?.age}
                                                     name="age"
                                                     onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
