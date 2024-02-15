@@ -72,6 +72,7 @@ const AddingProduct = () => {
     // ---------------
     shopId: '',
     shopLocationId: '',
+    shopLocationIds: [],
     section_Id: [],
     sub_Section_Id: [],
     season_Id: [],
@@ -245,6 +246,7 @@ const AddingProduct = () => {
             producer_Id: res?.product?.producer_id,
             shopId: res?.product?.shop[0]?.id,
             shopLocationId: res?.product?.shop_locations[0]?.id,
+            shopLocationIds: res?.product?.shop_locations,
             sizeGetList: res?.product
           })
         }
@@ -474,7 +476,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  // console.log(state?.checkedSizeList, "state?.checkedSizeList");
+  console.log(state?.shopLocationIds, "state?.shopLocationIds");
   // console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
@@ -483,7 +485,11 @@ const AddingProduct = () => {
     state?.pictureBgFile2 && form.append("photos[]", state?.pictureBgFile2);
     state?.pictureBgFile3 && form.append("photos[]", state?.pictureBgFile3);
     state?.pictureBgFile4 && form.append("photos[]", state?.pictureBgFile4);
-    form.append("shop_location_id", dressInfo?.locationIdAddProduct);
+
+    state?.shopLocationIds?.forEach((index) => {
+      form.append("shop_location_ids[]", Number(index?.id));
+    })
+    // form.append("shop_location_ids[]", dressInfo?.locationIdAddProduct);
     form.append("color_id", Number(lastElement));
     state?.checkedSizeList?.forEach((index) => {
       form.append("product_size_ids[]", Number(index));
