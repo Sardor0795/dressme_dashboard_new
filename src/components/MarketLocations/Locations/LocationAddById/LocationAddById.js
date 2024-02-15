@@ -368,7 +368,7 @@ export default function LocationAddById() {
           <div className="flex flex-wrap items-center justify-between gap-x-3 md:gap-4 ">
             {/* INPUT DATA */}
             <div className={"w-full block md:hidden mb-3 md:mb-0"}>
-              <label htmlFor="selectRegion">
+              <label htmlFor="selectRegion2">
                 <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                   Выберите регион
                   <span className="ml-[5px]">

@@ -444,14 +444,15 @@ function EditProfilePage() {
                 <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">
                   Выберите регион
                 </span>
-                <span
-                  className="select-none iconArrow cursor-pointer"
+                <button
+                  type="button"
+                  className="select-none  cursor-pointer"
                   onClick={() => {
                     setState({ ...state, openModalRegions: false });
                   }}
                 >
                   <MenuCloseIcons colors="#000" />
-                </span>
+                </button>
               </div>
 
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
@@ -543,7 +544,7 @@ function EditProfilePage() {
 
             {/* Region INput  */}
             <div className={"w-full"}>
-              <label htmlFor="selectRegion">
+              <label htmlFor="selectRegion1">
                 <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                   Выберите регион
                 </span>

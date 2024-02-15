@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
-import Cookies from "js-cookie";
 
 export default function MailVerfySeller() {
   const [timer, setTimer] = useState(false);
@@ -75,7 +74,6 @@ export default function MailVerfySeller() {
           } else if (res?.access_token) {
             localStorage.setItem("DressmeUserToken", res?.access_token);
             localStorage.setItem("RefreshUserToken", res?.refresh_token)
-            // Cookies.set("DressmeUserToken", res?.access_token, { expires: 1 / 30 });
 
             navigate("/");
             window.location.reload();

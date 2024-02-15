@@ -352,6 +352,7 @@ export default function ProductLocationsList() {
   useEffect(() => {
     if (!deleteModal) {
       setHideDeleteIcons(false)
+      setSuccessMessage(null)
     }
   }, [deleteModal])
 
@@ -374,7 +375,7 @@ export default function ProductLocationsList() {
       })
     })
   }, [dressInfo?.getProductList?.products_locations, searchName])
-
+  console.log(deleteMessage, SuccessMessage, "deleteMessage && !SuccessMessage");
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -789,7 +790,6 @@ export default function ProductLocationsList() {
 
           </div>}
       </section>
-
       {/* Search Section For Mobile */}
       <div className="flex md:hidden items-center justify-between border-t md:border-0 border-borderColor pt-3 md:pt-0 md:mt-3">
         <section className="w-full md:w-fit flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
