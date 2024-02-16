@@ -2153,23 +2153,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       </div>
                     </div>}
                   <div
-                    style={{
-                      backgroundImage: ` url("${imageOne?.url_photo1}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
-                    className="BackgImageBLur   h-full  flex items-center justify-center ">
+                    // style={{
+                    //   backgroundImage: ` url("${imageOne?.url_photo1}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
+                    className="BackgImageBLur  rounded-lg h-full  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-[350px] h-[377px]  backdrop-blur-md">
                       <img
                         className="
                         h-full
                         w-full
                         mx-auto 
-                        align-middle object-contain cursor-pointer "
+                        align-middle object-cover cursor-pointer "
                         src={imageOne?.url_photo1}
 
                         alt=""
@@ -2181,11 +2181,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-full mt-[10px] h-[124px] flex justify-between gap-x-[6px]   rounded-lg">
+          <div className="w-full mt-[10px] h-[150px] flex justify-between gap-x-[6px]   rounded-lg">
             <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
+                className="h-[120px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
               >
                 {!imageTwo?.url_photo2 ?
                   <div
@@ -2195,14 +2195,6 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         () => handleFreeModalUploadImg(imageTwo?.id2) : null}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
-                    {/* {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                      <input
-                        className="hidden"
-                        id={"imageTwo"}
-                        type="file"
-                        onChange={handleLocationImage2}
-                        accept=" image/*"
-                      /> : null} */}
                     <div
                       className="w-full h-full overflow-hidden   bg-photoBg  flex flex-col items-center  justify-center">
                       <span><DownloadIcon /></span>
@@ -2224,15 +2216,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                         : null
                     }
-                    style={{
-                      backgroundImage: ` url("${imageTwo?.url_photo2}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: ` url("${imageTwo?.url_photo2}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur overflow-hidden  w-full h-full rounded-lg flex items-center justify-center  ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                       <img
@@ -2240,7 +2232,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       h-full
                       w-full
                       mx-auto 
-                      align-middle object-contain cursor-pointer "
+                      align-middle object-cover cursor-pointer "
                         src={imageTwo?.url_photo2}
                         alt=""
                       />
@@ -2270,7 +2262,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageThree?.url_photo3 ?
                   <div
@@ -2308,15 +2300,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageThree?.id3)
                         : null
                     }
-                    style={{
-                      backgroundImage: ` url("${imageThree?.url_photo3}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: ` url("${imageThree?.url_photo3}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur  overflow-hidden  w-full h-full rounded-lg flex items-center justify-center   ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                       <img
@@ -2324,7 +2316,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     h-full
                     w-full
                     mx-auto 
-                    align-middle object-contain cursor-pointer "
+                    align-middle object-cover cursor-pointer "
                         src={imageThree?.url_photo3}
                         alt=""
                       />
@@ -2355,7 +2347,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFour?.url_photo4 ?
                   <div
@@ -2392,15 +2384,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageFour?.id4)
                         : null
                     }
-                    style={{
-                      backgroundImage: `url("${imageFour?.url_photo4}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: `url("${imageFour?.url_photo4}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2408,7 +2400,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     h-full
                     w-full
                     mx-auto 
-                    align-middle object-contain cursor-pointer "
+                    align-middle object-cover cursor-pointer "
                         src={imageFour?.url_photo4}
                         alt=""
                       />
@@ -2440,7 +2432,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               <button
                 type="button"
 
-                className="h-[96px]  w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[120px]  w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFive?.url_photo5 ?
                   colorListForTest?.length >= 2 ?
@@ -2492,15 +2484,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageFive?.id5)
                         : null
                     }
-                    style={{
-                      backgroundImage: `url("${imageFive?.url_photo5}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: `url("${imageFive?.url_photo5}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2508,7 +2500,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     h-full
                     w-full
                     mx-auto 
-                    align-middle object-contain cursor-pointer "
+                    align-middle object-cover cursor-pointer "
                         src={imageFive?.url_photo5}
                         alt=""
                       />
@@ -2552,7 +2544,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-60"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageSix?.url_photo6 ?
                   colorListForTest?.length >= 2 ?
@@ -2604,15 +2596,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                         : null
                     }
-                    style={{
-                      backgroundImage: `url("${imageSix?.url_photo6}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: `url("${imageSix?.url_photo6}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2620,7 +2612,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     h-full
                     w-full
                     mx-auto 
-                    align-middle object-contain cursor-pointer "
+                    align-middle object-cover cursor-pointer "
                         src={imageSix?.url_photo6}
                         alt=""
                       />
@@ -2667,7 +2659,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageSeven?.url_photo7 ?
                   colorListForTest?.length >= 3 ?
@@ -2719,19 +2711,19 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageSeven?.id7)
                         : null
                     }
-                    style={{
-                      backgroundImage: `url("${imageSeven?.url_photo7}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: `url("${imageSeven?.url_photo7}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
-                        className=" h-full w-full mx-auto align-middle object-contain cursor-pointer "
+                        className=" h-full w-full mx-auto align-middle object-cover cursor-pointer "
                         src={imageSeven?.url_photo7}
                         alt=""
                       />
@@ -2780,7 +2772,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-60"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[96px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageEight?.url_photo8 ?
                   colorListForTest?.length >= 4 ?
@@ -2832,15 +2824,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageEight?.id8)
                         : null
                     }
-                    style={{
-                      backgroundImage: `url("${imageEight?.url_photo8}")`,
-                      backgroundColor: "rgba(0,0,0,0.6)",
-                      backgroundPosition: "center center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundBlendMode: "darken",
-                      // filter: "blur(1px)"
-                    }}
+                    // style={{
+                    //   backgroundImage: `url("${imageEight?.url_photo8}")`,
+                    //   backgroundColor: "rgba(0,0,0,0.6)",
+                    //   backgroundPosition: "center center",
+                    //   backgroundSize: "cover",
+                    //   backgroundRepeat: "no-repeat",
+                    //   backgroundBlendMode: "darken",
+                    //   // filter: "blur(1px)"
+                    // }}
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2848,7 +2840,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     h-full
                     w-full
                     mx-auto 
-                    align-middle object-contain cursor-pointer "
+                    align-middle object-cover cursor-pointer "
                         src={imageEight?.url_photo8}
                         alt=""
                       />
