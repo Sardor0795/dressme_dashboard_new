@@ -21,6 +21,7 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import axios from "axios";
 import { SellerMainData } from "../../../../hook/SellerUserContext";
 import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
+import { ClipLoader } from "react-spinners";
 const { REACT_APP_BASE_URL } = process.env;
 
 function EditProfilePage() {
@@ -41,6 +42,7 @@ function EditProfilePage() {
     sellerStatus: "",
     sellerPhoneCode: "",
     sellerPhoneNum: "",
+    companyName: "",
     // -------------
     validateConfirm: true,
     eyesShow: true,
@@ -56,6 +58,11 @@ function EditProfilePage() {
     // ----popConfirmDelete
     popConfirmDelete: false,
     sellerTypes: null,
+    sellerUpdateInput: false,
+    sellerUpdateEmail: false,
+
+    sendingLoader: false,
+    isCheckInput: false,
   });
   const [openEditModal, setOpenEditModal] = useState(false);
 
@@ -75,6 +82,7 @@ function EditProfilePage() {
       sellerRegionId: sellerInformation?.sellerUserData?.region_id,
       sellerSubRegionId: sellerInformation?.sellerUserData?.sub_region_id,
       sellerTypeId: sellerInformation?.sellerUserData?.seller_type_id,
+      sellerTypes: sellerInformation?.sellerUserData?.seller_type_id >= 3 ? 'ENTITY' : 'INDIVIDUAL',
       sellerStatus: sellerInformation?.sellerUserData?.status,
       sellerPhoneCode:
         sellerInformation?.sellerUserData?.phone && sellerInformation?.sellerUserData?.phone.slice(0, 3),
@@ -135,7 +143,7 @@ function EditProfilePage() {
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
 
-  useQuery(['get_profile_axios11'], () => fetchData(customHeaders), {
+  const { refetch } = useQuery(['get_profile_axios11'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
@@ -205,13 +213,154 @@ function EditProfilePage() {
     }
   };
 
+  const card1 = state?.sellerCardNumber?.split("-")
+  const BankCard = card1?.join("")
+  const UpdateSeller = () => {
+    setState({ ...state, isCheckInput: true })
+    if (state?.sellerTypeId >= 3 && state?.companyName || state?.sellerTypeId < 3) {
+      setState({ ...state, sendingLoader: true })
+      let form = new FormData();
+      form.append("name", state?.sellerFname);
+      form.append("surname", state?.sellerLname);
+      form.append("phone", state?.sellerPhoneCode + state?.sellerPhoneNum);
+      form.append("card_number", BankCard);
+      form.append("seller_type_id", state?.sellerTypeId);
+      state?.sellerTypeId >= 3 && state?.companyName && form.append("company_name", state?.companyName);
+      form.append("region_id", state?.sellerRegionId);
+      form.append("sub_region_id", state?.sellerSubRegionId);
+
+      return fetch(`${url}/update-seller-info`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.errors && res?.message) {
+            setState({ ...state, sendingLoader: false, isCheckInput: false, sellerUpdateInput: false })
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else if (res?.message) {
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            refetch()
+            setState({ ...state, sendingLoader: false, isCheckInput: false, sellerUpdateInput: false })
+          }
+        })
+        .catch((err) => {
+          setState({ ...state, sendingLoader: false, isCheckInput: false, sellerUpdateInput: false })
+          toast.error(`${err}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        });
+    }
+  };
+
+  const dataMutateEmail = useMutation(() => {
+    return fetch(`${url}/update-seller-info`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+      },
+      body: JSON.stringify({ email: state?.sellerEmail, }),
+    }).then((res) => res.json());
+  });
+  const UpdateEmailSeller = () => {
+    setState({ ...state, sendingLoader: true })
+    dataMutateEmail.mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          if (res?.message && res?.errors) {
+            setState({ ...state, sendingLoader: false, sellerUpdateEmail: false })
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else if (res?.message) {
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            refetch()
+            setState({ ...state, sendingLoader: false, sellerUpdateEmail: false })
+          }
+        },
+        onError: (err) => {
+          setState({ ...state, sendingLoader: false, sellerUpdateEmail: false })
+          toast.error(`${err}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        },
+      }
+    );
+  };
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
     document.title = "Pедактировать профиль";
   }, []);
-  console.log(state?.sellerTypeId, "state?.sellerTypeId");
+  console.log(
+    // state?.sellerFname, '-sellerFname-',
+    // state?.sellerLname, '-sellerLname-',
+    // state?.sellerEmail, '-sellerEmail-',
+    // state?.sellerCardNumber, '-sellerCardNumber-',
+    state?.sellerRegionId, '-sellerRegionId-',
+    state?.sellerSubRegionId, '-sellerSubRegionId-',
+    // state?.sellerTypeId, '-sellerTypeId-',
+    // state?.sellerPhoneCode + state?.sellerPhoneNum, '-sellerPhoneNum-',
+    // state?.sellerPhoneCode, '-sellerPhoneNum-',
+    // state?.sellerTypes, '-sellerTypes-',
+  );
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -339,7 +488,7 @@ function EditProfilePage() {
                 placeholder="Имя"
                 value={state?.sellerFname || null}
                 onChange={(e) =>
-                  setState({ ...state, sellerFname: e.target.value })
+                  setState({ ...state, sellerFname: e.target.value, sellerUpdateInput: true })
                 }
                 required
               />
@@ -358,7 +507,7 @@ function EditProfilePage() {
                 placeholder="Фамилия"
                 value={state?.sellerLname || null}
                 onChange={(e) =>
-                  setState({ ...state, sellerLname: e.target.value })
+                  setState({ ...state, sellerLname: e.target.value, sellerUpdateInput: true })
                 }
                 required
               />
@@ -379,7 +528,7 @@ function EditProfilePage() {
                 placeholder="Адрес электронной почты"
                 value={state?.sellerEmail || null}
                 onChange={(e) =>
-                  setState({ ...state, sellerEmail: e.target.value })
+                  setState({ ...state, sellerEmail: e.target.value, sellerUpdateEmail: true })
                 }
                 required
               />
@@ -405,7 +554,7 @@ function EditProfilePage() {
                   name="phone"
                   value={state?.sellerPhoneNum || null}
                   onChange={(e) =>
-                    setState({ ...state, sellerPhoneNum: e.target.value })
+                    setState({ ...state, sellerPhoneNum: e.target.value, sellerUpdateInput: true })
                   }
                   className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
                     } text-base leading-4 text-black`}
@@ -451,7 +600,7 @@ function EditProfilePage() {
                               {data?.name_ru}
                             </span>
                             <span
-                              className={`${activeIndex == data?.id
+                              className={`${Number(activeIndex) === Number(data?.id)
                                 ? "rotate-[0deg]"
                                 : "rotate-[180deg]"
                                 } `}
@@ -462,7 +611,7 @@ function EditProfilePage() {
 
                           <div
                             className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id
+                             ${Number(activeIndex) === Number(data?.id)
                                 ? "openAccardion"
                                 : "CloseAccardion"
                               } `}
@@ -483,7 +632,7 @@ function EditProfilePage() {
                                       name="type_work"
                                       value={item?.region_id}
                                       checked={
-                                        state?.sellerSubRegionId == item?.id
+                                        Number(state?.sellerSubRegionId) === Number(item?.id)
                                       }
                                       className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                       onChange={(e) => {
@@ -491,6 +640,7 @@ function EditProfilePage() {
                                           ...state,
                                           sellerRegionId: e.target.value,
                                           sellerSubRegionId: item?.id,
+                                          sellerUpdateInput: true
                                         });
                                       }}
                                       required
@@ -540,23 +690,24 @@ function EditProfilePage() {
                     {!state?.sellerRegionId &&
                       !state?.sellerSubRegionId &&
                       "Выберите регион"}
-
-                    {dressInfo?.regionList?.regions
-                      ?.filter((e) => e.id == state?.sellerRegionId)
-                      .map((item) => {
-                        return (
-                          <span className="flex items-center text-[#000] text-[14px] sm:text-base">
-                            {item?.name_ru},
-                            {item?.sub_regions
-                              ?.filter((i) => i.id == state?.sellerSubRegionId)
-                              .map((item) => {
-                                return (
-                                  <span className="ml-1">{item?.name_ru}</span>
-                                );
-                              })}
-                          </span>
-                        );
-                      })}
+                    {state?.sellerRegionId &&
+                      state?.sellerSubRegionId &&
+                      <div className="flex items-center">
+                        {dressInfo?.regionList?.regions
+                          ?.filter((e) => Number(e.id) === Number(state?.sellerRegionId))
+                          .map((item) => {
+                            return (
+                              <div className="flex items-center text-[#000] text-[14px] sm:text-base">
+                                {item?.name_ru},
+                                {item?.sub_regions?.map((data) => {
+                                  return (
+                                    <span className="ml-1">{Number(data?.id) == Number(state?.sellerSubRegionId) && data?.name_ru}</span>
+                                  );
+                                })}
+                              </div>
+                            );
+                          })}
+                      </div>}
                   </span>
                   <span className=" iconArrow ">
 
@@ -582,7 +733,7 @@ function EditProfilePage() {
                 name="credit-card-number"
                 className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
                 onChange={(e) =>
-                  setState({ ...state, sellerCardNumber: e.target.value })
+                  setState({ ...state, sellerCardNumber: e.target.value, sellerUpdateInput: true })
                 }
                 placeholder="0000-0000-0000-0000"
               />
@@ -592,40 +743,42 @@ function EditProfilePage() {
           <div className="w-full ">
             <div className="w-full justify-between flex ">
               <span
-                onClick={() => setState({ ...state, sellerTypeId: 1 })}>
-                <span className={`${state?.sellerTypeId < 3 ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>ФИЗИЧЕСКОЕ ЛИЦО</span>
+                onClick={() => setState({ ...state, sellerTypes: "INDIVIDUAL" })}>
+                <span className={`${state?.sellerTypes === 'INDIVIDUAL' ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>
+                  ФИЗИЧЕСКОЕ ЛИЦО</span>
               </span>
               <span
-                onClick={() => setState({ ...state, sellerTypeId: 3 })}>
-                <span className={`${state?.sellerTypeId >= 3 ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>ЮРИДИЧЕСКОЕ ЛИЦО</span>
+                onClick={() => setState({ ...state, sellerTypes: 'ENTITY' })}>
+                <span className={`${state?.sellerTypes === 'ENTITY' ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>
+                  ЮРИДИЧЕСКОЕ ЛИЦО</span>
               </span>
             </div>
 
-            {state?.sellerTypeId >= 3 ? (
+            {state?.sellerTypes === 'ENTITY' &&
               <div className="w-full flex flex-col h-fit  mt-[6px]">
                 {/* Имя организации */}
                 <div className="w-full h-fit  ">
-                  {/* <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-                    Имя организации{" "}
-                  </div> */}
-                  <div className=" w-full flex items-center border border-searchBgColor rounded-lg">
+
+                  <div className={` w-full flex items-center  rounded-lg ${state?.isCheckInput && !state?.companyName ? "border border-[#FFB8B8] " : "border border-searchBgColor"}`}>
                     <input
                       className="outline-none px-[16px] rounded-lg w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
                       type="text"
                       name="companyName"
                       placeholder="Имя организации"
+                      value={state?.companyName}
+                      onChange={(e) => setState({ ...state, companyName: e?.target?.value, sellerUpdateInput: true })}
                       required
                     />
                   </div>
                 </div>
-              </div>
-            ) : (
+              </div>}
+            {state?.sellerTypes === 'INDIVIDUAL' &&
               <div className="w-full flex items-center ">
                 <Select
                   className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
                   placeholder="Тип предприятия"
                   optionFilterProp="children"
-                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
+                  onChange={(e) => setState({ ...state, sellerTypeId: e, sellerUpdateInput: true })}
                   value={dressInfo?.typeList?.individual?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
                   size="large"
                   options={dressInfo?.typeList?.individual?.map((item) => {
@@ -636,19 +789,18 @@ function EditProfilePage() {
                   })}
                 />
               </div>
-            )}
+            }
           </div>
-
-          <div className={`${state?.sellerTypeId >= 3 ? "flex" : "hidden"}  w-full h-fit flex flex-col items-center justify-start `}>
+          <div className={`${state?.sellerTypes === 'ENTITY' ? "flex" : "hidden"}  w-full h-fit flex flex-col items-center justify-start `}>
             <div className="w-full justify-start  flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
               Тип предприятия
             </div>
             <Select
-              className="SelectAntdStyle h-[42px] mt-[6px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+              className={`SelectAntdStyle  ${state?.isCheckInput && !state?.sellerTypeId ? "border border-[#FFB8B8] " : ""} h-[42px] mt-[6px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer`}
               placeholder="Тип предприятия"
               style={{ height: 42 }}
               optionFilterProp="children"
-              onChange={(e) => setState({ ...state, sellerTypeId: e })}
+              onChange={(e) => { setState({ ...state, sellerTypeId: e, sellerUpdateInput: true }) }}
               value={dressInfo?.typeList?.company?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
               size="large"
               options={dressInfo?.typeList?.company?.map((item) => {
@@ -660,32 +812,21 @@ function EditProfilePage() {
             />
           </div>
 
-          {/* // ) : (
-          //   <div className="w-full h-fit ">
-          //     <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-          //       Тип
-          //     </div>
-          //     <div className="w-full flex items-center mt-[6px] ">
-          //       <Select */}
-          {/* //         className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
-                //         placeholder="Тип предприятия"
-                //         optionFilterProp="children"
-                //         onChange={(e) => setState({ ...state, sellerTypeId: e })}
-                //         value={dressInfo?.typeList?.individual?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
-                //         size="large"
-                //         options={dressInfo?.typeList?.individual?.map((item) => {
-                //           return {
-                //             value: item?.id,
-                //             label: item?.name_ru,
-                //           };
-                //         })}
-                //       />
-                //     </div>
-                //   </div>
-                // )} */}
-
           {/* EditPassword */}
-          <div className="w-full  flex items-center xs:justify-start justify-end xs:mt-5 ">
+          <div className="w-full  flex items-center justify-between  xs:mt-5 ">
+            {state?.sellerUpdateEmail ?
+              <button
+                type="button"
+                onClick={() => UpdateEmailSeller()}
+                className={" text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"}>
+                Обновить почту
+              </button>
+              :
+              <span
+                className={" text-[#b5b5b5] flex items-center text-base not-italic font-AeonikProRegular "}>
+                Обновить почту
+              </span>
+            }
             <button
               onClick={() => setOpenEditModal(true)}
               className={
@@ -699,14 +840,41 @@ function EditProfilePage() {
 
         {/* Button */}
         <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
-          <button className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor">
-            <span className="text-center text-base text-white not-italic font-AeonikProMedium">
-              Сохранить данные
-            </span>
-            <span>
-              <CircleNextIcon />
-            </span>
-          </button>
+          {state?.sellerUpdateInput ?
+            state?.sendingLoader ?
+              <button
+                type="button"
+                onClick={() => UpdateSeller()}
+                className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor">
+                <ClipLoader
+                  className="h-full py-[2px]"
+                  color={"#fff"}
+                  size={40}
+                  loading={true}
+                />
+              </button> :
+              <button
+                type="button"
+                onClick={() => UpdateSeller()}
+                className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor">
+                <span className="text-center text-base text-white not-italic font-AeonikProMedium">
+                  Сохранить данные
+                </span>
+                <span>
+                  <CircleNextIcon />
+                </span>
+              </button>
+            :
+            <button
+              type="button"
+              className="w-full  h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center opacity-30 bg-weatherWinterColor">
+              <span className="text-center text-base text-white not-italic font-AeonikProMedium">
+                Сохранить данные
+              </span>
+              <span>
+                <CircleNextIcon />
+              </span>
+            </button>}
         </div>
       </div>
     </div >
