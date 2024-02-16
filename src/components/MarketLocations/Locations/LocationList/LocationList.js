@@ -275,7 +275,7 @@ function LocationList() {
                         </li>
                         <li className="w-[200px] h-[100px] flex items-center justify-center mr-[60px] rounded-lg overflow-hidden border">
                           <img
-                            className="w-[100%] h-[100%] object-contain rounded-lg"
+                            className="w-[100%] h-[100%] object-cover rounded-lg"
                             src={value?.url_image_path_one}
                             alt=""
                           />
