@@ -285,13 +285,13 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                 <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
                   <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
                   <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
-                  <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
-                  <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
-                  <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
-                  <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
-                  <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
-                  <th className="w-[10%] h-full flex items-center justify-center"></th>
+                  <th className="w-[15%] h-full flex items-center ">Наименование товара</th>
+                  <th className="w-[15%] h-full flex items-center ">Артикул</th>
+                  <th className="w-[8%] h-full flex items-center ">Тип</th>
+                  <th className="w-[8%] h-full flex items-center ">Дата</th>
+                  <th className="w-[10%] h-full flex items-center ">Статус</th>
+                  <th className="w-[10%] h-full flex items-center ">Цена товара</th>
+                  <th className="w-[10%] h-full flex items-center "></th>
                   <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
                 </tr>
               </div>
@@ -317,55 +317,58 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                 return (
                   <List.Item
                     key={index}
-                    className="w-full "
+                    className="w-full  mt-6"
                   >
                     <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
                       <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                         <div className="flex flex-col w-full">
-                          <div className="w-full flex h-[120px]  items-center">
+                          <div className="w-full flex h-[100px]  items-center">
                             <Checkbox value={itemValue?.id} checked={checked} />
                             <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                              <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
-                              <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
+                              <td className="w-[5%]  h-full  flex items-center justify-center" >{index + 1}</td>
+                              <td className="w-[14%]  h-full bg-white flex items-center justify-center  rounded-[12px]">
+                                <span className="w-[100px] h-[140px] border border-borderColor rounded-lg overflow-hidden">
+                                  <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"}
+                                    className=" w-full h-full object-cover" />
+                                </span>
                               </td>
-                              <td className="w-[15%] h-full  flex items-center  justify-center">
-                                <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
+                              <td className="w-[15%] h-full flex items-center ">
+                                <p className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
                                   {itemValue?.name_ru || "namrRu"}
                                 </p>
                               </td>
-                              <td className="w-[15%] h-full  flex items-center justify-center ">
+                              <td className="w-[15%] h-full flex items-center ">
                                 {itemValue?.sku || "sku"}
                               </td>
                               {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                 return (
                                   <td
                                     key={index}
-                                    className="w-[8%] h-full  flex items-center justify-center ">
+                                    className="w-[8%] h-full flex items-center ">
                                     {valueType?.name_ru || "type_id"}
                                   </td>
                                 )
                               })}
-                              <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
+                              <td className="w-[8%] h-full flex items-center ">{itemValue?.created_at || "created_at"}</td>
 
                               {itemValue?.status === "approved" &&
                                 <td
-                                  className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                                  {itemValue?.status || "status"}
+                                  className="w-[10%] h-fit  flex items-center  ">
+                                  <span className="w-[100px]  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
                                 </td>}
                               {itemValue?.status === "declined" && <td
                                 onClick={() => onHandleStatus(itemValue?.id)}
-                                className="w-[10%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                                {itemValue?.status || "status"}
+                                className="w-[10%] h-fit cursor-pointer flex items-center  ">
+                                <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
                               </td>}
-                              {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full ">
-                                {itemValue?.status || "status"}
+                              {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center  ">
+                                <span className="w-[100px]  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
                               </td>}
                               {itemValue?.status === "updated" &&
-                                <td className="w-[10%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                  {itemValue?.status || "status"}
+                                <td className="w-[10%] h-fit flex items-center">
+                                  <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
                                 </td>}
-                              <td className="w-[10%] h-full  flex items-center justify-center ">
+                              <td className="w-[10%] h-full   flex items-center ">
                                 {itemValue?.cost?.discount_price > 999 ?
                                   Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
                                   itemValue?.cost?.discount_price
@@ -376,17 +379,17 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                 }
                                 <span className="ml-[6px] text-[14px]">Сум</span>
                               </td>
-                              <td className="w-[10%] h-full  flex items-center justify-center ">
+                              <td className="w-[10%] h-full  flex items-center ">
 
                                 <button
                                   onClick={() => goProductDetailEdit(itemValue?.id, data?.id)}
-                                  className="text-[18px] text-weatherWinterColor w-full text-center"
+                                  className="text-[18px]  text-weatherWinterColor w-full text-center"
                                 >
                                   Подробнее
                                 </button>
                               </td>
 
-                              <td className="w-[9%] h-full  flex items-center justify-center ">
+                              <td className="w-[9%] h-full  flex items-center  justify-center">
                                 <button type="button"
                                   onClick={() => {
                                     setDeleteModal(true)

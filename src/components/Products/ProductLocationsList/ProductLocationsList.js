@@ -957,7 +957,7 @@ export default function ProductLocationsList() {
                                     {item?.name}
                                   </div>
                                   <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                    <section className="hidden md:flex items-center justify-between">
+                                    <section className="hidden md:flex items-center justify-between mt-2">
                                       <div className="w-fit flex items-center">
                                         <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                           {
@@ -989,7 +989,7 @@ export default function ProductLocationsList() {
                                                 </div>
                                               )
                                             })}
-                                            ({resData?.address})
+                                            <span className="flex items-center ml-1">({resData?.address})</span>
                                             {resData?.products?.length > 1 &&
                                               <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
                                                 ({resData?.products?.length})
@@ -1033,198 +1033,201 @@ export default function ProductLocationsList() {
                                       </div>}
 
                                     {resData?.products?.length > 0 ?
-                                      resData?.products?.filter(e =>
-                                        e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
-                                      )?.map((itemValue, index) => {
-                                        return (
-                                          <div key={index} className="w-full " >
-                                            <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
-                                              <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-                                                <div className="flex flex-col w-full">
-                                                  <table className="w-full flex h-[120px]  items-center">
-                                                    <tbody className="w-full h-full flex items-center">
-                                                      <tr>
-                                                        <td onClick={() => checkListItem(itemValue?.id, resData?.id, resData?.shop_id,)}>
-                                                          {
-                                                            checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
-                                                              <button
-                                                                className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor bg-fullBlue  justify-center">
-                                                                <FiCheck color={'#ffffff'} />
-                                                              </button>
-                                                              :
-                                                              <button
-                                                                className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor   justify-center">
-                                                              </button>
-                                                          }
-                                                        </td>
-                                                      </tr>
-                                                      <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                                        <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
-                                                        <td className="w-[14%] h-full  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                                          <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
-                                                        </td>
-                                                        <td className="w-[15%] h-full  flex items-center  justify-center">
-                                                          <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
-                                                            {itemValue?.name_ru || "namrRu"}
-                                                          </p>
-                                                        </td>
-                                                        <td className="w-[15%] h-full  flex items-center justify-center ">
-                                                          {itemValue?.sku || "sku"}
-                                                        </td>
-                                                        {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
-                                                          return (
-                                                            <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
-                                                              {valueType?.name_ru || "type_id"}
-                                                            </td>
-                                                          )
-                                                        })}
-                                                        <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
+                                      <div className="flex flex-col gap-y-11 mt-5">
+                                        {resData?.products?.filter(e =>
+                                          e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                                        )?.map((itemValue, index) => {
+                                          return (
+                                            <div key={index} className="w-full " >
+                                              <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
+                                                <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                                                  <div className="flex flex-col w-full">
+                                                    <table className="w-full flex h-[100px]  items-center">
+                                                      <tbody className="w-full h-full flex items-center">
+                                                        <tr>
+                                                          <td onClick={() => checkListItem(itemValue?.id, resData?.id, resData?.shop_id,)}>
+                                                            {
+                                                              checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
+                                                                <button
+                                                                  className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor bg-fullBlue  justify-center">
+                                                                  <FiCheck color={'#ffffff'} />
+                                                                </button>
+                                                                :
+                                                                <button
+                                                                  className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor   justify-center">
+                                                                </button>
+                                                            }
+                                                          </td>
+                                                        </tr>
+                                                        <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
+                                                          <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
+                                                          <td className="w-[14%] h-full flex items-center justify-center">
+                                                            <span className="w-[100px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                                            </span>
+                                                          </td>
+                                                          <td className="w-[15%] h-full  flex items-center  justify-center">
+                                                            <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
+                                                              {itemValue?.name_ru || "namrRu"}
+                                                            </p>
+                                                          </td>
+                                                          <td className="w-[15%] h-full  flex items-center justify-center ">
+                                                            {itemValue?.sku || "sku"}
+                                                          </td>
+                                                          {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                            return (
+                                                              <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
+                                                                {valueType?.name_ru || "type_id"}
+                                                              </td>
+                                                            )
+                                                          })}
+                                                          <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                                                        {itemValue?.status === "approved" &&
-                                                          <td
-                                                            className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                          {itemValue?.status === "approved" &&
+                                                            <td
+                                                              className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                              {itemValue?.status || "status"}
+                                                            </td>}
+                                                          {itemValue?.status === "declined" &&
+                                                            <td
+                                                              onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+
+                                                              className="w-[7%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                                              {itemValue?.status || "status"}
+                                                            </td>}
+                                                          {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                                             {itemValue?.status || "status"}
                                                           </td>}
-                                                        {itemValue?.status === "declined" &&
-                                                          <td
-                                                            onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
-
-                                                            className="w-[7%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                                          {itemValue?.status === "updated" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                             {itemValue?.status || "status"}
                                                           </td>}
-                                                        {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                          {itemValue?.status || "status"}
-                                                        </td>}
-                                                        {itemValue?.status === "updated" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                          {itemValue?.status || "status"}
-                                                        </td>}
-                                                        <td className="w-[10%] h-full  flex items-center justify-center ">
-                                                          {itemValue?.cost?.discount_price > 999 ?
-                                                            Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
-                                                            itemValue?.cost?.discount_price
-                                                              ||
-                                                              itemValue?.cost?.price > 999 ?
-                                                              Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
-                                                              : itemValue?.cost?.price
-                                                          }
-                                                          <span className="ml-[6px] text-[14px]">Сум</span>
-                                                        </td>
-                                                        <td className="w-[10%] h-full  flex items-center justify-center ">
-
-                                                          <button
-                                                            onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
-                                                            className="text-[18px] text-weatherWinterColor w-full text-center"
-                                                          >
-                                                            Подробнее
-                                                          </button>
-                                                        </td>
-                                                        <td className="w-[9%] h-full  flex items-center justify-center ">
-                                                          <button
-                                                            onClick={() => {
-                                                              addByLocation(itemValue?.id, resData?.id, resData?.shop_id)
-
+                                                          <td className="w-[10%] h-full  flex items-center justify-center ">
+                                                            {itemValue?.cost?.discount_price > 999 ?
+                                                              Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
+                                                              itemValue?.cost?.discount_price
+                                                                ||
+                                                                itemValue?.cost?.price > 999 ?
+                                                                Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
+                                                                : itemValue?.cost?.price
                                                             }
-                                                            }
-                                                            type="button" className="w-full flex justify-center cursor-auto">
-                                                            <span
-                                                              onClick={() => setOpenStoreList(true)}
-                                                              className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                                            <span className="ml-[6px] text-[14px]">Сум</span>
+                                                          </td>
+                                                          <td className="w-[10%] h-full  flex items-center justify-center ">
+
+                                                            <button
+                                                              onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
+                                                              className="text-[18px] text-weatherWinterColor w-full text-center"
                                                             >
-                                                              <AddLocationIcon width={30} />
-                                                            </span>
-                                                          </button>
-                                                        </td>
-                                                        <td className="w-[9%] h-full  flex items-center justify-center ">
-                                                          <button type="button"
-                                                            onClick={() => {
-                                                              setDeleteModal(true)
-                                                              setDeleteId(itemValue?.id)
-                                                              setGetIdShopLocation(resData?.id)
-                                                            }}
-                                                            className="w-fit flex justify-center cursor-auto">
-                                                            <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
-                                                              <DeleteIcon width={30} />
-                                                            </span>
-                                                          </button>
-                                                        </td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                                  {/* For Mobile Device */}
-                                                  <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
-                                                    <div className="mb-2">
-                                                      <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
-                                                        <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                                        <span className="text-checkboxBorder">{index + 1}</span>
-                                                        <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                                      </div>
-                                                    </div>
+                                                              Подробнее
+                                                            </button>
+                                                          </td>
+                                                          <td className="w-[9%] h-full  flex items-center justify-center ">
+                                                            <button
+                                                              onClick={() => {
+                                                                addByLocation(itemValue?.id, resData?.id, resData?.shop_id)
 
-                                                    <div className="mb-3 h-[148px]">
-                                                      <figure className="w-full h-full rounded-lg overflow-hidden">
-                                                        {/* <img className="w-[100%] h-[100%]" src={itemValue?.photos[0]?.url_photo} alt="" /> */}
-                                                      </figure>
-                                                    </div>
-
-                                                    <div className="mb-6">
-                                                      <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                        <div className="w-[40%] flex items-center">Имя товара</div>
-                                                        <div className="w-[30%] flex items-center">Статус</div>
-                                                        <div className="w-[30%] flex items-center">Цена товара</div>
-                                                      </div>
-
-                                                      <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                        <div className="w-[40%]"> {itemValue?.name_product}</div>
-                                                        <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{itemValue?.status}</div>
-                                                        <div className="w-[30%]"> {itemValue?.money} сум </div>
-                                                      </div>
-                                                    </div>
-
-                                                    <div className="flex items-center justify-between">
-                                                      <button
-                                                        onClick={() => goMapWear(itemValue?.city)}
-                                                        className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                                      >
-                                                        Добавить в локацию
-                                                      </button>
-                                                      <button
-                                                        onClick={() => goMapCity(itemValue?.city)}
-                                                        className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                                      >
-                                                        Подробнее
-                                                      </button>
-                                                    </div>
-
-                                                    <div className="w-full flex items-center justify-between mt-[18px]">
-                                                      <div
-
-                                                        className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${itemValue?.isCheck
-                                                          ? "bg-[#007DCA] border-[#007DCA]"
-                                                          : "bg-white border-checkboxBorder"
-                                                          } flex items-center justify-center rounded mr-[8px]`}
-                                                      >
-                                                        <div
-                                                          className={`${itemValue?.isCheck ? "flex items-center justify-center" : "hidden"
-                                                            }`}
-                                                        >
-                                                          {/* <CheckIcons /> */}
+                                                              }
+                                                              }
+                                                              type="button" className="w-full flex justify-center cursor-auto">
+                                                              <span
+                                                                onClick={() => setOpenStoreList(true)}
+                                                                className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                                              >
+                                                                <AddLocationIcon width={30} />
+                                                              </span>
+                                                            </button>
+                                                          </td>
+                                                          <td className="w-[9%] h-full  flex items-center justify-center ">
+                                                            <button type="button"
+                                                              onClick={() => {
+                                                                setDeleteModal(true)
+                                                                setDeleteId(itemValue?.id)
+                                                                setGetIdShopLocation(resData?.id)
+                                                              }}
+                                                              className="w-fit flex justify-center cursor-auto">
+                                                              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+                                                                <DeleteIcon width={30} />
+                                                              </span>
+                                                            </button>
+                                                          </td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                    {/* For Mobile Device */}
+                                                    <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+                                                      <div className="mb-2">
+                                                        <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
+                                                          <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
+                                                          <span className="text-checkboxBorder">{index + 1}</span>
+                                                          <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                                                         </div>
                                                       </div>
-                                                      <button to="#" className="text-textBlueColor text-[13px] font-AeonikProMedium">
-                                                        Больше...
-                                                      </button>
-                                                      <button className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
+
+                                                      <div className="mb-3 h-[148px]">
+                                                        <figure className="w-full h-full rounded-lg overflow-hidden">
+                                                          {/* <img className="w-[100%] h-[100%]" src={itemValue?.photos[0]?.url_photo} alt="" /> */}
+                                                        </figure>
+                                                      </div>
+
+                                                      <div className="mb-6">
+                                                        <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                          <div className="w-[40%] flex items-center">Имя товара</div>
+                                                          <div className="w-[30%] flex items-center">Статус</div>
+                                                          <div className="w-[30%] flex items-center">Цена товара</div>
+                                                        </div>
+
+                                                        <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                                          <div className="w-[40%]"> {itemValue?.name_product}</div>
+                                                          <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{itemValue?.status}</div>
+                                                          <div className="w-[30%]"> {itemValue?.money} сум </div>
+                                                        </div>
+                                                      </div>
+
+                                                      <div className="flex items-center justify-between">
+                                                        <button
+                                                          onClick={() => goMapWear(itemValue?.city)}
+                                                          className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                                        >
+                                                          Добавить в локацию
+                                                        </button>
+                                                        <button
+                                                          onClick={() => goMapCity(itemValue?.city)}
+                                                          className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                                        >
+                                                          Подробнее
+                                                        </button>
+                                                      </div>
+
+                                                      <div className="w-full flex items-center justify-between mt-[18px]">
+                                                        <div
+
+                                                          className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${itemValue?.isCheck
+                                                            ? "bg-[#007DCA] border-[#007DCA]"
+                                                            : "bg-white border-checkboxBorder"
+                                                            } flex items-center justify-center rounded mr-[8px]`}
+                                                        >
+                                                          <div
+                                                            className={`${itemValue?.isCheck ? "flex items-center justify-center" : "hidden"
+                                                              }`}
+                                                          >
+                                                            {/* <CheckIcons /> */}
+                                                          </div>
+                                                        </div>
+                                                        <button to="#" className="text-textBlueColor text-[13px] font-AeonikProMedium">
+                                                          Больше...
+                                                        </button>
+                                                        <button className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
+                                                      </div>
                                                     </div>
                                                   </div>
+
                                                 </div>
-
                                               </div>
+
                                             </div>
-
-                                          </div>
-                                        )
-                                      })
-
+                                          )
+                                        })}
+                                      </div>
                                       :
                                       <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
                                         <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
@@ -1268,7 +1271,7 @@ export default function ProductLocationsList() {
                                   {item?.name}
                                 </div>
                                 <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                  <section className="hidden md:flex items-center justify-between">
+                                  <section className="hidden md:flex items-center justify-between  mt-2">
                                     <div className="w-fit flex items-center">
                                       <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                         {
@@ -1341,7 +1344,7 @@ export default function ProductLocationsList() {
                                       </div>
                                     </div>}
                                   {resData?.products?.length > 0 ?
-                                    <div className="flex flex-col gap-y-4 ">
+                                    <div className="flex flex-col gap-y-11 mt-5">
                                       {resData?.products?.filter(e =>
                                         e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                                       )?.map((itemValue, index) => {
@@ -1352,7 +1355,7 @@ export default function ProductLocationsList() {
                                             <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
                                               <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                                                 <div className="flex flex-col w-full ">
-                                                  <table className="w-full flex h-[120px]  items-center">
+                                                  <table className="w-full flex h-[100px]  items-center ">
                                                     <tbody className="w-full h-full flex items-center">
                                                       <tr>
                                                         <td onClick={() => checkListItem(itemValue?.id, resData?.id, resData?.shop_id)}>
@@ -1371,8 +1374,10 @@ export default function ProductLocationsList() {
                                                       </tr>
                                                       <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                                                         <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
-                                                        <td className="w-[14%] h-[130px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                                          <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-contain" />
+                                                        <td className="w-[14%] h-full flex items-center justify-center">
+                                                          <span className="w-[100px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                            <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                                          </span>
                                                         </td>
                                                         <td className="w-[15%] h-full  flex items-center  justify-center">
                                                           <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
