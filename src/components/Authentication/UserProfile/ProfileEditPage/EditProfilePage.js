@@ -7,6 +7,7 @@ import {
   DeleteIcon,
   DownArrowAntd,
   MenuCloseIcons,
+  SuccessIconsForMail,
   UserMailIcon,
 } from "../../../../assets/icons";
 import '../../SellerAuthentication/SignUp/style.css'
@@ -60,6 +61,8 @@ function EditProfilePage() {
     sellerTypes: null,
     sellerUpdateInput: false,
     sellerUpdateEmail: false,
+    sellerEmailModal: false,
+    sellerEmailConfirm: false,
 
     sendingLoader: false,
     isCheckInput: false,
@@ -83,6 +86,7 @@ function EditProfilePage() {
       sellerSubRegionId: sellerInformation?.sellerUserData?.sub_region_id,
       sellerTypeId: sellerInformation?.sellerUserData?.seller_type_id,
       sellerTypes: sellerInformation?.sellerUserData?.seller_type_id >= 3 ? 'ENTITY' : 'INDIVIDUAL',
+      companyName: sellerInformation?.sellerUserData?.company,
       sellerStatus: sellerInformation?.sellerUserData?.status,
       sellerPhoneCode:
         sellerInformation?.sellerUserData?.phone && sellerInformation?.sellerUserData?.phone.slice(0, 3),
@@ -217,7 +221,7 @@ function EditProfilePage() {
   const BankCard = card1?.join("")
   const UpdateSeller = () => {
     setState({ ...state, isCheckInput: true })
-    if (state?.sellerTypeId >= 3 && state?.companyName || state?.sellerTypeId < 3) {
+    if (state?.sellerTypes === 'ENTITY' && state?.companyName && state?.sellerTypeId >= 3) {
       setState({ ...state, sendingLoader: true })
       let form = new FormData();
       form.append("name", state?.sellerFname);
@@ -225,7 +229,7 @@ function EditProfilePage() {
       form.append("phone", state?.sellerPhoneCode + state?.sellerPhoneNum);
       form.append("card_number", BankCard);
       form.append("seller_type_id", state?.sellerTypeId);
-      state?.sellerTypeId >= 3 && state?.companyName && form.append("company_name", state?.companyName);
+      state?.companyName && form.append("company_name", state?.companyName);
       form.append("region_id", state?.sellerRegionId);
       form.append("sub_region_id", state?.sellerSubRegionId);
 
@@ -280,10 +284,71 @@ function EditProfilePage() {
           });
         });
     }
+    if (state?.sellerTypes === 'INDIVIDUAL' && state?.sellerTypeId < 3) {
+      setState({ ...state, sendingLoader: true })
+      let form = new FormData();
+      form.append("name", state?.sellerFname);
+      form.append("surname", state?.sellerLname);
+      form.append("phone", state?.sellerPhoneCode + state?.sellerPhoneNum);
+      form.append("card_number", BankCard);
+      form.append("seller_type_id", state?.sellerTypeId);
+      form.append("region_id", state?.sellerRegionId);
+      form.append("sub_region_id", state?.sellerSubRegionId);
+      return fetch(`${url}/update-seller-info`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        },
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.errors && res?.message) {
+            setState({ ...state, sendingLoader: false, isCheckInput: false, sellerUpdateInput: false })
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else if (res?.message) {
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            refetch()
+            setState({ ...state, sendingLoader: false, isCheckInput: false, sellerUpdateInput: false })
+          }
+        })
+        .catch((err) => {
+          setState({ ...state, sendingLoader: false, isCheckInput: false, sellerUpdateInput: false })
+          toast.error(`${err}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        });
+    }
   };
 
   const dataMutateEmail = useMutation(() => {
-    return fetch(`${url}/update-seller-info`, {
+    return fetch(`${url}/update-seller-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -314,7 +379,7 @@ function EditProfilePage() {
           } else if (res?.message) {
             toast.success(`${res?.message}`, {
               position: "top-right",
-              autoClose: 3000,
+              autoClose: 5000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -322,8 +387,8 @@ function EditProfilePage() {
               progress: undefined,
               theme: "light",
             });
-            refetch()
-            setState({ ...state, sendingLoader: false, sellerUpdateEmail: false })
+            // refetch()
+            setState({ ...state, sendingLoader: false, sellerUpdateEmail: false, sellerEmailModal: false, sellerEmailConfirm: true })
           }
         },
         onError: (err) => {
@@ -389,16 +454,95 @@ function EditProfilePage() {
             ...state,
             popConfirmDelete: false,
             openModalRegions: false,
+            sellerEmailConfirm: false,
+            sellerEmailModal: false,
           });
           setDressInfo({ ...dressInfo, logOutSeller: false });
           // setState({...state, openModalRegions: false })
         }}
         className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions
+         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions || state?.sellerEmailModal || state?.sellerEmailConfirm
             ? ""
             : "hidden"
           }`}
       ></div>
+      {/* Confirm Email Confirm Modal */}
+      <section
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sellerEmailConfirm
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+
+        <div className="flex items-center w-full justify-end"><button
+          type="button"
+          className="select-none  cursor-pointer"
+          onClick={() => setState({ ...state, sellerEmailConfirm: false })}
+        >
+          <MenuCloseIcons colors="#000" />
+        </button></div>
+        <div className="w-full flex items-center justify-center flex-col">
+          <button className="flex p-4 items-center justify-center rounded-full mt-4 bg-[#D8EDFF]">
+            <SuccessIconsForMail />
+          </button>
+          <p className="text-[#1F1F1F] text-3xl not-italic font-AeonikProMedium mt-5">Мы отправили вам ссылку</p>
+          <p className="text-[#8B8B8B] text-xl not-italic font-AeonikProRegular mt-[30px]">Проверьте свой E-mail</p>
+        </div>
+
+      </section>
+      {/* Confirm Email Update */}
+      <section
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sellerEmailModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+
+        <div className="flex items-center w-full justify-end"><button
+          type="button"
+          className="select-none  cursor-pointer"
+          onClick={() => setState({ ...state, sellerEmailModal: false })}
+        >
+          <MenuCloseIcons colors="#000" />
+        </button></div>
+        <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+          <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+            Вы уверены?
+          </span>
+          <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
+            Если вы обновите почту, то ваш аккаунт станет недоступным, пока вы не проверите новую почту
+          </span>
+        </div>
+        <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
+          <button
+            onClick={() => setState({ ...state, sellerEmailModal: false })}
+            type="button"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+          >
+            Oтмена
+          </button>
+          {state?.sendingLoader ?
+            <button
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            >
+              <ClipLoader
+                className="h-full py-[2px]"
+                color={"#fff"}
+                size={40}
+                loading={true}
+              />
+            </button>
+            :
+            <button
+              onClick={() => UpdateEmailSeller()}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            >
+              Обновить
+            </button>}
+        </div>
+      </section>
       {/* Delete Account Of Pop Confirm */}
       <section
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete
@@ -795,21 +939,23 @@ function EditProfilePage() {
             <div className="w-full justify-start  flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
               Тип предприятия
             </div>
-            <Select
-              className={`SelectAntdStyle  ${state?.isCheckInput && !state?.sellerTypeId ? "border border-[#FFB8B8] " : ""} h-[42px] mt-[6px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer`}
-              placeholder="Тип предприятия"
-              style={{ height: 42 }}
-              optionFilterProp="children"
-              onChange={(e) => { setState({ ...state, sellerTypeId: e, sellerUpdateInput: true }) }}
-              value={dressInfo?.typeList?.company?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
-              size="large"
-              options={dressInfo?.typeList?.company?.map((item) => {
-                return {
-                  value: item?.id,
-                  label: item?.name_ru,
-                };
-              })}
-            />
+            <div className={`h-[44px] w-full mt-[6px] overflow-hidden rounded-lg  ${state?.isCheckInput && state?.sellerTypes === 'ENTITY' ? "border border-[#FFB8B8] bg-[#FFF6F6] " : "focus:border border-searchBgColor"}`}>
+              <Select
+                className={`SelectAntdStyle   h-[42px]  z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
+                placeholder="Тип предприятия"
+                style={{ height: 42 }}
+                optionFilterProp="children"
+                onChange={(e) => { setState({ ...state, sellerTypeId: e, sellerUpdateInput: true }) }}
+                value={dressInfo?.typeList?.company?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
+                size="large"
+                options={dressInfo?.typeList?.company?.map((item) => {
+                  return {
+                    value: item?.id,
+                    label: item?.name_ru,
+                  };
+                })}
+              />
+            </div>
           </div>
 
           {/* EditPassword */}
@@ -817,7 +963,7 @@ function EditProfilePage() {
             {state?.sellerUpdateEmail ?
               <button
                 type="button"
-                onClick={() => UpdateEmailSeller()}
+                onClick={() => setState({ ...state, sellerEmailModal: true })}
                 className={" text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"}>
                 Обновить почту
               </button>

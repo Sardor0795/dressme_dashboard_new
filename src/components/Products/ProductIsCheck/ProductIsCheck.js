@@ -59,32 +59,29 @@ export default function ProductIsCheck() {
         <div>
             {
 
-                loading ?
-                    <LoadingForSeller />
-                    :
-                    helperDatainform?.shopsList?.shops?.length > 0
+                helperDatainform?.shopsList?.shops?.length > 0
+                    ?
+                    dressInfo?.locationList?.length > 0
                         ?
-                        dressInfo?.locationList?.length > 0
-                            ?
-                            <ProductsPageOne />
-                            :
-                            <div className="flex items-center h-[100vh] justify-center">
-                                <Link
-                                    to="/locations-store"
-                                    className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                                >
-                                    У вас пока нет локации !
-                                </Link>
-                            </div >
+                        <ProductsPageOne />
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link
-                                to="/store"
+                                to="/locations-store"
                                 className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                             >
-                                Сначала создайте магазин!
+                                У вас пока нет локации !
                             </Link>
                         </div >
+                    :
+                    <div className="flex items-center h-[100vh] justify-center">
+                        <Link
+                            to="/store"
+                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                        >
+                            Сначала создайте магазин!
+                        </Link>
+                    </div >
             }
         </div >
     )
