@@ -9,6 +9,7 @@ import {
   MenuCloseIcons,
   UserMailIcon,
 } from "../../../../assets/icons";
+import '../../SellerAuthentication/SignUp/style.css'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
@@ -54,6 +55,7 @@ function EditProfilePage() {
     openModalRegions: false,
     // ----popConfirmDelete
     popConfirmDelete: false,
+    sellerTypes: null,
   });
   const [openEditModal, setOpenEditModal] = useState(false);
 
@@ -212,7 +214,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
-
+  console.log(state?.sellerTypeId, "state?.sellerTypeId");
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -303,7 +305,7 @@ function EditProfilePage() {
       >
         <EditPassword onClick={togglePassword} />
       </section>
-      {state?.sellerStatus == "pending" && (
+      {state?.sellerStatus === "pending" && (
         <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
           <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
             Скоро с вами свяжутся, ожидайте одобрения от администраторов{" "}
@@ -365,23 +367,6 @@ function EditProfilePage() {
               />
             </div>
           </div>
-          {/* Имя организации */}
-          {state?.sellerTypeId >= 3 && (
-            <div className="w-full h-fit  ">
-              <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-                Имя организации{" "}
-              </div>
-              <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-                <input
-                  className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                  type="text"
-                  name="companyName"
-                  placeholder="Имя организации"
-                  required
-                />
-              </div>
-            </div>
-          )}
           {/* Mail */}
           <div className="w-full h-fit  ">
             <div className=" flex items-center justify-between w-full">
@@ -584,59 +569,6 @@ function EditProfilePage() {
               </label>
             </div>
           </div>
-          {/* Type */}
-          {/* <div className="w-full h-fit  ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-              Тип{" "}
-            </div>
-            <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-              <input
-                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                type="text"
-                placeholder="Тип"
-                required
-              />
-            </div>
-          </div> */}
-          {state?.sellerTypeId >= 3 ? (
-            <div className="  w-full flex items-center ">
-              <Select
-                className=" flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
-                placeholder="Тип предприятия"
-                optionFilterProp="children"
-                onChange={(e) => setState({ ...state, sellerTypeId: e })}
-                size="large"
-                options={dressInfo?.typeList?.company?.map((item) => {
-                  return {
-                    value: item?.id,
-                    label: item?.name_ru,
-                  };
-                })}
-              />
-            </div>
-          ) : (
-            <div className="w-full h-fit ">
-              <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
-                Тип
-              </div>
-              <div className="w-full flex items-center mt-[6px] ">
-                <Select
-                  className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
-                  placeholder="Тип предприятия"
-                  optionFilterProp="children"
-                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
-                  value={dressInfo?.typeList?.individual?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
-                  size="large"
-                  options={dressInfo?.typeList?.individual?.map((item) => {
-                    return {
-                      value: item?.id,
-                      label: item?.name_ru,
-                    };
-                  })}
-                />
-              </div>
-            </div>
-          )}
           {/*  CardNumber */}
           <div className="w-full  h-fit   ">
             <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
@@ -659,6 +591,102 @@ function EditProfilePage() {
               />
             </div>
           </div>
+          {/* Type */}
+          <div className="w-full ">
+            <div className="w-full justify-between flex ">
+              <span
+                onClick={() => setState({ ...state, sellerTypeId: 1 })}>
+                <span className={`${state?.sellerTypeId < 3 ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>ФИЗИЧЕСКОЕ ЛИЦО</span>
+              </span>
+              <span
+                onClick={() => setState({ ...state, sellerTypeId: 3 })}>
+                <span className={`${state?.sellerTypeId >= 3 ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>ЮРИДИЧЕСКОЕ ЛИЦО</span>
+              </span>
+            </div>
+
+            {state?.sellerTypeId >= 3 ? (
+              <div className="w-full flex flex-col h-fit  mt-[6px]">
+                {/* Имя организации */}
+                <div className="w-full h-fit  ">
+                  {/* <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+                    Имя организации{" "}
+                  </div> */}
+                  <div className=" w-full flex items-center border border-searchBgColor rounded-lg">
+                    <input
+                      className="outline-none px-[16px] rounded-lg w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                      type="text"
+                      name="companyName"
+                      placeholder="Имя организации"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="w-full flex items-center ">
+                <Select
+                  className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                  placeholder="Тип предприятия"
+                  optionFilterProp="children"
+                  onChange={(e) => setState({ ...state, sellerTypeId: e })}
+                  value={dressInfo?.typeList?.individual?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
+                  size="large"
+                  options={dressInfo?.typeList?.individual?.map((item) => {
+                    return {
+                      value: item?.id,
+                      label: item?.name_ru,
+                    };
+                  })}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className={`${state?.sellerTypeId >= 3 ? "flex" : "hidden"}  w-full h-fit flex flex-col items-center justify-start `}>
+            <div className="w-full justify-start  flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
+              Тип предприятия
+            </div>
+            <Select
+              className="SelectAntdStyle h-[42px] mt-[6px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+              placeholder="Тип предприятия"
+              style={{ height: 42 }}
+              optionFilterProp="children"
+              onChange={(e) => setState({ ...state, sellerTypeId: e })}
+              value={dressInfo?.typeList?.company?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
+              size="large"
+              options={dressInfo?.typeList?.company?.map((item) => {
+                return {
+                  value: item?.id,
+                  label: item?.name_ru,
+                };
+              })}
+            />
+          </div>
+
+          {/* // ) : (
+          //   <div className="w-full h-fit ">
+          //     <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+          //       Тип
+          //     </div>
+          //     <div className="w-full flex items-center mt-[6px] ">
+          //       <Select */}
+          {/* //         className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                //         placeholder="Тип предприятия"
+                //         optionFilterProp="children"
+                //         onChange={(e) => setState({ ...state, sellerTypeId: e })}
+                //         value={dressInfo?.typeList?.individual?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
+                //         size="large"
+                //         options={dressInfo?.typeList?.individual?.map((item) => {
+                //           return {
+                //             value: item?.id,
+                //             label: item?.name_ru,
+                //           };
+                //         })}
+                //       />
+                //     </div>
+                //   </div>
+                // )} */}
+
           {/* EditPassword */}
           <div className="w-full  flex items-center xs:justify-start justify-end xs:mt-5 ">
             <button
@@ -684,7 +712,7 @@ function EditProfilePage() {
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 export default React.memo(EditProfilePage);
