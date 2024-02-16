@@ -377,17 +377,6 @@ function EditProfilePage() {
               theme: "light",
             });
           } else if (res?.message) {
-            toast.success(`${res?.message}`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-            // refetch()
             setState({ ...state, sendingLoader: false, sellerUpdateEmail: false, sellerEmailModal: false, sellerEmailConfirm: true })
           }
         },
@@ -414,18 +403,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
-  console.log(
-    // state?.sellerFname, '-sellerFname-',
-    // state?.sellerLname, '-sellerLname-',
-    // state?.sellerEmail, '-sellerEmail-',
-    // state?.sellerCardNumber, '-sellerCardNumber-',
-    state?.sellerRegionId, '-sellerRegionId-',
-    state?.sellerSubRegionId, '-sellerSubRegionId-',
-    // state?.sellerTypeId, '-sellerTypeId-',
-    // state?.sellerPhoneCode + state?.sellerPhoneNum, '-sellerPhoneNum-',
-    // state?.sellerPhoneCode, '-sellerPhoneNum-',
-    // state?.sellerTypes, '-sellerTypes-',
-  );
+
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -461,10 +439,18 @@ function EditProfilePage() {
           // setState({...state, openModalRegions: false })
         }}
         className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions || state?.sellerEmailModal || state?.sellerEmailConfirm
+         ${state?.popConfirmDelete || openEditModal || state?.openModalRegions || state?.sellerEmailModal
             ? ""
             : "hidden"
           }`}
+      ></div>
+      <div
+        onClick={() => {
+          navigate('/login-seller')
+          setState({ ...state, sellerEmailConfirm: false });
+        }}
+        className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
+         ${state?.sellerEmailConfirm ? "" : "hidden"}`}
       ></div>
       {/* Confirm Email Confirm Modal */}
       <section
@@ -477,7 +463,10 @@ function EditProfilePage() {
         <div className="flex items-center w-full justify-end"><button
           type="button"
           className="select-none  cursor-pointer"
-          onClick={() => setState({ ...state, sellerEmailConfirm: false })}
+          onClick={() => {
+            navigate('/login-seller')
+            setState({ ...state, sellerEmailConfirm: false })
+          }}
         >
           <MenuCloseIcons colors="#000" />
         </button></div>
