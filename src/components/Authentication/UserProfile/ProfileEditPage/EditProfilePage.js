@@ -83,9 +83,7 @@ function EditProfilePage() {
     });
   }, [sellerInformation?.sellerUserData]);
 
-
   // ------------GET METHOD Region-----------------
-
   useEffect(() => {
     const fetchDataRegions = async () => {
       try {
@@ -116,7 +114,6 @@ function EditProfilePage() {
       fetchDataTypes();
     }
   }, [dressInfo?.regionList, dressInfo?.typeLis]);
-
 
   const fetchData = async (customHeaders) => {
     try {
