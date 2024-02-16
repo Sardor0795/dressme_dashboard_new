@@ -112,9 +112,7 @@ export default function SignInSeller() {
       });
     }
   };
-  // useEffect(() => {
-  //   localStorage.setItem('DressmeUserToken', dressInfo?.AccessTokenSeller);
-  // }, [dressInfo?.AccessTokenSeller]); black
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
