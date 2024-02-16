@@ -53,23 +53,23 @@ export default function Products() {
     if (!dressInfo?.isCheckPoructList) {
       fetchDataLocations();
     }
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
-        });
-        if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
-        }
+    // const fetchData = async () => {
+    //   try {
+    //     const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+    //       headers: {
+    //         'Content-type': 'application/json; charset=UTF-8',
+    //         "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+    //       }
+    //     });
+    //     if (data?.status >= 200 && data?.status < 300) {
+    //       setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+    //     }
 
-      } catch (error) {
+    //   } catch (error) {
 
-      }
-    };
-    fetchData();
+    //   }
+    // };
+    // fetchData();
 
   }, [])
   console.log(dressInfo?.isCheckPoructList, "dressInfo?.isCheckPoructList");
