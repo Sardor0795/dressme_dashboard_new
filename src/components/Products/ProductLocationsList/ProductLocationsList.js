@@ -1062,8 +1062,8 @@ export default function ProductLocationsList() {
                                                         <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                                                           <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
                                                           <td className="w-[14%] h-full flex items-center justify-center">
-                                                            <span className="w-[100px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                                            <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-[110px] h-full object-cover" />
                                                             </span>
                                                           </td>
                                                           <td className="w-[15%] h-full  flex items-center  justify-center">
@@ -1375,8 +1375,8 @@ export default function ProductLocationsList() {
                                                       <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
                                                         <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
                                                         <td className="w-[14%] h-full flex items-center justify-center">
-                                                          <span className="w-[100px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                                            <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                                          <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                            <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-[110px] h-full object-cover" />
                                                           </span>
                                                         </td>
                                                         <td className="w-[15%] h-full  flex items-center  justify-center">
