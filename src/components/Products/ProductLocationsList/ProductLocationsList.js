@@ -41,6 +41,7 @@ export default function ProductLocationsList() {
     shopId: null,
     shopMarketId: ""
   });
+  const [getProductInfo, setGetProductInfo] = useState(null);
   // ------------
   const [statusModal, setStatusModal] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
@@ -317,6 +318,27 @@ export default function ProductLocationsList() {
       }
     })
   }
+
+  //get-product-info
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          }
+        });
+        if (data?.status >= 200 && data?.status < 300) {
+          setGetProductInfo(data?.data)
+        }
+
+      } catch (error) {
+
+      }
+    };
+    fetchData();
+  }, [])
   // products
   const navigate = useNavigate();
   function openMarketEditPage(id) {
@@ -1025,7 +1047,10 @@ export default function ProductLocationsList() {
                                               <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                               <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                                               <th className="w-[10%] h-full flex items-center justify-center"></th>
-                                              <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
+                                              {item?.shop_locations > 1 ?
+                                                <th className="w-[9%] h-full flex items-center justify-center">Добавить</th> :
+                                                <th className="w-[9%] h-full flex items-center justify-center"></th>
+                                              }
                                               <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
                                             </tr>
                                           </div>
@@ -1033,7 +1058,7 @@ export default function ProductLocationsList() {
                                       </div>}
 
                                     {resData?.products?.length > 0 ?
-                                      <div className="flex flex-col gap-y-11 mt-5">
+                                      <div className="flex flex-col gap-y-[52px] mt-5">
                                         {resData?.products?.filter(e =>
                                           e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                                         )?.map((itemValue, index) => {
@@ -1074,7 +1099,7 @@ export default function ProductLocationsList() {
                                                           <td className="w-[15%] h-full  flex items-center justify-center ">
                                                             {itemValue?.sku || "sku"}
                                                           </td>
-                                                          {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                          {getProductInfo?.types && getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                                             return (
                                                               <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
                                                                 {valueType?.name_ru || "type_id"}
@@ -1121,22 +1146,24 @@ export default function ProductLocationsList() {
                                                               Подробнее
                                                             </button>
                                                           </td>
-                                                          <td className="w-[9%] h-full  flex items-center justify-center ">
-                                                            <button
-                                                              onClick={() => {
-                                                                addByLocation(itemValue?.id, resData?.id, resData?.shop_id)
+                                                          {item?.shop_locations > 1 ?
+                                                            <td className={`w-[9%] h-full  flex items-center justify-center `}>
+                                                              <button
+                                                                onClick={() => {
+                                                                  addByLocation(itemValue?.id, resData?.id, resData?.shop_id)
 
-                                                              }
-                                                              }
-                                                              type="button" className="w-full flex justify-center cursor-auto">
-                                                              <span
-                                                                onClick={() => setOpenStoreList(true)}
-                                                                className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
-                                                              >
-                                                                <AddLocationIcon width={30} />
-                                                              </span>
-                                                            </button>
-                                                          </td>
+                                                                }
+                                                                }
+                                                                type="button" className="w-full flex justify-center cursor-auto">
+                                                                <span
+                                                                  onClick={() => setOpenStoreList(true)}
+                                                                  className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                                                >
+                                                                  <AddLocationIcon width={30} />
+                                                                </span>
+                                                              </button>
+                                                            </td> :
+                                                            <td className={`w-[9%] h-full  flex items-center justify-center `}></td>}
                                                           <td className="w-[9%] h-full  flex items-center justify-center ">
                                                             <button type="button"
                                                               onClick={() => {
@@ -1337,14 +1364,17 @@ export default function ProductLocationsList() {
                                             <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                             <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                                             <th className="w-[10%] h-full flex items-center justify-center"></th>
-                                            <th className="w-[9%] h-full flex items-center justify-center">Добавить</th>
+                                            {item?.shop_locations > 1 ?
+                                              <th className="w-[9%] h-full flex items-center justify-center">Добавить</th> :
+                                              <th className="w-[9%] h-full flex items-center justify-center"></th>
+                                            }
                                             <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
                                           </tr>
                                         </div>
                                       </div>
                                     </div>}
                                   {resData?.products?.length > 0 ?
-                                    <div className="flex flex-col gap-y-11 mt-5">
+                                    <div className="flex flex-col gap-y-[52px] mt-5">
                                       {resData?.products?.filter(e =>
                                         e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                                       )?.map((itemValue, index) => {
@@ -1387,7 +1417,7 @@ export default function ProductLocationsList() {
                                                         <td className="w-[15%] h-full  flex items-center justify-center ">
                                                           {itemValue?.sku || "sku"}
                                                         </td>
-                                                        {dressInfo?.getProductInfo?.types && dressInfo?.getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                        {getProductInfo?.types && getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
                                                           return (
                                                             <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
                                                               {valueType?.name_ru || "type_id"}
@@ -1433,18 +1463,21 @@ export default function ProductLocationsList() {
                                                             Подробнее
                                                           </button>
                                                         </td>
-                                                        <td className="w-[9%] h-full  flex items-center justify-center ">
-                                                          <button
-                                                            onClick={() => addByLocation(itemValue?.id, resData?.id, resData?.shop_id)}
-                                                            type="button" className="w-full flex justify-center cursor-auto">
-                                                            <span
-                                                              onClick={() => setOpenStoreList(true)}
-                                                              className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
-                                                            >
-                                                              <AddLocationIcon width={30} />
-                                                            </span>
-                                                          </button>
-                                                        </td>
+                                                        {item?.shop_locations > 1 ?
+                                                          <td className="w-[9%] h-full  flex items-center justify-center ">
+                                                            <button
+                                                              onClick={() => addByLocation(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                              type="button" className="w-full flex justify-center cursor-auto">
+                                                              <span
+                                                                onClick={() => setOpenStoreList(true)}
+                                                                className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                                              >
+                                                                <AddLocationIcon width={30} />
+                                                              </span>
+                                                            </button>
+                                                          </td> :
+                                                          <td className={`w-[9%] h-full  flex items-center justify-center `}></td>}
+
                                                         <td className="w-[9%] h-full  flex items-center justify-center ">
                                                           <button type="button"
                                                             onClick={() => {

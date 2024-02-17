@@ -18,12 +18,14 @@ import { Popover } from "antd";
 import { SellerMainData } from "../../hook/SellerUserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { HelperData } from "../../hook/HelperDataStore";
 function Sidebar() {
   const { request } = useHttp()
   const [dressInfo] = useContext(dressMainData);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectLang, setselectLang] = useState(1);
   const [sellerInformation] = useContext(SellerMainData);
+  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
   const LanguageList = [
     { id: 1, type: "Русский", icons: RussianFlag },
@@ -176,14 +178,18 @@ function Sidebar() {
                       <figure className="flex h-full gap-x-[15px] items-center justify-center">
                         <NavbarMarketIcon colors={"#007dca"} />
                         <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                          Магазины
+                          Магазин{helperDatainform?.shopsList?.shops?.length > 1 ?
+                            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                              ы </span> : ''}
                         </p>
                       </figure>
                     ) : (
                       <figure className=" flex h-full gap-x-[15px] items-center justify-center">
                         <NavbarMarketIcon colors={"#2c2c2c"} />
                         <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                          Магазины
+                          Магазин{helperDatainform?.shopsList?.shops?.length > 1 ?
+                            <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                              ы </span> : ''}
                         </p>
                       </figure>
                     )
@@ -275,7 +281,9 @@ function Sidebar() {
                       <NavbarMarketIcon colors="#c5c5c5" />
                     </span>
                     <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                      Магазины
+                      Магазин{helperDatainform?.shopsList?.shops?.length > 1 ?
+                        <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                          ы </span> : ''}
                     </span>
                   </p>
                   <p
