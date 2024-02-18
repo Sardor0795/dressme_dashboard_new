@@ -1221,7 +1221,7 @@ const AddingProduct = () => {
                             </div>
                             <ArrowRightIcon />
                           </button>
-                          <div className="w-full h-fit md:flex hidden">
+                          <div className="w-full h-fit md:flex hidden selectAndt">
                             <Select
                               className={` ${state?.isCheckValid && !state?.gender_Id ? "border border-[#FFB8B8] " : ""}
                           rounded-lg w-full h-11 md:h-10 overflow-hidden`}
@@ -1372,9 +1372,9 @@ const AddingProduct = () => {
                               <StarLabel />
                             </span>
                           </div>
-                          <div className="w-full h-fit">
+                          <div className="w-full h-fit selectAndt">
                             <Select
-                              className={`overflow-hidden block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : ""}`}
+                              className={`overflow-hidden block rounded-lg w-full  md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : ""}`}
                               showSearch
                               allowClear
                               placeholder="Выбрать"
@@ -1425,7 +1425,7 @@ const AddingProduct = () => {
                               <StarLabel />
                             </span>
                           </div>
-                          <div className="w-full h-11 md:h-10 overflow-hidden">
+                          <div className="w-full h-11 md:h-10 overflow-hidden selectAndt">
                             <Select
                               className={`overflow-hidden rounded-lg w-full  h-full ${state?.isCheckValid && !state?.producer_Id ? "border border-[#FFB8B8] " : ""}`}
                               showSearch
@@ -1469,9 +1469,9 @@ const AddingProduct = () => {
                           </div>
                           <ArrowRightIcon />
                         </button>
-                        <div className="w-full h-fit md:flex hidden">
+                        <div className="w-full h-fit md:flex hidden selectAndt">
                           <Select
-                            className={`block rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
+                            className={`block rounded-lg w-full  md:h-10  ${state?.isCheckValid && !state?.filterTypeId ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor"}`}
                             showSearch
                             placeholder="Выбрать"
                             optionFilterProp="children"
@@ -1518,7 +1518,7 @@ const AddingProduct = () => {
                         </div>
                       </div>
                       {/* Input Select 10 mobile */}
-                      <div className="w-full  flex md:hidden flex-col gap-y-[5px]">
+                      <div className="w-full  flex md:hidden flex-col gap-y-[4px] ">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
                             Производитель
@@ -1539,9 +1539,9 @@ const AddingProduct = () => {
                           </div>
                           <ArrowRightIcon />
                         </button>
-                        <div className="w-full h-fit md:flex hidden">
+                        <div className="w-full h-fit md:flex hidden selectAndt">
                           <Select
-                            className=" rounded-lg w-full h-11 md:h-10"
+                            className=" rounded-lg w-full md:h-10"
                             showSearch
                             placeholder="Выбрать"
                             optionFilterProp="children"
