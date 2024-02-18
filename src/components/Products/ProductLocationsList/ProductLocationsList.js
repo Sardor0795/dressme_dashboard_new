@@ -1047,7 +1047,7 @@ export default function ProductLocationsList() {
                                               <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                               <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                                               <th className="w-[10%] h-full flex items-center justify-center"></th>
-                                              {item?.shop_locations > 1 ?
+                                              {item?.shop_locations?.length > 1 ?
                                                 <th className="w-[9%] h-full flex items-center justify-center">Добавить</th> :
                                                 <th className="w-[9%] h-full flex items-center justify-center"></th>
                                               }
@@ -1146,7 +1146,7 @@ export default function ProductLocationsList() {
                                                               Подробнее
                                                             </button>
                                                           </td>
-                                                          {item?.shop_locations > 1 ?
+                                                          {item?.shop_locations?.length > 1 ?
                                                             <td className={`w-[9%] h-full  flex items-center justify-center `}>
                                                               <button
                                                                 onClick={() => {
@@ -1364,7 +1364,7 @@ export default function ProductLocationsList() {
                                             <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                             <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                                             <th className="w-[10%] h-full flex items-center justify-center"></th>
-                                            {item?.shop_locations > 1 ?
+                                            {item?.shop_locations?.length > 1 ?
                                               <th className="w-[9%] h-full flex items-center justify-center">Добавить</th> :
                                               <th className="w-[9%] h-full flex items-center justify-center"></th>
                                             }
@@ -1463,7 +1463,7 @@ export default function ProductLocationsList() {
                                                             Подробнее
                                                           </button>
                                                         </td>
-                                                        {item?.shop_locations > 1 ?
+                                                        {item?.shop_locations?.length > 1 ?
                                                           <td className="w-[9%] h-full  flex items-center justify-center ">
                                                             <button
                                                               onClick={() => addByLocation(itemValue?.id, resData?.id, resData?.shop_id)}

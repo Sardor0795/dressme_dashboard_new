@@ -433,3 +433,12 @@ input[type=number] {
   pointer-events: none;
 
 }
+
+.selectAndt .ant-select {
+  /* border: 1px solid red */
+}
+
+.selectAndt .ant-select,
+.ant-select-lg {
+  height: 40px !important;
+}
