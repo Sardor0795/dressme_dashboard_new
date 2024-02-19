@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { DeleteIcon, InputCheckedTrueIcons, MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
 import AccessoriesAdd from "../../../Details/Accessories/AccessoriesAdd";
 import HeadWearAdd from "../../../Details/HeadWear/HeadWearAdd";
@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useHttp } from "../../../../../../../hook/useHttp";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
+import { dressMainData } from "../../../../../../../hook/ContextTeam";
 const url = "https://api.dressme.uz/api/seller";
 
 function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCheckedSizeList, allColor, onRefetch, productsDataIdEdit }) {
@@ -23,6 +24,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
   const [sendingLoader, setSendingLoader] = useState(false)
   const [allSizeOfListId, setAllSizeOfListId] = useState([])
   const [handlePivotColorId, setHandlePivotColorId] = useState(productsDataIdEdit?.colors[0]?.pivot?.color_id)
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   // ------------Delete------
   const [deleteId, setDeleteId] = useState(null)
@@ -33,10 +35,12 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
   const [loader, setLoader] = useState(false);
   // ------------Delete------
   const [addNewColor, setAddNewColor] = useState(null);
-
+  const [productId, setProductId] = useState(null);
+  const [shopLocationId, setShopLocationId] = useState(null);
 
   const onHanldeColorModal = useCallback(() => setOpenColorModal(true), [])
   const onHandleDeleteSize = useCallback(() => setSizedeleteModal(true), [])
+
   function onDeleteId(childData) {
     setDeleteId(childData)
   }
@@ -45,8 +49,17 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       setAddNewColor(item)
     })
   }, [lastElement])
+
   useEffect(() => {
     setCheckColor(productsDataIdEdit?.colors[0]?.pivot?.id)
+    setHandlePivotColorId(productsDataIdEdit?.colors[0]?.pivot?.color_id)
+    productsDataIdEdit?.shop_locations?.map(item => {
+      if (Number(item?.id) === Number(dressInfo?.locationIdAddProduct)) {
+        setProductId(item?.pivot?.product_id)
+        setShopLocationId(item?.pivot?.shop_location_id)
+      }
+    })
+
   }, [productsDataIdEdit])
 
   function handleGetSizeCheckedList(childData, lastElementColorId) {
@@ -70,18 +83,22 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       setAddSizeColorById(id)
     }
   }
-  // console.log(productsDataIdEdit, "productsDataIdEdit");
+  console.log(productsDataIdEdit, "productsDataIdEdit");
+  // console.log(dressInfo?.locationIdAddProduct, "dressInfo?.locationIdAddProduct");
+  console.log(productId,
+    shopLocationId, "productIdshopLocationId ");
   const deleteSizeId = useMutation(() => {
     return request({
       url: `/products/${Number(deleteId)}/delete-product-size`, method: "POST",
       body: {
-        product_id: Number(productsDataIdEdit?.locations[0]?.pivot?.product_id),
+        product_id: Number(productId),
         color_id: Number(handlePivotColorId),
-        shop_location_id: productsDataIdEdit?.locations[0]?.pivot?.shop_location_id
+        shop_location_id: Number(shopLocationId)
       },
       token: true,
     });
   });
+
   function onHandleDeleteSizeById() {
     setLoader(true)
     setHideToggleIcons(true)
@@ -103,7 +120,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
           }
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }
@@ -180,6 +197,8 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         onClick={() => {
           setOpenColorModal(false)
           setSizedeleteModal(false)
+          setLoader(false)
+          setHideToggleIcons(false)
         }}
         className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColorModal || sizedeleteModal ? "" : "hidden"}`}
       ></section>
@@ -260,7 +279,11 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       <section
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${sizedeleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
         <button
-          onClick={() => setSizedeleteModal(false)}
+          onClick={() => {
+            setLoader(false)
+            setHideToggleIcons(false)
+            setSizedeleteModal(false)
+          }}
           type="button"
           className="absolute  right-3 top-3 w-5 h-5 ">
           <MenuCloseIcons
