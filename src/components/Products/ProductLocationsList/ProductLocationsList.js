@@ -41,6 +41,7 @@ export default function ProductLocationsList() {
     shopId: null,
     shopMarketId: ""
   });
+  const [shopLocationIdList, setShopLocationIdList] = useState();
   const [getProductInfo, setGetProductInfo] = useState(null);
   // ------------
   const [statusModal, setStatusModal] = useState(false);
@@ -194,7 +195,10 @@ export default function ProductLocationsList() {
         }
         // console.log(res, "Success - ThisIsSeveralSelected");
       })
-      .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
+      .catch((err) => {
+        throw new Error(err || "something wrong");
+
+      });
   };
   const onDeleteSeveralSelect = () => {
     setState({ ...state, loader: true, hideProductList: true })
@@ -226,7 +230,10 @@ export default function ProductLocationsList() {
         }
         // console.log(res, "Success - ThisIsSeveralSelected");
       })
-      .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
+      .catch((err) => {
+        throw new Error(err || "something wrong");
+
+      });
   };
   // ----------------------ListItem--------
   const deleteProductById = useMutation(() => {
@@ -250,7 +257,7 @@ export default function ProductLocationsList() {
           }
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }
@@ -275,7 +282,7 @@ export default function ProductLocationsList() {
           }
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }
@@ -314,7 +321,7 @@ export default function ProductLocationsList() {
         }
       },
       onError: err => {
-        console.log(err, "POSTID");
+        throw new Error(err || "something wrong");
       }
     })
   }
@@ -426,7 +433,6 @@ export default function ProductLocationsList() {
       document.body.style.overflow = "auto";
     }
   }, [deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal || statusModal]);
-
   return (
     <div className="w-full px-4 md:px-10">
       <section
@@ -903,7 +909,7 @@ export default function ProductLocationsList() {
             <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
               Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
-            {checkedList?.length >= 1 ? <button
+            {checkedList?.length >= 1 && shopLocationIdList?.length > 1 ? <button
               type="button"
               onClick={() => setState({ ...state, openSelectModal: true })}
               className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
@@ -999,6 +1005,7 @@ export default function ProductLocationsList() {
                                               <button onClick={() => {
                                                 setCheckedList([])
                                                 allCheckedList(resData?.id, item?.id, resData?.shop_id)
+                                                setShopLocationIdList(item?.shop_locations)
                                               }}
                                                 className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
                                               </button>
@@ -1077,7 +1084,10 @@ export default function ProductLocationsList() {
                                                     <table className="w-full flex h-[100px]  items-center">
                                                       <tbody className="w-full h-full flex items-center">
                                                         <tr>
-                                                          <td onClick={() => checkListItem(itemValue?.id, resData?.id, resData?.shop_id,)}>
+                                                          <td onClick={() => {
+                                                            setShopLocationIdList(item?.shop_locations)
+                                                            checkListItem(itemValue?.id, resData?.id, resData?.shop_id,)
+                                                          }}>
                                                             {
                                                               checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
                                                                 <button
@@ -1318,6 +1328,8 @@ export default function ProductLocationsList() {
                                             <button onClick={() => {
                                               setCheckedList([])
                                               allCheckedList(resData?.id, item?.id, resData?.shop_id)
+                                              setShopLocationIdList(item?.shop_locations)
+
                                             }}
                                               className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
                                             </button>
@@ -1395,7 +1407,10 @@ export default function ProductLocationsList() {
                                                   <table className="w-full flex h-[100px]  items-center ">
                                                     <tbody className="w-full h-full flex items-center">
                                                       <tr>
-                                                        <td onClick={() => checkListItem(itemValue?.id, resData?.id, resData?.shop_id)}>
+                                                        <td onClick={() => {
+                                                          setShopLocationIdList(item?.shop_locations)
+                                                          checkListItem(itemValue?.id, resData?.id, resData?.shop_id)
+                                                        }}>
                                                           {
                                                             checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
                                                               <button

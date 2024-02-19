@@ -11,7 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { useHttp } from "../../../../../../../hook/useHttp";
-import { MdError } from "react-icons/md";
+import { MdError, MdNumbers } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { dressMainData } from "../../../../../../../hook/ContextTeam";
 const url = "https://api.dressme.uz/api/seller";
@@ -83,10 +83,10 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       setAddSizeColorById(id)
     }
   }
-  console.log(productsDataIdEdit, "productsDataIdEdit");
+  // console.log(productsDataIdEdit, "productsDataIdEdit");
   // console.log(dressInfo?.locationIdAddProduct, "dressInfo?.locationIdAddProduct");
-  console.log(productId,
-    shopLocationId, "productIdshopLocationId ");
+  // console.log(productId,
+  //   shopLocationId, "productIdshopLocationId ");
   const deleteSizeId = useMutation(() => {
     return request({
       url: `/products/${Number(deleteId)}/delete-product-size`, method: "POST",
@@ -124,16 +124,17 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         }
       })
   }
+
   const onHandleCopyAddSize = async () => {
     setSendingLoader(true)
     let form = new FormData();
-    form.append("shop_location_id", productsDataIdEdit?.locations[0]?.pivot?.shop_location_id);
+    form.append("shop_location_id", Number(shopLocationId));
     form.append("color_id", addSizeColorById);
-    allSizeOfListId?.map((e, index) => {
-      form.append("product_size_ids[]", allSizeOfListId[index]);
+    allSizeOfListId?.forEach(item => {
+      form.append("product_size_ids[]", item);
     })
     try {
-      const res = await fetch(`${url}/products/${Number(productsDataIdEdit?.locations[0]?.pivot?.product_id)}/massive-add-product-sizes`, {
+      const res = await fetch(`${url}/products/${Number(productId)}/massive-add-product-sizes`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -199,6 +200,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
           setSizedeleteModal(false)
           setLoader(false)
           setHideToggleIcons(false)
+          setSendingLoader(false)
         }}
         className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${openColorModal || sizedeleteModal ? "" : "hidden"}`}
       ></section>
@@ -212,12 +214,14 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
           <button
             className="py-2"
             type="button"
-            onClick={() => setOpenColorModal(false)}
-          // className="text"
+            onClick={() => {
+              setSendingLoader(false)
+              setOpenColorModal(false)
+            }}
           >
             <MenuCloseIcons colors={"#a2a2a2"} />
           </button></div>
-        <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
+        <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6 ">
           {lastElement ?
 
             null

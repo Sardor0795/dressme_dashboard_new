@@ -113,8 +113,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         }
     }, [state?.discountPercent, state?.price])
 
-    console.log(dressInfo?.ProductFilterType, "head--dressInfo?.ProductFilterType");
-    console.log(typeId, "head--typeId");
+    // console.log(dressInfo?.ProductFilterType, "head--dressInfo?.ProductFilterType");
+    // console.log(typeId, "head--typeId");
     const contentHat = (
         <div className="w-[520px] h-fit">
             <div

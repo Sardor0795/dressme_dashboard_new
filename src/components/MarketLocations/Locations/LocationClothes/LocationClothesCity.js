@@ -68,7 +68,7 @@ export default function LocationClothesCity() {
         // console.log(res?.location, "BURES");
       },
       onError: (err) => {
-        console.log(err, "BU -- HOC -- Error");
+        throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -106,9 +106,11 @@ export default function LocationClothesCity() {
             setHideProductList(false)
           }, 2000);
         }
-        console.log(res, "Success - ThisIsSeveralSelected");
       })
-      .catch((err) => console.log(err, "Error ThisIsSeveralSelected"));
+      .catch((err) => {
+        throw new Error(err || "something wrong");
+
+      });
   };
 
   function addNewProductId() {

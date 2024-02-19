@@ -43,19 +43,9 @@ function EditPassword({ onClick }) {
       {},
       {
         onSuccess: (res) => {
-          console.log(res, "change-password");
           if (res?.message && res?.errors) {
             setState({ ...state, errorGroup: res?.errors, isLoadingSent: false })
-            // toast.error(`${res?.message}`, {
-            //   position: "top-right",
-            //   autoClose: 3000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            // });
+
 
           } else if (res?.message) {
             toast.success(`${res?.message}`, {
@@ -73,6 +63,7 @@ function EditPassword({ onClick }) {
           }
         },
         onError: (err) => {
+          throw new Error(err || "something wrong")
           setState({ ...state, isLoadingSent: false })
           toast.error(`${err}`, {
             position: "top-right",
@@ -89,7 +80,6 @@ function EditPassword({ onClick }) {
     );
 
   };
-  console.log(state?.errorGroup, "errorGroup");
   return (
     <div className="w-full md:w-[455px] h-fit bg-white rounded-t-lg md:rounded-lg px-4 py-5 md:py-[35px] md:px-[50px]">
       <div className="flex justify-end items-center md:mr-[-30px] md:mt-[-15px]">

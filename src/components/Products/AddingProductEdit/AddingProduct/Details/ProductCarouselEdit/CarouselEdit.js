@@ -26,7 +26,6 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   const [loader, setLoader] = useState(false);
   const [reRender, setReRender] = useState(false);
 
-  console.log(productData, "productData");
   const [colorPivotOne, setColorPivotOne] = useState('');
   const [colorPivotTwo, setColorPivotTwo] = useState('');
   const [colorPivotThree, setColorPivotThree] = useState('');
@@ -546,7 +545,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       .catch((err) => {
         setErrorMessage(err)
         setLoader(false)
-        console.log(err, "errImage")
+        throw new Error(err || "something wrong");
       });
   }
 
@@ -593,7 +592,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         },
 
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }
@@ -644,7 +643,6 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             setFreeModalUploadImg(false)
           }, 1000);
         }
-        console.log(res_1, "ProductStore---Added");
       }
     } catch (err) {
       setErrorMessage(err)

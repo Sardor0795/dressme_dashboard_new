@@ -19,7 +19,7 @@ export default function EditComponent({
     editComment: false,
   });
 
-  console.log(state?.editComment, 'editComment');
+  // console.log(state?.editComment, 'editComment');
 
   const url = "https://api.dressme.uz/api/seller/reply";
 
@@ -37,15 +37,15 @@ export default function EditComponent({
       }),
     })
       .then((res) => {
-        console.log(res, "RES");
+        // console.log(res, "RES");
         return res.json();
       })
       .then((data) => {
         setState({ ...state, getComment: data });
         handleRefetch();
       })
-      .catch((data) => {
-        console.log(data);
+      .catch((err) => {
+        throw new Error(err || "something wrong");
       });
   };
 
@@ -70,8 +70,8 @@ export default function EditComponent({
         handleRefetch();
         setState({ ...state, editComment: false, })
       })
-      .catch((data) => {
-        console.log(data);
+      .catch((err) => {
+        throw new Error(err || "something wrong");
       });
   };
 

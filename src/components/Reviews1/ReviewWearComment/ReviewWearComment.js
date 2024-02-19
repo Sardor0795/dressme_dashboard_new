@@ -46,7 +46,7 @@ export default function ReviewWearComment() {
         }
       },
       onError: (err) => {
-        console.log(err, "ERR-IN-PRODUCTS-COMMENTS");
+        throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -89,8 +89,8 @@ export default function ReviewWearComment() {
             >
               <button
                 className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                    ? "border border-textBlueColor bg-textBlueColor"
-                    : "border border-lightBorderColor"
+                  ? "border border-textBlueColor bg-textBlueColor"
+                  : "border border-lightBorderColor"
                   }`}
               >
                 {data?.checked ? <CheckTrue /> : null}

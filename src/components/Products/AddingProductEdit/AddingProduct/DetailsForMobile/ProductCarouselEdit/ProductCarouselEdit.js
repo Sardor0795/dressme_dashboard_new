@@ -25,7 +25,6 @@ const ProductCarouselEdit = () => {
 
   const [modalOfCarsouel, setModalOfCarsouel] = useState(false)
   const handleClickCarosuel = (id) => {
-    console.log("handleClickCarosuel", id);
     setModalOfCarsouel(true)
   }
 

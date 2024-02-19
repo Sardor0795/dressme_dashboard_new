@@ -348,7 +348,7 @@ const AddingProduct = () => {
   }, [screenSize]);
 
   const LocationAddSubmit = () => {
-    console.log(state?.textListOfFormList, " state?.textListOfFormList");
+    // console.log(state?.textListOfFormList, " state?.textListOfFormList");
   }
   const { id } = useParams()
   const newId = id?.replace(":", "")
@@ -461,9 +461,11 @@ const AddingProduct = () => {
             theme: "light",
           })
         }
-        console.log(res, "ProductStore---Added");
       })
-      .catch((err) => console.log(err, "errImage"));
+      .catch((err) => {
+        throw new Error(err || "something wrong");
+
+      });
   };
   const handleNextPage = () => {
     setState({ ...state, isCheckValid: true })

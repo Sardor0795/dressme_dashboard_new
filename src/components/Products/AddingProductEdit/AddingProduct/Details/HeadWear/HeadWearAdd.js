@@ -182,7 +182,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     };
     const handleChangePercent = (event) => {
         const { value } = event.target
-        console.log(value, 'value');
         if (value >= 0 && value < 100) {
             setState({ ...state, discountPercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
@@ -212,7 +211,6 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     }, [checkColor])
 
     function sendCheckListItem(id) {
-        console.log(id, "bucolorId");
         if (state?.addnewColorIdIcons) {
             setState({ ...state, addnewColorIdIcons: null })
         }

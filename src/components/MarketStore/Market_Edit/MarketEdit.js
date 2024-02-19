@@ -155,7 +155,7 @@ function MarketEdit() {
         // setImage(res?.shop?.url_logo_photo)
       },
       onError: (err) => {
-        console.log(err, "err getDelivery-method");
+        throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -226,7 +226,7 @@ function MarketEdit() {
 
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }
@@ -252,7 +252,7 @@ function MarketEdit() {
 
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
 
@@ -306,7 +306,7 @@ function MarketEdit() {
       })
       .catch((err) => {
         setLoaderEdit(false)
-        console.log(err, "errImage")
+        throw new Error(err || "something wrong");
       });
   };
 

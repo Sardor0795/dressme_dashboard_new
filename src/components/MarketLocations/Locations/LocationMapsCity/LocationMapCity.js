@@ -145,7 +145,7 @@ export default function LocationMapCity() {
 
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }
@@ -156,7 +156,6 @@ export default function LocationMapCity() {
   const { refetch } = useQuery(["location_index_id"], () => { return request({ url: `/shops/locations/${NewId}`, token: true }); },
     {
       onSuccess: (res) => {
-        console.log(res, "res_id");
         if (res?.errors && res?.message) {
           // setLoader(false)
         } else if (res?.location) {
@@ -197,7 +196,7 @@ export default function LocationMapCity() {
         }
       },
       onError: (err) => {
-        console.log(err, "BU -- LocationMapCity -- Error");
+        throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -361,7 +360,7 @@ export default function LocationMapCity() {
       .catch(err => {
 
         setLoaderEdit(false)
-        console.log(err, "errImage")
+        throw new Error(err || "something wrong");
       })
   }
   function onUserDeleteBackgroundImg2() {
@@ -394,13 +393,15 @@ export default function LocationMapCity() {
             }, 1000);
           }
         })
-        .catch((err) => console.log(err, "errImage"));
+        .catch((err) => {
+          throw new Error(err || "something wrong");
+
+        });
     }
     if (!state?.pictureBgTest2) {
       setPictureView2('')
       setPictureTest2('')
       setBackImgUploadModal(false)
-      console.log("ishga tushdi 2");
     }
   }
   function onUserDeleteBackgroundImg3() {
@@ -433,7 +434,10 @@ export default function LocationMapCity() {
             }, 1000);
           }
         })
-        .catch((err) => console.log(err, "errImage"));
+        .catch((err) => {
+          throw new Error(err || "something wrong");
+
+        });
     }
 
     if (!state?.pictureBgTest3) {

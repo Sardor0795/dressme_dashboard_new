@@ -72,7 +72,6 @@ export default function Products() {
     // fetchData();
 
   }, [])
-  console.log(dressInfo?.isCheckPoructList, "dressInfo?.isCheckPoructList");
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
       {dressInfo?.isCheckPoructList ?
