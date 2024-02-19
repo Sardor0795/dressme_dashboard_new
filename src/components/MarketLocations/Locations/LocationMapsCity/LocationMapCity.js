@@ -1240,7 +1240,7 @@ export default function LocationMapCity() {
 
                   className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
                 >
-                  Cохранит
+                  Сохранить
                 </button>
               </div>
             </div>

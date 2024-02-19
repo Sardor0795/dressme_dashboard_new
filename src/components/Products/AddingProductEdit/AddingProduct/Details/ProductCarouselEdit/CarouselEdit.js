@@ -763,7 +763,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             <div
               className="w-[670px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
             >
-              < div className="w-full  flex flex-col items-center justify-start ">
+              < div className="w-full  flex flex-col items-center justify-start">
                 {modalId == imageOne?.id1 &&
                   <div className="w-full">
                     <div className="w-full h-[80vh] flex items-center">
@@ -792,9 +792,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageOne?.url_photo1}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
+
                       }
+                      1
                     </div>
                     <div className={`w-full justify-between flex items-center px-3 h-[50px]`}>
                       <label
@@ -839,7 +841,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
                 {modalId == imageTwo?.id2 &&
-                  <div className="w-full">
+                  <div className="w-full ">
                     <div className="w-full h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
@@ -866,9 +868,9 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageTwo?.url_photo2}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[670px]  h-full	 border border-searchBgColor object-contain rounded-lg"
                         />
-                      }
+                      }2
                     </div>
                     <div className={`w-full  justify-between  flex items-center px-3 h-[50px]`}>
                       <label
@@ -942,6 +944,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
                         />
                       }
+                      3
                     </div>
                     <div className={`w-full justify-between px-3 h-[50px] flex items-center`}>
                       <label
@@ -1014,6 +1017,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
                         />
                       }
+                      4
                     </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
@@ -2115,18 +2119,27 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       </div >
       {/*------------------------- Modal Carosuel------------------------------------ */}
 
-      < div className="flex items-center justify-between" >
+      < div className="w-[290px] flex items-center justify-between" >
         <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
           <p>Фото</p>
           <span className="ml-[5px]">
             <StarLabel />
           </span>
         </div>
-
+        {
+          <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
+            <div className="w-fit h-fit flex items-center gap-x-3">
+              <button
+                type="button"
+                className={`w-[22px] h-[22px] rounded-full border `}
+                style={{ background: `${productData?.colors[0]?.hex}` }}
+              ></button>
+            </div>
+          </div>}
       </div >
       <section className="w-full flex flex-col flex-wrap h-full gap-x-[10px]">
         <div className="w-full h-full flex flex-col">
-          <div className={`w-full h-[404px]   flex items-center `}>
+          <div className={`w-[290px] h-[380px] flex items-center `}>
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
@@ -2140,18 +2153,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       } : null
                   }
                   className="w-full flex flex-col h-full ">
-                  {
-                    <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
-                      <div className="w-fit h-fit flex items-center gap-x-3">
-                        <button
-                          type="button"
-                          className={`w-[22px] h-[22px] rounded-full border `}
-                          style={{ background: `${productData?.colors[0]?.hex}` }}
-                        ></button>
 
-
-                      </div>
-                    </div>}
                   <div
                     // style={{
                     //   backgroundImage: ` url("${imageOne?.url_photo1}")`,
@@ -2181,7 +2183,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-full mt-[10px] h-[150px] flex justify-between gap-x-[6px]   rounded-lg">
+          <div className="w-[290px] mt-[10px] h-[130px] flex justify-between gap-x-[6px]   rounded-lg">
             <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
@@ -2216,15 +2218,6 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: ` url("${imageTwo?.url_photo2}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
                     className="BackgImageBLur overflow-hidden  w-full h-full rounded-lg flex items-center justify-center  ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                       <img
