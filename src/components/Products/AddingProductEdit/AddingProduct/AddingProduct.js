@@ -2015,7 +2015,7 @@ const AddingProduct = () => {
 
 
                 </div>
-                <div className={`w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
+                <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
 
                   {/* Img Carousel */}
                   <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>

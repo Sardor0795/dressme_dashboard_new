@@ -761,7 +761,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
           </button>
           <div>
             <div
-              className="w-[670px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
+              className="w-[620px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
             >
               < div className="w-full  flex flex-col items-center justify-start">
                 {modalId == imageOne?.id1 &&
@@ -796,7 +796,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         />
 
                       }
-                      1
+
                     </div>
                     <div className={`w-full justify-between flex items-center px-3 h-[50px]`}>
                       <label
@@ -868,9 +868,9 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageTwo?.url_photo2}
                           alt="backImg"
-                          className=" w-[670px]  h-full	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-full	 border border-searchBgColor object-cover rounded-lg"
                         />
-                      }2
+                      }
                     </div>
                     <div className={`w-full  justify-between  flex items-center px-3 h-[50px]`}>
                       <label
@@ -941,10 +941,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageThree?.url_photo3}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
-                      3
+
                     </div>
                     <div className={`w-full justify-between px-3 h-[50px] flex items-center`}>
                       <label
@@ -1014,10 +1014,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageFour?.url_photo4}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
-                      4
+
                     </div>
                     <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
                       <label
@@ -1086,7 +1086,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageFive?.url_photo5}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1157,7 +1157,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageSix?.url_photo6}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1228,7 +1228,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageSeven?.url_photo7}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1299,7 +1299,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageEight?.url_photo8}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-contain rounded-lg"
+                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1362,15 +1362,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
-          <div className="w-[670px] h-[60vh] overflow-hidden rounded-lg">
+          <div className="w-[620px] h-fit overflow-hidden rounded-lg">
             {Number(modalId) === Number(imageTwo?.id2) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-full">
 
                   {!imageTwo?.url_photo2 ?
                     <label
                       htmlFor={"imageTwo"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1391,7 +1391,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1416,12 +1416,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageTwo?.url_photo2}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover "
                       />
                   }
                 </div>
                 {imageTwo?.url_File2 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeImageTwo"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -1454,7 +1454,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
                     </button>
                   </div> :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
@@ -1473,12 +1473,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             }
             {Number(modalId) === Number(imageThree?.id3) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-fil">
 
                   {!imageThree?.url_photo3 ?
                     <label
                       htmlFor={"imageThree"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1499,7 +1499,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1524,12 +1524,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageThree?.url_photo3}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover "
                       />
                   }
                 </div>
                 {imageThree?.url_photo3 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeImageThree"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -1562,7 +1562,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
                     </button>
                   </div> :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
@@ -1581,12 +1581,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             }
             {Number(modalId) === Number(imageFour?.id4) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-fit">
 
                   {!imageFour?.url_photo4 ?
                     <label
                       htmlFor={"imageFour"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1606,7 +1606,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1631,12 +1631,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageFour?.url_photo4}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover "
                       />
                   }
                 </div>
                 {imageFour?.url_photo4 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeImageFour"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -1669,7 +1669,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </button>
                   </div>
                   :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
@@ -1688,12 +1688,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             }
             {Number(modalId) === Number(imageFive?.id5) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-fit">
 
                   {!imageFive?.url_photo5 ?
                     <label
                       htmlFor={"imageFive"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1713,7 +1713,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1738,12 +1738,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageFive?.url_photo5}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover "
                       />
                   }
                 </div>
                 {imageFive?.url_photo5 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeimageFive"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -1776,7 +1776,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </button>
                   </div>
                   :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
@@ -1795,12 +1795,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             }
             {Number(modalId) === Number(imageSix?.id6) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-fit">
 
                   {!imageSix?.url_photo6 ?
                     <label
                       htmlFor={"imageSix"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1820,7 +1820,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1845,12 +1845,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageSix?.url_photo6}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover "
                       />
                   }
                 </div>
                 {imageSix?.url_photo6 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeimageSix"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -1883,7 +1883,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </button>
                   </div>
                   :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
@@ -1902,12 +1902,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             }
             {Number(modalId) === Number(imageSeven?.id7) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-fit">
 
                   {!imageSeven?.url_photo7 ?
                     <label
                       htmlFor={"imageSeven"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1927,7 +1927,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1952,12 +1952,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageSeven?.url_photo7}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover"
                       />
                   }
                 </div>
                 {imageSeven?.url_photo7 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeimageSeven"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -1990,7 +1990,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </button>
                   </div>
                   :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
@@ -2009,12 +2009,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             }
             {Number(modalId) === Number(imageEight?.id8) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
-                <div className="w-full h-[90%]">
+                <div className="w-full h-fit">
 
                   {!imageEight?.url_photo8 ?
                     <label
                       htmlFor={"imageEight"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -2034,7 +2034,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -2059,12 +2059,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageEight?.url_photo8}
                         alt="backImg"
-                        className=" w-full h-full  object-contain "
+                        className=" w-full h-[80vh]  object-cover "
                       />
                   }
                 </div>
                 {imageEight?.url_photo8 ?
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <label
                       htmlFor={"changeimageEight"}
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -2097,7 +2097,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </button>
                   </div>
                   :
-                  <div className="w-full h-[10%] flex items-center justify-between px-3  border-t">
+                  <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
