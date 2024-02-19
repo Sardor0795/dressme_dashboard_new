@@ -1270,7 +1270,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 </div>
                                                 <div onClick={() => {
                                                     DeleteSize()
-                                                    onDeleteId()
+                                                    onDeleteId(item?.id)
                                                 }
                                                 }
                                                     className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
@@ -1280,12 +1280,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                             <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                         Обхват Талии
                                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                                        {/* <span className="ml-[5px]">
-                            <StarLabel />
-                        </span> */}
                                                     </p>
                                                     <div className="flex items-center">
                                                         <div className="flex flex-col">

@@ -2155,17 +2155,9 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   className="w-full flex flex-col h-full ">
 
                   <div
-                    // style={{
-                    //   backgroundImage: ` url("${imageOne?.url_photo1}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
+
                     className="BackgImageBLur  rounded-lg h-full  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-[350px] h-[377px]  backdrop-blur-md">
+                    <div className="flex items-center justify-center w-[290px] h-[380px]  backdrop-blur-md">
                       <img
                         className="
                         h-full
@@ -2233,22 +2225,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   <button
                     type="button"
                     className={`w-[22px] h-[22px] rounded-full border `}
                     style={{ background: `${productData?.colors[0]?.hex}` }}
                   ></button>
-                  {imageTwo?.status2 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageTwo?.status2 || "status"}
-                  </td>}
-                  {imageTwo?.status2 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageTwo?.status2 || "status"}
-                  </td>}
-                  {imageTwo?.status2 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageTwo?.status2 || "status"}
-                  </td>}
+
                 </div>
               </div>
             </div>
@@ -2265,14 +2249,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     // htmlFor={"imageThree"}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
-                    {/* {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                      <input
-                        className="hidden"
-                        id={"imageThree"}
-                        type="file"
-                        onChange={handleLocationImage3}
-                        accept=" image/*"
-                      /> : null} */}
+
                     <div
                       className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
                       <DownloadIcon />
@@ -2293,15 +2270,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageThree?.id3)
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: ` url("${imageThree?.url_photo3}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
+
                     className="BackgImageBLur  overflow-hidden  w-full h-full rounded-lg flex items-center justify-center   ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                       <img
@@ -2317,7 +2286,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   {/* {Number(productData?.colors[0]?.pivot?.id) === Number(imageThree?.product_color_id3) } */}
                   <button
@@ -2325,15 +2294,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     className={`w-[22px] h-[22px] rounded-full border `}
                     style={{ background: `${productData?.colors[0]?.hex}` }}
                   ></button>
-                  {imageThree?.status3 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageThree?.status3 || "status"}
-                  </td>}
-                  {imageThree?.status3 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageThree?.status3 || "status"}
-                  </td>}
-                  {imageThree?.status3 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageThree?.status3 || "status"}
-                  </td>}
+
                 </div>
               </div>
             </div>
@@ -2349,14 +2310,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         () => handleFreeModalUploadImg(imageFour?.id4) : null}
                     className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                   >
-                    {/* {productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                      <input
-                        className="hidden"
-                        id={"imageFour"}
-                        type="file"
-                        onChange={handleLocationImage4}
-                        accept="image/*"
-                      /> : null} */}
+
                     <div
                       className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
                       <DownloadIcon />
@@ -2377,15 +2331,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageFour?.id4)
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: `url("${imageFour?.url_photo4}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
+
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2401,7 +2347,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   <button
                     type="button"
@@ -2477,15 +2423,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageFive?.id5)
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: `url("${imageFive?.url_photo5}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
+
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2501,7 +2439,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]">
                 {productData?.colors?.length >= 2 ?
                   <div className="w-fit h-fit flex items-center">
                     <button
@@ -2509,15 +2447,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       className={`w-[22px] h-[22px] rounded-full border `}
                       style={{ background: `${productData?.colors[1]?.hex}` }}
                     ></button>
-                    {imageFive?.status5 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                      {imageFive?.status5 || "status"}
-                    </td>}
-                    {imageFive?.status5 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                      {imageFive?.status5 || "status"}
-                    </td>}
-                    {imageFive?.status5 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                      {imageFive?.status5 || "status"}
-                    </td>}
+
                   </div>
                   :
                   colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map((value, index) => {
@@ -2589,15 +2519,6 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: `url("${imageSix?.url_photo6}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2614,7 +2535,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
               </button>
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
                   {productData?.colors?.length >= 2 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
@@ -2622,15 +2543,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className={`w-[22px] h-[22px] rounded-full border `}
                         style={{ background: `${productData?.colors[1]?.hex}` }}
                       ></button>
-                      {imageSix?.status6 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageSix?.status6 || "status"}
-                      </td>}
-                      {imageSix?.status6 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageSix?.status6 || "status"}
-                      </td>}
-                      {imageSix?.status6 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageSix?.status6 || "status"}
-                      </td>}
+
                     </div>
                     :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[1]))?.map((value, index) => {
@@ -2704,15 +2617,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageSeven?.id7)
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: `url("${imageSeven?.url_photo7}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
+
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2728,7 +2633,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </button>
 
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px]">
                   {productData?.colors?.length >= 3 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
@@ -2736,15 +2641,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className={`w-[22px] h-[22px] rounded-full border `}
                         style={{ background: `${productData?.colors[2]?.hex}` }}
                       ></button>
-                      {imageSeven?.status7 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageSeven?.status7 || "status"}
-                      </td>}
-                      {imageSeven?.status7 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageSeven?.status7 || "status"}
-                      </td>}
-                      {imageSeven?.status7 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageSeven?.status7 || "status"}
-                      </td>}
+
                     </div>
                     :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[2]))?.map((value, index) => {
@@ -2817,15 +2714,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           () => handleFreeModalUploadImg(imageEight?.id8)
                         : null
                     }
-                    // style={{
-                    //   backgroundImage: `url("${imageEight?.url_photo8}")`,
-                    //   backgroundColor: "rgba(0,0,0,0.6)",
-                    //   backgroundPosition: "center center",
-                    //   backgroundSize: "cover",
-                    //   backgroundRepeat: "no-repeat",
-                    //   backgroundBlendMode: "darken",
-                    //   // filter: "blur(1px)"
-                    // }}
+
                     className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
                       <img
@@ -2842,7 +2731,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
               </button>
               <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] border rounded-[12px]">
+                <div className="w-full flex h-[22px] items-center justify-between mt-[3px]">
                   {productData?.colors?.length === 4 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
@@ -2850,15 +2739,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className={`w-[22px] h-[22px] rounded-full border `}
                         style={{ background: `${productData?.colors[3]?.hex}` }}
                       ></button>
-                      {imageEight?.status8 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageEight?.status8 || "status"}
-                      </td>}
-                      {imageEight?.status8 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageEight?.status8 || "status"}
-                      </td>}
-                      {imageEight?.status8 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                        {imageEight?.status8 || "status"}
-                      </td>}
+
                     </div>
                     :
                     colorGroup?.filter(e => e?.id == Number(colors_Id[3]))?.map((value, index) => {

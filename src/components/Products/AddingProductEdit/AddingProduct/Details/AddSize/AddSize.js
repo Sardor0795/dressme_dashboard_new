@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 const url = "https://api.dressme.uz/api/seller";
 
 function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListForTest, selectColorID, productsDataIdEdit }) {
-    const [dressInfo, setDressInfo] = useContext(dressMainData);
 
     const [state, setState] = useState({
         minHeadGirth: null,

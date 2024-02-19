@@ -643,7 +643,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 </div>
                                                 <div onClick={() => {
                                                     DeleteSize()
-                                                    onDeleteId()
+                                                    onDeleteId(item?.id)
                                                 }}
                                                     className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
                                                     <DeleteIcon width={30} />

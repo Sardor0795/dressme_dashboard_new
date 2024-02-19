@@ -2012,16 +2012,12 @@ const AddingProduct = () => {
                       <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
                     )}{" "}
                   </section>
-
-
                 </div>
                 <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row  justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
-
                   {/* Img Carousel */}
                   <div className={`w-full h-fit mx-auto flex flex-col gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
                     <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
-
                 </div>
               </div>
               <div className="md:relative w-full mt-[60px]  md:mt-[150px] ">
@@ -2037,11 +2033,8 @@ const AddingProduct = () => {
                   <div className="w-1/3 h-[1px] bg-borderColor"></div>
                 </div>
                 <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
-
-                  {/* {lastElement ? */}
                   {
                     lastElement ?
-
                       lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
                         <button
                           type="button"
