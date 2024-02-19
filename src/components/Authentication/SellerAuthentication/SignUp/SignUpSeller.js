@@ -214,7 +214,7 @@ const SignUpSeller = () => {
       },
 
       onError: (err) => {
-        console.log(err, "Error");
+        throw new Error(err || "something wrong");
         setState({ ...state, isLoadingSent: false })
 
         toast.error("Serverda xatolik", {

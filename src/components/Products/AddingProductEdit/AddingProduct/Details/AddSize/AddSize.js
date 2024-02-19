@@ -123,7 +123,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
         ]
     }
     )
-    console.log(newProductId, "newProductId");
     const onChangeSwitch = (checked) => {
         setState({ ...state, sizeCheck: checked })
     };

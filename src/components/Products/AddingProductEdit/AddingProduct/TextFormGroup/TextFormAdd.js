@@ -92,7 +92,6 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
             setState({ ...state, onEditTextForm: false })
         }
     }, [loading]);
-    console.log(loading, "loading");
 
     const send = () => {
         setState({ ...state, isCheckValid: true })

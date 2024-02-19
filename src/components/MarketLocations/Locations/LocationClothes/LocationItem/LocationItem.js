@@ -125,7 +125,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
           }
         },
         onError: err => {
-          console.log(err);
+          throw new Error(err || "something wrong");
         }
       })
   }

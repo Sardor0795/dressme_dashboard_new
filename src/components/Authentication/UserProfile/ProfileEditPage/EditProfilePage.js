@@ -190,7 +190,6 @@ function EditProfilePage() {
             navigate("/signup-seller");
             window.location.reload();
             setState({ ...state, popConfirmDelete: false });
-            console.log(res, "Delete");
             toast.warn(`${res?.message}`, {
               position: "top-right",
               autoClose: 3000,
@@ -203,7 +202,10 @@ function EditProfilePage() {
             });
           }
         },
-        onError: (err) => { },
+        onError: (err) => {
+          throw new Error(err || "something wrong");
+
+        },
       }
     );
   };

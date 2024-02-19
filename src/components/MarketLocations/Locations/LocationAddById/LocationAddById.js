@@ -118,7 +118,7 @@ export default function LocationAddById() {
         setState({ ...state, getRegionList: res });
       },
       onError: (err) => {
-        console.log(err, "BU -- HOC -- Error");
+        throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -160,7 +160,6 @@ export default function LocationAddById() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "AddLocationById");
 
         if (res?.errors && res?.message) {
           setState({ ...state, errorGroup: res?.errors });
@@ -178,7 +177,10 @@ export default function LocationAddById() {
           navigate("/locations-store");
         }
       })
-      .catch((err) => console.log(err, "errImage"));
+      .catch((err) => {
+        throw new Error(err || "something wrong");
+
+      });
   };
 
   const [activeIndex, setActiveIndex] = useState();

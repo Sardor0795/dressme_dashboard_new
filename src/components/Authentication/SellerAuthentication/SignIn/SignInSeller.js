@@ -49,7 +49,6 @@ export default function SignInSeller() {
         {},
         {
           onSuccess: (res) => {
-            console.log(res, "SignInSeller");
             if (res?.message && res?.errors) {
               setState({ ...state, errorGroup: res?.message, isLoadingSent: false })
               toast.error(`${res?.message}`, {

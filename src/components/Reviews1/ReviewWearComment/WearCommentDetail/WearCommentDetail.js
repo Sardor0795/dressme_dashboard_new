@@ -10,7 +10,7 @@ const WearCommentDetail = ({ sliderData }) => {
       width: window.innerWidth,
     };
   }
-  console.log(sliderData, "Slider-Data");
+  // console.log(sliderData, "Slider-Data");
 
   useEffect(() => {
     const updateDimension = () => {
@@ -123,7 +123,7 @@ const WearCommentDetail = ({ sliderData }) => {
     });
   }, []);
 
-  console.log(sliderData?.locationListId?.product, "Product");
+  // console.log(sliderData?.locationListId?.product, "Product");
 
   return (
     <div className="w-full h-fit">
