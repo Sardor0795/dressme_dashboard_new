@@ -652,6 +652,19 @@ function EditProfilePage() {
               <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
                 Электронная почта{" "}
               </div>
+              {state?.sellerUpdateEmail ?
+                <button
+                  type="button"
+                  onClick={() => setState({ ...state, sellerEmailModal: true })}
+                  className={" text-textBlueColor not-italic font-AeonikProRegular text-sm leading-4  tracking-[0,16px] hover:underline"}>
+                  Обновить почту
+                </button>
+                :
+                <span
+                  className={" text-[#b5b5b5] not-italic font-AeonikProRegular text-sm leading-4   tracking-[0,16px] "}>
+                  Обновить почту
+                </span>
+              }
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
@@ -877,12 +890,12 @@ function EditProfilePage() {
             <div className="w-full justify-between flex ">
               <span
                 onClick={() => setState({ ...state, sellerTypes: "INDIVIDUAL" })}>
-                <span className={`${state?.sellerTypes === 'INDIVIDUAL' ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>
+                <span className={`${state?.sellerTypes === 'INDIVIDUAL' ? 'text-fullBlue' : 'text-[#b5b5b5]'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>
                   ФИЗИЧЕСКОЕ ЛИЦО</span>
               </span>
               <span
                 onClick={() => setState({ ...state, sellerTypes: 'ENTITY' })}>
-                <span className={`${state?.sellerTypes === 'ENTITY' ? 'text-fullBlue' : 'text-black'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>
+                <span className={`${state?.sellerTypes === 'ENTITY' ? 'text-fullBlue' : 'text-[#b5b5b5]'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>
                   ЮРИДИЧЕСКОЕ ЛИЦО</span>
               </span>
             </div>
@@ -948,20 +961,8 @@ function EditProfilePage() {
           </div>
 
           {/* EditPassword */}
-          <div className="w-full  flex items-center justify-between  xs:mt-5 ">
-            {state?.sellerUpdateEmail ?
-              <button
-                type="button"
-                onClick={() => setState({ ...state, sellerEmailModal: true })}
-                className={" text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"}>
-                Обновить почту
-              </button>
-              :
-              <span
-                className={" text-[#b5b5b5] flex items-center text-base not-italic font-AeonikProRegular "}>
-                Обновить почту
-              </span>
-            }
+          <div className={`w-full  flex items-center   xs:mt-5  ${state?.sellerTypes === 'ENTITY' ? 'justify-start' : 'justify-end'}`}>
+
             <button
               onClick={() => setOpenEditModal(true)}
               className={

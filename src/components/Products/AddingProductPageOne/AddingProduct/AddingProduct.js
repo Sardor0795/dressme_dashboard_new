@@ -1613,7 +1613,7 @@ const AddingProduct = () => {
                         <StarLabel />
                       </span>
                     </div>
-                    <div className="w-[300px] md:w-full h-[380px] flex items-center justify-center ">
+                    <div className="w-[350px] md:w-[290px] h-[380px] flex items-center justify-center ">
                       <button
                         type="button"
                         className="h-full w-full flex items-center justify-center "
@@ -1650,9 +1650,8 @@ const AddingProduct = () => {
                       </button>
 
                     </div>
-                    <div className="w-[90px] md:w-full flex flex-col md:flex-row items-center justify-between gap-y-2 gap-x-[10px] md:mt-[10px]">
-
-                      <div className="w-full h-1/3 md:h-[110px] md:w-1/3 flex flex-col items-center justify-center ">
+                    <div className="w-[90px] md:w-[290px] flex flex-col md:flex-row items-center justify-between gap-y-2  md:mt-[10px]">
+                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -1690,7 +1689,7 @@ const AddingProduct = () => {
                           </label>
                         </button>
                       </div>
-                      <div className="w-full h-1/3 md:h-[110px] md:w-1/3 flex flex-col items-center justify-center ">
+                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -1728,7 +1727,7 @@ const AddingProduct = () => {
                           </label>
                         </button>
                       </div>
-                      <div className="w-full h-1/3 md:h-[110px] md:w-1/3 flex flex-col items-center justify-center ">
+                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -1766,7 +1765,6 @@ const AddingProduct = () => {
                           </label>
                         </button>
                       </div>
-
                     </div>
                   </div>
                 </div>

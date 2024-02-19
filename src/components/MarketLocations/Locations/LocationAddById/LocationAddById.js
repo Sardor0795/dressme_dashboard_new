@@ -245,7 +245,7 @@ export default function LocationAddById() {
             <AiOutlineLeft />
           </button>
         </div>
-        <div>
+        <div className={` ${state?.errorGroup?.address && !state?.shopCenterAddress ? 'border-[2px] border-[#D50000] rounded-[4px] overflow-hidden' : ''}`}>
 
           <YandexMapStore
             handleCallback={CallBackYandex}
@@ -253,12 +253,12 @@ export default function LocationAddById() {
           // errorLong={state?.errorGroup?.longitude}
           // errorTitle={state?.errorGroup?.address}
           />
-          {state?.errorGroup?.address && !state?.shopCenterAddress && (
-            <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
-              {state?.errorGroup?.address}
-            </p>
-          )}
         </div>
+        {state?.errorGroup?.address && !state?.shopCenterAddress && (
+          <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+            {state?.errorGroup?.address}
+          </p>
+        )}
         <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
           <div className=" w-full md:w-[31%] flex-col h-[75px] md:h-[150px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
@@ -301,71 +301,96 @@ export default function LocationAddById() {
           </div>
           <div className=" w-full md:w-[31%] h-[75px] md:h-[150px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center">
-              <label
-                htmlFor="DataImg2"
-                className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-              >
-                <input
-                  className="hidden"
-                  id="DataImg2"
-                  type="file"
-                  name="fileUpload2"
-                  onChange={handleLocationImageTwo}
-                  accept=" image/*"
-                />
-                {!state?.picturelogoView2 && (
+              {state?.pictureBgView1 ?
+                <label
+                  htmlFor="DataImg2"
+                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id="DataImg2"
+                    type="file"
+                    name="fileUpload2"
+                    onChange={handleLocationImageTwo}
+                    accept=" image/*"
+                  />
+                  {!state?.picturelogoView2 && (
+                    <div className="w-fit h-fit flex items-center">
+                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="hidden md:flex mr-1">Второе</span>
+                        фото
+                        локации
+                      </span>
+                    </div>
+                  )}
+                  {state?.picturelogoView2 && (
+                    <img
+                      src={state?.picturelogoView2}
+                      alt="backImg"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  )}
+                </label> :
+                <div
+                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
+                >
                   <div className="w-fit h-fit flex items-center">
-                    <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                      <span className="hidden md:flex">Второе</span> фото
+                    <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
+                      <span className="hidden md:flex mr-1">Второе</span>
+                      фото
                       локации
                     </span>
                   </div>
-                )}
-                {state?.picturelogoView2 && (
-                  <img
-                    src={state?.picturelogoView2}
-                    alt="backImg"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                )}
-              </label>
+                </div>}
             </button>
           </div>
           <div className=" w-full md:w-[31%] h-[75px] md:h-[150px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
-              <label
-                htmlFor="DataImg3"
-                className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
-              >
-                <input
-                  className="hidden"
-                  id="DataImg3"
-                  type="file"
-                  name="fileUpload3"
-                  onChange={handleLocationImageThree}
-                  accept=" image/*"
-                />
-                {!state?.pictureLastView3 && (
+              {state?.picturelogoView2 ?
+                <label
+                  htmlFor="DataImg3"
+                  className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
+                >
+                  <input
+                    className="hidden"
+                    id="DataImg3"
+                    type="file"
+                    name="fileUpload3"
+                    onChange={handleLocationImageThree}
+                    accept=" image/*"
+                  />
+                  {!state?.pictureLastView3 && (
+                    <div className="w-fit h-fit flex items-center">
+                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="hidden md:flex mr-1"> Третье</span> фото
+                        локации
+                      </span>
+                    </div>
+                  )}
+                  {state?.pictureLastView3 && (
+                    <img
+                      src={state?.pictureLastView3}
+                      alt="backImg"
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  )}
+                </label> :
+                <div
+                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
+                >
                   <div className="w-fit h-fit flex items-center">
-                    <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                      <span className="hidden md:flex"> Третье</span> фото
+                    <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
+                      <span className="hidden md:flex mr-1">Третье</span>
+                      фото
                       локации
                     </span>
                   </div>
-                )}
-                {state?.pictureLastView3 && (
-                  <img
-                    src={state?.pictureLastView3}
-                    alt="backImg"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                )}
-              </label>
+                </div>}
             </button>
           </div>
         </div>
         <div className="w-full  px-4 md:px-0 ">
-          <div className="flex flex-wrap items-center justify-between gap-x-3 md:gap-4 ">
+          <div className="flex flex-wrap  justify-between gap-x-3 md:gap-4 ">
             {/* INPUT DATA */}
             <div className={"w-full block md:hidden mb-3 md:mb-0"}>
               <label htmlFor="selectRegion2">
@@ -432,13 +457,13 @@ export default function LocationAddById() {
                   }
                   className="w-full outline-none text-[12px] md:text-[14px]  h-10 md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
                 />
-                {state?.errorGroup?.assistant_name &&
-                  !state?.assistantNameFirst && (
-                    <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
-                      {state?.errorGroup?.assistant_name}
-                    </p>
-                  )}
               </div>
+              {state?.errorGroup?.assistant_name &&
+                !state?.assistantNameFirst && (
+                  <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                    {state?.errorGroup?.assistant_name}
+                  </p>
+                )}
             </label>
             <label htmlFor="fname2" className=" w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
