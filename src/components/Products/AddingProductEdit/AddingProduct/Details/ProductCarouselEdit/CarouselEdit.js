@@ -2176,7 +2176,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             </div>
           </div>
           <div className="w-[290px] mt-[10px] h-[130px] flex justify-between gap-x-[6px]   rounded-lg">
-            <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
+            <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
                 className="h-[120px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
@@ -2236,7 +2236,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2298,7 +2298,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2367,7 +2367,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </div>
             {/*  color-2 */}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2464,7 +2464,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
               </div>
             </div>
-            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-60"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
+            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2562,7 +2562,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-3*/}
-            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-60"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
+            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2659,7 +2659,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-4*/}
-            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-60"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
+            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
