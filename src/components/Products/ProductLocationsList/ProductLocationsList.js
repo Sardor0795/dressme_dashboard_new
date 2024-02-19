@@ -418,6 +418,14 @@ export default function ProductLocationsList() {
       }
     })
   }
+  // For DropUp
+  useEffect(() => {
+    if (deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal || statusModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal || statusModal]);
 
   return (
     <div className="w-full px-4 md:px-10">

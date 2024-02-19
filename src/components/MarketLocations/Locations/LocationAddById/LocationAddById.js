@@ -260,7 +260,7 @@ export default function LocationAddById() {
           )}
         </div>
         <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
-          <div className=" w-full md:w-[31%] flex-col h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] flex-col h-[75px] md:h-[150px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
               <label
                 htmlFor="DataImg1"
@@ -288,7 +288,7 @@ export default function LocationAddById() {
                   <img
                     src={state?.pictureBgView1}
                     alt="backImg"
-                    className="w-full h-full object-contain rounded-lg"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 )}
               </label>
@@ -299,7 +299,7 @@ export default function LocationAddById() {
               </p>
             )}
           </div>
-          <div className=" w-full md:w-[31%] h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] h-[75px] md:h-[150px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center">
               <label
                 htmlFor="DataImg2"
@@ -325,13 +325,13 @@ export default function LocationAddById() {
                   <img
                     src={state?.picturelogoView2}
                     alt="backImg"
-                    className="w-full h-full object-contain rounded-lg"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 )}
               </label>
             </button>
           </div>
-          <div className=" w-full md:w-[31%] h-[75px] md:h-[130px] border-2 border-dashed flex items-center justify-center rounded-lg">
+          <div className=" w-full md:w-[31%] h-[75px] md:h-[150px] border-2 border-dashed flex items-center justify-center rounded-lg">
             <button className="h-full w-full flex items-center justify-center ">
               <label
                 htmlFor="DataImg3"
@@ -357,7 +357,7 @@ export default function LocationAddById() {
                   <img
                     src={state?.pictureLastView3}
                     alt="backImg"
-                    className="w-full h-full object-contain rounded-lg"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 )}
               </label>
