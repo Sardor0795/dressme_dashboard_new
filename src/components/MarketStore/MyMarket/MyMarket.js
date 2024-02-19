@@ -187,7 +187,7 @@ function MyMarket() {
                   </div>
                 </div>
                 <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[50px] mt-3 md:mt-0">
-                  <div className="flex items-center gap-x-1 ">
+                  <div className="flex items-center gap-x-1 select-none">
                     {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 1) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                       <img src={man} alt="" />
                     </div>}
@@ -195,7 +195,7 @@ function MyMarket() {
                       <img src={woman} alt="" />
                     </div>}
                   </div>
-                  <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[240px] ll:px-5 active:opacity-70 border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
+                  <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[240px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                     <img src={deliveryIcon} alt="" />
                     {helperDatainform?.deliveryList
                       ?.filter((e) => e.id == data?.delivery_id)
@@ -210,7 +210,7 @@ function MyMarket() {
                         );
                       })}
                   </div>
-                  <div className="w-[100px] flex items-center">
+                  <div className="w-[100px] flex items-center select-none">
                     {data?.status === "approved" &&
                       <button
                         type="button" className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">

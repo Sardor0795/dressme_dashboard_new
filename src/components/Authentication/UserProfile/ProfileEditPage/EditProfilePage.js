@@ -86,7 +86,7 @@ function EditProfilePage() {
       sellerSubRegionId: sellerInformation?.sellerUserData?.sub_region_id,
       sellerTypeId: sellerInformation?.sellerUserData?.seller_type_id,
       sellerTypes: sellerInformation?.sellerUserData?.seller_type_id >= 3 ? 'ENTITY' : 'INDIVIDUAL',
-      companyName: sellerInformation?.sellerUserData?.company,
+      companyName: sellerInformation?.sellerUserData?.company?.name,
       sellerStatus: sellerInformation?.sellerUserData?.status,
       sellerPhoneCode:
         sellerInformation?.sellerUserData?.phone && sellerInformation?.sellerUserData?.phone.slice(0, 3),
@@ -676,10 +676,10 @@ function EditProfilePage() {
               Номер телефона{" "}
             </div>
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
-              <div className="ss:w-[35%] md:w-[30%] h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                <div
-                  className="w-[40px] outline-none flex items-center h-full select-none mx-2 not-italic font-AeonikProRegular text-base leading-4 text-black"
-                >+998</div>
+              <div className="ss:w-[35%] md:w-[30%] box-border	 h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+                <span
+                  className="w-[40px] outline-none flex items-center h-[42px] select-none  not-italic font-AeonikProRegular text-base leading-4 text-black"
+                >+998</span>
               </div>
               <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
                 <InputMask
