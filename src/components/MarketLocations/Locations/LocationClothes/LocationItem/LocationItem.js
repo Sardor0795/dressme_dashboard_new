@@ -289,10 +289,10 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   <th className="w-[15%] h-full flex items-center ">Артикул</th>
                   <th className="w-[8%] h-full flex items-center ">Тип</th>
                   <th className="w-[8%] h-full flex items-center ">Дата</th>
-                  <th className="w-[10%] h-full flex items-center ">Статус</th>
                   <th className="w-[10%] h-full flex items-center ">Цена товара</th>
                   <th className="w-[10%] h-full flex items-center "></th>
                   <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                  <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                 </tr>
               </div>
             </div>
@@ -351,23 +351,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                               })}
                               <td className="w-[8%] h-full flex items-center ">{itemValue?.created_at || "created_at"}</td>
 
-                              {itemValue?.status === "approved" &&
-                                <td
-                                  className="w-[10%] h-fit  flex items-center  ">
-                                  <span className="w-[100px]  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
-                                </td>}
-                              {itemValue?.status === "declined" && <td
-                                onClick={() => onHandleStatus(itemValue?.id)}
-                                className="w-[10%] h-fit cursor-pointer flex items-center  ">
-                                <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
-                              </td>}
-                              {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center  ">
-                                <span className="w-[100px]  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
-                              </td>}
-                              {itemValue?.status === "updated" &&
-                                <td className="w-[10%] h-fit flex items-center">
-                                  <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
-                                </td>}
+
                               <td className="w-[10%] h-full   flex items-center ">
                                 {itemValue?.cost?.discount_price > 999 ?
                                   Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
@@ -402,6 +386,23 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                   </span>
                                 </button>
                               </td>
+                              {itemValue?.status === "approved" &&
+                                <td
+                                  className="w-[10%] h-fit  flex items-center justify-center  ">
+                                  <span className="w-[100px]  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
+                                </td>}
+                              {itemValue?.status === "declined" && <td
+                                onClick={() => onHandleStatus(itemValue?.id)}
+                                className="w-[10%] h-fit cursor-pointer flex items-center justify-center  ">
+                                <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
+                              </td>}
+                              {itemValue?.status === "pending" && <td className="w-[10%] h-fit  flex items-center justify-center  ">
+                                <span className="w-[100px]  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full">{itemValue?.status || "status"}</span>
+                              </td>}
+                              {itemValue?.status === "updated" &&
+                                <td className="w-[10%] h-fit flex items-center justify-center">
+                                  <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
+                                </td>}
                             </tr>
                           </div>
                           {/* For Mobile Device */}

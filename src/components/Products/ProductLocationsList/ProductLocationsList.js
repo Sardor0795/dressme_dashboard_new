@@ -953,7 +953,6 @@ export default function ProductLocationsList() {
         </div>
 
         {dressInfo?.getProductList?.products_locations?.filter(e => shopIdList?.includes(e?.id))?.map((item, index) => {
-
           return (
             <div key={index}>
               <div >
@@ -1052,7 +1051,6 @@ export default function ProductLocationsList() {
                                               <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
                                               <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
                                               <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                                              <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                               <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                                               <th className="w-[10%] h-full flex items-center justify-center"></th>
                                               {item?.shop_locations?.length > 1 ?
@@ -1060,6 +1058,7 @@ export default function ProductLocationsList() {
                                                 <th className="w-[9%] h-full flex items-center justify-center"></th>
                                               }
                                               <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                                              <th className="w-[10%] h-full flex items-center justify-center ">Статус</th>
                                             </tr>
                                           </div>
                                         </div>
@@ -1115,25 +1114,6 @@ export default function ProductLocationsList() {
                                                             )
                                                           })}
                                                           <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
-
-                                                          {itemValue?.status === "approved" &&
-                                                            <td
-                                                              className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                              {itemValue?.status || "status"}
-                                                            </td>}
-                                                          {itemValue?.status === "declined" &&
-                                                            <td
-                                                              onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
-
-                                                              className="w-[7%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
-                                                              {itemValue?.status || "status"}
-                                                            </td>}
-                                                          {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                            {itemValue?.status || "status"}
-                                                          </td>}
-                                                          {itemValue?.status === "updated" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                            {itemValue?.status || "status"}
-                                                          </td>}
                                                           <td className="w-[10%] h-full  flex items-center justify-center ">
                                                             {itemValue?.cost?.discount_price > 999 ?
                                                               Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
@@ -1185,6 +1165,25 @@ export default function ProductLocationsList() {
                                                               </span>
                                                             </button>
                                                           </td>
+                                                          {itemValue?.status === "approved" &&
+                                                            <td
+                                                              className="w-[10%] h-fit  flex items-center justify-center  ">
+                                                              <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                            </td>}
+                                                          {itemValue?.status === "declined" &&
+                                                            <td
+                                                              onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                              className="w-[10%] h-fit cursor-pointer flex items-center  justify-center">
+                                                              <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
+                                                            </td>}
+                                                          {itemValue?.status === "pending" &&
+                                                            <td className="w-[10%] h-fit  flex items-center justify-center ">
+                                                              <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                            </td>}
+                                                          {itemValue?.status === "updated" &&
+                                                            <td className="w-[10%] h-fit  flex items-center justify-center   ">
+                                                              <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                            </td>}
                                                         </tr>
                                                       </tbody>
                                                     </table>
@@ -1369,7 +1368,6 @@ export default function ProductLocationsList() {
                                             <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
                                             <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
                                             <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                                            <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                             <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
                                             <th className="w-[10%] h-full flex items-center justify-center"></th>
                                             {item?.shop_locations?.length > 1 ?
@@ -1377,6 +1375,7 @@ export default function ProductLocationsList() {
                                               <th className="w-[9%] h-full flex items-center justify-center"></th>
                                             }
                                             <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                                            <th className="w-[10%] h-full flex items-center justify-center">Статус</th>
                                           </tr>
                                         </div>
                                       </div>
@@ -1434,23 +1433,7 @@ export default function ProductLocationsList() {
                                                         })}
                                                         <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
 
-                                                        {itemValue?.status === "approved" &&
-                                                          <td
-                                                            className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                            {itemValue?.status || "status"}
-                                                          </td>}
-                                                        {itemValue?.status === "declined" &&
-                                                          <td
-                                                            onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
-                                                            className="w-[7%] h-fit cursor-pointer flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
-                                                            {itemValue?.status || "status"}
-                                                          </td>}
-                                                        {itemValue?.status === "pending" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                          {itemValue?.status || "status"}
-                                                        </td>}
-                                                        {itemValue?.status === "updated" && <td className="w-[7%] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                          {itemValue?.status || "status"}
-                                                        </td>}
+
                                                         <td className="w-[10%] h-full  flex items-center justify-center ">
                                                           {itemValue?.cost?.discount_price > 999 ?
                                                             Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
@@ -1485,7 +1468,6 @@ export default function ProductLocationsList() {
                                                             </button>
                                                           </td> :
                                                           <td className={`w-[9%] h-full  flex items-center justify-center `}></td>}
-
                                                         <td className="w-[9%] h-full  flex items-center justify-center ">
                                                           <button type="button"
                                                             onClick={() => {
@@ -1499,6 +1481,25 @@ export default function ProductLocationsList() {
                                                             </span>
                                                           </button>
                                                         </td>
+                                                        {itemValue?.status === "approved" &&
+                                                          <td
+                                                            className="w-[10%] h-fit  flex items-center justify-center  ">
+                                                            <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                          </td>}
+                                                        {itemValue?.status === "declined" &&
+                                                          <td
+                                                            onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                            className="w-[10%] h-fit cursor-pointer flex items-center  justify-center">
+                                                            <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
+                                                          </td>}
+                                                        {itemValue?.status === "pending" &&
+                                                          <td className="w-[10%] h-fit  flex items-center justify-center ">
+                                                            <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                          </td>}
+                                                        {itemValue?.status === "updated" &&
+                                                          <td className="w-[10%] h-fit  flex items-center justify-center   ">
+                                                            <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                          </td>}
                                                       </tr>
                                                     </tbody>
                                                   </table>
