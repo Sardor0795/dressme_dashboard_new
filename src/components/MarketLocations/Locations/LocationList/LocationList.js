@@ -212,12 +212,12 @@ function LocationList() {
                   Рабочее время
                 </span>
               </li>
-              <li className="w-[12%] ">
+              {/* <li className="w-[12%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                   Статус
                 </span>
-              </li>
-              <li className="w-[26%] flex items-center justify-end ">
+              </li> */}
+              <li className="w-[38%] flex items-center justify-end ">
                 <button
                   onClick={() => setOpenSelect(true)}
                   className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
@@ -299,7 +299,26 @@ function LocationList() {
                                 {value?.work_time_to || "endTime"}
                               </span>
                             </li>
-                            <li className="md:w-[12%] h-full  flex items-center ">
+
+                            <li className="md:w-[12%] h-full  flex items-center justify-center text-center">
+                              <button
+                                onClick={() => goMapWear(value?.id)}
+                                className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
+                              >
+                                {/* value?.wearLink */}
+                                Товары
+                              </button>
+                            </li>
+                            <li className="md:w-[14%] h-full  flex items-center justify-center text-center">
+                              <button
+                                onClick={() => goMapCity(value?.id)}
+                                className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
+                              >
+                                {/* {value?.showMore} */}
+                                Подробнее
+                              </button>
+                            </li>
+                            <li className="md:w-[12%] h-full  flex items-center justify-center ">
                               {value?.status === "approved" &&
                                 <button
                                   type="button" className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
@@ -320,24 +339,6 @@ function LocationList() {
                                 <button type="button" className="w-[100px] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                   {value?.status || "status"}
                                 </button>}
-                            </li>
-                            <li className="md:w-[12%] h-full  flex items-center justify-center text-center">
-                              <button
-                                onClick={() => goMapWear(value?.id)}
-                                className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
-                              >
-                                {/* value?.wearLink */}
-                                Товары
-                              </button>
-                            </li>
-                            <li className="md:w-[14%] h-full  flex items-center justify-center text-center">
-                              <button
-                                onClick={() => goMapCity(value?.id)}
-                                className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
-                              >
-                                {/* {value?.showMore} */}
-                                Подробнее
-                              </button>
                             </li>
                           </ul>
                         </li>
