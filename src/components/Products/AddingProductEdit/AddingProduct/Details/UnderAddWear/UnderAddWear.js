@@ -688,7 +688,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                             <div className="w-full flex gap-x-10 px-3 pt-5">
                                 <div className="w-fit flex flex-col">
                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Размер Бедер
+                                        Обхват Бедер
                                     </p>
                                     <div className="flex items-center">
                                         <div className="flex flex-col border border-borderColor  rounded-lg">
