@@ -1108,8 +1108,8 @@ export default function ProductLocationsList() {
                                                               <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-[110px] h-full object-cover" />
                                                             </span>
                                                           </td>
-                                                          <td className="w-[15%] h-full  flex items-center  justify-center">
-                                                            <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
+                                                          <td className="w-[15%] h-full break-all  overflow-hidden  flex items-center  justify-center">
+                                                            <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
                                                               {itemValue?.name_ru || "namrRu"}
                                                             </p>
                                                           </td>
@@ -1431,8 +1431,8 @@ export default function ProductLocationsList() {
                                                             <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-[110px] h-full object-cover" />
                                                           </span>
                                                         </td>
-                                                        <td className="w-[15%] h-full  flex items-center  justify-center">
-                                                          <p className="w-full  break-words text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
+                                                        <td className="w-[15%] h-full break-all  overflow-hidden  flex items-center  justify-center">
+                                                          <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
                                                             {itemValue?.name_ru || "namrRu"}
                                                           </p>
                                                         </td>

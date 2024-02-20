@@ -48,6 +48,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
 
 
     })
+
     const [getSizesIds, setGetSizesIds] = useState([]);
 
     const [checked, setChecked] = useState([]);
@@ -76,6 +77,17 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         ]
     }
     )
+    const [productId, setProductId] = useState(null);
+    const [shopLocationId, setShopLocationId] = useState(null);
+    console.log(stateList, "stateList");
+    useEffect(() => {
+        stateList?.shop_locations?.map(item => {
+            if (Number(item?.id) === Number(dressInfo?.locationIdAddProduct)) {
+                setProductId(item?.pivot?.product_id)
+                setShopLocationId(item?.pivot?.shop_location_id)
+            }
+        })
+    }, [stateList])
 
     const SelectedNumber = 2
     useEffect(() => {
@@ -110,9 +122,9 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         form.append("min_outwear_size", state?.minSize);
         state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
         state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
-        form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
+        form.append("shop_location_id", shopLocationId);
         form.append("color_id", pivotColorId);
-        form.append("product_id", Number(stateList?.shop_locations[0]?.pivot?.product_id));
+        form.append("product_id", Number(productId));
         return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
             method: "POST",
             headers: {
@@ -283,6 +295,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     //         setState({ ...state, successChanged: false, successMessage: '', errorMessage: '' })
     //     }
     // }, [state?.sizeEditModal])
+    console.log(dressInfo?.locationIdAddProduct, "ressInfo?.locationIdAddProduct");
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div>
@@ -994,17 +1007,17 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         itemLayout="horizontal"
                         dataSource={stateList?.sizes}
                         className="w-full">
-                        {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
-
+                        {stateList?.sizes?.filter(e => (e?.product_color_id == checkColor))?.map((item, index) => {
                             return (
-                                <List.Item key={index} className="w-full " >
-                                    <div className="flex items-center gap-x-1">
+                                <List.Item key={index} className="w-full ">
+                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct && <div className="flex items-center gap-x-1">
                                         <div className="flex items-center h-full">
                                             <Checkbox value={item?.id} checked={checked} />
                                         </div>
                                         <div
                                             className={`w-full h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                         >
+                                            {item?.shop_location_id}
                                             <div className="relative w-full flex  gap-x-10 px-3 pt-5">
                                                 <div className="w-[20%] flex flex-col">
                                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
@@ -1474,7 +1487,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 </div>
                                             </div>
                                         </div >
-                                    </div >
+                                    </div >}
                                 </List.Item>
                             )
                         })}
