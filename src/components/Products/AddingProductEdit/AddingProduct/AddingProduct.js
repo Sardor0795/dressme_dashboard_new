@@ -115,9 +115,7 @@ const AddingProduct = () => {
 
   function CallBackHeadWear(childData) {
     setState({ ...state, newColorByAddSizes: childData })
-    console.log(childData, "1111--childData");
   }
-  console.log(state?.newColorByAddSizes, '1111--newColorByAddSizes');
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }

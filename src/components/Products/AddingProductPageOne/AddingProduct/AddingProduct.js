@@ -464,6 +464,7 @@ const AddingProduct = () => {
       })
       .catch((err) => {
         throw new Error(err || "something wrong");
+        setState({ ...state, sendingLoader: false })
 
       });
   };
