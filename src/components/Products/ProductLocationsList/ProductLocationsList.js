@@ -353,7 +353,8 @@ export default function ProductLocationsList() {
   };
 
   function addNewProductId(locationId, shopId) {
-    setDressInfo({ ...dressInfo, locationIdAddProduct: locationId })
+    setDressInfo({ ...dressInfo, locationIdAddProduct: locationId, ProductFilterType: null })
+
     navigate(`/products/location/add/:${shopId}`);
 
   };
