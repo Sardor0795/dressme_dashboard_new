@@ -151,7 +151,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex py-[10px] px-[5px]`}>
+                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[48px] px-[5px]`}>
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
                                         type="text"
@@ -181,7 +181,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex py-[10px] px-[5px]`}>
+                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[48px] px-[5px]`}>
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
@@ -210,7 +210,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         (необязательно)
                                     </span>
                                 </div>
-                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
+                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] h-[48px] px-[5px]">
                                     <textarea
                                         className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
@@ -243,7 +243,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </span>
                                 </div>
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
-                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
+                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] h-[48px] px-[5px]">
                                     <textarea
                                         className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
@@ -272,7 +272,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                         <div className="w-full pb-[30px] md:border border-[#f2f2f2] flex flex-col md:rounded-lg md:p-5 flex-1">
                             <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
                                 {/* Language in RUSSIAN */}
-                                <div className="flex-1 mb-[10px]">
+                                <div className="flex-1 mb-[10px] ">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                             Качество на русском
@@ -283,7 +283,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px] overflow-hidden ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         // allowClear
@@ -313,7 +313,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px] overflow-hidden ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px] ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
 
                                         style={{ width: "100%" }}
                                         value={
@@ -353,7 +353,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             (необязательно)
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor  `}>
+                                    <div className={`rounded-lg  flex h-[48px] px-[5px] border border-borderColor  `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
@@ -381,7 +381,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             (необязательно)
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor `}>
+                                    <div className={`rounded-lg  flex h-[48px] px-[5px] border border-borderColor `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
