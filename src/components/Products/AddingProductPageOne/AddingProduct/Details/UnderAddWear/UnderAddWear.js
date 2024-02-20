@@ -143,7 +143,17 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             setState({ ...state, salePercent: value });
         }
     };
-
+    const onHandleSelectSize = (name) => {
+        if (!state?.sizeListCheck) {
+            setState({ ...state, sizeListCheck: name })
+        }
+        if (state?.sizeListCheck === name) {
+            setState({ ...state, sizeListCheck: null })
+        }
+        if (state?.sizeListCheck !== name) {
+            setState({ ...state, sizeListCheck: name })
+        }
+    }
     const contentUnderWear = (
         <div className="w-[840px] h-fit">
             <div
@@ -246,8 +256,8 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
-                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            checked={data?.name === state?.sizeListCheck}
+                                                            onChange={() => onHandleSelectSize(data?.name)}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
@@ -278,8 +288,8 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                                         type="checkbox"
                                                         id={data?.id}
                                                         name="size_Outwear"
-                                                        checked={data?.id === state?.selected}
-                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                        checked={data?.name === state?.sizeListCheck}
+                                                        onChange={() => onHandleSelectSize(data?.name)}
                                                         value={data?.name}
                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                     />

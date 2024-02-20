@@ -225,6 +225,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             setState({ ...state, salePrice: '' })
         }
     }, [state?.priceNum, state?.salePercent])
+    console.log(state?.priceNum, state?.salePercent, state?.salePrice, "state?.priceNum, state?.salePercent, state?.salePrice");
 
     useEffect(() => {
         setGetSizesIds([])
@@ -250,6 +251,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
+
     function sendCheckListItem(id) {
         if (state?.addnewColorIdIcons) {
             setState({ ...state, addnewColorIdIcons: null })
@@ -259,6 +261,17 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             setTimeout(() => {
                 onClick()
             }, 1000);
+        }
+    }
+    const onHandleSelectSize = (name) => {
+        if (!state?.sizeListCheck) {
+            setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
+        }
+        if (state?.sizeListCheck === name) {
+            setState({ ...state, sizeListCheck: null, saveBtnDisable: true, disableSizes: 0 })
+        }
+        if (state?.sizeListCheck !== name) {
+            setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
         }
     }
     return (
@@ -413,7 +426,6 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 key={data?.id}
                                                                 className="flex "
                                                             >
-
                                                                 {data?.action &&
                                                                     <label
                                                                         htmlFor={data?.id}
@@ -424,7 +436,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                             id={data?.id}
                                                                             name="size_Outwear"
                                                                             checked={data?.name === state?.sizeListCheck}
-                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            onChange={() => onHandleSelectSize(data?.name)}
                                                                             value={data?.name}
                                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                         />
@@ -457,7 +469,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                             id="m_outwear"
                                                                             name="size_Outwear"
                                                                             checked={data?.name === state?.sizeListCheck}
-                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            onChange={() => onHandleSelectSize(data?.name)}
                                                                             value={data?.name}
                                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                         />
@@ -611,7 +623,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle outline-none w-[130px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center  opacity-20`}
-                                                >{state?.minSize}</span>
+                                                >{state?.colSize}</span>
                                                 : <input
                                                     type="number"
                                                     name="colSize"
@@ -632,7 +644,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className={`inputStyle outline-none  w-[130px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center opacity-20`}
-                                                >{state?.minSize}</span>
+                                                >{state?.rowSize}</span>
                                                 : <input
                                                     type="number"
                                                     name="rowSize"
@@ -656,7 +668,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                             <span
                                                 className={`inputStyle outline-none w-[60px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
-                                            >{state?.minSize}</span>
+                                            >{state?.quantityNum}</span>
                                             : <input
                                                 type="number"
                                                 name="quantityNum"
@@ -680,7 +692,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 0 ?
                                                 <span
                                                     className={`inputStyle outline-none w-[58px] text-start h-[42px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
-                                                >{state?.minSize}</span>
+                                                >{state?.ageNum}</span>
                                                 : <input
                                                     type="number"
                                                     name="ageNum"
@@ -705,7 +717,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
                                                     className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                >{state?.minSize}</span>
+                                                >{state?.priceNum || 0}</span>
                                                 : <input
                                                     type="text"
                                                     placeholder="0"
@@ -735,7 +747,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                        >{state?.minSize}</span>
+                                                        >{state?.salePercent || 0}</span>
                                                         : <input
                                                             type="number"
                                                             placeholder="0"
@@ -753,14 +765,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                         <span
                                                             className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                        >{state?.minSize}</span>
+                                                        >{state?.salePrice || 0}</span>
                                                         : <input
                                                             type="text"
                                                             placeholder="0"
                                                             id="salePrice"
                                                             name="salePrice"
                                                             className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
-                                                            value={state?.salePrice}
+                                                            value={state?.salePrice || 0}
                                                             onChange={handleChangeSalePrice}
                                                             readOnly
                                                         />}
@@ -1220,12 +1232,11 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     </div>
                                                     <div className="w-[40%] flex flex-col items-start">
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                            <label
-                                                                htmlFor=""
+                                                            <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
                                                                 Скидка
-                                                            </label>
+                                                            </div>
 
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">

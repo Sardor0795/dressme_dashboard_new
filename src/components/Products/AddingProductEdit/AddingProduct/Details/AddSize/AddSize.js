@@ -95,7 +95,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             onConcel: false,
             selected: null,
         })
-        handleCallBack()
+        // handleCallBack()
     }, [productsDataIdEdit?.sizes])
 
     // console.log(productsDataIdEdit, "productsDataIdEdit");
@@ -386,7 +386,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             setState({ ...state, salePercent: value });
         }
     };
-
+    const onHandleSelectSize = (name, id) => {
+        if (!state?.sizeListCheck) {
+            setState({ ...state, sizeListCheck: name, selected: id })
+        }
+        if (state?.sizeListCheck === name) {
+            setState({ ...state, sizeListCheck: null, selected: null })
+        }
+        if (state?.sizeListCheck !== name) {
+            setState({ ...state, sizeListCheck: name, selected: id })
+        }
+    }
     const AddSize = (
         <div className="w-[840px] h-fit">
             {Number(typeId) === 1 &&
@@ -712,8 +722,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                                 type="checkbox"
                                                                 id={data?.id}
                                                                 name="size_Outwear"
-                                                                checked={data?.id === state?.selected}
-                                                                onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                                checked={data?.name === state?.sizeListCheck}
+                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
                                                                 value={data?.name}
                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                             />
@@ -744,8 +754,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                                 type="checkbox"
                                                                 id={data?.id}
                                                                 name="size_Outwear"
-                                                                checked={data?.id === state?.selected}
-                                                                onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                                checked={data?.name === state?.sizeListCheck}
+                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
                                                                 value={data?.name}
                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                             />
@@ -1205,8 +1215,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                                 type="checkbox"
                                                                 id={data?.id}
                                                                 name="size_Outwear"
-                                                                checked={data?.id === state?.selected}
-                                                                onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                                checked={data?.name === state?.sizeListCheck}
+                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
                                                                 value={data?.name}
                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                             />
@@ -1236,8 +1246,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                             type="checkbox"
                                                             id={data?.id}
                                                             name="size_Outwear"
-                                                            checked={data?.id === state?.selected}
-                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                            checked={data?.name === state?.sizeListCheck}
+                                                            onChange={() => onHandleSelectSize(data?.name, data?.id)}
                                                             value={data?.name}
                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                         />
@@ -1852,8 +1862,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                                 type="checkbox"
                                                                 id={data?.id}
                                                                 name="size_Outwear"
-                                                                checked={data?.id === state?.selected}
-                                                                onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                                checked={data?.name === state?.sizeListCheck}
+                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
                                                                 value={data?.name}
                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                             />
@@ -1885,8 +1895,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                                 type="checkbox"
                                                                 id="m_outwear"
                                                                 name="size_Outwear"
-                                                                checked={data?.id === state?.selected}
-                                                                onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id })}
+                                                                checked={data?.name === state?.sizeListCheck}
+                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
                                                                 value={data?.name}
                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                             />
