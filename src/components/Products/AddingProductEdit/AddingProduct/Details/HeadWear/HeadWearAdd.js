@@ -45,7 +45,16 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const [checked, setChecked] = useState([]);
     const [indeterminate, setIndeterminate] = useState(false);
     const [checkAll, setCheckAll] = useState(false);
-
+    const [productId, setProductId] = useState(null);
+    const [shopLocationId, setShopLocationId] = useState(null);
+    useEffect(() => {
+        stateList?.shop_locations?.map(item => {
+            if (Number(item?.id) === Number(dressInfo?.locationIdAddProduct)) {
+                setProductId(item?.pivot?.product_id)
+                setShopLocationId(item?.pivot?.shop_location_id)
+            }
+        })
+    }, [stateList])
     const SelectedNumber = 1
     useEffect(() => {
         if (state?.discountPercent > 0) {
@@ -74,9 +83,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
         state?.disableSizes === 2 && form.append("amount", state?.amount);
         state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
-        form.append("shop_location_id", stateList?.shop_locations[0]?.pivot?.shop_location_id);
+        form.append("shop_location_id", shopLocationId);
         form.append("color_id", pivotColorId);
-        form.append("product_id", Number(stateList?.shop_locations[0]?.pivot?.product_id));
+        form.append("product_id", Number(productId));
 
         return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
             method: "POST",
@@ -567,17 +576,18 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         dataSource={stateList?.sizes}
                         className="w-full">
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
-                            // console.log(item, "item--Map");
                             return (
                                 <List.Item key={index} className="w-full "
                                 >
-                                    <div className="w-full flex items-center gap-x-1">
+                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct && <div className="w-full flex items-center gap-x-1">
                                         <div className="flex items-center h-full">
                                             <Checkbox value={item?.id} checked={checked} />
                                         </div>
                                         <div
                                             className={`w-full  h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                         >
+                                            {item?.shop_location_id}
+
                                             <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
@@ -734,7 +744,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>}
                                 </List.Item>
                             )
                         })}
