@@ -105,6 +105,7 @@ const AddingProduct = () => {
     // -----
     subSectionToggle: false
   });
+
   const [deleteColorId, setDeleteColorId] = useState(null);
   const [hideToggleIcons, setHideToggleIcons] = useState(false);
   const [SuccessMessage, setSuccessMessage] = useState(null);
@@ -113,9 +114,10 @@ const AddingProduct = () => {
   const [addSizeDisable, setAddSizeDisable] = useState(null);
 
   function CallBackHeadWear(childData) {
-    // console.log(childData, "childData");
     setState({ ...state, newColorByAddSizes: childData })
+    console.log(childData, "1111--childData");
   }
+  console.log(state?.newColorByAddSizes, '1111--newColorByAddSizes');
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }

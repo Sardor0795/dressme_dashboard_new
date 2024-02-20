@@ -254,8 +254,6 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
         })
-        // setGetSizesIds(getSizesIds.filter((x, i, a) => a.indexOf(x) == i))
-
     }, [checkColor])
 
     useEffect(() => {
@@ -275,10 +273,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
         setIndeterminate(false)
         setCheckAll(false)
     }, [checkColor])
-    // console.log(checkColor, "checkColor2");
-    // console.log(getSizesIds, "getSizesIds2");
-    // console.log(checked, "checked2");
-    // console.log(checkAll, "checkAll2");
+
     function sendCheckListItem(id) {
         if (state?.addnewColorIdIcons) {
             setState({ ...state, addnewColorIdIcons: null })
@@ -290,12 +285,18 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             }, 1000);
         }
     }
-    // useEffect(() => {
-    //     if (!state?.sizeEditModal) {
-    //         setState({ ...state, successChanged: false, successMessage: '', errorMessage: '' })
-    //     }
-    // }, [state?.sizeEditModal])
-    console.log(dressInfo?.locationIdAddProduct, "ressInfo?.locationIdAddProduct");
+
+    const onHandleSelectSize = (name) => {
+        if (!state?.sizeListCheck) {
+            setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
+        }
+        if (state?.sizeListCheck === name) {
+            setState({ ...state, sizeListCheck: null, saveBtnDisable: true, disableSizes: 0 })
+        }
+        if (state?.sizeListCheck !== name) {
+            setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
+        }
+    }
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div>
@@ -523,7 +524,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                             id={data?.id}
                                                                             name="size_Outwear"
                                                                             checked={data?.name === state?.sizeListCheck}
-                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            onChange={() => onHandleSelectSize(data?.name)}
                                                                             value={data?.name}
                                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                         />
@@ -555,7 +556,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                             id={data?.id}
                                                                             name="size_Outwear"
                                                                             checked={data?.name === state?.sizeListCheck}
-                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            onChange={() => onHandleSelectSize(data?.name)}
                                                                             value={data?.name}
                                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                         />
@@ -1111,7 +1112,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                                         id={data?.id}
                                                                                         name="size_Outwear"
                                                                                         checked={data?.name === item?.letter_size}
-                                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
+                                                                                        onChange={() => onHandleSelectSize(data?.name)}
                                                                                         value={data?.name}
                                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                                     />
@@ -1143,7 +1144,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                                         id={data?.id}
                                                                                         name="size_Outwear"
                                                                                         checked={data?.name === item?.letter_size}
-                                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, sizeListCheck: data?.name, saveBtnDisable: true })}
+                                                                                        onChange={() => onHandleSelectSize(data?.name)}
                                                                                         value={data?.name}
                                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                                     />

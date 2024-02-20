@@ -283,7 +283,18 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             }, 1000);
         }
     };
-    // border-red
+
+    const onHandleSelectSize = (name) => {
+        if (!state?.sizeListCheck) {
+            setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
+        }
+        if (state?.sizeListCheck === name) {
+            setState({ ...state, sizeListCheck: null, saveBtnDisable: true, disableSizes: 0 })
+        }
+        if (state?.sizeListCheck !== name) {
+            setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
+        }
+    }
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  my-2`}>
             <div>
@@ -512,7 +523,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                             id={data?.id}
                                                                             name="size_Outwear"
                                                                             checked={data?.name === state?.sizeListCheck}
-                                                                            onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
+                                                                            onChange={() => onHandleSelectSize(data?.name)}
                                                                             value={data?.name}
                                                                             className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                         />
@@ -543,7 +554,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                         id={data?.id}
                                                                         name="size_Outwear"
                                                                         checked={data?.name === state?.sizeListCheck}
-                                                                        onChange={() => setState({ ...state, sizeListCheck: data?.name, selected: data?.id, saveBtnDisable: true, disableSizes: 0 })}
+                                                                        onChange={() => onHandleSelectSize(data?.name)}
                                                                         value={data?.name}
                                                                         className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                     />
