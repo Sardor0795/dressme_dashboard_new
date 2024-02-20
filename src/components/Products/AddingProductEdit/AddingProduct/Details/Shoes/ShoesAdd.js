@@ -36,6 +36,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
         editSizeId: null,
         addnewColorIdIcons: null,
         disableSizes: null,
+        checkEmpty: false
+
     })
 
     const [productId, setProductId] = useState(null);
@@ -66,86 +68,86 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
     }, [state?.salePercent, state?.priceNum])
 
     function saveEditData() {
-        setState({ ...state, sendingLoader: true })
-        let form = new FormData();
-        state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
-        state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
-        state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
-        // state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-        // state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
-        // state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
-        state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
-        state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
-        state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
-        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-        form.append("footwear_size", state?.minSize);
-        state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
-        state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
-        form.append("shop_location_id", shopLocationId);
-        form.append("color_id", pivotColorId);
-        form.append("product_id", Number(productId));
+        if (!state?.minFootLength && state?.maxFootLength) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            setState({ ...state, sendingLoader: true })
+            let form = new FormData();
+            state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
+            state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
+            state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
+            state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
+            state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
+            state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
+            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+            form.append("footwear_size", state?.minSize);
+            state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
+            state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
+            form.append("shop_location_id", shopLocationId);
+            form.append("color_id", pivotColorId);
+            form.append("product_id", Number(productId));
 
-        return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-            },
-            body: form,
-        })
-            .then(res => res?.json())
-            .then(res => {
-                if (res?.errors && res?.message) {
-                    toast.error(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setState({ ...state, sendingLoader: false, errorMessage: res?.message, successChanged: true })
-                    setTimeout(() => {
-                        setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
-                    }, 5000);
-                } else if (res?.message) {
-                    toast.success(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
-                    setTimeout(() => {
-                        setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
-                    }, 1000);
-                }
+            return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                },
+                body: form,
             })
-            .catch(err => {
-                toast.error(`${err}`, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
+                .then(res => res?.json())
+                .then(res => {
+                    if (res?.errors && res?.message) {
+                        toast.error(`${res?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setState({ ...state, sendingLoader: false, errorMessage: res?.message, successChanged: true })
+                        setTimeout(() => {
+                            setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
+                        }, 5000);
+                    } else if (res?.message) {
+                        toast.success(`${res?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
+                        setTimeout(() => {
+                            setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
+                        }, 1000);
+                    }
                 })
-                onRefetch()
-                setState({ ...state, sendingLoader: false, sizeEditModal: false })
-                throw new Error(err?.message || "something wrong");
-            })
+                .catch(err => {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, sendingLoader: false, sizeEditModal: false })
+                    throw new Error(err?.message || "something wrong");
+                })
+        }
     }
-    // console.log(state?.salePercent, "state?.salePercent");
     useEffect(() => {
         setState({
             ...state,
@@ -306,15 +308,15 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
                                     <div className="flex items-center gap-x-1">
-                                        <div className="flex flex-col  border border-borderColor rounded-lg">
+                                        <div className="flex flex-col ">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
-                                                    className={`inputStyle outline-none w-[60px] text-start h-[40px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
+                                                    className={`inputStyle outline-none  border border-borderColor rounded-lg w-[60px] text-start h-[40px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
                                                 >{state?.minFootLength}</span>
                                                 : <input
                                                     type="number"
                                                     name="minFootLength"
-                                                    className="inputStyle outline-none w-[60px] h-[40px] text-center px-3  rounded-lg   font-AeonikProRegular "
+                                                    className={`inputStyle outline-none w-[60px] h-[40px] text-center px-3   ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg   font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     value={state?.minFootLength}
                                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -770,7 +772,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         type="button"
                                                         onClick={() => {
                                                             // console.log(item?.id, "Bu Selected id")
-                                                            setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
+                                                            setState({ ...state, sizeEditModal: true, checkEmpty: false, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
                                                         }
                                                         }
                                                         className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

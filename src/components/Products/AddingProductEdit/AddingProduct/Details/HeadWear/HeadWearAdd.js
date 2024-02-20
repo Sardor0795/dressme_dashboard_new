@@ -39,6 +39,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         editSizeId: null,
         addnewColorIdIcons: null,
         disableSizes: null,
+        checkEmpty: false
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
 
@@ -71,81 +72,85 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     };
 
     function saveEditData() {
-        setState({ ...state, sendingLoader: true })
-        let form = new FormData();
-        form.append("one_size", state?.sizeCheck ? 1 : 0);
-        state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
-        state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-        state?.disableSizes === 1 && state?.discountPercent?.length > 0 && form.append("discount_percent", state?.discountPercent);
-        state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
-        state?.disableSizes === 1 && (state?.discountPercent?.length === 0 || Number(state?.discountPercent) === 0) && form.append("discount_price", 0);
-        state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
-        state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
-        state?.disableSizes === 2 && form.append("amount", state?.amount);
-        state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
-        form.append("shop_location_id", shopLocationId);
-        form.append("color_id", pivotColorId);
-        form.append("product_id", Number(productId));
+        if (!state?.minHeadGirth && state?.maxHeadGirth) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            setState({ ...state, sendingLoader: true, checkEmpty: false })
+            let form = new FormData();
+            form.append("one_size", state?.sizeCheck ? 1 : 0);
+            state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
+            state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
+            state?.disableSizes === 1 && state?.discountPercent?.length > 0 && form.append("discount_percent", state?.discountPercent);
+            state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
+            state?.disableSizes === 1 && (state?.discountPercent?.length === 0 || Number(state?.discountPercent) === 0) && form.append("discount_price", 0);
+            state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
+            state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
+            state?.disableSizes === 2 && form.append("amount", state?.amount);
+            state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
+            form.append("shop_location_id", shopLocationId);
+            form.append("color_id", pivotColorId);
+            form.append("product_id", Number(productId));
 
-        return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-            },
-            body: form,
-        })
-            .then(res => res?.json())
-            .then(res => {
-                if (res?.errors && res?.message) {
-                    toast.error(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setState({ ...state, sendingLoader: false, errorMessage: res?.message, successChanged: true })
-                    setTimeout(() => {
-                        setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
-                    }, 3000);
-                } else if (res?.message) {
-                    toast.success(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
-                    setTimeout(() => {
-                        setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
-                    }, 1000);
-                    onRefetch()
-                }
+            return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                },
+                body: form,
             })
-            .catch(err => {
-                toast.error(`${err}`, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
+                .then(res => res?.json())
+                .then(res => {
+                    if (res?.errors && res?.message) {
+                        toast.error(`${res?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setState({ ...state, sendingLoader: false, errorMessage: res?.message, successChanged: true })
+                        setTimeout(() => {
+                            setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
+                        }, 3000);
+                    } else if (res?.message) {
+                        toast.success(`${res?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
+                        setTimeout(() => {
+                            setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
+                        }, 1000);
+                        onRefetch()
+                    }
                 })
-                onRefetch()
-                setState({ ...state, sendingLoader: false, sizeEditModal: false })
-                throw new Error(err?.message || "something wrong");
-            })
+                .catch(err => {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, sendingLoader: false, sizeEditModal: false })
+                    throw new Error(err?.message || "something wrong");
+                })
+        }
     }
     useEffect(() => {
         setState({
@@ -281,15 +286,15 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
                                     <div className="w-full flex items-center mt-[10px] ">
-                                        <div className="flex flex-col border border-borderColor rounded-lg">
+                                        <div className="flex flex-col ">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
-                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[55px] border border-borderColor rounded-lg flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minHeadGirth}</span>
                                                 :
                                                 <input
                                                     type="number"
-                                                    className={`inputStyle w-[55px] h-[38px] text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[55px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     name="minHeadGirth"
                                                     value={state?.minHeadGirth}
@@ -736,7 +741,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        setState({ ...state, sizeEditModal: true, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
+                                                        setState({ ...state, sizeEditModal: true, checkEmpty: false, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
                                                     }
                                                     }
                                                     className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

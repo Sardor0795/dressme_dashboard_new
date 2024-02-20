@@ -45,6 +45,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         editSizeId: null,
         addnewColorIdIcons: null,
         disableSizes: null,
+        checkEmpty: false
 
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
@@ -96,94 +97,95 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
     }, [state?.salePercent, state?.priceNum])
 
     function saveEditData() {
-        setState({ ...state, sendingLoader: true })
-        let form = new FormData();
-        state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
-        state?.minHeight && form.append("min_height", state?.minHeight);
-        state?.maxHeight && form.append("max_height", state?.maxHeight);
-        state?.minSize && form.append("min_underwear_size", state?.minSize);
-        state?.maxSize && form.append("max_underwear_size", state?.maxSize);
-        state?.minBreast && form.append("min_underwear_waist_girth", state?.minBreast);
-        state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
-        state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
-        state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
-        state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
-        // state?.disableSizes === 1 && state?.salePercent && form.append("discount_percent", state?.salePercent);
-        // state?.disableSizes === 1 && state?.salePrice && form.append("discount_price", state?.salePercent === 0 ? null : state?.salePrice?.split(",")?.join(""));
-        // state?.disableSizes === 1 && (state?.salePercent === 0 || state?.salePercent === '') && form.append("discount_price", null);//no R
-        // state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
-        state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
-        state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
-        state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
-        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-        state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
-        state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
-        form.append("shop_location_id", shopLocationId);
-        form.append("color_id", pivotColorId);
-        form.append("product_id", Number(productId));
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minHeight && state?.maxHeight ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            setState({ ...state, sendingLoader: true })
+            let form = new FormData();
+            state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
+            state?.minHeight && form.append("min_height", state?.minHeight);
+            state?.maxHeight && form.append("max_height", state?.maxHeight);
+            state?.minSize && form.append("min_underwear_size", state?.minSize);
+            state?.maxSize && form.append("max_underwear_size", state?.maxSize);
+            state?.minBreast && form.append("min_underwear_waist_girth", state?.minBreast);
+            state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
+            state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
+            state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
+            state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
+            state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
+            state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
+            state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
+            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+            state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
+            state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
+            form.append("shop_location_id", shopLocationId);
+            form.append("color_id", pivotColorId);
+            form.append("product_id", Number(productId));
 
-        return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-            },
-            body: form,
-        })
-            .then(res => res?.json())
-            .then(res => {
-                if (res?.errors && res?.message) {
-                    toast.error(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setState({ ...state, sendingLoader: false, errorMessage: res?.message, successChanged: true })
-                    setTimeout(() => {
-                        setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
-                    }, 5000);
-
-                } else if (res?.message) {
-                    toast.success(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
-                    onRefetch()
-                    setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
-                    setTimeout(() => {
-                        setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
-                    }, 1000);
-                }
+            return fetch(`${url}/products/${state?.editSizeId}/update-product-size`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                },
+                body: form,
             })
-            .catch(err => {
-                toast.error(`${err}`, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
+                .then(res => res?.json())
+                .then(res => {
+                    if (res?.errors && res?.message) {
+                        toast.error(`${res?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setState({ ...state, sendingLoader: false, errorMessage: res?.message, successChanged: true })
+                        setTimeout(() => {
+                            setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
+                        }, 5000);
+
+                    } else if (res?.message) {
+                        toast.success(`${res?.message}`, {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        })
+                        onRefetch()
+                        setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
+                        setTimeout(() => {
+                            setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
+                        }, 1000);
+                    }
                 })
-                onRefetch()
-                setState({ ...state, sendingLoader: false, sizeEditModal: false })
-                throw new Error(err?.message || "something wrong");
-            })
-
-
+                .catch(err => {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, sendingLoader: false, sizeEditModal: false })
+                    throw new Error(err?.message || "something wrong");
+                })
+        }
     }
 
     useEffect(() => {
@@ -339,19 +341,18 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                             <div className="relative w-full flex gap-x-10 px-3 pt-5">
                                 <div className="w-fit flex flex-col">
                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                         Обхват Талии
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                                     </p>
                                     <div className="flex items-center">
-                                        <div className="flex flex-col  border border-borderColor rounded-lg">
+                                        <div className="flex flex-col ">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
-                                                    className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[60px]  border border-borderColor rounded-lg flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minBreast}</span>
                                                 : <input
                                                     type="number"
-                                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center  ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     name="minBreast"
                                                     value={state?.minBreast}
@@ -702,14 +703,14 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         Обхват Бедер
                                     </p>
                                     <div className="flex items-center">
-                                        <div className="flex flex-col border border-borderColor  rounded-lg">
+                                        <div className="flex flex-col">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                 <span
-                                                    className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    className={`inputStyle w-[60px] flex items-center justify-center  border border-borderColor  rounded-lg h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                 >{state?.minHips}</span>
                                                 : <input
                                                     type="number"
-                                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center rounded-lg bg-white  px-3  font-AeonikProRegular `}
+                                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center rounded-lg  ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     name="minHips"
                                                     value={state?.minHips}
@@ -739,15 +740,15 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     </p>
                                     <div className="flex items-center justify-between gap-x-1">
                                         <div className="flex items-center">
-                                            <div className="flex flex-col border border-borderColor rounded-lg">
+                                            <div className="flex flex-col ">
                                                 {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
-                                                        className={`inputStyle w-[60px]  flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                        className={`inputStyle w-[60px] border border-borderColor rounded-lg flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                     >{state?.minHeight}</span>
                                                     : <input
                                                         type="number"
                                                         name="minHeight"
-                                                        className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg   font-AeonikProRegular `}
+                                                        className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                                         placeholder="Мин"
                                                         value={state?.minHeight}
                                                         onChange={(e) => setState({ ...state, minHeight: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -1476,7 +1477,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <button
                                                         type="button"
                                                         onClick={() => {
-                                                            setState({ ...state, sizeEditModal: true, disableSizes: null, saveBtnDisable: false, sendingLoader: false, editSizeId: item?.id })
+                                                            setState({ ...state, sizeEditModal: true, checkEmpty: false, disableSizes: null, saveBtnDisable: false, sendingLoader: false, editSizeId: item?.id })
                                                         }
                                                         }
                                                         className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
