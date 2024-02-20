@@ -26,7 +26,9 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
         maxSizeShow: false,
         isCheckValid: false,
         // ------
-        onConcel: false
+        onConcel: false,
+        checkEmpty: false
+
     })
     useEffect(() => {
         if (state?.salePercent > 0) {
@@ -78,27 +80,36 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.quantityNum && state?.priceNum) {
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true })
-            setToggleShow(false)
-            handleCallBack({
-                minUnderwearWaistGirth: state?.minBreast,
-                maxUnderwearWaistGirth: state?.maxBreast,
-                minUnderWearSize: state?.minSize,
-                maxUnderWearSize: state?.maxSize,
-                minUnderWearHipGirth: state?.minHips,
-                maxUnderWearHipGirth: state?.maxHips,
-                minHeight: state?.minHeight,
-                maxHeight: state?.maxHeight,
-                underWearLetterSize: state?.sizeListCheck,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-                category_Id: SelectedNumber,
-            })
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minHeight && state?.maxHeight ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.minSize && state?.quantityNum && state?.priceNum) {
+                setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+                setState({
+                    ...state, isCheckValid: false, onConcel: true, checkEmpty: false
+                })
+                setToggleShow(false)
+                handleCallBack({
+                    minUnderwearWaistGirth: state?.minBreast,
+                    maxUnderwearWaistGirth: state?.maxBreast,
+                    minUnderWearSize: state?.minSize,
+                    maxUnderWearSize: state?.maxSize,
+                    minUnderWearHipGirth: state?.minHips,
+                    maxUnderWearHipGirth: state?.maxHips,
+                    minHeight: state?.minHeight,
+                    maxHeight: state?.maxHeight,
+                    underWearLetterSize: state?.sizeListCheck,
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    category_Id: SelectedNumber,
+                })
+            }
         }
     }
     const cancelSendDetail = (e) => {
@@ -121,6 +132,8 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             isCheckValid: false,
             onConcel: false,
             selected: null,
+            checkEmpty: false
+
         })
         handleCallBack()
         setToggleShow(false)
@@ -173,7 +186,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center  ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     name="minBreast"
                                     value={state?.minBreast}
@@ -443,7 +456,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center    ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     name="minHips"
                                     value={state?.minHips}
@@ -473,7 +486,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
-                                        className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
+                                        className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         name="minHeight"
                                         value={state?.minHeight}

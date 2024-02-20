@@ -16,7 +16,9 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
         quantityNum: "",
         isCheckValid: false,
         // ------
-        onConcel: false
+        onConcel: false,
+        checkEmpty: false
+
     })
     useEffect(() => {
         if (state?.salePercent > 0) {
@@ -44,25 +46,28 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.priceNum && state?.quantityNum) {
-            handleCallBack({
-                footWearSize: state?.minSize,
-                minFootLength: state?.minFootLength,
-                maxFootLength: state?.maxFootLength,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-                category_Id: SelectedNumber,
-
-            })
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true })
-            setToggleShow(false)
+        if (!state?.minFootLength && state?.maxFootLength) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.minSize && state?.priceNum && state?.quantityNum) {
+                handleCallBack({
+                    footWearSize: state?.minSize,
+                    minFootLength: state?.minFootLength,
+                    maxFootLength: state?.maxFootLength,
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    category_Id: SelectedNumber,
+                })
+                setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+                setState({
+                    ...state, isCheckValid: false, onConcel: true, checkEmpty: false
+                })
+                setToggleShow(false)
+            }
         }
-
-
     }
     const cancelSendDetail = (e) => {
         setDressInfo({ ...dressInfo, ProductFilterType: null })
@@ -75,9 +80,12 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
             priceNum: "",
             salePercent: "",
             salePrice: "",
+            quantityNum: "",
             isCheckValid: false,
             // ------
-            onConcel: false
+            onConcel: false,
+            checkEmpty: false
+
         })
         handleCallBack()
         setToggleShow(false)
@@ -138,7 +146,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                 <input
                                     type="number"
                                     name="minFootLength"
-                                    className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
+                                    className={`inputStyle outline-none w-[60px] h-[40px] text-center   ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular`}
                                     placeholder="Мин"
                                     value={state?.minFootLength}
                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
