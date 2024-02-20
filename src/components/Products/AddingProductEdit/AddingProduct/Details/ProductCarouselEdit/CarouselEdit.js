@@ -2173,28 +2173,38 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-[290px] mt-[10px] h-[130px] flex justify-between gap-x-[6px]   rounded-lg">
-            <div className={`w-[30%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
+          <div className="w-[290px] mt-[10px] h-[140px] flex justify-between    rounded-lg">
+            <div className={`w-[31%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
-                className="h-[120px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
+                className="h-[130px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
               >
                 {!imageTwo?.url_photo2 ?
-                  <div
-                    // htmlFor={"imageTwo"}
-                    onClick={
-                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                        () => handleFreeModalUploadImg(imageTwo?.id2) : null}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
+                  imageOne?.url_photo1 ?
                     <div
-                      className="w-full h-full overflow-hidden   bg-photoBg  flex flex-col items-center  justify-center">
-                      <span><DownloadIcon /></span>
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
+                      onClick={
+                        productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                          () => handleFreeModalUploadImg(imageTwo?.id2) : null}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+                      <div
+                        className="w-full h-full overflow-hidden   bg-photoBg  flex flex-col items-center  justify-center">
+                        <span><DownloadIcon colors={'#007DCA'} /></span>
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    :
+                    <div className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5]">
+                      <div
+                        className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
+                        <span><DownloadIcon colors={'#b5b5b5'} /></span>
+                        <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    </div>
                   :
                   <div
                     onClick={
@@ -2234,28 +2244,39 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[31%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
-                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageThree?.url_photo3 ?
-                  <div
-                    onClick={
-                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                        () => handleFreeModalUploadImg(imageThree?.id3) : null}
-                    // htmlFor={"imageThree"}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
-
+                  imageTwo?.url_photo2 ?
                     <div
-                      className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
+                      onClick={
+                        productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                          () => handleFreeModalUploadImg(imageThree?.id3) : null}
+                      // htmlFor={"imageThree"}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
+                        <DownloadIcon colors={'#007DCA'} />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    :
+                    <div className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5]">
+                      <div
+                        className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
+                        <span><DownloadIcon colors={'#b5b5b5'} /></span>
+                        <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    </div>
                   :
                   <div
                     onClick={
@@ -2296,27 +2317,38 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </div>
               </div>
             </div>
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[31%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
-                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFour?.url_photo4 ?
-                  <div
-                    onClick={
-                      productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
-                        () => handleFreeModalUploadImg(imageFour?.id4) : null}
-                    className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                  >
-
+                  imageThree?.url_photo3 ?
                     <div
-                      className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
-                      <DownloadIcon />
-                      <div className="text-[11px] text-textLightColor mt-[5px]">
-                        (необязательно)
+                      onClick={
+                        productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ?
+                          () => handleFreeModalUploadImg(imageFour?.id4) : null}
+                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                    >
+
+                      <div
+                        className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
+                        <DownloadIcon colors={'#007DCA'} />
+                        <div className="text-[11px] text-textLightColor mt-[5px]">
+                          (необязательно)
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    :
+                    <div className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5]">
+                      <div
+                        className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
+                        <span><DownloadIcon colors={'#b5b5b5'} /></span>
+                        <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
+                          (необязательно)
+                        </div>
+                      </div>
+                    </div>
                   :
                   <div
                     onClick={
@@ -2365,11 +2397,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </div>
             {/*  color-2 */}
-            <div className={`w-[30%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[31%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
-                className="h-[120px]  w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px]  w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageFive?.url_photo5 ?
                   colorListForTest?.length >= 2 ?
@@ -2381,7 +2413,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
@@ -2403,7 +2435,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         /> : null}
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
@@ -2462,10 +2494,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
               </div>
             </div>
-            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
+            <section className={`w-[31%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageSix?.url_photo6 ?
                   colorListForTest?.length >= 2 ?
@@ -2476,34 +2508,45 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     >
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
                       </div>
                     </div>
                     :
-                    <label
-                      htmlFor={"imageSix"}
-                      className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                    >
-                      {productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
-                        <input
-                          className="hidden"
-                          id={"imageSix"}
-                          type="file"
-                          name="fileUpload6"
-                          onChange={handleLocationImage6}
-                          accept=" image/*"
-                        /> : null}
-                      <div
-                        className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                        <DownloadIcon />
-                        <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
+                    imageFive?.url_photo5 ?
+                      <label
+                        htmlFor={"imageSix"}
+                        className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      >
+                        {productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ?
+                          <input
+                            className="hidden"
+                            id={"imageSix"}
+                            type="file"
+                            name="fileUpload6"
+                            onChange={handleLocationImage6}
+                            accept=" image/*"
+                          /> : null}
+                        <div
+                          className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
+                          <DownloadIcon colors={'#007DCA'} />
+                          <div className="text-[11px] text-textLightColor mt-[5px]">
+                            (необязательно)
+                          </div>
+                        </div>
+                      </label>
+                      :
+                      <div className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5]">
+                        <div
+                          className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
+                          <span><DownloadIcon colors={'#b5b5b5'} /></span>
+                          <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
+                            (необязательно)
+                          </div>
                         </div>
                       </div>
-                    </label>
                   :
                   <div
                     onClick={
@@ -2560,10 +2603,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-3*/}
-            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
+            <section className={`w-[31%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageSeven?.url_photo7 ?
                   colorListForTest?.length >= 3 ?
@@ -2575,7 +2618,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     >
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
@@ -2596,7 +2639,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       /> : null}
                       <div
                         className="w-full h-full overflow-hidden  flex flex-col items-center  justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
@@ -2657,10 +2700,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-4*/}
-            <section className={`w-[30%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
+            <section className={`w-[31%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
-                className="h-[120px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
               >
                 {!imageEight?.url_photo8 ?
                   colorListForTest?.length >= 4 ?
@@ -2672,7 +2715,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     >
                       <div
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>
@@ -2693,7 +2736,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       /> : null}
                       <div
                         className="w-full h-full overflow-hidden   flex flex-col items-center justify-center">
-                        <DownloadIcon />
+                        <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
                           (необязательно)
                         </div>

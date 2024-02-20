@@ -220,7 +220,7 @@ export default function LocationMapCity() {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, regionList: data?.data });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!dressInfo?.regionList) {
       fetchDataRegions();
@@ -517,11 +517,10 @@ export default function LocationMapCity() {
             ></section>
             {/* Delete Product Of Pop Confirm */}
             <section
-              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-                deleteModal
-                  ? " bottom-0 md:flex"
-                  : "md:hidden bottom-[-800px] z-[-10]"
-              }`}
+              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
+                }`}
             >
               <button
                 onClick={() => setDeleteModal(false)}
@@ -890,9 +889,8 @@ export default function LocationMapCity() {
                               placeholder="Введите адрес"
                               id="ForSearch"
                               name="search"
-                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
-                                !Boolean(forMaps?.title?.length) ? "" : "hidden"
-                              }`}
+                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps?.title?.length) ? "" : "hidden"
+                                }`}
                             />
 
                             <div
@@ -1000,48 +998,66 @@ export default function LocationMapCity() {
                   </button>
                 </div>
                 <div className=" w-full md:w-[31%]  h-[75px] md:h-[150px] flex items-center justify-center rounded-lg">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setBackImgOrder(2);
-                      setBackImgUploadModal(true);
-                    }}
-                    className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center"
-                  >
-                    {pictureView2 ? (
-                      <img
-                        src={pictureView2}
-                        alt="backImg"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        Фото локации
-                      </span>
-                    )}
-                  </button>
+                  {
+                    state?.pictureBgView1 ?
+                      < button
+                        type="button"
+                        onClick={() => {
+                          setBackImgOrder(2);
+                          setBackImgUploadModal(true);
+                        }}
+                        className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center"
+                      >
+                        {pictureView2 ? (
+                          <img
+                            src={pictureView2}
+                            alt="backImg"
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                            Фото локации
+                          </span>
+                        )}
+                      </button>
+                      :
+                      <div
+                        className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
+                      >
+                        <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
+                          Фото локации
+                        </span>
+                      </div>}
                 </div>
                 <div className=" w-full md:w-[31%]  h-[75px] md:h-[150px] flex items-center justify-center rounded-lg">
-                  <button
-                    onClick={() => {
-                      setBackImgOrder(3);
-                      setBackImgUploadModal(true);
-                    }}
-                    type="button"
-                    className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center "
-                  >
-                    {state?.pictureBgView3 ? (
-                      <img
-                        src={state?.pictureBgView3}
-                        alt="backImg"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                  {pictureView2 ?
+                    <button
+                      onClick={() => {
+                        setBackImgOrder(3);
+                        setBackImgUploadModal(true);
+                      }}
+                      type="button"
+                      className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center "
+                    >
+                      {state?.pictureBgView3 ? (
+                        <img
+                          src={state?.pictureBgView3}
+                          alt="backImg"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      ) : (
+                        <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                          Фото локации
+                        </span>
+                      )}
+                    </button> :
+                    <div
+                      className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
+                    >
+                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
                         Фото локации
                       </span>
-                    )}
-                  </button>
+                    </div>}
                 </div>
               </div>
               <div className="w-full  px-4 md:px-0  ">
@@ -1099,11 +1115,10 @@ export default function LocationMapCity() {
                   <div className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="w-full h-fit flex justify-center ">
                       <div
-                        className={`max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                          openRegionModal
-                            ? " bottom-0 md:flex flex-col"
-                            : "md:hidden bottom-[-1500px] z-[-10]"
-                        }`}
+                        className={`max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
+                          ? " bottom-0 md:flex flex-col"
+                          : "md:hidden bottom-[-1500px] z-[-10]"
+                          }`}
                       >
                         <div className="w-full flex items-center justify-between font-AeonikProMedium">
                           <span className="text-black text-lg not-italic font-AeonikProMedium">
@@ -1136,11 +1151,10 @@ export default function LocationMapCity() {
                                         {data?.name_ru}
                                       </span>
                                       <span
-                                        className={`${
-                                          activeIndex == data?.id
-                                            ? "rotate-[0deg]"
-                                            : "rotate-[180deg]"
-                                        } `}
+                                        className={`${activeIndex == data?.id
+                                          ? "rotate-[0deg]"
+                                          : "rotate-[180deg]"
+                                          } `}
                                       >
                                         <ArrowTopIcons colors={"#a1a1a1"} />
                                       </span>
@@ -1148,11 +1162,10 @@ export default function LocationMapCity() {
 
                                     <div
                                       className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                                          ? "openAccardion"
+                                          : "CloseAccardion"
+                                        } `}
                                     >
                                       {data?.sub_regions?.map((item) => {
                                         return (
@@ -1289,11 +1302,10 @@ export default function LocationMapCity() {
                               idAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                            state?.idAssistantPhone
-                              ? "font-AeonikProMedium"
-                              : null
-                          } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone
+                            ? "font-AeonikProMedium"
+                            : null
+                            } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
@@ -1326,11 +1338,10 @@ export default function LocationMapCity() {
                               idSecondAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                            state?.idSecondAssistantPhone
-                              ? "font-AeonikProMedium"
-                              : null
-                          } text-[13px] md:text-base leading-4 text-black`}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone
+                            ? "font-AeonikProMedium"
+                            : null
+                            } text-[13px] md:text-base leading-4 text-black`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
@@ -1392,8 +1403,9 @@ export default function LocationMapCity() {
             </div>
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 // export default LocationMapCity;

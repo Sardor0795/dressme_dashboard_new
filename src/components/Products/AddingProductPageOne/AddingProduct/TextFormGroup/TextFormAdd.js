@@ -263,7 +263,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px] overflow-hidden ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px]  ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         allowClear
@@ -292,7 +292,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px] overflow-hidden ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px]  ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
 
                                         style={{ width: "100%" }}
                                         value={

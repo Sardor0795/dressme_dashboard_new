@@ -1658,7 +1658,7 @@ const AddingProduct = () => {
                           type="button"
                           className="h-full w-full flex items-center justify-center "
                         >
-                          <label
+                          {state?.pictureBgView1 ? <label
                             htmlFor="DataImg2"
                             className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                           >
@@ -1674,7 +1674,7 @@ const AddingProduct = () => {
 
                             {!state?.pictureBgView2 && (
                               <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                                <DownloadIcon />
+                                <DownloadIcon colors={'#007DCA'} />
                                 <div className="text-[11px] text-textLightColor mt-[5px]">
                                   (необязательно)
                                 </div>
@@ -1688,45 +1688,18 @@ const AddingProduct = () => {
                               />
                             )}
 
-                          </label>
-                        </button>
-                      </div>
-                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
-                        <button
-                          type="button"
-                          className="h-full w-full flex items-center justify-center "
-                        >
-                          <label
-                            htmlFor="DataImg3"
-                            className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
-                          >
-                            <input
-                              className="hidden"
-                              id="DataImg3"
-                              type="file"
-                              name="fileUpload3"
-                              onChange={handleLocationImage3}
-                              accept=" image/*"
-                            />
-
-
-                            {!state?.pictureBgView3 && (
-                              <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                                <DownloadIcon />
+                          </label> :
+                            <div
+                              className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5] "
+                            >
+                              <div className="w-full h-full overflow-hidden  border border-dashed rounded-lg flex flex-col items-center justify-center">
+                                <DownloadIcon colors={'#b5b5b5'} />
                                 <div className="text-[11px] text-textLightColor mt-[5px]">
                                   (необязательно)
                                 </div>
                               </div>
-                            )}
-                            {state?.pictureBgView3 && (
-                              <img
-                                src={state?.pictureBgView3}
-                                alt="backImg"
-                                className="w-full h-full border border-searchBgColor object-cover rounded-lg"
-                              />
-                            )}
+                            </div>}
 
-                          </label>
                         </button>
                       </div>
                       <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
@@ -1734,7 +1707,57 @@ const AddingProduct = () => {
                           type="button"
                           className="h-full w-full flex items-center justify-center "
                         >
-                          <label
+                          {state?.pictureBgView2 ?
+                            <label
+                              htmlFor="DataImg3"
+                              className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                            >
+                              <input
+                                className="hidden"
+                                id="DataImg3"
+                                type="file"
+                                name="fileUpload3"
+                                onChange={handleLocationImage3}
+                                accept=" image/*"
+                              />
+
+
+                              {!state?.pictureBgView3 && (
+                                <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
+                                  <DownloadIcon colors={'#007DCA'} />
+                                  <div className="text-[11px] text-textLightColor mt-[5px]">
+                                    (необязательно)
+                                  </div>
+                                </div>
+                              )}
+                              {state?.pictureBgView3 && (
+                                <img
+                                  src={state?.pictureBgView3}
+                                  alt="backImg"
+                                  className="w-full h-full border border-searchBgColor object-cover rounded-lg"
+                                />
+                              )}
+
+                            </label>
+                            :
+                            <div
+                              className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5] "
+                            >
+                              <div className="w-full h-full overflow-hidden  border border-dashed rounded-lg flex flex-col items-center justify-center">
+                                <DownloadIcon colors={'#b5b5b5'} />
+                                <div className="text-[11px] text-textLightColor mt-[5px]">
+                                  (необязательно)
+                                </div>
+                              </div>
+                            </div>}
+                        </button>
+                      </div>
+                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
+                        <button
+                          type="button"
+                          className="h-full w-full flex items-center justify-center "
+                        >
+                          {state?.pictureBgView3 ? <label
                             htmlFor="DataImg4"
                             className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                           >
@@ -1750,7 +1773,7 @@ const AddingProduct = () => {
 
                             {!state?.pictureBgView4 && (
                               <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
-                                <DownloadIcon />
+                                <DownloadIcon colors={'#007DCA'} />
                                 <div className="text-[11px] text-textLightColor mt-[5px]">
                                   (необязательно)
                                 </div>
@@ -1764,7 +1787,17 @@ const AddingProduct = () => {
                               />
                             )}
 
-                          </label>
+                          </label> :
+                            <div
+                              className="h-full w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-[#b5b5b5] "
+                            >
+                              <div className="w-full h-full overflow-hidden  border border-dashed rounded-lg flex flex-col items-center justify-center">
+                                <DownloadIcon colors={'#b5b5b5'} />
+                                <div className="text-[11px] text-textLightColor mt-[5px]">
+                                  (необязательно)
+                                </div>
+                              </div>
+                            </div>}
                         </button>
                       </div>
                     </div>

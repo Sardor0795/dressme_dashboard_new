@@ -439,6 +439,17 @@ input[type=number] {
 }
 
 .selectAndt .ant-select,
-.ant-select-lg {
+.selectAndt .ant-select-lg {
   height: 40px !important;
 }
+
+/* .textForm .ant-select,
+.textForm .ant-select-lg,
+.textForm .ant-select-selector,
+.textForm .ant-select-selection-search-input {
+  height: 40px !important;
+} */
+
+/* .textForm .ant-select-selection-search-input {
+  height: 40px !important;
+} */
