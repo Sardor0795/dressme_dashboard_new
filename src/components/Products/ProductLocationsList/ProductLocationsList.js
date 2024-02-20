@@ -452,7 +452,8 @@ export default function ProductLocationsList() {
             hideProductList: false,
             openDeleteModal: false
           })
-          // setHideProductList(false)
+          setShopLocationIdList()
+
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal || statusModal ? "" : "hidden"}`}
@@ -733,7 +734,10 @@ export default function ProductLocationsList() {
           }`}
       >
         <button
-          onClick={() => setDeleteModal(false)}
+          onClick={() => {
+            setShopLocationIdList()
+            setDeleteModal(false)
+          }}
           type="button"
           className="absolute  right-3 top-3 w-5 h-5 ">
           <MenuCloseIcons
@@ -770,12 +774,20 @@ export default function ProductLocationsList() {
 
         }
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
-
-          <button
-            onClick={() => onProductDelete()}
-            type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-            Удалить везде</button>
+          {shopLocationIdList?.length > 1 ?
+            <button
+              onClick={() => onProductDelete()}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+              Удалить везде</button>
+            :
+            <button
+              onClick={() => setDeleteModal(false)}
+              type="button"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium">
+              Oтмена
+            </button>
+          }
           <button
             onClick={() => onProductAddressDelete()}
             type="button"
@@ -1168,6 +1180,7 @@ export default function ProductLocationsList() {
                                                                 setDeleteModal(true)
                                                                 setDeleteId(itemValue?.id)
                                                                 setGetIdShopLocation(resData?.id)
+                                                                setShopLocationIdList(item?.shop_locations)
                                                               }}
                                                               className="w-fit flex justify-center cursor-auto">
                                                               <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
@@ -1489,6 +1502,7 @@ export default function ProductLocationsList() {
                                                               setDeleteModal(true)
                                                               setDeleteId(itemValue?.id)
                                                               setGetIdShopLocation(resData?.id)
+                                                              setShopLocationIdList(item?.shop_locations)
                                                             }}
                                                             className="w-fit flex justify-center cursor-auto">
                                                             <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
