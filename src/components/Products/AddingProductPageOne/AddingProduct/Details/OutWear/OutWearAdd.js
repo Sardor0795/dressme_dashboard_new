@@ -28,6 +28,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         // ------
         onConcel: false,
         toggleShow: false,
+        checkEmpty: false
 
     })
     useEffect(() => {
@@ -79,27 +80,34 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.minSize && state?.quantityNum && state?.priceNum) {
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
-            handleCallBack({
-                minChestGirth: state?.minBreast,
-                maxChestGirth: state?.maxBreast,
-                minOutWearSize: state?.minSize,
-                maxOutWearSize: state?.maxSize,
-                minOutWearWaistGirth: state?.minWaist,
-                maxOutWearWaistGirth: state?.maxWaist,
-                minOutWearHipGirth: state?.minHips,
-                maxOutWearHipGirth: state?.maxHips,
-                outWearLetterSize: state?.sizeListCheck,
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-                category_Id: SelectedNumber,
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minWaist && state?.maxWaist ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.minSize && state?.quantityNum && state?.priceNum) {
+                setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+                setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false, checkEmpty: false })
+                handleCallBack({
+                    minChestGirth: state?.minBreast,
+                    maxChestGirth: state?.maxBreast,
+                    minOutWearSize: state?.minSize,
+                    maxOutWearSize: state?.maxSize,
+                    minOutWearWaistGirth: state?.minWaist,
+                    maxOutWearWaistGirth: state?.maxWaist,
+                    minOutWearHipGirth: state?.minHips,
+                    maxOutWearHipGirth: state?.maxHips,
+                    outWearLetterSize: state?.sizeListCheck,
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    category_Id: SelectedNumber,
 
-            })
+                })
+            }
         }
     }
     const cancelSendDetail = (e) => {
@@ -122,7 +130,9 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
             salePrice: "",
             selected: null,
             isCheckValid: false,
-            toggleShow: false
+            toggleShow: false,
+            checkEmpty: false
+
         })
         handleCallBack()
     }
@@ -175,7 +185,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
-                                    className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
                                     placeholder="Мин"
                                     name="minBreast"
                                     value={state?.minBreast}
@@ -442,7 +452,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
-                                    className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     name="minWaist"
                                     value={state?.minWaist}
@@ -473,7 +483,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex flex-col">
                                 <input
                                     type="number"
-                                    className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
+                                    className={`inputStyle outline-none w-[60px] h-[38px]  text-center  ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                     placeholder="Мин"
                                     name="minHips"
                                     value={state?.minHips}

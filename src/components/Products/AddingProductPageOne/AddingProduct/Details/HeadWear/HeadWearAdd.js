@@ -21,7 +21,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
         onConcel: false,
         // ----
         toggleShow: false,
-        isHasTypeId: false
+        isHasTypeId: false,
+        checkEmpty: false
 
     })
     const SelectedNumber = 1
@@ -66,21 +67,25 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     }
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (state?.amount && state?.price) {
-            handleCallBack({
-                minHeadGirth: state?.minHeadGirth,
-                maxHeadGirth: state?.maxHeadGirth,
-                oneSize: state?.sizeCheck,
-                amount: state?.amount,
-                age: state?.age,
-                price: state?.price?.split(",")?.join(""),
-                discountPercent: state?.discountPercent,
-                discountPrice: state?.discountPrice?.split(",")?.join(""),
-                category_Id: SelectedNumber,
+        if (!state?.minHeadGirth && state?.maxHeadGirth) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.amount && state?.price) {
+                handleCallBack({
+                    minHeadGirth: state?.minHeadGirth,
+                    maxHeadGirth: state?.maxHeadGirth,
+                    oneSize: state?.sizeCheck,
+                    amount: state?.amount,
+                    age: state?.age,
+                    price: state?.price?.split(",")?.join(""),
+                    discountPercent: state?.discountPercent,
+                    discountPrice: state?.discountPrice?.split(",")?.join(""),
+                    category_Id: SelectedNumber,
 
-            })
-            setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
-            setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false })
+                })
+                setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
+                setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false, checkEmpty: false })
+            }
         }
 
     }
@@ -97,7 +102,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
             discountPercent: '',
             discountPrice: '',
             onConcel: false,
-            toggleShow: false
+            toggleShow: false,
+            checkEmpty: false
         })
         handleCallBack()
     }
@@ -131,11 +137,11 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             </span> */}
                         </p>
                         <div className="w-full flex items-center mt-[10px]">
-                            <div className="flex flex-col">
+                            <div className={`flex flex-col rounded-lg  ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}`}>
                                 <input
                                     type="number"
                                     name="minHeadGirth"
-                                    className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                    className={`inputStyle w-[55px] h-[38px] text-center  bg-transparent  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                     placeholder="Мин"
                                     value={state?.minHeadGirth}
                                     onChange={(e) => setState({ ...state, minHeadGirth: e.target.value })}
@@ -297,9 +303,10 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     </div>
                 </div>
                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-                    {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Отменить
-                    </button>}
+                    {state?.onConcel &&
+                        <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
+                            Отменить
+                        </button>}
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                         Готово
                     </button>
