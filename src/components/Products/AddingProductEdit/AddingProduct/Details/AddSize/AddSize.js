@@ -271,76 +271,99 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
     const handleSendDetail = (e) => {
         setState({ ...state, isCheckValid: true })
-        if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
-            setToggleShow(false)
-            handleCallBack({
-                minHeadGirth: state?.minHeadGirth,
-                maxHeadGirth: state?.maxHeadGirth,
-                sizeCheck: state?.sizeCheck,
-                // All of Category
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-            })
+        if (!state?.minHeadGirth && state?.maxHeadGirth) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
+                setToggleShow(false)
+                handleCallBack({
+                    minHeadGirth: state?.minHeadGirth,
+                    maxHeadGirth: state?.maxHeadGirth,
+                    sizeCheck: state?.sizeCheck,
+                    // All of Category
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                })
+                setState({ ...state, checkEmpty: false })
+            }
         }
-        if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
-            setToggleShow(false)
-            handleCallBack({
-                // OutWear
-                minChestGirth: state?.minBreast,
-                maxChestGirth: state?.maxBreast,
-                minOutWearSize: state?.minSize,
-                maxOutWearSize: state?.maxSize,
-                minOutWearWaistGirth: state?.minWaist,
-                maxOutWearWaistGirth: state?.maxWaist,
-                minOutWearHipGirth: state?.minHips,
-                maxOutWearHipGirth: state?.maxHips,
-                outWearLetterSize: state?.sizeListCheck,
-                // All of Category
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-            })
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minWaist && state?.maxWaist ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
+                setToggleShow(false)
+                handleCallBack({
+                    // OutWear
+                    minChestGirth: state?.minBreast,
+                    maxChestGirth: state?.maxBreast,
+                    minOutWearSize: state?.minSize,
+                    maxOutWearSize: state?.maxSize,
+                    minOutWearWaistGirth: state?.minWaist,
+                    maxOutWearWaistGirth: state?.maxWaist,
+                    minOutWearHipGirth: state?.minHips,
+                    maxOutWearHipGirth: state?.maxHips,
+                    outWearLetterSize: state?.sizeListCheck,
+                    // All of Category
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                })
+            }
         }
-        if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
-            setToggleShow(false)
-            handleCallBack({
-                // UnderWear
-                minUnderwearWaistGirth: state?.minBreast,
-                maxUnderwearWaistGirth: state?.maxBreast,
-                minUnderWearSize: state?.minSize,
-                maxUnderWearSize: state?.maxSize,
-                minUnderWearHipGirth: state?.minHips,
-                maxUnderWearHipGirth: state?.maxHips,
-                minHeight: state?.minHeight,
-                maxHeight: state?.maxHeight,
-                underWearLetterSize: state?.sizeListCheck,
-                // All of Category
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-            })
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minHeight && state?.maxHeight ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
+                setToggleShow(false)
+                handleCallBack({
+                    // UnderWear
+                    minUnderwearWaistGirth: state?.minBreast,
+                    maxUnderwearWaistGirth: state?.maxBreast,
+                    minUnderWearSize: state?.minSize,
+                    maxUnderWearSize: state?.maxSize,
+                    minUnderWearHipGirth: state?.minHips,
+                    maxUnderWearHipGirth: state?.maxHips,
+                    minHeight: state?.minHeight,
+                    maxHeight: state?.maxHeight,
+                    underWearLetterSize: state?.sizeListCheck,
+                    // All of Category
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                })
+            }
         }
-        if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
-            setToggleShow(false)
-            handleCallBack({
-                // Shoes
-                footWearSize: state?.one_size,
-                minFootLength: state?.minFootLength,
-                maxFootLength: state?.maxFootLength,
-                // All of Category
-                amount: state?.quantityNum,
-                age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
-                discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
-            })
+        if (!state?.minFootLength && state?.maxFootLength) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
+                setToggleShow(false)
+                handleCallBack({
+                    // Shoes
+                    footWearSize: state?.one_size,
+                    minFootLength: state?.minFootLength,
+                    maxFootLength: state?.maxFootLength,
+                    // All of Category
+                    amount: state?.quantityNum,
+                    age: state?.ageNum,
+                    price: state?.priceNum?.split(",")?.join(""),
+                    discountPercent: state?.salePercent,
+                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                })
+            }
         }
         if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
             setToggleShow(false)
@@ -430,7 +453,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
-                                        className={`inputStyle w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                        className={`inputStyle w-[55px] h-[38px] text-center ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                         placeholder="Мин"
                                         name="minHeadGirth"
                                         value={state?.minHeadGirth}
@@ -634,15 +657,12 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
                                 Обхват Груди
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                {/* <span className="ml-[5px]">
-                              <StarLabel />
-                          </span> */}
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
-                                        className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                        className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
                                         placeholder="Мин"
                                         name="minBreast"
                                         value={state?.minBreast}
@@ -900,16 +920,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
                                 Обхват Талии
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                {/* <span className="ml-[5px]">
-                              <StarLabel />
-                          </span> */}
+
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
                                         name="minWaist"
-                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
+                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center  ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minWaist}
                                         onChange={(e) => setState({ ...state, minWaist: e.target.value })}
@@ -940,7 +958,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     <input
                                         type="number"
                                         name="minHips"
-                                        className="inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
+                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minHips}
                                         onChange={(e) => setState({ ...state, minHips: e.target.value })}
@@ -1124,16 +1142,13 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
                                 Обхват Талии
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                {/* <span className="ml-[5px]">
-                                 <StarLabel />
-                             </span> */}
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
                                         name="minBreast"
-                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minBreast}
                                         onChange={(e) => setState({ ...state, minBreast: e.target.value })}
@@ -1391,18 +1406,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex gap-x-10 px-3 pt-5">
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Размер Бедер
-                                {/* <span className="ml-[5px]">
-                                 <StarLabel />
-                             </span> */}
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
                                         name="minHips"
-                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                         placeholder="Мин"
                                         value={state?.minHips}
                                         onChange={(e) => setState({ ...state, minHips: e.target.value })}
@@ -1423,7 +1434,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         </div>
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Рост
                             </p>
                             <div className="flex items-center justify-between gap-x-1">
@@ -1432,7 +1442,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         <input
                                             type="number"
                                             name="minHeight"
-                                            className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
+                                            className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular `}
                                             placeholder="Мин"
                                             value={state?.minHeight}
                                             onChange={(e) => setState({ ...state, minHeight: e.target.value })}
@@ -1642,7 +1652,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     <input
                                         type="number"
                                         name="minFootLength"
-                                        className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
+                                        className={`inputStyle outline-none w-[60px] h-[40px] text-center ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular`}
                                         placeholder="Мин"
                                         value={state?.minFootLength}
                                         onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
