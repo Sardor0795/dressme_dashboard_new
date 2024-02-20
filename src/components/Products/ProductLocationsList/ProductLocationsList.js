@@ -1103,12 +1103,12 @@ export default function ProductLocationsList() {
                                                             {
                                                               checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
                                                                 <button
-                                                                  className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor bg-fullBlue  justify-center">
+                                                                  className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2] bg-fullBlue  justify-center">
                                                                   <FiCheck color={'#ffffff'} />
                                                                 </button>
                                                                 :
                                                                 <button
-                                                                  className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor   justify-center">
+                                                                  className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]   justify-center">
                                                                 </button>
                                                             }
                                                           </td>
@@ -1427,12 +1427,12 @@ export default function ProductLocationsList() {
                                                           {
                                                             checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
                                                               <button
-                                                                className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor bg-fullBlue  justify-center">
+                                                                className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]  bg-fullBlue  justify-center">
                                                                 <FiCheck color={'#ffffff'} />
                                                               </button>
                                                               :
                                                               <button
-                                                                className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-lightBorderColor   justify-center">
+                                                                className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center">
                                                               </button>
                                                           }
                                                         </td>
