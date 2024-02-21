@@ -319,8 +319,13 @@ function MarketEdit() {
       top: 0,
     });
   }, []);
-  // console.log(image, "state----image,");
-  // console.log(cropData, "state----cropData,");
+  const handleInputChange = (e) => {
+    if (e.target.value) {
+      setState({ ...state, marketName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+    } else {
+      setState({ ...state, marketName: null })
+    }
+  }
   return (
     <div className="w-full  h-full ">
       {loaderEdit ? <LoadingForSeller /> :
@@ -716,9 +721,7 @@ function MarketEdit() {
                     name="shopName"
                     id="shopName"
                     value={state?.marketName}
-                    onChange={(e) =>
-                      setState({ ...state, marketName: e.target.value })
-                    }
+                    onChange={handleInputChange}
                     placeholder="Введите название магазина"
                     className="w-[65%] md:w-[70%] h-[32px] md:h-[42px] border border-borderColor2 outline-none px-3 rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
                   />

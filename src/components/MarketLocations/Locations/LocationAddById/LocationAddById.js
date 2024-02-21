@@ -204,8 +204,20 @@ export default function LocationAddById() {
       top: 0,
     });
   }, []);
-  // console.log(state?.workTimeFrom, "workTimeFrom");
-  // console.log(state?.workTimeTo, "workTimeTo");
+  const handleInputAdminNameFirst = (e) => {
+    if (e.target.value) {
+      setState({ ...state, assistantNameFirst: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+    } else {
+      setState({ ...state, assistantNameFirst: null })
+    }
+  }
+  const handleInputAdminNameSecond = (e) => {
+    if (e.target.value) {
+      setState({ ...state, assistantNameSecond: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+    } else {
+      setState({ ...state, assistantNameSecond: null })
+    }
+  }
 
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 md:px-10 pb-10">
@@ -251,9 +263,7 @@ export default function LocationAddById() {
 
           <YandexMapStore
             handleCallback={CallBackYandex}
-          // errorLat={state?.errorGroup?.latitude}
-          // errorLong={state?.errorGroup?.longitude}
-          // errorTitle={state?.errorGroup?.address}
+
           />
         </div>
         {state?.errorGroup?.address && !state?.shopCenterAddress && (
@@ -454,9 +464,7 @@ export default function LocationAddById() {
                   name="fname"
                   placeholder=" Имя администратора"
                   value={state?.assistantNameFirst}
-                  onChange={(e) =>
-                    setState({ ...state, assistantNameFirst: e.target.value })
-                  }
+                  onChange={handleInputAdminNameFirst}
                   className="w-full outline-none text-[12px] md:text-[14px]  h-10 md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
                 />
               </div>
@@ -477,9 +485,7 @@ export default function LocationAddById() {
                   name="fname2"
                   placeholder=" (не обезательно)"
                   value={state?.assistantNameSecond}
-                  onChange={(e) =>
-                    setState({ ...state, assistantNameSecond: e.target.value })
-                  }
+                  onChange={handleInputAdminNameSecond}
                   className="w-full outline-none text-[12px] md:text-[14px] h-10 md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
                 {state?.errorGroup?.second_assistant_name &&
