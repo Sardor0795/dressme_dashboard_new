@@ -129,74 +129,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
     const handleOpenPopver = (newOpen) => {
         setToggleShow(newOpen)
+        // setState({ ...state, checkEmpty: false })
     }
 
-    const onHandleAddSize = async () => {
+    const onHandleAddSizeAccessory = async () => {
         setState({ ...state, isCheckValid: true, })
         if (state?.priceNum && state?.quantityNum) {
             setState({ ...state, sendingLoader: true })
             let form = new FormData();
-
-            if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
-                state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
-                state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
-                state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
-                state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-                state?.ageNum && form.append("age", Number(state?.ageNum));
-                form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
-                form.append("color_id", selectColorID);
-            }
-            if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
-                state?.sizeListCheck && form.append("outwear_letter_size", state?.sizeListCheck);
-                state?.minSize && form.append("min_outwear_size", state?.minSize);
-                state?.maxSize && form.append("max_outwear_size", state?.maxSize);
-                state?.minBreast && form.append("min_chest_girth", state?.minBreast);
-                state?.maxBreast && form.append("max_chest_girth", state?.maxBreast);
-                state?.minWaist && form.append("min_outwear_waist_girth", state?.minWaist);
-                state?.maxWaist && form.append("max_outwear_waist_girth", state?.maxWaist);
-                state?.minHips && form.append("min_outwear_hip_girth", state?.minHips);
-                state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
-                state?.ageNum && form.append("age", Number(state?.ageNum));
-                state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-                form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
-                form.append("color_id", selectColorID);
-            }
-            if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
-                state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
-                state?.minHeight && form.append("min_height", state?.minHeight);
-                state?.maxHeight && form.append("max_height", state?.maxHeight);
-                state?.minSize && form.append("min_underwear_size", state?.minSize);
-                state?.maxSize && form.append("max_underwear_size", state?.maxSize);
-                state?.minBreast && form.append("min_underwear_waist_girth", state?.minBreast);
-                state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
-                state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
-                state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
-                state?.ageNum && form.append("age", Number(state?.ageNum));
-                state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
-                form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
-                form.append("color_id", selectColorID);
-            }
-            if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
-                state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
-                state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
-                state?.ageNum && form.append("age", Number(state?.ageNum));
-                state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
-                form.append("footwear_size", state?.one_size);
-                form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
-                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
-                form.append("color_id", selectColorID);
-            }
             if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
                 state?.sizeListCheck && form.append("accessory_letter_size", state?.sizeListCheck);
                 state?.minSize && form.append("accessory_size", state?.minSize);
@@ -210,7 +150,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
             }
-
             try {
                 const res = await fetch(`${url}/products/${newProductId}/add-product-size`, {
                     method: "POST",
@@ -265,6 +204,328 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                 onRefetch()
                 setState({ ...state, isCheckValid: false, sendingLoader: false })
                 throw new Error(err?.message || "something wrong");
+            }
+        }
+    }
+    const onHandleAddSizeHead = async () => {
+        setState({ ...state, isCheckValid: true, })
+        if (!state?.minHeadGirth && state?.maxHeadGirth) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.priceNum && state?.quantityNum) {
+                setState({ ...state, sendingLoader: true })
+                let form = new FormData();
+                state?.sizeCheck && form.append("one_size", state?.sizeCheck ? 1 : 0);
+                state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
+                state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
+                state?.salePercent && form.append("discount_percent", state?.salePercent);
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
+                form.append("color_id", selectColorID);
+
+                try {
+                    const res = await fetch(`${url}/products/${newProductId}/add-product-size`, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                        },
+                        body: form,
+                    });
+                    const res_1 = await res.json();
+                    if (res_1) {
+                        if (res_1?.errors && res_1?.message) {
+                            toast.error(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        } else if (res_1?.message) {
+                            toast.success(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setToggleShow(false)
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        }
+                    }
+                } catch (err) {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, isCheckValid: false, sendingLoader: false })
+                    throw new Error(err?.message || "something wrong");
+                }
+            }
+        }
+    }
+    const onHandleAddSizeOut = async () => {
+        setState({ ...state, isCheckValid: true, })
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minWaist && state?.maxWaist ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
+                let form = new FormData();
+                state?.sizeListCheck && form.append("outwear_letter_size", state?.sizeListCheck);
+                state?.minSize && form.append("min_outwear_size", state?.minSize);
+                state?.maxSize && form.append("max_outwear_size", state?.maxSize);
+                state?.minBreast && form.append("min_chest_girth", state?.minBreast);
+                state?.maxBreast && form.append("max_chest_girth", state?.maxBreast);
+                state?.minWaist && form.append("min_outwear_waist_girth", state?.minWaist);
+                state?.maxWaist && form.append("max_outwear_waist_girth", state?.maxWaist);
+                state?.minHips && form.append("min_outwear_hip_girth", state?.minHips);
+                state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                state?.salePercent && form.append("discount_percent", state?.salePercent);
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
+                form.append("color_id", selectColorID);
+                try {
+                    const res = await fetch(`${url}/products/${newProductId}/add-product-size`, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                        },
+                        body: form,
+                    });
+                    const res_1 = await res.json();
+                    if (res_1) {
+                        if (res_1?.errors && res_1?.message) {
+                            toast.error(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        } else if (res_1?.message) {
+                            toast.success(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setToggleShow(false)
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        }
+                    }
+                } catch (err) {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, isCheckValid: false, sendingLoader: false })
+                    throw new Error(err?.message || "something wrong");
+                }
+            }
+        }
+    }
+    const onHandleAddSizeUnder = async () => {
+        setState({ ...state, isCheckValid: true, })
+        if (!state?.minBreast && state?.maxBreast ||
+            !state?.minSize && state?.maxSize ||
+            !state?.minHeight && state?.maxHeight ||
+            !state?.minHips && state?.maxHips) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.priceNum && state?.quantityNum && state?.minSize) {
+                let form = new FormData();
+                state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
+                state?.minHeight && form.append("min_height", state?.minHeight);
+                state?.maxHeight && form.append("max_height", state?.maxHeight);
+                state?.minSize && form.append("min_underwear_size", state?.minSize);
+                state?.maxSize && form.append("max_underwear_size", state?.maxSize);
+                state?.minBreast && form.append("min_underwear_waist_girth", state?.minBreast);
+                state?.maxBreast && form.append("max_underwear_waist_girth", state?.maxBreast);
+                state?.minHips && form.append("min_underwear_hip_girth", state?.minHips);
+                state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                state?.salePercent && form.append("discount_percent", state?.salePercent);
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
+                form.append("color_id", selectColorID);
+
+                try {
+                    const res = await fetch(`${url}/products/${newProductId}/add-product-size`, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                        },
+                        body: form,
+                    });
+                    const res_1 = await res.json();
+                    if (res_1) {
+                        if (res_1?.errors && res_1?.message) {
+                            toast.error(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        } else if (res_1?.message) {
+                            toast.success(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setToggleShow(false)
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        }
+                    }
+                } catch (err) {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, isCheckValid: false, sendingLoader: false })
+                    throw new Error(err?.message || "something wrong");
+                }
+            }
+        }
+    }
+    const onHandleAddSizeShoes = async () => {
+        setState({ ...state, isCheckValid: true, })
+        if (!state?.minFootLength && state?.maxFootLength) {
+            setState({ ...state, checkEmpty: true })
+        } else {
+            if (state?.priceNum && state?.quantityNum && state?.one_size) {
+                let form = new FormData();
+                state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
+                state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
+                state?.ageNum && form.append("age", Number(state?.ageNum));
+                state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                form.append("footwear_size", state?.one_size);
+                form.append("amount", state?.quantityNum);
+                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("shop_location_id", dressInfo?.locationIdAddProduct);
+                form.append("color_id", selectColorID);
+
+                try {
+                    const res = await fetch(`${url}/products/${newProductId}/add-product-size`, {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                        },
+                        body: form,
+                    });
+                    const res_1 = await res.json();
+                    if (res_1) {
+                        if (res_1?.errors && res_1?.message) {
+                            toast.error(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        } else if (res_1?.message) {
+                            toast.success(`${res_1?.message}`, {
+                                position: "top-right",
+                                autoClose: 3000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            })
+                            onRefetch()
+                            setToggleShow(false)
+                            setState({ ...state, isCheckValid: false, sendingLoader: false })
+                        }
+                    }
+                } catch (err) {
+                    toast.error(`${err}`, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    })
+                    onRefetch()
+                    setState({ ...state, isCheckValid: false, sendingLoader: false })
+                    throw new Error(err?.message || "something wrong");
+                }
             }
         }
     }
@@ -615,7 +876,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full h-fit  flex items-center justify-end gap-x-5">
 
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSize} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeHead} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -1100,7 +1361,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full h-fit  flex items-center justify-end gap-x-5">
 
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSize} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeOut} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -1584,7 +1845,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full h-fit flex items-center justify-end gap-x-5">
 
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSize} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeUnder} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -1792,7 +2053,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     </div>
                     <div className="w-full h-fit flex items-center justify-end gap-x-5">
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSize} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeShoes} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -2206,7 +2467,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full h-fit  flex items-center justify-end gap-x-5">
 
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSize} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeAccessory} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
