@@ -356,6 +356,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     placeholder="Мин"
                                                     name="minBreast"
                                                     value={state?.minBreast}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -371,6 +372,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     placeholder="Макс"
                                                     name="maxBreast"
                                                     value={state?.maxBreast}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -397,6 +399,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         placeholder="Мин"
                                                         value={state?.minSize}
                                                         name="minSize"
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     />}
                                             </div>
@@ -413,6 +416,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             placeholder="Макс"
                                                             name="maxSize"
                                                             value={state?.maxSize}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                         /> :
                                                     state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
@@ -714,6 +718,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     placeholder="Мин"
                                                     name="minHips"
                                                     value={state?.minHips}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -729,6 +734,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     className={`inputStyle outline-none w-[60px] rounded-lg h-[38px] text-center  bg-white  px-3  font-AeonikProRegular `}
                                                     placeholder="Макс"
                                                     value={state?.maxHips}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -751,6 +757,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
                                                         placeholder="Мин"
                                                         value={state?.minHeight}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minHeight: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     />}
                                             </div>
@@ -766,6 +773,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         className={`inputStyle outline-none w-[60px] rounded-lg text-center h-[38px]  bg-white px-3  font-AeonikProRegular `}
                                                         placeholder="Макс"
                                                         value={state?.maxHeight}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, maxHeight: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     />}
                                             </div>
@@ -790,6 +798,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 name="quantityNum"
                                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.quantityNum}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
                                             />}
                                     </div>
@@ -815,6 +824,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     className=" inputStyle w-[58px] h-[42px] text-center fon rounded-lg px-[12px]  outline-none"
                                                     placeholder=""
                                                     value={state?.ageNum}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
@@ -842,6 +852,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                     value={state?.priceNum}
                                                     onChange={handleChangePrice}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                 />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -871,6 +883,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                             value={state?.salePercent}
                                                             onChange={handleChangePercent}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                         />}
                                                     <span className="text-textLightColor ml-2">%</span>
                                                 </div>

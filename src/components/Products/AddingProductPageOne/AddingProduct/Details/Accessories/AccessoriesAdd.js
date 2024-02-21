@@ -160,7 +160,6 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Размер{" "}
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                         </p>
@@ -172,11 +171,11 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
                     </div>
-
                     <div className="w-[80%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                             Буквенный Размер
@@ -377,7 +376,6 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-[20%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Длина
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                         </p>
@@ -389,13 +387,13 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                     value={state?.colSize}
                                     onChange={(e) => setState({ ...state, colSize: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="w-[20%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Ширина
                         </p>
                         <div className="flex items-center justify-between gap-x-1">
@@ -406,13 +404,13 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                     value={state?.rowSize}
                                     onChange={(e) => setState({ ...state, rowSize: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="w-[60%] flex flex-col ml-auto">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Количество
                             <span className="ml-[5px]">
                                 <StarLabel />
@@ -426,6 +424,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                 className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                             />
                         </div>
                     </div>
@@ -447,6 +446,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     placeholder=""
                                     value={state?.ageNum}
                                     onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -469,6 +469,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.priceNum}
                                     onChange={handleChangePrice}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
@@ -495,6 +496,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 value={state?.salePercent}
                                                 onChange={handleChangePercent}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                             />
                                             :
                                             <input

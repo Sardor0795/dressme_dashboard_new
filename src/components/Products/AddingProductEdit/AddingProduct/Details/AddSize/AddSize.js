@@ -719,6 +719,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         name="minHeadGirth"
                                         value={state?.minHeadGirth}
                                         onChange={(e) => setState({ ...state, minHeadGirth: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                         required
                                     />
                                 </div>
@@ -731,6 +732,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxHeadGirth}
                                         onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                         required
                                     />
                                 </div>
@@ -768,6 +770,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     required
                                 />
                             </div>
@@ -790,6 +793,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="age"
                                         value={state?.ageNum}
                                         onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -812,6 +816,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                         value={state?.priceNum}
                                         onChange={handleChangePrice}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                         required
                                     />
                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -839,6 +845,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                     value={state?.salePercent}
                                                     onChange={handleChangePercent}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                 />
                                                 :
                                                 <input
@@ -928,6 +936,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         name="minBreast"
                                         value={state?.minBreast}
                                         onChange={(e) => setState({ ...state, minBreast: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -939,6 +948,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxBreast}
                                         onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -960,6 +970,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Мин"
                                         value={state?.minSize}
                                         onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -971,6 +982,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxSize}
                                         onChange={(e) => setState({ ...state, maxSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     /> :
                                         <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                             <BiPlus color="#007DCA" size={20} />
@@ -1192,6 +1204,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Мин"
                                         value={state?.minWaist}
                                         onChange={(e) => setState({ ...state, minWaist: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
                                     />
                                 </div>
@@ -1204,6 +1217,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxWaist}
                                         onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
                                     />
                                 </div>
@@ -1223,6 +1237,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Мин"
                                         value={state?.minHips}
                                         onChange={(e) => setState({ ...state, minHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1234,6 +1249,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxHips}
                                         onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1253,6 +1269,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -1274,6 +1291,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder=""
                                         value={state?.ageNum}
                                         onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1296,6 +1314,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
                                         value={state?.priceNum}
                                         onChange={handleChangePrice}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                     />
                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                         сум
@@ -1323,6 +1343,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                     value={state?.salePercent}
                                                     onChange={handleChangePercent}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                 />
                                                 :
                                                 <input
@@ -1413,6 +1435,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Мин"
                                         value={state?.minBreast}
                                         onChange={(e) => setState({ ...state, minBreast: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1424,6 +1447,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxBreast}
                                         onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1446,6 +1470,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                             placeholder="Мин"
                                             value={state?.minSize}
                                             onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                         />
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1457,6 +1482,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                             placeholder="Макс"
                                             value={state?.maxSize}
                                             onChange={(e) => setState({ ...state, maxSize: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                         /> :
                                             <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                                 <BiPlus color="#007DCA" size={20} />
@@ -1678,6 +1704,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Мин"
                                         value={state?.minHips}
                                         onChange={(e) => setState({ ...state, minHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1689,6 +1716,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxHips}
                                         onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1707,6 +1735,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                             placeholder="Мин"
                                             value={state?.minHeight}
                                             onChange={(e) => setState({ ...state, minHeight: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                         />
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1718,6 +1747,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                             placeholder="Макс"
                                             value={state?.maxHeight}
                                             onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                         />
                                     </div>
                                 </div>
@@ -1738,6 +1768,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -1759,6 +1790,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder=""
                                         value={state?.ageNum}
                                         onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1780,6 +1812,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                         value={state?.priceNum}
                                         onChange={handleChangePrice}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                         сум
@@ -1791,7 +1824,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-
                                     Скидка
                                 </div>
 
@@ -1808,6 +1840,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                     value={state?.salePercent}
                                                     onChange={handleChangePercent}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 />
                                                 :
                                                 <input
@@ -1831,6 +1864,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                 value={state?.salePrice}
                                                 onChange={handleChangeSalePrice}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 readOnly
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -1884,7 +1918,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex gap-x-10 px-3 pt-5">
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Размер
                                 <span className="ml-[5px]">
                                     <StarLabel />
@@ -1898,6 +1931,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.one_size ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                         value={state?.one_size}
                                         onChange={(e) => setState({ ...state, one_size: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1917,6 +1951,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Мин"
                                         value={state?.minFootLength}
                                         onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -1928,6 +1963,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="Макс"
                                         value={state?.maxFootLength}
                                         onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1947,6 +1983,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -1968,6 +2005,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder=""
                                         value={state?.ageNum}
                                         onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -1990,6 +2028,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                         value={state?.priceNum}
                                         onChange={handleChangePrice}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                     />
                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                         сум
@@ -2017,6 +2057,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                     value={state?.salePercent}
                                                     onChange={handleChangePercent}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                 />
                                                 :
                                                 <input
@@ -2104,6 +2146,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                         value={state?.one_size}
                                         onChange={(e) => setState({ ...state, one_size: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -2323,6 +2366,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                         value={state?.colSize}
                                         onChange={(e) => setState({ ...state, colSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -2340,6 +2384,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                         value={state?.rowSize}
                                         onChange={(e) => setState({ ...state, rowSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -2360,6 +2405,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -2381,6 +2427,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         name="ageNum"
                                         value={state?.ageNum}
                                         onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -2403,6 +2450,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                         value={state?.priceNum}
                                         onChange={handleChangePrice}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                     />
                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                         сум
@@ -2430,6 +2479,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                     value={state?.salePercent}
                                                     onChange={handleChangePercent}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                 />
                                                 :
                                                 <input

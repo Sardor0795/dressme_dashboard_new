@@ -330,6 +330,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     name="minSize"
                                                     className="inputStyle outline-none w-full text-start h-[42px]  px-3 rounded-lg  font-AeonikProRegular "
                                                     value={state?.minSize}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -629,6 +630,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     name="colSize"
                                                     className="inputStyle outline-none w-full h-[42px] text-start  px-3 rounded-lg   font-AeonikProRegular "
                                                     value={state?.colSize}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -650,6 +652,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     name="rowSize"
                                                     className="inputStyle outline-none w-full h-[42px] text-start  px-3  rounded-lg  font-AeonikProRegular "
                                                     value={state?.rowSize}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -674,6 +677,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 name="quantityNum"
                                                 className={`inputStyle outline-none w-[60px] h-[42px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.quantityNum}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
                                             />}
                                     </div>
@@ -699,6 +703,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     className="inputStyle w-[58px] h-[42px] text-center fon rounded-lg px-[12px] outline-none "
                                                     placeholder=""
                                                     value={state?.ageNum}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
@@ -726,6 +731,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                     value={state?.priceNum}
                                                     onChange={handleChangePrice}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -755,6 +761,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                             value={state?.salePercent}
                                                             onChange={handleChangePercent}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         />}
                                                     <span className="text-textLightColor ml-2">%</span>
                                                 </div>
@@ -915,6 +922,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     name="minSize"
                                                                     className="inputStyle cursor-default outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
                                                                     value={item?.wear_size}
+                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                     onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
                                                                 />
                                                             </div>
@@ -1142,6 +1150,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     name="colSize"
                                                                     className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
                                                                     value={item?.width}
+                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                     onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true })}
                                                                 />
                                                             </div>
@@ -1159,6 +1168,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     name="rowSize"
                                                                     className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
                                                                     value={item?.length}
+                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                     onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true })}
                                                                 />
                                                             </div>
@@ -1179,6 +1189,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 name="quantityNum"
                                                                 className={`inputStyle cursor-default outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
                                                                 value={item?.amount}
+                                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
                                                             />
                                                         </div>
@@ -1200,6 +1211,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     className="inputStyle cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
                                                                     placeholder=""
                                                                     value={item?.age}
+                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                     onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
                                                                 />
                                                             </div>
@@ -1223,6 +1235,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     className="inputStyle cursor-default w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                                     value={Number(item?.price)?.toLocaleString()}
                                                                     onChange={handleChangePrice}
+                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                 />
                                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                     сум
@@ -1234,10 +1247,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                                 Скидка
                                                             </div>
-
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
                                                             <div className="w-full flex items-center gap-x-1">
@@ -1250,6 +1261,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                             className="inputStyle cursor-default w-[80%] font-AeonikProMedium text-center outline-none "
                                                                             value={item?.discount_percent}
                                                                             onChange={handleChangePercent}
+                                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                         />
                                                                         <span className="text-textLightColor ml-1">%</span>
                                                                     </div>
