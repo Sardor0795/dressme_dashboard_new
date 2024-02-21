@@ -296,6 +296,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     name="minSize"
                                                     className={`inputStyle outline-none text-center w-full  h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                                     value={state?.minSize}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -319,6 +320,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     className={`inputStyle outline-none w-[60px] h-[40px] text-center px-3   ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg   font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     value={state?.minFootLength}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -334,6 +336,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     className="inputStyle outline-none w-[60px] h-[40px] text-center px-3  rounded-lg  font-AeonikProRegular "
                                                     placeholder="Макс"
                                                     value={state?.maxFootLength}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -357,6 +360,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 name="quantityNum"
                                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.quantityNum}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
                                             />}
                                     </div>
@@ -383,6 +387,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     className="inputStyle w-[58px] h-[40px] text-center fon  rounded-lg px-[12px]  outline-none "
                                                     placeholder=""
                                                     value={state?.ageNum}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
@@ -410,6 +415,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                     value={state?.priceNum}
                                                     onChange={handleChangePrice}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                                 />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -440,6 +447,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                             className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                             value={state?.salePercent}
                                                             onChange={handleChangePercent}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         />}
                                                     <span className="text-textLightColor ml-2">%</span>
                                                 </div>
@@ -771,7 +779,6 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <button
                                                         type="button"
                                                         onClick={() => {
-                                                            // console.log(item?.id, "Bu Selected id")
                                                             setState({ ...state, sizeEditModal: true, checkEmpty: false, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
                                                         }
                                                         }

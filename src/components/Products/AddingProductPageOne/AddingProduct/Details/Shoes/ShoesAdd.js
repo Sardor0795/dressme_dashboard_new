@@ -131,6 +131,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     className={`inputStyle outline-none w-full text-start h-[40px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
                                     value={state?.minSize}
                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -150,6 +151,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     placeholder="Мин"
                                     value={state?.minFootLength}
                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -161,6 +163,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     placeholder="Макс"
                                     value={state?.maxFootLength}
                                     onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -180,6 +183,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                             />
                         </div>
                     </div>
@@ -201,6 +205,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     placeholder=""
                                     value={state?.ageNum}
                                     onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -223,6 +228,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.priceNum}
                                     onChange={handleChangePrice}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
@@ -249,6 +255,8 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 value={state?.salePercent}
                                                 onChange={handleChangePercent}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+
                                             />
                                             :
                                             <input

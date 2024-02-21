@@ -298,9 +298,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     placeholder="Мин"
                                                     name="minHeadGirth"
                                                     value={state?.minHeadGirth}
-                                                    onChange={(e) => {
-                                                        setState({ ...state, minHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 })
-                                                    }}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                                    onChange={(e) => { setState({ ...state, minHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 }) }}
                                                     required
                                                 />
                                             }
@@ -317,6 +316,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     placeholder="Макс"
                                                     name="maxHeadGirth"
                                                     value={state?.maxHeadGirth}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     required
                                                 />}
@@ -360,6 +360,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.amount}
                                                 name="amount"
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, amount: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
                                                 required
                                             />}
@@ -386,6 +387,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     placeholder="0"
                                                     value={state?.age}
                                                     name="age"
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, age: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
@@ -414,6 +416,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     name="price"
                                                     value={state?.price}
                                                     onChange={handleChangePrice}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     required
                                                 />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
@@ -446,6 +449,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                             value={state?.discountPercent}
                                                             defaultValue={0}
                                                             onChange={handleChangePercent}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         />}
                                                     <span className="text-textLightColor ml-1">%</span>
                                                 </div>
@@ -596,12 +600,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-
                                                         Обхват головы
                                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                                                        {/* <span className="ml-[5px]">
-                                <StarLabel />
-                            </span> */}
                                                     </p>
                                                     <div className="w-full flex items-center mt-[10px]">
                                                         <div className="flex flex-col items-center">

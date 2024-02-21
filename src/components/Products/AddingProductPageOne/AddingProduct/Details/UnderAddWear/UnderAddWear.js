@@ -175,12 +175,8 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Обхват Талии
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                            {/* <span className="ml-[5px]">
-                                <StarLabel />
-                            </span> */}
                         </p>
                         <div className="flex items-center">
                             <div className="flex flex-col">
@@ -191,6 +187,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     name="minBreast"
                                     value={state?.minBreast}
                                     onChange={(e) => setState({ ...state, minBreast: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -202,13 +199,13 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     name="maxBreast"
                                     value={state?.maxBreast}
                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Размер
                             <span className="ml-[5px]">
                                 <StarLabel />
@@ -224,6 +221,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                         name="minSize"
                                         value={state?.minSize}
                                         onChange={(e) => setState({ ...state, minSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -235,6 +233,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                         name="maxSize"
                                         value={state?.maxSize}
                                         onChange={(e) => setState({ ...state, maxSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     /> :
                                         <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                             <BiPlus color="#007DCA" size={20} />
@@ -248,7 +247,6 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                             Буквенный Размер
                         </p>
-
                         <div className='w-full '>
                             {/* -----------------Desktop--------------------- */}
                             <div className="w-full hidden md:flex flex-row">
@@ -446,11 +444,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Обхват Бедер
-                            {/* <span className="ml-[5px]">
-                                <StarLabel />
-                            </span> */}
                         </p>
                         <div className="flex items-center">
                             <div className="flex flex-col">
@@ -461,6 +455,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     name="minHips"
                                     value={state?.minHips}
                                     onChange={(e) => setState({ ...state, minHips: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -472,13 +467,13 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     name="maxHips"
                                     value={state?.maxHips}
                                     onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                             Рост
                         </p>
                         <div className="flex items-center justify-between gap-x-1">
@@ -491,6 +486,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                         name="minHeight"
                                         value={state?.minHeight}
                                         onChange={(e) => setState({ ...state, minHeight: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
@@ -502,6 +498,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                         name="maxHeight"
                                         value={state?.maxHeight}
                                         onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
                                 </div>
                             </div>
@@ -522,6 +519,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                             />
                         </div>
                     </div>
@@ -543,6 +541,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     name="ageNum"
                                     value={state?.ageNum}
                                     onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                             </div>
                         </div>
@@ -565,6 +564,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                     value={state?.priceNum}
                                     onChange={handleChangePrice}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                     сум
@@ -591,6 +591,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
                                                 value={state?.salePercent}
                                                 onChange={handleChangePercent}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                             />
                                             :
                                             <input

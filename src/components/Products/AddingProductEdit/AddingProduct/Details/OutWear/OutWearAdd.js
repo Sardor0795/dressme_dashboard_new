@@ -313,7 +313,6 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         <button
                             type="button"
                             onClick={() => setState({ ...state, sizeEditModal: false, editSizeId: null, successChanged: false, errorMessage: '', successMessage: '' })}
-                        // className="absolute border right-3 top-3 w-5 h-5 "
                         >
                             <MenuCloseIcons
                                 className="w-full h-full "
@@ -342,10 +341,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                             <div className="relative w-full flex  gap-x-10 px-3 pt-5">
                                 <div className="w-[20%] flex flex-col">
                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                         Обхват Груди
                                         <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-
                                     </p>
                                     <div className="flex items-center">
                                         <div className="flex flex-col ">
@@ -359,6 +356,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     placeholder="Мин"
                                                     name="minBreast"
                                                     value={state?.minBreast}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -374,6 +372,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]   bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                                     placeholder="Макс"
                                                     value={state?.maxBreast}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -399,6 +398,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     value={state?.minSize}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -415,6 +415,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg font-AeonikProRegular `}
                                                         placeholder="Макс"
                                                         value={state?.maxSize}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     /> :
                                                 state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
@@ -714,6 +715,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     value={state?.minWaist}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -729,6 +731,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
                                                     placeholder="Макс"
                                                     value={state?.maxWaist}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -751,6 +754,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className={`inputStyle outline-none w-[60px] h-[38px]  text-center  px-2 md:px-3  rounded-lg ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   font-AeonikProRegular `}
                                                     placeholder="Мин"
                                                     value={state?.minHips}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -766,6 +770,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className="inputStyle outline-none w-[60px] h-[38px] text-center  px-2 md:px-3  rounded-lg  font-AeonikProRegular "
                                                     placeholder="Макс"
                                                     value={state?.maxHips}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                 />}
                                         </div>
@@ -789,6 +794,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 name="quantityNum"
                                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.quantityNum}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
                                             />}
                                     </div>
@@ -814,6 +820,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className="inputStyle w-[58px] h-[42px] text-center fon  rounded-lg   outline-none"
                                                     placeholder="0"
                                                     value={state?.ageNum}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true, disableSizes: 3 })}
                                                 />}
                                         </div>
@@ -841,6 +848,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
                                                     value={state?.priceNum}
                                                     onChange={handleChangePrice}
+                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 />}
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                 сум
@@ -870,6 +878,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
                                                             value={state?.salePercent}
                                                             onChange={handleChangePercent}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         />}
                                                     <span className="text-textLightColor ml-2">%</span>
                                                 </div>
