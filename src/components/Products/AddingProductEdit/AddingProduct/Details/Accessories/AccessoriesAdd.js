@@ -225,7 +225,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             setState({ ...state, salePrice: '' })
         }
     }, [state?.priceNum, state?.salePercent])
-    console.log(state?.priceNum, state?.salePercent, state?.salePrice, "state?.priceNum, state?.salePercent, state?.salePrice");
+    // console.log(state?.priceNum, state?.salePercent, state?.salePrice, "state?.priceNum, state?.salePercent, state?.salePrice");
 
     useEffect(() => {
         setGetSizesIds([])

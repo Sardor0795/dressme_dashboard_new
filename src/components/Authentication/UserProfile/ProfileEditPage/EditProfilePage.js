@@ -541,13 +541,15 @@ function EditProfilePage() {
           : "md:hidden bottom-[-800px] z-[-10]"
           }`}
       >
-
-        <span
-          className="select-none iconArrow cursor-pointer"
-          onClick={() => setState({ ...state, popConfirmDelete: false })}
-        >
-          <MenuCloseIcons colors="#000" />
-        </span>
+        <div className="w-full flex items-center justify-end">
+          <button
+            type="button"
+            className="select-none  cursor-pointer"
+            onClick={() => setState({ ...state, popConfirmDelete: false })}
+          >
+            <MenuCloseIcons colors="#000" />
+          </button>
+        </div>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
           <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
             <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">

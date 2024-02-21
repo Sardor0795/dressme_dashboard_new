@@ -754,7 +754,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         >
           <button
             onClick={() => setModalOfCarsouel(false)}
-            className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
+            className="absolute top-0  z-[202] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
           <div>
@@ -1357,7 +1357,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               setSuccessMessage(null)
               setFreeModalUploadImg(false)
             }}
-            className="absolute top-0  z-[116] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
+            className="absolute top-0  z-[224] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
           <div className="w-[620px] h-fit overflow-hidden rounded-lg">
@@ -2173,8 +2173,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-[290px] mt-[10px] h-[140px] flex justify-between    rounded-lg">
-            <div className={`w-[31%] h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
+          <div className="w-[290px] mt-[10px] h-[147px] flex justify-between    rounded-lg">
+            <div className={`w-[31%]  h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
@@ -2218,8 +2218,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                         : null
                     }
-                    className="BackgImageBLur overflow-hidden  w-full h-full rounded-lg flex items-center justify-center  ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                    className="BackgImageBLur overflow-hidden  w-full h-full flex items-center justify-center  ">
+                    <div className="flex items-center justify-center w-full h-full  ">
                       <img
                         className="
                       h-full
@@ -2244,7 +2244,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </div>
               </div>
             </div>
-            <div className={`w-[31%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2290,8 +2290,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         : null
                     }
 
-                    className="BackgImageBLur  overflow-hidden  w-full h-full rounded-lg flex items-center justify-center   ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
+                    className="BackgImageBLur  overflow-hidden  w-full h-full flex items-center justify-center   ">
+                    <div className="flex items-center justify-center w-full h-full ">
                       <img
                         className="
                     h-full
@@ -2317,7 +2317,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </div>
               </div>
             </div>
-            <div className={`w-[31%] h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2362,8 +2362,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         : null
                     }
 
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full  flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full  ">
                       <img
                         className="
                     h-full
@@ -2397,11 +2397,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </div>
             {/*  color-2 */}
-            <div className={`w-[31%] h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
-                className="h-[130px]  w-full flex items-center border rounded-lg overflow-hidden justify-center "
+                className="h-[130px]  w-full flex items-center border rounded-lg  overflow-hidden justify-center "
               >
                 {!imageFive?.url_photo5 ?
                   colorListForTest?.length >= 2 ?
@@ -2454,8 +2454,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         : null
                     }
 
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full  flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full   ">
                       <img
                         className="
                     h-full
@@ -2494,7 +2494,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
               </div>
             </div>
-            <section className={`w-[31%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
+            <section className={`w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2560,8 +2560,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
                         : null
                     }
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full   flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full   ">
                       <img
                         className="
                     h-full
@@ -2603,7 +2603,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-3*/}
-            <section className={`w-[31%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
+            <section className={`w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2659,8 +2659,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         : null
                     }
 
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full  flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full   ">
                       <img
                         className=" h-full w-full mx-auto align-middle object-cover cursor-pointer "
                         src={imageSeven?.url_photo7}
@@ -2700,7 +2700,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-4*/}
-            <section className={`w-[31%] h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
+            <section className={`w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2756,8 +2756,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         : null
                     }
 
-                    className="BackgImageBLur  overflow-hidden w-full h-full rounded-lg  flex items-center justify-center ">
-                    <div className="flex items-center justify-center w-full h-full  backdrop-blur-md ">
+                    className="BackgImageBLur  overflow-hidden w-full h-full flex items-center justify-center ">
+                    <div className="flex items-center justify-center w-full h-full ">
                       <img
                         className="
                     h-full
