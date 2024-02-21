@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
+import { BiPlus } from "react-icons/bi";
 
 function ShoesAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
         minFootLength: "",
         maxFootLength: "",
+        maxFootLengthShow: false,
         minSize: "",
         ageNum: "",
         priceNum: "",
@@ -157,15 +159,21 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
-                                <input
-                                    type="number"
-                                    name="maxFootLength"
-                                    className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                    placeholder="Макс"
-                                    value={state?.maxFootLength}
-                                    onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                />
+
+                                {state?.maxFootLengthShow ?
+                                    <input
+                                        type="number"
+                                        name="maxFootLength"
+                                        className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                        placeholder="Макс"
+                                        value={state?.maxFootLength}
+                                        onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    /> :
+                                    <button onClick={() => setState({ ...state, maxFootLengthShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>

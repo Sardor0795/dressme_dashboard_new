@@ -23,7 +23,10 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
         salePrice: "",
         sizeListCheck: null,
         selected: null,
+        maxBreastShow: false,
         maxSizeShow: false,
+        maxHeightShow: false,
+        maxHipsShow: false,
         isCheckValid: false,
         // ------
         onConcel: false,
@@ -193,15 +196,21 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
-                                <input
-                                    type="number"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                    placeholder="Макс"
-                                    name="maxBreast"
-                                    value={state?.maxBreast}
-                                    onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                />
+
+                                {state?.maxBreastShow ?
+                                    <input
+                                        type="number"
+                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                        placeholder="Макс"
+                                        name="maxBreast"
+                                        value={state?.maxBreast}
+                                        onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    /> :
+                                    <button onClick={() => setState({ ...state, maxBreastShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -461,15 +470,22 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
-                                <input
-                                    type="number"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                    placeholder="Макс"
-                                    name="maxHips"
-                                    value={state?.maxHips}
-                                    onChange={(e) => setState({ ...state, maxHips: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                />
+
+
+                                {state?.maxHipsShow ?
+                                    <input
+                                        type="number"
+                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                        placeholder="Макс"
+                                        name="maxHips"
+                                        value={state?.maxHips}
+                                        onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    /> :
+                                    <button onClick={() => setState({ ...state, maxHipsShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -492,15 +508,22 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
-                                        placeholder="Макс"
-                                        name="maxHeight"
-                                        value={state?.maxHeight}
-                                        onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
+
+
+                                    {state?.maxHeightShow ?
+                                        <input
+                                            type="number"
+                                            className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            name="maxHeight"
+                                            value={state?.maxHeight}
+                                            onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        /> :
+                                        <button onClick={() => setState({ ...state, maxHeightShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
