@@ -1270,7 +1270,7 @@ const AddingProduct = () => {
                             <input
                               type="text"
                               name="maxAge"
-                              placeholder="Мах"
+                              placeholder="Макс"
                               value={state?.max_Age_Category}
                               onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                               className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
@@ -1588,7 +1588,7 @@ const AddingProduct = () => {
                           <input
                             type="text"
                             name="maxAge"
-                            placeholder="Мах"
+                            placeholder="Макс"
                             value={state?.max_Age_Category}
                             onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                             className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
@@ -1654,7 +1654,7 @@ const AddingProduct = () => {
 
                     </div>
                     <div className="w-[90px] md:w-[290px] flex flex-col md:flex-row items-center justify-between gap-y-2  md:mt-[10px]">
-                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
+                      <div className="w-full h-1/3 md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -1703,7 +1703,7 @@ const AddingProduct = () => {
 
                         </button>
                       </div>
-                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
+                      <div className="w-full h-1/3 md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -1753,7 +1753,7 @@ const AddingProduct = () => {
                             </div>}
                         </button>
                       </div>
-                      <div className="w-full h-1/3 md:h-[110px] md:w-[31%] flex flex-col items-center justify-center ">
+                      <div className="w-full h-1/3 md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "

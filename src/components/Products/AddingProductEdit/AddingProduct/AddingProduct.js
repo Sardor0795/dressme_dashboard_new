@@ -1660,7 +1660,7 @@ const AddingProduct = () => {
                             <input
                               type="text"
                               name="maxAge"
-                              placeholder="Мах"
+                              placeholder="Макс"
                               value={state?.max_Age_Category}
                               onChange={(e) => setState({ ...state, onEditInput: true, max_Age_Category: e.target.value })}
                               className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
@@ -1970,7 +1970,7 @@ const AddingProduct = () => {
                         >{state?.min_Age_Category}</span> : <input
                           type="text"
                           name="maxAge1"
-                          placeholder="Мах"
+                          placeholder="Макс"
                           value={state?.max_Age_Category}
                           onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                           className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "

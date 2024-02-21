@@ -22,6 +22,9 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
         salePercent: null,
         salePrice: null,
         maxSizeShow: false,
+        maxWaistShow: false,
+        maxBreastShow: false,
+        maxHipsShow: false,
         sizeListCheck: null,
         selected: null,
         isCheckValid: false,
@@ -191,7 +194,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
-                                <input
+                                {state?.maxBreastShow ? <input
                                     type="number"
                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
                                     placeholder="Макс"
@@ -200,6 +203,10 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
+                                    :
+                                    <button onClick={() => setState({ ...state, maxBreastShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>}
                             </div>
                         </div>
                     </div>
@@ -463,16 +470,21 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
-                                <input
-                                    type="number"
-                                    className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                    placeholder="Макс"
-                                    name="maxWaist"
-                                    value={state?.maxWaist}
-                                    onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
-                                />
+                                {state?.maxWaistShow ?
+                                    <input
+                                        type="number"
+                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
+                                        placeholder="Макс"
+                                        name="maxWaist"
+                                        value={state?.maxWaist}
+                                        onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                    :
+                                    <button onClick={() => setState({ ...state, maxWaistShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>}
                             </div>
                         </div>
                     </div>
@@ -495,15 +507,21 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                             <div className="flex flex-col">
-                                <input
-                                    type="number"
-                                    className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                    placeholder="Макс"
-                                    name="maxHips"
-                                    value={state?.maxHips}
-                                    onChange={(e) => setState({ ...state, maxHips: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                />
+
+                                {state?.maxHipsShow ?
+                                    <input
+                                        type="number"
+                                        className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
+                                        placeholder="Макс"
+                                        name="maxHips"
+                                        value={state?.maxHips}
+                                        onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                    :
+                                    <button onClick={() => setState({ ...state, maxHipsShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>}
                             </div>
                         </div>
                     </div>

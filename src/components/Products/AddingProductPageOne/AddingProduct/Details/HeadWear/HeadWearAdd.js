@@ -3,6 +3,7 @@ import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSiz
 import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
+import { BiPlus } from "react-icons/bi";
 
 function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -10,6 +11,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
+        maxHeadGirthShow: false,
         sizeCheck: false,
         amount: null,
         age: null,
@@ -145,7 +147,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <span className="mx-[5px]"><LineIcon /></span>
                             <div className="flex flex-col">
-                                <input
+                                {state?.maxHeadGirthShow ? <input
                                     type="number"
                                     name="maxHeadGirth"
                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
@@ -155,6 +157,10 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     required
                                 />
+                                    :
+                                    <button onClick={() => setState({ ...state, maxHeadGirthShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[55px] text-center h-[38px] flex items-center justify-center">
+                                        <BiPlus color="#007DCA" size={20} />
+                                    </button>}
                             </div>
                         </div>
                     </div>
