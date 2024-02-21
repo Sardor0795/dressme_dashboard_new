@@ -92,7 +92,48 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
     }
 
 
-    // Категория одежды хлопок
+    const handleInputTitleRu = (e) => {
+        if (e.target.value) {
+            setState({ ...state, titleInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+        } else {
+            setState({ ...state, titleInRu: null })
+        }
+    }
+    const handleInputTitleUz = (e) => {
+        if (e.target.value) {
+            setState({ ...state, titleInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+        } else {
+            setState({ ...state, titleInUz: null })
+        }
+    }
+    const handleInputDescripRu = (e) => {
+        if (e.target.value) {
+            setState({ ...state, descriptionInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+        } else {
+            setState({ ...state, descriptionInRu: null })
+        }
+    }
+    const handleInputDescripUz = (e) => {
+        if (e.target.value) {
+            setState({ ...state, descriptionInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+        } else {
+            setState({ ...state, descriptionInUz: null })
+        }
+    }
+    const handleInputNoteRu = (e) => {
+        if (e.target.value) {
+            setState({ ...state, noteValueRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+        } else {
+            setState({ ...state, noteValueRu: null })
+        }
+    }
+    const handleInputNoteUz = (e) => {
+        if (e.target.value) {
+            setState({ ...state, noteValueUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+        } else {
+            setState({ ...state, noteValueUz: null })
+        }
+    }
     return (
         <div className="flex py-[40px] md:py-[50px] ">
             {/* <ToastContainer
@@ -149,7 +190,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         type="text"
                                         name="title"
                                         value={state?.titleInRu}
-                                        onChange={(e) => setState({ ...state, titleInRu: e.target.value })}
+                                        onChange={handleInputTitleRu}
 
                                     />
 
@@ -175,9 +216,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
                                         name="titleInUz"
-
                                         value={state?.titleInUz}
-                                        onChange={(e) => setState({ ...state, titleInUz: e.target.value })}
+                                        onChange={handleInputTitleUz}
                                     />
                                     <button
                                         type="button"
@@ -201,9 +241,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         className="block w-full h-full text-[#666] text-[16px] resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
-
                                         value={state?.descriptionInRu}
-                                        onChange={(e) => setState({ ...state, descriptionInRu: e.target.value })}
+                                        onChange={handleInputDescripRu}
 
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
@@ -231,9 +270,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         className="block w-full h-full text-[#666] text-[16px] resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
-
                                         value={state?.descriptionInUz}
-                                        onChange={(e) => setState({ ...state, descriptionInUz: e.target.value })}
+                                        onChange={handleInputDescripUz}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
                                         <button
@@ -338,7 +376,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                             type="text"
                                             name="noteValueRu"
                                             value={state?.noteValueRu}
-                                            onChange={(e) => setState({ ...state, noteValueRu: e.target.value })}
+                                            onChange={handleInputNoteRu}
                                         />
 
                                         <button
@@ -363,7 +401,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                             type="text"
                                             name="noteValueUz"
                                             value={state?.noteValueUz}
-                                            onChange={(e) => setState({ ...state, noteValueUz: e.target.value })}
+                                            onChange={handleInputNoteUz}
                                         />
                                         <button
                                             type="button"

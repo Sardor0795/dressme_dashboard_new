@@ -113,6 +113,48 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
         }
     }
 
+    const handleInputTitleRu = (e) => {
+        if (e.target.value) {
+            setState({ ...state, titleInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+        } else {
+            setState({ ...state, titleInRu: null })
+        }
+    }
+    const handleInputTitleUz = (e) => {
+        if (e.target.value) {
+            setState({ ...state, titleInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+        } else {
+            setState({ ...state, titleInUz: null })
+        }
+    }
+    const handleInputDescripRu = (e) => {
+        if (e.target.value) {
+            setState({ ...state, descriptionInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+        } else {
+            setState({ ...state, descriptionInRu: null })
+        }
+    }
+    const handleInputDescripUz = (e) => {
+        if (e.target.value) {
+            setState({ ...state, descriptionInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+        } else {
+            setState({ ...state, descriptionInUz: null })
+        }
+    }
+    const handleInputNoteRu = (e) => {
+        if (e.target.value) {
+            setState({ ...state, noteValueRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+        } else {
+            setState({ ...state, noteValueRu: null })
+        }
+    }
+    const handleInputNoteUz = (e) => {
+        if (e.target.value) {
+            setState({ ...state, noteValueUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
+        } else {
+            setState({ ...state, noteValueUz: null })
+        }
+    }
 
     // Категория одежды хлопок
     return (
@@ -157,13 +199,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         type="text"
                                         name="title"
                                         value={state?.titleInRu}
-                                        onChange={(e) => {
-
-                                            setState({ ...state, titleInRu: e.target.value, onEditTextForm: true })
-                                        }}
-
+                                        onChange={handleInputTitleRu}
                                     />
-
                                     <button
                                         type="button"
                                         onClick={() => navigator.clipboard.writeText(state?.titleInRu)}
@@ -186,12 +223,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
                                         name="title"
-
                                         value={state?.titleInUz}
-                                        onChange={(e) => {
-
-                                            setState({ ...state, titleInUz: e.target.value, onEditTextForm: true })
-                                        }}
+                                        onChange={handleInputTitleUz}
                                     />
                                     <button
                                         type="button"
@@ -210,18 +243,13 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         (необязательно)
                                     </span>
                                 </div>
-                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] h-[48px] px-[5px]">
+                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
                                     <textarea
                                         className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
-
                                         value={state?.descriptionInRu}
-                                        onChange={(e) => {
-
-                                            setState({ ...state, descriptionInRu: e.target.value, onEditTextForm: true })
-                                        }}
-
+                                        onChange={handleInputDescripRu}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
                                         <button
@@ -243,17 +271,13 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </span>
                                 </div>
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
-                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] h-[48px] px-[5px]">
+                                <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
                                     <textarea
                                         className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
-
                                         value={state?.descriptionInUz}
-                                        onChange={(e) => {
-
-                                            setState({ ...state, descriptionInUz: e.target.value, onEditTextForm: true })
-                                        }}
+                                        onChange={handleInputDescripUz}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
                                         <button
@@ -359,10 +383,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             type="text"
                                             name="noteValueRu"
                                             value={state?.noteValueRu}
-                                            onChange={(e) => {
-
-                                                setState({ ...state, noteValueRu: e.target.value, onEditTextForm: true })
-                                            }}
+                                            onChange={handleInputNoteRu}
                                         />
 
                                         <button
@@ -387,10 +408,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             type="text"
                                             name="noteValueUz"
                                             value={state?.noteValueUz}
-                                            onChange={(e) => {
-
-                                                setState({ ...state, noteValueUz: e.target.value, onEditTextForm: true })
-                                            }}
+                                            onChange={handleInputNoteUz}
                                         />
                                         <button
                                             type="button"

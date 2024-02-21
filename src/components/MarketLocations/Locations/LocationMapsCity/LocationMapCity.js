@@ -474,7 +474,20 @@ export default function LocationMapCity() {
     }
   }, [openRegionModal]);
 
-  // length
+  const handleInputAdminNameFirst = (e) => {
+    if (e.target.value) {
+      setState({ ...state, idAssistantName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+    } else {
+      setState({ ...state, idAssistantName: null })
+    }
+  }
+  const handleInputAdminNameSecond = (e) => {
+    if (e.target.value) {
+      setState({ ...state, idSecondAssistantName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+    } else {
+      setState({ ...state, idSecondAssistantName: null })
+    }
+  }
   return (
     <div>
       {loaderEdit ? (
@@ -1077,12 +1090,7 @@ export default function LocationMapCity() {
                         type="text"
                         name="fname"
                         value={state?.idAssistantName}
-                        onChange={(e) =>
-                          setState({
-                            ...state,
-                            idAssistantName: e.target.value,
-                          })
-                        }
+                        onChange={handleInputAdminNameFirst}
                         placeholder=" Имя администратора"
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2"
                       />
@@ -1100,12 +1108,7 @@ export default function LocationMapCity() {
                         type="text"
                         name="fname2"
                         value={state?.idSecondAssistantName}
-                        onChange={(e) =>
-                          setState({
-                            ...state,
-                            idSecondAssistantName: e.target.value,
-                          })
-                        }
+                        onChange={handleInputAdminNameSecond}
                         placeholder=" Имя администратора"
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2 "
                       />

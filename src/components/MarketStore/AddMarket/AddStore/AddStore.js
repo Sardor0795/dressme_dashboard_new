@@ -227,9 +227,14 @@ function AddStore({ onRefetch }) {
 
       });
   };
-  // console.log(cropData, "cropData");
-  // console.log(image, "cropData---image");
-  // console.log(state?.errorGroup?.logo_photo, "state?.errorGroup?.logo_photo");
+  const handleInputChange = (e) => {
+    if (e.target.value) {
+      setState({ ...state, magazinName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+    } else {
+      setState({ ...state, magazinName: null })
+    }
+  }
+
   return (
     <div className="w-full md:max-w-[1120px] md:mx-auto md:px-10 px-4 mt-6 md:mt-12">
       <section
@@ -510,9 +515,7 @@ function AddStore({ onRefetch }) {
                 name="shopName"
                 id="shopName"
                 value={state?.magazinName}
-                onChange={(e) =>
-                  setState({ ...state, magazinName: e.target.value })
-                }
+                onChange={handleInputChange}
                 placeholder="Введите название магазина"
                 className="w-[65%] md:w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
               />
