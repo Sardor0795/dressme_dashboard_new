@@ -126,8 +126,8 @@ function Sidebar() {
                 <NavbarUserIcon colors="#c5c5c5" />
               </button>
               <span className="text-black flex items-center gap-x-2 text-xl not-italic font-AeonikProRegular">
-                <span>{sellerInformation?.sellerUserData?.name || "Ism"}</span>
-                <span>{sellerInformation?.sellerUserData?.surname || "Familiya"}</span>
+                <span>{sellerInformation?.sellerUserData?.name}</span>
+                <span>{sellerInformation?.sellerUserData?.surname}</span>
                 {/* <span>Ism familiya</span> */}
 
               </span>
