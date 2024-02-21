@@ -152,6 +152,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             setState({ ...state, sizeListCheck: name })
         }
     }
+
     const contentAccessories = (
         <div className="w-[650px] h-fit">
             <div
@@ -163,7 +164,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                             Размер{" "}
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                         </p>
-                        <div className="w-[83px] flex items-center justify-between gap-x-1">
+                        <div className="w-[60px] flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
                                 <input
                                     type="number"
@@ -379,7 +380,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                             Длина
                             <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                         </p>
-                        <div className="flex items-center justify-between">
+                        <div className="w-[60px] flex items-center justify-between">
                             <div className="flex flex-col">
                                 <input
                                     type="number"
@@ -396,7 +397,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                             Ширина
                         </p>
-                        <div className="flex items-center justify-between gap-x-1">
+                        <div className="w-[60px] flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
                                 <input
                                     type="number"

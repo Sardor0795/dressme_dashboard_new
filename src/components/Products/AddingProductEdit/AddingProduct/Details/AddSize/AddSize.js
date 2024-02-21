@@ -1266,7 +1266,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 <input
                                     type="number"
                                     name="quantityNum"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1980,7 +1980,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 <input
                                     type="number"
                                     name="quantityNum"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -2138,7 +2138,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 Размер{" "}
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                             </p>
-                            <div className="w-[83px] flex items-center justify-between gap-x-1">
+                            <div className="w-[60px] flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
@@ -2358,7 +2358,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 Длина
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                             </p>
-                            <div className="flex items-center justify-between">
+                            <div className="w-[60px] flex items-center justify-between">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
@@ -2376,7 +2376,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
                                 Ширина
                             </p>
-                            <div className="flex items-center justify-between gap-x-1">
+                            <div className="w-[60px] flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
                                     <input
                                         type="number"
@@ -2554,3 +2554,5 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
     );
 }
 export default React.memo(AddSize)
+
+

@@ -518,7 +518,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                         <div className="flex items-start justify-between ">
                             <input
                                 type="number"
-                                className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-5  rounded-lg  font-AeonikProRegular `}
+                                className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                 value={state?.quantityNum}
                                 name="quantityNum"
                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value })}

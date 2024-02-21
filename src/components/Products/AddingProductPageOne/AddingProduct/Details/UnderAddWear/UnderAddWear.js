@@ -167,6 +167,7 @@ function UnderAddWear({ title, typeId, handleCallBack }) {
             setState({ ...state, sizeListCheck: name })
         }
     }
+
     const contentUnderWear = (
         <div className="w-[840px] h-fit">
             <div
