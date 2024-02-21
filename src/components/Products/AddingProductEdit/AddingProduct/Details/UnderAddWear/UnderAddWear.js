@@ -10,6 +10,7 @@ import { ClipLoader } from "react-spinners";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 const url = "https://api.dressme.uz/api/seller";
+
 function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -788,15 +789,15 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <StarLabel />
                                         </span>
                                     </p>
-                                    <div className="flex items-start justify-between border border-borderColor rounded-lg">
+                                    <div className="w-[60px]  overflow-hidden flex items-start justify-between border border-borderColor rounded-lg">
                                         {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                             <span
-                                                className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                className={`inputStyle w-full flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                             >{state?.quantityNum}</span>
                                             : <input
                                                 type="number"
                                                 name="quantityNum"
-                                                className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
+                                                className={`inputStyle outline-none w-full h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.quantityNum}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}

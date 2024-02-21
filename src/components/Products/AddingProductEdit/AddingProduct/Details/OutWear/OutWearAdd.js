@@ -784,15 +784,15 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                             <StarLabel />
                                         </span>
                                     </p>
-                                    <div className="flex items-start justify-between border border-borderColor rounded-lg">
+                                    <div className="w-[60px] overflow-hidden flex items-start justify-between border border-borderColor rounded-lg">
                                         {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                             <span
-                                                className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                className={`inputStyle w-full flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                             >{state?.quantityNum}</span>
                                             : <input
                                                 type="number"
                                                 name="quantityNum"
-                                                className={`inputStyle outline-none w-[60px] h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
+                                                className={`inputStyle outline-none w-full h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
                                                 value={state?.quantityNum}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
