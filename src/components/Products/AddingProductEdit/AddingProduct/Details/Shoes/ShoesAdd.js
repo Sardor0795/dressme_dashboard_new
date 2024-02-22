@@ -5,7 +5,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
-import { BiCheck } from "react-icons/bi";
+import { BiCheck, BiPlus } from "react-icons/bi";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 const url = "https://api.dressme.uz/api/seller";
@@ -22,6 +22,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
         quantityNum: null,
         isCheckValid: false,
         productColorId: null,
+        // ------
+        maxFootLengthShow: false,
         // ------
         successChanged: false,
         successMessage: '',
@@ -114,16 +116,16 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                             setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
                         }, 5000);
                     } else if (res?.message) {
-                        toast.success(`${res?.message}`, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                        })
+                        // toast.success(`${res?.message}`, {
+                        //     position: "top-right",
+                        //     autoClose: 3000,
+                        //     hideProgressBar: false,
+                        //     closeOnClick: true,
+                        //     pauseOnHover: true,
+                        //     draggable: true,
+                        //     progress: undefined,
+                        //     theme: "light",
+                        // })
                         onRefetch()
                         setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
                         setTimeout(() => {
@@ -160,7 +162,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             salePercent: null,
             salePrice: null,
             productColorId: null,
-            saveBtnDisable: false
+            saveBtnDisable: false,
+            maxFootLengthShow: false
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
             // console.log(data, "bu--Data");
@@ -273,7 +276,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                             }
                         </div>
                         :
-                        <div
+                        state?.sizeEditModal && <div
                             className={`w-full h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                         >
                             <div className="relative w-full flex gap-x-10 px-3 pt-5">
@@ -326,19 +329,30 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                         </div>
                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
-                                                <span
-                                                    className={`inputStyle outline-none w-[60px] text-start h-[40px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
-                                                >{state?.maxFootLength}</span>
-                                                : <input
-                                                    type="number"
-                                                    name="maxFootLength"
-                                                    className="inputStyle outline-none w-[60px] h-[40px] text-center px-3  rounded-lg  font-AeonikProRegular "
-                                                    placeholder="Макс"
-                                                    value={state?.maxFootLength}
-                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                    onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
-                                                />}
+                                            { }
+                                            {state?.maxFootLengthShow || state?.maxFootLength ?
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <span
+                                                        className={`inputStyle outline-none w-[60px] text-start h-[40px] px-3  rounded-lg   font-AeonikProRegular flex items-center justify-center opacity-20`}
+                                                    >{state?.maxFootLength}</span>
+                                                    : <input
+                                                        type="number"
+                                                        name="maxFootLength"
+                                                        className="inputStyle outline-none w-[60px] h-[40px] text-center px-3  rounded-lg  font-AeonikProRegular "
+                                                        placeholder="Макс"
+                                                        value={state?.maxFootLength}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                                        onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    /> :
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <button className=" bg-white opacity-20 rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                                    :
+                                                    <button onClick={() => setState({ ...state, maxFootLengthShow: true })} className=" bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>

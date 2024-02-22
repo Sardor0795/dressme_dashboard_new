@@ -130,16 +130,16 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
                     }, 5000);
                 } else if (res?.message) {
-                    toast.success(`${res?.message}`, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    })
+                    // toast.success(`${res?.message}`, {
+                    //     position: "top-right",
+                    //     autoClose: 3000,
+                    //     hideProgressBar: false,
+                    //     closeOnClick: true,
+                    //     pauseOnHover: true,
+                    //     draggable: true,
+                    //     progress: undefined,
+                    //     theme: "light",
+                    // })
                     onRefetch()
                     setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
                     setTimeout(() => {
@@ -309,7 +309,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                             }
                         </div>
                         :
-                        <div
+                        state?.sizeEditModal && <div
                             className={`w-full h-fit flex flex-col items-center justify-center   rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                         >
                             <div className="relative w-full flex gap-x-10 px-3 pt-5 ">

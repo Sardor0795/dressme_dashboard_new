@@ -30,8 +30,12 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         salePrice: "",
         sizeListCheck: null,
         selected: null,
-        maxSizeShow: false,
         isCheckValid: false,
+        // ---
+        maxSizeShow: false,
+        maxBreastShow: false,
+        maxHeightShow: false,
+        maxHipsShow: false,
         // ---
         successChanged: false,
         successMessage: '',
@@ -154,16 +158,16 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                         }, 5000);
 
                     } else if (res?.message) {
-                        toast.success(`${res?.message}`, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                        })
+                        // toast.success(`${res?.message}`, {
+                        //     position: "top-right",
+                        //     autoClose: 3000,
+                        //     hideProgressBar: false,
+                        //     closeOnClick: true,
+                        //     pauseOnHover: true,
+                        //     draggable: true,
+                        //     progress: undefined,
+                        //     theme: "light",
+                        // })
                         onRefetch()
                         setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
                         setTimeout(() => {
@@ -207,7 +211,11 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             salePrice: null,
             sizeListCheck: null,
             productColorId: null,
-            saveBtnDisable: false
+            saveBtnDisable: false,
+            maxSizeShow: false,
+            maxBreastShow: false,
+            maxHeightShow: false,
+            maxHipsShow: false,
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
             // console.log(data, "bu--Data");
@@ -336,7 +344,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                             }
                         </div>
                         :
-                        <div
+                        state?.sizeEditModal && <div
                             className={`w-full h-fit flex flex-col items-center justify-center  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                         >
                             <div className="relative w-full flex gap-x-10 px-3 pt-5">
@@ -363,19 +371,30 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         </div>
                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                         <div className="flex flex-col border border-borderColor rounded-lg ">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
-                                                <span
-                                                    className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                >{state?.maxBreast}</span>
-                                                : <input
-                                                    type="number"
-                                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center  bg-white rounded-lg  px-3   font-AeonikProRegular `}
-                                                    placeholder="Макс"
-                                                    name="maxBreast"
-                                                    value={state?.maxBreast}
-                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                    onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
-                                                />}
+                                            { }
+                                            {state?.maxBreastShow || state?.maxBreast ?
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <span
+                                                        className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    >{state?.maxBreast}</span>
+                                                    : <input
+                                                        type="number"
+                                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center  bg-white rounded-lg  px-3   font-AeonikProRegular `}
+                                                        placeholder="Макс"
+                                                        name="maxBreast"
+                                                        value={state?.maxBreast}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                                        onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    /> :
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <button className=" bg-white opacity-20 rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                                    :
+                                                    <button onClick={() => setState({ ...state, maxBreastShow: true })} className=" bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -403,6 +422,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     />}
+
                                             </div>
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="flex flex-col border border-borderColor  rounded-lg">
@@ -725,19 +745,30 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         </div>
                                         <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                         <div className="flex flex-col border border-borderColor  rounded-lg  ">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
-                                                <span
-                                                    className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                >{state?.maxHips}</span>
-                                                : <input
-                                                    type="number"
-                                                    name="maxHips"
-                                                    className={`inputStyle outline-none w-[60px] rounded-lg h-[38px] text-center  bg-white  px-3  font-AeonikProRegular `}
-                                                    placeholder="Макс"
-                                                    value={state?.maxHips}
-                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                    onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
-                                                />}
+                                            { }
+                                            {state?.maxHipsShow || state?.maxHips ?
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <span
+                                                        className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    >{state?.maxHips}</span>
+                                                    : <input
+                                                        type="number"
+                                                        name="maxHips"
+                                                        className={`inputStyle outline-none w-[60px] rounded-lg h-[38px] text-center  bg-white  px-3  font-AeonikProRegular `}
+                                                        placeholder="Макс"
+                                                        value={state?.maxHips}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                                        onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                    /> :
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <button className=" bg-white opacity-20 rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                                    :
+                                                    <button onClick={() => setState({ ...state, maxHipsShow: true })} className=" bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -764,19 +795,30 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             </div>
                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                             <div className="flex flex-col border border-borderColor rounded-lg">
-                                                {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
-                                                    <span
-                                                        className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                    >{state?.maxHeight}</span>
-                                                    : <input
-                                                        type="number"
-                                                        name="maxHeight"
-                                                        className={`inputStyle outline-none w-[60px] rounded-lg text-center h-[38px]  bg-white px-3  font-AeonikProRegular `}
-                                                        placeholder="Макс"
-                                                        value={state?.maxHeight}
-                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                        onChange={(e) => setState({ ...state, maxHeight: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
-                                                    />}
+                                                { }
+                                                {state?.maxHeightShow || state?.maxHeight ?
+                                                    state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                        <span
+                                                            className={`inputStyle w-[60px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                        >{state?.maxHeight}</span>
+                                                        : <input
+                                                            type="number"
+                                                            name="maxHeight"
+                                                            className={`inputStyle outline-none w-[60px] rounded-lg text-center h-[38px]  bg-white px-3  font-AeonikProRegular `}
+                                                            placeholder="Макс"
+                                                            value={state?.maxHeight}
+                                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                                            onChange={(e) => setState({ ...state, maxHeight: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                        /> :
+                                                    state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                        <button className=" bg-white opacity-20 rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                            <BiPlus color="#007DCA" size={20} />
+                                                        </button>
+                                                        :
+                                                        <button onClick={() => setState({ ...state, maxHeightShow: true })} className=" bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                            <BiPlus color="#007DCA" size={20} />
+                                                        </button>
+                                                }
                                             </div>
                                         </div>
                                     </div>
