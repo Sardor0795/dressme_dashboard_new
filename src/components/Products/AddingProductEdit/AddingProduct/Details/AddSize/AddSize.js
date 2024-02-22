@@ -25,6 +25,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
         maxHeight: null,
         minHips: null,
         maxHips: null,
+        minWaist: null,
+        maxWaist: null,
         // shoesWear
         minFootLength: null,
         maxFootLength: null,
@@ -40,8 +42,15 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
         salePrice: null,
         sizeListCheck: null,
         selected: null,
-        maxSizeShow: false,
         isCheckValid: false,
+        // --------------------
+        maxHeadGirthShow: false,
+        maxSizeShow: false,
+        maxBreastShow: false,
+        maxHeightShow: false,
+        maxHipsShow: false,
+        maxWaistShow: false,
+        maxFootLengthShow: false,
         // ------
         sendingLoader: false,
 
@@ -80,6 +89,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             minOutWearHipGirth: null,
             maxOutWearHipGirth: null,
             outWearLetterSize: null,
+
             // HeadWear
             minHeadGirth: null,
             maxHeadGirth: null,
@@ -725,16 +735,24 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <span className="mx-[5px]"><LineIcon /></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxHeadGirth"
-                                        className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                        placeholder="Макс"
-                                        value={state?.maxHeadGirth}
-                                        onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                        required
-                                    />
+                                    {state?.maxHeadGirthShow ?
+                                        <input
+                                            type="number"
+                                            name="maxHeadGirth"
+                                            className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                            placeholder="Макс"
+                                            value={state?.maxHeadGirth}
+                                            onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                            required
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxHeadGirthShow: true })}
+                                            className={`inputStyle w-[55px] h-[38px] flex items-center justify-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}>
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>}
                                 </div>
                             </div>
                         </div>
@@ -901,7 +919,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     </div>
                 </div>
             }
-            {Number(typeId) === 2 &&
+            {
+                Number(typeId) === 2 &&
                 <div
                     className={`w-full h-fit flex flex-col items-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
@@ -941,15 +960,25 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxBreast"
-                                        className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                        placeholder="Макс"
-                                        value={state?.maxBreast}
-                                        onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
+                                    {state?.maxBreastShow ?
+                                        <input
+                                            type="number"
+                                            name="maxBreast"
+                                            className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            value={state?.maxBreast}
+                                            onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxBreastShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -993,9 +1022,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-[53%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                 Буквенный Размер
-
                             </p>
-
                             <div className='w-full '>
                                 {/* -----------------Desktop--------------------- */}
                                 <div className="w-full hidden md:flex flex-row">
@@ -1190,10 +1217,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Обхват Талии
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
@@ -1205,21 +1230,30 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         value={state?.minWaist}
                                         onChange={(e) => setState({ ...state, minWaist: e.target.value })}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-
                                     />
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxWaist"
-                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                        placeholder="Макс"
-                                        value={state?.maxWaist}
-                                        onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
-                                    />
+                                    {state?.maxWaistShow ?
+                                        <input
+                                            type="number"
+                                            name="maxWaist"
+                                            className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            value={state?.maxWaist}
+                                            onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxWaistShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1242,15 +1276,25 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxHips"
-                                        className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                        placeholder="Макс"
-                                        value={state?.maxHips}
-                                        onChange={(e) => setState({ ...state, maxHips: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
+                                    {state?.maxHipsShow ?
+                                        <input
+                                            type="number"
+                                            name="maxHips"
+                                            className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
+                                            placeholder="Макс"
+                                            value={state?.maxHips}
+                                            onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxHipsShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1400,7 +1444,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     </div>
                 </div>
             }
-            {Number(typeId) === 3 &&
+            {
+                Number(typeId) === 3 &&
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
@@ -1440,15 +1485,25 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxBreast"
-                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                        placeholder="Макс"
-                                        value={state?.maxBreast}
-                                        onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
+                                    {state?.maxBreastShow ?
+                                        <input
+                                            type="number"
+                                            name="maxBreast"
+                                            className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            value={state?.maxBreast}
+                                            onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxBreastShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1709,15 +1764,25 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxHips"
-                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                        placeholder="Макс"
-                                        value={state?.maxHips}
-                                        onChange={(e) => setState({ ...state, maxHips: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
+                                    {state?.maxHipsShow ?
+                                        <input
+                                            type="number"
+                                            name="maxHips"
+                                            className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            value={state?.maxHips}
+                                            onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxHipsShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1740,15 +1805,25 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="flex flex-col">
-                                        <input
-                                            type="number"
-                                            name="maxHeight"
-                                            className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
-                                            placeholder="Макс"
-                                            value={state?.maxHeight}
-                                            onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
-                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                        />
+                                        {state?.maxHeightShow ?
+                                            <input
+                                                type="number"
+                                                name="maxHeight"
+                                                className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
+                                                placeholder="Макс"
+                                                value={state?.maxHeight}
+                                                onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                            />
+                                            :
+                                            <button
+                                                type="button"
+                                                onClick={() => setState({ ...state, maxHeightShow: true })}
+                                                className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                            >
+                                                <BiPlus color="#007DCA" size={20} />
+                                            </button>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -1896,7 +1971,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     </div>
                 </div>
             }
-            {Number(typeId) === 4 &&
+            {
+                Number(typeId) === 4 &&
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
@@ -1956,15 +2032,25 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="maxFootLength"
-                                        className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                        placeholder="Макс"
-                                        value={state?.maxFootLength}
-                                        onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
+                                    {state?.maxFootLengthShow ?
+                                        <input
+                                            type="number"
+                                            name="maxFootLength"
+                                            className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                            placeholder="Макс"
+                                            value={state?.maxFootLength}
+                                            onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxFootLengthShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -2112,7 +2198,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     </div>
                 </div>
             }
-            {Number(typeId) === 5 &&
+            {
+                Number(typeId) === 5 &&
                 <div
                     className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
@@ -2354,7 +2441,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex gap-x-10 px-3 pt-5">
                         <div className="w-[20%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Длина
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
                             </p>
@@ -2373,7 +2459,6 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         </div>
                         <div className="w-[20%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
                                 Ширина
                             </p>
                             <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -2535,7 +2620,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     </div>
                 </div>
             }
-        </div>
+        </div >
     );
     return (
         <Popover
