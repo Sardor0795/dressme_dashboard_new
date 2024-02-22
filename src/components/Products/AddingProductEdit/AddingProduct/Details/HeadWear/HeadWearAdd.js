@@ -6,7 +6,7 @@ import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
-import { BiCheck } from "react-icons/bi";
+import { BiCheck, BiPlus } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import { HelperData } from "../../../../../../hook/HelperDataStore";
@@ -38,8 +38,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         sendingLoader: false,
         editSizeId: null,
         addnewColorIdIcons: null,
-        disableSizes: null,
-        checkEmpty: false
+        disableSizes: '',
+        checkEmpty: false,
+        // --------------------
+        maxHeadGirthShow: false,
     })
     const [getSizesIds, setGetSizesIds] = useState([]);
 
@@ -118,16 +120,16 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                             setState({ ...state, sizeEditModal: false, errorMessage: '', successChanged: false })
                         }, 3000);
                     } else if (res?.message) {
-                        toast.success(`${res?.message}`, {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                        })
+                        // toast.success(`${res?.message}`, {
+                        //     position: "top-right",
+                        //     autoClose: 3000,
+                        //     hideProgressBar: false,
+                        //     closeOnClick: true,
+                        //     pauseOnHover: true,
+                        //     draggable: true,
+                        //     progress: undefined,
+                        //     theme: "light",
+                        // })
                         setState({ ...state, sendingLoader: false, successChanged: true, successMessage: res?.message })
                         setTimeout(() => {
                             setState({ ...state, sizeEditModal: false, successChanged: false, successMessage: null })
@@ -164,8 +166,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             discountPercent: null,
             discountPrice: null,
             productColorId: null,
-            saveBtnDisable: false
+            saveBtnDisable: false,
+            maxHeadGirthShow: false
         })
+
         stateList?.sizes?.filter(e => Number(e?.id) === state?.editSizeId)?.map(data => {
             setState({
                 ...state,
@@ -180,7 +184,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 productColorId: data?.product_color_id || null,
             })
         })
-    }, [state?.editSizeId, checkColor])
+    }, [state?.editSizeId, state?.sizeEditModal, checkColor])
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -236,6 +240,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         }
     }
 
+
+
     // console.log(state?.discountPercentstate?.sizeCheck, 'stateList   --------------');
     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2`}>
@@ -275,7 +281,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                             }
                         </div>
                         :
-                        <div
+                        state?.sizeEditModal && <div
                             className={`w-full h-fit flex flex-col items-center justify-center   rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                         >
                             <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
@@ -306,20 +312,30 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         </div>
                                         <span className="mx-[5px]"><LineIcon /></span>
                                         <div className="flex flex-col border border-borderColor rounded-lg">
-                                            {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
-                                                <span
-                                                    className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                >{state?.maxHeadGirth}</span>
-                                                : <input
-                                                    type="number"
-                                                    className={`inputStyle w-[55px] h-[38px] text-center   bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                    placeholder="Макс"
-                                                    name="maxHeadGirth"
-                                                    value={state?.maxHeadGirth}
-                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                    onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
-                                                    required
-                                                />}
+                                            { }
+                                            {state?.maxHeadGirthShow || state?.maxHeadGirth ?
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <span
+                                                        className={`inputStyle w-[55px] flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                    >{state?.maxHeadGirth}</span>
+                                                    : <input
+                                                        type="number"
+                                                        className={`inputStyle w-[55px] h-[38px] text-center   bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                                        placeholder="Макс"
+                                                        name="maxHeadGirth"
+                                                        value={state?.maxHeadGirth}
+                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                                        onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
+                                                        required
+                                                    /> :
+                                                state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
+                                                    <button className=" bg-white opacity-20 rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>
+                                                    :
+                                                    <button onClick={() => setState({ ...state, maxHeadGirthShow: true })} className=" bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                        <BiPlus color="#007DCA" size={20} />
+                                                    </button>}
                                         </div>
                                     </div>
                                 </div>
