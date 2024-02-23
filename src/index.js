@@ -15,15 +15,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <ContextTeam>
-      <SellerRefreshContext>
-        <SellerUserContext>
+      <SellerUserContext>
+        <SellerRefreshContext>
           <HelperDataStore>
             <QueryClientProvider client={queryClient}>
               <App />
             </QueryClientProvider >
           </HelperDataStore>
-        </SellerUserContext>
-      </SellerRefreshContext>
+        </SellerRefreshContext>
+      </SellerUserContext>
     </ContextTeam>
   </BrowserRouter>
 );

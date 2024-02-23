@@ -597,8 +597,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         onClick={() => {
                                                             setDecraseList(!decraseList)
                                                         }}
-                                                        className={` text-textBlueColor  select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer`}>
-                                                        {decraseList ? "Меньше" : "Больше"}
+                                                        className={` text-textBlueColor ${decraseList ? '' : 'pl-2'}  select-none  text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer`}>
+                                                        {decraseList ? "Меньше" : " Больше"}
                                                     </button>
                                                 </div>
                                             </div>
@@ -1218,7 +1218,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                         onClick={() => {
                                                                             setDecraseList(!decraseList)
                                                                         }}
-                                                                        className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
+                                                                        className={`text-textBlueColor ${decraseList ? '' : 'pl-2'}  select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer`}
                                                                     >
                                                                         {decraseList ? "Меньше" : "Больше"}
                                                                     </button>
