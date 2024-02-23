@@ -72,7 +72,6 @@ function App() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-
   return (
     <div>
       {/* <NavbarDashboard /> */}

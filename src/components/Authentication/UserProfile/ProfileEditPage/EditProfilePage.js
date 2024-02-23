@@ -180,7 +180,6 @@ function EditProfilePage() {
   });
 
   const onUserDelete = () => {
-    // setState({ ...state, popConfirmDelete: false })
     mutate(
       {},
       {
