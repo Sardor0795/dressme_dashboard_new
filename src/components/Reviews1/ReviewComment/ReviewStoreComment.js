@@ -36,7 +36,6 @@ export default function ReviewComment() {
     {
       onSuccess: (res) => {
         if (res) {
-          // console.log(res?.shop, "Review-Store-Details");
           setState({
             ...state,
             locationListId: res,

@@ -39,9 +39,10 @@ export default function MarketIsLocationCheck() {
     useQuery(['seller_location_list1'], () => fetchData(customHeaders), {
         onSuccess: (data) => {
             if (data?.status >= 200 && data?.status < 300) {
-                setDressInfo({ ...dressInfo, locationList: data?.data?.locations })
+                setDressInfo({ ...dressInfo, locationList: data?.data?.locations, sellerStatus: data?.status })
             }
             if (data?.status === 401) {
+                setDressInfo({ ...dressInfo, sellerStatus: data?.status })
                 sellerRefreshToken()
 
             }
@@ -49,6 +50,8 @@ export default function MarketIsLocationCheck() {
         onError: (error) => {
             if (error?.response?.status === 401) {
                 sellerRefreshToken()
+                setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
+
             }
         },
         keepPreviousData: true,
