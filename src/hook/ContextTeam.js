@@ -36,6 +36,7 @@ export default function ContextTeam({ children }) {
     genderList: null,
     regionList: null,
     typeList: null,
+    sellerStatus: null
   });
 
 
