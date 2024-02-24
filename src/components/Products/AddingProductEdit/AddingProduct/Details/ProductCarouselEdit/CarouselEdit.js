@@ -11,6 +11,7 @@ import { MdError } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiDownload } from "react-icons/fi";
+import imageCompression from "browser-image-compression";
 
 const url = "https://api.dressme.uz/api/seller";
 
@@ -409,100 +410,273 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   // console.log(productData, "Ishladi");
   // console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
   // console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
-  const handleLocationImage1 = (e) => {
-    setImageOne({
-      ...imageOne,
-      url_File1: e.target.files[0],
-      url_photo1: URL.createObjectURL(e.target.files[0]),
-      changed1: true
-    })
-
-  };
-  const handleLocationImage2 = (e) => {
-    setImageTwo({
-      ...imageTwo,
-      url_File2: e.target.files[0],
-      url_photo2: URL.createObjectURL(e.target.files[0]),
-      changed2: true
-    })
-
-  };
-  const handleLocationImage3 = (e) => {
-    setImageThree({
-      ...imageThree,
-      url_File3: e.target.files[0],
-      url_photo3: URL.createObjectURL(e.target.files[0]),
-      changed3: true
-    })
-
-  };
-  const handleLocationImage4 = (e) => {
-    setImageFour({
-      ...imageFour,
-      url_File4: e.target.files[0],
-      url_photo4: URL.createObjectURL(e.target.files[0]),
-      changed4: true,
-    })
-
-  };
-  const handleLocationImage5 = (e) => {
-    setImageFive({
-      ...imageFive,
-      url_File5: e.target.files[0],
-      url_photo5: URL.createObjectURL(e.target.files[0]),
-      changed5: true,
-    })
-    onHandleImage({
-      image_File_5: e.target.files[0],
-      image_File_6: imageSix?.url_File6,
-      image_File_7: imageSeven?.url_File7,
-      image_File_8: imageEight?.url_File8,
-
-    })
+  // const handleLocationImage1 = (e) => {
+  //   setImageOne({
+  //     ...imageOne,
+  //     url_File1: e.target.files[0],
+  //     url_photo1: URL.createObjectURL(e.target.files[0]),
+  //     changed1: true
+  //   })
+  // };
+  async function handleLocationImage1(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageOne({
+        ...imageOne,
+        url_File1: compressedFile,
+        url_photo1: URL.createObjectURL(e.target.files[0]),
+        changed1: true
+      })
+    } catch (error) {
+      console.log(error);
+    }
   }
-  const handleLocationImage6 = (e) => {
-    setImageSix({
-      ...imageSix,
-      url_File6: e.target.files[0],
-      url_photo6: URL.createObjectURL(e.target.files[0]),
-      changed6: true,
-    })
-    onHandleImage({
-      image_File_5: imageFive?.url_File5,
-      image_File_6: e.target.files[0],
-      image_File_7: imageSeven?.url_File7,
-      image_File_8: imageEight?.url_File8,
-    })
-  };
-  const handleLocationImage7 = (e) => {
-    setImageSeven({
-      ...imageSeven,
-      url_File7: e.target.files[0],
-      url_photo7: URL.createObjectURL(e.target.files[0]),
-      changed7: true,
-    })
-    onHandleImage({
-      image_File_5: imageFive?.url_File5,
-      image_File_6: imageSix?.url_File6,
-      image_File_7: e.target.files[0],
-      image_File_8: imageEight?.url_File8,
-    })
-  };
-  const handleLocationImage8 = (e) => {
-    setImageEight({
-      ...imageEight,
-      url_File8: e.target.files[0],
-      url_photo8: URL.createObjectURL(e.target.files[0]),
-      changed8: true,
-    })
-    onHandleImage({
-      image_File_5: imageFive?.url_File5,
-      image_File_6: imageSix?.url_File6,
-      image_File_7: imageSeven?.url_File7,
-      image_File_8: e.target.files[0],
-    })
-  };
+  // const handleLocationImage2 = (e) => {
+  //   setImageTwo({
+  //     ...imageTwo,
+  //     url_File2: e.target.files[0],
+  //     url_photo2: URL.createObjectURL(e.target.files[0]),
+  //     changed2: true
+  //   })
+  // };
+  async function handleLocationImage2(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageTwo({
+        ...imageTwo,
+        url_File2: compressedFile,
+        url_photo2: URL.createObjectURL(e.target.files[0]),
+        changed2: true
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage3 = (e) => {
+  //   setImageThree({
+  //     ...imageThree,
+  //     url_File3: e.target.files[0],
+  //     url_photo3: URL.createObjectURL(e.target.files[0]),
+  //     changed3: true
+  //   })
+  // };
+  async function handleLocationImage3(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageThree({
+        ...imageThree,
+        url_File3: compressedFile,
+        url_photo3: URL.createObjectURL(e.target.files[0]),
+        changed3: true
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage4 = (e) => {
+  //   setImageFour({
+  //     ...imageFour,
+  //     url_File4: e.target.files[0],
+  //     url_photo4: URL.createObjectURL(e.target.files[0]),
+  //     changed4: true,
+  //   })
 
+  // };
+  async function handleLocationImage4(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageFour({
+        ...imageFour,
+        url_File4: compressedFile,
+        url_photo4: URL.createObjectURL(e.target.files[0]),
+        changed4: true,
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage5 = (e) => {
+  //   setImageFive({
+  //     ...imageFive,
+  //     url_File5: e.target.files[0],
+  //     url_photo5: URL.createObjectURL(e.target.files[0]),
+  //     changed5: true,
+  //   })
+  //   onHandleImage({
+  //     image_File_5: e.target.files[0],
+  //     image_File_6: imageSix?.url_File6,
+  //     image_File_7: imageSeven?.url_File7,
+  //     image_File_8: imageEight?.url_File8,
+
+  //   })
+  // }
+  async function handleLocationImage5(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageFive({
+        ...imageFive,
+        url_File5: compressedFile,
+        url_photo5: URL.createObjectURL(e.target.files[0]),
+        changed5: true,
+      })
+      onHandleImage({
+        image_File_5: e.target.files[0],
+        image_File_6: imageSix?.url_File6,
+        image_File_7: imageSeven?.url_File7,
+        image_File_8: imageEight?.url_File8,
+
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage6 = (e) => {
+  //   setImageSix({
+  //     ...imageSix,
+  //     url_File6: e.target.files[0],
+  //     url_photo6: URL.createObjectURL(e.target.files[0]),
+  //     changed6: true,
+  //   })
+  //   onHandleImage({
+  //     image_File_5: imageFive?.url_File5,
+  //     image_File_6: e.target.files[0],
+  //     image_File_7: imageSeven?.url_File7,
+  //     image_File_8: imageEight?.url_File8,
+  //   })
+  // };
+  async function handleLocationImage6(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageSix({
+        ...imageSix,
+        url_File6: compressedFile,
+        url_photo6: URL.createObjectURL(e.target.files[0]),
+        changed6: true,
+      })
+      onHandleImage({
+        image_File_5: imageFive?.url_File5,
+        image_File_6: e.target.files[0],
+        image_File_7: imageSeven?.url_File7,
+        image_File_8: imageEight?.url_File8,
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage7 = (e) => {
+  //   setImageSeven({
+  //     ...imageSeven,
+  //     url_File7: e.target.files[0],
+  //     url_photo7: URL.createObjectURL(e.target.files[0]),
+  //     changed7: true,
+  //   })
+  //   onHandleImage({
+  //     image_File_5: imageFive?.url_File5,
+  //     image_File_6: imageSix?.url_File6,
+  //     image_File_7: e.target.files[0],
+  //     image_File_8: imageEight?.url_File8,
+  //   })
+  // };
+  async function handleLocationImage7(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageSeven({
+        ...imageSeven,
+        url_File7: compressedFile,
+        url_photo7: URL.createObjectURL(e.target.files[0]),
+        changed7: true,
+      })
+      onHandleImage({
+        image_File_5: imageFive?.url_File5,
+        image_File_6: imageSix?.url_File6,
+        image_File_7: e.target.files[0],
+        image_File_8: imageEight?.url_File8,
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage8 = (e) => {
+  //   setImageEight({
+  //     ...imageEight,
+  //     url_File8: e.target.files[0],
+  //     url_photo8: URL.createObjectURL(e.target.files[0]),
+  //     changed8: true,
+  //   })
+  //   onHandleImage({
+  //     image_File_5: imageFive?.url_File5,
+  //     image_File_6: imageSix?.url_File6,
+  //     image_File_7: imageSeven?.url_File7,
+  //     image_File_8: e.target.files[0],
+  //   })
+  // };
+  async function handleLocationImage8(e) {
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setImageEight({
+        ...imageEight,
+        url_File8: compressedFile,
+        url_photo8: URL.createObjectURL(e.target.files[0]),
+        changed8: true,
+      })
+      onHandleImage({
+        image_File_5: imageFive?.url_File5,
+        image_File_6: imageSix?.url_File6,
+        image_File_7: imageSeven?.url_File7,
+        image_File_8: e.target.files[0],
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // console.log(selectColorID, "selectColorID");
   function UpadatePhoto(productId) {
     setLoader(true)
