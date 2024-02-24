@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.7.2",
     "axios": "^1.6.5",
+    "browser-image-compression": "^2.0.2",
     "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-cropper": "^2.3.3",

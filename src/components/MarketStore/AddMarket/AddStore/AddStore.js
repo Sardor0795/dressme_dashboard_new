@@ -13,6 +13,7 @@ import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import { SellerMainData } from "../../../../hook/SellerUserContext";
 import { HelperData } from "../../../../hook/HelperDataStore";
+import imageCompression from "browser-image-compression";
 const { REACT_APP_BASE_URL } = process.env;
 
 function AddStore({ onRefetch }) {
@@ -44,6 +45,24 @@ function AddStore({ onRefetch }) {
       pictureBgView: URL.createObjectURL(e.target.files[0]),
     });
   };
+  async function handleImageUpload(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile: compressedFile,
+        pictureBgView: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const clearBgImg = () => {
     setState({
       ...state,
@@ -51,21 +70,6 @@ function AddStore({ onRefetch }) {
       pictureBgView: '',
     });
   }
-  const handleChangeBrand = (e) => {
-    setState({
-      ...state,
-      pictureLogoFile: e.target.files[0],
-      pictureLogoView: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-  // const ClearBrandImg = () => {
-  //   setState({
-  //     ...state,
-  //     pictureLogoFile: '',
-  //     pictureLogoView: '',
-  //   });
-  // }
-
 
   // ------------GET METHOD delivery-method-----------------
 
@@ -286,7 +290,8 @@ function AddStore({ onRefetch }) {
                     id={"imageThree1"}
                     type="file"
                     name="fileUpload1"
-                    onChange={handleChange}
+                    onChange={handleImageUpload}
+                    // onChange={handleChange}
                     accept=" image/*"
                   />
                   {state?.pictureBgView ?

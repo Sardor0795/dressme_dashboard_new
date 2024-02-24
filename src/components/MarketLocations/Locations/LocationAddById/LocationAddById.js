@@ -16,6 +16,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
 import { AiOutlineLeft } from "react-icons/ai";
+import imageCompression from "browser-image-compression";
+
 export default function LocationAddById() {
   const url = "https://api.dressme.uz/api/seller";
   const navigate = useNavigate();
@@ -88,28 +90,82 @@ export default function LocationAddById() {
   }
 
   // console.log();
-  const handleLocationImageOne = (e) => {
-    setState({
-      ...state,
-      pictureBgFile1: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-  const handleLocationImageTwo = (e) => {
-    setState({
-      ...state,
-      picturelogoFile2: e.target.files[0],
-      picturelogoView2: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-  const handleLocationImageThree = (e) => {
-    setState({
-      ...state,
-      pictureLastFile3: e.target.files[0],
-      pictureLastView3: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-
+  // const handleLocationImageOne = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile1: e.target.files[0],
+  //     pictureBgView1: URL.createObjectURL(e.target.files[0]),
+  //   });
+  // };
+  async function handleLocationImageOne(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile1: compressedFile,
+        pictureBgView1: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImageTwo = (e) => {
+  //   setState({
+  //     ...state,
+  //     picturelogoFile2: e.target.files[0],
+  //     picturelogoView2: URL.createObjectURL(e.target.files[0]),
+  //   });
+  // };
+  async function handleLocationImageTwo(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        picturelogoFile2: compressedFile,
+        picturelogoView2: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+ 
+  // const handleLocationImageThree = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureLastFile3: e.target.files[0],
+  //     pictureLastView3: URL.createObjectURL(e.target.files[0]),
+  //   });
+  // };
+  async function handleLocationImageThree(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureLastFile3: compressedFile,
+        pictureLastView3: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useQuery(["shops_regions"], () => {
     return request({ url: "/shops/locations/regions", token: true });
   },

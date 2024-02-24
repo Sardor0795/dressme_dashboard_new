@@ -15,6 +15,8 @@ import axios from "axios";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { SellerMainData } from "../../../hook/SellerUserContext";
 import { HelperData } from "../../../hook/HelperDataStore";
+import imageCompression from "browser-image-compression";
+
 const { REACT_APP_BASE_URL } = process.env;
 
 function MarketEdit() {
@@ -56,6 +58,24 @@ function MarketEdit() {
       pictureBgView1: URL.createObjectURL(e.target.files[0]),
     });
   };
+  async function handleImageUpload(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile1: compressedFile,
+        pictureBgView1: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // const clearBgImg = () => {
   //   setState({
   //     ...state,
@@ -482,7 +502,7 @@ function MarketEdit() {
                       id={"imageThree1"}
                       type="file"
                       name="fileUpload1"
-                      onChange={handleLocationImageOne}
+                      onChange={handleImageUpload}
                       accept=" image/*"
                     />
                     {state?.pictureBgView1 ?
