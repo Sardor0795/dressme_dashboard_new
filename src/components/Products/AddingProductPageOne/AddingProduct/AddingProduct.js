@@ -33,6 +33,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
+import imageCompression from "browser-image-compression";
+
 const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
@@ -111,40 +113,106 @@ const AddingProduct = () => {
 
 
 
-  const handleLocationImage1 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile1: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0])
-    })
-    // setSelectedFiles((countryList) => [...countryList, {
-    //   id: incrementUz, pictureBgFile: e.target.files[0],
-    //   pictureBgView1: URL.createObjectURL(e.target.files[0]
-    //   ),
-    // }])
-    // setIncrementUz(incrementUz + 1)
-  };
-  const handleLocationImage2 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile2: e.target.files[0],
-      pictureBgView2: URL.createObjectURL(e.target.files[0])
-    })
-  };
-  const handleLocationImage3 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile3: e.target.files[0],
-      pictureBgView3: URL.createObjectURL(e.target.files[0])
-    })
-  };
-  const handleLocationImage4 = (e) => {
-    setState({
-      ...state,
-      pictureBgFile4: e.target.files[0],
-      pictureBgView4: URL.createObjectURL(e.target.files[0])
-    })
-  };
+  // const handleLocationImage1 = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile1: e.target.files[0],
+  //     pictureBgView1: URL.createObjectURL(e.target.files[0])
+  //   })
+  // };
+  async function handleLocationImage1(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile1: compressedFile,
+        pictureBgView1: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage2 = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile2: e.target.files[0],
+  //     pictureBgView2: URL.createObjectURL(e.target.files[0])
+  //   })
+  // };
+  async function handleLocationImage2(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile2: compressedFile,
+        pictureBgView2: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage3 = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile3: e.target.files[0],
+  //     pictureBgView3: URL.createObjectURL(e.target.files[0])
+  //   })
+  // };
+  async function handleLocationImage3(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile3: compressedFile,
+        pictureBgView3: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // const handleLocationImage4 = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile4: e.target.files[0],
+  //     pictureBgView4: URL.createObjectURL(e.target.files[0])
+  //   })
+  // };
+  async function handleLocationImage4(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile4: compressedFile,
+        pictureBgView4: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   function CallBackHeadWear(childData) {
     setState({
@@ -187,7 +255,6 @@ const AddingProduct = () => {
 
   }
   function CallBackShoesWear(childData) {
-
     setState({
       ...state,
       shoesList: childData,
@@ -201,7 +268,6 @@ const AddingProduct = () => {
 
   }
   function CallBackAccessoriesWear(childData) {
-
     setState({
       ...state,
       AccessoriesList: childData,

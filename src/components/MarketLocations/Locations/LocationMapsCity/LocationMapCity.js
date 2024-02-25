@@ -27,6 +27,8 @@ import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
+import imageCompression from "browser-image-compression";
+
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function LocationMapCity() {
@@ -73,33 +75,81 @@ export default function LocationMapCity() {
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [loader, setLoader] = useState(false);
   const [openStoreList, setOpenStoreList] = useState(false);
-  const handleLocationImageOne = (e) => {
-    setState({
-      ...state,
-      pictureBgFile1: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0]),
-    });
-  };
+  // const handleLocationImageOne = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile1: e.target.files[0],
+  //     pictureBgView1: URL.createObjectURL(e.target.files[0]),
+  //   });
+  // };
+  async function handleLocationImageOne(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile1: compressedFile,
+        pictureBgView1: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const [pictureFile2, setPictureFile2] = useState("");
   const [pictureView2, setPictureView2] = useState("");
-  const [pictureTest2, setPictureTest2] = useState("");
-  const handleLocationImageTwo = (e) => {
-    // setState({
-    //   ...state,
-    //   pictureBgFile2: e.target.files[0],
-    //   pictureBgView2: URL.createObjectURL(e.target.files[0])
-    // });
-    setPictureFile2(e.target.files[0]);
-    setPictureView2(URL.createObjectURL(e.target.files[0]));
-  };
-  const handleLocationImageThree = (e) => {
-    setState({
-      ...state,
-      pictureBgFile3: e.target.files[0],
-      pictureBgView3: URL.createObjectURL(e.target.files[0]),
-    });
-  };
+  // const [pictureTest2, setPictureTest2] = useState("");
+
+  // const handleLocationImageTwo = (e) => {
+  //   setPictureFile2(e.target.files[0]);
+  //   setPictureView2(URL.createObjectURL(e.target.files[0]));
+  // };
+  async function handleLocationImageTwo(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setPictureFile2(compressedFile)
+      setPictureView2(URL.createObjectURL(event.target.files[0]))
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // const handleLocationImageThree = (e) => {
+  //   setState({
+  //     ...state,
+  //     pictureBgFile3: e.target.files[0],
+  //     pictureBgView3: URL.createObjectURL(e.target.files[0]),
+  //   });
+  // };
+  async function handleLocationImageThree(event) {
+    const imageFile = event.target.files[0];
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setState({
+        ...state,
+        pictureBgFile3: compressedFile,
+        pictureBgView3: URL.createObjectURL(event.target.files[0]),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const [isSendedLocation, setIsSendedLocation] = useState(true);
   const [forMaps, setForMaps] = useState({
@@ -423,7 +473,7 @@ export default function LocationMapCity() {
     }
     if (!state?.pictureBgTest2) {
       setPictureView2("");
-      setPictureTest2("");
+      // setPictureTest2("");
       setBackImgUploadModal(false);
     }
   }
@@ -1065,7 +1115,7 @@ export default function LocationMapCity() {
                       )}
                     </button> :
                     <div
-                      className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
+                      className="h-full border rounded-lg  w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
                     >
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
                         Фото локации
