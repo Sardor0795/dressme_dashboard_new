@@ -119,7 +119,7 @@ export default function SignInSeller() {
     document.title = "Войти в систему продавца";
   }, []);
   return (
-    <div className=" w-full h-full md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
+    <div className=" w-full h-[100vh] md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -180,12 +180,14 @@ export default function SignInSeller() {
               {state?.eyesShow ? (
                 <AiOutlineEyeInvisible
                   onClick={() => setState({ ...state, eyesShow: false })}
-                  size={20} color={"#e2e2e2"}
+                  size={20}
+                  color={"#e2e2e2"}
                 />
               ) : (
                 <AiOutlineEye
                   onClick={() => setState({ ...state, eyesShow: true })}
-                  size={20} color={"#e2e2e2"}
+                  size={20}
+                  color={"#e2e2e2"}
                 />
               )}
             </span>
@@ -216,10 +218,8 @@ export default function SignInSeller() {
             Забыли пароль?
           </NavLink>
         </div>
-        {state?.isLoadingSent ?
-          <button
-            className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
-          >
+        {state?.isLoadingSent ? (
+          <button className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 ">
             <ClipLoader
               className="h-full py-[2px]"
               color={"#fff"}
@@ -227,7 +227,8 @@ export default function SignInSeller() {
               loading={true}
             />
           </button>
-          : <button
+        ) : (
+          <button
             onClick={EnterTheSystem}
             className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
           >
@@ -237,12 +238,10 @@ export default function SignInSeller() {
             <span>
               <SircleNext colors={"#fff"} />
             </span>
-          </button>}
+          </button>
+        )}
 
-        <div className=" mt-6 text-center">
-          {" "}
-          Если у вас еще нету аккаунта
-        </div>
+        <div className=" mt-6 text-center"> Если у вас еще нету аккаунта</div>
         <NavLink
           to={"/signup-seller"}
           className="mt-3  cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-[#E8E8E8] select-none rounded-lg active:scale-95	active:opacity-70 "
