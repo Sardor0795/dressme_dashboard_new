@@ -578,6 +578,115 @@ export default function LocationMapCity() {
               className={`fixed inset-0 z-[99999] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
             ></section>
+            <div
+              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
+                ? " bottom-0 md:flex flex-col"
+                : "md:hidden bottom-[-1500px] z-[-10]"
+                }`}
+            >
+              <div className="w-full flex items-center justify-between font-AeonikProMedium">
+                <span className="text-black text-lg not-italic font-AeonikProMedium">
+                  Выберите регион
+                </span>
+                <span
+                  className="select-none cursor-pointer"
+                  onClick={() => setOpenRegionModal(false)}
+                >
+                  <MenuCloseIcons colors="#000" />
+                </span>
+              </div>
+
+              <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+                {dressInfo?.regionList?.regions ? (
+                  dressInfo?.regionList?.regions?.map(
+                    (data, index) => {
+                      return (
+                        <div
+                          key={data?.id}
+                          className="w-full  h-fit  "
+                        >
+                          <div
+                            onClick={() =>
+                              accordionCityList(data?.id)
+                            }
+                            className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                          >
+                            <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                              {data?.name_ru}
+                            </span>
+                            <span
+                              className={`${activeIndex == data?.id
+                                ? "rotate-[0deg]"
+                                : "rotate-[180deg]"
+                                } `}
+                            >
+                              <ArrowTopIcons colors={"#a1a1a1"} />
+                            </span>
+                          </div>
+
+                          <div
+                            className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                             ${activeIndex == data?.id
+                                ? "openAccardion"
+                                : "CloseAccardion"
+                              } `}
+                          >
+                            {data?.sub_regions?.map((item) => {
+                              return (
+                                <div
+                                  key={item?.id}
+                                  className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
+                                >
+                                  <label
+                                    htmlFor={item?.name_ru}
+                                    className="flex items-center gap-x-[6px]"
+                                  >
+                                    <input
+                                      type="radio"
+                                      id={item?.name_ru}
+                                      name="type_work"
+                                      value={item?.region_id}
+                                      checked={
+                                        state?.idSupRregionId ==
+                                        item?.id
+                                      }
+                                      className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                      onChange={(e) => {
+                                        setState({
+                                          ...state,
+                                          idRegionId: e.target.value,
+                                          idSupRregionId: item?.id,
+                                        });
+                                      }}
+                                      required
+                                    />
+                                    <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                      {item?.name_ru}
+                                    </span>
+                                  </label>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    }
+                  )
+                ) : (
+                  <p className="w-full h-full flex flex-col items-center justify-center">
+                    Malumotlar yuklanyapti...
+                  </p>
+                )}
+              </div>
+              <div className="w-full flex items-center justify-end mt-2">
+                <span
+                  onClick={() => setOpenRegionModal(false)}
+                  className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium"
+                >
+                  Готово
+                </span>
+              </div>
+            </div>
             {/* Delete Product Of Pop Confirm */}
             <section
               className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
@@ -628,14 +737,14 @@ export default function LocationMapCity() {
                 <button
                   onClick={() => setDeleteModal(false)}
                   type="button"
-                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[32px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
                 >
                   Oтмена
                 </button>
                 <button
                   onClick={() => onLocaTionDelete()}
                   type="button"
-                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[32px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
                 >
                   Удалить{" "}
                 </button>
@@ -643,14 +752,14 @@ export default function LocationMapCity() {
             </section>
             {/* Background Img Edit */}
             {backImgUploadModal && backImgOrder && (
-              <div className="max-w-[650px] h-fit w-full fixed z-[100000]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
+              <div className="max-w-[440px] md:max-w-[650px] h-fit w-full fixed z-[100000]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
                 {/* </div> */}
 
                 {backImgOrder === 1 && (
                   <div className="relative z-[100001]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
                     <div className={`flex items-center justify-between  pb-3`}>
                       <div className="w-fit flex items-center">
-                        <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                        <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
                           Выберите фото
                         </span>
                       </div>
@@ -662,7 +771,7 @@ export default function LocationMapCity() {
                         <MenuCloseIcons colors={"#000"} />
                       </button>
                     </div>
-                    <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                    <div className="w-full  h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
                       {hideDeleteIcons ? (
                         <div className="w-full flex items-center justify-center">
                           {loader && hideDeleteIcons ? (
@@ -689,7 +798,7 @@ export default function LocationMapCity() {
                           className="w-full h-full object-contain rounded-lg"
                         />
                       ) : (
-                        <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                        <span className="leading-none text-sm md:text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                           Фото
                         </span>
                       )}
@@ -697,7 +806,7 @@ export default function LocationMapCity() {
                     <div className="flex items-center justify-between  pt-2">
                       <label
                         htmlFor={"imageOne1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor  text-sm md:text-base font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -713,7 +822,7 @@ export default function LocationMapCity() {
                       </label>
                       <button
                         onClick={() => setBackImgUploadModal(false)}
-                        className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                        className="w-fit h-fit flex items-end justify-end text-sm md:text-base select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                       >
                         Oтмена
                       </button>
@@ -724,7 +833,7 @@ export default function LocationMapCity() {
                   <div className="relative z-[100001]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
                     <div className={`flex items-center justify-between  pb-3`}>
                       <div className="w-fit flex items-center">
-                        <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                        <span className="text-black text-sm md:text-base not-italic font-AeonikProRegular leading-5">
                           Выберите фото
                         </span>
                       </div>
@@ -736,7 +845,7 @@ export default function LocationMapCity() {
                         <MenuCloseIcons colors={"#000"} />
                       </button>
                     </div>
-                    <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                    <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
                       {hideDeleteIcons ? (
                         <div className="w-full flex items-center justify-center">
                           {loader && hideDeleteIcons ? (
@@ -763,7 +872,7 @@ export default function LocationMapCity() {
                           className="w-full h-full object-contain rounded-lg"
                         />
                       ) : (
-                        <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                        <span className="leading-none text-[12px]  md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                           Фото
                         </span>
                       )}
@@ -771,7 +880,7 @@ export default function LocationMapCity() {
                     <div className="flex items-center justify-between  pt-2">
                       <label
                         htmlFor={"imageTwo2"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center text-sm md:text-lg cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -786,14 +895,14 @@ export default function LocationMapCity() {
                       {pictureView2 ? (
                         <button
                           onClick={() => onUserDeleteBackgroundImg2()}
-                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
                           Удалить
                         </button>
                       ) : (
                         <button
                           onClick={() => setBackImgUploadModal(false)}
-                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
                           Oтмена
                         </button>
@@ -805,7 +914,7 @@ export default function LocationMapCity() {
                   <div className="relative z-[100001]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
                     <div className={`flex items-center justify-between  pb-3`}>
                       <div className="w-fit flex items-center">
-                        <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                        <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
                           Выберите фото
                         </span>
                       </div>
@@ -817,7 +926,7 @@ export default function LocationMapCity() {
                         <MenuCloseIcons colors={"#000"} />
                       </button>
                     </div>
-                    <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                    <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
                       {hideDeleteIcons ? (
                         <div className="w-full flex items-center justify-center">
                           {loader && hideDeleteIcons ? (
@@ -844,7 +953,7 @@ export default function LocationMapCity() {
                           className="w-full h-full object-contain rounded-lg"
                         />
                       ) : (
-                        <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                        <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                           Фото
                         </span>
                       )}
@@ -852,7 +961,7 @@ export default function LocationMapCity() {
                     <div className="flex items-center justify-between  pt-2">
                       <label
                         htmlFor={"imagethree3"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor  text-sm md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -869,14 +978,14 @@ export default function LocationMapCity() {
                       {state?.pictureBgView3 ? (
                         <button
                           onClick={() => onUserDeleteBackgroundImg3()}
-                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
                           Удалить
                         </button>
                       ) : (
                         <button
                           onClick={() => setBackImgUploadModal(false)}
-                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                          className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
                           Oтмена
                         </button>
@@ -896,7 +1005,7 @@ export default function LocationMapCity() {
                 >
                   <GoBackIcons />
                 </button>
-                <div className="text-center text-xl md:text-[35px] font-AeonikProMedium md:px-0">
+                <div className="text-center text-xl md:text-[35px] font-AeonikProMedium w-[80%] ll:w-fit md:px-0">
                   Редактировать местоположения
                 </div>
               </div>
@@ -1054,7 +1163,7 @@ export default function LocationMapCity() {
                         className="w-full h-full object-cover rounded-lg"
                       />
                     ) : (
-                      <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                      <span className="leading-none  text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                         Фото локации
                       </span>
                     )}
@@ -1078,7 +1187,7 @@ export default function LocationMapCity() {
                             className="w-full h-full object-cover rounded-lg"
                           />
                         ) : (
-                          <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                          <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                             Фото локации
                           </span>
                         )}
@@ -1109,7 +1218,7 @@ export default function LocationMapCity() {
                           className="w-full h-full object-cover rounded-lg"
                         />
                       ) : (
-                        <span className="leading-none md:text-[16px] text-[13px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                           Фото локации
                         </span>
                       )}
@@ -1167,115 +1276,7 @@ export default function LocationMapCity() {
 
                   <div className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="w-full h-fit flex justify-center ">
-                      <div
-                        className={`max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
-                          ? " bottom-0 md:flex flex-col"
-                          : "md:hidden bottom-[-1500px] z-[-10]"
-                          }`}
-                      >
-                        <div className="w-full flex items-center justify-between font-AeonikProMedium">
-                          <span className="text-black text-lg not-italic font-AeonikProMedium">
-                            Выберите регион
-                          </span>
-                          <span
-                            className="select-none cursor-pointer"
-                            onClick={() => setOpenRegionModal(false)}
-                          >
-                            <MenuCloseIcons colors="#000" />
-                          </span>
-                        </div>
 
-                        <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                          {dressInfo?.regionList?.regions ? (
-                            dressInfo?.regionList?.regions?.map(
-                              (data, index) => {
-                                return (
-                                  <div
-                                    key={data?.id}
-                                    className="w-full  h-fit  "
-                                  >
-                                    <div
-                                      onClick={() =>
-                                        accordionCityList(data?.id)
-                                      }
-                                      className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
-                                    >
-                                      <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                                        {data?.name_ru}
-                                      </span>
-                                      <span
-                                        className={`${activeIndex == data?.id
-                                          ? "rotate-[0deg]"
-                                          : "rotate-[180deg]"
-                                          } `}
-                                      >
-                                        <ArrowTopIcons colors={"#a1a1a1"} />
-                                      </span>
-                                    </div>
-
-                                    <div
-                                      className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id
-                                          ? "openAccardion"
-                                          : "CloseAccardion"
-                                        } `}
-                                    >
-                                      {data?.sub_regions?.map((item) => {
-                                        return (
-                                          <div
-                                            key={item?.id}
-                                            className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
-                                          >
-                                            <label
-                                              htmlFor={item?.name_ru}
-                                              className="flex items-center gap-x-[6px]"
-                                            >
-                                              <input
-                                                type="radio"
-                                                id={item?.name_ru}
-                                                name="type_work"
-                                                value={item?.region_id}
-                                                checked={
-                                                  state?.idSupRregionId ==
-                                                  item?.id
-                                                }
-                                                className="border border-borderColor  cursor-pointer  flex items-center justify-center"
-                                                onChange={(e) => {
-                                                  setState({
-                                                    ...state,
-                                                    idRegionId: e.target.value,
-                                                    idSupRregionId: item?.id,
-                                                  });
-                                                }}
-                                                required
-                                              />
-                                              <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
-                                                {item?.name_ru}
-                                              </span>
-                                            </label>
-                                          </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-                                );
-                              }
-                            )
-                          ) : (
-                            <p className="w-full h-full flex flex-col items-center justify-center">
-                              Malumotlar yuklanyapti...
-                            </p>
-                          )}
-                        </div>
-                        <div className="w-full flex items-center justify-end mt-2">
-                          <span
-                            onClick={() => setOpenRegionModal(false)}
-                            className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium"
-                          >
-                            Готово
-                          </span>
-                        </div>
-                      </div>
 
                       {/* Region INput  */}
                       <div className={"w-full"}>

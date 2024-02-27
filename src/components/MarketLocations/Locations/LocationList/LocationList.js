@@ -48,12 +48,19 @@ function LocationList() {
       }
     });
   }
+  useEffect(() => {
+    if (openSelect || statusModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openSelect, statusModal]);
+  // Прикрепить к магазину
   return (
     <div className={`w-full h-full  px-4  md:px-10   pb-10`}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${
-          openSelect || statusModal ? "" : "hidden"
-        }`}
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect || statusModal ? "" : "hidden"
+          }`}
         onClick={() => {
           setStatusModal(false);
           setOpenSelect(false);
@@ -61,11 +68,10 @@ function LocationList() {
       ></div>
       {/*status Modal */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          statusModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setStatusModal(false)}
@@ -90,9 +96,8 @@ function LocationList() {
         )}
       </section>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setOpenSelect(false)}
@@ -102,20 +107,20 @@ function LocationList() {
           <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
-          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+          <p className="text-tableTextTitle2 text-base md:text-2xl not-italic font-AeonikProRegular">
             Прикрепить к магазину
           </p>
         </div>
-        <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
+        <div className="w-full px-[10px] md:py-[30px] py-[15px]  flex flex-col md:gap-y-[10px]">
           {helperDatainform?.shopsList?.shops ? (
             helperDatainform?.shopsList?.shops?.map((item) => {
               return (
                 <button
                   onClick={() => handleShopsOfLocation(item?.id)}
                   key={item?.id}
-                  className="w-full py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                  className="w-full py-1 md:py-[10px] flex items-center justify-center rounded-[5px] hover:bg-LocationSelectBg focus:bg-LocationSelectBg  "
                 >
-                  <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
+                  <span className="text-tableTextTitle2 text-[14px] md:text-xl not-italic font-AeonikProRegular">
                     {item?.name}
                   </span>
                 </button>
@@ -242,7 +247,7 @@ function LocationList() {
         )
         ?.map((item) => {
           return (
-            <div key={item?.id}>
+            <div key={item?.id} className="mt-5 md:mt-0">
               {item?.shop_locations?.length ? (
                 <div
                   key={item?.id}
@@ -259,7 +264,7 @@ function LocationList() {
 
                   <button
                     onClick={() => setOpenSelect(true)}
-                    className="md:hidden p-2 flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
+                    className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
                   >
                     <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
                       Добавить локацию
@@ -270,7 +275,7 @@ function LocationList() {
 
               {/* Table */}
               {item?.shop_locations?.length ? (
-                <div className="w-full h-fit md:border md:rounded-xl md:overflow-hidden">
+                <div className="w-full h-fit md:border md:rounded-xl md:overflow-hidden flex flex-col gap-y-[30px]">
                   {item?.shop_locations?.map((value, index) => {
                     return (
                       <div
@@ -370,12 +375,12 @@ function LocationList() {
                           </li>
                         </ul>
                         {/* Mobile */}
-                        <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+                        <div className="border rounded-xl border-[##F2F2F2] p-[10px]  md:hidden w-full">
                           <div className="mb-2">
                             <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                               <span className="text-checkboxBorder">
-                                {value?.id}
+                                {index + 1}
                               </span>
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                             </div>
@@ -384,13 +389,36 @@ function LocationList() {
                           <div className="mb-3 h-[148px]">
                             <figure className="w-full h-full border border-lightBorderColor rounded-lg overflow-hidden">
                               <img
-                                className="w-[100%] h-[100%]  object-contain"
+                                className="w-[100%] h-[100%]  object-cover"
                                 src={value?.url_image_path_one}
                                 alt=""
                               />
                             </figure>
                           </div>
-
+                          <div className="w-full flex items-center select-none md:hidden  my-3">
+                            <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                              Cтатус:</p>
+                            <div className="w-[100px] flex items-center select-none ">
+                              {value?.status === "approved" &&
+                                <button
+                                  type="button" className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </button>}
+                              {value?.status === "declined" &&
+                                <button onClick={() => onHandleStatus(value?.id, item?.id)}
+                                  type="button" className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </button>}
+                              {value?.status === "pending" &&
+                                <button type="button" className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </button>}
+                              {value?.status === "updated" &&
+                                <button type="button" className="w-full h-fit  flex items-center justify-center text-[12px]  xs:text-base text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                  {value?.status || "status"}
+                                </button>}
+                            </div>
+                          </div>
                           <div className="mb-[25px]">
                             <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-1 ll:px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
                               <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[24%]">
@@ -408,7 +436,7 @@ function LocationList() {
                               <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
                                 {value?.region?.name_ru}
                               </div>
-                              <div className="relative pr-[5px] ll:pr-[10px] overflow-hidden  w-[46%]  text-justify	text-[11px] not-italic font-AeonikProMedium">
+                              <div className="relative pr-[5px] ll:pr-[10px] overflow-hidden  w-[46%]  	text-[11px] not-italic font-AeonikProMedium">
                                 <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
 
                                 {value?.address}
@@ -461,13 +489,13 @@ function LocationList() {
                                   </defs>
                                 </svg>
                               </span>
-                              {value?.wearLink}
+                              Товары
                             </button>
                             <button
                               onClick={() => goMapCity(value?.id)}
                               className="h-[31px] text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
-                              {value?.showMore}
+                              Подробнее
                               <span className="ml-[5px]">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
