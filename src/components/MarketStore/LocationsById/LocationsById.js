@@ -185,7 +185,7 @@ export default function LocationsByIdShow() {
                 {/* table product filter(e =>
                     e?.region?.name_ru?.toLowerCase()?.includes(state?.searchName?.toLowerCase())
                   )?*/}
-                <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border">
+                <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border gap-y-[30px] md:gap-y-0">
                   {state?.locationListId?.locations?.map((data, index) => {
                     return (
                       <div
@@ -244,11 +244,11 @@ export default function LocationsByIdShow() {
                         </ul>
 
                         {/* Mobile */}
-                        <div className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+                        <div className="border rounded-xl border-[##F2F2F2] p-[10px]  md:hidden w-full ">
                           <div className="mb-2">
                             <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                              <span className="text-checkboxBorder">0{data?.id}</span>
+                              <span className="text-checkboxBorder">{index+1}</span>
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                             </div>
                           </div>
@@ -278,7 +278,7 @@ export default function LocationsByIdShow() {
                               <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
                                 {data?.region?.name_ru}
                               </div>
-                              <div className="relative pr-[5px] ll:pr-[10px] h-[60px] overflow-hidden  w-[46%]  text-justify	text-[11px] not-italic font-AeonikProMedium">
+                              <div className="relative pr-[5px] ll:pr-[10px] h-[60px] overflow-hidden  w-[46%] 	text-[11px] not-italic font-AeonikProMedium">
                                 <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
 
                                 {data?.address}
@@ -327,13 +327,13 @@ export default function LocationsByIdShow() {
                                   </defs>
                                 </svg>
                               </span>
-                              {data?.wearLink}
+                              Одежда
                             </button>
                             <button
                               onClick={() => goMapCity(data?.id)}
                               className="text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] h-[31px] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
-                              {data?.showMore}
+                              Подробнее
                               <span className="ml-[5px]">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"

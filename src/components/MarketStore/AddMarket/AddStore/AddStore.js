@@ -246,7 +246,7 @@ function AddStore({ onRefetch }) {
         className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${backImgUploadModal ? "" : "hidden"}`}
       ></section>
       {backImgUploadModal && (
-        <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
+        <div className="max-w-[440px] md:max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
           {/* </div> */}
           {
             backImgOrder === 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
@@ -254,7 +254,7 @@ function AddStore({ onRefetch }) {
                 className={`flex items-center justify-between  pb-3`}
               >
                 <div className="w-fit flex items-center">
-                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                  <span className="text-black text-base md:text-lg not-italic font-AeonikProRegular leading-5">
                     Выберите фото
                   </span>
                 </div>
@@ -266,7 +266,7 @@ function AddStore({ onRefetch }) {
                   <MenuCloseIcons colors={"#000"} />
                 </button>
               </div>
-              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+              <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
                 {state?.pictureBgView ? (
                   <img
@@ -304,13 +304,13 @@ function AddStore({ onRefetch }) {
                 {state?.pictureBgView ?
                   <button
                     onClick={() => clearBgImg()}
-                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-base md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                     Удалить
                   </button>
                   :
                   <button
                     onClick={() => setBackImgUploadModal(false)}
-                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-base md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                     Oтмена
                   </button>
                 }
@@ -323,7 +323,7 @@ function AddStore({ onRefetch }) {
                 className={`flex items-center justify-between  pb-3`}
               >
                 <div className="w-fit flex items-center">
-                  <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                  <span className="text-black text-base md:text-lg not-italic font-AeonikProRegular leading-5">
                     Выберите логотип
                   </span>
                 </div>
@@ -335,7 +335,7 @@ function AddStore({ onRefetch }) {
                   <MenuCloseIcons colors={"#000"} />
                 </button>
               </div>
-              <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+              <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
                 {image ? (
                   <Cropper
@@ -362,7 +362,8 @@ function AddStore({ onRefetch }) {
 
                 ) :
                   <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                    Выберите логотип                </span>
+                    Выберите логотип
+                  </span>
                 }
               </div>
               <div className="flex items-center justify-between  pt-2">
@@ -393,13 +394,13 @@ function AddStore({ onRefetch }) {
                 {image ?
                   <button
                     onClick={() => ClearBrandImg()}
-                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-base md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                     Удалить
                   </button>
                   :
                   <button
                     onClick={() => setBackImgUploadModal(false)}
-                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-base md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                     Oтмена
                   </button>
                 }
@@ -438,9 +439,8 @@ function AddStore({ onRefetch }) {
         </button>
       </div>
       {/* )} */}
-      <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-10'} relative w-full h-[200px] md:h-[360px] border-2 border-dashed flex items-center justify-center rounded-lg md:mb-20`}>
-        <button
-          type="button"
+      <div className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView ? 'mb-10' : 'mb-10'} ${state?.pictureBgView ? 'border border-[#f5f5f5]' : 'border-2 border-dashed'} relative w-full h-[200px] md:h-[360px]  flex items-center justify-center rounded-lg md:mb-20`}>
+        <div
           onClick={() => {
             setBackImgOrder(1)
             setBackImgUploadModal(true)
@@ -450,7 +450,7 @@ function AddStore({ onRefetch }) {
             <img
               src={state?.pictureBgView}
               alt="backImg"
-              className="w-full h-full object-contain rounded-lg"
+              className="w-full h-full object-cover md:object-contain rounded-lg"
             />
           )
             :
@@ -458,15 +458,14 @@ function AddStore({ onRefetch }) {
               Фоновое фото
             </span>
           }
-        </button>
-        <div className="absolute   -bottom-11 rounded-full overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center  border border-dashed ">
+        </div>
+        <div className={`absolute   -bottom-11 rounded-full overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center  ${cropData ? 'border border-[#f5f5f5]' : 'border border-dashed'} `}>
           <button
             type="button"
             onClick={() => {
               setBackImgOrder(2)
               setBackImgUploadModal(true)
-            }
-            }
+            }}
             className="h-full w-full rounded-full  flex items-center justify-center ">
             {cropData ? (
               <img
@@ -477,8 +476,8 @@ function AddStore({ onRefetch }) {
             )
               :
               <div className="flex flex-col item-center">
-                <span className="flex items-center flex-col justify-center px-2">
-                  <div className="flex items-center md:w-[85px] text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
+                <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                  <div className="flex items-center md:w-[85px] cursor-pointer  leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Выберите логотип
                     <span className="hidden md:block">
                       <StarLabel />
@@ -502,7 +501,7 @@ function AddStore({ onRefetch }) {
 
 
       {/* Form */}
-      <div className="w-full flex flex-col items-center justify-between">
+      <div className="w-full flex flex-col items-center justify-between mt-5 xs:mt-0">
         <div className="w-full flex flex-col md:flex-row items-center justify-center mb-10 md:mb-[60px] gap-x-10">
           <div className="w-full md:w-3/5 mb-[24px] md:mb-0 md:mt-7">
             <div className="w-full flex items-center justify-between md:gap-x-[30px] ">
@@ -534,14 +533,14 @@ function AddStore({ onRefetch }) {
             </div>
             <div className="w-full flex items-center justify-between md:gap-x-[30px] my-5">
               <div
-                className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
+                className="w-[35%]  md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
               >
                 Пол
                 <span className="ml-[5px] hidden md:block">
                   <StarLabel />{" "}
                 </span>
               </div>
-              <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
+              <div className="w-[69%] md:w-[72%] radio-toolbar  md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg ">
                 {dressInfo?.genderList?.map((data, index) => {
                   return (
                     <div
@@ -560,7 +559,7 @@ function AddStore({ onRefetch }) {
                       />
                       <label
                         htmlFor={data?.id}
-                        className={`w-1/3 cursor-pointer md:w-full flex items-center justify-center   border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
+                        className={`w-1/3 cursor-pointer w-full flex items-center justify-center   border  md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular h-[32px] md:h-[42px] rounded-lg`}
                       >
                         <span>{data?.name_ru}</span>
                       </label>

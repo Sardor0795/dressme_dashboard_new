@@ -329,7 +329,7 @@ function LocationList() {
                                   Подробнее
                                 </button>
                               </li>
-                              <li className="md:w-[12%] h-full  flex items-center justify-center ">
+                              <li className=" md:w-[12%] h-full hidden md:flex items-center justify-center ">
                                 {value?.status === "approved" && (
                                   <button
                                     type="button"
@@ -375,7 +375,7 @@ function LocationList() {
                             <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                               <span className="text-checkboxBorder">
-                                0{value?.id}
+                                {value?.id}
                               </span>
                               <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                             </div>
