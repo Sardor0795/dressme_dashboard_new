@@ -827,7 +827,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   // console.log(colors_Id?.length, "colors_Id?.length");
   // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
   return (
-    <div className="max-w-[300px] w-full h-fit border border-black">
+    <div className="max-w-[350px] md:max-w-[300px] w-full h-fit border border-black">
 
       {/*------------------------- Modal Carosuel------------------------------------ */}
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
@@ -845,11 +845,9 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         <section
           onClick={() => {
             setDeleteModal(false)
-            // setOpenStoreList(false)
             setSuccessMessage(null)
             setErrorMessage(null)
             setFreeModalUploadImg(false)
-
           }}
           className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${deleteModal || freeModalUploadImg ? "" : "hidden"}`}
         ></section>
@@ -933,12 +931,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
           </button>
           <div>
             <div
-              className="w-[620px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
+              className="w-full max-w-[440px] md:max-w-[620px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
             >
               < div className="w-full  flex flex-col items-center justify-start">
                 {modalId == imageOne?.id1 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -964,16 +962,16 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageOne?.url_photo1}
                           alt="backImg"
-                          className=" w-[670px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
 
                       }
 
                     </div>
-                    <div className={`w-full justify-between flex items-center px-3 h-[50px]`}>
+                    <div className={`w-full justify-between flex items-center px-3 h-[38px] md:h-[50px]`}>
                       <label
                         htmlFor={"imageOne1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -991,13 +989,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageOne?.id1)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
 
                         Сохранить
                       </button> :
                         <span
-                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-[13px] md:text-lg text-[13px] md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
                         </span>
@@ -1007,14 +1005,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageOne?.id1)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
                 }
                 {modalId == imageTwo?.id2 &&
                   <div className="w-full ">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1040,14 +1038,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageTwo?.url_photo2}
                           alt="backImg"
-                          className=" w-[620px]  h-full	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px]  h-full	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
-                    <div className={`w-full  justify-between  flex items-center px-3 h-[50px]`}>
+                    <div className={`w-full  justify-between  flex items-center px-3 h-[38px] md:h-[50px]`}>
                       <label
                         htmlFor={"imageTwo1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1066,12 +1064,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                             UpadatePhoto(imageTwo?.id2)
                           }}
                           type="button"
-                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                          className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
                         </button> :
                         <span
-                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
                         </span>}
@@ -1080,14 +1078,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageTwo?.id2)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
                 }
                 {modalId == imageThree?.id3 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1113,15 +1111,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageThree?.url_photo3}
                           alt="backImg"
-                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
 
                     </div>
-                    <div className={`w-full justify-between px-3 h-[50px] flex items-center`}>
+                    <div className={`w-full justify-between px-3 h-[38px] md:h-[50px] flex items-center`}>
                       <label
                         htmlFor={"imageThree1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1139,12 +1137,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageThree?.id3)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </button> :
                         <span
-                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
                         </span>}
@@ -1153,14 +1151,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageThree?.id3)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
                 }
                 {modalId == imageFour?.id4 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1186,15 +1184,15 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageFour?.url_photo4}
                           alt="backImg"
-                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
 
                     </div>
-                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                    <div className={`w-full  justify-between px-3 h-[38px] md:h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageFour1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1212,11 +1210,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageFour?.id4)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </button> : <span
-                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </span>}
@@ -1225,14 +1223,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageFour?.id4)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
                 }
                 {modalId == imageFive?.id5 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1258,14 +1256,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageFive?.url_photo5}
                           alt="backImg"
-                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
-                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                    <div className={`w-full  justify-between px-3 h-[38px] md:h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageFive1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1283,11 +1281,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageFive?.id5)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </button> : <span
-                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </span>}
@@ -1296,14 +1294,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageFive?.id5)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>}
                     </div>
                   </div>
                 }
                 {modalId == imageSix?.id6 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1329,14 +1327,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageSix?.url_photo6}
                           alt="backImg"
-                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
-                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                    <div className={`w-full  justify-between px-3 h-[38px] md:h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageSix1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1354,11 +1352,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageSix?.id6)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </button> : <span
-                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </span>}
@@ -1367,14 +1365,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageSix?.id6)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70 text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
                 }
                 {modalId == imageSeven?.id7 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1400,14 +1398,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageSeven?.url_photo7}
                           alt="backImg"
-                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
-                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                    <div className={`w-full  justify-between px-3 h-[38px] md:h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageSeven1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1425,11 +1423,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageSeven?.id7)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </button> : <span
-                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </span>}
@@ -1438,14 +1436,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageSeven?.id7)
                         }}
-                        className="hidden text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className="hidden text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
                 }
                 {modalId == imageEight?.id8 &&
                   <div className="w-full">
-                    <div className="w-full h-[80vh] flex items-center">
+                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1471,14 +1469,14 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageEight?.url_photo8}
                           alt="backImg"
-                          className=" w-[620px]  h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
-                    <div className={`w-full  justify-between px-3 h-[50px]  flex items-center`}>
+                    <div className={`w-full  justify-between px-3 h-[38px] md:h-[50px]  flex items-center`}>
                       <label
                         htmlFor={"imageEight1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -1496,11 +1494,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           UpadatePhoto(imageEight?.id8)
                         }}
                         type="button"
-                        className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit flex items-center justify-center cursor-pointer active:scale-95  text-textBlueColor  text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </button> : <span
-                        className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                        className="w-fit flex items-center justify-center cursor-not-allowed text-[#b5b5b5] rounded-lg text-[13px] md:text-lg text-[13px] md:text-lg font-AeonikProMedium"
                       >
                         Сохранить
                       </span>}
@@ -1509,7 +1507,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageEight?.id8)
                         }}
-                        className=" hidden text-[#D50000] active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Удалить
+                        className=" hidden text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
                       </button>
                     </div>
                   </div>
@@ -1531,10 +1529,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               setSuccessMessage(null)
               setFreeModalUploadImg(false)
             }}
-            className="absolute top-0  z-[224] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
+            className="absolute top-0  z-[224] right-[-50px] md:right-[-80px]  flex items-center justify-center h-[38px] w-[38px] md:w-[50px] md:h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
-          <div className="w-[620px] h-fit overflow-hidden rounded-lg">
+          <div className="w-full max-w-[440px] md:max-w-[620px] h-fit overflow-hidden rounded-lg">
             {Number(modalId) === Number(imageTwo?.id2) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
                 <div className="w-full h-full">
@@ -2291,7 +2289,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       </div >
       {/*------------------------- Modal Carosuel------------------------------------ */}
 
-      < div className="w-[290px] flex items-center justify-between" >
+      < div className="w-[230px] ls:w-[250px] md:w-[290px] flex items-center justify-between" >
         <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
           <p>Фото</p>
           <span className="ml-[5px]">
@@ -2299,19 +2297,19 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
           </span>
         </div>
         {
-          <div className="w-fit flex h-[22px] items-center mb-[6px]  border rounded-[12px]">
+          <div className="w-fit flex h-fit items-center mb-[6px]  border rounded-[12px]">
             <div className="w-fit h-fit flex items-center gap-x-3">
               <button
                 type="button"
-                className={`w-[22px] h-[22px] rounded-full border `}
+                className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                 style={{ background: `${productData?.colors[0]?.hex}` }}
               ></button>
             </div>
           </div>}
       </div >
-      <section className="w-full flex flex-col flex-wrap h-full gap-x-[10px]">
-        <div className="w-full h-full flex flex-col">
-          <div className={`w-[290px] h-[380px] flex items-center `}>
+      <section className="w-full flex flex-col flex-wrap h-full md:gap-x-[10px]">
+        <div className="w-full h-full flex md:flex-col gap-x-3">
+          <div className={`ls:w-[250px] w-[230px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
@@ -2347,8 +2345,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-[290px] mt-[10px] h-[147px] flex justify-between    rounded-lg">
-            <div className={`w-[31%]  h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
+          <div className="w-[90px] md:w-[290px] mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg">
+            <div className={`w-full md:w-[31%]  h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border justify-center overflow-hidden rounded-lg"
@@ -2407,18 +2405,18 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   <button
                     type="button"
-                    className={`w-[22px] h-[22px] rounded-full border `}
+                    className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                     style={{ background: `${productData?.colors[0]?.hex}` }}
                   ></button>
 
                 </div>
               </div>
             </div>
-            <div className={`w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-full md:w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2479,19 +2477,19 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   {/* {Number(productData?.colors[0]?.pivot?.id) === Number(imageThree?.product_color_id3) } */}
                   <button
                     type="button"
-                    className={`w-[22px] h-[22px] rounded-full border `}
+                    className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                     style={{ background: `${productData?.colors[0]?.hex}` }}
                   ></button>
 
                 </div>
               </div>
             </div>
-            <div className={`w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
+            <div className={`w-full md:w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "hidden" : "flex"}`} >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2551,11 +2549,11 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   <button
                     type="button"
-                    className={`w-[22px] h-[22px] rounded-full border `}
+                    className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                     style={{ background: `${productData?.colors[0]?.hex}` }}
                   ></button>
                   {imageFour?.status4 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
@@ -2571,7 +2569,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </div>
             {/*  color-2 */}
-            <div className={`w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
+            <div className={`w-full md:w-[31%]  h-full  flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
 
@@ -2643,12 +2641,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px]">
                 {productData?.colors?.length >= 2 ?
                   <div className="w-fit h-fit flex items-center">
                     <button
                       type="button"
-                      className={`w-[22px] h-[22px] rounded-full border `}
+                      className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                       style={{ background: `${productData?.colors[1]?.hex}` }}
                     ></button>
 
@@ -2668,7 +2666,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
               </div>
             </div>
-            <section className={`w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
+            <section className={`w-full md:w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[1]?.pivot?.color_id == activeColor || colors_Id[1] == activeColor ? "" : "opacity-30"}  ${colors_Id?.length == 2 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2749,13 +2747,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-[22px] items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px]  rounded-[12px]">
+                <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
                   {productData?.colors?.length >= 2 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
                         type="button"
-                        className={`w-[22px] h-[22px] rounded-full border `}
+                        className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                         style={{ background: `${productData?.colors[1]?.hex}` }}
                       ></button>
 
@@ -2766,7 +2764,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <button
                           key={index}
                           type="button"
-                          className={`w-[22px] h-[22px] rounded-full border `}
+                          className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                           style={{ background: `${value?.hex}` }}
                         ></button>
                       )
@@ -2777,7 +2775,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-3*/}
-            <section className={`w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
+            <section className={`w-full md:w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[2]?.pivot?.color_id == activeColor || colors_Id[2] == activeColor ? "" : "opacity-30"} ${colors_Id?.length >= 3 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2847,13 +2845,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
               </button>
 
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-[22px] items-center justify-between mt-[3px]">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px]  rounded-[12px]">
+                <div className="w-full flex h-fit items-center justify-between mt-[3px]">
                   {productData?.colors?.length >= 3 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
                         type="button"
-                        className={`w-[22px] h-[22px] rounded-full border `}
+                        className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                         style={{ background: `${productData?.colors[2]?.hex}` }}
                       ></button>
 
@@ -2874,7 +2872,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               </div>
             </section>
             {/*  color-4*/}
-            <section className={`w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
+            <section className={`w-full md:w-[31%]  h-full cursor-default flex-col items-center justify-start ${productData?.colors[3]?.pivot?.color_id == activeColor || colors_Id[3] == activeColor ? "" : "opacity-30"} ${colors_Id?.length === 4 ? "flex" : "hidden"}`}  >
               <button
                 type="button"
                 className="h-[130px] w-full flex items-center border rounded-lg overflow-hidden justify-center "
@@ -2945,13 +2943,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-[22px] items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-[22px] items-center justify-between mt-[3px]">
+              <div className="w-full flex h-fit items-center justify-between mt-[3px]  rounded-[12px]">
+                <div className="w-full flex h-fit items-center justify-between mt-[3px]">
                   {productData?.colors?.length === 4 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
                         type="button"
-                        className={`w-[22px] h-[22px] rounded-full border `}
+                        className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                         style={{ background: `${productData?.colors[3]?.hex}` }}
                       ></button>
 
