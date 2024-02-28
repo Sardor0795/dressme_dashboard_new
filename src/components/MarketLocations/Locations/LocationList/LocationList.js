@@ -241,11 +241,12 @@ function LocationList() {
           </li>
         </ul>
       </div>
+    
       {dressInfo?.locationList
         ?.filter((e) =>
           e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
         )
-        ?.map((item) => {
+        ?.map((item, index) => {
           return (
             <div key={item?.id} className="mt-5 md:mt-0">
               {item?.shop_locations?.length ? (
@@ -262,14 +263,14 @@ function LocationList() {
                     )}
                   </p>
 
-                  <button
+                  {index === 1&& <button
                     onClick={() => setOpenSelect(true)}
                     className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
                   >
                     <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
                       Добавить локацию
                     </span>
-                  </button>
+                  </button>}
                 </div>
               ) : null}
 
