@@ -281,6 +281,20 @@ const AddingProduct = () => {
       setState({ ...state, onEditInput: true })
     }
   }
+  // ---------Mobile Device--------
+  const handleChangeSectionMobile = (e) => {
+    setState({ ...state, onEditInput: true })
+    if (section_Id?.length === 0) {
+      setSection_Id(section_Id => [...section_Id, e])
+    }
+    if (section_Id?.length > 0 && !section_Id?.includes(e)) {
+      setSection_Id(section_Id => [...section_Id, e])
+    }
+    if (section_Id?.length > 0 && section_Id?.includes(e)) {
+      setSection_Id(section_Id?.filter((v) => v !== e))
+    }
+  }
+
   const [newArray, setNewArray] = useState([])
   useEffect(() => {
     setNewArray([])
@@ -413,6 +427,19 @@ const AddingProduct = () => {
     } else {
       setSeason_Id(e)
       setState({ ...state, onEditInput: true })
+    }
+  }
+  // --------Mobile Season
+  const onHandleChangeSeasonMobile = (e) => {
+    setState({ ...state, onEditInput: true })
+    if (season_Id?.length === 0) {
+      setSeason_Id(season_Id => [...season_Id, e])
+    }
+    if (season_Id?.length > 0 && !season_Id?.includes(e)) {
+      setSeason_Id(season_Id => [...season_Id, e])
+    }
+    if (season_Id?.length > 0 && season_Id?.includes(e)) {
+      setSeason_Id(season_Id?.filter((v) => v !== e))
     }
   }
 
@@ -855,6 +882,9 @@ const AddingProduct = () => {
       navigate(-1)
     }
   }, [])
+  console.log(state?.filterTypeId, "state?.filterTypeId");
+  console.log(state?.type_Id, "state?.type_Id");
+
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1197,10 +1227,10 @@ const AddingProduct = () => {
                       <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
+                    <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.sections?.map((item) => {
                         return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                          <div onClick={() => handleChangeSectionMobile(item?.id)} key={item?.id} className={`w-full ${section_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
                           </div>
                         );
@@ -1230,10 +1260,10 @@ const AddingProduct = () => {
                       <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
+                    <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.sections?.map((item) => {
                         return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                          <div key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
                           </div>
                         );
@@ -1263,43 +1293,10 @@ const AddingProduct = () => {
                       <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
+                    <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.seasons?.map((item) => {
                         return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
-                            {item.name_ru}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </form>
-                </div>
-              </section>
-            </div>
-          </section>
-          {/*ColourList -will be ---Delete*/}
-          <section
-            className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.Colour ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
-          >
-            <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
-              <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium">Цвет</p>
-                <button onClick={() => setState({ ...state, Colour: false })}>
-                  <CloseAnswer colors={"#000"} />
-                </button>
-              </section>
-              <section className="w-full h-[400px] px-4 flex flex-col items-center">
-                <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                  <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
-                      <SearchIcon />
-                    </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
-                      {dressInfo?.getProductInfo?.seasons?.map((item) => {
-                        return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                          <div onClick={() => onHandleChangeSeasonMobile(item?.id)} key={item?.id} className={`w-full ${season_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
                           </div>
                         );
@@ -1329,10 +1326,10 @@ const AddingProduct = () => {
                       <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
+                    <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.gender?.map((item) => {
                         return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                          <div onClick={() => setState({ ...state, gender_Id: item?.id, onEditInput: true, })} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
                           </div>
                         );
@@ -1362,17 +1359,21 @@ const AddingProduct = () => {
                       <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
+                    <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                         return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                          <div
+                            onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
+                            key={item?.id} className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
                           </div>
                         )
                       }) :
                         dressInfo?.getProductInfo?.types?.map((item) => {
                           return (
-                            <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                            <div
+                              onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
+                              key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                               {item.name_ru}
                             </div>
                           )
@@ -1403,10 +1404,12 @@ const AddingProduct = () => {
                       <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
-                    <div className='w-full h-[260px] overflow-auto VerticelScroll'>
+                    <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.producers?.map((item) => {
                         return (
-                          <div key={item?.id} className='w-full  flex items-center justify-start border-b border-borderColor pb-[10px] mb-4 text-base font-AeonikProRegular'>
+                          <div
+                            onClick={() => setState({ ...state, producer_Id: item?.id })}
+                            key={item?.id} className={`w-full ${state?.producer_Id == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
                           </div>
                         );
@@ -1417,13 +1420,7 @@ const AddingProduct = () => {
               </section>
             </div>
           </section>
-          {/*ClothingCategory */}
-          {/* <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
-            >
-              <ClothingCategory onClick={ClothingCategoryToggle} />
-            </section> */}
+
           {/* ---------------------------------------- */}
 
           <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
@@ -1463,7 +1460,7 @@ const AddingProduct = () => {
                           Локация
                         </span>
                       </div>
- 
+
                       <div className="w-full  cursor-not-allowed h-fit flex">
                         <button
                           type="button"
@@ -1487,7 +1484,7 @@ const AddingProduct = () => {
                       </div>
                     </div>
                     {/* Input Select 1 */}
-                    <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
+                    <div className=" w-full h-fit flex flex-col gap-y-[5px] ">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
                           Раздел товара
@@ -1501,16 +1498,33 @@ const AddingProduct = () => {
                           setState({ ...state, ClothingSection: true })
                         }
                         type="button"
-                        className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                        className="w-full min-h-[40px] rounded-lg py-[2px] flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                          Выбрать
-                        </div>
-                        <ArrowRightIcon />
+                        {section_Id?.length ?
+                          <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden gap-1">
+                            {dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => {
+                              return (
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                  {item?.name_ru}
+                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
+                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
+                                    </path></svg>
+                                </span>
+                              )
+                            })}
+                          </div>
+                          :
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </span>
+                            <ArrowRightIcon />
+                          </div>
+                        }
                       </button>
-                      <div className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}>
+                      <div className={`w-full  hidden md:flex  rounded-lg focus:border-none `}>
                         <Select
-                          className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
+                          className={` rounded-lg w-full  ${state?.isCheckValid && !section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                           showSearch
                           mode="multiple"
                           placeholder="Выбрать"
@@ -1561,10 +1575,22 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                          Выбрать
-                        </div>
-                        <ArrowRightIcon />
+                        {subSection_Id?.length ?
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
+                              return (
+                                <span className="text-[13px] md:text-base font-AeonikProRegular">{item?.name_ru}</span>
+                              )
+                            })}
+                          </div>
+                          :
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </span>
+                            <ArrowRightIcon />
+                          </div>
+                        }
                       </button>
                       <div className="w-full h-fit hidden md:flex">
                         <Select
@@ -1622,10 +1648,26 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                          Выбрать
-                        </div>
-                        <ArrowRightIcon />
+                        {season_Id?.length ?
+                          <div className="w-full h-full rounded-lg flex items-center gap-x-1">
+                            {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
+                              return (
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                  {item?.name_ru}
+                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
+                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
+                                    </path></svg>
+                                </span>)
+                            })}
+                          </div>
+                          :
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </span>
+                            <ArrowRightIcon />
+                          </div>
+                        }
                       </button>
                       <div className="w-full h-fit hidden md:flex">
                         <Select
@@ -1666,16 +1708,6 @@ const AddingProduct = () => {
                           <StarLabel />
                         </span>
                       </div>
-                      <button
-                        onClick={() => setState({ ...state, Colour: true })}
-                        type="button"
-                        className="w-full h-[40px] rounded-lg flex hidden items-center justify-between border border-borderColor px-2"
-                      >
-                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                          Выбрать
-                        </div>
-                        <ArrowRightIcon />
-                      </button>
                       <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                         <div className={`w-fit flex items-center gap-x-2 justify-start  overflow-hidden                   
                         ${state?.imageAddError?.color_id && !lastElement ? "border-[2px] border-textRedColor " : "border border-borderColor"}   rounded-lg  h-[42px] md:h-10 px-[12px]`}>
@@ -1738,10 +1770,27 @@ const AddingProduct = () => {
                           type="button"
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
-                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                            Выбрать
-                          </div>
-                          <ArrowRightIcon />
+                          {state?.gender_Id ?
+                            <div className="w-full h-full rounded-lg flex items-center gap-x-1">
+                              {dressInfo?.getProductInfo?.gender?.filter(e => state?.gender_Id == e?.id)?.map((item) => {
+                                return (
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                    {item?.name_ru}
+                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
+                                      <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
+                                      </path></svg>
+                                  </span>
+                                )
+                              })}
+                            </div>
+                            :
+                            <div className="w-full h-full rounded-lg flex items-center justify-between">
+                              <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                Выбрать
+                              </span>
+                              <ArrowRightIcon />
+                            </div>
+                          }
                         </button>
                         <div className="w-full h-fit md:flex hidden">
                           <Select
@@ -1856,12 +1905,20 @@ const AddingProduct = () => {
                         onClick={() => setOpenCategories(true)}
                         className="w-full flex md:hidden items-center justify-between border border-borderColor rounded-lg h-[40px] px-3"
                       >
-                        <span className="text-[#b5b5b5] mt-[3px] font-AeonikProRegular text-[11px] ">
-                          Выбрать
-                        </span>
-                        <span className="rotate-[90deg]">
-                          <ArrowRightIcon />
-                        </span>
+                        {state?.category_Id ?
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            {dressInfo?.getProductInfo?.categories?.filter(e => e?.id == state?.category_Id)?.map((item, index) => {
+                              return <span key={index} className="text-[#a1a1a1] text-[13px] md:text-base font-AeonikProRegular">{item?.name_ru}</span>
+                            })}
+                          </div>
+                          :
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </span>
+                            <ArrowRightIcon />
+                          </div>
+                        }
                       </button>
                       <div className="w-full  cursor-not-allowed h-fit md:flex flex-col hidden">
                         <button
@@ -1981,10 +2038,26 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                          Выбрать
-                        </div>
-                        <ArrowRightIcon />
+                        {state?.category_Id ?
+                          <div className="w-full h-full rounded-lg flex items-center gap-x-1">
+                            {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
+                              return (
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                  {item?.name_ru}
+                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
+                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
+                                    </path></svg>
+                                </span>)
+                            })}
+                          </div>
+                          :
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </span>
+                            <ArrowRightIcon />
+                          </div>
+                        }
                       </button>
                       <div className="w-full h-fit md:flex hidden">
                         <Select
@@ -2049,10 +2122,26 @@ const AddingProduct = () => {
                         type="button"
                         className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
-                        <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                          Выбрать
-                        </div>
-                        <ArrowRightIcon />
+                        {state?.producer_Id ?
+                          <div className="w-full h-full rounded-lg flex items-center gap-x-1">
+                            {dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => {
+                              return (
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                  {item?.name_ru}
+                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
+                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
+                                    </path></svg>
+                                </span>)
+                            })}
+                          </div>
+                          :
+                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              Выбрать
+                            </span>
+                            <ArrowRightIcon />
+                          </div>
+                        }
                       </button>
                       <div className="w-full h-fit md:flex hidden">
                         <Select
