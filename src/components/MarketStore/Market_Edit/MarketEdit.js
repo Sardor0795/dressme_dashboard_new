@@ -442,14 +442,14 @@ function MarketEdit() {
           {/* Background Img Edit */}
 
           {backImgUploadModal && (
-            <div className="max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
+            <div className="max-w-[440px] md:max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
               {/* </div> */}
               {backImgOrder === 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
                 <div
                   className={`flex items-center justify-between  pb-3`}
                 >
                   <div className="w-fit flex items-center">
-                    <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
                       Выберите фото
                     </span>
                   </div>
@@ -461,7 +461,7 @@ function MarketEdit() {
                     <MenuCloseIcons colors={"#000"} />
                   </button>
                 </div>
-                <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
                   {hideDeleteIcons ?
                     <div className="w-full flex items-center justify-center">
                       {loader && hideDeleteIcons ?
@@ -475,7 +475,7 @@ function MarketEdit() {
                           <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                             <FaCheck size={30} color="#009B17" />
                           </span>
-                          <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                          <span className="text-sm md:text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
                         </div>
                       }
                     </div>
@@ -487,7 +487,7 @@ function MarketEdit() {
                         className="w-full h-full object-contain rounded-lg"
                       />
                       :
-                      <span className="leading-none text-lg md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                      <span className="leading-none text-[12px]  md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                         Фоновое фото
                       </span>
                   }
@@ -516,13 +516,13 @@ function MarketEdit() {
                   {state?.pictureBgView1 ?
                     <button
                       onClick={() => onUserDeleteBackgroundImg()}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                       Удалить
                     </button>
                     :
                     <button
                       onClick={() => setBackImgUploadModal(false)}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                       Oтмена
                     </button>
                   }
@@ -534,7 +534,7 @@ function MarketEdit() {
                     className={`flex items-center justify-between  pb-3`}
                   >
                     <div className="w-fit flex items-center">
-                      <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                      <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
                         Выберите логотип
                       </span>
                     </div>
@@ -546,7 +546,7 @@ function MarketEdit() {
                       <MenuCloseIcons colors={"#000"} />
                     </button>
                   </div>
-                  <div className="w-full h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                  <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
 
                     {image ? (
                       <Cropper
@@ -567,14 +567,14 @@ function MarketEdit() {
                         aspectRatio={1}
                       />
                     ) :
-                      <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                      <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                         Выберите логотип                </span>
                     }
                   </div>
                   <div className="flex items-center justify-between  pt-2">
                     <label
                       htmlFor={"logoBrand"}
-                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor  text-sm md:text-lg font-AeonikProMedium"
                     >
                       <input
                         className="hidden"
@@ -591,7 +591,7 @@ function MarketEdit() {
                     </label>
 
                     {image && <button
-                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-sm md:text-lg font-AeonikProMedium"
                       onClick={getCropData}>
                       Обрезать
                     </button>}
@@ -605,7 +605,7 @@ function MarketEdit() {
                     : */}
                     <button
                       onClick={() => setBackImgUploadModal(false)}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
                       Oтмена
                     </button>
                     {/* } */}
@@ -661,7 +661,7 @@ function MarketEdit() {
 
               {!state?.pictureBgView1 ?
                 <div className="w-fit h-fit flex items-center">
-                  <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
+                  <span className="leading-none text-[12px] font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Фоновое фото
                   </span>
 
@@ -670,7 +670,7 @@ function MarketEdit() {
                 <img
                   src={state?.pictureBgView1}
                   alt="backImg"
-                  className="w-full h-full object-contain rounded-lg"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               }
             </button>
@@ -693,7 +693,7 @@ function MarketEdit() {
                   :
                   <div className="flex flex-col item-center">
                     <span className="flex items-center flex-col justify-center px-2">
-                      <div className="flex items-center md:w-[85px] text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
+                      <div className="flex items-center md:w-[85px] text-[12px] md:text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
                         Выберите логотип
                         <span className="hidden md:block">
                           <StarLabel />
@@ -774,7 +774,7 @@ function MarketEdit() {
                           />
                           <label
                             htmlFor={data?.id}
-                            className={`w-1/3 h-[32px] md:h-[42px] cursor-pointer md:w-full flex items-center justify-center border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
+                            className={`w-1/3 h-[32px] md:h-[42px] cursor-pointer w-full flex items-center justify-center border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                           >
                             <span>{data?.name_ru}</span>
                           </label>

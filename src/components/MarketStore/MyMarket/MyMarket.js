@@ -148,7 +148,7 @@ function MyMarket() {
                   <div className="w-full md:w-fit flex items-center justify-between  md:pr-7 md:pl-5 text-xl font-AeonikProRegular ">
                     <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
                     <span className="text-checkboxBorder md:text-black flex items-center">
-                      <span className="md:hidden flex">0</span>
+                      <span className="md:hidden flex"></span>
                       {index + 1}
                     </span>
                     <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
@@ -161,9 +161,9 @@ function MyMarket() {
                         className="w-full h-full object-cover"
                       />
                     </figure>
-                    <div className="w-fit flex items-center gap-y-3 flex-col ml-5 md:ml-8">
+                    <div className="w-fit flex items-center gap-y-3 flex-col ml-5 md:ml-8 ">
                       <div className="h-fit flex items-center  ">
-                        <p className="w-fit text-[13px] flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                        <p className="w-fit text-[13px] text-start flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
                           {data?.name || null}
                         </p>
                       </div>
@@ -188,14 +188,14 @@ function MyMarket() {
                 </div>
                 <div className="w-full md:w-fit flex items-center justify-between sm:gap-x-[50px] mt-3 md:mt-0">
                   <div className="flex items-center gap-x-1 select-none">
-                    {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 1) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                    {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 1) && <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                       <img src={man} alt="" />
                     </div>}
-                    {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 2) && <div className="ll:w-12 w-[36px] h-[36px] ll:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                    {(Number(data?.gender_id) === 3 || Number(data?.gender_id) === 2) && <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
                       <img src={woman} alt="" />
                     </div>}
                   </div>
-                  <div className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[240px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
+                  <div className="h-[36px] xs:h-12 px-1 ls:px-[10px] md:w-[240px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                     <img src={deliveryIcon} alt="" />
                     {helperDatainform?.deliveryList
                       ?.filter((e) => e.id == data?.delivery_id)
@@ -212,7 +212,31 @@ function MyMarket() {
                   </div>
 
                 </div>
-                <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4 ll:mt-6 md:mt-0">
+                <div className="w-full flex items-center select-none md:hidden  mt-4">
+                  <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                    Cтатус:</p>
+                  <div className="w-[100px] flex items-center select-none ">
+                    {data?.status === "approved" &&
+                      <button
+                        type="button" className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </button>}
+                    {data?.status === "declined" &&
+                      <button onClick={() => onHandleStatus(data?.id)}
+                        type="button" className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </button>}
+                    {data?.status === "pending" &&
+                      <button type="button" className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </button>}
+                    {data?.status === "updated" &&
+                      <button type="button" className="w-full h-fit  flex items-center justify-center text-[12px]  xs:text-base text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                        {data?.status || "status"}
+                      </button>}
+                  </div>
+                </div>
+                <div className="w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4  md:mt-0">
                   <button
                     type="button"
                     onClick={() => navigate(`/store/locations/shop/:${data?.id}`)}
@@ -226,7 +250,7 @@ function MyMarket() {
                   >
                     Подробнее
                   </p>
-                  <div className="w-[100px] flex items-center select-none">
+                  <div className="w-[100px] md:flex items-center select-none hidden ">
                     {data?.status === "approved" &&
                       <button
                         type="button" className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
