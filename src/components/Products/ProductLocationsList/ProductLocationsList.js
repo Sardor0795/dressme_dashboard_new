@@ -17,6 +17,7 @@ import { FaCheck } from "react-icons/fa6";
 import { dressMainData } from "../../../hook/ContextTeam";
 import axios from "axios";
 import { FiCheck } from "react-icons/fi";
+import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -41,6 +42,7 @@ export default function ProductLocationsList() {
     shopId: null,
     shopMarketId: ""
   });
+  const [moreMobile, setMoreMobile] = useState(false);
   const [shopLocationIdList, setShopLocationIdList] = useState();
   const [getProductInfo, setGetProductInfo] = useState(null);
   // ------------
@@ -434,8 +436,9 @@ export default function ProductLocationsList() {
       document.body.style.overflow = "auto";
     }
   }, [deleteModal || openStoreList || state?.openSelectModal || state?.openDeleteModal || statusModal]);
+  // border border-green-50
   return (
-    <div className="w-full px-4 md:px-10">
+    <div className="w-full  md:px-10">
       <section
         onClick={() => {
           setDeleteModal(false)
@@ -694,19 +697,17 @@ export default function ProductLocationsList() {
         <section className="w-full flex md:hidden">
           <div className="w-full flex items-center">
             <button
-              onClick={() => {
-                navigate(-1);
-              }}
+            
               className="absolute flex items-center justify-start cursor-pointer "
             >
-              <GoBackIcons />
+              <MobileHumburgerMenu />
             </button>
             <p className="w-full text-center text-black text-2xl not-italic font-AeonikProMedium">
               Одежда
             </p>
           </div>
         </section>
-        <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
+        <section className="w-full md:w-fit hidden md:flex items-center justify-between md:justify-static ">
           <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
             <label
               htmlFor="searchStore"
@@ -898,20 +899,21 @@ export default function ProductLocationsList() {
               type="text"
               name="s"
               id="searchStore"
-              className="w-full h-full outline-0 	pl-[10px]"
+              value={searchName}
+              onChange={(e) => setSearchName(e?.target?.value)}
+              className="w-full h-full outline-0 px-[10px]"
               placeholder="Поиск"
             />
-            <span className="pr-[10px]">
+            <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
               <SearchIcon />
             </span>
           </label>
-
         </section>
       </div>
       {/* {isLoading ?
         <LoadingForSeller />
         : */}
-      <div className=" w-full">
+      <div className=" w-full md:mb-0 mb-10">
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
@@ -919,13 +921,13 @@ export default function ProductLocationsList() {
           </p>
 
           <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
-            <div className="flex items-center md:mr-6 font-AeonikProRegular text-sm md:text-lg text-mobileTextColor">
+            <div className="flex items-center md:mr-6 font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-mobileTextColor">
               Выбранные <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
             {checkedList?.length >= 1 && shopLocationIdList?.length > 1 ? <button
               type="button"
               onClick={() => setState({ ...state, openSelectModal: true })}
-              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
+              className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
                 
                 `}
             >
@@ -937,7 +939,7 @@ export default function ProductLocationsList() {
               :
               <button
                 type="button"
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
+                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
               >
                 <span className="mr-[5px]">
                   <AddLocationIcon width={20} />
@@ -949,7 +951,7 @@ export default function ProductLocationsList() {
             {checkedList?.length >= 1 ? <button
               type="button"
               onClick={() => setState({ ...state, openDeleteModal: true })}
-              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-deleteColor active:scale-95  active:opacity-70`}
+              className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-deleteColor active:scale-95  active:opacity-70`}
             >
               <span className="mr-[5px]">
                 <DeleteIcon width={20} />
@@ -959,7 +961,7 @@ export default function ProductLocationsList() {
               :
               <button
                 type="button"
-                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
+                className={`pl-[6px] md:pl-3 flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
               >
                 <span className="mr-[5px]">
                   <DeleteIcon width={20} />
@@ -973,341 +975,425 @@ export default function ProductLocationsList() {
 
         {dressInfo?.getProductList?.products_locations?.filter(e => shopIdList?.includes(e?.id))?.map((item, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="mt-6">
               <div >
+                {index === 0 && <div className="flex justify-end items-center md:justify-between mx-auto ">
+                  <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
+                    <p className="flex md:hidden text-sm font-AeonikProMedium">
+                      Общее количество: ({dressInfo?.getProductList?.products_locations?.length})
+                    </p>
+                  </div>
+                </div>}
                 {checkedList?.length > 0 ?
                   Number(state?.shopMarketId) === Number(item?.id) &&
                   <div className="flex items-center w-full">
-                    {item?.shop_locations?.length !== 0 && < div className="w-full  my-6">
-                      <button
-                        type="button"
-                        onClick={() => openMarketEditPage(item?.id)}
-                        className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
-                        <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
-                          {item?.name}                    </p>
-                      </button>
-                      {item?.shop_locations?.filter((location) =>
-                        searchName ?
-                          location?.products?.some(item =>
-                            item?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
-                          ) : location)?.map((resData, index) => {
-                            return (
-                              <div key={index} className="w-full">
-                                <div className="w-full  mt-5">
-                                  <div className="flex justify-end items-center md:justify-between mx-auto ">
-                                    <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
-                                      <p className="flex md:hidden text-sm font-AeonikProMedium">
-                                        Общее количество: ({dressInfo?.getProductList?.products_locations?.length})
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
-                                    {item?.name}
-                                  </div>
-                                  <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                    <section className="hidden md:flex items-center justify-between mt-2">
-                                      <div className="w-fit flex items-center">
-                                        <div className=" cursor-pointer bg-white flex items-center gap-x-2">
-                                          {
-                                            checkedList?.length === resData?.products?.length && addresNewId === resData?.id ?
-                                              <button onClick={() => allUnCheckedList()}
-                                                className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622] bg-fullBlue  justify-center">
-                                                <FiCheck color={'#ffffff'} />
-                                              </button>
-                                              :
-                                              <button onClick={() => {
-                                                setCheckedList([])
-                                                allCheckedList(resData?.id, item?.id, resData?.shop_id)
-                                                setShopLocationIdList(item?.shop_locations)
-                                              }}
-                                                className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
-                                              </button>
-                                          }
-                                          <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                            {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
-                                              return (
-                                                <div>
-                                                  {values?.name_ru},
-                                                  {values?.sub_regions?.filter(e => e?.id == resData?.sub_region_id)?.map(valueSub => {
-                                                    return (
-                                                      <span className="px-1">
-                                                        {valueSub?.name_ru},
-                                                      </span>
-                                                    )
-                                                  })}
-                                                </div>
-                                              )
-                                            })}
-                                            <span className="flex items-center ml-1">({resData?.address})</span>
-                                            {resData?.products?.length > 1 &&
-                                              <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
-                                                ({resData?.products?.length})
-                                              </span>}
-                                          </p>
-                                        </div>
-                                        <button
-                                          onClick={() => addNewProductId(resData?.id, resData?.shop_id)}
-                                          className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
-                                        >
-                                          <span>
-                                            <AddIconsCircle />
-                                          </span>
-                                          <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
-                                            Добавить одежду
-                                          </span>
-                                        </button>
-                                      </div>
 
-                                    </section>
-                                    {resData?.products?.length !== 0 &&
-                                      < div className="w-full hidden md:flex flex-col">
-                                        <div className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
-                                          <div className="w-full  h-[70px] flex items-center">
-                                            <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
-                                            <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                                              <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
-                                              <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
-                                              <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
-                                              <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
-                                              <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
-                                              <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
-                                              <th className="w-[10%] h-full flex items-center justify-center">Цена товара</th>
-                                              <th className="w-[10%] h-full flex items-center justify-center"></th>
-                                              {item?.shop_locations?.length > 1 ?
-                                                <th className="w-[9%] h-full flex items-center justify-center">Добавить</th> :
-                                                <th className="w-[9%] h-full flex items-center justify-center"></th>
-                                              }
-                                              <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
-                                              <th className="w-[10%] h-full flex items-center justify-center ">Статус</th>
-                                            </tr>
-                                          </div>
-                                        </div>
-                                      </div>}
-
-                                    {resData?.products?.length > 0 ?
-                                      <div className="flex flex-col gap-y-[52px] mt-5">
-                                        {resData?.products?.filter(e =>
-                                          e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
-                                        )?.map((itemValue, index) => {
-                                          return (
-                                            <div key={index} className="w-full " >
-                                              <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
-                                                <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
-                                                  <div className="flex flex-col w-full">
-                                                    <table className="w-full flex h-[100px]  items-center">
-                                                      <tbody className="w-full h-full flex items-center">
-                                                        <tr>
-                                                          <td onClick={() => {
-                                                            setShopLocationIdList(item?.shop_locations)
-                                                            checkListItem(itemValue?.id, resData?.id, resData?.shop_id,)
-                                                          }}>
-                                                            {
-                                                              checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
-                                                                <button
-                                                                  className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2] bg-fullBlue  justify-center">
-                                                                  <FiCheck color={'#ffffff'} />
-                                                                </button>
-                                                                :
-                                                                <button
-                                                                  className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]   justify-center">
-                                                                </button>
-                                                            }
-                                                          </td>
-                                                        </tr>
-                                                        <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                                          <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
-                                                          <td className="w-[14%] h-full flex items-center justify-center">
-                                                            <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
-                                                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-[110px] h-full object-cover" />
-                                                            </span>
-                                                          </td>
-                                                          <td className="w-[15%] h-full break-all  overflow-hidden  flex items-center  justify-center">
-                                                            <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
-                                                              {itemValue?.name_ru || "namrRu"}
-                                                            </p>
-                                                          </td>
-                                                          <td className="w-[15%] h-full  flex items-center justify-center ">
-                                                            {itemValue?.sku || "sku"}
-                                                          </td>
-                                                          {getProductInfo?.types && getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
-                                                            return (
-                                                              <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
-                                                                {valueType?.name_ru || "type_id"}
-                                                              </td>
-                                                            )
-                                                          })}
-                                                          <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
-                                                          <td className="w-[10%] h-full  flex items-center justify-center ">
-                                                            {itemValue?.cost?.discount_price > 999 ?
-                                                              Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
-                                                              itemValue?.cost?.discount_price
-                                                                ||
-                                                                itemValue?.cost?.price > 999 ?
-                                                                Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
-                                                                : itemValue?.cost?.price
-                                                            }
-                                                            <span className="ml-[6px] text-[14px]">Сум</span>
-                                                          </td>
-                                                          <td className="w-[10%] h-full  flex items-center justify-center ">
-
-                                                            <button
-                                                              onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
-                                                              className="text-[18px] text-weatherWinterColor w-full text-center"
-                                                            >
-                                                              Подробнее
-                                                            </button>
-                                                          </td>
-                                                          {item?.shop_locations?.length > 1 ?
-                                                            <td className={`w-[9%] h-full  flex items-center justify-center `}>
-                                                              <button
-                                                                onClick={() => {
-                                                                  addByLocation(itemValue?.id, resData?.id, resData?.shop_id)
-
-                                                                }
-                                                                }
-                                                                type="button" className="w-full flex justify-center cursor-auto">
-                                                                <span
-                                                                  onClick={() => setOpenStoreList(true)}
-                                                                  className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
-                                                                >
-                                                                  <AddLocationIcon width={30} />
-                                                                </span>
-                                                              </button>
-                                                            </td> :
-                                                            <td className={`w-[9%] h-full  flex items-center justify-center `}></td>}
-                                                          <td className="w-[9%] h-full  flex items-center justify-center ">
-                                                            <button type="button"
-                                                              onClick={() => {
-                                                                setDeleteModal(true)
-                                                                setDeleteId(itemValue?.id)
-                                                                setGetIdShopLocation(resData?.id)
-                                                                setShopLocationIdList(item?.shop_locations)
-                                                              }}
-                                                              className="w-fit flex justify-center cursor-auto">
-                                                              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
-                                                                <DeleteIcon width={30} />
-                                                              </span>
-                                                            </button>
-                                                          </td>
-                                                          {itemValue?.status === "approved" &&
-                                                            <td
-                                                              className="w-[10%] h-fit  flex items-center justify-center  ">
-                                                              <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
-                                                            </td>}
-                                                          {itemValue?.status === "declined" &&
-                                                            <td
-                                                              onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
-                                                              className="w-[10%] h-fit cursor-pointer flex items-center  justify-center">
-                                                              <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
-                                                            </td>}
-                                                          {itemValue?.status === "pending" &&
-                                                            <td className="w-[10%] h-fit  flex items-center justify-center ">
-                                                              <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
-                                                            </td>}
-                                                          {itemValue?.status === "updated" &&
-                                                            <td className="w-[10%] h-fit  flex items-center justify-center   ">
-                                                              <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
-                                                            </td>}
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                    {/* For Mobile Device */}
-                                                    <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
-                                                      <div className="mb-2">
-                                                        <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
-                                                          <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                                          <span className="text-checkboxBorder">{index + 1}</span>
-                                                          <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                                        </div>
-                                                      </div>
-
-                                                      <div className="mb-3 h-[148px]">
-                                                        <figure className="w-full h-full rounded-lg overflow-hidden">
-                                                          {/* <img className="w-[100%] h-[100%]" src={itemValue?.photos[0]?.url_photo} alt="" /> */}
-                                                        </figure>
-                                                      </div>
-
-                                                      <div className="mb-6">
-                                                        <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                          <div className="w-[40%] flex items-center">Имя товара</div>
-                                                          <div className="w-[30%] flex items-center">Статус</div>
-                                                          <div className="w-[30%] flex items-center">Цена товара</div>
-                                                        </div>
-
-                                                        <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                          <div className="w-[40%]"> {itemValue?.name_product}</div>
-                                                          <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{itemValue?.status}</div>
-                                                          <div className="w-[30%]"> {itemValue?.money} сум </div>
-                                                        </div>
-                                                      </div>
-
-                                                      <div className="flex items-center justify-between">
-                                                        <button
-                                                          onClick={() => goMapWear(itemValue?.city)}
-                                                          className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                                        >
-                                                          Добавить в локацию
-                                                        </button>
-                                                        <button
-                                                          onClick={() => goMapCity(itemValue?.city)}
-                                                          className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                                        >
-                                                          Подробнее
-                                                        </button>
-                                                      </div>
-
-                                                      <div className="w-full flex items-center justify-between mt-[18px]">
-                                                        <div
-
-                                                          className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${itemValue?.isCheck
-                                                            ? "bg-[#007DCA] border-[#007DCA]"
-                                                            : "bg-white border-checkboxBorder"
-                                                            } flex items-center justify-center rounded mr-[8px]`}
-                                                        >
-                                                          <div
-                                                            className={`${itemValue?.isCheck ? "flex items-center justify-center" : "hidden"
-                                                              }`}
-                                                          >
-                                                            {/* <CheckIcons /> */}
-                                                          </div>
-                                                        </div>
-                                                        <button to="#" className="text-textBlueColor text-[13px] font-AeonikProMedium">
-                                                          Больше...
-                                                        </button>
-                                                        <button className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-
-                                                </div>
-                                              </div>
-
-                                            </div>
-                                          )
-                                        })}
-                                      </div>
-                                      :
-                                      <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
-                                        <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
-                                      </div>}
-                                  </div>
-                                </div>
-                              </div>
-                            )
-                          })
-                      }
-                    </div>
-                    }
-                  </div>
-                  :
-                  <div className="flex items-center w-full ">
                     {item?.shop_locations?.length !== 0 &&
                       < div className="w-full  my-6">
                         <button
                           type="button"
                           onClick={() => openMarketEditPage(item?.id)}
                           className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
-                          <p className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                          <p className=" block text-textBlueColor text-xl md:text-2xl not-italic font-AeonikProMedium">
+                            {item?.name} </p>
+                        </button>
+
+                        {item?.shop_locations?.filter((location) =>
+                          searchName ?
+                            location?.products?.some(item =>
+                              item?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                            ) : location)?.map((resData, index) => {
+                              return (
+                                <div key={index} className="w-full">
+                                  <div className="w-full  mt-5">
+
+                                    <div className="mx-auto font-AeonikProRegular text-[16px] ">
+                                      <section className="flex items-center justify-between  md:mt-2">
+                                        <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
+                                          <div className=" cursor-pointer bg-white flex items-center gap-x-2">
+                                            {
+                                              checkedList?.length === resData?.products?.length && addresNewId === resData?.id ?
+                                                <button onClick={() => allUnCheckedList()}
+                                                  className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622] bg-fullBlue  justify-center">
+                                                  <FiCheck color={'#ffffff'} />
+                                                </button>
+                                                :
+                                                <button onClick={() => {
+                                                  setCheckedList([])
+                                                  allCheckedList(resData?.id, item?.id, resData?.shop_id)
+                                                  setShopLocationIdList(item?.shop_locations)
+
+                                                }}
+                                                  className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
+                                                </button>
+                                            }
+                                            <p className="text-black text-[13px] md:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                              {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
+                                                return (
+                                                  <div>
+                                                    {values?.name_ru},
+                                                    {values?.sub_regions?.filter(e => e?.id == resData?.sub_region_id)?.map(valueSub => {
+                                                      return (
+                                                        <span className="px-1">
+                                                          {valueSub?.name_ru},
+                                                        </span>
+                                                      )
+                                                    })}
+                                                  </div>
+                                                )
+                                              })}
+                                              <span className="hidden md:flex items-center ml-1">({resData?.address})</span>
+                                              {resData?.products?.length > 1 &&
+                                                <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
+                                            </p>
+                                          </div>
+                                          <button
+                                            onClick={() => addNewProductId(resData?.id, resData?.shop_id)}
+                                            className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
+                                          >
+                                            <span>
+                                              <AddIconsCircle />
+                                            </span>
+                                            <span className="text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                              Добавить одежду
+                                            </span>
+                                          </button>
+                                        </div>
+
+                                      </section>
+                                      {resData?.products?.length !== 0 &&
+                                        < div className="w-full hidden md:flex flex-col">
+                                          <div className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
+                                            <div className="w-full  h-[70px] flex items-center">
+                                              <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
+                                              <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
+                                                <th className="w-[5%] h-full flex items-center justify-center" >No:</th>
+                                                <th className="w-[14%] h-full flex items-center justify-center">Фото</th>
+                                                <th className="w-[15%] h-full flex items-center justify-center">Наименование товара</th>
+                                                <th className="w-[15%] h-full flex items-center justify-center">Артикул</th>
+                                                <th className="w-[8%] h-full flex items-center justify-center">Тип</th>
+                                                <th className="w-[8%] h-full flex items-center justify-center">Дата</th>
+                                                <th className="w-[30%] h-full flex items-center justify-center">Цена товара</th>
+                                                <th className="w-[10%] h-full flex items-center justify-center"></th>
+                                                {item?.shop_locations?.length > 1 ?
+                                                  <th className="w-[9%] h-full flex items-center justify-center">Добавить</th> :
+                                                  <th className="w-[9%] h-full flex items-center justify-center"></th>
+                                                }
+                                                <th className="w-[9%] h-full flex items-center justify-center">Удалить</th>
+                                                <th className="w-[10%] h-full flex items-center justify-center ">Статус</th>
+                                              </tr>
+                                            </div>
+                                          </div>
+                                        </div>}
+
+                                      {resData?.products?.length > 0 ?
+                                        <div className="flex flex-col gap-y-[52px] mt-5">
+                                          {resData?.products?.filter(e =>
+                                            e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                                          )?.map((itemValue, index) => {
+                                            return (
+                                              <div key={index} className="w-full " >
+                                                <div className="w-full   flex flex-col items-center text-tableTextTitle">
+                                                  <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+                                                    <div className="flex flex-col w-full">
+                                                      <table className="w-full hidden md:flex h-[100px]  items-center">
+                                                        <tbody className="w-full h-full flex items-center">
+                                                          <tr>
+                                                            <td onClick={() => {
+                                                              setShopLocationIdList(item?.shop_locations)
+                                                              checkListItem(itemValue?.id, resData?.id, resData?.shop_id,)
+                                                            }}>
+                                                              {
+                                                                checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
+                                                                  <button
+                                                                    className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2] bg-fullBlue  justify-center">
+                                                                    <FiCheck color={'#ffffff'} />
+                                                                  </button>
+                                                                  :
+                                                                  <button
+                                                                    className="w-[18px] h-[18px] md:w-[25px] md:h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]   justify-center">
+                                                                  </button>
+                                                              }
+                                                            </td>
+                                                          </tr>
+                                                          <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
+                                                            <td className="w-[5%] h-full  flex items-center justify-center " >{index + 1}</td>
+                                                            <td className="w-[14%] h-full flex items-center justify-center">
+                                                              <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                                <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-[110px] h-full object-cover" />
+                                                              </span>
+                                                            </td>
+                                                            <td className="w-[15%] h-full break-all  overflow-hidden  flex items-center  justify-center">
+                                                              <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
+                                                                {itemValue?.name_ru || "namrRu"}
+                                                              </p>
+                                                            </td>
+                                                            <td className="w-[15%] h-full  flex items-center justify-center ">
+                                                              {itemValue?.sku || "sku"}
+                                                            </td>
+                                                            {getProductInfo?.types && getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                              return (
+                                                                <td key={index} className="w-[8%] h-full  flex items-center justify-center ">
+                                                                  {valueType?.name_ru || "type_id"}
+                                                                </td>
+                                                              )
+                                                            })}
+                                                            <td className="w-[8%] h-full  flex items-center justify-center ">{itemValue?.created_at || "created_at"}</td>
+                                                            <td className="w-[10%] h-full  flex items-center justify-center ">
+                                                              {itemValue?.cost?.discount_price > 999 ?
+                                                                Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
+                                                                itemValue?.cost?.discount_price
+                                                                  ||
+                                                                  itemValue?.cost?.price > 999 ?
+                                                                  Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
+                                                                  : itemValue?.cost?.price
+                                                              }
+                                                              <span className="ml-[6px] text-[14px]">Сум</span>
+                                                            </td>
+                                                            <td className="w-[10%] h-full  flex items-center justify-center ">
+
+                                                              <button
+                                                                onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
+                                                                className="text-[18px] text-weatherWinterColor w-full text-center"
+                                                              >
+                                                                Подробнее
+                                                              </button>
+                                                            </td>
+                                                            {item?.shop_locations?.length > 1 ?
+                                                              <td className={`w-[9%] h-full  flex items-center justify-center `}>
+                                                                <button
+                                                                  onClick={() => {
+                                                                    addByLocation(itemValue?.id, resData?.id, resData?.shop_id)
+
+                                                                  }
+                                                                  }
+                                                                  type="button" className="w-full flex justify-center cursor-auto">
+                                                                  <span
+                                                                    onClick={() => setOpenStoreList(true)}
+                                                                    className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#F4A622] transition-colors duration-[0.2s] ease-linear"
+                                                                  >
+                                                                    <AddLocationIcon width={30} />
+                                                                  </span>
+                                                                </button>
+                                                              </td> :
+                                                              <td className={`w-[9%] h-full  flex items-center justify-center `}></td>}
+                                                            <td className="w-[9%] h-full  flex items-center justify-center ">
+                                                              <button type="button"
+                                                                onClick={() => {
+                                                                  setDeleteModal(true)
+                                                                  setDeleteId(itemValue?.id)
+                                                                  setGetIdShopLocation(resData?.id)
+                                                                  setShopLocationIdList(item?.shop_locations)
+                                                                }}
+                                                                className="w-fit flex justify-center cursor-auto">
+                                                                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#D2D2D2] hover:text-[#FF4747] transition-colors duration-[0.2s] ease-linear">
+                                                                  <DeleteIcon width={30} />
+                                                                </span>
+                                                              </button>
+                                                            </td>
+                                                            {itemValue?.status === "approved" &&
+                                                              <td
+                                                                className="w-[10%] h-fit  flex items-center justify-center  ">
+                                                                <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                              </td>}
+                                                            {itemValue?.status === "declined" &&
+                                                              <td
+                                                                onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                                className="w-[10%] h-fit cursor-pointer flex items-center  justify-center">
+                                                                <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
+                                                              </td>}
+                                                            {itemValue?.status === "pending" &&
+                                                              <td className="w-[10%] h-fit  flex items-center justify-center ">
+                                                                <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                              </td>}
+                                                            {itemValue?.status === "updated" &&
+                                                              <td className="w-[10%] h-fit  flex items-center justify-center   ">
+                                                                <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                              </td>}
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                      {/* For Mobile Device */}
+                                                      <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] md:hidden w-full">
+                                                        <div className="mb-2">
+                                                          <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
+                                                            <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
+                                                            <span className="text-checkboxBorder">{index + 1}</span>
+                                                            <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
+                                                          </div>
+                                                        </div>
+
+                                                        <div className="mb-3 h-[148px]">
+                                                          <figure className="w-full h-full rounded-lg overflow-hidden">
+                                                            <span className="w-full h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                              <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                                            </span>
+                                                          </figure>
+                                                        </div>
+
+                                                        <div className="mb-6">
+                                                          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                            <div className="w-[40%] flex items-center  ">Имя товара</div>
+                                                            <div className="w-[30%] flex items-center  ">Статус</div>
+                                                            <div className="w-[30%] flex items-center  ">Цена товара</div>
+                                                          </div>
+
+                                                          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                                            <div className="w-[40%] break-all  overflow-hidden  ">
+                                                              <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                {itemValue?.name_ru || "namrRu"}
+                                                              </p>
+                                                            </div>
+                                                            {itemValue?.status === "approved" &&
+                                                              <div
+                                                                className="w-[30%] h-fit  flex items-center justify-center  ">
+                                                                <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                              </div>}
+                                                            {itemValue?.status === "declined" &&
+                                                              <div
+                                                                onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                                className="w-[30%] h-fit cursor-pointer flex items-center  justify-center">
+                                                                <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
+                                                              </div>}
+                                                            {itemValue?.status === "pending" &&
+                                                              <div className="w-[30%] h-fit  flex items-center justify-center ">
+                                                                <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                              </div>}
+                                                            {itemValue?.status === "updated" &&
+                                                              <div className="w-[30%] h-fit  flex items-center justify-center   ">
+                                                                <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                              </div>}
+                                                            {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
+                                                            <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                              {itemValue?.cost?.discount_price > 999 ?
+                                                                Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
+                                                                itemValue?.cost?.discount_price
+                                                                  ||
+                                                                  itemValue?.cost?.price > 999 ?
+                                                                  Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
+                                                                  : itemValue?.cost?.price
+                                                              }
+                                                              <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">Сум</span>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        {moreMobile == itemValue?.id && <div className="mb-6">
+                                                          <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                            <div className="w-[40%] flex items-center  ">Артикул</div>
+                                                            <div className="w-[30%] flex items-center  ">Тип</div>
+                                                            <div className="w-[30%] flex items-center  "> Дата</div>
+                                                          </div>
+
+                                                          <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                                            <div className="w-[40%] break-all  overflow-hidden  ">
+                                                              <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                {itemValue?.sku || "sku"}
+                                                              </p>
+                                                            </div>
+                                                            {getProductInfo?.types && getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                              return (
+                                                                <td key={index} className="w-[30%] h-full  flex items-center justify-center ">
+                                                                  {valueType?.name_ru || "type_id"}
+                                                                </td>
+                                                              )
+                                                            })}
+                                                            {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
+                                                            <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                              {itemValue?.created_at || "created_at"}
+                                                            </div>
+                                                          </div>
+                                                        </div>}
+
+                                                        <div className="flex items-center justify-between">
+                                                          <button
+                                                            onClick={() => goMapWear(itemValue?.city)}
+                                                            className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                                          >
+                                                            Добавить в локацию
+                                                          </button>
+                                                          <button
+                                                            onClick={() => goMapCity(itemValue?.city)}
+                                                            className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                                          >
+                                                            Подробнее
+                                                          </button>
+                                                        </div>
+
+                                                        <div className="w-full flex items-center justify-between mt-[18px]">
+                                                          <div className="flex items-center gap-x-2"
+                                                            onClick={() => {
+                                                              setShopLocationIdList(item?.shop_locations)
+                                                              checkListItem(itemValue?.id, resData?.id, resData?.shop_id)
+                                                            }}>
+                                                            {
+                                                              checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
+                                                                <button
+                                                                  className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]  bg-fullBlue  justify-center">
+                                                                  <FiCheck color={'#ffffff'} />
+                                                                </button>
+                                                                :
+                                                                <button
+                                                                  className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center">
+                                                                </button>
+                                                            }
+                                                            <span
+                                                              className="text-[#b5b5b5] text-[13px] font-AeonikProMedium">
+                                                              Выбрать
+                                                            </span>
+
+                                                          </div>
+                                                          {moreMobile !== itemValue?.id ? <button
+                                                            onClick={() => setMoreMobile(itemValue?.id)}
+                                                            className="text-textBlueColor text-[13px] font-AeonikProMedium">
+                                                            Больше...
+                                                          </button> :
+                                                            <button
+                                                              onClick={() => setMoreMobile()}
+                                                              className="text-textBlueColor text-[13px] font-AeonikProMedium">
+                                                              Меньше...
+                                                            </button>}
+                                                          <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                              setDeleteModal(true)
+                                                              setDeleteId(itemValue?.id)
+                                                              setGetIdShopLocation(resData?.id)
+                                                              setShopLocationIdList(item?.shop_locations)
+                                                            }}
+                                                            className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+
+                                              </div>
+                                            )
+                                          })}
+                                        </div>
+                                        :
+                                        <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-2 md:mt-5">
+                                          <span className="text-[#D2D2D2] font-AeonikProRegular text-sm md:text-xl">Tовара нет</span>
+                                        </div>}
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            })
+                        }
+                      </div>
+                    }
+                  </div>
+                  :
+                  <div className="flex items-center w-full ">
+                    {item?.shop_locations?.length !== 0 &&
+                      < div className="w-full  md:my-6">
+                        <button
+                          type="button"
+                          onClick={() => openMarketEditPage(item?.id)}
+                          className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer">
+                          <p className="  md:block text-textBlueColor text-xl md:text-2xl not-italic font-AeonikProMedium">
                             {item?.name} </p>
                         </button>
                         {item?.shop_locations?.filter((location) =>
@@ -1318,24 +1404,15 @@ export default function ProductLocationsList() {
                           return (
                             <div key={index} className="w-full">
                               <div className="w-full  mt-5">
-                                <div className="flex justify-end items-center md:justify-between mx-auto ">
-                                  <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
-                                    <p className="flex md:hidden text-sm font-AeonikProMedium">
-                                      Общее количество: ({dressInfo?.getProductList?.products_locations?.length})
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="flex md:hidden text-textBlueColor text-xl not-italic font-AeonikProMedium mb-6 ">
-                                  {item?.name}
-                                </div>
+
                                 <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                  <section className="hidden md:flex items-center justify-between  mt-2">
-                                    <div className="w-fit flex items-center">
+                                  <section className="flex items-center justify-between  md:mt-2">
+                                    <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
                                       <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                         {
                                           checkedList?.length === resData?.products?.length && addresNewId === resData?.id ?
                                             <button onClick={() => allUnCheckedList()}
-                                              className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622] bg-fullBlue  justify-center">
+                                              className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622] bg-fullBlue  justify-center">
                                               <FiCheck color={'#ffffff'} />
                                             </button>
                                             :
@@ -1345,10 +1422,10 @@ export default function ProductLocationsList() {
                                               setShopLocationIdList(item?.shop_locations)
 
                                             }}
-                                              className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
+                                              className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center">
                                             </button>
                                         }
-                                        <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                        <p className="text-black text-[13px] md:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                           {dressInfo?.regionList?.regions?.filter(e => e?.id == resData?.region_id)?.map((values, index) => {
                                             return (
                                               <div>
@@ -1363,7 +1440,7 @@ export default function ProductLocationsList() {
                                               </div>
                                             )
                                           })}
-                                          <span className="flex items-center ml-1">({resData?.address})</span>
+                                          <span className="hidden md:flex items-center ml-1">({resData?.address})</span>
                                           {resData?.products?.length > 1 &&
                                             <span className="text-black text-base not-italic font-AeonikProMedium ml-1">({resData?.products?.length})</span>}
                                         </p>
@@ -1375,7 +1452,7 @@ export default function ProductLocationsList() {
                                         <span>
                                           <AddIconsCircle />
                                         </span>
-                                        <span className="text-addWearColorText text-base not-italic font-AeonikProMedium">
+                                        <span className="text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
                                           Добавить одежду
                                         </span>
                                       </button>
@@ -1407,7 +1484,7 @@ export default function ProductLocationsList() {
                                       </div>
                                     </div>}
                                   {resData?.products?.length > 0 ?
-                                    <div className="flex flex-col gap-y-[52px] mt-5">
+                                    <div className="flex flex-col gap-y-[30px] md:gap-y-[52px] mt-5 ">
                                       {resData?.products?.filter(e =>
                                         e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                                       )?.map((itemValue, index) => {
@@ -1415,10 +1492,10 @@ export default function ProductLocationsList() {
                                         return (
                                           <div key={index} className="w-full "
                                           >
-                                            <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
+                                            <div className="w-full   flex flex-col items-center text-tableTextTitle">
                                               <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                                                 <div className="flex flex-col w-full ">
-                                                  <table className="w-full flex h-[100px]  items-center ">
+                                                  <table className="w-full  h-[100px]  items-center  hidden md:flex">
                                                     <tbody className="w-full h-full flex items-center">
                                                       <tr>
                                                         <td onClick={() => {
@@ -1428,12 +1505,12 @@ export default function ProductLocationsList() {
                                                           {
                                                             checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
                                                               <button
-                                                                className="w-[25px] h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]  bg-fullBlue  justify-center">
+                                                                className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]  bg-fullBlue  justify-center">
                                                                 <FiCheck color={'#ffffff'} />
                                                               </button>
                                                               :
                                                               <button
-                                                                className="w-[25px] h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center">
+                                                                className="w-[18px] h-[18px] md:w-[25px] md:h-[25px]  idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center">
                                                               </button>
                                                           }
                                                         </td>
@@ -1534,7 +1611,7 @@ export default function ProductLocationsList() {
                                                     </tbody>
                                                   </table>
                                                   {/* For Mobile Device */}
-                                                  <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full">
+                                                  <div key={itemValue?.id} className="border rounded-xl border-[##F2F2F2] p-[10px] md:hidden w-full">
                                                     <div className="mb-2">
                                                       <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                                                         <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
@@ -1545,23 +1622,84 @@ export default function ProductLocationsList() {
 
                                                     <div className="mb-3 h-[148px]">
                                                       <figure className="w-full h-full rounded-lg overflow-hidden">
-                                                        {/* <img className="w-[100%] h-[100%]" src={itemValue?.photos[0]?.url_photo} alt="" /> */}
+                                                        <span className="w-full h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                                          <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                                        </span>
                                                       </figure>
                                                     </div>
 
                                                     <div className="mb-6">
                                                       <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                        <div className="w-[40%] flex items-center">Имя товара</div>
-                                                        <div className="w-[30%] flex items-center">Статус</div>
-                                                        <div className="w-[30%] flex items-center">Цена товара</div>
+                                                        <div className="w-[40%] flex items-center  ">Имя товара</div>
+                                                        <div className="w-[30%] flex items-center  ">Статус</div>
+                                                        <div className="w-[30%] flex items-center  ">Цена товара</div>
                                                       </div>
 
                                                       <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                        <div className="w-[40%]"> {itemValue?.name_product}</div>
-                                                        <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">{itemValue?.status}</div>
-                                                        <div className="w-[30%]"> {itemValue?.money} сум </div>
+                                                        <div className="w-[40%] break-all  overflow-hidden  ">
+                                                          <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                            {itemValue?.name_ru || "namrRu"}
+                                                          </p>
+                                                        </div>
+                                                        {itemValue?.status === "approved" &&
+                                                          <div
+                                                            className="w-[30%] h-fit  flex items-center justify-center  ">
+                                                            <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                          </div>}
+                                                        {itemValue?.status === "declined" &&
+                                                          <div
+                                                            onClick={() => onHandleStatus(itemValue?.id, resData?.id, resData?.shop_id)}
+                                                            className="w-[30%] h-fit cursor-pointer flex items-center  justify-center">
+                                                            <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">{itemValue?.status || "status"}</span>
+                                                          </div>}
+                                                        {itemValue?.status === "pending" &&
+                                                          <div className="w-[30%] h-fit  flex items-center justify-center ">
+                                                            <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                          </div>}
+                                                        {itemValue?.status === "updated" &&
+                                                          <div className="w-[30%] h-fit  flex items-center justify-center   ">
+                                                            <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">{itemValue?.status || "status"}</span>
+                                                          </div>}
+                                                        {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
+                                                        <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                          {itemValue?.cost?.discount_price > 999 ?
+                                                            Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ") :
+                                                            itemValue?.cost?.discount_price
+                                                              ||
+                                                              itemValue?.cost?.price > 999 ?
+                                                              Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ")
+                                                              : itemValue?.cost?.price
+                                                          }
+                                                          <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">Сум</span>
+                                                        </div>
                                                       </div>
                                                     </div>
+                                                    {moreMobile == itemValue?.id && <div className="mb-6">
+                                                      <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                        <div className="w-[40%] flex items-center  ">Артикул</div>
+                                                        <div className="w-[30%] flex items-center  ">Тип</div>
+                                                        <div className="w-[30%] flex items-center  "> Дата</div>
+                                                      </div>
+
+                                                      <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                                        <div className="w-[40%] break-all  overflow-hidden  ">
+                                                          <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                            {itemValue?.sku || "sku"}
+                                                          </p>
+                                                        </div>
+                                                        {getProductInfo?.types && getProductInfo?.types?.filter(e => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                                          return (
+                                                            <td key={index} className="w-[30%] h-full  flex items-center justify-center ">
+                                                              {valueType?.name_ru || "type_id"}
+                                                            </td>
+                                                          )
+                                                        })}
+                                                        {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
+                                                        <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                          {itemValue?.created_at || "created_at"}
+                                                        </div>
+                                                      </div>
+                                                    </div>}
 
                                                     <div className="flex items-center justify-between">
                                                       <button
@@ -1579,24 +1717,47 @@ export default function ProductLocationsList() {
                                                     </div>
 
                                                     <div className="w-full flex items-center justify-between mt-[18px]">
-                                                      <div
+                                                      <div className="flex items-center gap-x-2"
+                                                        onClick={() => {
+                                                          setShopLocationIdList(item?.shop_locations)
+                                                          checkListItem(itemValue?.id, resData?.id, resData?.shop_id)
+                                                        }}>
+                                                        {
+                                                          checkedList?.includes(itemValue?.id) && addresNewId === Number(resData?.id) ?
+                                                            <button
+                                                              className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]  bg-fullBlue  justify-center">
+                                                              <FiCheck color={'#ffffff'} />
+                                                            </button>
+                                                            :
+                                                            <button
+                                                              className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center">
+                                                            </button>
+                                                        }
+                                                        <span
+                                                          className="text-[#b5b5b5] text-[13px] font-AeonikProMedium">
+                                                          Выбрать
+                                                        </span>
 
-                                                        className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${itemValue?.isCheck
-                                                          ? "bg-[#007DCA] border-[#007DCA]"
-                                                          : "bg-white border-checkboxBorder"
-                                                          } flex items-center justify-center rounded mr-[8px]`}
-                                                      >
-                                                        <div
-                                                          className={`${itemValue?.isCheck ? "flex items-center justify-center" : "hidden"
-                                                            }`}
-                                                        >
-                                                          {/* <CheckIcons /> */}
-                                                        </div>
                                                       </div>
-                                                      <button to="#" className="text-textBlueColor text-[13px] font-AeonikProMedium">
+                                                      {moreMobile !== itemValue?.id ? <button
+                                                        onClick={() => setMoreMobile(itemValue?.id)}
+                                                        className="text-textBlueColor text-[13px] font-AeonikProMedium">
                                                         Больше...
-                                                      </button>
-                                                      <button className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
+                                                      </button> :
+                                                        <button
+                                                          onClick={() => setMoreMobile()}
+                                                          className="text-textBlueColor text-[13px] font-AeonikProMedium">
+                                                          Меньше...
+                                                        </button>}
+                                                      <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                          setDeleteModal(true)
+                                                          setDeleteId(itemValue?.id)
+                                                          setGetIdShopLocation(resData?.id)
+                                                          setShopLocationIdList(item?.shop_locations)
+                                                        }}
+                                                        className="text-red-600 text-[11px] font-AeonikProMedium">Удалить</button>
                                                     </div>
                                                   </div>
                                                 </div>
@@ -1609,8 +1770,8 @@ export default function ProductLocationsList() {
                                       })}
                                     </div>
                                     :
-                                    <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-5">
-                                      <span className="text-[#D2D2D2] font-AeonikProRegular text-xl">Tовара нет</span>
+                                    <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-2 md:mt-5">
+                                      <span className="text-[#D2D2D2] font-AeonikProRegular text-sm md:text-xl">Tовара нет</span>
                                     </div>}
                                 </div>
                               </div>
