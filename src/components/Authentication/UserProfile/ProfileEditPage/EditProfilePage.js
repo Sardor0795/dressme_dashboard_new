@@ -404,7 +404,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
-
+// Если вы удалите аккаунт
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -559,7 +559,7 @@ function EditProfilePage() {
             Вы уверены?
           </span>
           <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
-            Если вы удалите аккаунт все ваши товары и магазины удалятся, если
+            Если вы удалите аккаунт, все ваши товары и магазины удалятся, если
             они имеются
           </span>
         </div>
