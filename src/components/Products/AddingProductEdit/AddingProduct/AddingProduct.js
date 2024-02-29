@@ -290,10 +290,14 @@ const AddingProduct = () => {
     if (section_Id?.length > 0 && !section_Id?.includes(e)) {
       setSection_Id(section_Id => [...section_Id, e])
     }
+  }
+  const handleChangeSectionDeleteMobile = (e) => {
+    setState({ ...state, onEditInput: true })
     if (section_Id?.length > 0 && section_Id?.includes(e)) {
       setSection_Id(section_Id?.filter((v) => v !== e))
     }
   }
+
 
   const [newArray, setNewArray] = useState([])
   useEffect(() => {
@@ -309,6 +313,9 @@ const AddingProduct = () => {
         }
       })
     })
+    if (newArray?.length === 0) {
+      setState({ ...state, subSection_Id: [] })
+    }
   }, [section_Id, dressInfo?.getProductInfo])
   // console.log(productsData, "productsData");
   // console.log(section_Id, "section_Id");
@@ -387,7 +394,6 @@ const AddingProduct = () => {
   }
 
   const handleChangeSubSection = (e) => {
-    // console.log(e, "newArray5");
     if (e?.length < subSection_Id?.length) {
       if (newArray) {
         if (subSection_Id?.length > 1) {
@@ -401,6 +407,22 @@ const AddingProduct = () => {
     } else {
       setSubSection_Id(e)
       setState({ ...state, onEditInput: true })
+    }
+  }
+
+  const handleChangeSubSectionMobile = (e) => {
+    setState({ ...state, onEditInput: true })
+    if (subSection_Id?.length === 0) {
+      setSubSection_Id(subSection_Id => [...subSection_Id, e])
+    }
+    if (subSection_Id?.length > 0 && !subSection_Id?.includes(e)) {
+      setSubSection_Id(subSection_Id => [...subSection_Id, e])
+    }
+  }
+  const handleChangeSubSectionDeleteMobile = (e) => {
+    setState({ ...state, onEditInput: true })
+    if (subSection_Id?.length > 0 && subSection_Id?.includes(e)) {
+      setSubSection_Id(subSection_Id?.filter((v) => v !== e))
     }
   }
 
@@ -438,6 +460,10 @@ const AddingProduct = () => {
     if (season_Id?.length > 0 && !season_Id?.includes(e)) {
       setSeason_Id(season_Id => [...season_Id, e])
     }
+
+  }
+  const onHandleChangeSeasonDeleteMobile = (e) => {
+    setState({ ...state, onEditInput: true })
     if (season_Id?.length > 0 && season_Id?.includes(e)) {
       setSeason_Id(season_Id?.filter((v) => v !== e))
     }
@@ -1010,17 +1036,27 @@ const AddingProduct = () => {
           ></section>
 
           {state?.showColor && (
-            <div className="max-w-[650px] w-full fixed z-[221]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ">
+            // {` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
+            //   ? " bottom-0 md:flex flex-col"
+            //   : "md:hidden bottom-[-1500px] z-[-10]"
+            //   }`}
+            <div className={`
+            ${screenSize > 768 ? 'max-w-[650px] w-full fixed z-[221]  md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto'
+                :
+                `${state?.showColor ? " bottom-0 md:flex flex-col"
+                  : "md:hidden bottom-[-1500px] z-[-10]"
+                } max-w-[440px] w-full fixed z-[221] duration-300  md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto`}
+            `}>
               {/* </div> */}
-              <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-t-md  md:rounded-md shadow-lg">
                 <div
                   className={`flex items-center justify-between border-b border-searchBgColor pb-3`}
                 >
                   <div className="w-fit flex items-center">
-                    <span className="text-black text-lg not-italic font-AeonikProRegular leading-5">
+                    <span className="text-black text-[14px] md:text-lg not-italic font-AeonikProRegular leading-5">
                       Выберите цвет
                     </span>
-                    <span className="text-sm ml-[10px] text-[#a1a1a1] font-AeonikProRegular">
+                    <span className="text-[11px] md:text-sm ml-[10px] text-[#a1a1a1] font-AeonikProRegular">
                       (Можно добавить максимум 4 цвета)
                     </span>
                   </div>
@@ -1039,7 +1075,7 @@ const AddingProduct = () => {
                         key={data?.id}
                         className={`flex flex-col items-center justify-center ${colors_Id?.length === 4 ? colors_Id?.includes(data?.id) ? "" : "opacity-50" : ""} `}>
                         <div
-                          className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                          className={` relative md:rounded-[12px] rounded-full overflow-hidden flex items-center justify-center w-10 h-10 md:w-[65px] md:h-[40px] bg-[${data.hex
                             }] cursor-pointer ${data?.id == 2
                               ? "border border-setTexOpacity flex items-center justify-center"
                               : ""
@@ -1055,7 +1091,8 @@ const AddingProduct = () => {
 
                           </div>
                           {colors_Id?.includes(data?.id) ? (
-                            <span onClick={() => onHandleColorUnchecked(data?.id)} className="absolute z-[221] w-[20px] h-[20px] rounded-b-md	 right-0 top-0 hover:opacity-70 absolute bg-black flex items-center justify-center p-[1px]"> <MenuCloseIcons colors={"#fff"} /></span>
+                            <span onClick={() => onHandleColorUnchecked(data?.id)} className="absolute z-[221] w-[20px] h-[20px] rounded-b-md	 right-0 top-0 hover:opacity-70 absolute bg-black flex items-center justify-center p-[1px]">
+                              <MenuCloseIcons colors={"#fff"} /></span>
                           ) : null}
 
                           {/* {state?.color_Id === 2 && data?.id === state?.color_Id ? (
@@ -1063,7 +1100,7 @@ const AddingProduct = () => {
                             ) : null} */}
                         </div>
                         <span
-                          className={`text-black text-center text-[14px] not-italic font-AeonikProRegular ${colors_Id?.includes(data?.id) ? "border-b border-fullBlue" : ""}`}
+                          className={`text-black text-center text-[10px] ll:text-[11px] md:text-[14px] not-italic font-AeonikProRegular ${colors_Id?.includes(data?.id) ? "border-b border-fullBlue" : ""}`}
                         >
                           {data?.name_ru}
                         </span>
@@ -1081,7 +1118,7 @@ const AddingProduct = () => {
                     </button>
                   }
                   <button onClick={() => setState({ ...state, showColor: false })}
-                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                    className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
                     Готово
                   </button>
                 </div>
@@ -1230,8 +1267,12 @@ const AddingProduct = () => {
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.sections?.map((item) => {
                         return (
-                          <div onClick={() => handleChangeSectionMobile(item?.id)} key={item?.id} className={`w-full ${section_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                          <div
+                            onClick={() => handleChangeSectionMobile(item?.id)}
+                            key={item?.id}
+                            className={`w-full ${section_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
+                            {section_Id?.includes(item?.id) && <span onClick={() => handleChangeSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                           </div>
                         );
                       })}
@@ -1243,12 +1284,12 @@ const AddingProduct = () => {
           </section>
           {/*Sub Clothing Section */}
           <section
-            className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+            className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden  ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
               }`}
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium">Подраздел одежды</p>
+                <p className={`text-xl font-AeonikProMedium `}>Подраздел одежды</p>
                 <button onClick={() => setState({ ...state, SubClothingSection: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1261,10 +1302,13 @@ const AddingProduct = () => {
                       <SearchIcon />
                     </div>
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                      {dressInfo?.getProductInfo?.sections?.map((item) => {
+                      {newArray?.map((item) => {
                         return (
-                          <div key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                          <div
+                            onClick={() => handleChangeSubSectionMobile(item?.id)}
+                            key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
+                            {subSection_Id?.includes(item?.id) && <span onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                           </div>
                         );
                       })}
@@ -1296,8 +1340,9 @@ const AddingProduct = () => {
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.seasons?.map((item) => {
                         return (
-                          <div onClick={() => onHandleChangeSeasonMobile(item?.id)} key={item?.id} className={`w-full ${season_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                          <div onClick={() => onHandleChangeSeasonMobile(item?.id)} key={item?.id} className={`w-full ${season_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
+                            {season_Id?.includes(item?.id) && <span onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                           </div>
                         );
                       })}
@@ -1329,8 +1374,9 @@ const AddingProduct = () => {
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.gender?.map((item) => {
                         return (
-                          <div onClick={() => setState({ ...state, gender_Id: item?.id, onEditInput: true, })} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                          <div onClick={() => setState({ ...state, gender_Id: item?.id, onEditInput: true, })} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
+                            {state?.gender_Id == (item?.id) && <span onClick={() => setState({ ...state, gender_Id: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                           </div>
                         );
                       })}
@@ -1364,8 +1410,10 @@ const AddingProduct = () => {
                         return (
                           <div
                             onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
-                            key={item?.id} className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                            key={item?.id} className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
+                            {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+
                           </div>
                         )
                       }) :
@@ -1373,8 +1421,10 @@ const AddingProduct = () => {
                           return (
                             <div
                               onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
-                              key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                              key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                               {item.name_ru}
+                              {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+
                             </div>
                           )
                         })
@@ -1409,8 +1459,9 @@ const AddingProduct = () => {
                         return (
                           <div
                             onClick={() => setState({ ...state, producer_Id: item?.id })}
-                            key={item?.id} className={`w-full ${state?.producer_Id == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-start border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                            key={item?.id} className={`w-full ${state?.producer_Id == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                             {item.name_ru}
+                            {state?.producer_Id == (item?.id) && <span onClick={() => setState({ ...state, producer_Id: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                           </div>
                         );
                       })}
@@ -1498,17 +1549,14 @@ const AddingProduct = () => {
                           setState({ ...state, ClothingSection: true })
                         }
                         type="button"
-                        className="w-full min-h-[40px] rounded-lg py-[2px] flex md:hidden items-center justify-between border border-borderColor px-3"
+                        className="w-full min-h-[40px] relative rounded-lg py-[2px] flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
                         {section_Id?.length ?
-                          <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden gap-1">
+                          <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden ">
                             {dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => {
                               return (
-                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                   {item?.name_ru}
-                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
-                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
-                                    </path></svg>
                                 </span>
                               )
                             })}
@@ -1569,14 +1617,16 @@ const AddingProduct = () => {
                         </span>
                       </div>
                       <button
-                        onClick={() =>
-                          setState({ ...state, SubClothingSection: true })
+                        onClick={
+                          state?.subSectionToggle ?
+                            () => setState({ ...state, SubClothingSection: true })
+                            : null
                         }
                         type="button"
-                        className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                        className="w-full min-h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                       >
                         {subSection_Id?.length ?
-                          <div className="w-full h-full rounded-lg flex items-center justify-between">
+                          <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
                             {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
                               return (
                                 <span className="text-[13px] md:text-base font-AeonikProRegular">{item?.name_ru}</span>
@@ -1652,11 +1702,9 @@ const AddingProduct = () => {
                           <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                             {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
                               return (
-                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                   {item?.name_ru}
-                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
-                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
-                                    </path></svg>
+
                                 </span>)
                             })}
                           </div>
@@ -1774,11 +1822,9 @@ const AddingProduct = () => {
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                               {dressInfo?.getProductInfo?.gender?.filter(e => state?.gender_Id == e?.id)?.map((item) => {
                                 return (
-                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                     {item?.name_ru}
-                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
-                                      <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
-                                      </path></svg>
+
                                   </span>
                                 )
                               })}
@@ -2042,11 +2088,9 @@ const AddingProduct = () => {
                           <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                             {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
                               return (
-                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                   {item?.name_ru}
-                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
-                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
-                                    </path></svg>
+
                                 </span>)
                             })}
                           </div>
@@ -2126,11 +2170,9 @@ const AddingProduct = () => {
                           <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                             {dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => {
                               return (
-                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] bg-[#f5f5f5] gap-x-1 flex items-center">
+                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                   {item?.name_ru}
-                                  <svg viewBox="64 64 896 896" focusable="false" data-icon="close" width="12px" height="12px" fill="#b5b5b5" aria-hidden="true">
-                                    <path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
-                                    </path></svg>
+
                                 </span>)
                             })}
                           </div>
