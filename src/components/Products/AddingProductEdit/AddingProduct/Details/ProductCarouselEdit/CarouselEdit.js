@@ -827,7 +827,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   // console.log(colors_Id?.length, "colors_Id?.length");
   // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
   return (
-    <div className="max-w-[350px] w-full h-fit ">
+    <div className="max-w-[300px] w-full h-fit border border-black">
 
       {/*------------------------- Modal Carosuel------------------------------------ */}
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}

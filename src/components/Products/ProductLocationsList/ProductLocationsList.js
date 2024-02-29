@@ -697,7 +697,7 @@ export default function ProductLocationsList() {
         <section className="w-full flex md:hidden">
           <div className="w-full flex items-center">
             <button
-            
+
               className="absolute flex items-center justify-start cursor-pointer "
             >
               <MobileHumburgerMenu />
@@ -1312,7 +1312,7 @@ export default function ProductLocationsList() {
                                                             Добавить в локацию
                                                           </button>
                                                           <button
-                                                            onClick={() => goMapCity(itemValue?.city)}
+                                                            onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
                                                             className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                                           >
                                                             Подробнее
@@ -1709,7 +1709,7 @@ export default function ProductLocationsList() {
                                                         Добавить в локацию
                                                       </button>
                                                       <button
-                                                        onClick={() => goMapCity(itemValue?.city)}
+                                                        onClick={() => goProductDetailEdit(itemValue?.id, resData?.id)}
                                                         className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                                       >
                                                         Подробнее
