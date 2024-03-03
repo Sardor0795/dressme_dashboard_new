@@ -2627,8 +2627,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             open={toggleShow}
             onOpenChange={handleOpenPopver}
             className={`text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white 
-                    group px-[15px] h-[38px]   select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300
-                    `}
+                    group w-full px-0 md:px-[15px] h-[38px]   select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300
+                   `}
             trigger="click"
             options={["Hide"]}
             placement="bottom"

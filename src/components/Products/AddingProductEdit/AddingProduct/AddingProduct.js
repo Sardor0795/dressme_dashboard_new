@@ -1497,7 +1497,7 @@ const AddingProduct = () => {
                         >
                           <span>
                             <span
-                              className=" mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                              className=" mt-[3px] font-AeonikProRegular capitalize text-[12px] md:text-[14px] text-[#b5b5b5]">
                               {productsDataIdEdit?.shop?.name}
                             </span>
                           </span>
@@ -1910,15 +1910,16 @@ const AddingProduct = () => {
                         </span>
                       </div>
                       <div className="w-full h-fit flex items-center justify-between gap-x-3">
-                        {colorAction ? <span className={` cursor-not-allowed px-3 outline-none w-[calc(100%-42px)] h-10 text-start text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center  rounded-lg font-AeonikProRegular `}
-                        >{state?.sku}</span> :
+                        {colorAction ?
+                          <span className={` cursor-not-allowed px-3 text-[12px] md:text-base outline-none w-[calc(100%-42px)] h-10 text-start text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center  rounded-lg font-AeonikProRegular `}
+                          >{state?.sku}</span> :
                           <input
                             type="text"
                             value={state?.sku}
                             onChange={(e) => setState({ ...state, onEditInput: true, sku: e.target.value })}
                             name="artikul"
                             placeholder=""
-                            className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] " : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
+                            className={`inputStyle w-[calc(100%-42px)] h-10    flex items-center justify-between ${state?.isCheckValid && !state?.sku ? "border border-[#FFB8B8] " : "border border-borderColor"} rounded-lg px-[10px] outline-none`}
                           />}
                         {colorAction ?
                           <button
@@ -2243,24 +2244,53 @@ const AddingProduct = () => {
                         />}
                       </div>
                     </div>
+                    {/* Input Sizes 12 mobile */}
+                    <div className="w-full  flex md:hidden flex-col gap-y-[5px] ">
+                      <div className={`w-full flex items-center rounded-lg overflow-hidden  justify-between   md:gap-x-3 ${colorAction ? "p-[4px] border-[3px] border-yellow-500" : ""}`} >
+                        {addSizeDisable == 'AddSize' ?
+                          <button
+                            type="button"
+                            className="group w-[45%] md:w-[168px] flex items-center justify-center h-[38px]  whitespace-nowrap text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg  "
+                          >
+                            Все размеры{" "}
+                          </button> :
+                          <button
+                            type="button"
+                            onClick={() => setAllSizeModalShow(true)}
+                            className="group w-[45%] md:w-[168px] flex items-center justify-center h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+                          >
+                            Все размеры{" "}
+                          </button>}
+                        {addSizeDisable == 'AllSize' ?
+                          <div
+                            className={`md:px-[15px] px-0 w-[45%] md:w-fit text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] group h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300`}
+                          >
+                            <span>Добавить размер</span>
+                          </div>
+                          :
+                          <button className={` px-3 w-[50%]  ${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[8px]   w-fit `}>
+                            <AddSize typeId={state?.category_Id} newProductId={newProductId} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
+                          </button>}
+                      </div>
+                    </div>
                     <div className={`w-full hidden md:flex items-center rounded-lg overflow-hidden  justify-between gap-x-3 ${colorAction ? "p-[4px] border-[3px] border-yellow-500" : ""}`} >
                       {addSizeDisable == 'AddSize' ?
                         <button
                           type="button"
-                          className="group w-[168px] flex items-center justify-center px-[15px] h-[38px]  whitespace-nowrap text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg  "
+                          className="group w-[168px] flex items-center justify-center h-[38px]  whitespace-nowrap text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg  "
                         >
                           Все размеры{" "}
                         </button> :
                         <button
                           type="button"
                           onClick={() => setAllSizeModalShow(true)}
-                          className="group w-[168px] flex items-center justify-center px-[15px] h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
+                          className="group w-[168px] flex items-center justify-center h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
                         >
                           Все размеры{" "}
                         </button>}
                       {addSizeDisable == 'AllSize' ?
                         <div
-                          className={`text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] group px-[15px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-sm cursor-pointer rounded-lg transition duration-300`}
+                          className={`text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] group h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300`}
                         >
                           <span>Добавить размер</span>
                         </div>
