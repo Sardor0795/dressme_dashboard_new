@@ -1235,10 +1235,10 @@ export default function LocationMapCity() {
               </div>
               <div className="w-full  px-4 md:px-0  ">
                 <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
-                  <div className="w-full md:w-[31%] xs:w-[48%]">
+                  <div className="w-full md:w-[31%] xs:w-[48%] md:hidden block">
                     <div className="w-full h-fit flex justify-center ">
                       {/* Region INput  */}
-                      <div className={"w-full md:hidden block"}>
+                      <div className={"w-full "}>
                         <label htmlFor="selectRegion">
                           <span className="flex items-center text-[#303030] text-[13px] md:text-base not-italic font-AeonikProMedium leading-4 tracking-[0,16px] ">
                             Выберите регион{" "}
