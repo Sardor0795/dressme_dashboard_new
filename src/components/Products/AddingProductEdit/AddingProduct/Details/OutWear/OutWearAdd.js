@@ -1468,11 +1468,12 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                             </span>
                                         </p>
                                         <div className="w-full flex items-center gap-x-3 justify-center">
-                                            <div
+                                            <button
+                                                type="button"
                                                 onClick={(e) => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1, saveBtnDisable: true, disableSizes: 2 })}
                                                 className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                                 <span>-</span>
-                                            </div>
+                                            </button>
                                             <div className="w-[60px] overflow-hidden flex items-start justify-between border border-borderColor rounded-lg">
                                                 {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                                     <span
@@ -1487,11 +1488,12 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true, disableSizes: 2 })}
                                                     />}
                                             </div>
-                                            <div
+                                            <button
+                                                type="button"
                                                 onClick={(e) => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1, saveBtnDisable: true, disableSizes: 2 })}
                                                 className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                                 <span>+</span>
-                                            </div>
+                                            </button>
                                         </div>
 
                                     </div>
@@ -1658,7 +1660,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         defaultChecked={indeterminate}
                         onChange={onCheckAllChange}
                         checked={checkAll}
-                        className={`idCheck flex items-center rounded-[8px] overflow-hidden border border-[#f4a622] justify-center md:!min-w-[24px] md:!min-h-[24px] `}>
+                        className={`idCheck flex items-center rounded-[8px] overflow-hidden border border-[#f4a622] justify-center !min-w-[18px] !min-h-[18px] md:!min-w-[24px] md:!min-h-[24px] `}>
                     </Checkbox>
                     <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
                         Выбрать все
