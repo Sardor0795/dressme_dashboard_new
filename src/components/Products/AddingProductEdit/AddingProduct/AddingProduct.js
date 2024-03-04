@@ -1495,7 +1495,7 @@ const AddingProduct = () => {
           <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
             <div className="w-full h-fit md:relative md:py-12">
               <div className=" w-full h-fit flex gap-x-4 flex-col-reverse md:flex-row md:px-7 ">
-                <div className="w-full md:w-[70%] h-fit flex flex-col gap-y-6 border border-green-600">
+                <div className="w-full md:w-[70%] h-fit flex flex-col gap-y-6 ">
                   <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 mt-6 md:mt-0">
                     {/* Input Select 1.1 */}
                     <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
@@ -1821,7 +1821,7 @@ const AddingProduct = () => {
                       </div>
                       <div className={` w-fit ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                         <div className={`w-fit flex items-center gap-x-2 justify-start  overflow-hidden                   
-                        ${state?.imageAddError?.color_id && !lastElement ? "border-[2px] border-textRedColor " : "border border-borderColor"}   rounded-lg  h-[42px] md:h-10 px-[12px]`}>
+                        ${state?.imageAddError?.color_id && !lastElement ? "border-[2px] border-textRedColor " : "border border-borderColor"}   rounded-lg h-[40px]  md:h-[42px] md:h-10 px-[12px]`}>
                           {dressInfo?.getProductInfo?.colors
                             ?.filter((e) => colors_Id?.includes(e?.id))
                             ?.map((data) => {
@@ -2384,7 +2384,7 @@ const AddingProduct = () => {
                 </div>
                 <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row   justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                   {/* Img Carousel */}
-                  <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center border border-green-600 gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
+                  <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
                     <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                   </div>
                 </div>

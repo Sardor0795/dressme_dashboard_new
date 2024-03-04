@@ -316,7 +316,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                     className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.sizeEditModal ? "" : "hidden"}`}
                 ></section>
                 <section
-                    className={`max-w-[440px] md:max-w-[780px] border border-red-500 mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-3 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+                    className={`max-w-[440px] md:max-w-[780px]  mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-3 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
                     <div className="flex justify-end">
 
                         <button
@@ -1344,7 +1344,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <button
                                                         type="button"
                                                         className="flex items-center  text-[20px] w-[120px] h-[38px] opacity-20 border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
-                                                        <span>+</span>
+                                                        <span>-</span>
                                                     </button>
                                                     <span
                                                         className={`inputStyle w-[60px] border border-borderColor flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
@@ -1361,9 +1361,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <div className="w-full justify-center flex items-center gap-x-1" >
                                                     <button
                                                         type="button"
-                                                        onClick={(e) => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1, saveBtnDisable: true, disableSizes: 2 })}
+                                                        onClick={(e) => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1, saveBtnDisable: true, disableSizes: 2 })}
                                                         className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
-                                                        <span>+</span>
+                                                        <span>-</span>
                                                     </button>
                                                     <input
                                                         type="number"
@@ -1502,7 +1502,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                                 Цвет:
                                             </div>
-                                        </div>                                        {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
+                                        </div>
+                                        {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                             return (
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
