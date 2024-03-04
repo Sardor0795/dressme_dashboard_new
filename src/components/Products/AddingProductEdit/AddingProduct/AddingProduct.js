@@ -1232,7 +1232,14 @@ const AddingProduct = () => {
 
             </div>
           </section>
-
+          <section
+            className={`fixed z-[115]   w-full h-fit md:m-auto  cursor-pointer flex items-center justify-center   md:inset-0  left-[50%] right-[50%] translate-x-[-50%]  duration-300 overflow-hidden ${allSizeModalShow ? "bottom-0 " : "hidden"
+              }`}
+          >
+            {(
+              <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
+            )}{" "}
+          </section>
           <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
             <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
               1
@@ -1478,7 +1485,7 @@ const AddingProduct = () => {
           <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
             <div className="w-full h-fit md:relative md:py-12">
               <div className=" w-full h-fit flex gap-x-4 flex-col-reverse md:flex-row md:px-7 ">
-                <div className="w-full md:w-[70%] h-fit flex flex-col gap-y-6 border border-red-600">
+                <div className="w-full md:w-[70%] h-fit flex flex-col gap-y-6 border border-green-600">
                   <div className="w-full grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-6 mt-6 md:mt-0">
                     {/* Input Select 1.1 */}
                     <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
@@ -2363,16 +2370,9 @@ const AddingProduct = () => {
                         </button>}
                     </div>
                   </div>
-                  <section
-                    className={`fixed z-[115]   w-fit h-fit m-auto cursor-pointer flex items-center justify-center inset-0  overflow-hidden ${allSizeModalShow ? "" : "hidden"
-                      }`}
-                  >
-                    {(
-                      <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
-                    )}{" "}
-                  </section>
+
                 </div>
-                <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row  border border-red-600 justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
+                <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row   justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                   {/* Img Carousel */}
                   <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center border border-green-600 gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
                     <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />

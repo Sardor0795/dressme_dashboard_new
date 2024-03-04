@@ -178,40 +178,7 @@
   font-size: 14px;
 }
 
-/* ------------------- */
-@media (max-width: 767px) {
-  .inputStyle {
-    color: #000;
-    font-size: 14px;
 
-  }
-
-  .inputStyle::placeholder {
-    color: #A1A1A1;
-    font-size: 12px;
-  }
-
-  .WearScroll {
-    display: block;
-  }
-
-  .ant-space-item {
-    overflow: visible;
-    height: 0px;
-    overflow: hidden;
-    position: relative;
-    width: 0px;
-    right: 40px;
-    z-index: -10;
-  }
-
-  .ant-picker-dropdown {
-    position: absolute;
-    z-index: 150;
-  }
-
-
-}
 
 /* .ant-picker-input input::placeholder {
   display: none;
@@ -453,3 +420,50 @@ input[type=number] {
 /* .textForm .ant-select-selection-search-input {
   height: 40px !important;
 } */
+/* ------------------- */
+@media  (max-width: 767px) {
+  .inputStyle {
+    color: #000;
+    font-size: 14px;
+
+  }
+
+  .inputStyle::placeholder {
+    color: #A1A1A1;
+    font-size: 12px;
+  }
+
+  .WearScroll {
+    display: block;
+  }
+
+  .ant-space-item {
+    overflow: visible;
+    height: 0px;
+    overflow: hidden;
+    position: relative;
+    width: 0px;
+    right: 40px;
+    z-index: -10;
+  }
+
+  .ant-picker-dropdown {
+    position: absolute;
+    z-index: 150;
+  }
+/* ant-checkbox-input */
+.idCheck .ant-checkbox .ant-checkbox-inner {
+  width: 20px;
+  height: 20px;
+  border: none;
+  /* background-color: red; */
+}
+
+.ant-checkbox .ant-checkbox-inner {
+  width: 20px;
+  height: 20px;
+  /* background-color: red; */
+}
+
+
+}

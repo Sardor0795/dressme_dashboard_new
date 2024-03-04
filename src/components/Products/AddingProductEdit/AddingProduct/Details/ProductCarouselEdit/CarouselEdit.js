@@ -2345,7 +2345,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-[90px] md:w-[290px] mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg">
+          <div className="w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg">
             <div className={`w-full md:w-[31%]  h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
@@ -2405,7 +2405,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   <button
                     type="button"
@@ -2477,7 +2477,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   {/* {Number(productData?.colors[0]?.pivot?.id) === Number(imageThree?.product_color_id3) } */}
                   <button
@@ -2549,7 +2549,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px] ">
                 <div className="w-fit h-fit flex items-center">
                   <button
                     type="button"
@@ -2641,7 +2641,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-fit items-center justify-between mt-[3px]">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px]">
                 {productData?.colors?.length >= 2 ?
                   <div className="w-fit h-fit flex items-center">
                     <button
@@ -2657,7 +2657,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <button
                         key={index}
                         type="button"
-                        className={`w-[22px] h-[22px] rounded-full border `}
+                        className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                         style={{ background: `${value?.hex}` }}
                       ></button>
                     )
@@ -2747,8 +2747,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-fit items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-fit items-center justify-between mt-[3px] ">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px]  rounded-[12px]">
+                <div className="w-full flex h-fit items-center justify-between md:mt-[3px] ">
                   {productData?.colors?.length >= 2 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
@@ -2845,8 +2845,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
               </button>
 
-              <div className="w-full flex h-fit items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-fit items-center justify-between mt-[3px]">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px]  rounded-[12px]">
+                <div className="w-full flex h-fit items-center justify-between md:mt-[3px]">
                   {productData?.colors?.length >= 3 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
@@ -2862,7 +2862,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <button
                           key={index}
                           type="button"
-                          className={`w-[22px] h-[22px] rounded-full border `}
+                          className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                           style={{ background: `${value?.hex}` }}
                         ></button>
                       )
@@ -2943,8 +2943,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   </div>
                 }
               </button>
-              <div className="w-full flex h-fit items-center justify-between mt-[3px]  rounded-[12px]">
-                <div className="w-full flex h-fit items-center justify-between mt-[3px]">
+              <div className="w-full flex h-fit items-center justify-between md:mt-[3px]  rounded-[12px]">
+                <div className="w-full flex h-fit items-center justify-between md:mt-[3px]">
                   {productData?.colors?.length === 4 ?
                     <div className="w-fit h-fit flex items-center">
                       <button
@@ -2960,7 +2960,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <button
                           key={index}
                           type="button"
-                          className={`w-[22px] h-[22px] rounded-full border `}
+                          className={`w-[16px] xs:w-[22px] h-[16px] xs:h-[22px] rounded-full border `}
                           style={{ background: `${value?.hex}` }}
                         ></button>
                       )
