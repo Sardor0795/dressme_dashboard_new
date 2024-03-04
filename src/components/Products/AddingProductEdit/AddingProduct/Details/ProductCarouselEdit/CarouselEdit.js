@@ -827,7 +827,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   // console.log(colors_Id?.length, "colors_Id?.length");
   // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
   return (
-    <div className="max-w-[350px] md:max-w-[300px] w-full h-fit border border-black">
+    <div className="max-w-[350px] md:max-w-[300px] w-full h-fit ">
 
       {/*------------------------- Modal Carosuel------------------------------------ */}
       {/* Open Clothing Types Bottom Mobile Modal Animation Section */}
@@ -2308,8 +2308,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
           </div>}
       </div >
       <section className="w-full flex flex-col flex-wrap h-full md:gap-x-[10px]">
-        <div className="w-full h-full flex md:flex-col gap-x-3">
-          <div className={`ls:w-[250px] w-[230px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
+        <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3">
+          <div className={`ls:w-[250px] w-[220px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
             <div
               className="w-full h-full rounded-[12px] border overflow-hidden"
             >
@@ -2345,7 +2345,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
             </div>
           </div>
-          <div className="w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg">
+          <div className="w-[70px] ll:w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg">
             <div className={`w-full md:w-[31%]  h-full flex-col items-center justify-start ${productData?.colors[0]?.pivot?.color_id == activeColor || colors_Id[0] == activeColor ? "" : "opacity-30"} ${colors_Id?.length > 3 ? "hidden" : "flex"}`}>
               <button
                 type="button"
