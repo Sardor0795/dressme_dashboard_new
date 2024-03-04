@@ -88,7 +88,7 @@ export default function LocationMapCity() {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
       setState({
@@ -115,11 +115,11 @@ export default function LocationMapCity() {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
-      setPictureFile2(compressedFile)
-      setPictureView2(URL.createObjectURL(event.target.files[0]))
+      setPictureFile2(compressedFile);
+      setPictureView2(URL.createObjectURL(event.target.files[0]));
     } catch (error) {
       console.log(error);
     }
@@ -138,7 +138,7 @@ export default function LocationMapCity() {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
       setState({
@@ -270,7 +270,7 @@ export default function LocationMapCity() {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, regionList: data?.data });
         }
-      } catch (error) { }
+      } catch (error) {}
     };
     if (!dressInfo?.regionList) {
       fetchDataRegions();
@@ -526,18 +526,26 @@ export default function LocationMapCity() {
 
   const handleInputAdminNameFirst = (e) => {
     if (e.target.value) {
-      setState({ ...state, idAssistantName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+      setState({
+        ...state,
+        idAssistantName:
+          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+      });
     } else {
-      setState({ ...state, idAssistantName: null })
+      setState({ ...state, idAssistantName: null });
     }
-  }
+  };
   const handleInputAdminNameSecond = (e) => {
     if (e.target.value) {
-      setState({ ...state, idSecondAssistantName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+      setState({
+        ...state,
+        idSecondAssistantName:
+          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+      });
     } else {
-      setState({ ...state, idSecondAssistantName: null })
+      setState({ ...state, idSecondAssistantName: null });
     }
-  }
+  };
   return (
     <div>
       {loaderEdit ? (
@@ -579,10 +587,11 @@ export default function LocationMapCity() {
          ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
             ></section>
             <div
-              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
-                ? " bottom-0 md:flex flex-col"
-                : "md:hidden bottom-[-1500px] z-[-10]"
-                }`}
+              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
+                openRegionModal
+                  ? " bottom-0 md:flex flex-col"
+                  : "md:hidden bottom-[-1500px] z-[-10]"
+              }`}
             >
               <div className="w-full flex items-center justify-between font-AeonikProMedium">
                 <span className="text-black text-lg not-italic font-AeonikProMedium">
@@ -598,80 +607,72 @@ export default function LocationMapCity() {
 
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
                 {dressInfo?.regionList?.regions ? (
-                  dressInfo?.regionList?.regions?.map(
-                    (data, index) => {
-                      return (
+                  dressInfo?.regionList?.regions?.map((data, index) => {
+                    return (
+                      <div key={data?.id} className="w-full  h-fit  ">
                         <div
-                          key={data?.id}
-                          className="w-full  h-fit  "
+                          onClick={() => accordionCityList(data?.id)}
+                          className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                         >
-                          <div
-                            onClick={() =>
-                              accordionCityList(data?.id)
-                            }
-                            className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
-                          >
-                            <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                              {data?.name_ru}
-                            </span>
-                            <span
-                              className={`${activeIndex == data?.id
+                          <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                            {data?.name_ru}
+                          </span>
+                          <span
+                            className={`${
+                              activeIndex == data?.id
                                 ? "rotate-[0deg]"
                                 : "rotate-[180deg]"
-                                } `}
-                            >
-                              <ArrowTopIcons colors={"#a1a1a1"} />
-                            </span>
-                          </div>
-
-                          <div
-                            className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id
-                                ? "openAccardion"
-                                : "CloseAccardion"
-                              } `}
+                            } `}
                           >
-                            {data?.sub_regions?.map((item) => {
-                              return (
-                                <div
-                                  key={item?.id}
-                                  className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
-                                >
-                                  <label
-                                    htmlFor={item?.name_ru}
-                                    className="flex items-center gap-x-[6px]"
-                                  >
-                                    <input
-                                      type="radio"
-                                      id={item?.name_ru}
-                                      name="type_work"
-                                      value={item?.region_id}
-                                      checked={
-                                        state?.idSupRregionId ==
-                                        item?.id
-                                      }
-                                      className="border border-borderColor  cursor-pointer  flex items-center justify-center"
-                                      onChange={(e) => {
-                                        setState({
-                                          ...state,
-                                          idRegionId: e.target.value,
-                                          idSupRregionId: item?.id,
-                                        });
-                                      }}
-                                      required
-                                    />
-                                    <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
-                                      {item?.name_ru}
-                                    </span>
-                                  </label>
-                                </div>
-                              );
-                            })}
-                          </div>
+                            <ArrowTopIcons colors={"#a1a1a1"} />
+                          </span>
                         </div>
-                      );
-                    }
-                  )
+
+                        <div
+                          className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                             ${
+                               activeIndex == data?.id
+                                 ? "openAccardion"
+                                 : "CloseAccardion"
+                             } `}
+                        >
+                          {data?.sub_regions?.map((item) => {
+                            return (
+                              <div
+                                key={item?.id}
+                                className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
+                              >
+                                <label
+                                  htmlFor={item?.name_ru}
+                                  className="flex items-center gap-x-[6px]"
+                                >
+                                  <input
+                                    type="radio"
+                                    id={item?.name_ru}
+                                    name="type_work"
+                                    value={item?.region_id}
+                                    checked={state?.idSupRregionId == item?.id}
+                                    className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                    onChange={(e) => {
+                                      setState({
+                                        ...state,
+                                        idRegionId: e.target.value,
+                                        idSupRregionId: item?.id,
+                                      });
+                                    }}
+                                    required
+                                  />
+                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                    {item?.name_ru}
+                                  </span>
+                                </label>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })
                 ) : (
                   <p className="w-full h-full flex flex-col items-center justify-center">
                     Malumotlar yuklanyapti...
@@ -689,10 +690,11 @@ export default function LocationMapCity() {
             </div>
             {/* Delete Product Of Pop Confirm */}
             <section
-              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
-                ? " bottom-0 md:flex"
-                : "md:hidden bottom-[-800px] z-[-10]"
-                }`}
+              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+                deleteModal
+                  ? " bottom-0 md:flex"
+                  : "md:hidden bottom-[-800px] z-[-10]"
+              }`}
             >
               <button
                 onClick={() => setDeleteModal(false)}
@@ -1061,8 +1063,9 @@ export default function LocationMapCity() {
                               placeholder="Введите адрес"
                               id="ForSearch"
                               name="search"
-                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps?.title?.length) ? "" : "hidden"
-                                }`}
+                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
+                                !Boolean(forMaps?.title?.length) ? "" : "hidden"
+                              }`}
                             />
 
                             <div
@@ -1170,39 +1173,37 @@ export default function LocationMapCity() {
                   </button>
                 </div>
                 <div className=" w-full md:w-[31%]  h-[75px] md:h-[150px] flex items-center justify-center rounded-lg">
-                  {
-                    state?.pictureBgView1 ?
-                      < button
-                        type="button"
-                        onClick={() => {
-                          setBackImgOrder(2);
-                          setBackImgUploadModal(true);
-                        }}
-                        className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center"
-                      >
-                        {pictureView2 ? (
-                          <img
-                            src={pictureView2}
-                            alt="backImg"
-                            className="w-full h-full object-cover rounded-lg"
-                          />
-                        ) : (
-                          <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                            Фото локации
-                          </span>
-                        )}
-                      </button>
-                      :
-                      <div
-                        className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
-                      >
-                        <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
+                  {state?.pictureBgView1 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setBackImgOrder(2);
+                        setBackImgUploadModal(true);
+                      }}
+                      className="h-full w-full border border-searchBgColor rounded-lg overflow-hidden flex items-center justify-center"
+                    >
+                      {pictureView2 ? (
+                        <img
+                          src={pictureView2}
+                          alt="backImg"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      ) : (
+                        <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                           Фото локации
                         </span>
-                      </div>}
+                      )}
+                    </button>
+                  ) : (
+                    <div className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
+                      <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
+                        Фото локации
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className=" w-full md:w-[31%]  h-[75px] md:h-[150px] flex items-center justify-center rounded-lg">
-                  {pictureView2 ?
+                  {pictureView2 ? (
                     <button
                       onClick={() => {
                         setBackImgOrder(3);
@@ -1222,18 +1223,73 @@ export default function LocationMapCity() {
                           Фото локации
                         </span>
                       )}
-                    </button> :
-                    <div
-                      className="h-full border rounded-lg  w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
-                    >
+                    </button>
+                  ) : (
+                    <div className="h-full border rounded-lg  w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
                         Фото локации
                       </span>
-                    </div>}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="w-full  px-4 md:px-0  ">
                 <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
+                  <div className="w-full md:w-[31%] xs:w-[48%]">
+                    <div className="w-full h-fit flex justify-center ">
+                      {/* Region INput  */}
+                      <div className={"w-full md:hidden block"}>
+                        <label htmlFor="selectRegion">
+                          <span className="flex items-center text-[#303030] text-[13px] md:text-base not-italic font-AeonikProMedium leading-4 tracking-[0,16px] ">
+                            Выберите регион{" "}
+                            <span className="ml-[5px]">
+                              <StarLabel />
+                            </span>
+                          </span>
+                          <div
+                            onClick={() => setOpenRegionModal(true)}
+                            className="w-full h-8 md:h-11 mt-[6px] md:mt-[10px] px-[15px] flex items-center justify-between rounded md:rounded-lg cursor-pointer border border-searchBgColor"
+                          >
+                            <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
+                              {!state?.idRegionId &&
+                                !state?.idSupRregionId &&
+                                "Выберите регион"}
+
+                              {dressInfo?.regionList?.regions
+                                ?.filter((e) => e.id == state?.idRegionId)
+                                .map((item, index) => {
+                                  return (
+                                    <span
+                                      key={index}
+                                      className="flex items-center text-[#000] text-[13px] md:text-base font-AeonikProRegular"
+                                    >
+                                      {item?.name_ru},
+                                      {item?.sub_regions
+                                        ?.filter(
+                                          (i) => i.id == state?.idSupRregionId
+                                        )
+                                        .map((data, index) => {
+                                          return (
+                                            <span
+                                              key={index}
+                                              className="ml-1 font-AeonikProRegular"
+                                            >
+                                              {data?.name_ru}
+                                            </span>
+                                          );
+                                        })}
+                                    </span>
+                                  );
+                                })}
+                            </span>
+                            <span className="rotate-[180deg]">
+                              <ArrowTopIcons colors={"#a1a1a1"} />
+                            </span>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                   <label
                     htmlFor="fname"
                     className="w-full md:w-[31%] xs:w-[48%]   "
@@ -1276,10 +1332,8 @@ export default function LocationMapCity() {
 
                   <div className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="w-full h-fit flex justify-center ">
-
-
                       {/* Region INput  */}
-                      <div className={"w-full"}>
+                      <div className={"w-full hidden md:block"}>
                         <label htmlFor="selectRegion">
                           <span className="flex items-center text-[#303030] text-[13px] md:text-base not-italic font-AeonikProMedium leading-4 tracking-[0,16px] ">
                             Выберите регион
@@ -1356,10 +1410,11 @@ export default function LocationMapCity() {
                               idAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone
-                            ? "font-AeonikProMedium"
-                            : null
-                            } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
+                            state?.idAssistantPhone
+                              ? "font-AeonikProMedium"
+                              : null
+                          } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
@@ -1392,10 +1447,11 @@ export default function LocationMapCity() {
                               idSecondAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone
-                            ? "font-AeonikProMedium"
-                            : null
-                            } text-[13px] md:text-base leading-4 text-black`}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
+                            state?.idSecondAssistantPhone
+                              ? "font-AeonikProMedium"
+                              : null
+                          } text-[13px] md:text-base leading-4 text-black`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
@@ -1457,9 +1513,8 @@ export default function LocationMapCity() {
             </div>
           </div>
         </div>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }
 // export default LocationMapCity;
