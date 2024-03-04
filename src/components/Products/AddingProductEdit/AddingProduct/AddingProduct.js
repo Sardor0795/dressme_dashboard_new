@@ -1232,8 +1232,18 @@ const AddingProduct = () => {
 
             </div>
           </section>
+          {/* ----Desktop---- */}
           <section
-            className={`fixed z-[115]   w-full h-fit md:m-auto  cursor-pointer flex items-center justify-center   md:inset-0  left-[50%] right-[50%] translate-x-[-50%]  duration-300 overflow-hidden ${allSizeModalShow ? "bottom-0 " : "hidden"
+            className={`fixed z-[115]   w-fit h-fit m-auto  cursor-pointer hidden md:flex items-center justify-center   inset-0 duration-300 overflow-hidden ${allSizeModalShow ? "" : "md:hidden"
+              }`}
+          >
+            {(
+              <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
+            )}{" "}
+          </section>
+          {/* ----Desktop---- */}
+          <section
+            className={`fixed z-[115] md:hidden  w-full h-fit md:m-auto  cursor-pointer flex items-center justify-center    md:left-0 md:right-0  left-[50%] right-[50%] translate-x-[-50%] md:translate-x-auto md:inset-0 duration-300 overflow-hidden ${allSizeModalShow ? "bottom-0 md:bottom-auto" : "hidden"
               }`}
           >
             {(
