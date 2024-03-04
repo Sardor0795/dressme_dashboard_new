@@ -192,8 +192,11 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
 
   }
+
+
+
   return (
-    <div className="w-full md:w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-2 ls:px-3 ll:px-5 py-[6px] ls:py-2 ll:py-[10px] md:px-4 ">
+    <div className="w-full max-w-[440px] md:w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
       <section
         onClick={() => {
           setOpenColorModal(false)
@@ -373,19 +376,19 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
             );
           })}
         </div>
-        <button className="md:flex hidden" type="button " onClick={onClick}>
+        <button className="flex " type="button " onClick={onClick}>
           <MenuCloseIcons colors={"#a2a2a2"} />
         </button>
-        <label htmlFor="checkList" className="md:hidden flex items-center border border-borderColor rounded-lg overflow-hidden">
+        {/* <label htmlFor="checkList" className="md:hidden flex items-center border border-borderColor rounded-lg overflow-hidden">
           <input name="checkList" type="checkbox" className="w-[20px] h-[20px] rounded-lg" />
-        </label>
+        </label> */}
       </div>
 
       {/* All Cards */}
-      <div className="md:h-[694px]  overflow-hidden h-500  md:mt-6">
-        <div className="w-full h-full overflow-auto   flex flex-col gap-y-2   md:py-1 mb-5">
+      <div className="md:h-[694px]  overflow-hidden h-[600px] mt-4 md:mt-6 ">
+        <div className="w-full h-full   flex flex-col gap-y-2   md:py-1 mb-5">
           {/* Filter Area */}
-          <div className="w-full h-full overflow-auto ">
+          <div className="w-full h-full ">
             {Number(productsDataIdEdit?.category_id) === 1 && <HeadWearAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
             {Number(productsDataIdEdit?.category_id) === 2 && <OutWearAdd addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
             {Number(productsDataIdEdit?.category_id) === 3 && <UnderAddWear addNewColor={addNewColor} onClick={onClick} stateList={productsDataIdEdit} onRefetch={onRefetch} onDeleteId={onDeleteId} handleGetSizeCheckedList={handleGetSizeCheckedList} colorsList={productsDataIdEdit?.colors} ColorModal={onHanldeColorModal} DeleteSize={onHandleDeleteSize} pivotColorId={handlePivotColorId} checkColor={checkColor} />}
