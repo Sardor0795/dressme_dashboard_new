@@ -196,7 +196,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
 
 
   return (
-    <div className="w-full max-w-[440px] md:w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
+    <div className="w-full max-w-[440px] md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
       <section
         onClick={() => {
           setOpenColorModal(false)
