@@ -307,7 +307,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
         }
     }
     return (
-        <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fitoverflow-hidden  md:my-2 `}>
+        <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  md:my-2 `}>
             <div>
                 <section
                     onClick={() => {
