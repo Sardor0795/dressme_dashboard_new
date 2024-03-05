@@ -1936,7 +1936,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             />
                                                         </div>
                                                     </div>
-                                                    <span className="text-gray-800 text-base flex-col flex items-center not-italic font-AeonikProRegular">
+                                                    <span className="text-gray-800 text-[14px] xs:text-base flex-col flex items-center not-italic font-AeonikProRegular">
                                                         <div className="flex items-center  justify-center ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
