@@ -194,9 +194,9 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
   }
 
 
-
+console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
   return (
-    <div className="w-full max-w-[440px] md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
+    <div className="w-full max-w-[440px] border border-red-500 md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
       <section
         onClick={() => {
           setOpenColorModal(false)
@@ -385,7 +385,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
       </div>
 
       {/* All Cards */}
-      <div className="md:h-[694px]  overflow-hidden h-[600px] mt-4 md:mt-6 ">
+      <div className="w-full md:h-[694px]  overflow-hidden h-[600px] mt-4 md:mt-6 ">
         <div className="w-full h-full   flex flex-col gap-y-2   md:py-1 mb-5">
           {/* Filter Area */}
           <div className="w-full h-full ">
