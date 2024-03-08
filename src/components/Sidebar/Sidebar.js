@@ -307,7 +307,7 @@ function Sidebar() {
                       <ClothesIcons colors="#c5c5c5" />
                     </span>
                     <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                      Одежда
+                    Товары
                     </span>
                   </p>
                 </div>)}
