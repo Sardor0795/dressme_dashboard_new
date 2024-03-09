@@ -462,17 +462,17 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 <div className="w-1/3 h-[1px] bg-borderColor"></div>
                             </div>
 
-                            <div className=" flex justify-center md:justify-end gap-[20px] mt-auto">
+                            <div className="w-full flex justify-between md:justify-end md:gap-[20px] mt-auto">
                                 <button
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                                    className="md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg  font-AeonikProMedium"                                >
+                                    className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg  font-AeonikProMedium"                                >
                                     Назад
                                 </button>
                                 {state?.onEditTextForm ? <button
                                     type="button"
                                     onClick={send}
-                                    className="md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg font-AeonikProMedium">
+                                    className="md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg font-AeonikProMedium">
                                     {loading ?
                                         <ClipLoader
                                             className="h-full py-[2px]"
@@ -483,7 +483,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 </button>
                                     :
                                     <span
-                                        className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
+                                        className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                                     >
                                         Сохранить
                                     </span>}
