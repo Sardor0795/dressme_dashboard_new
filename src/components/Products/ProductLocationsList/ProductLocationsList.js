@@ -380,7 +380,7 @@ export default function ProductLocationsList() {
         if (data?.status >= 200 && data?.status < 300) {
           setGetProductInfo(data?.data);
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchData();
   }, []);
@@ -494,10 +494,10 @@ export default function ProductLocationsList() {
     }
   }, [
     deleteModal ||
-      openStoreList ||
-      state?.openSelectModal ||
-      state?.openDeleteModal ||
-      statusModal,
+    openStoreList ||
+    state?.openSelectModal ||
+    state?.openDeleteModal ||
+    statusModal,
   ]);
   // border border-green-50
   return (
@@ -522,24 +522,22 @@ export default function ProductLocationsList() {
           setShopLocationIdList();
         }}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${
-           deleteModal ||
-           openStoreList ||
-           state?.openSelectModal ||
-           state?.openDeleteModal ||
-           statusModal
-             ? ""
-             : "hidden"
-         }`}
+         ${deleteModal ||
+            openStoreList ||
+            state?.openSelectModal ||
+            state?.openDeleteModal ||
+            statusModal
+            ? ""
+            : "hidden"
+          }`}
       ></section>
 
       {/*status Modal */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          statusModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setStatusModal(false)}
@@ -565,11 +563,10 @@ export default function ProductLocationsList() {
       </section>
       {/* Add the Several selected products to the new one */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.openSelectModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelectModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => {
@@ -589,7 +586,7 @@ export default function ProductLocationsList() {
           <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
-          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProRegular">
             Добавить в локацию
           </p>
         </div>
@@ -601,20 +598,33 @@ export default function ProductLocationsList() {
               ) : (
                 <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                   {state?.onErrorMessage ? (
-                    <span className="flex flex-col items-center justify-center p-2">
-                      <span className="text-2xl not-italic font-AeonikProMedium">
-                        {state?.onErrorMessage?.message}
+                    <>
+                      <span className="hidden md:flex flex-col items-center justify-center p-2">
+                        <span className="text-base md:text-2xl not-italic font-AeonikProMedium">
+                          {state?.onErrorMessage?.message}
+                        </span>
+                        <MdError size={45} color="#FF4343" />
                       </span>
-                      <MdError size={45} color="#FF4343" />
-                    </span>
+                      <span className="md:hidden flex flex-col items-center justify-center p-2">
+                        <span className="text-base md:text-2xl not-italic font-AeonikProMedium">
+                          {state?.onErrorMessage?.message}
+                        </span>
+                        <MdError size={35} color="#FF4343" />
+                      </span>
+                    </>
                   ) : (
-                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                      <FaCheck size={30} color="#009B17" />
-                    </span>
+                    <>
+                      <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                        <FaCheck size={30} color="#009B17" />
+                      </span>
+                      <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                        <FaCheck size={20} color="#009B17" />
+                      </span>
+                    </>
                   )}
                   {state?.onErrorMessage ? (
                     <div className="w-fit flex flex-col overflow-hidden item-center justify-center gap-y-2">
-                      <span className="text-[18px] not-italic font-AeonikProMedium">
+                      <span className="text-[14px] md:text-[18px] not-italic font-AeonikProMedium">
                         {state?.onErrorMessage?.problems?.message?.ru}
                       </span>
                       <div className="w-full overflow-auto flex flex-col VerticelScroll item-center justify-center gap-y-2  h-[170px]">
@@ -625,9 +635,9 @@ export default function ProductLocationsList() {
                                 key={index}
                                 className={`w-min-[200px] w-full  mx-auto my-1 flex items-center p-[2px] rounded-[4px]  justify-start gap-x-1   `}
                               >
-                                <span className="text-[16px]">{index + 1}</span>
+                                <span className="text-[14px] md:text-[16px]">{index + 1}</span>
                                 )
-                                <p className="text-black text-[16px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                <p className="text-black text-[14px] md:text-[16px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                   {item?.name_ru}
                                 </p>
                               </div>
@@ -639,7 +649,7 @@ export default function ProductLocationsList() {
                   ) : (
                     <div className="w-full flex items-center justify-center">
                       {/* <span className="text-2xl not-italic font-AeonikProMedium">{state?.onErrorTitle}</span> */}
-                      <span className="text-2xl not-italic font-AeonikProMedium">
+                      <span className="text-lg md:text-2xl not-italic font-AeonikProMedium">
                         {state?.onSuccessMessaage}
                       </span>
                     </div>
@@ -658,7 +668,7 @@ export default function ProductLocationsList() {
                           <div className="w-full cursor-pointer mt-2">
                             {item?.shop_locations?.length >= 1 && (
                               <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                                <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                                <span className=" hidden md:block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium">
                                   {" "}
                                   {item?.name}
                                 </span>
@@ -673,17 +683,16 @@ export default function ProductLocationsList() {
                                               getShopLocationId: data?.id,
                                             })
                                           }
-                                          className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${
-                                            state?.getShopLocationId == data?.id
-                                              ? "bg-LocationSelectBg bg-LocationSelectBg"
-                                              : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                                          }  `}
+                                          className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id
+                                            ? "bg-LocationSelectBg bg-LocationSelectBg"
+                                            : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                                            }  `}
                                         >
-                                          <span className="text-[17px] mr-1">
+                                          <span className="text-[14px] md:text-[17px] mr-1">
                                             {index + 1}
                                           </span>
                                           )
-                                          <span className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                          <span className="text-black text-[14px] md:text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                             {data?.address}
                                           </span>
                                         </div>
@@ -699,7 +708,7 @@ export default function ProductLocationsList() {
                         <div className="w-full cursor-pointer mt-2">
                           {item?.shop_locations?.length >= 1 && (
                             <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                              <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                              <span className=" hidden md:block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium">
                                 {" "}
                                 {item?.name}
                               </span>
@@ -713,17 +722,16 @@ export default function ProductLocationsList() {
                                         getShopLocationId: data?.id,
                                       })
                                     }
-                                    className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${
-                                      state?.getShopLocationId == data?.id
-                                        ? "bg-LocationSelectBg bg-LocationSelectBg"
-                                        : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                                    }  `}
+                                    className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${state?.getShopLocationId == data?.id
+                                      ? "bg-LocationSelectBg bg-LocationSelectBg"
+                                      : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                                      }  `}
                                   >
-                                    <span className="text-[17px]">
+                                    <span className="text-[14px] md:text-[17px]">
                                       {index + 1}
                                     </span>
                                     )
-                                    <p className="text-black text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
+                                    <p className="text-black text-[14px] md:text-[17px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
                                       {data?.address}
                                     </p>
                                   </div>
@@ -747,14 +755,14 @@ export default function ProductLocationsList() {
               <button
                 onClick={() => setState({ ...state, openSelectModal: false })}
                 type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium"
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[16px] md:text-xl not-italic font-AeonikProMedium"
               >
                 Oтмена
               </button>
               <button
                 onClick={onSendPeoductSeveralSelect}
                 type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium"
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[16px] md:text-xl not-italic font-AeonikProMedium"
               >
                 Готово
               </button>
@@ -763,11 +771,10 @@ export default function ProductLocationsList() {
       </section>
       {/* Delete Product Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.openDeleteModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openDeleteModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setState({ ...state, openDeleteModal: false })}
@@ -781,40 +788,62 @@ export default function ProductLocationsList() {
             {state?.loader && hideProductList ? (
               <PuffLoader color={"#007DCA"} size={80} loading={true} />
             ) : (
-              <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                  <FaCheck size={30} color="#009B17" />
-                </span>
-                <span className="text-base not-italic font-AeonikProMedium">
-                  {state?.onSuccessMessaage}
-                </span>
-              </div>
+              <>
+                <div className="w-full hidden md:flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={30} color="#009B17" />
+                  </span>
+                  <span className="text-base not-italic font-AeonikProMedium">
+                    {state?.onSuccessMessaage}
+                  </span>
+                </div>
+                <div className="w-full md:hidden flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={20} color="#009B17" />
+                  </span>
+                  <span className="text-[14px] not-italic font-AeonikProMedium">
+                    {state?.onSuccessMessaage}
+                  </span>
+                </div>
+              </>
             )}
           </div>
         ) : (
-          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                <DeleteIcon width={30} />
+          <>
+            <div className="hidden md:flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
               </span>
-            </span>
-            <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-              Вы уверены?
-            </span>
-          </div>
+              <span className=" text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+            <div className="md:hidden flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-[38px] rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={20} />
+                </span>
+              </span>
+              <span className=" text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+          </>
         )}
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
           <button
             onClick={() => setState({ ...state, openDeleteModal: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
             Oтмена
           </button>
           <button
             onClick={onDeleteSeveralSelect}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
             Удалить из адреса
           </button>
@@ -862,11 +891,10 @@ export default function ProductLocationsList() {
       {/* ---------------------------------------- */}
       {/* Delete Product Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          deleteModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => {
@@ -888,34 +916,56 @@ export default function ProductLocationsList() {
                 loading={true}
               />
             ) : (
-              <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                  <FaCheck size={30} color="#009B17" />
-                </span>
-                <span className="text-base not-italic font-AeonikProMedium">
-                  {SuccessMessage}
-                </span>
-              </div>
+              <>
+                <div className="w-full hidden md:flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={30} color="#009B17" />
+                  </span>
+                  <span className="text-base not-italic font-AeonikProMedium">
+                    {SuccessMessage}
+                  </span>
+                </div>
+                <div className="w-full md:hidden flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={20} color="#009B17" />
+                  </span>
+                  <span className="text-[14px] not-italic font-AeonikProMedium">
+                    {SuccessMessage}
+                  </span>
+                </div>
+              </>
             )}
           </div>
         ) : (
-          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                <DeleteIcon width={30} />
+          <>
+            <div className="hidden md:flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
               </span>
-            </span>
-            <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-              Вы уверены?
-            </span>
-          </div>
+              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+            <div className="md:hidden flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={20} />
+                </span>
+              </span>
+              <span className=" text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
+                Вы уверены?
+              </span>
+            </div>
+          </>
         )}
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
           {shopLocationIdList?.length > 1 ? (
             <button
               onClick={() => onProductDelete()}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
             >
               Удалить везде
             </button>
@@ -923,7 +973,7 @@ export default function ProductLocationsList() {
             <button
               onClick={() => setDeleteModal(false)}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
             >
               Oтмена
             </button>
@@ -931,7 +981,7 @@ export default function ProductLocationsList() {
           <button
             onClick={() => onProductAddressDelete()}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
             Удалить из адреса
           </button>
@@ -939,11 +989,10 @@ export default function ProductLocationsList() {
       </section>
       {/* Add the selected products to the new one */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          openStoreList
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[114] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openStoreList
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => {
@@ -957,7 +1006,7 @@ export default function ProductLocationsList() {
           <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
-          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProRegular">
             Добавить локацию
           </p>
         </div>
@@ -974,13 +1023,23 @@ export default function ProductLocationsList() {
               ) : (
                 <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                   {deleteMessage ? (
-                    <span className="flex items-center justify-center p-2">
-                      <MdError size={35} color="#FF4343" />
-                    </span>
+                    <>
+                      <span className=" hidden md:flex items-center justify-center p-2">
+                        <MdError size={35} color="#FF4343" />
+                      </span>
+                      <span className="md:hidden flex items-center justify-center p-2">
+                        <MdError size={25} color="#FF4343" />
+                      </span>
+                    </>
                   ) : (
-                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                      <FaCheck size={30} color="#009B17" />
-                    </span>
+                    <>
+                      <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                        <FaCheck size={30} color="#009B17" />
+                      </span>
+                      <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                        <FaCheck size={20} color="#009B17" />
+                      </span>
+                    </>
                   )}
                   <span className="text-2xl not-italic font-AeonikProMedium">
                     {deleteMessage ? deleteMessage : SuccessMessage}
@@ -997,7 +1056,7 @@ export default function ProductLocationsList() {
                       {item?.shop_locations?.length >= 1 &&
                         Number(state?.shopMarketId) === Number(item?.id) && (
                           <div className="w-full py-[10px] flex items-center flex-col justify-center rounded-[5px]">
-                            <span className=" hidden md:block text-textBlueColor text-2xl not-italic font-AeonikProMedium">
+                            <span className=" hidden md:block text-textBlueColor text-lg md:text-2xl not-italic font-AeonikProMedium">
                               {" "}
                               {item?.name}
                             </span>
@@ -1006,19 +1065,18 @@ export default function ProductLocationsList() {
                                 <div
                                   key={index}
                                   onClick={() => setGetIdShopLocation(data?.id)}
-                                  className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${
-                                    getIdShopLocation == data?.id
-                                      ? "bg-LocationSelectBg bg-LocationSelectBg"
-                                      : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
-                                  }  `}
+                                  className={`w-full my-1 flex items-center p-[2px] rounded-[4px]  justify-center gap-x-1  ${getIdShopLocation == data?.id
+                                    ? "bg-LocationSelectBg bg-LocationSelectBg"
+                                    : "hover:bg-LocationSelectBg focus:bg-LocationSelectBg"
+                                    }  `}
                                 >
                                   {data?.id !== addresNewId && (
                                     <div className="flex items-center gap-x-1 ">
-                                      <span className="text-[17px]">
+                                      <span className="text-[14px] md:text-[17px]">
                                         {index + 1}
                                       </span>
                                       )
-                                      <span className="text-black text-[17px] not-italic leading-4 flex items-center font-AeonikProMedium mr-[20px]">
+                                      <span className="text-black text-[14px] md:text-[17px] not-italic leading-4 flex items-center font-AeonikProMedium mr-[20px]">
                                         {data?.address}
                                       </span>
                                     </div>
@@ -1040,14 +1098,14 @@ export default function ProductLocationsList() {
             <button
               onClick={() => setOpenStoreList(false)}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-base md:text-xl not-italic font-AeonikProMedium"
             >
               Oтмена
             </button>
             <button
               onClick={sendAddProductById}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px] px-4  text-center text-xl not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-base md:text-xl not-italic font-AeonikProMedium"
             >
               Готово
             </button>
@@ -1152,13 +1210,8 @@ export default function ProductLocationsList() {
                   {index === 0 && (
                     <div className="flex justify-end items-center md:justify-between mx-auto ">
                       <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
-                        <p className="flex md:hidden text-sm font-AeonikProMedium">
-                          Общее количество: (
-                          {
-                            dressInfo?.getProductList?.products_locations
-                              ?.length
-                          }
-                          )
+                        <p className="flex md:hidden text-sm font-AeonikProMedium  ">
+                          Общее количество: ( {dressInfo?.getProductList?.products_locations?.length} )
                         </p>
                       </div>
                     </div>
@@ -1171,7 +1224,7 @@ export default function ProductLocationsList() {
                             <button
                               type="button"
                               onClick={() => openMarketEditPage(item?.id)}
-                              className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer"
+                              className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer   "
                             >
                               <p className=" block text-textBlueColor text-xl md:text-2xl not-italic font-AeonikProMedium">
                                 {item?.name}{" "}
@@ -1182,10 +1235,10 @@ export default function ProductLocationsList() {
                               ?.filter((location) =>
                                 searchName
                                   ? location?.products?.some((item) =>
-                                      item?.name_uz
-                                        ?.toLowerCase()
-                                        ?.includes(searchName?.toLowerCase())
-                                    )
+                                    item?.name_uz
+                                      ?.toLowerCase()
+                                      ?.includes(searchName?.toLowerCase())
+                                  )
                                   : location
                               )
                               ?.map((resData, index) => {
@@ -1198,7 +1251,7 @@ export default function ProductLocationsList() {
                                             <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                               {checkedList?.length ===
                                                 resData?.products?.length &&
-                                              addresNewId === resData?.id ? (
+                                                addresNewId === resData?.id ? (
                                                 <button
                                                   onClick={() =>
                                                     allUnCheckedList()
@@ -1234,33 +1287,22 @@ export default function ProductLocationsList() {
                                                     return (
                                                       <div>
                                                         {values?.name_ru},
-                                                        {values?.sub_regions
-                                                          ?.filter(
-                                                            (e) =>
-                                                              e?.id ==
-                                                              resData?.sub_region_id
-                                                          )
-                                                          ?.map((valueSub) => {
-                                                            return (
-                                                              <span className="px-1">
-                                                                {
-                                                                  valueSub?.name_ru
-                                                                }
-                                                                ,
-                                                              </span>
-                                                            );
-                                                          })}
+                                                        {values?.sub_regions?.filter((e) => e?.id == resData?.sub_region_id)?.map((valueSub) => {
+                                                          return (
+                                                            <span className="px-1">{valueSub?.name_ru}
+                                                              ,
+                                                            </span>
+                                                          );
+                                                        })}
                                                       </div>
                                                     );
                                                   })}
-                                                <span className="hidden md:flex items-center ml-1">
+                                                <span className="hidden md:flex items-center ml-1   ">
                                                   ({resData?.address})
                                                 </span>
-                                                {resData?.products?.length >
-                                                  1 && (
-                                                  <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
-                                                    ({resData?.products?.length}
-                                                    )
+                                                {resData?.products?.length > 1 && (
+                                                  <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
+                                                    ({resData?.products?.length})
                                                   </span>
                                                 )}
                                               </p>
@@ -1368,7 +1410,7 @@ export default function ProductLocationsList() {
                                                                   {checkedList?.includes(
                                                                     itemValue?.id
                                                                   ) &&
-                                                                  addresNewId ===
+                                                                    addresNewId ===
                                                                     Number(
                                                                       resData?.id
                                                                     ) ? (
@@ -1447,27 +1489,27 @@ export default function ProductLocationsList() {
                                                                   {itemValue
                                                                     ?.cost
                                                                     ?.discount_price >
-                                                                  999
+                                                                    999
                                                                     ? Number(
-                                                                        itemValue
-                                                                          ?.cost
-                                                                          ?.discount_price
-                                                                      )
-                                                                        ?.toLocaleString()
-                                                                        ?.split(
-                                                                          ","
-                                                                        )
-                                                                        .join(
-                                                                          " "
-                                                                        )
-                                                                    : itemValue
+                                                                      itemValue
                                                                         ?.cost
-                                                                        ?.discount_price ||
+                                                                        ?.discount_price
+                                                                    )
+                                                                      ?.toLocaleString()
+                                                                      ?.split(
+                                                                        ","
+                                                                      )
+                                                                      .join(
+                                                                        " "
+                                                                      )
+                                                                    : itemValue
+                                                                      ?.cost
+                                                                      ?.discount_price ||
                                                                       itemValue
                                                                         ?.cost
                                                                         ?.price >
-                                                                        999
-                                                                    ? Number(
+                                                                      999
+                                                                      ? Number(
                                                                         itemValue
                                                                           ?.cost
                                                                           ?.price
@@ -1479,7 +1521,7 @@ export default function ProductLocationsList() {
                                                                         .join(
                                                                           " "
                                                                         )
-                                                                    : itemValue
+                                                                      : itemValue
                                                                         ?.cost
                                                                         ?.price}
                                                                   <span className="ml-[6px] text-[14px]">
@@ -1499,10 +1541,7 @@ export default function ProductLocationsList() {
                                                                     Подробнее
                                                                   </button>
                                                                 </td>
-                                                                {item
-                                                                  ?.shop_locations
-                                                                  ?.length >
-                                                                1 ? (
+                                                                {item?.shop_locations?.length > 1 ? (
                                                                   <td
                                                                     className={`w-[9%] h-full  flex items-center justify-center `}
                                                                   >
@@ -1568,49 +1607,49 @@ export default function ProductLocationsList() {
                                                                 </td>
                                                                 {itemValue?.status ===
                                                                   "approved" && (
-                                                                  <td className="w-[10%] h-fit  flex items-center justify-center  ">
-                                                                    <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </td>
-                                                                )}
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center  ">
+                                                                      <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </td>
+                                                                  )}
                                                                 {itemValue?.status ===
                                                                   "declined" && (
-                                                                  <td
-                                                                    onClick={() =>
-                                                                      onHandleStatus(
-                                                                        itemValue?.id,
-                                                                        resData?.id,
-                                                                        resData?.shop_id
-                                                                      )
-                                                                    }
-                                                                    className="w-[10%] h-fit cursor-pointer flex items-center  justify-center"
-                                                                  >
-                                                                    <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </td>
-                                                                )}
+                                                                    <td
+                                                                      onClick={() =>
+                                                                        onHandleStatus(
+                                                                          itemValue?.id,
+                                                                          resData?.id,
+                                                                          resData?.shop_id
+                                                                        )
+                                                                      }
+                                                                      className="w-[10%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                    >
+                                                                      <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </td>
+                                                                  )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
-                                                                  <td className="w-[10%] h-fit  flex items-center justify-center ">
-                                                                    <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </td>
-                                                                )}
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center ">
+                                                                      <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </td>
+                                                                  )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
-                                                                  <td className="w-[10%] h-fit  flex items-center justify-center   ">
-                                                                    <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </td>
-                                                                )}
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center   ">
+                                                                      <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </td>
+                                                                  )}
                                                               </tr>
                                                             </tbody>
                                                           </table>
@@ -1670,75 +1709,75 @@ export default function ProductLocationsList() {
                                                                 </div>
                                                                 {itemValue?.status ===
                                                                   "approved" && (
-                                                                  <div className="w-[30%] h-fit  flex items-center justify-center  ">
-                                                                    <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </div>
-                                                                )}
+                                                                    <div className="w-[30%] h-fit  flex items-center justify-center  ">
+                                                                      <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </div>
+                                                                  )}
                                                                 {itemValue?.status ===
                                                                   "declined" && (
-                                                                  <div
-                                                                    onClick={() =>
-                                                                      onHandleStatus(
-                                                                        itemValue?.id,
-                                                                        resData?.id,
-                                                                        resData?.shop_id
-                                                                      )
-                                                                    }
-                                                                    className="w-[30%] h-fit cursor-pointer flex items-center  justify-center"
-                                                                  >
-                                                                    <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </div>
-                                                                )}
+                                                                    <div
+                                                                      onClick={() =>
+                                                                        onHandleStatus(
+                                                                          itemValue?.id,
+                                                                          resData?.id,
+                                                                          resData?.shop_id
+                                                                        )
+                                                                      }
+                                                                      className="w-[30%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                    >
+                                                                      <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </div>
+                                                                  )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
-                                                                  <div className="w-[30%] h-fit  flex items-center justify-center ">
-                                                                    <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </div>
-                                                                )}
+                                                                    <div className="w-[30%] h-fit  flex items-center justify-center ">
+                                                                      <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </div>
+                                                                  )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
-                                                                  <div className="w-[30%] h-fit  flex items-center justify-center   ">
-                                                                    <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                      {itemValue?.status ||
-                                                                        "status"}
-                                                                    </span>
-                                                                  </div>
-                                                                )}
+                                                                    <div className="w-[30%] h-fit  flex items-center justify-center   ">
+                                                                      <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {itemValue?.status ||
+                                                                          "status"}
+                                                                      </span>
+                                                                    </div>
+                                                                  )}
                                                                 {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
                                                                 <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                   {itemValue
                                                                     ?.cost
                                                                     ?.discount_price >
-                                                                  999
+                                                                    999
                                                                     ? Number(
-                                                                        itemValue
-                                                                          ?.cost
-                                                                          ?.discount_price
-                                                                      )
-                                                                        ?.toLocaleString()
-                                                                        ?.split(
-                                                                          ","
-                                                                        )
-                                                                        .join(
-                                                                          " "
-                                                                        )
-                                                                    : itemValue
+                                                                      itemValue
                                                                         ?.cost
-                                                                        ?.discount_price ||
+                                                                        ?.discount_price
+                                                                    )
+                                                                      ?.toLocaleString()
+                                                                      ?.split(
+                                                                        ","
+                                                                      )
+                                                                      .join(
+                                                                        " "
+                                                                      )
+                                                                    : itemValue
+                                                                      ?.cost
+                                                                      ?.discount_price ||
                                                                       itemValue
                                                                         ?.cost
                                                                         ?.price >
-                                                                        999
-                                                                    ? Number(
+                                                                      999
+                                                                      ? Number(
                                                                         itemValue
                                                                           ?.cost
                                                                           ?.price
@@ -1750,7 +1789,7 @@ export default function ProductLocationsList() {
                                                                         .join(
                                                                           " "
                                                                         )
-                                                                    : itemValue
+                                                                      : itemValue
                                                                         ?.cost
                                                                         ?.price}
                                                                   <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
@@ -1761,73 +1800,76 @@ export default function ProductLocationsList() {
                                                             </div>
                                                             {moreMobile ==
                                                               itemValue?.id && (
-                                                              <div className="mb-6">
-                                                                <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                                  <div className="w-[40%] flex items-center  ">
-                                                                    Артикул
+                                                                <div className="mb-6">
+                                                                  <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                                    <div className="w-[40%] flex items-center  ">
+                                                                      Артикул
+                                                                    </div>
+                                                                    <div className="w-[30%] flex items-center  ">
+                                                                      Тип
+                                                                    </div>
+                                                                    <div className="w-[30%] flex items-center  ">
+                                                                      {" "}
+                                                                      Дата
+                                                                    </div>
                                                                   </div>
-                                                                  <div className="w-[30%] flex items-center  ">
-                                                                    Тип
-                                                                  </div>
-                                                                  <div className="w-[30%] flex items-center  ">
-                                                                    {" "}
-                                                                    Дата
+
+                                                                  <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                                                    <div className="w-[40%] break-all  overflow-hidden  ">
+                                                                      <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                        {itemValue?.sku ||
+                                                                          "sku"}
+                                                                      </p>
+                                                                    </div>
+                                                                    {getProductInfo?.types &&
+                                                                      getProductInfo?.types
+                                                                        ?.filter(
+                                                                          (e) =>
+                                                                            e?.id ==
+                                                                            itemValue?.type_id
+                                                                        )
+                                                                        ?.map(
+                                                                          (
+                                                                            valueType,
+                                                                            index
+                                                                          ) => {
+                                                                            return (
+                                                                              <td
+                                                                                key={
+                                                                                  index
+                                                                                }
+                                                                                className="w-[30%] h-full  flex items-center justify-center "
+                                                                              >
+                                                                                {valueType?.name_ru ||
+                                                                                  "type_id"}
+                                                                              </td>
+                                                                            );
+                                                                          }
+                                                                        )}
+                                                                    {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
+                                                                    <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                      {itemValue?.created_at ||
+                                                                        "created_at"}
+                                                                    </div>
                                                                   </div>
                                                                 </div>
+                                                              )}
 
-                                                                <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                  <div className="w-[40%] break-all  overflow-hidden  ">
-                                                                    <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                      {itemValue?.sku ||
-                                                                        "sku"}
-                                                                    </p>
-                                                                  </div>
-                                                                  {getProductInfo?.types &&
-                                                                    getProductInfo?.types
-                                                                      ?.filter(
-                                                                        (e) =>
-                                                                          e?.id ==
-                                                                          itemValue?.type_id
-                                                                      )
-                                                                      ?.map(
-                                                                        (
-                                                                          valueType,
-                                                                          index
-                                                                        ) => {
-                                                                          return (
-                                                                            <td
-                                                                              key={
-                                                                                index
-                                                                              }
-                                                                              className="w-[30%] h-full  flex items-center justify-center "
-                                                                            >
-                                                                              {valueType?.name_ru ||
-                                                                                "type_id"}
-                                                                            </td>
-                                                                          );
-                                                                        }
-                                                                      )}
-                                                                  {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
-                                                                  <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                    {itemValue?.created_at ||
-                                                                      "created_at"}
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            )}
-
-                                                            <div className="flex items-center justify-between">
-                                                              <button
-                                                                onClick={() =>
-                                                                  goMapWear(
-                                                                    itemValue?.city
-                                                                  )
-                                                                }
-                                                                className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                                              >
-                                                                Добавить в
-                                                                локацию
-                                                              </button>
+                                                            <div className={`flex items-center  ${item?.shop_locations?.length > 1 ? "justify-between" : "justify-center"} `}>
+                                                              {item?.shop_locations?.length > 1 ?
+                                                                <button
+                                                                  onClick={() => {
+                                                                    setOpenStoreList(true)
+                                                                    addByLocation(
+                                                                      itemValue?.id,
+                                                                      resData?.id,
+                                                                      resData?.shop_id
+                                                                    );
+                                                                  }}
+                                                                  className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                                                >
+                                                                  Добавить в локацию
+                                                                </button> : null}
                                                               <button
                                                                 onClick={() =>
                                                                   goProductDetailEdit(
@@ -1858,7 +1900,7 @@ export default function ProductLocationsList() {
                                                                 {checkedList?.includes(
                                                                   itemValue?.id
                                                                 ) &&
-                                                                addresNewId ===
+                                                                  addresNewId ===
                                                                   Number(
                                                                     resData?.id
                                                                   ) ? (
@@ -1877,7 +1919,7 @@ export default function ProductLocationsList() {
                                                                 </span>
                                                               </div>
                                                               {moreMobile !==
-                                                              itemValue?.id ? (
+                                                                itemValue?.id ? (
                                                                 <button
                                                                   onClick={() =>
                                                                     setMoreMobile(
@@ -1960,10 +2002,10 @@ export default function ProductLocationsList() {
                             ?.filter((location) =>
                               searchName
                                 ? location?.products?.some((item) =>
-                                    item?.name_uz
-                                      ?.toLowerCase()
-                                      ?.includes(searchName?.toLowerCase())
-                                  )
+                                  item?.name_uz
+                                    ?.toLowerCase()
+                                    ?.includes(searchName?.toLowerCase())
+                                )
                                 : location
                             )
                             ?.map((resData, index) => {
@@ -1976,7 +2018,7 @@ export default function ProductLocationsList() {
                                           <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                             {checkedList?.length ===
                                               resData?.products?.length &&
-                                            addresNewId === resData?.id ? (
+                                              addresNewId === resData?.id ? (
                                               <button
                                                 onClick={() =>
                                                   allUnCheckedList()
@@ -2035,10 +2077,10 @@ export default function ProductLocationsList() {
                                               </span>
                                               {resData?.products?.length >
                                                 1 && (
-                                                <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
-                                                  ({resData?.products?.length})
-                                                </span>
-                                              )}
+                                                  <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
+                                                    ({resData?.products?.length})
+                                                  </span>
+                                                )}
                                             </p>
                                           </div>
                                           <button
@@ -2088,7 +2130,7 @@ export default function ProductLocationsList() {
                                                 </th>
                                                 <th className="w-[10%] h-full flex items-center justify-center"></th>
                                                 {item?.shop_locations?.length >
-                                                1 ? (
+                                                  1 ? (
                                                   <th className="w-[9%] h-full flex items-center justify-center">
                                                     Добавить
                                                   </th>
@@ -2143,7 +2185,7 @@ export default function ProductLocationsList() {
                                                                 {checkedList?.includes(
                                                                   itemValue?.id
                                                                 ) &&
-                                                                addresNewId ===
+                                                                  addresNewId ===
                                                                   Number(
                                                                     resData?.id
                                                                   ) ? (
@@ -2222,25 +2264,25 @@ export default function ProductLocationsList() {
                                                               <td className="w-[10%] h-full  flex items-center justify-center ">
                                                                 {itemValue?.cost
                                                                   ?.discount_price >
-                                                                999
+                                                                  999
                                                                   ? Number(
-                                                                      itemValue
-                                                                        ?.cost
-                                                                        ?.discount_price
-                                                                    )
-                                                                      ?.toLocaleString()
-                                                                      ?.split(
-                                                                        ","
-                                                                      )
-                                                                      .join(" ")
-                                                                  : itemValue
+                                                                    itemValue
                                                                       ?.cost
-                                                                      ?.discount_price ||
+                                                                      ?.discount_price
+                                                                  )
+                                                                    ?.toLocaleString()
+                                                                    ?.split(
+                                                                      ","
+                                                                    )
+                                                                    .join(" ")
+                                                                  : itemValue
+                                                                    ?.cost
+                                                                    ?.discount_price ||
                                                                     itemValue
                                                                       ?.cost
                                                                       ?.price >
-                                                                      999
-                                                                  ? Number(
+                                                                    999
+                                                                    ? Number(
                                                                       itemValue
                                                                         ?.cost
                                                                         ?.price
@@ -2250,7 +2292,7 @@ export default function ProductLocationsList() {
                                                                         ","
                                                                       )
                                                                       .join(" ")
-                                                                  : itemValue
+                                                                    : itemValue
                                                                       ?.cost
                                                                       ?.price}
                                                                 <span className="ml-[6px] text-[14px]">
@@ -2334,49 +2376,49 @@ export default function ProductLocationsList() {
                                                               </td>
                                                               {itemValue?.status ===
                                                                 "approved" && (
-                                                                <td className="w-[10%] h-fit  flex items-center justify-center  ">
-                                                                  <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </td>
-                                                              )}
+                                                                  <td className="w-[10%] h-fit  flex items-center justify-center  ">
+                                                                    <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </td>
+                                                                )}
                                                               {itemValue?.status ===
                                                                 "declined" && (
-                                                                <td
-                                                                  onClick={() =>
-                                                                    onHandleStatus(
-                                                                      itemValue?.id,
-                                                                      resData?.id,
-                                                                      resData?.shop_id
-                                                                    )
-                                                                  }
-                                                                  className="w-[10%] h-fit cursor-pointer flex items-center  justify-center"
-                                                                >
-                                                                  <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </td>
-                                                              )}
+                                                                  <td
+                                                                    onClick={() =>
+                                                                      onHandleStatus(
+                                                                        itemValue?.id,
+                                                                        resData?.id,
+                                                                        resData?.shop_id
+                                                                      )
+                                                                    }
+                                                                    className="w-[10%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                  >
+                                                                    <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </td>
+                                                                )}
                                                               {itemValue?.status ===
                                                                 "pending" && (
-                                                                <td className="w-[10%] h-fit  flex items-center justify-center ">
-                                                                  <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </td>
-                                                              )}
+                                                                  <td className="w-[10%] h-fit  flex items-center justify-center ">
+                                                                    <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </td>
+                                                                )}
                                                               {itemValue?.status ===
                                                                 "updated" && (
-                                                                <td className="w-[10%] h-fit  flex items-center justify-center   ">
-                                                                  <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </td>
-                                                              )}
+                                                                  <td className="w-[10%] h-fit  flex items-center justify-center   ">
+                                                                    <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </td>
+                                                                )}
                                                             </tr>
                                                           </tbody>
                                                         </table>
@@ -2434,72 +2476,72 @@ export default function ProductLocationsList() {
                                                               </div>
                                                               {itemValue?.status ===
                                                                 "approved" && (
-                                                                <div className="w-[30%] h-fit  flex items-center justify-center  ">
-                                                                  <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </div>
-                                                              )}
+                                                                  <div className="w-[30%] h-fit  flex items-center justify-center  ">
+                                                                    <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </div>
+                                                                )}
                                                               {itemValue?.status ===
                                                                 "declined" && (
-                                                                <div
-                                                                  onClick={() =>
-                                                                    onHandleStatus(
-                                                                      itemValue?.id,
-                                                                      resData?.id,
-                                                                      resData?.shop_id
-                                                                    )
-                                                                  }
-                                                                  className="w-[30%] h-fit cursor-pointer flex items-center  justify-center"
-                                                                >
-                                                                  <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </div>
-                                                              )}
+                                                                  <div
+                                                                    onClick={() =>
+                                                                      onHandleStatus(
+                                                                        itemValue?.id,
+                                                                        resData?.id,
+                                                                        resData?.shop_id
+                                                                      )
+                                                                    }
+                                                                    className="w-[30%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                  >
+                                                                    <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </div>
+                                                                )}
                                                               {itemValue?.status ===
                                                                 "pending" && (
-                                                                <div className="w-[30%] h-fit  flex items-center justify-center ">
-                                                                  <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </div>
-                                                              )}
+                                                                  <div className="w-[30%] h-fit  flex items-center justify-center ">
+                                                                    <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </div>
+                                                                )}
                                                               {itemValue?.status ===
                                                                 "updated" && (
-                                                                <div className="w-[30%] h-fit  flex items-center justify-center   ">
-                                                                  <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                    {itemValue?.status ||
-                                                                      "status"}
-                                                                  </span>
-                                                                </div>
-                                                              )}
+                                                                  <div className="w-[30%] h-fit  flex items-center justify-center   ">
+                                                                    <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                      {itemValue?.status ||
+                                                                        "status"}
+                                                                    </span>
+                                                                  </div>
+                                                                )}
                                                               {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
                                                               <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                 {itemValue?.cost
                                                                   ?.discount_price >
-                                                                999
+                                                                  999
                                                                   ? Number(
-                                                                      itemValue
-                                                                        ?.cost
-                                                                        ?.discount_price
-                                                                    )
-                                                                      ?.toLocaleString()
-                                                                      ?.split(
-                                                                        ","
-                                                                      )
-                                                                      .join(" ")
-                                                                  : itemValue
+                                                                    itemValue
                                                                       ?.cost
-                                                                      ?.discount_price ||
+                                                                      ?.discount_price
+                                                                  )
+                                                                    ?.toLocaleString()
+                                                                    ?.split(
+                                                                      ","
+                                                                    )
+                                                                    .join(" ")
+                                                                  : itemValue
+                                                                    ?.cost
+                                                                    ?.discount_price ||
                                                                     itemValue
                                                                       ?.cost
                                                                       ?.price >
-                                                                      999
-                                                                  ? Number(
+                                                                    999
+                                                                    ? Number(
                                                                       itemValue
                                                                         ?.cost
                                                                         ?.price
@@ -2509,7 +2551,7 @@ export default function ProductLocationsList() {
                                                                         ","
                                                                       )
                                                                       .join(" ")
-                                                                  : itemValue
+                                                                    : itemValue
                                                                       ?.cost
                                                                       ?.price}
                                                                 <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
@@ -2520,72 +2562,76 @@ export default function ProductLocationsList() {
                                                           </div>
                                                           {moreMobile ==
                                                             itemValue?.id && (
-                                                            <div className="mb-6">
-                                                              <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                                <div className="w-[40%] flex items-center  ">
-                                                                  Артикул
+                                                              <div className="mb-6">
+                                                                <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                                  <div className="w-[40%] flex items-center  ">
+                                                                    Артикул
+                                                                  </div>
+                                                                  <div className="w-[30%] flex items-center  ">
+                                                                    Тип
+                                                                  </div>
+                                                                  <div className="w-[30%] flex items-center  ">
+                                                                    {" "}
+                                                                    Дата
+                                                                  </div>
                                                                 </div>
-                                                                <div className="w-[30%] flex items-center  ">
-                                                                  Тип
-                                                                </div>
-                                                                <div className="w-[30%] flex items-center  ">
-                                                                  {" "}
-                                                                  Дата
+
+                                                                <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                                                  <div className="w-[40%] break-all  overflow-hidden  ">
+                                                                    <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                      {itemValue?.sku ||
+                                                                        "sku"}
+                                                                    </p>
+                                                                  </div>
+                                                                  {getProductInfo?.types &&
+                                                                    getProductInfo?.types
+                                                                      ?.filter(
+                                                                        (e) =>
+                                                                          e?.id ==
+                                                                          itemValue?.type_id
+                                                                      )
+                                                                      ?.map(
+                                                                        (
+                                                                          valueType,
+                                                                          index
+                                                                        ) => {
+                                                                          return (
+                                                                            <td
+                                                                              key={
+                                                                                index
+                                                                              }
+                                                                              className="w-[30%] h-full  flex items-center justify-center "
+                                                                            >
+                                                                              {valueType?.name_ru ||
+                                                                                "type_id"}
+                                                                            </td>
+                                                                          );
+                                                                        }
+                                                                      )}
+                                                                  {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
+                                                                  <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                    {itemValue?.created_at ||
+                                                                      "created_at"}
+                                                                  </div>
                                                                 </div>
                                                               </div>
+                                                            )}
 
-                                                              <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                <div className="w-[40%] break-all  overflow-hidden  ">
-                                                                  <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                    {itemValue?.sku ||
-                                                                      "sku"}
-                                                                  </p>
-                                                                </div>
-                                                                {getProductInfo?.types &&
-                                                                  getProductInfo?.types
-                                                                    ?.filter(
-                                                                      (e) =>
-                                                                        e?.id ==
-                                                                        itemValue?.type_id
-                                                                    )
-                                                                    ?.map(
-                                                                      (
-                                                                        valueType,
-                                                                        index
-                                                                      ) => {
-                                                                        return (
-                                                                          <td
-                                                                            key={
-                                                                              index
-                                                                            }
-                                                                            className="w-[30%] h-full  flex items-center justify-center "
-                                                                          >
-                                                                            {valueType?.name_ru ||
-                                                                              "type_id"}
-                                                                          </td>
-                                                                        );
-                                                                      }
-                                                                    )}
-                                                                {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
-                                                                <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                  {itemValue?.created_at ||
-                                                                    "created_at"}
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                          )}
-
-                                                          <div className="flex items-center justify-between">
-                                                            <button
-                                                              onClick={() =>
-                                                                goMapWear(
-                                                                  itemValue?.city
-                                                                )
-                                                              }
-                                                              className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
-                                                            >
-                                                              Добавить в локацию
-                                                            </button>
+                                                          <div className={`flex items-center  ${item?.shop_locations?.length > 1 ? "justify-between" : "justify-center"} `}>
+                                                            {item?.shop_locations?.length > 1 ?
+                                                              <button
+                                                                onClick={() => {
+                                                                  setOpenStoreList(true)
+                                                                  addByLocation(
+                                                                    itemValue?.id,
+                                                                    resData?.id,
+                                                                    resData?.shop_id
+                                                                  );
+                                                                }}
+                                                                className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                                              >
+                                                                Добавить в локацию
+                                                              </button> : null}
                                                             <button
                                                               onClick={() =>
                                                                 goProductDetailEdit(
@@ -2616,7 +2662,7 @@ export default function ProductLocationsList() {
                                                               {checkedList?.includes(
                                                                 itemValue?.id
                                                               ) &&
-                                                              addresNewId ===
+                                                                addresNewId ===
                                                                 Number(
                                                                   resData?.id
                                                                 ) ? (
@@ -2635,7 +2681,7 @@ export default function ProductLocationsList() {
                                                               </span>
                                                             </div>
                                                             {moreMobile !==
-                                                            itemValue?.id ? (
+                                                              itemValue?.id ? (
                                                               <button
                                                                 onClick={() =>
                                                                   setMoreMobile(

@@ -13,13 +13,7 @@ import {
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import ClothingSection from "./DetailsForMobile/ClothesSection/ClothingSection";
-import SubClothingSection from "./DetailsForMobile/SubClothesSection/SubClothingSection";
-import DressSeason from "./DetailsForMobile/DressSeason/DressSeason";
-import ColourGroup from "./DetailsForMobile/ColourList/ColourGroup";
-import GenderList from "./DetailsForMobile/GenderList/GenderList";
-import DressType from "./DetailsForMobile/DressType/DressType";
-import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
+ 
 import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
@@ -28,8 +22,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
-import CategoriesMobileDropUp from "./DetailsForMobile/CategoriesMobileDropUp/CategoriesMobileDropUp";
-import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
+ import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
@@ -510,7 +503,7 @@ const AddingProduct = () => {
       state?.GenderModal ||
       state?.MakeCountryModal ||
       state?.SubClothingSection ||
-      allSizeModalShow||
+      allSizeModalShow ||
       addSizesMobileToggle
     ) {
       document.body.style.overflow = "hidden";
@@ -1053,11 +1046,11 @@ const AddingProduct = () => {
             //   }`}
             <div className={`
             ${screenSize > 768 ?
-                'max-w-[650px] w-full fixed z-[221]  md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto'
+                'max-w-[440px] md:max-w-[650px] w-full fixed z-[221]  md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto'
                 :
                 `${state?.showColor ? " bottom-0 md:flex flex-col"
                   : "md:hidden bottom-[-1500px] z-[-10]"
-                } max-w-[650px] w-full fixed z-[221] duration-300  md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto`}
+                } max-w-[440px] md:max-w-[650px] w-full fixed z-[221] duration-300  md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto`}
             `}>
               {/* </div> */}
               <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-t-md  md:rounded-md shadow-lg">
@@ -1159,16 +1152,28 @@ const AddingProduct = () => {
                     loading={true}
                   />
                   :
-                  <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
-                    {errorMessage ?
-                      <span className="flex items-center justify-center p-2">
-                        <MdError size={35} color="#FF4343" />
-                      </span> :
-                      <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                        <FaCheck size={30} color="#009B17" />
-                      </span>}
-                    <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
-                  </div>
+                  <>
+                    <div className="w-full h-full hidden md:flex gap-y-3 flex-col items-center justify-center ">
+                      {errorMessage ?
+                        <span className="flex items-center justify-center p-2">
+                          <MdError size={35} color="#FF4343" />
+                        </span> :
+                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                          <FaCheck size={30} color="#009B17" />
+                        </span>}
+                      <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                    </div>
+                    <div className="w-full h-full md:hidden flex gap-y-3 flex-col items-center justify-center ">
+                      {errorMessage ?
+                        <span className="flex items-center justify-center p-2">
+                          <MdError size={25} color="#FF4343" />
+                        </span> :
+                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                          <FaCheck size={20} color="#009B17" />
+                        </span>}
+                      <span className="text-lg not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                    </div>
+                  </>
                 }
               </div>
               :
@@ -1181,7 +1186,7 @@ const AddingProduct = () => {
                 <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
                   Вы уверены?
                 </span>
-                <span className=" text-[#a2a2a2] text-base xs:text-lg not-italic font-AeonikProMedium text-center">
+                <span className=" text-[#a2a2a2] text-[14px] xs:text-lg not-italic font-AeonikProMedium text-center">
                   Если вы удалите цвет, то удалятся все фото и размеры выбранного цвета!
                 </span>
               </div>}
@@ -1190,13 +1195,13 @@ const AddingProduct = () => {
               <button
                 onClick={() => setColorDelete(false)}
                 type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium">
                 Oтмена
               </button>
               <button
                 onClick={() => onHandleDeleteColor()}
                 type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium">
                 Удалить
               </button>
             </div>
@@ -2422,7 +2427,7 @@ const AddingProduct = () => {
                   </div>
                   <div className="w-1/3 h-[1px] bg-borderColor"></div>
                 </div>
-                <div className=" flex items-center md:justify-end justify-between md:gap-x-4 mr-4">
+                <div className=" flex items-center md:justify-end justify-between md:gap-x-4 md:mr-4">
                   {
                     lastElement ?
                       lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
@@ -2437,7 +2442,7 @@ const AddingProduct = () => {
                               :
                               () => onHandleAddImage()
                           }
-                          className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
                           {state?.sendingLoader ?
                             <ClipLoader
@@ -2449,7 +2454,7 @@ const AddingProduct = () => {
                         </button>
                         :
                         <span
-                          className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
                         </span>
@@ -2460,7 +2465,7 @@ const AddingProduct = () => {
                           onClick={
                             productUpdate
                           }
-                          className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
                           {state?.sendingLoader ?
                             <ClipLoader
@@ -2472,7 +2477,7 @@ const AddingProduct = () => {
                         </button>
                         :
                         <span
-                          className="w-[45%] select-none cursor-not-allowed  md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
+                          className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
                           Сохранить
                         </span>
@@ -2480,7 +2485,7 @@ const AddingProduct = () => {
                   <button
                     type="button"
                     onClick={handleNextPage}
-                    className="w-[45%] md:w-[200px] h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
                     Продолжить
                   </button>
