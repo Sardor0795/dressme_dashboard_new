@@ -552,7 +552,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                 </div>
                             </div>
                             {/* ----for mobile device---- */}
-
+ 
                             <div
                                 className={`w-full border p-1 gap-y-4 h-fit md:hidden flex flex-col items-center justify-center   rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                             >
