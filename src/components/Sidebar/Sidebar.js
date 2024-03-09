@@ -19,6 +19,7 @@ import { SellerMainData } from "../../hook/SellerUserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HelperData } from "../../hook/HelperDataStore";
+import { useTranslation } from "react-i18next";
 function Sidebar() {
   const { request } = useHttp()
   const [dressInfo] = useContext(dressMainData);
@@ -26,6 +27,8 @@ function Sidebar() {
   const [selectLang, setselectLang] = useState(1);
   const [sellerInformation] = useContext(SellerMainData);
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+
+  const { i18n, t } = useTranslation("sidebar");
 
   const LanguageList = [
     { id: 1, type: "Русский", icons: RussianFlag },
