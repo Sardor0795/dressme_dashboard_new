@@ -34,6 +34,8 @@ import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import axios from "axios";
+import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
+// import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -263,8 +265,13 @@ const AddingProduct = () => {
   // ------------------------------------------------------------------------ 
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
+  const [addSizesMobileToggle, setAddSizesMobileToggle] = useState(false);
   const toggleAllSizeModalShow = React.useCallback(
     () => setAllSizeModalShow(false),
+    []
+  );
+  const toggleAddSizeModalShow = React.useCallback(
+    () => setAddSizesMobileToggle(false),
     []
   );
 
@@ -503,7 +510,8 @@ const AddingProduct = () => {
       state?.GenderModal ||
       state?.MakeCountryModal ||
       state?.SubClothingSection ||
-      allSizeModalShow
+      allSizeModalShow||
+      addSizesMobileToggle
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -519,7 +527,8 @@ const AddingProduct = () => {
     state?.GenderModal,
     state?.MakeCountryModal,
     state?.SubClothingSection,
-    allSizeModalShow
+    allSizeModalShow,
+    addSizesMobileToggle
   ]);
   function onHandleImageAdd(childData) {
     setState({
@@ -1007,6 +1016,7 @@ const AddingProduct = () => {
                 openSelect: false,
               })
               setAllSizeModalShow(false)
+              setAddSizesMobileToggle(false)
               setOpenCategories(false)
               setColorDelete(false)
 
@@ -1024,6 +1034,7 @@ const AddingProduct = () => {
                 state?.openSelect ||
                 state?.MakeCountryModal ||
                 allSizeModalShow ||
+                addSizesMobileToggle ||
                 openCategories ||
                 colorDelete
                 ? ""
@@ -1241,7 +1252,7 @@ const AddingProduct = () => {
               <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
             )}{" "}
           </section>
-          {/* ----Desktop---- */}
+          {/* ----Mobile---- */}
           <section
             className={`fixed z-[115] md:hidden  w-full h-fit md:m-auto  cursor-pointer flex items-center justify-center    md:left-0 md:right-0  left-[50%] right-[50%] translate-x-[-50%] md:translate-x-auto md:inset-0 duration-300 overflow-hidden ${allSizeModalShow ? "bottom-0 md:bottom-auto" : "hidden"
               }`}
@@ -1249,6 +1260,13 @@ const AddingProduct = () => {
             {(
               <AllSizeModalEdit ThisState={state} newProductId={newProductId} lastElement={lastElement} allColor={dressInfo?.getProductInfo?.colors} AllCheckedSizeList={AllCheckedSizeList} onClick={toggleAllSizeModalShow} onRefetch={refetch} productsDataIdEdit={productsDataIdEdit} />
             )}{" "}
+          </section>
+          {/* ----Mobile---- */}
+          <section
+            className={`fixed z-[115] md:hidden  w-full h-fit md:m-auto  cursor-pointer flex items-center justify-center    md:left-0 md:right-0  left-[50%] right-[50%] translate-x-[-50%] md:translate-x-auto md:inset-0 duration-300 overflow-hidden ${addSizesMobileToggle ? "bottom-0 md:bottom-auto" : "hidden"
+              }`}
+          >
+            <AddSizesMobile typeId={state?.category_Id} newProductId={newProductId} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} onClick={toggleAddSizeModalShow} />
           </section>
           <div className="absolute top-[0px] hidden md:flex items-center justify-center flex-col mr-[50px]">
             <div className="w-[45px] h-[45px] font-AeonikProMedium border-2 flex items-center justify-center bg-textBlueColor border-textBlueColor rounded-full text-2xl text-white mb-[5px]">
@@ -2346,9 +2364,12 @@ const AddingProduct = () => {
                               <span>Добавить размер</span>
                             </div>
                             :
-                            <button className={` w-full ${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[10px] h-[38px] `}>
-                              <AddSize typeId={state?.category_Id} newProductId={newProductId} onRefetch={refetch} handleCallBack={CallBackHeadWear} clearSize={state?.clearAddSize} productsDataIdEdit={productsDataIdEdit} colorListForTest={colorListForTest} selectColorID={selectColorID} />
-                            </button>}
+                            <button
+                              onClick={() => setAddSizesMobileToggle(true)}
+                              className={` w-full  ${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[10px] h-[38px] text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
+                              Добавить размер
+                            </button>
+                          }
                         </div>
 
                       </div>
