@@ -194,9 +194,8 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
   }
 
 
-console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
   return (
-    <div className="w-full max-w-[440px] border border-red-500 md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
+    <div className="w-full max-w-[440px]   md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">
       <section
         onClick={() => {
           setOpenColorModal(false)
@@ -210,7 +209,7 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
       {/* Color Modal */}
       <div
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-2 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between border-b border-searchBgColor">
           <p className="pl-2">
             Выберите цвет
           </p>
@@ -223,8 +222,9 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
             }}
           >
             <MenuCloseIcons colors={"#a2a2a2"} />
-          </button></div>
-        <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6 ">
+          </button>
+        </div>
+        <div className="w-full px-2 py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6 ">
           {lastElement ?
 
             null
@@ -235,7 +235,7 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
                   key={data?.id}
                   className={`flex flex-col items-center justify-center `}>
                   <div
-                    className={` relative rounded-[12px] overflow-hidden flex items-center justify-center  w-[65px] h-[40px] bg-[${data.hex
+                    className={` relative rounded-full md:rounded-[12px] overflow-hidden flex items-center justify-center  w-[30px] h-[30px] md:w-[65px] md:h-[40px] bg-[${data.hex
                       }] cursor-pointer ${data?.id == 2
                         ? "border border-setTexOpacity flex items-center justify-center"
                         : ""
@@ -255,7 +255,7 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
                     </div>
                   </div>
                   <span
-                    className={`text-black text-center text-[14px] not-italic font-AeonikProRegular  `}
+                    className={`text-black text-center text-[12px] ll:text-[14px] not-italic font-AeonikProRegular  `}
                   >
                     {data?.name_ru}
                   </span>
@@ -270,7 +270,7 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
             <button
               type="button"
               onClick={onHandleCopyAddSize}
-              className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+              className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-base md:text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
               {sendingLoader ?
                 <ClipLoader
                   className="h-full py-[2px]"
@@ -321,12 +321,17 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
           </div>
           :
           <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] hidden md:flex items-center justify-center">
               <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
                 <DeleteIcon width={30} />
               </span>
             </span>
-            <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] md:hidden flex items-center justify-center">
+              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                <DeleteIcon width={30} />
+              </span>
+            </span>
+            <span className=" text-black text-base md:text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
               Вы уверены?
             </span>
           </div>
@@ -338,13 +343,13 @@ console.log(productsDataIdEdit?.category_id,'productsDataIdEdit?.category_id');
           <button
             onClick={() => setSizedeleteModal(false)}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
             Oтмена
           </button>
           <button
             onClick={() => onHandleDeleteSizeById()}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
             Удалить</button>
         </div>
 

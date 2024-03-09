@@ -61,9 +61,9 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const SelectedNumber = 1
     useEffect(() => {
         if (state?.discountPercent > 0) {
-            const sale = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, discountPrice: formattedValue })
+            const sale = Number(state?.price) * (100 - state?.discountPercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, discountPrice: parseInt(sale) })
         } else {
             setState({ ...state, discountPrice: 0 })
         }
@@ -85,10 +85,10 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
             state?.disableSizes === 1 && state?.discountPercent?.length > 0 && form.append("discount_percent", state?.discountPercent);
             state?.disableSizes === 1 && state?.discountPercent?.length === 0 && form.append("discount_percent", 0);
             state?.disableSizes === 1 && (state?.discountPercent?.length === 0 || Number(state?.discountPercent) === 0) && form.append("discount_price", 0);
-            state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice?.split(",")?.join(""));
+            state?.disableSizes === 1 && state?.discountPercent > 0 && form.append("discount_price", state?.discountPrice);
             state?.disableSizes === 3 && state?.age && form.append("age", Number(state?.age));
             state?.disableSizes === 2 && form.append("amount", state?.amount);
-            state?.disableSizes === 1 && form.append("price", state?.price?.split(",")?.join(""));
+            state?.disableSizes === 1 && form.append("price", state?.price)
             form.append("shop_location_id", shopLocationId);
             form.append("color_id", pivotColorId);
             form.append("product_id", Number(productId));
@@ -178,7 +178,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 sizeCheck: Number(data?.one_size) || null,
                 amount: data?.amount || null,
                 age: data?.age || null,
-                price: Number(data?.price)?.toLocaleString(),
+                price: Number(data?.price),
                 discountPercent: data?.discount_percent || null,
                 discountPrice: data?.discount_price || null,
                 productColorId: data?.product_color_id || null,
@@ -189,8 +189,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, price: formattedValue, saveBtnDisable: true, disableSizes: 1 });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, price: sanitizedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -198,6 +198,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
         const formattedValue = Number(sanitizedValue).toLocaleString()
         setState({ ...state, discountPrice: formattedValue, saveBtnDisable: true, disableSizes: 1 });
     };
+
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
@@ -266,20 +267,36 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         </button>
                     </div>
                     {state?.successChanged ?
-                        <div className="w-full h-[290px] flex flex-col items-center justify-center">
-                            {state?.errorMessage ?
-                                <span className="flex flex-col items-center justify-center p-2">
-                                    <span className="text-2xl not-italic font-AeonikProMedium">{state?.errorMessage}</span>
-                                    <MdError size={45} color="#FF4343" />
-                                </span>
-                                :
-                                <div className="flex flex-col items-center justify-center">
-                                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                        <FaCheck size={35} color="#009B17" /></span>
-                                    <span className="text-2xl mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
-                                </div>
-                            }
-                        </div>
+                        <>
+                            <div className="w-full h-[290px] hidden md:flex flex-col items-center justify-center">
+                                {state?.errorMessage ?
+                                    <span className="flex flex-col items-center justify-center p-2">
+                                        <span className="text-2xl not-italic font-AeonikProMedium">{state?.errorMessage}</span>
+                                        <MdError size={45} color="#FF4343" />
+                                    </span>
+                                    :
+                                    <div className="flex flex-col items-center justify-center">
+                                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                            <FaCheck size={35} color="#009B17" /></span>
+                                        <span className="text-2xl mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
+                                    </div>
+                                }
+                            </div>
+                            <div className="w-full h-[290px] md:hidden flex flex-col items-center justify-center">
+                                {state?.errorMessage ?
+                                    <span className="flex flex-col items-center justify-center p-2">
+                                        <span className="text-lg not-italic font-AeonikProMedium">{state?.errorMessage}</span>
+                                        <MdError size={35} color="#FF4343" />
+                                    </span>
+                                    :
+                                    <div className="flex flex-col items-center justify-center">
+                                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                            <FaCheck size={25} color="#009B17" /></span>
+                                        <span className="text-lg mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
+                                    </div>
+                                }
+                            </div>
+                        </>
                         :
                         state?.sizeEditModal &&
                         <div className="w-full h-full">
@@ -425,7 +442,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                    >{state?.price}</span>
+                                                    >{Number(state?.price)?.toLocaleString()}</span>
                                                     :
                                                     <input
                                                         type="text"
@@ -433,7 +450,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         id="enterPrice1"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                         name="price"
-                                                        value={state?.price}
+                                                        value={Number(state?.price)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         required
@@ -458,14 +475,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justify-start opacity-20 text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                            >{state?.discountPercent}</span>
+                                                            >{Number(state?.discountPercent)?.toLocaleString()}</span>
                                                             :
                                                             <input
                                                                 type="number"
                                                                 placeholder="0"
                                                                 name="discountPercent"
                                                                 className="inputStyle w-[70%] text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                value={state?.discountPercent}
+                                                                value={Number(state?.discountPercent)?.toLocaleString()}
                                                                 defaultValue={0}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -479,14 +496,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%] flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.discountPrice}</span>
+                                                            >{Number(state?.discountPrice)?.toLocaleString()}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="discountPrice1"
                                                                 name="discountPrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                value={state?.discountPrice}
+                                                                value={Number(state?.discountPrice)?.toLocaleString()}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
@@ -687,7 +704,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                    >{state?.price}</span>
+                                                    >{Number(state?.price)?.toLocaleString()}</span>
                                                     :
                                                     <input
                                                         type="text"
@@ -695,7 +712,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         id="enterPrice1"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                         name="price"
-                                                        value={state?.price}
+                                                        value={Number(state?.price)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         required
@@ -741,14 +758,14 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%] flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.discountPrice}</span>
+                                                            >{Number(state?.discountPrice)?.toLocaleString()}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="discountPrice1"
                                                                 name="discountPrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                value={state?.discountPrice}
+                                                                value={Number(state?.discountPrice)?.toLocaleString()}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
@@ -884,7 +901,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                     </div>
                 }
             </div>
-            <div className="w-full md:w-[785px] h-[640px] VerticelScroll overflow-auto pb-0 md:pb-[80px]">
+            <div className="w-full md:w-[785px] h-[640px] VerticelScroll overflow-auto md:pb-0 pb-[80px]">
                 <Checkbox.Group
                     style={{ width: "100%" }}
                     value={checked}

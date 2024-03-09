@@ -81,7 +81,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     )
     const [productId, setProductId] = useState(null);
     const [shopLocationId, setShopLocationId] = useState(null);
-    console.log(stateList, "stateList");
+    // console.log(stateList, "stateList");
     useEffect(() => {
         stateList?.shop_locations?.map(item => {
             if (Number(item?.id) === Number(dressInfo?.locationIdAddProduct)) {
@@ -92,15 +92,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     }, [stateList])
 
     const SelectedNumber = 2
-    useEffect(() => {
-        if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
-        } else {
-            setState({ ...state, salePrice: '' })
-        }
-    }, [state?.salePercent, state?.priceNum])
+
 
     function saveEditData() {
         if (!state?.minBreast && state?.maxBreast ||
@@ -123,7 +115,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
             state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
             state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
-            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", parseInt(state?.salePrice));
             form.append("min_outwear_size", state?.minSize);
             state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
             state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
@@ -191,7 +183,6 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                 })
         }
     }
-
     useEffect(() => {
         setState({
             ...state,
@@ -220,7 +211,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             setState({
                 ...state,
                 quantityNum: data?.amount || null,
-                priceNum: Number(data?.price)?.toLocaleString(),
+                priceNum: data?.price,
                 minBreast: data?.min_chest_girth || null,
                 maxBreast: data?.max_chest_girth || null,
                 minSize: data?.min_wear_size || null,
@@ -239,24 +230,36 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
 
     }, [state?.editSizeId, checkColor])
 
+    useEffect(() => {
+        if (state?.salePercent > 0) {
+            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: sale })
+        } else {
+            setState({ ...state, salePrice: 0 })
+        }
+    }, [state?.salePercent, state?.priceNum])
+
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
         const formattedValue = Number(sanitizedValue).toLocaleString()
         setState({ ...state, priceNum: formattedValue, saveBtnDisable: true, disableSizes: 1 });
     };
-    const handleChangeSalePrice = (event) => {
-        const result = event.target.value.replace(/\D/g, '')
-        const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, salePrice: formattedValue, saveBtnDisable: true, disableSizes: 1 });
-    };
+    // const handleChangeSalePrice = (event) => {
+    //     const result = event.target.value.replace(/\D/g, '')
+    //     const sanitizedValue = result.replace(/,/g, '');
+    //     const formattedValue = Number(sanitizedValue).toLocaleString()
+    //     setState({ ...state, salePrice: formattedValue, saveBtnDisable: true, disableSizes: 1 });
+    // };
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
     };
+    // console.log(state?.salePrice, ';;state?.salePrice');
+
     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
@@ -305,7 +308,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
         }
     }
-    return (
+     return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2 `}>
             <div>
                 <section
@@ -347,9 +350,9 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         <div className="w-full h-full">
                             {/* ---for Desktop device */}
                             <div
-                                className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-red-600  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                                className={`w-full h-fit hidden md:flex flex-col items-center justify-center   rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                             >
-                                <div className="relative w-full flex  gap-x-10 px-3 pt-5 border border-green-600">
+                                <div className="relative w-full flex  gap-x-10 px-3 pt-5  ">
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                             Обхват Груди
@@ -774,7 +777,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         id="priceOutWear1"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
@@ -817,17 +820,11 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice}</span>
-                                                            : <input
-                                                                type="text"
-                                                                placeholder="0"
-                                                                id="salePrice1"
-                                                                name="salePrice"
-                                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                value={state?.salePrice}
-                                                                onChange={handleChangeSalePrice}
-                                                                readOnly
-                                                            />}
+                                                            >{parseInt(state?.salePrice)?.toLocaleString()}</span>
+                                                            : <span
+                                                                className="inputStyle w-[75%] text-start select-none font-AeonikProMedium outline-none bg-transparent"
+                                                            >{parseInt(state?.salePrice)?.toLocaleString()}</span>
+                                                        }
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                             сум
                                                         </span>
@@ -1378,7 +1375,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         id="priceOutWear1"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
@@ -1398,7 +1395,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                         <div className="w-full flex items-center justify-center">
                                             <div className="w-full flex items-center gap-x-1">
                                                 <div className="w-[60px] flex items-start">
-                                                    <div className="w-full h-[38px] flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                                    <div className="w-full h-[38px] flex items-center px-1 justify-center bg-white border border-borderColor rounded-lg py-[8px]">
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
@@ -1421,17 +1418,9 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice}</span>
-                                                            : <input
-                                                                type="text"
-                                                                placeholder="0"
-                                                                id="salePrice1"
-                                                                name="salePrice"
-                                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                value={state?.salePrice}
-                                                                onChange={handleChangeSalePrice}
-                                                                readOnly
-                                                            />}
+                                                            >{parseInt(state?.salePrice)?.toLocaleString()}</span>
+                                                            : <span className="inputStyle w-[75%] text-start select-none font-AeonikProMedium outline-none bg-transparent"
+                                                            >{parseInt(state?.salePrice)?.toLocaleString()}</span>}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                             сум
                                                         </span>
@@ -1875,7 +1864,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div className="w-fit flex flex-col items-start">
+                                                    <div className="w-[50%] flex flex-col items-start">
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
@@ -1883,7 +1872,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
-                                                            <div className="w-full flex items-center gap-x-1">
+                                                            <div className="w-full flex items-center gap-x-1 ">
                                                                 <div className="w-[40%] md:w-[72px] flex items-start">
                                                                     <div className="w-full h-10 flex items-center  justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
                                                                         <input
@@ -1898,9 +1887,11 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     </div>
                                                                 </div>
                                                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                                                <div className="w-[60%] md:w-[75%] flex items-center">
-                                                                    <label htmlFor="salePrice" className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                                        <input
+                                                                <div className="w-[60%] md:w-[75%] flex items-center ">
+                                                                    <div className="w-full h-[40px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                                                        <div className="inputStyle  cursor-default w-full text-start select-none font-AeonikProMedium outline-none bg-transparent"
+                                                                        >{Number(item?.discount_price)?.toLocaleString()}</div>
+                                                                        {/* <input
                                                                             type="text"
                                                                             placeholder="0"
                                                                             id="salePrice"
@@ -1909,11 +1900,11 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                             value={Number(item?.discount_price)?.toLocaleString()}
                                                                             onChange={handleChangeSalePrice}
                                                                             readOnly
-                                                                        />
+                                                                        /> */}
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                             сум
                                                                         </span>
-                                                                    </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2293,9 +2284,11 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     </div>
                                                                 </div>
                                                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                                                <div className="w-[60%] md:w-[75%] flex items-center">
-                                                                    <label htmlFor="salePrice" className="w-full  h-[38px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                                        <input
+                                                                <div className="w-[60%] md:w-[75%] flex items-center ">
+                                                                    <div className="w-full  h-[38px] flex items-center justify-between bg-white border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                                                        <div className="inputStyle  cursor-default w-[75%] text-start select-none font-AeonikProMedium outline-none bg-transparent"
+                                                                        >{Number(item?.discount_price)?.toLocaleString()}</div>
+                                                                        {/* <input
                                                                             type="text"
                                                                             placeholder="0"
                                                                             id="salePrice"
@@ -2304,11 +2297,11 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                             value={Number(item?.discount_price)?.toLocaleString()}
                                                                             onChange={handleChangeSalePrice}
                                                                             readOnly
-                                                                        />
+                                                                        /> */}
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                             сум
                                                                         </span>
-                                                                    </label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

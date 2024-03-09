@@ -95,10 +95,10 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
         state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
         state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
         state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
-        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+        state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice)
         state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
         state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
-        state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
+        state?.disableSizes === 1 && form.append("price", state?.priceNum)
         form.append("shop_location_id", shopLocationId);
         form.append("color_id", pivotColorId);
         form.append("product_id", Number(productId));
@@ -183,7 +183,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             setState({
                 ...state,
                 quantityNum: data?.amount || null,
-                priceNum: Number(data?.price)?.toLocaleString(),
+                priceNum: Number(data?.price),
                 rowSize: data?.length || null,
                 colSize: data?.width || null,
                 minSize: data?.wear_size || null,
@@ -200,8 +200,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: formattedValue, saveBtnDisable: true, disableSizes: 1 });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, priceNum: sanitizedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -218,9 +218,9 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
     };
     useEffect(() => {
         if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
+            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: parseInt(sale) })
         } else {
             setState({ ...state, salePrice: '' })
         }
@@ -294,20 +294,36 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         </button>
                     </div>
                     {state?.successChanged ?
-                        <div className="w-full h-[290px] flex flex-col items-center justify-center">
-                            {state?.errorMessage ?
-                                <span className="flex flex-col items-center justify-center p-2">
-                                    <span className="text-2xl not-italic font-AeonikProMedium">{state?.errorMessage}</span>
-                                    <MdError size={45} color="#FF4343" />
-                                </span>
-                                :
-                                <div className="flex flex-col items-center justify-center">
-                                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                        <FaCheck size={35} color="#009B17" /></span>
-                                    <span className="text-2xl mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
-                                </div>
-                            }
-                        </div>
+                        <>
+                            <div className="w-full h-[290px] hidden md:flex flex-col items-center justify-center">
+                                {state?.errorMessage ?
+                                    <span className="flex flex-col items-center justify-center p-2">
+                                        <span className="text-2xl not-italic font-AeonikProMedium">{state?.errorMessage}</span>
+                                        <MdError size={45} color="#FF4343" />
+                                    </span>
+                                    :
+                                    <div className="flex flex-col items-center justify-center">
+                                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                            <FaCheck size={35} color="#009B17" /></span>
+                                        <span className="text-2xl mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
+                                    </div>
+                                }
+                            </div>
+                            <div className="w-full h-[290px] md:hidden flex flex-col items-center justify-center">
+                                {state?.errorMessage ?
+                                    <span className="flex flex-col items-center justify-center p-2">
+                                        <span className="text-lg not-italic font-AeonikProMedium">{state?.errorMessage}</span>
+                                        <MdError size={35} color="#FF4343" />
+                                    </span>
+                                    :
+                                    <div className="flex flex-col items-center justify-center">
+                                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                            <FaCheck size={25} color="#009B17" /></span>
+                                        <span className="text-lg mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
+                                    </div>
+                                }
+                            </div>
+                        </>
                         :
                         state?.sizeEditModal &&
                         <div>
@@ -498,7 +514,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </button>
                                                     </div>
                                                 </div>}
-                                         
+
                                         </div>
                                     </div>
 
@@ -613,14 +629,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                    >{state?.priceNum || 0}</span>
+                                                    >{Number(state?.priceNum)?.toLocaleString() || 0}</span>
                                                     : <input
                                                         type="text"
                                                         placeholder="0"
                                                         id="priceAccess"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
@@ -663,14 +679,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice || 0}</span>
+                                                            >{Number(state?.salePrice)?.toLocaleString() || 0}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="salePrice"
                                                                 name="salePrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
-                                                                value={state?.salePrice || 0}
+                                                                value={Number(state?.salePrice)?.toLocaleString() || 0}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
@@ -1095,14 +1111,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                    >{state?.priceNum || 0}</span>
+                                                    >{Number(state?.priceNum)?.toLocaleString() || 0}</span>
                                                     : <input
                                                         type="text"
                                                         placeholder="0"
                                                         id="priceAccess"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
@@ -1145,14 +1161,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice || 0}</span>
+                                                            >{Number(state?.salePrice)?.toLocaleString() || 0}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="salePrice"
                                                                 name="salePrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
-                                                                value={state?.salePrice || 0}
+                                                                value={Number(state?.salePrice)?.toLocaleString() || 0}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
@@ -1415,7 +1431,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                          
+
                                                         </div>
                                                     </div>
                                                     <div
@@ -1946,7 +1962,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
                                                             return (
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
-                                                                    className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                                                    className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3 py-1 px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                                 >
                                                                     <span >{data?.name_ru} </span>
                                                                 </div>

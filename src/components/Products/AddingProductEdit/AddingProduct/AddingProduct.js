@@ -260,7 +260,7 @@ const AddingProduct = () => {
     }
   )
 
-  // ------------------------------------------------------------------------ border-red-500
+  // ------------------------------------------------------------------------ 
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
   const toggleAllSizeModalShow = React.useCallback(

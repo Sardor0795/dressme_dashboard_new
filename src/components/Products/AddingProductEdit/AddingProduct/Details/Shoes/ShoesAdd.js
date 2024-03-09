@@ -61,11 +61,11 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
     const [checkAll, setCheckAll] = useState(false);
     useEffect(() => {
         if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
+            const sale = state?.priceNum * (100 - state?.salePercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: parseInt(sale) })
         } else {
-            setState({ ...state, salePrice: '' })
+            setState({ ...state, salePrice: 0 })
         }
     }, [state?.salePercent, state?.priceNum])
 
@@ -81,10 +81,10 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
             state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
             state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
-            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice);
             form.append("footwear_size", state?.minSize);
             state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
-            state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
+            state?.disableSizes === 1 && form.append("price", state?.priceNum);
             form.append("shop_location_id", shopLocationId);
             form.append("color_id", pivotColorId);
             form.append("product_id", Number(productId));
@@ -170,7 +170,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             setState({
                 ...state,
                 quantityNum: Number(data?.amount) || null,
-                priceNum: Number(data?.price)?.toLocaleString(),
+                priceNum: Number(data?.price),
                 minFootLength: Number(data?.min_foot_length) || null,
                 maxFootLength: Number(data?.max_foot_length) || null,
                 minSize: Number(data?.wear_size) || null,
@@ -203,13 +203,14 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
     };
-
+    // state?.priceNum
     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
             setGetSizesIds(getSizesIds => [...getSizesIds, item?.id])
         })
     }, [checkColor])
+
     useEffect(() => {
         if (stateList?.sizes?.length) {
             setIndeterminate(checked.length && checked.length !== getSizesIds?.length);
@@ -261,20 +262,37 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                         </button>
                     </div>
                     {state?.successChanged ?
-                        <div className="w-full h-[290px] flex flex-col items-center justify-center">
-                            {state?.errorMessage ?
-                                <span className="flex flex-col items-center justify-center p-2">
-                                    <span className="text-2xl not-italic font-AeonikProMedium">{state?.errorMessage}</span>
-                                    <MdError size={45} color="#FF4343" />
-                                </span>
-                                :
-                                <div className="flex flex-col items-center justify-center">
-                                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                        <FaCheck size={35} color="#009B17" /></span>
-                                    <span className="text-2xl mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
-                                </div>
-                            }
-                        </div>
+                        <>
+                            <div className="w-full h-[290px] hidden md:flex flex-col items-center justify-center">
+                                {state?.errorMessage ?
+                                    <span className="flex flex-col items-center justify-center p-2">
+                                        <span className="text-2xl not-italic font-AeonikProMedium">{state?.errorMessage}</span>
+                                        <MdError size={45} color="#FF4343" />
+                                    </span>
+                                    :
+                                    <div className="flex flex-col items-center justify-center">
+                                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                            <FaCheck size={35} color="#009B17" /></span>
+                                        <span className="text-2xl mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
+                                    </div>
+                                }
+                            </div>
+                            <div className="w-full h-[290px] md:hidden flex flex-col items-center justify-center">
+                                {state?.errorMessage ?
+                                    <span className="flex flex-col items-center justify-center p-2">
+                                        <span className="text-lg not-italic font-AeonikProMedium">{state?.errorMessage}</span>
+                                        <MdError size={35} color="#FF4343" />
+                                    </span>
+                                    :
+                                    <div className="flex flex-col items-center justify-center">
+                                        <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                                            <FaCheck size={25} color="#009B17" /></span>
+                                        <span className="text-lg mt-2 not-italic font-AeonikProMedium">{state?.successMessage}</span>
+                                    </div>
+                                }
+                            </div>
+                        </>
+
                         :
                         state?.sizeEditModal &&
                         <div className="w-full h-full ">
@@ -423,14 +441,14 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className="inputStyle flex items-center justify-start opacity-20 w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                    >{state?.priceNum}</span>
+                                                    >{Number(state?.priceNum)?.toLocaleString()}</span>
                                                     : <input
                                                         type="text"
                                                         id="priceShoes1"
                                                         placeholder="0"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -452,7 +470,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                         <div className="w-full flex items-center justify-center">
                                             <div className="w-full flex items-center gap-x-1">
                                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                                    <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                                    <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-1 md:px-3 py-[8px]">
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle flex items-center justify-start opacity-20 w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -475,14 +493,14 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle flex items-center justify-start opacity-20 w-[75%] font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice}</span>
+                                                            >{state?.salePrice?.toLocaleString()}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="salePrice1"
                                                                 name="salePrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
-                                                                value={state?.salePrice}
+                                                                value={state?.salePrice?.toLocaleString()}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
@@ -682,14 +700,14 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                     <span
                                                         className="inputStyle flex items-center justify-start opacity-20 w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                    >{state?.priceNum}</span>
+                                                    >{Number(state?.priceNum)?.toLocaleString()}</span>
                                                     : <input
                                                         type="text"
                                                         id="priceShoes1"
                                                         placeholder="0"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -734,14 +752,14 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle flex items-center justify-start opacity-20 w-[75%] font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice}</span>
+                                                            >{state?.salePrice?.toLocaleString()}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="salePrice1"
                                                                 name="salePrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none "
-                                                                value={state?.salePrice}
+                                                                value={state?.salePrice?.toLocaleString()}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}

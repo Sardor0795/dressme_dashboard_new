@@ -94,8 +94,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
     useEffect(() => {
         if (state?.salePercent > 0) {
             const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: parseInt(sale) })
         } else {
             setState({ ...state, salePrice: '' })
         }
@@ -123,7 +123,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
             state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
             state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
-            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", state?.salePrice);
             state?.disableSizes === 2 && form.append("amount", state?.quantityNum);
             state?.disableSizes === 1 && form.append("price", state?.priceNum?.split(",")?.join(""));
             form.append("shop_location_id", shopLocationId);
@@ -222,7 +222,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             setState({
                 ...state,
                 quantityNum: data?.amount || null,
-                priceNum: Number(data?.price)?.toLocaleString(),
+                priceNum: data?.price,
                 minBreast: data?.min_waist_girth || null,
                 maxBreast: data?.max_waist_girth || null,
                 minSize: data?.min_wear_size || null,
@@ -245,8 +245,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: formattedValue, saveBtnDisable: true, disableSizes: 1 });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, priceNum: sanitizedValue, saveBtnDisable: true, disableSizes: 1 });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -782,7 +782,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         id="priceNum1"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -827,14 +827,14 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice}</span>
+                                                            >{Number(state?.salePrice)?.toLocaleString()}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="salePrice1"
                                                                 name="salePrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                value={state?.salePrice}
+                                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
@@ -1410,7 +1410,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         id="priceNum1"
                                                         name="priceNum"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                        value={state?.priceNum}
+                                                        value={Number(state?.priceNum)?.toLocaleString()}
                                                         onChange={handleChangePrice}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -1431,7 +1431,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         <div className="w-full flex items-center justify-center">
                                             <div className="w-full flex items-center gap-x-1">
                                                 <div className="w-[60px] flex items-start">
-                                                    <div className="w-full h-[38px] flex items-center justify-center bg-white border border-borderColor rounded-lg px-[10px] md:px-3 py-[8px]">
+                                                    <div className="w-full h-[38px] flex items-center justify-center bg-white border border-borderColor rounded-lg px-1 md:px-3 py-[8px]">
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[70%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
@@ -1444,7 +1444,6 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                 value={state?.salePercent}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-
                                                             />}
                                                         <span className="text-textLightColor ml-2">%</span>
                                                     </div>
@@ -1455,14 +1454,14 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePrice}</span>
+                                                            >{Number(state?.salePrice)?.toLocaleString()}</span>
                                                             : <input
                                                                 type="text"
                                                                 placeholder="0"
                                                                 id="salePrice1"
                                                                 name="salePrice"
                                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                value={state?.salePrice}
+                                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                                 onChange={handleChangeSalePrice}
                                                                 readOnly
                                                             />}
