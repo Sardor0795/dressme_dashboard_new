@@ -2366,7 +2366,7 @@ const AddingProduct = () => {
                             :
                             <button
                               onClick={() => setAddSizesMobileToggle(true)}
-                              className={` w-full  ${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[10px] h-[38px] text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
+                              className={` w-full  ${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
                               Добавить размер
                             </button>
                           }

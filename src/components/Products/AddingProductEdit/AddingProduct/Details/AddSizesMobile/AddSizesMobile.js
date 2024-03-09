@@ -153,10 +153,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                 state?.rowSize && form.append("length", state?.rowSize);
                 state?.colSize && form.append("width", state?.colSize);
                 state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice);//no R
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
             }
@@ -229,10 +229,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                 state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
                 state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
                 state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.salePrice && form.append("discount_price", state?.salePrice);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
 
@@ -315,9 +315,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                 state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.salePrice && form.append("discount_price", state?.salePrice);
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
                 try {
@@ -399,9 +399,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                 state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.salePrice && form.append("discount_price", state?.salePrice);
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
 
@@ -474,10 +474,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                 state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice);//no R
                 form.append("footwear_size", state?.one_size);
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
 
@@ -554,9 +554,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
                 setState({ ...state, checkEmpty: false })
             }
@@ -583,9 +583,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
             }
         }
@@ -611,9 +611,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
             }
         }
@@ -630,9 +630,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
             }
         }
@@ -647,9 +647,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                 // All of Category
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
+                price: state?.priceNum,
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
+                discountPrice: state?.salePrice,
             })
         }
     }
@@ -658,8 +658,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: formattedValue });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, priceNum: sanitizedValue });
     };
     const handleChangeSalePrice = (event) => {
 
@@ -667,13 +667,14 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
 
     useEffect(() => {
         if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
+            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: parseInt(sale) })
         } else {
             setState({ ...state, salePrice: '' })
         }
     }, [state?.salePercent, state?.priceNum])
+
     const handleChangePercent = (event) => {
         const { value } = event.target
         if (value >= 0 && value < 100) {
@@ -691,10 +692,26 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             setState({ ...state, sizeListCheck: name, selected: id })
         }
     }
-
+    console.log(Number(state?.priceNum), 'state?.priceNum ');
+    console.log(state?.priceNum?.split(" ")?.join(""), 'state?.priceNum ');
     return (
-        <div className="max-w-[540px] w-full h-fit bg-white py-4 px-2">
-            <div className="w-full flex items-center ">
+        <div className="max-w-[440px] w-full h-fit bg-white py-4 px-2 rounded-t-lg">
+            <div className="w-full flex items-center justify-between   mb-4">
+                <div className="w-fit ">
+                    {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
+                        return (
+                            <div key={index} className={`flex justify-start items-center gap-x-2   ${data ? "" : "hidden"}`}>
+                                <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                <div
+                                    key={data?.id}
+                                    style={{ background: `${data.hex}` }}
+                                    className={`w-[18px] h-[18px] flex items-center justify-center rounded-full ${data?.id === 2 ? "border " : ""}`}
+                                >
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
                 <button
                     onClick={onClick}
                     type="button"
@@ -704,9 +721,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             </div>
             {Number(typeId) === 1 &&
                 <div
-                    className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                    className={`w-full h-fit flex border p-1 gap-y-4 rounded-lg flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full ">
+                    {/* <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
@@ -720,10 +737,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             );
                         })}
-                    </div>
-                    <div className="w-full flex justify-start px-3  gap-x-10  pt-5 ">
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                    </div> */}
+                    <div className="w-full grid grid-cols-2 gap-4   ">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Обхват головы
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -765,8 +782,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 One Size
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -781,67 +798,59 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 />
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col items-center">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
-                                Количество
-                                {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
-                                <span className="ml-[5px]">
-                                    <StarLabel />
-                                </span>
-                            </p>
-                            <div className="flex items-start justify-between mt-[10px]">
-                                <input
-                                    type="number"
-                                    name="quantityNum"
-                                    className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                    value={state?.quantityNum}
-                                    onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    required
-                                />
-                            </div>
+                    </div>
+                    <div className="w-full flex flex-col items-center  ">
+                        <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                            Количество
+                            <span className="ml-[5px]">
+                                <StarLabel />
+                            </span>
+                        </p>
+                        <div className="w-full flex items-start justify-center gap-x-1 mt-[10px]">
+                            <button
+                                type="button"
+                                onClick={(e) => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1, saveBtnDisable: true, disableSizes: 2 })}
+                                className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                <span>-</span>
+                            </button>
+                            <input
+                                type="number"
+                                name="quantityNum"
+                                className={`inputStyle w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                value={state?.quantityNum}
+                                onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={(e) => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1, saveBtnDisable: true, disableSizes: 2 })}
+                                className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                <span>+</span>
+                            </button>
                         </div>
                     </div>
-                    <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mt-[15px]">
-                        <div className="w-1/2 flex items-center gap-x-[25px]">
-                            <div className="w-fit hidden md:flex flex-col items-start">
-                                <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                    <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
-                                    </div>
-                                </div>
-                                <div className="w-full flex items-center">
-                                    <input
-                                        type="number"
-                                        name="ageNum"
-                                        className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                        placeholder="age"
-                                        value={state?.ageNum}
-                                        onChange={(e) => setState({ ...state, ageNum: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-full md:w-[90%]">
+                    <div className="w-full flex  justify-between  ">
+                        <div className="w-[40%] flex items-center  ">
+
+                            <div className="w-full ">
                                 <div className="flex items-center mb-2 ll:mb-[10px] ">
                                     <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                        className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                         Цена
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <label htmlFor="enterPrice1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                                <label htmlFor="enterPrice1" className={`w-full h-[38px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
                                         type="text"
                                         placeholder="0"
                                         id="enterPrice1"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString()}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -853,18 +862,18 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </label>
                             </div>
                         </div>
-                        <div className="w-1/2 flex flex-col items-start">
+                        <div className="w-[57%] flex flex-col items-start">
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
-                                    className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                     Скидка
                                 </div>
                             </div>
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
-                                    <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                    <div className=" w-[60px] flex items-start">
+                                        <div className={`w-full h-[38px] flex items-center justify-center border border-borderColor ${Number(state?.priceNum) > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {Number(state?.priceNum) > 0 ?
                                                 <input
                                                     type="number"
                                                     placeholder="0"
@@ -887,15 +896,15 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                    <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice1" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                    <div className=" w-[75%] flex items-center">
+                                        <label htmlFor="salePrice1" className={`w-full h-[38px] flex items-center justify-between  ${Number(state?.priceNum) > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice1"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -908,10 +917,29 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-
+                    <div className="w-full h-fit  flex  justify-between  ">
+                        <div className="w-fit  flex flex-col items-start">
+                            <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
+                                <div
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                    Возраст
+                                </div>
+                            </div>
+                            <div className="w-full flex items-center">
+                                <input
+                                    type="number"
+                                    name="ageNum"
+                                    className="inputStyle w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                    placeholder="age"
+                                    value={state?.ageNum}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                />
+                            </div>
+                        </div>
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSizeHead} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeHead} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium 
+                            ">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -921,7 +949,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : "Добавить"}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium 
+                            ">
                                 Готово
                             </button>
                         }
@@ -931,9 +960,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             {
                 Number(typeId) === 2 &&
                 <div
-                    className={`w-full h-fit flex flex-col items-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                    className={`w-full h-fit p-1 rounded-lg gap-y-4 flex flex-col items-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full ">
+                    {/* <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
@@ -947,10 +976,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             );
                         })}
-                    </div>
-                    <div className="w-full flex  gap-x-10 px-3 pt-5">
-                        <div className="w-[20%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                    </div> */}
+                    <div className="w-full flex   grid grid-cols-2 gap-4">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Обхват Груди
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -991,8 +1020,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-[20%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Размер
                                 <span className="ml-[5px]">
@@ -1028,8 +1057,93 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-[53%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                Обхват Талии
+                                <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            </p>
+                            <div className="flex items-center">
+                                <div className="flex flex-col">
+                                    <input
+                                        type="number"
+                                        name="minWaist"
+                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center  ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
+                                        placeholder="Мин"
+                                        value={state?.minWaist}
+                                        onChange={(e) => setState({ ...state, minWaist: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                </div>
+                                <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                <div className="flex flex-col">
+
+                                    {state?.maxWaistShow ?
+                                        <input
+                                            type="number"
+                                            name="maxWaist"
+                                            className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            value={state?.maxWaist}
+                                            onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxWaistShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
+                                Обхват Бедер
+                            </p>
+                            <div className="flex items-center">
+                                <div className="flex flex-col">
+                                    <input
+                                        type="number"
+                                        name="minHips"
+                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
+                                        placeholder="Мин"
+                                        value={state?.minHips}
+                                        onChange={(e) => setState({ ...state, minHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                </div>
+                                <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                <div className="flex flex-col">
+                                    {state?.maxHipsShow ?
+                                        <input
+                                            type="number"
+                                            name="maxHips"
+                                            className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
+                                            placeholder="Макс"
+                                            value={state?.maxHips}
+                                            onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxHipsShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full    gap-y-4">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                 Буквенный Размер
                             </p>
                             <div className='w-full '>
@@ -1222,100 +1336,20 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Обхват Талии
-                                <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                            </p>
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="minWaist"
-                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center  ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                        placeholder="Мин"
-                                        value={state?.minWaist}
-                                        onChange={(e) => setState({ ...state, minWaist: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                                <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                <div className="flex flex-col">
-
-                                    {state?.maxWaistShow ?
-                                        <input
-                                            type="number"
-                                            name="maxWaist"
-                                            className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                            placeholder="Макс"
-                                            value={state?.maxWaist}
-                                            onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
-                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                        />
-                                        :
-                                        <button
-                                            type="button"
-                                            onClick={() => setState({ ...state, maxWaistShow: true })}
-                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                        >
-                                            <BiPlus color="#007DCA" size={20} />
-                                        </button>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-
-                                Обхват Бедер
-                            </p>
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="minHips"
-                                        className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                        placeholder="Мин"
-                                        value={state?.minHips}
-                                        onChange={(e) => setState({ ...state, minHips: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                                <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                <div className="flex flex-col">
-                                    {state?.maxHipsShow ?
-                                        <input
-                                            type="number"
-                                            name="maxHips"
-                                            className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                            placeholder="Макс"
-                                            value={state?.maxHips}
-                                            onChange={(e) => setState({ ...state, maxHips: e.target.value })}
-                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                        />
-                                        :
-                                        <button
-                                            type="button"
-                                            onClick={() => setState({ ...state, maxHipsShow: true })}
-                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                        >
-                                            <BiPlus color="#007DCA" size={20} />
-                                        </button>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-fit flex flex-col md:ml-5">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full  flex flex-col  ">
+                            <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Количество
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
                             </p>
-                            <div className="flex items-start justify-between ">
+                            <div className="w-full flex items-start justify-center gap-x-1 ">
+                                <button
+                                    type="button"
+                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    <span>-</span>
+                                </button>
                                 <input
                                     type="number"
                                     name="quantityNum"
@@ -1324,48 +1358,37 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                    className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    <span>
+                                        +
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full flex flex-row px-3 gap-x-[11px] md:pt-5 md:gap-x-[20px] mb-[15px]">
-                        <div className="w-fit flex items-center gap-x-[25px]">
-                            <div className="w-fit hidden md:flex flex-col items-start">
-                                <div className="flex items-center justify-center ">
-                                    <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
-                                    </div>
-                                </div>
-                                <div className="w-fit flex items-center">
-                                    <input
-                                        type="number"
-                                        name="ageNum"
-                                        className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg   outline-none"
-                                        placeholder=""
-                                        value={state?.ageNum}
-                                        onChange={(e) => setState({ ...state, ageNum: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-full md:w-[55%]">
+                    <div className="w-full flex flex-row justify-between ">
+                        <div className="w-[40%] flex items-center gap-x-[25px]">
+                            <div className="w-full  ">
                                 <div className="flex items-center mb-2 ll:mb-[10px] ">
                                     <span
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                        className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                         Цена
                                     </span>
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <label htmlFor="priceOutWear" className={`w-full h-[40px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                                <label htmlFor="priceOutWear" className={`w-full h-[38px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
                                         type="text"
                                         placeholder="0"
                                         id="priceOutWear"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString()}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -1376,50 +1399,46 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </label>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col items-start">
+                        <div className="w-[57%] flex flex-col items-start">
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
-                                    className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                     Скидка
                                 </div>
 
                             </div>
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
-                                    <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                    <div className="w-[60px] flex items-start">
+                                        <div className={`w-full h-[38px] flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={state?.salePercent}
+                                                    value={Number(state?.salePercent)?.toLocaleString()}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
                                                 />
                                                 :
-                                                <input
-                                                    type="number"
-                                                    name="salePercent"
-                                                    placeholder="0"
+                                                <span
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    readOnly
-                                                />}
+                                                ></span>}
                                             <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
-                                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                    <span className="w-[8px] ll:w-[15px] h-[2px] bg-borderColor mx-[2px] ll:mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice2" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice2" className={`w-full h-[38px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-1 ls:px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice2"
                                                 name="salePrice"
-                                                className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                className="inputStyle w-[85%] ll:w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
+                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -1433,10 +1452,28 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                     </div>
 
-                    <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-
+                    <div className="w-full h-fit  flex   justify-between  ">
+                        <div className="w-fit  flex flex-col items-start">
+                            <div className="flex items-center justify-center ">
+                                <div
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                    Возраст
+                                </div>
+                            </div>
+                            <div className="w-fit flex items-center">
+                                <input
+                                    type="number"
+                                    name="ageNum"
+                                    className="inputStyle w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg   outline-none"
+                                    placeholder=""
+                                    value={state?.ageNum}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                />
+                            </div>
+                        </div>
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSizeOut} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeOut} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70  text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -1446,7 +1483,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : "Добавить"}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70  text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
                                 Готово
                             </button>
                         }
@@ -1456,9 +1493,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             {
                 Number(typeId) === 3 &&
                 <div
-                    className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                    className={`w-full border rounded-lg p-1 gap-y-4 h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full ">
+                    {/* <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
@@ -1472,10 +1509,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             );
                         })}
-                    </div>
-                    <div className="w-full flex gap-x-10 px-3 pt-5">
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                    </div> */}
+                    <div className="w-full flex  grid grid-cols-2 gap-4">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Обхват Талии
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -1516,8 +1553,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Размер
                                 <span className="ml-[5px]">
@@ -1556,8 +1593,93 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-[53%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                Размер Бедер
+                            </p>
+                            <div className="flex items-center">
+                                <div className="flex flex-col">
+                                    <input
+                                        type="number"
+                                        name="minHips"
+                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
+                                        placeholder="Мин"
+                                        value={state?.minHips}
+                                        onChange={(e) => setState({ ...state, minHips: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                </div>
+                                <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                <div className="flex flex-col">
+                                    {state?.maxHipsShow ?
+                                        <input
+                                            type="number"
+                                            name="maxHips"
+                                            className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                            placeholder="Макс"
+                                            value={state?.maxHips}
+                                            onChange={(e) => setState({ ...state, maxHips: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                        :
+                                        <button
+                                            type="button"
+                                            onClick={() => setState({ ...state, maxHipsShow: true })}
+                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                        >
+                                            <BiPlus color="#007DCA" size={20} />
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                Рост
+                            </p>
+                            <div className="flex items-center justify-between gap-x-1">
+                                <div className="flex items-center">
+                                    <div className="flex flex-col">
+                                        <input
+                                            type="number"
+                                            name="minHeight"
+                                            className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular `}
+                                            placeholder="Мин"
+                                            value={state?.minHeight}
+                                            onChange={(e) => setState({ ...state, minHeight: e.target.value })}
+                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                        />
+                                    </div>
+                                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                    <div className="flex flex-col">
+                                        {state?.maxHeightShow ?
+                                            <input
+                                                type="number"
+                                                name="maxHeight"
+                                                className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
+                                                placeholder="Макс"
+                                                value={state?.maxHeight}
+                                                onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
+                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                            />
+                                            :
+                                            <button
+                                                type="button"
+                                                onClick={() => setState({ ...state, maxHeightShow: true })}
+                                                className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
+                                            >
+                                                <BiPlus color="#007DCA" size={20} />
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full  gap-y-4 flex flex-col">
+
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                 Буквенный Размер
                             </p>
 
@@ -1753,148 +1875,58 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="w-full flex gap-x-10 px-3 pt-5">
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Размер Бедер
-                            </p>
-                            <div className="flex items-center">
-                                <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="minHips"
-                                        className={`inputStyle outline-none w-[60px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
-                                        placeholder="Мин"
-                                        value={state?.minHips}
-                                        onChange={(e) => setState({ ...state, minHips: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                                <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                <div className="flex flex-col">
-                                    {state?.maxHipsShow ?
-                                        <input
-                                            type="number"
-                                            name="maxHips"
-                                            className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                            placeholder="Макс"
-                                            value={state?.maxHips}
-                                            onChange={(e) => setState({ ...state, maxHips: e.target.value })}
-                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                        />
-                                        :
-                                        <button
-                                            type="button"
-                                            onClick={() => setState({ ...state, maxHipsShow: true })}
-                                            className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                        >
-                                            <BiPlus color="#007DCA" size={20} />
-                                        </button>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Рост
-                            </p>
-                            <div className="flex items-center justify-between gap-x-1">
-                                <div className="flex items-center">
-                                    <div className="flex flex-col">
-                                        <input
-                                            type="number"
-                                            name="minHeight"
-                                            className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular `}
-                                            placeholder="Мин"
-                                            value={state?.minHeight}
-                                            onChange={(e) => setState({ ...state, minHeight: e.target.value })}
-                                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                        />
-                                    </div>
-                                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                    <div className="flex flex-col">
-                                        {state?.maxHeightShow ?
-                                            <input
-                                                type="number"
-                                                name="maxHeight"
-                                                className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
-                                                placeholder="Макс"
-                                                value={state?.maxHeight}
-                                                onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
-                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                            />
-                                            :
-                                            <button
-                                                type="button"
-                                                onClick={() => setState({ ...state, maxHeightShow: true })}
-                                                className={`inputStyle outline-none w-[60px] flex items-center justify-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                            >
-                                                <BiPlus color="#007DCA" size={20} />
-                                            </button>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-fit flex flex-col md:ml-[14px]">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col md:ml-[14px]">
+                            <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Количество
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
                             </p>
-                            <div className="flex items-start justify-between ">
+                            <div className="w-full flex items-start justify-center gap-x-1 ">
+                                <button
+                                    type="button"
+                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    <span>-</span>
+                                </button>
                                 <input
                                     type="number"
                                     name="quantityNum"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                    className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    <span>
+                                        +
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full flex flex-row px-3 pt-5 gap-x-[11px] md:gap-x-[20px] mb-[15px]">
-                        <div className="w-fit flex items-center gap-x-[25px]">
-                            <div className="w-fit hidden md:flex flex-col items-start">
-                                <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                    <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
-                                    </div>
-                                </div>
-                                <div className="w-fit flex items-center">
-                                    <input
-                                        type="number"
-                                        name="ageNum"
-                                        className=" inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
-                                        placeholder=""
-                                        value={state?.ageNum}
-                                        onChange={(e) => setState({ ...state, ageNum: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-full md:w-[55%]">
+                    <div className="w-full flex items-center justify-between  ">
+                        <div className="w-[40%] flex items-center ">
+                            <div className="w-full  ">
                                 <div className="flex items-center  mb-2 ll:mb-[10px]">
                                     <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                        className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                         Цена
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <label htmlFor="priceNum" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
+                                <label htmlFor="priceNum" className={`w-full h-[38px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
                                         type="text"
                                         placeholder="0"
                                         id="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString()}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
@@ -1904,49 +1936,44 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </label>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col items-start">
+                        <div className="w-[57%] flex flex-col items-start">
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
-                                    className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                     Скидка
                                 </div>
-
                             </div>
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
-                                    <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                    <div className="w-[60px] flex items-start">
+                                        <div className={`w-full h-[38px] flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={state?.salePercent}
+                                                    value={Number(state?.salePercent)?.toLocaleString()}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 />
                                                 :
-                                                <input
-                                                    type="number"
-                                                    name="salePercent"
-                                                    placeholder="0"
+                                                <span
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    readOnly
-                                                />}
+                                                ></span>}
                                             <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                    <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice3" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                    <div className="w-[75%] flex items-center">
+                                        <label htmlFor="salePrice3" className={`w-full h-[38px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice3"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                 onChange={handleChangeSalePrice}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 readOnly
@@ -1960,10 +1987,28 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-fit flex items-center justify-end gap-x-5">
-
+                    <div className="w-full h-fit flex   justify-between  ">
+                        <div className="w-fit  flex flex-col items-start">
+                            <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
+                                <div
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                    Возраст
+                                </div>
+                            </div>
+                            <div className="w-fit flex items-center">
+                                <input
+                                    type="number"
+                                    name="ageNum"
+                                    className=" inputStyle w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
+                                    placeholder=""
+                                    value={state?.ageNum}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                />
+                            </div>
+                        </div>
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSizeUnder} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeUnder} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium  ">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -1973,7 +2018,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : "Добавить"}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium  ">
                                 Готово
                             </button>
                         }
@@ -1983,9 +2028,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             {
                 Number(typeId) === 4 &&
                 <div
-                    className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                    className={`w-full border p-1 gap-y-4 rounded-lg h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full ">
+                    {/* <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
@@ -1999,10 +2044,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             );
                         })}
-                    </div>
-                    <div className="w-full flex gap-x-10 px-3 pt-5">
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                    </div> */}
+                    <div className="w-full grid grid-cols-2 gap-4  flex ">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                 Размер
                                 <span className="ml-[5px]">
                                     <StarLabel />
@@ -2021,8 +2066,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Длина Стопы
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -2063,65 +2108,60 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col md:ml-5">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                Количество
-                                <span className="ml-[5px]">
-                                    <StarLabel />
+                    </div>
+                    <div className="w-full flex flex-col md:ml-5">
+                        <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+
+                            Количество
+                            <span className="ml-[5px]">
+                                <StarLabel />
+                            </span>
+                        </p>
+                        <div className="w-full flex items-start justify-center gap-x-1 ">
+                            <button
+                                type="button"
+                                onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                <span>-</span>
+                            </button>
+                            <input
+                                type="number"
+                                name="quantityNum"
+                                className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                value={state?.quantityNum}
+                                onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                <span>
+                                    +
                                 </span>
-                            </p>
-                            <div className="flex items-start justify-between ">
-                                <input
-                                    type="number"
-                                    name="quantityNum"
-                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                    value={state?.quantityNum}
-                                    onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
-                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                />
-                            </div>
+                            </button>
                         </div>
                     </div>
-                    <div className="w-full flex flex-row px-3 pt-5 gap-x-[11px] md:gap-x-[20px] mb-[15px]">
-                        <div className="w-fit flex items-center gap-x-[25px]">
-                            <div className="w-fit hidden md:flex flex-col items-start">
-                                <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                    <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
-                                    </div>
-                                </div>
-                                <div className="w-fit flex items-center">
-                                    <input
-                                        type="number"
-                                        name="ageNum"
-                                        className="inputStyle w-[58px] h-[40px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                        placeholder=""
-                                        value={state?.ageNum}
-                                        onChange={(e) => setState({ ...state, ageNum: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
-                            <div className="w-full md:w-[55%]">
+                    <div className="w-full flex flex-row justify-between ">
+                        <div className="w-[40%] flex items-center  ">
+                            <div className="w-full  ">
                                 <div className="flex items-center mb-2 ll:mb-[10px] ">
                                     <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                        className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                         Цена
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
+                                <label htmlFor="priceShoes" className={`w-full h-[38px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                     <input
                                         type="text"
                                         id="priceShoes"
                                         placeholder="0"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString()}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -2132,50 +2172,47 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </label>
                             </div>
                         </div>
-                        <div className="w-fit flex flex-col items-start">
+                        <div className="w-[57%] flex flex-col items-start">
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
-                                    className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                     Скидка
                                 </div>
-
                             </div>
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
-                                    <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                    <div className="w-[60px] flex items-start">
+                                        <div className={`w-full h-[38px] flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     name="salePercent"
                                                     placeholder="0"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={state?.salePercent}
+                                                    value={Number(state?.salePercent)?.toLocaleString()}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
                                                 />
                                                 :
-                                                <input
-                                                    type="number"
-                                                    name="salePercent"
-                                                    placeholder="0"
+                                                <span
+
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    readOnly
-                                                />}
+
+                                                ></span>}
                                             <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                    <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice4" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                    <div className="w-[75%] flex items-center">
+                                        <label htmlFor="salePrice4" className={`w-full h-[38px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice4"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -2188,9 +2225,28 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-fit flex items-center justify-end gap-x-5">
+                    <div className="w-full h-fit flex   justify-between  ">
+                        <div className="w-fit  flex flex-col items-start">
+                            <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
+                                <div
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                    Возраст
+                                </div>
+                            </div>
+                            <div className="w-fit flex items-center">
+                                <input
+                                    type="number"
+                                    name="ageNum"
+                                    className="inputStyle w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                    placeholder=""
+                                    value={state?.ageNum}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                />
+                            </div>
+                        </div>
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSizeShoes} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeShoes} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium ">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -2200,7 +2256,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : "Добавить"}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium ">
                                 Готово
                             </button>
                         }
@@ -2210,9 +2266,9 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             {
                 Number(typeId) === 5 &&
                 <div
-                    className={`w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                    className={`border p-1 rounded-lg gap-y-4 w-full h-fit flex flex-col cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                 >
-                    <div className="w-full ">
+                    {/* <div className="w-full ">
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
@@ -2226,10 +2282,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             );
                         })}
-                    </div>
-                    <div className="w-full flex gap-x-10 px-3 pt-5">
-                        <div className="w-fit flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                    </div> */}
+                    <div className="w-full flex  grid grid-cols-2 gap-4">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Размер{" "}
                                 <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
@@ -2247,9 +2303,45 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-
-                        <div className="w-[80%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                Длина
+                                <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            </p>
+                            <div className="w-[60px] flex items-center justify-between">
+                                <div className="flex flex-col">
+                                    <input
+                                        type="number"
+                                        name="colSize"
+                                        className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
+                                        value={state?.colSize}
+                                        onChange={(e) => setState({ ...state, colSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                Ширина
+                            </p>
+                            <div className="w-[60px] flex items-center justify-between gap-x-1">
+                                <div className="flex flex-col">
+                                    <input
+                                        type="number"
+                                        name="rowSize"
+                                        className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                        value={state?.rowSize}
+                                        onChange={(e) => setState({ ...state, rowSize: e.target.value })}
+                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full flex flex-col gap-y-4 ">
+                        <div className="w-full flex flex-col">
+                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                 Буквенный Размер
                             </p>
                             <div className='w-full '>
@@ -2446,45 +2538,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="w-full flex gap-x-10 px-3 pt-5">
-                        <div className="w-[20%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Длина
-                                <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
-                            </p>
-                            <div className="w-[60px] flex items-center justify-between">
-                                <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="colSize"
-                                        className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
-                                        value={state?.colSize}
-                                        onChange={(e) => setState({ ...state, colSize: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-[20%] flex flex-col">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Ширина
-                            </p>
-                            <div className="w-[60px] flex items-center justify-between gap-x-1">
-                                <div className="flex flex-col">
-                                    <input
-                                        type="number"
-                                        name="rowSize"
-                                        className="inputStyle outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                        value={state?.rowSize}
-                                        onChange={(e) => setState({ ...state, rowSize: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-[60%] flex flex-col ml-auto">
-                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                        <div className="w-full flex flex-col  ">
+                            <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                 Количество
                                 <span className="ml-[5px]">
@@ -2492,43 +2547,38 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </span>
                             </p>
 
-                            <div className="flex items-start justify-between ">
+                            <div className="w-full flex items-start justify-center gap-x-1 ">
+                                <button
+                                    type="button"
+                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    <span>-</span>
+                                </button>
                                 <input
                                     type="number"
                                     name="quantityNum"
-                                    className={`inputStyle outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
+                                    className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
                                     value={state?.quantityNum}
                                     onChange={(e) => setState({ ...state, quantityNum: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                    className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    <span>
+                                        +
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full flex flex-row px-3 pt-5 gap-x-[11px] md:gap-x-[20px] mb-[15px]">
-                        <div className="w-[45%] flex items-center gap-x-[25px]">
-                            <div className="w-fit hidden md:flex flex-col items-start">
-                                <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                    <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
-                                    </div>
-                                </div>
-                                <div className="w-fit flex items-center">
-                                    <input
-                                        type="number"
-                                        className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
-                                        placeholder=""
-                                        name="ageNum"
-                                        value={state?.ageNum}
-                                        onChange={(e) => setState({ ...state, ageNum: e.target.value })}
-                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                    />
-                                </div>
-                            </div>
+                    <div className="w-full flex flex-row justify-between ">
+                        <div className="w-[40%] flex items-center gap-x-[25px]">
+
                             <div className="w-full md:w-[55%]">
                                 <div className="flex items-center mb-2 ll:mb-[10px] ">
                                     <div
-                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                        className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
                                         Цена
                                     </div>
                                     <span className="ml-[5px]">
@@ -2542,7 +2592,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         id="priceAccess"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString()}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -2553,50 +2603,46 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 </label>
                             </div>
                         </div>
-                        <div className="w-[40%] flex flex-col items-start">
+                        <div className="w-[57%] flex flex-col items-start">
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
-                                    className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
                                     Скидка
                                 </div>
 
                             </div>
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
-                                    <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                    <div className="w-[60px] flex items-start">
+                                        <div className={`w-full h-[38px] flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     placeholder="0"
                                                     name="salePercent"
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    value={state?.salePercent}
+                                                    value={Number(state?.salePercent)?.toLocaleString()}
                                                     onChange={handleChangePercent}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
                                                 />
                                                 :
-                                                <input
-                                                    type="number"
-                                                    placeholder="0"
-                                                    name="salePercent"
+                                                <span
                                                     className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
-                                                    readOnly
-                                                />}
+                                                ></span>}
                                             <span className="text-textLightColor ml-1">%</span>
                                         </div>
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                    <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice5" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                    <div className="w-[75%] flex items-center">
+                                        <label htmlFor="salePrice5" className={`w-full h-[38px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice5"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString()}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -2609,10 +2655,28 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-fit  flex items-center justify-end gap-x-5">
-
+                    <div className="w-full h-fit  flex   justify-between ">
+                        <div className="w-fit  flex flex-col items-start">
+                            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
+                                <div
+                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                    Возраст
+                                </div>
+                            </div>
+                            <div className="w-fit flex items-center">
+                                <input
+                                    type="number"
+                                    className="inputStyle w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
+                                    placeholder=""
+                                    name="ageNum"
+                                    value={state?.ageNum}
+                                    onChange={(e) => setState({ ...state, ageNum: e.target.value })}
+                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
+                                />
+                            </div>
+                        </div>
                         {colorListForTest?.includes(selectColorID) ?
-                            <button onClick={onHandleAddSizeAccessory} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={onHandleAddSizeAccessory} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
                                 {state?.sendingLoader ?
                                     <ClipLoader
                                         className="h-full py-[2px]"
@@ -2622,7 +2686,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : "Добавить"}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
+                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
                                 Готово
                             </button>
                         }
