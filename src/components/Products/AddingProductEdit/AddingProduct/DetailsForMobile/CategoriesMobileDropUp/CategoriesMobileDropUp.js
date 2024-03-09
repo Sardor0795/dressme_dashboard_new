@@ -233,7 +233,7 @@ const CategoriesMobileDropUp = ({ onClick1, onClick2, colorGroup, modalOpenColor
                       <StarLabel />
                     </span>
                   </p>
-                  <div className='w-full border border-red-500 '>
+                  <div className='w-full   '>
                     {/* -----------------Desktop--------------------- */}
                     <div className="w-full hidden md:flex flex-row">
                       <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
