@@ -13,7 +13,7 @@ import {
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
- 
+
 import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
@@ -22,7 +22,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddSize from "./Details/AddSize/AddSize";
 import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
- import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
+import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
@@ -2210,23 +2210,24 @@ const AddingProduct = () => {
                         ${colorAction ? "text-[#b5b5b5] bg-[#F5F5F5]" : ""}
                         `}
                       >
-                        {colorAction ? state?.category_Id ?
-                          <div className="w-fit h-full rounded-lg flex items-center gap-x-1 text-[#b5b5b5] bg-[#F5F5F5]">
-                            {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
-                              return (
-                                <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                  {item?.name_ru}
+                        {colorAction ?
+                          state?.category_Id ?
+                            <div className="w-fit h-full rounded-lg flex items-center gap-x-1 text-[#b5b5b5] bg-[#F5F5F5]">
+                              {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
+                                return (
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    {item?.name_ru}
 
-                                </span>)
-                            })}
-                          </div>
-                          :
-                          <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
-                            <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                              Выбрать
-                            </span>
-                            <ArrowRightIcon />
-                          </div>
+                                  </span>)
+                              })}
+                            </div>
+                            :
+                            <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
+                              <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
+                                Выбрать
+                              </span>
+                              <ArrowRightIcon />
+                            </div>
                           :
                           state?.category_Id ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
