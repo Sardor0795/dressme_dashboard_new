@@ -692,8 +692,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             setState({ ...state, sizeListCheck: name, selected: id })
         }
     }
-    console.log(Number(state?.priceNum), 'state?.priceNum ');
-    console.log(state?.priceNum?.split(" ")?.join(""), 'state?.priceNum ');
+    // console.log(Number(state?.priceNum), 'state?.priceNum ');
+    // console.log(state?.priceNum?.split(" ")?.join(""), 'state?.priceNum ');
     return (
         <div className="max-w-[440px] w-full h-fit bg-white py-4 px-2 rounded-t-lg">
             <div className="w-full flex items-center justify-between   mb-4">
