@@ -40,8 +40,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, price: formattedValue });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, price: sanitizedValue });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -78,9 +78,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     oneSize: state?.sizeCheck,
                     amount: state?.amount,
                     age: state?.age,
-                    price: state?.price?.split(",")?.join(""),
+                    price: state?.price ,
                     discountPercent: state?.discountPercent,
-                    discountPrice: state?.discountPrice?.split(",")?.join(""),
+                    discountPrice: state?.discountPrice ,
                     category_Id: SelectedNumber,
 
                 })
@@ -111,10 +111,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
     useEffect(() => {
         if (state?.discountPercent > 0) {
-            const value = state?.price?.split(",")?.join("") * (100 - state?.discountPercent) / 100
-
-            const formattedValue = parseInt(value).toLocaleString()
-            setState({ ...state, discountPrice: formattedValue })
+            const value = Number(state?.price) * (100 - state?.discountPercent) / 100
+            // const formattedValue = parseInt(value).toLocaleString()
+            setState({ ...state, discountPrice: parseInt(value) })
         } else {
             setState({ ...state, discountPrice: '' })
         }
@@ -237,7 +236,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     id="enterPrice"
                                     name="price"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                    value={state?.price}
+                                    value={Number(state?.price)?.toLocaleString()}
                                     onChange={handleChangePrice}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()}
                                     required
@@ -259,8 +258,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.price?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                        {state?.price?.split(",")?.join("") > 0 ?
+                                    <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.price > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                        {state?.price > 0 ?
                                             <input
                                                 type="number"
                                                 name="discountPercent"
@@ -284,14 +283,14 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <label htmlFor="discountPrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.price?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                    <label htmlFor="discountPrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.price > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                         <input
                                             type="text"
                                             placeholder="0"
                                             id="discountPrice"
                                             name="discountPrice"
                                             className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                            value={state?.discountPrice}
+                                            value={Number(state?.discountPrice)?.toLocaleString()}
                                             onChange={handleChangeSalePrice}
                                             readOnly
                                         />

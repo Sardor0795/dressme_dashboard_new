@@ -24,9 +24,9 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
     })
     useEffect(() => {
         if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
+            const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: parseInt(sale) })
         } else {
             setState({ ...state, salePrice: '' })
         }
@@ -58,9 +58,9 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                     maxFootLength: state?.maxFootLength,
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                     category_Id: SelectedNumber,
                 })
                 setDressInfo({ ...dressInfo, ProductFilterType: SelectedNumber })
@@ -96,8 +96,8 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: formattedValue });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, priceNum: sanitizedValue });
     };
     const handleChangeSalePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
@@ -235,7 +235,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     placeholder="0"
                                     name="priceNum"
                                     className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                    value={state?.priceNum}
+                                    value={Number(state?.priceNum)?.toLocaleString()}
                                     onChange={handleChangePrice}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
@@ -255,8 +255,8 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                         <div className="w-full flex items-center justify-center">
                             <div className="w-full flex items-center gap-x-1">
                                 <div className="w-[40%] md:w-[72px] flex items-start">
-                                    <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                        {state?.priceNum?.split(",")?.join("") > 0 ?
+                                    <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                        {state?.priceNum > 0 ?
                                             <input
                                                 type="number"
                                                 name="salePercent"
@@ -280,14 +280,14 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                 </div>
                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                 <div className="w-[60%] md:w-[75%] flex items-center">
-                                    <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                    <label htmlFor="salePrice" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                         <input
                                             type="text"
                                             placeholder="0"
                                             id="salePrice"
                                             name="salePrice"
                                             className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                            value={state?.salePrice}
+                                            value={Number(state?.salePrice)?.toLocaleString()}
                                             onChange={handleChangeSalePrice}
                                             readOnly
                                         />

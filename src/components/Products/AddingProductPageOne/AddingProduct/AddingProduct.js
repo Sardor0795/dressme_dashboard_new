@@ -1273,14 +1273,40 @@ const AddingProduct = () => {
             </section>
 
             {/* ClothingCategory */}
-            {/* <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal
+            <section
+              className={`fixed z-[113]  left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal
                 ? "bottom-0"
                 : "bottom-[-800px] z-0"
                 }`}
             >
-              <ClothingCategory onClick={ClothingCategoryToggle} />
-            </section> */}
+              <div className="max-w-[440px] bg-white w-full h-[300px] flex items-center flex-wrap gap-3 ">
+                <HeadWearAdd
+                  title={dressInfo?.getProductInfo?.categories}
+                  typeId={state?.type_Id}
+                  handleCallBack={CallBackHeadWear}
+                />
+                <OutWearAdd
+                  title={dressInfo?.getProductInfo?.categories}
+                  typeId={state?.type_Id}
+                  handleCallBack={CallBackOutWear}
+                />
+                <UnderAddWear
+                  title={dressInfo?.getProductInfo?.categories}
+                  typeId={state?.type_Id}
+                  handleCallBack={CallBackUnderWear}
+                />
+                <ShoesAdd
+                  title={dressInfo?.getProductInfo?.categories}
+                  typeId={state?.type_Id}
+                  handleCallBack={CallBackShoesWear}
+                />
+                <AccessoriesAdd
+                  title={dressInfo?.getProductInfo?.categories}
+                  typeId={state?.type_Id}
+                  handleCallBack={CallBackAccessoriesWear}
+                />
+              </div>
+            </section>
             {/* ---------------------------------------- */}
 
             <div className="w-full md:mx-[140px] md:mb-[50px] xs:border border-borderColor rounded-xl md:px-0 p-1">
@@ -1995,13 +2021,6 @@ const AddingProduct = () => {
                             )}
                           </button>
                           <button
-                            // onClick={() =>
-                            //   setState({
-                            //     ...state,
-                            //     ClothingCategoryModal:
-                            //       !state?.ClothingCategoryModal,
-                            //   })
-                            // }
                             type="button"
                             className={`w-full overflow-hidden min-h-[40px] md:hidden flex items-center justify-between ${state?.isCheckValid &&
                               !state?.category_Id &&
@@ -2014,13 +2033,13 @@ const AddingProduct = () => {
                                 ?.filter((e) => e?.id == state?.type_Id)
                                 ?.map((item, index) => {
                                   return (
-                                    <span key={index} className="text-[12px] text-[#a1a1a1]">
+                                    <span key={index} className="text-[12px] text-[#b5b5b5]">
                                       {item?.name_ru}
                                     </span>
                                   );
                                 })
                             ) : (
-                              <span className="text-[#a1a1a1]"> Выбрать</span>
+                              <span className="text-[#b5b5b5] text-[12px]"> Выбрать</span>
                             )}
                             <span className="rotate-90 transition duration-200 ease-out">
                               <ArrowRightIcon />
@@ -2336,7 +2355,15 @@ const AddingProduct = () => {
                           />
                         </div>
                       </div>
+                      {/* Input Select 12 mobile */}
                       <button
+                        onClick={() =>
+                          setState({
+                            ...state,
+                            ClothingCategoryModal:
+                              !state?.ClothingCategoryModal,
+                          })
+                        }
                         className={` w-full  md:hidden   border border-textBlueColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
                         Добавить размер
                       </button>
