@@ -1062,7 +1062,7 @@ const AddingProduct = () => {
             >
               <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                 <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                  <p className="text-xl font-AeonikProMedium"> Раздел товара</p>
+                  <p className="text-base font-AeonikProMedium"> Раздел товара</p>
                   <button onClick={() => setState({ ...state, ClothingSection: false })}>
                     <CloseAnswer colors={"#000"} />
                   </button>
@@ -1109,7 +1109,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className={`text-xl font-AeonikProMedium `}>Подраздел одежды</p>
+                    <p className={`text-base font-AeonikProMedium `}>Подраздел одежды</p>
                     <button onClick={() => setState({ ...state, SubClothingSection: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1154,7 +1154,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-xl font-AeonikProMedium">Сезон товара</p>
+                    <p className="text-base font-AeonikProMedium">Сезон товара</p>
                     <button onClick={() => setState({ ...state, DressSeason: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1196,7 +1196,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-xl font-AeonikProMedium"> Пол</p>
+                    <p className="text-base font-AeonikProMedium"> Пол</p>
                     <button onClick={() => setState({ ...state, GenderModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1237,7 +1237,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-xl font-AeonikProMedium"> Тип</p>
+                    <p className="text-base font-AeonikProMedium"> Тип</p>
                     <button onClick={() => setState({ ...state, DressTypeModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1294,7 +1294,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-xl font-AeonikProMedium"> Производитель</p>
+                    <p className="text-base font-AeonikProMedium"> Производитель</p>
                     <button onClick={() => setState({ ...state, MakeCountryModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
