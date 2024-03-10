@@ -614,6 +614,7 @@ const AddingProduct = () => {
   useEffect(() => {
     if (!newArray?.length) {
       setState({ ...state, sub_Section_Id: [] });
+      setSubSection_Id([])
     }
   }, [newArray?.length]);
 
@@ -639,7 +640,6 @@ const AddingProduct = () => {
 
   // ---------Mobile Device--------
   const handleChangeSectionMobile = (e) => {
-    // setState({ ...state, onEditInput: true })
     if (section_Id?.length === 0) {
       setSection_Id(section_Id => [...section_Id, e])
     }
@@ -647,8 +647,12 @@ const AddingProduct = () => {
       setSection_Id(section_Id => [...section_Id, e])
     }
   }
+  const handleChangeSectionDeleteMobile = (e) => {
+    if (section_Id?.length > 0 && section_Id?.includes(e)) {
+      setSection_Id(section_Id?.filter((v) => v !== e))
+    }
+  }
   const handleChangeSubSectionMobile = (e) => {
-    // setState({ ...state, onEditInput: true })
     if (subSection_Id?.length === 0) {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
@@ -656,20 +660,67 @@ const AddingProduct = () => {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
   }
+  const handleChangeSubSectionDeleteMobile = (e) => {
+    if (subSection_Id?.length > 0 && subSection_Id?.includes(e)) {
+      setSubSection_Id(subSection_Id?.filter((v) => v !== e))
+    }
+  }
+
   const onHandleChangeSeasonMobile = (e) => {
-    setState({ ...state, onEditInput: true })
     if (season_Id?.length === 0) {
       setSeason_Id(season_Id => [...season_Id, e])
     }
     if (season_Id?.length > 0 && !season_Id?.includes(e)) {
       setSeason_Id(season_Id => [...season_Id, e])
     }
-
   }
-  // console.log(state?.section_Id, 'state?.section_Id,');
-  // console.log(state?.sub_Section_Id, 'state?.sub_Section_Id2222222222222');
-  console.log(state?.category_Id, 'state?.category_Id ,');
-  console.log(state?.filterTypeId, 'state?.filterTypeId ,');
+  const onHandleChangeSeasonDeleteMobile = (e) => {
+    if (season_Id?.length > 0 && season_Id?.includes(e)) {
+      setSeason_Id(season_Id?.filter((v) => v !== e))
+    }
+  }
+  const selectGenderId = (id) => {
+    if (!state?.gender_Id) {
+      setState({ ...state, gender_Id: id, })
+    }
+    if (state?.gender_Id !== id) {
+      setState({ ...state, gender_Id: id, })
+    }
+  }
+  const ClearGenderSelected = (id) => {
+    if (state?.gender_Id === id) {
+      setState({ ...state, gender_Id: null, })
+    }
+  }
+
+  const selectTypeById = (filter, type_Id) => {
+    if (!state?.filterTypeId) {
+      setState({ ...state, filterTypeId: filter, type_Id: type_Id })
+    }
+    if (state?.filterTypeId !== filter) {
+      setState({ ...state, filterTypeId: filter, type_Id: type_Id })
+    }
+  }
+  const ClearSelectTypeById = (filter, type_Id) => {
+
+    if (state?.filterTypeId === filter) {
+      setState({ ...state, filterTypeId: null, type_Id: null })
+    }
+  }
+  const selectProduceId = (id) => {
+    if (!state?.producer_Id) {
+      setState({ ...state, producer_Id: id })
+    }
+    if (state?.producer_Id !== id) {
+      setState({ ...state, producer_Id: id })
+    }
+  }
+  const ClearProducerById = (id) => {
+    if (state?.producer_Id === id) {
+      setState({ ...state, producer_Id: null })
+    }
+  }
+  console.log(state?.filterTypeId, state?.type_Id);
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -1033,7 +1084,7 @@ const AddingProduct = () => {
                               {item.name_ru}
                               {section_Id?.includes(item?.id) &&
                                 <span
-                                // onClick={() => handleChangeSectionDeleteMobile(item?.id)}
+                                  onClick={() => handleChangeSectionDeleteMobile(item?.id)}
                                 >
                                   <MenuCloseIcons colors={'#b5b5b5'} />
                                 </span>}
@@ -1046,7 +1097,6 @@ const AddingProduct = () => {
                 </section>
               </div>
             </section>
-
             {/*Sub Clothing Section */}
             <section
               className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
@@ -1080,7 +1130,7 @@ const AddingProduct = () => {
                                 {item.name_ru}
                                 {subSection_Id?.includes(item?.id) &&
                                   <span
-                                  // onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}
+                                    onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}
                                   ><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
@@ -1123,7 +1173,7 @@ const AddingProduct = () => {
                                 {item.name_ru}
                                 {season_Id?.includes(item?.id) &&
                                   <span
-                                  // onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}
+                                    onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}
                                   ><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
@@ -1161,9 +1211,10 @@ const AddingProduct = () => {
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.gender?.map((item) => {
                             return (
-                              <div onClick={() => setState({ ...state, gender_Id: item?.id, onEditInput: true, })} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                              <div onClick={() => selectGenderId(item?.id)} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {item.name_ru}
-                                {state?.gender_Id == (item?.id) && <span onClick={() => setState({ ...state, gender_Id: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                {state?.gender_Id == (item?.id) &&
+                                  <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
                           })}
@@ -1202,10 +1253,11 @@ const AddingProduct = () => {
                           {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                             return (
                               <div
-                                onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
+                                onClick={() => selectTypeById(item?.id, item?.category_id)}
                                 key={item?.id} className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {item.name_ru}
-                                {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                {state?.filterTypeId == (item?.id) &&
+                                  <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
 
                               </div>
                             )
@@ -1213,10 +1265,11 @@ const AddingProduct = () => {
                             dressInfo?.getProductInfo?.types?.map((item) => {
                               return (
                                 <div
-                                  onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
+                                  onClick={() => selectTypeById(item?.id, item?.category_id)}
                                   key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                   {item.name_ru}
-                                  {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                  {state?.filterTypeId == (item?.id) &&
+                                    <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
 
                                 </div>
                               )
@@ -1257,10 +1310,10 @@ const AddingProduct = () => {
                           {dressInfo?.getProductInfo?.producers?.map((item) => {
                             return (
                               <div
-                                onClick={() => setState({ ...state, producer_Id: item?.id })}
+                                onClick={() => selectProduceId(item?.id)}
                                 key={item?.id} className={`w-full ${state?.producer_Id == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {item.name_ru}
-                                {state?.producer_Id == (item?.id) && <span onClick={() => setState({ ...state, producer_Id: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                {state?.producer_Id == (item?.id) && <span onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
                           })}
@@ -1339,7 +1392,7 @@ const AddingProduct = () => {
                           {newId ? (
                             <button
                               type="button"
-                              className="w-full h-[40px] bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
+                              className="w-full h-[38px] md:h-[40px] bg-[#F5F5F5] rounded-lg flex items-center justify-between border border-borderColor px-3"
                             >
                               <span>
                                 {dressInfo?.getProductInfo?.shops
@@ -1348,7 +1401,7 @@ const AddingProduct = () => {
                                     return (
                                       <span
                                         key={index}
-                                        className="mt-[3px] font-AeonikProRegular text-[#b5b5b5]"
+                                        className="mt-[3px] text-[12px] md:text-[16px] font-AeonikProRegular text-[#b5b5b5]"
                                       >
                                         {data?.name}
                                       </span>
@@ -1423,7 +1476,7 @@ const AddingProduct = () => {
                           {dressInfo?.locationIdAddProduct ? (
                             <button
                               type="button"
-                              className="w-full overflow-hidden h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
+                              className="w-full overflow-hidden h-[38px] md:h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
                             >
                               <span className="w-[95%]">
                                 {dressInfo?.getProductInfo?.shops
@@ -1441,7 +1494,7 @@ const AddingProduct = () => {
                                         return (
                                           <span
                                             key={index}
-                                            className="w-full truncate overflow-hidden whitespace-nowrap text-[#b5b5b5] flex items-center  text-[14px] not-italic font-AeonikProRegular"
+                                            className="w-full truncate overflow-hidden whitespace-nowrap text-[#b5b5b5] flex items-center  text-[12px] not-italic font-AeonikProRegular"
                                           >
                                             {data?.address}
                                           </span>
@@ -1534,7 +1587,7 @@ const AddingProduct = () => {
                             setState({ ...state, ClothingSection: true })
                           }
                           type="button"
-                          className="w-full min-h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className="w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
                           {section_Id?.length ?
                             <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden ">
@@ -1616,7 +1669,7 @@ const AddingProduct = () => {
                             setState({ ...state, SubClothingSection: true }) : null
                           }
                           type="button"
-                          className="w-full min-h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className="w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
                           {subSection_Id?.length ?
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
@@ -1690,13 +1743,13 @@ const AddingProduct = () => {
                             setState({ ...state, DressSeason: true })
                           }
                           type="button"
-                          className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className="w-full h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
                           {season_Id?.length ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                               {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
                                 return (
-                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-full px-[3px] flex items-center">
                                     {item?.name_ru}
 
                                   </span>)
@@ -1754,16 +1807,7 @@ const AddingProduct = () => {
                             <StarLabel />
                           </span>
                         </div>
-                        <button
-                          onClick={() => setState({ ...state, Colour: true })}
-                          type="button"
-                          className="w-full hidden h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-2"
-                        >
-                          <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                            Выбрать
-                          </div>
-                          <ArrowRightIcon />
-                        </button>
+                        
                         <div
                           className={`w-full flex items-center gap-x-1 justify-between  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id
@@ -1844,7 +1888,7 @@ const AddingProduct = () => {
                               setState({ ...state, GenderModal: true })
                             }
                             type="button"
-                            className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                            className="w-full h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                           >
                             {state?.gender_Id ?
                               <div className="w-full h-full rounded-lg flex items-center gap-x-1">
@@ -1962,7 +2006,7 @@ const AddingProduct = () => {
                               setState({ ...state, sku: e.target.value })
                             }
                             placeholder=""
-                            className={`inputStyle w-[calc(100%-42px)] h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku
+                            className={`inputStyle w-[calc(100%-42px)] text-[12px] md:text-[16px] h-[38px] md:h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku
                               ? "border border-[#FFB8B8] "
                               : "border border-borderColor"
                               } rounded-lg px-[10px] outline-none`}
@@ -1970,7 +2014,7 @@ const AddingProduct = () => {
                           <button
                             onClick={() => randomCode(17)}
                             type={"button"}
-                            className={`w-[40px] h-[40px] active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
+                            className={`w-[40px] h-[38px] md:h-10 active:scale-95  active:opacity-70 flex items-center justify-center  bg-textBlueColor border border-borderColor rounded-lg`}
                           >
                             <LoaderIcon />
                           </button>
@@ -1990,7 +2034,7 @@ const AddingProduct = () => {
                           <button
                             onClick={toggleDropModalButton}
                             type="button"
-                            className={`w-full overflow-hidden h-[40px] hidden md:flex items-center justify-between ${state?.isCheckValid &&
+                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${state?.isCheckValid &&
                               !state?.category_Id &&
                               !state?.price
                               ? "border border-[#FFB8B8] "
@@ -2022,12 +2066,12 @@ const AddingProduct = () => {
                           </button>
                           <button
                             type="button"
-                            className={`w-full overflow-hidden min-h-[40px] md:hidden flex items-center justify-between ${state?.isCheckValid &&
+                            className={`w-full overflow-hidden min-h-[38px] md:hidden flex items-center justify-between ${state?.isCheckValid &&
                               !state?.category_Id &&
                               !state?.price
                               ? "border border-[#FFB8B8] "
                               : "border border-borderColor"
-                              }  rounded-lg p-3 `} >
+                              }  rounded-lg  px-3 `} >
                             {state?.type_Id ? (
                               dressInfo?.getProductInfo?.categories
                                 ?.filter((e) => e?.id == state?.type_Id)
@@ -2337,7 +2381,7 @@ const AddingProduct = () => {
                                 min_Age_Category: e.target.value,
                               })
                             }
-                            className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                            className="inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           />
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                           <input
@@ -2351,7 +2395,7 @@ const AddingProduct = () => {
                                 max_Age_Category: e.target.value,
                               })
                             }
-                            className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                            className="inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           />
                         </div>
                       </div>
