@@ -8,22 +8,27 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SellerUserContext from "./hook/SellerUserContext";
 import SellerRefreshContext from "./hook/SellerRefreshToken";
 import HelperDataStore from "./hook/HelperDataStore";
+import { DressmeLanguage } from "./language/LanguageItem";
+import "./language/i18n";
+
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    <ContextTeam>
-      <SellerRefreshContext>
-        <SellerUserContext>
-          <HelperDataStore>
-            <QueryClientProvider client={queryClient}>
-              <App />
-            </QueryClientProvider >
-          </HelperDataStore>
-        </SellerUserContext>
-      </SellerRefreshContext>
-    </ContextTeam>
+    <DressmeLanguage>
+      <ContextTeam>
+        <SellerRefreshContext>
+          <SellerUserContext>
+            <HelperDataStore>
+              <QueryClientProvider client={queryClient}>
+                <App />
+              </QueryClientProvider>
+            </HelperDataStore>
+          </SellerUserContext>
+        </SellerRefreshContext>
+      </ContextTeam>
+    </DressmeLanguage>
   </BrowserRouter>
 );

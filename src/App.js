@@ -11,19 +11,18 @@ const { REACT_APP_BASE_URL } = process.env;
 function App() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
-  const [sellerRefreshToken] = useContext(SellerRefresh)
+  const [sellerRefreshToken] = useContext(SellerRefresh);
 
   useEffect(() => {
     const fetchDataRegions = async () => {
       try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`)
+        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, regionList: data?.data })
+          setDressInfo({ ...dressInfo, regionList: data?.data });
         }
-
       } catch (error) {
         if (error?.response?.status === 401) {
-          sellerRefreshToken()
+          sellerRefreshToken();
         }
       }
     };
@@ -31,7 +30,16 @@ function App() {
     if (!dressInfo?.regionList) {
       fetchDataRegions();
     }
+  }, []);
 
+  useEffect(() => {
+    if (
+      localStorage.getItem("i18nextLng") === "en-US" ||
+      localStorage.getItem("i18nextLng") === "en-UZ"
+    ) {
+      localStorage.setItem("i18nextLng", "ru");
+      window.location.reload();
+    }
   }, []);
 
   const fetchData = async (customHeaders) => {
@@ -50,23 +58,23 @@ function App() {
   };
 
   const customHeaders = {
-    'Content-type': 'application/json; charset=UTF-8',
-    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    "Content-type": "application/json; charset=UTF-8",
+    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-  useQuery(['seller_shops_list'], () => fetchData(customHeaders), {
+  useQuery(["seller_shops_list"], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setHelperDatainform({ ...helperDatainform, shopsList: data?.data })
+        setHelperDatainform({ ...helperDatainform, shopsList: data?.data });
       }
 
       if (data?.status === 401) {
-        sellerRefreshToken()
-        fetchData()
+        sellerRefreshToken();
+        fetchData();
       }
     },
     onError: (error) => {
       if (error?.response?.status === 401) {
-        sellerRefreshToken()
+        sellerRefreshToken();
       }
     },
     keepPreviousData: true,
@@ -77,7 +85,6 @@ function App() {
     <div>
       {/* <NavbarDashboard /> */}
       <RouterList />
-
     </div>
   );
 }
