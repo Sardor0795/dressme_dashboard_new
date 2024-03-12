@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
 import { useTranslation } from "react-i18next";
-import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function EditComponent({ item, titleStore, handleRefetch }) {
   const [sendText, setSendText] = useState(false);
@@ -18,7 +17,6 @@ export default function EditComponent({ item, titleStore, handleRefetch }) {
   });
 
   const { t } = useTranslation("reviews");
-  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const url = "https://api.dressme.uz/api/seller/reply";
 
