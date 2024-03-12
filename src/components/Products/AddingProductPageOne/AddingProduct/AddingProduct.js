@@ -36,6 +36,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import imageCompression from "browser-image-compression";
+import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -46,6 +47,7 @@ const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const navigate = useNavigate();
   const { request } = useHttp();
+  const [clothingCategoryModal, setClothingCategoryModal] = useState(false)
   const [state, setState] = useState({
     buttonReviews: false,
     openDropModalButton: true,
@@ -213,6 +215,7 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
+
   }
 
   function CallBackUnderWear(childData) {
@@ -226,6 +229,7 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
+
   }
 
   function CallBackShoesWear(childData) {
@@ -252,6 +256,8 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
+    console.log(childData, 'headwear-CallBackAccessoriesWear');
+
   }
 
   function randomCode(len) {
@@ -881,7 +887,7 @@ const AddingProduct = () => {
               } relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}
           >
             <section
-              onClick={() =>
+              onClick={() => {
                 setState({
                   ...state,
                   ClothingSection: false,
@@ -895,6 +901,8 @@ const AddingProduct = () => {
                   showColor: false,
                   openSelect: false,
                 })
+                setClothingCategoryModal(false)
+              }
               }
               className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${state?.ClothingSection ||
@@ -903,7 +911,7 @@ const AddingProduct = () => {
                   state?.Colour ||
                   state?.GenderModal ||
                   state?.DressTypeModal ||
-                  state?.ClothingCategoryModal ||
+                  clothingCategoryModal ||
                   state?.showColor ||
                   state?.openSelect ||
                   state?.MakeCountryModal
@@ -1327,38 +1335,22 @@ const AddingProduct = () => {
 
             {/* ClothingCategory */}
             <section
-              className={`fixed z-[113]  left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingCategoryModal
+              className={`w-full max-w-[440px] h-[600px] fixed z-[113] rounded-t-lg   left-1/2  right-1/2  translate-x-[-50%]   duration-300 overflow-hidden ${clothingCategoryModal
                 ? "bottom-0"
                 : "bottom-[-800px] z-0"
                 }`}
             >
-              <div className="max-w-[440px] bg-white w-full h-[300px] flex items-center flex-wrap gap-3 ">
-                <HeadWearAdd
-                  title={dressInfo?.getProductInfo?.categories}
-                  typeId={state?.type_Id}
-                  handleCallBack={CallBackHeadWear}
-                />
-                <OutWearAdd
-                  title={dressInfo?.getProductInfo?.categories}
-                  typeId={state?.type_Id}
-                  handleCallBack={CallBackOutWear}
-                />
-                <UnderAddWear
-                  title={dressInfo?.getProductInfo?.categories}
-                  typeId={state?.type_Id}
-                  handleCallBack={CallBackUnderWear}
-                />
-                <ShoesAdd
-                  title={dressInfo?.getProductInfo?.categories}
-                  typeId={state?.type_Id}
-                  handleCallBack={CallBackShoesWear}
-                />
-                <AccessoriesAdd
-                  title={dressInfo?.getProductInfo?.categories}
-                  typeId={state?.type_Id}
-                  handleCallBack={CallBackAccessoriesWear}
-                />
-              </div>
+              <AddSizeForMobile
+                clothingCategoryModal={clothingCategoryModal}
+                setClothingCategoryModal={setClothingCategoryModal}
+                title={dressInfo?.getProductInfo?.categories}
+                typeId={state?.type_Id}
+                handleCallBackHead={CallBackHeadWear}
+                handleCallBackOut={CallBackOutWear}
+                handleCallBackUnder={CallBackUnderWear}
+                handleCallBackShoes={CallBackShoesWear}
+                handleCallBackAccess={CallBackAccessoriesWear}
+              />
             </section>
             {/* ---------------------------------------- */}
 
@@ -1807,7 +1799,7 @@ const AddingProduct = () => {
                             <StarLabel />
                           </span>
                         </div>
-                        
+
                         <div
                           className={`w-full flex items-center gap-x-1 justify-between  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id
@@ -2400,17 +2392,17 @@ const AddingProduct = () => {
                         </div>
                       </div>
                       {/* Input Select 12 mobile */}
-                      <button
-                        onClick={() =>
-                          setState({
-                            ...state,
-                            ClothingCategoryModal:
-                              !state?.ClothingCategoryModal,
-                          })
-                        }
-                        className={` w-full  md:hidden   border border-textBlueColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
-                        Добавить размер
-                      </button>
+                      {state?.type_Id ?
+                        <button
+                          onClick={() => setClothingCategoryModal(true)}
+                          className={` w-full  md:hidden   border border-textBlueColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
+                          Добавить размер
+                        </button> :
+                        <button
+                          className={` w-full  md:hidden   border border-searchBgColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-[#b5b5b5]    `}>
+                          Добавить размер
+                        </button>
+                      }
                     </div>
 
                     <div>
@@ -2691,8 +2683,9 @@ const AddingProduct = () => {
             />
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
