@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CloseAnswer,
   MobileStar,
@@ -7,12 +7,11 @@ import {
 } from "../../../../assets/icons";
 import EditComponent from "./EditComment";
 import { useTranslation } from "react-i18next";
-import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 const CommentTitle = ({ titleStore, handleRefetch }) => {
 
   const { t } = useTranslation("reviews");
-  const [languageDetector] = useContext(LanguageDetectorDress);
+  
 
   const [state, setState] = useState({
     startReviews: true,
