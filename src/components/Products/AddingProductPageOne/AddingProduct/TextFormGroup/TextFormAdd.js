@@ -454,11 +454,11 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 <div className="w-1/3 h-[1px] bg-borderColor"></div>
                             </div>
 
-                            <div className="flex justify-center md:justify-end gap-[20px] mt-auto">
+                            <div className=" flex justify-between  md:justify-end md:gap-[20px] mt-auto">
                                 <button
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular"
+                                    className="h-[38px]  md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[47%] md:max-w-[130px] w-full font-AeonikProRegular"
                                 >
                                     Назад
                                 </button>
@@ -466,7 +466,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     type="button"
                                     onClick={send}
                                     // onClick={onClick}
-                                    className="h-[42px] md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[130px] w-full font-AeonikProRegular">                                    Добавить
+                                    className="h-[38px]  md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[47%] md:max-w-[130px] w-full font-AeonikProRegular">
+                                    Добавить
                                 </button>
 
                             </div>

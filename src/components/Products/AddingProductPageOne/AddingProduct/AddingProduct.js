@@ -248,7 +248,6 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
-    console.log(childData, 'headwear-CallBackAccessoriesWear');
 
   }
 
@@ -276,7 +275,7 @@ const AddingProduct = () => {
       state?.DressTypeModal ||
       state?.GenderModal ||
       state?.MakeCountryModal ||
-      state?.SubClothingSection
+      state?.SubClothingSection || clothingCategoryModal
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -292,6 +291,7 @@ const AddingProduct = () => {
     state?.GenderModal,
     state?.MakeCountryModal,
     state?.SubClothingSection,
+    clothingCategoryModal
   ]);
 
   useEffect(() => {
@@ -686,9 +686,7 @@ const AddingProduct = () => {
       setState({ ...state, producer_Id: null })
     }
   }
-  console.log(state?.filterTypeId, state?.type_Id);
-  console.log(state?.section_Id, 'state?.section_Id');
-  console.log(state?.category_Id, state?.price, state?.isCheckValid);
+ 
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -698,147 +696,147 @@ const AddingProduct = () => {
           <div className="flex items-center grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2 mt-5 ">
             {state?.errorListMessage && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className="text-[16px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[16px] text-textRedColor font-AeonikProRegular">
                   {state?.errorListMessage}
                 </span>
               </div>
             )}
             {state?.errorList?.shop_id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Магазин:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.shop_id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.shop_location_id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Локация:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.shop_location_id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.section_ids && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Раздел одежды:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.section_ids[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.season_ids && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Сезон одежды:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.season_ids[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.color_id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Цвет:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.color_id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.gender_id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Пол:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.gender_id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.min_age_category && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Возраст Min:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.min_age_category[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.max_age_category && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Возраст Max:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.max_age_category[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.category_id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Категория одежды:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.category_id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.type_id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Тип:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.type_id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.producer_Id && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Производитель:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.producer_Id[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.amount && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Количество:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.amount[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.price && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Цена:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.price[0]}
                 </span>
               </div>
             )}
             {state?.errorList?.photos && (
               <div className="w-full  flex items-center gap-x-2 ">
-                <span className=" md:text-base font-AeonikProRegular">
+                <span className="text-[12px] md:text-base font-AeonikProRegular">
                   Выберите фото:
                 </span>
-                <span className="text-[14px] text-textRedColor font-AeonikProRegular">
+                <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.photos[0]}
                 </span>
               </div>
@@ -2646,7 +2644,7 @@ const AddingProduct = () => {
                     type="button"
                     // to="/products/add-detail"
                     onClick={handleNextPage}
-                    className="w-full h-[42px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px] py-3 border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
+                    className="w-full h-[38px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px]   border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
                     Продолжить
                   </button>
