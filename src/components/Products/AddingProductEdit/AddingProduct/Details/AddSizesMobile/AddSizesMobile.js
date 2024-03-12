@@ -1147,80 +1147,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 Буквенный Размер
                             </p>
                             <div className='w-full '>
-                                {/* -----------------Desktop--------------------- */}
-                                <div className="w-full hidden md:flex flex-row">
-                                    <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
-                                        {sizeList.sizeList1.map((data) => {
-                                            return (
-                                                <div
-                                                    key={data?.id}
-                                                    className="flex "
-                                                >
-                                                    {data?.action &&
-                                                        <label
-                                                            htmlFor={data?.id}
-                                                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                id={data?.id}
-                                                                name="size_Outwear"
-                                                                checked={data?.name === state?.sizeListCheck}
-                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
-                                                                value={data?.name}
-                                                                className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                            />
-                                                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                {data?.name}
-                                                            </span>
-                                                        </label>
-                                                    }
-                                                </div>
-                                            );
-                                        })}
 
-                                    </div>
-                                    <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
-                                        {decraseList && sizeList.sizeList2.map((data) => {
-                                            return (
-                                                <div
-                                                    key={data?.id}
-                                                    className="flex "
-                                                >
-
-                                                    {data?.action &&
-                                                        <label
-                                                            htmlFor={data?.id}
-                                                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                id={data?.id}
-                                                                name="size_Outwear"
-                                                                checked={data?.name === state?.sizeListCheck}
-                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
-                                                                value={data?.name}
-                                                                className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                            />
-                                                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                {data?.name}
-                                                            </span>
-                                                        </label>}
-                                                </div>
-                                            );
-                                        })}
-
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                setDecraseList(!decraseList)
-                                            }}
-                                            className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
-                                        >
-                                            {decraseList ? "Меньше" : "Больше"}
-                                        </button>
-                                    </div>
-                                </div>
                                 {/* -----------------Mobile--------------------- */}
                                 <div className="w-full flex md:flex-row flex-col md:hidden">
                                     <div className="w-fit md:w-[222px]  md:h-[50px] flex md:block flex-wrap md:grid md:grid-cols-4 gap-1 md:gap-2 ">
@@ -1347,7 +1274,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             <div className="w-full flex items-start justify-center gap-x-1 ">
                                 <button
                                     type="button"
-                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                     <span>-</span>
                                 </button>
                                 <input
@@ -1360,7 +1287,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                    onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1 })}
                                     className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                     <span>
                                         +
@@ -1684,80 +1611,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             </p>
 
                             <div className='w-full '>
-                                {/* -----------------Desktop--------------------- */}
-                                <div className="w-full hidden md:flex flex-row">
-                                    <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
-                                        {sizeList.sizeList1.map((data) => {
-                                            return (
-                                                <div
-                                                    key={data?.id}
-                                                    className="flex "
-                                                >
 
-                                                    {data?.action &&
-                                                        <label
-                                                            htmlFor={data?.id}
-                                                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                id={data?.id}
-                                                                name="size_Outwear"
-                                                                checked={data?.name === state?.sizeListCheck}
-                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
-                                                                value={data?.name}
-                                                                className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                            />
-                                                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                {data?.name}
-                                                            </span>
-                                                        </label>
-                                                    }
-                                                </div>
-                                            );
-                                        })}
-
-                                    </div>
-                                    <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
-                                        {decraseList && sizeList.sizeList2.map((data) => {
-                                            return (
-                                                <div
-                                                    key={data?.id}
-                                                    className="flex "
-                                                >
-
-                                                    {data?.action && <label
-                                                        htmlFor={data?.id}
-                                                        className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                    >
-                                                        <input
-                                                            type="checkbox"
-                                                            id={data?.id}
-                                                            name="size_Outwear"
-                                                            checked={data?.name === state?.sizeListCheck}
-                                                            onChange={() => onHandleSelectSize(data?.name, data?.id)}
-                                                            value={data?.name}
-                                                            className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                        />
-                                                        <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                            {data?.name}
-                                                        </span>
-                                                    </label>}
-                                                </div>
-                                            );
-                                        })}
-
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                setDecraseList(!decraseList)
-                                            }}
-                                            className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
-                                        >
-                                            {decraseList ? "Меньше" : "Больше"}
-                                        </button>
-                                    </div>
-                                </div>
                                 {/* -----------------Mobile--------------------- */}
                                 <div className="w-full flex md:flex-row flex-col md:hidden">
                                     <div className="w-fit md:w-[222px]  md:h-[50px] flex md:block flex-wrap md:grid md:grid-cols-4 gap-1 md:gap-2 ">
@@ -1886,7 +1740,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             <div className="w-full flex items-start justify-center gap-x-1 ">
                                 <button
                                     type="button"
-                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                     <span>-</span>
                                 </button>
                                 <input
@@ -1899,7 +1753,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                    onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1 })}
                                     className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                     <span>
                                         +
@@ -2121,7 +1975,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex items-start justify-center gap-x-1 ">
                             <button
                                 type="button"
-                                onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                 <span>-</span>
                             </button>
                             <input
@@ -2134,7 +1988,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             />
                             <button
                                 type="button"
-                                onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1 })}
                                 className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                 <span>
                                     +
@@ -2345,84 +2199,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 Буквенный Размер
                             </p>
                             <div className='w-full '>
-                                {/* -----------------Desktop--------------------- */}
-                                <div className="w-full hidden md:flex flex-row">
-                                    <div className="w-fit w-[222px]  h-[50px] grid grid-cols-4 gap-2 ">
-                                        {sizeList.sizeList1.map((data) => {
-                                            return (
-                                                <div
-                                                    key={data?.id}
-                                                    className="flex "
-                                                >
-
-                                                    {data?.action &&
-                                                        <label
-                                                            htmlFor={data?.id}
-                                                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                id={data?.id}
-                                                                name="size_Outwear"
-                                                                checked={data?.name === state?.sizeListCheck}
-                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
-                                                                value={data?.name}
-                                                                className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                            />
-                                                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                {data?.name}
-                                                            </span>
-                                                        </label>
-                                                    }
-                                                </div>
-                                            );
-                                        })}
-
-                                    </div>
-                                    <div className={`w-fit w-[222px]  h-[50px] grid grid-cols-4  gap-2 ${decraseList ? "" : "items-end"} `}>
-                                        {decraseList && sizeList.sizeList2.map((data) => {
-                                            return (
-                                                <div
-                                                    key={data?.id}
-                                                    className="flex "
-                                                >
-
-                                                    {data?.action &&
-
-                                                        <label
-                                                            htmlFor="m_outwear"
-                                                            className="flex w-[46px] gap-x-[2px] items-center  font-AeonikProMedium text-textLightColor   cursor-pointer"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                id="m_outwear"
-                                                                name="size_Outwear"
-                                                                checked={data?.name === state?.sizeListCheck}
-                                                                onChange={() => onHandleSelectSize(data?.name, data?.id)}
-                                                                value={data?.name}
-                                                                className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
-                                                            />
-                                                            <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
-                                                                {data?.name}
-                                                            </span>
-                                                        </label>
-
-                                                    }
-                                                </div>
-                                            );
-                                        })}
-
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                setDecraseList(!decraseList)
-                                            }}
-                                            className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
-                                        >
-                                            {decraseList ? "Меньше" : "Больше"}
-                                        </button>
-                                    </div>
-                                </div>
+                                
                                 {/* -----------------Mobile--------------------- */}
                                 <div className="w-full flex md:flex-row flex-col md:hidden">
                                     <div className="w-fit md:w-[222px]  md:h-[50px] flex md:block flex-wrap md:grid md:grid-cols-4 gap-1 md:gap-2 ">
@@ -2550,7 +2327,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                             <div className="w-full flex items-start justify-center gap-x-1 ">
                                 <button
                                     type="button"
-                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                    onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) - 1 })} className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                     <span>-</span>
                                 </button>
                                 <input
@@ -2563,7 +2340,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setState({ ...state, quantityNum: state?.quantityNum + 1 })}
+                                    onClick={() => setState({ ...state, quantityNum: Number(state?.quantityNum) + 1 })}
                                     className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
                                     <span>
                                         +
