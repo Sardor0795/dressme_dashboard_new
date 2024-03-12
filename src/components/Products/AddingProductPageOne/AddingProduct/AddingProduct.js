@@ -687,6 +687,8 @@ const AddingProduct = () => {
     }
   }
   console.log(state?.filterTypeId, state?.type_Id);
+  console.log(state?.section_Id, 'state?.section_Id');
+  console.log(state?.category_Id, state?.price, state?.isCheckValid);
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -1539,7 +1541,10 @@ const AddingProduct = () => {
                             setState({ ...state, ClothingSection: true })
                           }
                           type="button"
-                          className="w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between  px-3 ${state?.isCheckValid && !section_Id?.length > 0
+                            ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
+                            : "border border-borderColor"
+                            }`}
                         >
                           {section_Id?.length ?
                             <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden ">
@@ -1621,7 +1626,14 @@ const AddingProduct = () => {
                             setState({ ...state, SubClothingSection: true }) : null
                           }
                           type="button"
-                          className="w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 
+                          ${state?.isCheckValid &&
+                              !subSection_Id?.length &&
+                              newArray?.length
+                              ? "overflow-hidden border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                            }
+                          `}
                         >
                           {subSection_Id?.length ?
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
@@ -1695,7 +1707,12 @@ const AddingProduct = () => {
                             setState({ ...state, DressSeason: true })
                           }
                           type="button"
-                          className="w-full h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className={`w-full h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 
+                          ${state?.isCheckValid && !season_Id?.length
+                              ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                            }
+                          `}
                         >
                           {season_Id?.length ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
@@ -1763,7 +1780,7 @@ const AddingProduct = () => {
                         <div
                           className={`w-full flex items-center gap-x-1 justify-between  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id
-                              ? "border border-[#FFB8B8] "
+                              ? "border border-[#FFB8B8] !bg-[#FFF6F6] md:bg-auto"
                               : "border border-borderColor"
                             } rounded-lg  h-[42px] md:h-10 px-[12px]`}
                         >
@@ -1840,7 +1857,10 @@ const AddingProduct = () => {
                               setState({ ...state, GenderModal: true })
                             }
                             type="button"
-                            className="w-full h-[38px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                            className={`w-full h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 ${state?.isCheckValid && !state?.gender_Id
+                              ? "border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                              }`}
                           >
                             {state?.gender_Id ?
                               <div className="w-full h-full rounded-lg flex items-center gap-x-1">
@@ -1959,7 +1979,7 @@ const AddingProduct = () => {
                             }
                             placeholder=""
                             className={`inputStyle w-[calc(100%-42px)] text-[12px] md:text-[16px] h-[38px] md:h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku
-                              ? "border border-[#FFB8B8] "
+                              ? "border border-[#FFB8B8] !bg-[#FFF6F6]"
                               : "border border-borderColor"
                               } rounded-lg px-[10px] outline-none`}
                           />
@@ -1986,9 +2006,7 @@ const AddingProduct = () => {
                           <button
                             onClick={toggleDropModalButton}
                             type="button"
-                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${state?.isCheckValid &&
-                              !state?.category_Id &&
-                              !state?.price
+                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.type_Id
                               ? "border border-[#FFB8B8] "
                               : "border border-borderColor"
                               }  rounded-lg p-3 `}
@@ -2020,8 +2038,8 @@ const AddingProduct = () => {
                             type="button"
                             className={`w-full overflow-hidden min-h-[38px] md:hidden flex items-center justify-between ${state?.isCheckValid &&
                               !state?.category_Id &&
-                              !state?.price
-                              ? "border border-[#FFB8B8] "
+                              !state?.type_Id
+                              ? "border border-[#FFB8B8] bg-[#FFF6F6]"
                               : "border border-borderColor"
                               }  rounded-lg  px-3 `} >
                             {state?.type_Id ? (
@@ -2169,7 +2187,10 @@ const AddingProduct = () => {
                             setState({ ...state, DressTypeModal: true })
                           }
                           type="button"
-                          className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className={`w-full h-[40px] rounded-lg flex md:hidden items-center justify-between   px-3 ${state?.isCheckValid && !state?.filterTypeId
+                            ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                            : "border border-borderColor"
+                            }`}
                         >
                           {state?.filterTypeId ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
@@ -2263,7 +2284,12 @@ const AddingProduct = () => {
                             setState({ ...state, MakeCountryModal: true })
                           }
                           type="button"
-                          className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
+                          className={`w-full h-[40px] rounded-lg flex md:hidden items-center justify-between   px-3 
+                          ${state?.isCheckValid && !state?.producer_Id
+                              ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                            }
+                          `}
                         >
                           {state?.producer_Id ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
@@ -2333,7 +2359,11 @@ const AddingProduct = () => {
                                 min_Age_Category: e.target.value,
                               })
                             }
-                            className="inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                            className={`inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center    flex items-center justify-center rounded-lg font-AeonikProRegular 
+                            ${state?.isCheckValid && !state?.min_Age_Category
+                                ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                                : "border border-borderColor"
+                              }`}
                           />
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                           <input
@@ -2347,7 +2377,12 @@ const AddingProduct = () => {
                                 max_Age_Category: e.target.value,
                               })
                             }
-                            className="inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
+                            className={`inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center    flex items-center justify-center rounded-lg font-AeonikProRegular 
+                            
+                            ${state?.isCheckValid && !state?.max_Age_Category
+                                ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                                : "border border-borderColor"
+                              }`}
                           />
                         </div>
                       </div>
@@ -2407,7 +2442,7 @@ const AddingProduct = () => {
                         <StarLabel />
                       </span>
                     </div>
-                    <div className="w-[250px] h-[300px] md:w-[290px] md:h-[380px] flex items-center justify-center ">
+                    <div className="ls:w-[250px] w-[220px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center justify-center ">
                       <button
                         type="button"
                         className="h-full w-full flex items-center justify-center "
@@ -2426,7 +2461,7 @@ const AddingProduct = () => {
                           />
                           {!state.pictureBgView1 && (
                             <div
-                              className={`w-full h-full flex  bg-photoBg items-center justify-center ${state?.isCheckValid && !state.pictureBgView1
+                              className={`w-full h-full flex md:text-base text-[14px] bg-photoBg items-center justify-center ${state?.isCheckValid && !state.pictureBgView1
                                 ? "border border-[#FFB8B8]"
                                 : "border border-dashed"
                                 } rounded-lg`}
@@ -2449,8 +2484,8 @@ const AddingProduct = () => {
                         </label>
                       </button>
                     </div>
-                    <div className="w-[90px] md:w-[290px] flex flex-col md:flex-row items-center justify-between gap-y-2  md:mt-[10px]">
-                      <div className="w-full h-1/3 md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
+                    <div className="w-[70px] ll:w-[90px] md:w-[290px] md:mt-[10px]  flex flex-col md:flex-row items-center justify-between gap-y-2  md:mt-[10px]">
+                      <div className="w-full h-full md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -2497,7 +2532,7 @@ const AddingProduct = () => {
                           )}
                         </button>
                       </div>
-                      <div className="w-full h-1/3 md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
+                      <div className="w-full h-full md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
@@ -2544,7 +2579,7 @@ const AddingProduct = () => {
                           )}
                         </button>
                       </div>
-                      <div className="w-full h-1/3 md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
+                      <div className="w-full h-full md:h-[125px] md:w-[31%] flex flex-col items-center justify-center ">
                         <button
                           type="button"
                           className="h-full w-full flex items-center justify-center "
