@@ -507,14 +507,14 @@ function EditProfilePage() {
           <button
             onClick={() => setState({ ...state, sellerEmailModal: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
           >
             Oтмена
           </button>
           {state?.sendingLoader ?
             <button
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
             >
               <ClipLoader
                 className="h-full py-[2px]"
@@ -527,7 +527,7 @@ function EditProfilePage() {
             <button
               onClick={() => UpdateEmailSeller()}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
             >
               Обновить
             </button>}
@@ -567,14 +567,14 @@ function EditProfilePage() {
           <button
             onClick={() => setState({ ...state, popConfirmDelete: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
           >
             Oтмена
           </button>
           <button
             onClick={onUserDelete}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
           >
             Удалить
           </button>
@@ -613,12 +613,12 @@ function EditProfilePage() {
         <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 w-full h-fit ">
           {/* Name */}
           <div className="w-full h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+            <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
               Имя{" "}
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                 type="text"
                 name="fname"
                 placeholder="Имя"
@@ -632,12 +632,12 @@ function EditProfilePage() {
           </div>
           {/*  surname */}
           <div className="w-full h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+            <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
               Фамилия{" "}
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                 type="text"
                 name="lname"
                 placeholder="Фамилия"
@@ -652,7 +652,7 @@ function EditProfilePage() {
           {/* Mail */}
           <div className="w-full h-fit  ">
             <div className=" flex items-center justify-between w-full">
-              <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+              <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
                 Электронная почта{" "}
               </div>
               {state?.sellerUpdateEmail ?
@@ -671,7 +671,7 @@ function EditProfilePage() {
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	 w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                 type="email"
                 name="email"
                 placeholder="Адрес электронной почты"
@@ -688,16 +688,16 @@ function EditProfilePage() {
           </div>
           {/* Номер */}
           <div className="w-full h-fit ">
-            <div className="not-italic font-AeonikProRegular text-sm leading-4 text-black  tracking-[0,16px] ">
+            <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
               Номер телефона{" "}
             </div>
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
-              <div className="ss:w-[35%] md:w-[30%] box-border	 h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+              <div className="ss:w-[35%] md:w-[30%] box-border	 h-[38px] md:h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                 <span
-                  className="w-[40px] outline-none flex items-center h-[42px] select-none  not-italic font-AeonikProRegular text-base leading-4 text-black"
+                  className="w-[40px] outline-none flex items-center h-[38px] md:h-[42px] select-none  not-italic font-AeonikProRegular text-[12px] xs:text-[14px] md:text-base leading-4 text-black"
                 >+998</span>
               </div>
-              <div className="ss:w-[65%] md:w-[70%] h-[42px] overflow-hidden">
+              <div className="ss:w-[65%] md:w-[70%] h-[38px] md:h-[42px] overflow-hidden">
                 <InputMask
                   mask="(99) 999-99-99"
                   name="phone"
@@ -706,7 +706,7 @@ function EditProfilePage() {
                     setState({ ...state, sellerPhoneNum: e.target.value, sellerUpdateInput: true })
                   }
                   className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
-                    } text-base leading-4 text-black`}
+                    } text-[12px] xs:text-[14px] md:text-base leading-4 text-black`}
                   placeholder={"(99) 999-99-99"}
                 ></InputMask>
               </div>
@@ -721,7 +721,7 @@ function EditProfilePage() {
                 }`}
             >
               <div className="w-full flex items-center justify-between  ">
-                <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">
+                <span className="text-black text-base   md:text-2xl not-italic font-AeonikProRegular">
                   Выберите регион
                 </span>
                 <button
@@ -826,16 +826,16 @@ function EditProfilePage() {
             {/* Region INput  */}
             <div className={"w-full"}>
               <label htmlFor="selectRegion1">
-                <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                <span className="flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                   Выберите регион
                 </span>
                 <div
                   onClick={() => {
                     setState({ ...state, openModalRegions: true });
                   }}
-                  className="w-full h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                  className="w-full h-[38px] md:h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                 >
-                  <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                  <span className=" w-full h-[38px] md:h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                     {!state?.sellerRegionId &&
                       !state?.sellerSubRegionId &&
                       "Выберите регион"}
@@ -846,11 +846,11 @@ function EditProfilePage() {
                           ?.filter((e) => Number(e.id) === Number(state?.sellerRegionId))
                           .map((item) => {
                             return (
-                              <div className="flex items-center text-[#000] text-[14px] sm:text-base">
+                              <div className="flex items-center text-[#000] text-[14px] md:text-base">
                                 {item?.name_ru},
                                 {item?.sub_regions?.map((data) => {
                                   return (
-                                    <span className="ml-1">{Number(data?.id) == Number(state?.sellerSubRegionId) && data?.name_ru}</span>
+                                    <span className="ml-1 text-[14px] md:text-base">{Number(data?.id) == Number(state?.sellerSubRegionId) && data?.name_ru}</span>
                                   );
                                 })}
                               </div>
@@ -868,7 +868,7 @@ function EditProfilePage() {
           </div>
           {/*  CardNumber */}
           <div className="w-full  h-fit   ">
-            <span className="flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
+            <span className="flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
               Номер банковской карты
             </span>
             <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
@@ -880,7 +880,7 @@ function EditProfilePage() {
                 value={state?.sellerCardNumber}
                 mask="9999-9999-9999-9999"
                 name="credit-card-number"
-                className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
+                className="outline-none	  w-full h-[38px] md:h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
                 onChange={(e) =>
                   setState({ ...state, sellerCardNumber: e.target.value, sellerUpdateInput: true })
                 }
@@ -893,12 +893,12 @@ function EditProfilePage() {
             <div className="w-full justify-between flex ">
               <span
                 onClick={() => setState({ ...state, sellerTypes: "INDIVIDUAL" })}>
-                <span className={`${state?.sellerTypes === 'INDIVIDUAL' ? 'text-fullBlue' : 'text-[#b5b5b5]'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>
+                <span className={`${state?.sellerTypes === 'INDIVIDUAL' ? 'text-fullBlue' : 'text-[#b5b5b5]'} w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}>
                   ФИЗИЧЕСКОЕ ЛИЦО</span>
               </span>
               <span
                 onClick={() => setState({ ...state, sellerTypes: 'ENTITY' })}>
-                <span className={`${state?.sellerTypes === 'ENTITY' ? 'text-fullBlue' : 'text-[#b5b5b5]'} w-full justify-start cursor-pointer flex items-center text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>
+                <span className={`${state?.sellerTypes === 'ENTITY' ? 'text-fullBlue' : 'text-[#b5b5b5]'} w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}>
                   ЮРИДИЧЕСКОЕ ЛИЦО</span>
               </span>
             </div>
@@ -910,7 +910,7 @@ function EditProfilePage() {
 
                   <div className={` w-full flex items-center  rounded-lg ${state?.isCheckInput && !state?.companyName ? "border border-[#FFB8B8] " : "border border-searchBgColor"}`}>
                     <input
-                      className="outline-none px-[16px] rounded-lg w-full h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                      className="outline-none  text-[14px] md:text-base px-[16px] rounded-lg w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                       type="text"
                       name="companyName"
                       placeholder="Имя организации"
@@ -924,7 +924,7 @@ function EditProfilePage() {
             {state?.sellerTypes === 'INDIVIDUAL' &&
               <div className="w-full flex items-center ">
                 <Select
-                  className="h-[42px] z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                  className= "h-[38px] md:h-[42px]  text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
                   placeholder="Тип предприятия"
                   optionFilterProp="children"
                   onChange={(e) => setState({ ...state, sellerTypeId: e, sellerUpdateInput: true })}
@@ -941,18 +941,18 @@ function EditProfilePage() {
             }
           </div>
           <div className={`${state?.sellerTypes === 'ENTITY' ? "flex" : "hidden"}  w-full h-fit flex flex-col items-center justify-start `}>
-            <div className="w-full justify-start  flex items-center text-[#303030] text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
+            <div className="w-full justify-start  flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
               Тип предприятия
             </div>
             <div className={`h-[44px] w-full mt-[6px] overflow-hidden rounded-lg  ${state?.isCheckInput && state?.sellerTypes === 'ENTITY' ? "border border-[#FFB8B8] bg-[#FFF6F6] " : "focus:border border-searchBgColor"}`}>
               <Select
-                className={`SelectAntdStyle   h-[42px]  z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
+                className={`SelectAntdStyle   h-[38px] md:h-[42px] text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
                 placeholder="Тип предприятия"
                 style={{ height: 42 }}
                 optionFilterProp="children"
                 onChange={(e) => { setState({ ...state, sellerTypeId: e, sellerUpdateInput: true }) }}
                 value={dressInfo?.typeList?.company?.filter(e => (e?.id) == state?.sellerTypeId)?.map((item) => { return item?.name_ru })}
-                size="large"
+                // size="large"
                 options={dressInfo?.typeList?.company?.map((item) => {
                   return {
                     value: item?.id,
@@ -969,7 +969,7 @@ function EditProfilePage() {
             <button
               onClick={() => setOpenEditModal(true)}
               className={
-                " text-textBlueColor flex items-center text-base not-italic font-AeonikProRegular hover:underline"
+                " text-textBlueColor flex items-center text-sm md:text-base not-italic font-AeonikProRegular hover:underline"
               }
             >
               Изменить пароль
