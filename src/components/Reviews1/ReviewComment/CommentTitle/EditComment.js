@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
-export default function EditComponent({
-  item,
-  titleStore,
-  handleRefetch
-}) {
+export default function EditComponent({ item, titleStore, handleRefetch }) {
   const [sendText, setSendText] = useState(false);
   const [state, setState] = useState({
     sendAnswer: false,
@@ -19,7 +17,8 @@ export default function EditComponent({
     editComment: false,
   });
 
-  // console.log(state?.editComment, 'editComment');
+  const { t } = useTranslation("reviews");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const url = "https://api.dressme.uz/api/seller/reply";
 
@@ -68,7 +67,7 @@ export default function EditComponent({
       .then((data) => {
         setState({ ...state, getComment: data });
         handleRefetch();
-        setState({ ...state, editComment: false, })
+        setState({ ...state, editComment: false });
       })
       .catch((err) => {
         throw new Error(err || "something wrong");
@@ -76,7 +75,7 @@ export default function EditComponent({
   };
 
   return (
-    <div className="w-full h-fit rounded-[5px] p-[15px] mb-[10px] md:mb-3">
+    <div className="w-full h-fit rounded-[5px] p-[15px] mb-[10px] md:mb-3 border border-borderColor md:rounded-lg">
       {/* userImg and Date */}
       <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
         <div className="h-10 w-fit flex items-center gap-x-[15px]">
@@ -86,13 +85,15 @@ export default function EditComponent({
             </div>
             <div className="flex md:gap-x-[10px]">
               <p className="text-gray-700 text-[13px] md:text-sm font-AeonikProRegular leading-normal">
-                Оценка покупки
+                {t("purchase_rating")}
               </p>
               <p className="flex items-center gap-x-[2px] ml-[5px] md:ml-0">
                 <span className="text-gray-700 text-[13px] md:text-sm mr-[2px] font-AeonikProRegular leading-normal ">
                   {item?.score}.0
                 </span>
-                <span><StarOutlineIcon /></span>
+                <span>
+                  <StarOutlineIcon />
+                </span>
               </p>
             </div>
           </div>
@@ -116,7 +117,7 @@ export default function EditComponent({
             <div className="relative w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
               <div>
                 <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
-                  <span className="mr-1">Ответ</span>
+                  <span className="mr-1">{t("answer")}</span>
                   {titleStore?.locationListId?.shop?.name}
                 </p>
                 <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
@@ -143,8 +144,9 @@ export default function EditComponent({
       {!item?.reply && (
         <form
           onSubmit={(e) => e.preventDefault()}
-          className={`${sendText ? "hidden" : "flex"
-            } w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
+          className={`${
+            sendText ? "hidden" : "flex"
+          } w-full h-fit mt-[25px] md:mt-[5px]  justify-end`}
         >
           {state?.sendAnswer ? (
             <div className="w-full flex flex-col md:flex-row items-center justify-between">
@@ -160,7 +162,7 @@ export default function EditComponent({
                     getUserId: item?.id,
                   })
                 }
-                placeholder="Add your answer..."
+                placeholder={t("add_answer")}
               ></textarea>
               <div className="flex items-center ml-auto mt-3 md:mt-0">
                 <button
@@ -171,7 +173,7 @@ export default function EditComponent({
                   className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
                 >
                   <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                    Отправить
+                    {t("send")}
                   </span>
                 </button>
                 <button
@@ -190,7 +192,7 @@ export default function EditComponent({
               className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
             >
               <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                Ответить
+                {t("answer_two")}
               </span>
             </button>
           )}
@@ -211,7 +213,7 @@ export default function EditComponent({
                 getUserIdEdit: item?.id,
               })
             }
-            placeholder="Add your answer..."
+            placeholder={t("add_answer")}
           />
           <div className="flex items-center ml-auto mt-3 md:mt-0">
             <button
@@ -226,7 +228,7 @@ export default function EditComponent({
               className={` w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
             >
               <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                Отправить
+                {t("send")}
               </span>
             </button>
             <button

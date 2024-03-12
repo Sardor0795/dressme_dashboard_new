@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import ReviewStore from "./ReviewStore/ReviewStore";
 import ReviewWear from "./ReviewWear/ReviewWear";
 import { SearchIcon } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { HelperData } from "../../../hook/HelperDataStore";
+import { useTranslation } from "react-i18next";
 
 export default function ReviewStoreWear() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [helperDatainform] = useContext(HelperData);
+
+  const { t } = useTranslation("reviews");
 
   useEffect(() => {
     window.scrollTo({
@@ -27,7 +30,7 @@ export default function ReviewStoreWear() {
                 <MobileHumburgerMenu />
               </div>
               <span className="text-2xl not-italic font-AeonikProMedium">
-                Отзывы
+                {t("reviews")}
               </span>
             </div>
             <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
@@ -41,7 +44,7 @@ export default function ReviewStoreWear() {
                     name="s"
                     id="searchStore"
                     className="w-full h-full outline-0 px-[10px]"
-                    placeholder="Поиск"
+                    placeholder={`${t("search")}`}
                   />
                   <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                     <SearchIcon />
@@ -57,25 +60,32 @@ export default function ReviewStoreWear() {
               onClick={() => {
                 setDressInfo({ ...dressInfo, showSelectedButton: "products" });
               }}
-              className={`w-[260px] ${dressInfo?.showSelectedButton === "products"
-                ? "text-textBlueColor border rounded-lg border-textBlueColor"
-                : "text-black"
-                } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
+              className={`w-[260px] ${
+                dressInfo?.showSelectedButton === "products"
+                  ? "text-textBlueColor border rounded-lg border-textBlueColor"
+                  : "text-black"
+              } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
-              Товары
-              {dressInfo?.getReviewProduct?.data?.length?.rated_users_count > 1 ? (dressInfo?.getReviewProduct) : null}
+              {t("products")}
+              {dressInfo?.getReviewProduct?.data?.length?.rated_users_count > 1
+                ? dressInfo?.getReviewProduct
+                : null}
             </button>
             <button
               onClick={() => {
                 setDressInfo({ ...dressInfo, showSelectedButton: "shops" });
               }}
-              className={`w-[260px] ${dressInfo?.showSelectedButton === "shops"
-                ? "text-textBlueColor border rounded-lg border-textBlueColor"
-                : "text-black"
-                } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
+              className={`w-[260px] ${
+                dressInfo?.showSelectedButton === "shops"
+                  ? "text-textBlueColor border rounded-lg border-textBlueColor"
+                  : "text-black"
+              } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
-              Магазины
-              {helperDatainform?.shopsList?.shops?.data?.length?.rated_users_count > 1 ? (helperDatainform?.shopsList?.shops) : null}
+              {t("shops")}
+              {helperDatainform?.shopsList?.shops?.data?.length
+                ?.rated_users_count > 1
+                ? helperDatainform?.shopsList?.shops
+                : null}
             </button>
           </div>
         </div>
@@ -85,8 +95,7 @@ export default function ReviewStoreWear() {
           <ReviewStore />
         ) : (
           <ReviewWear />
-        )
-        }
+        )}
       </div>
     </div>
   );

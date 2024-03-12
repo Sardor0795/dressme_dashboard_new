@@ -18,7 +18,6 @@ import { Popover } from "antd";
 import { SellerMainData } from "../../hook/SellerUserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { HelperData } from "../../hook/HelperDataStore";
 
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -36,7 +35,6 @@ function Sidebar() {
   const [modalOpen, setModalOpen] = useState(false);
   // const [selectLang, setselectLang] = useState(1);
   const [sellerInformation] = useContext(SellerMainData);
-  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
   
   useEffect(() => {
     if (localStorage.getItem("i18nextLng")?.length > 2) {
@@ -44,10 +42,6 @@ function Sidebar() {
     }
     setLanguageDetector({ typeLang: currentLang });
   }, [currentLang]);
-
-  console.log(languageDetector, "languageDetector---22");
-  console.log(currentLang, "currentLang---22");
-  console.log("--------------------------");
 
 
   const LanguageList = [

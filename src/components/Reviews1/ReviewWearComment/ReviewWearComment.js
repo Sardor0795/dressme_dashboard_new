@@ -13,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Popover } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
+import { useTranslation } from "react-i18next";
 
 export default function ReviewWearComment() {
   const { request } = useHttp();
@@ -22,6 +23,8 @@ export default function ReviewWearComment() {
     locationListId: "",
     locationIsCheck: false,
   });
+
+  const { t } = useTranslation("reviews");
 
   const navigate = useNavigate();
 
@@ -88,10 +91,11 @@ export default function ReviewWearComment() {
               className="w-full h-5 flex items-center cursor-pointer"
             >
               <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                  ? "border border-textBlueColor bg-textBlueColor"
-                  : "border border-lightBorderColor"
-                  }`}
+                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
+                  data?.checked
+                    ? "border border-textBlueColor bg-textBlueColor"
+                    : "border border-lightBorderColor"
+                }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
               </button>
@@ -121,14 +125,14 @@ export default function ReviewWearComment() {
           onClick={() => setState({ ...state, openwear: false })}
           className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
         >
-          Отмена
+          {t("cancel")}
         </span>
         <span className="h-8 w-[1px] bg-lightBorderColor"></span>
         <span
           onClick={() => setState({ ...state, openwear: false })}
           className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
         >
-          Готово
+          {t("ready")}
         </span>
       </div>
     </div>
@@ -152,7 +156,7 @@ export default function ReviewWearComment() {
             <GoBackIcons />
           </button>
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
-            Подробнее о товаре
+            {t("more_details_of_product")}
           </span>
         </div>
         <div className="w-fit hidden md:flex gap-x-[30px]">
@@ -166,14 +170,15 @@ export default function ReviewWearComment() {
             content={contentWear}
           >
             <p className="text-textLightColor text-sm not-italic font-AeonikProMedium">
-              Фильтр рейтинг
+              {t("filter_rating")}
             </p>
             <span>
               <BiChevronDown
                 size={20}
                 style={{ color: "#c2c2c2" }}
-                className={`${state?.openwear ? "rotate-[-180deg]" : ""
-                  } duration-200`}
+                className={`${
+                  state?.openwear ? "rotate-[-180deg]" : ""
+                } duration-200`}
               />
             </span>
           </Popover>

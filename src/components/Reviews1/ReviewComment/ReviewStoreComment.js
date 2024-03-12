@@ -14,6 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import CommentTitle from "./CommentTitle/CommentTitle";
+import { useTranslation } from "react-i18next";
 
 export default function ReviewComment() {
   const { request } = useHttp();
@@ -24,6 +25,8 @@ export default function ReviewComment() {
     locationIsCheck: false,
     loading: true,
   });
+
+  const { t } = useTranslation("reviews")
 
   const { id } = useParams();
   const newId = id?.replace(":", "");
@@ -119,14 +122,14 @@ export default function ReviewComment() {
           onClick={() => setState({ ...state, openwear: false })}
           className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
         >
-          Отмена
+          {t("cancel")}
         </span>
         <span className="h-8 w-[1px] bg-lightBorderColor"></span>
         <span
           onClick={() => setState({ ...state, openwear: false })}
           className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
         >
-          Готово
+          {t("ready")}
         </span>
       </div>
     </div>
@@ -139,7 +142,7 @@ export default function ReviewComment() {
   }, []);
 
   return (
-    <div>
+    <div className="w-full h-[100vh] px-4 md:px-10">
       <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
           <button
@@ -151,7 +154,7 @@ export default function ReviewComment() {
             <GoBackIcons />
           </button>
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
-            Подробнее о товаре
+            {t("more_details_of_product")}
           </span>
         </div>
         <div className="w-fit hidden md:flex gap-x-[30px]  ">
@@ -164,15 +167,16 @@ export default function ReviewComment() {
             placement="bottom"
             content={contentWear}
           >
-            <p className="text-textLightColor text-sm not-italic font-AeonikProMedium">
-              Фильтр рейтинг
+            <p className="text-textLightColor text-sm not-italic font-AeonikProRegular">
+              {t("filter_rating")}
             </p>
             <span>
               <BiChevronDown
                 size={20}
                 style={{ color: "#c2c2c2" }}
-                className={`${state?.openwear ? "rotate-[-180deg]" : ""
-                  } duration-200`}
+                className={`${
+                  state?.openwear ? "rotate-[-180deg]" : ""
+                } duration-200`}
               />
             </span>
           </Popover>
@@ -180,7 +184,7 @@ export default function ReviewComment() {
             <input
               type="text"
               className="w-full h-full px-[10px] outline-0	"
-              placeholder="Поиск"
+              placeholder={`${t("search")}`}
               name="s"
             />
             <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">

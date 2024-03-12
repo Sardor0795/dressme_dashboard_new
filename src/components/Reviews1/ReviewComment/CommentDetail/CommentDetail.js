@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { Rate } from "antd";
 import { NoImg } from "../../../../assets/icons";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function CommentDetail({ state }) {
+  const { t } = useTranslation("reviews");
+  const [languageDetector] = useContext(LanguageDetectorDress);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -42,8 +47,10 @@ export default function CommentDetail({ state }) {
                   {state?.locationListId?.shop?.overall_rating || "0"}
                 </p>
                 <p className="text-setTexOpacity font-AeonikProRegular">
-                  ({state?.locationListId?.shop?.rated_users_count || "0"}{" "}
-                  votes){" "}
+                  ({t("votes")}:
+                  <span className="ml-[4px]">
+                    {state?.locationListId?.shop?.rated_users_count || "0"} )
+                  </span>
                 </p>
               </div>
             </div>
@@ -61,7 +68,10 @@ export default function CommentDetail({ state }) {
           <div className="h-12 flex items-center px-5 active:opacity-70 border border-borderColor bg-lightBgColor md:bg-white rounded-lg gap-x-3">
             <img src={deliveryIcon} alt="" />
             <span className="text-tableTextTitle2 text-[13px] md:text-base not-italic font-AeonikProMedium">
-              {state?.locationListId?.shop?.delivery?.name_ru || "NoDelivery"}
+              {languageDetector?.typeLang === "ru" &&
+                state?.locationListId?.shop?.delivery?.name_ru}
+              {languageDetector?.typeLang === "uz" &&
+                state?.locationListId?.shop?.delivery?.name_uz}
             </span>
           </div>
         </div>
