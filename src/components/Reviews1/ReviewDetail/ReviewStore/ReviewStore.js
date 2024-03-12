@@ -98,8 +98,8 @@ const ReviewStore = () => {
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
           {
-          // helperDatainform?.shopsList?.shops?.length > 0 &&
-          // helperDatainform?.shopsList?.shops?.rated_users_count > 0 ? (
+          helperDatainform?.shopsList?.shops?.length > 0 &&
+          helperDatainform?.shopsList?.shops?.rated_users_count > 0 ? (
             helperDatainform?.shopsList?.shops?.map((data, i) => {
               return (
                 <div
@@ -210,11 +210,11 @@ const ReviewStore = () => {
                 </div>
               );
             })
-          // ) : (
-          //   <div className="w-full  h-[50vh] md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
-          //     {t("no_reviews")}
-          //   </div>
-          // )
+          ) : (
+            <div className="w-full  h-[50vh] md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
+              {t("no_reviews")}
+            </div>
+          )
           }
         </div>
       )}

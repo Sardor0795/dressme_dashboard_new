@@ -80,9 +80,9 @@ export default function ReviewWear() {
         </div>
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1">
-          {/* {
+          {
           dressInfo?.getReviewProduct?.length > 0 &&
-          dressInfo?.getReviewProduct?.rated_users_count > 0 ? ( */}
+          dressInfo?.getReviewProduct?.rated_users_count > 0 ? (
           <div className="w-full h-fit md:mt-7">
             <div className="w-full mb-[10px] hidden md:block">
               <ul className="w-full h-full  flex items-center justify-between ">
@@ -209,11 +209,11 @@ export default function ReviewWear() {
               })}
             </div>
           </div>
-          {/* ) : (
+          ) : (
             <div className="w-full h-[50vh]  md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
               {t("no_reviews")}
             </div>
-          )} */}
+          )} 
         </div>
       )}
     </div>
