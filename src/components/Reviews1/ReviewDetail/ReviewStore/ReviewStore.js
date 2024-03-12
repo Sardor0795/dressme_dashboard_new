@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -7,12 +7,17 @@ import axios from "axios";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
 import { HelperData } from "../../../../hook/HelperDataStore";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
 
   const [sellerRefreshToken] = useContext(SellerRefresh)
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+
+  const { t } = useTranslation("reviews");
+  const [languageDetector] = useContext( LanguageDetectorDress);
 
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
@@ -88,15 +93,13 @@ const ReviewStore = () => {
     <div className="relative">
       {isLoading ? (
         <div className="h-full w-full">
-
           <LoadingForSeller />
         </div>
-
-        // <div className="absolute top-[-220px] md:top-[-170px] left-0 right-0"><LoadingForSeller /></div>
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
-          {helperDatainform?.shopsList?.shops?.length > 0 && helperDatainform?.shopsList?.shops?.rated_users_count > 0
-            ?
+          {
+          // helperDatainform?.shopsList?.shops?.length > 0 &&
+          // helperDatainform?.shopsList?.shops?.rated_users_count > 0 ? (
             helperDatainform?.shopsList?.shops?.map((data, i) => {
               return (
                 <div
@@ -128,15 +131,22 @@ const ReviewStore = () => {
                         </p>
                         <div className="flex items-center">
                           <div className="flex items-center mr-[5px] md:mr-[6px]">
-                            <Rate disabled allowHalf defaultValue={data?.overall_rating} />
+                            <Rate
+                              disabled
+                              allowHalf
+                              defaultValue={data?.overall_rating}
+                            />
                           </div>
                           <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                             <p className="font-AeonikProMedium text-black mr-[5px]">
                               {data.overall_rating ? data.overall_rating : 0}
                             </p>
                             <p className="text-setTexOpacity font-AeonikProRegular">
-                              ( {data.rated_users_count ? data.rated_users_count : 0}{" "}
-                              votes ){" "}
+                              ({" "}
+                              {data.rated_users_count
+                                ? data.rated_users_count
+                                : 0}{" "}
+                              {t("votes")} ){" "}
                             </p>
                           </div>
                         </div>
@@ -160,7 +170,8 @@ const ReviewStore = () => {
                               key={item?.id}
                               className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium"
                             >
-                              {item?.name_ru}
+                              {languageDetector?.typeLang === "ru" && item?.name_ru}
+                              {languageDetector?.typeLang === "uz" && item?.name_uz}
                             </span>
                           );
                         })}
@@ -170,7 +181,7 @@ const ReviewStore = () => {
                         onClick={() => goDetail(data?.id)}
                         className="text-textBlueColor cursor-pointer  text-base not-italic font-AeonikProMedium hover:underline"
                       >
-                        Подробнее
+                        {t("more_details")}
                       </p>
                     </section>
                   </action>
@@ -184,22 +195,26 @@ const ReviewStore = () => {
                     <div className="flex items-center h-9 ml-auto bg-lightBgColor px-[10px] active:opacity-70 border border-borderColor rounded-lg gap-x-3">
                       <img src={deliveryIcon} alt="" />
                       <span className="text-tableTextTitle2 text-[13px] md:text-base not-italic font-AeonikProMedium">
-                        Собственная доставка
+                        {t("own_delivery")}
                       </span>
                     </div>
                   </action>
                   <button
-                    onClick={() => navigate(`review/comment-store/:${data?.id}`)}
+                    onClick={() =>
+                      navigate(`review/comment-store/:${data?.id}`)
+                    }
                     className="w-full md:hidden flex items-center justify-center active:scale-95 h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium"
                   >
-                    Подробнее
+                    {t("more_details")}
                   </button>
                 </div>
               );
             })
-            : (
-              <div className="w-full  h-[50vh] md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">У вас пока нет отзывов</div>
-            )
+          // ) : (
+          //   <div className="w-full  h-[50vh] md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
+          //     {t("no_reviews")}
+          //   </div>
+          // )
           }
         </div>
       )}

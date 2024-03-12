@@ -6,12 +6,14 @@ import {
   StarIcon,
 } from "../../../../assets/icons";
 import EditComponent from "./EditComment";
+import { useTranslation } from "react-i18next";
 
 export default function WearCommentTitle({ titleProduct, handleRefetch }) {
   const [state, setState] = useState({
     startReviews: true,
   });
 
+  const { t } = useTranslation("reviews");
 
   useEffect(() => {
     window.scrollTo({
@@ -22,10 +24,10 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
   return (
     <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
-        <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
+        <p className="mr-[10px] md:ml-0"> {t("customer_reviews")}</p>
         <span className="block md:hidden text-xs text-mobileTextColor">
-          ( {titleProduct?.locationListId?.product?.ratings?.length || 0} отзывы
-          ){" "}
+          ( {titleProduct?.locationListId?.product?.ratings?.length || 0}{" "}
+          {t("reviews_two")}){" "}
         </span>
       </div>
       <div className="flex md:hidden gap-x-[14px] mb-4">
@@ -34,7 +36,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
             type="text"
             name="s"
             className="w-full h-full text-[13px] outline-0 px-[10px]"
-            placeholder="Поиск"
+            placeholder={t("search")}
           />
           <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
             <SearchIcon />
@@ -45,7 +47,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
           className="w-[30%] h-9 active:scale-95 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]"
         >
           <span className="text-[10px] ls:text-[11px] flex-none not-italic font-AeonikProMedium mr-[5px]">
-            По отзывам
+            {t("according_to_reviews")}
           </span>
           <MobileStar />
         </button>
@@ -96,8 +98,6 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
           </div>
         );
       })}
-
-
     </div>
   );
 }

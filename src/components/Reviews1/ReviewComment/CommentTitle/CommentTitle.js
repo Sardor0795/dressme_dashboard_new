@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   CloseAnswer,
   MobileStar,
@@ -6,8 +6,13 @@ import {
   StarIcon,
 } from "../../../../assets/icons";
 import EditComponent from "./EditComment";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 const CommentTitle = ({ titleStore, handleRefetch }) => {
+
+  const { t } = useTranslation("reviews");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [state, setState] = useState({
     startReviews: true,
@@ -20,11 +25,13 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
   }, []);
 
   return (
-    <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
+    <div className="w-full h-full flex flex-col md:gap-y-[15px]">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
-        <p className="mr-[10px] md:ml-0"> Отзывы клиентов</p>
+        <p className="mr-[10px] md:ml-0"> {t("customer_reviews")}</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
-          ( {titleStore?.locationListId?.shop?.ratings?.length || 0} отзывы ){" "}
+          ({t("reviews_two")}:
+          <span className="ml-[4px]">{titleStore?.locationListId?.shop?.ratings?.length || 0} </span>
+          )
         </span>
       </div>
 
@@ -33,7 +40,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
           <input
             type="text"
             className="w-full h-full text-[13px] px-[10px] outline-0"
-            placeholder="Поиск"
+            placeholder={t("search")}
             name="s"
           />
           <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
@@ -45,7 +52,7 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
           className="w-[30%] h-9 active:scale-95 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]"
         >
           <span className="text-[10px] ls:text-[11px] flex-none not-italic font-AeonikProMedium mr-[5px]">
-            По отзывам
+            {t("according_to_reviews")}
           </span>
           <MobileStar />
         </button>
