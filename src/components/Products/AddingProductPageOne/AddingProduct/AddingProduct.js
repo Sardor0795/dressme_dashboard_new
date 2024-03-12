@@ -12,20 +12,12 @@ import {
   StarLabel,
 } from "../../../../assets/icons";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+
 import HeadWearAdd from "./Details/HeadWear/HeadWearAdd";
 import OutWearAdd from "./Details/OutWear/OutWearAdd";
 import AccessoriesAdd from "./Details/Accessories/AccessoriesAdd";
 import ShoesAdd from "./Details/Shoes/ShoesAdd";
 import UnderAddWear from "./Details/UnderAddWear/UnderAddWear";
-import ClothingSection from "./DetailsForMobile/ClothesSection/ClothingSection";
-import SubClothingSection from "./DetailsForMobile/SubClothesSection/SubClothingSection";
-import DressSeason from "./DetailsForMobile/DressSeason/DressSeason";
-import ColourGroup from "./DetailsForMobile/ColourList/ColourGroup";
-import GenderList from "./DetailsForMobile/GenderList/GenderList";
-import DressType from "./DetailsForMobile/DressType/DressType";
-import MakeCountry from "./DetailsForMobile/CountrySize/MakeCountry";
-import ClothingCategory from "./DetailsForMobile/ClothingCategory/ClothingCategory";
 import { useHttp } from "../../../../hook/useHttp";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import TextFormAdd from "./TextFormGroup/TextFormAdd";
@@ -271,39 +263,7 @@ const AddingProduct = () => {
     });
   }
 
-  // ---------Callback----
-  // const ClothingSectionToggle = React.useCallback(
-  //   () => setState({ ...state, ClothingSection: false }),
-  //   []
-  // ); // ClothingSection
-  const SubClothingSectionToggle = React.useCallback(
-    () => setState({ ...state, SubClothingSection: false }),
-    []
-  ); // ClothingSection
-  const DressSeasonToggle = React.useCallback(
-    () => setState({ ...state, DressSeason: false }),
-    []
-  ); // ClothingSection
-  const ColourListToggle = React.useCallback(
-    () => setState({ ...state, Colour: false }),
-    []
-  ); // ClothingSection
-  const GenderListToggle = React.useCallback(
-    () => setState({ ...state, GenderModal: false }),
-    []
-  ); // ClothingSection
-  const DressTypeToggle = React.useCallback(
-    () => setState({ ...state, DressTypeModal: false }),
-    []
-  ); // ClothingSection
-  const MakeCountryToggle = React.useCallback(
-    () => setState({ ...state, MakeCountryModal: false }),
-    []
-  ); // ClothingSection
-  const ClothingCategoryToggle = React.useCallback(
-    () => setState({ ...state, ClothingCategoryModal: false }),
-    []
-  ); // ClothingSection
+
 
   // ---------Callback----
   useEffect(() => {
