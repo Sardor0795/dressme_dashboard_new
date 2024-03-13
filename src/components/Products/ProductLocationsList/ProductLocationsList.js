@@ -500,6 +500,7 @@ export default function ProductLocationsList() {
     statusModal,
   ]);
   // border border-green-50
+  console.log();
   return (
     <div className="w-full  md:px-10">
       <section
@@ -1384,6 +1385,7 @@ export default function ProductLocationsList() {
                                                   )
                                               )
                                               ?.map((itemValue, index) => {
+                                                console.log(itemValue, 'itemValue');
                                                 return (
                                                   <div
                                                     key={index}
@@ -1456,31 +1458,17 @@ export default function ProductLocationsList() {
                                                                   {itemValue?.sku ||
                                                                     "sku"}
                                                                 </td>
-                                                                {getProductInfo?.types &&
-                                                                  getProductInfo?.types
-                                                                    ?.filter(
-                                                                      (e) =>
-                                                                        e?.id ==
-                                                                        itemValue?.type_id
-                                                                    )
-                                                                    ?.map(
-                                                                      (
-                                                                        valueType,
-                                                                        index
-                                                                      ) => {
-                                                                        return (
-                                                                          <td
-                                                                            key={
-                                                                              index
-                                                                            }
-                                                                            className="w-[8%] h-full  flex items-center justify-center "
-                                                                          >
-                                                                            {valueType?.name_ru ||
-                                                                              "type_id"}
-                                                                          </td>
-                                                                        );
-                                                                      }
-                                                                    )}
+
+                                                                <td
+                                                                  key={
+                                                                    index
+                                                                  }
+                                                                  className="w-[8%] h-full  flex items-center justify-center "
+                                                                >
+                                                                  {itemValue?.type?.name_ru ||
+                                                                    "type_id"}
+                                                                </td>
+
                                                                 <td className="w-[8%] h-full  flex items-center justify-center ">
                                                                   {itemValue?.created_at ||
                                                                     "created_at"}
@@ -1786,31 +1774,16 @@ export default function ProductLocationsList() {
                                                                           "sku"}
                                                                       </p>
                                                                     </div>
-                                                                    {getProductInfo?.types &&
-                                                                      getProductInfo?.types
-                                                                        ?.filter(
-                                                                          (e) =>
-                                                                            e?.id ==
-                                                                            itemValue?.type_id
-                                                                        )
-                                                                        ?.map(
-                                                                          (
-                                                                            valueType,
-                                                                            index
-                                                                          ) => {
-                                                                            return (
-                                                                              <td
-                                                                                key={
-                                                                                  index
-                                                                                }
-                                                                                className="w-[30%] h-full  flex items-center justify-center "
-                                                                              >
-                                                                                {valueType?.name_ru ||
-                                                                                  "type_id"}
-                                                                              </td>
-                                                                            );
-                                                                          }
-                                                                        )}
+
+                                                                    <td
+                                                                      key={
+                                                                        index
+                                                                      }
+                                                                      className="w-[30%] h-full  flex items-center justify-center "
+                                                                    >
+                                                                      {itemValue?.type?.name_ru || "type_id"}
+                                                                    </td>
+
                                                                     {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
                                                                     <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                       {itemValue?.created_at ||
