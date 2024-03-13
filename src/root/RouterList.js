@@ -80,6 +80,7 @@ export default function RouterList() {
         {/* ---------------------<Store>------------------------- */}
 
         <Route element={<Sidebar />}>
+          <Route path={"/edit-profile"} element={<EditProfilePage />} />
           <Route path="/reviews" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
               <Reviews1 />
@@ -140,7 +141,6 @@ export default function RouterList() {
               <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
             </Route>}
 
-          <Route path={"/edit-profile"} element={<EditProfilePage />} />
         </Route>
 
 
@@ -150,11 +150,7 @@ export default function RouterList() {
           </Suspense>
         } />
         <Route path={"/login-seller"} element={<SignInSeller />} />
-        {/* <Route path="/login-seller" element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <SignInSeller />
-          </Suspense>
-        } /> */}
+    
         <Route path="/" element={<Navigate to={"/login-seller"} />} />
         <Route path="/forgot-password-seller" element={
           <Suspense fallback={<div>Loading...</div>}>

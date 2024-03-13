@@ -429,7 +429,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                       <div className="w-full    flex flex-col items-center text-tableTextTitle">
                         <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                           <div className="flex flex-col w-full">
-                            <div className="w-full flex h-[100px]  hidden md:flex items-center border border-green-500">
+                            <div className="w-full flex h-[100px]  hidden md:flex items-center  ">
                               <Checkbox
                                 value={itemValue?.id}
                                 checked={checked}
@@ -461,22 +461,15 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                 <td className="w-[15%] h-full flex items-center ">
                                   {itemValue?.sku || "sku"}
                                 </td>
-                                {dressInfo?.getProductInfo?.types &&
-                                  dressInfo?.getProductInfo?.types
-                                    ?.filter((e) => e?.id == itemValue?.type_id)
-                                    ?.map((valueType, index) => {
-                                      return (
-                                        <td
-                                          key={index}
-                                          className="w-[8%] h-full flex items-center "
-                                        >
-                                          {languageDetector?.typeLang ===
-                                            "ru" && valueType?.name_ru}
-                                          {languageDetector?.typeLang ===
-                                            "uz" && valueType?.name_uz}
-                                        </td>
-                                      );
-                                    })}
+
+                                <td
+                                  key={index}
+                                  className="w-[8%] h-full flex items-center "
+                                >
+                                  {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                  {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
+                                </td>
+
                                 <td className="w-[8%] h-full flex items-center ">
                                   {itemValue?.created_at || "created_at"}
                                 </td>
@@ -673,21 +666,12 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                           "sku"}
                                       </p>
                                     </div>
-                                    {/* {getProductInfo?.types && getProductInfo?.types?.filter((e) => e?.id == itemValue?.type_id)?.map((valueType, index) => {
-                                        return (
-                                          <td key={index}
-                                            className="w-[30%] h-full  flex items-center justify-center "
-                                          >
-                                            {valueType?.name_ru ||
-                                              "type_id"}
-                                          </td>
-                                        );
-                                      }
-                                      )} */}
+                                    
                                     <div key={index}
                                       className="w-[30%] h-full  flex items-center   "
                                     >
-                                      {itemValue?.type_id || "type_id"}
+                                      {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                     </div>
                                     <div className="w-[30%] h-full  flex items-center    text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                       {itemValue?.created_at ||
@@ -709,7 +693,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                       itemValue?.id,
                                       data?.id
                                     )
-                                  } className="text-[#007DCA] bg-[#E8F5FD] text-center w-[100%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                  } className="text-[#007DCA] bg-[#E8F5FD] text-center w-[100%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                 >
                                   {t("more_details")}
                                 </button>
