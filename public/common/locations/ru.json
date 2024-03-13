@@ -31,7 +31,7 @@
     "address": "Адрес",
     "products": "Товары",
     "more_details": "Подробнее",
-    "status": "Cтатус",
+    "status": "Статус",
     "sure": "Вы уверены",
     "delete": "Удалить",
     "cancel": "Отмена",
@@ -40,49 +40,26 @@
     "upload_a_photo": "Загрузить фото",
     "edit_locations": "Редактировать местоположения",
     "save": "Сохранить",
-    
-
-
-
-    
-    "search": "Поиск",
-    "create_new_store": "Создать новый магазин",
-    "votes": "голосов",
-    "location": "Локации",
-    "background_photo": "Фоновое фото",
-    "select_logo": "Выберите логотип",
-    "trim": "Обрезать",
-    "create_a_store": "Создать магазин",
-    "store_name": "Название магазина",
-    "enter_store_name": "Введите название магазина",
-    "gender": "Пол",
-    "delivery_method": "Метод доставки",
+    "remove_from_address": "Удалить из адреса",
     "cloth": "Одежда",
-    "shops": "Магазины",
-    "no_reviews": "У вас пока нет отзывов",
-    "reviews": "Отзывы",
-    "reviews_two": "oтзывы",
-    "own_delivery": "Собственная доставка",
-    "image": "Изображение",
+    "search": "Поиск",
+    "add_cloth": "Добавить одежду",
+    "selected": "Выбранные",
+    "select_all": "Выбрать все",
     "name_of_product": "Наименование товара",
+    "vendor_code": "Артикул",
+    "type": "Тип",
     "date": "Дата",
+    "price_of_product": "Цена товара",
+    "currency": "Сум",
+    "currency_two": "сум",
     "name_product": "Имя товара",
-    "more_details_of_product": "Подробнее о товаре",
-    "filter_rating": "Фильтр рейтинг",
-    "customer_reviews": "Отзывы клиентов",
-    "according_to_reviews": "По отзывам",
-    "purchase_rating": "Оценка покупки",
-    "answer": "Ответ",
-    "send": "Отправить",
-    "answer_two": "Ответить",
-    "add_answer": "Добавьте свой ответ ..."
+    "add_location_two": "Добавить в локацию",
+    "more": "Больше",
+    "no_product": "Tовара нет"
 
 
 
 
-
-
-
-
-    
+   
 }
