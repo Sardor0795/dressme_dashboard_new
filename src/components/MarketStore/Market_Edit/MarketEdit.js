@@ -9,19 +9,20 @@ import {
 } from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PuffLoader from "react-spinners/PuffLoader";
-import Cropper, { ReactCropperElement } from "react-cropper";
+import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { useHttp } from "../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../hook/ContextTeam";
-import { SellerMainData } from "../../../hook/SellerUserContext";
 import { HelperData } from "../../../hook/HelperDataStore";
 import imageCompression from "browser-image-compression";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../language/LanguageItem";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -29,6 +30,9 @@ function MarketEdit() {
   const { request } = useHttp();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+
+  const { t } = useTranslation("shops");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [state, setState] = useState({
     marketName: "",
@@ -46,7 +50,7 @@ function MarketEdit() {
     genderList: null,
     deliverList: null,
   });
-  const [loaderEdit, setLoaderEdit] = useState(true);
+  const [loaderEdit, setLoaderEdit] = useState(false);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -56,13 +60,6 @@ function MarketEdit() {
   const [backImgUploadModal, setBackImgUploadModal] = useState(false);
   const [backImgOrder, setBackImgOrder] = useState();
 
-  const handleLocationImageOne = (e) => {
-    setState({
-      ...state,
-      pictureBgFile1: e.target.files[0],
-      pictureBgView1: URL.createObjectURL(e.target.files[0]),
-    });
-  };
   async function handleImageUpload(event) {
     const imageFile = event.target.files[0];
     const options = {
@@ -81,20 +78,6 @@ function MarketEdit() {
       console.log(error);
     }
   }
-  // const clearBgImg = () => {
-  //   setState({
-  //     ...state,
-  //     pictureBgFile: null,
-  //     pictureBgView: null,
-  //   });
-  // }
-  const handleLocationImageTwo = (e) => {
-    setState({
-      ...state,
-      picturelogoFile2: e.target.files[0],
-      picturelogoView2: URL.createObjectURL(e.target.files[0]),
-    });
-  };
 
   const navigate = useNavigate();
   const pathname = window.location.pathname;
@@ -108,7 +91,6 @@ function MarketEdit() {
   const cropperRef = createRef();
 
   const onChange = (e) => {
-    // console.log(e, "state-----111pictureLogoFile");
     e.preventDefault();
     setState({
       ...state,
@@ -128,10 +110,7 @@ function MarketEdit() {
     };
     reader.readAsDataURL(files[0]);
   };
-  // const ClearBrandImg = () => {
-  //   setImage('')
-  //   // setCropData('')
-  // }
+
   const dataURLtoFile = (dataUrl, fileName) => {
     const arr = dataUrl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
@@ -146,9 +125,7 @@ function MarketEdit() {
     return new Blob([u8arr], { type: mime, name: fileName });
   };
 
-  // console.log(state?.pictureLogoFile, "state-----222pictureLogoFile");
   const getCropData = () => {
-    // console.log(cropperRef.current?.cropper?.getCroppedCanvas(), "state-----333cropperRef.current?.cropper");
     if (typeof cropperRef.current?.cropper !== "undefined") {
       const croppedData = cropperRef.current?.cropper
         .getCroppedCanvas()
@@ -179,12 +156,9 @@ function MarketEdit() {
           picturelogoView2: res?.shop?.url_logo_photo,
         });
         setCropData(res?.shop?.url_logo_photo);
-        setLoaderEdit(false);
-        // setImage(res?.shop?.url_logo_photo)
       },
       onError: (err) => {
         throw new Error(err || "something wrong");
-        setLoaderEdit(false);
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -367,27 +341,11 @@ function MarketEdit() {
         <LoadingForSeller />
       ) : (
         <div className="w-full   h-full mx-auto md:max-w-[1120px]  md:mt-12  md:px-10 px-4">
-          {/* <ToastContainer
-        style={{ zIndex: "1000", top: "80px" }}
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      /> */}
           <section
             onClick={() => {
               setDeleteModal(false);
               setOpenStoreList(false);
               setSuccessMessage(null);
-              // setDeleteMessage(null)
-              // setHideProductList(false)
               setBackImgUploadModal(false);
             }}
             className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
@@ -395,7 +353,7 @@ function MarketEdit() {
           ></section>
           {/* Delete Product Of Pop Confirm */}
           <section
-            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+            className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
               deleteModal
                 ? " bottom-0 md:flex"
                 : "md:hidden bottom-[-800px] z-[-10]"
@@ -411,12 +369,7 @@ function MarketEdit() {
             {hideDeleteIcons ? (
               <div className="w-full flex items-center justify-center">
                 {loader && hideDeleteIcons ? (
-                  <PuffLoader
-                    // className={styles.loader1}
-                    color={"#007DCA"}
-                    size={80}
-                    loading={true}
-                  />
+                  <PuffLoader color={"#007DCA"} size={80} loading={true} />
                 ) : (
                   <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
                     <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
@@ -436,7 +389,7 @@ function MarketEdit() {
                   </span>
                 </span>
                 <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                  Вы уверены?
+                  {t("sure")}?
                 </span>
               </div>
             )}
@@ -446,14 +399,14 @@ function MarketEdit() {
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
               >
-                Oтмена
+                {t("cancel")}
               </button>
               <button
                 onClick={() => onUserDelete()}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
               >
-                Удалить{" "}
+                {t("delete")}
               </button>
             </div>
           </section>
@@ -461,13 +414,12 @@ function MarketEdit() {
 
           {backImgUploadModal && (
             <div className="max-w-[440px] md:max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
-              {/* </div> */}
               {backImgOrder === 1 && (
                 <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
                   <div className={`flex items-center justify-between  pb-3`}>
                     <div className="w-fit flex items-center">
                       <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
-                        Выберите фото
+                        {t("select_photo")}
                       </span>
                     </div>
                     <button
@@ -506,14 +458,14 @@ function MarketEdit() {
                       />
                     ) : (
                       <span className="leading-none text-[12px]  md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                        Фоновое фото
+                        {t("background_photo")}
                       </span>
                     )}
                   </div>
                   <div className="flex items-center justify-between  pt-2">
                     <label
                       htmlFor={"imageThree1"}
-                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                      className="w-fit flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor md:text-lg font-AeonikProMedium"
                     >
                       <input
                         className="hidden"
@@ -524,8 +476,8 @@ function MarketEdit() {
                         accept=" image/*"
                       />
                       {state?.pictureBgView1
-                        ? "Изменить фото"
-                        : "Загрузить фото"}
+                        ? `${t("change_photo")}`
+                        : `${t("upload_a_photo")}`}
                     </label>
 
                     {state?.pictureBgView1 ? (
@@ -533,14 +485,14 @@ function MarketEdit() {
                         onClick={() => onUserDeleteBackgroundImg()}
                         className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                       >
-                        Удалить
+                        {t("delete")}
                       </button>
                     ) : (
                       <button
                         onClick={() => setBackImgUploadModal(false)}
                         className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                       >
-                        Oтмена
+                        {t("cancel")}
                       </button>
                     )}
                   </div>
@@ -551,7 +503,7 @@ function MarketEdit() {
                   <div className={`flex items-center justify-between  pb-3`}>
                     <div className="w-fit flex items-center">
                       <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
-                        Выберите логотип
+                        {t("select_logo")}
                       </span>
                     </div>
                     <button
@@ -583,14 +535,14 @@ function MarketEdit() {
                       />
                     ) : (
                       <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                        Выберите логотип{" "}
+                        {t("select_logo")}{" "}
                       </span>
                     )}
                   </div>
                   <div className="flex items-center justify-between  pt-2">
                     <label
                       htmlFor={"logoBrand"}
-                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor  text-sm md:text-lg font-AeonikProMedium"
+                      className="w-fit flex items-center justify-center cursor-pointer active:scale-95   text-textBlueColor text-sm md:text-lg font-AeonikProMedium"
                     >
                       <input
                         className="hidden"
@@ -600,7 +552,9 @@ function MarketEdit() {
                         onChange={onChange}
                         accept=" image/*"
                       />
-                      {image ? "Изменить фото" : "Загрузить фото"}
+                      {image
+                        ? `${t("change_photo")}`
+                        : `${t("upload_a_photo")}`}
                     </label>
 
                     {image && (
@@ -611,21 +565,12 @@ function MarketEdit() {
                         Обрезать
                       </button>
                     )}
-
-                    {/* {image ?
-                    <button
-                      onClick={() => ClearBrandImg()}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                      Удалить
-                    </button>
-                    : */}
                     <button
                       onClick={() => setBackImgUploadModal(false)}
                       className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                     >
-                      Oтмена
+                      {t("cancel")}
                     </button>
-                    {/* } */}
                   </div>
                 </div>
               )}
@@ -637,15 +582,15 @@ function MarketEdit() {
                 onClick={() => {
                   navigate(-1);
                 }}
-                className="  md:hidden absolute left-2 flex items-center cursor-pointer justify-center "
+                className="md:hidden absolute left-2 flex items-center cursor-pointer justify-center "
               >
                 <GoBackIcons />
               </button>
               <div className="w-fit">
                 <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
-                  Создать магазин
+                  {t("create_a_store")}
                 </span>
-                <span className="md:block hidden">Магазины</span>
+                <span className="md:block hidden">{t("shops")}</span>
               </div>
             </div>
           </div>
@@ -663,7 +608,7 @@ function MarketEdit() {
                 onClick={() => setDeleteModal(true)}
                 className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[10px] ls:text-[12px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
               >
-                Удалить
+                {t("delete")}
               </button>
             </div>
           </div>
@@ -679,7 +624,7 @@ function MarketEdit() {
               {!state?.pictureBgView1 ? (
                 <div className="w-fit h-fit flex items-center">
                   <span className="leading-none text-[12px] font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                    Фоновое фото
+                    {t("background_photo")}
                   </span>
                 </div>
               ) : (
@@ -709,7 +654,7 @@ function MarketEdit() {
                   <div className="flex flex-col item-center">
                     <span className="flex items-center flex-col justify-center px-2">
                       <div className="flex items-center md:w-[85px] text-[12px] md:text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
-                        Выберите логотип
+                        {t("select_logo")}
                         <span className="hidden md:block">
                           <StarLabel />
                         </span>
@@ -730,7 +675,7 @@ function MarketEdit() {
                   <LocationIcon colors="#007dca" />
                 </span>
                 <span className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[12px] ll:text-sm not-italic font-AeonikProMedium">
-                  Все локации
+                  {t("all_locations")}
                 </span>
               </button>
             </div>
@@ -744,7 +689,7 @@ function MarketEdit() {
                     htmlFor="shopName"
                     className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
                   >
-                    Название магазина
+                    {t("store_name")}
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />{" "}
                     </span>
@@ -755,13 +700,13 @@ function MarketEdit() {
                     id="shopName"
                     value={state?.marketName}
                     onChange={handleInputChange}
-                    placeholder="Введите название магазина"
+                    placeholder={t("enter_store_name")}
                     className="w-[65%] md:w-[70%] h-[32px] md:h-[42px] border border-borderColor2 outline-none px-3 rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
                   />
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-2 md:gap-x-[30px] mb-5">
                   <div className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular">
-                    Пол
+                    {t("gender")}
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />{" "}
                     </span>
@@ -782,9 +727,14 @@ function MarketEdit() {
                           />
                           <label
                             htmlFor={data?.id}
-                            className={`w-1/3 h-[32px] md:h-[42px] cursor-pointer w-full flex items-center justify-center border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
+                            className={`h-[32px] md:h-[42px] cursor-pointer w-full flex items-center justify-center border md:border-0 text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                           >
-                            <span>{data?.name_ru}</span>
+                            <span>
+                              {languageDetector?.typeLang === "ru" &&
+                                data?.name_ru}
+                              {languageDetector?.typeLang === "uz" &&
+                                data?.name_uz}
+                            </span>
                           </label>
                         </div>
                       );
@@ -793,12 +743,12 @@ function MarketEdit() {
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-2 md:gap-x-[30px] ">
                   <div className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular">
-                    Метод доставки
+                    {t("delivery_method")}
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />
                     </span>
                   </div>
-                  <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 gap-x-4 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
+                  <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                     {helperDatainform?.deliveryList?.map((data, index) => {
                       return (
                         <div className="w-full " key={index}>
@@ -817,7 +767,10 @@ function MarketEdit() {
                             className={`w-full h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                           >
                             <span className="leading-normal">
-                              {data?.name_ru}
+                              {languageDetector?.typeLang === "ru" &&
+                                data?.name_ru}
+                              {languageDetector?.typeLang === "uz" &&
+                                data?.name_uz}
                             </span>
                           </label>
                         </div>
@@ -831,9 +784,9 @@ function MarketEdit() {
           <div className="flex items-center justify-center mb-10 md:mb-24">
             <button
               onClick={handleEditShops}
-              className="inline-block px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
+              className="px-[100px] flex items-center justify-center  md:w-fit w-full h-[42px] bg-textBlueColor text-white rounded-lg active:scale-95"
             >
-              Сохранить{" "}
+              {t("save")}
             </button>
           </div>
         </div>
