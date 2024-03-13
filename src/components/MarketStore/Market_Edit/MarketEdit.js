@@ -1,6 +1,12 @@
 import React, { createRef, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DeleteIcon, GoBackIcons, LocationIcon, MenuCloseIcons, StarLabel } from "../../../assets/icons";
+import {
+  DeleteIcon,
+  GoBackIcons,
+  LocationIcon,
+  MenuCloseIcons,
+  StarLabel,
+} from "../../../assets/icons";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
@@ -40,7 +46,7 @@ function MarketEdit() {
     genderList: null,
     deliverList: null,
   });
-  const [loaderEdit, setLoaderEdit] = useState(false);
+  const [loaderEdit, setLoaderEdit] = useState(true);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -49,7 +55,6 @@ function MarketEdit() {
   const [openStoreList, setOpenStoreList] = useState(false);
   const [backImgUploadModal, setBackImgUploadModal] = useState(false);
   const [backImgOrder, setBackImgOrder] = useState();
-
 
   const handleLocationImageOne = (e) => {
     setState({
@@ -64,7 +69,7 @@ function MarketEdit() {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
       setState({
@@ -128,7 +133,7 @@ function MarketEdit() {
   //   // setCropData('')
   // }
   const dataURLtoFile = (dataUrl, fileName) => {
-    const arr = dataUrl.split(',');
+    const arr = dataUrl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];
     const bstr = atob(arr[1]);
     let n = bstr.length;
@@ -145,10 +150,12 @@ function MarketEdit() {
   const getCropData = () => {
     // console.log(cropperRef.current?.cropper?.getCroppedCanvas(), "state-----333cropperRef.current?.cropper");
     if (typeof cropperRef.current?.cropper !== "undefined") {
-      const croppedData = cropperRef.current?.cropper.getCroppedCanvas().toDataURL('image/jpeg');
-      setCropFile(dataURLtoFile(croppedData, 'cropped_image.jpg'))
+      const croppedData = cropperRef.current?.cropper
+        .getCroppedCanvas()
+        .toDataURL("image/jpeg");
+      setCropFile(dataURLtoFile(croppedData, "cropped_image.jpg"));
       setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
-      setBackImgUploadModal(false)
+      setBackImgUploadModal(false);
     }
   };
   // ------------------------------------------------------------
@@ -171,11 +178,13 @@ function MarketEdit() {
           pictureBgViewTest: res?.shop?.url_background_photo,
           picturelogoView2: res?.shop?.url_logo_photo,
         });
-        setCropData(res?.shop?.url_logo_photo)
+        setCropData(res?.shop?.url_logo_photo);
+        setLoaderEdit(false);
         // setImage(res?.shop?.url_logo_photo)
       },
       onError: (err) => {
         throw new Error(err || "something wrong");
+        setLoaderEdit(false);
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -188,17 +197,14 @@ function MarketEdit() {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/genders`, {
           headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          },
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, genderList: data?.data?.genders })
+          setDressInfo({ ...dressInfo, genderList: data?.data?.genders });
         }
-
-      } catch (error) {
-
-      }
+      } catch (error) {}
     };
     if (!dressInfo?.genderList) {
       fetchGender();
@@ -207,88 +213,93 @@ function MarketEdit() {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/delivery-method`, {
           headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          },
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setHelperDatainform({ ...helperDatainform, deliveryList: data?.data?.delivery_methods })
-
+          setHelperDatainform({
+            ...helperDatainform,
+            deliveryList: data?.data?.delivery_methods,
+          });
         }
-      } catch (error) {
-
-      }
+      } catch (error) {}
     };
     if (!helperDatainform?.deliveryList) {
       fetchDelivery();
     }
   }, []);
 
-
   const deleteProductByAddress = useMutation(() => {
     return request({ url: `/shops/${id}`, method: "DELETE", token: true });
   });
   function onUserDelete() {
-    setLoader(true)
-    setHideDeleteIcons(true)
-    deleteProductByAddress.mutate({},
+    setLoader(true);
+    setHideDeleteIcons(true);
+    deleteProductByAddress.mutate(
+      {},
       {
-        onSuccess: res => {
+        onSuccess: (res) => {
           if (res?.message) {
-            setSuccessMessage(res?.message)
-            setLoader(false)
+            setSuccessMessage(res?.message);
+            setLoader(false);
             // onRefetch()
             setTimeout(() => {
-              setDeleteModal(false)
+              setDeleteModal(false);
               navigate("/store");
             }, 2000);
           }
-
         },
-        onError: err => {
+        onError: (err) => {
           throw new Error(err || "something wrong");
-        }
-      })
+        },
+      }
+    );
   }
   const deleteProductByImage = useMutation(() => {
-    return request({ url: `/shops/${id}/delete-shop-background-photo`, method: "DELETE", token: true });
+    return request({
+      url: `/shops/${id}/delete-shop-background-photo`,
+      method: "DELETE",
+      token: true,
+    });
   });
 
   function onUserDeleteBackgroundImg() {
-    setLoader(true)
-    setHideDeleteIcons(true)
-    deleteProductByImage.mutate({},
+    setLoader(true);
+    setHideDeleteIcons(true);
+    deleteProductByImage.mutate(
+      {},
       {
-        onSuccess: res => {
+        onSuccess: (res) => {
           if (res?.message) {
-            setSuccessMessage(res?.message)
-            setLoader(false)
-            refetch()
+            setSuccessMessage(res?.message);
+            setLoader(false);
+            refetch();
             setTimeout(() => {
-              setBackImgUploadModal(false)
-              setHideDeleteIcons(false)
+              setBackImgUploadModal(false);
+              setHideDeleteIcons(false);
             }, 1000);
           }
-
         },
-        onError: err => {
+        onError: (err) => {
           throw new Error(err || "something wrong");
-        }
-      })
+        },
+      }
+    );
 
     if (!state?.pictureBgViewTest) {
-      setBackImgUploadModal(false)
+      setBackImgUploadModal(false);
       setState({
         ...state,
-        pictureBgFile1: '',
-        pictureBgView1: '',
+        pictureBgFile1: "",
+        pictureBgView1: "",
       });
     }
   }
 
   // ---------Handle Edit---------
   const handleEditShops = () => {
-    setLoaderEdit(true)
+    setLoaderEdit(true);
     let form = new FormData();
     form.append("name", state?.marketName);
     form.append("gender_id", state?.checkGender);
@@ -306,7 +317,7 @@ function MarketEdit() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setLoaderEdit(false)
+        setLoaderEdit(false);
         if (res?.fields || res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -318,14 +329,14 @@ function MarketEdit() {
             progress: undefined,
             theme: "light",
           });
-          refetch()
+          refetch();
           // setImage('')
 
           // navigate("/store");
         }
       })
       .catch((err) => {
-        setLoaderEdit(false)
+        setLoaderEdit(false);
         throw new Error(err || "something wrong");
       });
   };
@@ -341,17 +352,21 @@ function MarketEdit() {
   }, []);
   const handleInputChange = (e) => {
     if (e.target.value) {
-      setState({ ...state, marketName: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+      setState({
+        ...state,
+        marketName:
+          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+      });
     } else {
-      setState({ ...state, marketName: null })
+      setState({ ...state, marketName: null });
     }
-  }
+  };
   return (
     <div className="w-full  h-full ">
-      {loaderEdit ? <LoadingForSeller /> :
+      {loaderEdit ? (
+        <LoadingForSeller />
+      ) : (
         <div className="w-full   h-full mx-auto md:max-w-[1120px]  md:mt-12  md:px-10 px-4">
-
-
           {/* <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
         position="top-right"
@@ -368,49 +383,52 @@ function MarketEdit() {
       /> */}
           <section
             onClick={() => {
-              setDeleteModal(false)
-              setOpenStoreList(false)
-              setSuccessMessage(null)
+              setDeleteModal(false);
+              setOpenStoreList(false);
+              setSuccessMessage(null);
               // setDeleteMessage(null)
               // setHideProductList(false)
-              setBackImgUploadModal(false)
-
+              setBackImgUploadModal(false);
             }}
             className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
           ></section>
           {/* Delete Product Of Pop Confirm */}
           <section
-            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-              }`}
+            className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+              deleteModal
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
           >
             <button
               onClick={() => setDeleteModal(false)}
               type="button"
-              className="absolute  right-3 top-3 w-5 h-5 ">
-              <MenuCloseIcons
-                className="w-full h-full"
-                colors={"#a1a1a1"} />
+              className="absolute  right-3 top-3 w-5 h-5 "
+            >
+              <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
             </button>
-            {hideDeleteIcons ?
+            {hideDeleteIcons ? (
               <div className="w-full flex items-center justify-center">
-                {loader && hideDeleteIcons ?
+                {loader && hideDeleteIcons ? (
                   <PuffLoader
                     // className={styles.loader1}
                     color={"#007DCA"}
                     size={80}
                     loading={true}
                   />
-                  :
+                ) : (
                   <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
                     <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                       <FaCheck size={30} color="#009B17" />
                     </span>
-                    <span className="text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
+                    <span className="text-base not-italic font-AeonikProMedium">
+                      {SuccessMessage}
+                    </span>
                   </div>
-                }
+                )}
               </div>
-              :
+            ) : (
               <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
                 <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
                   <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
@@ -421,118 +439,116 @@ function MarketEdit() {
                   Вы уверены?
                 </span>
               </div>
-
-            }
+            )}
             <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
-
               <button
                 onClick={() => setDeleteModal(false)}
                 type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              >
                 Oтмена
               </button>
               <button
                 onClick={() => onUserDelete()}
                 type="button"
-                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-                Удалить </button>
+                className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              >
+                Удалить{" "}
+              </button>
             </div>
-
           </section>
           {/* Background Img Edit */}
 
           {backImgUploadModal && (
             <div className="max-w-[440px] md:max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
               {/* </div> */}
-              {backImgOrder === 1 && <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
-                <div
-                  className={`flex items-center justify-between  pb-3`}
-                >
-                  <div className="w-fit flex items-center">
-                    <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
-                      Выберите фото
-                    </span>
-                  </div>
-                  <button
-                    className="py-2"
-                    type="button"
-                    onClick={() => setBackImgUploadModal(false)}
-                  >
-                    <MenuCloseIcons colors={"#000"} />
-                  </button>
-                </div>
-                <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
-                  {hideDeleteIcons ?
-                    <div className="w-full flex items-center justify-center">
-                      {loader && hideDeleteIcons ?
-                        <PuffLoader
-                          color={"#007DCA"}
-                          size={80}
-                          loading={true}
-                        />
-                        :
-                        <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                          <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                            <FaCheck size={30} color="#009B17" />
-                          </span>
-                          <span className="text-sm md:text-base not-italic font-AeonikProMedium">{SuccessMessage}</span>
-                        </div>
-                      }
+              {backImgOrder === 1 && (
+                <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+                  <div className={`flex items-center justify-between  pb-3`}>
+                    <div className="w-fit flex items-center">
+                      <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
+                        Выберите фото
+                      </span>
                     </div>
-                    :
-                    state?.pictureBgView1 ?
+                    <button
+                      className="py-2"
+                      type="button"
+                      onClick={() => setBackImgUploadModal(false)}
+                    >
+                      <MenuCloseIcons colors={"#000"} />
+                    </button>
+                  </div>
+                  <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
+                    {hideDeleteIcons ? (
+                      <div className="w-full flex items-center justify-center">
+                        {loader && hideDeleteIcons ? (
+                          <PuffLoader
+                            color={"#007DCA"}
+                            size={80}
+                            loading={true}
+                          />
+                        ) : (
+                          <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
+                            <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                              <FaCheck size={30} color="#009B17" />
+                            </span>
+                            <span className="text-sm md:text-base not-italic font-AeonikProMedium">
+                              {SuccessMessage}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ) : state?.pictureBgView1 ? (
                       <img
                         src={state?.pictureBgView1}
                         alt="backImg"
                         className="w-full h-full object-contain rounded-lg"
                       />
-                      :
+                    ) : (
                       <span className="leading-none text-[12px]  md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                         Фоновое фото
                       </span>
-                  }
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between  pt-2">
+                    <label
+                      htmlFor={"imageThree1"}
+                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                    >
+                      <input
+                        className="hidden"
+                        id={"imageThree1"}
+                        type="file"
+                        name="fileUpload1"
+                        onChange={handleImageUpload}
+                        accept=" image/*"
+                      />
+                      {state?.pictureBgView1
+                        ? "Изменить фото"
+                        : "Загрузить фото"}
+                    </label>
+
+                    {state?.pictureBgView1 ? (
+                      <button
+                        onClick={() => onUserDeleteBackgroundImg()}
+                        className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                      >
+                        Удалить
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setBackImgUploadModal(false)}
+                        className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                      >
+                        Oтмена
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center justify-between  pt-2">
-                  <label
-                    htmlFor={"imageThree1"}
-                    className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
-                  >
-                    <input
-                      className="hidden"
-                      id={"imageThree1"}
-                      type="file"
-                      name="fileUpload1"
-                      onChange={handleImageUpload}
-                      accept=" image/*"
-                    />
-                    {state?.pictureBgView1 ?
-                      "Изменить фото" :
-                      "Загрузить фото"
-                    }
-
-                  </label>
-
-
-                  {state?.pictureBgView1 ?
-                    <button
-                      onClick={() => onUserDeleteBackgroundImg()}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                      Удалить
-                    </button>
-                    :
-                    <button
-                      onClick={() => setBackImgUploadModal(false)}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                      Oтмена
-                    </button>
-                  }
-                </div>
-              </div>}
-              {backImgOrder === 2 &&
+              )}
+              {backImgOrder === 2 && (
                 <div className="relative z-[224]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
-                  <div
-                    className={`flex items-center justify-between  pb-3`}
-                  >
+                  <div className={`flex items-center justify-between  pb-3`}>
                     <div className="w-fit flex items-center">
                       <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
                         Выберите логотип
@@ -547,7 +563,6 @@ function MarketEdit() {
                     </button>
                   </div>
                   <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
-
                     {image ? (
                       <Cropper
                         ref={cropperRef}
@@ -566,10 +581,11 @@ function MarketEdit() {
                         dragMode="move"
                         aspectRatio={1}
                       />
-                    ) :
+                    ) : (
                       <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                        Выберите логотип                </span>
-                    }
+                        Выберите логотип{" "}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center justify-between  pt-2">
                     <label
@@ -584,17 +600,17 @@ function MarketEdit() {
                         onChange={onChange}
                         accept=" image/*"
                       />
-                      {image ?
-                        "Изменить фото" :
-                        "Загрузить фото"
-                      }
+                      {image ? "Изменить фото" : "Загрузить фото"}
                     </label>
 
-                    {image && <button
-                      className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-sm md:text-lg font-AeonikProMedium"
-                      onClick={getCropData}>
-                      Обрезать
-                    </button>}
+                    {image && (
+                      <button
+                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-sm md:text-lg font-AeonikProMedium"
+                        onClick={getCropData}
+                      >
+                        Обрезать
+                      </button>
+                    )}
 
                     {/* {image ?
                     <button
@@ -605,13 +621,14 @@ function MarketEdit() {
                     : */}
                     <button
                       onClick={() => setBackImgUploadModal(false)}
-                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
+                      className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
+                    >
                       Oтмена
                     </button>
                     {/* } */}
                   </div>
                 </div>
-              }
+              )}
             </div>
           )}
           <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
@@ -654,43 +671,41 @@ function MarketEdit() {
             <button
               type="button"
               onClick={() => {
-                setBackImgOrder(1)
-                setBackImgUploadModal(true)
+                setBackImgOrder(1);
+                setBackImgUploadModal(true);
               }}
-              className="h-full w-full  rounded-lg overflow-hidden flex items-center justify-center ">
-
-              {!state?.pictureBgView1 ?
+              className="h-full w-full  rounded-lg overflow-hidden flex items-center justify-center "
+            >
+              {!state?.pictureBgView1 ? (
                 <div className="w-fit h-fit flex items-center">
                   <span className="leading-none text-[12px] font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
                     Фоновое фото
                   </span>
-
                 </div>
-                :
+              ) : (
                 <img
                   src={state?.pictureBgView1}
                   alt="backImg"
                   className="w-full h-full object-cover rounded-lg"
                 />
-              }
+              )}
             </button>
             <div className="absolute bottom-[-30px] ll:-bottom-11 overflow-hidden border border-searchBgColor md:bottom-[-60px] z-[20] bg-white left-[15px] ll:left-[30px] md:left-10 w-[60px] h-[60px] ll:w-[80px] ll:h-[80px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center rounded-full ">
               <button
                 type="button"
                 onClick={() => {
-                  setBackImgOrder(2)
-                  setBackImgUploadModal(true)
-                }
-                }
-                className="h-full w-full  rounded-full flex items-center justify-center ">
+                  setBackImgOrder(2);
+                  setBackImgUploadModal(true);
+                }}
+                className="h-full w-full  rounded-full flex items-center justify-center "
+              >
                 {cropData ? (
                   <img
                     src={cropData}
                     alt="backImg"
                     className="w-full h-full object-contain rounded-lg"
                   />
-                )
-                  :
+                ) : (
                   <div className="flex flex-col item-center">
                     <span className="flex items-center flex-col justify-center px-2">
                       <div className="flex items-center md:w-[85px] text-[12px] md:text-sm font-AeonikProMedium cursor-pointer  text-textBlueColor">
@@ -700,11 +715,9 @@ function MarketEdit() {
                         </span>
                       </div>
                     </span>
-
                   </div>
-                }
+                )}
               </button>
-
             </div>
           </div>
           <div className="w-full flex items-center justify-end mb-[24px] md:mb-20 mt-4">
@@ -747,9 +760,7 @@ function MarketEdit() {
                   />
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-2 md:gap-x-[30px] mb-5">
-                  <div
-                    className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular"
-                  >
+                  <div className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor mr-[5px] font-AeonikProRegular">
                     Пол
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />{" "}
@@ -758,10 +769,7 @@ function MarketEdit() {
                   <div className="w-[69%] md:w-[72%] radio-toolbar md:border md:border-borderColor2 outline-none text-base flex items-center justify-between rounded-lg gap-x-1 md:gap-x-0">
                     {dressInfo?.genderList?.map((data, index) => {
                       return (
-                        <div
-                          className="w-[30%]"
-                          key={index}
-                        >
+                        <div className="w-[30%]" key={index}>
                           <input
                             type="radio"
                             id={data?.id}
@@ -784,9 +792,7 @@ function MarketEdit() {
                   </div>
                 </div>
                 <div className="w-full flex items-center justify-between gap-x-2 md:gap-x-[30px] ">
-                  <div
-                    className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular"
-                  >
+                  <div className="w-[35%] md:w-[30%] flex items-center text-[10px] ls:text-[12px] md:text-base text-mobileTextColor font-AeonikProRegular">
                     Метод доставки
                     <span className="ml-[5px] hidden md:block">
                       <StarLabel />
@@ -795,7 +801,7 @@ function MarketEdit() {
                   <div className="w-[65%] md:w-[70%] radio-toolbar grid grid-cols-2 gap-x-4 items-center justify-between outline-none rounded-lg gap-x-1 md:gap-x-[14px]">
                     {helperDatainform?.deliveryList?.map((data, index) => {
                       return (
-                        <div className="w-full " key={index} >
+                        <div className="w-full " key={index}>
                           <input
                             type="radio"
                             id={data?.name_uz}
@@ -810,13 +816,14 @@ function MarketEdit() {
                             htmlFor={data?.name_uz}
                             className={`w-full h-[32px] md:h-[42px] flex items-center justify-center text-center cursor-pointer md:px-3 border border-searchBgColor text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular rounded-lg`}
                           >
-                            <span className="leading-normal">{data?.name_ru}</span>
+                            <span className="leading-normal">
+                              {data?.name_ru}
+                            </span>
                           </label>
                         </div>
                       );
                     })}
                   </div>
-
                 </div>
               </div>
             </div>
@@ -829,7 +836,8 @@ function MarketEdit() {
               Сохранить{" "}
             </button>
           </div>
-        </div>}
+        </div>
+      )}
     </div>
   );
 }
