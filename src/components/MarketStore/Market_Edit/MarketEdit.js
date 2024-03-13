@@ -50,7 +50,7 @@ function MarketEdit() {
     genderList: null,
     deliverList: null,
   });
-  const [loaderEdit, setLoaderEdit] = useState(false);
+  const [loaderEdit, setLoaderEdit] = useState(true);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -156,8 +156,10 @@ function MarketEdit() {
           picturelogoView2: res?.shop?.url_logo_photo,
         });
         setCropData(res?.shop?.url_logo_photo);
+        setLoaderEdit(false);
       },
       onError: (err) => {
+        setLoaderEdit(false);
         throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
