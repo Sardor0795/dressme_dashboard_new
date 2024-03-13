@@ -69,7 +69,7 @@ export default function LocationMapCity() {
     pictureBgTest3: "",
     // ----
   });
-  const [loaderEdit, setLoaderEdit] = useState(false);
+  const [loaderEdit, setLoaderEdit] = useState(true);
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
   const [SuccessMessage, setSuccessMessage] = useState(null);
@@ -206,6 +206,7 @@ export default function LocationMapCity() {
       onSuccess: (res) => {
         if (res?.errors && res?.message) {
           // setLoader(false)
+          setLoaderEdit(false);
         } else if (res?.location) {
           setState({
             ...state,
@@ -253,9 +254,11 @@ export default function LocationMapCity() {
               parseFloat(res?.location?.longitude?.slice(0, 9)),
             ],
           });
+          setLoaderEdit(false);
         }
       },
       onError: (err) => {
+        setLoaderEdit(false);
         throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
