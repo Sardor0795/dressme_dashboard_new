@@ -4,18 +4,20 @@ import NoLocations from '../NoLocations/NoLocations'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import LoadingForSeller from '../../Loading/LoadingFor'
-import { useHttp } from '../../../hook/useHttp'
 import axios from 'axios'
 import { dressMainData } from '../../../hook/ContextTeam'
 import { SellerRefresh } from '../../../hook/SellerRefreshToken'
-import { SellerMainData } from '../../../hook/SellerUserContext'
 import { HelperData } from '../../../hook/HelperDataStore'
+import { useTranslation } from 'react-i18next'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsLocationCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [sellerRefreshToken] = useContext(SellerRefresh)
     const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+
+    const { t } = useTranslation("locations");
+
 
     const fetchData = async (customHeaders) => {
         try {
@@ -44,14 +46,12 @@ export default function MarketIsLocationCheck() {
             if (data?.status === 401) {
                 setDressInfo({ ...dressInfo, sellerStatus: data?.status })
                 sellerRefreshToken()
-
             }
         },
         onError: (error) => {
             if (error?.response?.status === 401) {
                 sellerRefreshToken()
                 setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
-
             }
         },
         keepPreviousData: true,
@@ -71,9 +71,7 @@ export default function MarketIsLocationCheck() {
                 if (data?.status >= 200 && data?.status < 300) {
                     setHelperDatainform({ ...helperDatainform, shopsList: data?.data })
                 }
-
             } catch (error) {
-
             }
         };
         if (!helperDatainform?.shopsList) {
@@ -83,25 +81,25 @@ export default function MarketIsLocationCheck() {
 
 
     return (
-        <div>
-            {!dressInfo?.locationList ?
-                <LoadingForSeller />
-                :
-                helperDatainform?.shopsList?.shops ?
-                    dressInfo?.locationList ?
-                        <LocationList />
-                        :
-                        <NoLocations />
-                    :
-                    <div className="flex items-center h-[100vh] justify-center">
-                        <Link
-                            to="/store"
-                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                        >
-                            Сначала создайте магазин!
-                        </Link>
-                    </div >
-            }
-        </div >
-    )
+      <div>
+        {!dressInfo?.locationList ? (
+          <LoadingForSeller />
+        ) : helperDatainform?.shopsList?.shops ? (
+          dressInfo?.locationList ? (
+            <LocationList />
+          ) : (
+            <NoLocations />
+          )
+        ) : (
+          <div className="flex items-center h-[100vh] justify-center">
+            <Link
+              to="/store"
+              className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+            >
+              {t("first_create_a_store")}!
+            </Link>
+          </div>
+        )}
+      </div>
+    );
 }

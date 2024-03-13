@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
   GoBackIcons,
@@ -17,8 +17,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
 import { AiOutlineLeft } from "react-icons/ai";
 import imageCompression from "browser-image-compression";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function LocationAddById() {
+  const { t } = useTranslation("locations");
+  const [languageDetector] = useContext(LanguageDetectorDress);
+
   const url = "https://api.dressme.uz/api/seller";
   const navigate = useNavigate();
   const { request } = useHttp();
@@ -89,21 +94,13 @@ export default function LocationAddById() {
     });
   }
 
-  // console.log();
-  // const handleLocationImageOne = (e) => {
-  //   setState({
-  //     ...state,
-  //     pictureBgFile1: e.target.files[0],
-  //     pictureBgView1: URL.createObjectURL(e.target.files[0]),
-  //   });
-  // };
   async function handleLocationImageOne(event) {
     const imageFile = event.target.files[0];
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
       setState({
@@ -115,20 +112,14 @@ export default function LocationAddById() {
       console.log(error);
     }
   }
-  // const handleLocationImageTwo = (e) => {
-  //   setState({
-  //     ...state,
-  //     picturelogoFile2: e.target.files[0],
-  //     picturelogoView2: URL.createObjectURL(e.target.files[0]),
-  //   });
-  // };
+
   async function handleLocationImageTwo(event) {
     const imageFile = event.target.files[0];
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
       setState({
@@ -141,20 +132,13 @@ export default function LocationAddById() {
     }
   }
 
-  // const handleLocationImageThree = (e) => {
-  //   setState({
-  //     ...state,
-  //     pictureLastFile3: e.target.files[0],
-  //     pictureLastView3: URL.createObjectURL(e.target.files[0]),
-  //   });
-  // };
   async function handleLocationImageThree(event) {
     const imageFile = event.target.files[0];
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-    }
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
       setState({
@@ -166,9 +150,12 @@ export default function LocationAddById() {
       console.log(error);
     }
   }
-  useQuery(["shops_regions"], () => {
-    return request({ url: "/shops/locations/regions", token: true });
-  },
+
+  useQuery(
+    ["shops_regions"],
+    () => {
+      return request({ url: "/shops/locations/regions", token: true });
+    },
     {
       onSuccess: (res) => {
         setState({ ...state, getRegionList: res });
@@ -182,8 +169,6 @@ export default function LocationAddById() {
   );
 
   const LocationAddSubmit = () => {
-    // console.log(assistantPhoneNumberFirst, "assistantPhoneSecond ");
-
     let form = new FormData();
     form.append("address", state?.shopCenterAddress);
     form.append("longitude", state?.shopLongitude);
@@ -216,7 +201,6 @@ export default function LocationAddById() {
     })
       .then((res) => res.json())
       .then((res) => {
-
         if (res?.errors && res?.message) {
           setState({ ...state, errorGroup: res?.errors });
         } else if (res?.message) {
@@ -235,7 +219,6 @@ export default function LocationAddById() {
       })
       .catch((err) => {
         throw new Error(err || "something wrong");
-
       });
   };
 
@@ -262,18 +245,26 @@ export default function LocationAddById() {
   }, []);
   const handleInputAdminNameFirst = (e) => {
     if (e.target.value) {
-      setState({ ...state, assistantNameFirst: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+      setState({
+        ...state,
+        assistantNameFirst:
+          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+      });
     } else {
-      setState({ ...state, assistantNameFirst: null })
+      setState({ ...state, assistantNameFirst: null });
     }
-  }
+  };
   const handleInputAdminNameSecond = (e) => {
     if (e.target.value) {
-      setState({ ...state, assistantNameSecond: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1) })
+      setState({
+        ...state,
+        assistantNameSecond:
+          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+      });
     } else {
-      setState({ ...state, assistantNameSecond: null })
+      setState({ ...state, assistantNameSecond: null });
     }
-  }
+  };
 
   return (
     <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 md:px-10 pb-10">
@@ -291,120 +282,126 @@ export default function LocationAddById() {
         pauseOnHover
         theme="colored"
       />
+      <div
+        onClick={() => {
+          setState({ ...state, openStoreList: false });
+        }}
+        className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${
+          state?.openStoreList ? "" : "hidden"
+        }`}
+      ></div>
+      {
         <div
-                onClick={() => {
-                  setState({ ...state, openStoreList: false });
-                }}
-                className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openStoreList ? "" : "hidden"
-                  }`}
-              ></div>
-              {
-                <div
-                  className={`max-w-[440px] md:max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openStoreList
-                    ? " bottom-0 md:flex flex-col"
-                    : "md:hidden bottom-[-1500px] z-[-10]"
-                    }`}
-                >
-                  <div className="w-full flex items-center justify-between">
-                  <span className="text-black text-lg not-italic font-AeonikProMedium">
-                      Выберите регион
-                    </span>
-                    <span
-                      className="select-none cursor-pointer"
-                      onClick={() => {
-                        setState({ ...state, openStoreList: false });
-                      }}
+          className={`max-w-[440px] md:max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
+            state?.openStoreList
+              ? " bottom-0 md:flex flex-col"
+              : "md:hidden bottom-[-1500px] z-[-10]"
+          }`}
+        >
+          <div className="w-full flex items-center justify-between">
+            <span className="text-black text-lg not-italic font-AeonikProMedium">
+              {t("choose_region")}
+            </span>
+            <span
+              className="select-none cursor-pointer"
+              onClick={() => {
+                setState({ ...state, openStoreList: false });
+              }}
+            >
+              <MenuCloseIcons colors="#000" />
+            </span>
+          </div>
+
+          <div className="w-full overflow-auto flex flex-col gap-y-4 pt-3 overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+            {state?.getRegionList?.regions ? (
+              state?.getRegionList?.regions?.map((data, index) => {
+                return (
+                  <div key={data?.id} className="w-full  h-fit  ">
+                    <div
+                      onClick={() => accordionCityList(data?.id)}
+                      className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                     >
-                      <MenuCloseIcons colors="#000" />
-                    </span>
-                  </div>
+                      <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                        {languageDetector?.typeLang === "ru" && data?.name_ru}
+                        {languageDetector?.typeLang === "uz" && data?.name_uz}
+                      </span>
+                      <span
+                        className={`${
+                          activeIndex == data?.id
+                            ? "rotate-[0deg]"
+                            : "rotate-[180deg]"
+                        } `}
+                      >
+                        <ArrowTopIcons colors={"#a1a1a1"} />
+                      </span>
+                    </div>
 
-                  <div className="w-full overflow-auto flex flex-col gap-y-4 pt-3 overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                    {state?.getRegionList?.regions ? (
-                      state?.getRegionList?.regions?.map((data, index) => {
+                    <div
+                      className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                             ${
+                               activeIndex == data?.id
+                                 ? "openAccardion"
+                                 : "CloseAccardion"
+                             } `}
+                    >
+                      {data?.sub_regions?.map((item) => {
                         return (
-                          <div key={data?.id} className="w-full  h-fit  ">
-                            <div
-                              onClick={() => accordionCityList(data?.id)}
-                              className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                          <div
+                            key={item?.id}
+                            className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
+                          >
+                            <label
+                              htmlFor={item?.name_ru}
+                              className="flex items-center gap-x-[6px]"
                             >
-                              <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                                {data?.name_ru}
+                              <input
+                                type="radio"
+                                id={item?.name_ru}
+                                name="type_work_2"
+                                value={item?.region_id}
+                                checked={item?.id == state?.subRegionIdShops}
+                                className="border border-searchBgColor  cursor-pointer  flex items-center justify-center"
+                                onChange={(e) => {
+                                  setState({
+                                    ...state,
+                                    regionIdShops: e.target.value,
+                                    subRegionIdShops: item?.id,
+                                  });
+                                }}
+                                required
+                              />
+                              <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                {languageDetector?.typeLang === "ru" &&
+                                  data?.name_ru}
+                                {languageDetector?.typeLang === "uz" &&
+                                  data?.name_uz}
                               </span>
-                              <span
-                                className={`${activeIndex == data?.id
-                                  ? "rotate-[0deg]"
-                                  : "rotate-[180deg]"
-                                  } `}
-                              >
-                                <ArrowTopIcons colors={"#a1a1a1"} />
-                              </span>
-                            </div>
-
-                            <div
-                              className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${activeIndex == data?.id
-                                  ? "openAccardion"
-                                  : "CloseAccardion"
-                                } `}
-                            >
-                              {data?.sub_regions?.map((item) => {
-                                return (
-                                  <div
-                                    key={item?.id}
-                                    className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
-                                  >
-                                    <label
-                                      htmlFor={item?.name_ru}
-                                      className="flex items-center gap-x-[6px]"
-                                    >
-                                      <input
-                                        type="radio"
-                                        id={item?.name_ru}
-                                        name="type_work_2"
-                                        value={item?.region_id}
-                                        checked={
-                                          item?.id == state?.subRegionIdShops
-                                        }
-                                        className="border border-searchBgColor  cursor-pointer  flex items-center justify-center"
-                                        onChange={(e) => {
-                                          setState({
-                                            ...state,
-                                            regionIdShops: e.target.value,
-                                            subRegionIdShops: item?.id,
-                                          });
-                                        }}
-                                        required
-                                      />
-                                      <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
-                                        {item?.name_ru}
-                                      </span>
-                                    </label>
-                                  </div>
-                                );
-                              })}
-                            </div>
+                            </label>
                           </div>
                         );
-                      })
-                    ) : (
-                      <p className="w-full h-full flex flex-col items-center justify-center">
-                        Malumotlar yuklanyapti...
-                      </p>
-                    )}
+                      })}
+                    </div>
                   </div>
-                  <div className="w-full flex items-center justify-end  mt-2">
-                    <span
-                      onClick={() => {
-                        setState({ ...state, openStoreList: false });
-                      }}
-                      className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium"
-                    >
-                      Готово
-                    </span>
-                  </div>
-                </div>
-              }
+                );
+              })
+            ) : (
+              <p className="w-full h-full flex flex-col items-center justify-center">
+                {t("loading_data")}
+              </p>
+            )}
+          </div>
+          <div className="w-full flex items-center justify-end  mt-2">
+            <span
+              onClick={() => {
+                setState({ ...state, openStoreList: false });
+              }}
+              className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium"
+            >
+              {t("ready")}
+            </span>
+          </div>
+        </div>
+      }
       <div className=" ">
         <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
           <button
@@ -416,7 +413,7 @@ export default function LocationAddById() {
             <GoBackIcons />
           </button>
           <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium   md:px-0">
-            Добавить локацию магазина
+            {t("add_a_store_location")}
           </div>
         </div>
         <div className="hidden md:flex items-center mb-2 ">
@@ -429,12 +426,14 @@ export default function LocationAddById() {
             <AiOutlineLeft />
           </button>
         </div>
-        <div className={` ${state?.errorGroup?.address && !state?.shopCenterAddress ? 'border-[2px] border-[#D50000] rounded-[4px] overflow-hidden' : ''}`}>
-
-          <YandexMapStore
-            handleCallback={CallBackYandex}
-
-          />
+        <div
+          className={` ${
+            state?.errorGroup?.address && !state?.shopCenterAddress
+              ? "border-[2px] border-[#D50000] rounded-[4px] overflow-hidden"
+              : ""
+          }`}
+        >
+          <YandexMapStore handleCallback={CallBackYandex} />
         </div>
         {state?.errorGroup?.address && !state?.shopCenterAddress && (
           <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
@@ -442,7 +441,13 @@ export default function LocationAddById() {
           </p>
         )}
         <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
-          <div className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${state?.pictureBgView1 ? ' border border-searchBgColor ' : ' border-2 border-dashed '} flex items-center justify-center rounded-lg`}>
+          <div
+            className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${
+              state?.pictureBgView1
+                ? " border border-searchBgColor "
+                : " border-2 border-dashed "
+            } flex items-center justify-center rounded-lg`}
+          >
             <button className="h-full w-full flex items-center justify-center ">
               <label
                 htmlFor="DataImg1"
@@ -459,7 +464,7 @@ export default function LocationAddById() {
                 {!state?.pictureBgView1 && (
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                      Фото локации
+                      {t("photo_location")}
                     </span>
                     <span className=" ml-[2px] md:ml-[5px]">
                       <StarLabel />
@@ -481,9 +486,15 @@ export default function LocationAddById() {
               </p>
             )}
           </div>
-          <div className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.picturelogoView2 ? ' border border-searchBgColor ' : ' border-2 border-dashed '} flex items-center justify-center rounded-lg`}>
+          <div
+            className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${
+              state?.picturelogoView2
+                ? " border border-searchBgColor "
+                : " border-2 border-dashed "
+            } flex items-center justify-center rounded-lg`}
+          >
             <button className="h-full w-full flex items-center justify-center">
-              {state?.pictureBgView1 ?
+              {state?.pictureBgView1 ? (
                 <label
                   htmlFor="DataImg2"
                   className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
@@ -499,9 +510,10 @@ export default function LocationAddById() {
                   {!state?.picturelogoView2 && (
                     <div className="w-fit h-fit flex items-center">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        <span className="hidden md:flex mr-1">Второе</span>
-                        фото
-                        локации
+                        <span className="hidden md:flex mr-1">
+                          {t("second")}
+                        </span>
+                        {t("photo_location")}
                       </span>
                     </div>
                   )}
@@ -512,23 +524,28 @@ export default function LocationAddById() {
                       className="w-full h-full object-cover rounded-lg"
                     />
                   )}
-                </label> :
-                <div
-                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
-                >
+                </label>
+              ) : (
+                <div className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
-                      <span className="hidden md:flex mr-1">Второе</span>
-                      фото
-                      локации
+                      <span className="hidden md:flex mr-1">{t("second")}</span>
+                      {t("photo_location")}
                     </span>
                   </div>
-                </div>}
+                </div>
+              )}
             </button>
           </div>
-          <div className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.pictureLastView3 ? ' border border-searchBgColor ' : ' border-2 border-dashed '} flex items-center justify-center rounded-lg`}>
+          <div
+            className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${
+              state?.pictureLastView3
+                ? " border border-searchBgColor "
+                : " border-2 border-dashed "
+            } flex items-center justify-center rounded-lg`}
+          >
             <button className="h-full w-full flex items-center justify-center ">
-              {state?.picturelogoView2 ?
+              {state?.picturelogoView2 ? (
                 <label
                   htmlFor="DataImg3"
                   className="h-full w-full  text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-textBlueColor "
@@ -544,8 +561,11 @@ export default function LocationAddById() {
                   {!state?.pictureLastView3 && (
                     <div className="w-fit h-fit flex items-center">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        <span className="hidden md:flex mr-1"> Третье</span> фото
-                        локации
+                        <span className="hidden md:flex mr-1">
+                          {" "}
+                          {t("third")}
+                        </span>{" "}
+                        {t("photo_location")}
                       </span>
                     </div>
                   )}
@@ -556,18 +576,17 @@ export default function LocationAddById() {
                       className="w-full h-full object-cover rounded-lg"
                     />
                   )}
-                </label> :
-                <div
-                  className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] "
-                >
+                </label>
+              ) : (
+                <div className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
-                      <span className="hidden md:flex mr-1">Третье</span>
-                      фото
-                      локации
+                      <span className="hidden md:flex mr-1">{t("third")}</span>
+                      {t("photo_location")}
                     </span>
                   </div>
-                </div>}
+                </div>
+              )}
             </button>
           </div>
         </div>
@@ -577,7 +596,7 @@ export default function LocationAddById() {
             <div className={"w-full block md:hidden mb-3 md:mb-0"}>
               <label htmlFor="selectRegion2">
                 <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
-                  Выберите регион
+                  {t("choose_region")}
                   <span className="ml-[5px]">
                     <Star6Icon />
                   </span>
@@ -591,19 +610,27 @@ export default function LocationAddById() {
                   <span className=" w-full  h-[32px] md:h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-xs md:text-[16px] leading-4 ">
                     {!state?.regionIdShops &&
                       !state?.subRegionIdShops &&
-                      "Выберите регион"}
+                      `${t("choose_region")}`}
 
                     {state?.getRegionList?.regions
                       ?.filter((e) => e.id == state?.regionIdShops)
                       .map((item) => {
                         return (
-                          <span key={item?.name_ru} className="flex items-center text-[#000] text-[14px] sm:text-base">
+                          <span
+                            key={item?.name_ru}
+                            className="flex items-center text-[#000] text-[14px] sm:text-base"
+                          >
                             {item?.name_ru},
                             {item?.sub_regions
                               ?.filter((i) => i.id == state?.subRegionIdShops)
                               .map((data) => {
                                 return (
-                                  <span key={data?.name_ru} className="ml-1">{data?.name_ru}</span>
+                                  <span key={data?.name_ru} className="ml-1">
+                                    {languageDetector?.typeLang === "ru" &&
+                                      data?.name_ru}
+                                    {languageDetector?.typeLang === "uz" &&
+                                      data?.name_uz}
+                                  </span>
                                 );
                               })}
                           </span>
@@ -623,7 +650,7 @@ export default function LocationAddById() {
             </div>
             <label htmlFor="fname" className=" w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Имя администратора{" "}
+                {t("name_admin")}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
@@ -632,7 +659,7 @@ export default function LocationAddById() {
                 <input
                   type="text"
                   name="fname"
-                  placeholder=" Имя администратора"
+                  placeholder={t("name_admin")}
                   value={state?.assistantNameFirst}
                   onChange={handleInputAdminNameFirst}
                   className="w-full outline-none text-[12px] md:text-[14px]  h-[32px] md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
@@ -647,13 +674,13 @@ export default function LocationAddById() {
             </label>
             <label htmlFor="fname2" className=" w-full md:w-[31%] mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Имя второго администратора{" "}
+                {t("name_admin_two")}
               </div>
               <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname2"
-                  placeholder=" (не обезательно)"
+                  placeholder={t("not_necessary")}
                   value={state?.assistantNameSecond}
                   onChange={handleInputAdminNameSecond}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
@@ -668,12 +695,11 @@ export default function LocationAddById() {
             </label>
 
             <div className=" flex w-full md:w-[31%]">
-          
               {/* Region Input  */}
               <div className={"w-full hidden md:block"}>
                 <label htmlFor="selectRegion2">
                   <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
-                    Выберите регион
+                    {t("choose_region")}
                     <span className="ml-[5px]">
                       <Star6Icon />
                     </span>
@@ -687,20 +713,26 @@ export default function LocationAddById() {
                     <span className=" w-full  h-[32px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                       {!state?.regionIdShops &&
                         !state?.subRegionIdShops &&
-                        "Выберите регион"}
+                        `${t("choose_region")}`}
 
                       {state?.getRegionList?.regions
                         ?.filter((e) => e.id == state?.regionIdShops)
                         .map((item) => {
                           return (
-                            <span key={item?.name_ru} className="flex items-center text-[#000] text-[14px] sm:text-base">
+                            <span
+                              key={item?.name_ru}
+                              className="flex items-center text-[#000] text-[14px] sm:text-base"
+                            >
                               {item?.name_ru},
                               {item?.sub_regions
                                 ?.filter((i) => i.id == state?.subRegionIdShops)
                                 .map((data) => {
                                   return (
                                     <span key={data?.name_ru} className="ml-1">
-                                      {data?.name_ru}
+                                      {languageDetector?.typeLang === "ru" &&
+                                        data?.name_ru}
+                                      {languageDetector?.typeLang === "uz" &&
+                                        data?.name_uz}
                                     </span>
                                   );
                                 })}
@@ -720,9 +752,12 @@ export default function LocationAddById() {
                 </label>
               </div>
             </div>
-            <label htmlFor="phone1" className=" w-full md:w-[31%] mb-3 md:mb-0 ">
+            <label
+              htmlFor="phone1"
+              className=" w-full md:w-[31%] mb-3 md:mb-0 "
+            >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Номер администратора
+                {t("number_admin")}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
@@ -749,8 +784,9 @@ export default function LocationAddById() {
                         assistantPhoneFirst: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
-                      } text-xs md:text-base leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
+                      state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
+                    } text-xs md:text-base leading-4 text-black`}
                     placeholder={"(77) 777-77-77"}
                   ></InputMask>
                   <span className="mr-[12px]">
@@ -765,9 +801,12 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label htmlFor="phone2" className=" w-full md:w-[31%] mb-3 md:mb-0 ">
+            <label
+              htmlFor="phone2"
+              className=" w-full md:w-[31%] mb-3 md:mb-0 "
+            >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Номер второго администратора
+                {t("number_admin_two")}
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
               </div>
               <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
@@ -793,10 +832,11 @@ export default function LocationAddById() {
                         assistantPhoneSecond: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond
-                      ? "font-AeonikProMedium"
-                      : null
-                      } text-xs md:text-[16px] leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
+                      state?.assistantPhoneSecond
+                        ? "font-AeonikProMedium"
+                        : null
+                    } text-xs md:text-[16px] leading-4 text-black`}
                   ></InputMask>
                   <span className="mr-[12px]">
                     <TelIcon />
@@ -812,7 +852,7 @@ export default function LocationAddById() {
             </label>
             <div className=" w-full md:w-[31%]">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
-                Рабочее время
+                {t("work_time")}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
@@ -820,7 +860,7 @@ export default function LocationAddById() {
               <div className="w-full flex  items-center">
                 {" "}
                 <span className="w-fit text-[13px] md:text-base flex items-center font-AeonikProRegular">
-                  от
+                  {t("before")}
                 </span>
                 <input
                   className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded md:rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
@@ -836,7 +876,7 @@ export default function LocationAddById() {
                   required
                 />
                 <span className="w-fit text-[13px] md:text-base flex items-center font-AeonikProRegular">
-                  до
+                  {t("after")}
                 </span>
                 <input
                   className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
@@ -853,16 +893,14 @@ export default function LocationAddById() {
                 />
               </div>
             </div>
-
           </div>
         </div>
         <div className="flex justify-center mt-[50px]  px-4 md:px-0">
           <button
             onClick={LocationAddSubmit}
             className="w-full md:w-fit h-[42px] flex items-center justify-center md:px-[100px]  bg-weatherWinterColor text-white rounded md:rounded-lg active:scale-95"
-          // to={"/store"}
           >
-            Добавить
+            {t("add")}
           </button>
         </div>
       </div>

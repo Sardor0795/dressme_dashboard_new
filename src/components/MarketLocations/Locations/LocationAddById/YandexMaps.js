@@ -13,6 +13,7 @@ import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { clsx } from "clsx";
 import "./yandexmapsStore.css";
+import { useTranslation } from "react-i18next";
 
 const mapOptions = {
   modules: ["geocode", "SuggestView"],
@@ -38,13 +39,14 @@ export default function YandexMapStore({ handleCallback }) {
   const [state, setState] = useState({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
 
+  const { t } = useTranslation("locations");
+
   const mapRef = useRef(null);
   const searchRef = useRef(null);
 
   // submits
   const handleSubmit = () => {
     setIsSendedLocation(false);
-    // console.log({ title: state.title, center: mapRef.current.getCenter() });
     handleCallback({ title: state.title, center: mapRef.current.getCenter() })
   };
 
@@ -52,12 +54,7 @@ export default function YandexMapStore({ handleCallback }) {
   function handleReset() {
     setState({ ...initialState });
     handleCallback({ title: "", center: [] })
-
-    // setState({ ...initialState, title: "" });
-    // setState({ title: "" });
     searchRef.current.value = "";
-    // mapRef.current.setCenter(initialState.center);
-    // mapRef.current.setZoom(initialState.zoom);
   }
 
   // search popup
@@ -110,7 +107,7 @@ export default function YandexMapStore({ handleCallback }) {
             onLoad={setMapConstructor}
             onBoundsChange={handleBoundsChange}
             instanceRef={mapRef}
-          // defaultState={mapState}
+            // defaultState={mapState}
           >
             <div className="h-fit p-1 md:p-[10px] absolute top-2 z-40 gap-x-5 mx-1 md:mx-2 backdrop-blur-sm bg-yandexNavbar left-0 right-0 flex items-center justify-between border px-1 md:px-3 rounded-lg">
               <label
@@ -119,11 +116,12 @@ export default function YandexMapStore({ handleCallback }) {
               >
                 <input
                   ref={searchRef}
-                  placeholder="Введите адрес"
+                  placeholder={t("enter_address")}
                   id="ForSearch"
                   name="search"
-                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(state.title.length) ? "" : "hidden"
-                    }`}
+                  className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
+                    !Boolean(state.title.length) ? "" : "hidden"
+                  }`}
                 />
 
                 <div
@@ -132,19 +130,10 @@ export default function YandexMapStore({ handleCallback }) {
                   })}
                 >
                   <p className=" w-[90%] ">
-                    <span className="whitespace-normal">
-                      {state.title}
-                    </span>
+                    <span className="whitespace-normal">{state.title}</span>
                   </p>
                 </div>
 
-                {/* <div
-                  className={`titleBox ${
-                    state.title.length ? "titleBox_show" : ""
-                  }`}
-                >
-                  <span className="whitespace-nowrap ">{state.title} </span>
-                </div> */}
                 {state?.title.length ? (
                   <button
                     onClick={handleReset}
@@ -171,7 +160,7 @@ export default function YandexMapStore({ handleCallback }) {
                   {isSendedLocation ? (
                     <>
                       {" "}
-                      <span className="md:flex hidden">Подтвердить</span>
+                      <span className="md:flex hidden">{t("confirm")}</span>
                       <span className="md:hidden flex">OK</span>
                     </>
                   ) : (
@@ -185,24 +174,11 @@ export default function YandexMapStore({ handleCallback }) {
                   type="button"
                   className="w-[40px] md:w-[150px] h-10 px-3  flex items-center justify-center bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
                 >
-                  <span className="md:flex hidden">Подтвердить</span>
+                  <span className="md:flex hidden">{t("confirm")}</span>
                   <span className="md:hidden flex">OK</span>{" "}
                 </button>
               )}
             </div>
-            {/* <div
-              className={
-                "w-full h-fit border border-black relative flex items-center justify-center bg-transparent"
-              }
-            >
-              <div className="absolute top-0 left-0 z-[50]" title={state.title}>
-                {state.title}
-              </div>
-              <button onClick={handleReset}>
-                <MenuCloseIcons />
-              </button>
-            </div>
-          */}
             <span className={"placemark"}>
               <MapLocationIcon color="primary" />
             </span>
@@ -221,8 +197,8 @@ export default function YandexMapStore({ handleCallback }) {
               }}
             />
           </Map>
-        </YMaps >
-      </div >
-    </div >
+        </YMaps>
+      </div>
+    </div>
   );
 }
