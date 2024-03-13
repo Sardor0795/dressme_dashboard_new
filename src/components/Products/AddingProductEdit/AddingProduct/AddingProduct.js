@@ -43,6 +43,7 @@ const AddingProduct = () => {
 
   const { id } = useParams()
   const newProductId = id
+  const [searchList, setSearchList] = useState(null)
 
   const { request } = useHttp();
   const [state, setState] = useState({
@@ -910,8 +911,15 @@ const AddingProduct = () => {
       navigate(-1)
     }
   }, [])
-  console.log(state?.filterTypeId, "state?.filterTypeId");
-  console.log(state?.type_Id, "state?.type_Id");
+  useEffect(() => {
+    setSearchList('')
+  }, [
+    state?.ClothingSection,
+    state?.SubClothingSection,
+    state?.DressTypeModal,
+    state?.openSelect,
+    state?.MakeCountryModal
+  ])
 
   return (
     <div className="w-full h-fit ">
@@ -1293,7 +1301,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium"> Раздел товара</p>
+                <p className="text-base font-AeonikProMedium"> Раздел товара</p>
                 <button onClick={() => setState({ ...state, ClothingSection: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1301,12 +1309,20 @@ const AddingProduct = () => {
               <section className="w-full h-[400px] px-4 flex flex-col items-center">
                 <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                   <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
+                      <input
+                        type="text"
+                        value={searchList}
+                        onChange={(e) => setSearchList(e?.target?.value)}
+                        name='clothingTypes'
+                        placeholder='Искать раздел'
+                        className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                      {dressInfo?.getProductInfo?.sections?.map((item) => {
+                      {dressInfo?.getProductInfo?.sections?.filter((e) =>
+                        searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                      )?.map((item) => {
                         return (
                           <div
                             onClick={() => handleChangeSectionMobile(item?.id)}
@@ -1330,7 +1346,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className={`text-xl font-AeonikProMedium `}>Подраздел одежды</p>
+                <p className={`text-base font-AeonikProMedium `}>Подраздел одежды</p>
                 <button onClick={() => setState({ ...state, SubClothingSection: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1338,12 +1354,20 @@ const AddingProduct = () => {
               <section className="w-full h-[400px] px-4 flex flex-col items-center">
                 <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                   <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
+                      <input
+                        type="text"
+                        value={searchList}
+                        onChange={(e) => setSearchList(e?.target?.value)}
+                        name='clothingTypes'
+                        placeholder='Искать раздел'
+                        className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                      {newArray?.map((item) => {
+                      {newArray?.filter((e) =>
+                        searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                      )?.map((item) => {
                         return (
                           <div
                             onClick={() => handleChangeSubSectionMobile(item?.id)}
@@ -1366,18 +1390,15 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium">Сезон товара</p>
+                <p className="text-base font-AeonikProMedium">Сезон товара</p>
                 <button onClick={() => setState({ ...state, DressSeason: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
               </section>
               <section className="w-full h-[400px] px-4 flex flex-col items-center">
                 <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                  <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
-                      <SearchIcon />
-                    </div>
+                  <div className='w-full flex flex-col items-center'>
+
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.seasons?.map((item) => {
                         return (
@@ -1388,7 +1409,7 @@ const AddingProduct = () => {
                         );
                       })}
                     </div>
-                  </form>
+                  </div>
                 </div>
               </section>
             </div>
@@ -1400,18 +1421,15 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium"> Пол</p>
+                <p className="text-base font-AeonikProMedium"> Пол</p>
                 <button onClick={() => setState({ ...state, GenderModal: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
               </section>
               <section className="w-full h-[400px] px-4 flex flex-col items-center">
                 <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                  <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
-                      <SearchIcon />
-                    </div>
+                  <div className='w-full flex flex-col items-center'>
+
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {dressInfo?.getProductInfo?.gender?.map((item) => {
                         return (
@@ -1422,7 +1440,7 @@ const AddingProduct = () => {
                         );
                       })}
                     </div>
-                  </form>
+                  </div>
                 </div>
               </section>
             </div>
@@ -1434,7 +1452,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium"> Тип</p>
+                <p className="text-base font-AeonikProMedium"> Тип</p>
                 <button onClick={() => setState({ ...state, DressTypeModal: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1442,23 +1460,47 @@ const AddingProduct = () => {
               <section className="w-full h-[400px] px-4 flex flex-col items-center">
                 <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                   <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
+                      <input
+                        type="text"
+                        value={searchList}
+                        onChange={(e) => setSearchList(e?.target?.value)}
+                        name='clothingTypes'
+                        placeholder='Искать раздел'
+                        className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                       {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                         return (
-                          <div
-                            onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
-                            key={item?.id} className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                            {item.name_ru}
-                            {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                          <> {searchList ? item?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) &&
+                            <div
+                              onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
+                              key={item?.id}
+                              className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                              {item.name_ru}
+                              {state?.filterTypeId == (item?.id) &&
+                                <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}>
+                                  <MenuCloseIcons colors={'#b5b5b5'} /></span>}
 
-                          </div>
+                            </div> :
+                            <div
+                              onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
+                              key={item?.id}
+                              className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                              {item.name_ru}
+                              {state?.filterTypeId == (item?.id) &&
+                                <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}>
+                                  <MenuCloseIcons colors={'#b5b5b5'} /></span>}
+
+                            </div>
+                          }
+                          </>
                         )
                       }) :
-                        dressInfo?.getProductInfo?.types?.map((item) => {
+                        dressInfo?.getProductInfo?.types?.filter((e) =>
+                          searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                        )?.map((item) => {
                           return (
                             <div
                               onClick={() => setState({ ...state, filterTypeId: item?.id, onEditInput: true, type_Id: item?.category_id })}
@@ -1483,7 +1525,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-xl font-AeonikProMedium"> Производитель</p>
+                <p className="text-base font-AeonikProMedium"> Производитель</p>
                 <button onClick={() => setState({ ...state, MakeCountryModal: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1491,12 +1533,21 @@ const AddingProduct = () => {
               <section className="w-full h-[400px] px-4 flex flex-col items-center">
                 <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                   <form className='w-full flex flex-col items-center'>
-                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                      <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                    <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
+                      <input
+                        type="text"
+                        name='clothingTypes'
+                        placeholder='Искать раздел'
+                        className='w-full pr-3 outline-none'
+                        value={searchList}
+                        onChange={(e) => setSearchList(e?.target?.value)}
+                      />
                       <SearchIcon />
                     </div>
                     <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                      {dressInfo?.getProductInfo?.producers?.map((item) => {
+                      {dressInfo?.getProductInfo?.producers?.filter((e) =>
+                        searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                      )?.map((item) => {
                         return (
                           <div
                             onClick={() => setState({ ...state, producer_Id: item?.id })}

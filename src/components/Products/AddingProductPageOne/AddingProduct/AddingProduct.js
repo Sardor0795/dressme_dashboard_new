@@ -40,6 +40,7 @@ const AddingProduct = () => {
   const navigate = useNavigate();
   const { request } = useHttp();
   const [clothingCategoryModal, setClothingCategoryModal] = useState(false)
+  const [searchList, setSearchList] = useState(null)
   const [state, setState] = useState({
     buttonReviews: false,
     openDropModalButton: true,
@@ -686,7 +687,20 @@ const AddingProduct = () => {
       setState({ ...state, producer_Id: null })
     }
   }
+
+  useEffect(() => {
+    setSearchList( '')
+  }, [
+    state?.ClothingSection,
+    state?.SubClothingSection,
+    state?.DressTypeModal,
+    clothingCategoryModal,
+    state?.openSelect,
+    state?.MakeCountryModal
+  ])
+
  
+
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -865,7 +879,7 @@ const AddingProduct = () => {
               }
               }
               className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-         ${state?.ClothingSection ||
+                ${state?.ClothingSection ||
                   state?.SubClothingSection ||
                   state?.DressSeason ||
                   state?.Colour ||
@@ -1039,11 +1053,19 @@ const AddingProduct = () => {
                   <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                     <form className='w-full flex flex-col items-center'>
                       <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                        <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                        <input
+                          type="text"
+                          name='clothingTypes'
+                          placeholder='Искать раздел'
+                          value={searchList}
+                          onChange={(e) => setSearchList(e?.target?.value)}
+                          className='w-full pr-3 outline-none' />
                         <SearchIcon />
                       </div>
                       <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                        {dressInfo?.getProductInfo?.sections?.map((item) => {
+                        {dressInfo?.getProductInfo?.sections?.filter((e) =>
+                          searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                        )?.map((item) => {
                           return (
                             <div
                               onClick={() => handleChangeSectionMobile(item?.id)}
@@ -1086,11 +1108,16 @@ const AddingProduct = () => {
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                       <form className='w-full flex flex-col items-center'>
                         <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                          <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                          <input type="text"
+                            value={searchList}
+                            onChange={(e) => setSearchList(e?.target?.value)}
+                            name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                          {newArray?.map((item) => {
+                          {newArray?.filter((e) =>
+                            searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                          )?.map((item) => {
                             return (
                               <div
                                 onClick={() => handleChangeSubSectionMobile(item?.id)}
@@ -1110,7 +1137,6 @@ const AddingProduct = () => {
                 </div>
               </section>
             </section>
-
             {/*DressSeason */}
             <section
               className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
@@ -1129,11 +1155,8 @@ const AddingProduct = () => {
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <form className='w-full flex flex-col items-center'>
-                        <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                          <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
-                          <SearchIcon />
-                        </div>
+                      <div className='w-full flex flex-col items-center'>
+
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.seasons?.map((item) => {
                             return (
@@ -1147,7 +1170,7 @@ const AddingProduct = () => {
                             );
                           })}
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </section>
                 </div>
@@ -1171,11 +1194,8 @@ const AddingProduct = () => {
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <form className='w-full flex flex-col items-center'>
-                        <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                          <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
-                          <SearchIcon />
-                        </div>
+                      <div className='w-full flex flex-col items-center'>
+
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.gender?.map((item) => {
                             return (
@@ -1187,13 +1207,12 @@ const AddingProduct = () => {
                             );
                           })}
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </section>
                 </div>
               </section>
             </section>
-
             {/*Type */}
             <section
               className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
@@ -1214,23 +1233,34 @@ const AddingProduct = () => {
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                       <form className='w-full flex flex-col items-center'>
                         <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                          <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                          <input
+                            type="text"
+                            value={searchList}
+                            onChange={(e) => setSearchList(e?.target?.value)}
+                            name='clothingTypes'
+                            placeholder='Искать раздел'
+                            className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                          {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
+                          {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => {
+                            e?.category_id == state?.category_Id ||
+                              e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase())
+                          })?.map((item) => {
                             return (
                               <div
                                 onClick={() => selectTypeById(item?.id, item?.category_id)}
-                                key={item?.id} className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                key={item?.id}
+                                className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {item.name_ru}
                                 {state?.filterTypeId == (item?.id) &&
                                   <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
-
                               </div>
                             )
                           }) :
-                            dressInfo?.getProductInfo?.types?.map((item) => {
+                            dressInfo?.getProductInfo?.types?.filter((e) =>
+                              searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                            )?.map((item) => {
                               return (
                                 <div
                                   onClick={() => selectTypeById(item?.id, item?.category_id)}
@@ -1250,7 +1280,6 @@ const AddingProduct = () => {
                 </div>
               </section>
             </section>
-
             {/*MakeCountry */}
             <section
               className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
@@ -1271,11 +1300,19 @@ const AddingProduct = () => {
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
                       <form className='w-full flex flex-col items-center'>
                         <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
-                          <input type="text" name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                          <input
+                            type="text"
+                            value={searchList}
+                            onChange={(e) => setSearchList(e?.target?.value)}
+                            name='clothingTypes'
+                            placeholder='Искать раздел'
+                            className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                          {dressInfo?.getProductInfo?.producers?.map((item) => {
+                          {dressInfo?.getProductInfo?.producers?.filter((e) =>
+                            searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                          )?.map((item) => {
                             return (
                               <div
                                 onClick={() => selectProduceId(item?.id)}
@@ -1292,7 +1329,6 @@ const AddingProduct = () => {
                 </div>
               </section>
             </section>
-
             {/* ClothingCategory */}
             <section
               className={`w-full max-w-[440px] h-[600px] fixed z-[113] rounded-t-lg   left-1/2  right-1/2  translate-x-[-50%]   duration-300 overflow-hidden ${clothingCategoryModal
