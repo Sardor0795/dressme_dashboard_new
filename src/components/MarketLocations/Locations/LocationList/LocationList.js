@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { ProductImg } from "../../assets";
-import { MenuCloseIcons, SearchIcon } from "../../../../assets/icons";
+import { MenuCloseIcons } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 
 import MobileHumburgerMenu from "../../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { dressMainData } from "../../../../hook/ContextTeam";
-import { SellerMainData } from "../../../../hook/SellerUserContext";
 import { HelperData } from "../../../../hook/HelperDataStore";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 function LocationList() {
   const [openSelect, setOpenSelect] = useState(false);
@@ -18,6 +18,9 @@ function LocationList() {
   const [statusModal, setStatusModal] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
   // ------------
+
+  const { t } = useTranslation("locations");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const handleShopsOfLocation = (id) => {
     navigate(`/locations-store/:${id}`);
@@ -55,12 +58,13 @@ function LocationList() {
       document.body.style.overflow = "auto";
     }
   }, [openSelect, statusModal]);
-  // Прикрепить к магазину
+
   return (
-    <div className={`w-full h-full  px-4  md:px-10   pb-10`}>
+    <div className={`w-full h-full px-4 md:px-10 pb-10`}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect || statusModal ? "" : "hidden"
-          }`}
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${
+          openSelect || statusModal ? "" : "hidden"
+        }`}
         onClick={() => {
           setStatusModal(false);
           setOpenSelect(false);
@@ -68,10 +72,11 @@ function LocationList() {
       ></div>
       {/*status Modal */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal
-          ? " bottom-0 md:flex"
-          : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
+        className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed  py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+          statusModal
+            ? " bottom-0 md:flex"
+            : "md:hidden bottom-[-800px] z-[-10]"
+        }`}
       >
         <button
           onClick={() => setStatusModal(false)}
@@ -82,7 +87,7 @@ function LocationList() {
         </button>
         <div className="w-full h-fit flex items-center justify-center mb-2">
           <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-            Причина
+            {t("cause")}
           </p>
         </div>
         {statusMessage ? (
@@ -91,13 +96,14 @@ function LocationList() {
           </div>
         ) : (
           <div className="w-full flex text-[#b5b5b5] items-center justify-center border border-borderColor rounded-lg  h-[300px]  overflow-hidden  ">
-            Нет причин
+            {t("no_reason")}
           </div>
         )}
       </section>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+          openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+        }`}
       >
         <button
           onClick={() => setOpenSelect(false)}
@@ -108,7 +114,7 @@ function LocationList() {
         </button>
         <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
           <p className="text-tableTextTitle2 text-base md:text-2xl not-italic font-AeonikProRegular">
-            Прикрепить к магазину
+            {t("attach_to_store")}
           </p>
         </div>
         <div className="w-full px-[10px] md:py-[30px] py-[15px]  flex flex-col md:gap-y-[10px]">
@@ -128,7 +134,7 @@ function LocationList() {
             })
           ) : (
             <div className="w-full h-[150px] flex items-center jsutify-center">
-              Ничего не найдено
+              {t("nothing_found")}
             </div>
           )}
         </div>
@@ -140,55 +146,18 @@ function LocationList() {
             <MobileHumburgerMenu />
           </div>
           <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
-            Все локации
+            {t("all_locations")}
           </p>
           <div className="w-[30px]"></div>
         </div>
-        {/* <section className="w-full md:hidden flex items-center justify-between md:justify-static gap-x-6 md:gap-x-[15px]">
-          <label
-            htmlFor="searchStore"
-            className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
-          >
-            <input
-              type="text"
-              name="s"
-              id="searchStore"
-              value={searchName}
-              onChange={(e) => setSearchName(e?.target?.value)}
-              className="w-full h-full outline-0 px-[10px]"
-              placeholder="Поиск"
-            />
-            <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-              <SearchIcon />
-            </span>
-          </label>
-        </section> */}
+
         <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
           <div className="flex justify-end items-center md:justify-between">
             <section className="hidden md:flex">
               <p className="text-black text-2xl not-italic font-AeonikProMedium">
-                Все локации
+                {t("all_locations")}
               </p>
             </section>
-            {/* <div className="w-full md:max-w-[400px] flex items-center gap-x-[15px]">
-              <label
-                htmlFor="searchStore"
-                className="w-full md:max-w-[400px] h-10 overflow-hidden border  border-lightBorderColor flex items-center rounded-lg"
-              >
-                <input
-                  type="text"
-                  name="s"
-                  id="searchStore"
-                  value={searchName}
-                  onChange={(e) => setSearchName(e?.target?.value)}
-                  className="w-full h-full outline-0 px-[10px]"
-                  placeholder="Поиск"
-                />
-                <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-                  <SearchIcon />
-                </span>
-              </label>
-            </div> */}
           </div>
         </div>
       </>
@@ -202,38 +171,33 @@ function LocationList() {
           </li>
           <li className="w-[200px] pl-4 mr-[60px]">
             <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle2">
-              Фото
+              {t("photo")}
             </span>
           </li>
           <li className="w-[calc(100%-230px)]  flex items-center justify-between">
             <ul className="flex items-center w-full">
               <li className="w-[20%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Регион{" "}
+                  {t("region")}
                 </span>
               </li>
               <li className="w-[28%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Адрес
+                  {t("address")}
                 </span>
               </li>
               <li className="w-[14%] ">
                 <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Рабочее время
+                  {t("work_time")}
                 </span>
               </li>
-              {/* <li className="w-[12%] ">
-                <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
-                  Статус
-                </span>
-              </li> */}
               <li className="w-[38%] flex items-center justify-end ">
                 <button
                   onClick={() => setOpenSelect(true)}
                   className="px-[30px] py-3 flex items-center rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
                 >
                   <span className="text-sm  text-white not-italic font-AeonikProMedium">
-                    Добавить локацию
+                    {t("add_location")}
                   </span>
                 </button>
               </li>
@@ -241,7 +205,7 @@ function LocationList() {
           </li>
         </ul>
       </div>
-    
+
       {dressInfo?.locationList
         ?.filter((e) =>
           e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
@@ -263,14 +227,16 @@ function LocationList() {
                     )}
                   </p>
 
-                  {index === 1&& <button
-                    onClick={() => setOpenSelect(true)}
-                    className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
-                  >
-                    <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
-                      Добавить локацию
-                    </span>
-                  </button>}
+                  {index === 1 && (
+                    <button
+                      onClick={() => setOpenSelect(true)}
+                      className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
+                    >
+                      <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
+                        {t("add_location")}
+                      </span>
+                    </button>
+                  )}
                 </div>
               ) : null}
 
@@ -301,8 +267,17 @@ function LocationList() {
                             <ul className="flex items-center w-full ">
                               <li className="md:w-[20%] h-full pr-10 ">
                                 <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
-                                  {value?.region?.name_ru || "city"},{" "}
-                                  {value?.sub_region?.name_ru || "sub_region"}
+                                  {languageDetector?.typeLang === "ru" &&
+                                    value?.region?.name_ru}
+                                  {languageDetector?.typeLang === "uz" &&
+                                    value?.region?.name_uz}
+                                  ,
+                                  <span className="ml-[4px]">
+                                    {languageDetector?.typeLang === "ru" &&
+                                      value?.sub_region?.name_ru}
+                                    {languageDetector?.typeLang === "uz" &&
+                                      value?.sub_region?.name_uz}
+                                  </span>
                                 </span>
                               </li>
                               <li className="md:w-[28%] h-full pr-10 ">
@@ -323,7 +298,7 @@ function LocationList() {
                                   className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                                 >
                                   {/* value?.wearLink */}
-                                  Товары
+                                  {t("products")}
                                 </button>
                               </li>
                               <li className="md:w-[14%] h-full  flex items-center justify-center text-center">
@@ -332,7 +307,7 @@ function LocationList() {
                                   className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                                 >
                                   {/* {value?.showMore} */}
-                                  Подробнее
+                                  {t("more_details")}
                                 </button>
                               </li>
                               <li className=" md:w-[12%] h-full hidden md:flex items-center justify-center ">
@@ -398,44 +373,65 @@ function LocationList() {
                           </div>
                           <div className="w-full flex items-center select-none md:hidden  my-3">
                             <p className="w-fit text-[13px] mr-2 flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
-                              Cтатус:</p>
+                              {t("status")}:
+                            </p>
                             <div className="w-[100px] flex items-center select-none ">
-                              {value?.status === "approved" &&
+                              {value?.status === "approved" && (
                                 <button
-                                  type="button" className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                  type="button"
+                                  className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full "
+                                >
                                   {value?.status || "status"}
-                                </button>}
-                              {value?.status === "declined" &&
-                                <button onClick={() => onHandleStatus(value?.id, item?.id)}
-                                  type="button" className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full ">
+                                </button>
+                              )}
+                              {value?.status === "declined" && (
+                                <button
+                                  onClick={() =>
+                                    onHandleStatus(value?.id, item?.id)
+                                  }
+                                  type="button"
+                                  className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full "
+                                >
                                   {value?.status || "status"}
-                                </button>}
-                              {value?.status === "pending" &&
-                                <button type="button" className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                </button>
+                              )}
+                              {value?.status === "pending" && (
+                                <button
+                                  type="button"
+                                  className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full "
+                                >
                                   {value?.status || "status"}
-                                </button>}
-                              {value?.status === "updated" &&
-                                <button type="button" className="w-full h-fit  flex items-center justify-center text-[12px]  xs:text-base text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                </button>
+                              )}
+                              {value?.status === "updated" && (
+                                <button
+                                  type="button"
+                                  className="w-full h-fit  flex items-center justify-center text-[12px]  xs:text-base text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full "
+                                >
                                   {value?.status || "status"}
-                                </button>}
+                                </button>
+                              )}
                             </div>
                           </div>
                           <div className="mb-[25px]">
                             <div className="border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-1 ll:px-[10px] py-[5px] flex text-[#3F6175] font-AeonikProMedium text-[13px] items-center mb-[8px]">
                               <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[24%]">
-                                Регион
+                                {t("region")}
                               </div>
                               <div className="text-[#3F6175] text-[12px] not-italic font-AeonikProMedium pr-[10px] w-[46%]">
-                                Адрес
+                                {t("address")}
                               </div>
                               <div className="text-[#3F6175] text-[12px] text-center not-italic font-AeonikProMedium w-[30%]">
-                                Рабочее время
+                                {t("work_time")}
                               </div>
                             </div>
 
                             <div className="px-1 ll:px-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[13px]">
                               <div className="pr-[5px] ll:pr-[10px] w-[24%] break-words  text-gray-700 text-[11px] not-italic font-AeonikProMedium">
-                                {value?.region?.name_ru}
+                                {languageDetector?.typeLang === "ru" &&
+                                  value?.region?.name_ru}
+                                {languageDetector?.typeLang === "uz" &&
+                                  value?.region?.name_uz}
                               </div>
                               <div className="relative pr-[5px] ll:pr-[10px] overflow-hidden  w-[46%]  	text-[11px] not-italic font-AeonikProMedium">
                                 <div className="absolute ToogleOff left-0 w-full h-full z-[10] top-0"></div>
@@ -448,7 +444,6 @@ function LocationList() {
                               </div>
                             </div>
                           </div>
-                          {/* {value?.region?.name_ru || "city"}, {value?.sub_region?.name_ru || "sub_region"} */}
 
                           <div className="flex items-center justify-between gap-x-[15px]">
                             <button
@@ -490,13 +485,13 @@ function LocationList() {
                                   </defs>
                                 </svg>
                               </span>
-                              Товары
+                              {t("products")}
                             </button>
                             <button
                               onClick={() => goMapCity(value?.id)}
                               className="h-[31px] text-[#007DCA] bg-[#E8F5FD] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
-                              Подробнее
+                              {t("more_details")}
                               <span className="ml-[5px]">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
   GoBackIcons,
@@ -18,7 +18,7 @@ import { BiCheckDouble } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 import { clsx } from "clsx";
 import "../LocationAddById/yandexmapsStore.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PuffLoader from "react-spinners/PuffLoader";
 
@@ -28,12 +28,17 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import imageCompression from "browser-image-compression";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function LocationMapCity() {
   const { request } = useHttp();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+
+  const { t } = useTranslation("locations");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [state, setState] = useState({
     idAddress: "",
@@ -75,13 +80,7 @@ export default function LocationMapCity() {
   const [SuccessMessage, setSuccessMessage] = useState(null);
   const [loader, setLoader] = useState(false);
   const [openStoreList, setOpenStoreList] = useState(false);
-  // const handleLocationImageOne = (e) => {
-  //   setState({
-  //     ...state,
-  //     pictureBgFile1: e.target.files[0],
-  //     pictureBgView1: URL.createObjectURL(e.target.files[0]),
-  //   });
-  // };
+
   async function handleLocationImageOne(event) {
     const imageFile = event.target.files[0];
     const options = {
@@ -103,12 +102,7 @@ export default function LocationMapCity() {
 
   const [pictureFile2, setPictureFile2] = useState("");
   const [pictureView2, setPictureView2] = useState("");
-  // const [pictureTest2, setPictureTest2] = useState("");
 
-  // const handleLocationImageTwo = (e) => {
-  //   setPictureFile2(e.target.files[0]);
-  //   setPictureView2(URL.createObjectURL(e.target.files[0]));
-  // };
   async function handleLocationImageTwo(event) {
     const imageFile = event.target.files[0];
     const options = {
@@ -125,13 +119,6 @@ export default function LocationMapCity() {
     }
   }
 
-  // const handleLocationImageThree = (e) => {
-  //   setState({
-  //     ...state,
-  //     pictureBgFile3: e.target.files[0],
-  //     pictureBgView3: URL.createObjectURL(e.target.files[0]),
-  //   });
-  // };
   async function handleLocationImageThree(event) {
     const imageFile = event.target.files[0];
     const options = {
@@ -555,20 +542,6 @@ export default function LocationMapCity() {
         <LoadingForSeller />
       ) : (
         <div className="w-full md:px-10 ">
-          {/* <ToastContainer
-        style={{ zIndex: "1000", top: "80px" }}
-        position="top-right"
-        autoClose={5000}
-        limit={4}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      /> */}
           <div className="w-full max-w-[920px] mx-auto mt-6 md:mt-12 mb-[30px]">
             <div
               onClick={() => {
@@ -598,7 +571,7 @@ export default function LocationMapCity() {
             >
               <div className="w-full flex items-center justify-between font-AeonikProMedium">
                 <span className="text-black text-lg not-italic font-AeonikProMedium">
-                  Выберите регион
+                  {t("choose_region")}
                 </span>
                 <span
                   className="select-none cursor-pointer"
@@ -618,7 +591,10 @@ export default function LocationMapCity() {
                           className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                         >
                           <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                            {data?.name_ru}
+                            {languageDetector?.typeLang === "ru" &&
+                              data?.name_ru}
+                            {languageDetector?.typeLang === "uz" &&
+                              data?.name_uz}
                           </span>
                           <span
                             className={`${
@@ -666,7 +642,10 @@ export default function LocationMapCity() {
                                     required
                                   />
                                   <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
-                                    {item?.name_ru}
+                                    {languageDetector?.typeLang === "ru" &&
+                                      item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" &&
+                                      item?.name_uz}
                                   </span>
                                 </label>
                               </div>
@@ -678,7 +657,7 @@ export default function LocationMapCity() {
                   })
                 ) : (
                   <p className="w-full h-full flex flex-col items-center justify-center">
-                    Malumotlar yuklanyapti...
+                    {t("loading_data")}
                   </p>
                 )}
               </div>
@@ -687,7 +666,7 @@ export default function LocationMapCity() {
                   onClick={() => setOpenRegionModal(false)}
                   className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium"
                 >
-                  Готово
+                  {t("ready")}
                 </span>
               </div>
             </div>
@@ -734,7 +713,7 @@ export default function LocationMapCity() {
                     </span>
                   </span>
                   <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                    Вы уверены?
+                    {t("sure")}?
                   </span>
                 </div>
               )}
@@ -744,14 +723,14 @@ export default function LocationMapCity() {
                   type="button"
                   className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[32px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
                 >
-                  Oтмена
+                  {t("cancel")}
                 </button>
                 <button
                   onClick={() => onLocaTionDelete()}
                   type="button"
                   className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[32px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
                 >
-                  Удалить{" "}
+                  {t("delete")}
                 </button>
               </div>
             </section>
@@ -765,7 +744,7 @@ export default function LocationMapCity() {
                     <div className={`flex items-center justify-between  pb-3`}>
                       <div className="w-fit flex items-center">
                         <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
-                          Выберите фото
+                          {t("select_photo")}
                         </span>
                       </div>
                       <button
@@ -804,14 +783,14 @@ export default function LocationMapCity() {
                         />
                       ) : (
                         <span className="leading-none text-sm md:text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                          Фото
+                          {t("photo")}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center justify-between  pt-2">
                       <label
                         htmlFor={"imageOne1"}
-                        className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor  text-sm md:text-base font-AeonikProMedium"
+                        className="w-fit flex items-center justify-center cursor-pointer  active:scale-95 text-textBlueColor  text-sm md:text-base font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -822,14 +801,14 @@ export default function LocationMapCity() {
                           accept=" image/*"
                         />
                         {state?.pictureBgView1
-                          ? "Изменить фото"
-                          : "Загрузить фото"}
+                          ? t("change_photo")
+                          : t("upload_a_photo")}
                       </label>
                       <button
                         onClick={() => setBackImgUploadModal(false)}
                         className="w-fit h-fit flex items-end justify-end text-sm md:text-base select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                       >
-                        Oтмена
+                        {t("cancel")}
                       </button>
                     </div>
                   </div>
@@ -839,7 +818,7 @@ export default function LocationMapCity() {
                     <div className={`flex items-center justify-between  pb-3`}>
                       <div className="w-fit flex items-center">
                         <span className="text-black text-sm md:text-base not-italic font-AeonikProRegular leading-5">
-                          Выберите фото
+                          {t("select_photo")}
                         </span>
                       </div>
                       <button
@@ -878,14 +857,14 @@ export default function LocationMapCity() {
                         />
                       ) : (
                         <span className="leading-none text-[12px]  md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                          Фото
+                          {t("photo")}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center justify-between  pt-2">
                       <label
                         htmlFor={"imageTwo2"}
-                        className="w-fit   flex items-center justify-center text-sm md:text-lg cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
+                        className="w-fit   flex items-center justify-center text-sm md:text-lg cursor-pointer active:scale-95 text-textBlueColor   font-AeonikProMedium"
                       >
                         <input
                           className="hidden"
@@ -895,21 +874,21 @@ export default function LocationMapCity() {
                           onChange={handleLocationImageTwo}
                           accept=" image/*"
                         />
-                        {pictureView2 ? "Изменить фото" : "Загрузить фото"}
+                        {pictureView2 ? t("change_photo") : t("upload_a_photo")}
                       </label>
                       {pictureView2 ? (
                         <button
                           onClick={() => onUserDeleteBackgroundImg2()}
                           className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
-                          Удалить
+                          {t("delete")}
                         </button>
                       ) : (
                         <button
                           onClick={() => setBackImgUploadModal(false)}
                           className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
-                          Oтмена
+                          {t("cancel")}
                         </button>
                       )}
                     </div>
@@ -920,7 +899,7 @@ export default function LocationMapCity() {
                     <div className={`flex items-center justify-between  pb-3`}>
                       <div className="w-fit flex items-center">
                         <span className="text-black text-sm md:text-lg not-italic font-AeonikProRegular leading-5">
-                          Выберите фото
+                          {t("select_photo")}
                         </span>
                       </div>
                       <button
@@ -959,7 +938,7 @@ export default function LocationMapCity() {
                         />
                       ) : (
                         <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
-                          Фото
+                          {t("photo")}
                         </span>
                       )}
                     </div>
@@ -977,22 +956,22 @@ export default function LocationMapCity() {
                           accept=" image/*"
                         />
                         {state?.pictureBgView3
-                          ? "Изменить фото"
-                          : "Загрузить фото"}
+                          ? t("change_photo")
+                          : t("upload_a_photo")}
                       </label>
                       {state?.pictureBgView3 ? (
                         <button
                           onClick={() => onUserDeleteBackgroundImg3()}
                           className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
-                          Удалить
+                          {t("delete")}
                         </button>
                       ) : (
                         <button
                           onClick={() => setBackImgUploadModal(false)}
                           className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                         >
-                          Oтмена
+                          {t("cancel")}
                         </button>
                       )}
                     </div>
@@ -1006,12 +985,12 @@ export default function LocationMapCity() {
                   onClick={() => {
                     navigate(-1);
                   }}
-                  className="  md:hidden absolute left-2 flex items-center cursor-pointer justify-center "
+                  className="md:hidden absolute left-2 flex items-center cursor-pointer justify-center "
                 >
                   <GoBackIcons />
                 </button>
                 <div className="text-center text-xl md:text-[35px] font-AeonikProMedium w-[80%] ll:w-fit md:px-0">
-                  Редактировать местоположения
+                  {t("edit_locations")}
                 </div>
               </div>
               <div className=" px-4 md:px-0 w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-[8px] md:border-0 border-b border-borderColor">
@@ -1029,7 +1008,7 @@ export default function LocationMapCity() {
                     // onClick={onLocaTionDelete}
                     className="w-fit text-weatherWinterColor hover:underline cursor-pointer text-[13px] xs:text-sm not-italic font-AeonikProRegular xs:font-AeonikProMedium"
                   >
-                    Удалить
+                    {t("delete")}
                   </button>
                 </div>
               </div>
@@ -1063,7 +1042,7 @@ export default function LocationMapCity() {
                           >
                             <input
                               ref={searchRef}
-                              placeholder="Введите адрес"
+                              placeholder={t("enter_address")}
                               id="ForSearch"
                               name="search"
                               className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
@@ -1108,7 +1087,7 @@ export default function LocationMapCity() {
                                 <>
                                   {" "}
                                   <span className="md:flex hidden md:text-[16px]">
-                                    Подтвердить
+                                    {t("confirm")}
                                   </span>
                                   <span className="md:hidden flex">OK</span>
                                 </>
@@ -1124,7 +1103,7 @@ export default function LocationMapCity() {
                               className="w-[40px] md:w-[150px] h-10 px-3  flex items-center justify-center bg-borderColor text-textLightColor rounded-lg text-sm font-AeonikProMedium"
                             >
                               <span className="md:flex hidden">
-                                Подтвердить
+                                {t("confirm")}
                               </span>
                               <span className="md:hidden flex">OK</span>{" "}
                             </button>
@@ -1170,7 +1149,7 @@ export default function LocationMapCity() {
                       />
                     ) : (
                       <span className="leading-none  text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        Фото локации
+                        {t("photo_location")}
                       </span>
                     )}
                   </button>
@@ -1193,14 +1172,14 @@ export default function LocationMapCity() {
                         />
                       ) : (
                         <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                          Фото локации
+                          {t("photo_location")}
                         </span>
                       )}
                     </button>
                   ) : (
                     <div className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
-                        Фото локации
+                        {t("photo_location")}
                       </span>
                     </div>
                   )}
@@ -1223,14 +1202,14 @@ export default function LocationMapCity() {
                         />
                       ) : (
                         <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                          Фото локации
+                          {t("photo_location")}
                         </span>
                       )}
                     </button>
                   ) : (
                     <div className="h-full border rounded-lg  w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
-                        Фото локации
+                        {t("photo_location")}
                       </span>
                     </div>
                   )}
@@ -1244,7 +1223,7 @@ export default function LocationMapCity() {
                       <div className={"w-full "}>
                         <label htmlFor="selectRegion">
                           <span className="flex items-center text-[#303030] text-[13px] md:text-base not-italic font-AeonikProMedium leading-4 tracking-[0,16px] ">
-                            Выберите регион{" "}
+                            {t("choose_region")}{" "}
                             <span className="ml-[5px]">
                               <StarLabel />
                             </span>
@@ -1256,7 +1235,7 @@ export default function LocationMapCity() {
                             <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
                               {!state?.idRegionId &&
                                 !state?.idSupRregionId &&
-                                "Выберите регион"}
+                                `${t("choose_region")}`}
 
                               {dressInfo?.regionList?.regions
                                 ?.filter((e) => e.id == state?.idRegionId)
@@ -1266,7 +1245,11 @@ export default function LocationMapCity() {
                                       key={index}
                                       className="flex items-center text-[#000] text-[13px] md:text-base font-AeonikProRegular"
                                     >
-                                      {item?.name_ru},
+                                      {languageDetector?.typeLang === "ru" &&
+                                        item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" &&
+                                        item?.name_uz}
+                                      ,
                                       {item?.sub_regions
                                         ?.filter(
                                           (i) => i.id == state?.idSupRregionId
@@ -1277,7 +1260,10 @@ export default function LocationMapCity() {
                                               key={index}
                                               className="ml-1 font-AeonikProRegular"
                                             >
-                                              {data?.name_ru}
+                                              {languageDetector?.typeLang ===
+                                                "ru" && data?.name_ru}
+                                              {languageDetector?.typeLang ===
+                                                "uz" && data?.name_uz}
                                             </span>
                                           );
                                         })}
@@ -1298,7 +1284,7 @@ export default function LocationMapCity() {
                     className="w-full md:w-[31%] xs:w-[48%]   "
                   >
                     <div className="w-full text-[13px] font-AeonikProMedium md:text-base flex items-center mb-[10px]">
-                      Имя администратора{" "}
+                      {t("name_admin")}{" "}
                       <span className="ml-[5px]">
                         <StarLabel />
                       </span>
@@ -1309,7 +1295,7 @@ export default function LocationMapCity() {
                         name="fname"
                         value={state?.idAssistantName}
                         onChange={handleInputAdminNameFirst}
-                        placeholder=" Имя администратора"
+                        placeholder={t("name_admin")}
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2"
                       />
                     </div>
@@ -1319,7 +1305,7 @@ export default function LocationMapCity() {
                     className="w-full md:w-[31%] xs:w-[48%]  "
                   >
                     <div className="w-full text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
-                      Имя второго администратора{" "}
+                      {t("name_admin_two")}
                     </div>
                     <div className="w-full flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
                       <input
@@ -1327,7 +1313,7 @@ export default function LocationMapCity() {
                         name="fname2"
                         value={state?.idSecondAssistantName}
                         onChange={handleInputAdminNameSecond}
-                        placeholder=" Имя администратора"
+                        placeholder={t("name_admin_two")}
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2 "
                       />
                     </div>
@@ -1339,7 +1325,7 @@ export default function LocationMapCity() {
                       <div className={"w-full hidden md:block"}>
                         <label htmlFor="selectRegion">
                           <span className="flex items-center text-[#303030] text-[13px] md:text-base not-italic font-AeonikProMedium leading-4 tracking-[0,16px] ">
-                            Выберите регион
+                            {t("choose_region")}
                           </span>
                           <div
                             onClick={() => setOpenRegionModal(true)}
@@ -1348,7 +1334,7 @@ export default function LocationMapCity() {
                             <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
                               {!state?.idRegionId &&
                                 !state?.idSupRregionId &&
-                                "Выберите регион"}
+                                `${t("choose_region")}`}
 
                               {dressInfo?.regionList?.regions
                                 ?.filter((e) => e.id == state?.idRegionId)
@@ -1358,7 +1344,11 @@ export default function LocationMapCity() {
                                       key={index}
                                       className="flex items-center text-[#000] text-[13px] md:text-base font-AeonikProRegular"
                                     >
-                                      {item?.name_ru},
+                                      {languageDetector?.typeLang === "ru" &&
+                                        item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" &&
+                                        item?.name_uz}
+                                      ,
                                       {item?.sub_regions
                                         ?.filter(
                                           (i) => i.id == state?.idSupRregionId
@@ -1369,7 +1359,10 @@ export default function LocationMapCity() {
                                               key={index}
                                               className="ml-1 font-AeonikProRegular"
                                             >
-                                              {data?.name_ru}
+                                              {languageDetector?.typeLang ===
+                                                "ru" && data?.name_ru}
+                                              {languageDetector?.typeLang ===
+                                                "uz" && data?.name_uz}
                                             </span>
                                           );
                                         })}
@@ -1390,7 +1383,7 @@ export default function LocationMapCity() {
                     className="w-full md:w-[31%] xs:w-[48%]"
                   >
                     <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
-                      Номер администратора
+                      {t("number_admin")}
                       <span className="ml-[5px]">
                         <StarLabel />
                       </span>
@@ -1428,7 +1421,7 @@ export default function LocationMapCity() {
                     className="w-full md:w-[31%] xs:w-[48%]"
                   >
                     <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
-                      Номер второго администратора{" "}
+                      {t("number_admin")}
                       <span className="ml-[5px]">{/* <StarLabel /> */}</span>
                     </div>
 
@@ -1462,7 +1455,7 @@ export default function LocationMapCity() {
                   </label>
                   <div className="w-full md:w-[31%] xs:w-[48%]">
                     <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-1 md:mb-[10px]">
-                      Рабочее время
+                      {t("work_time")}
                       <span className="ml-[5px]">
                         <StarLabel />
                       </span>
@@ -1470,7 +1463,7 @@ export default function LocationMapCity() {
                     <div className="w-full flex  items-center">
                       {" "}
                       <span className="w-fit text-[13px] md:text-base flex items-center font-AeonikProRegular">
-                        от
+                        {t("before")}
                       </span>
                       <input
                         className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded md:rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
@@ -1486,7 +1479,7 @@ export default function LocationMapCity() {
                         required
                       />
                       <span className="w-fit text-[13px] md:text-base flex items-center font-AeonikProRegular">
-                        до
+                        {t("after")}
                       </span>
                       <input
                         className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
@@ -1510,7 +1503,7 @@ export default function LocationMapCity() {
                   onClick={() => handleEditLocation()}
                   className="w-full md:w-fit h-[42px] flex items-center font-AeonikProMedium justify-center md:px-[100px]  bg-textBlueColor text-white rounded md:rounded-lg active:scale-95"
                 >
-                  Сохранить
+                  {t("save")}
                 </button>
               </div>
             </div>

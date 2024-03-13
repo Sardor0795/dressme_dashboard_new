@@ -1,0 +1,88 @@
+{
+    "no_location": "У вас пока нет локации !",
+    "add_location": "Добавить локацию",
+    "attach_to_store": "Прикрепить к магазину",
+    "first_create_a_store": "Сначала создайте магазин",
+    "choose_region": "Выберите регион",
+    "loading_data": "Загрузка данных...",
+    "ready": "Готово",
+    "add_a_store_location": "Добавить локацию магазина",
+    "photo_location": "Фото локации",
+    "second": "Второе",
+    "third": "Третье",
+    "name_admin": "Имя администратора",
+    "name_admin_two": "Имя второго администратора",
+    "not_necessary": "(не обезательно)",
+    "number_admin": "Номер администратора",
+    "number_adminnumber_adminnumber_adminnumber_admin": "Номер второго администратора",
+    "work_time": "Рабочее время",
+    "before": "от",
+    "after": "до",
+    "add": "Добавить",
+    "enter_address": "Введите адрес",
+    "confirm": "Подтвердить",
+    "cause": "Причина",
+    "no_reason": "Нет причин",
+    "nothing_found": "Ничего не найдено",
+    "all_shops": "Все магазины",
+    "all_locations": "Все локации",
+    "photo": "Фото",
+    "region": "Регион",
+    "address": "Адрес",
+    "products": "Товары",
+    "more_details": "Подробнее",
+    "status": "Cтатус",
+    "sure": "Вы уверены",
+    "delete": "Удалить",
+    "cancel": "Отмена",
+    "select_photo": "Выберите фото",
+    "change_photo": "Изменить фото",
+    "upload_a_photo": "Загрузить фото",
+    "edit_locations": "Редактировать местоположения",
+    "save": "Сохранить",
+    
+
+
+
+    
+    "search": "Поиск",
+    "create_new_store": "Создать новый магазин",
+    "votes": "голосов",
+    "location": "Локации",
+    "background_photo": "Фоновое фото",
+    "select_logo": "Выберите логотип",
+    "trim": "Обрезать",
+    "create_a_store": "Создать магазин",
+    "store_name": "Название магазина",
+    "enter_store_name": "Введите название магазина",
+    "gender": "Пол",
+    "delivery_method": "Метод доставки",
+    "cloth": "Одежда",
+    "shops": "Магазины",
+    "no_reviews": "У вас пока нет отзывов",
+    "reviews": "Отзывы",
+    "reviews_two": "oтзывы",
+    "own_delivery": "Собственная доставка",
+    "image": "Изображение",
+    "name_of_product": "Наименование товара",
+    "date": "Дата",
+    "name_product": "Имя товара",
+    "more_details_of_product": "Подробнее о товаре",
+    "filter_rating": "Фильтр рейтинг",
+    "customer_reviews": "Отзывы клиентов",
+    "according_to_reviews": "По отзывам",
+    "purchase_rating": "Оценка покупки",
+    "answer": "Ответ",
+    "send": "Отправить",
+    "answer_two": "Ответить",
+    "add_answer": "Добавьте свой ответ ..."
+
+
+
+
+
+
+
+
+    
+}
