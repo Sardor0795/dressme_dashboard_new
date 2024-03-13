@@ -404,7 +404,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
-// Если вы удалите аккаунт
+// Если вы удалите аккаунт Тип предприятия
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -889,7 +889,7 @@ function EditProfilePage() {
             </div>
           </div>
           {/* Type */}
-          <div className="w-full ">
+          <div className="w-full  md:pt-[3px]">
             <div className="w-full justify-between flex ">
               <span
                 onClick={() => setState({ ...state, sellerTypes: "INDIVIDUAL" })}>
@@ -940,10 +940,10 @@ function EditProfilePage() {
               </div>
             }
           </div>
-          <div className={`${state?.sellerTypes === 'ENTITY' ? "flex" : "hidden"}  w-full h-fit flex flex-col items-center justify-start `}>
-            <div className="w-full justify-start  flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
+          <div className={`${state?.sellerTypes === 'ENTITY' ? "flex" : "hidden"}  w-full h-fit flex flex-col    `}>
+            <span className="w-full  box-border flex text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular tracking-[0,16px]">
               Тип предприятия
-            </div>
+            </span>
             <div className={`h-[44px] w-full mt-[6px] overflow-hidden rounded-lg  ${state?.isCheckInput && state?.sellerTypes === 'ENTITY' ? "border border-[#FFB8B8] bg-[#FFF6F6] " : "focus:border border-searchBgColor"}`}>
               <Select
                 className={`SelectAntdStyle   h-[38px] md:h-[42px] text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
