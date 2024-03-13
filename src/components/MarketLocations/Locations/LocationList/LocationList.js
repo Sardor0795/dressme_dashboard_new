@@ -62,9 +62,8 @@ function LocationList() {
   return (
     <div className={`w-full h-full px-4 md:px-10 pb-10`}>
       <div
-        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${
-          openSelect || statusModal ? "" : "hidden"
-        }`}
+        className={`fixed cursor-pointer z-[200] inset-0 w-full h-full bg-black opacity-40 ${openSelect || statusModal ? "" : "hidden"
+          }`}
         onClick={() => {
           setStatusModal(false);
           setOpenSelect(false);
@@ -72,11 +71,10 @@ function LocationList() {
       ></div>
       {/*status Modal */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed  py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          statusModal
+        className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed  py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal
             ? " bottom-0 md:flex"
             : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+          }`}
       >
         <button
           onClick={() => setStatusModal(false)}
@@ -101,9 +99,8 @@ function LocationList() {
         )}
       </section>
       <section
-        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openSelect ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setOpenSelect(false)}
@@ -447,7 +444,7 @@ function LocationList() {
 
                           <div className="flex items-center justify-between gap-x-[15px]">
                             <button
-                              onClick={() => goMapWear(value?.shop_id)}
+                              onClick={() => goMapWear(value?.id)}
                               className="h-[31px] text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                             >
                               <span className="mr-[5px]">

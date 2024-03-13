@@ -1754,44 +1754,9 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
                                                                 <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                  {itemValue
-                                                                    ?.cost
-                                                                    ?.discount_price >
-                                                                    999
-                                                                    ? Number(
-                                                                      itemValue
-                                                                        ?.cost
-                                                                        ?.discount_price
-                                                                    )
-                                                                      ?.toLocaleString()
-                                                                      ?.split(
-                                                                        ","
-                                                                      )
-                                                                      .join(
-                                                                        " "
-                                                                      )
-                                                                    : itemValue
-                                                                      ?.cost
-                                                                      ?.discount_price ||
-                                                                      itemValue
-                                                                        ?.cost
-                                                                        ?.price >
-                                                                      999
-                                                                      ? Number(
-                                                                        itemValue
-                                                                          ?.cost
-                                                                          ?.price
-                                                                      )
-                                                                        ?.toLocaleString()
-                                                                        ?.split(
-                                                                          ","
-                                                                        )
-                                                                        .join(
-                                                                          " "
-                                                                        )
-                                                                      : itemValue
-                                                                        ?.cost
-                                                                        ?.price}
+                                                                  {itemValue?.cost?.discount_price > 999 ? Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ")
+                                                                    : itemValue?.cost?.discount_price || itemValue?.cost?.price > 999 ?
+                                                                      Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ") : itemValue?.cost?.price}
                                                                   <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                     Сум
                                                                   </span>
