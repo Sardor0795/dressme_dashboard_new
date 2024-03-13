@@ -4,13 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 99999;
-  /* left: 0; */
   inset: 0;
   background-color: white;
-}
-
-.loader1 {
-  size: 140px;
 }

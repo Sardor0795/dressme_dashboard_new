@@ -1,15 +1,18 @@
 import React from "react";
 import styles from "./forLoading.module.css";
-import PuffLoader from "react-spinners/PuffLoader";
+import WiFiLoader from "../../assets/loader/wifi_loader.gif";
 export default function LoadingForSeller() {
   return (
     <div className={styles.loader}>
-      <PuffLoader
-        className={styles.loader1}
-        color={"#007DCA"}
-        size={100}
-        loading={true}
-      />
+      <div
+        style={{
+          backgroundImage: `url('${WiFiLoader}')`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+        }}
+        className="md:w-[100px] w-[60px] md:h-[100px] h-[60px]"
+      ></div>
     </div>
   );
 }
