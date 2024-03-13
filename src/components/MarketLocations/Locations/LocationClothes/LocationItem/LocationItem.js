@@ -4,6 +4,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { FaCheck } from "react-icons/fa6";
 import {
 
+  AddIconsCircle,
   CheckIcons,
   DeleteIcon,
   MenuCloseIcons,
@@ -23,10 +24,11 @@ const { REACT_APP_BASE_URL } = process.env;
 function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
-    const { t } = useTranslation("locations");
-    const [languageDetector] = useContext(LanguageDetectorDress);
+  const { t } = useTranslation("locations");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const { request } = useHttp()
+  const [moreMobile, setMoreMobile] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -156,6 +158,12 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
     })
 
   }
+
+  function addNewProductId() {
+    // setDressInfo({ ...dressInfo, locationIdAddProduct: data?.id });
+    // navigate(`/products/location/add/:${Number(data?.shop_id)}`);
+  }
+  console.log(data, 'data');
   return (
     <div className="w-full">
       <ToastContainer
@@ -185,14 +193,62 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
           className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
          ${deleteModal || openStoreList || statusModal ? "" : "hidden"}`}
         ></section>
+        <div className=" w-full md:hidden flex items-center justify-between">
+          <div className="flex">
+            <Checkbox
+              defaultChecked={indeterminate}
+              onChange={onCheckAllChange}
+              checked={checkAll}
+
+              className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[20px] !min-h-[20px] `}
+            ></Checkbox>
+            <p className="text-black text-[13px] md:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+              {dressInfo?.regionList?.regions
+                ?.filter((e) => e?.id == data?.region_id)
+                ?.map((values, index) => {
+                  return (
+                    <div>
+                      {values?.name_ru},
+                      {values?.sub_regions?.filter((e) => e?.id == data?.sub_region_id)?.map((valueSub) => {
+                        return (
+                          <span className="px-1">{valueSub?.name_ru}
+                            ,
+                          </span>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              <span className="hidden md:flex items-center ml-1   ">
+                ({data?.address})
+              </span>
+              {data?.products?.length > 1 && (
+                <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
+                  ({data?.products?.length})
+                </span>
+              )}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => addNewProductId()}
+            className="active:scale-95 cursor-pointer active:opacity-70 flex items-center gap-x-[4px]"
+          >
+            <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
+              {t("add_cloth")}
+            </span>
+            <span>
+              <AddIconsCircle size={16} />
+            </span>
+          </button>
+        </div>
         {/* ---------------------------------------- */}
         {/*status Modal */}
         <section
-          className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-            statusModal
-              ? " bottom-0 md:flex"
-              : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
+          className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[201] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal
+            ? " bottom-0 md:flex"
+            : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
         >
           <button
             onClick={() => setStatusModal(false)}
@@ -218,11 +274,10 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
         </section>
         {/* Delete Product Of Pop Confirm */}
         <section
-          className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-            deleteModal
-              ? " bottom-0 md:flex"
-              : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
+          className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
+            ? " bottom-0 md:flex"
+            : "md:hidden bottom-[-800px] z-[-10]"
+            }`}
         >
           <button
             onClick={() => setDeleteModal(false)}
@@ -241,40 +296,62 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   loading={true}
                 />
               ) : (
-                <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                    <FaCheck size={30} color="#009B17" />
-                  </span>
-                  <span className="text-base not-italic font-AeonikProMedium">
-                    {SuccessMessage}
-                  </span>
-                </div>
+                <>
+                  <div className="w-full hidden md:flex gap-y-2 flex-col items-center justify-center ">
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                      <FaCheck size={30} color="#009B17" />
+                    </span>
+                    <span className="text-base not-italic font-AeonikProMedium">
+                      {SuccessMessage}
+                    </span>
+                  </div>
+                  <div className="w-full md:hidden flex gap-y-2 flex-col items-center justify-center ">
+                    <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                      <FaCheck size={20} color="#009B17" />
+                    </span>
+                    <span className="text-[14px] not-italic font-AeonikProMedium">
+                      {SuccessMessage}
+                    </span>
+                  </div>
+                </>
               )}
             </div>
           ) : (
-            <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                  <DeleteIcon width={30} />
+            <>
+              <div className="hidden md:flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+                <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                  <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                    <DeleteIcon width={30} />
+                  </span>
                 </span>
-              </span>
-              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                {t("sure")}?
-              </span>
-            </div>
+                <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                  {t("sure")}?
+                </span>
+              </div>
+              <div className="md:hidden flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+                <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                  <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                    <DeleteIcon width={20} />
+                  </span>
+                </span>
+                <span className=" text-black text-base  not-italic font-AeonikProMedium text-center">
+                  {t("sure")}?
+                </span>
+              </div>
+            </>
           )}
           <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
             <button
               onClick={() => setDeleteModal(false)}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px]  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px]  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
             >
               {t("cancel")}
             </button>
             <button
               onClick={() => onProductAddressDelete()}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor hover:text-white text-[#FF4747] bg-white hover:bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor hover:text-white text-[#FF4747] bg-white hover:bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
             >
               {t("remove_from_address")}
             </button>
@@ -346,12 +423,13 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                 )
                 ?.map((itemValue, index) => {
+                  console.log(itemValue, 'itemValue');
                   return (
                     <List.Item key={index} className="w-full  mt-6">
-                      <div className="w-full   hidden md:flex flex-col items-center text-tableTextTitle">
+                      <div className="w-full    flex flex-col items-center text-tableTextTitle">
                         <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
                           <div className="flex flex-col w-full">
-                            <div className="w-full flex h-[100px]  items-center">
+                            <div className="w-full flex h-[100px]  hidden md:flex items-center border border-green-500">
                               <Checkbox
                                 value={itemValue?.id}
                                 checked={checked}
@@ -406,16 +484,16 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                 <td className="w-[10%] h-full   flex items-center ">
                                   {itemValue?.cost?.discount_price > 999
                                     ? Number(itemValue?.cost?.discount_price)
-                                        ?.toLocaleString()
-                                        ?.split(",")
-                                        .join(" ")
+                                      ?.toLocaleString()
+                                      ?.split(",")
+                                      .join(" ")
                                     : itemValue?.cost?.discount_price ||
                                       itemValue?.cost?.price > 999
-                                    ? Number(itemValue?.cost?.price)
+                                      ? Number(itemValue?.cost?.price)
                                         ?.toLocaleString()
                                         ?.split(",")
                                         .join(" ")
-                                    : itemValue?.cost?.price}
+                                      : itemValue?.cost?.price}
                                   <span className="ml-[6px] text-[14px]">
                                     {t("currency")}
                                   </span>
@@ -485,6 +563,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                               </tr>
                             </div>
                             {/* For Mobile Device */}
+
                             <div
                               key={itemValue?.id}
                               className="border rounded-xl border-[##F2F2F2] p-[10px] mb-3 md:hidden w-full"
@@ -492,88 +571,191 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                               <div className="mb-2">
                                 <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                                   <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
-                                  <span className="text-checkboxBorder">
-                                    0{itemValue?.id}
+                                  <span className="text-[14px] text-checkboxBorder">
+                                    {index + 1}
                                   </span>
                                   <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
                                 </div>
                               </div>
 
                               <div className="mb-3 h-[148px]">
-                                <figure className="w-full h-full rounded-lg overflow-hidden"></figure>
+                                <figure className="w-full h-full rounded-lg overflow-hidden">
+                                  <span className="h-[138px] mx-auto w-[108px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                    <img src={itemValue?.photos[0]?.url_photo || "nodate"} alt={"noImg"} className="w-full h-full object-cover" />
+                                  </span>
+                                </figure>
                               </div>
 
                               <div className="mb-6">
                                 <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                  <div className="w-[40%] flex items-center">
+                                  <div className="w-[40%] flex items-center ">
                                     {t("name_product")}
                                   </div>
-                                  <div className="w-[30%] flex items-center">
+                                  <div className="w-[30%] flex items-center ">
                                     {t("status")}
                                   </div>
-                                  <div className="w-[30%] flex items-center">
+                                  <div className="w-[30%] flex items-center ">
                                     {t("price_of_product")}
                                   </div>
                                 </div>
 
                                 <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                  <div className="w-[40%]">
-                                    {" "}
-                                    {itemValue?.name_product}
+                                  <div className="w-[40%] break-all  overflow-hidden  ">
+                                    <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                      {itemValue?.name_ru ||
+                                        "namrRu"}
+                                    </p>
                                   </div>
-                                  <div className=" w-[30%] flex items-center justify-center text-white bg-green-500 rounded-lg px-[5px] py-[2px]">
-                                    {itemValue?.status}
+                                  <div className=" w-[30%] flex items-center     rounded-lg  ">
+                                    {itemValue?.status === "approved" && (
+                                      <div className="w-full h-fit  flex items-center   ">
+                                        <span className="w-[100px]  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full">
+                                          {itemValue?.status || "status"}
+                                        </span>
+                                      </div>
+                                    )}
+                                    {itemValue?.status === "declined" && (
+                                      <div
+                                        onClick={() =>
+                                          onHandleStatus(itemValue?.id)
+                                        }
+                                        className="w-full h-fit cursor-pointer flex items-center   "
+                                      >
+                                        <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full">
+                                          {itemValue?.status || "status"}
+                                        </span>
+                                      </div>
+                                    )}
+                                    {itemValue?.status === "pending" && (
+                                      <div className="w-full h-fit  flex items-center   ">
+                                        <span className="w-[100px]  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full">
+                                          {itemValue?.status || "status"}
+                                        </span>
+                                      </div>
+                                    )}
+                                    {itemValue?.status === "updated" && (
+                                      <div className="w-full h-fit flex items-center ">
+                                        <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full">
+                                          {itemValue?.status || "status"}
+                                        </span>
+                                      </div>
+                                    )}
                                   </div>
-                                  <div className="w-[30%]">
-                                    {" "}
-                                    {itemValue?.money} {t("currency_two")}{" "}
+                                  <div className="w-[30%] flex items-center   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                    {itemValue?.cost?.discount_price > 999 ? Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ")
+                                      : itemValue?.cost?.discount_price || itemValue?.cost?.price > 999 ?
+                                        Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ") : itemValue?.cost?.price}
+                                    <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                      {itemValue?.money} {t("currency_two")}
+                                    </span>
                                   </div>
                                 </div>
                               </div>
+                              {moreMobile == itemValue?.id && (
+                                <div className="mb-6">
+                                  <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                    <div className="w-[40%] flex items-center  ">
+                                      Артикул
+                                    </div>
+                                    <div className="w-[30%] flex items-center  ">
+                                      Тип
+                                    </div>
+                                    <div className="w-[30%] flex items-center  ">
+                                      {" "}
+                                      Дата
+                                    </div>
+                                  </div>
 
-                              <div className="flex items-center justify-between">
-                                <button
+                                  <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
+                                    <div className="w-[40%] break-   overflow-hidden  ">
+                                      <p className="w-full  break-all text-weatherWinterColor text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                        {itemValue?.sku ||
+                                          "sku"}
+                                      </p>
+                                    </div>
+                                    {/* {getProductInfo?.types && getProductInfo?.types?.filter((e) => e?.id == itemValue?.type_id)?.map((valueType, index) => {
+                                        return (
+                                          <td key={index}
+                                            className="w-[30%] h-full  flex items-center justify-center "
+                                          >
+                                            {valueType?.name_ru ||
+                                              "type_id"}
+                                          </td>
+                                        );
+                                      }
+                                      )} */}
+                                    <div key={index}
+                                      className="w-[30%] h-full  flex items-center   "
+                                    >
+                                      {itemValue?.type_id || "type_id"}
+                                    </div>
+                                    <div className="w-[30%] h-full  flex items-center    text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                      {itemValue?.created_at ||
+                                        "created_at"}
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                              <div className="flex items-center justify-center">
+                                {/* <button
                                   onClick={() => goMapWear(itemValue?.city)}
                                   className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                 >
                                   {t("Joyga qo'shish")}
-                                </button>
+                                </button> */}
                                 <button
-                                  onClick={() => goMapCity(itemValue?.city)}
-                                  className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
+                                  onClick={() =>
+                                    goProductDetailEdit(
+                                      itemValue?.id,
+                                      data?.id
+                                    )
+                                  } className="text-[#007DCA] bg-[#E8F5FD] text-center w-[100%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                 >
                                   {t("more_details")}
                                 </button>
                               </div>
-
                               <div className="w-full flex items-center justify-between mt-[18px]">
-                                <div
-                                  // onClick={() => {
-                                  //   click(itemValue?.id);
-                                  // }}
-                                  className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
-                                    itemValue?.isCheck
-                                      ? "bg-[#007DCA] border-[#007DCA]"
-                                      : "bg-white border-checkboxBorder"
-                                  } flex items-center justify-center rounded mr-[8px]`}
-                                >
-                                  <div
-                                    className={`${
-                                      itemValue?.isCheck
-                                        ? "flex items-center justify-center"
-                                        : "hidden"
-                                    }`}
-                                  >
-                                    <CheckIcons />
+                                <div className={`cursor-pointer  bg-white border-checkboxBorder  flex items-center justify-center rounded mr-[8px]`}>
+                                  <div className={` flex items-center justify-center `}>
+                                    <Checkbox value={itemValue?.id} checked={checked} />
                                   </div>
                                 </div>
-                                <button
+                                {moreMobile !==
+                                  itemValue?.id ? (
+                                  <button
+                                    onClick={() =>
+                                      setMoreMobile(
+                                        itemValue?.id
+                                      )
+                                    }
+                                    className="text-textBlueColor text-[13px] font-AeonikProMedium"
+                                  >
+                                    Больше...
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={() =>
+                                      setMoreMobile()
+                                    }
+                                    className="text-textBlueColor text-[13px] font-AeonikProMedium"
+                                  >
+                                    Меньше...
+                                  </button>
+                                )}
+                                {/* <button
                                   to="#"
                                   className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                 >
                                   {t("more")}...
-                                </button>
-                                <button className="text-red-600 text-[11px] font-AeonikProMedium">
+                                </button> */}
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setDeleteModal(true);
+                                    setDeleteId(itemValue?.id);
+                                    setGetIdShopLocation(data?.id);
+                                  }}
+                                  className="text-red-600 text-[11px] font-AeonikProMedium">
                                   {t("delete")}
                                 </button>
                               </div>
@@ -596,7 +778,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
       </div>
       {/* )
       })} */}
-    </div>
+    </div >
   );
 }
 export default React.memo(LocationItem)

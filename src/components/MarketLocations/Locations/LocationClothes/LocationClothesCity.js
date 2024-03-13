@@ -24,7 +24,7 @@ export default function LocationClothesCity() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   const { t } = useTranslation("locations");
-  const [languageDetector] = useContext(LanguageDetectorDress)  ;
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const navigate = useNavigate();
   const [state, setState] = useState({
@@ -124,7 +124,7 @@ export default function LocationClothesCity() {
   }
 
   return (
-    <div className="px-4 md:px-10">
+    <div className="px-4 md:px-10 ">
       <section
         onClick={() => {
           setState({
@@ -145,11 +145,10 @@ export default function LocationClothesCity() {
 
       {/* Delete Product Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.openDeleteModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openDeleteModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setState({ ...state, openDeleteModal: false })}
@@ -168,40 +167,62 @@ export default function LocationClothesCity() {
                 loading={true}
               />
             ) : (
-              <div className="w-full flex gap-y-2 flex-col items-center justify-center ">
-                <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                  <FaCheck size={30} color="#009B17" />
-                </span>
-                <span className="text-base not-italic font-AeonikProMedium">
-                  {state?.onSuccessMessaage}
-                </span>
-              </div>
+              <>
+                <div className="w-full hidden md:flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={30} color="#009B17" />
+                  </span>
+                  <span className="text-base not-italic font-AeonikProMedium">
+                    {state?.onSuccessMessaage}
+                  </span>
+                </div>
+                <div className="w-full md:hidden flex gap-y-2 flex-col items-center justify-center ">
+                  <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
+                    <FaCheck size={20} color="#009B17" />
+                  </span>
+                  <span className="text-[14px] not-italic font-AeonikProMedium">
+                    {state?.onSuccessMessaage}
+                  </span>
+                </div>
+              </>
             )}
           </div>
         ) : (
-          <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
-            <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
-              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                <DeleteIcon width={30} />
+          <>
+            <div className="hidden md:flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={30} />
+                </span>
               </span>
-            </span>
-            <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-              {t("sure")}?
-            </span>
-          </div>
+              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                {t("sure")}?
+              </span>
+            </div>
+            <div className="md:hidden flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
+              <span className="w-10 h-10 rounded-full border border-[#a2a2a2] flex items-center justify-center">
+                <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                  <DeleteIcon width={20} />
+                </span>
+              </span>
+              <span className=" text-black text-[14px] not-italic font-AeonikProMedium text-center">
+                {t("sure")}?
+              </span>
+            </div>
+          </>
         )}
         <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
           <button
             onClick={() => setState({ ...state, openDeleteModal: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[42px]  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px]  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
             {t("cancel")}
           </button>
           <button
             onClick={() => onDeleteSeveralSelect()}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor hover:text-white text-[#FF4747] bg-white hover:bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor hover:text-white text-[#FF4747] bg-white hover:bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
             {t("remove_from_address")}
           </button>
@@ -248,11 +269,34 @@ export default function LocationClothesCity() {
 
       <div className="mt-[10px] md:mt-[35px] flex justify-end items-center md:justify-between mx-auto pb-6">
         <section className="hidden md:flex gap-x-4">
-          <p className="text-black text-xl not-italic font-AeonikProMedium">
-            {getListItem?.address}
-            {getListItem?.products?.length > 1 && (
-              <span className="ml-2">({getListItem?.products?.length})</span>
-            )}
+          <p className="text-black text-xl not-italic font-AeonikProMedium mr-[20px]">
+            <p className="text-black text-[13px] md:text-lg not-italic flex items-center font-AeonikProMedium mr-[20px]">
+              {dressInfo?.regionList?.regions
+                ?.filter((e) => e?.id == getListItem?.region_id)
+                ?.map((values, index) => {
+                  return (
+                    <div>
+                      {values?.name_ru},
+                      {values?.sub_regions?.filter((e) => e?.id == getListItem?.sub_region_id)?.map((valueSub) => {
+                        return (
+                          <span className="px-1">{valueSub?.name_ru}
+                            ,
+                          </span>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              <span className="hidden md:flex items-center ml-1   ">
+                ({getListItem?.address})
+              </span>
+              {getListItem?.products?.length > 1 && (
+                <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
+                  ({getListItem?.products?.length})
+                </span>
+              )}
+            </p>
+
           </p>
           <button
             type="button"
@@ -262,12 +306,12 @@ export default function LocationClothesCity() {
             <span>
               <AddIconsCircle />
             </span>
-            <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
+            <span className="text-addWearColorText md:text-base not-italic font-AeonikProMedium">
               {t("add_cloth")}
             </span>
           </button>
         </section>
-        <div className="w-full md:w-fit flex items-center border-b md:border-b-0 border-[#F2F2F2] pb-[25px] md:pb-0">
+        <div className=" w-fit flex items-center border-b md:border-b-0 border-[#F2F2F2] pb-[25px] md:pb-0  ">
           <div className="mr-auto md:mr-4 font-AeonikProMedium text-[11px] ls:text-[12px] ll:text-sm md:text-lg text-mobileTextColor">
             {t("selected")}:
           </div>
@@ -298,71 +342,9 @@ export default function LocationClothesCity() {
       </div>
 
       <div className="mx-auto font-AeonikProRegular text-[16px]">
-        <div className="mb-[10px] flex items-center text-tableTextTitle">
-          <div className="w-full block  md:hidden ">
-            <div className="flex items-center md:hidden justify-end w-full mb-[25px]">
-              {t("select_all")}
-              <div
-                onClick={() => {
-                  // onCheck(checkIndicator);
-                  setAllChecked(!allChecked);
-                }}
-                className={`cursor-pointer min-w-[18px] min-h-[18px] border border-checkboxBorder ${
-                  allChecked
-                    ? "bg-[#007DCA] border-[#007DCA]"
-                    : "bg-white border-checkboxBorder"
-                } flex items-center justify-center rounded ml-[8px]`}
-              >
-                <span
-                  className={`${
-                    allChecked ? "flex items-center justify-center" : "hidden"
-                  }`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="8"
-                    height="10"
-                    viewBox="0 0 11 13"
-                    fill="none"
-                  >
-                    <path
-                      d="M1 9.5L5.88235 11L10 1"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
 
-            <div className="w-full ">
-              <section className="flex md:hidden gap-x-4">
-                <p className="text-black text-[16px] not-italic font-AeonikProMedium mr-auto">
-                  {getListItem?.address}
-                  {getListItem?.products?.length > 1 && (
-                    <span className="ml-2">
-                      ({getListItem?.products?.length})
-                    </span>
-                  )}
-                </p>
-                <Link
-                  to="/products/add-wear"
-                  className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
-                >
-                  <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
-                    {t("add_cloth")}
-                  </span>
-                  <span>
-                    <AddIconsCircle size={16} />
-                  </span>
-                </Link>
-              </section>
-            </div>
-          </div>
-        </div>
 
-        <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
+        <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]  ">
           <LocationItem
             data={getListItem}
             onRefetch={refetch}
