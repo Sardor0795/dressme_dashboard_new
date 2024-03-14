@@ -13,9 +13,12 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
+import { useTranslation } from "react-i18next";
 const { REACT_APP_BASE_URL } = process.env;
 
 const SignUpSeller = () => {
+  const { t } = useTranslation("product");
+
   // const { REACT_APP_BASE_URL: url } = process.env;
   const url = "https://api.dressme.uz/api/seller"
   const navigate = useNavigate()
@@ -488,7 +491,7 @@ const SignUpSeller = () => {
                       <div className="w-full flex items-center justify-end  mt-2">
                         <span onClick={() => {
                           setState({ ...state, openModalRegions: false });
-                        }} className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium">Готово</span>
+                        }} className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium">{t("SSready")}</span>
                       </div>
                     </div>
                   }

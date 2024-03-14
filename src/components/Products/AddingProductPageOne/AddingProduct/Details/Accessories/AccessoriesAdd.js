@@ -3,9 +3,14 @@ import { StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { Checkbox, Col, Row } from 'antd';
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 
 function AccessoriesAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const [languageDetector] = useContext(LanguageDetectorDress);
+    const { t } = useTranslation("product");
+
     const [state, setState] = useState({
         rowSize: null,
         colSize: null,
@@ -161,8 +166,8 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Размер{" "}
-                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            {t("SSsize")}
+                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                         </p>
                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
@@ -179,7 +184,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-[80%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Буквенный Размер
+                            {t("SSletter_Size")}
                         </p>
                         <div className='w-full '>
                             {/* -----------------Desktop--------------------- */}
@@ -254,7 +259,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                         }}
                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                     >
-                                        {decraseList ? "Меньше" : "Больше"}
+                                        {decraseList ? t("SSless") : t("SSmore")}
                                     </button>
                                 </div>
                             </div>
@@ -327,7 +332,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                         }}
                                         className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                     >
-                                        {decraseList ? "Меньше" : "Больше"}
+                                        {decraseList ? t("SSless") : t("SSmore")}
                                     </button>
                                     {/* </span> */}
                                 </div>
@@ -367,7 +372,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                         }}
                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                     >
-                                        {decraseList ? "Меньше" : "Больше"}
+                                        {decraseList ? t("SSless") : t("SSmore")}
                                     </button>
                                 </div>
                             </div>
@@ -377,8 +382,8 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 <div className="w-full flex gap-x-10 px-3 pt-5">
                     <div className="w-[20%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Длина
-                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            {t("SSlength")}
+                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                         </p>
                         <div className="w-[60px] flex items-center justify-between">
                             <div className="flex flex-col">
@@ -395,7 +400,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-[20%] flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Ширина
+                            {t("SSwidth")}
                         </p>
                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                             <div className="flex flex-col">
@@ -412,7 +417,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-[60%] flex flex-col ml-auto">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            Количество
+                            {t("SSquantity")}
                             <span className="ml-[5px]">
                                 <StarLabel />
                             </span>
@@ -436,7 +441,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Возраст
+                                    {t("SSage")}
                                 </div>
                             </div>
                             <div className="w-fit flex items-center">
@@ -455,7 +460,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Цена
+                                    {t("SSprice")}
                                 </div>
                                 <span className="ml-[5px]">
                                     <StarLabel />
@@ -473,7 +478,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                    сум
+                                    {t("SSsumm")}
                                 </span>
                             </label>
                         </div>
@@ -482,7 +487,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                             <div
                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                Скидка
+                                {t("SSsale")}
                             </div>
                         </div>
                         <div className="w-full flex items-center justify-center">
@@ -524,7 +529,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                                             readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                            сум
+                                            {t("SSsumm")}
                                         </span>
                                     </label>
                                 </div>
@@ -534,10 +539,10 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                 </div>
                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
                     {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Отменить
+                        {t("SScancel")}
                     </button>}
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Готово
+                        {t("SSready")}
                     </button>
                 </div>
             </div>
@@ -565,7 +570,10 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
             {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
-                        <span key={item?.id}>{item?.name_ru} </span>
+                        <span key={item?.id}>
+                             {languageDetector?.typeLang === "ru" && item?.name_ru}
+                            {languageDetector?.typeLang === "uz" && item?.name_uz}
+                        </span>
                     )
                 })
             }

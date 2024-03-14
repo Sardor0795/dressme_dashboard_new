@@ -5,6 +5,7 @@
     "PRaddTocation": "Joylashuv qo'shish",
     "PRaddWear": "Kiyim qo'shish",
     "PRsure": "Ishonchingiz komilmi",
+    "PRsuretext": "Agar rangni o'chirsangiz, tanlangan rangning barcha fotosuratlari va o'lchamlari o'chiriladi!    ",
     "PRcancel": "Bekor qilish",
     "PRready": "Tayyor",
     "PRdelete": "Oʻchirish",
@@ -92,5 +93,8 @@
     "SShip_circumference": "Ship atrofi",
     "SSfoot_Length": "Oyoq uzunligi",
     "SSheight": "Balandlik",
-    "SSadd_size": "Hajmini qo'shish"
+    "SSadd_size": "Hajmini qo'shish",
+    "SSsm": "sm",
+    "SSmin": "Min",
+    "SSmax": "Max"
 }

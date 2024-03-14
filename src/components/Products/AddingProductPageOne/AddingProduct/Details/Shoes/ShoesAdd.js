@@ -3,9 +3,13 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { BiPlus } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 
 function ShoesAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const [languageDetector] = useContext(LanguageDetectorDress);
+
     const [state, setState] = useState({
         minFootLength: "",
         maxFootLength: "",
@@ -22,6 +26,8 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
         checkEmpty: false
 
     })
+    const { t } = useTranslation("product");
+
     useEffect(() => {
         if (state?.salePercent > 0) {
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
@@ -121,7 +127,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            Размер
+                        {t("SSsize")}
                             <span className="ml-[5px]">
                                 <StarLabel />
                             </span>
@@ -142,8 +148,8 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            Длина Стопы
-                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                        {t("SSfoot_Length")}
+                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                         </p>
                         <div className="flex items-center gap-x-1">
                             <div className="flex flex-col">
@@ -151,7 +157,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     name="minFootLength"
                                     className={`inputStyle outline-none w-[60px] h-[40px] text-center   ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular`}
-                                    placeholder="Мин"
+                                    placeholder={t("SSmin")}
                                     value={state?.minFootLength}
                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -165,7 +171,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                         type="number"
                                         name="maxFootLength"
                                         className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                        placeholder="Макс"
+                                        placeholder={t("SSmax")}
                                         value={state?.maxFootLength}
                                         onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -180,7 +186,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                     <div className="w-fit flex flex-col md:ml-5">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            Количество
+                        {t("SSquantity")}
                             <span className="ml-[5px]">
                                 <StarLabel />
                             </span>
@@ -203,7 +209,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                             <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Возраст
+                                    {t("SSage")}
                                 </div>
                             </div>
                             <div className="w-fit flex items-center">
@@ -222,7 +228,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Цена
+                                    {t("SSprice")}
                                 </div>
                                 <span className="ml-[5px]">
                                     <StarLabel />
@@ -240,7 +246,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                    сум
+                                    {t("SSsumm")}
                                 </span>
                             </label>
                         </div>
@@ -249,7 +255,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                             <div
                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                Скидка
+                                {t("SSsale")}
                             </div>
                         </div>
                         <div className="w-full flex items-center justify-center">
@@ -292,7 +298,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                             readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                            сум
+                                            {t("SSsumm")}
                                         </span>
                                     </label>
                                 </div>
@@ -302,10 +308,10 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                 </div>
                 <div className="w-full h-fit flex items-center justify-end gap-x-5">
                     {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Отменить
+                    {t("SScancel")}
                     </button>}
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Готово
+                    {t("SSready")}
                     </button>
                 </div>
             </div>
@@ -332,7 +338,8 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
             {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
-                        <span key={item?.id}>{item?.name_ru}</span>
+                        <span key={item?.id}> {languageDetector?.typeLang === "ru" && item?.name_ru}
+                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                     )
                 })
             }

@@ -12,11 +12,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FiDownload } from "react-icons/fi";
 import imageCompression from "browser-image-compression";
+import { useTranslation } from "react-i18next";
 
 const url = "https://api.dressme.uz/api/seller";
 
 const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorListForTest, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
+  const { t } = useTranslation("product");
+
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   // --------------
@@ -898,8 +901,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   <DeleteIcon width={30} />
                 </span>
               </span>
-              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                Вы уверены?
+              <span className="flex items-center text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+              {t("PRsure")}<span>?</span>
               </span>
             </div>
           }
@@ -1621,7 +1624,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageTwo({ ...imageTwo, url_File2: null, url_photo2: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div> :
                   <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
@@ -1636,7 +1639,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
@@ -1729,7 +1732,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageThree({ ...imageThree, url_File3: null, url_photo3: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div> :
                   <div className="w-full h-[48px] flex items-center justify-between px-3  border-t">
@@ -1744,7 +1747,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
@@ -1835,7 +1838,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageFour({ ...imageFour, url_File4: null, url_photo4: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div>
                   :
@@ -1851,7 +1854,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
@@ -1942,7 +1945,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageFive({ ...imageFive, url_File5: null, url_photo5: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div>
                   :
@@ -1958,7 +1961,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>}
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
@@ -2049,7 +2052,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageSix({ ...imageSix, url_File6: null, url_photo6: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div>
                   :
@@ -2065,7 +2068,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>}
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
@@ -2156,7 +2159,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageSeven({ ...imageSeven, url_File7: null, url_photo7: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div>
                   :
@@ -2172,7 +2175,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>}
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
@@ -2263,7 +2266,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       onClick={() => {
                         setImageEight({ ...imageEight, url_File8: null, url_photo8: null })
                       }}
-                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#D50000]  active:scale-95	active:opacity-70  text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </button>
                   </div>
                   :
@@ -2279,7 +2282,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       Сохранить
                     </span>}
                     <span
-                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">Отменить
+                      className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
                     </span>
                   </div>}
               </div>
