@@ -19,6 +19,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { BackBtn } from "../../../backBtn/backBtn";
 
 export default function LocationAddById() {
   const { t } = useTranslation("locations");
@@ -404,27 +405,13 @@ export default function LocationAddById() {
       }
       <div className=" ">
         <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="  md:hidden absolute left-0 flex items-center cursor-pointer justify-center "
-          >
-            <GoBackIcons />
-          </button>
-          <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium   md:px-0">
+          <BackBtn />
+          <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium md:px-0">
             {t("add_a_store_location")}
           </div>
         </div>
         <div className="hidden md:flex items-center mb-2 ">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="w-8 h-8 flex items-center cursor-pointer justify-center border border-borderColor  rounded-lg active:scale-95  active:opacity-70"
-          >
-            <AiOutlineLeft />
-          </button>
+          <BackBtn />
         </div>
         <div
           className={` ${
@@ -812,7 +799,7 @@ export default function LocationAddById() {
               <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
-                    className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium 
+                    className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium
                     text-xs md:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
                     type="text"
                     name="phoneCode2"

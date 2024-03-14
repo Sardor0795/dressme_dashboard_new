@@ -23,6 +23,7 @@ import { HelperData } from "../../../hook/HelperDataStore";
 import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
+import { BackBtn } from "../../backBtn/backBtn";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -580,14 +581,10 @@ function MarketEdit() {
           )}
           <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
             <div className="mt-6 flex items-center justify-center  ">
-              <button
-                onClick={() => {
-                  navigate(-1);
-                }}
-                className="md:hidden absolute left-2 flex items-center cursor-pointer justify-center "
-              >
-                <GoBackIcons />
-              </button>
+              <div className="md:hidden flex absolute left-2">
+                <BackBtn />
+              </div>
+              {/* <BackBtn /> */}
               <div className="w-fit">
                 <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
                   {t("create_a_store")}
@@ -597,14 +594,9 @@ function MarketEdit() {
             </div>
           </div>
           <div className="w-full flex items-center justify-end md:justify-between mb-2 md:mb-3 md:pb-0 pb-2 md:border-0 border-borderColor">
-            <button
-              onClick={() => {
-                navigate(-1);
-              }}
-              className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-            >
-              <AiOutlineLeft />
-            </button>
+            <div className="hidden md:flex">
+              <BackBtn />
+            </div>
             <div className="flex items-center gap-x-[8px] xs:gap-x-[15px]">
               <button
                 onClick={() => setDeleteModal(true)}

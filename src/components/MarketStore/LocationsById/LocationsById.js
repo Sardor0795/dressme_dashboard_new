@@ -7,6 +7,7 @@ import LoadingForSeller from "../../Loading/LoadingFor";
 import { useHttp } from "../../../hook/useHttp";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
+import { BackBtn } from "../../backBtn/backBtn";
 
 export default function LocationsByIdShow() {
   const { request } = useHttp();
@@ -72,14 +73,7 @@ export default function LocationsByIdShow() {
       ) : state?.locationIsCheck ? (
         <div className="w-full h-full px-4 md:px-10 ">
           <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
-            <button
-              onClick={() => {
-                navigate(-1);
-              }}
-              className="flex items-center cursor-pointer justify-center "
-            >
-              <GoBackIcons />
-            </button>
+            <BackBtn />
             <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
               {t("location")}
             </p>
@@ -88,14 +82,9 @@ export default function LocationsByIdShow() {
           <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
             <div className="flex justify-end items-center md:justify-between">
               <section className="hidden md:flex items-center">
-                <button
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                  className="md:w-8 md:h-8 w-6 h-6 hidden md:flex mr-5 items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-                >
-                  <AiOutlineLeft />
-                </button>
+                <div className="mr-5">
+                  <BackBtn />
+                </div>
                 <p className="text-black text-2xl not-italic font-AeonikProMedium">
                   {t("location")}
                 </p>
