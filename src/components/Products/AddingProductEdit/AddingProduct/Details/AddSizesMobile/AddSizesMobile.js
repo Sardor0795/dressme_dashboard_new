@@ -703,7 +703,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
                         return (
                             <div key={index} className={`flex justify-start items-center gap-x-2   ${data ? "" : "hidden"}`}>
-                                <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                 <div
                                     key={data?.id}
                                     style={{ background: `${data.hex}` }}
@@ -729,7 +729,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -948,7 +948,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium 
@@ -968,7 +968,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -1409,7 +1409,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70  text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
@@ -1428,7 +1428,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -1872,7 +1872,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium  ">
@@ -1891,7 +1891,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -2110,7 +2110,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium ">
@@ -2129,7 +2129,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -2463,7 +2463,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">

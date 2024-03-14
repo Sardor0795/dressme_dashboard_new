@@ -3,6 +3,7 @@
     "PRnoCause": "Нет причин",
     "PRaddToLocation": "Добавить в локацию",
     "PRaddTocation": "Добавить локацию",
+    "PRNoLocation": "У вас пока нет локации !",
     "PRaddWear": "Добавить одежду",
     "PRsure": "Вы уверены",
     "PRsuretext": "Если вы удалите цвет, то удалятся все фото и размеры выбранного цвета!",
@@ -10,6 +11,9 @@
     "PRready": "Готово",
     "PRdelete": "Удалить",
     "PRsave": "Сохранить",
+    "PRedit": "Изменить",
+    "PReditPhoto": "Изменить фото",
+    "PReditProduct": "Изменить товар",
     "PRremoveByAddress": "Удалить из адреса",
     "PRproduct": "Товары",
     "PRremoveEverwhere": " Удалить везде",
@@ -30,14 +34,17 @@
     "PRless": "Меньше",
     "PRnoProduct": " Tовара нет",
     "PRselect2": " Выбрать",
+    "PRselectAll": " Выбрать все",
     "PRsearch": " Поиск",
     "PRallSize": " Все размеры",
     "APaddProduct": " Добавить товара",
+    "APaddColor": " Добавить к цвету",
     "APmarket": "Магазин",
     "APlocation": "Локация",
     "APclothesSection": "Раздел одежды",
     "APclothesseason": "Сезон одежды",
     "APcolor": "Цвет",
+    "APcolors": "Цветa",
     "APcolorText": "Можно добавить максимум 4 цвета",
     "APgender": "Пол",
     "APageMin": "Возраст Мин",
@@ -95,7 +102,6 @@
     "SSwaist": "Обхват Талии",
     "SShip_circumference": "Обхват Бедер",
     "SSsize_circumference": "Размер Бедер",
-    
     "SSfoot_Length": "Длина Стопы",
     "SSheight": "Рост",
     "SSadd_size": "Добавить размер",
@@ -103,4 +109,3 @@
     "SSmin": "Мин",
     "SSmax": "Макс"
 }
- 

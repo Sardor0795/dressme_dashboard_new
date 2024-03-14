@@ -841,7 +841,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
                                     <div className="w-full h-fit  flex items-center justify-between px-3">
                                         <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                            Цвет:
+                                             {t("APcolor")}:
                                             {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                                 return (
                                                     <div key={data?.id} style={{ background: `${data.hex}` }}
@@ -863,12 +863,12 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         color={"#007DCA"}
                                                         size={40}
                                                         loading={true}
-                                                    /> : "Сохранить"}
+                                                    /> : t("PRsave")}
                                             </button> :
                                             <button
                                                 type="button"
                                                 className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-[#b5b5b5]  px-3 py-2 font-AeonikProMedium pr-1`}>
-                                                Сохранить
+                                                {t("PRsave")}
                                             </button>
                                         }
                                     </div>
@@ -1461,7 +1461,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                         <div className="flex items-center justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Цвет:
+                                                 {t("APcolor")}:
                                             </div>
                                         </div>
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
@@ -1486,12 +1486,12 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         color={"#007DCA"}
                                                         size={40}
                                                         loading={true}
-                                                    /> : "Сохранить"}
+                                                    /> : t("PRsave")}
                                             </button> :
                                             <button
                                                 type="button"
                                                 className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] xs:text-base text-[#b5b5b5]   font-AeonikProMedium pr-1`}>
-                                                Сохранить
+                                                {t("PRsave")}
                                             </button>
                                         }
                                     </div>
@@ -1511,14 +1511,14 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         className={`idCheck flex items-center rounded-[8px] overflow-hidden border border-[#f4a622] justify-center !min-w-[18px] !min-h-[18px] md:!min-w-[24px] md:!min-h-[24px] `}>
                     </Checkbox>
                     <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                        Выбрать все
+                    {t("PRselectAll")}
                     </p>
                 </div>
                 {checked?.length ?
                     <div className="w-fit flex items-center gap-x-1">
                         <button type="button" onClick={addNewColor?.id ? () => sendCheckListItem(addNewColor?.id) : ColorModal}
                             className="text-textBlueColor flex items-center gap-x-1 hover:underline text-base not-italic font-AeonikProMedium">
-                            <span> Добавить к цвету</span>
+                            <span>{t("APaddColor")}</span>
                             {addNewColor &&
                                 <span
                                     style={{ background: `${addNewColor?.hex}` }}
@@ -1538,7 +1538,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         <button
                             className=" flex items-center gap-x-1 text-base not-italic font-AeonikProMedium">
                             <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
-                                Добавить к цвету
+                               {t("APaddColor")}
                             </span>
                             {addNewColor &&
                                 <span
@@ -1917,7 +1917,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="w-full h-fit  flex items-center justify-end gap-x-5 ">
                                                     <div className="w-full h-fit  flex items-center justify-between px-3">
                                                         <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                                            Цвет:
+                                                             {t("APcolor")}:
                                                             {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
                                                                 return (
                                                                     <div key={data?.id} style={{ background: `${data.hex}` }}
@@ -1935,7 +1935,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }
                                                             }
                                                             className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
-                                                            Изменить
+                                                            {t("PRedit")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -2335,7 +2335,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             <div className="flex items-center justify-center ">
                                                                 <div
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Цвет:
+                                                                     {t("APcolor")}:
                                                                 </div>
                                                             </div>
                                                             {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
@@ -2356,7 +2356,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                 }
                                                                 }
                                                                 className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] xs:text-base  mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular text-textBlueColor   `}>
-                                                                Изменить
+                                                                {t("PRedit")}
                                                             </button>
                                                         </div>
                                                     </div>

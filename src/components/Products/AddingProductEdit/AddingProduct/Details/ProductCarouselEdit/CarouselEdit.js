@@ -902,7 +902,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 </span>
               </span>
               <span className="flex items-center text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-              {t("PRsure")}<span>?</span>
+                {t("PRsure")}<span>?</span>
               </span>
             </div>
           }
@@ -912,13 +912,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               onClick={() => setDeleteModal(false)}
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Oтмена
+              {t("PRcancel")}
             </button>
             <button
               onClick={() => onHandleDeleteImage()}
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-              Удалить </button>
+              {t("PRdelete")} </button>
           </div>
 
         </section>
@@ -984,7 +984,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage1}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageOne?.changed1 ? <button
                         onClick={() => {
@@ -995,12 +995,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
 
-                        Сохранить
+                        {t("PRsave")}
                       </button> :
                         <span
                           className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-[13px] md:text-lg text-[13px] md:text-lg font-AeonikProMedium"
                         >
-                          Сохранить
+                          {t("PRsave")}
                         </span>
                       }
                       <button
@@ -1008,7 +1008,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           setDeleteModal(true)
                           setDeleteId(imageOne?.id1)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1058,7 +1058,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage2}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageTwo?.changed2 ?
                         <button
@@ -1069,19 +1069,19 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           type="button"
                           className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                         >
-                          Сохранить
+                          {t("PRsave")}
                         </button> :
                         <span
                           className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                         >
-                          Сохранить
+                          {t("PRsave")}
                         </span>}
                       <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageTwo?.id2)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1132,7 +1132,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage3}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageThree?.changed3 ? <button
                         onClick={() => {
@@ -1142,19 +1142,19 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         type="button"
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </button> :
                         <span
                           className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                         >
-                          Сохранить
+                          {t("PRsave")}
                         </span>}
                       <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageThree?.id3)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1205,7 +1205,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage4}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageFour?.changed4 ? <button
                         onClick={() => {
@@ -1215,18 +1215,18 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         type="button"
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </button> : <span
                         className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </span>}
                       <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageFour?.id4)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1276,7 +1276,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage5}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageFive?.changed5 ? <button
                         onClick={() => {
@@ -1286,18 +1286,18 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         type="button"
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </button> : <span
                         className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </span>}
                       {imageSix?.url_photo6 && <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageFive?.id5)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>}
                     </div>
                   </div>
@@ -1347,7 +1347,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage6}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageSix?.changed6 ? <button
                         onClick={() => {
@@ -1357,18 +1357,18 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         type="button"
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </button> : <span
                         className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </span>}
                       <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageSix?.id6)
                         }}
-                        className="text-[#D50000] active:scale-95	active:opacity-70 text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="text-[#D50000] active:scale-95	active:opacity-70 text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1418,7 +1418,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage7}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageSeven?.changed7 ? <button
                         onClick={() => {
@@ -1428,18 +1428,18 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         type="button"
                         className="w-fit  flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </button> : <span
                         className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </span>}
                       <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageSeven?.id7)
                         }}
-                        className="hidden text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className="hidden text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1489,7 +1489,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           onChange={handleLocationImage8}
                           accept=" image/*"
                         />
-                        Изменить фото
+                        {t("PReditPhoto")}
                       </label>
                       {imageEight?.changed8 ? <button
                         onClick={() => {
@@ -1499,18 +1499,18 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         type="button"
                         className="w-fit flex items-center justify-center cursor-pointer active:scale-95  text-textBlueColor  text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </button> : <span
                         className="w-fit flex items-center justify-center cursor-not-allowed text-[#b5b5b5] rounded-lg text-[13px] md:text-lg text-[13px] md:text-lg font-AeonikProMedium"
                       >
-                        Сохранить
+                        {t("PRsave")}
                       </span>}
                       <button
                         onClick={() => {
                           setDeleteModal(true)
                           setDeleteId(imageEight?.id8)
                         }}
-                        className=" hidden text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">Удалить
+                        className=" hidden text-[#D50000] active:scale-95	active:opacity-70  text-[13px] md:text-lg not-italic font-AeonikProMedium">{t("PRdelete")}
                       </button>
                     </div>
                   </div>
@@ -1558,7 +1558,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -1607,7 +1607,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage2}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
 
                     <button
@@ -1617,7 +1617,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>
                     <button
                       type="button"
@@ -1631,12 +1631,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -1666,7 +1666,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -1715,7 +1715,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage3}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
                     <button
                       onClick={() => {
@@ -1724,7 +1724,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>
 
                     <button
@@ -1739,12 +1739,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -1773,7 +1773,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -1822,7 +1822,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage4}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
                     <button
                       onClick={() => {
@@ -1831,7 +1831,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>
                     <button
                       type="button"
@@ -1846,12 +1846,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -1880,7 +1880,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -1929,7 +1929,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage4}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
                     {colorListForTest?.length >= 2 && <button
                       onClick={() => {
@@ -1938,7 +1938,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>}
                     <button
                       type="button"
@@ -1953,12 +1953,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     {false && <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>}
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -1987,7 +1987,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -2036,7 +2036,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage6}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
                     {colorListForTest?.length >= 2 && <button
                       onClick={() => {
@@ -2045,7 +2045,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>}
                     <button
                       type="button"
@@ -2060,12 +2060,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     {false && <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>}
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -2094,7 +2094,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -2143,7 +2143,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage7}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
                     {colorListForTest?.length >= 3 && < button
                       onClick={() => {
@@ -2152,7 +2152,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>}
                     <button
                       type="button"
@@ -2167,12 +2167,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     {false && <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>}
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -2201,7 +2201,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col items-center justify-center">
                         < FiDownload size={30} colors="" />
                         <div className="text-xl text-textLightColor mt-[5px] ">
-                          Выберите фото
+                          {t("APselectPhoto")}
                         </div>
                       </div>
                     </label>
@@ -2250,7 +2250,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         onChange={handleLocationImage8}
                         accept=" image/*"
                       />
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </label>
                     {colorListForTest?.length === 4 && <button
                       onClick={() => {
@@ -2259,7 +2259,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       type="button"
                       className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </button>}
                     <button
                       type="button"
@@ -2274,12 +2274,12 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span
                       className="w-fit   flex items-center  cursor-not-allowed    text-[#b5b5b5]   md:text-lg font-AeonikProMedium"
                     >
-                      Изменить фото
+                      {t("PReditPhoto")}
                     </span>
                     {colors_Id?.length === 4 && <span
                       className="w-fit  flex items-center justify-center cursor-not-allowed    text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
                     >
-                      Сохранить
+                      {t("PRsave")}
                     </span>}
                     <span
                       className="text-[#b5b5b5]  cursor-not-allowed   text-lg not-italic font-AeonikProMedium">{t("SScancel")}
@@ -2294,7 +2294,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
       < div className="w-[230px] ls:w-[250px] md:w-[290px] flex items-center justify-between" >
         <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
-          <p>Фото</p>
+          <p>{t("PRphoto")}</p>
           <span className="ml-[5px]">
             <StarLabel />
           </span>
