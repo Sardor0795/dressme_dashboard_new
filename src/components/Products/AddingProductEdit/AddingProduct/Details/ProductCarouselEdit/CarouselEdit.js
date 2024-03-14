@@ -2366,7 +2366,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden   bg-photoBg  flex flex-col items-center  justify-center">
                         <span><DownloadIcon colors={'#007DCA'} /></span>
                         <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2376,7 +2376,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
                         <span><DownloadIcon colors={'#b5b5b5'} /></span>
                         <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2438,7 +2438,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2448,7 +2448,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
                         <span><DownloadIcon colors={'#b5b5b5'} /></span>
                         <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2510,7 +2510,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg  flex flex-col  items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2520,7 +2520,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
                         <span><DownloadIcon colors={'#b5b5b5'} /></span>
                         <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2590,7 +2590,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2612,7 +2612,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </label>
@@ -2685,7 +2685,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2708,7 +2708,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                           <DownloadIcon colors={'#007DCA'} />
                           <div className="text-[11px] text-textLightColor mt-[5px]">
-                            (необязательно)
+                            ({t("APnotNecessary")})
                           </div>
                         </div>
                       </label>
@@ -2718,7 +2718,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           className="w-full h-full overflow-hidden    flex flex-col items-center  justify-center">
                           <span><DownloadIcon colors={'#b5b5b5'} /></span>
                           <div className="text-[11px] text-[#b5b5b5] mt-[5px]">
-                            (необязательно)
+                            ({t("APnotNecessary")})
                           </div>
                         </div>
                       </div>
@@ -2795,7 +2795,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2816,7 +2816,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  flex flex-col items-center  justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </label>
@@ -2892,7 +2892,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden  bg-photoBg   flex flex-col items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
                       </div>
                     </div>
@@ -2913,7 +2913,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         className="w-full h-full overflow-hidden   flex flex-col items-center justify-center">
                         <DownloadIcon colors={'#007DCA'} />
                         <div className="text-[11px] invisible text-textLightColor mt-[5px]">
-                          (необязательно)
+                          ({t("APnotNecessary")})
                         </div>
 
                       </div>

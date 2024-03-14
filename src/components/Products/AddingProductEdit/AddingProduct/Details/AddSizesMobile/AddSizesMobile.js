@@ -1025,7 +1025,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                Размер
+                                {t('SSsize')}
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
@@ -1146,7 +1146,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     <div className="w-full    gap-y-4">
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Буквенный Размер
+                               {t('SSletter_Size')}
                             </p>
                             <div className='w-full '>
 
@@ -1485,7 +1485,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                Размер
+                                {t('SSsize')}
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
@@ -1524,7 +1524,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Размер Бедер
+                            {t("SSsize_circumference")}
+
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
@@ -1609,7 +1610,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
 
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Буквенный Размер
+                               {t('SSletter_Size')}
                             </p>
 
                             <div className='w-full '>
@@ -1904,7 +1905,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     <div className="w-full grid grid-cols-2 gap-4  flex ">
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Размер
+                                {t('SSsize')}
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
@@ -2143,7 +2144,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                Размер{" "}
+                                {t('SSsize')}{" "}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -2198,7 +2199,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     <div className="w-full flex flex-col gap-y-4 ">
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                Буквенный Размер
+                               {t('SSletter_Size')}
                             </p>
                             <div className='w-full '>
                                 

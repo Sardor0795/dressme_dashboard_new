@@ -8,9 +8,11 @@ import { dressMainData } from "../../../../../hook/ContextTeam";
 import AddBtn from "./AddBtn";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function TextFormAdd({ productsEdit, handlCallBack, loading, onClick, onEdit }) {
+    const { t } = useTranslation("product");
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -177,7 +179,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             target="_blank"
                             className="text-[#007DCA] text-[14px] border-b border-[#007dca] leading-none font-AeonikProRegular"
                         >
-                            Google переводчиком
+                            {t("TFtranslate")}
                         </Link>
                     </div>
                     <div
@@ -187,7 +189,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <div className="mb-[10px]">
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Название на русском
+                                        {t("TFtitleRu")}
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
@@ -212,7 +214,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <div className="mb-[10px]">
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Название на узбекском
+                                        {t("TFtitleUz")}
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
@@ -237,10 +239,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <div className="mb-[10px]">
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Описание на русском
+                                        {t("TFdescriptionRu")}
                                     </div>
                                     <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
-                                        (необязательно)
+                                        ({t("APnotNecessary")})
                                     </span>
                                 </div>
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
@@ -264,10 +266,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <div>
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Описание на узбекском
+                                        {t("TFdescriptionUz")}
                                     </div>
                                     <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
-                                        (необязательно)
+                                        ({t("APnotNecessary")})
                                     </span>
                                 </div>
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
@@ -299,7 +301,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 <div className="flex-1 mb-[10px] ">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                            Качество на русском
+                                            {t("TFqualityRu")}
                                         </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
@@ -329,7 +331,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 <div className="flex-1 mb-[10px]">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                            Качество на узбекском
+                                            {t("TFqualityUz")}
                                         </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
@@ -372,9 +374,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 {/* Состав на русском */}
                                 <div className="flex-1 mb-[17px] md:mb-[10px]">
                                     <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
-                                        Состав на русском
+                                        {t("TFcompoundRu")}
                                         <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
-                                            (необязательно)
+                                            ({t("APnotNecessary")})
                                         </span>
                                     </div>
                                     <div className={`rounded-lg  flex h-[48px] px-[5px] border border-borderColor  `}>
@@ -397,9 +399,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 {/* Состав на узбекском */}
                                 <div className="flex-1 mb-[10px]">
                                     <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
-                                        Состав на узбекском
+                                        {t("TFcompoundUz")}
                                         <span className="notRecquired ml-[5px] font-AeonikProRegular text-sm text-textLightColor">
-                                            (необязательно)
+                                            ({t("APnotNecessary")})
                                         </span>
                                     </div>
                                     <div className={`rounded-lg  flex h-[48px] px-[5px] border border-borderColor `}>
@@ -423,9 +425,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
                                 <div className="flex-1 mb-[10px]">
                                     <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
-                                        Бренд
+                                    {t("TFbrand")}
                                         <span className="notRecquired ml-[5px] text-sm text-textLightColor font-AeonikProRegular">
-                                            (необязательно)
+                                            ({t("APnotNecessary")})
+                                            
                                         </span>
                                     </div>
                                     <Select
@@ -467,7 +470,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     type="button"
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
                                     className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center text-center text-base md:text-lg active:scale-95 active:scale-95  border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg  font-AeonikProMedium"                                >
-                                    Назад
+                                    {t("TFback")}
                                 </button>
                                 {state?.onEditTextForm ? <button
                                     type="button"
@@ -485,19 +488,19 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     <span
                                         className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                                     >
-                                        Сохранить
+                                        {t("PRsave")}
                                     </span>}
                             </div>
                         </div>
                     </div>
                     <div className="hidden md:block mt-[30px] font-AeonikProRegular">
-                        Воспользоваться
+                    {t("TFtakeAdvantage")}
                         <Link
                             to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                             target="_blank"
                             className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
                         >
-                            Google переводчиком
+                            {t("TFtranslate")}
                         </Link>
                     </div>
                 </div>

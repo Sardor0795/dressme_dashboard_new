@@ -36,7 +36,7 @@ const { REACT_APP_BASE_URL } = process.env;
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
 
-// Все размеры
+// {t("PRallSize")}
 
 const AddingProduct = () => {
   const { t } = useTranslation("product");
@@ -1072,7 +1072,8 @@ const AddingProduct = () => {
                       {t("APselectColor")}
                     </span>
                     <span className="text-[11px] md:text-sm ml-[10px] text-[#a1a1a1] font-AeonikProRegular">
-                      (Можно добавить максимум 4 цвета)
+                      ({t("APcolorText")})
+
                     </span>
                   </div>
                   <button
@@ -1197,7 +1198,7 @@ const AddingProduct = () => {
                   {t("PRsure")}<span>?</span>
                 </span>
                 <span className=" text-[#a2a2a2] text-[14px] xs:text-lg not-italic font-AeonikProMedium text-center">
-                  
+
                   {t("PRsuretext")}
                 </span>
               </div>}
@@ -1231,7 +1232,7 @@ const AddingProduct = () => {
             </button>
             <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
               <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-              {t("APattacLocation")}
+                {t("APattacLocation")}
               </p>
             </div>
             <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
@@ -1318,7 +1319,7 @@ const AddingProduct = () => {
                         value={searchList}
                         onChange={(e) => setSearchList(e?.target?.value)}
                         name='clothingTypes'
-                        placeholder='Искать раздел'
+                        placeholder={t("APsearch")}
                         className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
@@ -1363,7 +1364,7 @@ const AddingProduct = () => {
                         value={searchList}
                         onChange={(e) => setSearchList(e?.target?.value)}
                         name='clothingTypes'
-                        placeholder='Искать раздел'
+                        placeholder={t("APsearch")}
                         className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
@@ -1455,7 +1456,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-base font-AeonikProMedium"> Тип</p>
+                <p className="text-base font-AeonikProMedium"> {t("PRtype")}</p>
                 <button onClick={() => setState({ ...state, DressTypeModal: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1469,7 +1470,7 @@ const AddingProduct = () => {
                         value={searchList}
                         onChange={(e) => setSearchList(e?.target?.value)}
                         name='clothingTypes'
-                        placeholder='Искать раздел'
+                        placeholder={t("APsearch")}
                         className='w-full pr-3 outline-none' />
                       <SearchIcon />
                     </div>
@@ -1528,7 +1529,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-base font-AeonikProMedium"> Производитель</p>
+                <p className="text-base font-AeonikProMedium"> {t("APmanufacturer")}</p>
                 <button onClick={() => setState({ ...state, MakeCountryModal: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1540,7 +1541,7 @@ const AddingProduct = () => {
                       <input
                         type="text"
                         name='clothingTypes'
-                        placeholder='Искать раздел'
+                        placeholder={t("APsearch")}
                         className='w-full pr-3 outline-none'
                         value={searchList}
                         onChange={(e) => setSearchList(e?.target?.value)}
@@ -1578,7 +1579,7 @@ const AddingProduct = () => {
                     <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Магазин
+                          {t("APmarket")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -1603,7 +1604,7 @@ const AddingProduct = () => {
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.shopId ? "text-[#000]" : "text-[#b5b5b5]"}`}>
-                          Локация
+                          {t("APlocation")}
                         </span>
                       </div>
 
@@ -1633,7 +1634,7 @@ const AddingProduct = () => {
                     <div className=" w-full h-fit flex flex-col gap-y-[5px] ">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Раздел товара
+                          {t("APsectionProduct")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -1663,7 +1664,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -1681,7 +1682,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -1692,7 +1693,7 @@ const AddingProduct = () => {
                           className={` rounded-lg w-full  ${state?.isCheckValid && !section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                           showSearch
                           mode="multiple"
-                          placeholder="Выбрать"
+                          placeholder={t("PRselect2")}
                           optionLabelProp="label"
                           disabled={colorAction ? true : false}
                           value={dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => { return item?.id })}
@@ -1725,7 +1726,7 @@ const AddingProduct = () => {
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className={`text-[13px] md:text-base font-AeonikProRegular ${state?.subSectionToggle ? "text-[#000]" : "text-[#b5b5b5]"}`}>
-                          Подраздел товара
+                          {t("APsubSectionProduct")}
                         </span>
                         <span className="ml-[5px]">
                           {state?.subSectionToggle ? (
@@ -1755,7 +1756,7 @@ const AddingProduct = () => {
                           :
                           <div className="w-full h-full rounded-lg flex items-center justify-between">
                             <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                              Выбрать
+                              {t("PRselect2")}
                             </span>
                             <ArrowRightIcon />
                           </div>
@@ -1766,7 +1767,7 @@ const AddingProduct = () => {
                           className={`rounded-lg w-full  ${newArray?.length && state?.isCheckValid && !subSection_Id?.length ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " border-borderColor bg-white"}`}
                           showSearch
                           disabled={colorAction || !state?.subSectionToggle}
-                          placeholder="Выбрать"
+                          placeholder={t("PRselect2")}
                           mode="multiple"
                           optionLabelProp="label"
                           value={newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => { return item?.id })}
@@ -1833,7 +1834,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -1851,7 +1852,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -1862,7 +1863,7 @@ const AddingProduct = () => {
                           className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !season_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
                           mode="multiple"
                           disabled={colorAction ? true : false}
-                          placeholder="Выбрать"
+                          placeholder={t("PRselect2")}
                           value={dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => { return item?.id })}
                           size="large"
                           onChange={(e) => {
@@ -1890,7 +1891,7 @@ const AddingProduct = () => {
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Цвет
+                          {t("APcolor")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -1974,7 +1975,7 @@ const AddingProduct = () => {
                               :
                               <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
                                 <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                  Выбрать
+                                  {t("PRselect2")}
                                 </span>
                                 <ArrowRightIcon />
                               </div>
@@ -1993,7 +1994,7 @@ const AddingProduct = () => {
                               :
                               <div className="w-full h-full rounded-lg flex items-center justify-between">
                                 <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                  Выбрать
+                                  {t("PRselect2")}
                                 </span>
                                 <ArrowRightIcon />
                               </div>
@@ -2004,7 +2005,7 @@ const AddingProduct = () => {
                             className={` ${state?.isCheckValid && !state?.gender_Id ? "border border-[#FFB8B8] " : ""}
                           rounded-lg w-full h-11 md:h-10 overflow-hidden`}
                             showSearch
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             optionFilterProp="children"
                             disabled={colorAction ? true : false}
                             value={dressInfo?.getProductInfo?.gender?.filter(e => e?.id == state?.gender_Id)?.map((item) => { return item?.id })}
@@ -2063,7 +2064,7 @@ const AddingProduct = () => {
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center  ">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Артикул
+                          {t("PRrandomCode")}
                         </span>
 
                         <span className="ml-[5px]">
@@ -2102,7 +2103,7 @@ const AddingProduct = () => {
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Категория товара
+                          {t("APcategoryProduct")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -2124,7 +2125,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2138,7 +2139,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2161,7 +2162,7 @@ const AddingProduct = () => {
                       <div className="w-1/2 flex flex-col gap-y-[5px] ">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Тип
+                            {t("APtype")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2173,7 +2174,7 @@ const AddingProduct = () => {
                             showSearch
                             // allowClear
                             disabled={colorAction ? true : false}
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             value={dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return item?.name_ru })}
                             optionFilterProp="children"
                             onChange={(value, attribute2) => {
@@ -2215,7 +2216,7 @@ const AddingProduct = () => {
                       <div className="w-1/2 flex flex-col gap-y-[5px] ">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Производитель
+                            {t("APmanufacturer")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2226,7 +2227,7 @@ const AddingProduct = () => {
                             className={`overflow-hidden rounded-lg w-full  h-full ${state?.isCheckValid && !state?.producer_Id ? "border border-[#FFB8B8] " : ""}`}
                             showSearch
                             disabled={colorAction ? true : false}
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             optionFilterProp="children"
                             value={dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return item?.name_ru })}
                             onChange={(e) => setState({ ...state, producer_Id: e })}
@@ -2251,7 +2252,7 @@ const AddingProduct = () => {
                     <div className="w-full  flex md:hidden flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Тип
+                          {t("APtype")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -2278,7 +2279,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2296,7 +2297,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2307,7 +2308,7 @@ const AddingProduct = () => {
                     <div className="w-full  flex md:hidden flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Производитель
+                          {t("APmanufacturer")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -2338,7 +2339,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between text-[#b5b5b5] bg-[#F5F5F5]">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2356,7 +2357,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2368,7 +2369,7 @@ const AddingProduct = () => {
                     <div className="w-full  flex md:hidden flex-col gap-y-[5px] ">
                       <div className="flex items-center">
                         <span className="text-[12px] flex flex-wrap whitespace-nowrap md:text-base font-AeonikProRegular">
-                          Возрастная категория
+                          {t("APageCategory")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -2406,14 +2407,14 @@ const AddingProduct = () => {
                               type="button"
                               className="group w-full flex items-center justify-center h-[38px]  whitespace-nowrap text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg  "
                             >
-                              Все размеры{" "}
+                              {t("PRallSize")}{" "}
                             </button> :
                             <button
                               type="button"
                               onClick={() => setAllSizeModalShow(true)}
                               className="group w-full flex items-center justify-center h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
                             >
-                              Все размеры{" "}
+                              {t("PRallSize")}{" "}
                             </button>}
                         </div>
                         <div className="w-[48%]">
@@ -2440,14 +2441,14 @@ const AddingProduct = () => {
                           type="button"
                           className="group w-[168px] flex items-center justify-center h-[38px]  whitespace-nowrap text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg  "
                         >
-                          Все размеры{" "}
+                          {t("PRallSize")}{" "}
                         </button> :
                         <button
                           type="button"
                           onClick={() => setAllSizeModalShow(true)}
                           className="group w-[168px] flex items-center justify-center h-[38px]  whitespace-nowrap border-textBlueColor text-textBlueColor border-[1px] font-AeonikProMedium flex items-center text-[12px] md:text-sm justify-center cursor-pointer  rounded-lg focus:bg-textBlueColor focus:text-white transition duration-300"
                         >
-                          Все размеры{" "}
+                          {t("PRallSize")}{" "}
                         </button>}
                       {addSizeDisable == 'AllSize' ?
                         <div
@@ -2505,13 +2506,13 @@ const AddingProduct = () => {
                               color={"#007DCA"}
                               size={40}
                               loading={true}
-                            /> : "Сохранить"}
+                            /> : t("PRsave")}
                         </button>
                         :
                         <span
                           className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
-                          Сохранить
+                          {t("PRsave")}
                         </span>
                       :
                       state?.onEditInput ?
@@ -2528,13 +2529,13 @@ const AddingProduct = () => {
                               color={"#007DCA"}
                               size={40}
                               loading={true}
-                            /> : "Сохранить"}
+                            /> : t("PRsave")}
                         </button>
                         :
                         <span
                           className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                         >
-                          Сохранить
+                          {t("PRsave")}
                         </span>
                   }
                   <button
@@ -2542,7 +2543,7 @@ const AddingProduct = () => {
                     onClick={handleNextPage}
                     className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
-                    Продолжить
+                     {t("APContinue")}
                   </button>
                 </div>
               </div>

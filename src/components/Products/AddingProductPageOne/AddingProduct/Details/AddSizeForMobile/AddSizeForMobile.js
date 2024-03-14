@@ -308,7 +308,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
     return (
         <div className=' w-full bg-white h-full'>
             <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-base font-AeonikProMedium">Добавить размер</p>
+                <p className="text-base font-AeonikProMedium">   {t("APaddSize")}</p>
                 <button onClick={() => setClothingCategoryModal(false)}>
                     <CloseAnswer colors={"#b5b5b5"} />
                 </button>
@@ -1106,7 +1106,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 </div>
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Размер Бедер
+                                        {t("SSsize_circumference")}
+
                                     </p>
                                     <div className="flex items-center">
                                         <div className="flex flex-col">

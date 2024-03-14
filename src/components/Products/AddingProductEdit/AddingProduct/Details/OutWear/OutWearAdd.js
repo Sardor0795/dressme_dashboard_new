@@ -407,7 +407,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Размер
+                                            {t('SSsize')}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -457,7 +457,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     </div>
                                     <div className="w-[53%] flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Буквенный Размер
+                                           {t('SSletter_Size')}
                                         </p>
 
                                         <div className='w-full '>
@@ -930,7 +930,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Размер
+                                            {t('SSsize')}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -1080,7 +1080,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="w-full flex flex-col justify-start items-center gap-y-4">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Буквенный Размер
+                                           {t('SSletter_Size')}
                                         </p>
 
                                         <div className='w-full '>
@@ -1616,7 +1616,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-[20%] flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер
+                                                            {t('SSsize')}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1650,7 +1650,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     </div>
                                                     <div className="w-[53%] flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Буквенный Размер
+                                                           {t('SSletter_Size')}
 
                                                         </p>
 
@@ -1992,7 +1992,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер
+                                                            {t('SSsize')}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -2088,7 +2088,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="w-full flex flex-col justify-start items-center grid grid-cols-1 gap-4  ">
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Буквенный Размер
+                                                           {t('SSletter_Size')}
 
                                                         </p>
 
