@@ -214,7 +214,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-2 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${openColorModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
         <div className="flex items-center justify-between border-b border-searchBgColor">
           <p className="pl-2">
-            Выберите цвет
+            {t("APselectColor")}
           </p>
           <button
             className="py-2"
@@ -280,7 +280,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
                   color={"#007DCA"}
                   size={40}
                   loading={true}
-                /> : "Добавить"}
+                /> :t("TFadd")}
             </button>
           }
         </div>
@@ -347,19 +347,19 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
             onClick={() => setSizedeleteModal(false)}
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-            Oтмена
+            {t("PRcancel")}
           </button>
           <button
             onClick={() => onHandleDeleteSizeById()}
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium">
-            Удалить</button>
+            {t("PRdelete")}</button>
         </div>
 
       </section>
       <div className="w-full flex items-center justify-between md:pl-7 ">
         <div className="w-fit flex items-center gap-x-2">
-          <span className="text-black text-md not-italic font-AeonikProRegular"> Цветa:</span>
+          <span className="text-black text-md not-italic font-AeonikProRegular"> {t("APcolors")}:</span>
           {productsDataIdEdit?.colors?.map((data) => {
             return (
               <div onClick={() => {

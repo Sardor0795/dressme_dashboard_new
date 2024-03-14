@@ -703,7 +703,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -718,7 +718,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SShead_circumference")} 
+                                {t("SShead_circumference")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                             </p>
@@ -911,7 +911,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
@@ -930,7 +930,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -945,7 +945,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-[20%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSchest_circumference")} 
+                                {t("SSchest_circumference")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center">
@@ -1023,7 +1023,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         </div>
                         <div className="w-[53%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t('SSletter_Size')}
+                                {t('SSletter_Size')}
                             </p>
                             <div className='w-full '>
                                 {/* -----------------Desktop--------------------- */}
@@ -1219,7 +1219,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSwaist")} 
+                                {t("SSwaist")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center">
@@ -1262,7 +1262,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SShip_circumference")} 
+                                {t("SShip_circumference")}
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
@@ -1436,7 +1436,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
@@ -1455,7 +1455,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -1470,7 +1470,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSwaist")} 
+                                {t("SSwaist")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center">
@@ -1551,7 +1551,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         </div>
                         <div className="w-[53%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t('SSletter_Size')}
+                                {t('SSletter_Size')}
                             </p>
 
                             <div className='w-full '>
@@ -1750,7 +1750,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex gap-x-10 px-3 pt-5">
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                 {t("SSsize_circumference")}
+                                {t("SSsize_circumference")}
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
@@ -1790,7 +1790,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         </div>
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSheight")}
+                                {t("SSheight")}
                             </p>
                             <div className="flex items-center justify-between gap-x-1">
                                 <div className="flex items-center">
@@ -1963,7 +1963,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
@@ -1982,7 +1982,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -2017,7 +2017,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-fit flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSfoot_Length")}
+                                {t("SSfoot_Length")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center gap-x-1">
@@ -2190,7 +2190,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
@@ -2209,7 +2209,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         {productsDataIdEdit?.colors?.filter(e => e?.id == selectColorID)?.map((data, index) => {
                             return (
                                 <div key={index} className={`flex justify-start items-center gap-x-2 px-3 ${data ? "" : "hidden"}`}>
-                                    <span className="text-black text-base not-italic font-AeonikProRegular"> Цвет:</span>
+                                    <span className="text-black text-base not-italic font-AeonikProRegular">  {t("APcolor")}:</span>
                                     <div
                                         key={data?.id}
                                         style={{ background: `${data.hex}` }}
@@ -2243,7 +2243,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
                         <div className="w-[80%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t('SSletter_Size')}
+                                {t('SSletter_Size')}
                             </p>
                             <div className='w-full '>
                                 {/* -----------------Desktop--------------------- */}
@@ -2443,7 +2443,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     <div className="w-full flex gap-x-10 px-3 pt-5">
                         <div className="w-[20%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSlength")}
+                                {t("SSlength")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="w-[60px] flex items-center justify-between">
@@ -2461,7 +2461,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         </div>
                         <div className="w-[20%] flex flex-col">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSwidth")}
+                                {t("SSwidth")}
                             </p>
                             <div className="w-[60px] flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
@@ -2479,7 +2479,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         <div className="w-[60%] flex flex-col ml-auto">
                             <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSquantity")}
+                                {t("SSquantity")}
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
@@ -2612,7 +2612,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         color={"#007DCA"}
                                         size={40}
                                         loading={true}
-                                    /> : "Добавить"}
+                                    /> : t("TFadd")}
                             </button>
                             :
                             <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">

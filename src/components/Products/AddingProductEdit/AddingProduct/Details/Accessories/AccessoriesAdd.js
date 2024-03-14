@@ -705,7 +705,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                 </div>
                                 <div className="w-full h-fit  flex items-center justify-between px-3">
                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                        Цвет:
+                                    {t("APcolor")}:
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                             return (
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
@@ -727,12 +727,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     color={"#007DCA"}
                                                     size={40}
                                                     loading={true}
-                                                /> : "Сохранить"}
+                                                /> : t("PRsave")}
                                         </button> :
                                         <button
                                             type="button"
                                             className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-[#b5b5b5]  px-3 py-2 font-AeonikProMedium pr-1`}>
-                                            Сохранить
+                                            {t("PRsave")}
                                         </button>
                                     }
                                 </div>
@@ -1213,7 +1213,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="flex items-center justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Цвет:
+                                                 {t("APcolor")}:
                                             </div>
                                         </div>
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
@@ -1237,12 +1237,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     color={"#007DCA"}
                                                     size={40}
                                                     loading={true}
-                                                /> : "Сохранить"}
+                                                /> : t("PRsave")}
                                         </button> :
                                         <button
                                             type="button"
                                             className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] xs:text-base text-[#b5b5b5]  font-AeonikProMedium `}>
-                                            Сохранить
+                                            {t("PRsave")}
                                         </button>
                                     }
                                 </div>
@@ -1261,14 +1261,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center md:!min-w-[24px] md:!min-h-[24px] `}>
                     </Checkbox>
                     <p className="text-black text-[14px] xs:text-base  not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                        Выбрать все
+                    {t("PRselectAll")}
                     </p>
                 </div>
                 {checked?.length ?
                     <div className="w-fit flex items-center gap-x-1">
                         <button type="button" onClick={addNewColor?.id ? () => sendCheckListItem(addNewColor?.id) : ColorModal}
                             className="text-textBlueColor flex items-center gap-x-1 hover:underline text-[14px] xs:text-base  not-italic font-AeonikProMedium">
-                            <span> Добавить к цвету</span>
+                            <span> {t("APaddColor")}</span>
                             {addNewColor &&
                                 <span
                                     style={{ background: `${addNewColor?.hex}` }}
@@ -1288,7 +1288,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         <button
                             className=" flex items-center gap-x-1 text-[14px] xs:text-base  not-italic font-AeonikProMedium">
                             <span className="text-[#b5b5b5]  text-[14px] xs:text-base  not-italic font-AeonikProMedium">
-                                Добавить к цвету
+                            {t("APaddColor")}
                             </span>
                             {addNewColor &&
                                 <span
@@ -1602,7 +1602,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 </div>
                                                 <div className="w-full h-fit  flex items-center justify-between px-3">
                                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                                        Цвет:
+                                                    {t("APcolor")}:
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
                                                             return (
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
@@ -1621,7 +1621,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         }
                                                         }
                                                         className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
-                                                        Изменить
+                                                        {t("PRedit")}
                                                     </button>
                                                 </div>
                                             </div>
@@ -1960,7 +1960,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center  justify-center ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Цвет:
+                                                                 {t("APcolor")}:
                                                             </div>
                                                         </div>
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
@@ -1980,7 +1980,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         }
                                                         }
                                                         className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] xs:text-base  text-textBlueColor  font-AeonikProMedium  `}>
-                                                        Изменить
+                                                        {t("PRedit")}
                                                     </button>
                                                 </div>
                                             </div>

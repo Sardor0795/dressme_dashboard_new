@@ -482,7 +482,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             color={"#fff"}
                                             size={40}
                                             loading={true}
-                                        /> : "Сохранить"}
+                                        /> : t("PRsave")}
                                 </button>
                                     :
                                     <span
