@@ -4,18 +4,18 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
-    backend: {
-      loadPath: "/common/{{ns}}/{{lng}}.json",
-    },
-    fallbackLng: "ru",
-    debug: false,
-    ns: ["sidebar"],
-    interpolation: {
-      espaceValue: false,
-      formatSeparator: ",",
-    },
-    react: {
-      wait: true,
-    },
-  });
+  backend: {
+    loadPath: "/common/{{ns}}/{{lng}}.json",
+  },
+  fallbackLng: "ru",
+  debug: false,
+  ns: ["sidebar", 'profil','shops'],
+  interpolation: {
+    espaceValue: false,
+    formatSeparator: ",",
+  },
+  react: {
+    wait: true,
+  },
+});
 export default i18n;

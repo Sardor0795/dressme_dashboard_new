@@ -18,12 +18,14 @@ import { dressMainData } from "../../../hook/ContextTeam";
 import axios from "axios";
 import { FiCheck } from "react-icons/fi";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
+import { useTranslation } from "react-i18next";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
 
 export default function ProductLocationsList() {
   const { request } = useHttp();
+  const { t } = useTranslation("product");
 
   const [searchName, setSearchName] = useState("");
   const [state, setState] = useState({
@@ -499,8 +501,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
-  // border border-green-50
-  console.log();
+
   return (
     <div className="w-full  md:px-10">
       <section
@@ -549,7 +550,7 @@ export default function ProductLocationsList() {
         </button>
         <div className="w-full h-fit flex items-center justify-center mb-2">
           <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-            Причина
+            {t("PRcause")}
           </p>
         </div>
         {statusMessage ? (
@@ -558,7 +559,7 @@ export default function ProductLocationsList() {
           </div>
         ) : (
           <div className="w-full flex text-[#b5b5b5] items-center justify-center border border-borderColor rounded-lg  h-[300px]  overflow-hidden  ">
-            Нет причин
+            {t("PRnoCause")}
           </div>
         )}
       </section>
@@ -588,7 +589,7 @@ export default function ProductLocationsList() {
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
           <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProRegular">
-            Добавить в локацию
+            {t("PRaddToLocation")}
           </p>
         </div>
         <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
@@ -758,14 +759,14 @@ export default function ProductLocationsList() {
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[16px] md:text-xl not-italic font-AeonikProMedium"
               >
-                Oтмена
+                {t("PRcancel")}
               </button>
               <button
                 onClick={onSendPeoductSeveralSelect}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[16px] md:text-xl not-italic font-AeonikProMedium"
               >
-                Готово
+                {t("PRready")}
               </button>
             </div>
           )}
@@ -817,8 +818,8 @@ export default function ProductLocationsList() {
                   <DeleteIcon width={30} />
                 </span>
               </span>
-              <span className=" text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
-                Вы уверены?
+              <span className="flex items-center text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
+                {t("PRsure")}<span>?</span>
               </span>
             </div>
             <div className="md:hidden flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
@@ -827,8 +828,8 @@ export default function ProductLocationsList() {
                   <DeleteIcon width={20} />
                 </span>
               </span>
-              <span className=" text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
-                Вы уверены?
+              <span className="flex items-center text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
+                {t("PRsure")}<span>?</span>
               </span>
             </div>
           </>
@@ -839,14 +840,14 @@ export default function ProductLocationsList() {
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
-            Oтмена
+            {t("PRcancel")}
           </button>
           <button
             onClick={onDeleteSeveralSelect}
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
-            Удалить из адреса
+            {t("PRremoveByAddress")}
           </button>
         </div>
       </section>
@@ -854,7 +855,7 @@ export default function ProductLocationsList() {
       <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
         <section className="hidden md:flex">
           <p className="text-black text-2xl not-italic font-AeonikProMedium ">
-            Товары
+            {t("PRproduct")}
           </p>
         </section>
         <section className="w-full flex md:hidden">
@@ -863,7 +864,7 @@ export default function ProductLocationsList() {
               <MobileHumburgerMenu />
             </button>
             <p className="w-full text-center text-black text-2xl not-italic font-AeonikProMedium">
-              Товары
+              {t("PRproduct")}
             </p>
           </div>
         </section>
@@ -945,8 +946,8 @@ export default function ProductLocationsList() {
                   <DeleteIcon width={30} />
                 </span>
               </span>
-              <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                Вы уверены?
+              <span className="flex items-center text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                {t("PRsure")}<span>?</span>
               </span>
             </div>
             <div className="md:hidden flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
@@ -955,8 +956,8 @@ export default function ProductLocationsList() {
                   <DeleteIcon width={20} />
                 </span>
               </span>
-              <span className=" text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
-                Вы уверены?
+              <span className="flex items-center text-black text-base xs:text-xl not-italic font-AeonikProMedium text-center">
+                {t("PRsure")}<span>?</span>
               </span>
             </div>
           </>
@@ -968,7 +969,7 @@ export default function ProductLocationsList() {
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
             >
-              Удалить везде
+              {t("PRremoveEverwhere")}
             </button>
           ) : (
             <button
@@ -976,7 +977,7 @@ export default function ProductLocationsList() {
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
             >
-              Oтмена
+              {t("PRcancel")}
             </button>
           )}
           <button
@@ -984,7 +985,7 @@ export default function ProductLocationsList() {
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium"
           >
-            Удалить из адреса
+            {t("PRremoveByAddress")}
           </button>
         </div>
       </section>
@@ -1008,7 +1009,7 @@ export default function ProductLocationsList() {
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
           <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProRegular">
-            Добавить локацию
+            {t("PRaddTocation")}
           </p>
         </div>
         <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
@@ -1101,14 +1102,14 @@ export default function ProductLocationsList() {
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-base md:text-xl not-italic font-AeonikProMedium"
             >
-              Oтмена
+              {t("PRcancel")}
             </button>
             <button
               onClick={sendAddProductById}
               type="button"
               className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-lg duration-200 border border-textBlueColor text-textBlueColor bg-white hover:text-white hover:bg-textBlueColor h-[38px] md:h-[42px] px-4  text-center text-base md:text-xl not-italic font-AeonikProMedium"
             >
-              Готово
+              {t("PRready")}
             </button>
           </div>
         )}
@@ -1142,13 +1143,13 @@ export default function ProductLocationsList() {
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
-            Общее количество: (
+            {t("PRtotal")}: (
             {dressInfo?.getProductList?.products_locations?.length})
           </p>
 
           <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
             <div className="flex items-center md:mr-6 font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-mobileTextColor">
-              Выбранные{" "}
+              {t("PRselected")}{" "}
               <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
             {checkedList?.length >= 1 && shopLocationIdList?.length > 1 ? (
@@ -1162,7 +1163,7 @@ export default function ProductLocationsList() {
                 <span className="mr-[5px]">
                   <AddLocationIcon width={20} />
                 </span>
-                Добавить в локацию
+                {t("PRaddToLocation")}
               </button>
             ) : (
               <button
@@ -1172,7 +1173,7 @@ export default function ProductLocationsList() {
                 <span className="mr-[5px]">
                   <AddLocationIcon width={20} />
                 </span>
-                Добавить в локацию
+                {t("PRaddToLocation")}
               </button>
             )}
 
@@ -1185,7 +1186,7 @@ export default function ProductLocationsList() {
                 <span className="mr-[5px]">
                   <DeleteIcon width={20} />
                 </span>
-                Удалить
+                {t("PRdelete")}
               </button>
             ) : (
               <button
@@ -1195,7 +1196,7 @@ export default function ProductLocationsList() {
                 <span className="mr-[5px]">
                   <DeleteIcon width={20} />
                 </span>
-                Удалить
+                {t("PRdelete")}
               </button>
             )}
           </div>
@@ -1212,7 +1213,7 @@ export default function ProductLocationsList() {
                     <div className="flex justify-end items-center md:justify-between mx-auto ">
                       <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                         <p className="flex md:hidden text-sm font-AeonikProMedium  ">
-                          Общее количество: ( {dressInfo?.getProductList?.products_locations?.length} )
+                          {t("PRtotal")}: ( {dressInfo?.getProductList?.products_locations?.length} )
                         </p>
                       </div>
                     </div>
@@ -1321,7 +1322,7 @@ export default function ProductLocationsList() {
                                                 <AddIconsCircle />
                                               </span>
                                               <span className="text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                Добавить одежду
+                                                {t("PRaddWear")}
                                               </span>
                                             </button>
                                           </div>
@@ -1336,37 +1337,37 @@ export default function ProductLocationsList() {
                                                     No:
                                                   </th>
                                                   <th className="w-[14%] h-full flex items-center justify-center">
-                                                    Фото
+                                                    {t("PRphoto")}
                                                   </th>
                                                   <th className="w-[15%] h-full flex items-center justify-center">
-                                                    Наименование товара
+                                                    {t("PRproductName")}
                                                   </th>
                                                   <th className="w-[15%] h-full flex items-center justify-center">
-                                                    Артикул
+                                                    {t("PRrandomCode")}
                                                   </th>
                                                   <th className="w-[8%] h-full flex items-center justify-center">
-                                                    Тип
+                                                    {t("PRtype")}
                                                   </th>
                                                   <th className="w-[8%] h-full flex items-center justify-center">
-                                                    Дата
+                                                    {t("PRdate")}
                                                   </th>
                                                   <th className="w-[30%] h-full flex items-center justify-center">
-                                                    Цена товара
+                                                    {t("PRprice")}
                                                   </th>
                                                   <th className="w-[10%] h-full flex items-center justify-center"></th>
                                                   {item?.shop_locations
                                                     ?.length > 1 ? (
                                                     <th className="w-[9%] h-full flex items-center justify-center">
-                                                      Добавить
+                                                      {t("PRadd")}
                                                     </th>
                                                   ) : (
                                                     <th className="w-[9%] h-full flex items-center justify-center"></th>
                                                   )}
                                                   <th className="w-[9%] h-full flex items-center justify-center">
-                                                    Удалить
+                                                    {t("PRdelete")}
                                                   </th>
                                                   <th className="w-[10%] h-full flex items-center justify-center ">
-                                                    Статус
+                                                    {t("PRstatus")}
                                                   </th>
                                                 </tr>
                                               </div>
@@ -1513,7 +1514,7 @@ export default function ProductLocationsList() {
                                                                         ?.cost
                                                                         ?.price}
                                                                   <span className="ml-[6px] text-[14px]">
-                                                                    Сум
+                                                                    {t("PRsumm")}
                                                                   </span>
                                                                 </td>
                                                                 <td className="w-[10%] h-full  flex items-center justify-center ">
@@ -1526,7 +1527,7 @@ export default function ProductLocationsList() {
                                                                     }
                                                                     className="text-[18px] text-weatherWinterColor w-full text-center"
                                                                   >
-                                                                    Подробнее
+                                                                    {t("PRmore")}
                                                                   </button>
                                                                 </td>
                                                                 {item?.shop_locations?.length > 1 ? (
@@ -1678,13 +1679,13 @@ export default function ProductLocationsList() {
                                                             <div className="mb-6">
                                                               <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
                                                                 <div className="w-[40%] flex items-center  ">
-                                                                  Имя товара
+                                                                  {t("PRproductName2")}
                                                                 </div>
                                                                 <div className="w-[30%] flex items-center  ">
-                                                                  Статус
+                                                                  {t("PRstatus")}
                                                                 </div>
                                                                 <div className="w-[30%] flex items-center  ">
-                                                                  Цена товара
+                                                                  {t("PRprice")}
                                                                 </div>
                                                               </div>
 
@@ -1746,7 +1747,7 @@ export default function ProductLocationsList() {
                                                                     : itemValue?.cost?.discount_price || itemValue?.cost?.price > 999 ?
                                                                       Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ") : itemValue?.cost?.price}
                                                                   <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                    Сум
+                                                                    {t("PRsumm")}
                                                                   </span>
                                                                 </div>
                                                               </div>
@@ -1756,14 +1757,14 @@ export default function ProductLocationsList() {
                                                                 <div className="mb-6">
                                                                   <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
                                                                     <div className="w-[40%] flex items-center  ">
-                                                                      Артикул
+                                                                      {t("PRrandomCode")}
                                                                     </div>
                                                                     <div className="w-[30%] flex items-center  ">
-                                                                      Тип
+                                                                      {t("PRtype")}
                                                                     </div>
                                                                     <div className="w-[30%] flex items-center  ">
                                                                       {" "}
-                                                                      Дата
+                                                                      {t("PRdate")}
                                                                     </div>
                                                                   </div>
 
@@ -1806,7 +1807,7 @@ export default function ProductLocationsList() {
                                                                   }}
                                                                   className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                                                 >
-                                                                  Добавить в локацию
+                                                                  {t("PRaddToLocation")}
                                                                 </button> : null}
                                                               <button
                                                                 onClick={() =>
@@ -1817,7 +1818,7 @@ export default function ProductLocationsList() {
                                                                 }
                                                                 className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                                               >
-                                                                Подробнее
+                                                                {t("PRmore")}
                                                               </button>
                                                             </div>
 
@@ -1853,7 +1854,7 @@ export default function ProductLocationsList() {
                                                                   <button className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center"></button>
                                                                 )}
                                                                 <span className="text-[#b5b5b5] text-[13px] font-AeonikProMedium">
-                                                                  Выбрать
+                                                                  {t("PRselect2")}
                                                                 </span>
                                                               </div>
                                                               {moreMobile !==
@@ -1866,7 +1867,7 @@ export default function ProductLocationsList() {
                                                                   }
                                                                   className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
-                                                                  Больше...
+                                                                  {t("PRmore2")}...
                                                                 </button>
                                                               ) : (
                                                                 <button
@@ -1875,7 +1876,7 @@ export default function ProductLocationsList() {
                                                                   }
                                                                   className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
-                                                                  Меньше...
+                                                                  {t("PRless")}...
                                                                 </button>
                                                               )}
                                                               <button
@@ -1896,7 +1897,7 @@ export default function ProductLocationsList() {
                                                                 }}
                                                                 className="text-red-600 text-[11px] font-AeonikProMedium"
                                                               >
-                                                                Удалить
+                                                                {t("PRdelete")}
                                                               </button>
                                                             </div>
                                                           </div>
@@ -1910,7 +1911,7 @@ export default function ProductLocationsList() {
                                         ) : (
                                           <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-2 md:mt-5">
                                             <span className="text-[#D2D2D2] font-AeonikProRegular text-sm md:text-xl">
-                                              Tовара нет
+                                              {t("PRnoProduct")}
                                             </span>
                                           </div>
                                         )}
@@ -2035,7 +2036,7 @@ export default function ProductLocationsList() {
                                                 <AddIconsCircle />
                                               </span>
                                               <span className="text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                Добавить одежду
+                                                {t("PRaddWear")}
                                               </span>
                                             </button>
                                           </div>
@@ -2050,37 +2051,37 @@ export default function ProductLocationsList() {
                                                     No:
                                                   </th>
                                                   <th className="w-[14%] h-full flex items-center justify-center">
-                                                    Фото
+                                                    {t("PRphoto")}
                                                   </th>
                                                   <th className="w-[15%] h-full flex items-center justify-center">
-                                                    Наименование товара
+                                                    {t("PRproductName")}
                                                   </th>
                                                   <th className="w-[15%] h-full flex items-center justify-center">
-                                                    Артикул
+                                                    {t("PRrandomCode")}
                                                   </th>
                                                   <th className="w-[8%] h-full flex items-center justify-center">
-                                                    Тип
+                                                    {t("PRtype")}
                                                   </th>
                                                   <th className="w-[8%] h-full flex items-center justify-center">
-                                                    Дата
+                                                    {t("PRdate")}
                                                   </th>
                                                   <th className="w-[10%] h-full flex items-center justify-center">
-                                                    Цена товара
+                                                    {t("PRprice")}
                                                   </th>
                                                   <th className="w-[10%] h-full flex items-center justify-center"></th>
                                                   {item?.shop_locations?.length >
                                                     1 ? (
                                                     <th className="w-[9%] h-full flex items-center justify-center">
-                                                      Добавить
+                                                      {t("PRadd")}
                                                     </th>
                                                   ) : (
                                                     <th className="w-[9%] h-full flex items-center justify-center"></th>
                                                   )}
                                                   <th className="w-[9%] h-full flex items-center justify-center">
-                                                    Удалить
+                                                    {t("PRdelete")}
                                                   </th>
                                                   <th className="w-[10%] h-full flex items-center justify-center">
-                                                    Статус
+                                                    {t("PRstatus")}
                                                   </th>
                                                 </tr>
                                               </div>
@@ -2170,31 +2171,17 @@ export default function ProductLocationsList() {
                                                                   {itemValue?.sku ||
                                                                     "sku"}
                                                                 </td>
-                                                                {getProductInfo?.types &&
-                                                                  getProductInfo?.types
-                                                                    ?.filter(
-                                                                      (e) =>
-                                                                        e?.id ==
-                                                                        itemValue?.type_id
-                                                                    )
-                                                                    ?.map(
-                                                                      (
-                                                                        valueType,
-                                                                        index
-                                                                      ) => {
-                                                                        return (
-                                                                          <td
-                                                                            key={
-                                                                              index
-                                                                            }
-                                                                            className="w-[8%] h-full  flex items-center justify-center "
-                                                                          >
-                                                                            {valueType?.name_ru ||
-                                                                              "type_id"}
-                                                                          </td>
-                                                                        );
-                                                                      }
-                                                                    )}
+
+                                                                <td
+                                                                  key={
+                                                                    index
+                                                                  }
+                                                                  className="w-[8%] h-full  flex items-center justify-center "
+                                                                >
+                                                                  {itemValue?.type?.name_ru ||
+                                                                    "type_id"}
+                                                                </td>
+
                                                                 <td className="w-[8%] h-full  flex items-center justify-center ">
                                                                   {itemValue?.created_at ||
                                                                     "created_at"}
@@ -2235,7 +2222,7 @@ export default function ProductLocationsList() {
                                                                         ?.cost
                                                                         ?.price}
                                                                   <span className="ml-[6px] text-[14px]">
-                                                                    Сум
+                                                                    {t("PRsumm")}
                                                                   </span>
                                                                 </td>
                                                                 <td className="w-[10%] h-full  flex items-center justify-center ">
@@ -2248,7 +2235,7 @@ export default function ProductLocationsList() {
                                                                     }
                                                                     className="text-[18px] text-weatherWinterColor w-full text-center"
                                                                   >
-                                                                    Подробнее
+                                                                    {t("PRmore")}
                                                                   </button>
                                                                 </td>
                                                                 {item
@@ -2396,13 +2383,13 @@ export default function ProductLocationsList() {
                                                             <div className="mb-6">
                                                               <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
                                                                 <div className="w-[40%] flex items-center  ">
-                                                                  Имя товара
+                                                                  {t("PRproductName2")}
                                                                 </div>
                                                                 <div className="w-[30%] flex items-center  ">
-                                                                  Статус
+                                                                  {t("PRstatus")}
                                                                 </div>
                                                                 <div className="w-[30%] flex items-center  ">
-                                                                  Цена товара
+                                                                  {t("PRprice")}
                                                                 </div>
                                                               </div>
 
@@ -2494,7 +2481,7 @@ export default function ProductLocationsList() {
                                                                         ?.cost
                                                                         ?.price}
                                                                   <span className="ml-[6px]  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                    Сум
+                                                                    {t("PRsumm")}
                                                                   </span>
                                                                 </div>
                                                               </div>
@@ -2504,14 +2491,14 @@ export default function ProductLocationsList() {
                                                                 <div className="mb-6">
                                                                   <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
                                                                     <div className="w-[40%] flex items-center  ">
-                                                                      Артикул
+                                                                      {t("PRrandomCode")}
                                                                     </div>
                                                                     <div className="w-[30%] flex items-center  ">
-                                                                      Тип
+                                                                      {t("PRtype")}
                                                                     </div>
                                                                     <div className="w-[30%] flex items-center  ">
                                                                       {" "}
-                                                                      Дата
+                                                                      {t("PRdate")}
                                                                     </div>
                                                                   </div>
 
@@ -2522,31 +2509,16 @@ export default function ProductLocationsList() {
                                                                           "sku"}
                                                                       </p>
                                                                     </div>
-                                                                    {getProductInfo?.types &&
-                                                                      getProductInfo?.types
-                                                                        ?.filter(
-                                                                          (e) =>
-                                                                            e?.id ==
-                                                                            itemValue?.type_id
-                                                                        )
-                                                                        ?.map(
-                                                                          (
-                                                                            valueType,
-                                                                            index
-                                                                          ) => {
-                                                                            return (
-                                                                              <td
-                                                                                key={
-                                                                                  index
-                                                                                }
-                                                                                className="w-[30%] h-full  flex items-center justify-center "
-                                                                              >
-                                                                                {valueType?.name_ru ||
-                                                                                  "type_id"}
-                                                                              </td>
-                                                                            );
-                                                                          }
-                                                                        )}
+
+                                                                    <td
+                                                                      key={
+                                                                        index
+                                                                      }
+                                                                      className="w-[30%] h-full  flex items-center justify-center "
+                                                                    >
+                                                                      {itemValue?.type?.name_ru || "type_id"}
+                                                                    </td>
+
                                                                     {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
                                                                     <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                       {itemValue?.created_at ||
@@ -2569,7 +2541,7 @@ export default function ProductLocationsList() {
                                                                   }}
                                                                   className="text-[#ED7925] bg-[#FDF1E8] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                                                 >
-                                                                  Добавить в локацию
+                                                                  {t("PRaddToLocation")}
                                                                 </button> : null}
                                                               <button
                                                                 onClick={() =>
@@ -2580,7 +2552,7 @@ export default function ProductLocationsList() {
                                                                 }
                                                                 className="text-[#007DCA] bg-[#E8F5FD] text-center w-[45%] py-2 rounded-lg text-[11px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                                                               >
-                                                                Подробнее
+                                                                {t("PRmore")}
                                                               </button>
                                                             </div>
 
@@ -2616,7 +2588,7 @@ export default function ProductLocationsList() {
                                                                   <button className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#D2D2D2]    justify-center"></button>
                                                                 )}
                                                                 <span className="text-[#b5b5b5] text-[13px] font-AeonikProMedium">
-                                                                  Выбрать
+                                                                  {t("PRselect2")}
                                                                 </span>
                                                               </div>
                                                               {moreMobile !==
@@ -2629,7 +2601,7 @@ export default function ProductLocationsList() {
                                                                   }
                                                                   className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
-                                                                  Больше...
+                                                                  {t("PRmore2")}...
                                                                 </button>
                                                               ) : (
                                                                 <button
@@ -2638,7 +2610,7 @@ export default function ProductLocationsList() {
                                                                   }
                                                                   className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
-                                                                  Меньше...
+                                                                  {t("PRless")}...
                                                                 </button>
                                                               )}
                                                               <button
@@ -2659,7 +2631,7 @@ export default function ProductLocationsList() {
                                                                 }}
                                                                 className="text-red-600 text-[11px] font-AeonikProMedium"
                                                               >
-                                                                Удалить
+                                                                {t("PRdelete")}
                                                               </button>
                                                             </div>
                                                           </div>
@@ -2673,7 +2645,7 @@ export default function ProductLocationsList() {
                                         ) : (
                                           <div className="w-full h-[100px] rounded-lg border flex items-center justify-center mt-2 md:mt-5">
                                             <span className="text-[#D2D2D2] font-AeonikProRegular text-sm md:text-xl">
-                                              Tовара нет
+                                              {t("PRnoProduct")}
                                             </span>
                                           </div>
                                         )}

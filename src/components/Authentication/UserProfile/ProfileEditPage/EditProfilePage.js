@@ -1116,14 +1116,14 @@ function EditProfilePage() {
               {t("type")}
             </span>
             <div
-              className={`h-[44px] w-full mt-[6px] overflow-hidden rounded-lg  ${
+              className={`h-[38px] md:h-[44px] w-full mt-[6px] overflow-hidden rounded-lg    ${
                 state?.isCheckInput && state?.sellerTypes === "ENTITY"
                   ? "border border-[#FFB8B8] bg-[#FFF6F6] "
-                  : "focus:border border-searchBgColor"
+                  : "border border-searchBgColor"
               }`}
             >
               <Select
-                className={`SelectAntdStyle   h-[38px] md:h-[42px] text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
+                className={`   h-full text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
                 placeholder={t("type")}
                 style={{ height: 42 }}
                 optionFilterProp="children"
