@@ -19,6 +19,7 @@ import axios from "axios";
 import { FiCheck } from "react-icons/fi";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../language/LanguageItem";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -26,6 +27,7 @@ const url = "https://api.dressme.uz/api/seller";
 export default function ProductLocationsList() {
   const { request } = useHttp();
   const { t } = useTranslation("product");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [searchName, setSearchName] = useState("");
   const [state, setState] = useState({
@@ -640,7 +642,8 @@ export default function ProductLocationsList() {
                                 <span className="text-[14px] md:text-[16px]">{index + 1}</span>
                                 )
                                 <p className="text-black text-[14px] md:text-[16px] not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                  {item?.name_ru}
+                                  {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                  {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 </p>
                               </div>
                             );
@@ -881,7 +884,7 @@ export default function ProductLocationsList() {
                 value={searchName}
                 onChange={(e) => setSearchName(e?.target?.value)}
                 className="w-full h-full outline-0 px-[10px]"
-                placeholder="Поиск"
+                placeholder={t("PRsearch")}
               />
               <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                 <SearchIcon />
@@ -1288,10 +1291,13 @@ export default function ProductLocationsList() {
                                                   ?.map((values, index) => {
                                                     return (
                                                       <div>
-                                                        {values?.name_ru},
+                                                        {languageDetector?.typeLang === "ru" && values?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && values?.name_uz}                                                        ,
                                                         {values?.sub_regions?.filter((e) => e?.id == resData?.sub_region_id)?.map((valueSub) => {
                                                           return (
-                                                            <span className="px-1">{valueSub?.name_ru}
+                                                            <span className="px-1">
+                                                              {languageDetector?.typeLang === "ru" && valueSub?.name_ru}
+                                                              {languageDetector?.typeLang === "uz" && valueSub?.name_uz}
                                                               ,
                                                             </span>
                                                           );
@@ -1328,45 +1334,45 @@ export default function ProductLocationsList() {
                                           </div>
                                         </section>
                                         {resData?.products?.length !== 0 && (
-                                          <div className="w-full hidden md:flex flex-col">
+                                          <div className="w-full hidden md:flex flex-col border border-red-500">
                                             <div className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
                                               <div className="w-full  h-[70px] flex items-center">
                                                 <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
                                                 <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                                                  <th className="w-[5%] h-full flex items-center justify-center">
+                                                  <th className="w-[5%] h-full flex items-center justify-center border border-red-500">
                                                     No:
                                                   </th>
-                                                  <th className="w-[14%] h-full flex items-center justify-center">
+                                                  <th className="w-[14%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRphoto")}
                                                   </th>
-                                                  <th className="w-[15%] h-full flex items-center justify-center">
+                                                  <th className="w-[15%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRproductName")}
                                                   </th>
-                                                  <th className="w-[15%] h-full flex items-center justify-center">
+                                                  <th className="w-[15%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRrandomCode")}
                                                   </th>
-                                                  <th className="w-[8%] h-full flex items-center justify-center">
+                                                  <th className="w-[8%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRtype")}
                                                   </th>
-                                                  <th className="w-[8%] h-full flex items-center justify-center">
+                                                  <th className="w-[8%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRdate")}
                                                   </th>
-                                                  <th className="w-[30%] h-full flex items-center justify-center">
+                                                  <th className="w-[10%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRprice")}
                                                   </th>
-                                                  <th className="w-[10%] h-full flex items-center justify-center"></th>
+                                                  <th className="w-[10%] h-full flex items-center justify-center border border-red-500"></th>
                                                   {item?.shop_locations
                                                     ?.length > 1 ? (
-                                                    <th className="w-[9%] h-full flex items-center justify-center">
+                                                    <th className="w-[9%] h-full flex items-center justify-center border border-red-500">
                                                       {t("PRadd")}
                                                     </th>
                                                   ) : (
-                                                    <th className="w-[9%] h-full flex items-center justify-center"></th>
+                                                    <th className="w-[9%] h-full flex items-center justify-center border border-red-500"></th>
                                                   )}
-                                                  <th className="w-[9%] h-full flex items-center justify-center">
+                                                  <th className="w-[9%] h-full flex items-center justify-center border border-red-500">
                                                     {t("PRdelete")}
                                                   </th>
-                                                  <th className="w-[10%] h-full flex items-center justify-center ">
+                                                  <th className="w-[10%] h-full flex items-center justify-center border border-red-500 ">
                                                     {t("PRstatus")}
                                                   </th>
                                                 </tr>
@@ -1433,7 +1439,7 @@ export default function ProductLocationsList() {
                                                                 <td className="w-[5%] h-full  flex items-center justify-center ">
                                                                   {index + 1}
                                                                 </td>
-                                                                <td className="w-[14%] h-full flex items-center justify-center">
+                                                                <td className="w-[14%] h-full flex items-center justify-center border border-red-500">
                                                                   <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                                                     <img
                                                                       src={
@@ -1449,13 +1455,13 @@ export default function ProductLocationsList() {
                                                                     />
                                                                   </span>
                                                                 </td>
-                                                                <td className="w-[15%] h-full break-all  overflow-hidden  flex items-center  justify-center">
+                                                                <td className="w-[15%] h-full break-all px-1 overflow-hidden  flex items-center  justify-center border border-red-500">
                                                                   <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
-                                                                    {itemValue?.name_ru ||
-                                                                      "namrRu"}
+                                                                    {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
+                                                                    {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
                                                                   </p>
                                                                 </td>
-                                                                <td className="w-[15%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[15%] h-full  px-1 flex items-center justify-center border border-red-500">
                                                                   {itemValue?.sku ||
                                                                     "sku"}
                                                                 </td>
@@ -1464,17 +1470,18 @@ export default function ProductLocationsList() {
                                                                   key={
                                                                     index
                                                                   }
-                                                                  className="w-[8%] h-full  flex items-center justify-center "
+                                                                  className="w-[8%] h-full  px-1 flex items-center justify-center border border-red-500"
                                                                 >
-                                                                  {itemValue?.type?.name_ru ||
-                                                                    "type_id"}
+
+                                                                  {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                                                  {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                 </td>
 
-                                                                <td className="w-[8%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[8%] h-full  px-1 flex items-center justify-center border border-red-500">
                                                                   {itemValue?.created_at ||
                                                                     "created_at"}
                                                                 </td>
-                                                                <td className="w-[10%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center border border-red-500">
                                                                   {itemValue
                                                                     ?.cost
                                                                     ?.discount_price >
@@ -1517,7 +1524,7 @@ export default function ProductLocationsList() {
                                                                     {t("PRsumm")}
                                                                   </span>
                                                                 </td>
-                                                                <td className="w-[10%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center border border-red-500">
                                                                   <button
                                                                     onClick={() =>
                                                                       goProductDetailEdit(
@@ -1532,7 +1539,7 @@ export default function ProductLocationsList() {
                                                                 </td>
                                                                 {item?.shop_locations?.length > 1 ? (
                                                                   <td
-                                                                    className={`w-[9%] h-full  flex items-center justify-center `}
+                                                                    className={`w-[9%] h-full  flex items-center justify-center border border-red-500`}
                                                                   >
                                                                     <button
                                                                       onClick={() => {
@@ -1563,10 +1570,10 @@ export default function ProductLocationsList() {
                                                                   </td>
                                                                 ) : (
                                                                   <td
-                                                                    className={`w-[9%] h-full  flex items-center justify-center `}
+                                                                    className={`w-[9%] h-full  flex items-center justify-center border border-red-500`}
                                                                   ></td>
                                                                 )}
-                                                                <td className="w-[9%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[9%] h-full  flex items-center justify-center border border-red-500">
                                                                   <button
                                                                     type="button"
                                                                     onClick={() => {
@@ -1596,7 +1603,7 @@ export default function ProductLocationsList() {
                                                                 </td>
                                                                 {itemValue?.status ===
                                                                   "approved" && (
-                                                                    <td className="w-[10%] h-fit  flex items-center justify-center  ">
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center border border-red-500 ">
                                                                       <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1613,7 +1620,7 @@ export default function ProductLocationsList() {
                                                                           resData?.shop_id
                                                                         )
                                                                       }
-                                                                      className="w-[10%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                      className="w-[10%] h-fit cursor-pointer flex items-center  justify-center border border-red-500"
                                                                     >
                                                                       <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
                                                                         {itemValue?.status ||
@@ -1623,7 +1630,7 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
-                                                                    <td className="w-[10%] h-fit  flex items-center justify-center ">
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center border border-red-500 ">
                                                                       <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1632,7 +1639,7 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
-                                                                    <td className="w-[10%] h-fit  flex items-center justify-center   ">
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center border border-red-500   ">
                                                                       <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1692,8 +1699,8 @@ export default function ProductLocationsList() {
                                                               <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
                                                                 <div className="w-[40%] break-all  overflow-hidden  ">
                                                                   <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                    {itemValue?.name_ru ||
-                                                                      "namrRu"}
+                                                                    {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
+                                                                    {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
                                                                   </p>
                                                                 </div>
                                                                 {itemValue?.status ===
@@ -1782,7 +1789,8 @@ export default function ProductLocationsList() {
                                                                       }
                                                                       className="w-[30%] h-full  flex items-center justify-center "
                                                                     >
-                                                                      {itemValue?.type?.name_ru || "type_id"}
+                                                                      {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                                                      {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                     </td>
 
                                                                     {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
@@ -1992,7 +2000,9 @@ export default function ProductLocationsList() {
                                                   ?.map((values, index) => {
                                                     return (
                                                       <div>
-                                                        {values?.name_ru},
+                                                        {languageDetector?.typeLang === "ru" && values?.type?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && values?.type?.name_uz}
+                                                        ,
                                                         {values?.sub_regions
                                                           ?.filter(
                                                             (e) =>
@@ -2002,9 +2012,9 @@ export default function ProductLocationsList() {
                                                           ?.map((valueSub) => {
                                                             return (
                                                               <span className="px-1">
-                                                                {
-                                                                  valueSub?.name_ru
-                                                                }
+
+                                                                {languageDetector?.typeLang === "ru" && valueSub?.type?.name_ru}
+                                                                {languageDetector?.typeLang === "uz" && valueSub?.type?.name_uz}
                                                                 ,
                                                               </span>
                                                             );
@@ -2145,7 +2155,7 @@ export default function ProductLocationsList() {
                                                                 <td className="w-[5%] h-full  flex items-center justify-center ">
                                                                   {index + 1}
                                                                 </td>
-                                                                <td className="w-[14%] h-full flex items-center justify-center">
+                                                                <td className="w-[14%]  px-1 h-full flex items-center justify-center">
                                                                   <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                                                     <img
                                                                       src={
@@ -2161,13 +2171,13 @@ export default function ProductLocationsList() {
                                                                     />
                                                                   </span>
                                                                 </td>
-                                                                <td className="w-[15%] h-full break-all  overflow-hidden  flex items-center  justify-center">
+                                                                <td className="w-[15%]  px-1 h-full break-all  overflow-hidden  flex items-center  justify-center">
                                                                   <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
-                                                                    {itemValue?.name_ru ||
-                                                                      "namrRu"}
+                                                                    {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
+                                                                    {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
                                                                   </p>
                                                                 </td>
-                                                                <td className="w-[15%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[15%] h-full  px-1 flex items-center justify-center ">
                                                                   {itemValue?.sku ||
                                                                     "sku"}
                                                                 </td>
@@ -2176,18 +2186,18 @@ export default function ProductLocationsList() {
                                                                   key={
                                                                     index
                                                                   }
-                                                                  className="w-[8%] h-full  flex items-center justify-center "
+                                                                  className="w-[8%] h-full  px-1 flex items-center justify-center "
                                                                 >
-                                                                  {itemValue?.type?.name_ru ||
-                                                                    "type_id"}
+                                                                  {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                                                  {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                 </td>
 
-                                                                <td className="w-[8%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[8%] h-full  px-1 flex items-center justify-center ">
                                                                   {itemValue?.created_at ||
                                                                     "created_at"}
                                                                 </td>
 
-                                                                <td className="w-[10%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center ">
                                                                   {itemValue?.cost
                                                                     ?.discount_price >
                                                                     999
@@ -2225,7 +2235,7 @@ export default function ProductLocationsList() {
                                                                     {t("PRsumm")}
                                                                   </span>
                                                                 </td>
-                                                                <td className="w-[10%] h-full  flex items-center justify-center ">
+                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center ">
                                                                   <button
                                                                     onClick={() =>
                                                                       goProductDetailEdit(
@@ -2396,8 +2406,9 @@ export default function ProductLocationsList() {
                                                               <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
                                                                 <div className="w-[40%] break-all  overflow-hidden  ">
                                                                   <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                    {itemValue?.name_ru ||
-                                                                      "namrRu"}
+
+                                                                    {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
+                                                                    {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
                                                                   </p>
                                                                 </div>
                                                                 {itemValue?.status ===
@@ -2516,7 +2527,8 @@ export default function ProductLocationsList() {
                                                                       }
                                                                       className="w-[30%] h-full  flex items-center justify-center "
                                                                     >
-                                                                      {itemValue?.type?.name_ru || "type_id"}
+                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                                                      {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                     </td>
 
                                                                     {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
