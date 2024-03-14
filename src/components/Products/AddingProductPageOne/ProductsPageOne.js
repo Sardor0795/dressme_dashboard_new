@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineLeft } from "react-icons/ai";
 import { GoBackIcons } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
+import { useTranslation } from "react-i18next";
 
 export default function ProductsPageOne() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const { t } = useTranslation("product");
 
   useEffect(() => {
     window.scrollTo({
@@ -55,11 +57,10 @@ export default function ProductsPageOne() {
                 )
               )}
               <p
-                className={`w-full text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${
-                  !dressInfo?.nextPageShowForm && "md:ml-[30px]"
-                } `}
+                className={`w-full text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${!dressInfo?.nextPageShowForm && "md:ml-[30px]"
+                  } `}
               >
-                Добавить товара
+                {t("APaddProduct")}
               </p>
             </section>
           </section>

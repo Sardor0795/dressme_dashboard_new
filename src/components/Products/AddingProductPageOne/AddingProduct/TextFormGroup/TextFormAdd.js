@@ -9,9 +9,11 @@ import AddBtn from "./AddBtn";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 const { REACT_APP_BASE_URL } = process.env;
 
 function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
+    const { t } = useTranslation("product");
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -168,7 +170,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             target="_blank"
                             className="text-[#007DCA] text-[14px] border-b border-[#007dca] leading-none font-AeonikProRegular"
                         >
-                            Google переводчиком
+                            {t("TFtranslate")}
                         </Link>
                     </div>
                     <div
@@ -178,7 +180,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <div className="mb-[10px]">
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Название на русском
+                                        {t("TFtitleRu")}
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
@@ -205,7 +207,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <div className="mb-[10px]">
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Название на узбекском
+                                        {t("TFtitleUz")}
                                     </div>
                                     <span className="ml-[5px]">
                                         <StarLabel />
@@ -230,10 +232,10 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <div className="mb-[10px]">
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Описание на русском
+                                        {t("TFdescriptionRu")}
                                     </div>
                                     <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
-                                        (необязательно)
+                                        ({t("APnotNecessary")})
                                     </span>
                                 </div>
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px] py-[10px] px-[5px]">
@@ -258,10 +260,10 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <div>
                                 <div className="flex items-center mb-[5px]">
                                     <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                        Описание на узбекском
+                                        {t("TFdescriptionUz")}
                                     </div>
                                     <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
-                                        (необязательно)
+                                        ({t("APnotNecessary")})
                                     </span>
                                 </div>
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
@@ -293,7 +295,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 <div className="flex-1 mb-[10px]">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                            Качество на русском
+                                            {t("TFqualityRu")}
                                         </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
@@ -322,7 +324,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 <div className="flex-1 mb-[10px]">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
-                                            Качество на узбекском
+                                            {t("TFqualityUz")}
                                         </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
@@ -365,9 +367,9 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 {/* Состав на русском */}
                                 <div className="flex-1 mb-[17px] md:mb-[10px]">
                                     <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
-                                        Состав на русском
+                                        {t("TFcompoundRu")}
                                         <span className="text-sm ml-[5px] text-[#a1a1a1] font-AeonikProRegular">
-                                            (необязательно)
+                                            ({t("APnotNecessary")})
                                         </span>
                                     </div>
                                     <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor  `}>
@@ -390,9 +392,9 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 {/* Состав на узбекском */}
                                 <div className="flex-1 mb-[10px]">
                                     <div className="text-[#303030] mb-[5px] pr-[15px] w-fit text-base bg-no-repeat font-AeonikProRegular">
-                                        Состав на узбекском
+                                        {t("TFcompoundUz")}
                                         <span className="notRecquired ml-[5px] font-AeonikProRegular text-sm text-textLightColor">
-                                            (необязательно)
+                                            ({t("APnotNecessary")})
                                         </span>
                                     </div>
                                     <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor `}>
@@ -416,9 +418,9 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
                                 <div className="flex-1 mb-[10px]">
                                     <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
-                                        Бренд
+                                        {t("TFbrand")}
                                         <span className="notRecquired ml-[5px] text-sm text-textLightColor font-AeonikProRegular">
-                                            (необязательно)
+                                            ({t("APnotNecessary")})
                                         </span>
                                     </div>
                                     <Select
@@ -460,27 +462,27 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     onClick={() => setDressInfo({ ...dressInfo, nextPageShowForm: true })}
                                     className="h-[38px]  md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[47%] md:max-w-[130px] w-full font-AeonikProRegular"
                                 >
-                                    Назад
+                                    {t("TFback")}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={send}
                                     // onClick={onClick}
                                     className="h-[38px]  md:h-[45px] flex items-center justify-center text-white text-center text-base md:text-lg  active:scale-95  active:opacity-70 rounded-lg bg-[#007dca] max-w-[47%] md:max-w-[130px] w-full font-AeonikProRegular">
-                                    Добавить
+                                    {t("TFadd")}
                                 </button>
 
                             </div>
                         </div>
                     </div>
                     <div className="hidden md:block mt-[30px] font-AeonikProRegular">
-                        Воспользоваться
+                        {t("TFtakeAdvantage")}
                         <Link
                             to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                             target="_blank"
                             className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
                         >
-                            Google переводчиком
+                            {t("TFtranslate")}
                         </Link>
                     </div>
                 </div>
