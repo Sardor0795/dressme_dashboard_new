@@ -29,6 +29,8 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import imageCompression from "browser-image-compression";
 import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -39,6 +41,9 @@ const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const navigate = useNavigate();
   const { request } = useHttp();
+  const { t } = useTranslation("product");
+  const [languageDetector] = useContext(LanguageDetectorDress);
+
   const [clothingCategoryModal, setClothingCategoryModal] = useState(false)
   const [searchList, setSearchList] = useState(null)
   const [state, setState] = useState({
@@ -689,7 +694,7 @@ const AddingProduct = () => {
   }
 
   useEffect(() => {
-    setSearchList( '')
+    setSearchList('')
   }, [
     state?.ClothingSection,
     state?.SubClothingSection,
@@ -699,7 +704,7 @@ const AddingProduct = () => {
     state?.MakeCountryModal
   ])
 
- 
+
 
   return (
     <div className="w-full h-fit ">
@@ -718,7 +723,7 @@ const AddingProduct = () => {
             {state?.errorList?.shop_id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Магазин:
+                  {t("APmarket")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.shop_id[0]}
@@ -728,7 +733,7 @@ const AddingProduct = () => {
             {state?.errorList?.shop_location_id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Локация:
+                  {t("APlocation")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.shop_location_id[0]}
@@ -738,7 +743,7 @@ const AddingProduct = () => {
             {state?.errorList?.section_ids && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Раздел одежды:
+                  {t("APclothesSection")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.section_ids[0]}
@@ -748,7 +753,7 @@ const AddingProduct = () => {
             {state?.errorList?.season_ids && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Сезон одежды:
+                  {t("APclothesseason")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.season_ids[0]}
@@ -758,7 +763,7 @@ const AddingProduct = () => {
             {state?.errorList?.color_id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Цвет:
+                  {t("APcolor")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.color_id[0]}
@@ -768,7 +773,7 @@ const AddingProduct = () => {
             {state?.errorList?.gender_id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Пол:
+                  {t("APgender")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.gender_id[0]}
@@ -778,7 +783,7 @@ const AddingProduct = () => {
             {state?.errorList?.min_age_category && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Возраст Min:
+                  {t("APageMin")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.min_age_category[0]}
@@ -788,7 +793,7 @@ const AddingProduct = () => {
             {state?.errorList?.max_age_category && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Возраст Max:
+                  {t("APageMax")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.max_age_category[0]}
@@ -798,7 +803,7 @@ const AddingProduct = () => {
             {state?.errorList?.category_id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Категория одежды:
+                  {t("APclothesCategory")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.category_id[0]}
@@ -808,7 +813,7 @@ const AddingProduct = () => {
             {state?.errorList?.type_id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Тип:
+                  {t("APtype")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.type_id[0]}
@@ -818,7 +823,7 @@ const AddingProduct = () => {
             {state?.errorList?.producer_Id && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Производитель:
+                  {t("APmanufacturer")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.producer_Id[0]}
@@ -828,7 +833,7 @@ const AddingProduct = () => {
             {state?.errorList?.amount && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Количество:
+                  {t("APquantity")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.amount[0]}
@@ -838,7 +843,7 @@ const AddingProduct = () => {
             {state?.errorList?.price && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Цена:
+                  {t("APprice")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.price[0]}
@@ -848,7 +853,7 @@ const AddingProduct = () => {
             {state?.errorList?.photos && (
               <div className="w-full  flex items-center gap-x-2 ">
                 <span className="text-[12px] md:text-base font-AeonikProRegular">
-                  Выберите фото:
+                  {t("APselectPhoto")}:
                 </span>
                 <span className="text-[12px] md:text-[14px] text-textRedColor font-AeonikProRegular">
                   {state?.errorList?.photos[0]}
@@ -901,7 +906,7 @@ const AddingProduct = () => {
                     className={`flex items-center justify-between border-b border-searchBgColor pb-3`}
                   >
                     <span className="text-black text-[14px] md:text-lg not-italic font-AeonikProRegular leading-5">
-                      Выберите цвет
+                      {t("APselectColor")}
                     </span>
                     <button
                       className="py-2"
@@ -944,7 +949,8 @@ const AddingProduct = () => {
                           <span
                             className={`text-black text-center text-[10px] md:text-xs not-italic font-AeonikProRegular`}
                           >
-                            {data?.name_ru}
+                            {languageDetector?.typeLang === "ru" && data?.name_ru}
+                            {languageDetector?.typeLang === "uz" && data?.name_uz}
                           </span>
                         </div>
                       );
@@ -958,14 +964,14 @@ const AddingProduct = () => {
                         }
                         className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] md:text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"
                       >
-                        Отключить
+                        {t("APdisable")}
                       </button>
                     )}
                     <button
                       onClick={() => setState({ ...state, showColor: false })}
                       className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] md:text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1"
                     >
-                      Готово
+                      {t("PRready")}
                     </button>
                   </div>
                 </div>
@@ -986,7 +992,7 @@ const AddingProduct = () => {
               </button>
               <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
                 <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-                  Прикрепить к локация
+                  {t("APattacLocation")}
                 </p>
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
@@ -1044,7 +1050,7 @@ const AddingProduct = () => {
             >
               <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                 <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                  <p className="text-base font-AeonikProMedium"> Раздел товара</p>
+                  <p className="text-base font-AeonikProMedium"> {t("APsectionProduct")}</p>
                   <button onClick={() => setState({ ...state, ClothingSection: false })}>
                     <CloseAnswer colors={"#000"} />
                   </button>
@@ -1056,7 +1062,7 @@ const AddingProduct = () => {
                         <input
                           type="text"
                           name='clothingTypes'
-                          placeholder='Искать раздел'
+                          placeholder={t("APsearch")}
                           value={searchList}
                           onChange={(e) => setSearchList(e?.target?.value)}
                           className='w-full pr-3 outline-none' />
@@ -1064,14 +1070,16 @@ const AddingProduct = () => {
                       </div>
                       <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                         {dressInfo?.getProductInfo?.sections?.filter((e) =>
-                          searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                          searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                            e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                         )?.map((item) => {
                           return (
                             <div
                               onClick={() => handleChangeSectionMobile(item?.id)}
                               key={item?.id}
                               className={`w-full ${section_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                              {item.name_ru}
+                              {languageDetector?.typeLang === "ru" && item?.name_ru}
+                              {languageDetector?.typeLang === "uz" && item?.name_uz}
                               {section_Id?.includes(item?.id) &&
                                 <span
                                   onClick={() => handleChangeSectionDeleteMobile(item?.id)}
@@ -1099,7 +1107,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className={`text-base font-AeonikProMedium `}>Подраздел одежды</p>
+                    <p className={`text-base font-AeonikProMedium `}>{t("APsubSectionProduct")}</p>
                     <button onClick={() => setState({ ...state, SubClothingSection: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1111,18 +1119,20 @@ const AddingProduct = () => {
                           <input type="text"
                             value={searchList}
                             onChange={(e) => setSearchList(e?.target?.value)}
-                            name='clothingTypes' placeholder='Искать раздел' className='w-full pr-3 outline-none' />
+                            name='clothingTypes' placeholder={t("APsearch")} className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {newArray?.filter((e) =>
-                            searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                            searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                           )?.map((item) => {
                             return (
                               <div
                                 onClick={() => handleChangeSubSectionMobile(item?.id)}
                                 key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {item.name_ru}
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {subSection_Id?.includes(item?.id) &&
                                   <span
                                     onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}
@@ -1148,7 +1158,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium">Сезон товара</p>
+                    <p className="text-base font-AeonikProMedium">{t("APseasonProduct")}</p>
                     <button onClick={() => setState({ ...state, DressSeason: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1161,7 +1171,8 @@ const AddingProduct = () => {
                           {dressInfo?.getProductInfo?.seasons?.map((item) => {
                             return (
                               <div onClick={() => onHandleChangeSeasonMobile(item?.id)} key={item?.id} className={`w-full ${season_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {item.name_ru}
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {season_Id?.includes(item?.id) &&
                                   <span
                                     onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}
@@ -1187,7 +1198,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium"> Пол</p>
+                    <p className="text-base font-AeonikProMedium"> {t("APgender")}</p>
                     <button onClick={() => setState({ ...state, GenderModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1200,7 +1211,8 @@ const AddingProduct = () => {
                           {dressInfo?.getProductInfo?.gender?.map((item) => {
                             return (
                               <div onClick={() => selectGenderId(item?.id)} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {item.name_ru}
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {state?.gender_Id == (item?.id) &&
                                   <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
@@ -1224,7 +1236,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium"> Тип</p>
+                    <p className="text-base font-AeonikProMedium">  {t("APtype")}</p>
                     <button onClick={() => setState({ ...state, DressTypeModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1238,34 +1250,40 @@ const AddingProduct = () => {
                             value={searchList}
                             onChange={(e) => setSearchList(e?.target?.value)}
                             name='clothingTypes'
-                            placeholder='Искать раздел'
+                            placeholder={t("APsearch")}
                             className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => {
                             e?.category_id == state?.category_Id ||
-                              e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase())
+                              languageDetector?.typeLang === "ru" ?
+                              e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase())
                           })?.map((item) => {
                             return (
                               <div
                                 onClick={() => selectTypeById(item?.id, item?.category_id)}
                                 key={item?.id}
                                 className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {item.name_ru}
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {state?.filterTypeId == (item?.id) &&
                                   <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             )
                           }) :
                             dressInfo?.getProductInfo?.types?.filter((e) =>
-                              searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                              searchList ? languageDetector?.typeLang === "ru" ?
+                                e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                                e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                             )?.map((item) => {
                               return (
                                 <div
                                   onClick={() => selectTypeById(item?.id, item?.category_id)}
                                   key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                  {item.name_ru}
+                                  {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                  {languageDetector?.typeLang === "uz" && item?.name_uz}
                                   {state?.filterTypeId == (item?.id) &&
                                     <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
 
@@ -1291,7 +1309,7 @@ const AddingProduct = () => {
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium"> Производитель</p>
+                    <p className="text-base font-AeonikProMedium">  {t("APmanufacturer")}</p>
                     <button onClick={() => setState({ ...state, MakeCountryModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
@@ -1305,19 +1323,22 @@ const AddingProduct = () => {
                             value={searchList}
                             onChange={(e) => setSearchList(e?.target?.value)}
                             name='clothingTypes'
-                            placeholder='Искать раздел'
+                            placeholder={t("APsearch")}
                             className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.producers?.filter((e) =>
-                            searchList ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                            searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                           )?.map((item) => {
                             return (
                               <div
                                 onClick={() => selectProduceId(item?.id)}
                                 key={item?.id} className={`w-full ${state?.producer_Id == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {item.name_ru}
+                                {/* {item.name_ru} */}
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {state?.producer_Id == (item?.id) && <span onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
@@ -1359,7 +1380,7 @@ const AddingProduct = () => {
                       <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Магазин
+                            {t("APmarket")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -1370,7 +1391,7 @@ const AddingProduct = () => {
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
                           <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                            Выбрать
+                            {t("APselect2")}
                           </div>
                           <ArrowRightIcon />
                         </button> */}
@@ -1407,7 +1428,7 @@ const AddingProduct = () => {
                                 : ""
                                 }`}
                               showSearch
-                              placeholder="Выбрать"
+                              placeholder={t("PRselect2")}
                               optionFilterProp="children"
                               onChange={(e) =>
                                 setState({ ...state, shopId: e })
@@ -1441,7 +1462,7 @@ const AddingProduct = () => {
                             className={`text-[13px] md:text-base font-AeonikProRegular ${newId ? "text-[#000]" : "text-[#b5b5b5]"
                               }`}
                           >
-                            Локация
+                            {t("APlocation")}
                           </span>
                           <span className="ml-[5px]">
                             {newId ? <StarLabel /> : null}
@@ -1536,7 +1557,8 @@ const AddingProduct = () => {
                                   })
                               ) : (
                                 <div className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                  Выбрать
+                                  {t("PRselect2")}
+
                                 </div>
                               )}
 
@@ -1551,7 +1573,7 @@ const AddingProduct = () => {
                               className="w-full h-11 md:h-10  bg-[#F5F5F5] rounded-lg flex cursor-pointer items-center justify-between border border-borderColor px-3"
                             >
                               <div className="text-[15px] mt-[3px] font-AeonikProRegular text-[#b5b5b5] tracking-wider	ant-select-selection-placeholder">
-                                Выбрать
+                                {t("PRselect2")}
                               </div>
                               <span className="rotate-[90deg]">
                                 <ArrowRightIcon />
@@ -1564,7 +1586,7 @@ const AddingProduct = () => {
                       <div className=" w-full h-fit flex flex-col gap-y-[5px] overflow-hidden">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Раздел товара
+                            {t("APsectionProduct")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -1585,7 +1607,8 @@ const AddingProduct = () => {
                               {dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => {
                                 return (
                                   <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                    {item?.name_ru}
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
                                   </span>
                                 )
                               })}
@@ -1593,7 +1616,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>}
@@ -1608,7 +1631,7 @@ const AddingProduct = () => {
                               }`}
                             showSearch
                             mode="multiple"
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             optionLabelProp="label"
                             // optionFilterProp="children"
                             onChange={(e) =>
@@ -1628,10 +1651,16 @@ const AddingProduct = () => {
                                   <Option
                                     key={item.id}
                                     value={item.id}
-                                    label={item.name_ru}
+                                    label={
+                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                          undefined
+                                    }
                                   >
                                     <Space>
-                                      <span>{item.name_ru}</span>
+                                      <span>
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                                     </Space>
                                   </Option>
                                 );
@@ -1649,7 +1678,7 @@ const AddingProduct = () => {
                               : "text-[#b5b5b5]"
                               }`}
                           >
-                            Подраздел товара
+                            {t("APsubSectionProduct")}
                           </span>
                           <span className="ml-[5px]">
                             {newArray?.length ? <StarLabel /> : null}
@@ -1673,14 +1702,16 @@ const AddingProduct = () => {
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
                               {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
                                 return (
-                                  <span className="text-[13px] md:text-base font-AeonikProRegular">{item?.name_ru}</span>
+                                  <span className="text-[13px] md:text-base font-AeonikProRegular">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                                 )
                               })}
                             </div>
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -1697,7 +1728,7 @@ const AddingProduct = () => {
                               }`}
                             showSearch
                             disabled={newArray?.length ? false : true}
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             mode="multiple"
                             optionLabelProp="label"
                             value={state?.sub_Section_Id}
@@ -1717,9 +1748,17 @@ const AddingProduct = () => {
                                 <Option
                                   key={item.id}
                                   value={item.id}
-                                  label={item.name_ru}
+                                  label={
+                                    languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                      languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                        undefined
+                                  }
                                 >
-                                  <span>{item.name_ru}</span>
+                                  <Space>
+                                    <span>
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                  </Space>
                                 </Option>
                               );
                             })}
@@ -1730,7 +1769,7 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Сезон товара
+                            {t("APseasonProduct")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -1753,7 +1792,8 @@ const AddingProduct = () => {
                               {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
                                 return (
                                   <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-full px-[3px] flex items-center">
-                                    {item?.name_ru}
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
 
                                   </span>)
                               })}
@@ -1761,7 +1801,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("APselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>}
@@ -1776,7 +1816,7 @@ const AddingProduct = () => {
                             style={{
                               width: "100%",
                             }}
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             // defaultValue={["china"]}
                             size="large"
                             onChange={(e) =>
@@ -1789,11 +1829,16 @@ const AddingProduct = () => {
                                 <Option
                                   key={item.id}
                                   value={item.id}
-                                  label={item.name_ru}
+                                  label={
+                                    languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                      languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                        undefined
+                                  }
                                 >
                                   <Space>
-                                    <span>{item.name_ru}</span>
-                                  </Space>
+                                    <span>
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>                                  </Space>
                                 </Option>
                               );
                             })}
@@ -1804,7 +1849,7 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Цвет
+                            {t("APcolor")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -1880,7 +1925,7 @@ const AddingProduct = () => {
                         <div className="w-full md:w-1/2 flex flex-col gap-y-[5px]">
                           <div className="flex items-center">
                             <span className="text-[13px] md:text-base font-AeonikProRegular">
-                              Пол
+                              {t("APgender")}
                             </span>
                             <span className="ml-[5px]">
                               <StarLabel />
@@ -1901,8 +1946,8 @@ const AddingProduct = () => {
                                 {dressInfo?.getProductInfo?.gender?.filter(e => state?.gender_Id == e?.id)?.map((item) => {
                                   return (
                                     <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                      {item?.name_ru}
-
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
                                   )
                                 })}
@@ -1910,7 +1955,7 @@ const AddingProduct = () => {
                               :
                               <div className="w-full h-full rounded-lg flex items-center justify-between">
                                 <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                  Выбрать
+                                  {t("APselect2")}
                                 </span>
                                 <ArrowRightIcon />
                               </div>}
@@ -1923,7 +1968,7 @@ const AddingProduct = () => {
                                 }
                           rounded-lg w-full h-11 md:h-10 overflow-hidden`}
                               showSearch
-                              placeholder="Выбрать"
+                              placeholder={t("PRselect2")}
                               optionFilterProp="children"
                               onChange={(e) =>
                                 setState({ ...state, gender_Id: e })
@@ -1939,7 +1984,7 @@ const AddingProduct = () => {
                                 (item) => {
                                   return {
                                     value: item?.id,
-                                    label: item?.name_ru,
+                                    label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
                                   };
                                 }
                               )}
@@ -1949,7 +1994,7 @@ const AddingProduct = () => {
                         <div className="w-1/2 hidden md:flex flex-col gap-y-[5px] ">
                           <div className="flex items-center">
                             <span className="text-[12px] flex flex-wrap whitespace-nowrap md:text-base font-AeonikProRegular">
-                              Возраст
+                              {t("APage")}
                             </span>
                             <span className="ml-[5px]">
                               <StarLabel />
@@ -1959,7 +2004,7 @@ const AddingProduct = () => {
                             <input
                               type="text"
                               name="minAge"
-                              placeholder="Мин"
+                              placeholder={t("APmin")}
                               value={state?.min_Age_Category}
                               onChange={(e) =>
                                 setState({
@@ -1976,7 +2021,7 @@ const AddingProduct = () => {
                             <input
                               type="text"
                               name="maxAge"
-                              placeholder="Макс"
+                              placeholder={t("APmax")}
                               value={state?.max_Age_Category}
                               onChange={(e) =>
                                 setState({
@@ -1996,7 +2041,7 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center  ">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Артикул
+                            {t("PRrandomCode")}
                           </span>
 
                           <span className="ml-[5px]">
@@ -2030,7 +2075,7 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Категория товара
+                            {t("APcategoryProduct")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2051,12 +2096,13 @@ const AddingProduct = () => {
                                 ?.map((item, index) => {
                                   return (
                                     <span key={index} className="text-[#000]">
-                                      {item?.name_ru}
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
                                   );
                                 })
                             ) : (
-                              <span className="text-[#a1a1a1]"> Выбрать</span>
+                              <span className="text-[#a1a1a1]"> {t("APselect2")}</span>
                             )}
                             {state.openDropModalButton ? (
                               <span className="-rotate-90 transition duration-200 ease-out">
@@ -2082,12 +2128,13 @@ const AddingProduct = () => {
                                 ?.map((item, index) => {
                                   return (
                                     <span key={index} className="text-[12px] text-[#b5b5b5]">
-                                      {item?.name_ru}
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
                                   );
                                 })
                             ) : (
-                              <span className="text-[#b5b5b5] text-[12px]"> Выбрать</span>
+                              <span className="text-[#b5b5b5] text-[12px]"> {t("APselect2")}</span>
                             )}
                             <span className="rotate-90 transition duration-200 ease-out">
                               <ArrowRightIcon />
@@ -2100,7 +2147,7 @@ const AddingProduct = () => {
                         <div className="w-1/2 flex flex-col gap-y-[5px] ">
                           <div className="flex items-center">
                             <span className="text-[13px] md:text-base font-AeonikProRegular">
-                              Тип
+                              {t("APtype")}
                             </span>
                             <span className="ml-[5px]">
                               <StarLabel />
@@ -2114,7 +2161,7 @@ const AddingProduct = () => {
                                 }`}
                               showSearch
                               allowClear
-                              placeholder="Выбрать"
+                              placeholder={t("PRselect2")}
                               optionFilterProp="children"
                               onChange={(value, attribute2) => {
                                 setState({
@@ -2146,7 +2193,8 @@ const AddingProduct = () => {
                                         value={item?.id}
                                         attribute2={item?.category_id}
                                       >
-                                        {item.name_ru}
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}
                                       </Option>
                                     );
                                   })
@@ -2158,7 +2206,8 @@ const AddingProduct = () => {
                                         value={item?.id}
                                         attribute2={item?.category_id}
                                       >
-                                        {item.name_ru}
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}
                                       </Option>
                                     );
                                   }
@@ -2169,7 +2218,7 @@ const AddingProduct = () => {
                         <div className="w-1/2 flex flex-col gap-y-[5px] ">
                           <div className="flex items-center">
                             <span className="text-[13px] md:text-base font-AeonikProRegular">
-                              Производитель
+                              {t("APmanufacturer")}
                             </span>
                             <span className="ml-[5px]">
                               <StarLabel />
@@ -2182,7 +2231,7 @@ const AddingProduct = () => {
                                 : ""
                                 }`}
                               showSearch
-                              placeholder="Выбрать"
+                              placeholder={t("PRselect2")}
                               optionFilterProp="children"
                               onChange={(e) =>
                                 setState({ ...state, producer_Id: e })
@@ -2198,7 +2247,8 @@ const AddingProduct = () => {
                                 (item) => {
                                   return {
                                     value: item?.id,
-                                    label: item?.name_ru,
+                                    label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
+
                                   };
                                 }
                               )}
@@ -2210,7 +2260,7 @@ const AddingProduct = () => {
                       <div className="w-full  flex md:hidden flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Тип
+                            {t("PRtype")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2231,7 +2281,8 @@ const AddingProduct = () => {
                               {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
                                 return (
                                   <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                    {item?.name_ru}
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
 
                                   </span>)
                               })}
@@ -2239,7 +2290,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("APselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2252,7 +2303,7 @@ const AddingProduct = () => {
                               : "border border-borderColor"
                               }`}
                             showSearch
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             optionFilterProp="children"
                             onChange={(value, attribute2) => {
                               setState({
@@ -2283,7 +2334,8 @@ const AddingProduct = () => {
                                       value={item?.id}
                                       attribute2={item?.category_id}
                                     >
-                                      {item.name_ru}
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </Option>
                                   );
                                 })
@@ -2295,7 +2347,8 @@ const AddingProduct = () => {
                                       value={item?.id}
                                       attribute2={item?.category_id}
                                     >
-                                      {item.name_ru}
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </Option>
                                   );
                                 }
@@ -2307,7 +2360,7 @@ const AddingProduct = () => {
                       <div className="w-full  flex md:hidden flex-col gap-y-[4px] ">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Производитель
+                            {t("APmanufacturer")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2330,7 +2383,8 @@ const AddingProduct = () => {
                               {dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => {
                                 return (
                                   <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                    {item?.name_ru}
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
 
                                   </span>)
                               })}
@@ -2338,7 +2392,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                Выбрать
+                                {t("APselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2348,7 +2402,7 @@ const AddingProduct = () => {
                           <Select
                             className=" rounded-lg w-full md:h-10"
                             showSearch
-                            placeholder="Выбрать"
+                            placeholder={t("PRselect2")}
                             optionFilterProp="children"
                             onChange={(e) =>
                               setState({ ...state, producer_Id: e })
@@ -2364,7 +2418,7 @@ const AddingProduct = () => {
                               (item) => {
                                 return {
                                   value: item?.id,
-                                  label: item?.name_ru,
+                                  label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
                                 };
                               }
                             )}
@@ -2375,7 +2429,7 @@ const AddingProduct = () => {
                       <div className="w-full  flex md:hidden flex-col gap-y-[5px] ">
                         <div className="flex items-center">
                           <span className="text-[12px] flex flex-wrap whitespace-nowrap md:text-base font-AeonikProRegular">
-                            Возрастная категория
+                            {t("APageCategory")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2385,7 +2439,7 @@ const AddingProduct = () => {
                           <input
                             type="text"
                             name="minAge"
-                            placeholder="Мин"
+                            placeholder={t("APmin")}
                             value={state?.min_Age_Category}
                             onChange={(e) =>
                               setState({
@@ -2403,7 +2457,7 @@ const AddingProduct = () => {
                           <input
                             type="text"
                             name="maxAge"
-                            placeholder="Макс"
+                            placeholder={t("APmax")}
                             value={state?.max_Age_Category}
                             onChange={(e) =>
                               setState({
@@ -2425,11 +2479,11 @@ const AddingProduct = () => {
                         <button
                           onClick={() => setClothingCategoryModal(true)}
                           className={` w-full  md:hidden   border border-textBlueColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
-                          Добавить размер
+                          {t("APaddSize")}
                         </button> :
                         <button
                           className={` w-full  md:hidden   border border-searchBgColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-[#b5b5b5]    `}>
-                          Добавить размер
+                          {t("APaddSize")}
                         </button>
                       }
                     </div>
@@ -2470,7 +2524,7 @@ const AddingProduct = () => {
                   <div className="w-full md:w-[30%] h-fit flex md:flex-col flex-row  justify-center gap-x-4 ">
                     <div className="hidden md:flex items-center  justify-start mb-[5px]">
                       <span className="text-base font-AeonikProRegular">
-                        Фото
+                        {t("PRphoto")}
                       </span>
                       <span className="ml-[5px]">
                         <StarLabel />
@@ -2501,7 +2555,7 @@ const AddingProduct = () => {
                                 } rounded-lg`}
                             >
                               <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
-                                Выберите фото{" "}
+                                {t("APselectPhoto")}{" "}
                                 <span className="ml-[5px]">
                                   <StarLabel />
                                 </span>
@@ -2542,7 +2596,7 @@ const AddingProduct = () => {
                                 <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                                   <DownloadIcon colors={"#007DCA"} />
                                   <div className="text-[9px] md:text-[11px] text-textLightColor mt-[5px]">
-                                    (необязательно)
+                                    ({t("APnotNecessary")})
                                   </div>
                                 </div>
                               )}
@@ -2559,7 +2613,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full overflow-hidden  border border-dashed rounded-lg flex flex-col items-center justify-center">
                                 <DownloadIcon colors={"#b5b5b5"} />
                                 <div className="text-[9px] md:text-[11px] text-textLightColor mt-[5px]">
-                                  (необязательно)
+                                  ({t("APnotNecessary")})
                                 </div>
                               </div>
                             </div>
@@ -2589,7 +2643,7 @@ const AddingProduct = () => {
                                 <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                                   <DownloadIcon colors={"#007DCA"} />
                                   <div className="text-[9px] md:text-[11px] text-textLightColor mt-[5px]">
-                                    (необязательно)
+                                    ({t("APnotNecessary")})
                                   </div>
                                 </div>
                               )}
@@ -2606,7 +2660,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full overflow-hidden  border border-dashed rounded-lg flex flex-col items-center justify-center">
                                 <DownloadIcon colors={"#b5b5b5"} />
                                 <div className="text-[9px] md:text-[11px] text-textLightColor mt-[5px]">
-                                  (необязательно)
+                                  ({t("APnotNecessary")})
                                 </div>
                               </div>
                             </div>
@@ -2636,7 +2690,7 @@ const AddingProduct = () => {
                                 <div className="w-full h-full overflow-hidden bg-photoBg border border-dashed rounded-lg flex flex-col items-center justify-center">
                                   <DownloadIcon colors={"#007DCA"} />
                                   <div className="text-[9px] md:text-[11px] text-textLightColor mt-[5px]">
-                                    (необязательно)
+                                    ({t("APnotNecessary")})
                                   </div>
                                 </div>
                               )}
@@ -2653,7 +2707,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full overflow-hidden  border border-dashed rounded-lg flex flex-col items-center justify-center">
                                 <DownloadIcon colors={"#b5b5b5"} />
                                 <div className="text-[9px] md:text-[11px] text-textLightColor mt-[5px]">
-                                  (необязательно)
+                                  ({t("APnotNecessary")})
                                 </div>
                               </div>
                             </div>
@@ -2682,7 +2736,7 @@ const AddingProduct = () => {
                     onClick={handleNextPage}
                     className="w-full h-[38px] md:h-[45px] flex items-center justify-center md:w-fit md:absolute active:scale-95 md:right-3 md:bottom-3 md:px-[50px]   border border-textBlueColor bg-textBlueColor text-white rounded-lg text-base md:text-lg font-AeonikProMedium"
                   >
-                    Продолжить
+                    {t("APContinue")}
                   </button>
                 </div>
               </div>
@@ -2719,3 +2773,4 @@ const AddingProduct = () => {
 };
 
 export default AddingProduct;
+// APsubSectionProduct
