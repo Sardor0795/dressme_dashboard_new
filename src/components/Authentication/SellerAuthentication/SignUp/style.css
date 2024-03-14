@@ -86,3 +86,12 @@ input:-webkit-autofill:active {
 .ant-select-lg {
   height: 44px !important;
 }
+
+ @media (max-width: 767px) {
+
+  .SelectAntdStyle .ant-select-selector,
+  .ant-select,
+  .ant-select-lg {
+    height: 38px !important;
+  }
+}
