@@ -339,7 +339,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-fit flex flex-col ">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Размер{" "}
+                                        {t('SSsize')}{" "}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -361,7 +361,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </div>
                                     <div className="w-[80%] flex flex-col ">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Буквенный Размер
+                                            {t('SSletter_Size')}
                                         </p>
                                         <div className='w-full '>
                                             {/* -----------------Desktop--------------------- */}
@@ -437,7 +437,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ?t("SSless") : t("SSmore")}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -514,7 +514,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ?t("SSless") : t("SSmore")}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>}
@@ -527,7 +527,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        {t("SSlength")}
+                                            {t("SSlength")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center justify-between">
@@ -744,7 +744,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                 <div className="relative w-full flex grid grid-cols-2 gap-4 ">
                                     <div className="w-full flex flex-col ">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Размер{" "}
+                                            {t('SSsize')}{" "}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -812,7 +812,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                 <div className="w-full flex flex-col gap-y-4  ">
                                     <div className="w-full flex flex-col ">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Буквенный Размер
+                                            {t('SSletter_Size')}
                                         </p>
                                         <div className='w-full '>
                                             {/* -----------------Mobile--------------------- */}
@@ -885,7 +885,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ?t("SSless") : t("SSmore")}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                         {/* </span> */}
                                                     </div>
@@ -925,7 +925,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ?t("SSless") : t("SSmore")}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -998,7 +998,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ?t("SSless") : t("SSmore")}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                         {/* </span> */}
                                                     </div>
@@ -1038,7 +1038,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ?t("SSless") : t("SSmore")}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>}
@@ -1336,7 +1336,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-fit flex flex-col ">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер{" "}
+                                                            {t('SSsize')}{" "}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -1354,7 +1354,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     </div>
                                                     <div className="w-[80%] flex flex-col ">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Буквенный Размер
+                                                            {t('SSletter_Size')}
                                                         </p>
                                                         <div className='w-full '>
                                                             {/* -----------------Desktop--------------------- */}
@@ -1431,7 +1431,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         }}
                                                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ?t("SSless") : t("SSmore")}
+                                                                        {decraseList ? t("SSless") : t("SSmore")}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1649,7 +1649,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-full flex flex-col ">
                                                         <p className="flex items-center text-[14px] xs:text-base  text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер{" "}
+                                                            {t('SSsize')}{" "}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -1706,7 +1706,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 <div className="w-full flex flex-col gap-y-4 ">
                                                     <div className="w-full flex flex-col ">
                                                         <p className="flex items-center text-[14px] xs:text-base  text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Буквенный Размер
+                                                            {t('SSletter_Size')}
                                                         </p>
                                                         <div className='w-full '>
                                                             {/* -----------------Mobile--------------------- */}
@@ -1778,7 +1778,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         }}
                                                                         className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ?t("SSless") : t("SSmore")}
+                                                                        {decraseList ? t("SSless") : t("SSmore")}
                                                                     </button>
                                                                     {/* </span> */}
                                                                 </div>
@@ -1818,7 +1818,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         }}
                                                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ?t("SSless") : t("SSmore")}
+                                                                        {decraseList ? t("SSless") : t("SSmore")}
                                                                     </button>
                                                                 </div>
                                                             </div>

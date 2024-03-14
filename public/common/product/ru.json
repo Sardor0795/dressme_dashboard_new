@@ -9,6 +9,7 @@
     "PRcancel": "Oтмена",
     "PRready": "Готово",
     "PRdelete": "Удалить",
+    "PRsave": "Сохранить",
     "PRremoveByAddress": "Удалить из адреса",
     "PRproduct": "Товары",
     "PRremoveEverwhere": " Удалить везде",
@@ -30,12 +31,14 @@
     "PRnoProduct": " Tовара нет",
     "PRselect2": " Выбрать",
     "PRsearch": " Поиск",
+    "PRallSize": " Все размеры",
     "APaddProduct": " Добавить товара",
     "APmarket": "Магазин",
     "APlocation": "Локация",
     "APclothesSection": "Раздел одежды",
     "APclothesseason": "Сезон одежды",
     "APcolor": "Цвет",
+    "APcolorText": "Можно добавить максимум 4 цвета",
     "APgender": "Пол",
     "APageMin": "Возраст Мин",
     "APageMax": "Возраст Макс",
@@ -91,6 +94,8 @@
     "SSchest_circumference": "Обхват Груди",
     "SSwaist": "Обхват Талии",
     "SShip_circumference": "Обхват Бедер",
+    "SSsize_circumference": "Размер Бедер",
+    
     "SSfoot_Length": "Длина Стопы",
     "SSheight": "Рост",
     "SSadd_size": "Добавить размер",
@@ -98,3 +103,4 @@
     "SSmin": "Мин",
     "SSmax": "Макс"
 }
+ 

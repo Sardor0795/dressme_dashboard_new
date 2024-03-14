@@ -356,7 +356,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                 <div className="relative w-full flex gap-x-10 px-3 pt-5">
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            {t("SSwaist")} 
+                                            {t("SSwaist")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
@@ -407,7 +407,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Размер
+                                            {t('SSsize')}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -461,7 +461,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     </div>
                                     <div className="w-[55%] flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Буквенный Размер
+                                            {t('SSletter_Size')}
                                         </p>
 
                                         <div className='w-full '>
@@ -617,7 +617,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                 <div className="w-full flex gap-x-10 px-3 pt-5">
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                           {t("SShip_circumference")} 
+                                            {t("SShip_circumference")}
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col">
@@ -891,7 +891,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                 <div className="relative w-full grid grid-cols-2 gap-4 flex">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            {t("SSwaist")} 
+                                            {t("SSwaist")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
@@ -942,7 +942,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Размер
+                                            {t('SSsize')}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -996,7 +996,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     </div>
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                           {t("SShip_circumference")} 
+                                            {t("SShip_circumference")}
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col">
@@ -1098,7 +1098,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                 <div className="w-full flex flex-col gap-y-4">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Буквенный Размер
+                                            {t('SSletter_Size')}
                                         </p>
 
                                         <div className='w-full '>
@@ -1629,7 +1629,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            {t("SSwaist")} 
+                                                            {t("SSwaist")}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center">
@@ -1659,7 +1659,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер
+                                                            {t('SSsize')}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1696,7 +1696,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     </div>
                                                     <div className="w-[53%] flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Буквенный Размер
+                                                            {t('SSletter_Size')}
                                                         </p>
 
                                                         <div className='w-full '>
@@ -1789,7 +1789,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <div className="w-full flex gap-x-10 px-3 pt-5">
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Размер Бедер
+                                                            {t("SSsize_circumference")}
+
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -2000,7 +2001,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            {t("SSwaist")} 
+                                                            {t("SSwaist")}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center">
@@ -2030,7 +2031,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер
+                                                            {t('SSsize')}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -2067,7 +2068,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     </div>
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Размер Бедер
+                                                            {t("SSsize_circumference")}
+
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -2128,7 +2130,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <div className="w-full flex flex-col gap-y-4 ">
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Буквенный Размер
+                                                            {t('SSletter_Size')}
                                                         </p>
                                                         <div className='w-full '>
                                                             {/* -----------------Mobile--------------------- */}

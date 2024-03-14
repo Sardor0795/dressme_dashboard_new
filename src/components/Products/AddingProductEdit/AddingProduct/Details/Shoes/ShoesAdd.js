@@ -307,7 +307,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Размер
+                                            {t('SSsize')}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -557,7 +557,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                 <div className="relative w-full flex  grid grid-cols-2 gap-4 ">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Размер
+                                            {t('SSsize')}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -929,7 +929,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер
+                                                            {t('SSsize')}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1138,7 +1138,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Размер
+                                                            {t('SSsize')}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
