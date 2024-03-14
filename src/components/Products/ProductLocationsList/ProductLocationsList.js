@@ -503,7 +503,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
-
+// border-red
   return (
     <div className="w-full  md:px-10">
       <section
@@ -590,7 +590,7 @@ export default function ProductLocationsList() {
           <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
-          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProRegular">
+          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProMedium">
             {t("PRaddToLocation")}
           </p>
         </div>
@@ -1011,8 +1011,8 @@ export default function ProductLocationsList() {
           <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
-          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProRegular">
-            {t("PRaddTocation")}
+          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProMedium">
+            {t("PRaddToLocation")}
           </p>
         </div>
         <div className="w-full  flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
@@ -1334,45 +1334,45 @@ export default function ProductLocationsList() {
                                           </div>
                                         </section>
                                         {resData?.products?.length !== 0 && (
-                                          <div className="w-full hidden md:flex flex-col border border-red-500">
+                                          <div className="w-full hidden md:flex flex-col  ">
                                             <div className="w-full  my-3 hidden md:flex flex-col items-center text-tableTextTitle">
                                               <div className="w-full  h-[70px] flex items-center">
                                                 <div className="min-w-[24px] min-h-[24px] bg-white mr-[8px]"></div>
                                                 <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                                                  <th className="w-[5%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[5%] h-full flex items-center justify-center  ">
                                                     No:
                                                   </th>
-                                                  <th className="w-[14%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[14%] h-full flex items-center justify-center  ">
                                                     {t("PRphoto")}
                                                   </th>
-                                                  <th className="w-[15%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[15%] h-full flex items-center justify-center  ">
                                                     {t("PRproductName")}
                                                   </th>
-                                                  <th className="w-[15%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[15%] h-full flex items-center justify-center  ">
                                                     {t("PRrandomCode")}
                                                   </th>
-                                                  <th className="w-[8%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[8%] h-full flex items-center justify-center  ">
                                                     {t("PRtype")}
                                                   </th>
-                                                  <th className="w-[8%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[8%] h-full flex items-center justify-center  ">
                                                     {t("PRdate")}
                                                   </th>
-                                                  <th className="w-[10%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[10%] h-full flex items-center justify-center  ">
                                                     {t("PRprice")}
                                                   </th>
-                                                  <th className="w-[10%] h-full flex items-center justify-center border border-red-500"></th>
+                                                  <th className="w-[10%] h-full flex items-center justify-center  "></th>
                                                   {item?.shop_locations
                                                     ?.length > 1 ? (
-                                                    <th className="w-[9%] h-full flex items-center justify-center border border-red-500">
+                                                    <th className="w-[9%] h-full flex items-center justify-center  ">
                                                       {t("PRadd")}
                                                     </th>
                                                   ) : (
-                                                    <th className="w-[9%] h-full flex items-center justify-center border border-red-500"></th>
+                                                    <th className="w-[9%] h-full flex items-center justify-center  "></th>
                                                   )}
-                                                  <th className="w-[9%] h-full flex items-center justify-center border border-red-500">
+                                                  <th className="w-[9%] h-full flex items-center justify-center  ">
                                                     {t("PRdelete")}
                                                   </th>
-                                                  <th className="w-[10%] h-full flex items-center justify-center border border-red-500 ">
+                                                  <th className="w-[10%] h-full flex items-center justify-center   ">
                                                     {t("PRstatus")}
                                                   </th>
                                                 </tr>
@@ -1439,7 +1439,7 @@ export default function ProductLocationsList() {
                                                                 <td className="w-[5%] h-full  flex items-center justify-center ">
                                                                   {index + 1}
                                                                 </td>
-                                                                <td className="w-[14%] h-full flex items-center justify-center border border-red-500">
+                                                                <td className="w-[14%] h-full flex items-center justify-center  ">
                                                                   <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                                                     <img
                                                                       src={
@@ -1455,13 +1455,13 @@ export default function ProductLocationsList() {
                                                                     />
                                                                   </span>
                                                                 </td>
-                                                                <td className="w-[15%] h-full break-all px-1 overflow-hidden  flex items-center  justify-center border border-red-500">
+                                                                <td className="w-[15%] h-full break-all px-1 overflow-hidden  flex items-center  justify-center  ">
                                                                   <p className="w-full  break-all  text-center text-weatherWinterColor flex items-center justify-center  text-base not-italic font-AeonikProMedium">
                                                                     {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
                                                                     {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
                                                                   </p>
                                                                 </td>
-                                                                <td className="w-[15%] h-full  px-1 flex items-center justify-center border border-red-500">
+                                                                <td className="w-[15%] h-full  px-1 flex items-center justify-center  ">
                                                                   {itemValue?.sku ||
                                                                     "sku"}
                                                                 </td>
@@ -1470,18 +1470,18 @@ export default function ProductLocationsList() {
                                                                   key={
                                                                     index
                                                                   }
-                                                                  className="w-[8%] h-full  px-1 flex items-center justify-center border border-red-500"
+                                                                  className="w-[8%] h-full  px-1 flex items-center justify-center  "
                                                                 >
 
                                                                   {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                   {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                 </td>
 
-                                                                <td className="w-[8%] h-full  px-1 flex items-center justify-center border border-red-500">
+                                                                <td className="w-[8%] h-full  px-1 flex items-center justify-center  ">
                                                                   {itemValue?.created_at ||
                                                                     "created_at"}
                                                                 </td>
-                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center border border-red-500">
+                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center  ">
                                                                   {itemValue
                                                                     ?.cost
                                                                     ?.discount_price >
@@ -1524,7 +1524,7 @@ export default function ProductLocationsList() {
                                                                     {t("PRsumm")}
                                                                   </span>
                                                                 </td>
-                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center border border-red-500">
+                                                                <td className="w-[10%] h-full  px-1 flex items-center justify-center  ">
                                                                   <button
                                                                     onClick={() =>
                                                                       goProductDetailEdit(
@@ -1539,7 +1539,7 @@ export default function ProductLocationsList() {
                                                                 </td>
                                                                 {item?.shop_locations?.length > 1 ? (
                                                                   <td
-                                                                    className={`w-[9%] h-full  flex items-center justify-center border border-red-500`}
+                                                                    className={`w-[9%] h-full  flex items-center justify-center  `}
                                                                   >
                                                                     <button
                                                                       onClick={() => {
@@ -1570,10 +1570,10 @@ export default function ProductLocationsList() {
                                                                   </td>
                                                                 ) : (
                                                                   <td
-                                                                    className={`w-[9%] h-full  flex items-center justify-center border border-red-500`}
+                                                                    className={`w-[9%] h-full  flex items-center justify-center  `}
                                                                   ></td>
                                                                 )}
-                                                                <td className="w-[9%] h-full  flex items-center justify-center border border-red-500">
+                                                                <td className="w-[9%] h-full  flex items-center justify-center  ">
                                                                   <button
                                                                     type="button"
                                                                     onClick={() => {
@@ -1603,7 +1603,7 @@ export default function ProductLocationsList() {
                                                                 </td>
                                                                 {itemValue?.status ===
                                                                   "approved" && (
-                                                                    <td className="w-[10%] h-fit  flex items-center justify-center border border-red-500 ">
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center   ">
                                                                       <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1620,7 +1620,7 @@ export default function ProductLocationsList() {
                                                                           resData?.shop_id
                                                                         )
                                                                       }
-                                                                      className="w-[10%] h-fit cursor-pointer flex items-center  justify-center border border-red-500"
+                                                                      className="w-[10%] h-fit cursor-pointer flex items-center  justify-center  "
                                                                     >
                                                                       <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
                                                                         {itemValue?.status ||
@@ -1630,7 +1630,7 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
-                                                                    <td className="w-[10%] h-fit  flex items-center justify-center border border-red-500 ">
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center   ">
                                                                       <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1639,7 +1639,7 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
-                                                                    <td className="w-[10%] h-fit  flex items-center justify-center border border-red-500   ">
+                                                                    <td className="w-[10%] h-fit  flex items-center justify-center     ">
                                                                       <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}

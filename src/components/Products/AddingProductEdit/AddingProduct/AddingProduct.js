@@ -28,6 +28,7 @@ import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import axios from "axios";
 import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
+import { useTranslation } from "react-i18next";
 // import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -38,6 +39,7 @@ const url = "https://api.dressme.uz/api/seller";
 // Все размеры
 
 const AddingProduct = () => {
+  const { t } = useTranslation("product");
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const navigate = useNavigate()
 
@@ -929,59 +931,59 @@ const AddingProduct = () => {
             <span className="text-[16px] text-textRedColor font-AeonikProRegular">{state?.errorListMessage}</span>
           </div>}
           {state?.errorList?.shop_id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Магазин:</span>
+            <span className=" md:text-base font-AeonikProRegular">{t("APmarket")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.shop_id[0]}</span>
           </div>}
           {state?.errorList?.shop_location_id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Локация:</span>
+            <span className=" md:text-base font-AeonikProRegular">{t("APlocation")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.shop_location_id[0]}</span>
           </div>}
           {state?.errorList?.section_ids && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Раздел одежды:</span>
+            <span className=" md:text-base font-AeonikProRegular">{t("APclothesSection")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.section_ids[0]}</span>
           </div>}
           {state?.errorList?.season_ids && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Сезон одежды:</span>
+            <span className=" md:text-base font-AeonikProRegular">{t("APclothesseason")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.season_ids[0]}</span>
           </div>}
           {state?.errorList?.color_id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Цвет:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APcolor")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.color_id[0]}</span>
           </div>}
           {state?.errorList?.gender_id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Пол:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APgender")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.gender_id[0]}</span>
           </div>}
           {state?.errorList?.min_age_category && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Возраст Min:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APageMin")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.min_age_category[0]}</span>
           </div>}
           {state?.errorList?.max_age_category && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Возраст Max:</span>
+            <span className=" md:text-base font-AeonikProRegular">{t("APageMax")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.max_age_category[0]}</span>
           </div>}
           {state?.errorList?.category_id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Категория одежды:</span>
+            <span className=" md:text-base font-AeonikProRegular">  {t("APclothesCategory")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.category_id[0]}</span>
           </div>}
           {state?.errorList?.type_id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Тип:</span>
+            <span className=" md:text-base font-AeonikProRegular">{t("APtype")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.type_id[0]}</span>
           </div>}
           {state?.errorList?.producer_Id && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Производитель:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APmanufacturer")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.producer_Id[0]}</span>
           </div>}
           {state?.errorList?.amount && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Количество:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APquantity")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.amount[0]}</span>
           </div>}
           {state?.errorList?.price && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Цена:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APprice")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.price[0]}</span>
           </div>}
           {state?.errorList?.photos && <div className="w-full  flex items-center gap-x-2 ">
-            <span className=" md:text-base font-AeonikProRegular">Выберите фото:</span>
+            <span className=" md:text-base font-AeonikProRegular"> {t("APselectPhoto")}:</span>
             <span className="text-[14px] text-textRedColor font-AeonikProRegular">{state?.errorList?.photos[0]}</span>
           </div>}
 
@@ -1067,7 +1069,7 @@ const AddingProduct = () => {
                 >
                   <div className="w-fit flex items-center">
                     <span className="text-black text-[14px] md:text-lg not-italic font-AeonikProRegular leading-5">
-                      Выберите цвет
+                      {t("APselectColor")}
                     </span>
                     <span className="text-[11px] md:text-sm ml-[10px] text-[#a1a1a1] font-AeonikProRegular">
                       (Можно добавить максимум 4 цвета)
@@ -1127,12 +1129,12 @@ const AddingProduct = () => {
                     <button
                       onClick={() => setState({ ...state, color_Id: '', showColor: false })}
                       className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1"                    >
-                      Отключить
+                      {t("APdisable")}
                     </button>
                   }
                   <button onClick={() => setState({ ...state, showColor: false })}
                     className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-sm md:text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                    Готово
+                    {t("SSready")}
                   </button>
                 </div>
               </div>
@@ -1191,11 +1193,12 @@ const AddingProduct = () => {
                     <DeleteIcon width={30} />
                   </span>
                 </span>
-                <span className=" text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-                  Вы уверены?
+                <span className="flex items-center text-black text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+                  {t("PRsure")}<span>?</span>
                 </span>
                 <span className=" text-[#a2a2a2] text-[14px] xs:text-lg not-italic font-AeonikProMedium text-center">
-                  Если вы удалите цвет, то удалятся все фото и размеры выбранного цвета!
+                  
+                  {t("PRsuretext")}
                 </span>
               </div>}
             <div className="w-full flex items-center justify-between mt-5 xs:mt-10 gap-x-2">
@@ -1204,13 +1207,13 @@ const AddingProduct = () => {
                 onClick={() => setColorDelete(false)}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium">
-                Oтмена
+                {t("PRcancel")}
               </button>
               <button
                 onClick={() => onHandleDeleteColor()}
                 type="button"
                 className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-[14px] md:text-base not-italic font-AeonikProMedium">
-                Удалить
+                {t("PRdelete")}
               </button>
             </div>
 
@@ -1228,7 +1231,7 @@ const AddingProduct = () => {
             </button>
             <div className="w-full h-fit flex items-center justify-center py-5 border-b border-borderColor2">
               <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-                Прикрепить к локация
+              {t("APattacLocation")}
               </p>
             </div>
             <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
@@ -1301,7 +1304,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-base font-AeonikProMedium"> Раздел товара</p>
+                <p className="text-base font-AeonikProMedium"> {t("APsectionProduct")}</p>
                 <button onClick={() => setState({ ...state, ClothingSection: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1346,7 +1349,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className={`text-base font-AeonikProMedium `}>Подраздел одежды</p>
+                <p className={`text-base font-AeonikProMedium `}>{t("APsubSectionProduct")}</p>
                 <button onClick={() => setState({ ...state, SubClothingSection: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1390,7 +1393,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-base font-AeonikProMedium">Сезон товара</p>
+                <p className="text-base font-AeonikProMedium">{t("APseasonProduct")}</p>
                 <button onClick={() => setState({ ...state, DressSeason: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1421,7 +1424,7 @@ const AddingProduct = () => {
           >
             <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
               <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                <p className="text-base font-AeonikProMedium"> Пол</p>
+                <p className="text-base font-AeonikProMedium"> {t("APgender")}</p>
                 <button onClick={() => setState({ ...state, GenderModal: false })}>
                   <CloseAnswer colors={"#000"} />
                 </button>
@@ -1803,7 +1806,7 @@ const AddingProduct = () => {
                     <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                       <div className="flex items-center">
                         <span className="text-[13px] md:text-base font-AeonikProRegular">
-                          Сезон товара
+                          {t("APseasonProduct")}
                         </span>
                         <span className="ml-[5px]">
                           <StarLabel />
@@ -1944,7 +1947,7 @@ const AddingProduct = () => {
                       <div className="w-full md:w-1/2 flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span className="text-[13px] md:text-base font-AeonikProRegular">
-                            Пол
+                            {t("APgender")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2025,7 +2028,7 @@ const AddingProduct = () => {
                       <div className="w-1/2 hidden md:flex flex-col gap-y-[5px] ">
                         <div className="flex items-center">
                           <span className="text-[12px] flex flex-wrap whitespace-nowrap md:text-base font-AeonikProRegular">
-                            Возраст
+                            {t("SSage")}
                           </span>
                           <span className="ml-[5px]">
                             <StarLabel />
@@ -2037,7 +2040,7 @@ const AddingProduct = () => {
                             <input
                               type="text"
                               name="minAge"
-                              placeholder="Мин"
+                              placeholder={t("SSmin")}
                               value={state?.min_Age_Category}
                               onChange={(e) => setState({ ...state, onEditInput: true, min_Age_Category: e.target.value })}
                               className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
@@ -2048,7 +2051,7 @@ const AddingProduct = () => {
                             <input
                               type="text"
                               name="maxAge"
-                              placeholder="Макс"
+                              placeholder={t("SSmax")}
                               value={state?.max_Age_Category}
                               onChange={(e) => setState({ ...state, onEditInput: true, max_Age_Category: e.target.value })}
                               className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
@@ -2377,7 +2380,7 @@ const AddingProduct = () => {
                           <input
                             type="text"
                             name="minAge1"
-                            placeholder="Мин"
+                            placeholder={t("SSmin")}
                             value={state?.min_Age_Category}
                             onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
                             className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
@@ -2387,7 +2390,7 @@ const AddingProduct = () => {
                         >{state?.min_Age_Category}</span> : <input
                           type="text"
                           name="maxAge1"
-                          placeholder="Макс"
+                          placeholder={t("SSmax")}
                           value={state?.max_Age_Category}
                           onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                           className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
@@ -2418,13 +2421,13 @@ const AddingProduct = () => {
                             <div
                               className={`w-full text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] group h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300`}
                             >
-                              <span>Добавить размер</span>
+                              <span>{t("SSadd_size")}</span>
                             </div>
                             :
                             <button
                               onClick={() => setAddSizesMobileToggle(true)}
                               className={` w-full  ${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
-                              Добавить размер
+                              {t("SSadd_size")}
                             </button>
                           }
                         </div>
@@ -2450,7 +2453,7 @@ const AddingProduct = () => {
                         <div
                           className={`text-[#b5b5b5] border border-[#b5b5b5] bg-[#F5F5F5] group h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300`}
                         >
-                          <span>Добавить размер</span>
+                          <span>{t("SSadd_size")}</span>
                         </div>
                         :
                         <button className={`${state?.imageAddError?.price && !state?.newColorByAddSizes?.price ? " border-[2px] border-textRedColor" : " border border-textBlueColor"} rounded-[10px] h-[38px]  w-fit `}>

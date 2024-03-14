@@ -8,9 +8,12 @@ import { ClipLoader } from "react-spinners";
 import { BiCheck, BiPlus } from "react-icons/bi";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 const url = "https://api.dressme.uz/api/seller";
 function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const { t } = useTranslation("product");
+
     const [state, setState] = useState({
         minFootLength: null,
         maxFootLength: null,
@@ -329,8 +332,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Длина Стопы
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSfoot_Length")}
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center gap-x-1">
                                             <div className="flex flex-col ">
@@ -342,7 +345,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         type="number"
                                                         name="minFootLength"
                                                         className={`inputStyle outline-none w-[60px] h-[40px] text-center px-3   ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg   font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minFootLength}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -360,7 +363,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                             type="number"
                                                             name="maxFootLength"
                                                             className="inputStyle outline-none w-[60px] h-[40px] text-center px-3  rounded-lg  font-AeonikProRegular "
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxFootLength}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -380,7 +383,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="w-fit flex flex-col md:ml-5">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
+                                            {t("SSquantity")}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -408,7 +411,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                             <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                                 <div
                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Возраст
+                                                    {t("SSage")}
                                                 </div>
                                             </div>
                                             <div className="w-fit flex items-center border border-borderColor rounded-lg">
@@ -431,7 +434,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </div>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -454,7 +457,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
 
                                                     />}
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -463,7 +466,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
 
                                         </div>
@@ -505,7 +508,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                 readOnly
                                                             />}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -579,8 +582,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Длина Стопы
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSfoot_Length")}
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center gap-x-1">
                                             <div className="flex flex-col ">
@@ -592,7 +595,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         type="number"
                                                         name="minFootLength"
                                                         className={`inputStyle outline-none w-[60px] h-[40px] text-center px-3   ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg   font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minFootLength}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -610,7 +613,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                             type="number"
                                                             name="maxFootLength"
                                                             className="inputStyle outline-none w-[60px] h-[40px] text-center px-3  rounded-lg  font-AeonikProRegular "
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxFootLength}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -632,7 +635,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                     <div className="w-full flex flex-col md:ml-5">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
+                                            {t("SSquantity")}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -690,7 +693,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </div>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -713,7 +716,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
 
                                                     />}
                                                 <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -722,7 +725,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
 
                                         </div>
@@ -764,7 +767,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                 readOnly
                                                             />}
                                                         <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -777,7 +780,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Возраст
+                                                {t("SSage")}
                                             </div>
                                         </div>
                                         <div className="w-fit flex items-center border border-borderColor rounded-lg">
@@ -946,8 +949,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Длина Стопы
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSfoot_Length")}
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center gap-x-1">
                                                             <div className="flex flex-col">
@@ -955,7 +958,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                     type="number"
                                                                     name="minFootLength"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_foot_length}
                                                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -966,7 +969,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                     type="number"
                                                                     name="maxFootLength"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_foot_length}
                                                                     onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -976,7 +979,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <div className="w-fit flex flex-col md:ml-5">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Количество
+                                                            {t("SSquantity")}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1005,7 +1008,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                             <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                                                 <div
                                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Возраст
+                                                                    {t("SSage")}
                                                                 </div>
                                                             </div>
                                                             <div className="w-fit flex items-center">
@@ -1023,7 +1026,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                                 <div
                                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Цена
+                                                                    {t("SSprice")}
                                                                 </div>
                                                                 <span className="ml-[5px]">
                                                                     <StarLabel />
@@ -1040,7 +1043,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                     onChange={handleChangePrice}
                                                                 />
                                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                    сум
+                                                                    {t("SSsumm")}
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -1049,7 +1052,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Скидка
+                                                                {t("SSsale")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
@@ -1081,7 +1084,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                             readOnly
                                                                         />
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                            сум
+                                                                            {t("SSsumm")}
                                                                         </span>
                                                                     </label>
                                                                 </div>
@@ -1155,8 +1158,8 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Длина Стопы
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSfoot_Length")}
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center gap-x-1">
                                                             <div className="flex flex-col">
@@ -1164,7 +1167,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                     type="number"
                                                                     name="minFootLength"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg   font-AeonikProRegular "
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_foot_length}
                                                                     onChange={(e) => setState({ ...state, minFootLength: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1175,7 +1178,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                     type="number"
                                                                     name="maxFootLength"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_foot_length}
                                                                     onChange={(e) => setState({ ...state, maxFootLength: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1186,7 +1189,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                 <div className="relative w-full flex ">
                                                     <div className="w-full flex flex-col">
                                                         <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Количество
+                                                            {t("SSquantity")}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1220,7 +1223,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                                 <div
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Цена
+                                                                    {t("SSprice")}
                                                                 </div>
                                                                 <span className="ml-[5px]">
                                                                     <StarLabel />
@@ -1237,7 +1240,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                     onChange={handleChangePrice}
                                                                 />
                                                                 <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
-                                                                    сум
+                                                                    {t("SSsumm")}
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -1246,7 +1249,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Скидка
+                                                                {t("SSsale")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
@@ -1278,7 +1281,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                             readOnly
                                                                         />
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                            сум
+                                                                            {t("SSsumm")}
                                                                         </span>
                                                                     </label>
                                                                 </div>
@@ -1291,7 +1294,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Возраст
+                                                                {t("SSage")}
                                                             </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">

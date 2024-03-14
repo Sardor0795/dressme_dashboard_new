@@ -14,10 +14,13 @@ import { useHttp } from "../../../../../../../hook/useHttp";
 import { MdError, MdNumbers } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { dressMainData } from "../../../../../../../hook/ContextTeam";
+import { useTranslation } from "react-i18next";
 const url = "https://api.dressme.uz/api/seller";
 
 function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCheckedSizeList, allColor, onRefetch, productsDataIdEdit }) {
   const { request } = useHttp()
+  const { t } = useTranslation("product");
+
   const [checkColor, setCheckColor] = useState(productsDataIdEdit?.colors[0]?.pivot?.id)
   const [addSizeColorById, setAddSizeColorById] = useState(false)
   const [openColorModal, setOpenColorModal] = useState(false)
@@ -331,8 +334,8 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
                 <DeleteIcon width={30} />
               </span>
             </span>
-            <span className=" text-black text-base md:text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-              Вы уверены?
+            <span className=" flex items-center text-black text-base md:text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
+            {t("PRsure")}<span>?</span>
             </span>
           </div>
         }

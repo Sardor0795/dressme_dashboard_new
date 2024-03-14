@@ -9,9 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 const url = "https://api.dressme.uz/api/seller";
 function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const { t } = useTranslation("product");
+
     const [state, setState] = useState({
         minBreast: null,
         maxBreast: null,
@@ -355,8 +358,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="relative w-full flex  gap-x-10 px-3 pt-5  ">
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Обхват Груди
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSchest_circumference")} 
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col ">
@@ -367,7 +370,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     : <input
                                                         type="number"
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         name="minBreast"
                                                         value={state?.minBreast}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -385,7 +388,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxBreast"
                                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]   bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxBreast}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -419,7 +422,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         type="number"
                                                         name="minSize"
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minSize}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -436,7 +439,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxSizeShow"
                                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxSize}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -525,7 +528,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }}
                                                             className="text-textBlueColor  select-none text-[10px]  ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div> :
@@ -599,7 +602,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }}
                                                             className={`text-textBlueColor  select-none ${decraseList ? '' : 'pl-2'}  text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer`}
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -611,8 +614,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Обхват Талии
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSwaist")} 
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col  ">
@@ -624,7 +627,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         type="number"
                                                         name="minWaist"
                                                         className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minWaist}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -642,7 +645,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxWaist"
                                                             className={`inputStyle outline-none w-[60px] h-[38px]  text-center bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxWaist}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -661,7 +664,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Обхват Бедер
+                                            {t("SShip_circumference")} 
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col ">
@@ -673,7 +676,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         type="number"
                                                         name="minHips"
                                                         className={`inputStyle outline-none w-[60px] h-[38px]  text-center  px-2 md:px-3  rounded-lg ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minHips}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -691,7 +694,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxHips"
                                                             className="inputStyle outline-none w-[60px] h-[38px] text-center  px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxHips}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -710,7 +713,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-fit flex flex-col ">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
+                                            {t("SSquantity")}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -737,7 +740,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                             <div className="flex items-center justify-center ">
                                                 <div
                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Возраст
+                                                    {t("SSage")}
                                                 </div>
                                             </div>
                                             <div className="w-fit flex items-center border border-borderColor  rounded-lg">
@@ -760,7 +763,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <span
                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </span>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -782,7 +785,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -791,7 +794,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center justify-center">
@@ -826,7 +829,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             >{parseInt(state?.salePrice)?.toLocaleString()}</span>
                                                         }
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -878,8 +881,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="relative w-full flex grid grid-cols-2 gap-4 ">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Обхват Груди
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSchest_circumference")} 
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col ">
@@ -890,7 +893,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     : <input
                                                         type="number"
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         name="minBreast"
                                                         value={state?.minBreast}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -908,7 +911,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxBreast"
                                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]   bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxBreast}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -942,7 +945,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         type="number"
                                                         name="minSize"
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minSize}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -959,7 +962,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxSizeShow"
                                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]  bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxSize}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -977,8 +980,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     </div>
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Обхват Талии
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSwaist")} 
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col  ">
@@ -990,7 +993,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         type="number"
                                                         name="minWaist"
                                                         className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minWaist}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -1008,7 +1011,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxWaist"
                                                             className={`inputStyle outline-none w-[60px] h-[38px]  text-center bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxWaist}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -1027,7 +1030,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Обхват Бедер
+                                            {t("SShip_circumference")} 
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col ">
@@ -1039,7 +1042,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         type="number"
                                                         name="minHips"
                                                         className={`inputStyle outline-none w-[60px] h-[38px]  text-center  px-2 md:px-3  rounded-lg ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         value={state?.minHips}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -1057,7 +1060,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             type="number"
                                                             name="maxHips"
                                                             className="inputStyle outline-none w-[60px] h-[38px] text-center  px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             value={state?.maxHips}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
@@ -1151,7 +1154,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }}
                                                             className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                         {/* </span> */}
                                                     </div>
@@ -1191,7 +1194,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div> :
@@ -1263,7 +1266,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }}
                                                             className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                         {/* </span> */}
                                                     </div>
@@ -1303,7 +1306,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ? t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -1315,7 +1318,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-full flex flex-col ">
                                         <p className="w-full flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
+                                            {t("SSquantity")}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -1357,7 +1360,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <span
                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </span>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -1380,7 +1383,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
                                                 <span className="text-textLightColor ml-[5px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -1389,7 +1392,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center justify-center">
@@ -1422,7 +1425,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             : <span className="inputStyle w-[75%] text-start select-none font-AeonikProMedium outline-none bg-transparent"
                                                             >{parseInt(state?.salePrice)?.toLocaleString()}</span>}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -1435,7 +1438,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                         <div className="flex items-center justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Возраст
+                                                {t("SSage")}
                                             </div>
                                         </div>
                                         <div className="w-fit flex items-center border border-borderColor  rounded-lg">
@@ -1582,8 +1585,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-[20%] flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Обхват Груди
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSchest_circumference")} 
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                                                         </p>
                                                         <div className="flex items-center">
@@ -1592,7 +1595,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minBreast"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_chest_girth}
                                                                     onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1603,7 +1606,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxBreast"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_chest_girth}
                                                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1624,7 +1627,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minSize"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_wear_size}
                                                                     onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1635,7 +1638,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxSize"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_wear_size}
                                                                     onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
                                                                 /> :
@@ -1722,7 +1725,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                         }}
                                                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ? "Меньше" : "Больше"}
+                                                                        {decraseList ? t("SSless") : t("SSmore")}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1741,8 +1744,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5  ">
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Обхват Талии
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSwaist")} 
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -1750,7 +1753,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minWaist"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_waist_girth}
                                                                     onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true })}
 
@@ -1762,7 +1765,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxWaist"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_waist_girth}
                                                                     onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true })}
 
@@ -1773,7 +1776,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Обхват Бедер
+                                                            {t("SShip_circumference")} 
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -1781,7 +1784,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minHips"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_hip_girth}
                                                                     onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1792,7 +1795,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxHips"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_hip_girth}
                                                                     onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1802,7 +1805,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-fit flex flex-col md:ml-5">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Количество
+                                                            {t("SSquantity")}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1824,7 +1827,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             <div className="flex items-center justify-center ">
                                                                 <div
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Возраст
+                                                                    {t("SSage")}
                                                                 </div>
                                                             </div>
                                                             <div className="w-fit flex items-center">
@@ -1842,7 +1845,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                                 <span
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Цена
+                                                                    {t("SSprice")}
                                                                 </span>
                                                                 <span className="ml-[5px]">
                                                                     <StarLabel />
@@ -1859,7 +1862,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     onChange={handleChangePrice}
                                                                 />
                                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                    сум
+                                                                    {t("SSsumm")}
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -1868,7 +1871,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Скидка
+                                                                {t("SSsale")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
@@ -1902,7 +1905,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                             readOnly
                                                                         /> */}
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                            сум
+                                                                            {t("SSsumm")}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -1958,8 +1961,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="relative w-full flex  grid grid-cols-2 gap-4 ">
                                                     <div className="w-full flex flex-col ">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Обхват Груди
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSchest_circumference")} 
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                                                         </p>
                                                         <div className="flex items-center">
@@ -1968,7 +1971,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minBreast"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_chest_girth}
                                                                     onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -1979,7 +1982,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxBreast"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_chest_girth}
                                                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -2000,7 +2003,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minSize"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_wear_size}
                                                                     onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -2011,7 +2014,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxSize"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_wear_size}
                                                                     onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
                                                                 /> :
@@ -2023,8 +2026,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     </div>
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Обхват Талии
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSwaist")} 
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center ">
                                                             <div className="flex flex-col">
@@ -2032,7 +2035,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minWaist"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_waist_girth}
                                                                     onChange={(e) => setState({ ...state, minWaist: e.target.value, saveBtnDisable: true })}
 
@@ -2044,7 +2047,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxWaist"
                                                                     className={`inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_waist_girth}
                                                                     onChange={(e) => setState({ ...state, maxWaist: e.target.value, saveBtnDisable: true })}
 
@@ -2055,7 +2058,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Обхват Бедер
+                                                            {t("SShip_circumference")} 
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -2063,7 +2066,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="minHips"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[38px]  text-center border border-borderColor px-2 md:px-3  rounded-lg   font-AeonikProRegular "
-                                                                    placeholder="Мин"
+                                                                    placeholder={t("SSmin")}
                                                                     value={item?.min_hip_girth}
                                                                     onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -2074,7 +2077,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     type="number"
                                                                     name="maxHips"
                                                                     className="inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                                                    placeholder="Макс"
+                                                                    placeholder={t("SSmax")}
                                                                     value={item?.max_hip_girth}
                                                                     onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
                                                                 />
@@ -2160,7 +2163,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                         }}
                                                                         className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ? "Меньше" : "Больше"}
+                                                                        {decraseList ? t("SSless") : t("SSmore")}
                                                                     </button>
                                                                     {/* </span> */}
                                                                 </div>
@@ -2200,7 +2203,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                         }}
                                                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ? "Меньше" : "Больше"}
+                                                                        {decraseList ? t("SSless") : t("SSmore")}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -2208,7 +2211,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     </div>
                                                     <div className="w-full flex flex-col ">
                                                         <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Количество
+                                                            {t("SSquantity")}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -2239,7 +2242,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                                 <span
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Цена
+                                                                    {t("SSprice")}
                                                                 </span>
                                                                 <span className="ml-[5px]">
                                                                     <StarLabel />
@@ -2256,7 +2259,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     onChange={handleChangePrice}
                                                                 />
                                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                    сум
+                                                                    {t("SSsumm")}
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -2265,7 +2268,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Скидка
+                                                                {t("SSsale")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
@@ -2299,7 +2302,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                             readOnly
                                                                         /> */}
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                            сум
+                                                                            {t("SSsumm")}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -2314,7 +2317,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             <div className="flex items-center justify-center ">
                                                                 <div
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Возраст
+                                                                    {t("SSage")}
                                                                 </div>
                                                             </div>
                                                             <div className="w-fit flex items-center">

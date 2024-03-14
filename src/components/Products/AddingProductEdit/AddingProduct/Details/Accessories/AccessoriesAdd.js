@@ -9,9 +9,13 @@ import { ClipLoader } from "react-spinners";
 import { BiCheck } from "react-icons/bi";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
+
 const url = "https://api.dressme.uz/api/seller";
 function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const { t } = useTranslation("product");
+
     const [state, setState] = useState({
         rowSize: null,
         colSize: null,
@@ -336,7 +340,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                             Размер{" "}
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                             <div className="flex flex-col border border-borderColor rounded-lg">
@@ -433,7 +437,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ?t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -510,7 +514,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ?t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>}
@@ -523,8 +527,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Длина
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                        {t("SSlength")}
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center justify-between">
                                             <div className=" w-[60px] flex flex-col border border-borderColor rounded-lg">
@@ -546,7 +550,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Ширина
+                                            {t("SSwidth")}
                                         </p>
                                         <div className="flex items-center justify-between gap-x-1">
                                             <div className="w-[60px] flex flex-col border border-borderColor rounded-lg">
@@ -568,7 +572,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-[60%] flex flex-col ml-auto">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
+                                            {t("SSquantity")}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -596,7 +600,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Возраст
+                                                    {t("SSage")}
                                                 </div>
                                             </div>
                                             <div className="w-fit flex items-center border border-borderColor rounded-lg">
@@ -619,7 +623,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </div>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -641,7 +645,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -650,7 +654,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center justify-center">
@@ -691,7 +695,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 readOnly
                                                             />}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -741,7 +745,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-full flex flex-col ">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
                                             Размер{" "}
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                             <div className="w-full flex flex-col border border-borderColor rounded-lg">
@@ -763,8 +767,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Длина
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSlength")}
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center justify-between">
                                             <div className=" w-[60px] flex flex-col border border-borderColor rounded-lg">
@@ -785,7 +789,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     </div>
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Ширина
+                                            {t("SSwidth")}
                                         </p>
                                         <div className="flex items-center justify-between gap-x-1">
                                             <div className="w-[60px] flex flex-col border border-borderColor rounded-lg">
@@ -881,7 +885,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ?t("SSless") : t("SSmore")}
                                                         </button>
                                                         {/* </span> */}
                                                     </div>
@@ -921,7 +925,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ?t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -994,7 +998,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ?t("SSless") : t("SSmore")}
                                                         </button>
                                                         {/* </span> */}
                                                     </div>
@@ -1034,7 +1038,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             }}
                                                             className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                         >
-                                                            {decraseList ? "Меньше" : "Больше"}
+                                                            {decraseList ?t("SSless") : t("SSmore")}
                                                         </button>
                                                     </div>
                                                 </div>}
@@ -1044,7 +1048,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-full flex flex-col ml-auto">
                                         <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
+                                            {t("SSquantity")}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -1101,7 +1105,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </div>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -1123,7 +1127,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                     />}
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -1132,7 +1136,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center justify-center">
@@ -1173,7 +1177,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 readOnly
                                                             />}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -1186,7 +1190,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Возраст
+                                                {t("SSage")}
                                             </div>
                                         </div>
                                         <div className="w-fit flex items-center border border-borderColor rounded-lg">
@@ -1333,7 +1337,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                                             Размер{" "}
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
@@ -1427,7 +1431,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         }}
                                                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ? "Меньше" : "Больше"}
+                                                                        {decraseList ?t("SSless") : t("SSmore")}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1448,8 +1452,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-[20%] flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Длина
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSlength")}
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between">
                                                             <div className="flex flex-col">
@@ -1467,7 +1471,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-[20%] flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Ширина
+                                                            {t("SSwidth")}
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
@@ -1485,7 +1489,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-[60%] flex flex-col ml-auto">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Количество
+                                                            {t("SSquantity")}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1509,7 +1513,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                                 <div
                                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Возраст
+                                                                    {t("SSage")}
                                                                 </div>
                                                             </div>
                                                             <div className="w-fit flex items-center">
@@ -1528,7 +1532,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                                 <div
                                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                    Цена
+                                                                    {t("SSprice")}
                                                                 </div>
                                                                 <span className="ml-[5px]">
                                                                     <StarLabel />
@@ -1546,7 +1550,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                                 />
                                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                    сум
+                                                                    {t("SSsumm")}
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -1555,7 +1559,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Скидка
+                                                                {t("SSsale")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
@@ -1588,7 +1592,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                             readOnly
                                                                         />
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                            сум
+                                                                            {t("SSsumm")}
                                                                         </span>
                                                                     </label>
                                                                 </div>
@@ -1646,7 +1650,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <p className="flex items-center text-[14px] xs:text-base  text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
                                                             Размер{" "}
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
@@ -1664,8 +1668,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base  text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Длина
-                                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                            {t("SSlength")}
+                                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between">
                                                             <div className="flex flex-col">
@@ -1683,7 +1687,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base  text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Ширина
+                                                            {t("SSwidth")}
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
@@ -1774,7 +1778,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         }}
                                                                         className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ? "Меньше" : "Больше"}
+                                                                        {decraseList ?t("SSless") : t("SSmore")}
                                                                     </button>
                                                                     {/* </span> */}
                                                                 </div>
@@ -1814,7 +1818,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                         }}
                                                                         className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                                     >
-                                                                        {decraseList ? "Меньше" : "Больше"}
+                                                                        {decraseList ?t("SSless") : t("SSmore")}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -1823,7 +1827,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <div className="w-full flex flex-col ml-auto">
                                                         <p className="w-full justify-center flex items-center text-[14px] xs:text-base  text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            Количество
+                                                            {t("SSquantity")}
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
                                                             </span>
@@ -1865,7 +1869,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base  text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Цена
+                                                                {t("SSprice")}
                                                             </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
@@ -1883,7 +1887,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                сум
+                                                                {t("SSsumm")}
                                                             </span>
                                                         </label>
                                                     </div>
@@ -1891,7 +1895,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base  text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Скидка
+                                                                {t("SSsale")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center justify-center">
@@ -1924,7 +1928,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                             readOnly
                                                                         />
                                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                            сум
+                                                                            {t("SSsumm")}
                                                                         </span>
                                                                     </label>
                                                                 </div>
@@ -1937,7 +1941,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base  text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Возраст
+                                                                {t("SSage")}
                                                             </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">

@@ -10,10 +10,12 @@ import { BiCheck, BiPlus } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import { HelperData } from "../../../../../../hook/HelperDataStore";
+import { useTranslation } from "react-i18next";
 const url = "https://api.dressme.uz/api/seller";
 function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+    const { t } = useTranslation("product");
 
     const [state, setState] = useState({
         minHeadGirth: null,
@@ -308,8 +310,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Обхват головы
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                             {t("SShead_circumference")} 
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-full flex items-center mt-[10px] ">
                                             <div className="flex flex-col ">
@@ -321,7 +323,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <input
                                                         type="number"
                                                         className={`inputStyle w-[55px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         name="minHeadGirth"
                                                         value={state?.minHeadGirth}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -341,7 +343,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         : <input
                                                             type="number"
                                                             className={`inputStyle w-[55px] h-[38px] text-center   bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             name="maxHeadGirth"
                                                             value={state?.maxHeadGirth}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -361,8 +363,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     </div>
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            One Size
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSone_Size")}
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center justify-center mt-[10px]">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
@@ -380,8 +382,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="w-fit flex flex-col items-center">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
-                                            {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
+                                            {t("SSquantity")}
+                                            {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -409,7 +411,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                                 <div
                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Возраст
+                                                    {t("SSage")}
                                                 </div>
                                             </div>
                                             <div className="w-full flex items-center border border-borderColor rounded-lg">
@@ -432,7 +434,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </div>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -456,7 +458,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         required
                                                     />}
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -465,7 +467,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center justify-center">
@@ -508,7 +510,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                 readOnly
                                                             />}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -560,8 +562,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Обхват головы
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                             {t("SShead_circumference")} 
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-full flex items-center mt-[10px] ">
                                             <div className="flex flex-col ">
@@ -573,7 +575,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <input
                                                         type="number"
                                                         className={`inputStyle w-[55px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                        placeholder="Мин"
+                                                        placeholder={t("SSmin")}
                                                         name="minHeadGirth"
                                                         value={state?.minHeadGirth}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -593,7 +595,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         : <input
                                                             type="number"
                                                             className={`inputStyle w-[55px] h-[38px] text-center   bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                            placeholder="Макс"
+                                                            placeholder={t("SSmax")}
                                                             name="maxHeadGirth"
                                                             value={state?.maxHeadGirth}
                                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -613,8 +615,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     </div>
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            One Size
-                                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                            {t("SSone_Size")}
+                                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center justify-center mt-[10px]">
                                             {state?.disableSizes === 1 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
@@ -634,8 +636,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="w-full flex flex-col items-center">
                                         <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            Количество
-                                            {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
+                                            {t("SSquantity")}
+                                            {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
                                             <span className="ml-[5px]">
                                                 <StarLabel />
                                             </span>
@@ -694,7 +696,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                 <div
                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                    Цена
+                                                    {t("SSprice")}
                                                 </div>
                                                 <span className="ml-[5px]">
                                                     <StarLabel />
@@ -718,7 +720,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         required
                                                     />}
                                                 <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -727,7 +729,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Скидка
+                                                {t("SSsale")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center justify-center">
@@ -770,7 +772,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                 readOnly
                                                             />}
                                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                            сум
+                                                            {t("SSsumm")}
                                                         </span>
                                                     </label>
                                                 </div>
@@ -783,7 +785,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Возраст
+                                                {t("SSage")}
                                             </div>
                                         </div>
                                         <div className="w-full flex items-center border border-borderColor rounded-lg">
@@ -929,8 +931,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                        Обхват головы
-                                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                         {t("SShead_circumference")} 
+                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                     </p>
                                                     <div className="w-full flex items-center mt-[10px]">
                                                         <div className="flex flex-col items-center">
@@ -949,8 +951,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 </div>
                                                 <div className="w-fit flex flex-col">
                                                     <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                        One Size
-                                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                        {t("SSone_Size")}
+                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                     </p>
                                                     <div className="flex items-center justify-center mt-[10px]">
                                                         <Switch
@@ -962,8 +964,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div className="w-fit flex flex-col items-center">
                                                     <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                        Количество
-                                                        {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
+                                                        {t("SSquantity")}
+                                                        {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
                                                         <span className="ml-[5px]">
                                                             <StarLabel />
                                                         </span>
@@ -991,7 +993,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                                             <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Возраст
+                                                                {t("SSage")}
                                                             </div>
                                                         </div>
                                                         <div className="w-full flex items-center">
@@ -1004,7 +1006,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Цена
+                                                                {t("SSprice")}
                                                             </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
@@ -1015,7 +1017,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                 className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                             >{Number(item?.price)?.toLocaleString() || null}</p>
                                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                сум
+                                                                {t("SSsumm")}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -1024,7 +1026,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                         <div
                                                             className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Скидка
+                                                            {t("SSsale")}
                                                         </div>
 
                                                     </div>
@@ -1045,7 +1047,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                         className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                                     >{Number(item?.discount_price)?.toLocaleString() || null}</p>
                                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                        сум
+                                                                        {t("SSsumm")}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -1101,8 +1103,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                             <div className="relative w-full  grid grid-cols-2 gap-4 ">
                                                 <div className="w-full flex flex-col">
                                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                        Обхват головы
-                                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                         {t("SShead_circumference")} 
+                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                     </p>
                                                     <div className="w-full flex items-center mt-[10px]">
                                                         <div className="flex flex-col items-center">
@@ -1121,8 +1123,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 </div>
                                                 <div className="w-full flex flex-col">
                                                     <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                        One Size
-                                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                                        {t("SSone_Size")}
+                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                     </p>
                                                     <div className="flex items-center justify-center mt-[10px]">
                                                         <Switch
@@ -1136,8 +1138,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div className="w-full flex flex-col items-center">
                                                     <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                        Количество
-                                                        {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
+                                                        {t("SSquantity")}
+                                                        {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
                                                         <span className="ml-[5px]">
                                                             <StarLabel />
                                                         </span>
@@ -1167,7 +1169,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                Цена
+                                                                {t("SSprice")}
                                                             </div>
                                                             <span className="ml-[5px]">
                                                                 <StarLabel />
@@ -1178,7 +1180,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                 className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                             >{Number(item?.price)?.toLocaleString() || null}</p>
                                                             <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
-                                                                сум
+                                                                {t("SSsumm")}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -1187,7 +1189,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                                         <div
                                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Скидка
+                                                            {t("SSsale")}
                                                         </div>
 
                                                     </div>
@@ -1208,7 +1210,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                                         className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
                                                                     >{Number(item?.discount_price)?.toLocaleString() || null}</p>
                                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                        сум
+                                                                        {t("SSsumm")}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -1221,7 +1223,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                                         <div
                                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            Возраст
+                                                            {t("SSage")}
                                                         </div>
                                                     </div>
                                                     <div className="w-full flex items-center">

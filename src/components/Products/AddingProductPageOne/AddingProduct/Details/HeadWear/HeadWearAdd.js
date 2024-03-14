@@ -4,9 +4,13 @@ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { BiPlus } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 
 function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
+    const { t } = useTranslation("product");
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [state, setState] = useState({
         minHeadGirth: null,
@@ -78,9 +82,9 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     oneSize: state?.sizeCheck,
                     amount: state?.amount,
                     age: state?.age,
-                    price: state?.price ,
+                    price: state?.price,
                     discountPercent: state?.discountPercent,
-                    discountPrice: state?.discountPrice ,
+                    discountPrice: state?.discountPrice,
                     category_Id: SelectedNumber,
 
                 })
@@ -128,8 +132,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 <div className="w-full flex justify-start px-3  gap-x-10  pt-5 ">
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                            Обхват головы
-                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            {t("SShead_circumference")}
+                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                         </p>
                         <div className="w-full flex items-center mt-[10px]">
                             <div className={`flex flex-col rounded-lg  ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}`}>
@@ -137,7 +141,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     name="minHeadGirth"
                                     className={`inputStyle w-[55px] h-[38px] text-center  bg-transparent  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                    placeholder="Мин"
+                                    placeholder={t("SSmin")}
                                     value={state?.minHeadGirth}
                                     onChange={(e) => setState({ ...state, minHeadGirth: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -150,7 +154,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     name="maxHeadGirth"
                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                    placeholder="Макс"
+                                    placeholder={t("SSmax")}
                                     value={state?.maxHeadGirth}
                                     onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -165,8 +169,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     </div>
                     <div className="w-fit flex flex-col">
                         <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                            One Size
-                            <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                            {t("SSone_Size")}
+                            <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                         </p>
                         <div className="flex items-center justify-center mt-[10px]">
                             <Switch
@@ -179,8 +183,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                     <div className="w-fit flex flex-col items-center">
                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            Количество
-                            {/* <span className="text-sm text-textLightColor ml-[6px]">(см)</span> */}
+                            {t("SSquantity")}
+                            {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
                             <span className="ml-[5px]">
                                 <StarLabel />
                             </span>
@@ -204,7 +208,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Возраст
+                                    {t("SSage")}
                                 </div>
                             </div>
                             <div className="w-full flex items-center">
@@ -223,7 +227,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                             <div className="flex items-center mb-2 ll:mb-[10px] ">
                                 <div
                                     className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Цена
+                                    {t("SSprice")}
                                 </div>
                                 <span className="ml-[5px]">
                                     <StarLabel />
@@ -242,7 +246,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     required
                                 />
                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                    сум
+                                    {t("SSsumm")}
                                 </span>
                             </label>
                         </div>
@@ -251,7 +255,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                             <div
                                 className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                Скидка
+                                {t("SSsale")}
                             </div>
                         </div>
 
@@ -295,7 +299,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                             readOnly
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                            сум
+                                            {t("SSsumm")}
                                         </span>
                                     </label>
                                 </div>
@@ -306,10 +310,10 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
                     {state?.onConcel &&
                         <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                            Отменить
+                            {t("SScancel")}
                         </button>}
                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg text-textBlueColor px-3 py-2 font-AeonikProMedium pr-1">
-                        Готово
+                        {t("SSready")}
                     </button>
                 </div>
             </div>
@@ -336,7 +340,8 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
             {
                 title?.filter(e => e?.id === SelectedNumber)?.map(item => {
                     return (
-                        <span key={item?.id}>{item?.name_ru}</span>
+                        <span key={item?.id}> {languageDetector?.typeLang === "ru" && item?.name_ru}
+                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                     )
                 })
             }

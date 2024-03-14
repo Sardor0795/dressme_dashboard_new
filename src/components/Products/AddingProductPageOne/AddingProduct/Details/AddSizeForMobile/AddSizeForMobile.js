@@ -4,6 +4,8 @@ import { dressMainData } from '../../../../../../hook/ContextTeam';
 import { Switch } from 'antd';
 import { BiPlus } from 'react-icons/bi';
 import { ClipLoader } from 'react-spinners';
+import { useTranslation } from 'react-i18next';
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 
 export default function AddSizeForMobile({ onClick, title, typeId, handleCallBackOut,
     handleCallBackHead,
@@ -12,6 +14,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
     handleCallBackAccess, clothingCategoryModal, setClothingCategoryModal }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [decraseList, setDecraseList] = useState(false)
+    const { t } = useTranslation("product");
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [state, setState] = useState({
         minHeadGirth: null,
@@ -285,7 +289,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             onConcel: false,
             // ----
             toggleShow: false,
-            
+
             checkEmpty: false,
             category_Id: null,
         })
@@ -335,8 +339,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        Обхват головы
-                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                        {t("SShead_circumference")}
+                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                                     </p>
                                     <div className="w-full flex items-center mt-[10px]">
@@ -344,7 +348,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                             <input
                                                 type="number"
                                                 className={`inputStyle w-[55px] h-[38px] text-center ${state?.checkEmpty && !state?.minHeadGirth ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                placeholder="Мин"
+                                                placeholder={t("SSmin")}
                                                 name="minHeadGirth"
                                                 value={state?.minHeadGirth}
                                                 onChange={(e) => setState({ ...state, minHeadGirth: e.target.value })}
@@ -359,7 +363,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="number"
                                                     name="maxHeadGirth"
                                                     className={`inputStyle w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                    placeholder="Макс"
+                                                    placeholder={t("SSmax")}
                                                     value={state?.maxHeadGirth}
                                                     onChange={(e) => setState({ ...state, maxHeadGirth: e.target.value })}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -378,8 +382,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        One Size
-                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                        {t("SSone_Size")}
+                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                                     </p>
                                     <div className="flex items-center justify-center mt-[10px]">
@@ -394,7 +398,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             </div>
                             <div className="w-full flex flex-col items-center  ">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Количество
+                                    {t("SSquantity")}
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
@@ -430,7 +434,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Цена
+                                                {t("SSprice")}
                                             </div>
                                             <span className="ml-[5px]">
                                                 <StarLabel />
@@ -450,7 +454,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 required
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                сум
+                                                {t("SSsumm")}
                                             </span>
                                         </label>
                                     </div>
@@ -459,7 +463,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Скидка
+                                            {t("SSsale")}
                                         </div>
                                     </div>
                                     <div className="w-full flex items-center justify-center">
@@ -502,7 +506,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         readOnly
                                                     />
                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                        сум
+                                                        {t("SSsumm")}
                                                     </span>
                                                 </label>
                                             </div>
@@ -515,7 +519,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Возраст
+                                            {t("SSage")}
                                         </div>
                                     </div>
                                     <div className="w-full flex items-center">
@@ -532,10 +536,10 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 </div>
                                 <div className='w-fit flex items-center gap-x-4'>
                                     {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                                        Отменить
+                                        {t("SScancel")}
                                     </button>}
                                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium ">
-                                        Готово
+                                        {t("SSready")}
                                     </button>
                                 </div>
 
@@ -567,15 +571,15 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                    Обхват Груди
-                                    <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                    {t("SSchest_circumference")}
+                                    <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                 </p>
                                 <div className="flex items-center">
                                     <div className="flex flex-col">
                                         <input
                                             type="number"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg  font-AeonikProRegular `}
-                                            placeholder="Мин"
+                                            placeholder={t("SSmin")}
                                             name="minBreast"
                                             value={state?.minBreast}
                                             onChange={(e) => setState({ ...state, minBreast: e.target.value })}
@@ -589,7 +593,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 type="number"
                                                 name="maxBreast"
                                                 className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg font-AeonikProRegular `}
-                                                placeholder="Макс"
+                                                placeholder={t("SSmax")}
                                                 value={state?.maxBreast}
                                                 onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -609,7 +613,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                    Размер
+                                    {t("SSsize")}
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
@@ -620,7 +624,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                             type="number"
                                             name="minSize"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px]  ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg font-AeonikProRegular `}
-                                            placeholder="Мин"
+                                            placeholder={t("SSmin")}
                                             value={state?.minSize}
                                             onChange={(e) => setState({ ...state, minSize: e.target.value })}
                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -632,7 +636,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                             type="number"
                                             name="maxSize"
                                             className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg font-AeonikProRegular `}
-                                            placeholder="Макс"
+                                            placeholder={t("SSmax")}
                                             value={state?.maxSize}
                                             onChange={(e) => setState({ ...state, maxSize: e.target.value })}
                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -645,8 +649,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             </div>
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Обхват Талии
-                                    <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                    {t("SSwaist")}
+                                    <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                 </p>
                                 <div className="flex items-center">
                                     <div className="flex flex-col">
@@ -654,7 +658,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                             type="number"
                                             name="minWaist"
                                             className={`inputStyle outline-none w-[60px] h-[38px]  text-center  ${state?.checkEmpty && !state?.minWaist && state?.maxWaist ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                            placeholder="Мин"
+                                            placeholder={t("SSmin")}
                                             value={state?.minWaist}
                                             onChange={(e) => setState({ ...state, minWaist: e.target.value })}
                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -668,7 +672,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 type="number"
                                                 name="maxWaist"
                                                 className={`inputStyle outline-none w-[60px] h-[38px]  text-center border border-borderColor bg-white px-2 md:px-3  rounded-lg  font-AeonikProRegular `}
-                                                placeholder="Макс"
+                                                placeholder={t("SSmax")}
                                                 value={state?.maxWaist}
                                                 onChange={(e) => setState({ ...state, maxWaist: e.target.value })}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -688,7 +692,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                    Обхват Бедер
+                                    {t("SShip_circumference")}
                                 </p>
                                 <div className="flex items-center">
                                     <div className="flex flex-col">
@@ -696,7 +700,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                             type="number"
                                             name="minHips"
                                             className={`inputStyle outline-none w-[60px] h-[38px]  text-center ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-2 md:px-3  rounded-lg   font-AeonikProRegular `}
-                                            placeholder="Мин"
+                                            placeholder={t("SSmin")}
                                             value={state?.minHips}
                                             onChange={(e) => setState({ ...state, minHips: e.target.value })}
                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -709,7 +713,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 type="number"
                                                 name="maxHips"
                                                 className="inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor px-2 md:px-3  rounded-lg  font-AeonikProRegular "
-                                                placeholder="Макс"
+                                                placeholder={t("SSmax")}
                                                 value={state?.maxHips}
                                                 onChange={(e) => setState({ ...state, maxHips: e.target.value })}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -730,7 +734,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                         <div className="w-full    gap-y-4">
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Буквенный Размер
+                                    {t("SSletter_Size")}
                                 </p>
                                 <div className='w-full '>
 
@@ -803,7 +807,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 }}
                                                 className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                             >
-                                                {decraseList ? "Меньше" : "Больше"}
+                                                {decraseList ? t("SSless") : t("SSmore")}
                                             </button>
                                             {/* </span> */}
                                         </div>
@@ -843,7 +847,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 }}
                                                 className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                             >
-                                                {decraseList ? "Меньше" : "Больше"}
+                                                {decraseList ? t("SSless") : t("SSmore")}
                                             </button>
                                         </div>
                                     </div>
@@ -852,7 +856,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             <div className="w-full  flex flex-col  ">
                                 <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                    Количество
+                                    {t("SSquantity")}
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
@@ -888,7 +892,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center mb-2 ll:mb-[10px] ">
                                         <span
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Цена
+                                            {t("SSprice")}
                                         </span>
                                         <span className="ml-[5px]">
                                             <StarLabel />
@@ -907,7 +911,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                            сум
+                                            {t("SSsumm")}
                                         </span>
                                     </label>
                                 </div>
@@ -916,7 +920,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                     <div
                                         className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Скидка
+                                        {t("SSsale")}
                                     </div>
 
                                 </div>
@@ -956,7 +960,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     readOnly
                                                 />
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -970,7 +974,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="flex items-center justify-center ">
                                     <div
                                         className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
+                                        {t("SSage")}
                                     </div>
                                 </div>
                                 <div className="w-fit flex items-center">
@@ -987,10 +991,10 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             </div>
                             <div className='w-fit flex items-center gap-x-4'>
                                 {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                                    Отменить
+                                    {t("SScancel")}
                                 </button>}
                                 <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium ">
-                                    Готово
+                                    {t("SSready")}
                                 </button>
                             </div>
 
@@ -1021,8 +1025,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        Обхват Талии
-                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                        {t("SSwaist")}
+                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                     </p>
                                     <div className="flex items-center">
                                         <div className="flex flex-col">
@@ -1030,7 +1034,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 type="number"
                                                 name="minBreast"
                                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center ${state?.checkEmpty && !state?.minBreast && state?.maxBreast ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular `}
-                                                placeholder="Мин"
+                                                placeholder={t("SSmin")}
                                                 value={state?.minBreast}
                                                 onChange={(e) => setState({ ...state, minBreast: e.target.value })}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1043,7 +1047,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="number"
                                                     name="maxBreast"
                                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                    placeholder="Макс"
+                                                    placeholder={t("SSmax")}
                                                     value={state?.maxBreast}
                                                     onChange={(e) => setState({ ...state, maxBreast: e.target.value })}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1063,7 +1067,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        Размер
+                                        {t("SSsize")}
                                         <span className="ml-[5px]">
                                             <StarLabel />
                                         </span>
@@ -1075,7 +1079,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="number"
                                                     name="minSize"
                                                     className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
-                                                    placeholder="Мин"
+                                                    placeholder={t("SSmin")}
                                                     value={state?.minSize}
                                                     onChange={(e) => setState({ ...state, minSize: e.target.value })}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1087,7 +1091,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="number"
                                                     name="maxSize"
                                                     className={`inputStyle outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                    placeholder="Макс"
+                                                    placeholder={t("SSmax")}
                                                     value={state?.maxSize}
                                                     onChange={(e) => setState({ ...state, maxSize: e.target.value })}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1110,7 +1114,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 type="number"
                                                 name="minHips"
                                                 className={`inputStyle outline-none w-[60px] h-[38px] text-center  ${state?.checkEmpty && !state?.minHips && state?.maxHips ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg   font-AeonikProRegular `}
-                                                placeholder="Мин"
+                                                placeholder={t("SSmin")}
                                                 value={state?.minHips}
                                                 onChange={(e) => setState({ ...state, minHips: e.target.value })}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1123,7 +1127,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="number"
                                                     name="maxHips"
                                                     className={`inputStyle outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                    placeholder="Макс"
+                                                    placeholder={t("SSmax")}
                                                     value={state?.maxHips}
                                                     onChange={(e) => setState({ ...state, maxHips: e.target.value })}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1142,7 +1146,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 </div>
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Рост
+                                        {t("SSheight")}
                                     </p>
                                     <div className="flex items-center justify-between gap-x-1">
                                         <div className="flex items-center">
@@ -1151,7 +1155,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     type="number"
                                                     name="minHeight"
                                                     className={`inputStyle outline-none w-[60px] text-center h-[38px] ${state?.checkEmpty && !state?.minHeight && state?.maxHeight ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular `}
-                                                    placeholder="Мин"
+                                                    placeholder={t("SSmin")}
                                                     value={state?.minHeight}
                                                     onChange={(e) => setState({ ...state, minHeight: e.target.value })}
                                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1164,7 +1168,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         type="number"
                                                         name="maxHeight"
                                                         className={`inputStyle outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
-                                                        placeholder="Макс"
+                                                        placeholder={t("SSmax")}
                                                         value={state?.maxHeight}
                                                         onChange={(e) => setState({ ...state, maxHeight: e.target.value })}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1187,7 +1191,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Буквенный Размер
+                                        {t("SSletter_Size")}
                                     </p>
 
                                     <div className='w-full '>
@@ -1261,7 +1265,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     }}
                                                     className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                 >
-                                                    {decraseList ? "Меньше" : "Больше"}
+                                                    {decraseList ? t("SSless") : t("SSmore")}
                                                 </button>
                                                 {/* </span> */}
                                             </div>
@@ -1303,7 +1307,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     }}
                                                     className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                 >
-                                                    {decraseList ? "Меньше" : "Больше"}
+                                                    {decraseList ? t("SSless") : t("SSmore")}
                                                 </button>
                                             </div>
                                         </div>
@@ -1312,7 +1316,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col md:ml-[14px]">
                                     <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        Количество
+                                        {t("SSquantity")}
                                         <span className="ml-[5px]">
                                             <StarLabel />
                                         </span>
@@ -1348,7 +1352,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                         <div className="flex items-center  mb-2 ll:mb-[10px]">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Цена
+                                                {t("SSprice")}
                                             </div>
                                             <span className="ml-[5px]">
                                                 <StarLabel />
@@ -1365,7 +1369,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                сум
+                                                {t("SSsumm")}
                                             </span>
                                         </label>
                                     </div>
@@ -1374,7 +1378,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Скидка
+                                            {t("SSsale")}
                                         </div>
                                     </div>
                                     <div className="w-full flex items-center justify-center">
@@ -1413,7 +1417,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         readOnly
                                                     />
                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                        сум
+                                                        {t("SSsumm")}
                                                     </span>
                                                 </label>
                                             </div>
@@ -1426,7 +1430,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Возраст
+                                            {t("SSage")}
                                         </div>
                                     </div>
                                     <div className="w-fit flex items-center">
@@ -1444,10 +1448,10 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                                 <div className='w-fit flex items-center gap-x-4'>
                                     {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                                        Отменить
+                                        {t("SScancel")}
                                     </button>}
                                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium ">
-                                        Готово
+                                        {t("SSready")}
                                     </button>
                                 </div>
 
@@ -1477,7 +1481,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                         <div className="w-full grid grid-cols-2 gap-4  flex ">
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                    Размер
+                                    {t("SSsize")}
                                     <span className="ml-[5px]">
                                         <StarLabel />
                                     </span>
@@ -1498,8 +1502,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             <div className="w-full flex flex-col">
                                 <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                    Длина Стопы
-                                    <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                    {t("SSfoot_Length")}
+                                    <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                 </p>
                                 <div className="flex items-center gap-x-1">
                                     <div className="flex flex-col">
@@ -1507,7 +1511,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                             type="number"
                                             name="minFootLength"
                                             className={`inputStyle outline-none w-[60px] h-[40px] text-center ${state?.checkEmpty && !state?.minFootLength && state?.maxFootLength ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3  rounded-lg   font-AeonikProRegular`}
-                                            placeholder="Мин"
+                                            placeholder={t("SSmin")}
                                             value={state?.minFootLength}
                                             onChange={(e) => setState({ ...state, minFootLength: e.target.value })}
                                             onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1520,7 +1524,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                 type="number"
                                                 name="maxFootLength"
                                                 className="inputStyle outline-none w-[60px] h-[40px] text-center border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                                placeholder="Макс"
+                                                placeholder={t("SSmax")}
                                                 value={state?.maxFootLength}
                                                 onChange={(e) => setState({ ...state, maxFootLength: e.target.value })}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
@@ -1542,7 +1546,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                         <div className="w-full flex flex-col md:ml-5">
                             <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                Количество
+                                {t("SSquantity")}
                                 <span className="ml-[5px]">
                                     <StarLabel />
                                 </span>
@@ -1577,7 +1581,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center mb-2 ll:mb-[10px] ">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Цена
+                                            {t("SSprice")}
                                         </div>
                                         <span className="ml-[5px]">
                                             <StarLabel />
@@ -1596,7 +1600,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                                         />
                                         <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                            сум
+                                            {t("SSsumm")}
                                         </span>
                                     </label>
                                 </div>
@@ -1605,7 +1609,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                     <div
                                         className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Скидка
+                                        {t("SSsale")}
                                     </div>
                                 </div>
                                 <div className="w-full flex items-center justify-center">
@@ -1646,7 +1650,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     readOnly
                                                 />
                                                 <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                    сум
+                                                    {t("SSsumm")}
                                                 </span>
                                             </label>
                                         </div>
@@ -1659,7 +1663,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
                                     <div
                                         className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Возраст
+                                        {t("SSage")}
                                     </div>
                                 </div>
                                 <div className="w-fit flex items-center">
@@ -1677,10 +1681,10 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                             <div className='w-fit flex items-center gap-x-4'>
                                 {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                                    Отменить
+                                    {t("SScancel")}
                                 </button>}
                                 <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium ">
-                                    Готово
+                                    {t("SSready")}
                                 </button>
                             </div>
 
@@ -1711,8 +1715,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        Размер{" "}
-                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                        {t("SSsize")}{" "}
+                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                     </p>
                                     <div className="w-[60px] flex items-center justify-between gap-x-1">
                                         <div className="flex flex-col">
@@ -1729,8 +1733,8 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 </div>
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Длина
-                                        <span className="text-sm text-textLightColor ml-[6px]">(см)</span>
+                                        {t("SSlength")}
+                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                     </p>
                                     <div className="w-[60px] flex items-center justify-between">
                                         <div className="flex flex-col">
@@ -1747,7 +1751,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 </div>
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Ширина
+                                        {t("SSwidth")}
                                     </p>
                                     <div className="w-[60px] flex items-center justify-between gap-x-1">
                                         <div className="flex flex-col">
@@ -1766,7 +1770,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                             <div className="w-full flex flex-col gap-y-4 ">
                                 <div className="w-full flex flex-col">
                                     <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                        Буквенный Размер
+                                        {t("SSletter_Size")}
                                     </p>
                                     <div className='w-full '>
 
@@ -1839,7 +1843,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     }}
                                                     className=" md:hidden text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-md not-italic font-AeonikProMedium cursor-pointer"
                                                 >
-                                                    {decraseList ? "Меньше" : "Больше"}
+                                                    {decraseList ? t("SSless") : t("SSmore")}
                                                 </button>
                                                 {/* </span> */}
                                             </div>
@@ -1879,7 +1883,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                     }}
                                                     className="text-textBlueColor select-none text-[10px] ls:text-[12px] ll:text-xs not-italic font-AeonikProMedium cursor-pointer"
                                                 >
-                                                    {decraseList ? "Меньше" : "Больше"}
+                                                    {decraseList ? t("SSless") : t("SSmore")}
                                                 </button>
                                             </div>
                                         </div>
@@ -1888,7 +1892,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                 <div className="w-full flex flex-col  ">
                                     <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        Количество
+                                        {t("SSquantity")}
                                         <span className="ml-[5px]">
                                             <StarLabel />
                                         </span>
@@ -1926,7 +1930,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                         <div className="flex items-center mb-2 ll:mb-[10px] ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                Цена
+                                                {t("SSprice")}
                                             </div>
                                             <span className="ml-[5px]">
                                                 <StarLabel />
@@ -1945,7 +1949,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                                             />
                                             <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                сум
+                                                {t("SSsumm")}
                                             </span>
                                         </label>
                                     </div>
@@ -1954,7 +1958,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Скидка
+                                            {t("SSsale")}
                                         </div>
 
                                     </div>
@@ -1994,7 +1998,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                                         readOnly
                                                     />
                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                        сум
+                                                        {t("SSsumm")}
                                                     </span>
                                                 </label>
                                             </div>
@@ -2007,7 +2011,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
                                     <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                                         <div
                                             className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                            Возраст
+                                            {t("SSage")}
                                         </div>
                                     </div>
                                     <div className="w-fit flex items-center">
@@ -2025,10 +2029,10 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
 
                                 <div className='w-fit flex items-center gap-x-4'>
                                     {state?.onConcel && <button onClick={cancelSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-lg text-textRedColor px-3 py-2 font-AeonikProMedium pr-1">
-                                        Отменить
+                                        {t("SScancel")}
                                     </button>}
                                     <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium ">
-                                        Готово
+                                        {t("SSready")}
                                     </button>
                                 </div>
                             </div>

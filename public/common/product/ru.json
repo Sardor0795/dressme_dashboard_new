@@ -5,6 +5,7 @@
     "PRaddTocation": "Добавить локацию",
     "PRaddWear": "Добавить одежду",
     "PRsure": "Вы уверены",
+    "PRsuretext": "Если вы удалите цвет, то удалятся все фото и размеры выбранного цвета!",
     "PRcancel": "Oтмена",
     "PRready": "Готово",
     "PRdelete": "Удалить",
@@ -92,5 +93,8 @@
     "SShip_circumference": "Обхват Бедер",
     "SSfoot_Length": "Длина Стопы",
     "SSheight": "Рост",
-    "SSadd_size": "Добавить размер"
+    "SSadd_size": "Добавить размер",
+    "SSsm": "см",
+    "SSmin": "Мин",
+    "SSmax": "Макс"
 }
