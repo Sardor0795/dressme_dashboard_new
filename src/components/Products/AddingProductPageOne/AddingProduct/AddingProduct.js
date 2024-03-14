@@ -1391,7 +1391,7 @@ const AddingProduct = () => {
                           className="w-full h-[40px] rounded-lg flex md:hidden items-center justify-between border border-borderColor px-3"
                         >
                           <div className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                            {t("APselect2")}
+                            {t("PRselect2")}
                           </div>
                           <ArrowRightIcon />
                         </button> */}
@@ -1801,7 +1801,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                {t("APselect2")}
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>}
@@ -1955,7 +1955,7 @@ const AddingProduct = () => {
                               :
                               <div className="w-full h-full rounded-lg flex items-center justify-between">
                                 <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                  {t("APselect2")}
+                                  {t("PRselect2")}
                                 </span>
                                 <ArrowRightIcon />
                               </div>}
@@ -2102,7 +2102,7 @@ const AddingProduct = () => {
                                   );
                                 })
                             ) : (
-                              <span className="text-[#a1a1a1]"> {t("APselect2")}</span>
+                              <span className="text-[#a1a1a1]"> {t("PRselect2")}</span>
                             )}
                             {state.openDropModalButton ? (
                               <span className="-rotate-90 transition duration-200 ease-out">
@@ -2134,7 +2134,7 @@ const AddingProduct = () => {
                                   );
                                 })
                             ) : (
-                              <span className="text-[#b5b5b5] text-[12px]"> {t("APselect2")}</span>
+                              <span className="text-[#b5b5b5] text-[12px]"> {t("PRselect2")}</span>
                             )}
                             <span className="rotate-90 transition duration-200 ease-out">
                               <ArrowRightIcon />
@@ -2290,7 +2290,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                {t("APselect2")}
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
@@ -2392,7 +2392,7 @@ const AddingProduct = () => {
                             :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
-                                {t("APselect2")}
+                                {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
