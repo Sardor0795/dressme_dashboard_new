@@ -16,7 +16,7 @@
     "PRphoto": "Rasm",
     "PRproductName": "Mahsulot nomi",
     "PRrandomCode": "Sotuvchi kodi",
-    "PRtype:": "Tur",
+    "PRtype": "Tur",
     "PRdate": "Sana",
     "PRprice": "Tovar narxi",
     "PRadd": "Qo'shish",
@@ -27,6 +27,7 @@
     "PRmore2": "Ko'proq",
     "PRless": "Kamroq",
     "PRnoProduct": "Mahsulot mavjud emas",
-    "PRselect2": " Tanlang"
+    "PRselect2": " Tanlang",
+    "PRsearch": " Qidiruv"
 
 }

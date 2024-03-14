@@ -16,7 +16,7 @@
     "PRphoto": "Фото",
     "PRproductName": "Наименование товара",
     "PRrandomCode": "Артикул",
-    "PRtype:": "Тип",
+    "PRtype": "Тип",
     "PRdate": "Дата",
     "PRprice": "Цена товара",
     "PRadd": "Добавить",
@@ -27,5 +27,6 @@
     "PRmore2": "Больше",
     "PRless": "Меньше",
     "PRnoProduct": " Tовара нет",
-    "PRselect2": " Выбрать"
+    "PRselect2": " Выбрать",
+    "PRsearch": " Поиск"
 }
