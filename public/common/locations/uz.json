@@ -15,6 +15,8 @@
     "not_necessary": "(shart emas)",
     "number_admin": "Administratorning raqami",
     "number_admin_two": "Ikkinchi administratorning raqami",
+    "number_admin_tg": "Telegram administratori ",
+    "number_admin_tg_two": "Ikkinchi administratorning Telegrami ",
     "work_time": "Ish vaqti",
     "before": "dan",
     "after": "gacha",
@@ -37,8 +39,8 @@
     "cancel": "Bekor qilish",
     "select_photo": "Fotosuratni tanlang",
     "change_photo": "Suratni o'zgartirish",
-    "upload_a_photo": "Surat yuklang", 
-    "edit_locations": "Joylarni tahrirlash",   
+    "upload_a_photo": "Surat yuklang",
+    "edit_locations": "Joylarni tahrirlash",
     "save": "Saqlash",
     "remove_from_address": "Manzildan olib tashlash",
     "cloth": "Kiyim-kechak",
@@ -56,6 +58,4 @@
     "add_location_two": "Добавить в локацию",
     "more": "Ko'proq",
     "no_product": "Mahsulot yo'q"
-
-    
 }

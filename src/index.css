@@ -63,23 +63,30 @@
   border-color: #303030;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(
-    .ant-select-customize-input
-  )
-  .ant-select-selector {
-  width: 100%;
+ 
+.textForm :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+   width: 100%;
   height: 48px;
   padding: 8px 10px;
   line-height: 10px;
 }
-
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(
-    .ant-select-customize-input
-  )
-  .ant-select-selector
-  .ant-select-selection-search-input {
-  height: 48px;
+ 
+.textForm :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+   height: 48px;
   font-size: 16px;
+
+}
+
+.profileSelect :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  width: 100%;
+  height: 48px;
+  padding: 8px 10px;
+
+}
+
+.profileSelect :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+  height: 48px;
+
 }
 
 .ymaps-2-1-79-map-copyrights-promo {
@@ -414,12 +421,17 @@ input[type="number"] {
 
 .selectAndt .ant-select {
   /* border: 1px solid red */
+
 }
 
 .selectAndt .ant-select,
 .selectAndt .ant-select-lg {
   height: 40px !important;
+
 }
+
+
+
 
 /* .textForm .ant-select,
 .textForm .ant-select-lg,
@@ -432,8 +444,9 @@ input[type="number"] {
   height: 40px !important;
 } */
 /* ------------------- */
-@media (max-width: 767px) {
-  .inputStyle {
+ 
+@media screen and (max-width: 767px) {
+   .inputStyle {
     color: #000;
     font-size: 14px;
   }
@@ -461,7 +474,7 @@ input[type="number"] {
     position: absolute;
     z-index: 150;
   }
-  /* ant-checkbox-input */
+   /* ant-checkbox-input */
   .idCheck .ant-checkbox .ant-checkbox-inner {
     width: 20px;
     height: 20px;
@@ -469,9 +482,41 @@ input[type="number"] {
     /* background-color: red; */
   }
 
+ 
   .ant-checkbox .ant-checkbox-inner {
     width: 20px;
     height: 20px;
     /* background-color: red; */
   }
+ 
+
+
+  .profileSelect :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    width: 100%;
+    height: 38px;
+    /* padding: 8px; */
+    /* line-height: 10px; */
+    padding: 4px 8px;
+  }
+
+  .profileSelect :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+    height: 38px;
+    /* font-size: 16px; */
+    /* padding: 2px; */
+  
+  }
+
+  .textForm :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    width: 100%;
+    height: 38px;
+    padding: 8px 10px;
+    line-height: 10px;
+  }
+
+  .textForm :where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+    height: 38px;
+    font-size: 16px;
+
+  }
 }
+ 

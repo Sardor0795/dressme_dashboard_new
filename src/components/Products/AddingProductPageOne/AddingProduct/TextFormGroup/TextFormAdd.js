@@ -303,7 +303,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                         <div className="w-full pb-[30px] md:border border-[#f2f2f2] flex flex-col md:rounded-lg md:p-5 flex-1">
                             <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
                                 {/* Language in RUSSIAN */}
-                                <div className="flex-1 mb-[10px]">
+                                <div className="flex-1 mb-[10px] textForm">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                             {t("TFqualityRu")}
@@ -332,7 +332,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     />
                                 </div>
                                 {/* Language in UZBEK */}
-                                <div className="flex-1 mb-[10px]">
+                                <div className="flex-1 mb-[10px] textForm">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                             {t("TFqualityUz")}
@@ -343,7 +343,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px]  ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
 
                                         style={{ width: "100%" }}
                                         value={
@@ -427,7 +427,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 </div>
                             </div>
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
-                                <div className="flex-1 mb-[10px]">
+                                <div className="flex-1 mb-[10px] textForm">
                                     <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
                                         {t("TFbrand")}
                                         <span className="notRecquired ml-[5px] text-sm text-textLightColor font-AeonikProRegular">
