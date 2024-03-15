@@ -34,7 +34,7 @@ export default function MobileHumburgerMenu() {
     setIsModalOpen(false);
   };
 
-  const { i18n, t } = useTranslation("sidebar");
+  const { i18n, t } = useTranslation("mobileMenu");
 
   const [openLang, setOpenLang] = useState(false);
   const handleOpenChangeLang = (newOpen) => {
@@ -163,14 +163,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start ">
                   <NavbarReviewIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Отзывы
+                    {t("reviews")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start ">
                   <NavbarReviewIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Отзывы
+                    {t("reviews")}
                   </p>
                 </figure>
               )
@@ -191,14 +191,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <NavbarMarketIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Магазины
+                    {t("shops")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <NavbarMarketIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Магазины
+                    {t("shops")}
                   </p>
                 </figure>
               )
@@ -220,14 +220,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <LocationIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Локации
+                    {t("locations")}
                   </p>
                 </figure>
               ) : (
                 <figure className=" w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <LocationIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Локации
+                    {t("locations")}
                   </p>
                 </figure>
               )
@@ -248,14 +248,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <ClothesIcons colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Товары
+                    {t("products")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <ClothesIcons colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    Товары
+                    {t("products")}
                   </p>
                 </figure>
               )
@@ -268,7 +268,7 @@ export default function MobileHumburgerMenu() {
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium"
           >
-            <UserExitIcon colors={"#fff"} /> <span>Выйти</span>
+            <UserExitIcon colors={"#fff"} /> <span>{t("exit")}</span>
           </button>
           <section className="w-1/2 xs:w-[45%] bg-lightBorderColor rounded-lg  h-fit font-AeonikProMedium select-none cursor-pointer">
             {LanguageList.filter((data) => data?.value === currentLang).map(
@@ -278,13 +278,13 @@ export default function MobileHumburgerMenu() {
                     key={data?.id}
                     open={openLang}
                     onOpenChange={handleOpenChangeLang}
-                    className="w-full  h-[42px] gap-x-[5px] flex items-center justify-center capitalize "
+                    className="w-full h-[42px] gap-x-[5px] flex items-center justify-center capitalize "
                     trigger="click"
                     options={["Hide"]}
                     placement="top"
                     content={contentLang}
                   >
-                    <span className="block mr-[6px] ">
+                    <span className="block mr-[4px] ">
                       <img
                         src={data?.icons}
                         className="min-w-[16px] min-h-[16px]"
@@ -316,14 +316,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#007dca"} />
                   <p className="text-base not-italic font-AeonikProMedium leading-5">
-                    Профиль
+                    {t("profil")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#2c2c2c"} />
                   <p className="text-base not-italic font-AeonikProMedium leading-5">
-                    Профиль
+                    {t("profil")}
                   </p>
                 </figure>
               )
