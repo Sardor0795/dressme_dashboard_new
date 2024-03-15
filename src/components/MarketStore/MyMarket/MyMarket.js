@@ -183,7 +183,7 @@ function MyMarket() {
                             {data?.name || null}
                           </p>
                           <p className="relative md:block hidden max-h-[56px] overflow-hidden w-full break-all md:pr-4 text-[13px] md:w-[350px] ls:text-[14px] xs:text-xl font-AeonikProMedium">
-                            {data?.name || null} Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, sint? Dolor nobis neque omnis ipsa! Doloremque corporis maiores sunt officia ipsam rem et accusantium ducimus placeat doloribus, aliquid atque facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis obcaecati ipsam ea accusamus perferendis ratione iure provident, tenetur molestiae id voluptate recusandae at, enim ex odio amet vitae ad libero.
+                            {data?.name || null}
                             <span className="absolute right-[16px] top-[28px] w-full block linearGr h-[28px]"></span>
                           </p>
                         </div>
