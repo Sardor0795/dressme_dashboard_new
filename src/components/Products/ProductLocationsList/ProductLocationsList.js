@@ -20,6 +20,7 @@ import { FiCheck } from "react-icons/fi";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
+import { dressRegionList } from "../../../hook/RegionList";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -128,6 +129,21 @@ export default function ProductLocationsList() {
   };
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [regionList, setRegionList] = useContext(dressRegionList)
+  useEffect(() => {
+    const fetchDataRegions = async () => {
+      try {
+        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
+        if (data?.status >= 200 && data?.status < 300) {
+          setRegionList(data?.data);
+        }
+      } catch (error) { }
+    };
+    if (!regionList) {
+      fetchDataRegions();
+    }
+  }, [])
+
   const fetchData = async (customHeaders) => {
     try {
       const response = await axios.get(
@@ -1282,7 +1298,7 @@ export default function ProductLocationsList() {
                                                 ></button>
                                               )}
                                               <p className="text-black text-[13px] md:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                                {dressInfo?.regionList?.regions
+                                                {regionList?.regions
                                                   ?.filter(
                                                     (e) =>
                                                       e?.id ==
@@ -1683,28 +1699,28 @@ export default function ProductLocationsList() {
                                                             </div>
 
                                                             <div className="mb-6">
-                                                              <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                                <div className="w-[40%] flex items-center  ">
+                                                              <div className="w-full grid grid-cols-3 gap-4  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] mb-[8px]">
+                                                                <div className="w-full flex items-center justify-center ">
                                                                   {t("PRproductName2")}
                                                                 </div>
-                                                                <div className="w-[30%] flex items-center  ">
+                                                                <div className="w-full flex items-center justify-center ">
                                                                   {t("PRstatus")}
                                                                 </div>
-                                                                <div className="w-[30%] flex items-center  ">
+                                                                <div className="w-full flex items-center justify-center ">
                                                                   {t("PRprice")}
                                                                 </div>
                                                               </div>
 
                                                               <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                <div className="w-[40%] break-all  overflow-hidden  ">
-                                                                  <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                <div className="w-full break-all  overflow-hidden  ">
+                                                                  <p className="w-full  break-all  text-weatherWinterColor  text-center text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                     {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
                                                                     {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
                                                                   </p>
                                                                 </div>
                                                                 {itemValue?.status ===
                                                                   "approved" && (
-                                                                    <div className="w-[30%] h-fit  flex items-center justify-center  ">
+                                                                    <div className="w-full h-fit  flex items-center justify-center  ">
                                                                       <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1721,7 +1737,7 @@ export default function ProductLocationsList() {
                                                                           resData?.shop_id
                                                                         )
                                                                       }
-                                                                      className="w-[30%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                      className="w-full h-fit cursor-pointer flex items-center  justify-center"
                                                                     >
                                                                       <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
                                                                         {itemValue?.status ||
@@ -1731,7 +1747,7 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
-                                                                    <div className="w-[30%] h-fit  flex items-center justify-center ">
+                                                                    <div className="w-full h-fit  flex items-center justify-center ">
                                                                       <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -1740,15 +1756,15 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
-                                                                    <div className="w-[30%] h-fit  flex items-center justify-center   ">
+                                                                    <div className="w-full h-fit  flex items-center justify-center   ">
                                                                       <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
                                                                       </span>
                                                                     </div>
                                                                   )}
-                                                                {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
-                                                                <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                {/* <div className="w-full"> {itemValue?.money} сум </div> */}
+                                                                <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                   {itemValue?.cost?.discount_price > 999 ? Number(itemValue?.cost?.discount_price)?.toLocaleString()?.split(",").join(" ")
                                                                     : itemValue?.cost?.discount_price || itemValue?.cost?.price > 999 ?
                                                                       Number(itemValue?.cost?.price)?.toLocaleString()?.split(",").join(" ") : itemValue?.cost?.price}
@@ -1761,39 +1777,39 @@ export default function ProductLocationsList() {
                                                             {moreMobile ==
                                                               itemValue?.id && (
                                                                 <div className="mb-6">
-                                                                  <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                                    <div className="w-[40%] flex items-center  ">
+                                                                  <div className="w-full grid grid-cols-3 gap-4  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
+                                                                    <div className="w-full flex items-center justify-center ">
                                                                       {t("PRrandomCode")}
                                                                     </div>
-                                                                    <div className="w-[30%] flex items-center  ">
+                                                                    <div className="w-full flex items-center justify-center ">
                                                                       {t("PRtype")}
                                                                     </div>
-                                                                    <div className="w-[30%] flex items-center  ">
+                                                                    <div className="w-full flex items-center justify-center ">
                                                                       {" "}
                                                                       {t("PRdate")}
                                                                     </div>
                                                                   </div>
 
                                                                   <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                    <div className="w-[40%] break-all  overflow-hidden  ">
+                                                                    <div className="w-full break-all  overflow-hidden  ">
                                                                       <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                         {itemValue?.sku ||
                                                                           "sku"}
                                                                       </p>
                                                                     </div>
 
-                                                                    <td
+                                                                    <div
                                                                       key={
                                                                         index
                                                                       }
-                                                                      className="w-[30%] h-full  flex items-center justify-center "
+                                                                      className="w-full h-full  flex items-center justify-center "
                                                                     >
                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                       {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
-                                                                    </td>
+                                                                    </div>
 
-                                                                    {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
-                                                                    <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                    {/* <div className="w-full"> {itemValue?.money} сум </div> */}
+                                                                    <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                       {itemValue?.created_at ||
                                                                         "created_at"}
                                                                     </div>
@@ -1829,9 +1845,9 @@ export default function ProductLocationsList() {
                                                               </button>
                                                             </div>
 
-                                                            <div className="w-full flex items-center justify-between mt-[18px]">
+                                                            <div className="w-full grid grid-cols-3 gap-4   mt-[18px]">
                                                               <div
-                                                                className="flex items-center gap-x-2"
+                                                                className="w-full flex items-center gap-x-2"
                                                                 onClick={() => {
                                                                   setShopLocationIdList(
                                                                     item?.shop_locations
@@ -1872,7 +1888,7 @@ export default function ProductLocationsList() {
                                                                       itemValue?.id
                                                                     )
                                                                   }
-                                                                  className="text-textBlueColor text-[13px] font-AeonikProMedium"
+                                                                  className="w-full flex items-center justify-center text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
                                                                   {t("PRmore2")}...
                                                                 </button>
@@ -1881,7 +1897,7 @@ export default function ProductLocationsList() {
                                                                   onClick={() =>
                                                                     setMoreMobile()
                                                                   }
-                                                                  className="text-textBlueColor text-[13px] font-AeonikProMedium"
+                                                                  className="w-full items-center justify-center text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
                                                                   {t("PRless")}...
                                                                 </button>
@@ -1902,7 +1918,7 @@ export default function ProductLocationsList() {
                                                                     item?.shop_locations
                                                                   );
                                                                 }}
-                                                                className="text-red-600 text-[11px] font-AeonikProMedium"
+                                                                className="w-full flex justify-end text-red-600 text-[11px] font-AeonikProMedium"
                                                               >
                                                                 {t("PRdelete")}
                                                               </button>
@@ -1991,7 +2007,7 @@ export default function ProductLocationsList() {
                                                 ></button>
                                               )}
                                               <p className="text-black text-[13px] md:text-base not-italic  flex items-center font-AeonikProMedium mr-[20px]">
-                                                {dressInfo?.regionList?.regions?.filter((e) => e?.id == resData?.region_id)?.map((values, index) => {
+                                                {regionList?.regions?.filter((e) => e?.id == resData?.region_id)?.map((values, index) => {
                                                   return (
                                                     <div>
                                                       {languageDetector?.typeLang === "ru" && values?.name_ru}
@@ -2376,20 +2392,20 @@ export default function ProductLocationsList() {
                                                             </div>
 
                                                             <div className="mb-6">
-                                                              <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                                <div className="w-[40%] flex items-center  ">
+                                                              <div className="w-full  grid grid-cols-3 gap-4  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px]   mb-[8px]">
+                                                                <div className="w-full flex items-center justify-center   ">
                                                                   {t("PRproductName2")}
                                                                 </div>
-                                                                <div className="w-[30%] flex items-center  ">
+                                                                <div className="w-full flex items-center justify-center   ">
                                                                   {t("PRstatus")}
                                                                 </div>
-                                                                <div className="w-[30%] flex items-center  ">
+                                                                <div className="w-full flex items-center justify-center   ">
                                                                   {t("PRprice")}
                                                                 </div>
                                                               </div>
 
                                                               <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                <div className="w-[40%] break-all  overflow-hidden  ">
+                                                                <div className="w-full break-all  overflow-hidden  ">
                                                                   <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
 
                                                                     {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
@@ -2398,7 +2414,7 @@ export default function ProductLocationsList() {
                                                                 </div>
                                                                 {itemValue?.status ===
                                                                   "approved" && (
-                                                                    <div className="w-[30%] h-fit  flex items-center justify-center  ">
+                                                                    <div className="w-full h-fit  flex items-center justify-center  ">
                                                                       <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -2415,7 +2431,7 @@ export default function ProductLocationsList() {
                                                                           resData?.shop_id
                                                                         )
                                                                       }
-                                                                      className="w-[30%] h-fit cursor-pointer flex items-center  justify-center"
+                                                                      className="w-full h-fit cursor-pointer flex items-center  justify-center"
                                                                     >
                                                                       <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
                                                                         {itemValue?.status ||
@@ -2425,7 +2441,7 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
-                                                                    <div className="w-[30%] h-fit  flex items-center justify-center ">
+                                                                    <div className="w-full h-fit  flex items-center justify-center ">
                                                                       <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
@@ -2434,15 +2450,15 @@ export default function ProductLocationsList() {
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
-                                                                    <div className="w-[30%] h-fit  flex items-center justify-center   ">
+                                                                    <div className="w-full h-fit  flex items-center justify-center   ">
                                                                       <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
                                                                         {itemValue?.status ||
                                                                           "status"}
                                                                       </span>
                                                                     </div>
                                                                   )}
-                                                                {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
-                                                                <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                {/* <div className="w-full"> {itemValue?.money} сум </div> */}
+                                                                <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                   {itemValue?.cost
                                                                     ?.discount_price >
                                                                     999
@@ -2485,21 +2501,21 @@ export default function ProductLocationsList() {
                                                             {moreMobile ==
                                                               itemValue?.id && (
                                                                 <div className="mb-6">
-                                                                  <div className="w-full flex items-center  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
-                                                                    <div className="w-[40%] flex items-center  ">
+                                                                  <div className="w-full grid grid-cols-3 gap-4  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px]   mb-[8px]">
+                                                                    <div className="w-full flex items-center justify-center  ">
                                                                       {t("PRrandomCode")}
                                                                     </div>
-                                                                    <div className="w-[30%] flex items-center  ">
+                                                                    <div className="w-full flex items-center justify-center  ">
                                                                       {t("PRtype")}
                                                                     </div>
-                                                                    <div className="w-[30%] flex items-center  ">
+                                                                    <div className="w-full flex items-center justify-center  ">
                                                                       {" "}
                                                                       {t("PRdate")}
                                                                     </div>
                                                                   </div>
 
                                                                   <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                    <div className="w-[40%] break-all  overflow-hidden  ">
+                                                                    <div className="w-full break-all  overflow-hidden  ">
                                                                       <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                         {itemValue?.sku ||
                                                                           "sku"}
@@ -2510,14 +2526,14 @@ export default function ProductLocationsList() {
                                                                       key={
                                                                         index
                                                                       }
-                                                                      className="w-[30%] h-full  flex items-center justify-center "
+                                                                      className="w-full h-full  flex items-center justify-center "
                                                                     >
                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                       {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                     </td>
 
-                                                                    {/* <div className="w-[30%]"> {itemValue?.money} сум </div> */}
-                                                                    <div className="w-[30%] h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                    {/* <div className="w-full"> {itemValue?.money} сум </div> */}
+                                                                    <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                       {itemValue?.created_at ||
                                                                         "created_at"}
                                                                     </div>
@@ -2553,9 +2569,9 @@ export default function ProductLocationsList() {
                                                               </button>
                                                             </div>
 
-                                                            <div className="w-full flex items-center justify-between mt-[18px]">
+                                                            <div className="w-full  grid grid-cols-3 gap-4 flex items-center justify-between mt-[18px]">
                                                               <div
-                                                                className="flex items-center gap-x-2"
+                                                                className="w-full flex items-center flex justify-start gap-x-2"
                                                                 onClick={() => {
                                                                   setShopLocationIdList(
                                                                     item?.shop_locations
@@ -2596,7 +2612,7 @@ export default function ProductLocationsList() {
                                                                       itemValue?.id
                                                                     )
                                                                   }
-                                                                  className="text-textBlueColor text-[13px] font-AeonikProMedium"
+                                                                  className="w-full flex justify-center text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
                                                                   {t("PRmore2")}...
                                                                 </button>
@@ -2605,7 +2621,7 @@ export default function ProductLocationsList() {
                                                                   onClick={() =>
                                                                     setMoreMobile()
                                                                   }
-                                                                  className="text-textBlueColor text-[13px] font-AeonikProMedium"
+                                                                  className="w-full flex justify-center text-textBlueColor text-[13px] font-AeonikProMedium"
                                                                 >
                                                                   {t("PRless")}...
                                                                 </button>
@@ -2626,7 +2642,7 @@ export default function ProductLocationsList() {
                                                                     item?.shop_locations
                                                                   );
                                                                 }}
-                                                                className="text-red-600 text-[11px] font-AeonikProMedium"
+                                                                className="w-full flex justify-end text-red-600 text-[11px] font-AeonikProMedium"
                                                               >
                                                                 {t("PRdelete")}
                                                               </button>

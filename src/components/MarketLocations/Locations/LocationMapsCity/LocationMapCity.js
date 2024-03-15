@@ -31,12 +31,14 @@ import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { BackBtn } from "../../../backBtn/backBtn";
+import { dressRegionList } from "../../../../hook/RegionList";
 
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function LocationMapCity() {
   const { request } = useHttp();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -254,19 +256,7 @@ export default function LocationMapCity() {
     }
   );
 
-  useEffect(() => {
-    const fetchDataRegions = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
-        if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, regionList: data?.data });
-        }
-      } catch (error) {}
-    };
-    if (!dressInfo?.regionList) {
-      fetchDataRegions();
-    }
-  }, [dressInfo?.regionList]);
+   
 
   useEffect(() => {
     window.scrollTo({
@@ -604,8 +594,8 @@ export default function LocationMapCity() {
               </div>
 
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                {dressInfo?.regionList?.regions ? (
-                  dressInfo?.regionList?.regions?.map((data, index) => {
+                {regionList?.regions ? (
+                  regionList?.regions?.map((data, index) => {
                     return (
                       <div key={data?.id} className="w-full  h-fit  ">
                         <div
@@ -1249,7 +1239,7 @@ export default function LocationMapCity() {
                                 !state?.idSupRregionId &&
                                 `${t("choose_region")}`}
 
-                              {dressInfo?.regionList?.regions
+                              {regionList?.regions
                                 ?.filter((e) => e.id == state?.idRegionId)
                                 .map((item, index) => {
                                   return (
@@ -1341,7 +1331,7 @@ export default function LocationMapCity() {
                                 !state?.idSupRregionId &&
                                 `${t("choose_region")}`}
 
-                              {dressInfo?.regionList?.regions
+                              {regionList?.regions
                                 ?.filter((e) => e.id == state?.idRegionId)
                                 .map((item, index) => {
                                   return (

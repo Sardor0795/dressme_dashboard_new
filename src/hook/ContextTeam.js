@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useEffect, useState } from "react";
 export const dressMainData = createContext();
-
+ 
 export default function ContextTeam({ children }) {
   const [dressInfo, setDressInfo] = useState({
     isItPorduct: true,
