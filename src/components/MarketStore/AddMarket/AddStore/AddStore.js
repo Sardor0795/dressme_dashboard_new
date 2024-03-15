@@ -17,6 +17,7 @@ import { HelperData } from "../../../../hook/HelperDataStore";
 import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { BackBtn } from "../../../backBtn/backBtn";
 const { REACT_APP_BASE_URL } = process.env;
 
 function AddStore({ onRefetch }) {
@@ -405,14 +406,7 @@ function AddStore({ onRefetch }) {
       <div className="w-full flex items-center">
         {/* {shopsList?.shops?.data?.length >= 1 && ( */}
         <div className="flex md:hidden items-start">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="flex items-center cursor-pointer justify-center "
-          >
-            <GoBackIcons />
-          </button>
+          <BackBtn />
         </div>
         {/* )} */}
         <div className="w-full text-center text-tableTextTitle2 text-xl mb-0 pr-6 md:pr-0 md:mb-[50px] md:text-[35px] not-italic font-AeonikProMedium">
@@ -421,14 +415,7 @@ function AddStore({ onRefetch }) {
       </div>
       {/* {shopsList?.shops?.data?.length >= 1 && ( */}
       <div className="mb-3">
-        <button
-          onClick={() => {
-            navigate(-1);
-          }}
-          className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-        >
-          <AiOutlineLeft />
-        </button>
+        <BackBtn />
       </div>
       {/* )} */}
       <div

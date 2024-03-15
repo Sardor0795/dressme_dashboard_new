@@ -14,6 +14,7 @@ import { Popover } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import { useTranslation } from "react-i18next";
+import { BackBtn } from "../../backBtn/backBtn";
 
 export default function ReviewWearComment() {
   const { request } = useHttp();
@@ -147,14 +148,7 @@ export default function ReviewWearComment() {
     <div className="">
       <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="w-8 h-8 flex absolute md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
-          >
-            <GoBackIcons />
-          </button>
+          <BackBtn />
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
             {t("more_details_of_product")}
           </span>
