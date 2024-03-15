@@ -5,6 +5,7 @@ import { dressMainData } from '../../../hook/ContextTeam'
 import axios from 'axios'
 import LoadingForSeller from '../../Loading/LoadingFor'
 import { HelperData } from '../../../hook/HelperDataStore'
+import { useTranslation } from 'react-i18next'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
@@ -12,6 +13,7 @@ export default function ProductIsCheck() {
     const [loading, setLoading] = useState(true);
     const [helperDatainform, setHelperDatainform] = useContext(HelperData);
 
+    const { t } = useTranslation("product");
 
     useEffect(() => {
         const fetchDataShop = async () => {
@@ -73,7 +75,7 @@ export default function ProductIsCheck() {
                                     to="/locations-store"
                                     className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                                 >
-                                    У вас пока нет локации !
+                                    {t("PRNoLocation")}
                                 </Link>
                             </div >
                         :
@@ -82,7 +84,7 @@ export default function ProductIsCheck() {
                                 to="/store"
                                 className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                             >
-                                Сначала создайте магазин!
+                                {t("PRaddMarket")}
                             </Link>
                         </div >
             }

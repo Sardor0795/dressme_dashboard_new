@@ -15,12 +15,15 @@ import { MdError, MdNumbers } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { dressMainData } from "../../../../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 
 function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCheckedSizeList, allColor, onRefetch, productsDataIdEdit }) {
   const { request } = useHttp()
   const { t } = useTranslation("product");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
+  // name_ru
   const [checkColor, setCheckColor] = useState(productsDataIdEdit?.colors[0]?.pivot?.id)
   const [addSizeColorById, setAddSizeColorById] = useState(false)
   const [openColorModal, setOpenColorModal] = useState(false)
@@ -260,7 +263,8 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
                   <span
                     className={`text-black text-center text-[12px] ll:text-[14px] not-italic font-AeonikProRegular  `}
                   >
-                    {data?.name_ru}
+                    {languageDetector?.typeLang === "ru" && data?.name_ru}
+                    {languageDetector?.typeLang === "uz" && data?.name_uz}
                   </span>
                 </div>
               );
@@ -280,7 +284,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
                   color={"#007DCA"}
                   size={40}
                   loading={true}
-                /> :t("TFadd")}
+                /> : t("TFadd")}
             </button>
           }
         </div>
@@ -335,7 +339,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
               </span>
             </span>
             <span className=" flex items-center text-black text-base md:text-lg xs:text-xl not-italic font-AeonikProMedium text-center">
-            {t("PRsure")}<span>?</span>
+              {t("PRsure")}<span>?</span>
             </span>
           </div>
         }

@@ -9,10 +9,12 @@ import AddBtn from "./AddBtn";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../language/LanguageItem";
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function TextFormAdd({ productsEdit, handlCallBack, loading, onClick, onEdit }) {
     const { t } = useTranslation("product");
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -174,13 +176,22 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
             <div className="flex-1">
                 <div>
                     <div className="flex md:hidden mb-4 justify-end">
-                        <Link
-                            to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
-                            target="_blank"
-                            className="text-[#007DCA] text-[14px] border-b border-[#007dca] leading-none font-AeonikProRegular"
-                        >
-                            {t("TFtranslate")}
-                        </Link>
+                        {languageDetector?.typeLang === "ru" &&
+                            <Link
+                                to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
+                        {languageDetector?.typeLang === "uz" &&
+                            <Link
+                                to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
                     </div>
                     <div
                         className="flex flex-wrap md:flex-nowrap gap-[25px] md:gap-[40px]"
@@ -425,10 +436,10 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
                                 <div className="flex-1 mb-[10px]">
                                     <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
-                                    {t("TFbrand")}
+                                        {t("TFbrand")}
                                         <span className="notRecquired ml-[5px] text-sm text-textLightColor font-AeonikProRegular">
                                             ({t("APnotNecessary")})
-                                            
+
                                         </span>
                                     </div>
                                     <Select
@@ -494,14 +505,23 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                         </div>
                     </div>
                     <div className="hidden md:block mt-[30px] font-AeonikProRegular">
-                    {t("TFtakeAdvantage")}
-                        <Link
-                            to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
-                            target="_blank"
-                            className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
-                        >
-                            {t("TFtranslate")}
-                        </Link>
+                        {t("TFtakeAdvantage")}
+                        {languageDetector?.typeLang === "ru" &&
+                            <Link
+                                to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
+                        {languageDetector?.typeLang === "uz" &&
+                            <Link
+                                to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
                     </div>
                 </div>
             </div>

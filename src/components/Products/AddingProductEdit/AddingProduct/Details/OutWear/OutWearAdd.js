@@ -10,11 +10,12 @@ import { ClipLoader } from "react-spinners";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const { t } = useTranslation("product");
-
+    const [languageDetector] = useContext(LanguageDetectorDress);
     const [state, setState] = useState({
         minBreast: null,
         maxBreast: null,
@@ -311,7 +312,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             setState({ ...state, sizeListCheck: name, saveBtnDisable: true, disableSizes: 0 })
         }
     }
-     return (
+    return (
         <div className={`w-full ${SelectedNumber == stateList?.category_id ? "" : "hidden"}  h-fit overflow-hidden  my-2 `}>
             <div>
                 <section
@@ -358,7 +359,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="relative w-full flex  gap-x-10 px-3 pt-5  ">
                                     <div className="w-[20%] flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            {t("SSchest_circumference")} 
+                                            {t("SSchest_circumference")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
@@ -457,7 +458,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     </div>
                                     <div className="w-[53%] flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                           {t('SSletter_Size')}
+                                            {t('SSletter_Size')}
                                         </p>
 
                                         <div className='w-full '>
@@ -614,7 +615,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5">
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            {t("SSwaist")} 
+                                            {t("SSwaist")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
@@ -664,7 +665,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            {t("SShip_circumference")} 
+                                            {t("SShip_circumference")}
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col ">
@@ -841,13 +842,14 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="w-full h-fit  flex items-center justify-end gap-x-5">
                                     <div className="w-full h-fit  flex items-center justify-between px-3">
                                         <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                             {t("APcolor")}:
+                                            {t("APcolor")}:
                                             {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                                 return (
                                                     <div key={data?.id} style={{ background: `${data.hex}` }}
                                                         className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                     >
-                                                        <span >{data?.name_ru} </span>
+                                                        <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                     </div>
                                                 );
                                             })}
@@ -881,7 +883,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="relative w-full flex grid grid-cols-2 gap-4 ">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            {t("SSchest_circumference")} 
+                                            {t("SSchest_circumference")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
@@ -980,7 +982,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     </div>
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                            {t("SSwaist")} 
+                                            {t("SSwaist")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="flex items-center">
@@ -1030,7 +1032,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                            {t("SShip_circumference")} 
+                                            {t("SShip_circumference")}
                                         </p>
                                         <div className="flex items-center">
                                             <div className="flex flex-col ">
@@ -1080,7 +1082,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div className="w-full flex flex-col justify-start items-center gap-y-4">
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                           {t('SSletter_Size')}
+                                            {t('SSletter_Size')}
                                         </p>
 
                                         <div className='w-full '>
@@ -1461,7 +1463,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                         <div className="flex items-center justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                 {t("APcolor")}:
+                                                {t("APcolor")}:
                                             </div>
                                         </div>
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
@@ -1469,7 +1471,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                 </div>
                                             );
                                         })}
@@ -1511,7 +1514,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         className={`idCheck flex items-center rounded-[8px] overflow-hidden border border-[#f4a622] justify-center !min-w-[18px] !min-h-[18px] md:!min-w-[24px] md:!min-h-[24px] `}>
                     </Checkbox>
                     <p className="text-black text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                    {t("PRselectAll")}
+                        {t("PRselectAll")}
                     </p>
                 </div>
                 {checked?.length ?
@@ -1538,7 +1541,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                         <button
                             className=" flex items-center gap-x-1 text-base not-italic font-AeonikProMedium">
                             <span className="text-[#b5b5b5]  text-base not-italic font-AeonikProMedium">
-                               {t("APaddColor")}
+                                {t("APaddColor")}
                             </span>
                             {addNewColor &&
                                 <span
@@ -1585,7 +1588,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-[20%] flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            {t("SSchest_circumference")} 
+                                                            {t("SSchest_circumference")}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                                                         </p>
@@ -1650,7 +1653,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     </div>
                                                     <div className="w-[53%] flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                           {t('SSletter_Size')}
+                                                            {t('SSletter_Size')}
 
                                                         </p>
 
@@ -1744,7 +1747,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="w-full flex justify-start items-center gap-x-10 px-3 pt-5  ">
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            {t("SSwaist")} 
+                                                            {t("SSwaist")}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center">
@@ -1776,7 +1779,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            {t("SShip_circumference")} 
+                                                            {t("SShip_circumference")}
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -1917,13 +1920,14 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="w-full h-fit  flex items-center justify-end gap-x-5 ">
                                                     <div className="w-full h-fit  flex items-center justify-between px-3">
                                                         <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                                             {t("APcolor")}:
+                                                            {t("APcolor")}:
                                                             {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
                                                                 return (
                                                                     <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                         className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                                     >
-                                                                        <span >{data?.name_ru} </span>
+                                                                        <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                                     </div>
                                                                 );
                                                             })}
@@ -1961,7 +1965,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="relative w-full flex  grid grid-cols-2 gap-4 ">
                                                     <div className="w-full flex flex-col ">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            {t("SSchest_circumference")} 
+                                                            {t("SSchest_circumference")}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                                                         </p>
@@ -2026,7 +2030,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     </div>
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            {t("SSwaist")} 
+                                                            {t("SSwaist")}
                                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                         </p>
                                                         <div className="flex items-center ">
@@ -2058,7 +2062,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                                            {t("SShip_circumference")} 
+                                                            {t("SShip_circumference")}
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
@@ -2088,7 +2092,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div className="w-full flex flex-col justify-start items-center grid grid-cols-1 gap-4  ">
                                                     <div className="w-full flex flex-col">
                                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                           {t('SSletter_Size')}
+                                                            {t('SSletter_Size')}
 
                                                         </p>
 
@@ -2335,7 +2339,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                             <div className="flex items-center justify-center ">
                                                                 <div
                                                                     className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                     {t("APcolor")}:
+                                                                    {t("APcolor")}:
                                                                 </div>
                                                             </div>
                                                             {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
@@ -2343,7 +2347,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                     <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                         className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] xs:text-base  not-italic font-AeonikProRegular`}
                                                                     >
-                                                                        <span >{data?.name_ru} </span>
+                                                                        <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                                     </div>
                                                                 );
                                                             })}
