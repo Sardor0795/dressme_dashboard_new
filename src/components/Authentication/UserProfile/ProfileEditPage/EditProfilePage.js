@@ -113,7 +113,7 @@ function EditProfilePage() {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, regionList: data?.data });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!dressInfo?.regionList) {
       fetchDataRegions();
@@ -124,7 +124,7 @@ function EditProfilePage() {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, typeList: data?.data });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!dressInfo?.typeList) {
       fetchDataTypes();
@@ -498,14 +498,13 @@ function EditProfilePage() {
           // setState({...state, openModalRegions: false })
         }}
         className={`fixed inset-0 z-[112] cursor-pointer duration-200 w-full h-[100vh] bg-black opacity-50
-         ${
-           state?.popConfirmDelete ||
-           openEditModal ||
-           state?.openModalRegions ||
-           state?.sellerEmailModal
-             ? ""
-             : "hidden"
-         }`}
+         ${state?.popConfirmDelete ||
+            openEditModal ||
+            state?.openModalRegions ||
+            state?.sellerEmailModal
+            ? ""
+            : "hidden"
+          }`}
       ></div>
       <div
         onClick={() => {
@@ -517,11 +516,10 @@ function EditProfilePage() {
       ></div>
       {/* Confirm Email Confirm Modal */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.sellerEmailConfirm
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sellerEmailConfirm
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <div className="flex items-center w-full justify-end">
           <button
@@ -549,11 +547,10 @@ function EditProfilePage() {
       </section>
       {/* Confirm Email Update */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.sellerEmailModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sellerEmailModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <div className="flex items-center w-full justify-end">
           <button
@@ -576,14 +573,14 @@ function EditProfilePage() {
           <button
             onClick={() => setState({ ...state, sellerEmailModal: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[48px] px-4  text-center text-base not-italic font-AeonikProMedium"
           >
             {t("cancel")}
           </button>
           {state?.sendingLoader ? (
             <button
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[38px] md:h-[48px] px-4  text-center text-base not-italic font-AeonikProMedium"
             >
               <ClipLoader
                 className="h-full py-[2px]"
@@ -596,7 +593,7 @@ function EditProfilePage() {
             <button
               onClick={() => UpdateEmailSeller()}
               type="button"
-              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+              className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-white bg-textBlueColor  h-[38px] md:h-[48px] px-4  text-center text-base not-italic font-AeonikProMedium"
             >
               {t("update")}
             </button>
@@ -605,11 +602,10 @@ function EditProfilePage() {
       </section>
       {/* Delete Account Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.popConfirmDelete
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.popConfirmDelete
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <div className="w-full flex items-center justify-end">
           <button
@@ -637,14 +633,14 @@ function EditProfilePage() {
           <button
             onClick={() => setState({ ...state, popConfirmDelete: false })}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[48px] px-4  text-center text-base not-italic font-AeonikProMedium"
           >
             {t("cancel")}
           </button>
           <button
             onClick={onUserDelete}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+            className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[48px] px-4  text-center text-base not-italic font-AeonikProMedium"
           >
             {t("dell")}
           </button>
@@ -652,9 +648,8 @@ function EditProfilePage() {
       </section>
       {/* ---password change----- */}
       <section
-        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${
-          openEditModal ? "" : "hidden z-0"
-        }`}
+        className={`fixed  max-w-[440px] md:max-w-[550px] mx-auto w-full md:w-auto z-[113] bottom-0 md:bottom-auto  duration-300 overflow-hidden ${openEditModal ? "" : "hidden z-0"
+          }`}
       >
         <EditPassword onClick={togglePassword} />
       </section>
@@ -689,7 +684,7 @@ function EditProfilePage() {
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                 type="text"
                 name="fname"
                 placeholder={t("name")}
@@ -712,7 +707,7 @@ function EditProfilePage() {
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                 type="text"
                 name="lname"
                 placeholder={t("surname")}
@@ -756,7 +751,7 @@ function EditProfilePage() {
             </div>
             <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
               <input
-                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                 type="email"
                 name="email"
                 placeholder={t("emailPlaceholder")}
@@ -781,12 +776,12 @@ function EditProfilePage() {
               {t("phone")}
             </div>
             <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
-              <div className="ss:w-[35%] md:w-[30%] box-border	 h-[38px] md:h-[42px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                <span className="w-[40px] outline-none flex items-center h-[38px] md:h-[42px] select-none  not-italic font-AeonikProRegular text-[12px] xs:text-[14px] md:text-base leading-4 text-black">
+              <div className="ss:w-[35%] md:w-[30%] box-border	 h-[38px] md:h-[48px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+                <span className="w-[40px] outline-none flex items-center h-[38px] md:h-[48px] select-none  not-italic font-AeonikProRegular text-[12px] xs:text-[14px] md:text-base leading-4 text-black">
                   +998
                 </span>
               </div>
-              <div className="ss:w-[65%] md:w-[70%] h-[38px] md:h-[42px] overflow-hidden">
+              <div className="ss:w-[65%] md:w-[70%] h-[38px] md:h-[48px] overflow-hidden">
                 <InputMask
                   mask="(99) 999-99-99"
                   name="phone"
@@ -798,9 +793,8 @@ function EditProfilePage() {
                       sellerUpdateInput: true,
                     })
                   }
-                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                    state?.sellerPhoneNum ? "font-AeonikProMedium" : null
-                  } text-[12px] xs:text-[14px] md:text-base leading-4 text-black`}
+                  className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
+                    } text-[12px] xs:text-[14px] md:text-base leading-4 text-black`}
                   placeholder={"(99) 999-99-99"}
                 ></InputMask>
               </div>
@@ -809,11 +803,10 @@ function EditProfilePage() {
           {/* Выберите регион, */}
           <div className="w-full h-fit flex justify-center ">
             <div
-              className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                state?.openModalRegions
-                  ? " bottom-0 md:flex flex-col"
-                  : "md:hidden bottom-[-1500px] z-[-10]"
-              }`}
+              className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
+                ? " bottom-0 md:flex flex-col"
+                : "md:hidden bottom-[-1500px] z-[-10]"
+                }`}
             >
               <div className="w-full flex items-center justify-between  ">
                 <span className="text-black text-base   md:text-2xl not-italic font-AeonikProRegular">
@@ -846,11 +839,10 @@ function EditProfilePage() {
                               data?.name_uz}
                           </span>
                           <span
-                            className={`${
-                              Number(activeIndex) === Number(data?.id)
-                                ? "rotate-[0deg]"
-                                : "rotate-[180deg]"
-                            } `}
+                            className={`${Number(activeIndex) === Number(data?.id)
+                              ? "rotate-[0deg]"
+                              : "rotate-[180deg]"
+                              } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
                           </span>
@@ -858,11 +850,10 @@ function EditProfilePage() {
 
                         <div
                           className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               Number(activeIndex) === Number(data?.id)
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${Number(activeIndex) === Number(data?.id)
+                              ? "openAccardion"
+                              : "CloseAccardion"
+                            } `}
                         >
                           {data?.sub_regions?.map((item) => {
                             return (
@@ -936,9 +927,9 @@ function EditProfilePage() {
                   onClick={() => {
                     setState({ ...state, openModalRegions: true });
                   }}
-                  className="w-full h-[38px] md:h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                  className="w-full h-[38px] md:h-[48px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                 >
-                  <span className=" w-full h-[38px] md:h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                  <span className=" w-full h-[38px] md:h-[48px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                     {!state?.sellerRegionId &&
                       !state?.sellerSubRegionId &&
                       t("selectRegion")}
@@ -998,7 +989,7 @@ function EditProfilePage() {
                 value={state?.sellerCardNumber}
                 mask="9999-9999-9999-9999"
                 name="credit-card-number"
-                className="outline-none	  w-full h-[38px] md:h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
+                className="outline-none	  w-full h-[38px] md:h-[48px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
                 onChange={(e) =>
                   setState({
                     ...state,
@@ -1019,11 +1010,10 @@ function EditProfilePage() {
                 }
               >
                 <span
-                  className={`${
-                    state?.sellerTypes === "INDIVIDUAL"
-                      ? "text-fullBlue"
-                      : "text-[#b5b5b5]"
-                  } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}
+                  className={`${state?.sellerTypes === "INDIVIDUAL"
+                    ? "text-fullBlue"
+                    : "text-[#b5b5b5]"
+                    } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}
                 >
                   {t("individual")}
                 </span>
@@ -1032,11 +1022,10 @@ function EditProfilePage() {
                 onClick={() => setState({ ...state, sellerTypes: "ENTITY" })}
               >
                 <span
-                  className={`${
-                    state?.sellerTypes === "ENTITY"
-                      ? "text-fullBlue"
-                      : "text-[#b5b5b5]"
-                  } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}
+                  className={`${state?.sellerTypes === "ENTITY"
+                    ? "text-fullBlue"
+                    : "text-[#b5b5b5]"
+                    } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}
                 >
                   {t("company")}
                 </span>
@@ -1044,18 +1033,17 @@ function EditProfilePage() {
             </div>
 
             {state?.sellerTypes === "ENTITY" && (
-              <div className="w-full flex flex-col h-fit  mt-[6px]">
+              <div className="w-full flex flex-col h-fit  mt-[6px] ">
                 {/* Имя организации */}
                 <div className="w-full h-fit  ">
                   <div
-                    className={` w-full flex items-center  rounded-lg ${
-                      state?.isCheckInput && !state?.companyName
-                        ? "border border-[#FFB8B8] "
-                        : "border border-searchBgColor"
-                    }`}
+                    className={` w-full flex items-center  rounded-lg ${state?.isCheckInput && !state?.companyName
+                      ? "border border-[#FFB8B8] "
+                      : "border border-searchBgColor"
+                      }`}
                   >
                     <input
-                      className="outline-none  text-[14px] md:text-base px-[16px] rounded-lg w-full h-[38px] md:h-[42px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                      className="outline-none  text-[14px] md:text-base px-[16px] rounded-lg w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                       type="text"
                       name="companyName"
                       placeholder={t("companyName")}
@@ -1076,7 +1064,7 @@ function EditProfilePage() {
             {state?.sellerTypes === "INDIVIDUAL" && (
               <div className="w-full flex items-center ">
                 <Select
-                  className="h-[38px] md:h-[42px]  text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                  className="h-[38px] md:h-[48px]  text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
                   placeholder={t("type")}
                   optionFilterProp="children"
                   onChange={(e) =>
@@ -1107,59 +1095,92 @@ function EditProfilePage() {
               </div>
             )}
           </div>
-          <div
-            className={`${
-              state?.sellerTypes === "ENTITY" ? "flex" : "hidden"
-            }  w-full h-fit flex flex-col    `}
-          >
-            <span className="w-full  box-border flex text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular tracking-[0,16px]">
-              {t("type")}
-            </span>
-            <div
-              className={`h-[38px] md:h-[44px] w-full mt-[6px] overflow-hidden rounded-lg    ${
-                state?.isCheckInput && state?.sellerTypes === "ENTITY"
-                  ? "border border-[#FFB8B8] bg-[#FFF6F6] "
-                  : "border border-searchBgColor"
-              }`}
-            >
-              <Select
-                className={`   h-full text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full  cursor-pointer`}
-                placeholder={t("type")}
-                style={{ height: 42 }}
-                optionFilterProp="children"
-                onChange={(e) => {
-                  setState({
-                    ...state,
-                    sellerTypeId: e,
-                    sellerUpdateInput: true,
-                  });
-                }}
-                value={dressInfo?.typeList?.company
-                  ?.filter((e) => e?.id == state?.sellerTypeId)
-                  ?.map((item) => {
-                    return languageDetector?.typeLang === "ru"
-                      ? item?.name_ru
-                      : item?.name_uz;
-                  })}
-                // size="large"
-                options={dressInfo?.typeList?.company?.map((item) => {
-                  return {
-                    value: item?.id,
-                    label:
-                      languageDetector?.typeLang === "ru"
+          {state?.sellerTypes === "ENTITY" &&
+            <div className={` w-full flex flex-col   `}>
+              <span className="w-full  box-border flex text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular tracking-[0,16px]">
+                {t("type")}
+              </span>
+              <div className={`w-full mt-[6px] profileSelect flex items-center    ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
+                    ? "border border-[#FFB8B8] bg-[#FFF6F6] "
+                    : "  "
+                  }
+              `}>
+                <Select
+                  className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
+                  placeholder={t("type")}
+                  optionFilterProp="children"
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      sellerTypeId: e,
+                      sellerUpdateInput: true,
+                    });
+                  }}
+                  value={dressInfo?.typeList?.company
+                    ?.filter((e) => e?.id == state?.sellerTypeId)
+                    ?.map((item) => {
+                      return languageDetector?.typeLang === "ru"
                         ? item?.name_ru
-                        : item?.name_uz,
-                  };
-                })}
-              />
+                        : item?.name_uz;
+                    })}
+                  // size="large"
+                  options={dressInfo?.typeList?.company?.map((item) => {
+                    return {
+                      value: item?.id,
+                      label:
+                        languageDetector?.typeLang === "ru"
+                          ? item?.name_ru
+                          : item?.name_uz,
+                    };
+                  })}
+                />
+              </div>
+              {/* <div
+                className={`w-full mt-[6px]   overflow-hidden rounded-lg border border-green-600    
+              ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
+                    ? "border border-[#FFB8B8] bg-[#FFF6F6] "
+                    : " "
+                  }
+              `}
+              >
+                <Select
+                  className=" h-full  border border-red-600  text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                  placeholder={t("type")}
+                  // style={{ height: 42 }}
+                  optionFilterProp="children"
+                  onChange={(e) => {
+                    setState({
+                      ...state,
+                      sellerTypeId: e,
+                      sellerUpdateInput: true,
+                    });
+                  }}
+                  value={dressInfo?.typeList?.company
+                    ?.filter((e) => e?.id == state?.sellerTypeId)
+                    ?.map((item) => {
+                      return languageDetector?.typeLang === "ru"
+                        ? item?.name_ru
+                        : item?.name_uz;
+                    })}
+                  // size="large"
+                  options={dressInfo?.typeList?.company?.map((item) => {
+                    return {
+                      value: item?.id,
+                      label:
+                        languageDetector?.typeLang === "ru"
+                          ? item?.name_ru
+                          : item?.name_uz,
+                    };
+                  })}
+                />
+              </div> */}
             </div>
-          </div>
+          }
 
           {/* EditPassword */}
           <div
-            className={`w-full  flex items-center   xs:mt-5  ${
-              state?.sellerTypes === "ENTITY" ? "justify-start" : "justify-end"
-            }`}
+            className={`w-full  flex items-center   xs:mt-5  ${state?.sellerTypes === "ENTITY" ? "justify-start" : "justify-end"
+              }`}
           >
             <button
               onClick={() => setOpenEditModal(true)}

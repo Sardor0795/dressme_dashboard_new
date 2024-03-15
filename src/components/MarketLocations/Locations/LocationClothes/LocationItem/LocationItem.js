@@ -160,11 +160,10 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
   }
 
   function addNewProductId() {
-    // setDressInfo({ ...dressInfo, locationIdAddProduct: data?.id });
-    // navigate(`/products/location/add/:${Number(data?.shop_id)}`);
+    setDressInfo({ ...dressInfo, locationIdAddProduct: data?.id });
+    navigate(`/products/location/add/${Number(data?.shop_id)}`);
   }
-  console.log(data, 'data');
-  return (
+   return (
     <div className="w-full">
       <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
@@ -200,9 +199,9 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
               onChange={onCheckAllChange}
               checked={checkAll}
 
-              className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[20px] !min-h-[20px] `}
+              className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center w-[20px] h-[20px] `}
             ></Checkbox>
-            <p className="text-black text-[13px] md:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
+            <p className="text-black text-[12px]   not-italic flex items-center font-AeonikProMedium mr-[20px]">
               {dressInfo?.regionList?.regions
                 ?.filter((e) => e?.id == data?.region_id)
                 ?.map((values, index) => {
@@ -234,7 +233,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
             onClick={() => addNewProductId()}
             className="active:scale-95 cursor-pointer active:opacity-70 flex items-center gap-x-[4px]"
           >
-            <span className="text-addWearColorText text-[13px] not-italic font-AeonikProMedium">
+            <span className="text-addWearColorText text-[12px] not-italic font-AeonikProMedium">
               {t("add_cloth")}
             </span>
             <span>
@@ -423,8 +422,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                 )
                 ?.map((itemValue, index) => {
-                  console.log(itemValue, 'itemValue');
-                  return (
+                   return (
                     <List.Item key={index} className="w-full  mt-6">
                       <div className="w-full    flex flex-col items-center text-tableTextTitle">
                         <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
@@ -439,7 +437,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                   {index + 1}
                                 </td>
                                 <td className="w-[14%]  h-full bg-white flex items-center justify-center  rounded-[12px]">
-                                  <span className="w-[110px] h-[140px] border border-borderColor rounded-lg overflow-hidden">
+                                  <span className="w-[110px] h-[140px] border  border-lightBorderColor rounded-lg overflow-hidden">
                                     <img
                                       src={
                                         itemValue?.photos[0]?.url_photo ||

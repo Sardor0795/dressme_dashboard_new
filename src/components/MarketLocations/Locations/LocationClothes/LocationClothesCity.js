@@ -17,6 +17,7 @@ import { FaCheck } from "react-icons/fa6";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import LoadingForSeller from "../../../Loading/LoadingFor";
 
 const url = "https://api.dressme.uz/api/seller";
 export default function LocationClothesCity() {
@@ -50,7 +51,7 @@ export default function LocationClothesCity() {
       top: 0,
     });
   }, []);
-  const [allChecked, setAllChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleAllCheckList(childData, shopId) {
     setState({ ...state, getCheckListItem: childData, shopId: shopId });
@@ -59,19 +60,22 @@ export default function LocationClothesCity() {
   const NewId = id.replace(":", "");
   // ------------GET  Has Magazin ?-----------------
   const [getListItem, setGetListItem] = useState();
-  const { refetch } = useQuery(
-    ["location_store_id"],
-    () => {
-      return request({
-        url: `/shops/locations/${NewId}/show-products-by-location`,
-        token: true,
-      });
-    },
+  const { refetch, isLoading } = useQuery(["location_store_id"], () => {
+    setLoading(true)
+    return request({
+      url: `/shops/locations/${NewId}/show-products-by-location`,
+      token: true,
+    });
+  },
     {
       onSuccess: (res) => {
         setGetListItem(res?.location);
+        setLoading(false)
+
       },
       onError: (err) => {
+        setLoading(false)
+
         throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
@@ -120,9 +124,9 @@ export default function LocationClothesCity() {
 
   function addNewProductId() {
     setDressInfo({ ...dressInfo, locationIdAddProduct: getListItem?.id });
-    navigate(`/products/location/add/:${Number(getListItem?.shop_id)}`);
+    navigate(`/products/location/add/${Number(getListItem?.shop_id)}`);
   }
-
+  console.log(isLoading, 'isFetched');
   return (
     <div className="px-4 md:px-10 ">
       <section
@@ -343,15 +347,15 @@ export default function LocationClothesCity() {
 
       <div className="mx-auto font-AeonikProRegular text-[16px]">
 
-
-        <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]  ">
-          <LocationItem
-            data={getListItem}
-            onRefetch={refetch}
-            searchName={state?.searchName}
-            allCheckedList={handleAllCheckList}
-          />
-        </div>
+        {loading ? <LoadingForSeller /> :
+          <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]  ">
+            <LocationItem
+              data={getListItem}
+              onRefetch={refetch}
+              searchName={state?.searchName}
+              allCheckedList={handleAllCheckList}
+            />
+          </div>}
       </div>
     </div>
   );

@@ -503,7 +503,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
-// border-red
+  // border-red
   return (
     <div className="w-full  md:px-10">
       <section
@@ -1991,37 +1991,25 @@ export default function ProductLocationsList() {
                                                   className="w-[18px] h-[18px] md:w-[25px] md:h-[25px] idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center"
                                                 ></button>
                                               )}
-                                              <p className="text-black text-[13px] md:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                                                {dressInfo?.regionList?.regions
-                                                  ?.filter(
-                                                    (e) =>
-                                                      e?.id == resData?.region_id
-                                                  )
-                                                  ?.map((values, index) => {
-                                                    return (
-                                                      <div>
-                                                        {languageDetector?.typeLang === "ru" && values?.type?.name_ru}
-                                                        {languageDetector?.typeLang === "uz" && values?.type?.name_uz}
-                                                        ,
-                                                        {values?.sub_regions
-                                                          ?.filter(
-                                                            (e) =>
-                                                              e?.id ==
-                                                              resData?.sub_region_id
-                                                          )
-                                                          ?.map((valueSub) => {
-                                                            return (
-                                                              <span className="px-1">
-
-                                                                {languageDetector?.typeLang === "ru" && valueSub?.type?.name_ru}
-                                                                {languageDetector?.typeLang === "uz" && valueSub?.type?.name_uz}
-                                                                ,
-                                                              </span>
-                                                            );
-                                                          })}
-                                                      </div>
-                                                    );
-                                                  })}
+                                              <p className="text-black text-[13px] md:text-base not-italic  flex items-center font-AeonikProMedium mr-[20px]">
+                                                {dressInfo?.regionList?.regions?.filter((e) => e?.id == resData?.region_id)?.map((values, index) => {
+                                                  return (
+                                                    <div>
+                                                      {languageDetector?.typeLang === "ru" && values?.name_ru}
+                                                      {languageDetector?.typeLang === "uz" && values?.name_uz}
+                                                      ,
+                                                      {values?.sub_regions?.filter((e) => e?.id == resData?.sub_region_id)?.map((valueSub) => {
+                                                        return (
+                                                          <span className="px-1">
+                                                            {languageDetector?.typeLang === "ru" && valueSub?.name_ru}
+                                                            {languageDetector?.typeLang === "uz" && valueSub?.name_uz}
+                                                            ,
+                                                          </span>
+                                                        );
+                                                      })}
+                                                    </div>
+                                                  );
+                                                })}
                                                 <span className="hidden md:flex items-center ml-1">
                                                   ({resData?.address})
                                                 </span>
@@ -2527,7 +2515,7 @@ export default function ProductLocationsList() {
                                                                       }
                                                                       className="w-[30%] h-full  flex items-center justify-center "
                                                                     >
-                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
+                                                                      {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                       {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                     </td>
 
