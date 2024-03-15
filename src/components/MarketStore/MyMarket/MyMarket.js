@@ -61,9 +61,8 @@ function MyMarket() {
       }
     });
   }
-  
-  console.log(helperDatainform?.shopsList?.shops, "data-status"); 
 
+  console.log(helperDatainform?.shopsList?.shops, "data-status");
 
   return (
     <div className="w-full h-full  py-1 px-4 md:px-10">
@@ -171,17 +170,21 @@ function MyMarket() {
                       <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
                     </div>
                     <div className="w-full md:w-fit flex items-center my-[15px] md:my-0 ">
-                      <figure className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] overflow-hidden md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
+                      <figure className="max-w-[80px] max-h-[80px] md:max-w-[120px] md:max-h-[120px] min-w-[80px] min-h-[80px] md:min-w-[120px] md:min-h-[120px] overflow-hidden md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
                         <img
                           src={data?.url_logo_photo}
                           alt="url_logo_photo"
                           className="w-full h-full object-cover"
                         />
                       </figure>
-                      <div className="w-fit flex items-center gap-y-3 flex-col ml-5 md:ml-8 ">
-                        <div className="h-fit flex items-center  ">
-                          <p className="w-fit text-[13px] text-start flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                      <div className="w-fit flex gap-y-3 flex-col ml-5 md:ml-8 ">
+                        <div className="h-fit flex items-center  justify-start">
+                          <p className="md:hidden w-fit text-[13px] text-start flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
                             {data?.name || null}
+                          </p>
+                          <p className="relative md:block hidden max-h-[56px] overflow-hidden w-full break-all md:pr-4 text-[13px] md:w-[350px] ls:text-[14px] xs:text-xl font-AeonikProMedium">
+                            {data?.name || null} Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, sint? Dolor nobis neque omnis ipsa! Doloremque corporis maiores sunt officia ipsam rem et accusantium ducimus placeat doloribus, aliquid atque facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis obcaecati ipsam ea accusamus perferendis ratione iure provident, tenetur molestiae id voluptate recusandae at, enim ex odio amet vitae ad libero.
+                            <span className="absolute right-[16px] top-[28px] w-full block linearGr h-[28px]"></span>
                           </p>
                         </div>
                         {data?.overall_rating && (
