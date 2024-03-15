@@ -10,13 +10,14 @@ import { ClipLoader } from "react-spinners";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 
 function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor, DeleteSize, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const SelectedNumber = 3
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const { t } = useTranslation("product");
-
+    const [languageDetector] = useContext(LanguageDetectorDress);
     const [state, setState] = useState({
         minBreast: "",
         maxBreast: "",
@@ -858,7 +859,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                 </div>
                                             );
                                         })}
@@ -1513,7 +1515,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                 </div>
                                             );
                                         })}
@@ -1963,7 +1966,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                                 >
-                                                                    <span >{data?.name_ru} </span>
+                                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                                 </div>
                                                             );
                                                         })}
@@ -2391,7 +2395,8 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px]   px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] xs:text-base  not-italic font-AeonikProRegular`}
                                                                 >
-                                                                    <span >{data?.name_ru} </span>
+                                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                                 </div>
                                                             );
                                                         })}

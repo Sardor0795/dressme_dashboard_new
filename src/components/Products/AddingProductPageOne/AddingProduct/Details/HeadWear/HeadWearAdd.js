@@ -216,7 +216,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
                                     type="number"
                                     name="age"
                                     className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                    placeholder="age"
+                                    placeholder=" "
                                     value={state?.age}
                                     onChange={(e) => setState({ ...state, age: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()}

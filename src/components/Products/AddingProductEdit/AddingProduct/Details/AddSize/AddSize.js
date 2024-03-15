@@ -810,7 +810,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         type="number"
                                         name="ageNum"
                                         className="inputStyle w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                        placeholder="age"
+                                        placeholder=" "
                                         value={state?.ageNum}
                                         onChange={(e) => setState({ ...state, ageNum: e.target.value })}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish

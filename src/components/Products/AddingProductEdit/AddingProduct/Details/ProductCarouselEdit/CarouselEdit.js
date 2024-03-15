@@ -19,6 +19,7 @@ const url = "https://api.dressme.uz/api/seller";
 const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorListForTest, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
   const { t } = useTranslation("product");
+    // name_ru
 
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);

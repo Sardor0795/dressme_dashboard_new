@@ -8,13 +8,14 @@ import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 
 function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, colorListForTest, selectColorID, productsDataIdEdit, onClick }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const { t } = useTranslation("product");
-
-    const [state, setState] = useState({
+   
+     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
         sizeCheck: false,
@@ -932,7 +933,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     type="number"
                                     name="ageNum"
                                     className="inputStyle w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                    placeholder="age"
+                                    placeholder=" "
                                     value={state?.ageNum}
                                     onChange={(e) => setState({ ...state, ageNum: e.target.value })}
                                     onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish

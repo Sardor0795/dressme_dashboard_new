@@ -11,13 +11,14 @@ import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
 import { HelperData } from "../../../../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [helperDatainform, setHelperDatainform] = useContext(HelperData);
     const { t } = useTranslation("product");
-
-    const [state, setState] = useState({
+ const [languageDetector] = useContext(LanguageDetectorDress);
+     const [state, setState] = useState({
         minHeadGirth: null,
         maxHeadGirth: null,
         sizeCheck: false,
@@ -527,7 +528,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
                                                 </div>
                                             );
                                         })}
@@ -816,7 +818,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
                                                 </div>
                                             );
                                         })}
@@ -1064,7 +1067,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                             <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                 className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                             >
-                                                                <span >{data?.name_ru} </span>
+                                                                <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
                                                             </div>
                                                         );
                                                     })}
@@ -1243,7 +1247,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                             <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                 className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                             >
-                                                                <span >{data?.name_ru} </span>
+                                                                <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
                                                             </div>
                                                         );
                                                     })}

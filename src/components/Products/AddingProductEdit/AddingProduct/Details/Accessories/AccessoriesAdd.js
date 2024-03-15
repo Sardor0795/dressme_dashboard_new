@@ -10,11 +10,13 @@ import { BiCheck } from "react-icons/bi";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 
 const url = "https://api.dressme.uz/api/seller";
 function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, addNewColor, onRefetch, onDeleteId, checkColor, pivotColorId, handleGetSizeCheckedList }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const { t } = useTranslation("product");
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [state, setState] = useState({
         rowSize: null,
@@ -339,7 +341,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                     <div className="w-fit flex flex-col ">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                        {t('SSsize')}{" "}
+                                            {t('SSsize')}{" "}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
@@ -705,13 +707,16 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                 </div>
                                 <div className="w-full h-fit  flex items-center justify-between px-3">
                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                    {t("APcolor")}:
+                                        {t("APcolor")}:
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                             return (
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span >
+                                                        {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}
+                                                    </span>
                                                 </div>
                                             );
                                         })}
@@ -1213,7 +1218,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                         <div className="flex items-center justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                 {t("APcolor")}:
+                                                {t("APcolor")}:
                                             </div>
                                         </div>
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
@@ -1221,7 +1226,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
-                                                    <span >{data?.name_ru} </span>
+                                                    <span > {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}                         </span>
                                                 </div>
                                             );
                                         })}
@@ -1261,7 +1267,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center md:!min-w-[24px] md:!min-h-[24px] `}>
                     </Checkbox>
                     <p className="text-black text-[14px] xs:text-base  not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                    {t("PRselectAll")}
+                        {t("PRselectAll")}
                     </p>
                 </div>
                 {checked?.length ?
@@ -1288,7 +1294,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         <button
                             className=" flex items-center gap-x-1 text-[14px] xs:text-base  not-italic font-AeonikProMedium">
                             <span className="text-[#b5b5b5]  text-[14px] xs:text-base  not-italic font-AeonikProMedium">
-                            {t("APaddColor")}
+                                {t("APaddColor")}
                             </span>
                             {addNewColor &&
                                 <span
@@ -1602,13 +1608,14 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 </div>
                                                 <div className="w-full h-fit  flex items-center justify-between px-3">
                                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                                    {t("APcolor")}:
+                                                        {t("APcolor")}:
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
                                                             return (
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                                 >
-                                                                    <span >{data?.name_ru} </span>
+                                                                    <span > {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}                         </span>
                                                                 </div>
                                                             );
                                                         })}
@@ -1960,7 +1967,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         <div className="flex items-center  justify-center ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                 {t("APcolor")}:
+                                                                {t("APcolor")}:
                                                             </div>
                                                         </div>
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
@@ -1968,7 +1975,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3 py-1 px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                                 >
-                                                                    <span >{data?.name_ru} </span>
+                                                                    <span > {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}                         </span>
                                                                 </div>
                                                             );
                                                         })}

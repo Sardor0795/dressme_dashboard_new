@@ -10,10 +10,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../language/LanguageItem";
 const { REACT_APP_BASE_URL } = process.env;
 
 function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
     const { t } = useTranslation("product");
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -165,13 +167,22 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
             <div className="flex-1">
                 <div>
                     <div className="flex md:hidden mb-4 justify-end">
-                        <Link
-                            to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
-                            target="_blank"
-                            className="text-[#007DCA] text-[14px] border-b border-[#007dca] leading-none font-AeonikProRegular"
-                        >
-                            {t("TFtranslate")}
-                        </Link>
+                        {languageDetector?.typeLang === "ru" &&
+                            <Link
+                                to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
+                        {languageDetector?.typeLang === "uz" &&
+                            <Link
+                                to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
                     </div>
                     <div
                         className="flex flex-wrap md:flex-nowrap gap-[25px] md:gap-[40px]"
@@ -477,13 +488,22 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                     </div>
                     <div className="hidden md:block mt-[30px] font-AeonikProRegular">
                         {t("TFtakeAdvantage")}
-                        <Link
-                            to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
-                            target="_blank"
-                            className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
-                        >
-                            {t("TFtranslate")}
-                        </Link>
+                        {languageDetector?.typeLang === "ru" &&
+                            <Link
+                                to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
+                        {languageDetector?.typeLang === "uz" &&
+                            <Link
+                                to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
+                                target="_blank"
+                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                            >
+                                {t("TFtranslate")}
+                            </Link>}
                     </div>
                 </div>
             </div>
