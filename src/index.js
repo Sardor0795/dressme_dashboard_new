@@ -10,6 +10,7 @@ import SellerRefreshContext from "./hook/SellerRefreshToken";
 import HelperDataStore from "./hook/HelperDataStore";
 import { DressmeLanguage } from "./language/LanguageItem";
 import "./language/i18n";
+import RegionList from "./hook/RegionList";
 
 const queryClient = new QueryClient();
 
@@ -19,15 +20,17 @@ root.render(
   <BrowserRouter>
     <DressmeLanguage>
       <ContextTeam>
-        <SellerRefreshContext>
-          <SellerUserContext>
-            <HelperDataStore>
-              <QueryClientProvider client={queryClient}>
-                <App />
-              </QueryClientProvider>
-            </HelperDataStore>
-          </SellerUserContext>
-        </SellerRefreshContext>
+        <RegionList>
+          <SellerRefreshContext>
+            <SellerUserContext>
+              <HelperDataStore>
+                <QueryClientProvider client={queryClient}>
+                  <App />
+                </QueryClientProvider>
+              </HelperDataStore>
+            </SellerUserContext>
+          </SellerRefreshContext>
+        </RegionList>
       </ContextTeam>
     </DressmeLanguage>
   </BrowserRouter>

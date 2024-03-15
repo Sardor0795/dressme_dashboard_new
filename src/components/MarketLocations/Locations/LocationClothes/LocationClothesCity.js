@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import { BackBtn } from "../../../backBtn/backBtn";
+import { dressRegionList } from "../../../../hook/RegionList";
 
 const url = "https://api.dressme.uz/api/seller";
 export default function LocationClothesCity() {
@@ -27,6 +28,7 @@ export default function LocationClothesCity() {
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   const navigate = useNavigate();
   const [state, setState] = useState({
@@ -276,7 +278,7 @@ export default function LocationClothesCity() {
         <section className="hidden md:flex gap-x-4">
           <p className="text-black text-xl not-italic font-AeonikProMedium mr-[20px]">
             <p className="text-black text-[13px] md:text-lg not-italic flex items-center font-AeonikProMedium mr-[20px]">
-              {dressInfo?.regionList?.regions
+              {regionList?.regions
                 ?.filter((e) => e?.id == getListItem?.region_id)
                 ?.map((values, index) => {
                   return (

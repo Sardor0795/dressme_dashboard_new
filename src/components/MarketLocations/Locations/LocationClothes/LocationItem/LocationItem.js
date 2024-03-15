@@ -18,11 +18,13 @@ import axios from "axios";
 import { dressMainData } from "../../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../../language/LanguageItem";
+import { dressRegionList } from "../../../../../hook/RegionList";
 const url = "https://api.dressme.uz/api/seller";
 const { REACT_APP_BASE_URL } = process.env;
 
 function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -202,7 +204,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
               className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center w-[20px] h-[20px] `}
             ></Checkbox>
             <p className="text-black text-[12px]   not-italic flex items-center font-AeonikProMedium mr-[20px]">
-              {dressInfo?.regionList?.regions
+              {regionList?.regions
                 ?.filter((e) => e?.id == data?.region_id)
                 ?.map((values, index) => {
                   return (

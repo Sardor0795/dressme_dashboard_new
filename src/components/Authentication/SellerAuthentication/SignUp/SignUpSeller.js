@@ -14,6 +14,7 @@ import LoadingForSeller from "../../../Loading/LoadingFor";
 import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
+import { dressRegionList } from "../../../../hook/RegionList";
 const { REACT_APP_BASE_URL } = process.env;
 
 const SignUpSeller = () => {
@@ -24,6 +25,7 @@ const SignUpSeller = () => {
   const navigate = useNavigate()
   const [naturalPerson, setNaturalPerson] = useState(true);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   const [api, contextHolder] = notification.useNotification();
   const [state, setState] = useState({
@@ -125,7 +127,7 @@ const SignUpSeller = () => {
 
       }
     };
-    if (!dressInfo?.regionList) {
+    if (!regionList) {
       fetchDataRegions();
     }
     if (!dressInfo?.typeList) {
@@ -432,8 +434,8 @@ const SignUpSeller = () => {
                           <MenuCloseIcons colors="#000" /></span>
                       </div>
                       <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                        {dressInfo?.regionList?.regions ?
-                          dressInfo?.regionList?.regions?.map((data, index) => {
+                        {regionList?.regions ?
+                          regionList?.regions?.map((data, index) => {
                             return (
                               <div key={data?.id} className="w-full  h-fit  ">
                                 <div
@@ -511,7 +513,7 @@ const SignUpSeller = () => {
                         <span className=" w-full h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                           {!state?.region && !state?.sub_region && "Выберите регион"}
 
-                          {dressInfo?.regionList?.regions?.filter(e => e.id == state?.region).map(item => {
+                          {regionList?.regions?.filter(e => e.id == state?.region).map(item => {
                             return <span key={item?.id} className="flex items-center text-[#000] text-[14px] sm:text-base">
                               {item?.name_ru},
                               {item?.sub_regions?.filter(i => i.id == state?.sub_region).map(item => {

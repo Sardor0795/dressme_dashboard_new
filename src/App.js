@@ -6,28 +6,25 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { HelperData } from "./hook/HelperDataStore";
 import { SellerRefresh } from "./hook/SellerRefreshToken";
+import { dressRegionList } from "./hook/RegionList";
 const { REACT_APP_BASE_URL } = process.env;
 
 function App() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
   const [sellerRefreshToken] = useContext(SellerRefresh);
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   useEffect(() => {
     const fetchDataRegions = async () => {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, regionList: data?.data });
+          setRegionList(data?.data);
         }
-      } catch (error) {
-        if (error?.response?.status === 401) {
-          sellerRefreshToken();
-        }
-      }
+      } catch (error) { }
     };
-
-    if (!dressInfo?.regionList) {
+    if (!regionList) {
       fetchDataRegions();
     }
   }, []);

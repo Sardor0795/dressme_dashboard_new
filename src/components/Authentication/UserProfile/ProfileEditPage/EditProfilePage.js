@@ -25,6 +25,7 @@ import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
 import { ClipLoader } from "react-spinners";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { dressRegionList } from "../../../../hook/RegionList";
 const { REACT_APP_BASE_URL } = process.env;
 
 function EditProfilePage() {
@@ -34,6 +35,7 @@ function EditProfilePage() {
 
   const { t } = useTranslation("profil");
   const [languageDetector] = useContext(LanguageDetectorDress);
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   const navigate = useNavigate();
 
@@ -111,11 +113,11 @@ function EditProfilePage() {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, regionList: data?.data });
+          setRegionList(data?.data);
         }
       } catch (error) { }
     };
-    if (!dressInfo?.regionList) {
+    if (!regionList) {
       fetchDataRegions();
     }
     const fetchDataTypes = async () => {
@@ -129,7 +131,7 @@ function EditProfilePage() {
     if (!dressInfo?.typeList) {
       fetchDataTypes();
     }
-  }, [dressInfo?.regionList, dressInfo?.typeLis]);
+  }, [regionList, dressInfo?.typeLis]);
 
   const fetchData = async (customHeaders) => {
     try {
@@ -824,8 +826,8 @@ function EditProfilePage() {
               </div>
 
               <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                {dressInfo?.regionList?.regions ? (
-                  dressInfo?.regionList?.regions?.map((data, index) => {
+                {regionList?.regions ? (
+                  regionList?.regions?.map((data, index) => {
                     return (
                       <div key={data?.id} className="w-full  h-fit  ">
                         <div
@@ -935,7 +937,7 @@ function EditProfilePage() {
                       t("selectRegion")}
                     {state?.sellerRegionId && state?.sellerSubRegionId && (
                       <div className="flex items-center">
-                        {dressInfo?.regionList?.regions
+                        {regionList?.regions
                           ?.filter(
                             (e) =>
                               Number(e.id) === Number(state?.sellerRegionId)
@@ -1101,9 +1103,9 @@ function EditProfilePage() {
                 {t("type")}
               </span>
               <div className={`w-full mt-[6px] profileSelect flex items-center    ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
-                    ? "border border-[#FFB8B8] bg-[#FFF6F6] "
-                    : "  "
-                  }
+                ? "border border-[#FFB8B8] bg-[#FFF6F6] "
+                : "  "
+                }
               `}>
                 <Select
                   className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
