@@ -76,10 +76,10 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
   };
 
   const goMapCity = (id) => {
-    navigate(`/locations-store/city/:${id}`);
+    navigate(`/locations-store/city/${id}`);
   };
   const goMapWear = (id) => {
-    navigate(`/locations-store/wears/:${id}`);
+    navigate(`/locations-store/wears/${id}`);
   };
 
   const [checked, setChecked] = useState([]);

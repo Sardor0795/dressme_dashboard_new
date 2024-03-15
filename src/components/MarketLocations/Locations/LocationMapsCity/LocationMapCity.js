@@ -44,6 +44,8 @@ export default function LocationMapCity() {
     idAddress: "",
     idAssistantMessenger: "",
     idAssistantName: "",
+    assistantNameFirstTg: "",
+    assistantNameSecondTg: "",
     idAssistantPhone: "",
     idAssistantPhoneCode: "998",
     idSecondAssistantMessegner: "",
@@ -52,7 +54,6 @@ export default function LocationMapCity() {
     idSecondAssistantPhoneCode: "998",
     idLongitudeById: "",
     idLatitudeById: "",
-    idAssistantName: "",
     idShopId: "",
     idRegionId: "",
     idSupRregionId: "",
@@ -198,9 +199,9 @@ export default function LocationMapCity() {
           setState({
             ...state,
             idAddress: res?.location?.address,
-            idAssistantMessenger: res?.location?.assistant_messenger,
+            assistantNameFirstTg: res?.location?.assistant_messenger,
             idAssistantName: res?.location?.assistant_name,
-            idSecondAssistantMessegner:
+            assistantNameSecondTg:
               res?.location?.second_assistant_messenger,
             idSecondAssistantName: res?.location?.second_assistant_name,
             idLecondAssistantPhone: res?.location?.second_assistant_phone,
@@ -260,7 +261,7 @@ export default function LocationMapCity() {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, regionList: data?.data });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!dressInfo?.regionList) {
       fetchDataRegions();
@@ -382,6 +383,8 @@ export default function LocationMapCity() {
     form.append("work_time_to", state?.idWorkTimeTo);
     form.append("assistant_name", state?.idAssistantName);
     form.append("assistant_phone", assistantPhoneNumberFirst);
+    state?.assistantNameFirstTg && form.append("assistant_messenger", state?.assistantNameFirstTg);
+    state?.assistantNameSecondTg && form.append("second_assistant_messenger", state?.assistantNameSecondTg);
     state?.idSecondAssistantName &&
       form.append("second_assistant_name", state?.idSecondAssistantName);
     state?.idSecondAssistantPhone &&
@@ -536,6 +539,22 @@ export default function LocationMapCity() {
       setState({ ...state, idSecondAssistantName: null });
     }
   };
+  const handleInputAdminNameFirstTg = (e) => {
+    if (e.target.value) {
+      setState({
+        ...state, assistantNameFirstTg: e.target.value,
+      });
+    } else {
+      setState({ ...state, assistantNameFirstTg: null });
+    }
+  };
+  const handleInputAdminNameSecondTg = (e) => {
+    if (e.target.value) {
+      setState({ ...state, assistantNameSecondTg: e.target.value, });
+    } else {
+      setState({ ...state, assistantNameSecondTg: null });
+    }
+  };
   return (
     <div>
       {loaderEdit ? (
@@ -563,11 +582,10 @@ export default function LocationMapCity() {
          ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
             ></section>
             <div
-              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                openRegionModal
-                  ? " bottom-0 md:flex flex-col"
-                  : "md:hidden bottom-[-1500px] z-[-10]"
-              }`}
+              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
+                ? " bottom-0 md:flex flex-col"
+                : "md:hidden bottom-[-1500px] z-[-10]"
+                }`}
             >
               <div className="w-full flex items-center justify-between font-AeonikProMedium">
                 <span className="text-black text-lg not-italic font-AeonikProMedium">
@@ -597,11 +615,10 @@ export default function LocationMapCity() {
                               data?.name_uz}
                           </span>
                           <span
-                            className={`${
-                              activeIndex == data?.id
-                                ? "rotate-[0deg]"
-                                : "rotate-[180deg]"
-                            } `}
+                            className={`${activeIndex == data?.id
+                              ? "rotate-[0deg]"
+                              : "rotate-[180deg]"
+                              } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
                           </span>
@@ -609,11 +626,10 @@ export default function LocationMapCity() {
 
                         <div
                           className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                              ? "openAccardion"
+                              : "CloseAccardion"
+                            } `}
                         >
                           {data?.sub_regions?.map((item) => {
                             return (
@@ -672,11 +688,10 @@ export default function LocationMapCity() {
             </div>
             {/* Delete Product Of Pop Confirm */}
             <section
-              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-                deleteModal
-                  ? " bottom-0 md:flex"
-                  : "md:hidden bottom-[-800px] z-[-10]"
-              }`}
+              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
+                }`}
             >
               <button
                 onClick={() => setDeleteModal(false)}
@@ -721,14 +736,14 @@ export default function LocationMapCity() {
                 <button
                   onClick={() => setDeleteModal(false)}
                   type="button"
-                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[32px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textBlueColor text-textBlueColor bg-white h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
                 >
                   {t("cancel")}
                 </button>
                 <button
                   onClick={() => onLocaTionDelete()}
                   type="button"
-                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[32px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
+                  className="w-1/2 xs:w-[45%] active:scale-95  active:opacity-70 flex items-center justify-center rounded-[12px] border border-textRedColor text-white bg-[#FF4747]  h-[38px] md:h-[42px] px-4  text-center text-base not-italic font-AeonikProMedium"
                 >
                   {t("delete")}
                 </button>
@@ -998,7 +1013,7 @@ export default function LocationMapCity() {
                   onClick={() => {
                     navigate(-1);
                   }}
-                  className="md:w-8 md:h-8 w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+                  className="md:w-8 md:h-[38px] w-6 h-6 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
                 >
                   <AiOutlineLeft />
                 </button>
@@ -1045,9 +1060,8 @@ export default function LocationMapCity() {
                               placeholder={t("enter_address")}
                               id="ForSearch"
                               name="search"
-                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
-                                !Boolean(forMaps?.title?.length) ? "" : "hidden"
-                              }`}
+                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps?.title?.length) ? "" : "hidden"
+                                }`}
                             />
 
                             <div
@@ -1148,7 +1162,7 @@ export default function LocationMapCity() {
                         className="w-full h-full object-cover rounded-lg"
                       />
                     ) : (
-                      <span className="leading-none  text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                      <span className="leading-none  text-[11px] xs:text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                         {t("photo_location")}
                       </span>
                     )}
@@ -1171,7 +1185,7 @@ export default function LocationMapCity() {
                           className="w-full h-full object-cover rounded-lg"
                         />
                       ) : (
-                        <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="leading-none text-[11px] xs:text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                           {t("photo_location")}
                         </span>
                       )}
@@ -1201,7 +1215,7 @@ export default function LocationMapCity() {
                           className="w-full h-full object-cover rounded-lg"
                         />
                       ) : (
-                        <span className="leading-none text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
+                        <span className="leading-none text-[11px] xs:text-[12px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
                           {t("photo_location")}
                         </span>
                       )}
@@ -1216,8 +1230,8 @@ export default function LocationMapCity() {
                 </div>
               </div>
               <div className="w-full  px-4 md:px-0  ">
-                <div className="flex flex-wrap items-center justify-between gap-3 md:gap-4 ">
-                  <div className="w-full md:w-[31%] xs:w-[48%] md:hidden block">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4  ">
+                  <div className="w-full  md:hidden block">
                     <div className="w-full h-fit flex justify-center ">
                       {/* Region INput  */}
                       <div className={"w-full "}>
@@ -1230,9 +1244,9 @@ export default function LocationMapCity() {
                           </span>
                           <div
                             onClick={() => setOpenRegionModal(true)}
-                            className="w-full h-8 md:h-11 mt-[6px] md:mt-[10px] px-[15px] flex items-center justify-between rounded md:rounded-lg cursor-pointer border border-searchBgColor"
+                            className="w-full h-[38px] md:h-11 mt-[6px] md:mt-[10px] px-[15px] flex items-center justify-between rounded md:rounded-lg cursor-pointer border border-searchBgColor"
                           >
-                            <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
+                            <span className=" w-full h-[38px] md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
                               {!state?.idRegionId &&
                                 !state?.idSupRregionId &&
                                 `${t("choose_region")}`}
@@ -1281,15 +1295,15 @@ export default function LocationMapCity() {
                   </div>
                   <label
                     htmlFor="fname"
-                    className="w-full md:w-[31%] xs:w-[48%]   "
+                    className="w-full    "
                   >
-                    <div className="w-full text-[13px] font-AeonikProMedium md:text-base flex items-center mb-[10px]">
+                    <p className="w-full text-[13px] font-AeonikProMedium md:text-base flex items-center mb-[2px] md:mb-[10px]">
                       {t("name_admin")}{" "}
                       <span className="ml-[5px]">
                         <StarLabel />
                       </span>
-                    </div>
-                    <div className="flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg w-full md:max-w-[287px] text-base font-AeonikProMedium">
+                    </p>
+                    <div className="flex items-center border border-borderColor h-[38px] md:h-[45px] rounded md:rounded-lg w-full md:max-w-[287px] text-base font-AeonikProMedium">
                       <input
                         type="text"
                         name="fname"
@@ -1302,12 +1316,12 @@ export default function LocationMapCity() {
                   </label>
                   <label
                     htmlFor="fname1"
-                    className="w-full md:w-[31%] xs:w-[48%]  "
+                    className="w-full   "
                   >
-                    <div className="w-full text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
+                    <p className="w-full text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
                       {t("name_admin_two")}
-                    </div>
-                    <div className="w-full flex items-center border border-borderColor h-[32px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
+                    </p>
+                    <div className="w-full flex items-center border border-borderColor h-[38px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
                       <input
                         type="text"
                         name="fname2"
@@ -1318,8 +1332,7 @@ export default function LocationMapCity() {
                       />
                     </div>
                   </label>
-
-                  <div className="w-full md:w-[31%] xs:w-[48%]">
+                  <div className="w-full  hidden md:block">
                     <div className="w-full h-fit flex justify-center ">
                       {/* Region INput  */}
                       <div className={"w-full hidden md:block"}>
@@ -1329,9 +1342,9 @@ export default function LocationMapCity() {
                           </span>
                           <div
                             onClick={() => setOpenRegionModal(true)}
-                            className="w-full h-8 md:h-11 mt-[6px] md:mt-[10px] px-[15px] flex items-center justify-between rounded md:rounded-lg cursor-pointer border border-searchBgColor"
+                            className="w-full h-[38px] md:h-11 mt-[6px] md:mt-[10px] px-[15px] flex items-center justify-between rounded md:rounded-lg cursor-pointer border border-searchBgColor"
                           >
-                            <span className=" w-full h-8 md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
+                            <span className=" w-full h-[38px] md:h-11 flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-[13px] md:text-base leading-4 ">
                               {!state?.idRegionId &&
                                 !state?.idSupRregionId &&
                                 `${t("choose_region")}`}
@@ -1380,7 +1393,7 @@ export default function LocationMapCity() {
                   </div>
                   <label
                     htmlFor="phone1"
-                    className="w-full md:w-[31%] xs:w-[48%]"
+                    className="w-full "
                   >
                     <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
                       {t("number_admin")}
@@ -1388,8 +1401,8 @@ export default function LocationMapCity() {
                         <StarLabel />
                       </span>
                     </div>
-                    <div className="mt-[6px] h-8 md:h-11 flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg">
-                      <div className="ss:w-[35%] md:w-[30%] h-8 md:h-11 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+                    <div className="mt-[6px] h-[38px] md:h-11 flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg">
+                      <div className="ss:w-[35%] md:w-[30%] h-[38px] md:h-11 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-[13px] md:text-base leading-4 text-black">
                           {" "}
                           +998
@@ -1406,11 +1419,10 @@ export default function LocationMapCity() {
                               idAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                            state?.idAssistantPhone
-                              ? "font-AeonikProMedium"
-                              : null
-                          } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone
+                            ? "font-AeonikProMedium"
+                            : null
+                            } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
@@ -1418,21 +1430,21 @@ export default function LocationMapCity() {
                   </label>
                   <label
                     htmlFor="phone2"
-                    className="w-full md:w-[31%] xs:w-[48%]"
+                    className="w-full "
                   >
                     <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
                       {t("number_admin")}
                       <span className="ml-[5px]">{/* <StarLabel /> */}</span>
                     </div>
 
-                    <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg h-8 md:h-11">
+                    <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded md:rounded-lg h-[38px] md:h-11">
                       <div className="w-[35%] md:w-[30%] flex items-center justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular leading-4 text-black text-[13px] md:text-base">
                           {" "}
                           +998
                         </div>
                       </div>
-                      <div className="w-[65%] md:w-[70%] h-8 md:h-11 overflow-hidden">
+                      <div className="w-[65%] md:w-[70%] h-[38px] md:h-11 overflow-hidden">
                         <InputMask
                           mask="(99) 999-99-99"
                           name="phone2"
@@ -1443,18 +1455,17 @@ export default function LocationMapCity() {
                               idSecondAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                            state?.idSecondAssistantPhone
-                              ? "font-AeonikProMedium"
-                              : null
-                          } text-[13px] md:text-base leading-4 text-black`}
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone
+                            ? "font-AeonikProMedium"
+                            : null
+                            } text-[13px] md:text-base leading-4 text-black`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
                     </div>
                   </label>
-                  <div className="w-full md:w-[31%] xs:w-[48%]">
-                    <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-1 md:mb-[10px]">
+                  <div className="w-full ">
+                    <div className="text-[13px] md:text-base font-AeonikProMedium flex items-center   mb-[10px]">
                       {t("work_time")}
                       <span className="ml-[5px]">
                         <StarLabel />
@@ -1466,7 +1477,7 @@ export default function LocationMapCity() {
                         {t("before")}
                       </span>
                       <input
-                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded md:rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
+                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[38px] md:h-11 rounded md:rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
                         type="time"
                         min="00:00"
                         max="23:59"
@@ -1482,7 +1493,7 @@ export default function LocationMapCity() {
                         {t("after")}
                       </span>
                       <input
-                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
+                        className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[38px] md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
                         type="time"
                         min="00:00"
                         max="23:59"
@@ -1494,6 +1505,42 @@ export default function LocationMapCity() {
                         }
                         required
                       />
+                    </div>
+                  </div>
+                  <div htmlFor="telegrem1" className=" w-full    ">
+                    <p className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
+                      {t("number_admin_tg")}
+                    </p>
+                    <div className="relative flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+                      <input
+                        type="text"
+                        name="telegrem1"
+                        placeholder={'@Username '}
+                        value={state?.assistantNameFirstTg}
+                        onChange={handleInputAdminNameFirstTg}
+                        className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                      />
+                      {!state?.assistantNameFirstTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                        {t("not_necessary")}
+                      </p>}
+                    </div>
+                  </div>
+                  <div htmlFor="telegrem2" className=" w-full    ">
+                    <p className="text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
+                      {t("number_admin_tg_two")}
+                    </p>
+                    <div className="relative flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+                      <input
+                        type="text"
+                        name="telegrem2"
+                        placeholder={'@Username'}
+                        value={state?.assistantNameSecondTg}
+                        onChange={handleInputAdminNameSecondTg}
+                        className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                      />
+                      {!state?.assistantNameSecondTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                        {t("not_necessary")}
+                      </p>}
                     </div>
                   </div>
                 </div>

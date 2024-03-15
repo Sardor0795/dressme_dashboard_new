@@ -29,7 +29,7 @@ export default function LocationAddById() {
   const navigate = useNavigate();
   const { request } = useHttp();
   const { id } = useParams();
-  const shopId = id?.replace(":", "");
+   const shopId = id?.replace(":", "");
   const [state, setState] = useState({
     imgFirst: "",
     imgSecond: "",
@@ -183,6 +183,8 @@ export default function LocationAddById() {
     form.append("work_time_to", state?.workTimeTo);
     form.append("assistant_name", state?.assistantNameFirst);
     form.append("assistant_phone", assistantPhoneNumberFirst);
+    state?.assistantNameFirstTg && form.append("assistant_messenger", state?.assistantNameFirstTg);
+    state?.assistantNameSecondTg && form.append("second_assistant_messenger", state?.assistantNameSecondTg);
     state?.assistantNameSecond &&
       form.append("second_assistant_name", state?.assistantNameSecond);
     state?.assistantPhoneSecond &&
@@ -442,7 +444,7 @@ export default function LocationAddById() {
           <div
             className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${state?.pictureBgView1
               ? " border border-searchBgColor "
-              : " border-2 border-dashed "
+              : " border border-dashed "
               } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center ">
@@ -486,7 +488,7 @@ export default function LocationAddById() {
           <div
             className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.picturelogoView2
               ? " border border-searchBgColor "
-              : " border-2 border-dashed "
+              : " border border-dashed "
               } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center">
@@ -536,7 +538,7 @@ export default function LocationAddById() {
           <div
             className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.pictureLastView3
               ? " border border-searchBgColor "
-              : " border-2 border-dashed "
+              : " border border-dashed "
               } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center ">
@@ -588,7 +590,7 @@ export default function LocationAddById() {
         <div className="w-full  px-4 md:px-0  ">
           <div className="     grid grid-cols-1 md:grid-cols-3 gap-y-3 md:gap-4">
             {/* INPUT DATA */}
-            <div className={"w-full block md:hidden "}>
+            <div className={"w-full block md:hidden  "}>
               <label htmlFor="selectRegion2">
                 <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                   {t("choose_region")}
@@ -600,9 +602,9 @@ export default function LocationAddById() {
                   onClick={() => {
                     setState({ ...state, openStoreList: true });
                   }}
-                  className="w-full  h-[32px] md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                  className="w-full  h-[38px] md:h-[45px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                 >
-                  <span className=" w-full  h-[32px] md:h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-xs md:text-[16px] leading-4 ">
+                  <span className=" w-full  h-[38px] md:h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] text-xs md:text-[16px] leading-4 ">
                     {!state?.regionIdShops &&
                       !state?.subRegionIdShops &&
                       `${t("choose_region")}`}
@@ -643,21 +645,21 @@ export default function LocationAddById() {
                 )}
               </label>
             </div>
-            <label htmlFor="fname" className=" w-full   ">
+            <label htmlFor="fname" className=" w-full    ">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin")}
                 <span className="ml-[5px]">
                   <StarLabel />
                 </span>
               </div>
-              <div className="flex flex-col items-center h-[32px] md:h-[42px] w-full text-base font-AeonikProMedium">
+              <div className="flex flex-col items-center h-[38px] md:h-[42px] w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="fname"
                   placeholder={t("name_admin")}
                   value={state?.assistantNameFirst}
                   onChange={handleInputAdminNameFirst}
-                  className="w-full outline-none text-[12px] md:text-[14px]  h-[32px] md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px]  h-[38px] md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
                 />
               </div>
               {state?.errorGroup?.assistant_name &&
@@ -667,7 +669,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label htmlFor="fname2" className=" w-full   ">
+            <label htmlFor="fname2" className=" w-full    ">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin_two")}
               </div>
@@ -678,7 +680,7 @@ export default function LocationAddById() {
                   placeholder={t("not_necessary")}
                   value={state?.assistantNameSecond}
                   onChange={handleInputAdminNameSecond}
-                  className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
                 {state?.errorGroup?.second_assistant_name &&
                   !state?.assistantNameSecond && (
@@ -689,9 +691,9 @@ export default function LocationAddById() {
               </div>
             </label>
 
-            <div className=" flex w-full  ">
+            <div className="hidden md:block  flex w-full   ">
               {/* Region Input  */}
-              <div className={"w-full hidden md:block"}>
+              <div className={"w-full hidden md:block "}>
                 <label htmlFor="selectRegion2">
                   <span className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px] tracking-[0,16px] ">
                     {t("choose_region")}
@@ -703,9 +705,9 @@ export default function LocationAddById() {
                     onClick={() => {
                       setState({ ...state, openStoreList: true });
                     }}
-                    className="w-full  h-[32px] md:h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                    className="w-full  h-[38px] md:h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                   >
-                    <span className=" w-full  h-[32px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                    <span className=" w-full  h-[38px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
                       {!state?.regionIdShops &&
                         !state?.subRegionIdShops &&
                         `${t("choose_region")}`}
@@ -748,7 +750,7 @@ export default function LocationAddById() {
               </div>
             </div>
             <label
-              className=" w-full    "
+              className=" w-full     "
               htmlFor="phone1"
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
@@ -758,7 +760,7 @@ export default function LocationAddById() {
                 </span>
               </div>
 
-              <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
+              <div className="h-[38px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
@@ -796,14 +798,14 @@ export default function LocationAddById() {
                 )}
             </label>
             <label
+              className=" w-full     "
               htmlFor="phone2"
-              className=" w-full    "
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_two")}
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
               </div>
-              <div className="h-[32px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
+              <div className="h-[38px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <input
                     className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium
@@ -843,7 +845,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <div className=" w-full ">
+            <div className=" w-full  ">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("work_time")}
                 <span className="ml-[5px]">
@@ -856,7 +858,7 @@ export default function LocationAddById() {
                   {t("before")}
                 </span>
                 <input
-                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded md:rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
+                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[38px] md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
                   type="time"
                   min="00:00"
                   max="23:59"
@@ -872,7 +874,7 @@ export default function LocationAddById() {
                   {t("after")}
                 </span>
                 <input
-                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-8 md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
+                  className="without_ampm mr-5 ml-[5px]  outline-none w-[45%] xs:w-[40%] border border-borderColor text-center flex items-center justify-center h-[38px] md:h-11 rounded-lg md:w-[80px] text-[13px] md:text-[14px] font-AeonikProRegular "
                   type="time"
                   min="00:00"
                   max="23:59"
@@ -886,36 +888,40 @@ export default function LocationAddById() {
                 />
               </div>
             </div>
-            <div htmlFor="telegrem1" className=" w-full   ">
+            <div htmlFor="telegrem1" className=" w-full    ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_tg")}
               </p>
-              <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+              <div className="relative flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="telegrem1"
                   placeholder={'@Username '}
                   value={state?.assistantNameFirstTg}
                   onChange={handleInputAdminNameFirstTg}
-                  className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
-
+                {!state?.assistantNameFirstTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                  {t("not_necessary")}
+                </p>}
               </div>
             </div>
-            <div htmlFor="telegrem2" className=" w-full   ">
+            <div htmlFor="telegrem2" className=" w-full    ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_tg_two")}
               </p>
-              <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+              <div className="relative flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
                   name="telegrem2"
                   placeholder={'@Username'}
                   value={state?.assistantNameSecondTg}
                   onChange={handleInputAdminNameSecondTg}
-                  className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
-
+                {!state?.assistantNameSecondTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                  {t("not_necessary")}
+                </p>}
               </div>
             </div>
           </div>

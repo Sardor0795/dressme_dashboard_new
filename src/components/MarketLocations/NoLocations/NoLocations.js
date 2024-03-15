@@ -14,7 +14,7 @@ function NoLocations() {
 
   const handleShopsOfLocation = (id) => {
     setOpenSelect(true);
-    navigate(`/locations-store/:${id}`);
+    navigate(`/locations-store/${id}`);
   };
 
   return (

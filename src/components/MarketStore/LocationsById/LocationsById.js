@@ -51,13 +51,13 @@ export default function LocationsByIdShow() {
 
   const navigate = useNavigate();
   const goMapCity = (id) => {
-    navigate(`/locations-store/city/:${id}`);
+    navigate(`/locations-store/city/${id}`);
   };
   const goMapWear = (id) => {
-    navigate(`/locations-store/wears/:${id}`);
+    navigate(`/locations-store/wears/${id}`);
   };
   const addLocationByMarket = () => {
-    navigate(`/locations-store/:${newId}`);
+    navigate(`/locations-store/${newId}`);
   };
 
   useEffect(() => {

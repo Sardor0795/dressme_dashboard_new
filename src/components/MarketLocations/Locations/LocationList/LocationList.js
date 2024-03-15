@@ -23,15 +23,15 @@ function LocationList() {
   const [languageDetector] = useContext(LanguageDetectorDress);
 
   const handleShopsOfLocation = (id) => {
-    navigate(`/locations-store/:${id}`);
+    navigate(`/locations-store/${id}`);
     setOpenSelect(false);
   };
 
   const goMapCity = (id) => {
-    navigate(`/locations-store/city/:${id}`);
+    navigate(`/locations-store/city/${id}`);
   };
   const goMapWear = (id) => {
-    navigate(`/locations-store/wears/:${id}`);
+    navigate(`/locations-store/wears/${id}`);
   };
 
   useEffect(() => {

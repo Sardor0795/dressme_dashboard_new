@@ -1210,7 +1210,7 @@ export default function ProductLocationsList() {
           ?.filter((e) => shopIdList?.includes(e?.id))
           ?.map((item, index) => {
             return (
-              <div key={index} className="mt-6">
+              <div key={index} className="mt-6   ">
                 <div>
                   {index === 0 && (
                     <div className="flex justify-end items-center md:justify-between mx-auto ">
@@ -1225,11 +1225,11 @@ export default function ProductLocationsList() {
                     Number(state?.shopMarketId) === Number(item?.id) && (
                       <div className="flex items-center w-full">
                         {item?.shop_locations?.length !== 0 && (
-                          <div className="w-full  my-6">
+                          <div className="w-full  md:my-6  ">
                             <button
                               type="button"
                               onClick={() => openMarketEditPage(item?.id)}
-                              className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer   "
+                              className="w-fit mx-auto   flex items-center justify-center mb-5 cursor-pointer   "
                             >
                               <p className=" block text-textBlueColor text-xl md:text-2xl not-italic font-AeonikProMedium">
                                 {item?.name}{" "}
@@ -1248,8 +1248,8 @@ export default function ProductLocationsList() {
                               )
                               ?.map((resData, index) => {
                                 return (
-                                  <div key={index} className="w-full  ">
-                                    <div className="w-full  mt-5">
+                                  <div key={index} className="w-full    ">
+                                    <div className="w-full   mt-4">
                                       <div className="mx-auto font-AeonikProRegular text-[16px] ">
                                         <section className="flex items-center justify-between  md:mt-2">
                                           <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
@@ -1292,13 +1292,12 @@ export default function ProductLocationsList() {
                                                     return (
                                                       <div>
                                                         {languageDetector?.typeLang === "ru" && values?.name_ru}
-                                                        {languageDetector?.typeLang === "uz" && values?.name_uz}                                                        ,
+                                                        {languageDetector?.typeLang === "uz" && values?.name_uz},
                                                         {values?.sub_regions?.filter((e) => e?.id == resData?.sub_region_id)?.map((valueSub) => {
                                                           return (
                                                             <span className="px-1">
                                                               {languageDetector?.typeLang === "ru" && valueSub?.name_ru}
-                                                              {languageDetector?.typeLang === "uz" && valueSub?.name_uz}
-                                                              ,
+                                                              {languageDetector?.typeLang === "uz" && valueSub?.name_uz},
                                                             </span>
                                                           );
                                                         })}
@@ -1933,19 +1932,19 @@ export default function ProductLocationsList() {
                       </div>
                     )
                   ) : (
-                    <div className="flex items-center w-full ">
+                    <div className="flex items-center w-full  ">
                       {item?.shop_locations?.length !== 0 && (
                         <div className="w-full  md:my-6  ">
                           <button
                             type="button"
                             onClick={() => openMarketEditPage(item?.id)}
-                            className="w-fit mx-auto   flex items-center justify-center mb-6 cursor-pointer"
+                            className="w-fit mx-auto    flex items-center justify-center mb-6 cursor-pointer"
                           >
                             <p className="  md:block text-textBlueColor text-xl md:text-2xl not-italic font-AeonikProMedium ">
                               {item?.name}{" "}
                             </p>
                           </button>
-                          <div className="  flex flex-col gap-y-7">
+                          <div className="   flex flex-col gap-y-7">
                             {item?.shop_locations
                               ?.filter((location) =>
                                 searchName
@@ -1996,14 +1995,12 @@ export default function ProductLocationsList() {
                                                   return (
                                                     <div>
                                                       {languageDetector?.typeLang === "ru" && values?.name_ru}
-                                                      {languageDetector?.typeLang === "uz" && values?.name_uz}
-                                                      ,
+                                                      {languageDetector?.typeLang === "uz" && values?.name_uz},
                                                       {values?.sub_regions?.filter((e) => e?.id == resData?.sub_region_id)?.map((valueSub) => {
                                                         return (
                                                           <span className="px-1">
                                                             {languageDetector?.typeLang === "ru" && valueSub?.name_ru}
-                                                            {languageDetector?.typeLang === "uz" && valueSub?.name_uz}
-                                                            ,
+                                                            {languageDetector?.typeLang === "uz" && valueSub?.name_uz},
                                                           </span>
                                                         );
                                                       })}
