@@ -30,6 +30,14 @@
   font-display: swap;
 }
 
+.linearGr {
+  background: linear-gradient(
+    90deg,
+    rgba(167, 207, 223, 0) 50%,
+    hsla(0, 0%, 100%, 0.99)
+  );
+}
+
 .ant-picker-range-separator {
   display: none;
 }
@@ -48,18 +56,28 @@
   border: 1px solid #f2f2f2;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-select:not(
+    .ant-select-disabled
+  ):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover
+  .ant-select-selector {
   border-color: #303030;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
   width: 100%;
   height: 48px;
   padding: 8px 10px;
   line-height: 10px;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector
+  .ant-select-selection-search-input {
   height: 48px;
   font-size: 16px;
 }
@@ -99,17 +117,16 @@
 }
 
 .ToogleOff {
-
-  background: linear-gradient(180deg,
-      rgba(167, 207, 223, 0) 50%,
-      rgba(255, 255, 255, 0.99) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(167, 207, 223, 0) 50%,
+    rgba(255, 255, 255, 0.99) 100%
+  );
 }
-
 
 .slick-arrow .slick-prev {
   display: none;
 }
-
 
 /* -------------------WearCarosuelScroll in Location */
 .WearScroll {
@@ -170,15 +187,12 @@
 .inputStyle {
   color: #000;
   font-size: 16px;
-
 }
 
 .inputStyle::placeholder {
-  color: #C5C5C5;
+  color: #c5c5c5;
   font-size: 14px;
 }
-
-
 
 /* .ant-picker-input input::placeholder {
   display: none;
@@ -232,15 +246,13 @@
 input[type="time"]::-webkit-calendar-picker-indicator {
   background: none;
   display: none;
-
 }
 
 .without_ampm::-webkit-datetime-edit-ampm-field {
   display: none;
-
 }
 
-input[type=time]::-webkit-clear-button {
+input[type="time"]::-webkit-clear-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   -o-appearance: none;
@@ -262,13 +274,13 @@ input[type=time]::-webkit-clear-button {
   /* border: 1px solid red */
 }
 
-.radio-toolbar input[type="radio"]:checked+label {
+.radio-toolbar input[type="radio"]:checked + label {
   background-color: #e6f2f9;
-  color: #007DCA;
+  color: #007dca;
   /* border: 1px solid green */
 }
 
-input[type="radio"]:checked+label span {
+input[type="radio"]:checked + label span {
   /* background-color: #660006; */
 }
 
@@ -289,7 +301,8 @@ input[type="radio"]:checked+label span {
   margin-inline-end: 2px !important;
 }
 
-:where(.css-dev-only-do-not-override-1jr9qlj).ant-rate .ant-rate-star:not(:last-child) {
+:where(.css-dev-only-do-not-override-1jr9qlj).ant-rate
+  .ant-rate-star:not(:last-child) {
   margin-inline-end: 4px !important;
 }
 
@@ -320,7 +333,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -334,7 +347,6 @@ input[type=number] {
 
 /*------ Crop Card ------*/
 
-
 .zoom-range {
   /* -webkit-appearance: none; */
   -moz-appearance: none;
@@ -343,7 +355,7 @@ input[type=number] {
   border-bottom: 5px solid #fff;
   background: #3f51b5;
   width: 100%;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .zoom-range::-moz-range-thumb {
@@ -355,7 +367,7 @@ input[type=number] {
   width: 18px;
   height: 18px;
   transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .zoom-range::-webkit-slider-thumb {
@@ -367,7 +379,7 @@ input[type=number] {
   width: 18px;
   height: 18px;
   transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .cropper-crop-box,
@@ -398,7 +410,6 @@ input[type=number] {
   height: 12px;
   font-size: 12px;
   pointer-events: none;
-
 }
 
 .selectAndt .ant-select {
@@ -421,15 +432,14 @@ input[type=number] {
   height: 40px !important;
 } */
 /* ------------------- */
-@media  (max-width: 767px) {
+@media (max-width: 767px) {
   .inputStyle {
     color: #000;
     font-size: 14px;
-
   }
 
   .inputStyle::placeholder {
-    color: #A1A1A1;
+    color: #a1a1a1;
     font-size: 12px;
   }
 
@@ -451,19 +461,17 @@ input[type=number] {
     position: absolute;
     z-index: 150;
   }
-/* ant-checkbox-input */
-.idCheck .ant-checkbox .ant-checkbox-inner {
-  width: 20px;
-  height: 20px;
-  border: none;
-  /* background-color: red; */
-}
+  /* ant-checkbox-input */
+  .idCheck .ant-checkbox .ant-checkbox-inner {
+    width: 20px;
+    height: 20px;
+    border: none;
+    /* background-color: red; */
+  }
 
-.ant-checkbox .ant-checkbox-inner {
-  width: 20px;
-  height: 20px;
-  /* background-color: red; */
-}
-
-
+  .ant-checkbox .ant-checkbox-inner {
+    width: 20px;
+    height: 20px;
+    /* background-color: red; */
+  }
 }
