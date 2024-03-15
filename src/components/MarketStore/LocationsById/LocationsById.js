@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { GoBackIcons } from "../../../assets/icons";
-import { AiOutlineLeft } from "react-icons/ai";
 import LoadingForSeller from "../../Loading/LoadingFor";
 import { useHttp } from "../../../hook/useHttp";
 import { useTranslation } from "react-i18next";
@@ -155,6 +153,10 @@ export default function LocationsByIdShow() {
 
             <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border gap-y-[30px] md:gap-y-0">
               {state?.locationListId?.locations?.map((data, index) => {
+                console.log(
+                  state?.locationListId?.locations,
+                  "state?.locationListId?.locations"
+                );
                 return (
                   <div key={index}>
                     <ul className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor">
@@ -197,7 +199,7 @@ export default function LocationsByIdShow() {
                         </li>
                         <li className="md:w-[15%] h-full flex items-center justify-center text-center">
                           <button
-                            onClick={() => goMapWear(data?.shop_id)}
+                            onClick={() => goMapWear(data?.id)}
                             className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                           >
                             {t("cloth")}
@@ -268,7 +270,7 @@ export default function LocationsByIdShow() {
 
                       <div className="flex items-center justify-between gap-x-[15px]">
                         <button
-                          onClick={() => goMapWear(data?.shop_id)}
+                          onClick={() => goMapWear(data?.id)}
                           className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] h-[31px] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                         >
                           <span className="mr-[5px]">
@@ -345,17 +347,22 @@ export default function LocationsByIdShow() {
           </div>
         </div>
       ) : (
-        <div className="w-full h-[100vh]  flex items-center justify-center  ">
-          <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
-            <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
-              {t("no_location")}
-            </p>
-            <button
-              onClick={addLocationByMarket}
-              className="px-7 active:scale-95  active:opacity-70 cursor-pointer py-3 rounded-lg flex items-center justify-center bg-textBlueColor text-white text-lg not-italic font-AeonikProMedium"
-            >
-              {t("add_location")}
-            </button>
+        <div className="w-full h-[100vh]">
+          <div className="w-full h-[90px] md:h-0 px-4 flex items-center justify-start md:hidden">
+            <BackBtn />
+          </div>
+          <div className="w-full h-[80%] md:h-full flex items-center justify-center  ">
+            <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
+              <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
+                {t("no_location")}
+              </p>
+              <button
+                onClick={addLocationByMarket}
+                className="px-7 active:scale-95  active:opacity-70 cursor-pointer py-3 rounded-lg flex items-center justify-center bg-textBlueColor text-white text-lg not-italic font-AeonikProMedium"
+              >
+                {t("add_location")}
+              </button>
+            </div>
           </div>
         </div>
       )}

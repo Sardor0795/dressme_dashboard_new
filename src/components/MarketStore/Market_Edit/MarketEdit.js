@@ -587,7 +587,7 @@ function MarketEdit() {
               {/* <BackBtn /> */}
               <div className="w-fit">
                 <span className="md:hidden block text-tableTextTitle2 text-xl not-italic font-AeonikProMedium">
-                  {t("create_a_store")}
+                  {t("shops")}
                 </span>
                 <span className="md:block hidden">{t("shops")}</span>
               </div>

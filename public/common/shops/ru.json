@@ -32,38 +32,6 @@
     "upload_a_photo": "Загрузить фото",
     "shops": "Магазины",
     "all_locations": "Все локации",
-    "save": "Сохранить",
-
-
-
-
-    "no_reviews": "У вас пока нет отзывов",
-    "reviews": "Отзывы",
-    "reviews_two": "oтзывы",
-    "products": "Товары",
-    "own_delivery": "Собственная доставка",
-
-    "image": "Изображение",
-    "name_of_product": "Наименование товара",
-    "date": "Дата",
-    "name_product": "Имя товара",
-    "more_details_of_product": "Подробнее о товаре",
-    "filter_rating": "Фильтр рейтинг",
-    "customer_reviews": "Отзывы клиентов",
-    "according_to_reviews": "По отзывам",
-    "purchase_rating": "Оценка покупки",
-    "answer": "Ответ",
-    "send": "Отправить",
-    "answer_two": "Ответить",
-    "add_answer": "Добавьте свой ответ ...",
-    "ready": "Готово"
-
-
-
-
-
-
-
-
+    "save": "Сохранить"
     
 }
