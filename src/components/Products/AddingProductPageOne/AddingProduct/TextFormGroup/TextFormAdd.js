@@ -171,7 +171,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <Link
                                 to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-base md:text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -179,7 +179,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <Link
                                 to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-base md:text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -197,7 +197,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex py-[10px] px-[5px]`}>
+                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[38px] md:h-[48px] px-[5px]`}>
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
                                         type="text"
@@ -224,7 +224,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex py-[10px] px-[5px]`}>
+                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[38px] md:h-[48px] px-[5px]`}>
                                     <input
                                         className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
@@ -303,7 +303,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                         <div className="w-full pb-[30px] md:border border-[#f2f2f2] flex flex-col md:rounded-lg md:p-5 flex-1">
                             <div className="row mb-[17px] md:mb-[20px] block md:flex gap-[35px]">
                                 {/* Language in RUSSIAN */}
-                                <div className="flex-1 mb-[10px] textForm">
+                                <div className="  flex-1 mb-[10px] textForm">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                             {t("TFqualityRu")}
@@ -313,7 +313,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         </span>
                                     </div>
                                     <Select
-                                        placeholder={"Выбрать"}
+                                        placeholder={t("PRselect2")}
                                         className={`rounded-[6px]  ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
@@ -332,7 +332,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     />
                                 </div>
                                 {/* Language in UZBEK */}
-                                <div className="flex-1 mb-[10px] textForm">
+                                <div className="  flex-1 mb-[10px] textForm">
                                     <div className="flex items-center mb-[5px]">
                                         <div className="text-[#303030] w-fit text-base font-AeonikProRegular">
                                             {t("TFqualityUz")}
@@ -342,8 +342,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         </span>
                                     </div>
                                     <Select
-                                        placeholder={"Выбрать"}
-                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        placeholder={t("PRselect2")}
+                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}   `}
 
                                         style={{ width: "100%" }}
                                         value={
@@ -383,7 +383,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                             ({t("APnotNecessary")})
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor  `}>
+                                    <div className={`rounded-lg  flex  h-[38px] md:h-[48px] px-[5px] border border-borderColor  `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
@@ -408,7 +408,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                             ({t("APnotNecessary")})
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex py-[10px] px-[5px] border border-borderColor `}>
+                                    <div className={`rounded-lg  flex  h-[38px] md:h-[48px] px-[5px] border border-borderColor `}>
                                         <input
                                             className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
@@ -427,7 +427,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                 </div>
                             </div>
                             <div className="row mb-[30px] md:mb-[20px] block md:flex gap-[35px]">
-                                <div className="flex-1 mb-[10px] textForm">
+                                <div className="  flex-1 mb-[10px] textForm">
                                     <div className="inputTitle text-[#303030] mb-[5px] pr-[15px] w-fit text-base font-AeonikProRegular">
                                         {t("TFbrand")}
                                         <span className="notRecquired ml-[5px] text-sm text-textLightColor font-AeonikProRegular">
@@ -436,7 +436,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     </div>
                                     <Select
                                         className="font-AeonikProMedium"
-                                        placeholder={"Выбрать"}
+                                        placeholder={t("PRselect2")}
                                         style={{ width: "100%" }}
                                         onChange={handleBrand}
                                         options={

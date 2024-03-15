@@ -900,8 +900,11 @@ const AddingProduct = () => {
             ></section>
 
             {state?.showColor && (
-              <div className="max-w-[440px] md:max-w-[576px] w-full fixed z-[221]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ">
-                <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-md shadow-lg">
+              <div className={`max-w-[440px] md:max-w-[576px] w-full fixed z-[221]  left-1/2 right-1/2 md:top-[50%] translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ${state?.showColor
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
+                }`}>
+                <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-t-md md:rounded-md shadow-lg">
                   <div
                     className={`flex items-center justify-between border-b border-searchBgColor pb-3`}
                   >
@@ -2048,7 +2051,7 @@ const AddingProduct = () => {
                             <StarLabel />
                           </span>
                         </div>
-                        <div className="w-full h-fit flex items-center justify-between gap-x-3">
+                        <div className="w-full h-fit   flex items-center justify-between gap-x-3">
                           <input
                             type="text"
                             name="artikul"
@@ -2478,7 +2481,11 @@ const AddingProduct = () => {
                       {state?.type_Id ?
                         <button
                           onClick={() => setClothingCategoryModal(true)}
-                          className={` w-full  md:hidden   border border-textBlueColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white `}>
+                          className={` w-full  md:hidden rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white 
+                          ${state?.isCheckValid && !state?.category_Id && !state?.type_Id ?
+                              "border border-[#FFB8B8] "
+                              : "border border-textBlueColor"}
+                          `}>
                           {t("APaddSize")}
                         </button> :
                         <button
