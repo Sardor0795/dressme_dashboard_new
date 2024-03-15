@@ -36,6 +36,8 @@ export default function LocationAddById() {
     imgThird: "",
     assistantNameFirst: "",
     assistantNameSecond: "",
+    assistantNameFirstTg: "",
+    assistantNameSecondTg: "",
     assistantPhoneFirst: "",
     phoneCode: "+998",
     assistantPhoneSecond: "",
@@ -247,12 +249,19 @@ export default function LocationAddById() {
   const handleInputAdminNameFirst = (e) => {
     if (e.target.value) {
       setState({
-        ...state,
-        assistantNameFirst:
-          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+        ...state, assistantNameFirst: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
       });
     } else {
       setState({ ...state, assistantNameFirst: null });
+    }
+  };
+  const handleInputAdminNameFirstTg = (e) => {
+    if (e.target.value) {
+      setState({
+        ...state, assistantNameFirstTg: e.target.value,
+      });
+    } else {
+      setState({ ...state, assistantNameFirstTg: null });
     }
   };
   const handleInputAdminNameSecond = (e) => {
@@ -264,6 +273,13 @@ export default function LocationAddById() {
       });
     } else {
       setState({ ...state, assistantNameSecond: null });
+    }
+  };
+  const handleInputAdminNameSecondTg = (e) => {
+    if (e.target.value) {
+      setState({ ...state, assistantNameSecondTg: e.target.value, });
+    } else {
+      setState({ ...state, assistantNameSecondTg: null });
     }
   };
 
@@ -287,17 +303,15 @@ export default function LocationAddById() {
         onClick={() => {
           setState({ ...state, openStoreList: false });
         }}
-        className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-          state?.openStoreList ? "" : "hidden"
-        }`}
+        className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openStoreList ? "" : "hidden"
+          }`}
       ></div>
       {
         <div
-          className={`max-w-[440px] md:max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-            state?.openStoreList
-              ? " bottom-0 md:flex flex-col"
-              : "md:hidden bottom-[-1500px] z-[-10]"
-          }`}
+          className={`max-w-[440px] md:max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openStoreList
+            ? " bottom-0 md:flex flex-col"
+            : "md:hidden bottom-[-1500px] z-[-10]"
+            }`}
         >
           <div className="w-full flex items-center justify-between">
             <span className="text-black text-lg not-italic font-AeonikProMedium">
@@ -327,11 +341,10 @@ export default function LocationAddById() {
                         {languageDetector?.typeLang === "uz" && data?.name_uz}
                       </span>
                       <span
-                        className={`${
-                          activeIndex == data?.id
-                            ? "rotate-[0deg]"
-                            : "rotate-[180deg]"
-                        } `}
+                        className={`${activeIndex == data?.id
+                          ? "rotate-[0deg]"
+                          : "rotate-[180deg]"
+                          } `}
                       >
                         <ArrowTopIcons colors={"#a1a1a1"} />
                       </span>
@@ -339,11 +352,10 @@ export default function LocationAddById() {
 
                     <div
                       className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                          ? "openAccardion"
+                          : "CloseAccardion"
+                        } `}
                     >
                       {data?.sub_regions?.map((item) => {
                         return (
@@ -414,11 +426,10 @@ export default function LocationAddById() {
           <BackBtn />
         </div>
         <div
-          className={` ${
-            state?.errorGroup?.address && !state?.shopCenterAddress
-              ? "border-[2px] border-[#D50000] rounded-[4px] overflow-hidden"
-              : ""
-          }`}
+          className={` ${state?.errorGroup?.address && !state?.shopCenterAddress
+            ? "border-[2px] border-[#D50000] rounded-[4px] overflow-hidden"
+            : ""
+            }`}
         >
           <YandexMapStore handleCallback={CallBackYandex} />
         </div>
@@ -427,13 +438,12 @@ export default function LocationAddById() {
             {state?.errorGroup?.address}
           </p>
         )}
-        <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px] ">
+        <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px]  ">
           <div
-            className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${
-              state?.pictureBgView1
-                ? " border border-searchBgColor "
-                : " border-2 border-dashed "
-            } flex items-center justify-center rounded-lg`}
+            className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${state?.pictureBgView1
+              ? " border border-searchBgColor "
+              : " border-2 border-dashed "
+              } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center ">
               <label
@@ -474,11 +484,10 @@ export default function LocationAddById() {
             )}
           </div>
           <div
-            className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${
-              state?.picturelogoView2
-                ? " border border-searchBgColor "
-                : " border-2 border-dashed "
-            } flex items-center justify-center rounded-lg`}
+            className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.picturelogoView2
+              ? " border border-searchBgColor "
+              : " border-2 border-dashed "
+              } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center">
               {state?.pictureBgView1 ? (
@@ -525,11 +534,10 @@ export default function LocationAddById() {
             </button>
           </div>
           <div
-            className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${
-              state?.pictureLastView3
-                ? " border border-searchBgColor "
-                : " border-2 border-dashed "
-            } flex items-center justify-center rounded-lg`}
+            className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.pictureLastView3
+              ? " border border-searchBgColor "
+              : " border-2 border-dashed "
+              } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center ">
               {state?.picturelogoView2 ? (
@@ -577,8 +585,8 @@ export default function LocationAddById() {
             </button>
           </div>
         </div>
-        <div className="w-full  px-4 md:px-0 ">
-          <div className="flex flex-wrap  justify-between gap-x-3 md:gap-4 ">
+        <div className="w-full  px-4 md:px-0  ">
+          <div className="  gap-x-3 md:gap-4  grid grid-cols-3 gap-4">
             {/* INPUT DATA */}
             <div className={"w-full block md:hidden mb-3 md:mb-0"}>
               <label htmlFor="selectRegion2">
@@ -635,7 +643,7 @@ export default function LocationAddById() {
                 )}
               </label>
             </div>
-            <label htmlFor="fname" className=" w-full md:w-[31%] mb-3 md:mb-0">
+            <label htmlFor="fname" className=" w-full   mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin")}
                 <span className="ml-[5px]">
@@ -659,7 +667,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label htmlFor="fname2" className=" w-full md:w-[31%] mb-3 md:mb-0">
+            <label htmlFor="fname2" className=" w-full   mb-3 md:mb-0">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin_two")}
               </div>
@@ -681,7 +689,7 @@ export default function LocationAddById() {
               </div>
             </label>
 
-            <div className=" flex w-full md:w-[31%]">
+            <div className=" flex w-full  ">
               {/* Region Input  */}
               <div className={"w-full hidden md:block"}>
                 <label htmlFor="selectRegion2">
@@ -740,8 +748,8 @@ export default function LocationAddById() {
               </div>
             </div>
             <label
+              className=" w-full   mb-3 md:mb-0 "
               htmlFor="phone1"
-              className=" w-full md:w-[31%] mb-3 md:mb-0 "
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin")}
@@ -771,9 +779,8 @@ export default function LocationAddById() {
                         assistantPhoneFirst: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                      state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
-                    } text-xs md:text-base leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
+                      } text-xs md:text-base leading-4 text-black`}
                     placeholder={"(77) 777-77-77"}
                   ></InputMask>
                   <span className="mr-[12px]">
@@ -790,7 +797,7 @@ export default function LocationAddById() {
             </label>
             <label
               htmlFor="phone2"
-              className=" w-full md:w-[31%] mb-3 md:mb-0 "
+              className=" w-full   mb-3 md:mb-0 "
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_two")}
@@ -819,11 +826,10 @@ export default function LocationAddById() {
                         assistantPhoneSecond: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                      state?.assistantPhoneSecond
-                        ? "font-AeonikProMedium"
-                        : null
-                    } text-xs md:text-[16px] leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond
+                      ? "font-AeonikProMedium"
+                      : null
+                      } text-xs md:text-[16px] leading-4 text-black`}
                   ></InputMask>
                   <span className="mr-[12px]">
                     <TelIcon />
@@ -837,7 +843,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <div className=" w-full md:w-[31%]">
+            <div className=" w-full ">
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("work_time")}
                 <span className="ml-[5px]">
@@ -878,6 +884,38 @@ export default function LocationAddById() {
                   }
                   required
                 />
+              </div>
+            </div>
+            <div htmlFor="telegrem1" className=" w-full   mb-3 md:mb-0">
+              <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
+                {t("number_admin_tg")}
+              </p>
+              <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+                <input
+                  type="text"
+                  name="telegrem1"
+                  placeholder={'@Username '}
+                  value={state?.assistantNameFirstTg}
+                  onChange={handleInputAdminNameFirstTg}
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                />
+
+              </div>
+            </div>
+            <div htmlFor="telegrem2" className=" w-full   mb-3 md:mb-0">
+              <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
+                {t("number_admin_tg_two")}
+              </p>
+              <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+                <input
+                  type="text"
+                  name="telegrem2"
+                  placeholder={'@Username'}
+                  value={state?.assistantNameSecondTg}
+                  onChange={handleInputAdminNameSecondTg}
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[32px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                />
+
               </div>
             </div>
           </div>

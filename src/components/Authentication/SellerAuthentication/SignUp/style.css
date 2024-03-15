@@ -82,16 +82,16 @@ input:-webkit-autofill:active {
   box-shadow: none !important;
 } */
 .SelectAntdStyle .ant-select-selector,
-.ant-select,
-.ant-select-lg {
+.SelectAntdStyle .ant-select,
+.SelectAntdStyle .ant-select-lg {
   height: 44px !important;
 }
 
- @media (max-width: 767px) {
+@media screen and (max-width: 767px) {
 
   .SelectAntdStyle .ant-select-selector,
-  .ant-select,
-  .ant-select-lg {
+  .SelectAntdStyle .ant-select,
+  .SelectAntdStyle .ant-select-lg {
     height: 38px !important;
   }
 }
