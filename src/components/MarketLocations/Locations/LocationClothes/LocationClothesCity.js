@@ -18,6 +18,7 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import { BackBtn } from "../../../backBtn/backBtn";
 
 const url = "https://api.dressme.uz/api/seller";
 export default function LocationClothesCity() {
@@ -60,21 +61,22 @@ export default function LocationClothesCity() {
   const NewId = id.replace(":", "");
   // ------------GET  Has Magazin ?-----------------
   const [getListItem, setGetListItem] = useState();
-  const { refetch, isLoading } = useQuery(["location_store_id"], () => {
-    setLoading(true)
-    return request({
-      url: `/shops/locations/${NewId}/show-products-by-location`,
-      token: true,
-    });
-  },
+  const { refetch, isLoading } = useQuery(
+    ["location_store_id"],
+    () => {
+      setLoading(true);
+      return request({
+        url: `/shops/locations/${NewId}/show-products-by-location`,
+        token: true,
+      });
+    },
     {
       onSuccess: (res) => {
         setGetListItem(res?.location);
-        setLoading(false)
-
+        setLoading(false);
       },
       onError: (err) => {
-        setLoading(false)
+        setLoading(false);
 
         throw new Error(err || "something wrong");
       },
@@ -126,7 +128,7 @@ export default function LocationClothesCity() {
     setDressInfo({ ...dressInfo, locationIdAddProduct: getListItem?.id });
     navigate(`/products/location/add/${Number(getListItem?.shop_id)}`);
   }
-  console.log(isLoading, 'isFetched');
+  console.log(isLoading, "isFetched");
   return (
     <div className="px-4 md:px-10 ">
       <section
@@ -149,10 +151,11 @@ export default function LocationClothesCity() {
 
       {/* Delete Product Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openDeleteModal
-          ? " bottom-0 md:flex"
-          : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
+        className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
+          state?.openDeleteModal
+            ? " bottom-0 md:flex"
+            : "md:hidden bottom-[-800px] z-[-10]"
+        }`}
       >
         <button
           onClick={() => setState({ ...state, openDeleteModal: false })}
@@ -235,14 +238,12 @@ export default function LocationClothesCity() {
       <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor block ">
         <div className="block md:flex justify-start items-center md:justify-between ">
           <div className=" flex items-center justify-center gap-x-2 ">
-            <button
-              onClick={() => {
-                navigate(-1);
-              }}
-              className="h-8 w-8 md:static absolute left-0 flex items-center cursor-pointer justify-center rounded-lg md:border border-borderColor"
-            >
-              <GoBackIcons />
-            </button>
+            <div className="md:hidden absolute left-[16px]">
+              <BackBtn />
+            </div>
+            <div className="hidden md:block">
+              <BackBtn />
+            </div>
             <div className="text-center flex items-center text-xl md:text-[24px] font-AeonikProMedium   md:ml-[30px]">
               {t("cloth")}
             </div>
@@ -281,13 +282,13 @@ export default function LocationClothesCity() {
                   return (
                     <div>
                       {values?.name_ru},
-                      {values?.sub_regions?.filter((e) => e?.id == getListItem?.sub_region_id)?.map((valueSub) => {
-                        return (
-                          <span className="px-1">{valueSub?.name_ru}
-                            ,
-                          </span>
-                        );
-                      })}
+                      {values?.sub_regions
+                        ?.filter((e) => e?.id == getListItem?.sub_region_id)
+                        ?.map((valueSub) => {
+                          return (
+                            <span className="px-1">{valueSub?.name_ru},</span>
+                          );
+                        })}
                     </div>
                   );
                 })}
@@ -300,7 +301,6 @@ export default function LocationClothesCity() {
                 </span>
               )}
             </p>
-
           </p>
           <button
             type="button"
@@ -346,8 +346,9 @@ export default function LocationClothesCity() {
       </div>
 
       <div className="mx-auto font-AeonikProRegular text-[16px]">
-
-        {loading ? <LoadingForSeller /> :
+        {loading ? (
+          <LoadingForSeller />
+        ) : (
           <div className="mb-[10px] flex flex-col gap-y-[10px] items-center text-tableTextTitle font-AeonikProRegular text-[16px]  ">
             <LocationItem
               data={getListItem}
@@ -355,7 +356,8 @@ export default function LocationClothesCity() {
               searchName={state?.searchName}
               allCheckedList={handleAllCheckList}
             />
-          </div>}
+          </div>
+        )}
       </div>
     </div>
   );

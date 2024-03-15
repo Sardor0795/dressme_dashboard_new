@@ -5,6 +5,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { GoBackIcons } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
+import { BackBtn } from "../../backBtn/backBtn";
 
 export default function ProductsPageOne() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -24,14 +25,7 @@ export default function ProductsPageOne() {
           <section className="w-full md:w-fit flex justify-center md:justify-start">
             <section className="w-full md:w-fit flex justify-start">
               {dressInfo?.isCheckPoructList?.length >= 1 ? (
-                <button
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                  className="w-8 h-8 md:mr-[30px] flex items-center cursor-pointer justify-center border border-borderColor rounded-lg active:scale-95  active:opacity-70"
-                >
-                  <AiOutlineLeft />
-                </button>
+                <BackBtn />
               ) : (
                 !dressInfo?.nextPageShowForm && (
                   <>
@@ -57,8 +51,9 @@ export default function ProductsPageOne() {
                 )
               )}
               <p
-                className={`w-full text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${!dressInfo?.nextPageShowForm && "md:ml-[30px]"
-                  } `}
+                className={`w-full text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${
+                  !dressInfo?.nextPageShowForm && "md:ml-[30px]"
+                } `}
               >
                 {t("APaddProduct")}
               </p>

@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import CommentTitle from "./CommentTitle/CommentTitle";
 import { useTranslation } from "react-i18next";
+import { BackBtn } from "../../backBtn/backBtn";
 
 export default function ReviewComment() {
   const { request } = useHttp();
@@ -26,7 +27,7 @@ export default function ReviewComment() {
     loading: true,
   });
 
-  const { t } = useTranslation("reviews")
+  const { t } = useTranslation("reviews");
 
   const { id } = useParams();
   const newId = id?.replace(":", "");
@@ -89,10 +90,11 @@ export default function ReviewComment() {
               className="w-full h-5 flex items-center cursor-pointer"
             >
               <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                  ? "border border-textBlueColor bg-textBlueColor"
-                  : "border border-lightBorderColor"
-                  }`}
+                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${
+                  data?.checked
+                    ? "border border-textBlueColor bg-textBlueColor"
+                    : "border border-lightBorderColor"
+                }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
               </button>
@@ -145,14 +147,7 @@ export default function ReviewComment() {
     <div className="w-full h-[100vh] px-4 md:px-10">
       <div className="w-full flex justify-between md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
-          <button
-            onClick={() => {
-              navigate(-1);
-            }}
-            className="w-8 h-8 flex absolute md:static left-2 items-center cursor-pointer justify-center md:border border-borderColor rounded-lg"
-          >
-            <GoBackIcons />
-          </button>
+          <BackBtn />
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
             {t("more_details_of_product")}
           </span>
