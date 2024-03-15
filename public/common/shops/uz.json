@@ -25,44 +25,13 @@
     "region": "Mintaqa",
     "address": "Manzil",
     "work_time": "Ish vaqti",
-    "cloth": "Kiyim-kechak",
+    "cloth": "Tovarlar",
     "no_location": "Sizda hali joy yo'q !",
     "sure": "Ishonchingiz komilmi",
     "change_photo": "Suratni o'zgartirish",
     "upload_a_photo": "Surat yuklang",
     "shops": "Do'konlar",
     "all_locations": "Barcha manzillar",
-    "save": "Saqlash",
-
-
-
-
-
-    "no_reviews": "Sizda hali hech qanday sharh yo'q",
-    "reviews": "Sharhlar",
-    "reviews_two": "sharhlar",
-    "products": "Tovarlar",
-    "own_delivery": "Uyga yetkazib berish",
-
-    "image": "Rasm",
-    "name_of_product": "Mahsulot nomi",
-    "date": "Sana",
-    "name_product": "Mahsulot nomi",
-    "more_details_of_product": "Mahsulot haqida batafsil ma'lumot",
-    "filter_rating": "Filtr reytingi",
-    "customer_reviews": "Mijozlarning sharhlari",
-    "according_to_reviews": "Sharhlarga ko'ra",
-    "purchase_rating": "Sotib olish reytingi",
-    "answer": "Javob",
-    "send": "Jo'natish",
-    "answer_two": "Javob",
-    "add_answer": "Javobingizni qo'shing ...",
-    "ready": "Jo'natish"
-
-
-
-
-
-
+    "save": "Saqlash"
     
 }
