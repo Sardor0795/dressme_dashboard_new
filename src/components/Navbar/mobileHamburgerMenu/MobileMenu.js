@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button, Modal, Popover } from "antd";
 import {
   ClothesIcons,
   LocationIcon,
@@ -8,18 +8,22 @@ import {
   UserExitIcon,
   UserIcon,
 } from "../../../assets/icons";
-import { useContext, useState } from "react";
+import i18next from "i18next";
+import { RussianFlag, UzbekFlag } from "../../../assets";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { useHttp } from "../../../hook/useHttp";
 import { useMutation } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LanguageDetectorDress } from "../../../language/LanguageItem";
+import { useTranslation } from "react-i18next";
 export default function MobileHumburgerMenu() {
-  const { request } = useHttp()
-  const [dressInfo, setDressInfo] = useContext(dressMainData)
+  const { request } = useHttp();
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -29,34 +33,95 @@ export default function MobileHumburgerMenu() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const { i18n, t } = useTranslation("sidebar");
+
+  const [openLang, setOpenLang] = useState(false);
+  const handleOpenChangeLang = (newOpen) => {
+    setOpenLang(newOpen);
+  };
+
+  const [languageDetector, setLanguageDetector] = useContext(
+    LanguageDetectorDress
+  );
+  const [currentLang, setCurrentLang] = useState(
+    localStorage.getItem("i18nextLng")
+  );
+
   // -----------------------Seller Delete---------------
   const HandleLogOutSeller = useMutation(() => {
     return request({ url: `/logout`, method: "POST", token: true });
   });
   const logOutHandle = () => {
-    HandleLogOutSeller.mutate({}, {
-      onSuccess: res => {
-        setIsModalOpen(false)
-        if (res?.message) {
-          localStorage.clear();
-          navigate("/login-seller")
-          window.location.reload();
-          toast.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setDressInfo({ ...dressInfo, logOutSeller: false })
-        }
-      },
+    HandleLogOutSeller.mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          setIsModalOpen(false);
+          if (res?.message) {
+            localStorage.clear();
+            navigate("/login-seller");
+            window.location.reload();
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setDressInfo({ ...dressInfo, logOutSeller: false });
+          }
+        },
+      }
+    );
+  };
 
-    })
-  }
+  const LanguageList = [
+    { id: 1, value: "uz", type: "O'zbekcha", icons: UzbekFlag },
+    { id: 2, value: "ru", type: "Русский", icons: RussianFlag },
+  ];
+
+  useEffect(() => {
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
+      i18next.changeLanguage(currentLang);
+    }
+    setLanguageDetector({ typeLang: currentLang });
+  }, [currentLang]);
+
+  const handleLangValue = (value) => {
+    i18n.changeLanguage(value);
+    setCurrentLang(value);
+    setOpenLang(false);
+  };
+
+  const contentLang = (
+    <section className="w-[250px] h-fit m-0 p-0">
+      {LanguageList.map((data) => {
+        return (
+          <article
+            key={data?.value}
+            className={`p-2 gap-x-2 text-sm cursor-pointer hover:bg-bgColor flex items-center justify-start  ${dressInfo?.ColorSeason}`}
+            onClick={() => {
+              handleLangValue(data?.value);
+            }}
+          >
+            <figure className="mr-[6px]  w-5 h-5">
+              <img className="w-full h-full" src={data?.icons} alt="" />
+            </figure>
+            <article
+              className={`text-lg not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
+            >
+              {data?.type}
+            </article>
+          </article>
+        );
+      })}
+    </section>
+  );
+
   return (
     <div className="flex md:hidden items-center">
       <ToastContainer
@@ -198,18 +263,48 @@ export default function MobileHumburgerMenu() {
           </NavLink>
         </div>
         <div className=" flex items-center justify-between gap-x-2 border-t border-borderColor w-full mt-2 pt-2">
-
           <button
             onClick={logOutHandle}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium">
-            <UserExitIcon colors={"#fff"} />{" "}
-            <span>Выйти</span>
+            className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium"
+          >
+            <UserExitIcon colors={"#fff"} /> <span>Выйти</span>
           </button>
+          <section className="w-1/2 xs:w-[45%] bg-lightBorderColor rounded-lg  h-fit font-AeonikProMedium select-none cursor-pointer">
+            {LanguageList.filter((data) => data?.value === currentLang).map(
+              (data) => {
+                return (
+                  <Popover
+                    key={data?.id}
+                    open={openLang}
+                    onOpenChange={handleOpenChangeLang}
+                    className="w-full  h-[42px] gap-x-[5px] flex items-center justify-center capitalize "
+                    trigger="click"
+                    options={["Hide"]}
+                    placement="top"
+                    content={contentLang}
+                  >
+                    <span className="block mr-[6px] ">
+                      <img
+                        src={data?.icons}
+                        className="min-w-[16px] min-h-[16px]"
+                        alt=""
+                      />
+                    </span>
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
+                      {data?.type}
+                    </p>
+                  </Popover>
+                );
+              }
+            )}
+          </section>
+        </div>
+        <div className="w-full mt-5">
           <NavLink
             onClick={() => setIsModalOpen(false)}
             className={
-              "w-1/2 xs:w-[45%] h-[42px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-[12px] flex items-center justify-center"
+              "w-full h-[42px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-[12px] flex items-center justify-center"
             }
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
@@ -234,7 +329,6 @@ export default function MobileHumburgerMenu() {
               )
             }
           </NavLink>
-
         </div>
       </Modal>
     </div>
