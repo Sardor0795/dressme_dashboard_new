@@ -98,7 +98,7 @@ export default function MobileHumburgerMenu() {
   };
 
   const contentLang = (
-    <section className="w-[250px] h-fit m-0 p-0">
+    <section className="w-[140px] h-fit m-0 p-0">
       {LanguageList.map((data) => {
         return (
           <article
@@ -112,7 +112,7 @@ export default function MobileHumburgerMenu() {
               <img className="w-full h-full" src={data?.icons} alt="" />
             </figure>
             <article
-              className={`text-lg not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
+              className={`text-base not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
             >
               {data?.type}
             </article>
@@ -291,7 +291,7 @@ export default function MobileHumburgerMenu() {
                         alt=""
                       />
                     </span>
-                    <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
+                    <p className="text-base not-italic font-AeonikProMedium leading-5 ">
                       {data?.type}
                     </p>
                   </Popover>
@@ -315,14 +315,14 @@ export default function MobileHumburgerMenu() {
               isActive ? (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#007dca"} />
-                  <p className="text-base not-italic font-AeonikProMedium leading-5">
+                  <p className="text-base not-italic font-AeonikProMedium ">
                     {t("profil")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#2c2c2c"} />
-                  <p className="text-base not-italic font-AeonikProMedium leading-5">
+                  <p className="text-base not-italic font-AeonikProMedium ">
                     {t("profil")}
                   </p>
                 </figure>
