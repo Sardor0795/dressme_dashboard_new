@@ -19,7 +19,7 @@ const url = "https://api.dressme.uz/api/seller";
 const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorListForTest, colorGroup, onRefetch, productId, onHandleImage }) => {
   const { request } = useHttp()
   const { t } = useTranslation("product");
-    // name_ru
+  // name_ru
 
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -891,7 +891,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                       <FaCheck size={30} color="#009B17" />
                     </span>}
-                  <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                  <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                 </div>
               }
             </div>
@@ -930,7 +930,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         >
           <button
             onClick={() => setModalOfCarsouel(false)}
-            className="absolute top-0  z-[202] right-[-80px]  flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#808080]">
+            className="absolute   z-[202] sm:top-0  top-[-50px] z-[224] right-[0px] sm:right-[-50px] md:right-[-80px]  flex items-center justify-center h-[38px] w-[38px] md:w-[50px] md:h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
           <div>
@@ -940,7 +940,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               < div className="w-full  flex flex-col items-center justify-start">
                 {modalId == imageOne?.id1 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]   flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -958,7 +958,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -966,7 +966,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageOne?.url_photo1}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
 
                       }
@@ -1016,7 +1016,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageTwo?.id2 &&
                   <div className="w-full ">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1034,7 +1034,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1089,7 +1089,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageThree?.id3 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1107,7 +1107,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1115,7 +1115,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageThree?.url_photo3}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
 
@@ -1162,7 +1162,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageFour?.id4 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1180,7 +1180,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1188,7 +1188,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageFour?.url_photo4}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
 
@@ -1234,7 +1234,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageFive?.id5 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1252,7 +1252,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1260,7 +1260,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageFive?.url_photo5}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1305,7 +1305,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageSix?.id6 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1323,7 +1323,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1331,7 +1331,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageSix?.url_photo6}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1376,7 +1376,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageSeven?.id7 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1394,7 +1394,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1402,7 +1402,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageSeven?.url_photo7}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1447,7 +1447,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                 }
                 {modalId == imageEight?.id8 &&
                   <div className="w-full">
-                    <div className="w-full h-[60vh] md:h-[80vh] flex items-center">
+                    <div className="w-full h-[400px] md:h-[80vh]    flex items-center">
                       {hideToggleIcons ?
                         <div className="w-full h-full flex items-center justify-center">
                           {loader && hideToggleIcons ?
@@ -1465,7 +1465,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                                 <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
                                   <FaCheck size={30} color="#009B17" />
                                 </span>}
-                              <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                             </div>
                           }
                         </div>
@@ -1473,7 +1473,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                         <img
                           src={imageEight?.url_photo8}
                           alt="backImg"
-                          className=" w-full max-w-[440px] md:max-w-[620px] h-[60vh] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                          className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
                         />
                       }
                     </div>
@@ -1523,7 +1523,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         </section>
         {/* Img Upload */}
         <section
-          className={`fixed z-[223] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
+          className={`fixed z-[223] rounded-lg bg-white w-full max-w-[440px]  md:w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
             }`}
         >
           <button
@@ -1533,10 +1533,10 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
               setSuccessMessage(null)
               setFreeModalUploadImg(false)
             }}
-            className="absolute top-0  z-[224] right-[-50px] md:right-[-80px]  flex items-center justify-center h-[38px] w-[38px] md:w-[50px] md:h-[50px] rounded-full bg-[#808080]">
+            className="absolute sm:top-0  top-[-50px] z-[224] right-[0px] sm:right-[-50px] md:right-[-80px]  flex items-center justify-center h-[38px] w-[38px] md:w-[50px] md:h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
-          <div className="w-full max-w-[440px] md:max-w-[620px] h-fit overflow-hidden rounded-lg">
+          <div className="w-full max-w-[440px] md:max-w-[620px] h-fit overflow-hidden rounded-lg  ">
             {Number(modalId) === Number(imageTwo?.id2) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
                 <div className="w-full h-full">
@@ -1544,7 +1544,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageTwo?.url_photo2 ?
                     <label
                       htmlFor={"imageTwo"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1565,7 +1565,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1576,13 +1576,24 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>
+                            }
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -1590,7 +1601,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageTwo?.url_photo2}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover "
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover "
                       />
                   }
                 </div>
@@ -1652,7 +1663,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageThree?.url_photo3 ?
                     <label
                       htmlFor={"imageThree"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1673,7 +1684,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1684,13 +1695,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>}
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -1698,7 +1719,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageThree?.url_photo3}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover "
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover "
                       />
                   }
                 </div>
@@ -1760,7 +1781,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageFour?.url_photo4 ?
                     <label
                       htmlFor={"imageFour"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1780,7 +1801,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1791,13 +1812,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>}
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -1805,7 +1836,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageFour?.url_photo4}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover "
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover "
                       />
                   }
                 </div>
@@ -1867,7 +1898,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageFive?.url_photo5 ?
                     <label
                       htmlFor={"imageFive"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1887,7 +1918,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -1898,13 +1929,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>}
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -1912,7 +1953,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageFive?.url_photo5}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover "
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover "
                       />
                   }
                 </div>
@@ -1974,7 +2015,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageSix?.url_photo6 ?
                     <label
                       htmlFor={"imageSix"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -1994,7 +2035,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -2005,13 +2046,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>}
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -2019,7 +2070,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageSix?.url_photo6}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover "
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover "
                       />
                   }
                 </div>
@@ -2081,7 +2132,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageSeven?.url_photo7 ?
                     <label
                       htmlFor={"imageSeven"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -2101,7 +2152,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -2112,13 +2163,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>}
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -2126,7 +2187,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageSeven?.url_photo7}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover"
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover"
                       />
                   }
                 </div>
@@ -2188,7 +2249,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                   {!imageEight?.url_photo8 ?
                     <label
                       htmlFor={"imageEight"}
-                      className="h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
+                      className="h-[400px] md:h-[60vh] w-full cursor-pointer  text-sm font-AeonikProMedium flex items-center flex-col justify-center text-textBlueColor "
                     >
                       <input
                         className="hidden"
@@ -2208,7 +2269,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     </label>
                     :
                     hideToggleIcons ?
-                      <div className="w-full h-[60vh] flex items-center justify-center">
+                      <div className="w-full h-[400px] md:h-[60vh] flex items-center justify-center">
                         {loader && hideToggleIcons ?
                           <PuffLoader
                             // className={styles.loader1}
@@ -2219,13 +2280,23 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                           :
                           <div className="w-full h-full flex gap-y-3 flex-col items-center justify-center ">
                             {errorMessage ?
-                              <span className="flex items-center justify-center p-2">
-                                <MdError size={35} color="#FF4343" />
-                              </span> :
-                              <span className="border-2 border-[#009B17] rounded-full flex items-center justify-center p-2">
-                                <FaCheck size={30} color="#009B17" />
-                              </span>}
-                            <span className="text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
+                              <>
+                                <span className="hidden md:flex items-center justify-center p-2">
+                                  <MdError size={35} color="#FF4343" />
+                                </span>
+                                <span className="md:hidden flex items-center justify-center p-2">
+                                  <MdError size={25} color="#FF4343" />
+                                </span>
+                              </> :
+                              <>
+                                <span className="border-2 border-[#009B17] rounded-full hidden md:flex items-center justify-center p-2">
+                                  <FaCheck size={30} color="#009B17" />
+                                </span>
+                                <span className="border-2 border-[#009B17] rounded-full md:hidden flex items-center justify-center p-2">
+                                  <FaCheck size={20} color="#009B17" />
+                                </span>
+                              </>}
+                            <span className="text-base md:text-2xl not-italic font-AeonikProMedium">{errorMessage ? errorMessage : SuccessMessage}</span>
                           </div>
                         }
                       </div>
@@ -2233,7 +2304,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       <img
                         src={imageEight?.url_photo8}
                         alt="backImg"
-                        className=" w-full h-[80vh]  object-cover "
+                        className=" w-full h-[400px] md:h-[80vh]  object-cover "
                       />
                   }
                 </div>

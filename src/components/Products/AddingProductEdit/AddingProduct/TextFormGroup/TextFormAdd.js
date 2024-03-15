@@ -180,7 +180,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <Link
                                 to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-base md:text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -188,7 +188,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                             <Link
                                 to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-base md:text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -206,9 +206,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[48px] px-[5px]`}>
+                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInRu ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[38px] md:h-[48px] px-[5px]`}>
                                     <input
-                                        className="flex-1 mr-[30px] w-[30px] focus:outline-none font-AeonikProRegular"
+                                        className="flex-1 mr-[30px]   text-[12px] md:text-base w-[30px]   focus:outline-none font-AeonikProRegular"
                                         type="text"
                                         name="title"
                                         value={state?.titleInRu}
@@ -231,9 +231,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         <StarLabel />
                                     </span>
                                 </div>
-                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[48px] px-[5px]`}>
+                                <div className={`justify-between rounded-lg   ${state?.isCheckValid && !state?.titleInUz ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex h-[38px] md:h-[48px] px-[5px]`}>
                                     <input
-                                        className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                                        className="flex-1 mr-[30px] text-[12px] md:text-base w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                         type="text"
                                         name="title"
                                         value={state?.titleInUz}
@@ -258,7 +258,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 </div>
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
                                     <textarea
-                                        className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
+                                        className="block w-full h-full text-[#000] text-[12px] md:text-base resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
                                         value={state?.descriptionInRu}
@@ -286,7 +286,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 {/* error -  border-[#ffb8b8] bg-[#fff6f6] */}
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
                                     <textarea
-                                        className="block w-full h-full text-[#000]  resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
+                                        className="block w-full h-full text-[#000] text-[12px] md:text-base resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
                                         name=""
                                         id=""
                                         value={state?.descriptionInUz}
@@ -320,7 +320,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px] text-[12px] md:text-base  ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         // allowClear
@@ -350,7 +350,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px] ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px] text-[12px] md:text-base ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
 
                                         style={{ width: "100%" }}
                                         value={
@@ -390,9 +390,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             ({t("APnotNecessary")})
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex h-[48px] px-[5px] border border-borderColor  `}>
+                                    <div className={`rounded-lg  flex h-[38px] md:h-[48px] px-[5px] border border-borderColor  `}>
                                         <input
-                                            className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                                            className="flex-1 mr-[30px] text-[12px] md:text-base w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             name="noteValueRu"
                                             value={state?.noteValueRu}
@@ -415,9 +415,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             ({t("APnotNecessary")})
                                         </span>
                                     </div>
-                                    <div className={`rounded-lg  flex h-[48px] px-[5px] border border-borderColor `}>
+                                    <div className={`rounded-lg  flex h-[38px] md:h-[48px] px-[5px] border border-borderColor `}>
                                         <input
-                                            className="flex-1 mr-[30px] w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
+                                            className="flex-1 mr-[30px] text-[12px] md:text-base w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             name="noteValueUz"
                                             value={state?.noteValueUz}
@@ -496,11 +496,12 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         /> : t("PRsave")}
                                 </button>
                                     :
-                                    <span
+                                    <button
+                                        type="button"
                                         className="w-[48%] select-none cursor-not-allowed  md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center border border-[#b5b5b5] text-[#b5b5b5] bg-[#f5f5f5]  py-3   t rounded-lg text-base md:text-lg font-AeonikProMedium"
                                     >
                                         {t("PRsave")}
-                                    </span>}
+                                    </button>}
                             </div>
                         </div>
                     </div>
