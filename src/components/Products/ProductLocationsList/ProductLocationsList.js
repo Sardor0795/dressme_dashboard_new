@@ -2406,7 +2406,7 @@ export default function ProductLocationsList() {
 
                                                               <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
                                                                 <div className="w-full break-all  overflow-hidden  ">
-                                                                  <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                                  <p className="w-full  break-all  text-weatherWinterColor text-center   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
 
                                                                     {languageDetector?.typeLang === "ru" && itemValue?.name_ru}
                                                                     {languageDetector?.typeLang === "uz" && itemValue?.name_uz}
@@ -2522,7 +2522,7 @@ export default function ProductLocationsList() {
                                                                       </p>
                                                                     </div>
 
-                                                                    <td
+                                                                    <div
                                                                       key={
                                                                         index
                                                                       }
@@ -2530,7 +2530,7 @@ export default function ProductLocationsList() {
                                                                     >
                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                       {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
-                                                                    </td>
+                                                                    </div>
 
                                                                     {/* <div className="w-full"> {itemValue?.money} сум </div> */}
                                                                     <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
