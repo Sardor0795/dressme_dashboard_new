@@ -16,12 +16,15 @@ export default function SignInSeller() {
     rememberCheck: "",
     errorGroup: "",
     isLoadingSent: false,
+
+
+
   });
 
   const handleChange = (e) => {
     const { checked } = e.target;
-    setState({ ...state, rememberCheck: checked });
-  };
+    setState({ ...state, rememberCheck: checked })
+  }
 
   const navigate = useNavigate();
   const url = "https://api.dressme.uz/api/seller/login";
@@ -31,13 +34,9 @@ export default function SignInSeller() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json"
       },
-      body: JSON.stringify({
-        email: state.email,
-        password: state.password,
-        rememberToken: state?.rememberCheck,
-      }),
+      body: JSON.stringify({ email: state.email, password: state.password, rememberToken: state?.rememberCheck }),
     }).then((res) => res.json());
   });
   const EnterTheSystem = () => {
@@ -45,17 +44,13 @@ export default function SignInSeller() {
     // console.log(state?.password, "password");
     // console.log(state?.rememberCheck, "rememberCheck");
     if (state.email?.length && state.password?.length) {
-      setState({ ...state, isLoadingSent: true });
+      setState({ ...state, isLoadingSent: true })
       dataMutate.mutate(
         {},
         {
           onSuccess: (res) => {
             if (res?.message && res?.errors) {
-              setState({
-                ...state,
-                errorGroup: res?.message,
-                isLoadingSent: false,
-              });
+              setState({ ...state, errorGroup: res?.message, isLoadingSent: false })
               toast.error(`${res?.message}`, {
                 position: "top-right",
                 autoClose: 3000,
@@ -66,11 +61,13 @@ export default function SignInSeller() {
                 progress: undefined,
                 theme: "light",
               });
-            } else if (res?.access_token) {
-              localStorage.setItem("DressmeUserToken", res?.access_token);
-              localStorage.setItem("RefreshUserToken", res?.refresh_token);
 
-              navigate("/edit-profile");
+            } else if (res?.access_token) {
+
+              localStorage.setItem("DressmeUserToken", res?.access_token)
+              localStorage.setItem("RefreshUserToken", res?.refresh_token)
+
+              navigate("/edit-profile")
               // window.location.reload();
               // toast.success(`Успешный  вход в систему`, {
               //   position: "top-right",
@@ -83,17 +80,11 @@ export default function SignInSeller() {
               //   theme: "light",
               // });
               // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
-              setState({
-                ...state,
-                email: "",
-                password: "",
-                errorGroup: "",
-                isLoadingSent: false,
-              });
+              setState({ ...state, email: "", password: "", errorGroup: "", isLoadingSent: false });
             }
           },
           onError: (err) => {
-            setState({ ...state, isLoadingSent: false });
+            setState({ ...state, isLoadingSent: false })
             toast.error(`${err}`, {
               position: "top-right",
               autoClose: 3000,
@@ -128,7 +119,7 @@ export default function SignInSeller() {
     document.title = "Войти в систему продавца";
   }, []);
   return (
-    <form className=" w-full h-[100vh] md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
+    <div className=" w-full h-[100vh] md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -157,8 +148,6 @@ export default function SignInSeller() {
               className="outline-none !bg-white  w-full h-[42px] text-base  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black focus:bg-white placeholder-bg-white"
               type="email"
               name="email"
-              autoComplete="on"
-              inputMode="email"
               value={state.email}
               onChange={({ target: { value } }) => {
                 setState({ ...state, email: value });
@@ -181,12 +170,11 @@ export default function SignInSeller() {
               type={state?.eyesShow ? "password" : "text"}
               placeholder="Enter your password"
               name="password"
-              required
-              autoComplete="current-password"
               value={state.password}
               onChange={({ target: { value } }) => {
                 setState({ ...state, password: value });
               }}
+              required
             />
             <span className="cursor-pointer">
               {state?.eyesShow ? (
@@ -263,6 +251,6 @@ export default function SignInSeller() {
           </span>
         </NavLink>
       </div>
-    </form>
+    </div>
   );
 }

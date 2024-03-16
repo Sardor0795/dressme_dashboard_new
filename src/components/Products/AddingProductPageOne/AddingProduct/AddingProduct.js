@@ -44,8 +44,8 @@ const AddingProduct = () => {
   const { t } = useTranslation("product");
   const [languageDetector] = useContext(LanguageDetectorDress);
 
-  const [clothingCategoryModal, setClothingCategoryModal] = useState(false);
-  const [searchList, setSearchList] = useState(null);
+  const [clothingCategoryModal, setClothingCategoryModal] = useState(false)
+  const [searchList, setSearchList] = useState(null)
   const [state, setState] = useState({
     buttonReviews: false,
     openDropModalButton: true,
@@ -109,9 +109,9 @@ const AddingProduct = () => {
     sendingLoader: false,
   });
   // console.log(state, 'state?.sub_Section_Id1111111111111');
-  const [section_Id, setSection_Id] = useState([]);
-  const [subSection_Id, setSubSection_Id] = useState([]);
-  const [season_Id, setSeason_Id] = useState([]);
+  const [section_Id, setSection_Id] = useState([])
+  const [subSection_Id, setSubSection_Id] = useState([])
+  const [season_Id, setSeason_Id] = useState([])
 
   async function handleLocationImage1(event) {
     const imageFile = event.target.files[0];
@@ -213,6 +213,7 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
+
   }
 
   function CallBackUnderWear(childData) {
@@ -226,6 +227,7 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
+
   }
 
   function CallBackShoesWear(childData) {
@@ -252,6 +254,7 @@ const AddingProduct = () => {
       discount_price: childData?.discountPrice,
       discount_percent: childData?.discountPercent,
     });
+
   }
 
   function randomCode(len) {
@@ -265,6 +268,8 @@ const AddingProduct = () => {
     });
   }
 
+
+
   // ---------Callback----
   useEffect(() => {
     if (
@@ -276,8 +281,7 @@ const AddingProduct = () => {
       state?.DressTypeModal ||
       state?.GenderModal ||
       state?.MakeCountryModal ||
-      state?.SubClothingSection ||
-      clothingCategoryModal
+      state?.SubClothingSection || clothingCategoryModal
     ) {
       document.body.style.overflow = "hidden";
     } else {
@@ -293,7 +297,7 @@ const AddingProduct = () => {
     state?.GenderModal,
     state?.MakeCountryModal,
     state?.SubClothingSection,
-    clothingCategoryModal,
+    clothingCategoryModal
   ]);
 
   useEffect(() => {
@@ -313,7 +317,7 @@ const AddingProduct = () => {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, getProductInfo: data?.data });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!dressInfo?.getProductInfo) {
       fetchData();
@@ -582,7 +586,7 @@ const AddingProduct = () => {
   useEffect(() => {
     if (!newArray?.length) {
       setState({ ...state, sub_Section_Id: [] });
-      setSubSection_Id([]);
+      setSubSection_Id([])
     }
   }, [newArray?.length]);
 
@@ -609,95 +613,98 @@ const AddingProduct = () => {
   // ---------Mobile Device--------
   const handleChangeSectionMobile = (e) => {
     if (section_Id?.length === 0) {
-      setSection_Id((section_Id) => [...section_Id, e]);
+      setSection_Id(section_Id => [...section_Id, e])
     }
     if (section_Id?.length > 0 && !section_Id?.includes(e)) {
-      setSection_Id((section_Id) => [...section_Id, e]);
+      setSection_Id(section_Id => [...section_Id, e])
     }
-  };
+  }
   const handleChangeSectionDeleteMobile = (e) => {
     if (section_Id?.length > 0 && section_Id?.includes(e)) {
-      setSection_Id(section_Id?.filter((v) => v !== e));
+      setSection_Id(section_Id?.filter((v) => v !== e))
     }
-  };
+  }
   const handleChangeSubSectionMobile = (e) => {
     if (subSection_Id?.length === 0) {
-      setSubSection_Id((subSection_Id) => [...subSection_Id, e]);
+      setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
     if (subSection_Id?.length > 0 && !subSection_Id?.includes(e)) {
-      setSubSection_Id((subSection_Id) => [...subSection_Id, e]);
+      setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
-  };
+  }
   const handleChangeSubSectionDeleteMobile = (e) => {
     if (subSection_Id?.length > 0 && subSection_Id?.includes(e)) {
-      setSubSection_Id(subSection_Id?.filter((v) => v !== e));
+      setSubSection_Id(subSection_Id?.filter((v) => v !== e))
     }
-  };
+  }
 
   const onHandleChangeSeasonMobile = (e) => {
     if (season_Id?.length === 0) {
-      setSeason_Id((season_Id) => [...season_Id, e]);
+      setSeason_Id(season_Id => [...season_Id, e])
     }
     if (season_Id?.length > 0 && !season_Id?.includes(e)) {
-      setSeason_Id((season_Id) => [...season_Id, e]);
+      setSeason_Id(season_Id => [...season_Id, e])
     }
-  };
+  }
   const onHandleChangeSeasonDeleteMobile = (e) => {
     if (season_Id?.length > 0 && season_Id?.includes(e)) {
-      setSeason_Id(season_Id?.filter((v) => v !== e));
+      setSeason_Id(season_Id?.filter((v) => v !== e))
     }
-  };
+  }
   const selectGenderId = (id) => {
     if (!state?.gender_Id) {
-      setState({ ...state, gender_Id: id });
+      setState({ ...state, gender_Id: id, })
     }
     if (state?.gender_Id !== id) {
-      setState({ ...state, gender_Id: id });
+      setState({ ...state, gender_Id: id, })
     }
-  };
+  }
   const ClearGenderSelected = (id) => {
     if (state?.gender_Id === id) {
-      setState({ ...state, gender_Id: null });
+      setState({ ...state, gender_Id: null, })
     }
-  };
+  }
 
   const selectTypeById = (filter, type_Id) => {
     if (!state?.filterTypeId) {
-      setState({ ...state, filterTypeId: filter, type_Id: type_Id });
+      setState({ ...state, filterTypeId: filter, type_Id: type_Id })
     }
     if (state?.filterTypeId !== filter) {
-      setState({ ...state, filterTypeId: filter, type_Id: type_Id });
+      setState({ ...state, filterTypeId: filter, type_Id: type_Id })
     }
-  };
+  }
   const ClearSelectTypeById = (filter, type_Id) => {
+
     if (state?.filterTypeId === filter) {
-      setState({ ...state, filterTypeId: null, type_Id: null });
+      setState({ ...state, filterTypeId: null, type_Id: null })
     }
-  };
+  }
   const selectProduceId = (id) => {
     if (!state?.producer_Id) {
-      setState({ ...state, producer_Id: id });
+      setState({ ...state, producer_Id: id })
     }
     if (state?.producer_Id !== id) {
-      setState({ ...state, producer_Id: id });
+      setState({ ...state, producer_Id: id })
     }
-  };
+  }
   const ClearProducerById = (id) => {
     if (state?.producer_Id === id) {
-      setState({ ...state, producer_Id: null });
+      setState({ ...state, producer_Id: null })
     }
-  };
+  }
 
   useEffect(() => {
-    setSearchList("");
+    setSearchList('')
   }, [
     state?.ClothingSection,
     state?.SubClothingSection,
     state?.DressTypeModal,
     clothingCategoryModal,
     state?.openSelect,
-    state?.MakeCountryModal,
-  ]);
+    state?.MakeCountryModal
+  ])
+
+
 
   return (
     <div className="w-full h-fit ">
@@ -855,9 +862,8 @@ const AddingProduct = () => {
             )}
           </div>
           <div
-            className={`${
-              dressInfo?.nextPageShowForm ? "flex" : "hidden"
-            } relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}
+            className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"
+              } relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}
           >
             <section
               onClick={() => {
@@ -873,12 +879,12 @@ const AddingProduct = () => {
                   ClothingCategoryModal: false,
                   showColor: false,
                   openSelect: false,
-                });
-                setClothingCategoryModal(false);
-              }}
+                })
+                setClothingCategoryModal(false)
+              }
+              }
               className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
-                ${
-                  state?.ClothingSection ||
+                ${state?.ClothingSection ||
                   state?.SubClothingSection ||
                   state?.DressSeason ||
                   state?.Colour ||
@@ -888,19 +894,16 @@ const AddingProduct = () => {
                   state?.showColor ||
                   state?.openSelect ||
                   state?.MakeCountryModal
-                    ? ""
-                    : "hidden"
+                  ? ""
+                  : "hidden"
                 }`}
             ></section>
 
             {state?.showColor && (
-              <div
-                className={`max-w-[440px] md:max-w-[576px] w-full fixed z-[221]  left-1/2 right-1/2 md:top-[50%] translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ${
-                  state?.showColor
-                    ? " bottom-0 md:flex"
-                    : "md:hidden bottom-[-800px] z-[-10]"
-                }`}
-              >
+              <div className={`max-w-[440px] md:max-w-[576px] w-full fixed z-[221]  left-1/2 right-1/2 md:top-[50%] translate-x-[-50%] md:translate-y-[-50%]  h-fit flex items-center  justify-center mx-auto ${state?.showColor
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
+                }`}>
                 <div className="relative z-[223]  top-0 w-full h-fit p-4 mx-auto bg-white rounded-t-md md:rounded-md shadow-lg">
                   <div
                     className={`flex items-center justify-between border-b border-searchBgColor pb-3`}
@@ -929,32 +932,28 @@ const AddingProduct = () => {
                               setState({ ...state, color_Id: data?.id })
                             }
                             style={{ background: `${data.hex}` }}
-                            className={`rounded-full md:rounded-[12px] flex items-center justify-center w-[25px] h-[25px]  md:w-[65px] md:h-[40px] bg-[${
-                              data.hex
-                            }] cursor-pointer ${
-                              data?.id == 2
+                            className={`rounded-full md:rounded-[12px] flex items-center justify-center w-[25px] h-[25px]  md:w-[65px] md:h-[40px] bg-[${data.hex
+                              }] cursor-pointer ${data?.id == 2
                                 ? "border border-setTexOpacity flex items-center justify-center"
                                 : ""
-                            }
+                              }
                      `}
                           >
                             {data?.id === state?.color_Id &&
-                            state?.color_Id !== 2 ? (
+                              state?.color_Id !== 2 ? (
                               <InputCheckedTrueIcons colors={"#fff"} />
                             ) : null}
 
                             {state?.color_Id === 2 &&
-                            data?.id === state?.color_Id ? (
+                              data?.id === state?.color_Id ? (
                               <InputCheckedTrueIcons colors={"#000"} />
                             ) : null}
                           </div>
                           <span
                             className={`text-black text-center text-[10px] md:text-xs not-italic font-AeonikProRegular`}
                           >
-                            {languageDetector?.typeLang === "ru" &&
-                              data?.name_ru}
-                            {languageDetector?.typeLang === "uz" &&
-                              data?.name_uz}
+                            {languageDetector?.typeLang === "ru" && data?.name_ru}
+                            {languageDetector?.typeLang === "uz" && data?.name_uz}
                           </span>
                         </div>
                       );
@@ -982,11 +981,10 @@ const AddingProduct = () => {
               </div>
             )}
             <section
-              className={` max-w-[440px] md:max-w-[700px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[25px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-                state?.openSelect
-                  ? " bottom-0 md:flex"
-                  : "md:hidden bottom-[-800px] z-[-10]"
-              }`}
+              className={` max-w-[440px] md:max-w-[700px] z-[201] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[25px] rounded-t-lg md:rounded-b-lg left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openSelect
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
+                }`}
             >
               <button
                 onClick={() => setState({ ...state, openSelect: false })}
@@ -1015,12 +1013,11 @@ const AddingProduct = () => {
                             })
                           }
                           key={data?.id}
-                          className={`w-full py-[10px] px-[20px] flex items-center justify-between rounded-[8px] ${
-                            Number(data?.id) ===
+                          className={`w-full py-[10px] px-[20px] flex items-center justify-between rounded-[8px] ${Number(data?.id) ===
                             Number(dressInfo?.locationIdAddProduct)
-                              ? "bg-LocationSelectBg"
-                              : "bg-white"
-                          } hover:bg-LocationSelectBg focus:bg-LocationSelectBg`}
+                            ? "bg-LocationSelectBg"
+                            : "bg-white"
+                            } hover:bg-LocationSelectBg focus:bg-LocationSelectBg`}
                         >
                           <span className="text-tableTextTitle2 text-xl not-italic font-AeonikProRegular">
                             {" "}
@@ -1028,8 +1025,8 @@ const AddingProduct = () => {
                           </span>
                           {Number(data?.id) ===
                             Number(dressInfo?.locationIdAddProduct) && (
-                            <BiCheckDouble size={25} color={"#007dca"} />
-                          )}
+                              <BiCheckDouble size={25} color={"#007dca"} />
+                            )}
                         </button>
                       );
                     });
@@ -1051,80 +1048,50 @@ const AddingProduct = () => {
             {/* ---------------------------------------- */}
             {/* Clothing Section */}
             <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.ClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
             >
               <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                 <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                  <p className="text-base font-AeonikProMedium">
-                    {" "}
-                    {t("APsectionProduct")}
-                  </p>
-                  <button
-                    onClick={() =>
-                      setState({ ...state, ClothingSection: false })
-                    }
-                  >
+                  <p className="text-base font-AeonikProMedium"> {t("APsectionProduct")}</p>
+                  <button onClick={() => setState({ ...state, ClothingSection: false })}>
                     <CloseAnswer colors={"#000"} />
                   </button>
                 </section>
                 <section className="w-full h-[400px] px-4 flex flex-col items-center">
                   <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                    <form className="w-full flex flex-col items-center">
-                      <div className="w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3">
+                    <form className='w-full flex flex-col items-center'>
+                      <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
                         <input
                           type="text"
-                          name="clothingTypes"
+                          name='clothingTypes'
                           placeholder={t("APsearch")}
                           value={searchList}
                           onChange={(e) => setSearchList(e?.target?.value)}
-                          className="w-full pr-3 outline-none"
-                        />
+                          className='w-full pr-3 outline-none' />
                         <SearchIcon />
                       </div>
-                      <div className="w-full h-[290px] overflow-auto VerticelScroll">
-                        {dressInfo?.getProductInfo?.sections
-                          ?.filter((e) =>
-                            searchList
-                              ? languageDetector?.typeLang === "ru"
-                                ? e?.name_ru
-                                    ?.toLowerCase()
-                                    ?.includes(searchList?.toLowerCase())
-                                : e?.name_uz
-                                    ?.toLowerCase()
-                                    ?.includes(searchList?.toLowerCase())
-                              : e
-                          )
-                          ?.map((item) => {
-                            return (
-                              <div
-                                onClick={() =>
-                                  handleChangeSectionMobile(item?.id)
-                                }
-                                key={item?.id}
-                                className={`w-full ${
-                                  section_Id?.includes(item?.id)
-                                    ? "bg-bgUpdate"
-                                    : ""
-                                } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                              >
-                                {languageDetector?.typeLang === "ru" &&
-                                  item?.name_ru}
-                                {languageDetector?.typeLang === "uz" &&
-                                  item?.name_uz}
-                                {section_Id?.includes(item?.id) && (
-                                  <span
-                                    onClick={() =>
-                                      handleChangeSectionDeleteMobile(item?.id)
-                                    }
-                                  >
-                                    <MenuCloseIcons colors={"#b5b5b5"} />
-                                  </span>
-                                )}
-                              </div>
-                            );
-                          })}
+                      <div className='w-full h-[290px] overflow-auto VerticelScroll'>
+                        {dressInfo?.getProductInfo?.sections?.filter((e) =>
+                          searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                            e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                        )?.map((item) => {
+                          return (
+                            <div
+                              onClick={() => handleChangeSectionMobile(item?.id)}
+                              key={item?.id}
+                              className={`w-full ${section_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                              {languageDetector?.typeLang === "ru" && item?.name_ru}
+                              {languageDetector?.typeLang === "uz" && item?.name_uz}
+                              {section_Id?.includes(item?.id) &&
+                                <span
+                                  onClick={() => handleChangeSectionDeleteMobile(item?.id)}
+                                >
+                                  <MenuCloseIcons colors={'#b5b5b5'} />
+                                </span>}
+                            </div>
+                          );
+                        })}
                       </div>
                     </form>
                   </div>
@@ -1133,87 +1100,49 @@ const AddingProduct = () => {
             </section>
             {/*Sub Clothing Section */}
             <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
             >
               {/*Sub Clothing Section */}
               <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden  ${
-                  state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden  ${state?.SubClothingSection ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className={`text-base font-AeonikProMedium `}>
-                      {t("APsubSectionProduct")}
-                    </p>
-                    <button
-                      onClick={() =>
-                        setState({ ...state, SubClothingSection: false })
-                      }
-                    >
+                    <p className={`text-base font-AeonikProMedium `}>{t("APsubSectionProduct")}</p>
+                    <button onClick={() => setState({ ...state, SubClothingSection: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <form className="w-full flex flex-col items-center">
-                        <div className="w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3">
-                          <input
-                            type="text"
+                      <form className='w-full flex flex-col items-center'>
+                        <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
+                          <input type="text"
                             value={searchList}
                             onChange={(e) => setSearchList(e?.target?.value)}
-                            name="clothingTypes"
-                            placeholder={t("APsearch")}
-                            className="w-full pr-3 outline-none"
-                          />
+                            name='clothingTypes' placeholder={t("APsearch")} className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
-                        <div className="w-full h-[290px] overflow-auto VerticelScroll">
-                          {newArray
-                            ?.filter((e) =>
-                              searchList
-                                ? languageDetector?.typeLang === "ru"
-                                  ? e?.name_ru
-                                      ?.toLowerCase()
-                                      ?.includes(searchList?.toLowerCase())
-                                  : e?.name_uz
-                                      ?.toLowerCase()
-                                      ?.includes(searchList?.toLowerCase())
-                                : e
-                            )
-                            ?.map((item) => {
-                              return (
-                                <div
-                                  onClick={() =>
-                                    handleChangeSubSectionMobile(item?.id)
-                                  }
-                                  key={item?.id}
-                                  className={`w-full ${
-                                    subSection_Id?.includes(item?.id)
-                                      ? "bg-bgUpdate"
-                                      : ""
-                                  } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                                >
-                                  {languageDetector?.typeLang === "ru" &&
-                                    item?.name_ru}
-                                  {languageDetector?.typeLang === "uz" &&
-                                    item?.name_uz}
-                                  {subSection_Id?.includes(item?.id) && (
-                                    <span
-                                      onClick={() =>
-                                        handleChangeSubSectionDeleteMobile(
-                                          item?.id
-                                        )
-                                      }
-                                    >
-                                      <MenuCloseIcons colors={"#b5b5b5"} />
-                                    </span>
-                                  )}
-                                </div>
-                              );
-                            })}
+                        <div className='w-full h-[290px] overflow-auto VerticelScroll'>
+                          {newArray?.filter((e) =>
+                            searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                          )?.map((item) => {
+                            return (
+                              <div
+                                onClick={() => handleChangeSubSectionMobile(item?.id)}
+                                key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {subSection_Id?.includes(item?.id) &&
+                                  <span
+                                    onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}
+                                  ><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                              </div>
+                            );
+                          })}
                         </div>
                       </form>
                     </div>
@@ -1223,56 +1152,34 @@ const AddingProduct = () => {
             </section>
             {/*DressSeason */}
             <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
             >
               <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                  state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressSeason ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium">
-                      {t("APseasonProduct")}
-                    </p>
-                    <button
-                      onClick={() => setState({ ...state, DressSeason: false })}
-                    >
+                    <p className="text-base font-AeonikProMedium">{t("APseasonProduct")}</p>
+                    <button onClick={() => setState({ ...state, DressSeason: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <div className="w-full flex flex-col items-center">
-                        <div className="w-full h-[290px] overflow-auto VerticelScroll">
+                      <div className='w-full flex flex-col items-center'>
+
+                        <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.seasons?.map((item) => {
                             return (
-                              <div
-                                onClick={() =>
-                                  onHandleChangeSeasonMobile(item?.id)
-                                }
-                                key={item?.id}
-                                className={`w-full ${
-                                  season_Id?.includes(item?.id)
-                                    ? "bg-bgUpdate"
-                                    : ""
-                                } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                              >
-                                {languageDetector?.typeLang === "ru" &&
-                                  item?.name_ru}
-                                {languageDetector?.typeLang === "uz" &&
-                                  item?.name_uz}
-                                {season_Id?.includes(item?.id) && (
+                              <div onClick={() => onHandleChangeSeasonMobile(item?.id)} key={item?.id} className={`w-full ${season_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {season_Id?.includes(item?.id) &&
                                   <span
-                                    onClick={() =>
-                                      onHandleChangeSeasonDeleteMobile(item?.id)
-                                    }
-                                  >
-                                    <MenuCloseIcons colors={"#b5b5b5"} />
-                                  </span>
-                                )}
+                                    onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}
+                                  ><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
                           })}
@@ -1285,55 +1192,32 @@ const AddingProduct = () => {
             </section>
             {/*GenderModal */}
             <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
             >
               <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                  state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.GenderModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium">
-                      {" "}
-                      {t("APgender")}
-                    </p>
-                    <button
-                      onClick={() => setState({ ...state, GenderModal: false })}
-                    >
+                    <p className="text-base font-AeonikProMedium"> {t("APgender")}</p>
+                    <button onClick={() => setState({ ...state, GenderModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <div className="w-full flex flex-col items-center">
-                        <div className="w-full h-[290px] overflow-auto VerticelScroll">
+                      <div className='w-full flex flex-col items-center'>
+
+                        <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                           {dressInfo?.getProductInfo?.gender?.map((item) => {
                             return (
-                              <div
-                                onClick={() => selectGenderId(item?.id)}
-                                key={item?.id}
-                                className={`w-full ${
-                                  state?.gender_Id == item?.id
-                                    ? "bg-bgUpdate"
-                                    : ""
-                                } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                              >
-                                {languageDetector?.typeLang === "ru" &&
-                                  item?.name_ru}
-                                {languageDetector?.typeLang === "uz" &&
-                                  item?.name_uz}
-                                {state?.gender_Id == item?.id && (
-                                  <span
-                                    onClick={() =>
-                                      ClearGenderSelected(item?.id)
-                                    }
-                                  >
-                                    <MenuCloseIcons colors={"#b5b5b5"} />
-                                  </span>
-                                )}
+                              <div onClick={() => selectGenderId(item?.id)} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {state?.gender_Id == (item?.id) &&
+                                  <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
                               </div>
                             );
                           })}
@@ -1346,132 +1230,70 @@ const AddingProduct = () => {
             </section>
             {/*Type */}
             <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
             >
               <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                  state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.DressTypeModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium">
-                      {" "}
-                      {t("APtype")}
-                    </p>
-                    <button
-                      onClick={() =>
-                        setState({ ...state, DressTypeModal: false })
-                      }
-                    >
+                    <p className="text-base font-AeonikProMedium">  {t("APtype")}</p>
+                    <button onClick={() => setState({ ...state, DressTypeModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <form className="w-full flex flex-col items-center">
-                        <div className="w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3">
+                      <form className='w-full flex flex-col items-center'>
+                        <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
                           <input
                             type="text"
                             value={searchList}
                             onChange={(e) => setSearchList(e?.target?.value)}
-                            name="clothingTypes"
+                            name='clothingTypes'
                             placeholder={t("APsearch")}
-                            className="w-full pr-3 outline-none"
-                          />
+                            className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
-                        <div className="w-full h-[290px] overflow-auto VerticelScroll">
-                          {state?.category_Id
-                            ? dressInfo?.getProductInfo?.types
-                                ?.filter((e) => {
-                                  e?.category_id == state?.category_Id ||
-                                  languageDetector?.typeLang === "ru"
-                                    ? e?.name_ru
-                                        ?.toLowerCase()
-                                        ?.includes(searchList?.toLowerCase())
-                                    : e?.name_uz
-                                        ?.toLowerCase()
-                                        ?.includes(searchList?.toLowerCase());
-                                })
-                                ?.map((item) => {
-                                  return (
-                                    <div
-                                      onClick={() =>
-                                        selectTypeById(
-                                          item?.id,
-                                          item?.category_id
-                                        )
-                                      }
-                                      key={item?.id}
-                                      className={`w-full ${
-                                        state?.filterTypeId == item?.id
-                                          ? "bg-bgUpdate"
-                                          : ""
-                                      } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                                    >
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                      {state?.filterTypeId == item?.id && (
-                                        <span
-                                          onClick={() =>
-                                            ClearSelectTypeById(item?.id)
-                                          }
-                                        >
-                                          <MenuCloseIcons colors={"#b5b5b5"} />
-                                        </span>
-                                      )}
-                                    </div>
-                                  );
-                                })
-                            : dressInfo?.getProductInfo?.types
-                                ?.filter((e) =>
-                                  searchList
-                                    ? languageDetector?.typeLang === "ru"
-                                      ? e?.name_ru
-                                          ?.toLowerCase()
-                                          ?.includes(searchList?.toLowerCase())
-                                      : e?.name_uz
-                                          ?.toLowerCase()
-                                          ?.includes(searchList?.toLowerCase())
-                                    : e
-                                )
-                                ?.map((item) => {
-                                  return (
-                                    <div
-                                      onClick={() =>
-                                        selectTypeById(
-                                          item?.id,
-                                          item?.category_id
-                                        )
-                                      }
-                                      key={item?.id}
-                                      className={`w-full ${
-                                        state?.filterTypeId == item?.id
-                                          ? "bg-bgUpdate"
-                                          : ""
-                                      } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                                    >
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                      {state?.filterTypeId == item?.id && (
-                                        <span
-                                          onClick={() =>
-                                            ClearSelectTypeById(item?.id)
-                                          }
-                                        >
-                                          <MenuCloseIcons colors={"#b5b5b5"} />
-                                        </span>
-                                      )}
-                                    </div>
-                                  );
-                                })}
+                        <div className='w-full h-[290px] overflow-auto VerticelScroll'>
+                          {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => {
+                            e?.category_id == state?.category_Id ||
+                              languageDetector?.typeLang === "ru" ?
+                              e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase())
+                          })?.map((item) => {
+                            return (
+                              <div
+                                onClick={() => selectTypeById(item?.id, item?.category_id)}
+                                key={item?.id}
+                                className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {state?.filterTypeId == (item?.id) &&
+                                  <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                              </div>
+                            )
+                          }) :
+                            dressInfo?.getProductInfo?.types?.filter((e) =>
+                              searchList ? languageDetector?.typeLang === "ru" ?
+                                e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                                e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                            )?.map((item) => {
+                              return (
+                                <div
+                                  onClick={() => selectTypeById(item?.id, item?.category_id)}
+                                  key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                  {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                  {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                  {state?.filterTypeId == (item?.id) &&
+                                    <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+
+                                </div>
+                              )
+                            })
+                          }
                         </div>
                       </form>
                     </div>
@@ -1481,84 +1303,49 @@ const AddingProduct = () => {
             </section>
             {/*MakeCountry */}
             <section
-              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+                }`}
             >
               <section
-                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${
-                  state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
-                }`}
+                className={`fixed z-[113] left-0 right-0 md:hidden duration-300 overflow-hidden ${state?.MakeCountryModal ? "bottom-0" : "bottom-[-800px] z-0"
+                  }`}
               >
                 <div className="max-w-[440px] w-[100%] mx-auto bg-white shadow-navMenuShadov  overflow-hidden h-fit rounded-t-[12px]">
                   <section className="h-[52px] w-full bg-btnBgColor flex items-center  justify-between px-4">
-                    <p className="text-base font-AeonikProMedium">
-                      {" "}
-                      {t("APmanufacturer")}
-                    </p>
-                    <button
-                      onClick={() =>
-                        setState({ ...state, MakeCountryModal: false })
-                      }
-                    >
+                    <p className="text-base font-AeonikProMedium">  {t("APmanufacturer")}</p>
+                    <button onClick={() => setState({ ...state, MakeCountryModal: false })}>
                       <CloseAnswer colors={"#000"} />
                     </button>
                   </section>
                   <section className="w-full h-[400px] px-4 flex flex-col items-center">
                     <div className="w-full h-fit flex items-center justify-center flex-wrap gap-x-7 mb-[40px]">
-                      <form className="w-full flex flex-col items-center">
-                        <div className="w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3">
+                      <form className='w-full flex flex-col items-center'>
+                        <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[11px] px-3'>
                           <input
                             type="text"
                             value={searchList}
                             onChange={(e) => setSearchList(e?.target?.value)}
-                            name="clothingTypes"
+                            name='clothingTypes'
                             placeholder={t("APsearch")}
-                            className="w-full pr-3 outline-none"
-                          />
+                            className='w-full pr-3 outline-none' />
                           <SearchIcon />
                         </div>
-                        <div className="w-full h-[290px] overflow-auto VerticelScroll">
-                          {dressInfo?.getProductInfo?.producers
-                            ?.filter((e) =>
-                              searchList
-                                ? languageDetector?.typeLang === "ru"
-                                  ? e?.name_ru
-                                      ?.toLowerCase()
-                                      ?.includes(searchList?.toLowerCase())
-                                  : e?.name_uz
-                                      ?.toLowerCase()
-                                      ?.includes(searchList?.toLowerCase())
-                                : e
-                            )
-                            ?.map((item) => {
-                              return (
-                                <div
-                                  onClick={() => selectProduceId(item?.id)}
-                                  key={item?.id}
-                                  className={`w-full ${
-                                    state?.producer_Id == item?.id
-                                      ? "bg-bgUpdate"
-                                      : ""
-                                  } h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}
-                                >
-                                  {/* {item.name_ru} */}
-                                  {languageDetector?.typeLang === "ru" &&
-                                    item?.name_ru}
-                                  {languageDetector?.typeLang === "uz" &&
-                                    item?.name_uz}
-                                  {state?.producer_Id == item?.id && (
-                                    <span
-                                      onClick={() =>
-                                        ClearProducerById(item?.id)
-                                      }
-                                    >
-                                      <MenuCloseIcons colors={"#b5b5b5"} />
-                                    </span>
-                                  )}
-                                </div>
-                              );
-                            })}
+                        <div className='w-full h-[290px] overflow-auto VerticelScroll'>
+                          {dressInfo?.getProductInfo?.producers?.filter((e) =>
+                            searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                          )?.map((item) => {
+                            return (
+                              <div
+                                onClick={() => selectProduceId(item?.id)}
+                                key={item?.id} className={`w-full ${state?.producer_Id == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                {/* {item.name_ru} */}
+                                {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {state?.producer_Id == (item?.id) && <span onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                              </div>
+                            );
+                          })}
                         </div>
                       </form>
                     </div>
@@ -1568,9 +1355,10 @@ const AddingProduct = () => {
             </section>
             {/* ClothingCategory */}
             <section
-              className={`w-full max-w-[440px] h-[600px] fixed z-[113] rounded-t-lg   left-1/2  right-1/2  translate-x-[-50%]   duration-300 overflow-hidden ${
-                clothingCategoryModal ? "bottom-0" : "bottom-[-800px] z-0"
-              }`}
+              className={`w-full max-w-[440px] h-[600px] fixed z-[113] rounded-t-lg   left-1/2  right-1/2  translate-x-[-50%]   duration-300 overflow-hidden ${clothingCategoryModal
+                ? "bottom-0"
+                : "bottom-[-800px] z-0"
+                }`}
             >
               <AddSizeForMobile
                 clothingCategoryModal={clothingCategoryModal}
@@ -1638,11 +1426,10 @@ const AddingProduct = () => {
                             </button>
                           ) : (
                             <Select
-                              className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${
-                                state?.isCheckValid && !newId
-                                  ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
-                                  : ""
-                              }`}
+                              className={`overflow-hidden rounded-lg w-full h-11 md:h-10  ${state?.isCheckValid && !newId
+                                ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
+                                : ""
+                                }`}
                               showSearch
                               placeholder={t("PRselect2")}
                               optionFilterProp="children"
@@ -1675,9 +1462,8 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span
-                            className={`text-[13px] md:text-base font-AeonikProRegular ${
-                              newId ? "text-[#000]" : "text-[#b5b5b5]"
-                            }`}
+                            className={`text-[13px] md:text-base font-AeonikProRegular ${newId ? "text-[#000]" : "text-[#b5b5b5]"
+                              }`}
                           >
                             {t("APlocation")}
                           </span>
@@ -1738,14 +1524,13 @@ const AddingProduct = () => {
                                 setState({ ...state, openSelect: true })
                               }
                               type="button"
-                              className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between
-                             ${
-                               state?.isCheckValid &&
-                               !Number(dressInfo?.locationIdAddProduct)
-                                 ? "border border-[#FFB8B8] "
-                                 : "border border-borderColor"
-                             }
-
+                              className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
+                             ${state?.isCheckValid &&
+                                  !Number(dressInfo?.locationIdAddProduct)
+                                  ? "border border-[#FFB8B8] "
+                                  : "border border-borderColor"
+                                }
+  
                              px-3`}
                             >
                               {Number(dressInfo?.locationIdAddProduct) ? (
@@ -1776,6 +1561,7 @@ const AddingProduct = () => {
                               ) : (
                                 <div className="text-[14px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                   {t("PRselect2")}
+
                                 </div>
                               )}
 
@@ -1814,45 +1600,38 @@ const AddingProduct = () => {
                             setState({ ...state, ClothingSection: true })
                           }
                           type="button"
-                          className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between  px-3 ${
-                            state?.isCheckValid && !section_Id?.length > 0
-                              ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
-                              : "border border-borderColor"
-                          }`}
+                          className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between  px-3 ${state?.isCheckValid && !section_Id?.length > 0
+                            ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
+                            : "border border-borderColor"
+                            }`}
                         >
-                          {section_Id?.length ? (
+                          {section_Id?.length ?
                             <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden ">
-                              {dressInfo?.getProductInfo?.sections
-                                ?.filter((e) => section_Id?.includes(e?.id))
-                                ?.map((item) => {
-                                  return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>
-                                  );
-                                })}
+                              {dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => {
+                                return (
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                  </span>
+                                )
+                              })}
                             </div>
-                          ) : (
+                            :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                 {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
-                            </div>
-                          )}
+                            </div>}
                         </button>
                         <div
                           className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}
                         >
                           <Select
-                            className={`overflow-hidden rounded-lg w-full  ${
-                              state?.isCheckValid && !state?.section_Id?.length
-                                ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
-                                : ""
-                            }`}
+                            className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.section_Id?.length
+                              ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : ""
+                              }`}
                             showSearch
                             mode="multiple"
                             placeholder={t("PRselect2")}
@@ -1876,20 +1655,15 @@ const AddingProduct = () => {
                                     key={item.id}
                                     value={item.id}
                                     label={
-                                      languageDetector?.typeLang === "ru"
-                                        ? item?.name_ru
-                                        : languageDetector?.typeLang === "uz"
-                                        ? item?.name_uz
-                                        : undefined
+                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                          undefined
                                     }
                                   >
                                     <Space>
                                       <span>
-                                        {languageDetector?.typeLang === "ru" &&
-                                          item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" &&
-                                          item?.name_uz}
-                                      </span>
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                                     </Space>
                                   </Option>
                                 );
@@ -1902,11 +1676,10 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span
-                            className={`text-[13px] md:text-base font-AeonikProRegular ${
-                              newArray?.length > 0
-                                ? "text-[#000]"
-                                : "text-[#b5b5b5]"
-                            }`}
+                            className={`text-[13px] md:text-base font-AeonikProRegular ${newArray?.length > 0
+                              ? "text-[#000]"
+                              : "text-[#b5b5b5]"
+                              }`}
                           >
                             {t("APsubSectionProduct")}
                           </span>
@@ -1915,60 +1688,47 @@ const AddingProduct = () => {
                           </span>
                         </div>
                         <button
-                          onClick={
-                            newArray?.length > 0
-                              ? () =>
-                                  setState({
-                                    ...state,
-                                    SubClothingSection: true,
-                                  })
-                              : null
+                          onClick={newArray?.length > 0 ? () =>
+                            setState({ ...state, SubClothingSection: true }) : null
                           }
                           type="button"
-                          className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3
-                          ${
-                            state?.isCheckValid &&
-                            !subSection_Id?.length &&
-                            newArray?.length
+                          className={`w-full min-h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 
+                          ${state?.isCheckValid &&
+                              !subSection_Id?.length &&
+                              newArray?.length
                               ? "overflow-hidden border border-[#FFB8B8] !bg-[#FFF6F6]"
                               : "border border-borderColor"
-                          }
+                            }
                           `}
                         >
-                          {subSection_Id?.length ? (
+                          {subSection_Id?.length ?
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
-                              {newArray
-                                ?.filter((e) => subSection_Id?.includes(e?.id))
-                                ?.map((item) => {
-                                  return (
-                                    <span className="text-[13px] md:text-base font-AeonikProRegular">
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>
-                                  );
-                                })}
+                              {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
+                                return (
+                                  <span className="text-[13px] md:text-base font-AeonikProRegular">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                )
+                              })}
                             </div>
-                          ) : (
+                            :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                 {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
-                          )}
+                          }
                         </button>
 
                         <div className="w-full h-fit hidden md:flex">
                           <Select
-                            className={` rounded-lg w-full h-11 md:h-10 ${
-                              state?.isCheckValid &&
+                            className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid &&
                               !state?.sub_Section_Id?.length &&
                               newArray?.length
-                                ? " overflow-hidden border border-[#FFB8B8] "
-                                : ""
-                            }`}
+                              ? " overflow-hidden border border-[#FFB8B8] "
+                              : ""
+                              }`}
                             showSearch
                             disabled={newArray?.length ? false : true}
                             placeholder={t("PRselect2")}
@@ -1992,20 +1752,15 @@ const AddingProduct = () => {
                                   key={item.id}
                                   value={item.id}
                                   label={
-                                    languageDetector?.typeLang === "ru"
-                                      ? item?.name_ru
-                                      : languageDetector?.typeLang === "uz"
-                                      ? item?.name_uz
-                                      : undefined
+                                    languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                      languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                        undefined
                                   }
                                 >
                                   <Space>
                                     <span>
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                                   </Space>
                                 </Option>
                               );
@@ -2028,45 +1783,38 @@ const AddingProduct = () => {
                             setState({ ...state, DressSeason: true })
                           }
                           type="button"
-                          className={`w-full h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3
-                          ${
-                            state?.isCheckValid && !season_Id?.length
+                          className={`w-full h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 
+                          ${state?.isCheckValid && !season_Id?.length
                               ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
                               : "border border-borderColor"
-                          }
+                            }
                           `}
                         >
-                          {season_Id?.length ? (
+                          {season_Id?.length ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
-                              {dressInfo?.getProductInfo?.seasons
-                                ?.filter((e) => season_Id?.includes(e?.id))
-                                ?.map((item) => {
-                                  return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-full px-[3px] flex items-center">
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>
-                                  );
-                                })}
+                              {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
+                                return (
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-full px-[3px] flex items-center">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+
+                                  </span>)
+                              })}
                             </div>
-                          ) : (
+                            :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                 {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
-                            </div>
-                          )}
+                            </div>}
                         </button>
                         <div className="w-full h-fit hidden md:flex">
                           <Select
-                            className={`overflow-hidden rounded-lg w-full  ${
-                              state?.isCheckValid && !state?.season_Id?.length
-                                ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
-                                : ""
-                            }`}
+                            className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.season_Id?.length
+                              ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : ""
+                              }`}
                             mode="multiple"
                             style={{
                               width: "100%",
@@ -2085,21 +1833,15 @@ const AddingProduct = () => {
                                   key={item.id}
                                   value={item.id}
                                   label={
-                                    languageDetector?.typeLang === "ru"
-                                      ? item?.name_ru
-                                      : languageDetector?.typeLang === "uz"
-                                      ? item?.name_uz
-                                      : undefined
+                                    languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                      languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                        undefined
                                   }
                                 >
                                   <Space>
                                     <span>
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>{" "}
-                                  </Space>
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>                                  </Space>
                                 </Option>
                               );
                             })}
@@ -2118,12 +1860,11 @@ const AddingProduct = () => {
                         </div>
 
                         <div
-                          className={`w-full flex items-center gap-x-1 justify-between  overflow-hidden
-                          ${
-                            state?.isCheckValid && !state?.color_Id
+                          className={`w-full flex items-center gap-x-1 justify-between  overflow-hidden                   
+                          ${state?.isCheckValid && !state?.color_Id
                               ? "border border-[#FFB8B8] !bg-[#FFF6F6] md:bg-auto"
                               : "border border-borderColor"
-                          } rounded-lg  h-[42px] md:h-10 px-[12px]`}
+                            } rounded-lg  h-[42px] md:h-10 px-[12px]`}
                         >
                           {dressInfo?.getProductInfo?.colors
                             ?.filter((e) => e?.id <= 9)
@@ -2144,7 +1885,7 @@ const AddingProduct = () => {
                                       className={`rounded-full border  w-[22px] h-[22px] p-[2px] cursor-pointer flex items-center justify-center hover:scale-110 duration-300 `}
                                     >
                                       {data?.id === state?.color_Id &&
-                                      state?.color_Id !== 2 ? (
+                                        state?.color_Id !== 2 ? (
                                         <BiCheck
                                           size={25}
                                           color={"#fff"}
@@ -2153,7 +1894,7 @@ const AddingProduct = () => {
                                       ) : null}
 
                                       {state?.color_Id === 2 &&
-                                      data?.id === state?.color_Id ? (
+                                        data?.id === state?.color_Id ? (
                                         <BiCheck
                                           size={25}
                                           color={"#000"}
@@ -2198,43 +1939,36 @@ const AddingProduct = () => {
                               setState({ ...state, GenderModal: true })
                             }
                             type="button"
-                            className={`w-full h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 ${
-                              state?.isCheckValid && !state?.gender_Id
-                                ? "border border-[#FFB8B8] !bg-[#FFF6F6]"
-                                : "border border-borderColor"
-                            }`}
+                            className={`w-full h-[38px] rounded-lg flex md:hidden items-center justify-between   px-3 ${state?.isCheckValid && !state?.gender_Id
+                              ? "border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                              }`}
                           >
-                            {state?.gender_Id ? (
+                            {state?.gender_Id ?
                               <div className="w-full h-full rounded-lg flex items-center gap-x-1">
-                                {dressInfo?.getProductInfo?.gender
-                                  ?.filter((e) => state?.gender_Id == e?.id)
-                                  ?.map((item) => {
-                                    return (
-                                      <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                        {languageDetector?.typeLang === "ru" &&
-                                          item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" &&
-                                          item?.name_uz}
-                                      </span>
-                                    );
-                                  })}
+                                {dressInfo?.getProductInfo?.gender?.filter(e => state?.gender_Id == e?.id)?.map((item) => {
+                                  return (
+                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                    </span>
+                                  )
+                                })}
                               </div>
-                            ) : (
+                              :
                               <div className="w-full h-full rounded-lg flex items-center justify-between">
                                 <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                   {t("PRselect2")}
                                 </span>
                                 <ArrowRightIcon />
-                              </div>
-                            )}
+                              </div>}
                           </button>
                           <div className="w-full h-fit md:flex hidden selectAndt">
                             <Select
-                              className={` ${
-                                state?.isCheckValid && !state?.gender_Id
-                                  ? "border border-[#FFB8B8] "
-                                  : ""
-                              }
+                              className={` ${state?.isCheckValid && !state?.gender_Id
+                                ? "border border-[#FFB8B8] "
+                                : ""
+                                }
                           rounded-lg w-full h-11 md:h-10 overflow-hidden`}
                               showSearch
                               placeholder={t("PRselect2")}
@@ -2253,10 +1987,7 @@ const AddingProduct = () => {
                                 (item) => {
                                   return {
                                     value: item?.id,
-                                    label:
-                                      languageDetector?.typeLang === "ru"
-                                        ? item?.name_ru
-                                        : item?.name_uz,
+                                    label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
                                   };
                                 }
                               )}
@@ -2284,11 +2015,10 @@ const AddingProduct = () => {
                                   min_Age_Category: e.target.value,
                                 })
                               }
-                              className={`inputStyle outline-none w-[55px] h-10 text-center  ${
-                                state?.isCheckValid && !state?.min_Age_Category
-                                  ? "border border-[#FFB8B8] "
-                                  : "border border-borderColor"
-                              }  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                              className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category
+                                ? "border border-[#FFB8B8] "
+                                : "border border-borderColor"
+                                }  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             />
                             <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                             <input
@@ -2302,11 +2032,10 @@ const AddingProduct = () => {
                                   max_Age_Category: e.target.value,
                                 })
                               }
-                              className={`inputStyle outline-none w-[55px] h-10 text-center  ${
-                                state?.isCheckValid && !state?.max_Age_Category
-                                  ? "border border-[#FFB8B8] "
-                                  : "border border-borderColor"
-                              }  flex items-center justify-center rounded-lg font-AeonikProRegular `}
+                              className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category
+                                ? "border border-[#FFB8B8] "
+                                : "border border-borderColor"
+                                }  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             />
                           </div>
                         </div>
@@ -2331,11 +2060,10 @@ const AddingProduct = () => {
                               setState({ ...state, sku: e.target.value })
                             }
                             placeholder=""
-                            className={`inputStyle w-[calc(100%-42px)] text-[12px] md:text-[16px] h-[38px] md:h-10  flex items-center justify-between ${
-                              state?.isCheckValid && !state?.sku
-                                ? "border border-[#FFB8B8] !bg-[#FFF6F6]"
-                                : "border border-borderColor"
-                            } rounded-lg px-[10px] outline-none`}
+                            className={`inputStyle w-[calc(100%-42px)] text-[12px] md:text-[16px] h-[38px] md:h-10  flex items-center justify-between ${state?.isCheckValid && !state?.sku
+                              ? "border border-[#FFB8B8] !bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                              } rounded-lg px-[10px] outline-none`}
                           />
                           <button
                             onClick={() => randomCode(17)}
@@ -2360,13 +2088,10 @@ const AddingProduct = () => {
                           <button
                             onClick={toggleDropModalButton}
                             type="button"
-                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${
-                              state?.isCheckValid &&
-                              !state?.category_Id &&
-                              !state?.type_Id
-                                ? "border border-[#FFB8B8] "
-                                : "border border-borderColor"
-                            }  rounded-lg p-3 `}
+                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.type_Id
+                              ? "border border-[#FFB8B8] "
+                              : "border border-borderColor"
+                              }  rounded-lg p-3 `}
                           >
                             {state?.type_Id ? (
                               dressInfo?.getProductInfo?.categories
@@ -2374,18 +2099,13 @@ const AddingProduct = () => {
                                 ?.map((item, index) => {
                                   return (
                                     <span key={index} className="text-[#000]">
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
                                   );
                                 })
                             ) : (
-                              <span className="text-[#a1a1a1]">
-                                {" "}
-                                {t("PRselect2")}
-                              </span>
+                              <span className="text-[#a1a1a1]"> {t("PRselect2")}</span>
                             )}
                             {state.openDropModalButton ? (
                               <span className="-rotate-90 transition duration-200 ease-out">
@@ -2399,35 +2119,25 @@ const AddingProduct = () => {
                           </button>
                           <button
                             type="button"
-                            className={`w-full overflow-hidden min-h-[38px] md:hidden flex items-center justify-between ${
-                              state?.isCheckValid &&
+                            className={`w-full overflow-hidden min-h-[38px] md:hidden flex items-center justify-between ${state?.isCheckValid &&
                               !state?.category_Id &&
                               !state?.type_Id
-                                ? "border border-[#FFB8B8] bg-[#FFF6F6]"
-                                : "border border-borderColor"
-                            }  rounded-lg  px-3 `}
-                          >
+                              ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                              }  rounded-lg  px-3 `} >
                             {state?.type_Id ? (
                               dressInfo?.getProductInfo?.categories
                                 ?.filter((e) => e?.id == state?.type_Id)
                                 ?.map((item, index) => {
                                   return (
-                                    <span
-                                      key={index}
-                                      className="text-[12px] text-[#b5b5b5]"
-                                    >
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
+                                    <span key={index} className="text-[12px] text-[#b5b5b5]">
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
                                   );
                                 })
                             ) : (
-                              <span className="text-[#b5b5b5] text-[12px]">
-                                {" "}
-                                {t("PRselect2")}
-                              </span>
+                              <span className="text-[#b5b5b5] text-[12px]"> {t("PRselect2")}</span>
                             )}
                             <span className="rotate-90 transition duration-200 ease-out">
                               <ArrowRightIcon />
@@ -2448,11 +2158,10 @@ const AddingProduct = () => {
                           </div>
                           <div className="w-full h-fit selectAndt">
                             <Select
-                              className={`overflow-hidden block rounded-lg w-full  md:h-10  ${
-                                state?.isCheckValid && !state?.filterTypeId
-                                  ? "border border-[#FFB8B8] bg-[#FFF6F6]"
-                                  : ""
-                              }`}
+                              className={`overflow-hidden block rounded-lg w-full  md:h-10  ${state?.isCheckValid && !state?.filterTypeId
+                                ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                                : ""
+                                }`}
                               showSearch
                               allowClear
                               placeholder={t("PRselect2")}
@@ -2475,41 +2184,37 @@ const AddingProduct = () => {
                             >
                               {dressInfo?.ProductFilterType
                                 ? dressInfo?.getProductInfo?.types
-                                    ?.filter(
-                                      (e) =>
-                                        Number(e?.category_id) ===
-                                        Number(dressInfo?.ProductFilterType)
-                                    )
-                                    ?.map((item) => {
-                                      return (
-                                        <Option
-                                          key={"item_" + item.id}
-                                          value={item?.id}
-                                          attribute2={item?.category_id}
-                                        >
-                                          {languageDetector?.typeLang ===
-                                            "ru" && item?.name_ru}
-                                          {languageDetector?.typeLang ===
-                                            "uz" && item?.name_uz}
-                                        </Option>
-                                      );
-                                    })
+                                  ?.filter(
+                                    (e) =>
+                                      Number(e?.category_id) ===
+                                      Number(dressInfo?.ProductFilterType)
+                                  )
+                                  ?.map((item) => {
+                                    return (
+                                      <Option
+                                        key={"item_" + item.id}
+                                        value={item?.id}
+                                        attribute2={item?.category_id}
+                                      >
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                      </Option>
+                                    );
+                                  })
                                 : dressInfo?.getProductInfo?.types?.map(
-                                    (item) => {
-                                      return (
-                                        <Option
-                                          key={"item_" + item.id}
-                                          value={item?.id}
-                                          attribute2={item?.category_id}
-                                        >
-                                          {languageDetector?.typeLang ===
-                                            "ru" && item?.name_ru}
-                                          {languageDetector?.typeLang ===
-                                            "uz" && item?.name_uz}
-                                        </Option>
-                                      );
-                                    }
-                                  )}
+                                  (item) => {
+                                    return (
+                                      <Option
+                                        key={"item_" + item.id}
+                                        value={item?.id}
+                                        attribute2={item?.category_id}
+                                      >
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                      </Option>
+                                    );
+                                  }
+                                )}
                             </Select>
                           </div>
                         </div>
@@ -2524,11 +2229,10 @@ const AddingProduct = () => {
                           </div>
                           <div className="w-full h-11 md:h-10 overflow-hidden selectAndt">
                             <Select
-                              className={`overflow-hidden rounded-lg w-full  h-full ${
-                                state?.isCheckValid && !state?.producer_Id
-                                  ? "border border-[#FFB8B8] "
-                                  : ""
-                              }`}
+                              className={`overflow-hidden rounded-lg w-full  h-full ${state?.isCheckValid && !state?.producer_Id
+                                ? "border border-[#FFB8B8] "
+                                : ""
+                                }`}
                               showSearch
                               placeholder={t("PRselect2")}
                               optionFilterProp="children"
@@ -2546,10 +2250,8 @@ const AddingProduct = () => {
                                 (item) => {
                                   return {
                                     value: item?.id,
-                                    label:
-                                      languageDetector?.typeLang === "ru"
-                                        ? item?.name_ru
-                                        : item?.name_uz,
+                                    label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
+
                                   };
                                 }
                               )}
@@ -2572,43 +2274,37 @@ const AddingProduct = () => {
                             setState({ ...state, DressTypeModal: true })
                           }
                           type="button"
-                          className={`w-full h-[40px] rounded-lg flex md:hidden items-center justify-between   px-3 ${
-                            state?.isCheckValid && !state?.filterTypeId
-                              ? "border border-[#FFB8B8] bg-[#FFF6F6]"
-                              : "border border-borderColor"
-                          }`}
+                          className={`w-full h-[40px] rounded-lg flex md:hidden items-center justify-between   px-3 ${state?.isCheckValid && !state?.filterTypeId
+                            ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                            : "border border-borderColor"
+                            }`}
                         >
-                          {state?.filterTypeId ? (
+                          {state?.filterTypeId ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
-                              {dressInfo?.getProductInfo?.types
-                                ?.filter((e) => e?.id == state?.filterTypeId)
-                                ?.map((item) => {
-                                  return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>
-                                  );
-                                })}
+                              {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
+                                return (
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+
+                                  </span>)
+                              })}
                             </div>
-                          ) : (
+                            :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                 {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
-                          )}
+                          }
                         </button>
                         <div className="w-full h-fit md:flex hidden selectAndt">
                           <Select
-                            className={`block rounded-lg w-full  md:h-10  ${
-                              state?.isCheckValid && !state?.filterTypeId
-                                ? "border border-[#FFB8B8] bg-[#FFF6F6]"
-                                : "border border-borderColor"
-                            }`}
+                            className={`block rounded-lg w-full  md:h-10  ${state?.isCheckValid && !state?.filterTypeId
+                              ? "border border-[#FFB8B8] bg-[#FFF6F6]"
+                              : "border border-borderColor"
+                              }`}
                             showSearch
                             placeholder={t("PRselect2")}
                             optionFilterProp="children"
@@ -2629,41 +2325,37 @@ const AddingProduct = () => {
                           >
                             {dressInfo?.ProductFilterType
                               ? dressInfo?.getProductInfo?.types
-                                  ?.filter(
-                                    (e) =>
-                                      e?.category_id ==
-                                      dressInfo?.ProductFilterType
-                                  )
-                                  ?.map((item) => {
-                                    return (
-                                      <Option
-                                        key={"item_" + item.id}
-                                        value={item?.id}
-                                        attribute2={item?.category_id}
-                                      >
-                                        {languageDetector?.typeLang === "ru" &&
-                                          item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" &&
-                                          item?.name_uz}
-                                      </Option>
-                                    );
-                                  })
+                                ?.filter(
+                                  (e) =>
+                                    e?.category_id ==
+                                    dressInfo?.ProductFilterType
+                                )
+                                ?.map((item) => {
+                                  return (
+                                    <Option
+                                      key={"item_" + item.id}
+                                      value={item?.id}
+                                      attribute2={item?.category_id}
+                                    >
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                    </Option>
+                                  );
+                                })
                               : dressInfo?.getProductInfo?.types?.map(
-                                  (item) => {
-                                    return (
-                                      <Option
-                                        key={"item_" + item.id}
-                                        value={item?.id}
-                                        attribute2={item?.category_id}
-                                      >
-                                        {languageDetector?.typeLang === "ru" &&
-                                          item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" &&
-                                          item?.name_uz}
-                                      </Option>
-                                    );
-                                  }
-                                )}
+                                (item) => {
+                                  return (
+                                    <Option
+                                      key={"item_" + item.id}
+                                      value={item?.id}
+                                      attribute2={item?.category_id}
+                                    >
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                    </Option>
+                                  );
+                                }
+                              )}
                           </Select>
                         </div>
                       </div>
@@ -2682,37 +2374,32 @@ const AddingProduct = () => {
                             setState({ ...state, MakeCountryModal: true })
                           }
                           type="button"
-                          className={`w-full h-[40px] rounded-lg flex md:hidden items-center justify-between   px-3
-                          ${
-                            state?.isCheckValid && !state?.producer_Id
+                          className={`w-full h-[40px] rounded-lg flex md:hidden items-center justify-between   px-3 
+                          ${state?.isCheckValid && !state?.producer_Id
                               ? "border border-[#FFB8B8] bg-[#FFF6F6]"
                               : "border border-borderColor"
-                          }
+                            }
                           `}
                         >
-                          {state?.producer_Id ? (
+                          {state?.producer_Id ?
                             <div className="w-full h-full rounded-lg flex items-center gap-x-1">
-                              {dressInfo?.getProductInfo?.producers
-                                ?.filter((e) => e?.id == state?.producer_Id)
-                                ?.map((item) => {
-                                  return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
-                                      {languageDetector?.typeLang === "ru" &&
-                                        item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" &&
-                                        item?.name_uz}
-                                    </span>
-                                  );
-                                })}
+                              {dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => {
+                                return (
+                                  <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+
+                                  </span>)
+                              })}
                             </div>
-                          ) : (
+                            :
                             <div className="w-full h-full rounded-lg flex items-center justify-between">
                               <span className="text-[11px] mt-[3px] font-AeonikProRegular text-[#b5b5b5]">
                                 {t("PRselect2")}
                               </span>
                               <ArrowRightIcon />
                             </div>
-                          )}
+                          }
                         </button>
                         <div className="w-full h-fit md:flex hidden selectAndt">
                           <Select
@@ -2734,10 +2421,7 @@ const AddingProduct = () => {
                               (item) => {
                                 return {
                                   value: item?.id,
-                                  label:
-                                    languageDetector?.typeLang === "ru"
-                                      ? item?.name_ru
-                                      : item?.name_uz,
+                                  label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
                                 };
                               }
                             )}
@@ -2766,12 +2450,11 @@ const AddingProduct = () => {
                                 min_Age_Category: e.target.value,
                               })
                             }
-                            className={`inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center    flex items-center justify-center rounded-lg font-AeonikProRegular
-                            ${
-                              state?.isCheckValid && !state?.min_Age_Category
+                            className={`inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center    flex items-center justify-center rounded-lg font-AeonikProRegular 
+                            ${state?.isCheckValid && !state?.min_Age_Category
                                 ? "border border-[#FFB8B8] bg-[#FFF6F6]"
                                 : "border border-borderColor"
-                            }`}
+                              }`}
                           />
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                           <input
@@ -2785,39 +2468,31 @@ const AddingProduct = () => {
                                 max_Age_Category: e.target.value,
                               })
                             }
-                            className={`inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center    flex items-center justify-center rounded-lg font-AeonikProRegular
-
-                            ${
-                              state?.isCheckValid && !state?.max_Age_Category
+                            className={`inputStyle text-[12px]  outline-none w-[40%] h-[38px] text-center    flex items-center justify-center rounded-lg font-AeonikProRegular 
+                            
+                            ${state?.isCheckValid && !state?.max_Age_Category
                                 ? "border border-[#FFB8B8] bg-[#FFF6F6]"
                                 : "border border-borderColor"
-                            }`}
+                              }`}
                           />
                         </div>
                       </div>
                       {/* Input Select 12 mobile */}
-                      {state?.type_Id ? (
+                      {state?.type_Id ?
                         <button
                           onClick={() => setClothingCategoryModal(true)}
-                          className={` w-full  md:hidden rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white
-                          ${
-                            state?.isCheckValid &&
-                            !state?.category_Id &&
-                            !state?.type_Id
-                              ? "border border-[#FFB8B8] "
-                              : "border border-textBlueColor"
-                          }
-                          `}
-                        >
+                          className={` w-full  md:hidden rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white 
+                          ${state?.isCheckValid && !state?.category_Id && !state?.type_Id ?
+                              "border border-[#FFB8B8] "
+                              : "border border-textBlueColor"}
+                          `}>
                           {t("APaddSize")}
-                        </button>
-                      ) : (
+                        </button> :
                         <button
-                          className={` w-full  md:hidden   border border-searchBgColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-[#b5b5b5]    `}
-                        >
+                          className={` w-full  md:hidden   border border-searchBgColor rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-[#b5b5b5]    `}>
                           {t("APaddSize")}
                         </button>
-                      )}
+                      }
                     </div>
 
                     <div>
@@ -2881,11 +2556,10 @@ const AddingProduct = () => {
                           />
                           {!state.pictureBgView1 && (
                             <div
-                              className={`w-full h-full flex md:text-base text-[14px] bg-photoBg items-center justify-center ${
-                                state?.isCheckValid && !state.pictureBgView1
-                                  ? "border border-[#FFB8B8]"
-                                  : "border border-dashed"
-                              } rounded-lg`}
+                              className={`w-full h-full flex md:text-base text-[14px] bg-photoBg items-center justify-center ${state?.isCheckValid && !state.pictureBgView1
+                                ? "border border-[#FFB8B8]"
+                                : "border border-dashed"
+                                } rounded-lg`}
                             >
                               <span className="leading-none flex items-center text-textBlueColor border-b border-textBlueColor font-AeonikProMedium">
                                 {t("APselectPhoto")}{" "}
@@ -3076,9 +2750,8 @@ const AddingProduct = () => {
             </div>
           </div>
           <div
-            className={`relative w-full ${
-              dressInfo?.nextPageShowForm ? "hidden" : " flex"
-            }`}
+            className={`relative w-full ${dressInfo?.nextPageShowForm ? "hidden" : " flex"
+              }`}
           >
             <ToastContainer
               style={{ zIndex: "1000", top: "80px" }}
@@ -3100,8 +2773,9 @@ const AddingProduct = () => {
             />
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

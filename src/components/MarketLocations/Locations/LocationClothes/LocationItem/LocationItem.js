@@ -715,7 +715,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                     className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                   >
                                        
-                                    {t("more")}...
+                                    {t("SSmore")}...
                                   </button>
                                 ) : (
                                   <button
@@ -724,7 +724,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                     }
                                     className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                   >
-                                    {t("less")}...
+                                    {t("SSless")}...
                                   </button>
                                 )}
                                 {/* <button

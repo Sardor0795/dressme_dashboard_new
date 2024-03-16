@@ -23,28 +23,26 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { LanguageDetectorDress } from "../../language/LanguageItem";
 
+
 function Sidebar() {
   const { i18n, t } = useTranslation("sidebar");
 
   const [dressInfo] = useContext(dressMainData);
-  const [languageDetector, setLanguageDetector] = useContext(
-    LanguageDetectorDress
-  );
-  const [currentLang, setCurrentLang] = useState(
-    localStorage.getItem("i18nextLng")
-  );
+  const [languageDetector, setLanguageDetector] = useContext(LanguageDetectorDress);
+  const [currentLang, setCurrentLang] = useState(localStorage.getItem("i18nextLng"));
 
-  const { request } = useHttp();
+  const { request } = useHttp()
   const [modalOpen, setModalOpen] = useState(false);
   // const [selectLang, setselectLang] = useState(1);
   const [sellerInformation] = useContext(SellerMainData);
-
+  
   useEffect(() => {
     if (localStorage.getItem("i18nextLng")?.length > 2) {
       i18next.changeLanguage(currentLang);
     }
     setLanguageDetector({ typeLang: currentLang });
   }, [currentLang]);
+
 
   const LanguageList = [
     { id: 1, value: "uz", type: "O'zbekcha", icons: UzbekFlag },
@@ -92,30 +90,29 @@ function Sidebar() {
     return request({ url: `/logout`, method: "POST", token: true });
   });
   const logOutHandle = () => {
-    HandleLogOutSeller.mutate(
-      {},
-      {
-        onSuccess: (res) => {
-          if (res?.message) {
-            localStorage.clear();
-            navigate("/login-seller");
-            toast.success(`${res?.message}`, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-            // setDressInfo({ ...dressInfo, logOutSeller: false })
-          }
-        },
-        onError: (err) => {},
+    HandleLogOutSeller.mutate({}, {
+      onSuccess: res => {
+        if (res?.message) {
+          localStorage.clear();
+          navigate("/login-seller")
+          toast.success(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          // setDressInfo({ ...dressInfo, logOutSeller: false })
+        }
+      },
+      onError: err => {
+
       }
-    );
-  };
+    })
+  }
   return (
     <div className="w-full h-full flex ">
       <ToastContainer
@@ -410,7 +407,7 @@ function Sidebar() {
             >
               <UserExitIcon colors={"#FF4343"} />{" "}
               <span
-                className={`text-redText text-lg not-italic font-AeonikProMedium leading-5`}
+                className={` text-black text-redText text-lg not-italic font-AeonikProMedium leading-5`}
               >
                 {t("logOut")}
               </span>
@@ -459,4 +456,4 @@ function Sidebar() {
     </div>
   );
 }
-export default React.memo(Sidebar);
+export default React.memo(Sidebar)
