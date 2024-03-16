@@ -4,10 +4,8 @@ export const HelperData = createContext();
 export default function HelperDataStore({ children }) {
     const [shopCheckedList, setShopCheckedList] = useState([])
     const [helperDatainform, setHelperDatainform] = useState({
-        shopsList: null,
-        deliveryList: null,
-        shopCheckedList: []
-    });
+         deliveryList: null, 
+     });
 
     return (
         <HelperData.Provider value={[helperDatainform, setHelperDatainform, shopCheckedList, setShopCheckedList]}>

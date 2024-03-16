@@ -3,10 +3,12 @@ import { MenuCloseIcons } from "../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { HelperData } from "../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
+import { ShopList } from "../../../hook/ShopList";
 
 function NoLocations() {
   const [openSelect, setOpenSelect] = useState(true);
   const [helperDatainform] = useContext(HelperData);
+  const [shopList, setShopList] = useContext(ShopList)
 
   const { t } = useTranslation("locations");
 
@@ -50,7 +52,7 @@ function NoLocations() {
                 </p>
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-                {helperDatainform?.shopsList?.shops?.data?.map((item) => {
+                {shopList?.shops?.data?.map((item) => {
                   return (
                     <button
                       onClick={() => handleShopsOfLocation(item?.id)}

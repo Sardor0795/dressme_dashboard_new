@@ -8,6 +8,7 @@ import axios from "axios";
 import { HelperData } from "../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
+import { ShopList } from "../../../hook/ShopList";
 const { REACT_APP_BASE_URL } = process.env;
 
 function MyMarket() {
@@ -15,6 +16,7 @@ function MyMarket() {
   const navigate = useNavigate();
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
   // ------------
+  const [shopList, setShopList] = useContext(ShopList)
 
   const { t } = useTranslation("shops");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -55,15 +57,14 @@ function MyMarket() {
   }, []);
   function onHandleStatus(id) {
     setStatusModal(true);
-    helperDatainform?.shopsList?.shops?.map((data) => {
+    shopList?.shops?.map((data) => {
       if (data?.id == id) {
         setStatusMessage(data?.status_reason);
       }
     });
   }
 
-  console.log(helperDatainform?.shopsList?.shops, "data-status");
-
+ 
   return (
     <div className="w-full h-full  py-1 px-4 md:px-10">
       <section
@@ -148,9 +149,9 @@ function MyMarket() {
           {t("create_new_store")}
         </Link>
       </div>
-      {helperDatainform?.shopsList ? (
+      {shopList ? (
         <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
-          {helperDatainform?.shopsList?.shops
+          {shopList?.shops
             ?.filter((item) =>
               item?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
             )

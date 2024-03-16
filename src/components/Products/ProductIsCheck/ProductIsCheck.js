@@ -6,12 +6,13 @@ import axios from 'axios'
 import LoadingForSeller from '../../Loading/LoadingFor'
 import { HelperData } from '../../../hook/HelperDataStore'
 import { useTranslation } from 'react-i18next'
+import { ShopList } from '../../../hook/ShopList'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [loading, setLoading] = useState(true);
-    const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+     const [shopList, setShopList] = useContext(ShopList)
 
     const { t } = useTranslation("product");
 
@@ -26,8 +27,7 @@ export default function ProductIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                    setHelperDatainform({ ...helperDatainform, shopsList: data?.data })
-
+                     setShopList( data?.data)
                 }
                 setLoading(false)
 
@@ -50,7 +50,7 @@ export default function ProductIsCheck() {
 
             }
         };
-        if (!helperDatainform?.shopsList) {
+        if (!shopList) {
             fetchDataShop();
         }
         if (!dressInfo?.locationList) {
@@ -64,7 +64,7 @@ export default function ProductIsCheck() {
                 loading ?
                     <LoadingForSeller />
                     :
-                    helperDatainform?.shopsList?.shops?.length > 0
+                    shopList?.shops?.length > 0
                         ?
                         dressInfo?.locationList?.length > 0
                             ?
