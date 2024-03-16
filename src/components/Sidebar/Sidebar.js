@@ -22,10 +22,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { LanguageDetectorDress } from "../../language/LanguageItem";
+import { ShopList } from "../../hook/ShopList";
 
 
 function Sidebar() {
   const { i18n, t } = useTranslation("sidebar");
+  const [shopList, setShopList] = useContext(ShopList)
 
   const [dressInfo] = useContext(dressMainData);
   const [languageDetector, setLanguageDetector] = useContext(LanguageDetectorDress);
@@ -35,7 +37,7 @@ function Sidebar() {
   const [modalOpen, setModalOpen] = useState(false);
   // const [selectLang, setselectLang] = useState(1);
   const [sellerInformation] = useContext(SellerMainData);
-  
+
   useEffect(() => {
     if (localStorage.getItem("i18nextLng")?.length > 2) {
       i18next.changeLanguage(currentLang);
@@ -129,9 +131,8 @@ function Sidebar() {
         theme="colored"
       />
       <div
-        className={`fixed cursor-pointer z-[999999] inset-0 w-full h-full bg-black opacity-80 ${
-          modalOpen ? "" : "hidden"
-        }`}
+        className={`fixed cursor-pointer z-[999999] inset-0 w-full h-full bg-black opacity-80 ${modalOpen ? "" : "hidden"
+          }`}
         onClick={() => setModalOpen(false)}
       ></div>
       <div
@@ -197,13 +198,13 @@ function Sidebar() {
                         <NavbarMarketIcon colors={"#007dca"} />
                         <p className="text-lg not-italic font-AeonikProMedium leading-5">
                           {t("shop")}
-                          {/* {helperDatainform?.shopsList?.shops?.length > 1 ? (
+                          {shopList?.shops?.length > 1 ? (
                             <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                              ы{" "}
+                              {t("ShopS")}  
                             </span>
                           ) : (
                             ""
-                          )} */}
+                          )}
                         </p>
                       </figure>
                     ) : (
@@ -211,13 +212,13 @@ function Sidebar() {
                         <NavbarMarketIcon colors={"#2c2c2c"} />
                         <p className="text-lg not-italic font-AeonikProMedium leading-5">
                           {t("shop")}
-                          {/* {helperDatainform?.shopsList?.shops?.length > 1 ? (
+                          {shopList?.shops?.length > 1 ? (
                             <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                              ы{" "}
+                              {t("ShopS")}
                             </span>
                           ) : (
                             ""
-                          )} */}
+                          )}
                         </p>
                       </figure>
                     )
@@ -309,13 +310,13 @@ function Sidebar() {
                   </span>
                   <span className=" text-lg not-italic font-AeonikProMedium leading-5">
                     {t("shop")}
-                    {/* {helperDatainform?.shopsList?.shops?.length > 1 ? (
+                    {shopList?.shops?.length > 1 ? (
                       <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                        ы{" "}
+                        {t("ShopS")}
                       </span>
                     ) : (
                       ""
-                    )} */}
+                    )}
                   </span>
                 </p>
                 <p
@@ -418,9 +419,8 @@ function Sidebar() {
       </div>
       <div className=" w-full md:w-[calc(100%-300px)] md:ml-[300px] ">
         <section
-          className={`absolute max-w-[90%] md:max-w-[550px] z-[1000000] mx-auto w-full flex-col h-fit bg-white fixed py-[30px] md:py-[35px] px-[20px] md:px-[50px] rounded-t-lg rounded-b-lg md:top-[50%] duration-300 overflow-hidden left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%] hidden ${
-            modalOpen ? "bottom-0 md:flex" : "md:hidden z-[-10]"
-          }`}
+          className={`absolute max-w-[90%] md:max-w-[550px] z-[1000000] mx-auto w-full flex-col h-fit bg-white fixed py-[30px] md:py-[35px] px-[20px] md:px-[50px] rounded-t-lg rounded-b-lg md:top-[50%] duration-300 overflow-hidden left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%] hidden ${modalOpen ? "bottom-0 md:flex" : "md:hidden z-[-10]"
+            }`}
         >
           <button
             onClick={() => setModalOpen(false)}

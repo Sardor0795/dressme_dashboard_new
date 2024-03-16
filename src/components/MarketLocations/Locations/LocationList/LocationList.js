@@ -7,6 +7,7 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import { HelperData } from "../../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { ShopList } from "../../../../hook/ShopList";
 
 function LocationList() {
   const [openSelect, setOpenSelect] = useState(false);
@@ -18,6 +19,7 @@ function LocationList() {
   const [statusModal, setStatusModal] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
   // ------------
+  const [shopList, setShopList] = useContext(ShopList)
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -115,8 +117,8 @@ function LocationList() {
           </p>
         </div>
         <div className="w-full px-[10px] md:py-[30px] py-[15px]  flex flex-col md:gap-y-[10px]">
-          {helperDatainform?.shopsList?.shops ? (
-            helperDatainform?.shopsList?.shops?.map((item) => {
+          {shopList?.shops ? (
+            shopList?.shops?.map((item) => {
               return (
                 <button
                   onClick={() => handleShopsOfLocation(item?.id)}

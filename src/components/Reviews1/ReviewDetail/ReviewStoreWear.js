@@ -6,10 +6,11 @@ import { dressMainData } from "../../../hook/ContextTeam";
 import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { HelperData } from "../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
+import { ShopList } from "../../../hook/ShopList";
 
 export default function ReviewStoreWear() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [helperDatainform] = useContext(HelperData);
+   const [shopList, setShopList] = useContext(ShopList)
 
   const { t } = useTranslation("reviews");
 
@@ -82,9 +83,9 @@ export default function ReviewStoreWear() {
               } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               {t("shops")}
-              {helperDatainform?.shopsList?.shops?.data?.length
+              {shopList?.shops?.data?.length
                 ?.rated_users_count > 1
-                ? helperDatainform?.shopsList?.shops
+                ? shopList?.shops
                 : null}
             </button>
           </div>
