@@ -12,6 +12,8 @@ import { DressmeLanguage } from "./language/LanguageItem";
 import "./language/i18n";
 import RegionList from "./hook/RegionList";
 import ShopIsList from "./hook/ShopList";
+import ShopIsLocationList from "./hook/ShopLocationList";
+import ShopIsLocationProductList from "./hook/ShopLocationProductList";
 
 const queryClient = new QueryClient();
 
@@ -23,15 +25,19 @@ root.render(
       <DressmeLanguage>
         <ContextTeam>
           <RegionList>
-            <SellerRefreshContext>
-              <SellerUserContext>
-                <HelperDataStore>
-                  <ShopIsList>
-                    <App />
-                  </ShopIsList>
-                </HelperDataStore>
-              </SellerUserContext>
-            </SellerRefreshContext>
+            <ShopIsLocationList>
+              <ShopIsList>
+                <ShopIsLocationProductList>
+                  <SellerRefreshContext>
+                    <SellerUserContext>
+                      <HelperDataStore>
+                        <App />
+                      </HelperDataStore>
+                    </SellerUserContext>
+                  </SellerRefreshContext>
+                </ShopIsLocationProductList>
+              </ShopIsList>
+            </ShopIsLocationList>
           </RegionList>
         </ContextTeam>
       </DressmeLanguage>

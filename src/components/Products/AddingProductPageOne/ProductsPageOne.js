@@ -6,10 +6,12 @@ import { GoBackIcons } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { BackBtn } from "../../backBtn/backBtn";
+import { ShopLocationProductList } from "../../../hook/ShopLocationProductList";
 
 export default function ProductsPageOne() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const { t } = useTranslation("product");
+  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
   useEffect(() => {
     window.scrollTo({
@@ -17,6 +19,7 @@ export default function ProductsPageOne() {
     });
   }, []);
   const navigate = useNavigate();
+  console.log(  'test-- page one');
 
   return (
     <div>
@@ -24,7 +27,7 @@ export default function ProductsPageOne() {
         <div className="w-full flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit flex justify-center md:justify-start">
             <section className="w-full md:w-fit flex justify-start">
-              {dressInfo?.isCheckPoructList?.length >= 1 ? (
+              {shopLocationProductList?.length >= 1 ? (
                 <BackBtn />
               ) : (
                 !dressInfo?.nextPageShowForm && (

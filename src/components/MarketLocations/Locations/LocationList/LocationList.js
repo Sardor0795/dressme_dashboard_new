@@ -8,6 +8,7 @@ import { HelperData } from "../../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopList } from "../../../../hook/ShopList";
+import { ShopLocationList } from "../../../../hook/ShopLocationList";
 
 function LocationList() {
   const [openSelect, setOpenSelect] = useState(false);
@@ -20,6 +21,7 @@ function LocationList() {
   const [statusMessage, setStatusMessage] = useState(null);
   // ------------
   const [shopList, setShopList] = useContext(ShopList)
+  const [shopLocationList, setShopLocationList] = useContext(ShopLocationList)
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -41,9 +43,10 @@ function LocationList() {
       top: 0,
     });
   }, []);
+
   function onHandleStatus(locationid, shopId) {
     setStatusModal(true);
-    dressInfo?.locationList?.map((value1) => {
+    shopLocationList?.map((value1) => {
       if (value1?.id == shopId) {
         value1?.shop_locations?.map((value2) => {
           if (value2?.id == locationid) {
@@ -205,7 +208,7 @@ function LocationList() {
         </ul>
       </div>
 
-      {dressInfo?.locationList
+      {shopLocationList
         ?.filter((e) =>
           e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
         )

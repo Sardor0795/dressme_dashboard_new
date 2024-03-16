@@ -7,10 +7,12 @@ import { GoBackIcons } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { BackBtn } from "../../backBtn/backBtn";
+import { ShopLocationProductList } from "../../../hook/ShopLocationProductList";
 
 export default function ProductEditPage() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const { t } = useTranslation("product");
+  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
   useEffect(() => {
     window.scrollTo({
@@ -25,7 +27,7 @@ export default function ProductEditPage() {
         <div className="flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit  flex justify-center md:justify-start">
             <section className=" w-full md:w-fit  flex justify-center md:justify-start">
-              {dressInfo?.isCheckPoructList?.length >= 1 &&
+              {shopLocationProductList?.length >= 1 &&
               dressInfo?.nextPageShowForm ? (
                 <>
                   <div className="md:hidden absolute left-[16px]">

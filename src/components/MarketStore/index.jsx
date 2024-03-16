@@ -13,6 +13,7 @@ const { REACT_APP_BASE_URL } = process.env;
 export default function MarketStore() {
   const [sellerRefreshToken] = useContext(SellerRefresh);
   const [shopList, setShopList] = useContext(ShopList)
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   useEffect(() => {
     window.scrollTo({
@@ -45,12 +46,15 @@ export default function MarketStore() {
       }
 
       if (data?.status === 401) {
+
+        setDressInfo({ ...dressInfo, sellerStatus: data?.status })
         sellerRefreshToken();
         fetchData();
       }
     },
     onError: (error) => {
       if (error?.response?.status === 401) {
+        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
         sellerRefreshToken();
       }
     },
