@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
-import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
+ import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
 import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
