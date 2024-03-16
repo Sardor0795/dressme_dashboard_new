@@ -8,6 +8,8 @@ import {
   UserExitIcon,
   UserIcon,
 } from "../../../assets/icons";
+import i18next from "i18next";
+import { RussianFlag, UzbekFlag } from "../../../assets";
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { dressMainData } from "../../../hook/ContextTeam";
@@ -16,17 +18,12 @@ import { useMutation } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
-import { RussianFlag, UzbekFlag } from "../../../assets";
 import { useTranslation } from "react-i18next";
 export default function MobileHumburgerMenu() {
-  const { request } = useHttp()
-  const [dressInfo, setDressInfo] = useContext(dressMainData)
+  const { request } = useHttp();
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [languageDetector, setLanguageDetector] = useContext(LanguageDetectorDress);
-  const [currentLang, setCurrentLang] = useState(localStorage.getItem("i18nextLng"));
-  const { i18n, t } = useTranslation("sidebar");
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -36,58 +33,72 @@ export default function MobileHumburgerMenu() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const { i18n, t } = useTranslation("mobileMenu");
+
+  const [openLang, setOpenLang] = useState(false);
+  const handleOpenChangeLang = (newOpen) => {
+    setOpenLang(newOpen);
+  };
+
+  const [languageDetector, setLanguageDetector] = useContext(
+    LanguageDetectorDress
+  );
+  const [currentLang, setCurrentLang] = useState(
+    localStorage.getItem("i18nextLng")
+  );
+
   // -----------------------Seller Delete---------------
   const HandleLogOutSeller = useMutation(() => {
     return request({ url: `/logout`, method: "POST", token: true });
   });
   const logOutHandle = () => {
-    HandleLogOutSeller.mutate({}, {
-      onSuccess: res => {
-        setIsModalOpen(false)
-        if (res?.message) {
-          localStorage.clear();
-          navigate("/login-seller")
-          window.location.reload();
-          toast.success(`${res?.message}`, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setDressInfo({ ...dressInfo, logOutSeller: false })
-        }
-      },
-
-    })
-  }
-  useEffect(() => {
-    if (localStorage.getItem("i18nextLng")?.length > 2) {
-      i18n.changeLanguage(currentLang);
-    }
-    setLanguageDetector({ typeLang: currentLang });
-  }, [currentLang]);
-
+    HandleLogOutSeller.mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          setIsModalOpen(false);
+          if (res?.message) {
+            localStorage.clear();
+            navigate("/login-seller");
+            window.location.reload();
+            toast.success(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setDressInfo({ ...dressInfo, logOutSeller: false });
+          }
+        },
+      }
+    );
+  };
 
   const LanguageList = [
     { id: 1, value: "uz", type: "O'zbekcha", icons: UzbekFlag },
     { id: 2, value: "ru", type: "Русский", icons: RussianFlag },
   ];
 
-  const [openLang, setOpenLang] = useState(false);
-  const handleOpenChangeLang = (newOpen) => {
-    setOpenLang(newOpen);
-  };
+  useEffect(() => {
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
+      i18next.changeLanguage(currentLang);
+    }
+    setLanguageDetector({ typeLang: currentLang });
+  }, [currentLang]);
+
   const handleLangValue = (value) => {
     i18n.changeLanguage(value);
     setCurrentLang(value);
     setOpenLang(false);
   };
+
   const contentLang = (
-    <section className="w-[250px] h-fit m-0 p-0">
+    <section className="w-[140px] h-fit m-0 p-0">
       {LanguageList.map((data) => {
         return (
           <article
@@ -98,10 +109,10 @@ export default function MobileHumburgerMenu() {
             }}
           >
             <figure className="mr-[6px]  w-5 h-5">
-              <img className="w-[140px] h-full" src={data?.icons} alt="" />
+              <img className="w-full h-full" src={data?.icons} alt="" />
             </figure>
             <article
-              className={`text-lg not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
+              className={`text-base not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
             >
               {data?.type}
             </article>
@@ -180,14 +191,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <NavbarMarketIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    {t("shop")}
+                    {t("shops")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
                   <NavbarMarketIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
-                    {t("shop")}
+                    {t("shops")}
                   </p>
                 </figure>
               )
@@ -252,15 +263,14 @@ export default function MobileHumburgerMenu() {
           </NavLink>
         </div>
         <div className=" flex items-center justify-between gap-x-2 border-t border-borderColor w-full mt-2 pt-2">
-
           <button
             onClick={logOutHandle}
             type="button"
-            className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium">
-            <UserExitIcon colors={"#fff"} />{" "}
-            <span>{t("logOut")}</span>
+            className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium"
+          >
+            <UserExitIcon colors={"#fff"} /> <span>{t("exit")}</span>
           </button>
-          <section className="w-1/2 xs:w-[45%] h-[42px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-[12px] flex items-center justify-center">
+          <section className="w-1/2 xs:w-[45%] bg-lightBorderColor rounded-lg  h-fit font-AeonikProMedium select-none cursor-pointer">
             {LanguageList.filter((data) => data?.value === currentLang).map(
               (data) => {
                 return (
@@ -268,16 +278,20 @@ export default function MobileHumburgerMenu() {
                     key={data?.id}
                     open={openLang}
                     onOpenChange={handleOpenChangeLang}
-                    className="w-full  h-[54px] gap-x-[15px]   flex items-center justify-start capitalize "
+                    className="w-full h-[42px] gap-x-[5px] flex items-center justify-center capitalize "
                     trigger="click"
                     options={["Hide"]}
                     placement="top"
                     content={contentLang}
                   >
-                    <figure className="block mr-[6px]  ">
-                      <img className="min-w-4 min-h-4" src={data?.icons} alt="data" />
-                    </figure>
-                    <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
+                    <span className="block mr-[4px] ">
+                      <img
+                        src={data?.icons}
+                        className="min-w-[16px] min-h-[16px]"
+                        alt=""
+                      />
+                    </span>
+                    <p className="text-base not-italic font-AeonikProMedium leading-5 ">
                       {data?.type}
                     </p>
                   </Popover>
@@ -285,38 +299,8 @@ export default function MobileHumburgerMenu() {
               }
             )}
           </section>
-          <NavLink
-            onClick={() => setIsModalOpen(false)}
-            className={
-              "w-1/2 hidden xs:w-[45%] h-[42px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-[12px] flex items-center justify-center"
-            }
-            style={({ isActive }) => ({
-              background: isActive ? "#f2f2f2" : "#fcfcfc",
-            })}
-            to="/edit-profile"
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
-                  <UserIcon colors={"#007dca"} />
-                  <p className="text-base not-italic font-AeonikProMedium leading-5">
-                    {t("profile")}
-                  </p>
-                </figure>
-              ) : (
-                <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
-                  <UserIcon colors={"#2c2c2c"} />
-                  <p className="text-base not-italic font-AeonikProMedium leading-5">
-                    {t("profile")}
-                  </p>
-                </figure>
-              )
-            }
-          </NavLink>
-
         </div>
-        <div className=" flex items-center justify-between gap-x-2 border-t border-borderColor w-full mt-2 pt-2">
-
+        <div className="w-full mt-5">
           <NavLink
             onClick={() => setIsModalOpen(false)}
             className={
@@ -331,21 +315,20 @@ export default function MobileHumburgerMenu() {
               isActive ? (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#007dca"} />
-                  <p className="text-base not-italic font-AeonikProMedium leading-5">
-                    {t("profile")}
+                  <p className="text-base not-italic font-AeonikProMedium ">
+                    {t("profil")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#2c2c2c"} />
-                  <p className="text-base not-italic font-AeonikProMedium leading-5">
-                    {t("profile")}
+                  <p className="text-base not-italic font-AeonikProMedium ">
+                    {t("profil")}
                   </p>
                 </figure>
               )
             }
           </NavLink>
-
         </div>
       </Modal>
     </div>
