@@ -157,7 +157,7 @@ export default function SignInSeller() {
               className="outline-none !bg-white  w-full h-[42px] text-base  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black focus:bg-white placeholder-bg-white"
               type="email"
               name="email"
-              autoComplete="email"
+              autoComplete="on"
               inputMode="email"
               value={state.email}
               onChange={({ target: { value } }) => {
