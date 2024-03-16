@@ -403,7 +403,7 @@ function AddStore({ onRefetch }) {
           )}
         </div>
       )}
-      <div className="w-full flex items-center mb-4 md:mb-0">
+      <div className="w-full flex items-center">
         {/* {shopsList?.shops?.data?.length >= 1 && ( */}
         <div className="flex md:hidden items-start">
           <BackBtn />
@@ -414,7 +414,7 @@ function AddStore({ onRefetch }) {
         </div>
       </div>
       {/* {shopsList?.shops?.data?.length >= 1 && ( */}
-      <div className="mb-3 hidden md:flex">
+      <div className="mb-3">
         <BackBtn />
       </div>
       {/* )} */}

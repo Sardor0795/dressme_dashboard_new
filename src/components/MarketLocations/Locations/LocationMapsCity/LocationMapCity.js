@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
+  GoBackIcons,
   MenuCloseIcons,
   SearchIcon,
   StarLabel,
   MapLocationIcon,
   DeleteIcon,
 } from "../../../../assets/icons";
+import { AiOutlineLeft } from "react-icons/ai";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import InputMask from "react-input-mask";
 import { YMaps, Map, ZoomControl, GeolocationControl } from "react-yandex-maps";
@@ -23,15 +25,19 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { useHttp } from "../../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import axios from "axios";
+import { dressMainData } from "../../../../hook/ContextTeam";
 import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { BackBtn } from "../../../backBtn/backBtn";
 import { dressRegionList } from "../../../../hook/RegionList";
 
+const { REACT_APP_BASE_URL } = process.env;
 
 export default function LocationMapCity() {
   const { request } = useHttp();
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [regionList, setRegionList] = useContext(dressRegionList)
 
   const { t } = useTranslation("locations");
@@ -1297,7 +1303,7 @@ export default function LocationMapCity() {
                     <p className="w-full text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
                       {t("name_admin_two")}
                     </p>
-                    <div className="relative w-full flex items-center border border-borderColor h-[38px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
+                    <div className="w-full flex items-center border border-borderColor h-[38px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
                       <input
                         type="text"
                         name="fname2"
@@ -1306,11 +1312,6 @@ export default function LocationMapCity() {
                         placeholder={t("name_admin_two")}
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2 "
                       />
-                      {!state?.idSecondAssistantName && (
-                        <p className="text-[10px] text-[#b5b5b5] flex md:hidden items-center absolute right-2 z-[10] h-full">
-                          {t("not_necessary")}
-                        </p>
-                      )}
                     </div>
                   </label>
                   <div className="w-full  hidden md:block">

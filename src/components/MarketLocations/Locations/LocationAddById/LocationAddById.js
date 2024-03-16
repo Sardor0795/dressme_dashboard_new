@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
+  GoBackIcons,
   MenuCloseIcons,
   Star6Icon,
   StarLabel,
@@ -14,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
+import { AiOutlineLeft } from "react-icons/ai";
 import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
@@ -27,7 +29,7 @@ export default function LocationAddById() {
   const navigate = useNavigate();
   const { request } = useHttp();
   const { id } = useParams();
-  const shopId = id?.replace(":", "");
+   const shopId = id?.replace(":", "");
   const [state, setState] = useState({
     imgFirst: "",
     imgSecond: "",
@@ -181,10 +183,8 @@ export default function LocationAddById() {
     form.append("work_time_to", state?.workTimeTo);
     form.append("assistant_name", state?.assistantNameFirst);
     form.append("assistant_phone", assistantPhoneNumberFirst);
-    state?.assistantNameFirstTg &&
-      form.append("assistant_messenger", state?.assistantNameFirstTg);
-    state?.assistantNameSecondTg &&
-      form.append("second_assistant_messenger", state?.assistantNameSecondTg);
+    state?.assistantNameFirstTg && form.append("assistant_messenger", state?.assistantNameFirstTg);
+    state?.assistantNameSecondTg && form.append("second_assistant_messenger", state?.assistantNameSecondTg);
     state?.assistantNameSecond &&
       form.append("second_assistant_name", state?.assistantNameSecond);
     state?.assistantPhoneSecond &&
@@ -251,9 +251,7 @@ export default function LocationAddById() {
   const handleInputAdminNameFirst = (e) => {
     if (e.target.value) {
       setState({
-        ...state,
-        assistantNameFirst:
-          e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
+        ...state, assistantNameFirst: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1),
       });
     } else {
       setState({ ...state, assistantNameFirst: null });
@@ -262,8 +260,7 @@ export default function LocationAddById() {
   const handleInputAdminNameFirstTg = (e) => {
     if (e.target.value) {
       setState({
-        ...state,
-        assistantNameFirstTg: e.target.value,
+        ...state, assistantNameFirstTg: e.target.value,
       });
     } else {
       setState({ ...state, assistantNameFirstTg: null });
@@ -282,7 +279,7 @@ export default function LocationAddById() {
   };
   const handleInputAdminNameSecondTg = (e) => {
     if (e.target.value) {
-      setState({ ...state, assistantNameSecondTg: e.target.value });
+      setState({ ...state, assistantNameSecondTg: e.target.value, });
     } else {
       setState({ ...state, assistantNameSecondTg: null });
     }
@@ -308,17 +305,15 @@ export default function LocationAddById() {
         onClick={() => {
           setState({ ...state, openStoreList: false });
         }}
-        className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-          state?.openStoreList ? "" : "hidden"
-        }`}
+        className={`fixed inset-0 z-[10000] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openStoreList ? "" : "hidden"
+          }`}
       ></div>
       {
         <div
-          className={`max-w-[440px] md:max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-            state?.openStoreList
-              ? " bottom-0 md:flex flex-col"
-              : "md:hidden bottom-[-1500px] z-[-10]"
-          }`}
+          className={`max-w-[440px] md:max-w-[550px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[10001] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openStoreList
+            ? " bottom-0 md:flex flex-col"
+            : "md:hidden bottom-[-1500px] z-[-10]"
+            }`}
         >
           <div className="w-full flex items-center justify-between">
             <span className="text-black text-lg not-italic font-AeonikProMedium">
@@ -348,11 +343,10 @@ export default function LocationAddById() {
                         {languageDetector?.typeLang === "uz" && data?.name_uz}
                       </span>
                       <span
-                        className={`${
-                          activeIndex == data?.id
-                            ? "rotate-[0deg]"
-                            : "rotate-[180deg]"
-                        } `}
+                        className={`${activeIndex == data?.id
+                          ? "rotate-[0deg]"
+                          : "rotate-[180deg]"
+                          } `}
                       >
                         <ArrowTopIcons colors={"#a1a1a1"} />
                       </span>
@@ -360,11 +354,10 @@ export default function LocationAddById() {
 
                     <div
                       className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                          ? "openAccardion"
+                          : "CloseAccardion"
+                        } `}
                     >
                       {data?.sub_regions?.map((item) => {
                         return (
@@ -425,11 +418,9 @@ export default function LocationAddById() {
         </div>
       }
       <div className=" ">
-        <div className="w-full flex items-center justify-start px-4 md:px-0 mb-6 md:mb-[50px]">
-          <div className="flex md:hidden items-center justify-center">
-            <BackBtn />
-          </div>
-          <div className="w-full text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium md:p x-0">
+        <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
+          <BackBtn />
+          <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium md:px-0">
             {t("add_a_store_location")}
           </div>
         </div>
@@ -437,11 +428,10 @@ export default function LocationAddById() {
           <BackBtn />
         </div>
         <div
-          className={` ${
-            state?.errorGroup?.address && !state?.shopCenterAddress
-              ? "border-[2px] border-[#D50000] rounded-[4px] overflow-hidden"
-              : ""
-          }`}
+          className={` ${state?.errorGroup?.address && !state?.shopCenterAddress
+            ? "border-[2px] border-[#D50000] rounded-[4px] overflow-hidden"
+            : ""
+            }`}
         >
           <YandexMapStore handleCallback={CallBackYandex} />
         </div>
@@ -452,11 +442,10 @@ export default function LocationAddById() {
         )}
         <div className="flex mt-[10px]  px-4 md:px-0 justify-between items-centers gap-x-[5px] ls:gap-x-[10px] md:gap-[25px] mb-[25px]  ">
           <div
-            className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${
-              state?.pictureBgView1
-                ? " border border-searchBgColor "
-                : " border border-dashed "
-            } flex items-center justify-center rounded-lg`}
+            className={` w-full md:w-[31%] flex-col h-[75px] md:h-[150px] ${state?.pictureBgView1
+              ? " border border-searchBgColor "
+              : " border border-dashed "
+              } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center ">
               <label
@@ -497,11 +486,10 @@ export default function LocationAddById() {
             )}
           </div>
           <div
-            className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${
-              state?.picturelogoView2
-                ? " border border-searchBgColor "
-                : " border border-dashed "
-            } flex items-center justify-center rounded-lg`}
+            className={`w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.picturelogoView2
+              ? " border border-searchBgColor "
+              : " border border-dashed "
+              } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center">
               {state?.pictureBgView1 ? (
@@ -548,11 +536,10 @@ export default function LocationAddById() {
             </button>
           </div>
           <div
-            className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${
-              state?.pictureLastView3
-                ? " border border-searchBgColor "
-                : " border border-dashed "
-            } flex items-center justify-center rounded-lg`}
+            className={` w-full md:w-[31%] h-[75px] md:h-[150px] ${state?.pictureLastView3
+              ? " border border-searchBgColor "
+              : " border border-dashed "
+              } flex items-center justify-center rounded-lg`}
           >
             <button className="h-full w-full flex items-center justify-center ">
               {state?.picturelogoView2 ? (
@@ -686,22 +673,15 @@ export default function LocationAddById() {
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin_two")}
               </div>
-              <div className=" flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
-                <div className="relative w-full flex items-center">
-                  <input
-                    type="text"
-                    name="fname2"
-                    placeholder={t("not_necessary")}
-                    value={state?.assistantNameSecond}
-                    onChange={handleInputAdminNameSecond}
-                    className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
-                  />
-                  {/* {!state?.assistantNameSecond && (
-                    <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
-                      {t("not_necessary")}
-                    </p>
-                  )} */}
-                </div>
+              <div className="flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
+                <input
+                  type="text"
+                  name="fname2"
+                  placeholder={t("not_necessary")}
+                  value={state?.assistantNameSecond}
+                  onChange={handleInputAdminNameSecond}
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                />
                 {state?.errorGroup?.second_assistant_name &&
                   !state?.assistantNameSecond && (
                     <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
@@ -711,7 +691,7 @@ export default function LocationAddById() {
               </div>
             </label>
 
-            <div className="hidden md:flex w-full   ">
+            <div className="hidden md:block  flex w-full   ">
               {/* Region Input  */}
               <div className={"w-full hidden md:block "}>
                 <label htmlFor="selectRegion2">
@@ -769,7 +749,10 @@ export default function LocationAddById() {
                 </label>
               </div>
             </div>
-            <label className="w-full" htmlFor="phone1">
+            <label
+              className=" w-full     "
+              htmlFor="phone1"
+            >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin")}
                 <span className="ml-[5px]">
@@ -798,9 +781,8 @@ export default function LocationAddById() {
                         assistantPhoneFirst: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                      state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
-                    } text-xs md:text-base leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneFirst ? "font-AeonikProMedium" : null
+                      } text-xs md:text-base leading-4 text-black`}
                     placeholder={"(77) 777-77-77"}
                   ></InputMask>
                   <span className="mr-[12px]">
@@ -815,7 +797,10 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label className="w-full" htmlFor="phone2">
+            <label
+              className=" w-full     "
+              htmlFor="phone2"
+            >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_two")}
                 <span className="ml-[5px]">{/* <StarLabel /> */}</span>
@@ -843,11 +828,10 @@ export default function LocationAddById() {
                         assistantPhoneSecond: e.target.value,
                       })
                     }
-                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                      state?.assistantPhoneSecond
-                        ? "font-AeonikProMedium"
-                        : null
-                    } text-xs md:text-[16px] leading-4 text-black`}
+                    className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.assistantPhoneSecond
+                      ? "font-AeonikProMedium"
+                      : null
+                      } text-xs md:text-[16px] leading-4 text-black`}
                   ></InputMask>
                   <span className="mr-[12px]">
                     <TelIcon />
@@ -912,16 +896,14 @@ export default function LocationAddById() {
                 <input
                   type="text"
                   name="telegrem1"
-                  placeholder={"@Username "}
+                  placeholder={'@Username '}
                   value={state?.assistantNameFirstTg}
                   onChange={handleInputAdminNameFirstTg}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
-                {!state?.assistantNameFirstTg && (
-                  <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
-                    {t("not_necessary")}
-                  </p>
-                )}
+                {!state?.assistantNameFirstTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                  {t("not_necessary")}
+                </p>}
               </div>
             </div>
             <div htmlFor="telegrem2" className=" w-full    ">
@@ -932,16 +914,14 @@ export default function LocationAddById() {
                 <input
                   type="text"
                   name="telegrem2"
-                  placeholder={"@Username"}
+                  placeholder={'@Username'}
                   value={state?.assistantNameSecondTg}
                   onChange={handleInputAdminNameSecondTg}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
-                {!state?.assistantNameSecondTg && (
-                  <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
-                    {t("not_necessary")}
-                  </p>
-                )}
+                {!state?.assistantNameSecondTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                  {t("not_necessary")}
+                </p>}
               </div>
             </div>
           </div>
