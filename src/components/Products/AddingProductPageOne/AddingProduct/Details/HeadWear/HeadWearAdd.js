@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import AllSizeListForWear from "../../../../../../hook/AllSizeListForWear/AllSizeListForWear";
-import { LineIcon, StarLabel } from "../../../../../../assets/icons";
+ import { LineIcon, StarLabel } from "../../../../../../assets/icons";
 import { Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { BiPlus } from "react-icons/bi";
