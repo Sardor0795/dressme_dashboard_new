@@ -10,12 +10,14 @@ import { SellerRefresh } from '../../../hook/SellerRefreshToken'
 import { HelperData } from '../../../hook/HelperDataStore'
 import { useTranslation } from 'react-i18next'
 import { ShopList } from '../../../hook/ShopList'
+import { ShopLocationList } from '../../../hook/ShopLocationList'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsLocationCheck() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerRefreshToken] = useContext(SellerRefresh)
    const [shopList, setShopList] = useContext(ShopList)
+   const [shopLocationList, setShopLocationList] = useContext(ShopLocationList)
 
   const { t } = useTranslation("locations");
 
@@ -42,7 +44,8 @@ export default function MarketIsLocationCheck() {
   useQuery(['seller_location_list1'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setDressInfo({ ...dressInfo, locationList: data?.data?.locations, sellerStatus: data?.status })
+        // setDressInfo({ ...dressInfo, locationList: data?.data?.locations, sellerStatus: data?.status })
+        setShopLocationList(data?.data?.locations)
       }
       if (data?.status === 401) {
         setDressInfo({ ...dressInfo, sellerStatus: data?.status })
@@ -83,10 +86,10 @@ export default function MarketIsLocationCheck() {
 
   return (
     <div>
-      {!dressInfo?.locationList ? (
+      {!shopLocationList ? (
         <LoadingForSeller />
       ) : shopList?.shops ? (
-        dressInfo?.locationList ? (
+        shopLocationList ? (
           <LocationList />
         ) : (
           <NoLocations />

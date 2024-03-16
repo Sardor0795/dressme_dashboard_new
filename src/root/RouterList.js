@@ -34,6 +34,7 @@ import ProductsPageOne from "../components/Products/AddingProductPageOne/Product
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewStoreComment";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
+import { ShopLocationProductList } from "../hook/ShopLocationProductList";
 // ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
 
@@ -47,6 +48,7 @@ const MarketLocations = lazy(() => import('../components/MarketLocations'));
 const Products = lazy(() => import('../components/Products/Products'));
 
 export default function RouterList() {
+  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const location = useLocation();
@@ -98,7 +100,7 @@ export default function RouterList() {
             <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
           </Route>
           {/* ---------------------<LocationsProduct>------------------------- */}
-          {dressInfo?.isCheckPoructList?.length >= 1
+          {shopLocationProductList?.length >= 1
             ?
             <Route path="/products" element={
               <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>

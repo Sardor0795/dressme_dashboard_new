@@ -7,12 +7,14 @@ import LoadingForSeller from '../../Loading/LoadingFor'
 import { HelperData } from '../../../hook/HelperDataStore'
 import { useTranslation } from 'react-i18next'
 import { ShopList } from '../../../hook/ShopList'
+import { ShopLocationList } from '../../../hook/ShopLocationList'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [loading, setLoading] = useState(true);
-     const [shopList, setShopList] = useContext(ShopList)
+    const [shopList, setShopList] = useContext(ShopList)
+    const [shopLocationList, setShopLocationList] = useContext(ShopLocationList)
 
     const { t } = useTranslation("product");
 
@@ -27,7 +29,7 @@ export default function ProductIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                     setShopList( data?.data)
+                    setShopList(data?.data)
                 }
                 setLoading(false)
 
@@ -45,6 +47,7 @@ export default function ProductIsCheck() {
                 });
                 if (data?.status >= 200 && data?.status < 300) {
                     setDressInfo({ ...dressInfo, locationList: data?.data?.locations })
+                    setShopLocationList(data?.data?.locations)
                 }
             } catch (error) {
 
@@ -53,40 +56,39 @@ export default function ProductIsCheck() {
         if (!shopList) {
             fetchDataShop();
         }
-        if (!dressInfo?.locationList) {
+        if (!shopLocationList) {
             fetchDataLocations();
         }
     }, []);
+    console.log(shopList?.shops, 'test-- shopList?.shops');
+    console.log(shopLocationList, 'test-- shopLocationList');
     return (
         <div>
             {
 
-                loading ?
-                    <LoadingForSeller />
-                    :
-                    shopList?.shops?.length > 0
+                shopList?.shops?.length > 0
+                    ?
+                    shopLocationList?.length > 0
                         ?
-                        dressInfo?.locationList?.length > 0
-                            ?
-                            <ProductsPageOne />
-                            :
-                            <div className="flex items-center h-[100vh] justify-center">
-                                <Link
-                                    to="/locations-store"
-                                    className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                                >
-                                    {t("PRNoLocation")}
-                                </Link>
-                            </div >
+                        <ProductsPageOne />
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link
-                                to="/store"
+                                to="/locations-store"
                                 className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                             >
-                                {t("PRaddMarket")}
+                                {t("PRNoLocation")}
                             </Link>
                         </div >
+                    :
+                    <div className="flex items-center h-[100vh] justify-center">
+                        <Link
+                            to="/store"
+                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                        >
+                            {t("PRaddMarket")}
+                        </Link>
+                    </div >
             }
         </div >
     )

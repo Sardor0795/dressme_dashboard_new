@@ -31,6 +31,7 @@ import imageCompression from "browser-image-compression";
 import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { ShopLocationProductList } from "../../../../hook/ShopLocationProductList";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -43,6 +44,7 @@ const AddingProduct = () => {
   const { request } = useHttp();
   const { t } = useTranslation("product");
   const [languageDetector] = useContext(LanguageDetectorDress);
+  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
   const [clothingCategoryModal, setClothingCategoryModal] = useState(false)
   const [searchList, setSearchList] = useState(null)
@@ -607,7 +609,11 @@ const AddingProduct = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (!dressInfo?.locationIdAddProduct) navigate(-1);
+    if (shopLocationProductList?.length >= 1) {
+      if (!dressInfo?.locationIdAddProduct) {
+        navigate(-1);
+      }
+    }
   }, [dressInfo?.locationIdAddProduct]);
 
   // ---------Mobile Device--------
@@ -704,7 +710,8 @@ const AddingProduct = () => {
     state?.MakeCountryModal
   ])
 
-
+  console.log('test-- page two');
+  // navigate(-1)
 
   return (
     <div className="w-full h-fit ">

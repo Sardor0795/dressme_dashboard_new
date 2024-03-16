@@ -165,9 +165,7 @@ export default function ProductLocationsList() {
     "Content-type": "application/json; charset=UTF-8",
     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-  const { refetch } = useQuery(
-    ["seller_getProductList_list1"],
-    () => fetchData(customHeaders),
+  const { refetch } = useQuery(["seller_getProductList_list1"], () => fetchData(customHeaders),
     {
       onSuccess: (data) => {
         // console.log(data, "data");

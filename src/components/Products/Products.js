@@ -6,77 +6,71 @@ import { useHttp } from "../../hook/useHttp";
 import LoadingForSeller from "../Loading/LoadingFor";
 import axios from "axios";
 import { SellerRefresh } from "../../hook/SellerRefreshToken";
+import { ShopLocationProductList } from "../../hook/ShopLocationProductList";
 const { REACT_APP_BASE_URL } = process.env;
 
 
 export default function Products() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerRefreshToken] = useContext(SellerRefresh)
-  const [loader, setLoader] = useState(false)
+  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
-  const { request } = useHttp()
   const location = useLocation();
   const pathname = window.location.pathname;
+
   useEffect(() => {
     if (pathname !== 'products/location/:id') {
       setDressInfo({ ...dressInfo, nextPageShowForm: true })
     }
   }, [location.pathname]);
 
-  useEffect(() => {
-    const fetchDataLocations = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
-        });
-        if (data?.status >= 200 && data?.status < 300) {
-          data?.data?.products_locations?.map(item => {
-            if (item?.shop_locations?.length >= 1) {
-              setDressInfo({ ...dressInfo, isCheckPoructList: item?.shop_locations, sellerStatus: data?.status })
-            }
-          })
-        }
-        if (data.status === 401) {
-          sellerRefreshToken()
-          setDressInfo({ ...dressInfo, sellerStatus: data?.status })
 
-        }
-      } catch (error) {
-        if (error?.response?.status === 401) {
-          sellerRefreshToken()
-          setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
+  const fetchData = async (customHeaders) => {
+    try {
+      const response = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
 
-        }
-      }
-    };
-    if (!dressInfo?.isCheckPoructList) {
-      fetchDataLocations();
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
     }
-    // const fetchData = async () => {
-    //   try {
-    //     const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
-    //       headers: {
-    //         'Content-type': 'application/json; charset=UTF-8',
-    //         "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-    //       }
-    //     });
-    //     if (data?.status >= 200 && data?.status < 300) {
-    //       setDressInfo({ ...dressInfo, getProductInfo: data?.data })
-    //     }
+  };
 
-    //   } catch (error) {
-
-    //   }
-    // };
-    // fetchData();
-
-  }, [])
-  return (
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+  const { isLoading } = useQuery(['seller_location_list1'], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        data?.data?.products_locations?.map(item => {
+          if (item?.shop_locations?.length >= 1) {
+            setDressInfo({ ...dressInfo, sellerStatus: data?.status })
+            setShopLocationProductList(item?.shop_locations)
+          }
+        })
+      }
+      if (data?.status === 401) {
+        setDressInfo({ ...dressInfo, sellerStatus: data?.status })
+        sellerRefreshToken()
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+        sellerRefreshToken()
+        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
+      }
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
-      {dressInfo?.isCheckPoructList ?
+      {!isLoading ?
         <Outlet />
         :
         <LoadingForSeller />
