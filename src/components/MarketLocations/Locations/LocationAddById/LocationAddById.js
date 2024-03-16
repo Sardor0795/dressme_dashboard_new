@@ -691,16 +691,16 @@ export default function LocationAddById() {
                   <input
                     type="text"
                     name="fname2"
-                    placeholder={t("name_admin_two")}
+                    placeholder={t("not_necessary")}
                     value={state?.assistantNameSecond}
                     onChange={handleInputAdminNameSecond}
                     className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                   />
-                  {!state?.assistantNameSecond && (
+                  {/* {!state?.assistantNameSecond && (
                     <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
                       {t("not_necessary")}
                     </p>
-                  )}
+                  )} */}
                 </div>
                 {state?.errorGroup?.second_assistant_name &&
                   !state?.assistantNameSecond && (
@@ -711,7 +711,7 @@ export default function LocationAddById() {
               </div>
             </label>
 
-            <div className="hidden md:block  flex w-full   ">
+            <div className="hidden md:flex w-full   ">
               {/* Region Input  */}
               <div className={"w-full hidden md:block "}>
                 <label htmlFor="selectRegion2">
