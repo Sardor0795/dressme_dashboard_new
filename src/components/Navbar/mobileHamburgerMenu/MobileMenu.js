@@ -268,14 +268,14 @@ export default function MobileHumburgerMenu() {
                     key={data?.id}
                     open={openLang}
                     onOpenChange={handleOpenChangeLang}
-                    className="w-full  h-[54px] gap-x-[15px] px-[25px] flex items-center justify-start capitalize "
+                    className="w-full  h-[54px] gap-x-[15px]   flex items-center justify-start capitalize "
                     trigger="click"
                     options={["Hide"]}
                     placement="top"
                     content={contentLang}
                   >
-                    <figure className="mr-[6px] w-5 h-5">
-                      <img className="w-full h-full" src={data?.icons} alt="data" />
+                    <figure className="block mr-[6px]  ">
+                      <img className="min-w-4 min-h-4" src={data?.icons} alt="data" />
                     </figure>
                     <p className="text-lg not-italic font-AeonikProMedium leading-5 ">
                       {data?.type}
