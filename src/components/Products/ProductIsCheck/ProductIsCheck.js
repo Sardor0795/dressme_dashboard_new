@@ -46,7 +46,6 @@ export default function ProductIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                    setDressInfo({ ...dressInfo, locationList: data?.data?.locations })
                     setShopLocationList(data?.data?.locations)
                 }
             } catch (error) {
@@ -65,30 +64,33 @@ export default function ProductIsCheck() {
     return (
         <div>
             {
+                shopList && shopLocationList ?
 
-                shopList?.shops?.length > 0
-                    ?
-                    shopLocationList?.length > 0
+                    shopList?.shops?.length > 0
                         ?
-                        <ProductsPageOne />
+                        shopLocationList?.length > 0
+                            ?
+                            <ProductsPageOne />
+                            :
+                            <div className="flex items-center h-[100vh] justify-center">
+                                <Link
+                                    to="/locations-store"
+                                    className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                                >
+                                    {t("PRNoLocation")}
+                                </Link>
+                            </div >
                         :
                         <div className="flex items-center h-[100vh] justify-center">
                             <Link
-                                to="/locations-store"
+                                to="/store"
                                 className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                             >
-                                {t("PRNoLocation")}
+                                {t("PRaddMarket")}
                             </Link>
                         </div >
                     :
-                    <div className="flex items-center h-[100vh] justify-center">
-                        <Link
-                            to="/store"
-                            className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                        >
-                            {t("PRaddMarket")}
-                        </Link>
-                    </div >
+                    <LoadingForSeller />
             }
         </div >
     )
