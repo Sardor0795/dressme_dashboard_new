@@ -69,26 +69,26 @@ export default function SellerRefreshContext({ children }) {
 
         } catch (error) {
             if (error?.response?.status === 401) {
-                localStorage.removeItem("DressmeUserToken");
-                navigate("/login-seller");
+                // localStorage.removeItem("DressmeUserToken");
+                // navigate("/login-seller");
             }
             if (error?.response?.status === 403) {
-                localStorage.removeItem("DressmeUserToken");
-                navigate("/login-seller");
+                // localStorage.removeItem("DressmeUserToken");
+                // navigate("/login-seller");
             }
         }
     };
 
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            sellerRefreshToken();
-            // }, 5 * 10000);
-        }, 2 * 59 * 60 * 1000);
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
+    // useEffect(() => {
+    //     const intervalId = setInterval(() => {
+    //         sellerRefreshToken();
+    //         // }, 5 * 10000);
+    //     }, 2 * 59 * 60 * 1000);
+    //     return () => {
+    //         clearInterval(intervalId);
+    //     };
+    // }, []);
 
     return (
         <SellerRefresh.Provider value={[sellerRefreshToken]}>

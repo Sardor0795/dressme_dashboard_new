@@ -7,6 +7,7 @@ import LoadingForSeller from "../Loading/LoadingFor";
 import axios from "axios";
 import { SellerRefresh } from "../../hook/SellerRefreshToken";
 import { ShopLocationProductList } from "../../hook/ShopLocationProductList";
+import axiosInstance from "../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -23,10 +24,11 @@ export default function Products() {
     }
   }, [location.pathname]);
 
+
   const fetchData = async (customHeaders) => {
+    setLoader(true);
     try {
-      setLoader(true);
-      const response = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
+      const response = await axiosInstance.get("/products/locations", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -55,16 +57,9 @@ export default function Products() {
           }
         });
       }
-      if (data?.status === 401) {
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status });
-        sellerRefreshToken();
-      }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken();
-        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status });
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,

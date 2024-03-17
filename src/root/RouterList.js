@@ -35,6 +35,7 @@ import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewStoreComment";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
 import { ShopLocationProductList } from "../hook/ShopLocationProductList";
+import { ProtectedRoute } from "./protected-route";
 // ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
 
@@ -56,12 +57,17 @@ export default function RouterList() {
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
+ 
   return (
     <div className="w-full h-full">
       <Routes>
         {/* ---------------------<Store>------------------------- */}
 
-        <Route element={<Sidebar />}>
+        <Route element={
+          <ProtectedRoute>
+            <Sidebar />
+          </ProtectedRoute>
+        }>
           <Route path={"/edit-profile"} element={<EditProfilePage />} />
           <Route path="/reviews" element={
             <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>

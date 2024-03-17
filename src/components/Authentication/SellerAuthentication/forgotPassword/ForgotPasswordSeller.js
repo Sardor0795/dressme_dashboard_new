@@ -64,7 +64,6 @@ export default function ForgotPasswordSeller() {
                 },
                 onError: err => {
                     setState({ ...state, isLoadingSent: false })
-                    throw new Error(err || "something wrong");
                     toast.error("введите правильный адрес электронной почты", {
                         position: "top-right",
                         autoClose: 3000,
@@ -75,6 +74,7 @@ export default function ForgotPasswordSeller() {
                         progress: undefined,
                         theme: "light",
                     });
+                    throw new Error(err || "something wrong");
                 }
             })
         } else {
