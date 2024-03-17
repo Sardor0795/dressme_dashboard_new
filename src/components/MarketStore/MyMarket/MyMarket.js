@@ -40,7 +40,7 @@ function MyMarket() {
             deliveryList: data?.data?.delivery_methods,
           });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!helperDatainform?.deliveryList) {
       fetchDelivery();
@@ -64,7 +64,7 @@ function MyMarket() {
     });
   }
 
- 
+
   return (
     <div className="w-full h-full  py-1 px-4 md:px-10">
       <section
@@ -74,11 +74,10 @@ function MyMarket() {
       ></section>
       {/*status Modal */}
       <section
-        className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          statusModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+        className={` max-w-[440px] md:max-w-[750px] w-full flex-col  h-fit  bg-white mx-auto fixed py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${statusModal
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
       >
         <button
           onClick={() => setStatusModal(false)}
@@ -180,10 +179,10 @@ function MyMarket() {
                       </figure>
                       <div className="w-fit flex gap-y-3 flex-col ml-5 md:ml-8 ">
                         <div className="h-fit flex items-center  justify-start">
-                          <p className="md:hidden w-fit text-[13px] text-start flex items-center md:w-[350px] ls:text-[14px] xs:text-xl xs:font-AeonikProMedium font-AeonikProRegular">
+                          <p className="md:hidden w-fit  text-start flex items-center md:w-[350px] text-[14px] xs:text-xl font-AeonikProMedium  ">
                             {data?.name || null}
                           </p>
-                          <p className="relative md:block hidden max-h-[56px] overflow-hidden w-full break-all md:pr-4 text-[13px] md:w-[350px] ls:text-[14px] xs:text-xl font-AeonikProMedium">
+                          <p className="relative md:block hidden max-h-[56px] overflow-hidden w-full break-all md:pr-4   md:w-[350px] text-[14px] xs:text-xl font-AeonikProMedium">
                             {data?.name || null}
                             <span className="absolute right-[16px] top-[28px] w-full block linearGr h-[28px]"></span>
                           </p>
@@ -214,16 +213,16 @@ function MyMarket() {
                     <div className="flex items-center gap-x-1 select-none">
                       {(Number(data?.gender_id) === 3 ||
                         Number(data?.gender_id) === 1) && (
-                        <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
-                          <img src={man} alt="" />
-                        </div>
-                      )}
+                          <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                            <img src={man} alt="" />
+                          </div>
+                        )}
                       {(Number(data?.gender_id) === 3 ||
                         Number(data?.gender_id) === 2) && (
-                        <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
-                          <img src={woman} alt="" />
-                        </div>
-                      )}
+                          <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                            <img src={woman} alt="" />
+                          </div>
+                        )}
                     </div>
                     <div className="h-[36px] xs:h-12 px-1 ls:px-[10px] md:w-[240px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                       <img src={deliveryIcon} alt="" />
@@ -254,7 +253,7 @@ function MyMarket() {
                           type="button"
                           className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("approved")}
                         </button>
                       )}
                       {data?.status === "declined" && (
@@ -263,7 +262,7 @@ function MyMarket() {
                           type="button"
                           className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("declined")}
                         </button>
                       )}
                       {data?.status === "pending" && (
@@ -271,7 +270,7 @@ function MyMarket() {
                           type="button"
                           className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("pending")}
                         </button>
                       )}
                       {data?.status === "updated" && (
@@ -279,7 +278,7 @@ function MyMarket() {
                           type="button"
                           className="w-full h-fit  flex items-center justify-center text-[12px]  xs:text-base text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("updated")}
                         </button>
                       )}
                     </div>
@@ -300,13 +299,13 @@ function MyMarket() {
                     >
                       {t("more_details")}
                     </p>
-                    <div className="w-[100px] md:flex items-center select-none hidden ">
+                    <div className="min-w-[110px] md:flex items-center select-none hidden ">
                       {data?.status === "approved" && (
                         <button
                           type="button"
                           className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("approved")}
                         </button>
                       )}
                       {data?.status === "declined" && (
@@ -315,7 +314,7 @@ function MyMarket() {
                           type="button"
                           className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("declined")}
                         </button>
                       )}
                       {data?.status === "pending" && (
@@ -323,7 +322,7 @@ function MyMarket() {
                           type="button"
                           className="w-full h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("pending")}
                         </button>
                       )}
                       {data?.status === "updated" && (
@@ -331,7 +330,7 @@ function MyMarket() {
                           type="button"
                           className="w-full h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full "
                         >
-                          {data?.status || "status"}
+                          {t("updated")}
                         </button>
                       )}
                     </div>

@@ -2632,13 +2632,13 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                     style={{ background: `${productData?.colors[0]?.hex}` }}
                   ></button>
                   {imageFour?.status4 === "approved" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageFour?.status4 || "status"}
+                    {t("approved")}
                   </td>}
                   {imageFour?.status4 === "declined" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageFour?.status4 || "status"}
+                    {t("declined")}
                   </td>}
                   {imageFour?.status4 === "pending" && <td className=" h-fit  flex items-center justify-center text-[12px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[2px] px-[5px] rounded-[10px] ">
-                    {imageFour?.status4 || "status"}
+                    {t("pending")}
                   </td>}
                 </div>
               </div>

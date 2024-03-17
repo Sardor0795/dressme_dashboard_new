@@ -32,6 +32,9 @@
     "upload_a_photo": "Surat yuklang",
     "shops": "Do'konlar",
     "all_locations": "Barcha manzillar",
-    "save": "Saqlash"
-    
+    "save": "Saqlash",
+    "approved": "Tasdiqlangan",
+    "declined": "Rad etilgan",
+    "pending": "Kutilmoqda",
+    "updated": "Yangilangan"
 }

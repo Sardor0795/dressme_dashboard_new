@@ -316,9 +316,9 @@ function LocationList() {
                                 {value?.status === "approved" && (
                                   <button
                                     type="button"
-                                    className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full "
+                                    className="min-w-[110px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full "
                                   >
-                                    {value?.status || "status"}
+                                    {t("approved")}
                                   </button>
                                 )}
                                 {value?.status === "declined" && (
@@ -327,25 +327,25 @@ function LocationList() {
                                       onHandleStatus(value?.id, item?.id)
                                     }
                                     type="button"
-                                    className="w-[100px] cursor-pointer h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full "
+                                    className="min-w-[110px] cursor-pointer h-fit overflow-hidden flex items-center justify-center  text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full "
                                   >
-                                    {value?.status || "status"}
+                                    {t("declined")}
                                   </button>
                                 )}
                                 {value?.status === "pending" && (
                                   <button
                                     type="button"
-                                    className="w-[100px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full "
+                                    className="min-w-[110px] h-fit overflow-hidden flex items-center justify-center  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full "
                                   >
-                                    {value?.status || "status"}
+                                    {t("pending")}
                                   </button>
                                 )}
                                 {value?.status === "updated" && (
                                   <button
                                     type="button"
-                                    className="w-[100px] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full "
+                                    className="min-w-[110px] h-fit  flex items-center justify-center  text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full "
                                   >
-                                    {value?.status || "status"}
+                                    {t("updated")}
                                   </button>
                                 )}
                               </li>
@@ -383,7 +383,7 @@ function LocationList() {
                                   type="button"
                                   className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full "
                                 >
-                                  {value?.status || "status"}
+                                  {t("approved")}
                                 </button>
                               )}
                               {value?.status === "declined" && (
@@ -394,7 +394,7 @@ function LocationList() {
                                   type="button"
                                   className="w-full cursor-pointer h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full "
                                 >
-                                  {value?.status || "status"}
+                                  {t("declined")}
                                 </button>
                               )}
                               {value?.status === "pending" && (
@@ -402,7 +402,7 @@ function LocationList() {
                                   type="button"
                                   className="w-full h-fit overflow-hidden flex items-center justify-center text-[12px]  xs:text-base text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full "
                                 >
-                                  {value?.status || "status"}
+                                  {t("pending")}
                                 </button>
                               )}
                               {value?.status === "updated" && (
@@ -410,7 +410,7 @@ function LocationList() {
                                   type="button"
                                   className="w-full h-fit  flex items-center justify-center text-[12px]  xs:text-base text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full "
                                 >
-                                  {value?.status || "status"}
+                                  {t("updated")}
                                 </button>
                               )}
                             </div>

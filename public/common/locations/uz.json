@@ -59,5 +59,9 @@
     "add_location_two": "Manzilga qoʻshish",
     "more": "Ko'proq",
     "less": "Kamroq",
-    "no_product": "Mahsulot yo'q"
+    "no_product": "Mahsulot yo'q",
+    "approved": "Tasdiqlangan",
+    "declined": "Rad etilgan",
+    "pending": "Kutilmoqda",
+    "updated": "Yangilangan"
 }

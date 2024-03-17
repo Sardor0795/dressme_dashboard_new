@@ -1620,9 +1620,8 @@ export default function ProductLocationsList() {
                                                                 {itemValue?.status ===
                                                                   "approved" && (
                                                                     <td className="w-[10%] h-fit  flex items-center justify-center   ">
-                                                                      <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {t("approved")}
                                                                       </span>
                                                                     </td>
                                                                   )}
@@ -1638,27 +1637,24 @@ export default function ProductLocationsList() {
                                                                       }
                                                                       className="w-[10%] h-fit cursor-pointer flex items-center  justify-center  "
                                                                     >
-                                                                      <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                                                        {t("declined")}
                                                                       </span>
                                                                     </td>
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
                                                                     <td className="w-[10%] h-fit  flex items-center justify-center   ">
-                                                                      <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {t("pending")}
                                                                       </span>
                                                                     </td>
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
                                                                     <td className="w-[10%] h-fit  flex items-center justify-center     ">
-                                                                      <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {t("updated")}
                                                                       </span>
                                                                     </td>
                                                                   )}
@@ -1723,8 +1719,7 @@ export default function ProductLocationsList() {
                                                                   "approved" && (
                                                                     <div className="w-full h-fit  flex items-center justify-center  ">
                                                                       <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("approved")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -1741,8 +1736,7 @@ export default function ProductLocationsList() {
                                                                       className="w-full h-fit cursor-pointer flex items-center  justify-center"
                                                                     >
                                                                       <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("declined")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -1750,8 +1744,7 @@ export default function ProductLocationsList() {
                                                                   "pending" && (
                                                                     <div className="w-full h-fit  flex items-center justify-center ">
                                                                       <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("pending")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -1759,8 +1752,7 @@ export default function ProductLocationsList() {
                                                                   "updated" && (
                                                                     <div className="w-full h-fit  flex items-center justify-center   ">
                                                                       <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("updated")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -2315,9 +2307,8 @@ export default function ProductLocationsList() {
                                                                 {itemValue?.status ===
                                                                   "approved" && (
                                                                     <td className="w-[10%] h-fit  flex items-center justify-center  ">
-                                                                      <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {t("approved")}
                                                                       </span>
                                                                     </td>
                                                                   )}
@@ -2333,27 +2324,24 @@ export default function ProductLocationsList() {
                                                                       }
                                                                       className="w-[10%] h-fit cursor-pointer flex items-center  justify-center"
                                                                     >
-                                                                      <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                                                                        {t("declined")}
                                                                       </span>
                                                                     </td>
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "pending" && (
                                                                     <td className="w-[10%] h-fit  flex items-center justify-center ">
-                                                                      <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {t("pending")}
                                                                       </span>
                                                                     </td>
                                                                   )}
                                                                 {itemValue?.status ===
                                                                   "updated" && (
                                                                     <td className="w-[10%] h-fit  flex items-center justify-center   ">
-                                                                      <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                                                                        {t("updated")}
                                                                       </span>
                                                                     </td>
                                                                   )}
@@ -2417,8 +2405,7 @@ export default function ProductLocationsList() {
                                                                   "approved" && (
                                                                     <div className="w-full h-fit  flex items-center justify-center  ">
                                                                       <span className="w-[100px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                      {t("approved")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -2435,8 +2422,7 @@ export default function ProductLocationsList() {
                                                                       className="w-full h-fit cursor-pointer flex items-center  justify-center"
                                                                     >
                                                                       <span className="w-[100px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("declined")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -2444,8 +2430,7 @@ export default function ProductLocationsList() {
                                                                   "pending" && (
                                                                     <div className="w-full h-fit  flex items-center justify-center ">
                                                                       <span className="w-[100px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("pending")}
                                                                       </span>
                                                                     </div>
                                                                   )}
@@ -2453,8 +2438,7 @@ export default function ProductLocationsList() {
                                                                   "updated" && (
                                                                     <div className="w-full h-fit  flex items-center justify-center   ">
                                                                       <span className="w-[100px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
-                                                                        {itemValue?.status ||
-                                                                          "status"}
+                                                                        {t("updated")}
                                                                       </span>
                                                                     </div>
                                                                   )}

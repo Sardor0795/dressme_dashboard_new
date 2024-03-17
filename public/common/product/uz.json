@@ -108,5 +108,9 @@
     "SSadd_size": "Hajmini qo'shish",
     "SSsm": "sm",
     "SSmin": "Min",
-    "SSmax": "Max"
+    "SSmax": "Max",
+    "approved": "Tasdiqlangan",
+    "declined": "Rad etilgan",
+    "pending": "Kutilmoqda",
+    "updated": "Yangilangan"
 }
