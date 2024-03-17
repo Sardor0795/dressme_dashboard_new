@@ -1,11 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import RouterList from "./root/RouterList";
-
+ 
 
 function App() {
+ 
 
-
+  // useEffect(() => {
+  //   const fetchDataRegions = async () => {
+  //     try {
+  //       const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
+  //       if (data?.status >= 200 && data?.status < 300) {
+  //         setRegionList(data?.data);
+  //       }
+  //     } catch (error) { }
+  //   };
+  //   if (!regionList) {
+  //     fetchDataRegions();
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (
@@ -17,10 +30,10 @@ function App() {
     }
   }, []);
 
-
+   
+  console.log("app1");
   return (
     <div>
-
       {/* <NavbarDashboard /> */}
       <RouterList />
     </div>
