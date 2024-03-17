@@ -7,14 +7,13 @@ import { dressRegionList } from "../../hook/RegionList";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { ShopList } from "../../hook/ShopList";
+import axiosInstance from "../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 
 export default function MarketStore() {
-  const [sellerRefreshToken] = useContext(SellerRefresh);
-  const [shopList, setShopList] = useContext(ShopList)
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-
+   const [shopList, setShopList] = useContext(ShopList)
+ 
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -23,7 +22,7 @@ export default function MarketStore() {
 
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+      const response = await axiosInstance.get("/shops", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -44,19 +43,9 @@ export default function MarketStore() {
       if (data?.status >= 200 && data?.status < 300) {
         setShopList(data?.data)
       }
-
-      if (data?.status === 401) {
-
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status })
-        sellerRefreshToken();
-        fetchData();
-      }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
-        sellerRefreshToken();
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,

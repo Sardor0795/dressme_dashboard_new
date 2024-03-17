@@ -10,6 +10,7 @@ import { dressMainData } from "../../../../hook/ContextTeam";
 import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import axiosInstance from "../../../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ReviewWear() {
@@ -24,9 +25,11 @@ export default function ReviewWear() {
   const [languageDetector] = useContext(LanguageDetectorDress);
 
   // // ------------GET  Has Magazin ?-----------------
+ 
+  
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(`${REACT_APP_BASE_URL}/products`, {
+      const response = await axiosInstance.get("/products", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -43,20 +46,14 @@ export default function ReviewWear() {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
-  const { isLoading } = useQuery(['seller_product_list_review'], () => fetchData(customHeaders), {
+  const { isLoading }= useQuery(['seller_product_list_review'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setDressInfo({ ...dressInfo, getReviewProduct: data?.data?.products?.data })
       }
-      if (data?.status === 401) {
-        sellerRefreshToken()
-      }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken()
-
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,

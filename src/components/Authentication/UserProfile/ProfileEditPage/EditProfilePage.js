@@ -26,6 +26,7 @@ import { ClipLoader } from "react-spinners";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { dressRegionList } from "../../../../hook/RegionList";
+import axiosInstance from "../../AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 function EditProfilePage() {
@@ -133,9 +134,11 @@ function EditProfilePage() {
     }
   }, [regionList, dressInfo?.typeLis]);
 
+
+
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(`${url}/profile`, {
+      const response = await axiosInstance.get("/profile", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -147,39 +150,23 @@ function EditProfilePage() {
       return { error, status };
     }
   };
-
   const customHeaders = {
     "Content-type": "application/json; charset=UTF-8",
     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
+  const { refetch } = useQuery(["get_profile_list"], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
 
-  const { refetch } = useQuery(
-    ["get_profile_axios11"],
-    () => fetchData(customHeaders),
-    {
-      onSuccess: (data) => {
-        if (data?.status >= 200 && data?.status < 300) {
-          setSellerInformation({
-            ...sellerInformation,
-            sellerUserData: data?.data,
-          });
-        }
-        if (data?.status === 401) {
-          setSellerInformation({ ...sellerInformation, sellerUserData: [] });
-          sellerRefreshToken();
-        }
-      },
-      onError: (error) => {
-        if (error?.response?.status === 401) {
-          sellerRefreshToken();
-          setSellerInformation({ ...sellerInformation, sellerUserData: [] });
-        }
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
-
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
     return fetch(`${url}/delete`, {
