@@ -20,36 +20,36 @@ export default function MarketStore() {
     });
   }, []);
 
-  const fetchData = async (customHeaders) => {
-    try {
-      const response = await axiosInstance.get("/shops", {
-        headers: customHeaders,
-      });
-      const status = response.status;
-      const data = response.data;
+  // const fetchData = async (customHeaders) => {
+  //   try {
+  //     const response = await axiosInstance.get("/shops", {
+  //       headers: customHeaders,
+  //     });
+  //     const status = response.status;
+  //     const data = response.data;
 
-      return { data, status };
-    } catch (error) {
-      const status = error.response ? error.response.status : null;
-      return { error, status };
-    }
-  };
-  const customHeaders = {
-    "Content-type": "application/json; charset=UTF-8",
-    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
-  };
-  useQuery(["seller_shops_list"], () => fetchData(customHeaders), {
-    onSuccess: (data) => {
-      if (data?.status >= 200 && data?.status < 300) {
-        setShopList(data?.data)
-      }
-    },
-    onError: (error) => {
-      throw new Error(error || "something wrong");
-    },
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  });
+  //     return { data, status };
+  //   } catch (error) {
+  //     const status = error.response ? error.response.status : null;
+  //     return { error, status };
+  //   }
+  // };
+  // const customHeaders = {
+  //   "Content-type": "application/json; charset=UTF-8",
+  //   Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
+  // };
+  // useQuery(["seller_shops_list_index"], () => fetchData(customHeaders), {
+  //   onSuccess: (data) => {
+  //     if (data?.status >= 200 && data?.status < 300) {
+  //       setShopList(data?.data)
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     throw new Error(error || "something wrong");
+  //   },
+  //   keepPreviousData: true,
+  //   refetchOnWindowFocus: false,
+  // });
   return (
     <div className="mb-10">
       <Outlet />

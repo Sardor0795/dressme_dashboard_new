@@ -35,7 +35,7 @@ export default function MarketIsStoreCheck() {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
-  const { refetch, isLoading } = useQuery(['seller_shops_list'], () => fetchData(customHeaders), {
+  const { refetch, isLoading } = useQuery(['seller_shops_list_check'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setShopList(data?.data)

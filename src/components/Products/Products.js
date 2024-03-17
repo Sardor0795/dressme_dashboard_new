@@ -8,6 +8,7 @@ import axios from "axios";
 import { SellerRefresh } from "../../hook/SellerRefreshToken";
 import { ShopLocationProductList } from "../../hook/ShopLocationProductList";
 import axiosInstance from "../Authentication/AxiosIntance";
+import { GetProductList } from "../../hook/GetProductList";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -17,6 +18,7 @@ export default function Products() {
   const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList);
   const [loader, setLoader] = useState(true);
   const location = useLocation();
+  const [getProductList, setGetProductList] = useContext(GetProductList)
 
   useEffect(() => {
     if (location.pathname !== 'products/location/:id') {
@@ -24,10 +26,9 @@ export default function Products() {
     }
   }, [location.pathname]);
 
-
   const fetchData = async (customHeaders) => {
     setLoader(true);
-    try {
+      try {
       const response = await axiosInstance.get("/products/locations", {
         headers: customHeaders,
       });
@@ -50,9 +51,9 @@ export default function Products() {
   const { isLoading } = useQuery(['seller_location_list12'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
+        setGetProductList(data?.data)
         data?.data?.products_locations?.forEach(item => {
           if (item?.shop_locations?.length >= 1) {
-            setDressInfo({ ...dressInfo, sellerStatus: data?.status });
             setShopLocationProductList(item?.shop_locations);
           }
         });
