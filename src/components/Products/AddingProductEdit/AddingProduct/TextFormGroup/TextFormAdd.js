@@ -14,7 +14,7 @@ const { REACT_APP_BASE_URL } = process.env;
 
 export default function TextFormAdd({ productsEdit, handlCallBack, loading, onClick, onEdit }) {
     const { t } = useTranslation("product");
-    const [languageDetector] = useContext(LanguageDetectorDress);
+    const [languageDetector] = useContext(LanguageDetectorDress); 
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({

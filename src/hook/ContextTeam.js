@@ -12,8 +12,7 @@ export default function ContextTeam({ children }) {
     getProductInfo: null,
 
     // ------MarketStore
-    getProductList: null,
-    getReviewProduct: null,
+     getReviewProduct: null,
     showSelectedButton: 'products',
     genderList: null,
     typeList: null,

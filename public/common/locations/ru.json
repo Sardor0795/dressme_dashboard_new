@@ -59,5 +59,9 @@
   "add_location_two": "Добавить в локацию",
   "more": "Больше",
   "less": "Больше",
-  "no_product": "Tовара нет"
+  "no_product": "Tовара нет",
+  "approved": "Одобренный",
+  "declined": "Отклоненный",
+  "pending": "В ожидании ",
+  "updated": "Обновлено"
 }

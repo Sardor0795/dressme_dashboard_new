@@ -26,12 +26,10 @@ import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
 import { MdError } from "react-icons/md";
-import axios from "axios";
 import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import LoadingForSeller from "../../../Loading/LoadingFor";
-// import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -140,35 +138,6 @@ const AddingProduct = () => {
     () => setState({ ...state, onEditTextForm: true }),
     []
   ); // onEdittextForm
-  // console.log(state?.onEditTextForm, "onEditTextForm");
-  const ClothingSectionToggle = React.useCallback(
-    () => setState({ ...state, ClothingSection: false }),
-    []
-  ); // ClothingSection
-  const SubClothingSectionToggle = React.useCallback(
-    () => setState({ ...state, SubClothingSection: false }),
-    []
-  ); // ClothingSection
-  const DressSeasonToggle = React.useCallback(
-    () => setState({ ...state, DressSeason: false }),
-    []
-  ); // ClothingSection
-  const ColourListToggle = React.useCallback(
-    () => setState({ ...state, Colour: false }),
-    []
-  ); // ClothingSection
-  const GenderListToggle = React.useCallback(
-    () => setState({ ...state, GenderModal: false }),
-    []
-  ); // ClothingSection
-  const DressTypeToggle = React.useCallback(
-    () => setState({ ...state, DressTypeModal: false }),
-    []
-  ); // ClothingSection
-  const MakeCountryToggle = React.useCallback(
-    () => setState({ ...state, MakeCountryModal: false }),
-    []
-  ); // ClothingSection
 
 
 
@@ -185,16 +154,14 @@ const AddingProduct = () => {
   const [subSection_Id, setSubSection_Id] = useState([]);
   const [season_Id, setSeason_Id] = useState([]);
   const [colors_Id, setColors_Id] = useState([]);
-  const [loading, setLoading] = useState(false)
 
 
-  const { refetch } = useQuery(["products_id"], () => {
-    setLoading(true)
+  const { refetch, isFetching } = useQuery(["products_id_edit"], () => {
     return request({ url: `/products/${newProductId}`, token: true })
   },
     {
       onSuccess: (res) => {
-        setLoading(false)
+        // setLoading(false) 
 
         setProductsDataIdEdit(res?.product)
 
@@ -256,13 +223,12 @@ const AddingProduct = () => {
         }
       },
       onError: (err) => {
-        setLoading(false)
+        throw new Error(err || "something wrong");
       },
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     }
   )
-
   // ------------------------------------------------------------------------ 
   // allSizeModalShow
   const [allSizeModalShow, setAllSizeModalShow] = useState(false);
@@ -275,7 +241,6 @@ const AddingProduct = () => {
     () => setAddSizesMobileToggle(false),
     []
   );
-
 
   // ------------------------------------------------------------------------
   const handleChangeSection = (e) => {
@@ -325,14 +290,11 @@ const AddingProduct = () => {
       setState({ ...state, subSection_Id: [] })
     }
   }, [section_Id, dressInfo?.getProductInfo])
-  // console.log(productsData, "productsData");
-  // console.log(section_Id, "section_Id");
-  // -----------------------------------------------------------
-  // ColorHandle
+
   // ------------------------------------------------------------------------
 
   function onHanleColorList(e) {
-    if (!colorListForTest?.includes(e)) {
+     if (!colorListForTest?.includes(e)) {
       setSelectColorID(e)
       if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
         setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
@@ -343,8 +305,6 @@ const AddingProduct = () => {
 
     }
   }
-  // console.log(colors_Id?.length, "colors_Id?.length ");
-
 
   function onHandleColorUnchecked(id) {
     if (colorListForTest?.includes(id)) {
@@ -368,7 +328,6 @@ const AddingProduct = () => {
   }, [selectColorID, productsDataIdEdit?.colors])
 
   // -----------------------------------------------------------
-  // console.log(selectColorID, "selectColorID");
   const onSearch = (value) => {
     // console.log("search:", value);
   };
@@ -392,11 +351,7 @@ const AddingProduct = () => {
     };
   }, [screenSize]);
 
-  const LocationAddSubmit = () => {
-    // console.log(state?.textListOfFormList, " state?.textListOfFormList");
-  }
-  // const CallBackTextForm = (childData) => {
-  // };
+
   const handleNextPage = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
@@ -439,7 +394,6 @@ const AddingProduct = () => {
       setSection_Id(section_Id.filter((x, i, a) => a.indexOf(x) == i))
     }
   }, [dressInfo?.getProductInfo])
-  // }, [productsData])
 
   useEffect(() => {
     if (subSection_Id?.length > 1) {
@@ -543,7 +497,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-  // console.log(state?.newColorByAddSizes?.amount, state?.newColorByAddSizes?.price, state?.checkedSizeList, "---------------");
+
   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
@@ -724,11 +678,31 @@ const AddingProduct = () => {
         }
       })
   }
+  // console.log(productsDataIdEdit, 'test---productsDataIdEdit');
+  // console.log(
+  //   state?.gender_Id, 'gender_Id', `\n`,
+  //   state?.min_Age_Category, 'min_Age_Category', `\n`,
+  //   state?.max_Age_Category, 'max_Age_Category', `\n`,
+  //   state?.sku, 'sku', `\n`,
+  //   state?.filterTypeId, 'filterTypeId', `\n`,
+  //   state?.producer_Id, 'producer_Id', `\n`,
+  //   'test---'
+  // );
+  console.log(
+    Number(productsDataIdEdit?.gender_id) == state?.gender_Id,
+    Number(productsDataIdEdit?.min_age_category) == state?.min_Age_Category,
+    Number(productsDataIdEdit?.max_age_category) == state?.max_Age_Category
+  );
+  console.log(Number(productsDataIdEdit?.gender_id),
+    Number(productsDataIdEdit?.min_age_category),
+    Number(productsDataIdEdit?.max_age_category));
+  console.log(state?.gender_Id, state?.min_Age_Category, state?.max_Age_Category);
+
 
   const productUpdate = (childData) => {
     setState({ ...state, isCheckValid: true })
     if (newArray?.length && subSection_Id?.length) {
-      setState({ ...state, sendingLoader: true, })
+       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
       section_Id && section_Id?.forEach((index) => {
         form.append("section_ids[]", Number(index));
@@ -739,21 +713,21 @@ const AddingProduct = () => {
       season_Id && season_Id?.forEach((index) => {
         form.append("season_ids[]", Number(index));
       })
-      state?.gender_Id && form.append("gender_id", state?.gender_Id);
-      state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
-      state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
-      state?.sku && form.append("sku", state?.sku);
-      state?.filterTypeId && form.append("type_id", parseFloat(state?.filterTypeId));
-      state?.producer_Id && form.append("producer_id", state?.producer_Id);
-      childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
-      childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
-      childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
-      childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
-      childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
-      childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
-      childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
-      childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
-      childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
+      !(productsDataIdEdit?.gender_id == state?.gender_Id) && form.append("gender_id", state?.gender_Id);
+      !(productsDataIdEdit?.min_age_category == state?.min_Age_Category) && form.append("min_age_category", state?.min_Age_Category);
+      !(productsDataIdEdit?.max_age_category == state?.max_Age_Category) && form.append("max_age_category", state?.max_Age_Category);
+      !(productsDataIdEdit?.sku == state?.sku) && form.append("sku", state?.sku);
+      !(productsDataIdEdit?.type_id == state?.filterTypeId) && form.append("type_id", parseFloat(state?.filterTypeId));
+      !(productsDataIdEdit?.producer_id == state?.producer_Id) && form.append("producer_id", state?.producer_Id);
+      childData && (productsDataIdEdit?.name_uz !== childData?.name_Uz) && form.append("name_uz", childData?.name_Uz);
+      childData && (productsDataIdEdit?.name_ru !== childData?.name_Ru) && form.append("name_ru", childData?.name_Ru);
+      childData && (productsDataIdEdit?.quality_uz !== childData?.quality_Uz) && form.append("quality_uz", childData?.quality_Uz);
+      childData && (productsDataIdEdit?.quality_ru !== childData?.quality_Ru) && form.append("quality_ru", childData?.quality_Ru);
+      childData && (productsDataIdEdit?.description_uz !== childData?.description_Uz) && form.append("description_uz", childData?.description_Uz);
+      childData && (productsDataIdEdit?.description_ru !== childData?.description_Ru) && form.append("description_ru", childData?.description_Ru);
+      childData && (productsDataIdEdit?.composition_uz !== childData?.composition_Uz) && form.append("composition_uz", childData?.composition_Uz);//no R
+      childData && (productsDataIdEdit?.composition_ru !== childData?.composition_Ru) && form.append("composition_ru", childData?.composition_Ru);//no R
+      childData && !(Number(productsDataIdEdit?.brand_id) == childData?.brand_id) && form.append("brand_id", childData?.brand_id);//no R
 
       return fetch(`${url}/products/${Number(newProductId)}`, {
         method: "POST",
@@ -806,7 +780,9 @@ const AddingProduct = () => {
           })
         });
     }
-    if (!newArray?.length) {
+     if (!newArray?.length) {
+      console.log("run-2");
+
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
       section_Id && section_Id?.forEach((index) => {
@@ -818,21 +794,21 @@ const AddingProduct = () => {
       season_Id && season_Id?.forEach((index) => {
         form.append("season_ids[]", Number(index));
       })
-      state?.gender_Id && form.append("gender_id", state?.gender_Id);
-      state?.min_Age_Category && form.append("min_age_category", state?.min_Age_Category);
-      state?.max_Age_Category && form.append("max_age_category", state?.max_Age_Category);
-      state?.sku && form.append("sku", state?.sku);
-      state?.filterTypeId && form.append("type_id", parseFloat(state?.filterTypeId));
-      state?.producer_Id && form.append("producer_id", state?.producer_Id);
-      childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
-      childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
-      childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
-      childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
-      childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
-      childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
-      childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
-      childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
-      childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
+      !(productsDataIdEdit?.gender_id == state?.gender_Id) && form.append("gender_id", state?.gender_Id);
+      !(productsDataIdEdit?.min_age_category == state?.min_Age_Category) && form.append("min_age_category", state?.min_Age_Category);
+      !(productsDataIdEdit?.max_age_category == state?.max_Age_Category) && form.append("max_age_category", state?.max_Age_Category);
+      !(productsDataIdEdit?.sku == state?.sku) && form.append("sku", state?.sku);
+      !(productsDataIdEdit?.type_id == state?.filterTypeId) && form.append("type_id", parseFloat(state?.filterTypeId));
+      !(productsDataIdEdit?.producer_id == state?.producer_Id) && form.append("producer_id", state?.producer_Id);
+      childData && childData?.name_Uz && form.append("name_uz", childData?.name_Uz);
+      childData && childData?.name_Ru && form.append("name_ru", childData?.name_Ru);
+      childData && childData?.quality_Uz && form.append("quality_uz", childData?.quality_Uz);
+      childData && childData?.quality_Ru && form.append("quality_ru", childData?.quality_Ru);
+      childData && childData?.description_Uz && form.append("description_uz", childData?.description_Uz);
+      childData && childData?.description_Ru && form.append("description_ru", childData?.description_Ru);
+      childData && childData?.composition_Uz && form.append("composition_uz", childData?.composition_Uz);//no R
+      childData && childData?.composition_Ru && form.append("composition_ru", childData?.composition_Ru);//no R
+      childData && childData?.brand_id && form.append("brand_id", childData?.brand_id);//no R
 
       return fetch(`${url}/products/${Number(newProductId)}`, {
         method: "POST",
@@ -929,43 +905,43 @@ const AddingProduct = () => {
   ])
   const selectGenderId = (id) => {
     if (!state?.gender_Id) {
-      setState({ ...state, gender_Id: id, })
+      setState({ ...state, gender_Id: id, onEditInput: true })
     }
     if (state?.gender_Id !== id) {
-      setState({ ...state, gender_Id: id, })
+      setState({ ...state, gender_Id: id, onEditInput: true })
     }
   }
   const ClearGenderSelected = (id) => {
     if (state?.gender_Id === id) {
-      setState({ ...state, gender_Id: null, })
+      setState({ ...state, gender_Id: null,  onEditInput: true})
     }
   }
 
   const selectTypeById = (filter, type_Id) => {
     if (!state?.filterTypeId) {
-      setState({ ...state, filterTypeId: filter, type_Id: type_Id })
+      setState({ ...state, filterTypeId: filter, type_Id: type_Id, onEditInput: true })
     }
     if (state?.filterTypeId !== filter) {
-      setState({ ...state, filterTypeId: filter, type_Id: type_Id })
+      setState({ ...state, filterTypeId: filter, type_Id: type_Id, onEditInput: true })
     }
   }
   const ClearSelectTypeById = (filter, type_Id) => {
 
     if (state?.filterTypeId === filter) {
-      setState({ ...state, filterTypeId: null, type_Id: null })
+      setState({ ...state, filterTypeId: null, type_Id: null, onEditInput: true })
     }
   }
   const selectProduceId = (id) => {
     if (!state?.producer_Id) {
-      setState({ ...state, producer_Id: id })
+      setState({ ...state, producer_Id: id, onEditInput: true })
     }
     if (state?.producer_Id !== id) {
-      setState({ ...state, producer_Id: id })
+      setState({ ...state, producer_Id: id, onEditInput: true })
     }
   }
   const ClearProducerById = (id) => {
     if (state?.producer_Id === id) {
-      setState({ ...state, producer_Id: null })
+      setState({ ...state, producer_Id: null, onEditInput: true })
     }
   }
 
@@ -1034,7 +1010,7 @@ const AddingProduct = () => {
           </div>}
 
         </div>
-        {loading ? <LoadingForSeller /> :
+        {isFetching ? <LoadingForSeller /> :
           <div className={`${dressInfo?.nextPageShowForm ? "flex" : "hidden"}  relative w-full md:px-0  items-center justify-between mb-[50px] my-6 md:my-[50px] focus:bg-textBlueColor `}>
             {/* <ToastContainer
             style={{ zIndex: "1000", top: "80px" }}
@@ -2616,9 +2592,7 @@ const AddingProduct = () => {
                         state?.onEditInput ?
                           <button
                             type="button"
-                            onClick={
-                              productUpdate
-                            }
+                            onClick={() => productUpdate()}
                             className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center cursor-pointer  active:scale-95  py-3 border border-textBlueColor  text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
                           >
                             {state?.sendingLoader ?
