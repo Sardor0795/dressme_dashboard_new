@@ -15,8 +15,7 @@ import axiosInstance from '../../Authentication/AxiosIntance'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsLocationCheck() {
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [sellerRefreshToken] = useContext(SellerRefresh)
+ 
   const [shopList, setShopList] = useContext(ShopList)
   const [shopLocationList, setShopLocationList] = useContext(ShopLocationList)
 

@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { dressRegionList } from "../../../hook/RegionList";
 import { GetProductList } from "../../../hook/GetProductList";
+import axiosInstance from "../../Authentication/AxiosIntance";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -148,7 +149,7 @@ export default function ProductLocationsList() {
 
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(
+       const response = await axios.get(
         `${REACT_APP_BASE_URL}/products/locations`,
         {
           headers: customHeaders,
@@ -172,8 +173,7 @@ export default function ProductLocationsList() {
       onSuccess: (data) => {
         // console.log(data, "data");
         if (data?.status >= 200 && data?.status < 300) {
-          // setDressInfo({ ...dressInfo, getProductList: data?.data });
-          setGetProductList(data?.data)
+           setGetProductList(data?.data)
         }
         if (data?.status === 401) {
         }
@@ -383,28 +383,43 @@ export default function ProductLocationsList() {
     );
   };
 
-  //get-product-info
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(
-          `${REACT_APP_BASE_URL}/products/get-product-info`,
-          {
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `Bearer ${localStorage.getItem(
-                "DressmeUserToken"
-              )}`,
-            },
+
+  const fetchDataProductInfo = async (customHeadersProductInfo) => {
+    try {
+      const response = await axiosInstance.get("/products/get-product-info", {
+        headers: customHeadersProductInfo,
+      });
+      const status = response.status;
+      const data = response.data;
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+
+  const customHeadersProductInfo = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+
+  useQuery(['fetchDataProductInfo'], () => fetchDataProductInfo(customHeadersProductInfo), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        data?.data?.products_locations?.forEach(item => {
+          if (item?.shop_locations?.length >= 1) {
+            setGetProductInfo(data?.data);
           }
-        );
-        if (data?.status >= 200 && data?.status < 300) {
-          setGetProductInfo(data?.data);
-        }
-      } catch (error) { }
-    };
-    fetchData();
-  }, []);
+        });
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
   // products
   const navigate = useNavigate();
   function openMarketEditPage(id) {

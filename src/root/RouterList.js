@@ -139,7 +139,7 @@ export default function RouterList() {
         <Route path={"/reset-password-seller/:id"} element={<ResetPasswordSeller />} />
         <Route path={"/mail-verify-seller/:id"} element={<MailVerfySeller />} />
         <Route path="*" element={<Error colors="text-[#007DCA]" />} />
-        <Route path="/" element={<Navigate to={"/login-seller"} />} />
+        <Route path="/" element={<Navigate to={"/edit-profile"} />} />
 
 
       </Routes>

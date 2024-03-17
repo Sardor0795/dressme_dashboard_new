@@ -48,6 +48,7 @@
 
 // export default axiosInstance;
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const axiosInstance = axios.create({
     baseURL: "https://api.dressme.uz/api/seller", // Replace with your API base URL
@@ -55,7 +56,9 @@ const axiosInstance = axios.create({
 
 let isRefreshing = false;
 let refreshSubscribers = [];
- async function refreshToken() {
+console.log(refreshSubscribers, 'refreshSubscribers');
+console.log(isRefreshing, 'isRefreshing');
+async function refreshToken(navigate) {
     try {
         const headers = {
             'Content-type': 'application/json; charset=UTF-8',
@@ -71,7 +74,8 @@ let refreshSubscribers = [];
     } catch (error) {
         if (error?.response?.status === 401 || error?.response?.status === 403) {
             localStorage.removeItem("DressmeUserToken");
-            console.log("expired refresdh token");
+            // const navigate = useNavigate();
+             console.log("expired refresdh token", error?.response?.status);
         }
     }
 }
@@ -88,28 +92,27 @@ axiosInstance.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-
+ 
 axiosInstance.interceptors.response.use(
     (response) => {
         return response;
     },
     async (error) => {
         const originalRequest = error.config;
-
+        console.log(error.response, error.response.status, 'error.response.status', !originalRequest._retry);
         if (error.response && error.response.status === 401 && !originalRequest._retry) {
-            if (!isRefreshing) {
+             if (!isRefreshing) {
+                console.log("refreshToken");
                 isRefreshing = true;
-                await refreshToken();
+                await refreshToken( );
                 isRefreshing = false;
             }
-
             return new Promise((resolve, reject) => {
                 refreshSubscribers.push(() => {
                     resolve(axiosInstance(originalRequest));
                 });
             });
         }
-
         return Promise.reject(error);
     }
 );
