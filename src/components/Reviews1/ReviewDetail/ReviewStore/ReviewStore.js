@@ -10,6 +10,7 @@ import { HelperData } from "../../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopList } from "../../../../hook/ShopList";
+import { dressMainData } from "../../../../hook/ContextTeam";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
@@ -17,6 +18,7 @@ const ReviewStore = () => {
   const [sellerRefreshToken] = useContext(SellerRefresh)
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
   const [shopList, setShopList] = useContext(ShopList)
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
 
   const { t } = useTranslation("reviews");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -45,15 +47,18 @@ const ReviewStore = () => {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setShopList(data?.data)
+        setDressInfo({ ...dressInfo, sellerStatus: data?.status  })
       }
       if (data?.status === 401) {
         sellerRefreshToken()
+        setDressInfo({ ...dressInfo, sellerStatus: data?.status  })
+
       }
     },
     onError: (error) => {
       if (error?.response?.status === 401) {
         sellerRefreshToken()
-
+        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
       }
     },
     keepPreviousData: true,
