@@ -1731,11 +1731,10 @@ export default function ProductLocationsList() {
                                                                 <div className="mb-6">
                                                                   <div className="w-full grid grid-cols-3 gap-4  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px] gap-x-[10px] mb-[8px]">
                                                                     <div className="w-full flex items-center justify-center ">
-                                                                      {t("PRrandomCode")}
-                                                                    </div>
-                                                                    <div className="w-full flex items-center justify-center ">
                                                                       {t("PRtype")}
                                                                     </div>
+                                                                    <div className="w-full"></div>
+
                                                                     <div className="w-full flex items-center justify-center ">
                                                                       {" "}
                                                                       {t("PRdate")}
@@ -1743,12 +1742,6 @@ export default function ProductLocationsList() {
                                                                   </div>
 
                                                                   <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                    <div className="w-full break-all  overflow-hidden  ">
-                                                                      <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
-                                                                        {itemValue?.sku ||
-                                                                          "sku"}
-                                                                      </p>
-                                                                    </div>
 
                                                                     <div
                                                                       key={
@@ -1759,7 +1752,7 @@ export default function ProductLocationsList() {
                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                       {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                     </div>
-
+                                                                    <div className="w-full"></div>
                                                                     {/* <div className="w-full"> {itemValue?.money} сум </div> */}
                                                                     <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                       {itemValue?.created_at ||
@@ -2441,12 +2434,14 @@ export default function ProductLocationsList() {
                                                               itemValue?.id && (
                                                                 <div className="mb-6">
                                                                   <div className="w-full grid grid-cols-3 gap-4  border rounded-lg border-[#F2F2F2] bg-[#FCFCFC] px-[10px] py-[5px] text-[#3F6175] font-AeonikProMedium text-[12px]   mb-[8px]">
-                                                                    <div className="w-full flex items-center justify-center  ">
+                                                                    {/* <div className="w-full flex items-center justify-center  ">
                                                                       {t("PRrandomCode")}
-                                                                    </div>
+                                                                    </div> */}
                                                                     <div className="w-full flex items-center justify-center  ">
                                                                       {t("PRtype")}
                                                                     </div>
+                                                                    <div className="w-full"></div>
+
                                                                     <div className="w-full flex items-center justify-center  ">
                                                                       {" "}
                                                                       {t("PRdate")}
@@ -2454,12 +2449,12 @@ export default function ProductLocationsList() {
                                                                   </div>
 
                                                                   <div className="w-full px-[10px] gap-x-[10px] py-[5px] flex text-[#2C2C2C] font-AeonikProMedium text-[11px] items-center">
-                                                                    <div className="w-full break-all  overflow-hidden  ">
+                                                                    {/* <div className="w-full break-all  overflow-hidden  ">
                                                                       <p className="w-full  break-all  text-weatherWinterColor   text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                                         {itemValue?.sku ||
                                                                           "sku"}
                                                                       </p>
-                                                                    </div>
+                                                                    </div> */}
 
                                                                     <div
                                                                       key={
@@ -2470,6 +2465,7 @@ export default function ProductLocationsList() {
                                                                       {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                                                       {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
                                                                     </div>
+                                                                    <div className="w-full"></div>
 
                                                                     {/* <div className="w-full"> {itemValue?.money} сум </div> */}
                                                                     <div className="w-full h-full  flex items-center justify-center  text-[11px] xs:text-[13px] md:text-base not-italic font-AeonikProMedium">
