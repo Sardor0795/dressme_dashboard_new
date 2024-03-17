@@ -7,8 +7,6 @@ import LoadingForSeller from "../Loading/LoadingFor";
 import axios from "axios";
 import { SellerRefresh } from "../../hook/SellerRefreshToken";
 import { ShopLocationProductList } from "../../hook/ShopLocationProductList";
-import axiosInstance from "../Authentication/AxiosIntance";
-import { GetProductList } from "../../hook/GetProductList";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -18,7 +16,6 @@ export default function Products() {
   const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList);
   const [loader, setLoader] = useState(true);
   const location = useLocation();
-  const [getProductList, setGetProductList] = useContext(GetProductList)
 
   useEffect(() => {
     if (location.pathname !== 'products/location/:id') {
@@ -27,9 +24,9 @@ export default function Products() {
   }, [location.pathname]);
 
   const fetchData = async (customHeaders) => {
-    setLoader(true);
-      try {
-      const response = await axiosInstance.get("/products/locations", {
+    try {
+      setLoader(true);
+      const response = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
         headers: customHeaders,
       });
       const status = response.status;
@@ -51,16 +48,23 @@ export default function Products() {
   const { isLoading } = useQuery(['seller_location_list12'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setGetProductList(data?.data)
         data?.data?.products_locations?.forEach(item => {
           if (item?.shop_locations?.length >= 1) {
+            setDressInfo({ ...dressInfo, sellerStatus: data?.status });
             setShopLocationProductList(item?.shop_locations);
           }
         });
       }
+      if (data?.status === 401) {
+        setDressInfo({ ...dressInfo, sellerStatus: data?.status });
+        sellerRefreshToken();
+      }
     },
     onError: (error) => {
-      throw new Error(error || "something wrong");
+      if (error?.response?.status === 401) {
+        sellerRefreshToken();
+        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status });
+      }
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,

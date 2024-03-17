@@ -60,7 +60,7 @@ function AddStore({ onRefetch }) {
         pictureBgView: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      throw new Error(error || "something wrong");
+      console.log(error);
     }
   }
 
@@ -86,10 +86,7 @@ function AddStore({ onRefetch }) {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, genderList: data?.data?.genders });
         }
-      } catch (error) {
-        throw new Error(error || "something wrong");
-
-      }
+      } catch (error) {}
     };
     if (!dressInfo?.genderList) {
       fetchGender();
@@ -108,10 +105,7 @@ function AddStore({ onRefetch }) {
             deliveryList: data?.data?.delivery_methods,
           });
         }
-      } catch (error) {
-        throw new Error(error || "something wrong");
-
-       }
+      } catch (error) {}
     };
     if (!helperDatainform?.deliveryList) {
       fetchDelivery();
@@ -248,8 +242,9 @@ function AddStore({ onRefetch }) {
         onClick={() => {
           setBackImgUploadModal(false);
         }}
-        className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${backImgUploadModal ? "" : "hidden"
-          }`}
+        className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${
+          backImgUploadModal ? "" : "hidden"
+        }`}
       ></section>
       {backImgUploadModal && (
         <div className="max-w-[440px] md:max-w-[650px] h-fit w-full fixed z-[223]  left-1/2 right-1/2 top-[50%] translate-x-[-50%] translate-y-[-50%]  flex items-center  justify-center mx-auto ">
@@ -283,7 +278,7 @@ function AddStore({ onRefetch }) {
                   </span>
                 )}
               </div>
-              <div className="flex items-center justify-between  pt-2 border border-red-600">
+              <div className="flex items-center justify-between  pt-2">
                 <label
                   htmlFor={"imageThree1"}
                   className="w-fit   flex items-center justify-center cursor-pointer  active:scale-95   text-textBlueColor   md:text-lg font-AeonikProMedium"
@@ -354,8 +349,8 @@ function AddStore({ onRefetch }) {
                     guides={true}
                     dragMode="move"
                     aspectRatio={1}
-                  // aspectRatio={1}
-                  // containerStyle={{ borderRadius: '50%' }}
+                    // aspectRatio={1}
+                    // containerStyle={{ borderRadius: '50%' }}
                   />
                 ) : (
                   <span className="leading-none text-base md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
@@ -424,13 +419,15 @@ function AddStore({ onRefetch }) {
       </div>
       {/* )} */}
       <div
-        className={`${state?.errorGroup?.logo_photo && !state?.pictureLogoView
-          ? "mb-10"
-          : "mb-10"
-          } ${state?.pictureBgView
+        className={`${
+          state?.errorGroup?.logo_photo && !state?.pictureLogoView
+            ? "mb-10"
+            : "mb-10"
+        } ${
+          state?.pictureBgView
             ? "border border-[#f5f5f5]"
             : "border-2 border-dashed"
-          } relative w-full h-[200px] md:h-[360px]  flex items-center justify-center rounded-lg md:mb-20`}
+        } relative w-full h-[200px] md:h-[360px]  flex items-center justify-center rounded-lg md:mb-20`}
       >
         <div
           onClick={() => {
@@ -452,8 +449,9 @@ function AddStore({ onRefetch }) {
           )}
         </div>
         <div
-          className={`absolute   -bottom-11 rounded-full overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center  ${cropData ? "border border-[#f5f5f5]" : "border border-dashed"
-            } `}
+          className={`absolute   -bottom-11 rounded-full overflow-hidden md:bottom-[-64px] bg-white left-[30px] md:left-10 w-[90px] h-[90px] md:w-[120px] md:h-[120px] flex items-center justify-center text-center  ${
+            cropData ? "border border-[#f5f5f5]" : "border border-dashed"
+          } `}
         >
           <button
             type="button"

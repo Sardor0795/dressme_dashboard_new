@@ -81,8 +81,8 @@ export default function MailVerfySeller() {
           }
         },
         onError: (err) => {
-          setState({ ...state, errorMessage: err?.message });
           throw new Error(err || "something wrong");
+          setState({ ...state, errorMessage: err?.message });
         },
       }
     );

@@ -10,7 +10,6 @@ import { HelperData } from "../../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopList } from "../../../../hook/ShopList";
-import axiosInstance from "../../../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
@@ -23,10 +22,9 @@ const ReviewStore = () => {
   const [languageDetector] = useContext(LanguageDetectorDress);
 
   // // ------------GET  Has Magazin ?-----------------
-
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axiosInstance.get("/shops", {
+      const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
         headers: customHeaders,
       });
       const status = response.status;
@@ -48,15 +46,19 @@ const ReviewStore = () => {
       if (data?.status >= 200 && data?.status < 300) {
         setShopList(data?.data)
       }
+      if (data?.status === 401) {
+        sellerRefreshToken()
+      }
     },
     onError: (error) => {
-      throw new Error(error || "something wrong");
+      if (error?.response?.status === 401) {
+        sellerRefreshToken()
+
+      }
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-
-
   // ------------GET METHOD delivery-method-----------------
   useEffect(() => {
     const fetchDelivery = async () => {
