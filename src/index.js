@@ -14,6 +14,7 @@ import RegionList from "./hook/RegionList";
 import ShopIsList from "./hook/ShopList";
 import ShopIsLocationList from "./hook/ShopLocationList";
 import ShopIsLocationProductList from "./hook/ShopLocationProductList";
+import GetProductIsList from "./hook/GetProductList";
 
 const queryClient = new QueryClient();
 
@@ -26,17 +27,19 @@ root.render(
         <ContextTeam>
           <RegionList>
             <ShopIsLocationList>
-              <ShopIsList>
-                <ShopIsLocationProductList>
-                  <SellerRefreshContext>
-                    <SellerUserContext>
-                      <HelperDataStore>
-                        <App />
-                      </HelperDataStore>
-                    </SellerUserContext>
-                  </SellerRefreshContext>
-                </ShopIsLocationProductList>
-              </ShopIsList>
+              <GetProductIsList>
+                <ShopIsList>
+                  <ShopIsLocationProductList>
+                    <SellerRefreshContext>
+                      <SellerUserContext>
+                        <HelperDataStore>
+                          <App />
+                        </HelperDataStore>
+                      </SellerUserContext>
+                    </SellerRefreshContext>
+                  </ShopIsLocationProductList>
+                </ShopIsList>
+              </GetProductIsList>
             </ShopIsLocationList>
           </RegionList>
         </ContextTeam>

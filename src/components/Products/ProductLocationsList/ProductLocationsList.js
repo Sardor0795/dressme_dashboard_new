@@ -21,6 +21,7 @@ import MobileHumburgerMenu from "../../Navbar/mobileHamburgerMenu/MobileMenu";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { dressRegionList } from "../../../hook/RegionList";
+import { GetProductList } from "../../../hook/GetProductList";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -29,6 +30,7 @@ export default function ProductLocationsList() {
   const { request } = useHttp();
   const { t } = useTranslation("product");
   const [languageDetector] = useContext(LanguageDetectorDress);
+  const [getProductList, setGetProductList] = useContext(GetProductList)
 
   const [searchName, setSearchName] = useState("");
   const [state, setState] = useState({
@@ -77,7 +79,7 @@ export default function ProductLocationsList() {
     setState({ ...state, shopId: productId, shopMarketId: marketId });
     setCheckedList([]);
     setAddresNewId(addressId);
-    dressInfo?.getProductList?.products_locations?.map((item) => {
+    getProductList?.products_locations?.map((item) => {
       item?.shop_locations?.map((data) => {
         if (Number(data?.id) === Number(addressId)) {
           data?.products?.map((value) => {
@@ -170,7 +172,8 @@ export default function ProductLocationsList() {
       onSuccess: (data) => {
         // console.log(data, "data");
         if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductList: data?.data });
+          // setDressInfo({ ...dressInfo, getProductList: data?.data });
+          setGetProductList(data?.data)
         }
         if (data?.status === 401) {
         }
@@ -456,7 +459,7 @@ export default function ProductLocationsList() {
   const [shopIdList, setShopIdList] = useState([]);
   useEffect(() => {
     setShopIdList([]);
-    dressInfo?.getProductList?.products_locations?.map((value1) => {
+    getProductList?.products_locations?.map((value1) => {
       value1?.shop_locations?.map((value2) => {
         if (searchName) {
           value2?.products
@@ -478,12 +481,12 @@ export default function ProductLocationsList() {
         }
       });
     });
-  }, [dressInfo?.getProductList?.products_locations, searchName]);
+  }, [getProductList?.products_locations, searchName]);
 
   function onHandleStatus(productId, locationid, shopId) {
     setStatusModal(true);
 
-    dressInfo?.getProductList?.products_locations?.map((value1) => {
+    getProductList?.products_locations?.map((value1) => {
       if (value1?.id == shopId) {
         value1?.shop_locations?.map((value2) => {
           if (value2?.id == locationid) {
@@ -678,7 +681,7 @@ export default function ProductLocationsList() {
             </div>
           ) : (
             <div className="w-full h-full overflow-y-auto VerticelScroll">
-              {dressInfo?.getProductList?.products_locations?.map(
+              {getProductList?.products_locations?.map(
                 (item, index) => {
                   return (
                     <div key={index}>
@@ -1068,7 +1071,7 @@ export default function ProductLocationsList() {
             </div>
           ) : (
             <div className="w-full h-full overflow-y-auto VerticelScroll">
-              {dressInfo?.getProductList?.products_locations?.map(
+              {getProductList?.products_locations?.map(
                 (item, index) => {
                   return (
                     <div key={index} className="w-full cursor-pointer mt-2">
@@ -1161,7 +1164,7 @@ export default function ProductLocationsList() {
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
             {t("PRtotal")}: (
-            {dressInfo?.getProductList?.products_locations?.length})
+            {getProductList?.products_locations?.length})
           </p>
 
           <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
@@ -1220,7 +1223,7 @@ export default function ProductLocationsList() {
         </div>
         <div className="w-full my-4"></div>
 
-        {dressInfo?.getProductList?.products_locations
+        {getProductList?.products_locations
           ?.filter((e) => shopIdList?.includes(e?.id))
           ?.map((item, index) => {
             return (
@@ -1230,7 +1233,7 @@ export default function ProductLocationsList() {
                     <div className="flex justify-end items-center md:justify-between mx-auto ">
                       <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
                         <p className="flex md:hidden text-sm font-AeonikProMedium  ">
-                          {t("PRtotal")}: ( {dressInfo?.getProductList?.products_locations?.length} )
+                          {t("PRtotal")}: ( {getProductList?.products_locations?.length} )
                         </p>
                       </div>
                     </div>
