@@ -147,10 +147,10 @@ export default function MobileHumburgerMenu() {
         closeIcon={false}
         footer={null}
       >
-        <div className="w-full flex flex-wrap gap-y-5  justify-center  ">
+        <div className="w-full flex flex-wrap gap-y-5  justify-center   ">
           <NavLink
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start  "
             }
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
@@ -160,14 +160,14 @@ export default function MobileHumburgerMenu() {
           >
             {({ isActive }) =>
               isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start ">
+                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <NavbarReviewIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("reviews")}
                   </p>
                 </figure>
               ) : (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start ">
+                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <NavbarReviewIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("reviews")}
@@ -178,7 +178,7 @@ export default function MobileHumburgerMenu() {
           </NavLink>
           <NavLink
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
             }
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
@@ -188,14 +188,14 @@ export default function MobileHumburgerMenu() {
           >
             {({ isActive }) =>
               isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
+                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <NavbarMarketIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("shops")}
                   </p>
                 </figure>
               ) : (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
+                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <NavbarMarketIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("shops")}
@@ -207,7 +207,7 @@ export default function MobileHumburgerMenu() {
 
           <NavLink
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
             }
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
@@ -217,14 +217,14 @@ export default function MobileHumburgerMenu() {
           >
             {({ isActive }) =>
               isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
+                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <LocationIcon colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("locations")}
                   </p>
                 </figure>
               ) : (
-                <figure className=" w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
+                <figure className=" w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <LocationIcon colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("locations")}
@@ -235,7 +235,7 @@ export default function MobileHumburgerMenu() {
           </NavLink>
           <NavLink
             className={
-              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center"
+              "w-full h-[54px] gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
             }
             style={({ isActive }) => ({
               background: isActive ? "#f2f2f2" : "#fcfcfc",
@@ -245,14 +245,14 @@ export default function MobileHumburgerMenu() {
           >
             {({ isActive }) =>
               isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
+                <figure className="w-[150px] pl-[1px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <ClothesIcons colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("products")}
                   </p>
                 </figure>
               ) : (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start">
+                <figure className="w-[150px] pl-[1px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <ClothesIcons colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("products")}
@@ -300,7 +300,7 @@ export default function MobileHumburgerMenu() {
             )}
           </section>
         </div>
-        <div className="w-full mt-5">
+        <div className="w-full mt-5 ">
           <NavLink
             onClick={() => setIsModalOpen(false)}
             className={
