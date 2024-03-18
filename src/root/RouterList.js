@@ -57,6 +57,11 @@ export default function RouterList() {
   useEffect(() => {
     setLocationWindow(location.pathname);
   }, [location.pathname, dressInfo?.isAuthen]);
+
+  const isAuthenticated = localStorage.getItem("DressmeUserToken") ? localStorage.getItem("DressmeUserToken") : null;
+
+ 
+
   return (
     <div className="w-full h-full">
       <Routes>
@@ -138,11 +143,13 @@ export default function RouterList() {
         <Route path={"/reset-password-seller/:id"} element={<ResetPasswordSeller />} />
         <Route path={"/mail-verify-seller/:id"} element={<MailVerfySeller />} />
         <Route path="*" element={<Error colors="text-[#007DCA]" />} />
-        <Route path="/" element={<Navigate to={"/login-seller"} />} />
-
-
+        <Route path="/" element={
+          isAuthenticated ? (
+            <Navigate to="/edit-profile" />
+          ) : (
+            <Navigate to="/login-seller" />
+          )} />
       </Routes>
-
     </div>
   );
 }
