@@ -19,7 +19,7 @@ export default function ProductsPageOne() {
     });
   }, []);
   const navigate = useNavigate();
-  console.log(  'test-- page one');
+  console.log(dressInfo?.nextPageShowForm);
 
   return (
     <div>
@@ -54,9 +54,7 @@ export default function ProductsPageOne() {
                 )
               )}
               <p
-                className={`w-full text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${
-                  !dressInfo?.nextPageShowForm && "md:ml-[30px]"
-                } `}
+                className={`w-full md:w-fit text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium md:ml-[30px] `}
               >
                 {t("APaddProduct")}
               </p>

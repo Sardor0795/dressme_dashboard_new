@@ -23,6 +23,8 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { LanguageDetectorDress } from "../../language/LanguageItem";
 import { ShopList } from "../../hook/ShopList";
+import ScrollToTop from "react-scroll-to-top";
+import { ReactComponent as MySVG } from "../../assets/backtop/backTop.svg";
 
 
 function Sidebar() {
@@ -200,7 +202,7 @@ function Sidebar() {
                           {t("shop")}
                           {shopList?.shops?.length > 1 ? (
                             <span className=" text-lg not-italic font-AeonikProMedium leading-5">
-                              {t("ShopS")}  
+                              {t("ShopS")}
                             </span>
                           ) : (
                             ""
@@ -453,6 +455,24 @@ function Sidebar() {
         </section>
         <Outlet />
       </div>
+      <article>
+        <ScrollToTop
+          smooth
+          top="600"
+          color="#000"
+          component={<MySVG />}
+          style={{
+            borderRadius: "50%",
+            bottom: 70,
+            right: 25,
+            width: "48px",
+            height: "48px",
+            border: "1px solid #c1c1c1",
+            backgroundColor: "#fafafa",
+          }}
+          className="bg-bgColor rounded-full mt-[-100px] !z-[11] flex items-center opacity-70 justify-center ss:bottom-[75px] ss:right-[15px] md:bottom-10 md:right-10"
+        />
+      </article>
     </div>
   );
 }
