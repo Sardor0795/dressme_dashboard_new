@@ -66,7 +66,69 @@ function MyMarket() {
 
 
   return (
-    <div className="w-full h-full  py-1 px-4 md:px-10">
+    <div className="relative w-full h-full  py-[1px] px-4 md:px-10">
+      <div className="fixed md:static w-[calc(100%-32px)] bg-white md:w-full z-[10] top-0 py-5 md:py-0  md:pb-4 md:py-4 md:border-b border-lightBorderColor block  ">
+        <div className="w-full flex items-center justify-center md:hidden">
+          <div className="absolute left-4 ">
+            <MobileHumburgerMenu />
+          </div>
+          <span className="text-2xl not-italic font-AeonikProMedium">
+            {t("all_shops")}
+          </span>
+        </div>
+        <div className="hidden md:flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-4 pt-5">
+          <section className="  ">
+            <p className="text-black text-2xl not-italic font-AeonikProMedium">
+              {t("all_shops")}{" "}
+            </p>
+          </section>
+
+          <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
+            <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
+              <label
+                htmlFor="searchStore"
+                className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+              >
+                <input
+                  type="text"
+                  name="s"
+                  id="searchStore"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e?.target?.value)}
+                  className="w-full h-full outline-0 px-[10px]"
+                  placeholder={t("search")}
+                />
+                <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                  <SearchIcon />
+                </span>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div className="md:hidden flex items-center justify-between   mt-[90px]" >
+        <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
+          <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
+            <label
+              htmlFor="searchStore"
+              className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+            >
+              <input
+                type="text"
+                name="s"
+                id="searchStore"
+                value={searchName}
+                onChange={(e) => setSearchName(e?.target?.value)}
+                className="w-full h-full outline-0 px-[10px]"
+                placeholder={t("search")}
+              />
+              <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                <SearchIcon />
+              </span>
+            </label>
+          </div>
+        </section>
+      </div>
       <section
         onClick={() => setStatusModal(false)}
         className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50
@@ -101,45 +163,7 @@ function MyMarket() {
           </div>
         )}
       </section>
-      <div className="w-full pt-6 pb-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block ">
-        <div className="w-full flex items-center justify-center md:hidden">
-          <div className="absolute left-4 ">
-            <MobileHumburgerMenu />
-          </div>
-          <span className="text-2xl not-italic font-AeonikProMedium">
-            {t("all_shops")}
-          </span>
-        </div>
-        <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-4 pt-5">
-          <section className="hidden md:block">
-            <p className="text-black text-2xl not-italic font-AeonikProMedium">
-              {t("all_shops")}{" "}
-            </p>
-          </section>
 
-          <section className="w-full md:w-fit flex items-center justify-between md:justify-static ">
-            <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
-              <label
-                htmlFor="searchStore"
-                className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
-              >
-                <input
-                  type="text"
-                  name="s"
-                  id="searchStore"
-                  value={searchName}
-                  onChange={(e) => setSearchName(e?.target?.value)}
-                  className="w-full h-full outline-0 px-[10px]"
-                  placeholder={t("search")}
-                />
-                <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-                  <SearchIcon />
-                </span>
-              </label>
-            </div>
-          </section>
-        </div>
-      </div>
       <div className="h-fit md:py-7 w-full flex items-center justify-end ">
         <Link
           to={"/store/market-add"}

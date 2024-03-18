@@ -408,7 +408,7 @@ export default function ProductLocationsList() {
   // products
   const navigate = useNavigate();
   function openMarketEditPage(id) {
-    navigate(`/store/market-list/:${id}`);
+    navigate(`/store/market-list/${id}`);
   }
 
   function addNewProductId(locationId, shopId) {
@@ -418,7 +418,7 @@ export default function ProductLocationsList() {
       ProductFilterType: null,
     });
 
-    navigate(`/products/location/add/:${shopId}`);
+    navigate(`/products/location/add/${shopId}`);
   }
   const goProductDetailEdit = (id, locationId) => {
     setDressInfo({ ...dressInfo, locationIdAddProduct: locationId });
@@ -426,10 +426,10 @@ export default function ProductLocationsList() {
   };
 
   const goMapCity = (id) => {
-    navigate(`/locations-store/city/:${id}`);
+    navigate(`/locations-store/city/${id}`);
   };
   const goMapWear = (id) => {
-    navigate(`/locations-store/wears/:${id}`);
+    navigate(`/locations-store/wears/${id}`);
   };
   useEffect(() => {
     if (!openStoreList) {
@@ -522,7 +522,46 @@ export default function ProductLocationsList() {
   ]);
   // border-red
   return (
-    <div className="w-full  md:px-10">
+    <div className="relative w-full  md:px-10">
+      {/* Navbar */}
+      <div className="fixed md:static top-0 w-[calc(100%-32px)]   md:w-full z-[10] bg-white flex justify-start items-center md:justify-between md:border-b border-borderColor py-4  ">
+        <section className="hidden md:flex">
+          <p className="text-black text-2xl not-italic font-AeonikProMedium ">
+            {t("PRproduct")}
+          </p>
+        </section>
+        <section className="w-full flex md:hidden">
+          <div className="w-full flex items-center">
+            <button className="absolute flex items-center justify-start cursor-pointer ">
+              <MobileHumburgerMenu />
+            </button>
+            <p className="w-full text-center text-black text-2xl not-italic font-AeonikProMedium">
+              {t("PRproduct")}
+            </p>
+          </div>
+        </section>
+        <section className="w-full md:w-fit hidden md:flex items-center justify-between md:justify-static ">
+          <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
+            <label
+              htmlFor="searchStore"
+              className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
+            >
+              <input
+                type="text"
+                name="s"
+                id="searchStore"
+                value={searchName}
+                onChange={(e) => setSearchName(e?.target?.value)}
+                className="w-full h-full outline-0 px-[10px]"
+                placeholder={t("PRsearch")}
+              />
+              <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
+                <SearchIcon />
+              </span>
+            </label>
+          </div>
+        </section>
+      </div>
       <section
         onClick={() => {
           setDeleteModal(false);
@@ -871,45 +910,7 @@ export default function ProductLocationsList() {
           </button>
         </div>
       </section>
-      {/* Navbar */}
-      <div className="flex justify-start items-center md:justify-between md:border-b border-borderColor py-4">
-        <section className="hidden md:flex">
-          <p className="text-black text-2xl not-italic font-AeonikProMedium ">
-            {t("PRproduct")}
-          </p>
-        </section>
-        <section className="w-full flex md:hidden">
-          <div className="w-full flex items-center">
-            <button className="absolute flex items-center justify-start cursor-pointer ">
-              <MobileHumburgerMenu />
-            </button>
-            <p className="w-full text-center text-black text-2xl not-italic font-AeonikProMedium">
-              {t("PRproduct")}
-            </p>
-          </div>
-        </section>
-        <section className="w-full md:w-fit hidden md:flex items-center justify-between md:justify-static ">
-          <div className="w-full md:w-[400px] flex items-center justify-between md:justify-static gap-x-[15px]">
-            <label
-              htmlFor="searchStore"
-              className=" w-full h-10 overflow-hidden border cursor-pointer  border-lightBorderColor flex items-center rounded-lg"
-            >
-              <input
-                type="text"
-                name="s"
-                id="searchStore"
-                value={searchName}
-                onChange={(e) => setSearchName(e?.target?.value)}
-                className="w-full h-full outline-0 px-[10px]"
-                placeholder={t("PRsearch")}
-              />
-              <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-                <SearchIcon />
-              </span>
-            </label>
-          </div>
-        </section>
-      </div>
+
       {/* ---------------------------------------- */}
       {/* Delete Product Of Pop Confirm */}
       <section
@@ -1159,7 +1160,7 @@ export default function ProductLocationsList() {
       {/* {isLoading ?
         <LoadingForSeller />
         : */}
-      <div className=" w-full md:mb-0 mb-10">
+      <div className=" w-full md:mb-0 mb-10 md:mt-0 mt-10">
         {/* Up Title */}
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
