@@ -1102,7 +1102,7 @@ const AddingProduct = () => {
                       type="button"
                       onClick={() => setState({ ...state, showColor: false })}
                     >
-                      <MenuCloseIcons colors={"#000"} />
+                      <MenuCloseIcons colors={"#a1a1a1"} />
                     </button>
                   </div>
                   <div className="w-full py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
@@ -1358,7 +1358,7 @@ const AddingProduct = () => {
                               {languageDetector?.typeLang === "ru" && item?.name_ru}
                               {languageDetector?.typeLang === "uz" && item?.name_uz}
                               {section_Id?.includes(item?.id) &&
-                                <span onClick={() => handleChangeSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                <span onClick={() => handleChangeSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                             </div>
                           );
                         })}
@@ -1406,7 +1406,7 @@ const AddingProduct = () => {
                               {languageDetector?.typeLang === "ru" && item?.name_ru}
                               {languageDetector?.typeLang === "uz" && item?.name_uz}
                               {subSection_Id?.includes(item?.id) &&
-                                <span onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                <span onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                             </div>
                           );
                         })}
@@ -1441,7 +1441,7 @@ const AddingProduct = () => {
                               {languageDetector?.typeLang === "ru" && item?.name_ru}
                               {languageDetector?.typeLang === "uz" && item?.name_uz}
                               {season_Id?.includes(item?.id) &&
-                                <span onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                <span onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                             </div>
                           );
                         })}
@@ -1477,7 +1477,7 @@ const AddingProduct = () => {
                               {languageDetector?.typeLang === "ru" && item?.name_ru}
                               {languageDetector?.typeLang === "uz" && item?.name_uz}
                               {state?.gender_Id == (item?.id) &&
-                                <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                             </div>
                           );
                         })}
@@ -1527,7 +1527,7 @@ const AddingProduct = () => {
                                   {languageDetector?.typeLang === "uz" && item?.name_uz}
                                   {state?.filterTypeId == (item?.id) &&
                                     <span onClick={() => ClearSelectTypeById(item?.id)}>
-                                      <MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                      <MenuCloseIcons colors={'#a1a1a1'} /></span>}
                                 </div>
                               :
                               <div
@@ -1538,7 +1538,7 @@ const AddingProduct = () => {
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {state?.filterTypeId == (item?.id) &&
                                   <span onClick={() => ClearSelectTypeById(item?.id)}>
-                                    <MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                    <MenuCloseIcons colors={'#a1a1a1'} /></span>}
 
                               </div>
                             }
@@ -1556,7 +1556,7 @@ const AddingProduct = () => {
                                 key={item?.id} className={`w-full ${state?.filterTypeId == (item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                {state?.filterTypeId == (item?.id) && <span onClick={() => setState({ ...state, filterTypeId: null, onEditInput: true })}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
 
                               </div>
                             )
@@ -1608,7 +1608,7 @@ const AddingProduct = () => {
                               {state?.producer_Id == (item?.id) &&
                                 <button
                                   type="button"
-                                  onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></button>}
+                                  onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></button>}
                             </div>
                           );
                         })}

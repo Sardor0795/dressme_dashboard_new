@@ -325,7 +325,7 @@ export default function LocationAddById() {
                 setState({ ...state, openStoreList: false });
               }}
             >
-              <MenuCloseIcons colors="#000" />
+              <MenuCloseIcons colors="#a1a1a1" />
             </span>
           </div>
 

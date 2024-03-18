@@ -719,7 +719,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     onClick={onClick}
                     type="button"
                 >
-                    <MenuCloseIcons colors={"#b5b5b5"} />
+                    <MenuCloseIcons colors={"#a1a1a1"} />
                 </button>
             </div>
             {Number(typeId) === 1 &&

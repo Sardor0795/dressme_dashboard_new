@@ -923,7 +923,7 @@ const AddingProduct = () => {
                       type=""
                       onClick={() => setState({ ...state, showColor: false })}
                     >
-                      <MenuCloseIcons colors={"#000"} />
+                      <MenuCloseIcons colors={"#a1a1a1"} />
                     </button>
                   </div>
                   <div className="py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6">
@@ -1094,7 +1094,7 @@ const AddingProduct = () => {
                                 <span
                                   onClick={() => handleChangeSectionDeleteMobile(item?.id)}
                                 >
-                                  <MenuCloseIcons colors={'#b5b5b5'} />
+                                  <MenuCloseIcons colors={'#a1a1a1'} />
                                 </span>}
                             </div>
                           );
@@ -1146,7 +1146,7 @@ const AddingProduct = () => {
                                 {subSection_Id?.includes(item?.id) &&
                                   <span
                                     onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}
-                                  ><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                  ><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                               </div>
                             );
                           })}
@@ -1186,7 +1186,7 @@ const AddingProduct = () => {
                                 {season_Id?.includes(item?.id) &&
                                   <span
                                     onClick={() => onHandleChangeSeasonDeleteMobile(item?.id)}
-                                  ><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                  ><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                               </div>
                             );
                           })}
@@ -1224,7 +1224,7 @@ const AddingProduct = () => {
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {state?.gender_Id == (item?.id) &&
-                                  <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                  <span onClick={() => ClearGenderSelected(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                               </div>
                             );
                           })}
@@ -1279,7 +1279,7 @@ const AddingProduct = () => {
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {state?.filterTypeId == (item?.id) &&
-                                  <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                  <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                               </div>
                             )
                           }) :
@@ -1295,7 +1295,7 @@ const AddingProduct = () => {
                                   {languageDetector?.typeLang === "ru" && item?.name_ru}
                                   {languageDetector?.typeLang === "uz" && item?.name_uz}
                                   {state?.filterTypeId == (item?.id) &&
-                                    <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                    <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
 
                                 </div>
                               )
@@ -1349,7 +1349,7 @@ const AddingProduct = () => {
                                 {/* {item.name_ru} */}
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                {state?.producer_Id == (item?.id) && <span onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#b5b5b5'} /></span>}
+                                {state?.producer_Id == (item?.id) && <span onClick={() => ClearProducerById(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                               </div>
                             );
                           })}

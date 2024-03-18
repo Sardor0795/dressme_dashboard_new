@@ -100,7 +100,7 @@ function EditPassword({ onClick }) {
           className="select-none  cursor-pointer"
           onClick={onClick}
         >
-          <MenuCloseIcons colors="#000" />
+          <MenuCloseIcons colors="#a1a1a1" />
         </button>
       </div>
       <div className="w-full flex items-center justify-center">

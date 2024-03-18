@@ -227,7 +227,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
               setOpenColorModal(false)
             }}
           >
-            <MenuCloseIcons colors={"#a2a2a2"} />
+            <MenuCloseIcons colors={"#a1a1a1"} />
           </button>
         </div>
         <div className="w-full px-2 py-4 gap-x-2 gap-y-4 grid gap-4 grid-cols-6 ">
@@ -389,7 +389,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
           })}
         </div>
         <button className="flex " type="button " onClick={onClick}>
-          <MenuCloseIcons colors={"#a2a2a2"} />
+          <MenuCloseIcons colors={"#a1a1a1"} />
         </button>
         {/* <label htmlFor="checkList" className="md:hidden flex items-center border border-borderColor rounded-lg overflow-hidden">
           <input name="checkList" type="checkbox" className="w-[20px] h-[20px] rounded-lg" />
