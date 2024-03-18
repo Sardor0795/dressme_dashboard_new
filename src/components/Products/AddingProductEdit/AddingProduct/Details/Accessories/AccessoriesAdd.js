@@ -296,7 +296,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                             type="button"
                             onClick={() => setState({ ...state, sizeEditModal: false, successChanged: false, editSizeId: null, errorMessage: '', successMessage: '' })}
                         >
-                            <MenuCloseIcons className="w-full h-full " colors={"#b2b2b2"} />
+                            <MenuCloseIcons className="w-full h-full " colors={"#a1a1a1"} />
                         </button>
                     </div>
                     {state?.successChanged ?

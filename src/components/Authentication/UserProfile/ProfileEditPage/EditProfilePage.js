@@ -532,7 +532,7 @@ function EditProfilePage() {
               setState({ ...state, sellerEmailConfirm: false });
             }}
           >
-            <MenuCloseIcons colors="#000" />
+            <MenuCloseIcons colors="#a1a1a1" />
           </button>
         </div>
         <div className="w-full flex items-center justify-center flex-col">
@@ -560,7 +560,7 @@ function EditProfilePage() {
             className="select-none  cursor-pointer"
             onClick={() => setState({ ...state, sellerEmailModal: false })}
           >
-            <MenuCloseIcons colors="#000" />
+            <MenuCloseIcons colors="#a1a1a1" />
           </button>
         </div>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
@@ -615,7 +615,7 @@ function EditProfilePage() {
             className="select-none  cursor-pointer"
             onClick={() => setState({ ...state, popConfirmDelete: false })}
           >
-            <MenuCloseIcons colors="#000" />
+            <MenuCloseIcons colors="#a1a1a1" />
           </button>
         </div>
         <div className="flex flex-col justify-center items-center gap-y-2 ll:gap-y-4">
@@ -805,13 +805,13 @@ function EditProfilePage() {
           {/* Выберите регион, */}
           <div className="w-full h-fit flex justify-center ">
             <div
-              className={` max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
+              className={`max-w-[440px] w-full md:max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
                 ? " bottom-0 md:flex flex-col"
                 : "md:hidden bottom-[-1500px] z-[-10]"
                 }`}
             >
               <div className="w-full flex items-center justify-between  ">
-                <span className="text-black text-base   md:text-2xl not-italic font-AeonikProRegular">
+                <span className="text-black text-base   md:text-2xl not-italic font-AeonikProMedium">
                   {t("selectRegion")}
                 </span>
                 <button
@@ -821,7 +821,7 @@ function EditProfilePage() {
                     setState({ ...state, openModalRegions: false });
                   }}
                 >
-                  <MenuCloseIcons colors="#000" />
+                  <MenuCloseIcons colors="#a1a1a1" />
                 </button>
               </div>
 
@@ -834,11 +834,9 @@ function EditProfilePage() {
                           onClick={() => accordionCityList(data?.id)}
                           className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                         >
-                          <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
-                            {languageDetector?.typeLang === "ru" &&
-                              data?.name_ru}
-                            {languageDetector?.typeLang === "uz" &&
-                              data?.name_uz}
+                          <span className="text-[#303030] text-[14px] md:text-lg not-italic font-AeonikProRegular">
+                            {languageDetector?.typeLang === "ru" && data?.name_ru}
+                            {languageDetector?.typeLang === "uz" && data?.name_uz}
                           </span>
                           <span
                             className={`${Number(activeIndex) === Number(data?.id)
@@ -887,7 +885,7 @@ function EditProfilePage() {
                                     }}
                                     required
                                   />
-                                  <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                                  <span className="text-[#303030]  cursor-pointer text-[13px] md:text-[15px]   not-italic font-AeonikProRegular">
                                     {languageDetector?.typeLang === "ru" &&
                                       item?.name_ru}
                                     {languageDetector?.typeLang === "uz" &&
@@ -912,7 +910,7 @@ function EditProfilePage() {
                   onClick={() => {
                     setState({ ...state, openModalRegions: false });
                   }}
-                  className="cursor-pointer text-textBlueColor text-lg not-italic font-AeonikProMedium"
+                  className="cursor-pointer text-textBlueColor text-base md:text-lg not-italic font-AeonikProMedium"
                 >
                   {t("ready")}
                 </span>

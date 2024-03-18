@@ -430,7 +430,7 @@ function MarketEdit() {
                       type="button"
                       onClick={() => setBackImgUploadModal(false)}
                     >
-                      <MenuCloseIcons colors={"#000"} />
+                      <MenuCloseIcons colors={"#a1a1a1"} />
                     </button>
                   </div>
                   <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
@@ -514,7 +514,7 @@ function MarketEdit() {
                       type="button"
                       onClick={() => setBackImgUploadModal(false)}
                     >
-                      <MenuCloseIcons colors={"#000"} />
+                      <MenuCloseIcons colors={"#a1a1a1"} />
                     </button>
                   </div>
                   <div className="w-full h-[40vh] md:h-[50vh] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden">
