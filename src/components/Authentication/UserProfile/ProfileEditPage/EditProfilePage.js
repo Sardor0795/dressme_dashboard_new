@@ -134,6 +134,44 @@ function EditProfilePage() {
     }
   }, [regionList, dressInfo?.typeLis]);
 
+  const fetchDataRegion = async (customHeadersRegion) => {
+    try {
+      const response = await axios.get(`${url}/regions`, {
+        headers: customHeadersRegion,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+
+  const customHeadersRegion = {
+    "Content-type": "application/json; charset=UTF-8",
+    'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
+  };
+
+  useQuery(["get_region_list"], () => fetchDataRegion(customHeadersRegion), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setRegionList(data?.data);
+      }
+      if (data?.status === 401) {
+        sellerRefreshToken();
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+        sellerRefreshToken();
+      }
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  }
+  );
   const fetchData = async (customHeaders) => {
     try {
       const response = await axios.get(`${url}/profile`, {
@@ -166,14 +204,14 @@ function EditProfilePage() {
           });
         }
         if (data?.status === 401) {
-          setSellerInformation({ ...sellerInformation, sellerUserData: [] });
+          // setSellerInformation({ ...sellerInformation, sellerUserData: [] });
           sellerRefreshToken();
         }
       },
       onError: (error) => {
         if (error?.response?.status === 401) {
           sellerRefreshToken();
-          setSellerInformation({ ...sellerInformation, sellerUserData: [] });
+          // setSellerInformation({ ...sellerInformation, sellerUserData: [] });
         }
       },
       keepPreviousData: true,
