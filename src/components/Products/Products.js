@@ -7,6 +7,7 @@ import LoadingForSeller from "../Loading/LoadingFor";
 import axios from "axios";
 import { SellerRefresh } from "../../hook/SellerRefreshToken";
 import { ShopLocationProductList } from "../../hook/ShopLocationProductList";
+import axiosInstance from "../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -24,9 +25,9 @@ export default function Products() {
   }, [location.pathname]);
 
   const fetchData = async (customHeaders) => {
-    try {
-      setLoader(true);
-      const response = await axios.get(`${REACT_APP_BASE_URL}/products/locations`, {
+    setLoader(true);
+      try {
+      const response = await axiosInstance.get("/products/locations", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -48,27 +49,21 @@ export default function Products() {
   const { isLoading } = useQuery(['seller_location_list12'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
+        // setGetProductList(data?.data)
         data?.data?.products_locations?.forEach(item => {
           if (item?.shop_locations?.length >= 1) {
-            setDressInfo({ ...dressInfo, sellerStatus: data?.status });
             setShopLocationProductList(item?.shop_locations);
           }
         });
       }
-      if (data?.status === 401) {
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status });
-        sellerRefreshToken();
-      }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken();
-        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status });
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
+
 
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
