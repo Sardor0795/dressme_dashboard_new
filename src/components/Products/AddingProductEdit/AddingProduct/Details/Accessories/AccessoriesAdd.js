@@ -19,16 +19,16 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
     const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [state, setState] = useState({
-        rowSize: null,
-        colSize: null,
-        minSize: null,
-        ageNum: null,
-        quantityNum: null,
-        priceNum: null,
-        salePercent: null,
-        salePrice: null,
-        sizeListCheck: null,
-        productColorId: null,
+        rowSize: "",
+        colSize: "",
+        minSize: "",
+        ageNum: "",
+        quantityNum: "",
+        priceNum: "",
+        salePercent: "",
+        salePrice: "",
+        sizeListCheck: "",
+        productColorId: "",
         isCheckValid: false,
         // ------
         successChanged: false,
@@ -354,7 +354,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         type="number"
                                                         name="minSize"
                                                         className="inputStyle outline-none w-full text-start h-[42px]  px-3 rounded-lg  font-AeonikProRegular "
-                                                        value={state?.minSize}
+                                                        value={state?.minSize || ""}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     />}
@@ -463,7 +463,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                                 name="size_Outwear"
                                                                                 checked={data?.name === state?.sizeListCheck}
                                                                                 onChange={() => onHandleSelectSize(data?.name)}
-                                                                                value={data?.name}
+                                                                                value={data?.name || ""}
                                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                             />
                                                                             <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
@@ -496,7 +496,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                                 name="size_Outwear"
                                                                                 checked={data?.name === state?.sizeListCheck}
                                                                                 onChange={() => onHandleSelectSize(data?.name)}
-                                                                                value={data?.name}
+                                                                                value={data?.name || ""}
                                                                                 className="w-3 h-3 ll:w-[16px] ll:h-[16px] border border-[#B5B5B5] rounded-[2px] "
                                                                             />
                                                                             <span className="text-textLightColor  flex items-center  select-none text-[11px] ls:text-[12px] md:text-[13px] not-italic font-AeonikProMedium">
@@ -542,7 +542,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         type="number"
                                                         name="colSize"
                                                         className="inputStyle outline-none w-full h-[42px] text-start  px-3 rounded-lg   font-AeonikProRegular "
-                                                        value={state?.colSize}
+                                                        value={state?.colSize || ""}
                                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                         onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true, disableSizes: 0 })}
                                                     />}

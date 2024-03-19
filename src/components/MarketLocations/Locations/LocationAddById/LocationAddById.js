@@ -373,7 +373,7 @@ export default function LocationAddById() {
                                 type="radio"
                                 id={item?.name_ru}
                                 name="type_work_2"
-                                value={item?.region_id}
+                                value={item?.region_id || ""}
                                 checked={item?.id == state?.subRegionIdShops}
                                 className="border border-searchBgColor  cursor-pointer  flex items-center justify-center"
                                 onChange={(e) => {
@@ -657,7 +657,7 @@ export default function LocationAddById() {
                   type="text"
                   name="fname"
                   placeholder={t("name_admin")}
-                  value={state?.assistantNameFirst}
+                  value={state?.assistantNameFirst || ""}
                   onChange={handleInputAdminNameFirst}
                   className="w-full outline-none text-[12px] md:text-[14px]  h-[38px] md:h-[42px] border border-borderColor rounded-lg md:rounded-lg font-AeonikProRegular px-2"
                 />
@@ -678,7 +678,7 @@ export default function LocationAddById() {
                   type="text"
                   name="fname2"
                   placeholder={t("not_necessary")}
-                  value={state?.assistantNameSecond}
+                  value={state?.assistantNameSecond || ""}
                   onChange={handleInputAdminNameSecond}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
@@ -769,7 +769,7 @@ export default function LocationAddById() {
                 <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
                   <InputMask
                     mask="(99) 999-99-99"
-                    value={state?.assistantPhoneFirst || null}
+                    value={state?.assistantPhoneFirst || ""}
                     name="phone"
                     onChange={(e) =>
                       setState({
@@ -812,7 +812,7 @@ export default function LocationAddById() {
                 <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
                   <InputMask
                     mask="(99) 999-99-99"
-                    value={state?.assistantPhoneSecond || null}
+                    value={state?.assistantPhoneSecond || ""}
                     name="phone2"
                     placeholder={"(77) 777-77-77"}
                     onChange={(e) =>
@@ -890,7 +890,7 @@ export default function LocationAddById() {
                   type="text"
                   name="telegrem1"
                   placeholder={'@Username '}
-                  value={state?.assistantNameFirstTg}
+                  value={state?.assistantNameFirstTg || ""}
                   onChange={handleInputAdminNameFirstTg}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
@@ -908,7 +908,7 @@ export default function LocationAddById() {
                   type="text"
                   name="telegrem2"
                   placeholder={'@Username'}
-                  value={state?.assistantNameSecondTg}
+                  value={state?.assistantNameSecondTg || ""}
                   onChange={handleInputAdminNameSecondTg}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />

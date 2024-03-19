@@ -322,7 +322,7 @@ const SignUpSeller = () => {
                               type="radio"
                               id={data?.name_ru}
                               name={"type_work"}
-                              value={data?.id}
+                              value={data?.id || ""}
                               checked={parseFloat(data?.id) === parseFloat(state?.seller_type_id)}
                               className="w-[18px] h-[18px] cursor-pointer"
                               onChange={(e) => setState({ ...state, seller_type_id: e.target.value })}
@@ -391,7 +391,7 @@ const SignUpSeller = () => {
                     className="w-full h-[42px] placeholder-text-[#b5b5b5] px-2 md:px-4 border border-searchBgColor rounded-lg outline-none	bg-white placeholder-bg-white  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4"
                     type="text"
                     name="companyName"
-                    value={state?.company_name}
+                    value={state?.company_name || ""}
                     onChange={(e) => setState({ ...state, company_name: e.target.value })}
                     placeholder="Наименование организации..."
                   // required
@@ -467,7 +467,7 @@ const SignUpSeller = () => {
                                             type="radio"
                                             id={item?.name_ru}
                                             name="select_in_city"
-                                            value={item?.region_id}
+                                            value={item?.region_id || ""}
                                             checked={parseFloat(item?.id) === parseFloat(state?.sub_region)}
                                             className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                             onChange={(e) => {
@@ -545,7 +545,7 @@ const SignUpSeller = () => {
                     {/* CredtCardicons */}
                     <span><CreditCardNumber /></span>
                     <InputMask
-                      value={state?.cardNumber}
+                      value={state?.cardNumber || ""}
                       mask='9999-9999-9999-9999'
                       name="credit-card-number"
                       className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
@@ -580,7 +580,7 @@ const SignUpSeller = () => {
                         name="fname"
                         autoComplete="off"
                         placeholder="Имя"
-                        value={state?.firstName}
+                        value={state?.firstName || ""}
                         onChange={(e) => setState({ ...state, firstName: e.target.value })}
                         required
                       />
@@ -604,7 +604,7 @@ const SignUpSeller = () => {
                         name="lname"
                         autoComplete="off"
                         placeholder="Фамилия"
-                        value={state?.lastName}
+                        value={state?.lastName || ""}
                         onChange={(e) => setState({ ...state, lastName: e.target.value })}
                         required
                       />
@@ -633,7 +633,7 @@ const SignUpSeller = () => {
                         type="email"
                         name="email"
                         placeholder="example@mail.com"
-                        value={state?.email}
+                        value={state?.email || ""}
                         onChange={({ target: { value } }) => {
                           setState({ ...state, email: value, isEmailMessage: value });
                         }}
@@ -667,7 +667,7 @@ const SignUpSeller = () => {
                       <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-[42px] overflow-hidden">
                         <InputMask
                           mask="(99) 999-99-99"
-                          value={state?.phone || null}
+                          value={state?.phone || ""}
                           name="phone"
                           onChange={(e) => setState({ ...state, phone: e.target.value })}
                           className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.phone ? "font-AeonikProMedium" : null
@@ -698,7 +698,7 @@ const SignUpSeller = () => {
                         type={`${state?.passwordEye ? "text" : "password"}`}
                         name="password"
                         placeholder=""
-                        value={state?.password}
+                        value={state?.password || ""}
                         onChange={(e) => setState({ ...state, password: e.target.value })}
                         required
 
@@ -743,7 +743,7 @@ const SignUpSeller = () => {
 
                         name="confirmPassword"
                         placeholder=""
-                        value={state?.confirmPassword}
+                        value={state?.confirmPassword || ""}
                         onChange={(e) => setState({ ...state, confirmPassword: e.target.value })}
                         // onBlur={handleBlur}
                         required

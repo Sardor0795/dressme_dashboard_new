@@ -93,7 +93,7 @@ function MyMarket() {
                   type="text"
                   name="s"
                   id="searchStore"
-                  value={searchName}
+                  value={searchName || ""}
                   onChange={(e) => setSearchName(e?.target?.value)}
                   className="w-full h-full outline-0 px-[10px]"
                   placeholder={t("search")}
@@ -117,7 +117,7 @@ function MyMarket() {
                 type="text"
                 name="s"
                 id="searchStore"
-                value={searchName}
+                value={searchName || ""}
                 onChange={(e) => setSearchName(e?.target?.value)}
                 className="w-full h-full outline-0 px-[10px]"
                 placeholder={t("search")}

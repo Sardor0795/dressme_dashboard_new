@@ -148,7 +148,7 @@ export default function SignInSeller() {
               className="outline-none !bg-white  w-full h-[42px] text-base  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black focus:bg-white placeholder-bg-white"
               type="email"
               name="email"
-              value={state.email}
+              value={state.email || ""}
               onChange={({ target: { value } }) => {
                 setState({ ...state, email: value });
               }}
@@ -170,7 +170,7 @@ export default function SignInSeller() {
               type={state?.eyesShow ? "password" : "text"}
               placeholder="Enter your password"
               name="password"
-              value={state.password}
+              value={state.password || ""}
               onChange={({ target: { value } }) => {
                 setState({ ...state, password: value });
               }}

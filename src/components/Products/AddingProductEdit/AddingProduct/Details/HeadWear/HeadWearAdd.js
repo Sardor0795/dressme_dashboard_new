@@ -18,16 +18,16 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const { t } = useTranslation("product");
  const [languageDetector] = useContext(LanguageDetectorDress);
      const [state, setState] = useState({
-        minHeadGirth: null,
-        maxHeadGirth: null,
+        minHeadGirth: "",
+        maxHeadGirth: "",
         sizeCheck: false,
-        amount: null,
-        age: null,
-        price: null,
+        amount: "",
+        age: "",
+        price: "",
         discountPercent: 0,
-        discountPrice: null,
+        discountPrice: "",
         isCheckValid: false,
-        productColorId: null,
+        productColorId: "",
         // ---save
         saveBtnDisable: false,
         successChanged: false,

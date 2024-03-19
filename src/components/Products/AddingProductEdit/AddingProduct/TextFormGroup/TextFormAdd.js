@@ -18,16 +18,16 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
-        titleInRu: null,
-        titleInUz: null,
-        descriptionInRu: null,
-        descriptionInUz: null,
-        qualityInRu: null,
-        qualityInUz: null,
-        noteValueRu: null,
-        noteValueUz: null,
+        titleInRu: "",
+        titleInUz: "",
+        descriptionInRu: "",
+        descriptionInUz: "",
+        qualityInRu: "",
+        qualityInUz: "",
+        noteValueRu: "",
+        noteValueUz: "",
         isCheckValid: false,
-        brand: null,
+        brand: "",
         onEditTextForm: false
     })
     useEffect(() => {
