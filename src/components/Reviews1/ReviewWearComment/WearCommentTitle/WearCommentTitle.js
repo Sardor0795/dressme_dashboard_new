@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 export default function WearCommentTitle({ titleProduct, handleRefetch }) {
   const [state, setState] = useState({
     startReviews: true,
+    searchComment: ""
   });
 
   const { t } = useTranslation("reviews");
@@ -37,6 +38,8 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
             name="s"
             className="w-full h-full text-[13px] outline-0 px-[10px]"
             placeholder={t("search")}
+            value={state?.searchComment}
+            onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
           />
           <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
             <SearchIcon />

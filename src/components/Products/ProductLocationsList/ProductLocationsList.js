@@ -1407,7 +1407,7 @@ export default function ProductLocationsList() {
                                                   )
                                               )
                                               ?.map((itemValue, index) => {
-                                                console.log(itemValue, 'itemValue');
+                                                // console.log(itemValue, 'itemValue');
                                                 return (
                                                   <div
                                                     key={index}

@@ -18,7 +18,7 @@ function App() {
   }, []);
 
    
-  console.log("app1");
+  // console.log("app1");
   return (
     <div>
       {/* <NavbarDashboard /> */}

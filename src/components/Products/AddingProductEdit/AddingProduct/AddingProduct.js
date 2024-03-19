@@ -674,6 +674,7 @@ const AddingProduct = () => {
             theme: "light",
           })
           // refetch()
+          throw new Error(err || "something wrong");
 
         }
       })
@@ -688,15 +689,15 @@ const AddingProduct = () => {
   //   state?.producer_Id, 'producer_Id', `\n`,
   //   'test---'
   // );
-  console.log(
-    Number(productsDataIdEdit?.gender_id) == state?.gender_Id,
-    Number(productsDataIdEdit?.min_age_category) == state?.min_Age_Category,
-    Number(productsDataIdEdit?.max_age_category) == state?.max_Age_Category
-  );
-  console.log(Number(productsDataIdEdit?.gender_id),
-    Number(productsDataIdEdit?.min_age_category),
-    Number(productsDataIdEdit?.max_age_category));
-  console.log(state?.gender_Id, state?.min_Age_Category, state?.max_Age_Category);
+  // console.log(
+  //   Number(productsDataIdEdit?.gender_id) == state?.gender_Id,
+  //   Number(productsDataIdEdit?.min_age_category) == state?.min_Age_Category,
+  //   Number(productsDataIdEdit?.max_age_category) == state?.max_Age_Category
+  // );
+  // console.log(Number(productsDataIdEdit?.gender_id),
+  //   Number(productsDataIdEdit?.min_age_category),
+  //   Number(productsDataIdEdit?.max_age_category));
+  // console.log(state?.gender_Id, state?.min_Age_Category, state?.max_Age_Category);
 
 
   const productUpdate = (childData) => {
@@ -778,10 +779,12 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
+          throw new Error(err || "something wrong");
+
         });
     }
      if (!newArray?.length) {
-      console.log("run-2");
+      // console.log("run-2");
 
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
@@ -860,6 +863,8 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
+          throw new Error(err || "something wrong");
+
         });
     }
   };

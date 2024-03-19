@@ -29,7 +29,7 @@ export default function LocationAddById() {
   const navigate = useNavigate();
   const { request } = useHttp();
   const { id } = useParams();
-   const shopId = id?.replace(":", "");
+  const shopId = id?.replace(":", "");
   const [state, setState] = useState({
     imgFirst: "",
     imgSecond: "",
@@ -112,7 +112,7 @@ export default function LocationAddById() {
         pictureBgView1: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
     }
   }
 
@@ -131,7 +131,7 @@ export default function LocationAddById() {
         picturelogoView2: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
     }
   }
 
@@ -150,7 +150,7 @@ export default function LocationAddById() {
         pictureLastView3: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
     }
   }
 
@@ -762,13 +762,9 @@ export default function LocationAddById() {
 
               <div className="h-[38px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
-                  <input
+                  <span
                     className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                    name="phoneCode"
-                    type="text"
-                    value={state.phoneCode}
-                    readOnly
-                  />
+                  >{state.phoneCode}</span>
                 </div>
                 <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
                   <InputMask
@@ -807,14 +803,11 @@ export default function LocationAddById() {
               </div>
               <div className="h-[38px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
-                  <input
+                  <span
                     className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium
                     text-xs md:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
-                    type="text"
-                    name="phoneCode2"
-                    value={state.phoneCode}
-                    readOnly
-                  />
+
+                  >{state.phoneCode}</span>
                 </div>
                 <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
                   <InputMask

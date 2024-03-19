@@ -113,6 +113,8 @@ export default function ResetPasswordSeller() {
                         progress: undefined,
                         theme: "light",
                     });
+                    throw new Error(err || "something wrong");
+
                 }
             })
 

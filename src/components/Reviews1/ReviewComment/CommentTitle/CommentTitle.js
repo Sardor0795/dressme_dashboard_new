@@ -11,10 +11,11 @@ import { useTranslation } from "react-i18next";
 const CommentTitle = ({ titleStore, handleRefetch }) => {
 
   const { t } = useTranslation("reviews");
-  
+
 
   const [state, setState] = useState({
     startReviews: true,
+    searchComment: ""
   });
 
   useEffect(() => {
@@ -41,6 +42,8 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
             className="w-full h-full text-[13px] px-[10px] outline-0"
             placeholder={t("search")}
             name="s"
+            value={state?.searchComment}
+            onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
           />
           <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
             <SearchIcon />

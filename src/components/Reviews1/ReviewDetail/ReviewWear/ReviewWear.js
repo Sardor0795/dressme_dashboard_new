@@ -23,6 +23,9 @@ export default function ReviewWear() {
   const { t } = useTranslation("reviews");
   const [languageDetector] = useContext(LanguageDetectorDress);
 
+  const [state, setState] = useState({
+     searchComment: ""
+  });
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
     try {
@@ -119,6 +122,8 @@ export default function ReviewWear() {
                           name="s"
                           className="w-full h-full px-[10px] outline-0	"
                           placeholder={`${t("search")}`}
+                          value={state?.searchComment}
+                          onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
                         />
                         <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                           <SearchIcon />
@@ -130,11 +135,11 @@ export default function ReviewWear() {
                 {/* table product */}
                 <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
                   {dressInfo?.getReviewProduct?.map((data) => {
-                    console.log(data, "data");
-                    console.log(
-                      dressInfo?.getReviewProduct,
-                      "dressInfo?.getReviewProduct"
-                    );
+                    // console.log(data, "data");
+                    // console.log(
+                    //   dressInfo?.getReviewProduct,
+                    //   "dressInfo?.getReviewProduct"
+                    // );
                     return (
                       <ul
                         key={data?.id}
