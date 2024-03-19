@@ -12,15 +12,15 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
     const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [state, setState] = useState({
-        minHeadGirth: null,
-        maxHeadGirth: null,
+        minHeadGirth: "",
+        maxHeadGirth: "",
         maxHeadGirthShow: false,
         sizeCheck: false,
-        amount: null,
-        age: null,
-        price: null,
-        discountPercent: null,
-        discountPrice: null,
+        amount: "",
+        age: "",
+        price: "",
+        discountPercent: "",
+        discountPrice: "",
         isCheckValid: false,
         // ------
         onConcel: false,

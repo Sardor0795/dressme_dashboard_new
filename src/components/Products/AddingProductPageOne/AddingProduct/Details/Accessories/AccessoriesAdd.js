@@ -12,19 +12,19 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
     const { t } = useTranslation("product");
 
     const [state, setState] = useState({
-        rowSize: null,
-        colSize: null,
-        minSize: null,
-        ageNum: null,
-        quantityNum: null,
-        priceNum: null,
-        salePercent: null,
-        salePrice: null,
-        sizeListCheck: null,
+        rowSize: "",
+        colSize: "",
+        minSize: "",
+        ageNum: "",
+        quantityNum: "",
+        priceNum: "",
+        salePercent: "",
+        salePrice: "",
+        sizeListCheck: "",
         isCheckValid: false,
         // ------
         onConcel: false,
-        selected: null
+        selected: ""
     })
     const [toggleShow, setToggleShow] = useState(false)
     const [toggle, setToggle] = useState(false)

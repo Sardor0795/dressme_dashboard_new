@@ -19,16 +19,16 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
     // name_ru
 
     const [state, setState] = useState({
-        minFootLength: null,
-        maxFootLength: null,
-        minSize: null,
-        ageNum: null,
-        priceNum: null,
+        minFootLength: "",
+        maxFootLength: "",
+        minSize: "",
+        ageNum: "",
+        priceNum: "",
         salePercent: 0,
-        salePrice: null,
-        quantityNum: null,
+        salePrice: "",
+        quantityNum: "",
         isCheckValid: false,
-        productColorId: null,
+        productColorId: "",
         // ------
         maxFootLengthShow: false,
         // ------

@@ -160,7 +160,7 @@ export default function ForgotPasswordSeller() {
                                 className="outline-none w-full h-[42px] pl-2 xs:pl-[16px] rounded-lg bg-btnBgColor focus:bg-btnBgColor active:bg-btnBgColor placeholder:bg-btnBgColor placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
                                 type="email"
                                 name="email"
-                                value={state?.email}
+                                value={state?.email || ""}
                                 onChange={(e) => setState({ ...state, email: e.target.value })}
                                 placeholder="example@mail.com"
                                 required

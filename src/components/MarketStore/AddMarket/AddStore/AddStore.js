@@ -509,7 +509,7 @@ function AddStore({ onRefetch }) {
                 type="text"
                 name="shopName"
                 id="shopName"
-                value={state?.magazinName}
+                value={state?.magazinName || ""}
                 onChange={handleInputChange}
                 placeholder={t("enter_store_name")}
                 className="w-[65%] md:w-[70%] border border-borderColor2 outline-none h-[32px] md:h-[42px] px-3  rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
@@ -536,7 +536,7 @@ function AddStore({ onRefetch }) {
                       <input
                         type="radio"
                         id={data?.id}
-                        value={data?.id}
+                        value={data?.id || ""}
                         name="checkGender"
                         checked={data?.id === Number(state?.checkGender)}
                         onChange={(e) =>
@@ -571,7 +571,7 @@ function AddStore({ onRefetch }) {
                       <input
                         type="radio"
                         id={data?.name_uz}
-                        value={data?.id}
+                        value={data?.id || ""}
                         name="checkDeliver"
                         checked={data?.id === Number(state?.deliverCheck)}
                         onChange={(e) =>

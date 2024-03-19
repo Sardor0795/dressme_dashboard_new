@@ -259,7 +259,7 @@ export default function LocationClothesCity() {
                 type="text"
                 name="s"
                 id="searchStore"
-                value={state?.searchName}
+                value={state?.searchName || ""}
                 onChange={(e) =>
                   setState({ ...state, searchName: e?.target?.value })
                 }

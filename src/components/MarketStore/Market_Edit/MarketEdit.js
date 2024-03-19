@@ -181,7 +181,7 @@ function MarketEdit() {
         if (data?.status >= 200 && data?.status < 300) {
           setDressInfo({ ...dressInfo, genderList: data?.data?.genders });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!dressInfo?.genderList) {
       fetchGender();
@@ -200,7 +200,7 @@ function MarketEdit() {
             deliveryList: data?.data?.delivery_methods,
           });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     if (!helperDatainform?.deliveryList) {
       fetchDelivery();
@@ -356,11 +356,10 @@ function MarketEdit() {
           ></section>
           {/* Delete Product Of Pop Confirm */}
           <section
-            className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-              deleteModal
+            className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
                 ? " bottom-0 md:flex"
                 : "md:hidden bottom-[-800px] z-[-10]"
-            }`}
+              }`}
           >
             <button
               onClick={() => setDeleteModal(false)}
@@ -692,7 +691,7 @@ function MarketEdit() {
                     type="text"
                     name="shopName"
                     id="shopName"
-                    value={state?.marketName}
+                    value={state?.marketName || ""}
                     onChange={handleInputChange}
                     placeholder={t("enter_store_name")}
                     className="w-[65%] md:w-[70%] h-[32px] md:h-[42px] border border-borderColor2 outline-none px-3 rounded-lg text-[10px] ls:text-[12px] md:text-base font-AeonikProRegular"
@@ -712,7 +711,7 @@ function MarketEdit() {
                           <input
                             type="radio"
                             id={data?.id}
-                            value={data?.id}
+                            value={data?.id || ""}
                             name="checkGender"
                             checked={data?.id === Number(state?.checkGender)}
                             onChange={() =>
@@ -749,7 +748,7 @@ function MarketEdit() {
                           <input
                             type="radio"
                             id={data?.name_uz}
-                            value={data?.id}
+                            value={data?.id || ""}
                             name="checkDeliver"
                             checked={data?.id === Number(state?.deliverCheck)}
                             onChange={() =>

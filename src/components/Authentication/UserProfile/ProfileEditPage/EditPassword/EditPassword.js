@@ -122,7 +122,7 @@ function EditPassword({ onClick }) {
               type={state?.eyesShowOld ? "text" : "password"}
               placeholder={t("writeOldPassword")}
               name="oldPassword"
-              value={state?.oldPassword}
+              value={state?.oldPassword || ""}
               onChange={(e) =>
                 setState({ ...state, oldPassword: e.target.value })
               }
@@ -165,7 +165,7 @@ function EditPassword({ onClick }) {
               type={state?.eyesShowNew ? "text" : "password"}
               placeholder={t("writeNewPassword")}
               name="newPassword"
-              value={state?.newPassword}
+              value={state?.newPassword || ""}
               onChange={(e) =>
                 setState({ ...state, newPassword: e.target.value })
               }
@@ -208,7 +208,7 @@ function EditPassword({ onClick }) {
               type={state?.eyesShowConfirm ? "text" : "password"}
               placeholder={t("confirmPassword")}
               name="confirmPassword"
-              value={state?.newConfirmPassword}
+              value={state?.newConfirmPassword || ""}
               onChange={(e) =>
                 setState({ ...state, newConfirmPassword: e.target.value })
               }

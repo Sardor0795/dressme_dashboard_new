@@ -294,7 +294,7 @@ const AddingProduct = () => {
   // ------------------------------------------------------------------------
 
   function onHanleColorList(e) {
-     if (!colorListForTest?.includes(e)) {
+    if (!colorListForTest?.includes(e)) {
       setSelectColorID(e)
       if (colorListForTest?.length + 2 > colors_Id?.length && colors_Id?.length > colorListForTest?.length && e) {
         setColors_Id(colors_Id?.filter(e => e !== colors_Id[colors_Id?.length - 1]))
@@ -703,7 +703,7 @@ const AddingProduct = () => {
   const productUpdate = (childData) => {
     setState({ ...state, isCheckValid: true })
     if (newArray?.length && subSection_Id?.length) {
-       setState({ ...state, sendingLoader: true, })
+      setState({ ...state, sendingLoader: true, })
       let form = new FormData();
       section_Id && section_Id?.forEach((index) => {
         form.append("section_ids[]", Number(index));
@@ -783,7 +783,7 @@ const AddingProduct = () => {
 
         });
     }
-     if (!newArray?.length) {
+    if (!newArray?.length) {
       // console.log("run-2");
 
       setState({ ...state, sendingLoader: true, })
@@ -918,7 +918,7 @@ const AddingProduct = () => {
   }
   const ClearGenderSelected = (id) => {
     if (state?.gender_Id === id) {
-      setState({ ...state, gender_Id: null,  onEditInput: true})
+      setState({ ...state, gender_Id: null, onEditInput: true })
     }
   }
 
@@ -1342,7 +1342,7 @@ const AddingProduct = () => {
                       <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
                         <input
                           type="text"
-                          value={searchList}
+                          value={searchList || ""}
                           onChange={(e) => setSearchList(e?.target?.value)}
                           name='clothingTypes'
                           placeholder={t("APsearch")}
@@ -1391,7 +1391,7 @@ const AddingProduct = () => {
                       <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
                         <input
                           type="text"
-                          value={searchList}
+                          value={searchList || ""}
                           onChange={(e) => setSearchList(e?.target?.value)}
                           name='clothingTypes'
                           placeholder={t("APsearch")}
@@ -1510,7 +1510,7 @@ const AddingProduct = () => {
                       <div className='w-full h-[34px] flex items-center justify-between rounded-lg border border-borderColor mb-[26px] text-[12px] px-3'>
                         <input
                           type="text"
-                          value={searchList}
+                          value={searchList || ""}
                           onChange={(e) => setSearchList(e?.target?.value)}
                           name='clothingTypes'
                           placeholder={t("APsearch")}
@@ -1594,7 +1594,7 @@ const AddingProduct = () => {
                           name='clothingTypes'
                           placeholder={t("APsearch")}
                           className='w-full pr-3 outline-none'
-                          value={searchList}
+                          value={searchList || ""}
                           onChange={(e) => setSearchList(e?.target?.value)}
                         />
                         <SearchIcon />
@@ -1693,7 +1693,7 @@ const AddingProduct = () => {
                             <StarLabel />
                           </span>
                         </div>
-                        <button
+                        <div
                           onClick={
                             colorAction ? null : () =>
                               setState({ ...state, ClothingSection: true })
@@ -1740,7 +1740,7 @@ const AddingProduct = () => {
                                 <ArrowRightIcon />
                               </div>
                           }
-                        </button>
+                        </div>
                         <div className={`w-full  hidden md:flex  rounded-lg focus:border-none `}>
                           <Select
                             className={` rounded-lg w-full  ${state?.isCheckValid && !section_Id?.length ? "!border border-[#FFB8B8] !bg-[#FFF6F6]" : ""}`}
@@ -1838,6 +1838,7 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
+ 
                           >
                             {newArray?.map(item => {
                               return (
@@ -1996,7 +1997,7 @@ const AddingProduct = () => {
                                         type="radio"
                                         id={data?.id}
                                         name="checkStatus"
-                                        value={data?.id}
+                                        value={data?.id || ""}
                                         className={"hidden w-full h-full"}
                                       />
                                     </div>
@@ -2113,7 +2114,7 @@ const AddingProduct = () => {
                                 type="text"
                                 name="minAge"
                                 placeholder={t("SSmin")}
-                                value={state?.min_Age_Category}
+                                value={state?.min_Age_Category || ""}
                                 onChange={(e) => setState({ ...state, onEditInput: true, min_Age_Category: e.target.value })}
                                 className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                               />}
@@ -2124,7 +2125,7 @@ const AddingProduct = () => {
                                 type="text"
                                 name="maxAge"
                                 placeholder={t("SSmax")}
-                                value={state?.max_Age_Category}
+                                value={state?.max_Age_Category || ""}
                                 onChange={(e) => setState({ ...state, onEditInput: true, max_Age_Category: e.target.value })}
                                 className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                               />}
@@ -2148,7 +2149,7 @@ const AddingProduct = () => {
                             >{state?.sku}</span> :
                             <input
                               type="text"
-                              value={state?.sku}
+                              value={state?.sku || ""}
                               onChange={(e) => setState({ ...state, onEditInput: true, sku: e.target.value })}
                               name="artikul"
                               placeholder=""
@@ -2461,7 +2462,7 @@ const AddingProduct = () => {
                               type="text"
                               name="minAge1"
                               placeholder={t("SSmin")}
-                              value={state?.min_Age_Category}
+                              value={state?.min_Age_Category || ""}
                               onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
                               className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                             />}
@@ -2471,7 +2472,7 @@ const AddingProduct = () => {
                             type="text"
                             name="maxAge1"
                             placeholder={t("SSmax")}
-                            value={state?.max_Age_Category}
+                            value={state?.max_Age_Category || ""}
                             onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                             className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           />}

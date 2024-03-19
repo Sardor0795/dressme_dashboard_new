@@ -370,36 +370,36 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   style={{ width: "26px", height: "26px" }}
                   className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center !min-w-[24px] !min-h-[24px] `}
                 ></Checkbox>
-                <tr className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
-                  <th className="w-[5%] h-full flex items-center justify-center">
+                <div className="w-full h-full flex items-center justify-between border rounded-[8px]  border-lightBorderColor">
+                  <p className="w-[5%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
                     No:
-                  </th>
-                  <th className="w-[14%] h-full flex items-center justify-center">
+                  </p>
+                  <p className="w-[14%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
                     {t("photo")}
-                  </th>
-                  <th className="w-[15%] h-full flex items-center ">
+                  </p>
+                  <p className="w-[15%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
                     {t("name_of_product")}
-                  </th>
-                  <th className="w-[15%] h-full flex items-center ">
+                  </p>
+                  <p className="w-[15%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
                     {t("vendor_code")}
-                  </th>
-                  <th className="w-[8%] h-full flex items-center ">
+                  </p>
+                  <p className="w-[8%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
                     {t("type")}
-                  </th>
-                  <th className="w-[8%] h-full flex items-center ">
+                  </p>
+                  <p className="w-[8%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
                     {t("date")}
-                  </th>
-                  <th className="w-[10%] h-full flex items-center ">
+                  </p>
+                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium ">
                     {t("price_of_product")}
-                  </th>
-                  <th className="w-[10%] h-full flex items-center "></th>
-                  <th className="w-[9%] h-full flex items-center justify-center">
+                  </p>
+                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium "></p>
+                  <p className="w-[9%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
                     {t("delete")}
-                  </th>
-                  <th className="w-[10%] h-full flex items-center justify-center">
+                  </p>
+                  <p className="w-[10%] h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center">
                     {t("status")}
-                  </th>
-                </tr>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -434,11 +434,11 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                 value={itemValue?.id}
                                 checked={checked}
                               />
-                              <tr className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
-                                <td className="w-[5%]  h-full  flex items-center justify-center">
+                              <div className="w-full h-full py-2 ml-2  flex items-center justify-between rounded-[8px] border  border-lightBorderColor">
+                                <div className="w-[5%]  h-full  flex items-center justify-center">
                                   {index + 1}
-                                </td>
-                                <td className="w-[14%]  h-full bg-white flex items-center justify-center  rounded-[12px]">
+                                </div>
+                                <div className="w-[14%]  h-full bg-white flex items-center justify-center  rounded-[12px]">
                                   <span className="w-[110px] h-[140px] border  border-lightBorderColor rounded-lg overflow-hidden">
                                     <img
                                       src={
@@ -449,32 +449,32 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                       className=" w-[110px] h-full object-cover"
                                     />
                                   </span>
-                                </td>
-                                <td className="w-[15%] h-full flex items-center ">
-                                  <p className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
+                                </div>
+                                <div className="w-[15%] h-full flex items-center ">
+                                  <span className="w-full  break-words text-center text-weatherWinterColor flex items-center  text-base not-italic font-AeonikProMedium">
                                     {languageDetector?.typeLang === "ru" &&
                                       itemValue?.name_ru}
                                     {languageDetector?.typeLang === "uz" &&
                                       itemValue?.name_uz}
-                                  </p>
-                                </td>
-                                <td className="w-[15%] h-full flex items-center ">
+                                  </span>
+                                </div>
+                                <div className="w-[15%] h-full flex items-center ">
                                   {itemValue?.sku || "sku"}
-                                </td>
+                                </div>
 
-                                <td
+                                <div
                                   key={index}
                                   className="w-[8%] h-full flex items-center "
                                 >
                                   {languageDetector?.typeLang === "ru" && itemValue?.type?.name_ru}
                                   {languageDetector?.typeLang === "uz" && itemValue?.type?.name_uz}
-                                </td>
+                                </div>
 
-                                <td className="w-[8%] h-full flex items-center ">
+                                <div className="w-[8%] h-full flex items-center ">
                                   {itemValue?.created_at || "created_at"}
-                                </td>
+                                </div>
 
-                                <td className="w-[10%] h-full   flex items-center ">
+                                <div className="w-[10%] h-full   flex items-center ">
                                   {itemValue?.cost?.discount_price > 999
                                     ? Number(itemValue?.cost?.discount_price)
                                       ?.toLocaleString()
@@ -490,8 +490,8 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                   <span className="ml-[6px] text-[14px]">
                                     {t("currency")}
                                   </span>
-                                </td>
-                                <td className="w-[10%] h-full  flex items-center ">
+                                </div>
+                                <div className="w-[10%] h-full  flex items-center ">
                                   <button
                                     onClick={() =>
                                       goProductDetailEdit(
@@ -503,9 +503,9 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                   >
                                     {t("more_details")}
                                   </button>
-                                </td>
+                                </div>
 
-                                <td className="w-[9%] h-full  flex items-center  justify-center">
+                                <div className="w-[9%] h-full  flex items-center  justify-center">
                                   <button
                                     type="button"
                                     onClick={() => {
@@ -519,16 +519,16 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                       <DeleteIcon width={30} />
                                     </span>
                                   </button>
-                                </td>
+                                </div>
                                 {itemValue?.status === "approved" && (
-                                  <td className="w-[10%] h-fit  flex items-center justify-center  ">
+                                  <div className="w-[10%] h-fit  flex items-center justify-center  ">
                                     <span className="min-w-[110px]  text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px] px-[10px] rounded-full">
                                       {t("approved")}
                                     </span>
-                                  </td>
+                                  </div>
                                 )}
                                 {itemValue?.status === "declined" && (
-                                  <td
+                                  <div
                                     onClick={() =>
                                       onHandleStatus(itemValue?.id)
                                     }
@@ -537,23 +537,23 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                     <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px] px-[10px] rounded-full">
                                       {t("declined")}
                                     </span>
-                                  </td>
+                                  </div>
                                 )}
                                 {itemValue?.status === "pending" && (
-                                  <td className="w-[10%] h-fit  flex items-center justify-center  ">
+                                  <div className="w-[10%] h-fit  flex items-center justify-center  ">
                                     <span className="min-w-[110px]  text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px] px-[10px] rounded-full">
                                       {t("pending")}
                                     </span>
-                                  </td>
+                                  </div>
                                 )}
                                 {itemValue?.status === "updated" && (
-                                  <td className="w-[10%] h-fit flex items-center justify-center">
+                                  <div className="w-[10%] h-fit flex items-center justify-center">
                                     <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full">
                                       {t("updated")}
                                     </span>
-                                  </td>
+                                  </div>
                                 )}
-                              </tr>
+                              </div>
                             </div>
                             {/* For Mobile Device */}
 

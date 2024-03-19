@@ -63,9 +63,9 @@ const AddingProduct = () => {
     MakeCountryModal: false,
     ClothingCategoryModal: false,
     isCheckValid: false,
-    errorList: null,
-    errorListMessage: null,
-    type_Id: null,
+    errorList: "",
+    errorListMessage: "",
+    type_Id: "",
     // --------------
     pictureBgFile1: null,
     pictureBgView1: null,
@@ -76,35 +76,35 @@ const AddingProduct = () => {
     pictureBgFile4: null,
     pictureBgView4: null,
     // ---------------
-    shopId: null,
-    shopLocationId: null,
+    shopId: "",
+    shopLocationId: "",
     section_Id: [],
     sub_Section_Id: [],
     season_Id: [],
-    color_Id: null,
-    gender_Id: null,
-    min_Age_Category: null,
-    max_Age_Category: null,
-    sku: null,
-    category_Id: null,
-    filterTypeId: null,
-    producer_Id: null,
+    color_Id: "",
+    gender_Id: "",
+    min_Age_Category: "",
+    max_Age_Category: "",
+    sku: "",
+    category_Id: "",
+    filterTypeId: "",
+    producer_Id: "",
     photos1: [],
-    amount: null,
-    age: null,
-    price: null,
-    discount_percent: null,
-    discount_price: null,
+    amount: "",
+    age: "",
+    price: "",
+    discount_percent: "",
+    discount_price: "",
 
     // -----Details-----
-    textListOfFormList: null,
-    headWearList: null,
-    outWearList: null,
-    underWearList: null,
-    shoesList: null,
-    AccessoriesList: null,
-    titleUz: null,
-    titleRu: null,
+    textListOfFormList: "",
+    headWearList: "",
+    outWearList: "",
+    underWearList: "",
+    shoesList: "",
+    AccessoriesList: "",
+    titleUz: "",
+    titleRu: "",
     selectedUz: [],
     PathnameToken: "",
     // ------
@@ -543,7 +543,7 @@ const AddingProduct = () => {
           setDressInfo({
             ...dressInfo,
             nextPageShowForm: true,
-            ProductFilterType: null,
+            ProductFilterType: "",
           });
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -1448,6 +1448,8 @@ const AddingProduct = () => {
                                 setState({ ...state, shopId: e })
                               }
                               onSearch={onSearch}
+                              optionLabelProp="label"
+
                               size="large"
                               filterOption={(input, option) =>
                                 (option?.label ?? "")
@@ -1987,7 +1989,7 @@ const AddingProduct = () => {
                               onChange={(e) =>
                                 setState({ ...state, gender_Id: e })
                               }
-                              onSearch={onSearch}
+                              // onSearch={onSearch}
                               size="large"
                               filterOption={(input, option) =>
                                 (option?.label ?? "")
@@ -2187,6 +2189,8 @@ const AddingProduct = () => {
                               }}
                               onSearch={onSearch}
                               size="large"
+                              optionLabelProp="label"
+
                               filterOption={(input, option) =>
                                 (option?.label ?? "")
                                   .toLowerCase()

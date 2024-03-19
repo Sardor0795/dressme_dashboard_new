@@ -641,7 +641,7 @@ export default function LocationMapCity() {
                                     type="radio"
                                     id={item?.name_ru}
                                     name="type_work"
-                                    value={item?.region_id}
+                                    value={item?.region_id || ""}
                                     checked={state?.idSupRregionId == item?.id}
                                     className="border border-borderColor  cursor-pointer  flex items-center justify-center"
                                     onChange={(e) => {
@@ -1290,7 +1290,7 @@ export default function LocationMapCity() {
                       <input
                         type="text"
                         name="fname"
-                        value={state?.idAssistantName}
+                        value={state?.idAssistantName || ""}
                         onChange={handleInputAdminNameFirst}
                         placeholder={t("name_admin")}
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2"
@@ -1305,7 +1305,7 @@ export default function LocationMapCity() {
                       <input
                         type="text"
                         name="fname2"
-                        value={state?.idSecondAssistantName}
+                        value={state?.idSecondAssistantName || ""}
                         onChange={handleInputAdminNameSecond}
                         placeholder={t("name_admin_two")}
                         className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2 "
@@ -1389,7 +1389,7 @@ export default function LocationMapCity() {
                         <InputMask
                           mask="(99) 999-99-99"
                           name="phone"
-                          value={state?.idAssistantPhone || null}
+                          value={state?.idAssistantPhone || ""}
                           onChange={(e) =>
                             setState({
                               ...state,
@@ -1422,7 +1422,7 @@ export default function LocationMapCity() {
                         <InputMask
                           mask="(99) 999-99-99"
                           name="phone2"
-                          value={state?.idSecondAssistantPhone || null}
+                          value={state?.idSecondAssistantPhone || ""}
                           onChange={(e) =>
                             setState({
                               ...state,
@@ -1457,7 +1457,7 @@ export default function LocationMapCity() {
                         max="23:59"
                         name="startTime"
                         pattern="[0-2][0-9]:[0-5][0-9]"
-                        value={state?.idWorkTimeFrom}
+                        value={state?.idWorkTimeFrom || ""}
                         onChange={(e) =>
                           setState({ ...state, idWorkTimeFrom: e.target.value })
                         }
@@ -1473,7 +1473,7 @@ export default function LocationMapCity() {
                         max="23:59"
                         name="endTime"
                         pattern="[0-2][0-9]:[0-5][0-9]"
-                        value={state?.idWorkTimeTo}
+                        value={state?.idWorkTimeTo || ""}
                         onChange={(e) =>
                           setState({ ...state, idWorkTimeTo: e.target.value })
                         }
@@ -1490,7 +1490,7 @@ export default function LocationMapCity() {
                         type="text"
                         name="telegrem1"
                         placeholder={"@Username "}
-                        value={state?.assistantNameFirstTg}
+                        value={state?.assistantNameFirstTg || ""}
                         onChange={handleInputAdminNameFirstTg}
                         className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                       />
@@ -1510,7 +1510,7 @@ export default function LocationMapCity() {
                         type="text"
                         name="telegrem2"
                         placeholder={"@Username"}
-                        value={state?.assistantNameSecondTg}
+                        value={state?.assistantNameSecondTg || ""}
                         onChange={handleInputAdminNameSecondTg}
                         className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                       />

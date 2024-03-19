@@ -723,7 +723,7 @@ function EditProfilePage() {
                   type="text"
                   name="fname"
                   placeholder={t("name")}
-                  value={state?.sellerFname || null}
+                  value={state?.sellerFname || ""}
                   onChange={(e) =>
                     setState({
                       ...state,
@@ -746,7 +746,7 @@ function EditProfilePage() {
                   type="text"
                   name="lname"
                   placeholder={t("surname")}
-                  value={state?.sellerLname || null}
+                  value={state?.sellerLname || ""}
                   onChange={(e) =>
                     setState({
                       ...state,
@@ -790,7 +790,7 @@ function EditProfilePage() {
                   type="email"
                   name="email"
                   placeholder={t("emailPlaceholder")}
-                  value={state?.sellerEmail || null}
+                  value={state?.sellerEmail || ""}
                   onChange={(e) =>
                     setState({
                       ...state,
@@ -820,7 +820,7 @@ function EditProfilePage() {
                   <InputMask
                     mask="(99) 999-99-99"
                     name="phone"
-                    value={state?.sellerPhoneNum || null}
+                    value={state?.sellerPhoneNum || ""}
                     onChange={(e) =>
                       setState({
                         ...state,
@@ -902,7 +902,7 @@ function EditProfilePage() {
                                       type="radio"
                                       id={item?.name_uz}
                                       name="type_work"
-                                      value={item?.region_id}
+                                      value={item?.region_id || ""}
                                       checked={
                                         Number(state?.sellerSubRegionId) ===
                                         Number(item?.id)
@@ -1017,7 +1017,7 @@ function EditProfilePage() {
                   <CreditCardNumber />
                 </span>
                 <InputMask
-                  value={state?.sellerCardNumber}
+                  value={state?.sellerCardNumber || ""}
                   mask="9999-9999-9999-9999"
                   name="credit-card-number"
                   className="outline-none	  w-full h-[38px] md:h-[48px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
@@ -1078,7 +1078,7 @@ function EditProfilePage() {
                         type="text"
                         name="companyName"
                         placeholder={t("companyName")}
-                        value={state?.companyName}
+                        value={state?.companyName || ""}
                         onChange={(e) =>
                           setState({
                             ...state,

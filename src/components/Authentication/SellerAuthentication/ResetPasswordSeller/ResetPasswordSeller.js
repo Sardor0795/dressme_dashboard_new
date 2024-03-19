@@ -164,7 +164,7 @@ export default function ResetPasswordSeller() {
                                 type={state?.newPasswordEye ? "text" : "password"}
                                 name="password"
                                 placeholder="Новый пароль"
-                                value={state?.newPassword}
+                                value={state?.newPassword || ""}
                                 onChange={(e) => setState({ ...state, newPassword: e.target.value })}
                                 required
                             />
@@ -198,7 +198,7 @@ export default function ResetPasswordSeller() {
                                 className="outline-none w-full h-[42px] pl-2 xs:pl-[16px]  placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black "
                                 type={state?.newConfirmPasswordEye ? "text" : "password"}
                                 name="cofirmPassword"
-                                value={state?.newPasswordConfirm}
+                                value={state?.newPasswordConfirm || ""}
                                 onChange={(e) => setState({ ...state, newPasswordConfirm: e.target.value })}
                                 placeholder="Повторите новый пароль"
                                 required
