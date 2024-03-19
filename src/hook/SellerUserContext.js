@@ -54,13 +54,14 @@ export default function SellerUserContext({ children }) {
                         fetchDataSeller()
                         sellerRefreshToken()
                     }
+                    throw new Error(error || "something wrong");
+
                 }
             }
             fetchDatProfile()
         }
     }, [dressInfo?.sellerStatus])
-    // console.log("sellerdatamain");
-    return (
+     return (
         <SellerMainData.Provider value={[sellerInformation, setSellerInformation]}>
             {children}
         </SellerMainData.Provider>

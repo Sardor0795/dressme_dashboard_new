@@ -100,7 +100,8 @@ export default function LocationMapCity() {
         pictureBgView1: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -119,7 +120,8 @@ export default function LocationMapCity() {
       setPictureFile2(compressedFile);
       setPictureView2(URL.createObjectURL(event.target.files[0]));
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -138,7 +140,8 @@ export default function LocationMapCity() {
         pictureBgView3: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -256,7 +259,7 @@ export default function LocationMapCity() {
     }
   );
 
-   
+
 
   useEffect(() => {
     window.scrollTo({
@@ -575,11 +578,10 @@ export default function LocationMapCity() {
          ${deleteModal || openStoreList || backImgUploadModal ? "" : "hidden"}`}
             ></section>
             <div
-              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                openRegionModal
+              className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
                   ? " bottom-0 md:flex flex-col"
                   : "md:hidden bottom-[-1500px] z-[-10]"
-              }`}
+                }`}
             >
               <div className="w-full flex items-center justify-between font-AeonikProMedium">
                 <span className="text-black text-lg not-italic font-AeonikProMedium">
@@ -609,11 +611,10 @@ export default function LocationMapCity() {
                               data?.name_uz}
                           </span>
                           <span
-                            className={`${
-                              activeIndex == data?.id
+                            className={`${activeIndex == data?.id
                                 ? "rotate-[0deg]"
                                 : "rotate-[180deg]"
-                            } `}
+                              } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
                           </span>
@@ -621,11 +622,10 @@ export default function LocationMapCity() {
 
                         <div
                           className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${
-                               activeIndex == data?.id
-                                 ? "openAccardion"
-                                 : "CloseAccardion"
-                             } `}
+                             ${activeIndex == data?.id
+                              ? "openAccardion"
+                              : "CloseAccardion"
+                            } `}
                         >
                           {data?.sub_regions?.map((item) => {
                             return (
@@ -684,11 +684,10 @@ export default function LocationMapCity() {
             </div>
             {/* Delete Product Of Pop Confirm */}
             <section
-              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-                deleteModal
+              className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
                   ? " bottom-0 md:flex"
                   : "md:hidden bottom-[-800px] z-[-10]"
-              }`}
+                }`}
             >
               <button
                 onClick={() => setDeleteModal(false)}
@@ -1047,9 +1046,8 @@ export default function LocationMapCity() {
                               placeholder={t("enter_address")}
                               id="ForSearch"
                               name="search"
-                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${
-                                !Boolean(forMaps?.title?.length) ? "" : "hidden"
-                              }`}
+                              className={`w-full outline-none text-sm font-AeonikProMedium mr-3 h-10  rounded-lg ${!Boolean(forMaps?.title?.length) ? "" : "hidden"
+                                }`}
                             />
 
                             <div
@@ -1398,11 +1396,10 @@ export default function LocationMapCity() {
                               idAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                            state?.idAssistantPhone
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone
                               ? "font-AeonikProMedium"
                               : null
-                          } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
+                            } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>
@@ -1432,11 +1429,10 @@ export default function LocationMapCity() {
                               idSecondAssistantPhone: e.target.value,
                             })
                           }
-                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${
-                            state?.idSecondAssistantPhone
+                          className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone
                               ? "font-AeonikProMedium"
                               : null
-                          } text-[13px] md:text-base leading-4 text-black`}
+                            } text-[13px] md:text-base leading-4 text-black`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
                       </div>

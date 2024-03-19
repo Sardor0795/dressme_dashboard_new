@@ -130,7 +130,8 @@ const AddingProduct = () => {
         pictureBgView1: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -149,7 +150,8 @@ const AddingProduct = () => {
         pictureBgView2: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -168,7 +170,8 @@ const AddingProduct = () => {
         pictureBgView3: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -187,7 +190,8 @@ const AddingProduct = () => {
         pictureBgView4: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
 
@@ -710,7 +714,7 @@ const AddingProduct = () => {
     state?.MakeCountryModal
   ])
 
-  console.log('test-- page two');
+  // console.log('test-- page two');
   // navigate(-1)
 
   return (

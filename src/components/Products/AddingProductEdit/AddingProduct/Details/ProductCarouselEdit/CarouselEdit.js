@@ -395,33 +395,9 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       })
 
     }
-    // const filterSimilarObjects = (array) => {
-    //   const uniqueIds = new Set();
-    //   return array.filter(obj => {
-    //     if (!uniqueIds.has(obj.id)) {
-    //       uniqueIds.add(obj.id);
-    //       return true;
-    //     }
-    //     return false;
-    //   });
-    // };
-    // console.log(filterSimilarObjects(photsArrOne), "ishladi filterSimilarObjects(photsArrOne);");
-    // console.log(photsArrOne, "photsArrOne");
+
   }, [photsArrOne, photsArrTwo, photsArrThree, photsArrFour, clearSize, productData])
-  // console.log(productData?.photos, "productData?.photos");
-  // console.log(imageSeven, "imageSeven---photos");
-  // console.log(imageEight, "imageEight---photos");
-  // console.log(productData, "Ishladi");
-  // console.log(colorPivotOne, colorPivotTwo, colorPivotThree, colorPivotFour, "ColorPivot");
-  // console.log(photsArrOne, photsArrTwo, photsArrThree, photsArrFour, "photsArr");
-  // const handleLocationImage1 = (e) => {
-  //   setImageOne({
-  //     ...imageOne,
-  //     url_File1: e.target.files[0],
-  //     url_photo1: URL.createObjectURL(e.target.files[0]),
-  //     changed1: true
-  //   })
-  // };
+
   async function handleLocationImage1(e) {
     const imageFile = e.target.files[0];
     const options = {
@@ -438,7 +414,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         changed1: true
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
     }
   }
   // const handleLocationImage2 = (e) => {
@@ -465,7 +441,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         changed2: true
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // const handleLocationImage3 = (e) => {
@@ -492,7 +469,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         changed3: true
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // const handleLocationImage4 = (e) => {
@@ -520,7 +498,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         changed4: true,
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // const handleLocationImage5 = (e) => {
@@ -561,7 +540,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // const handleLocationImage6 = (e) => {
@@ -600,7 +580,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         image_File_8: imageEight?.url_File8,
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // const handleLocationImage7 = (e) => {
@@ -639,7 +620,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         image_File_8: imageEight?.url_File8,
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // const handleLocationImage8 = (e) => {
@@ -678,7 +660,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         image_File_8: e.target.files[0],
       })
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
+
     }
   }
   // console.log(selectColorID, "selectColorID");

@@ -47,7 +47,7 @@ export default function NavbarForSetting() {
             </button>
 
             {/* Mobile Main Menu User Section */}
-            <div
+            {/* <div
               className="w-full ml-[30px] h-9 overflow-hidden border border-lightBorderColor flex items-center px-[10px] rounded-lg">
               <input
                 type="text"
@@ -56,7 +56,7 @@ export default function NavbarForSetting() {
                 placeholder="Поиск"
               />
               <span> <SearchIcon /> </span>
-            </div>
+            </div> */}
           </div>
           {/* Desktop Main Header User Section */}
           <button className="md:w-[56px] md:h-[56px] rounded-full md:border border-lightBorderColor bg-white hidden md:flex items-center justify-center cursor-pointer">

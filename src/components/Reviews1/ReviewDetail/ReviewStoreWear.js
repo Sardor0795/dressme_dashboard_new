@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReviewStore from "./ReviewStore/ReviewStore";
 import ReviewWear from "./ReviewWear/ReviewWear";
 import { SearchIcon } from "../../../assets/icons";
@@ -11,6 +11,9 @@ import { ShopList } from "../../../hook/ShopList";
 export default function ReviewStoreWear() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
    const [shopList, setShopList] = useContext(ShopList)
+   const [state, setState] = useState({
+     searchComment: ""
+  });
 
   const { t } = useTranslation("reviews");
 
@@ -46,6 +49,8 @@ export default function ReviewStoreWear() {
                     id="searchStore"
                     className="w-full h-full outline-0 px-[10px]"
                     placeholder={`${t("search")}`}
+                    value={state?.searchComment}
+                    onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
                   />
                   <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
                     <SearchIcon />

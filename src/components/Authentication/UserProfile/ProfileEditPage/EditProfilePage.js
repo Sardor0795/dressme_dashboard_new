@@ -27,6 +27,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { dressRegionList } from "../../../../hook/RegionList";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import axiosInstance from "../../AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 function EditProfilePage() {
@@ -172,9 +173,11 @@ function EditProfilePage() {
     refetchOnWindowFocus: false,
   }
   );
+
+
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(`${url}/profile`, {
+      const response = await axiosInstance.get("/profile", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -186,38 +189,27 @@ function EditProfilePage() {
       return { error, status };
     }
   };
-
   const customHeaders = {
     "Content-type": "application/json; charset=UTF-8",
     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
+  const { refetch, isFetching } = useQuery(["get_profile_list"], () => fetchData(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.status === 401) {
+        sellerRefreshToken();
+      }
+      throw new Error(error || "something wrong");
 
-  const { refetch, isFetching } = useQuery(
-    ["get_profile_axios11"],
-    () => fetchData(customHeaders),
-    {
-      onSuccess: (data) => {
-        if (data?.status >= 200 && data?.status < 300) {
-          setSellerInformation({
-            ...sellerInformation,
-            sellerUserData: data?.data,
-          });
-        }
-        if (data?.status === 401) {
-          // setSellerInformation({ ...sellerInformation, sellerUserData: [] });
-          sellerRefreshToken();
-        }
-      },
-      onError: (error) => {
-        if (error?.response?.status === 401) {
-          sellerRefreshToken();
-          // setSellerInformation({ ...sellerInformation, sellerUserData: [] });
-        }
-      },
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
 
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
@@ -504,7 +496,7 @@ function EditProfilePage() {
     document.title = "Pедактировать профиль";
   }, []);
   // Если вы удалите аккаунт Тип предприятия
-  console.log(isFetching, 'isFetching');
+  // console.log(isFetching, 'isFetching');
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -983,7 +975,7 @@ function EditProfilePage() {
                             )
                             .map((item) => {
                               return (
-                                <div className="flex items-center text-[#000] text-[14px] md:text-base">
+                                <div key={item?.name_uz} className="flex items-center text-[#000] text-[14px] md:text-base">
                                   {languageDetector?.typeLang === "ru" &&
                                     item?.name_ru}
                                   {languageDetector?.typeLang === "uz" &&
@@ -991,13 +983,11 @@ function EditProfilePage() {
                                   ,
                                   {item?.sub_regions?.map((data) => {
                                     return (
-                                      <span className="ml-1 text-[14px] md:text-base">
-                                        {Number(data?.id) ==
-                                          Number(state?.sellerSubRegionId) &&
+                                      <span key={data?.id} className="ml-1 text-[14px] md:text-base">
+                                        {Number(data?.id) === Number(state?.sellerSubRegionId) &&
                                           languageDetector?.typeLang === "ru" &&
                                           data?.name_ru}
-                                        {Number(data?.id) ==
-                                          Number(state?.sellerSubRegionId) &&
+                                        {Number(data?.id) === Number(state?.sellerSubRegionId) &&
                                           languageDetector?.typeLang === "uz" &&
                                           data?.name_uz}
                                       </span>

@@ -60,7 +60,7 @@ function AddStore({ onRefetch }) {
         pictureBgView: URL.createObjectURL(event.target.files[0]),
       });
     } catch (error) {
-      console.log(error);
+      throw new Error(error || "something wrong");
     }
   }
 
