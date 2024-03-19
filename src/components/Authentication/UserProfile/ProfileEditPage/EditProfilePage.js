@@ -137,7 +137,7 @@ function EditProfilePage() {
 
   const fetchDataRegion = async (customHeadersRegion) => {
     try {
-      const response = await axios.get(`${url}/regions`, {
+      const response = await axiosInstance.get("/regions", {
         headers: customHeadersRegion,
       });
       const status = response.status;
@@ -155,19 +155,14 @@ function EditProfilePage() {
     'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
 
-  useQuery(["get_region_list"], () => fetchDataRegion(customHeadersRegion), {
+  useQuery(["get_regionInProfile"], () => fetchDataRegion(customHeadersRegion), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setRegionList(data?.data);
       }
-      if (data?.status === 401) {
-        sellerRefreshToken();
-      }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken();
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
@@ -201,9 +196,6 @@ function EditProfilePage() {
       }
     },
     onError: (error) => {
-
-      console.log(error, 'error profile')
-
 
       throw new Error(error || "something wrong");
 
