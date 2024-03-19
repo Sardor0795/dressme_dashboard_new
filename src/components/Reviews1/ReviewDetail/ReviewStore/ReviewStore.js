@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopList } from "../../../../hook/ShopList";
 import { dressMainData } from "../../../../hook/ContextTeam";
+import axiosInstance from "../../../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
@@ -26,7 +27,7 @@ const ReviewStore = () => {
   // // ------------GET  Has Magazin ?-----------------
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+      const response = await axiosInstance.get("/shops", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -47,23 +48,15 @@ const ReviewStore = () => {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setShopList(data?.data)
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status  })
-      }
-      if (data?.status === 401) {
-        sellerRefreshToken()
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status  })
-
       }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken()
-        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
+
   // ------------GET METHOD delivery-method-----------------
   useEffect(() => {
     const fetchDelivery = async () => {

@@ -11,6 +11,7 @@ import { HelperData } from '../../../hook/HelperDataStore'
 import { useTranslation } from 'react-i18next'
 import { ShopList } from '../../../hook/ShopList'
 import { ShopLocationList } from '../../../hook/ShopLocationList'
+import axiosInstance from '../../Authentication/AxiosIntance'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function MarketIsLocationCheck() {
@@ -22,9 +23,10 @@ export default function MarketIsLocationCheck() {
   const { t } = useTranslation("locations");
 
 
+
   const fetchData = async (customHeaders) => {
     try {
-      const response = await axios.get(`${REACT_APP_BASE_URL}/shops/locations/index`, {
+      const response = await axiosInstance.get("/shops/locations/index", {
         headers: customHeaders,
       });
       const status = response.status;
@@ -41,22 +43,14 @@ export default function MarketIsLocationCheck() {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
-  useQuery(['seller_location_list1'], () => fetchData(customHeaders), {
+  useQuery(['seller_location_list33'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        // setDressInfo({ ...dressInfo, locationList: data?.data?.locations, sellerStatus: data?.status })
-        setShopLocationList(data?.data?.locations)
-      }
-      if (data?.status === 401) {
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status })
-        sellerRefreshToken()
+         setShopLocationList(data?.data?.locations)
       }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken()
-        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
-      }
+      throw new Error(error || "something wrong");
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,

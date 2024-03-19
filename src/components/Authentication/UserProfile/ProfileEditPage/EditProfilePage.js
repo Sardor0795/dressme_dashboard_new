@@ -87,27 +87,27 @@ function EditProfilePage() {
   useEffect(() => {
     setState({
       ...state,
-      sellerFname: sellerInformation?.sellerUserData?.name,
-      sellerLname: sellerInformation?.sellerUserData?.surname,
-      sellerEmail: sellerInformation?.sellerUserData?.email,
-      sellerCardNumber: sellerInformation?.sellerUserData?.card_number,
-      sellerRegionId: sellerInformation?.sellerUserData?.region_id,
-      sellerSubRegionId: sellerInformation?.sellerUserData?.sub_region_id,
-      sellerTypeId: sellerInformation?.sellerUserData?.seller_type_id,
+      sellerFname: sellerInformation?.name,
+      sellerLname: sellerInformation?.surname,
+      sellerEmail: sellerInformation?.email,
+      sellerCardNumber: sellerInformation?.card_number,
+      sellerRegionId: sellerInformation?.region_id,
+      sellerSubRegionId: sellerInformation?.sub_region_id,
+      sellerTypeId: sellerInformation?.seller_type_id,
       sellerTypes:
-        sellerInformation?.sellerUserData?.seller_type_id >= 3
+        sellerInformation?.seller_type_id >= 3
           ? "ENTITY"
           : "INDIVIDUAL",
-      companyName: sellerInformation?.sellerUserData?.company?.name,
-      sellerStatus: sellerInformation?.sellerUserData?.status,
+      companyName: sellerInformation?.company?.name,
+      sellerStatus: sellerInformation?.status,
       sellerPhoneCode:
-        sellerInformation?.sellerUserData?.phone &&
-        sellerInformation?.sellerUserData?.phone.slice(0, 3),
+        sellerInformation?.phone &&
+        sellerInformation?.phone.slice(0, 3),
       sellerPhoneNum:
-        sellerInformation?.sellerUserData?.phone &&
-        sellerInformation?.sellerUserData?.phone.slice(3, 12),
+        sellerInformation?.phone &&
+        sellerInformation?.phone.slice(3, 12),
     });
-  }, [sellerInformation?.sellerUserData]);
+  }, [sellerInformation]);
 
   // ------------GET METHOD Region-----------------
   useEffect(() => {
@@ -175,6 +175,7 @@ function EditProfilePage() {
   );
 
 
+
   const fetchData = async (customHeaders) => {
     try {
       const response = await axiosInstance.get("/profile", {
@@ -193,24 +194,25 @@ function EditProfilePage() {
     "Content-type": "application/json; charset=UTF-8",
     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-  const { refetch, isFetching } = useQuery(["get_profile_list"], () => fetchData(customHeaders), {
+  const { refetch, isLoading } = useQuery(["get_profile_list2"], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setSellerInformation({ ...sellerInformation, sellerUserData: data?.data })
+        setSellerInformation(data?.data)
       }
     },
     onError: (error) => {
-      if (error?.response?.status === 401) {
-        sellerRefreshToken();
-      }
+
+      console.log(error, 'error profile')
+
+
       throw new Error(error || "something wrong");
 
     },
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-
-
+  console.log(sellerInformation, 'sellerInformation');
+  console.log(isLoading, 'isLoading');
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
     return fetch(`${url}/delete`, {
@@ -496,7 +498,7 @@ function EditProfilePage() {
     document.title = "Pедактировать профиль";
   }, []);
   // Если вы удалите аккаунт Тип предприятия
-  // console.log(isFetching, 'isFetching');
+  // console.log(isLoading, 'isLoading');
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -694,7 +696,8 @@ function EditProfilePage() {
           </span>
         </div>
       )}
-      {isFetching ? <LoadingForSeller /> :
+      {
+        // {isLoading ? <LoadingForSeller /> :
         <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">
           {/* title */}
           <div className="w-full flex items-center justify-between ">
@@ -1017,7 +1020,7 @@ function EditProfilePage() {
                   <CreditCardNumber />
                 </span>
                 <InputMask
-                  value={state?.sellerCardNumber || ""}
+                  value={state?.sellerCardNumber}
                   mask="9999-9999-9999-9999"
                   name="credit-card-number"
                   className="outline-none	  w-full h-[38px] md:h-[48px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
@@ -1078,7 +1081,7 @@ function EditProfilePage() {
                         type="text"
                         name="companyName"
                         placeholder={t("companyName")}
-                        value={state?.companyName || ""}
+                        value={state?.companyName}
                         onChange={(e) =>
                           setState({
                             ...state,

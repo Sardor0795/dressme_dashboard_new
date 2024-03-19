@@ -532,9 +532,9 @@ export default function ProductLocationsList() {
         </section>
         <section className="w-full flex md:hidden">
           <div className="w-full flex items-center">
-            <button className="absolute flex items-center justify-start cursor-pointer ">
+            <div className="absolute flex items-center justify-start cursor-pointer ">
               <MobileHumburgerMenu />
-            </button>
+            </div>
             <p className="w-full text-center text-black text-2xl not-italic font-AeonikProMedium">
               {t("PRproduct")}
             </p>

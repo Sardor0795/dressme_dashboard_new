@@ -35,32 +35,32 @@ export default function MarketStore() {
       return { error, status };
     }
   };
-  const customHeaders = {
-    "Content-type": "application/json; charset=UTF-8",
-    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
-  };
-  useQuery(["seller_shops_list"], () => fetchData(customHeaders), {
-    onSuccess: (data) => {
-      if (data?.status >= 200 && data?.status < 300) {
-        setShopList(data?.data)
-      }
+  // const customHeaders = {
+  //   "Content-type": "application/json; charset=UTF-8",
+  //   Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
+  // };
+  // useQuery(["seller_shops_list"], () => fetchData(customHeaders), {
+  //   onSuccess: (data) => {
+  //     if (data?.status >= 200 && data?.status < 300) {
+  //       setShopList(data?.data)
+  //     }
 
-      if (data?.status === 401) {
+  //     if (data?.status === 401) {
 
-        setDressInfo({ ...dressInfo, sellerStatus: data?.status })
-        sellerRefreshToken();
-        fetchData();
-      }
-    },
-    onError: (error) => {
-      if (error?.response?.status === 401) {
-        setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
-        sellerRefreshToken();
-      }
-    },
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  });
+  //       setDressInfo({ ...dressInfo, sellerStatus: data?.status })
+  //       sellerRefreshToken();
+  //       fetchData();
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     if (error?.response?.status === 401) {
+  //       setDressInfo({ ...dressInfo, sellerStatus: error?.response?.status })
+  //       sellerRefreshToken();
+  //     }
+  //   },
+  //   keepPreviousData: true,
+  //   refetchOnWindowFocus: false,
+  // });
   return (
     <div className="mb-10">
       <Outlet />
