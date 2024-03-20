@@ -111,17 +111,7 @@ function EditProfilePage() {
 
   // ------------GET METHOD Region-----------------
   useEffect(() => {
-    const fetchDataRegions = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
-        if (data?.status >= 200 && data?.status < 300) {
-          setRegionList(data?.data);
-        }
-      } catch (error) { }
-    };
-    if (!regionList) {
-      fetchDataRegions();
-    }
+
     const fetchDataTypes = async () => {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/seller-types`);
@@ -133,11 +123,11 @@ function EditProfilePage() {
     if (!dressInfo?.typeList) {
       fetchDataTypes();
     }
-  }, [regionList, dressInfo?.typeLis]);
+  }, [dressInfo?.typeLis]);
 
   const fetchDataRegion = async (customHeadersRegion) => {
     try {
-      const response = await axiosInstance.get("/regions", {
+      const response = await axios.get(`${url}/regions`, {
         headers: customHeadersRegion,
       });
       const status = response.status;
@@ -154,7 +144,6 @@ function EditProfilePage() {
     "Content-type": "application/json; charset=UTF-8",
     'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-
   useQuery(["get_regionInProfile"], () => fetchDataRegion(customHeadersRegion), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
@@ -203,8 +192,7 @@ function EditProfilePage() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-  console.log(sellerInformation, 'sellerInformation');
-  console.log(isLoading, 'isLoading');
+
   // -----------------------Seller Delete---------------
   const { mutate } = useMutation(() => {
     return fetch(`${url}/delete`, {
@@ -688,8 +676,8 @@ function EditProfilePage() {
           </span>
         </div>
       )}
-      {
-        // {isLoading ? <LoadingForSeller /> :
+
+      {isLoading ? <LoadingForSeller /> :
         <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">
           {/* title */}
           <div className="w-full flex items-center justify-between ">
