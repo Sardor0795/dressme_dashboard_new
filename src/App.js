@@ -29,11 +29,11 @@ function App() {
     "Content-type": "application/json; charset=UTF-8",
     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-  useQuery(["get_profile_app"], () => access_token && fetchData(customHeaders), {
+  useQuery(["get_profile_app"], () => !sellerInformation && access_token && fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setSellerInformation(data?.data)
-       }
+      }
     },
     onError: (error) => {
       throw new Error(error || "something wrong");
