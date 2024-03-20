@@ -65,12 +65,12 @@ export default function SellerRefreshContext({ children }) {
             if (response?.status >= 200 && response?.status < 300) {
                 localStorage.setItem("DressmeUserToken", response?.data?.access_token)
                 // refetch()
-                console.log(response?.status, "refresh token response");
+                // console.log(response?.status, "refresh token response");
 
             }
 
         } catch (error) {
-            console.log(error, "refresh token error");
+            // console.log(error, "refresh token error");
             if (error?.response?.status === 401) {
                 localStorage.removeItem("DressmeUserToken");
                 navigate("/login-seller");

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { dressMainData } from '../../hook/ContextTeam';
 import { useContext } from 'react';
 
@@ -9,6 +9,7 @@ const axiosInstance = axios.create({
 
 let isRefreshing = false;
 let refreshSubscribers = [];
+let reloadCounter = 0;
 
 // const [dressInfo, setDressInfo] = useContext(dressMainData);
 // async function refreshToken() {
@@ -32,6 +33,10 @@ let refreshSubscribers = [];
 //         }
 //     }
 // }
+
+// Function to reload the page only once
+
+
 async function refreshToken() {
     try {
         const headers = {
@@ -53,7 +58,7 @@ async function refreshToken() {
     } catch (error) {
         if (error?.response?.status === 401 || error?.response?.status === 403) {
             localStorage.removeItem("DressmeUserToken");
-            // console.log(error?.response?.status,'error?.response?.status');
+             <Navigate to="/login-seller" replace />;
             if (localStorage?.getItem("DressmeUserToken")) {
                 window.location.reload();
             }

@@ -58,7 +58,7 @@ export default function SellerUserContext({ children }) {
         },
         onError: (error) => {
 
-            console.log(error, 'error profile')
+            // console.log(error, 'error profile')
 
 
             throw new Error(error || "something wrong");

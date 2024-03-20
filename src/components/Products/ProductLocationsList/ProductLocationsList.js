@@ -132,19 +132,38 @@ export default function ProductLocationsList() {
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [regionList, setRegionList] = useContext(dressRegionList)
-  useEffect(() => {
-    const fetchDataRegions = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/regions`);
-        if (data?.status >= 200 && data?.status < 300) {
-          setRegionList(data?.data);
-        }
-      } catch (error) { }
-    };
-    if (!regionList) {
-      fetchDataRegions();
+  const fetchDataRegion = async (customHeadersRegion) => {
+    try {
+      const response = await axios.get(`${url}/regions`, {
+        headers: customHeadersRegion,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
     }
-  }, [])
+  };
+
+  const customHeadersRegion = {
+    "Content-type": "application/json; charset=UTF-8",
+    'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
+  };
+  useQuery(["get_regionInproduct"], () => fetchDataRegion(customHeadersRegion), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setRegionList(data?.data);
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  }
+  );
 
   const fetchData = async (customHeaders) => {
     try {
