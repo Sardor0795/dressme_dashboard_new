@@ -165,7 +165,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
     setDressInfo({ ...dressInfo, locationIdAddProduct: data?.id });
     navigate(`/products/location/add/${Number(data?.shop_id)}`);
   }
-   return (
+  return (
     <div className="w-full">
       <ToastContainer
         style={{ zIndex: "1000", top: "80px" }}
@@ -421,10 +421,11 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
             >
               {data?.products
                 ?.filter((e) =>
-                  e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                  languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
+                    e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                 )
                 ?.map((itemValue, index) => {
-                   return (
+                  return (
                     <List.Item key={index} className="w-full  mt-6">
                       <div className="w-full    flex flex-col items-center text-tableTextTitle">
                         <div className="w-full flex flex-col  items-center text-tableTextTitle font-AeonikProRegular text-[16px]">
@@ -666,7 +667,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                           "sku"}
                                       </p>
                                     </div>
-                                    
+
                                     <div key={index}
                                       className="w-[30%] h-full  flex items-center   "
                                     >
@@ -714,7 +715,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                                     }
                                     className="text-textBlueColor text-[13px] font-AeonikProMedium"
                                   >
-                                       
+
                                     {t("SSmore")}...
                                   </button>
                                 ) : (

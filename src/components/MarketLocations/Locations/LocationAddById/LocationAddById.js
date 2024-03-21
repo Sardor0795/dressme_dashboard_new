@@ -61,6 +61,7 @@ export default function LocationAddById() {
     picturelogoView2: "",
     pictureLastFile3: "",
     pictureLastView3: "",
+    errorMessage: ""
   });
   // ----------phone Number----------1
 
@@ -172,6 +173,17 @@ export default function LocationAddById() {
   );
 
   const LocationAddSubmit = () => {
+    const telegramRegex = /^(?:https?:\/\/)?t.me\/\w+$/i;
+    if (!telegramRegex.test(state?.assistantNameFirstTg)) {
+      setState({ ...state, errorMessage: languageDetector?.typeLang === "uz" ? "Iltimos, yaroqli Telegram havolasini kiriting. " : 'Пожалуйста, введите действительную ссылку Telegram.' });
+    } else {
+      setState({ ...state, errorMessage: '' });
+    }
+    if (!telegramRegex.test(state?.assistantNameSecondTg)) {
+      setState({ ...state, errorMessage: languageDetector?.typeLang === "uz" ? "Iltimos, yaroqli Telegram havolasini kiriting. " : 'Пожалуйста, введите действительную ссылку Telegram.'  });
+    } else {
+      setState({ ...state, errorMessage: '' });
+    }
     let form = new FormData();
     form.append("address", state?.shopCenterAddress);
     form.append("longitude", state?.shopLongitude);
@@ -278,6 +290,7 @@ export default function LocationAddById() {
     }
   };
   const handleInputAdminNameSecondTg = (e) => {
+
     if (e.target.value) {
       setState({ ...state, assistantNameSecondTg: e.target.value, });
     } else {
@@ -418,8 +431,10 @@ export default function LocationAddById() {
         </div>
       }
       <div className=" ">
-        <div className=" flex items-center justify-center mb-6 md:mb-[50px]">
-          <BackBtn />
+        <div className="relative flex items-center justify-center mb-6 md:mb-[50px]">
+          <div className="md:hidden absolute left-[16px]">
+            <BackBtn />
+          </div>
           <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium md:px-0">
             {t("add_a_store_location")}
           </div>
@@ -508,9 +523,9 @@ export default function LocationAddById() {
                   {!state?.picturelogoView2 && (
                     <div className="w-fit h-fit flex items-center">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        <span className="hidden md:flex mr-1">
+                        {/* <span className="hidden md:flex mr-1">
                           {t("second")}
-                        </span>
+                        </span> */}
                         {t("photo_location")}
                       </span>
                     </div>
@@ -527,7 +542,7 @@ export default function LocationAddById() {
                 <div className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
-                      <span className="hidden md:flex mr-1">{t("second")}</span>
+                      {/* <span className="hidden md:flex mr-1">{t("second")}</span> */}
                       {t("photo_location")}
                     </span>
                   </div>
@@ -558,10 +573,10 @@ export default function LocationAddById() {
                   {!state?.pictureLastView3 && (
                     <div className="w-fit h-fit flex items-center">
                       <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-textBlueColor text-textBlueColor">
-                        <span className="hidden md:flex mr-1">
+                        {/* <span className="hidden md:flex mr-1">
                           {" "}
                           {t("third")}
-                        </span>{" "}
+                        </span>{" "} */}
                         {t("photo_location")}
                       </span>
                     </div>
@@ -578,7 +593,7 @@ export default function LocationAddById() {
                 <div className="h-full w-full text-sm font-AeonikProMedium flex items-center flex-col justify-center  cursor-pointer  text-[#b5b5b5] ">
                   <div className="w-fit h-fit flex items-center">
                     <span className="leading-none text-[11px] flex md:text-sm font-AeonikProRegular md:font-AeonikProMedium border-b border-[#b5b5b5] text-[#b5b5b5]">
-                      <span className="hidden md:flex mr-1">{t("third")}</span>
+                      {/* <span className="hidden md:flex mr-1">{t("third")}</span> */}
                       {t("photo_location")}
                     </span>
                   </div>
@@ -669,7 +684,7 @@ export default function LocationAddById() {
                   </p>
                 )}
             </label>
-            <label htmlFor="fname2" className=" w-full    ">
+            <label htmlFor="fname2" className=" w-full     ">
               <div className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("name_admin_two")}
               </div>
@@ -691,7 +706,7 @@ export default function LocationAddById() {
               </div>
             </label>
 
-            <div className="hidden md:block  flex w-full   ">
+            <div className="hidden md:block  flex w-full     ">
               {/* Region Input  */}
               <div className={"w-full hidden md:block "}>
                 <label htmlFor="selectRegion2">
@@ -707,10 +722,10 @@ export default function LocationAddById() {
                     }}
                     className="w-full  h-[38px] md:h-[42px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
                   >
-                    <span className=" w-full  h-[38px] md:h-[45px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                    <div className=" w-full  h-[38px] md:h-[42px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] leading-4 ">
                       {!state?.regionIdShops &&
                         !state?.subRegionIdShops &&
-                        `${t("choose_region")}`}
+                        <span className="w-full h-full flex items-center"> {t("choose_region")}</span>}
 
                       {state?.getRegionList?.regions
                         ?.filter((e) => e.id == state?.regionIdShops)
@@ -736,7 +751,7 @@ export default function LocationAddById() {
                             </span>
                           );
                         })}
-                    </span>
+                    </div>
                     <span className="rotate-[180deg]">
                       <ArrowTopIcons colors={"#a1a1a1"} />
                     </span>
@@ -750,7 +765,7 @@ export default function LocationAddById() {
               </div>
             </div>
             <label
-              className=" w-full     "
+              className=" w-full"
               htmlFor="phone1"
             >
               <div className="text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
@@ -763,7 +778,7 @@ export default function LocationAddById() {
               <div className="h-[38px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-[12px] md:text-base  flex items-center px-[12px] justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <span
-                    className=" outline-none	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                    className=" outline-none flex items-center	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium text-xs md:text-base placeholder-text-base placeholder-leading-4 placeholder-text-black"
                   >{state.phoneCode}</span>
                 </div>
                 <div className="w-full md:w-[70%] h-10 xs:h-[42px] overflow-hidden flex items-center">
@@ -804,7 +819,7 @@ export default function LocationAddById() {
               <div className="h-[38px] md:h-[42px] mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                 <div className="text-xs md:text-base  flex items-center px-[12px] justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
                   <span
-                    className=" w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium
+                    className="flex items-center w-[40px] h-[42px] outline-none placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium
                     text-xs md:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
 
                   >{state.phoneCode}</span>
@@ -881,42 +896,48 @@ export default function LocationAddById() {
                 />
               </div>
             </div>
-            <div htmlFor="telegrem1" className=" w-full    ">
+            <label htmlFor="telegramLink1" className=" w-full    ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_tg")}
               </p>
               <div className="relative flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
-                  name="telegrem1"
+                  name="telegramLink"
+                  id="telegramLink1"
                   placeholder={'@Username '}
                   value={state?.assistantNameFirstTg || ""}
                   onChange={handleInputAdminNameFirstTg}
                   className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                 />
-                {!state?.assistantNameFirstTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+                {!state?.assistantNameFirstTg && <p className="select-none  text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full text-[14px] font-AeonikProRegular">
                   {t("not_necessary")}
                 </p>}
               </div>
-            </div>
-            <div htmlFor="telegrem2" className=" w-full    ">
+              {state?.errorMessage && <p className="select-none flex items-center text-[13px] font-AeonikProRegular text-[#D50000]"  >{state?.errorMessage}</p>}
+
+            </label>
+            <label htmlFor="telegramLink2" className=" w-full    ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
                 {t("number_admin_tg_two")}
               </p>
               <div className="relative flex flex-col items-center h-10  w-full text-base font-AeonikProMedium">
                 <input
                   type="text"
-                  name="telegrem2"
-                  placeholder={'@Username'}
+                  name="telegramLink"
+                  id="telegramLink2"
+                  placeholder="@Username"
                   value={state?.assistantNameSecondTg || ""}
                   onChange={handleInputAdminNameSecondTg}
-                  className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                  className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular placeholder-font-AeonikProRegular px-2"
                 />
-                {!state?.assistantNameSecondTg && <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
+
+                {!state?.assistantNameSecondTg && <p className="select-none   text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full text-[14px] font-AeonikProRegular">
                   {t("not_necessary")}
                 </p>}
               </div>
-            </div>
+              {state?.errorMessage && <p className="select-none flex items-center text-[13px] font-AeonikProRegular text-[#D50000]" >{state?.errorMessage}</p>}
+            </label>
           </div>
         </div>
         <div className="flex justify-center mt-[50px]  px-4 md:px-0">

@@ -440,7 +440,7 @@ function AddStore({ onRefetch }) {
             <img
               src={state?.pictureBgView}
               alt="backImg"
-              className="w-full h-full object-cover md:object-contain rounded-lg"
+              className="w-full h-full object-cover   rounded-lg"
             />
           ) : (
             <span className="leading-none text-[11px] md:text-sm font-AeonikProRegular md:font-AeonikProMedium text-textBlueColor">
