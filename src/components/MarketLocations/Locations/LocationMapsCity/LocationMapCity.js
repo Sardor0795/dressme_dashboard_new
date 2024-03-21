@@ -579,8 +579,8 @@ export default function LocationMapCity() {
             ></section>
             <div
               className={`max-w-[440px] md:max-w-[600px] h-fit fixed px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-l rounded-t-lg mx-auto w-full duration-500 z-[999999] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${openRegionModal
-                  ? " bottom-0 md:flex flex-col"
-                  : "md:hidden bottom-[-1500px] z-[-10]"
+                ? " bottom-0 md:flex flex-col"
+                : "md:hidden bottom-[-1500px] z-[-10]"
                 }`}
             >
               <div className="w-full flex items-center justify-between font-AeonikProMedium">
@@ -612,8 +612,8 @@ export default function LocationMapCity() {
                           </span>
                           <span
                             className={`${activeIndex == data?.id
-                                ? "rotate-[0deg]"
-                                : "rotate-[180deg]"
+                              ? "rotate-[0deg]"
+                              : "rotate-[180deg]"
                               } `}
                           >
                             <ArrowTopIcons colors={"#a1a1a1"} />
@@ -685,8 +685,8 @@ export default function LocationMapCity() {
             {/* Delete Product Of Pop Confirm */}
             <section
               className={` max-w-[440px] md:max-w-[550px] mx-auto w-full flex-col h-fit bg-white fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[100000] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${deleteModal
-                  ? " bottom-0 md:flex"
-                  : "md:hidden bottom-[-800px] z-[-10]"
+                ? " bottom-0 md:flex"
+                : "md:hidden bottom-[-800px] z-[-10]"
                 }`}
             >
               <button
@@ -1301,14 +1301,14 @@ export default function LocationMapCity() {
                     <p className="w-full text-[13px] md:text-base font-AeonikProMedium flex items-center mb-[10px]">
                       {t("name_admin_two")}
                     </p>
-                    <div className="w-full flex items-center border border-borderColor h-[38px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px] text-base font-AeonikProMedium">
+                    <div className="w-full flex items-center border border-borderColor h-[38px] md:h-[45px] rounded md:rounded-lg md:max-w-[287px]   text-base font-AeonikProMedium">
                       <input
                         type="text"
                         name="fname2"
                         value={state?.idSecondAssistantName || ""}
                         onChange={handleInputAdminNameSecond}
                         placeholder={t("name_admin_two")}
-                        className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2 "
+                        className="w-full outline-none text-[13px] md:text-[16px] font-AeonikProRegular px-2 placeholder-text-[12px] placeholder-font-AeonikProRegular"
                       />
                     </div>
                   </label>
@@ -1397,8 +1397,8 @@ export default function LocationMapCity() {
                             })
                           }
                           className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idAssistantPhone
-                              ? "font-AeonikProMedium"
-                              : null
+                            ? "font-AeonikProMedium"
+                            : null
                             } text-[13px] md:text-base leading-4 text-black font-AeonikProRegular`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
@@ -1430,8 +1430,8 @@ export default function LocationMapCity() {
                             })
                           }
                           className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.idSecondAssistantPhone
-                              ? "font-AeonikProMedium"
-                              : null
+                            ? "font-AeonikProMedium"
+                            : null
                             } text-[13px] md:text-base leading-4 text-black`}
                           placeholder={"(99) 999-99-99"}
                         ></InputMask>
@@ -1494,11 +1494,9 @@ export default function LocationMapCity() {
                         onChange={handleInputAdminNameFirstTg}
                         className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                       />
-                      {!state?.assistantNameFirstTg && (
-                        <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
-                          {t("not_necessary")}
-                        </p>
-                      )}
+                      {!state?.assistantNameFirstTg && <p className="select-none  text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full text-[14px] font-AeonikProRegular">
+                        {t("not_necessary")}
+                      </p>}
                     </div>
                   </div>
                   <div htmlFor="telegrem2" className=" w-full    ">
@@ -1514,11 +1512,9 @@ export default function LocationMapCity() {
                         onChange={handleInputAdminNameSecondTg}
                         className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                       />
-                      {!state?.assistantNameSecondTg && (
-                        <p className="text-[10px] text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full">
-                          {t("not_necessary")}
-                        </p>
-                      )}
+                      {!state?.assistantNameSecondTg && <p className="select-none  text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full text-[14px] font-AeonikProRegular">
+                        {t("not_necessary")}
+                      </p>}
                     </div>
                   </div>
                 </div>

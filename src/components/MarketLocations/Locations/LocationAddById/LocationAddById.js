@@ -668,7 +668,7 @@ export default function LocationAddById() {
                 </span>
               </div>
               <div className="flex flex-col items-center h-[38px] md:h-[42px] w-full text-base font-AeonikProMedium">
-                <input
+                <input 
                   type="text"
                   name="fname"
                   placeholder={t("name_admin")}
