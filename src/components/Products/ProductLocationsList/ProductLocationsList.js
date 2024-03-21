@@ -478,28 +478,50 @@ export default function ProductLocationsList() {
   const [shopIdList, setShopIdList] = useState([]);
   useEffect(() => {
     setShopIdList([]);
-    getProductList?.products_locations?.map((value1) => {
-      value1?.shop_locations?.map((value2) => {
-        if (searchName) {
-          value2?.products
-            ?.filter((e) =>
-              e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
-            )
-            ?.map((value3) => {
-              if (searchName) {
-                if (!shopIdList?.includes(value3?.shop_id)) {
-                  setShopIdList((shopIdList) => [
-                    ...shopIdList,
-                    Number(value3?.shop_id),
-                  ]);
+    if (languageDetector?.typeLang === "ru") {
+      getProductList?.products_locations?.map((value1) => {
+        value1?.shop_locations?.map((value2) => {
+          if (searchName) {
+            value2?.products
+              ?.filter((e) => e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()))
+              ?.map((value3) => {
+                if (searchName) {
+                  if (!shopIdList?.includes(value3?.shop_id)) {
+                    setShopIdList((shopIdList) => [
+                      ...shopIdList,
+                      Number(value3?.shop_id),
+                    ]);
+                  }
                 }
-              }
-            });
-        } else if (!searchName) {
-          setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
-        }
-      });
-    });
+              });
+          } else if (!searchName) {
+            setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
+          }
+        });
+      })
+    }
+    if (languageDetector?.typeLang === "uz") {
+      getProductList?.products_locations?.map((value1) => {
+        value1?.shop_locations?.map((value2) => {
+          if (searchName) {
+            value2?.products
+              ?.filter((e) => e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase()))
+              ?.map((value3) => {
+                if (searchName) {
+                  if (!shopIdList?.includes(value3?.shop_id)) {
+                    setShopIdList((shopIdList) => [
+                      ...shopIdList,
+                      Number(value3?.shop_id),
+                    ]);
+                  }
+                }
+              });
+          } else if (!searchName) {
+            setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
+          }
+        });
+      })
+    }
   }, [getProductList?.products_locations, searchName]);
 
   function onHandleStatus(productId, locationid, shopId) {

@@ -182,7 +182,7 @@ function MyMarket() {
               return (
                 <div
                   key={data?.id}
-                  className="w-full h-fit md:h-[100px] border border-borderColor md:pr-10  p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
+                  className="w-full h-fit md:h-[100px]  border border-borderColor md:pr-10   overflow-hidden  p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
                 >
                   <div className="w-full md:w-fit flex flex-col md:flex-row items-center md:justify-start  md:border-0 border-b border-borderColor">
                     <div className="w-full md:w-fit flex items-center justify-between  md:pr-7 md:pl-5 text-xl font-AeonikProRegular ">
