@@ -1326,8 +1326,9 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
 
                             return (
-                                <List.Item key={index} className="w-full" >
-                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct &&
+                                <div>
+                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct && <List.Item key={index} className="w-full" >
+
                                         <div className="flex items-center gap-x-1">
                                             <div className="hidden md:flex items-center h-full">
                                                 <Checkbox value={item?.id} checked={checked} />
@@ -1336,8 +1337,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             <div
                                                 className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                             >
-                                                {item?.shop_location_id}
-
+ 
                                                 <div className="relative w-full flex gap-x-10 px-3 pt-5 ">
                                                     <div className="w-fit flex flex-col ">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
@@ -1992,8 +1992,9 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>}
-                                </List.Item>
+                                        </div>
+                                    </List.Item>}
+                                </div>
                             )
                         })}
                     </List>

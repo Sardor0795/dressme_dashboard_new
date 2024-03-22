@@ -853,14 +853,14 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                 </div>
                                 <div className="w-full h-fit  flex items-center justify-between px-3">
                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                         {t("APcolor")}:
+                                        {t("APcolor")}:
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                             return (
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
                                                     <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
-                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                 </div>
                                             );
                                         })}
@@ -1507,7 +1507,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                         <div className="flex items-center justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                 {t("APcolor")}:
+                                                {t("APcolor")}:
                                             </div>
                                         </div>
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
@@ -1516,7 +1516,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                 >
                                                     <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
-                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
+                                                        {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                 </div>
                                             );
                                         })}
@@ -1615,9 +1615,10 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
 
                             return (
-                                <List.Item key={index} className="w-full "
-                                >
-                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct &&
+                                <div>
+                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct && <List.Item key={index} className="w-full "
+                                    >
+
                                         <div className="flex items-center gap-x-1">
                                             <div className="hidden md:flex items-center h-full">
                                                 <Checkbox value={item?.id} checked={checked} />
@@ -1626,7 +1627,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <div
                                                 className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                             >
-                                                {item?.shop_location_id}
+                                                 
 
                                                 <div className="relative w-full flex gap-x-10 px-3 pt-5">
                                                     <div className="w-fit flex flex-col">
@@ -1960,14 +1961,14 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 </div>
                                                 <div className="w-full h-fit  flex items-center justify-between px-3">
                                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                                         {t("APcolor")}:
+                                                        {t("APcolor")}:
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
                                                             return (
                                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
                                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
                                                                 >
                                                                     <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
-                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
+                                                                        {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                                 </div>
                                                             );
                                                         })}
@@ -2387,7 +2388,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex items-center justify-center ">
                                                             <div
                                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                 {t("APcolor")}:
+                                                                {t("APcolor")}:
                                                             </div>
                                                         </div>
                                                         {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
@@ -2396,7 +2397,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                     className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px]   px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] xs:text-base  not-italic font-AeonikProRegular`}
                                                                 >
                                                                     <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
-                                                            {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
+                                                                        {languageDetector?.typeLang === "uz" && data?.name_uz} </span>
                                                                 </div>
                                                             );
                                                         })}
@@ -2412,8 +2413,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>}
-                                </List.Item>
+                                        </div>
+                                    </List.Item>}
+                                </div>
                             )
                         })}
                     </List>

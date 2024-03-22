@@ -32,6 +32,7 @@ import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopLocationProductList } from "../../../../hook/ShopLocationProductList";
+import Item from "antd/es/list/Item";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -543,7 +544,7 @@ const AddingProduct = () => {
           setDressInfo({
             ...dressInfo,
             nextPageShowForm: true,
-            ProductFilterType: "",
+            // ProductFilterType: "",
           });
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -558,8 +559,8 @@ const AddingProduct = () => {
         }
       })
       .catch((err) => {
-        throw new Error(err || "something wrong");
         setState({ ...state, sendingLoader: false });
+        throw new Error(err || "something wrong");
       });
   };
   const handleNextPage = () => {
@@ -585,6 +586,7 @@ const AddingProduct = () => {
       setState({ ...state, isCheckValid: false });
     }
   };
+  
   const handleChangeSubSection = (e) => {
     setState({ ...state, sub_Section_Id: e });
   };
@@ -713,7 +715,10 @@ const AddingProduct = () => {
     state?.openSelect,
     state?.MakeCountryModal
   ])
-
+  console.log(dressInfo?.ProductFilterType, 'ProductFilterType');
+  console.log(state?.filterTypeId, 'filterTypeId');
+  console.log(state?.category_Id, 'category_Id');
+  console.log(state?.type_Id, 'type_Id');
   // console.log('test-- page two');
   // navigate(-1)
 
@@ -1269,24 +1274,26 @@ const AddingProduct = () => {
                           <SearchIcon />
                         </div>
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                          {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => {
-                            e?.category_id == state?.category_Id ||
-                              languageDetector?.typeLang === "ru" ?
-                              e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
-                              e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase())
-                          })?.map((item) => {
-                            return (
-                              <div
-                                onClick={() => selectTypeById(item?.id, item?.category_id)}
-                                key={item?.id}
-                                className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                {state?.filterTypeId == (item?.id) &&
-                                  <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
-                              </div>
-                            )
-                          }) :
+                          {state?.type_Id ?
+                            dressInfo?.getProductInfo?.types?.filter(e =>
+                              searchList ? languageDetector?.typeLang === "ru" ?
+                                e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
+                                e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
+                            )?.map((item) => {
+                              return (
+                                <>   {item?.category_id == state?.type_Id &&
+                                  <div
+                                    onClick={() => selectTypeById(item?.id, item?.category_id)}
+                                    key={item?.id}
+                                    className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                    {state?.filterTypeId == (item?.id) &&
+                                      <span onClick={() => ClearSelectTypeById(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
+                                  </div>}</>
+                              )
+                            })
+                            :
                             dressInfo?.getProductInfo?.types?.filter((e) =>
                               searchList ? languageDetector?.typeLang === "ru" ?
                                 e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
@@ -2101,7 +2108,7 @@ const AddingProduct = () => {
                           <button
                             onClick={toggleDropModalButton}
                             type="button"
-                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.type_Id
+                            className={`w-full overflow-hidden h-[38px] hidden md:flex items-center justify-between ${state?.isCheckValid && (!state?.price || !state?.type_Id)
                               ? "border border-[#FFB8B8] "
                               : "border border-borderColor"
                               }  rounded-lg p-3 `}
@@ -2132,9 +2139,7 @@ const AddingProduct = () => {
                           </button>
                           <button
                             type="button"
-                            className={`w-full overflow-hidden min-h-[38px] md:hidden flex items-center justify-between ${state?.isCheckValid &&
-                              !state?.category_Id &&
-                              !state?.type_Id
+                            className={`w-full overflow-hidden min-h-[38px] md:hidden flex items-center justify-between ${state?.isCheckValid && !state?.category_Id && !state?.type_Id
                               ? "border border-[#FFB8B8] bg-[#FFF6F6]"
                               : "border border-borderColor"
                               }  rounded-lg  px-3 `} >
@@ -2160,7 +2165,7 @@ const AddingProduct = () => {
                       </div>
                       {/* Input Select 8 */}
                       <div className="w-full   h-fit  hidden md:flex items-center gap-x-3">
-                        <div className="w-1/2 flex flex-col gap-y-[5px] ">
+                        <div className="w-1/2 flex flex-col gap-y-[5px]  ">
                           <div className="flex items-center">
                             <span className="text-[13px] md:text-base font-AeonikProRegular">
                               {t("APtype")}
@@ -2190,6 +2195,7 @@ const AddingProduct = () => {
                               onSearch={onSearch}
                               size="large"
                               optionLabelProp="label"
+                              value={dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz })}
 
                               filterOption={(input, option) =>
                                 (option?.label ?? "")
@@ -2197,43 +2203,36 @@ const AddingProduct = () => {
                                   .includes(input.toLowerCase())
                               }
                             >
-                              {dressInfo?.ProductFilterType
-                                ? dressInfo?.getProductInfo?.types
-                                  ?.filter(
-                                    (e) =>
-                                      Number(e?.category_id) ===
-                                      Number(dressInfo?.ProductFilterType)
-                                  )
-                                  ?.map((item) => {
-                                    return (
-                                      <Option
-                                        key={"item_" + item.id}
-                                        value={item?.id}
-                                        attribute2={item?.category_id}
-                                      >
-                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                      </Option>
-                                    );
-                                  })
-                                : dressInfo?.getProductInfo?.types?.map(
-                                  (item) => {
-                                    return (
-                                      <Option
-                                        key={"item_" + item.id}
-                                        value={item?.id}
-                                        attribute2={item?.category_id}
-                                      >
-                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                      </Option>
-                                    );
-                                  }
+                              {dressInfo?.ProductFilterType ? dressInfo?.getProductInfo?.types?.filter((e) => Number(e?.category_id) === Number(dressInfo?.ProductFilterType))?.map((item) => {
+                                console.log(item, 'item');
+                                return (
+                                  <Option
+                                    key={"item_" + item.id}
+                                    value={item?.id}
+                                    attribute2={item?.category_id}
+                                  >
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                  </Option>
+                                );
+                              })
+                                : dressInfo?.getProductInfo?.types?.map((item) => {
+                                  return (
+                                    <Option
+                                      key={"item_" + item.id}
+                                      value={item?.id}
+                                      attribute2={item?.category_id}
+                                    >
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                    </Option>
+                                  );
+                                }
                                 )}
                             </Select>
                           </div>
                         </div>
-                        <div className="w-1/2 flex flex-col gap-y-[5px] ">
+                        <div className="w-1/2 flex flex-col gap-y-[5px]  ">
                           <div className="flex items-center">
                             <span className="text-[13px] md:text-base font-AeonikProRegular">
                               {t("APmanufacturer")}
@@ -2511,35 +2510,35 @@ const AddingProduct = () => {
                     </div>
 
                     <div>
-                      {state.openDropModalButton ? (
-                        <div className="w-full hidden md:flex items-center flex-wrap gap-3 ">
-                          <HeadWearAdd
-                            title={dressInfo?.getProductInfo?.categories}
-                            typeId={state?.type_Id}
-                            handleCallBack={CallBackHeadWear}
-                          />
-                          <OutWearAdd
-                            title={dressInfo?.getProductInfo?.categories}
-                            typeId={state?.type_Id}
-                            handleCallBack={CallBackOutWear}
-                          />
-                          <UnderAddWear
-                            title={dressInfo?.getProductInfo?.categories}
-                            typeId={state?.type_Id}
-                            handleCallBack={CallBackUnderWear}
-                          />
-                          <ShoesAdd
-                            title={dressInfo?.getProductInfo?.categories}
-                            typeId={state?.type_Id}
-                            handleCallBack={CallBackShoesWear}
-                          />
-                          <AccessoriesAdd
-                            title={dressInfo?.getProductInfo?.categories}
-                            typeId={state?.type_Id}
-                            handleCallBack={CallBackAccessoriesWear}
-                          />
-                        </div>
-                      ) : null}
+
+                      <div className={`w-full hidden   items-center flex-wrap gap-3 ${state.openDropModalButton ? "md:flex" : "md:hidden"} `}>
+                        <HeadWearAdd
+                          title={dressInfo?.getProductInfo?.categories}
+                          typeId={state?.type_Id}
+                          handleCallBack={CallBackHeadWear}
+                        />
+                        <OutWearAdd
+                          title={dressInfo?.getProductInfo?.categories}
+                          typeId={state?.type_Id}
+                          handleCallBack={CallBackOutWear}
+                        />
+                        <UnderAddWear
+                          title={dressInfo?.getProductInfo?.categories}
+                          typeId={state?.type_Id}
+                          handleCallBack={CallBackUnderWear}
+                        />
+                        <ShoesAdd
+                          title={dressInfo?.getProductInfo?.categories}
+                          typeId={state?.type_Id}
+                          handleCallBack={CallBackShoesWear}
+                        />
+                        <AccessoriesAdd
+                          title={dressInfo?.getProductInfo?.categories}
+                          typeId={state?.type_Id}
+                          handleCallBack={CallBackAccessoriesWear}
+                        />
+                      </div>
+
                     </div>
                   </div>
 
