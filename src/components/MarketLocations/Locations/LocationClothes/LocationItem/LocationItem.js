@@ -203,16 +203,16 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
 
               className={`idCheck flex mr-[8px] items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center w-[20px] h-[20px] `}
             ></Checkbox>
-            <p className="text-black text-[12px]   not-italic flex items-center font-AeonikProMedium mr-[20px]">
+            <div className="text-black text-[12px]   not-italic flex items-center font-AeonikProMedium mr-[20px]">
               {regionList?.regions
                 ?.filter((e) => e?.id == data?.region_id)
                 ?.map((values, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       {values?.name_ru},
                       {values?.sub_regions?.filter((e) => e?.id == data?.sub_region_id)?.map((valueSub) => {
                         return (
-                          <span className="px-1">{valueSub?.name_ru}
+                          <span key={valueSub?.id} className="px-1">{valueSub?.name_ru}
                             ,
                           </span>
                         );
@@ -228,7 +228,7 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
                   ({data?.products?.length})
                 </span>
               )}
-            </p>
+            </div>
           </div>
           <button
             type="button"

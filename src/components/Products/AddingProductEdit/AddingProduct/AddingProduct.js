@@ -442,7 +442,7 @@ const AddingProduct = () => {
   const pathname = window.location.pathname;
   useEffect(() => {
     if (pathname !== '/products')
-      setState({ ...state, PathnameToken: pathname.replace("/products/location/:", "") })
+      setState({ ...state, PathnameToken: pathname.replace("/products/location/", "") })
 
   }, [location.pathname]);
 

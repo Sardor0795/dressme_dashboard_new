@@ -48,7 +48,7 @@ function MyMarket() {
   }, []);
 
   const goDetail = (id) => {
-    navigate(`/store/market-list/:${id}`);
+    navigate(`/store/market-list/${id}`);
   };
   useEffect(() => {
     window.scrollTo({
@@ -164,7 +164,7 @@ function MyMarket() {
         )}
       </section>
 
-      <div className="h-fit md:py-7 w-full flex items-center justify-end ">
+      <div className="h-fit md:pt-7 md:pb-4 w-full flex items-center justify-end  ">
         <Link
           to={"/store/market-add"}
           className="w-fit h-[42px] active:scale-95 rounded-lg flex items-center px-[10px] md:bg-weatherWinterColor text-weatherWinterColor  md:text-white text-[14px] md:text-base not-italic font-AeonikProMedium"
@@ -173,7 +173,7 @@ function MyMarket() {
         </Link>
       </div>
       {shopList ? (
-        <div className="w-full h-fit  flex flex-col gap-y-[30px] ">
+        <div className="w-full h-fit  flex flex-col gap-y-[30px] pt-3  overflow-hidden">
           {shopList?.shops
             ?.filter((item) =>
               item?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
@@ -312,7 +312,7 @@ function MyMarket() {
                       <button
                         type="button"
                         onClick={() =>
-                          navigate(`/store/locations/shop/:${data?.id}`)
+                          navigate(`/store/locations/shop/${data?.id}`)
                         }
                         className="md:text-textBlueColor cursor-pointer w-[50%] flex items-center justify-center md:w-fit  md:text-base text-[13px] not-italic md:font-AeonikProMedium font-AeonikProRegular md:hover:underline md:px-0 px-[20px] ll:px-[25px] xs:px-[54px] md:py-0 py-2 md:rounded-0 rounded-lg md:bg-white bg-locationBg text-locationText"
                       >

@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
-  GoBackIcons,
-  MenuCloseIcons,
+   MenuCloseIcons,
   Star6Icon,
   StarLabel,
   TelIcon,
@@ -15,8 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
-import { AiOutlineLeft } from "react-icons/ai";
-import imageCompression from "browser-image-compression";
+ import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { BackBtn } from "../../../backBtn/backBtn";
@@ -29,8 +27,8 @@ export default function LocationAddById() {
   const navigate = useNavigate();
   const { request } = useHttp();
   const { id } = useParams();
-  const shopId = id?.replace(":", "");
-  const [state, setState] = useState({
+   const shopId = id?.replace(":", "");
+   const [state, setState] = useState({
     imgFirst: "",
     imgSecond: "",
     imgThird: "",

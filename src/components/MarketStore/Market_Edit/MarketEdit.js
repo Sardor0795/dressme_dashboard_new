@@ -82,7 +82,7 @@ function MarketEdit() {
 
   const navigate = useNavigate();
   const pathname = window.location.pathname;
-  let id = pathname.replace("/store/market-list/:", "");
+  let id = pathname.replace("/store/market-list/", "");
   const url = "https://api.dressme.uz/api/seller";
   // ------------------------------------------------------------
   const [cropData, setCropData] = useState();
@@ -319,7 +319,7 @@ function MarketEdit() {
   };
 
   const goLocation = (id) => {
-    navigate(`/store/locations/shop/:${id}`);
+    navigate(`/store/locations/shop/${id}`);
   };
 
   useEffect(() => {

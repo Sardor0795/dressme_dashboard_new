@@ -201,7 +201,7 @@ const ReviewStore = () => {
                     </action>
                     <button
                       onClick={() =>
-                        navigate(`review/comment-store/:${data?.id}`)
+                        navigate(`review/comment-store/${data?.id}`)
                       }
                       className="w-full md:hidden flex items-center justify-center active:scale-95 h-8 text-textBlueColor bg-[#E8F5FD] rounded-lg mt-6 text-[13px] font-AeonikProMedium"
                     >
