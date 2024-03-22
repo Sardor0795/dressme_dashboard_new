@@ -18,17 +18,12 @@ import { dressRegionList } from "../../../../hook/RegionList";
 const { REACT_APP_BASE_URL } = process.env;
 
 const SignUpSeller = () => {
-  const { t } = useTranslation("product");
-
-  // const { REACT_APP_BASE_URL: url } = process.env;
-  const url = "https://api.dressme.uz/api/seller"
-  const navigate = useNavigate()
-  const [naturalPerson, setNaturalPerson] = useState(true);
+ 
+    const [naturalPerson, setNaturalPerson] = useState(true);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [regionList, setRegionList] = useContext(dressRegionList)
 
-  const [api, contextHolder] = notification.useNotification();
-  const [state, setState] = useState({
+   const [state, setState] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -110,7 +105,7 @@ const SignUpSeller = () => {
 
   // ------------POST METHOD-----------------
   const { mutate } = useMutation(() => {
-    return fetch(`${url}/register`, {
+    return fetch(`${REACT_APP_BASE_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -361,7 +356,7 @@ const SignUpSeller = () => {
                     <span className="ml-[5px]"><Star6Icon /></span>
                   </p>
                   <input
-                    className="w-full h-[42px] placeholder-text-[#b5b5b5] px-2 md:px-4 border border-searchBgColor rounded-lg outline-none	bg-white placeholder-bg-white  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4"
+                    className="w-full h-[42px] placeholder-text-[#b5b5b5] px-2 md:px-4 border border-searchBgColor rounded-lg outline-none	bg-white placeholder-bg-white  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4"
                     type="text"
                     name="companyName"
                     value={state?.company_name || ""}
@@ -394,17 +389,17 @@ const SignUpSeller = () => {
                       }`}
                   ></div>
                   {
-                    <div className={` max-w-[550px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
+                    <div className={` max-w-[440px] md:max-w-[550px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions ? " bottom-0 md:flex flex-col" : "md:hidden bottom-[-1500px] z-[-10]"}`} >
                       <div className="w-full flex items-center justify-between  ">
 
-                        <span className="text-black text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
+                        <span className="text-black text-lg sm:text-xl md:text-2xl not-italic font-AeonikProRegular">Выберите регион</span>
                         <span
                           className="select-none cursor-pointer"
                           onClick={() => {
                             setState({ ...state, openModalRegions: false });
                           }}
                         >
-                          <MenuCloseIcons colors="#000" /></span>
+                          <MenuCloseIcons colors="#a1a1a1" /></span>
                       </div>
                       <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
                         {regionList?.regions ?
@@ -415,7 +410,7 @@ const SignUpSeller = () => {
                                   onClick={() => accordionCityList(data?.id)}
                                   className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                                 >
-                                  <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                                  <span className="text-[#303030] text-base md:text-lg not-italic font-AeonikProRegular">
                                     {data?.name_ru}
                                   </span>
                                   <span
@@ -449,7 +444,7 @@ const SignUpSeller = () => {
                                             required
 
                                           />
-                                          <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular"
+                                          <span className="text-[#303030] text-[14px] md:text-base cursor-pointer text-[15px] not-italic font-AeonikProRegular"
                                           >{item?.name_ru}</span>
                                         </label>
                                       </div>
@@ -466,7 +461,7 @@ const SignUpSeller = () => {
                       <div className="w-full flex items-center justify-end  mt-2">
                         <span onClick={() => {
                           setState({ ...state, openModalRegions: false });
-                        }} className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium">{t("SSready")}</span>
+                        }} className="cursor-pointer text-fullBlue text-base md:text-lg not-italic font-AeonikProMedium">Готово</span>
                       </div>
                     </div>
                   }
@@ -521,7 +516,7 @@ const SignUpSeller = () => {
                       value={state?.cardNumber || ""}
                       mask='9999-9999-9999-9999'
                       name="credit-card-number"
-                      className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
+                      className="outline-none	 w-full h-[42px]  text-black  not-italic font-AeonikProRegular  placeholder-text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4"
                       onChange={(e) => setState({ ...state, cardNumber: e.target.value })}
                       placeholder="0000-0000-0000-0000"
                     />
@@ -548,7 +543,7 @@ const SignUpSeller = () => {
                     </span>
                     <div className="mt-1 xs:mt-[6px]  w-full flex items-center overflow-hidden border border-searchBgColor rounded-lg ">
                       <input
-                        className="w-full px-2 xs:px-[16px] outline-none	bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                        className="w-full px-2 xs:px-[16px] outline-none	bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         type="text"
                         name="fname"
                         autoComplete="off"
@@ -572,7 +567,7 @@ const SignUpSeller = () => {
                     </span>
                     <div className="mt-1 xs:mt-[6px]  w-full flex items-center  overflow-hidden border border-searchBgColor rounded-lg ">
                       <input
-                        className="w-full px-2 xs:px-[16px] outline-none	bg-white placeholder-bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                        className="w-full px-2 xs:px-[16px] outline-none	bg-white placeholder-bg-white w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         type="text"
                         name="lname"
                         autoComplete="off"
@@ -602,7 +597,7 @@ const SignUpSeller = () => {
                     </div>
                     <div className="mt-1 xs:mt-[6px] overflow-hidden  w-full flex items-center border border-searchBgColor rounded-lg ">
                       <input
-                        className=" pl-2 xs:pl-[16px] outline-none	 w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                        className=" pl-2 xs:pl-[16px] outline-none	 w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         type="email"
                         name="email"
                         placeholder="example@mail.com"
@@ -634,7 +629,7 @@ const SignUpSeller = () => {
                     <div className="mt-[6px] flex items-center overflow-hidden border border-searchBgColor rounded-lg">
                       <div className="w-[30%] sm:w-[35%] md:w-[100px] h-[40px] xs:h-[42px] flex items-center justify-center   cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div
-                          className=" outline-none flex items-center	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                          className=" outline-none flex items-center	w-[40px] h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         >{state.phoneCode}</div>
                       </div>
                       <div className="ss:w-[65%] md:w-[70%] h-[40px] xs:h-[42px] overflow-hidden">
@@ -658,16 +653,16 @@ const SignUpSeller = () => {
                   </div>
                 </div>
                 {/* Пароль, Пароль */}
-                <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-5 sm:gap-x-[50px] gap-y-4 xs:gap-y-0">
+                <div className="w-full  flex  xs:flex-row flex-col items-center justify-between gap-x-5 sm:gap-x-[50px]  gap-y-4">
                   {/* Пароль */}
-                  <div className="w-full xs:w-1/2 h-[85px] ll:h-[100px]">
+                  <div className="w-full xs:w-1/2  ">
                     <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                       Пароль
                       <span className="ml-[5px]"><Star6Icon /></span>
                     </span>
                     <div className="mt-1 xs:mt-[6px]  w-full flex items-center overflow-hidden border border-searchBgColor rounded-lg ">
                       <input
-                        className="px-2 xs:px-[16px] outline-none	 w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                        className="px-2 xs:px-[16px] outline-none	 w-full h-[42px]  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         type={`${state?.passwordEye ? "text" : "password"}`}
                         name="password"
                         placeholder=""
@@ -703,14 +698,14 @@ const SignUpSeller = () => {
                     }
                   </div>
                   {/* Повторите пароль */}
-                  <div className="w-full xs:w-1/2 h-[85px] ll:h-[100px] ">
+                  <div className="w-full xs:w-1/2   ">
                     <span className="flex items-center select-none text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
                       Повторите пароль
                       <span className="ml-[5px]"><Star6Icon /></span>
                     </span>
                     <div className=" mt-1 xs:mt-[6px]  w-full flex items-center overflow-hidden border border-searchBgColor rounded-lg ">
                       <input
-                        className="px-2 xs:px-[16px] outline-none w-full h-[42px] placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
+                        className="px-2 xs:px-[16px] outline-none w-full h-[42px] placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         // type="Повторите пароль"
                         type={`${state?.confirmPasswordEye ? "text" : "password"}`}
 

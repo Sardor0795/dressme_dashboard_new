@@ -40,8 +40,7 @@ function HeadWearAdd({ title, typeId, handleCallBack }) {
 
     }, [typeId])
     
-console.log(typeId,'typeId');
-console.log(state?.isHasTypeId,'isHasTypeId');
+ 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');

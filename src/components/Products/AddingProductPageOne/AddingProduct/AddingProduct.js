@@ -32,8 +32,7 @@ import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopLocationProductList } from "../../../../hook/ShopLocationProductList";
-import Item from "antd/es/list/Item";
-
+ 
 const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
@@ -715,10 +714,7 @@ const AddingProduct = () => {
     state?.openSelect,
     state?.MakeCountryModal
   ])
-  console.log(dressInfo?.ProductFilterType, 'ProductFilterType');
-  console.log(state?.filterTypeId, 'filterTypeId');
-  console.log(state?.category_Id, 'category_Id');
-  console.log(state?.type_Id, 'type_Id');
+   
   // console.log('test-- page two');
   // navigate(-1)
 

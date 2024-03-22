@@ -1106,6 +1106,7 @@ function EditProfilePage() {
                   : "  "
                   }
               `}>
+                
                   <Select
                     className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
                     placeholder={t("type")}
