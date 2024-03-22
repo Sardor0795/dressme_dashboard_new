@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
- import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
+import { DeleteIcon, LineIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
 import { Checkbox, List, Popover, Select, Switch } from "antd";
 import { dressMainData } from "../../../../../../hook/ContextTeam";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,8 +16,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [helperDatainform, setHelperDatainform] = useContext(HelperData);
     const { t } = useTranslation("product");
- const [languageDetector] = useContext(LanguageDetectorDress);
-     const [state, setState] = useState({
+    const [languageDetector] = useContext(LanguageDetectorDress);
+    const [state, setState] = useState({
         minHeadGirth: "",
         maxHeadGirth: "",
         sizeCheck: false,
@@ -310,7 +310,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="w-fit flex flex-col">
                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                             {t("SShead_circumference")} 
+                                            {t("SShead_circumference")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-full flex items-center mt-[10px] ">
@@ -521,7 +521,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                 <div className="w-full h-fit  flex items-center justify-between px-3">
 
                                     <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                         {t("APcolor")}:
+                                        {t("APcolor")}:
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
                                             return (
                                                 <div key={data?.id} style={{ background: `${data.hex}` }}
@@ -544,7 +544,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     color={"#007DCA"}
                                                     size={40}
                                                     loading={true}
-                                                /> : t("PRsave")  }
+                                                /> : t("PRsave")}
                                         </button> :
                                         <button
                                             type="button"
@@ -555,7 +555,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                 </div>
                             </div>
                             {/* ----for mobile device---- */}
- 
+
                             <div
                                 className={`w-full border p-1 gap-y-4 h-fit md:hidden flex flex-col items-center justify-center   rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                             >
@@ -563,7 +563,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                     <div className="w-full flex flex-col">
                                         <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                                             {t("SShead_circumference")} 
+                                            {t("SShead_circumference")}
                                             <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                         </p>
                                         <div className="w-full flex items-center mt-[10px] ">
@@ -809,7 +809,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                         <div className="flex items-center  justify-center ">
                                             <div
                                                 className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                 {t("APcolor")}:
+                                                {t("APcolor")}:
                                             </div>
                                         </div>
                                         {colorsList.filter(e => e?.pivot?.id == state?.productColorId)?.map((data) => {
@@ -834,7 +834,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     color={"#007DCA"}
                                                     size={40}
                                                     loading={true}
-                                                /> : t("PRsave")  }
+                                                /> : t("PRsave")}
                                         </button> :
                                         <button
                                             type="button"
@@ -859,7 +859,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         className={`idCheck flex items-center rounded-[6px] overflow-hidden border border-[#f4a622]   justify-center md:!min-w-[24px] md:!min-h-[24px] `}>
                     </Checkbox>
                     <p className="text-black text-[14px] xs:text-base not-italic flex items-center font-AeonikProMedium mr-[20px]">
-                    {t("PRselectAll")}
+                        {t("PRselectAll")}
                     </p>
                 </div>
                 {checked?.length ?
@@ -887,7 +887,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         <button
                             className=" flex items-center gap-x-1 text-[14px] xs:text-base not-italic font-AeonikProMedium">
                             <span className="text-[#b5b5b5]  text-[14px] xs:text-base not-italic font-AeonikProMedium">
-                               {t("APaddColor")}
+                                {t("APaddColor")}
                             </span>
                             {addNewColor &&
                                 <span
@@ -918,353 +918,355 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                         className="w-full">
                         {stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map((item, index) => {
                             return (
-                                <List.Item key={index} className="w-full "
-                                >
-                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct && <div className="w-full flex items-center gap-x-1">
-                                        <div className="hidden md:flex items-center h-full">
-                                            <Checkbox value={item?.id} checked={checked} />
-                                        </div>
-                                        {/* ---for desktop device---- */}
-                                        <div
-                                            className={`w-full  h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
-                                        >
-                                            {item?.shop_location_id}
-
-                                            <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
-                                                <div className="w-fit flex flex-col">
-                                                    <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                         {t("SShead_circumference")} 
-                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
-                                                    </p>
-                                                    <div className="w-full flex items-center mt-[10px]">
-                                                        <div className="flex flex-col items-center">
-                                                            <p
-                                                                className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                            >{item?.min_head_girth || null}
-                                                            </p>
-                                                        </div>
-                                                        <span className="mx-[5px]"><LineIcon /></span>
-                                                        <div className="flex flex-col">
-                                                            <p
-                                                                className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                            >{item?.max_head_girth || null}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="w-fit flex flex-col">
-                                                    <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                        {t("SSone_Size")}
-                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
-                                                    </p>
-                                                    <div className="flex items-center justify-center mt-[10px]">
-                                                        <Switch
-                                                            className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
-                                                            checked={Number(item?.one_size)}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="w-fit flex flex-col items-center">
-                                                    <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
-                                                        {t("SSquantity")}
-                                                        {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
-                                                        <span className="ml-[5px]">
-                                                            <StarLabel />
-                                                        </span>
-                                                    </p>
-                                                    <div className="flex items-start justify-between mt-[10px]">
-                                                        <p
-                                                            className={`inputStyle flex items-center justify-center cursor-default w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                                        >{item?.amount || null}</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    onClick={() => {
-                                                        DeleteSize()
-                                                        onDeleteId(item?.id)
-                                                    }
-                                                    }
-                                                    className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
-                                                    <DeleteIcon
-                                                        width={30} />
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mt-[15px]">
-                                                <div className="w-1/2 flex items-center gap-x-[25px]">
-                                                    <div className="w-fit hidden md:flex flex-col items-start">
-                                                        <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                                            <div
-                                                                className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                {t("SSage")}
-                                                            </div>
-                                                        </div>
-                                                        <div className="w-full flex items-center">
-                                                            <p
-                                                                className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                                            >{item?.age || null}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w-full md:w-[90%]">
-                                                        <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                                            <div
-                                                                className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                {t("SSprice")}
-                                                            </div>
-                                                            <span className="ml-[5px]">
-                                                                <StarLabel />
-                                                            </span>
-                                                        </div>
-                                                        <div className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
-                                                            <p
-                                                                className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                            >{Number(item?.price)?.toLocaleString() || null}</p>
-                                                            <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                {t("SSsumm")}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="w-1/2 flex flex-col items-start">
-                                                    <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                        <div
-                                                            className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            {t("SSsale")}
-                                                        </div>
-
-                                                    </div>
-                                                    <div className="w-full flex items-center justify-center">
-                                                        <div className="w-full flex items-center gap-x-1">
-                                                            <div className="w-[40%] md:w-[72px] flex items-start">
-                                                                <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
-                                                                    <p
-                                                                        className="inputStyle w-[70%] flex items-center justify-center cursor-default  text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                    >{item?.discount_percent || null}</p>
-                                                                    <span className="text-textLightColor ml-1">%</span>
-                                                                </div>
-                                                            </div>
-                                                            <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                                            <div className="w-[60%] md:w-[75%] flex items-center">
-                                                                <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
-                                                                    <p
-                                                                        className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                    >{Number(item?.discount_price)?.toLocaleString() || null}</p>
-                                                                    <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
-                                                                        {t("SSsumm")}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="w-full h-fit  flex items-center justify-between px-3">
-
-                                                <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
-                                                     {t("APcolor")}:
-                                                    {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
-                                                        return (
-                                                            <div key={data?.id} style={{ background: `${data.hex}` }}
-                                                                className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
-                                                            >
-                                                                <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
-                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </span>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        setState({ ...state, sizeEditModal: true, checkEmpty: false, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
-                                                    }
-                                                    }
-                                                    className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
-                                                    {t("PRedit")}
-                                                </button>
-                                            </div>
-                                        </div>
-                                        {/* ---for mobile device---- */}
-                                        <div
-                                            className={`w-full md:hidden gap-y-4 p-1 h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
-                                        >
-                                            {/* {item?.shop_location_id} */}
-                                            <div className="w-full flex items-center justify-between">
-                                                <div className="flex items-center h-full">
+                                <div key={item?.id}>
+                                    {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct &&
+                                        <List.Item className="w-full ">
+                                            <div className="w-full flex items-center gap-x-1">
+                                                <div className="hidden md:flex items-center h-full">
                                                     <Checkbox value={item?.id} checked={checked} />
                                                 </div>
+                                                {/* ---for desktop device---- */}
                                                 <div
-                                                    onClick={() => {
-                                                        DeleteSize()
-                                                        onDeleteId(item?.id)
-                                                    }
-                                                    }
-                                                    className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
-                                                    <DeleteIcon
-                                                        width={20} />
-                                                </div>
-                                            </div>
-                                            <div className="relative w-full  grid grid-cols-2 gap-4 ">
-                                                <div className="w-full flex flex-col">
-                                                    <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                         {t("SShead_circumference")} 
-                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
-                                                    </p>
-                                                    <div className="w-full flex items-center mt-[10px]">
-                                                        <div className="flex flex-col items-center">
-                                                            <p
-                                                                className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
-                                                            >{item?.min_head_girth || null}
+                                                    className={`w-full  h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                                                >
+ 
+                                                    <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
+                                                        <div className="w-fit flex flex-col">
+                                                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                {t("SShead_circumference")}
+                                                                <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                                                             </p>
-                                                        </div>
-                                                        <span className="mx-[5px]"><LineIcon /></span>
-                                                        <div className="flex flex-col">
-                                                            <p
-                                                                className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
-                                                            >{item?.max_head_girth || null}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="w-full flex flex-col">
-                                                    <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                        {t("SSone_Size")}
-                                                        <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
-                                                    </p>
-                                                    <div className="flex items-center justify-center mt-[10px]">
-                                                        <Switch
-                                                            className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
-                                                            checked={Number(item?.one_size)}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="w-full">
-                                                <div className="w-full flex flex-col items-center">
-                                                    <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-
-                                                        {t("SSquantity")}
-                                                        {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
-                                                        <span className="ml-[5px]">
-                                                            <StarLabel />
-                                                        </span>
-                                                    </p>
-                                                    <div className="w-full flex items-center gap-x-3 justify-center mt-[10px]">
-                                                        <button
-                                                            type="button"
-                                                            className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
-                                                            <span>-</span>
-                                                        </button>
-                                                        <p
-                                                            className={`inputStyle flex items-center justify-center cursor-default w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
-                                                        >{item?.amount || null}
-                                                        </p>
-                                                        <button
-                                                            type="button"
-                                                            className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
-                                                            <span>+</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex flex-row justify-between ">
-                                                <div className="w-[40%] flex items-center ">
-
-                                                    <div className="w-full ">
-                                                        <div className="flex items-center mb-2 ll:mb-[10px] ">
-                                                            <div
-                                                                className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
-                                                                {t("SSprice")}
-                                                            </div>
-                                                            <span className="ml-[5px]">
-                                                                <StarLabel />
-                                                            </span>
-                                                        </div>
-                                                        <div className={`w-full h-[38px] flex items-center justify-between ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
-                                                            <p
-                                                                className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                                            >{Number(item?.price)?.toLocaleString() || null}</p>
-                                                            <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
-                                                                {t("SSsumm")}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="w-[57%] flex flex-col items-start">
-                                                    <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
-                                                        <div
-                                                            className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            {t("SSsale")}
-                                                        </div>
-
-                                                    </div>
-                                                    <div className="w-full flex items-center justify-center">
-                                                        <div className="w-full flex items-center gap-x-1">
-                                                            <div className="w-[60px] flex items-start">
-                                                                <div className="w-full h-[38px] flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
+                                                            <div className="w-full flex items-center mt-[10px]">
+                                                                <div className="flex flex-col items-center">
                                                                     <p
-                                                                        className="inputStyle w-[70%] flex items-center justify-center cursor-default  text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
-                                                                    >{item?.discount_percent || null}</p>
-                                                                    <span className="text-textLightColor ml-1">%</span>
+                                                                        className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                                    >{item?.min_head_girth || null}
+                                                                    </p>
+                                                                </div>
+                                                                <span className="mx-[5px]"><LineIcon /></span>
+                                                                <div className="flex flex-col">
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                                                    >{item?.max_head_girth || null}</p>
                                                                 </div>
                                                             </div>
-                                                            <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
-                                                            <div className="w-[60%] md:w-[75%] flex items-center">
-                                                                <div className="w-full h-[38px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                                        </div>
+                                                        <div className="w-fit flex flex-col">
+                                                            <p className="flex items-center justify-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                {t("SSone_Size")}
+                                                                <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
+                                                            </p>
+                                                            <div className="flex items-center justify-center mt-[10px]">
+                                                                <Switch
+                                                                    className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
+                                                                    checked={Number(item?.one_size)}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="w-fit flex flex-col items-center">
+                                                            <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
+                                                                {t("SSquantity")}
+                                                                {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
+                                                                <span className="ml-[5px]">
+                                                                    <StarLabel />
+                                                                </span>
+                                                            </p>
+                                                            <div className="flex items-start justify-between mt-[10px]">
+                                                                <p
+                                                                    className={`inputStyle flex items-center justify-center cursor-default w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                                                >{item?.amount || null}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            onClick={() => {
+                                                                DeleteSize()
+                                                                onDeleteId(item?.id)
+                                                            }
+                                                            }
+                                                            className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
+                                                            <DeleteIcon
+                                                                width={30} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full flex flex-row px-3 gap-x-[11px] md:gap-x-[30px] mb-[15px] md:mt-[15px]">
+                                                        <div className="w-1/2 flex items-center gap-x-[25px]">
+                                                            <div className="w-fit hidden md:flex flex-col items-start">
+                                                                <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
+                                                                    <div
+                                                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                        {t("SSage")}
+                                                                    </div>
+                                                                </div>
+                                                                <div className="w-full flex items-center">
                                                                     <p
-                                                                        className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                                    >{Number(item?.discount_price)?.toLocaleString() || null}</p>
+                                                                        className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                                                    >{item?.age || null}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="w-full md:w-[90%]">
+                                                                <div className="flex items-center mb-2 ll:mb-[10px] ">
+                                                                    <div
+                                                                        className="flex items-center text-[14px] ll:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                        {t("SSprice")}
+                                                                    </div>
+                                                                    <span className="ml-[5px]">
+                                                                        <StarLabel />
+                                                                    </span>
+                                                                </div>
+                                                                <div className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                                                                    <p
+                                                                        className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
+                                                                    >{Number(item?.price)?.toLocaleString() || null}</p>
                                                                     <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
                                                                         {t("SSsumm")}
                                                                     </span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="w-full h-fit  flex  justify-between ">
-                                                <div className="w-fit flex flex-col items-start">
-                                                    <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
-                                                        <div
-                                                            className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
-                                                            {t("SSage")}
-                                                        </div>
-                                                    </div>
-                                                    <div className="w-full flex items-center">
-                                                        <p
-                                                            className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
-                                                        >{item?.age || null}</p>
-                                                    </div>
-                                                </div>
-                                                <span className="text-gray-800 text-base flex flex-col items-center not-italic font-AeonikProRegular">
-                                                    <div className="flex items-center  justify-center ">
-                                                        <div
-                                                            className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                                                             {t("APcolor")}:
-                                                        </div>
-                                                    </div>                                                    {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
-                                                        return (
-                                                            <div key={data?.id} style={{ background: `${data.hex}` }}
-                                                                className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
-                                                            >
-                                                                <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
-                                                        {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
+                                                        <div className="w-1/2 flex flex-col items-start">
+                                                            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
+                                                                <div
+                                                                    className="flex items-center text-[14px] ll:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                    {t("SSsale")}
+                                                                </div>
+
                                                             </div>
-                                                        );
-                                                    })}
-                                                </span>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        setState({ ...state, sizeEditModal: true, checkEmpty: false, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
-                                                    }
-                                                    }
-                                                    className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] xs:text-base  text-textBlueColor  font-AeonikProMedium `}>
-                                                    {t("PRedit")}
-                                                </button>
+                                                            <div className="w-full flex items-center justify-center">
+                                                                <div className="w-full flex items-center gap-x-1">
+                                                                    <div className="w-[40%] md:w-[72px] flex items-start">
+                                                                        <div className="w-full h-10 flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
+                                                                            <p
+                                                                                className="inputStyle w-[70%] flex items-center justify-center cursor-default  text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
+                                                                            >{item?.discount_percent || null}</p>
+                                                                            <span className="text-textLightColor ml-1">%</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                                                    <div className="w-[60%] md:w-[75%] flex items-center">
+                                                                        <div className="w-full h-[40px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                                                            <p
+                                                                                className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
+                                                                            >{Number(item?.discount_price)?.toLocaleString() || null}</p>
+                                                                            <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                                                                                {t("SSsumm")}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full h-fit  flex items-center justify-between px-3">
+
+                                                        <span className="text-gray-800 text-base flex items-center not-italic font-AeonikProRegular">
+                                                            {t("APcolor")}:
+                                                            {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
+                                                                return (
+                                                                    <div key={data?.id} style={{ background: `${data.hex}` }}
+                                                                        className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                                                    >
+                                                                        <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                                            {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </span>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setState({ ...state, sizeEditModal: true, checkEmpty: false, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
+                                                            }
+                                                            }
+                                                            className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>
+                                                            {t("PRedit")}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                {/* ---for mobile device---- */}
+                                                <div
+                                                    className={`w-full md:hidden gap-y-4 p-1 h-fit flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
+                                                >
+                                                    {/* {item?.shop_location_id} */}
+                                                    <div className="w-full flex items-center justify-between">
+                                                        <div className="flex items-center h-full">
+                                                            <Checkbox value={item?.id} checked={checked} />
+                                                        </div>
+                                                        <div
+                                                            onClick={() => {
+                                                                DeleteSize()
+                                                                onDeleteId(item?.id)
+                                                            }
+                                                            }
+                                                            className="absolute right-2 cursor-pointer active:scale-95	active:opacity-70 text-[#a2a2a2] hover:text-textRedColor transition-colors duration-[0.2s] ease-linear">
+                                                            <DeleteIcon
+                                                                width={20} />
+                                                        </div>
+                                                    </div>
+                                                    <div className="relative w-full  grid grid-cols-2 gap-4 ">
+                                                        <div className="w-full flex flex-col">
+                                                            <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                {t("SShead_circumference")}
+                                                                <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
+                                                            </p>
+                                                            <div className="w-full flex items-center mt-[10px]">
+                                                                <div className="flex flex-col items-center">
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center border border-borderColor bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                                    >{item?.min_head_girth || null}
+                                                                    </p>
+                                                                </div>
+                                                                <span className="mx-[5px]"><LineIcon /></span>
+                                                                <div className="flex flex-col">
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default w-[55px] h-[38px] text-center  border border-borderColor bg-white px-2 rounded-lg  font-AeonikProRegular  outline-none`}
+                                                                    >{item?.max_head_girth || null}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="w-full flex flex-col">
+                                                            <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                {t("SSone_Size")}
+                                                                <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
+                                                            </p>
+                                                            <div className="flex items-center justify-center mt-[10px]">
+                                                                <Switch
+                                                                    className={`border border-borderColor cursor-default bg-[#8B8B8B] `}
+                                                                    checked={Number(item?.one_size)}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full">
+                                                        <div className="w-full flex flex-col items-center">
+                                                            <p className="w-full justify-center flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+
+                                                                {t("SSquantity")}
+                                                                {/* <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span> */}
+                                                                <span className="ml-[5px]">
+                                                                    <StarLabel />
+                                                                </span>
+                                                            </p>
+                                                            <div className="w-full flex items-center gap-x-3 justify-center mt-[10px]">
+                                                                <button
+                                                                    type="button"
+                                                                    className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                                                    <span>-</span>
+                                                                </button>
+                                                                <p
+                                                                    className={`inputStyle flex items-center justify-center cursor-default w-[60px] h-[38px] text-center  flex items-center justify-center outline-none px-1 ${state?.isCheckValid && !state?.amount ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   rounded-lg  font-AeonikProRegular `}
+                                                                >{item?.amount || null}
+                                                                </p>
+                                                                <button
+                                                                    type="button"
+                                                                    className="flex items-center  text-[20px] w-[120px] h-[38px] border border-borderColor bg-[#E5E5E5] rounded-lg justify-center">
+                                                                    <span>+</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full flex flex-row justify-between ">
+                                                        <div className="w-[40%] flex items-center ">
+
+                                                            <div className="w-full ">
+                                                                <div className="flex items-center mb-2 ll:mb-[10px] ">
+                                                                    <div
+                                                                        className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                        {t("SSprice")}
+                                                                    </div>
+                                                                    <span className="ml-[5px]">
+                                                                        <StarLabel />
+                                                                    </span>
+                                                                </div>
+                                                                <div className={`w-full h-[38px] flex items-center justify-between ${state?.isCheckValid && !state?.price ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
+                                                                    <p
+                                                                        className="inputStyle flex items-center  cursor-default  w-[70%] font-AeonikProMedium outline-none bg-transparent"
+                                                                    >{Number(item?.price)?.toLocaleString() || null}</p>
+                                                                    <span className="text-textLightColor  text-xs md:text-base font-AeonikProRegular">
+                                                                        {t("SSsumm")}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="w-[57%] flex flex-col items-start">
+                                                            <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
+                                                                <div
+                                                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                    {t("SSsale")}
+                                                                </div>
+
+                                                            </div>
+                                                            <div className="w-full flex items-center justify-center">
+                                                                <div className="w-full flex items-center gap-x-1">
+                                                                    <div className="w-[60px] flex items-start">
+                                                                        <div className="w-full h-[38px] flex items-center justify-center border border-borderColor rounded-lg px-[4px] md:px-1 py-[8px]">
+                                                                            <p
+                                                                                className="inputStyle w-[70%] flex items-center justify-center cursor-default  text-center  font-AeonikProMedium  outline-none flex items-center justify-center mx-auto"
+                                                                            >{item?.discount_percent || null}</p>
+                                                                            <span className="text-textLightColor ml-1">%</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
+                                                                    <div className="w-[60%] md:w-[75%] flex items-center">
+                                                                        <div className="w-full h-[38px] flex items-center justify-between border border-borderColor px-3 py-[6px] rounded-lg text-xs">
+                                                                            <p
+                                                                                className="inputStyle flex items-center justify-start cursor-default w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
+                                                                            >{Number(item?.discount_price)?.toLocaleString() || null}</p>
+                                                                            <span className="text-textLightColor ml-[10px] text-xs md:text-base font-AeonikProRegular">
+                                                                                {t("SSsumm")}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="w-full h-fit  flex  justify-between ">
+                                                        <div className="w-fit flex flex-col items-start">
+                                                            <div className="flex items-center justify-center  mb-2 ll:mb-[10px]">
+                                                                <div
+                                                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                    {t("SSage")}
+                                                                </div>
+                                                            </div>
+                                                            <div className="w-full flex items-center">
+                                                                <p
+                                                                    className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none "
+                                                                >{item?.age || null}</p>
+                                                            </div>
+                                                        </div>
+                                                        <span className="text-gray-800 text-base flex flex-col items-center not-italic font-AeonikProRegular">
+                                                            <div className="flex items-center  justify-center ">
+                                                                <div
+                                                                    className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
+                                                                    {t("APcolor")}:
+                                                                </div>
+                                                            </div>                                                    {colorsList.filter(e => e?.pivot?.id == item?.product_color_id)?.map((data) => {
+                                                                return (
+                                                                    <div key={data?.id} style={{ background: `${data.hex}` }}
+                                                                        className={`border border-black ${Number(data?.id) === 2 ? "border border-black text-black" : "text-white"} rounded-[15px] ml-3  px-[15px]  whitespace-nowrap flex items-center justify-center text-[14px] ll:text-md  not-italic font-AeonikProRegular`}
+                                                                    >
+                                                                        <span >{languageDetector?.typeLang === "ru" && data?.name_ru}
+                                                                            {languageDetector?.typeLang === "uz" && data?.name_uz}</span>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </span>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setState({ ...state, sizeEditModal: true, checkEmpty: false, sendingLoader: false, editSizeId: item?.id, disableSizes: null, saveBtnDisable: false })
+                                                            }
+                                                            }
+                                                            className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-[14px] xs:text-base  text-textBlueColor  font-AeonikProMedium `}>
+                                                            {t("PRedit")}
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>}
-                                </List.Item>
+                                        </List.Item>}
+                                    
+                                </div>
                             )
                         })}
                     </List>

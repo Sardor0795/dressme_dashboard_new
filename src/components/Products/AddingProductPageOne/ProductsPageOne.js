@@ -19,7 +19,7 @@ export default function ProductsPageOne() {
     });
   }, []);
   const navigate = useNavigate();
-  console.log(dressInfo?.nextPageShowForm);
+  // console.log(dressInfo?.nextPageShowForm);
 
   return (
     <div>
