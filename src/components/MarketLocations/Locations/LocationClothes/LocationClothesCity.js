@@ -153,11 +153,10 @@ export default function LocationClothesCity() {
 
       {/* Delete Product Of Pop Confirm */}
       <section
-        className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${
-          state?.openDeleteModal
+        className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openDeleteModal
             ? " bottom-0 md:flex"
             : "md:hidden bottom-[-800px] z-[-10]"
-        }`}
+          }`}
       >
         <button
           onClick={() => setState({ ...state, openDeleteModal: false })}
@@ -276,19 +275,19 @@ export default function LocationClothesCity() {
 
       <div className="mt-[10px] md:mt-[35px] flex justify-end items-center md:justify-between mx-auto pb-6">
         <section className="hidden md:flex gap-x-4">
-          <p className="text-black text-xl not-italic font-AeonikProMedium mr-[20px]">
-            <p className="text-black text-[13px] md:text-lg not-italic flex items-center font-AeonikProMedium mr-[20px]">
+          <div className="text-black text-xl not-italic font-AeonikProMedium mr-[20px]">
+            <div className="text-black text-[13px] md:text-lg not-italic flex items-center font-AeonikProMedium mr-[20px]">
               {regionList?.regions
                 ?.filter((e) => e?.id == getListItem?.region_id)
                 ?.map((values, index) => {
                   return (
-                    <div>
+                    <div key={values?.id}>
                       {values?.name_ru},
                       {values?.sub_regions
                         ?.filter((e) => e?.id == getListItem?.sub_region_id)
                         ?.map((valueSub) => {
                           return (
-                            <span className="px-1">{valueSub?.name_ru},</span>
+                            <span key={valueSub?.id} className="px-1">{valueSub?.name_ru},</span>
                           );
                         })}
                     </div>
@@ -302,8 +301,8 @@ export default function LocationClothesCity() {
                   ({getListItem?.products?.length})
                 </span>
               )}
-            </p>
-          </p>
+            </div>
+          </div>
           <button
             type="button"
             onClick={() => addNewProductId()}
