@@ -547,12 +547,12 @@ const AddingProduct = () => {
         if (res?.errors && res?.message) {
           setState({ ...state, sendingLoader: false });
           if (res?.errors === true) {
-            setState({ ...state, errorListMessage: res?.message });
+            setState({ ...state, errorListMessage: res?.message, price: null });
           } else {
-            setState({ ...state, errorList: res?.errors });
+            setState({ ...state, errorList: res?.errors, price: null });
           }
         } else if (res?.message) {
-          setState({ ...state, sendingLoader: false });
+          setState({ ...state, sendingLoader: false, price: null });
           navigate("/products/location");
           setDressInfo({
             ...dressInfo,
@@ -572,7 +572,7 @@ const AddingProduct = () => {
         }
       })
       .catch((err) => {
-        setState({ ...state, sendingLoader: false });
+        setState({ ...state, sendingLoader: false, price: null });
         throw new Error(err || "something wrong");
       });
   };
@@ -599,9 +599,27 @@ const AddingProduct = () => {
       setState({ ...state, isCheckValid: false });
     }
   };
-
+  console.log(
+    newId, "newId", `\n`,
+    Number(dressInfo?.locationIdAddProduct), "locationIdAddProduct)", `\n`,
+    state?.section_Id, "section_Id", `\n`,
+    state?.color_Id, "color_Id", `\n`,
+    state?.gender_Id, "gender_Id", `\n`,
+    state?.min_Age_Category, "min_Age_Category", `\n`,
+    state?.max_Age_Category, "max_Age_Category", `\n`,
+    state?.sku, "sku", `\n`,
+    state?.type_Id, "type_Id", `\n`,
+    state?.price, "price", `\n`,
+    state?.filterTypeId, "filterTypeId", `\n`,
+    state?.producer_Id, "producer_Id", `\n`,
+    state?.season_Id, "season_Id", `\n`,
+    state?.pictureBgFile1, "pictureBgFile1", `\n`,
+  );
   const handleChangeSubSection = (e) => {
     setState({ ...state, sub_Section_Id: e });
+  };
+  const handleChangeSection = (e) => {
+    setState({ ...state, section_Id: e })
   };
 
   useEffect(() => {
@@ -1441,7 +1459,7 @@ const AddingProduct = () => {
                                     return (
                                       <span
                                         key={index}
-                                        className="mt-[3px] text-[12px] md:text-[16px] font-AeonikProRegular text-[#b5b5b5]"
+                                        className="mt-[3px] text-[12px] md:text-[16px] capitalize   font-AeonikProRegular text-[#b5b5b5]"
                                       >
                                         {data?.name}
                                       </span>
@@ -1536,8 +1554,8 @@ const AddingProduct = () => {
                                         return (
                                           <span
                                             key={index}
-                                            className="w-full truncate overflow-hidden whitespace-nowrap text-[#b5b5b5] flex items-center  text-[12px] not-italic font-AeonikProRegular"
-                                          >
+                                            className="w-full leading-[15px]	 text-start text-[11px] xs:text-[12px] md:text-[14px]  overflow-hidden text-[#b5b5b5] flex items-center">
+
                                             {data?.address}
                                           </span>
                                         );
@@ -1581,7 +1599,7 @@ const AddingProduct = () => {
                                             className="w-[85%] whitespace-nowrap	flex items-center text-tableTextTitle2 text-[14px] not-italic font-AeonikProRegular" // onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
                                             key={data?.id}
                                           >
-                                            <span className="w-full whitespace-nowrap flex items-center">
+                                            <span className="w-full leading-[15px]	 text-start text-[11px] xs:text-[12px] md:text-[14px]  overflow-hidden text-[#b5b5b5] flex items-center">
                                               {data?.address}
                                             </span>
                                           </span>
@@ -1667,9 +1685,9 @@ const AddingProduct = () => {
                             placeholder={t("PRselect2")}
                             optionLabelProp="label"
                             // optionFilterProp="children"
-                            onChange={(e) =>
-                              setState({ ...state, section_Id: e })
-                            }
+                            // value={dressInfo?.getProductInfo?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((item) => { return languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz })}
+                            onChange={handleChangeSection}
+                            value={state?.section_Id}
                             onSearch={onSearchSection}
                             size="large"
                             filterOption={(input, option) =>
@@ -1677,6 +1695,7 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
+
                           >
                             {dressInfo?.getProductInfo?.sections?.map(
                               (item) => {
@@ -1775,6 +1794,8 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
+                          // value={dressInfo?.getProductInfo?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((item) => { return languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz })}
+
                           >
                             {newArray?.map((item) => {
                               return (
@@ -1851,11 +1872,15 @@ const AddingProduct = () => {
                             }}
                             placeholder={t("PRselect2")}
                             // defaultValue={["china"]}
+                            showSearch={false} // Disabling search functionality
+
                             size="large"
                             onChange={(e) =>
                               setState({ ...state, season_Id: e })
                             }
                             optionLabelProp="label"
+                            value={state?.season_Id}
+
                           >
                             {dressInfo?.getProductInfo?.seasons?.map((item) => {
                               return (
@@ -2000,13 +2025,14 @@ const AddingProduct = () => {
                                 : ""
                                 }
                           rounded-lg w-full h-11 md:h-10 overflow-hidden`}
-                              showSearch
                               placeholder={t("PRselect2")}
                               optionFilterProp="children"
                               onChange={(e) =>
                                 setState({ ...state, gender_Id: e })
                               }
-                              // onSearch={onSearch}
+                              value={state?.gender_Id}
+
+                              showSearch={false} // Disabling search functionality
                               size="large"
                               filterOption={(input, option) =>
                                 (option?.label ?? "")
@@ -2281,6 +2307,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
+                              value={dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => { return languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz })}
 
                             >
                               {dressInfo?.getProductInfo?.producers?.map(
@@ -2348,65 +2375,7 @@ const AddingProduct = () => {
                             </div>
                           }
                         </button>
-                        <div className="w-full h-fit md:flex hidden selectAndt">
-                          <Select
-                            className={`block rounded-lg w-full  md:h-10  ${state?.isCheckValid && !state?.filterTypeId
-                              ? "border border-[#FFB8B8] bg-[#FFF6F6]"
-                              : "border border-borderColor"
-                              }`}
-                            showSearch
-                            placeholder={t("PRselect2")}
-                            optionFilterProp="children"
-                            onChange={(value, attribute2) => {
-                              setState({
-                                ...state,
-                                filterTypeId: value,
-                                type_Id: attribute2?.attribute2,
-                              });
-                            }}
-                            onSearch={onSearchType}
-                            size="large"
-                            filterOption={(input, option) =>
-                              (option?.label ?? "")
-                                .toLowerCase()
-                                .includes(input.toLowerCase())
-                            }
-                          >
-                            {dressInfo?.ProductFilterType
-                              ? dressInfo?.getProductInfo?.types
-                                ?.filter(
-                                  (e) =>
-                                    e?.category_id ==
-                                    dressInfo?.ProductFilterType
-                                )
-                                ?.map((item) => {
-                                  return (
-                                    <Option
-                                      key={"item_" + item.id}
-                                      value={item?.id}
-                                      attribute2={item?.category_id}
-                                    >
-                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                    </Option>
-                                  );
-                                })
-                              : dressInfo?.getProductInfo?.types?.map(
-                                (item) => {
-                                  return (
-                                    <Option
-                                      key={"item_" + item.id}
-                                      value={item?.id}
-                                      attribute2={item?.category_id}
-                                    >
-                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                    </Option>
-                                  );
-                                }
-                              )}
-                          </Select>
-                        </div>
+
                       </div>
                       {/* Input Select 10 mobile */}
                       <div className="w-full  flex md:hidden flex-col gap-y-[4px] ">
@@ -2450,47 +2419,7 @@ const AddingProduct = () => {
                             </div>
                           }
                         </button>
-                        <div className="w-full h-fit md:flex hidden selectAndt">
-                          <Select
-                            className=" rounded-lg w-full md:h-10"
-                            showSearch
-                            placeholder={t("PRselect2")}
-                            optionFilterProp="children"
-                            onChange={(e) =>
-                              setState({ ...state, producer_Id: e })
-                            }
-                            onSearch={onSearchCountry}
-                            size="large"
-                            filterOption={(input, option) =>
-                              (option?.label ?? "")
-                                .toLowerCase()
-                                .includes(input.toLowerCase())
-                            }
 
-                          >
-                            {dressInfo?.getProductInfo?.producers?.map(
-                              (item) => {
-                                return (
-                                  <Option
-                                    key={item.id}
-                                    value={item.id}
-                                    label={
-                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
-                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
-                                          undefined
-                                    }
-                                  >
-                                    <Space>
-                                      <span>
-                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
-                                    </Space>
-                                  </Option>
-                                );
-                              }
-                            )}
-                          </Select>
-                        </div>
                       </div>
                       {/* Input Select 11 mobile */}
                       <div className="w-full  flex md:hidden flex-col gap-y-[5px] ">
