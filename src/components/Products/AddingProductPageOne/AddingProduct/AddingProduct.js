@@ -599,22 +599,22 @@ const AddingProduct = () => {
       setState({ ...state, isCheckValid: false });
     }
   };
-  console.log(
-    newId, "newId", `\n`,
-    Number(dressInfo?.locationIdAddProduct), "locationIdAddProduct)", `\n`,
-    state?.section_Id, "section_Id", `\n`,
-    state?.color_Id, "color_Id", `\n`,
-    state?.gender_Id, "gender_Id", `\n`,
-    state?.min_Age_Category, "min_Age_Category", `\n`,
-    state?.max_Age_Category, "max_Age_Category", `\n`,
-    state?.sku, "sku", `\n`,
-    state?.type_Id, "type_Id", `\n`,
-    state?.price, "price", `\n`,
-    state?.filterTypeId, "filterTypeId", `\n`,
-    state?.producer_Id, "producer_Id", `\n`,
-    state?.season_Id, "season_Id", `\n`,
-    state?.pictureBgFile1, "pictureBgFile1", `\n`,
-  );
+  // console.log(
+  //   newId, "newId", `\n`,
+  //   Number(dressInfo?.locationIdAddProduct), "locationIdAddProduct)", `\n`,
+  //   state?.section_Id, "section_Id", `\n`,
+  //   state?.color_Id, "color_Id", `\n`,
+  //   state?.gender_Id, "gender_Id", `\n`,
+  //   state?.min_Age_Category, "min_Age_Category", `\n`,
+  //   state?.max_Age_Category, "max_Age_Category", `\n`,
+  //   state?.sku, "sku", `\n`,
+  //   state?.type_Id, "type_Id", `\n`,
+  //   state?.price, "price", `\n`,
+  //   state?.filterTypeId, "filterTypeId", `\n`,
+  //   state?.producer_Id, "producer_Id", `\n`,
+  //   state?.season_Id, "season_Id", `\n`,
+  //   state?.pictureBgFile1, "pictureBgFile1", `\n`,
+  // );
   const handleChangeSubSection = (e) => {
     setState({ ...state, sub_Section_Id: e });
   };
