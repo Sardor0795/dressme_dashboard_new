@@ -14,7 +14,7 @@ const { REACT_APP_BASE_URL } = process.env;
 
 export default function TextFormAdd({ productsEdit, handlCallBack, loading, onClick, onEdit }) {
     const { t } = useTranslation("product");
-    const [languageDetector] = useContext(LanguageDetectorDress); 
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const [state, setState] = useState({
@@ -47,17 +47,42 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
     }, [dressInfo?.nextPageShowForm])
 
 
-    const handleSelectQuality = (value) => {
-        dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru === value).map(item => {
+    // const handleSelectQuality = (value) => {
+    //     dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru === value).map(item => {
+    //         setState({ ...state, qualityInUz: item?.name_uz, onEditTextForm: true })
+    //     })
+
+    //     setState({ ...state, qualityInRu: value, qualityInUz: value, onEditTextForm: true })
+    // }
+    // const handleSelectQualityUz = (value) => {
+    //     setState({ ...state, onEditTextForm: true })
+    // }
+
+    const handleSelectQualityRu = (value) => {
+        setState({ ...state, qualityInRu: value, })
+    }
+    useEffect(() => {
+        dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru === state?.qualityInRu).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz, onEditTextForm: true })
         })
+        if (!state?.qualityInRu) {
+            setState({ ...state, qualityInUz: null, onEditTextForm: true })
+        }
+    }, [state?.qualityInRu])
 
-        setState({ ...state, qualityInRu: value, qualityInUz: value, onEditTextForm: true })
-    }
     const handleSelectQualityUz = (value) => {
-        setState({ ...state, onEditTextForm: true })
 
+        setState({ ...state, qualityInUz: value })
     }
+    useEffect(() => {
+        dressInfo?.getProductInfo?.quality?.filter(e => e.name_uz === state?.qualityInUz).map(item => {
+            setState({ ...state, qualityInRu: item?.name_ru, onEditTextForm: true })
+        })
+        if (!state?.qualityInUz) {
+            setState({ ...state, qualityInRu: null, onEditTextForm: true })
+        }
+    }, [state?.qualityInUz])
+
     const handleBrand = (value) => {
         setState({ ...state, brand: value, onEditTextForm: true })
 
@@ -323,9 +348,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                         className={`rounded-[6px] text-[12px] md:text-base  ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
-                                        // allowClear
-                                        value={dressInfo?.getProductInfo?.quality?.filter(e => e?.name_ru == state?.qualityInRu)?.map(item => { return item?.name_ru })}
-                                        onChange={handleSelectQuality}
+                                        allowClear
+                                        value={state?.qualityInRu}
+                                        onChange={handleSelectQualityRu}
                                         options={
                                             dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (
@@ -350,23 +375,13 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                     </div>
                                     <Select
                                         placeholder={"Выбрать"}
-                                        className={`rounded-[6px] text-[12px] md:text-base ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}  `}
+                                        className={`rounded-[6px] text-[12px] md:text-base ${state?.isCheckValid && !state?.qualityInUz ? "border border-[#FFB8B8] " : ""}  `}
 
                                         style={{ width: "100%" }}
-                                        value={
-                                            dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
-                                                return item?.name_uz
-                                            })
-                                            // lang === ''
-                                            // ? 'Выбрать'
-                                            // : lang === 'Оригинал'
-                                            //     ? 'Original'
-                                            //     : lang === 'Полуоригинал'
-                                            //         ? 'Yarim original'
-                                            //         : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
-                                        }
+                                        value={state?.qualityInUz}
+
                                         onChange={handleSelectQualityUz}
-                                        // allowClear
+                                        allowClear
                                         options={
                                             dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (

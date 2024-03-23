@@ -444,12 +444,7 @@ export default function ProductLocationsList() {
     navigate(`/products/location/${id}`);
   };
 
-  const goMapCity = (id) => {
-    navigate(`/locations-store/city/${id}`);
-  };
-  const goMapWear = (id) => {
-    navigate(`/locations-store/wears/${id}`);
-  };
+
   useEffect(() => {
     if (!openStoreList) {
       setDeleteMessage(null);
@@ -477,24 +472,28 @@ export default function ProductLocationsList() {
 
   const [shopIdList, setShopIdList] = useState([]);
   useEffect(() => {
+    return () => {
+      setSearchName("")
+      setShopIdList()
+    }
+  }, [languageDetector?.typeLang])
+  useEffect(() => {
     setShopIdList([]);
     if (languageDetector?.typeLang === "ru") {
       getProductList?.products_locations?.map((value1) => {
         value1?.shop_locations?.map((value2) => {
-          if (searchName) {
+          if (searchName.trim()) {
             value2?.products
-              ?.filter((e) => e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()))
+              ?.filter((e) => e?.name_ru?.toLowerCase()?.includes(searchName.trim()?.toLowerCase()))
               ?.map((value3) => {
-                if (searchName) {
-                  if (!shopIdList?.includes(value3?.shop_id)) {
-                    setShopIdList((shopIdList) => [
-                      ...shopIdList,
-                      Number(value3?.shop_id),
-                    ]);
-                  }
+                if (!shopIdList?.includes(value3?.shop_id)) {
+                  setShopIdList((shopIdList) => [
+                    ...shopIdList,
+                    Number(value3?.shop_id),
+                  ]);
                 }
               });
-          } else if (!searchName) {
+          } else if (!searchName.trim()) {
             setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
           }
         });
@@ -503,11 +502,11 @@ export default function ProductLocationsList() {
     if (languageDetector?.typeLang === "uz") {
       getProductList?.products_locations?.map((value1) => {
         value1?.shop_locations?.map((value2) => {
-          if (searchName) {
+          if (searchName.trim()) {
             value2?.products
-              ?.filter((e) => e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase()))
+              ?.filter((e) => e?.name_uz?.toLowerCase()?.includes(searchName.trim()?.toLowerCase()))
               ?.map((value3) => {
-                if (searchName) {
+                if (searchName.trim()) {
                   if (!shopIdList?.includes(value3?.shop_id)) {
                     setShopIdList((shopIdList) => [
                       ...shopIdList,
@@ -516,13 +515,13 @@ export default function ProductLocationsList() {
                   }
                 }
               });
-          } else if (!searchName) {
+          } else if (!searchName.trim()) {
             setShopIdList((shopIdList) => [...shopIdList, Number(value1?.id)]);
           }
         });
       })
     }
-  }, [getProductList?.products_locations, searchName]);
+  }, [getProductList?.products_locations, searchName, languageDetector?.typeLang]);
 
   function onHandleStatus(productId, locationid, shopId) {
     setStatusModal(true);
@@ -1295,14 +1294,12 @@ export default function ProductLocationsList() {
                               </span>
                             </button>
                             <div className="flex flex-col  gap-y-7">
+
                               {item?.shop_locations
                                 ?.filter((location) =>
-                                  searchName
-                                    ? location?.products?.some((item) =>
-                                      item?.name_uz
-                                        ?.toLowerCase()
-                                        ?.includes(searchName?.toLowerCase())
-                                    )
+                                  searchName ? languageDetector?.typeLang === "ru" ?
+                                    location?.products?.some((item) => item?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase())) :
+                                    location?.products?.some((item) => item?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase()))
                                     : location
                                 )
                                 ?.map((resData, index) => {
@@ -1441,14 +1438,12 @@ export default function ProductLocationsList() {
 
                                           {resData?.products?.length > 0 ? (
                                             <div className="flex flex-col gap-y-[52px] mt-5">
-                                              {resData?.products
-                                                ?.filter((e) =>
-                                                  e?.name_uz
-                                                    ?.toLowerCase()
-                                                    ?.includes(
-                                                      searchName?.toLowerCase()
-                                                    )
-                                                )
+                                              {resData?.products?.filter((e) => {
+                                                languageDetector?.typeLang === "ru" ?
+                                                  e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
+                                                  e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                                              }
+                                              )
                                                 ?.map((itemValue, index) => {
                                                   // console.log(itemValue, 'itemValue');
                                                   return (
@@ -1951,14 +1946,13 @@ export default function ProductLocationsList() {
                             </span>
                           </button>
                           <div className="   flex flex-col gap-y-7">
+
                             {item?.shop_locations
                               ?.filter((location) =>
                                 searchName
-                                  ? location?.products?.some((item) =>
-                                    item?.name_uz
-                                      ?.toLowerCase()
-                                      ?.includes(searchName?.toLowerCase())
-                                  )
+                                  ? languageDetector?.typeLang === "ru" ?
+                                    location?.products?.some((item) => item?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase())) :
+                                    location?.products?.some((item) => item?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase()))
                                   : location
                               )
                               ?.map((resData, index) => {
@@ -2091,11 +2085,9 @@ export default function ProductLocationsList() {
                                           <div className="flex flex-col gap-y-[30px] md:gap-y-[52px] mt-5 ">
                                             {resData?.products
                                               ?.filter((e) =>
-                                                e?.name_uz
-                                                  ?.toLowerCase()
-                                                  ?.includes(
-                                                    searchName?.toLowerCase()
-                                                  )
+                                                languageDetector?.typeLang === "ru" ?
+                                                  e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
+                                                  e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
                                               )
                                               ?.map((itemValue, index) => {
                                                 return (

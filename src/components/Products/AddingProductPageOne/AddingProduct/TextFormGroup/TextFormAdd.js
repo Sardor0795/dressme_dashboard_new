@@ -23,8 +23,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
         titleInUz: "",
         descriptionInRu: "",
         descriptionInUz: "",
-        qualityInRu: "",
-        qualityInUz: "",
+        qualityInRu: null,
+        qualityInUz: null,
         noteValueRu: "",
         noteValueUz: "",
         isCheckValid: false,
@@ -32,15 +32,30 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
     })
 
 
-    const handleSelectQuality = (value) => {
-        dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == value).map(item => {
+    const handleSelectQualityRu = (value) => {
+        setState({ ...state, qualityInRu: value, })
+    }
+    useEffect(() => {
+        dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru === state?.qualityInRu).map(item => {
             setState({ ...state, qualityInUz: item?.name_uz })
         })
-        setState({ ...state, qualityInRu: value, qualityInUz: value })
+        if (!state?.qualityInRu) {
+            setState({ ...state, qualityInUz: null })
+        }
+    }, [state?.qualityInRu])
 
-    }
     const handleSelectQualityUz = (value) => {
+
+        setState({ ...state, qualityInUz: value })
     }
+    useEffect(() => {
+        dressInfo?.getProductInfo?.quality?.filter(e => e.name_uz === state?.qualityInUz).map(item => {
+            setState({ ...state, qualityInRu: item?.name_ru })
+        })
+        if (!state?.qualityInUz) {
+            setState({ ...state, qualityInRu: null })
+        }
+    }, [state?.qualityInUz])
     const handleBrand = (value) => {
         setState({ ...state, brand: value })
 
@@ -318,7 +333,8 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                         style={{ width: "100%" }}
                                         // value={lang === '' ? 'Выбрать' : lang}
                                         allowClear
-                                        onChange={handleSelectQuality}
+                                        value={state?.qualityInRu}
+                                        onChange={handleSelectQualityRu}
                                         options={
                                             dressInfo?.getProductInfo?.quality?.map(item => {
                                                 return (
@@ -343,21 +359,15 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                                     </div>
                                     <Select
                                         placeholder={t("PRselect2")}
-                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInRu ? "border border-[#FFB8B8] " : ""}   `}
+                                        className={`rounded-[6px]   ${state?.isCheckValid && !state?.qualityInUz ? "border border-[#FFB8B8] " : ""}   `}
 
                                         style={{ width: "100%" }}
-                                        value={
-                                            dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
-                                                return item?.name_uz
-                                            })
-                                            // lang === ''
-                                            // ? 'Выбрать'
-                                            // : lang === 'Оригинал'
-                                            //     ? 'Original'
-                                            //     : lang === 'Полуоригинал'
-                                            //         ? 'Yarim original'
-                                            //         : lang === 'Не оригинал' ? 'Original emas' : 'Выбрать'
-                                        }
+                                        // value={
+                                        //     dressInfo?.getProductInfo?.quality?.filter(e => e.name_ru == state?.qualityInRu).map(item => {
+                                        //         return item?.name_uz
+                                        //     })
+                                        // }
+                                        value={state?.qualityInUz}
                                         onChange={handleSelectQualityUz}
                                         allowClear
                                         options={
