@@ -32,7 +32,7 @@ import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopLocationProductList } from "../../../../hook/ShopLocationProductList";
- 
+
 const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
@@ -353,6 +353,20 @@ const AddingProduct = () => {
   const onSearch = (value) => {
     // console.log("search:", value);
   };
+  const onSearchSection = (value) => {
+    // console.log("search:", value);
+  };
+  const onSearchSubSection = (value) => {
+    // console.log("search:", value);
+  };
+
+  const onSearchType = (value) => {
+    // console.log("search:", value);
+  };
+
+  const onSearchCountry = (value) => {
+    // console.log("search:", value);
+  };
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   function getCurrentDimension() {
@@ -585,7 +599,7 @@ const AddingProduct = () => {
       setState({ ...state, isCheckValid: false });
     }
   };
-  
+
   const handleChangeSubSection = (e) => {
     setState({ ...state, sub_Section_Id: e });
   };
@@ -714,7 +728,7 @@ const AddingProduct = () => {
     state?.openSelect,
     state?.MakeCountryModal
   ])
-   
+
   // console.log('test-- page two');
   // navigate(-1)
 
@@ -1656,7 +1670,7 @@ const AddingProduct = () => {
                             onChange={(e) =>
                               setState({ ...state, section_Id: e })
                             }
-                            onSearch={onSearch}
+                            onSearch={onSearchSection}
                             size="large"
                             filterOption={(input, option) =>
                               (option?.label ?? "")
@@ -1753,7 +1767,7 @@ const AddingProduct = () => {
                             value={state?.sub_Section_Id}
                             // onChange={(e) => setState({ ...state, sub_Section_Id: e })}
                             onChange={handleChangeSubSection}
-                            onSearch={onSearch}
+                            onSearch={onSearchSubSection}
                             size="large"
                             allowClear
                             filterOption={(input, option) =>
@@ -2188,9 +2202,9 @@ const AddingProduct = () => {
                                 });
                                 // CategoryTypeId(value, attribute2?.attribute2)
                               }}
-                              onSearch={onSearch}
+                              onSearch={onSearchType}
                               size="large"
-                              optionLabelProp="label"
+                              // optionLabelProp="label"
                               value={dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => { return languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz })}
 
                               filterOption={(input, option) =>
@@ -2200,12 +2214,16 @@ const AddingProduct = () => {
                               }
                             >
                               {dressInfo?.ProductFilterType ? dressInfo?.getProductInfo?.types?.filter((e) => Number(e?.category_id) === Number(dressInfo?.ProductFilterType))?.map((item) => {
-                                console.log(item, 'item');
                                 return (
                                   <Option
                                     key={"item_" + item.id}
                                     value={item?.id}
                                     attribute2={item?.category_id}
+                                    label={
+                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                          undefined
+                                    }
                                   >
                                     {languageDetector?.typeLang === "ru" && item?.name_ru}
                                     {languageDetector?.typeLang === "uz" && item?.name_uz}
@@ -2218,6 +2236,11 @@ const AddingProduct = () => {
                                       key={"item_" + item.id}
                                       value={item?.id}
                                       attribute2={item?.category_id}
+                                      label={
+                                        languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                          languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                            undefined
+                                      }
                                     >
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
@@ -2226,6 +2249,7 @@ const AddingProduct = () => {
                                 }
                                 )}
                             </Select>
+
                           </div>
                         </div>
                         <div className="w-1/2 flex flex-col gap-y-[5px]  ">
@@ -2249,23 +2273,38 @@ const AddingProduct = () => {
                               onChange={(e) =>
                                 setState({ ...state, producer_Id: e })
                               }
-                              onSearch={onSearch}
+                              allowClear
+                              onSearch={onSearchCountry}
                               size="large"
                               filterOption={(input, option) =>
                                 (option?.label ?? "")
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={dressInfo?.getProductInfo?.producers?.map(
-                                (item) => {
-                                  return {
-                                    value: item?.id,
-                                    label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
 
-                                  };
+                            >
+                              {dressInfo?.getProductInfo?.producers?.map(
+                                (item) => {
+                                  return (
+                                    <Option
+                                      key={item.id}
+                                      value={item.id}
+                                      label={
+                                        languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                          languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                            undefined
+                                      }
+                                    >
+                                      <Space>
+                                        <span>
+                                          {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                          {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                      </Space>
+                                    </Option>
+                                  );
                                 }
                               )}
-                            />
+                            </Select>
                           </div>
                         </div>
                       </div>
@@ -2325,7 +2364,7 @@ const AddingProduct = () => {
                                 type_Id: attribute2?.attribute2,
                               });
                             }}
-                            onSearch={onSearch}
+                            onSearch={onSearchType}
                             size="large"
                             filterOption={(input, option) =>
                               (option?.label ?? "")
@@ -2420,22 +2459,37 @@ const AddingProduct = () => {
                             onChange={(e) =>
                               setState({ ...state, producer_Id: e })
                             }
-                            onSearch={onSearch}
+                            onSearch={onSearchCountry}
                             size="large"
                             filterOption={(input, option) =>
                               (option?.label ?? "")
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
-                            options={dressInfo?.getProductInfo?.producers?.map(
+
+                          >
+                            {dressInfo?.getProductInfo?.producers?.map(
                               (item) => {
-                                return {
-                                  value: item?.id,
-                                  label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
-                                };
+                                return (
+                                  <Option
+                                    key={item.id}
+                                    value={item.id}
+                                    label={
+                                      languageDetector?.typeLang === "ru" ? item?.name_ru :
+                                        languageDetector?.typeLang === "uz" ? item?.name_uz :
+                                          undefined
+                                    }
+                                  >
+                                    <Space>
+                                      <span>
+                                        {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                        {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                    </Space>
+                                  </Option>
+                                );
                               }
                             )}
-                          />
+                          </Select>
                         </div>
                       </div>
                       {/* Input Select 11 mobile */}
