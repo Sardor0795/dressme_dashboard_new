@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { deliveryIcon, man, woman } from "../../../../assets";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -20,7 +20,9 @@ const ReviewStore = () => {
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
   const [shopList, setShopList] = useContext(ShopList)
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-
+  const [state, setState] = useState({
+    isShops: false
+  });
   const { t } = useTranslation("reviews");
   const [languageDetector] = useContext(LanguageDetectorDress);
 
@@ -78,7 +80,11 @@ const ReviewStore = () => {
       fetchDelivery();
     }
   }, []);
-
+  useEffect(() => {
+    if (shopList?.shops?.some(data => data?.overall_rating > 0)) {
+      setState({ ...state, isShops: true });
+    }
+  }, [shopList?.shops]);
   const navigate = useNavigate();
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-store/${id}`);
@@ -99,8 +105,8 @@ const ReviewStore = () => {
         <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
           {
             shopList?.shops?.length > 0 &&
-              shopList?.shops?.rated_users_count > 0 ? (
-              shopList?.shops?.map((data, i) => {
+              state?.isShops > 0 ? (
+              shopList?.shops?.filter(e => Number(e?.overall_rating) > 0)?.map((data, i) => {
                 return (
                   <div
                     key={data?.id}
