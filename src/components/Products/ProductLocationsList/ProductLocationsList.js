@@ -132,11 +132,9 @@ export default function ProductLocationsList() {
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [regionList, setRegionList] = useContext(dressRegionList)
-  const fetchDataRegion = async (customHeadersRegion) => {
+  const fetchDataRegion = async () => {
     try {
-      const response = await axios.get(`${url}/regions`, {
-        headers: customHeadersRegion,
-      });
+      const response = await axios.get(`${url}/regions`)
       const status = response.status;
       const data = response.data;
 
@@ -146,12 +144,7 @@ export default function ProductLocationsList() {
       return { error, status };
     }
   };
-
-  const customHeadersRegion = {
-    "Content-type": "application/json; charset=UTF-8",
-    'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
-  };
-  useQuery(["get_regionInproduct"], () => fetchDataRegion(customHeadersRegion), {
+  useQuery(["get_regionIn_product"], () => fetchDataRegion(), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
         setRegionList(data?.data);
