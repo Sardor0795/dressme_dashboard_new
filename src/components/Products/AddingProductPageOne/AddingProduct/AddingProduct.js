@@ -551,13 +551,17 @@ const AddingProduct = () => {
           } else {
             setState({ ...state, errorList: res?.errors, price: null });
           }
+          setDressInfo({
+            ...dressInfo,
+            nextPageShowForm: true,
+          });
         } else if (res?.message) {
           setState({ ...state, sendingLoader: false, price: null });
           navigate("/products/location");
           setDressInfo({
             ...dressInfo,
             nextPageShowForm: true,
-            // ProductFilterType: "",
+            ProductFilterType: "",
           });
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -572,6 +576,10 @@ const AddingProduct = () => {
         }
       })
       .catch((err) => {
+        setDressInfo({
+          ...dressInfo,
+          nextPageShowForm: true,
+        })
         setState({ ...state, sendingLoader: false, price: null });
         throw new Error(err || "something wrong");
       });
