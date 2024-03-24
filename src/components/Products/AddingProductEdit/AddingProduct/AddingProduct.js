@@ -679,39 +679,45 @@ const AddingProduct = () => {
         }
       })
   }
-  // console.log(productsDataIdEdit, 'test---productsDataIdEdit');
-  // console.log(
-  //   state?.gender_Id, 'gender_Id', `\n`,
-  //   state?.min_Age_Category, 'min_Age_Category', `\n`,
-  //   state?.max_Age_Category, 'max_Age_Category', `\n`,
-  //   state?.sku, 'sku', `\n`,
-  //   state?.filterTypeId, 'filterTypeId', `\n`,
-  //   state?.producer_Id, 'producer_Id', `\n`,
-  //   'test---'
-  // );
-  // console.log(
-  //   Number(productsDataIdEdit?.gender_id) == state?.gender_Id,
-  //   Number(productsDataIdEdit?.min_age_category) == state?.min_Age_Category,
-  //   Number(productsDataIdEdit?.max_age_category) == state?.max_Age_Category
-  // );
-  // console.log(Number(productsDataIdEdit?.gender_id),
-  //   Number(productsDataIdEdit?.min_age_category),
-  //   Number(productsDataIdEdit?.max_age_category));
-  // console.log(state?.gender_Id, state?.min_Age_Category, state?.max_Age_Category);
 
+  function arraysAreEqual(arr1, arr2) {
+    // Check if lengths are different
+    if (arr1?.length !== arr2?.length) {
+      return false;
+    }
 
+    // Iterate over each element and compare
+    for (let i = 0; i < arr1?.length; i++) {
+      if (arr1[i] !== arr2[i]?.id) {
+        return false;
+      }
+    }
+
+    // If all elements are equal, return true
+    return true;
+  }
+  // // console.log(sectionAreEqual(section_Id, productsDataIdEdit?.sections), 'section_Id arraysAreEqual');
+  // console.log(section_Id, 'section_Id');
+  // // console.log(productsDataIdEdit?.sections, 'sections-productsDataIdEdit');
+  // // console.log(sectionAreEqual(subSection_Id, productsDataIdEdit?.sub_sections), 'subSection_Id arraysAreEqual');
+  // console.log(subSection_Id, 'subSection_Id');
+  // // console.log(productsDataIdEdit?.sub_sections, 'subSection_Id-productsDataIdEdit');
+  // // console.log(sectionAreEqual(season_Id, productsDataIdEdit?.seasons), 'season_Id arraysAreEqual');
+  // console.log(season_Id, 'season_Id');
+  // // console.log(productsDataIdEdit?.seasons, 'season_Id-productsDataIdEdit');
+// console.log("0--------------------------------------------");
   const productUpdate = (childData) => {
     setState({ ...state, isCheckValid: true })
     if (newArray?.length && subSection_Id?.length) {
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
-      section_Id && section_Id?.forEach((index) => {
+      !arraysAreEqual(section_Id, productsDataIdEdit?.sections) && section_Id?.length > 0 && section_Id?.forEach((index) => {
         form.append("section_ids[]", Number(index));
       })
-      subSection_Id && subSection_Id?.forEach((index) => {
+      !arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections) && subSection_Id?.length > 0 && subSection_Id?.forEach((index) => {
         form.append("sub_section_ids[]", Number(index));
       })
-      season_Id && season_Id?.forEach((index) => {
+      !arraysAreEqual(season_Id, productsDataIdEdit?.seasons) && season_Id?.length > 0 && season_Id?.forEach((index) => {
         form.append("season_ids[]", Number(index));
       })
       !(productsDataIdEdit?.gender_id == state?.gender_Id) && form.append("gender_id", state?.gender_Id);
@@ -788,13 +794,13 @@ const AddingProduct = () => {
 
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
-      section_Id && section_Id?.forEach((index) => {
+      !arraysAreEqual(section_Id, productsDataIdEdit?.sections) && section_Id?.length > 0 && section_Id?.forEach((index) => {
         form.append("section_ids[]", Number(index));
       })
-      subSection_Id && subSection_Id?.forEach((index) => {
+      !arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections) && subSection_Id?.length > 0 && subSection_Id?.forEach((index) => {
         form.append("sub_section_ids[]", Number(index));
       })
-      season_Id && season_Id?.forEach((index) => {
+      !arraysAreEqual(season_Id, productsDataIdEdit?.seasons) && season_Id?.length > 0 && season_Id?.forEach((index) => {
         form.append("season_ids[]", Number(index));
       })
       !(productsDataIdEdit?.gender_id == state?.gender_Id) && form.append("gender_id", state?.gender_Id);
@@ -1838,7 +1844,7 @@ const AddingProduct = () => {
                                 .toLowerCase()
                                 .includes(input.toLowerCase())
                             }
- 
+
                           >
                             {newArray?.map(item => {
                               return (
