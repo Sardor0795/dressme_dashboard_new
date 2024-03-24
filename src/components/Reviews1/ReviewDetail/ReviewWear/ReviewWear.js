@@ -77,7 +77,7 @@ export default function ReviewWear() {
   }, []);
 
   return (
-    <div className="relative border border-red-600">
+    <div className="relative ">
       {isLoading ? (
         <div className="h-full w-full">
           <LoadingForSeller />

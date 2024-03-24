@@ -24,7 +24,7 @@ export default function ReviewStoreWear() {
   }, []);
 
   return (
-    <div className="w-full h-full border border-red-600">
+    <div className="w-full h-full ">
       {/* FILTER */}
       <div className="w-full h-full px-4 md:px-10 py-1">
         <div className="w-full block pb-4 md:py-4 md:border-b border-lightBorderColor">
