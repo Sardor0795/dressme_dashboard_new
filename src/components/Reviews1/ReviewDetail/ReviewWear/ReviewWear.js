@@ -25,10 +25,11 @@ export default function ReviewWear() {
   const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [state, setState] = useState({
-     searchComment: ""
+    searchComment: "",
+    isProduct: false
   });
   // // ------------GET  Has Magazin ?-----------------
- 
+
   const fetchData = async (customHeaders) => {
     try {
       const response = await axiosInstance.get("/products", {
@@ -48,10 +49,10 @@ export default function ReviewWear() {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
-  const { isLoading }= useQuery(['seller_product_list_review'], () => fetchData(customHeaders), {
+  const { isLoading } = useQuery(['seller_product_list_review'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setDressInfo({ ...dressInfo, getReviewProduct: data?.data?.products?.data })
+         setDressInfo({ ...dressInfo, getReviewProduct: data?.data?.products })
       }
     },
     onError: (error) => {
@@ -60,8 +61,11 @@ export default function ReviewWear() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-
-
+  useEffect(() => {
+    if (dressInfo?.getReviewProduct?.some(data => data?.overall_rating > 0)) {
+      setState({ ...state, isProduct: true });
+    }
+  }, [dressInfo?.getReviewProduct]);
   const goDetail = (id) => {
     navigate(`/reviews/review/comment-wear/${id}`);
   };
@@ -73,7 +77,7 @@ export default function ReviewWear() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative border border-red-600">
       {isLoading ? (
         <div className="h-full w-full">
           <LoadingForSeller />
@@ -81,8 +85,7 @@ export default function ReviewWear() {
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1">
           {
-            dressInfo?.getReviewProduct?.length > 0 &&
-              dressInfo?.getReviewProduct?.rated_users_count > 0 ? (
+            dressInfo?.getReviewProduct?.length > 0 && state?.isProduct ? (
               <div className="w-full h-fit md:mt-7">
                 <div className="w-full mb-[10px] hidden md:block">
                   <ul className="w-full h-full  flex items-center justify-between ">
@@ -125,12 +128,7 @@ export default function ReviewWear() {
                 </div>
                 {/* table product */}
                 <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
-                  {dressInfo?.getReviewProduct?.map((data) => {
-                    // console.log(data, "data");
-                    // console.log(
-                    //   dressInfo?.getReviewProduct,
-                    //   "dressInfo?.getReviewProduct"
-                    // );
+                  {dressInfo?.getReviewProduct?.filter(e => Number(e?.overall_rating) > 0)?.map((data) => {
                     return (
                       <ul
                         key={data?.id}
