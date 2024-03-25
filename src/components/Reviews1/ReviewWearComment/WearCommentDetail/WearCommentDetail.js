@@ -86,7 +86,7 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -94,14 +94,14 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 560,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
@@ -109,7 +109,7 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
@@ -174,12 +174,12 @@ const WearCommentDetail = ({ sliderData }) => {
         </div>
       </section>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
-        <div className="w-full flex items-start md:gap-x-[10px]">
+        <div className="w-full flex    items-start md:gap-x-[10px]">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
-            <div className="flex md:h-[402px] gap-x-4">
-              <div className="md:w-[350px] h-full  overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
+            <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4 flex-col md:flex-row md:justify-start justify-center">
+              <div className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center justify-center mx-auto md:border border-searchBgColor rounded-xl" >
                 <Slider
-                  className="w-full h-full flex items-center justify-center rounded-lg cursor-pointer"
+                  className="w-full h-full flex items-center justify-center rounded-lg cursor-pointer  "
                   asNavFor={nav2}
                   ref={slider1}
                   swipeToSlide={true}
@@ -198,7 +198,7 @@ const WearCommentDetail = ({ sliderData }) => {
                       >
                         <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                           <img
-                            className="md:w-[350px] md:h-[402px] object-cover"
+                            className=" w-[350px] h-[200px] md:h-[402px] object-cover"
                             src={data?.url_photo}
                             alt=""
                           />
@@ -208,7 +208,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   })}
                 </Slider>
               </div>
-              <div className="w-full md:w-[120px] h-full flex items-center justify-between  border border-red-600">
+              <div className="w-full md:w-[120px] h-full hidden md:flex items-center justify-between  ">
                 <Slider
                   asNavFor={nav1}
                   ref={slider2}
@@ -226,6 +226,32 @@ const WearCommentDetail = ({ sliderData }) => {
                       >
                         <img
                           className="!h-[90px] md:w-[120px] object-cover flex items-center justify-center border border-searchBgColor rounded-lg"
+                          src={data?.url_photo}
+                          alt=""
+                        />
+                      </figure>
+                    );
+                  })}
+                </Slider>
+              </div>
+              <div className="w-full mx-auto max-w-[350px] md:w-[120px]  h-[70px] md:h-full md:hidden flex items-center justify-between   ">
+                <Slider
+                  asNavFor={nav1}
+                  ref={slider2}
+                  swipeToSlide={true}
+                  focusOnSelect={true}
+                  // vertical={false}
+                  {...settings1}
+                  className="max-w-[350px] w-full h-full flex items-center justify-between rounded-lg   "
+                >
+                  {sliderData?.locationListId?.product?.photos?.map((data) => {
+                    return (
+                      <figure
+                        key={data?.id}
+                        className=" h-[70px] md:h-[90px] !w-[80px] md:w-[120px] cursor-pointer bg-btnBgColor rounded-lg mx-1"
+                      >
+                        <img
+                          className="h-full md:h-[90px] w-full md:w-[120px] object-cover   rounded-lg"
                           src={data?.url_photo}
                           alt=""
                         />
