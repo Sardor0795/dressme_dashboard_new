@@ -22,8 +22,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
         titleInUz: "",
         descriptionInRu: "",
         descriptionInUz: "",
-        qualityInRu: "",
-        qualityInUz: "",
+        qualityInRu: null,
+        qualityInUz: null,
         noteValueRu: "",
         noteValueUz: "",
         isCheckValid: false,
@@ -146,42 +146,42 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
         if (e.target.value) {
             setState({ ...state, titleInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
         } else {
-            setState({ ...state, titleInRu: null })
+            setState({ ...state, titleInRu: "" })
         }
     }
     const handleInputTitleUz = (e) => {
         if (e.target.value) {
             setState({ ...state, titleInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
         } else {
-            setState({ ...state, titleInUz: null })
+            setState({ ...state, titleInUz: "" })
         }
     }
     const handleInputDescripRu = (e) => {
         if (e.target.value) {
             setState({ ...state, descriptionInRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
         } else {
-            setState({ ...state, descriptionInRu: null })
+            setState({ ...state, descriptionInRu: "" })
         }
     }
     const handleInputDescripUz = (e) => {
         if (e.target.value) {
             setState({ ...state, descriptionInUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
         } else {
-            setState({ ...state, descriptionInUz: null })
+            setState({ ...state, descriptionInUz: "" })
         }
     }
     const handleInputNoteRu = (e) => {
         if (e.target.value) {
             setState({ ...state, noteValueRu: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
         } else {
-            setState({ ...state, noteValueRu: null })
+            setState({ ...state, noteValueRu: "" })
         }
     }
     const handleInputNoteUz = (e) => {
         if (e.target.value) {
             setState({ ...state, noteValueUz: e.target.value?.charAt(0).toUpperCase() + e.target.value?.slice(1), onEditTextForm: true })
         } else {
-            setState({ ...state, noteValueUz: null })
+            setState({ ...state, noteValueUz: "" })
         }
     }
 
@@ -284,9 +284,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
                                     <textarea
                                         className="block w-full h-full text-[#000] text-[12px] md:text-base resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
-                                        name=""
-                                        id=""
-                                        value={state?.descriptionInRu}
+                                        name="description"
+                                        id="descriptionru"
+                                        value={state?.descriptionInRu !== null ? state?.descriptionInRu : ""}
                                         onChange={handleInputDescripRu}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
@@ -312,9 +312,9 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                 <div className="rounded-lg relative border pr-[40px] border-[#e5e5e5] flex flex-col h-[120px]  px-[5px]">
                                     <textarea
                                         className="block w-full h-full text-[#000] text-[12px] md:text-base resize-none bg-transparent flex-1 outline-none font-AeonikProRegular"
-                                        name=""
-                                        id=""
-                                        value={state?.descriptionInUz}
+                                        name="description"
+                                        id="descriptionuz"
+                                        value={state?.descriptionInUz !== null ? state?.descriptionInUz : ""}
                                         onChange={handleInputDescripUz}
                                     ></textarea>
                                     <div className="flex justify-end w-full absolute right-[6px] bottom-[6px]">
@@ -410,7 +410,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             className="flex-1 mr-[30px] text-[12px] md:text-base w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             name="noteValueRu"
-                                            value={state?.noteValueRu}
+                                            value={state?.noteValueRu !== null ? state?.noteValueRu : ""}
                                             onChange={handleInputNoteRu}
                                         />
 
@@ -435,7 +435,8 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
                                             className="flex-1 mr-[30px] text-[12px] md:text-base w-[30px] ll:w-auto focus:outline-none font-AeonikProRegular"
                                             type="text"
                                             name="noteValueUz"
-                                            value={state?.noteValueUz}
+                                             value={state?.noteValueUz !== null ? state?.noteValueUz : ""}
+
                                             onChange={handleInputNoteUz}
                                         />
                                         <button

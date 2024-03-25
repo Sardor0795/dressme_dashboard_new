@@ -136,7 +136,7 @@ export default function ReviewWear() {
                       :
                       e)?.map((data, index) => {
                         return (
-                          <>
+                          <div key={index}>
                             {Number(data?.overall_rating) > 0 && <ul
                               key={data?.id}
                               className="w-full hidden   md:flex h-[100px] border border-borderColor flex items-center   gap-x-5 md:gap-x-0 rounded-xl  md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
@@ -145,7 +145,7 @@ export default function ReviewWear() {
                                 {data?.photos.length > 1
                                   ? data?.photos?.map((item, index) =>
                                     index === 0 ? (
-                                      <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                      <span key={index} className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
                                         <img
                                           src={item?.url_photo || "nodate"}
                                           alt={"noImg"}
@@ -259,7 +259,7 @@ export default function ReviewWear() {
                                   {t("more_details")}
                                 </button>
                               </div>}
-                          </>
+                          </div>
                         );
                       })}
                   </div >
