@@ -1440,7 +1440,7 @@ export default function ProductLocationsList() {
                                                 ?.map((itemValue, index) => {
                                                   // console.log(itemValue, 'itemValue');
                                                   return (
-                                                    <div 
+                                                    <div
                                                       key={index}
                                                       className="w-full "
                                                     >
@@ -1655,8 +1655,7 @@ export default function ProductLocationsList() {
                                                             {/* For Mobile Device */}
                                                             <div
                                                               key={itemValue?.id}
-                                                              className="border rounded-xl border-[##F2F2F2] p-[10px] md:hidden w-full"
-                                                            >
+                                                              className="border rounded-xl border-[##F2F2F2] p-[10px] md:hidden w-full"                                                            >
                                                               <div className="mb-2">
                                                                 <div className="w-full md:w-fit flex items-center justify-between text-xl font-AeonikProRegular ">
                                                                   <div className="w-[40%] border-b border-borderColor h-[2px]"></div>
