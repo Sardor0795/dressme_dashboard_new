@@ -18,12 +18,12 @@ import { dressRegionList } from "../../../../hook/RegionList";
 const { REACT_APP_BASE_URL } = process.env;
 
 const SignUpSeller = () => {
- 
-    const [naturalPerson, setNaturalPerson] = useState(true);
+
+  const [naturalPerson, setNaturalPerson] = useState(true);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [regionList, setRegionList] = useContext(dressRegionList)
 
-   const [state, setState] = useState({
+  const [state, setState] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -99,9 +99,9 @@ const SignUpSeller = () => {
   const sendMessagePhoneNumber = data5 + data4;
 
 
- 
 
-  
+
+
 
   // ------------POST METHOD-----------------
   const { mutate } = useMutation(() => {
@@ -405,9 +405,14 @@ const SignUpSeller = () => {
                         {regionList?.regions ?
                           regionList?.regions?.map((data, index) => {
                             return (
-                              <div key={data?.id} className="w-full  h-fit  ">
+                              <div key={data?.id} className={`w-full   flex flex-col items-center ${data?.id === 2 ? "" : "opacity-50"
+                                } `}>
                                 <div
-                                  onClick={() => accordionCityList(data?.id)}
+                                  onClick={data?.id === 2
+                                    ? () => {
+                                      accordionCityList(data?.id);
+                                    }
+                                    : null}
                                   className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                                 >
                                   <span className="text-[#303030] text-base md:text-lg not-italic font-AeonikProRegular">
@@ -421,8 +426,8 @@ const SignUpSeller = () => {
                                 </div>
 
                                 <div
-                                  className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${data?.id == activeIndex ? "openAccardion" : "CloseAccardion"} `}
+                                  className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms] 
+                                  ${data?.id == activeIndex ? "openAccardion" : "CloseAccardion"} `}
                                 >
                                   {data?.sub_regions?.map((item) => {
                                     return (
