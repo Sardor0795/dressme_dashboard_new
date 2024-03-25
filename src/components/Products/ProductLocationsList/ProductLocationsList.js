@@ -1372,10 +1372,13 @@ export default function ProductLocationsList() {
                                                 }
                                                 className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
                                               >
-                                                <span>
+                                                <span className="  ll:hidden flex">
+                                                  <AddIconsCircle size={25} />
+                                                </span>
+                                                <span className="hidden ll:flex">
                                                   <AddIconsCircle />
                                                 </span>
-                                                <span className="text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                <span className="hidden ll:flex text-addWearColorText  text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                   {t("PRaddWear")}
                                                 </span>
                                               </button>
@@ -2019,10 +2022,13 @@ export default function ProductLocationsList() {
                                               }
                                               className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
                                             >
-                                              <span>
+                                              <span className="  ll:hidden flex">
+                                                <AddIconsCircle size={25} />
+                                              </span>
+                                              <span className="hidden ll:flex">
                                                 <AddIconsCircle />
                                               </span>
-                                              <span className="text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                              <span className="hidden ll:flex text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                 {t("PRaddWear")}
                                               </span>
                                             </button>

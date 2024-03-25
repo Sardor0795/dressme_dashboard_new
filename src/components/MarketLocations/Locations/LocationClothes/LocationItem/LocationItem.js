@@ -235,11 +235,14 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
             onClick={() => addNewProductId()}
             className="active:scale-95 cursor-pointer active:opacity-70 flex items-center gap-x-[4px]"
           >
-            <span className="text-addWearColorText text-[12px] not-italic font-AeonikProMedium">
+            <span className="hidden ll:flex text-addWearColorText text-[12px] not-italic font-AeonikProMedium">
               {t("add_cloth")}
             </span>
-            <span>
-              <AddIconsCircle size={16} />
+            <span className="  ll:hidden flex">
+              <AddIconsCircle size={25} />
+            </span>
+            <span className="hidden ll:flex">
+              <AddIconsCircle />
             </span>
           </button>
         </div>

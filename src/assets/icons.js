@@ -846,7 +846,7 @@ const ArrowTopIcons = ({ colors }) => {
     </svg>
   );
 };
-const AddIconsCircle = ({ colors, size }) => {
+const AddIconsCircle = ({ size }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

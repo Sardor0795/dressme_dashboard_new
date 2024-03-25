@@ -154,8 +154,8 @@ export default function LocationClothesCity() {
       {/* Delete Product Of Pop Confirm */}
       <section
         className={` max-w-[440px] md:max-w-[550px] w-full flex-col h-fit bg-white mx-auto fixed px-4 py-5 md:py-[35px] md:px-[50px] rounded-t-lg md:rounded-b-lg z-[113] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.openDeleteModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
+          ? " bottom-0 md:flex"
+          : "md:hidden bottom-[-800px] z-[-10]"
           }`}
       >
         <button
@@ -308,10 +308,13 @@ export default function LocationClothesCity() {
             onClick={() => addNewProductId()}
             className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
           >
-            <span>
+            <span className="  ll:hidden flex">
+              <AddIconsCircle size={25} />
+            </span>
+            <span className="hidden ll:flex">
               <AddIconsCircle />
             </span>
-            <span className="text-addWearColorText md:text-base not-italic font-AeonikProMedium">
+            <span className="hidden ll:flex text-addWearColorText md:text-base not-italic font-AeonikProMedium">
               {t("add_cloth")}
             </span>
           </button>
