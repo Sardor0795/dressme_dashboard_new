@@ -5,21 +5,17 @@ import { useQuery } from "@tanstack/react-query";
 import { Rate } from "antd";
 import axios from "axios";
 import LoadingForSeller from "../../../Loading/LoadingFor";
-import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
-import { HelperData } from "../../../../hook/HelperDataStore";
+ import { HelperData } from "../../../../hook/HelperDataStore";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopList } from "../../../../hook/ShopList";
-import { dressMainData } from "../../../../hook/ContextTeam";
-import axiosInstance from "../../../Authentication/AxiosIntance";
+ import axiosInstance from "../../../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
-  const [sellerRefreshToken] = useContext(SellerRefresh);
-  const [helperDatainform, setHelperDatainform] = useContext(HelperData);
+   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
   const [shopList, setShopList] = useContext(ShopList);
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [state, setState] = useState({
+   const [state, setState] = useState({
     isShops: false,
   });
   const { t } = useTranslation("reviews");

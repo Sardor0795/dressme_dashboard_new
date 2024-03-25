@@ -174,93 +174,87 @@ const WearCommentDetail = ({ sliderData }) => {
 
         </div>
       </section>
-      <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
+      <section className="w-full flex flex-col flex-wrap h-fit ">
         <div className="w-full flex    items-start md:gap-x-[10px]">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
-            <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4 flex-col md:flex-row md:justify-start justify-center">
-              <div className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center justify-center mx-auto md:border border-searchBgColor rounded-xl" >
-                <Slider
-                  className="w-full h-full flex items-center justify-center rounded-lg cursor-pointer  "
-                  asNavFor={nav2}
-                  ref={slider1}
-                  swipeToSlide={true}
-                  focusOnSelect={true}
-                  {...settings}
-                >
-                  {sliderData?.locationListId?.product?.photos?.map((data) => {
-                    return (
-                      <article
-                        key={data?.id}
-                        onClick={() => {
-                          setModalOfCarsouel(true)
-                          setCarosuelCurrent(data?.id)
-                        }}
-                        className="flex items-center justify-center h-full"
-                      >
-                        <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
-                          <img
-                            className=" w-[350px] h-[200px] md:h-[402px] object-cover"
-                            src={data?.url_photo}
-                            alt=""
-                          />
-                        </figure>
-                      </article>
-                    );
-                  })}
-                </Slider>
-              </div>
-              <div className="w-full md:w-[120px] h-full hidden md:flex items-center justify-between  ">
-                <Slider
-                  asNavFor={nav1}
-                  ref={slider2}
-                  swipeToSlide={true}
-                  focusOnSelect={true}
-                  vertical={true}
-                  {...settings1}
-                  className="!w-full h-full  flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg  "
-                >
-                  {sliderData?.locationListId?.product?.photos?.map((data) => {
-                    return (
-                      <figure
-                        key={data?.id}
-                        className="  !h-[90px] md:w-[120px]   cursor-pointer bg-btnBgColor rounded-lg "
-                      >
+            <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4 flex-col md:flex-row   ">
+              <Slider
+                className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center md:justify-start justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
+                asNavFor={nav2}
+                ref={slider1}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                {...settings}
+              >
+                {sliderData?.locationListId?.product?.photos?.map((data) => {
+                  return (
+                    <article
+                      key={data?.id}
+                      onClick={() => {
+                        setModalOfCarsouel(true)
+                        setCarosuelCurrent(data?.id)
+                      }}
+                      className="flex items-center justify-center h-full"
+                    >
+                      <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                         <img
-                          className="!h-[90px] md:w-[120px] object-cover flex items-center justify-center border border-searchBgColor rounded-lg"
+                          className=" w-[350px] h-[200px] md:h-[402px] object-cover"
                           src={data?.url_photo}
                           alt=""
                         />
                       </figure>
-                    );
-                  })}
-                </Slider>
-              </div>
-              <div className="w-full mx-auto max-w-[350px] md:w-[120px]  h-[70px] md:h-full md:hidden flex items-center justify-between   ">
-                <Slider
-                  asNavFor={nav1}
-                  ref={slider2}
-                  swipeToSlide={true}
-                  focusOnSelect={true}
-                  // vertical={false}
-                  {...settings1}
-                  className="max-w-[350px] w-full h-full flex items-center justify-between rounded-lg   "
-                >
-                  {sliderData?.locationListId?.product?.photos?.map((data) => {
-                    return (
-                      <figure
-                        key={data?.id}
-                        className=" h-[70px] md:h-[90px] !w-[80px] md:w-[120px] cursor-pointer bg-btnBgColor rounded-lg mx-1"
-                      >
-                        <img
-                          className="h-full md:h-[90px] w-full md:w-[120px] object-cover   rounded-lg"
-                          src={data?.url_photo}
-                          alt=""
-                        />
-                      </figure>
-                    );
-                  })}
-                </Slider>
-              </div>
+                    </article>
+                  );
+                })}
+              </Slider>
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={true}
+                {...settings1}
+                className="w-full md:w-[120px] h-full hidden md:flex items-center flex-row flex-wrap pt-0 rounded-lg   "
+              >
+                {sliderData?.locationListId?.product?.photos?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className="  !h-[90px] md:w-[120px]   cursor-pointer bg-btnBgColor rounded-lg "
+                    >
+                      <img
+                        className="!h-[90px] md:w-[120px] object-cover flex items-center justify-center border border-searchBgColor rounded-lg"
+                        src={data?.url_photo}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
+              <Slider
+                asNavFor={nav1}
+                ref={slider2}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={false}
+                {...settings1}
+                className="  w-full   mx-auto max-w-[350px] md:w-[120px]  h-[70px] md:h-full md:hidden flex items-center justify-between "
+              >
+                {sliderData?.locationListId?.product?.photos?.map((data) => {
+                  return (
+                    <figure
+                      key={data?.id}
+                      className=" h-[70px] md:h-[90px] !w-[80px] md:w-[120px] cursor-pointer bg-btnBgColor rounded-lg mx-1"
+                    >
+                      <img
+                        className="h-full md:h-[90px] w-full md:w-[120px] object-cover   rounded-lg"
+                        src={data?.url_photo}
+                        alt=""
+                      />
+                    </figure>
+                  );
+                })}
+              </Slider>
             </div>
           ) : (
             <div>
