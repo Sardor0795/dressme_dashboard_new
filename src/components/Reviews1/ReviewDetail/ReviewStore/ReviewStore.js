@@ -99,6 +99,7 @@ const ReviewStore = () => {
       top: 0,
     });
   }, []);
+
   return (
     <div className="relative">
       {isLoading ? (
@@ -119,7 +120,7 @@ const ReviewStore = () => {
                     <action className="w-full flex md:hidden items-center justify-between">
                       <span className="w-1/2 h-[1px] bg-borderColor"></span>
                       <span className="text-[#d2d2d2] text-base font-AeonikProRegular mx-[10px]">
-                        0{data.id}
+                        {i < 10 ? `${"0" + (i + 1)}` : i}
                       </span>
                       <span className="w-1/2 h-[1px] bg-borderColor"></span>
                     </action>
@@ -208,12 +209,17 @@ const ReviewStore = () => {
                       </section>
                     </action>
                     <action className="w-full flex md:hidden items-center gap-x-1 mt-3">
-                      <div className="w-9 h-9 rounded-lg border border-borderColor bg-lightBgColor flex items-center justify-center">
-                        <img src={man} alt="" />
-                      </div>
-                      <div className="w-9 h-9 rounded-lg border border-borderColor bg-lightBgColor flex items-center justify-center">
-                        <img src={woman} alt="" />
-                      </div>
+                      {data?.gender?.id === 1 || data?.gender?.id === 3 ? (
+                        <div className="w-9 h-9 rounded-lg border border-borderColor bg-lightBgColor flex items-center justify-center">
+                          <img src={man} alt="" />
+                        </div>
+                      ) : null}
+
+                      {data?.gender?.id === 2 || data?.gender?.id === 3 ? (
+                        <div className="w-9 h-9 rounded-lg border border-borderColor bg-lightBgColor flex items-center justify-center">
+                          <img src={woman} alt="" />
+                        </div>
+                      ) : null}
                       <div className="flex items-center h-9 ml-auto bg-lightBgColor px-[10px] active:opacity-70 border border-borderColor rounded-lg gap-x-3">
                         <img src={deliveryIcon} alt="" />
                         <span className="text-tableTextTitle2 text-[13px] md:text-base not-italic font-AeonikProMedium">
