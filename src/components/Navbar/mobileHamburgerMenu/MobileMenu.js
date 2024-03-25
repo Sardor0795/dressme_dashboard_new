@@ -245,14 +245,14 @@ export default function MobileHumburgerMenu() {
           >
             {({ isActive }) =>
               isActive ? (
-                <figure className="w-[150px] pl-[1px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
+                <figure className="w-[150px] pl-[5px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <ClothesIcons colors={"#007dca"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("products")}
                   </p>
                 </figure>
               ) : (
-                <figure className="w-[150px] pl-[1px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
+                <figure className="w-[150px] pl-[5px] mx-auto flex h-full gap-x-[15px] items-center justify-start  ">
                   <ClothesIcons colors={"#2c2c2c"} />
                   <p className="text-lg not-italic font-AeonikProMedium leading-5">
                     {t("products")}
