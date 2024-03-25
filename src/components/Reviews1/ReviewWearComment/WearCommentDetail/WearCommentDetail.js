@@ -51,6 +51,7 @@ const WearCommentDetail = ({ sliderData }) => {
       </main>
     );
   };
+
   const PrevArrow = (props) => {
     const { onClick } = props;
     return (
@@ -155,7 +156,7 @@ const WearCommentDetail = ({ sliderData }) => {
             < div className="w-full  flex flex-col items-center justify-start">
               {sliderData?.locationListId?.product?.photos?.filter(e => e?.id === carosuelCurrent)?.map(item => {
                 return (
-                  <div className="w-full">
+                  <div key={item?.id} className="w-full">
                     <div className="w-full h-[400px] md:h-[80vh]   flex items-center">
                       <img
                         src={item?.url_photo}
@@ -216,7 +217,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   focusOnSelect={true}
                   vertical={true}
                   {...settings1}
-                  className="!w-full h-full  flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg border border-green-600"
+                  className="!w-full h-full  flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg  "
                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (

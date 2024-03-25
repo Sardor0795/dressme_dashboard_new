@@ -114,6 +114,7 @@ const AddingProduct = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loader, setLoader] = useState(false);
   const [addSizeDisable, setAddSizeDisable] = useState(null);
+  const [sectionsChanged, setSectionsChanged] = useState(false);
 
   function CallBackHeadWear(childData) {
     setState({ ...state, newColorByAddSizes: childData })
@@ -247,11 +248,13 @@ const AddingProduct = () => {
     if (e?.length < section_Id?.length) {
       if (section_Id?.length > 1) {
         setSection_Id(e)
+        setSectionsChanged(true)
         setState({ ...state, onEditInput: true })
       }
     } else {
       setSection_Id(e)
       setState({ ...state, onEditInput: true })
+      setSectionsChanged(true)
     }
   }
   // ---------Mobile Device--------
@@ -259,15 +262,19 @@ const AddingProduct = () => {
     setState({ ...state, onEditInput: true })
     if (section_Id?.length === 0) {
       setSection_Id(section_Id => [...section_Id, e])
+      setSectionsChanged(true)
     }
     if (section_Id?.length > 0 && !section_Id?.includes(e)) {
       setSection_Id(section_Id => [...section_Id, e])
+      setSectionsChanged(true)
+
     }
   }
   const handleChangeSectionDeleteMobile = (e) => {
     setState({ ...state, onEditInput: true })
     if (section_Id?.length > 0 && section_Id?.includes(e)) {
       setSection_Id(section_Id?.filter((v) => v !== e))
+      setSectionsChanged(true)
     }
   }
 
@@ -358,6 +365,8 @@ const AddingProduct = () => {
 
   const handleChangeSubSection = (e) => {
     if (e?.length < subSection_Id?.length) {
+      setSectionsChanged(true)
+
       if (newArray) {
         if (subSection_Id?.length > 1) {
           setSubSection_Id(e)
@@ -370,11 +379,15 @@ const AddingProduct = () => {
     } else {
       setSubSection_Id(e)
       setState({ ...state, onEditInput: true })
+      setSectionsChanged(true)
+
     }
   }
 
   const handleChangeSubSectionMobile = (e) => {
     setState({ ...state, onEditInput: true })
+    setSectionsChanged(true)
+
     if (subSection_Id?.length === 0) {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
@@ -383,6 +396,8 @@ const AddingProduct = () => {
     }
   }
   const handleChangeSubSectionDeleteMobile = (e) => {
+    setSectionsChanged(true)
+
     setState({ ...state, onEditInput: true })
     if (subSection_Id?.length > 0 && subSection_Id?.includes(e)) {
       setSubSection_Id(subSection_Id?.filter((v) => v !== e))
@@ -391,13 +406,13 @@ const AddingProduct = () => {
 
   useEffect(() => {
     if (section_Id?.length > 1) {
-      setSection_Id(section_Id.filter((x, i, a) => a.indexOf(x) == i))
+      setSection_Id(section_Id?.filter((x, i, a) => a.indexOf(x) == i))
     }
   }, [dressInfo?.getProductInfo])
 
   useEffect(() => {
     if (subSection_Id?.length > 1) {
-      setSubSection_Id(subSection_Id.filter((x, i, a) => a.indexOf(x) == i))
+      setSubSection_Id(subSection_Id?.filter((x, i, a) => a.indexOf(x) == i))
     }
   }, [newArray, section_Id])
 
@@ -692,31 +707,24 @@ const AddingProduct = () => {
         return false;
       }
     }
-
     // If all elements are equal, return true
     return true;
   }
-  // // console.log(sectionAreEqual(section_Id, productsDataIdEdit?.sections), 'section_Id arraysAreEqual');
-  // console.log(section_Id, 'section_Id');
-  // // console.log(productsDataIdEdit?.sections, 'sections-productsDataIdEdit');
-  // // console.log(sectionAreEqual(subSection_Id, productsDataIdEdit?.sub_sections), 'subSection_Id arraysAreEqual');
-  // console.log(subSection_Id, 'subSection_Id');
-  // // console.log(productsDataIdEdit?.sub_sections, 'subSection_Id-productsDataIdEdit');
-  // // console.log(sectionAreEqual(season_Id, productsDataIdEdit?.seasons), 'season_Id arraysAreEqual');
-  // console.log(season_Id, 'season_Id');
-  // // console.log(productsDataIdEdit?.seasons, 'season_Id-productsDataIdEdit');
-// console.log("0--------------------------------------------");
   const productUpdate = (childData) => {
     setState({ ...state, isCheckValid: true })
     if (newArray?.length && subSection_Id?.length) {
       setState({ ...state, sendingLoader: true, })
       let form = new FormData();
-      !arraysAreEqual(section_Id, productsDataIdEdit?.sections) && section_Id?.length > 0 && section_Id?.forEach((index) => {
-        form.append("section_ids[]", Number(index));
-      })
-      !arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections) && subSection_Id?.length > 0 && subSection_Id?.forEach((index) => {
-        form.append("sub_section_ids[]", Number(index));
-      })
+      if ((!arraysAreEqual(section_Id, productsDataIdEdit?.sections) && section_Id?.length > 0) || (sectionsChanged && section_Id?.length > 0)) {
+        section_Id?.forEach((index) => {
+          form.append("section_ids[]", Number(index));
+        })
+      }
+      if ((!arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections) && subSection_Id?.length > 0) || (sectionsChanged && subSection_Id?.length > 0)) {
+        subSection_Id?.forEach((index) => {
+          form.append("sub_section_ids[]", Number(index));
+        })
+      }
       !arraysAreEqual(season_Id, productsDataIdEdit?.seasons) && season_Id?.length > 0 && season_Id?.forEach((index) => {
         form.append("season_ids[]", Number(index));
       })
@@ -746,6 +754,7 @@ const AddingProduct = () => {
       })
         .then((res) => res.json())
         .then((res) => {
+          setSectionsChanged(false)
           if (res?.errors && res?.message) {
             toast.error(`${res?.message}`, {
               position: "top-right",
@@ -775,6 +784,8 @@ const AddingProduct = () => {
           // console.log(res, "ProductStore---Added");
         })
         .catch((err) => {
+          setSectionsChanged(false)
+          setState({ ...state, onEditInput: false, sendingLoader: false })
           toast.error(`${err?.message}`, {
             position: "top-right",
             autoClose: 3000,
@@ -790,16 +801,17 @@ const AddingProduct = () => {
         });
     }
     if (!newArray?.length) {
-      // console.log("run-2");
-
-      setState({ ...state, sendingLoader: true, })
       let form = new FormData();
-      !arraysAreEqual(section_Id, productsDataIdEdit?.sections) && section_Id?.length > 0 && section_Id?.forEach((index) => {
-        form.append("section_ids[]", Number(index));
-      })
-      !arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections) && subSection_Id?.length > 0 && subSection_Id?.forEach((index) => {
-        form.append("sub_section_ids[]", Number(index));
-      })
+      if ((!arraysAreEqual(section_Id, productsDataIdEdit?.sections) && section_Id?.length > 0) || (sectionsChanged && section_Id?.length > 0)) {
+        section_Id?.forEach((index) => {
+          form.append("section_ids[]", Number(index));
+        })
+      }
+      if ((!arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections) && subSection_Id?.length > 0) || (sectionsChanged && subSection_Id?.length > 0)) {
+        subSection_Id?.forEach((index) => {
+          form.append("sub_section_ids[]", Number(index));
+        })
+      }
       !arraysAreEqual(season_Id, productsDataIdEdit?.seasons) && season_Id?.length > 0 && season_Id?.forEach((index) => {
         form.append("season_ids[]", Number(index));
       })
@@ -829,6 +841,7 @@ const AddingProduct = () => {
       })
         .then((res) => res.json())
         .then((res) => {
+          setSectionsChanged(false)
           if (res?.errors && res?.message) {
             toast.error(`${res?.message}`, {
               position: "top-right",
@@ -856,9 +869,10 @@ const AddingProduct = () => {
             setState({ ...state, onEditInput: false, sendingLoader: false, isCheckValid: false })
 
           }
-          // console.log(res, "ProductStore---Added");
         })
         .catch((err) => {
+          setSectionsChanged(false)
+          setState({ ...state, onEditInput: false, sendingLoader: false, isCheckValid: false })
           toast.error(`${err?.message}`, {
             position: "top-right",
             autoClose: 3000,
@@ -1526,10 +1540,22 @@ const AddingProduct = () => {
                       <div className='w-full h-[290px] overflow-auto VerticelScroll'>
                         {state?.category_Id ? dressInfo?.getProductInfo?.types?.filter(e => e?.category_id == state?.category_Id)?.map((item) => {
                           return (
-                            <> {searchList ?
-                              languageDetector?.typeLang === "ru" ?
-                                item?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase())
-                                : item?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) &&
+                            <div key={item?.id}>
+                              {searchList ?
+                                languageDetector?.typeLang === "ru" ?
+                                  item?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase())
+                                  : item?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) &&
+                                  <div
+                                    onClick={() => selectTypeById(item?.id, item?.category_id)}
+                                    key={item?.id}
+                                    className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                    {state?.filterTypeId == (item?.id) &&
+                                      <span onClick={() => ClearSelectTypeById(item?.id)}>
+                                        <MenuCloseIcons colors={'#a1a1a1'} /></span>}
+                                  </div>
+                                :
                                 <div
                                   onClick={() => selectTypeById(item?.id, item?.category_id)}
                                   key={item?.id}
@@ -1539,21 +1565,10 @@ const AddingProduct = () => {
                                   {state?.filterTypeId == (item?.id) &&
                                     <span onClick={() => ClearSelectTypeById(item?.id)}>
                                       <MenuCloseIcons colors={'#a1a1a1'} /></span>}
-                                </div>
-                              :
-                              <div
-                                onClick={() => selectTypeById(item?.id, item?.category_id)}
-                                key={item?.id}
-                                className={`w-full ${state?.filterTypeId == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                {languageDetector?.typeLang === "uz" && item?.name_uz}
-                                {state?.filterTypeId == (item?.id) &&
-                                  <span onClick={() => ClearSelectTypeById(item?.id)}>
-                                    <MenuCloseIcons colors={'#a1a1a1'} /></span>}
 
-                              </div>
-                            }
-                            </>
+                                </div>
+                              }
+                            </div>
                           )
                         }) :
                           dressInfo?.getProductInfo?.types?.filter((e) =>
@@ -1680,7 +1695,7 @@ const AddingProduct = () => {
                             >
                               {productsDataIdEdit?.shop_locations?.filter(e => e?.id == dressInfo?.locationIdAddProduct)?.map(item => {
                                 return (
-                                  <span className="w-full leading-[15px]	 text-start text-[11px] xs:text-[12px] md:text-[14px]  overflow-hidden text-[#b5b5b5] flex items-center">
+                                  <span key={item?.address} className="w-full leading-[15px]	 text-start text-[11px] xs:text-[12px] md:text-[14px]  overflow-hidden text-[#b5b5b5] flex items-center">
                                     {item?.address}
                                   </span>
                                 )
@@ -1714,7 +1729,7 @@ const AddingProduct = () => {
                               <div className="w-fit h-full rounded-lg flex flex-wrap overflow-hidden text-[#b5b5b5] bg-[#F5F5F5]">
                                 {dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}                                  </span>
                                   )
@@ -1732,7 +1747,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full rounded-lg flex flex-wrap overflow-hidden ">
                                 {dressInfo?.getProductInfo?.sections?.filter(e => section_Id?.includes(e?.id))?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}                                  </span>
                                   )
@@ -1811,7 +1826,7 @@ const AddingProduct = () => {
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
                               {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
                                 return (
-                                  <span className="text-[13px] md:text-base font-AeonikProRegular">
+                                  <span key={item?.id} className="text-[13px] md:text-base font-AeonikProRegular">
                                     {languageDetector?.typeLang === "ru" && item?.name_ru}
                                     {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
                                 )
@@ -1895,7 +1910,7 @@ const AddingProduct = () => {
                               <div className="w-fit h-full rounded-lg flex items-center gap-x-1 text-[#b5b5b5] bg-[#F5F5F5]">
                                 {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
 
@@ -1914,7 +1929,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                                 {dressInfo?.getProductInfo?.seasons?.filter(e => season_Id?.includes(e?.id))?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
 
@@ -2042,7 +2057,7 @@ const AddingProduct = () => {
                                 <div className="w-fit h-full rounded-lg flex items-center gap-x-1 text-[#b5b5b5] bg-[#F5F5F5]">
                                   {dressInfo?.getProductInfo?.gender?.filter(e => state?.gender_Id == e?.id)?.map((item) => {
                                     return (
-                                      <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                      <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                         {languageDetector?.typeLang === "ru" && item?.name_ru}
                                         {languageDetector?.typeLang === "uz" && item?.name_uz}
                                       </span>
@@ -2061,7 +2076,7 @@ const AddingProduct = () => {
                                 <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                                   {dressInfo?.getProductInfo?.gender?.filter(e => state?.gender_Id == e?.id)?.map((item) => {
                                     return (
-                                      <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                      <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                         {languageDetector?.typeLang === "ru" && item?.name_ru}
                                         {languageDetector?.typeLang === "uz" && item?.name_uz}
                                       </span>
@@ -2356,7 +2371,7 @@ const AddingProduct = () => {
                               <div className="w-fit h-full rounded-lg flex items-center gap-x-1 text-[#b5b5b5] bg-[#F5F5F5]">
                                 {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>)
@@ -2374,7 +2389,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                                 {dressInfo?.getProductInfo?.types?.filter(e => e?.id == state?.filterTypeId)?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>)
@@ -2416,7 +2431,7 @@ const AddingProduct = () => {
                               <div className="w-fit h-full rounded-lg flex items-center gap-x-1 text-[#b5b5b5] bg-[#F5F5F5]">
                                 {dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>)
@@ -2434,7 +2449,7 @@ const AddingProduct = () => {
                               <div className="w-full h-full rounded-lg flex items-center gap-x-1">
                                 {dressInfo?.getProductInfo?.producers?.filter(e => e?.id == state?.producer_Id)?.map((item) => {
                                   return (
-                                    <span className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
+                                    <span key={item?.id} className="text-[12px] rounded-lg md:text-base font-AeonikProRegular h-[32px] px-[3px] flex items-center">
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>)
