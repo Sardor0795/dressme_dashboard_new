@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useHttp } from "../../../hook/useHttp";
 import { useTranslation } from "react-i18next";
 import { BackBtn } from "../../backBtn/backBtn";
+import LoadingForSeller from "../../Loading/LoadingFor";
 
 export default function ReviewWearComment() {
   const { request } = useHttp();
@@ -34,7 +35,7 @@ export default function ReviewWearComment() {
   const newId = id?.replace(":", "");
 
   // ------------GET METHOD delivery-method-----------------
-  const { refetch } = useQuery(
+  const { refetch, isLoading } = useQuery(
     ["review_product_details"],
     () => {
       return request({ url: `/products/${newId}`, token: true });
@@ -82,62 +83,7 @@ export default function ReviewWearComment() {
       });
     });
   };
-  const contentWear = (
-    <div className="w-[220px] h-fit m-0 p-0">
-      <div className="flex flex-col gap-y-3">
-        {filterStar.map((data) => {
-          return (
-            <div
-              key={data?.id}
-              onClick={() => handleFilterStar(data?.id)}
-              className="w-full h-5 flex items-center cursor-pointer"
-            >
-              <button
-                className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                  ? "border border-textBlueColor bg-textBlueColor"
-                  : "border border-lightBorderColor"
-                  }`}
-              >
-                {data?.checked ? <CheckTrue /> : null}
-              </button>
-              <article className="flex items-center ml-[10px]">
-                <span className="text-gray-700 text-base not-italic font-AeonikProRegular">
-                  {data?.starValue}
-                </span>
-                <span className="flex items-center ml-[5px] gap-x-[2px]">
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                </span>
-                <span className="flex items-center  gap-x-[2px]">
-                  <StarOutlineIcon />
-                  <StarOutlineIcon />
-                </span>
-              </article>
-              <p className="ml-[15px] text-gray-700 text-base not-italic font-AeonikProRegular">
-                ({data?.valueCount})
-              </p>
-            </div>
-          );
-        })}
-      </div>
-      <div className="w-full pt-5 mt-5 border-t border-lightBorderColor flex items-center justify-between">
-        <span
-          onClick={() => setState({ ...state, openwear: false })}
-          className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
-        >
-          {t("cancel")}
-        </span>
-        <span className="h-8 w-[1px] bg-lightBorderColor"></span>
-        <span
-          onClick={() => setState({ ...state, openwear: false })}
-          className="h-8 w-[49%]  text-base not-italic font-AeonikProMedium flex items-center justify-center cursor-pointer text-tableTextTitle2 hover:text-textBlueColor text-center"
-        >
-          {t("ready")}
-        </span>
-      </div>
-    </div>
-  );
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -146,29 +92,29 @@ export default function ReviewWearComment() {
 
   return (
     <div className="  w-full h-full px-4 md:px-10 py-1">
-      <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6">
+      <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6  ">
         <div className="relative w-full md:w-fit flex items-center justify-center md:justify-start pb-1">
           <div className="absolute left-0">
             <BackBtn />
           </div  >
-          <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
+          <span className="flex items-center text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[45px]">
             {t("more_details_of_product")}
           </span>
         </div>
 
       </div>
-      {/* {state?.loading ? (
+      {isLoading ? (
         <LoadingForSeller />
-      ) : ( */}
-      <div className="relative w-full flex flex-col md:flex-row gap-x-[40px] mt-6  ">
-        <section className="w-full md:w-[32%] overflow-hidden  ">
-          <WearCommentDetail sliderData={state} />
-        </section>
+      ) : (
+        <div className="relative w-full flex flex-col md:flex-row gap-x-[40px] mt-6  ">
+          <section className="w-full md:w-[32%] overflow-hidden  ">
+            <WearCommentDetail sliderData={state} />
+          </section>
 
-        <section className="w-full md:w-[calc(68%-40px)]  ">
-          <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
-        </section>
-      </div>
+          <section className="w-full md:w-[calc(68%-40px)]  ">
+            <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
+          </section>
+        </div>)}
     </div>
   );
 }

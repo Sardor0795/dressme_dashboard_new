@@ -8,6 +8,7 @@ import { useHttp } from "../../../hook/useHttp";
 import CommentTitle from "./CommentTitle/CommentTitle";
 import { useTranslation } from "react-i18next";
 import { BackBtn } from "../../backBtn/backBtn";
+import LoadingForSeller from "../../Loading/LoadingFor";
 
 export default function ReviewComment() {
   const { request } = useHttp();
@@ -26,7 +27,7 @@ export default function ReviewComment() {
   const { id } = useParams();
   const newId = id?.replace(":", "");
 
-  const { refetch } = useQuery(
+  const { refetch, isLoading } = useQuery(
     ["review_store_details"],
     () => {
       return request({ url: `/shops/${newId}`, token: true });
@@ -67,15 +68,18 @@ export default function ReviewComment() {
           <div></div>
         </div>
       </div>
-      <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
-        <div className="w-full md:w-[35%]">
-          <CommentDetail state={state} />
-        </div>
+      {isLoading ? (
+        <LoadingForSeller />
+      ) : (
+        <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
+          <div className="w-full md:w-[35%]">
+            <CommentDetail state={state} />
+          </div>
 
-        <div className="w-full md:w-[calc(70%-40px)] ">
-          <CommentTitle titleStore={state} handleRefetch={refetch} />
-        </div>
-      </div>
+          <div className="w-full md:w-[calc(70%-40px)] ">
+            <CommentTitle titleStore={state} handleRefetch={refetch} />
+          </div>
+        </div>)}
     </div>
   );
 }

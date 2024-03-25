@@ -76,7 +76,7 @@ export default function EditComponent({
         throw new Error(err || "something wrong");
       });
   };
-// console.log(item,'item');
+
   return (
     <div className="w-full h-fit rounded-[5px] p-[15px] mb-[10px] md:mb-3 border border-lightBorderColor">
       {/* userImg and Date */}

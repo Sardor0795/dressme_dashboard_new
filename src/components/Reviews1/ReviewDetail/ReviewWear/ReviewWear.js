@@ -2,13 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { SearchIcon } from "../../../../assets/icons";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useHttp } from "../../../../hook/useHttp";
-import { Rate } from "antd";
+ import { Rate } from "antd";
 import LoadingForSeller from "../../../Loading/LoadingFor";
-import axios from "axios";
-import { dressMainData } from "../../../../hook/ContextTeam";
-import { SellerRefresh } from "../../../../hook/SellerRefreshToken";
-import { useTranslation } from "react-i18next";
+ import { dressMainData } from "../../../../hook/ContextTeam";
+ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import axiosInstance from "../../../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
@@ -19,8 +16,7 @@ export default function ReviewWear() {
 
   // ------------GET  Has Reviews ?-----------------
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [sellerRefreshToken] = useContext(SellerRefresh)
-
+ 
   const { t } = useTranslation("reviews");
   const [languageDetector] = useContext(LanguageDetectorDress);
 
