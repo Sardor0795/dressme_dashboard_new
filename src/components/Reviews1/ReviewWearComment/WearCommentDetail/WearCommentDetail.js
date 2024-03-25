@@ -25,12 +25,16 @@ const WearCommentDetail = ({ sliderData }) => {
 
     return () => {
       window.removeEventListener("resize", updateDimension);
+      setCarosuelCurrent(null)
+      setModalOfCarsouel(false)
     };
   }, [screenSize]);
 
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
+  let sliderRef11 = useRef(null);
+  let sliderRef22 = useRef(null);
   let sliderRef1 = useRef(null);
   let sliderRef2 = useRef(null);
 
@@ -74,6 +78,57 @@ const WearCommentDetail = ({ sliderData }) => {
     speed: 500,
   };
   let settings1 = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 560,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+
+      {
+        breakpoint: 390,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 360,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  let settings11 = {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -182,8 +237,8 @@ const WearCommentDetail = ({ sliderData }) => {
                 <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4  ">
                   <Slider
                     className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center md:justify-start justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
-                    asNavFor={sliderRef2.current}
-                    ref={sliderRef1}
+                    asNavFor={sliderRef22.current}
+                    ref={sliderRef11}
                     {...settings}
                   >
                     {sliderData?.locationListId?.product?.photos?.map((data) => {
@@ -208,12 +263,12 @@ const WearCommentDetail = ({ sliderData }) => {
                     })}
                   </Slider>
                   <Slider
-                    asNavFor={sliderRef1.current}
-                    ref={sliderRef2}
+                    asNavFor={sliderRef11.current}
+                    ref={sliderRef22}
                     swipeToSlide={true}
                     focusOnSelect={true}
                     vertical={true}
-                    {...settings1}
+                    {...settings11}
                     className="w-full md:w-[120px] h-full  flex items-center flex-row flex-wrap pt-0 rounded-lg   "
                   >
                     {sliderData?.locationListId?.product?.photos?.map((data) => {
