@@ -110,40 +110,40 @@ function EditProfilePage() {
   }, [sellerInformation]);
 
   // ------------GET METHOD Region-----------------
-   
 
-  // const fetchDataRegion = async (customHeadersRegion) => {
-  //   try {
-  //     const response = await axios.get(`${url}/regions`, {
-  //       headers: customHeadersRegion,
-  //     });
-  //     const status = response.status;
-  //     const data = response.data;
 
-  //     return { data, status };
-  //   } catch (error) {
-  //     const status = error.response ? error.response.status : null;
-  //     return { error, status };
-  //   }
-  // };
+  const fetchDataRegion = async (customHeadersRegion) => {
+    try {
+      const response = await axios.get(`${url}/regions`, {
+        headers: customHeadersRegion,
+      });
+      const status = response.status;
+      const data = response.data;
 
-  // const customHeadersRegion = {
-  //   "Content-type": "application/json; charset=UTF-8",
-  //   'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
-  // };
-  // useQuery(["get_regionInProfile"], () => fetchDataRegion(customHeadersRegion), {
-  //   onSuccess: (data) => {
-  //     if (data?.status >= 200 && data?.status < 300) {
-  //       setRegionList(data?.data);
-  //     }
-  //   },
-  //   onError: (error) => {
-  //     throw new Error(error || "something wrong");
-  //   },
-  //   keepPreviousData: true,
-  //   refetchOnWindowFocus: false,
-  // }
-  // );
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+
+  const customHeadersRegion = {
+    "Content-type": "application/json; charset=UTF-8",
+    'Authorization': `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
+  };
+  useQuery(["get_regionInProfile"], () => fetchDataRegion(customHeadersRegion), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setRegionList(data?.data);
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  }
+  );
 
 
 
@@ -832,10 +832,13 @@ function EditProfilePage() {
                   {regionList?.regions ? (
                     regionList?.regions?.map((data, index) => {
                       return (
-                        <div key={data?.id} className="w-full  h-fit  ">
+                        <div key={data?.id} className={`w-full  h-fit  flex flex-col items-center ${data?.id === 2 ? "" : "opacity-50"}`}>
                           <div
-                            onClick={() => accordionCityList(data?.id)}
-                            className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                            onClick={data?.id === 2
+                              ? () => {
+                                accordionCityList(data?.id);
+                              }
+                              : null} className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                           >
                             <span className="text-[#303030] text-[14px] md:text-lg not-italic font-AeonikProRegular">
                               {languageDetector?.typeLang === "ru" && data?.name_ru}
@@ -1106,7 +1109,7 @@ function EditProfilePage() {
                   : "  "
                   }
               `}>
-                
+
                   <Select
                     className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
                     placeholder={t("type")}
