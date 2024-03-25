@@ -94,8 +94,8 @@ export default function ReviewWearComment() {
             >
               <button
                 className={`h-4 w-4 rounded-[2px] overflow-hidden flex items-center justify-center  ${data?.checked
-                    ? "border border-textBlueColor bg-textBlueColor"
-                    : "border border-lightBorderColor"
+                  ? "border border-textBlueColor bg-textBlueColor"
+                  : "border border-lightBorderColor"
                   }`}
               >
                 {data?.checked ? <CheckTrue /> : null}
@@ -145,25 +145,27 @@ export default function ReviewWearComment() {
   }, []);
 
   return (
-    <div className="border border-red-600 w-full h-full px-4 md:px-10 py-1">
+    <div className="  w-full h-full px-4 md:px-10 py-1">
       <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6">
-        <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
-          <BackBtn />
+        <div className="relative w-full md:w-fit flex items-center justify-center md:justify-start pb-1">
+          <div className="absolute left-0">
+            <BackBtn />
+          </div  >
           <span className="block text-tableTextTitle2 text-xl md:text-2xl not-italic font-AeonikProMedium ml-[30px]">
             {t("more_details_of_product")}
           </span>
         </div>
-         
+
       </div>
       {/* {state?.loading ? (
         <LoadingForSeller />
       ) : ( */}
-      <div className="relative w-full flex flex-col md:flex-row gap-x-[40px] mt-6 border border-red-600">
-        <section className="w-full md:w-[32%] overflow-hidden border border-red-600">
+      <div className="relative w-full flex flex-col md:flex-row gap-x-[40px] mt-6  ">
+        <section className="w-full md:w-[32%] overflow-hidden  ">
           <WearCommentDetail sliderData={state} />
         </section>
 
-        <section className="w-full md:w-[calc(68%-40px)] border border-red-600">
+        <section className="w-full md:w-[calc(68%-40px)]  ">
           <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
         </section>
       </div>
