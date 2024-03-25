@@ -32,11 +32,7 @@ export default function CommentDetail({ state }) {
             </span>
             <div className="flex md:hidden items-center mt-[5px]">
               <div className="flex md:hidden items-center mr-[5px] md:mr-[6px]">
-                <Rate
-                  allowHalf
-                  disabled
-                  defaultValue={state?.locationListId?.overall_rating}
-                />
+                <Rate disabled allowHalf count={1} defaultValue={1} />
               </div>
               <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
                 <p className="font-AeonikProMedium text-black mr-[5px]">
@@ -54,12 +50,19 @@ export default function CommentDetail({ state }) {
         </div>
         <div className="flex items-center justify-between md:justify-normal mt-[15px] md:mt-[30px] gap-x-5 md:border-b border-lightBorderColor pb-6 md:pb-10">
           <div className="flex items-center gap-x-1">
-            <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-borderColor bg-lightBgColor md:bg-white">
-              <img src={man} alt="" />
-            </div>
-            <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-borderColor bg-lightBgColor md:bg-white">
-              <img src={woman} alt="" />
-            </div>
+            {state?.locationListId?.shop?.gender_id === "1" ||
+            state?.locationListId?.shop?.gender_id === "3" ? (
+              <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-borderColor bg-lightBgColor md:bg-white">
+                <img src={man} alt="" />
+              </div>
+            ) : null}
+
+            {state?.locationListId?.shop?.gender_id === "2" ||
+            state?.locationListId?.shop?.gender_id === "3" ? (
+              <div className="w-12 h-12 flex items-center justify-center rounded-lg border border-borderColor bg-lightBgColor md:bg-white">
+                <img src={woman} alt="" />
+              </div>
+            ) : null}
           </div>
           <div className="h-12 flex items-center px-5 active:opacity-70 border border-borderColor bg-lightBgColor md:bg-white rounded-lg gap-x-3">
             <img src={deliveryIcon} alt="" />

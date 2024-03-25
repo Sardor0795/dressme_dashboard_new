@@ -9,13 +9,11 @@ import EditComponent from "./EditComment";
 import { useTranslation } from "react-i18next";
 
 const CommentTitle = ({ titleStore, handleRefetch }) => {
-
   const { t } = useTranslation("reviews");
-
 
   const [state, setState] = useState({
     startReviews: true,
-    searchComment: ""
+    searchComment: "",
   });
 
   useEffect(() => {
@@ -30,34 +28,11 @@ const CommentTitle = ({ titleStore, handleRefetch }) => {
         <p className="mr-[10px] md:ml-0"> {t("customer_reviews")}</p>
         <span className="block md:hidden text-xs text-mobileTextColor mt-[3px]">
           ({t("reviews_two")}:
-          <span className="ml-[4px]">{titleStore?.locationListId?.shop?.ratings?.length || 0} </span>
+          <span className="ml-[4px]">
+            {titleStore?.locationListId?.shop?.ratings?.length || 0}{" "}
+          </span>
           )
         </span>
-      </div>
-
-      <div className="flex md:hidden gap-x-[14px] mb-4">
-        <div className="w-[70%] h-9 overflow-hidden border border-lightBorderColor flex items-center rounded-lg">
-          <input
-            type="text"
-            className="w-full h-full text-[13px] px-[10px] outline-0"
-            placeholder={t("search")}
-            name="s"
-            value={state?.searchComment}
-            onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
-          />
-          <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-            <SearchIcon />
-          </span>
-        </div>
-        <button
-          onClick={() => setState({ ...state, startReviews: false })}
-          className="w-[30%] h-9 active:scale-95 bg-textBlueColor flex items-center justify-center text-white rounded-lg px-[8px] ls:px-[10px]"
-        >
-          <span className="text-[10px] ls:text-[11px] flex-none not-italic font-AeonikProMedium mr-[5px]">
-            {t("according_to_reviews")}
-          </span>
-          <MobileStar />
-        </button>
       </div>
 
       {!state.startReviews ? (
