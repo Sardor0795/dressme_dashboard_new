@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { MenuCloseIcons } from "../../../../assets/icons";
 
 const WearCommentDetail = ({ sliderData }) => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [modalOfCarsouel, setModalOfCarsouel] = useState(false);
+  const [carosuelCurrent, setCarosuelCurrent] = useState(null);
 
   const [languageDetector] = useContext(LanguageDetectorDress);
 
@@ -69,14 +72,14 @@ const WearCommentDetail = ({ sliderData }) => {
     speed: 500,
   };
   let settings1 = {
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
@@ -127,22 +130,56 @@ const WearCommentDetail = ({ sliderData }) => {
 
   return (
     <div className="w-full h-fit">
-      <div className="pb-5 text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center gap-x-4">
-        <div className="h-5 w-[4px] bg-textBlueColor"></div>
-        <p>
-          {languageDetector?.typeLang === "ru" &&
-            sliderData?.locationListId?.product?.name_ru}
-          {languageDetector?.typeLang === "uz" &&
-            sliderData?.locationListId?.product?.name_uz}
-        </p>
-      </div>
+      <section
+        onClick={() => {
+          setModalOfCarsouel(false)
+        }}
+        className={`fixed inset-0 z-[200] duration-200 w-full h-[100vh] bg-black opacity-60 
+          ${modalOfCarsouel ? "" : "hidden"
+          }`}
+      ></section>
+
+      <section
+        className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
+          }`}
+      >
+        <button
+          onClick={() => setModalOfCarsouel(false)}
+          className="absolute   z-[202] sm:top-0  top-[-50px] z-[224] right-[0px] sm:right-[-50px] md:right-[-80px]  flex items-center justify-center h-[38px] w-[38px] md:w-[50px] md:h-[50px] rounded-full bg-[#808080]">
+          <MenuCloseIcons colors="#fff" />
+        </button>
+        <div>
+          <div
+            className="w-full max-w-[440px] md:max-w-[620px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
+          >
+            < div className="w-full  flex flex-col items-center justify-start">
+              {sliderData?.locationListId?.product?.photos?.filter(e => e?.id === carosuelCurrent)?.map(item => {
+                return (
+                  <div className="w-full">
+                    <div className="w-full h-[400px] md:h-[80vh]   flex items-center">
+                      <img
+                        src={item?.url_photo}
+                        alt="backImg"
+                        className=" w-full max-w-[440px] md:max-w-[620px] h-[400px] md:h-[80vh]	 border border-searchBgColor object-cover rounded-lg"
+                      />
+
+                    </div>
+                  </div>
+                )
+              })
+              }
+            </div>
+          </div>
+
+        </div>
+      </section>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
         <div className="w-full flex items-start md:gap-x-[10px]">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
             <div className="flex md:h-[402px] gap-x-4">
               <div className="md:w-[350px] h-full  overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
                 <Slider
-                  className="w-full h-full flex items-center justify-center rounded-lg "
+                  className="w-full h-full flex items-center justify-center rounded-lg cursor-pointer"
                   asNavFor={nav2}
                   ref={slider1}
                   swipeToSlide={true}
@@ -153,6 +190,10 @@ const WearCommentDetail = ({ sliderData }) => {
                     return (
                       <article
                         key={data?.id}
+                        onClick={() => {
+                          setModalOfCarsouel(true)
+                          setCarosuelCurrent(data?.id)
+                        }}
                         className="flex items-center justify-center h-full"
                       >
                         <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
@@ -199,7 +240,12 @@ const WearCommentDetail = ({ sliderData }) => {
               <div className="w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
                 {sliderData?.locationListId?.product?.photos?.map((data) => {
                   return (
-                    <article key={data?.id}>
+                    <article
+                      onClick={() => {
+                        setModalOfCarsouel(true)
+                        setCarosuelCurrent(data?.id)
+                      }}
+                      key={data?.id}>
                       <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                         <img
                           className="h-full md:w-full md:h-fit"
@@ -215,7 +261,7 @@ const WearCommentDetail = ({ sliderData }) => {
           )}
         </div>
       </section>
-    </div>
+    </div >
   );
 };
 export { WearCommentDetail };

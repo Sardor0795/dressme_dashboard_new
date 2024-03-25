@@ -1506,7 +1506,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         </section>
         {/* Img Upload */}
         <section
-          className={`fixed z-[223] rounded-lg bg-white w-full max-w-[440px]  md:w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
+          className={`fixed z-[223]  rounded-lg bg-white w-full max-w-[440px]   md:max-w-[620px]  h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${freeModalUploadImg ? "" : "hidden"
             }`}
         >
           <button
