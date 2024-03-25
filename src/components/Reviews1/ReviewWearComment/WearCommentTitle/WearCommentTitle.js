@@ -23,7 +23,7 @@ export default function WearCommentTitle({ titleProduct, handleRefetch }) {
   }, []);
 
   return (
-    <div className="w-full h-full  flex flex-col md:gap-y-[15px]">
+    <div className="w-full h-full  flex flex-col md:gap-y-[15px]  ">
       <div className="pb-1 md:justify-end text-tableTextTitle2 text-xl not-italic font-AeonikProMedium flex items-center md:gap-x-4 mt-[37px] mb-[18px] md:mt-0 md:mb-0">
         <p className="mr-[10px] md:ml-0"> {t("customer_reviews")}</p>
         <span className="block md:hidden text-xs text-mobileTextColor">

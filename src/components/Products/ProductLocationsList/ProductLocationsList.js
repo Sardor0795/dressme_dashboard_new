@@ -1440,7 +1440,7 @@ export default function ProductLocationsList() {
                                                 ?.map((itemValue, index) => {
                                                   // console.log(itemValue, 'itemValue');
                                                   return (
-                                                    <div
+                                                    <div 
                                                       key={index}
                                                       className="w-full "
                                                     >

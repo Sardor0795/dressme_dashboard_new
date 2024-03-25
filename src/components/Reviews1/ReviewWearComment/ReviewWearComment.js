@@ -145,7 +145,7 @@ export default function ReviewWearComment() {
   }, []);
 
   return (
-    <div className="">
+    <div className="border border-red-600 w-full h-full px-4 md:px-10 py-1">
       <div className="w-full flex justify-between overflow-x-hidden	  md:border-b border-lightBorderColor pt-6 md:py-6">
         <div className="w-full md:w-fit flex items-center justify-center md:justify-start">
           <BackBtn />
@@ -153,52 +153,17 @@ export default function ReviewWearComment() {
             {t("more_details_of_product")}
           </span>
         </div>
-        <div className="w-fit hidden md:flex gap-x-[30px]">
-          <Popover
-            open={state?.openwear}
-            onOpenChange={handleOpenChangeWear}
-            className="w-[244px] h-10 overflow-hidden cursor-pointer border border-lightBorderColor flex items-center justify-between px-[10px] rounded-[12px] "
-            trigger="click"
-            options={["Hide"]}
-            placement="bottom"
-            content={contentWear}
-          >
-            <p className="text-textLightColor text-sm not-italic font-AeonikProMedium">
-              {t("filter_rating")}
-            </p>
-            <span>
-              <BiChevronDown
-                size={20}
-                style={{ color: "#c2c2c2" }}
-                className={`${state?.openwear ? "rotate-[-180deg]" : ""
-                  } duration-200`}
-              />
-            </span>
-          </Popover>
-          <div className="w-[350px]  h-10 overflow-hidden border border-lightBorderColor flex items-center rounded-[12px]">
-            <input
-              type="text"
-              name="s"
-              className="w-full h-full px-[10px] outline-0	"
-              placeholder="Поиск"
-              value={state?.searchComment}
-              onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
-            />
-            <button className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-              <SearchIcon />
-            </button>
-          </div>
-        </div>
+         
       </div>
       {/* {state?.loading ? (
         <LoadingForSeller />
       ) : ( */}
-      <div className="relative w-full flex flex-col md:flex-row gap-x-[70px] mt-6">
-        <section className="w-full md:w-[32%] overflow-hidden">
+      <div className="relative w-full flex flex-col md:flex-row gap-x-[40px] mt-6 border border-red-600">
+        <section className="w-full md:w-[32%] overflow-hidden border border-red-600">
           <WearCommentDetail sliderData={state} />
         </section>
 
-        <section className="w-full md:w-[calc(68%-70px)] ">
+        <section className="w-full md:w-[calc(68%-40px)] border border-red-600">
           <WearCommentTitle titleProduct={state} handleRefetch={refetch} />
         </section>
       </div>

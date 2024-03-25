@@ -2381,10 +2381,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
                       } : null
                   }
                   className="w-full flex flex-col h-full ">
-
-                  <div
-
-                    className="BackgImageBLur  rounded-lg h-full  flex items-center justify-center ">
+                  <div className="BackgImageBLur  rounded-lg h-full  flex items-center justify-center ">
                     <div className="flex items-center justify-center w-[290px] h-[380px]  backdrop-blur-md">
                       <img
                         className="

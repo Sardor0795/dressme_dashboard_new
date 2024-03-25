@@ -137,10 +137,10 @@ const WearCommentDetail = ({ sliderData }) => {
         </p>
       </div>
       <section className="w-full flex flex-col flex-wrap h-fit gap-x-[10px]">
-        <div className="w-full flex flex-col md:flex-row justify-between items-start md:gap-x-[10px]">
+        <div className="w-full flex items-start md:gap-x-[10px]">
           {sliderData?.locationListId?.product?.photos?.length > 1 ? (
-            <>
-              <div className="w-full md:w-[350px] md:h-[402px] overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
+            <div className="flex md:h-[402px] gap-x-4">
+              <div className="md:w-[350px] h-full  overflow-hidden flex items-center justify-center md:border border-searchBgColor rounded-xl">
                 <Slider
                   className="w-full h-full flex items-center justify-center rounded-lg "
                   asNavFor={nav2}
@@ -157,7 +157,7 @@ const WearCommentDetail = ({ sliderData }) => {
                       >
                         <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                           <img
-                            className="h-full md:w-full md:h-fit"
+                            className="md:w-[350px] md:h-[402px] object-cover"
                             src={data?.url_photo}
                             alt=""
                           />
@@ -167,7 +167,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   })}
                 </Slider>
               </div>
-              <div className="w-full md:w-[120px] h-fit flex items-center justify-between mt-1">
+              <div className="w-full md:w-[120px] h-full flex items-center justify-between  border border-red-600">
                 <Slider
                   asNavFor={nav1}
                   ref={slider2}
@@ -175,16 +175,16 @@ const WearCommentDetail = ({ sliderData }) => {
                   focusOnSelect={true}
                   vertical={true}
                   {...settings1}
-                  className="!w-full md:!h-[73px] flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg"
+                  className="!w-full h-full  flex items-center justify-between flex-row flex-wrap pt-0 rounded-lg border border-green-600"
                 >
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
                       <figure
                         key={data?.id}
-                        className="!w-full !h-[70px] md:!w-[110px] md:!h-[73px] cursor-pointer bg-btnBgColor rounded-lg pr-2 md:pr-0"
+                        className="  !h-[90px] md:w-[120px]   cursor-pointer bg-btnBgColor rounded-lg "
                       >
                         <img
-                          className="w-full h-full md:p-0 md:w-full md:h-full object-contain flex items-center justify-center border border-searchBgColor rounded-lg"
+                          className="!h-[90px] md:w-[120px] object-cover flex items-center justify-center border border-searchBgColor rounded-lg"
                           src={data?.url_photo}
                           alt=""
                         />
@@ -193,9 +193,9 @@ const WearCommentDetail = ({ sliderData }) => {
                   })}
                 </Slider>
               </div>
-            </>
+            </div>
           ) : (
-            <>
+            <div>
               <div className="w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
                 {sliderData?.locationListId?.product?.photos?.map((data) => {
                   return (
@@ -211,7 +211,7 @@ const WearCommentDetail = ({ sliderData }) => {
                   );
                 })}
               </div>
-            </>
+            </div>
           )}
         </div>
       </section>
