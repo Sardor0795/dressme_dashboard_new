@@ -10,9 +10,9 @@ import { ShopList } from "../../../hook/ShopList";
 
 export default function ReviewStoreWear() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
-   const [shopList, setShopList] = useContext(ShopList)
-   const [state, setState] = useState({
-     searchComment: ""
+  const [shopList, setShopList] = useContext(ShopList);
+  const [state, setState] = useState({
+    searchComment: "",
   });
 
   const { t } = useTranslation("reviews");
@@ -36,27 +36,6 @@ export default function ReviewStoreWear() {
               <span className="text-2xl not-italic font-AeonikProMedium">
                 {t("reviews")}
               </span>
-            </div>
-            <div className="flex items-center justify-between border-t md:border-0 border-borderColor md:mt-0 md:pt-0 mt-3 pt-3">
-              <section className="w-full  flex items-center justify-between gap-x-[15px]">
-                <label
-                  htmlFor="searchStore"
-                  className="w-full md:max-w-[400px] h-10 flex md:hidden items-center overflow-hidden border  border-lightBorderColor  rounded-lg"
-                >
-                  <input
-                    type="text"
-                    name="s"
-                    id="searchStore"
-                    className="w-full h-full outline-0 px-[10px]"
-                    placeholder={`${t("search")}`}
-                    value={state?.searchComment}
-                    onChange={(e) => setState({ ...state, searchComment: e?.target.value })}
-                  />
-                  <span className="px-[10px] bg-lightBorderColor h-full flex items-center justify-center">
-                    <SearchIcon />
-                  </span>
-                </label>
-              </section>
             </div>
           </div>
         </div>
@@ -88,8 +67,7 @@ export default function ReviewStoreWear() {
               } h-full flex items-center justify-center text-sm md:text-base not-italic font-AeonikProMedium`}
             >
               {t("shops")}
-              {shopList?.shops?.data?.length
-                ?.rated_users_count > 1
+              {shopList?.shops?.data?.length?.rated_users_count > 1
                 ? shopList?.shops
                 : null}
             </button>
