@@ -15,13 +15,12 @@ import axiosInstance from "../../../Authentication/AxiosIntance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ReviewStore = () => {
-
-  const [sellerRefreshToken] = useContext(SellerRefresh)
+  const [sellerRefreshToken] = useContext(SellerRefresh);
   const [helperDatainform, setHelperDatainform] = useContext(HelperData);
-  const [shopList, setShopList] = useContext(ShopList)
+  const [shopList, setShopList] = useContext(ShopList);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [state, setState] = useState({
-    isShops: false
+    isShops: false,
   });
   const { t } = useTranslation("reviews");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -43,21 +42,25 @@ const ReviewStore = () => {
   };
 
   const customHeaders = {
-    'Content-type': 'application/json; charset=UTF-8',
-    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+    "Content-type": "application/json; charset=UTF-8",
+    Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed
   };
-  const { isLoading } = useQuery(['seller_shops_list_review'], () => fetchData(customHeaders), {
-    onSuccess: (data) => {
-      if (data?.status >= 200 && data?.status < 300) {
-        setShopList(data?.data)
-      }
-    },
-    onError: (error) => {
-      throw new Error(error || "something wrong");
-    },
-    keepPreviousData: true,
-    refetchOnWindowFocus: false,
-  });
+  const { isLoading } = useQuery(
+    ["seller_shops_list_review"],
+    () => fetchData(customHeaders),
+    {
+      onSuccess: (data) => {
+        if (data?.status >= 200 && data?.status < 300) {
+          setShopList(data?.data);
+        }
+      },
+      onError: (error) => {
+        throw new Error(error || "something wrong");
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   // ------------GET METHOD delivery-method-----------------
   useEffect(() => {
@@ -65,23 +68,24 @@ const ReviewStore = () => {
       try {
         const data = await axios.get(`${REACT_APP_BASE_URL}/delivery-method`, {
           headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          },
         });
         if (data?.status >= 200 && data?.status < 300) {
-          setHelperDatainform({ ...helperDatainform, deliveryList: data?.data?.delivery_methods })
+          setHelperDatainform({
+            ...helperDatainform,
+            deliveryList: data?.data?.delivery_methods,
+          });
         }
-      } catch (error) {
-
-      }
+      } catch (error) {}
     };
     if (!helperDatainform?.deliveryList) {
       fetchDelivery();
     }
   }, []);
   useEffect(() => {
-    if (shopList?.shops?.some(data => data?.overall_rating > 0)) {
+    if (shopList?.shops?.some((data) => data?.overall_rating > 0)) {
       setState({ ...state, isShops: true });
     }
   }, [shopList?.shops]);
@@ -103,10 +107,10 @@ const ReviewStore = () => {
         </div>
       ) : (
         <div className="w-full h-full px-4 md:px-10 py-1 flex flex-col gap-y-[30px]">
-          {
-            shopList?.shops?.length > 0 &&
-              state?.isShops > 0 ? (
-              shopList?.shops?.filter(e => Number(e?.overall_rating) > 0)?.map((data, i) => {
+          {shopList?.shops?.length > 0 && state?.isShops > 0 ? (
+            shopList?.shops
+              ?.filter((e) => Number(e?.overall_rating) > 0)
+              ?.map((data, i) => {
                 return (
                   <div
                     key={data?.id}
@@ -124,23 +128,28 @@ const ReviewStore = () => {
                         <div className="hidden md:flex items-center justify-center pr-7 pl-5 text-xl font-AeonikProRegular">
                           {i + 1}
                         </div>
-                        <figure className="overflow-hidden w-[75px] h-[75px] md:w-[120px] md:h-[120px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
+                        <figure className="overflow-hidden max-w-[75px] md:max-w-[120px] max-h-[75px] md:max-h-[120px] min-w-[75px] md:min-w-[120px] min-h-[75px] md:min-h-[120px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
                           <img
                             className="w-full h-full object-cover"
                             src={data?.url_logo_photo}
                             alt=""
                           />
                         </figure>
-                        <div className="w-[60%] flex flex-col ml-[8px] md:ml-8">
-                          <p className="text-sm md:text-xl font-AeonikProMedium mb-3">
-                            {data?.name}
+                        <div className="w-full md:w-[60%] flex flex-col ml-[8px] md:ml-8">
+                          <p className="block md:hidden break-all text-sm md:text-xl font-AeonikProMedium mb-[5px] md:mb-3">
+                            {data?.name || null}
+                          </p>
+                          <p className="relative md:block hidden max-h-[56px] mb-[5px] overflow-hidden w-full break-all md:pr-4 text-[13px] md:w-[250px] ls:text-[14px] xs:text-xl md:text-lg font-AeonikProMedium">
+                            {data?.name || null}
+                            <span className="absolute right-[16px] top-[28px] w-full block linearGr h-[28px]"></span>
                           </p>
                           <div className="flex items-center">
                             <div className="flex items-center mr-[5px] md:mr-[6px]">
                               <Rate
                                 disabled
                                 allowHalf
-                                defaultValue={data?.overall_rating}
+                                count={1}
+                                defaultValue={1}
                               />
                             </div>
                             <div className="flex items-center not-italic font-AeonikProRegular leading-4 text-right text-gray-500 md:ml-1 text-[12px] mt-[2px] md:mt-[3px] md:text-sm">
@@ -159,12 +168,17 @@ const ReviewStore = () => {
                         </div>
                       </section>
                       <section className="hidden w-[15%] md:flex items-center gap-x-1">
-                        <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
-                          <img src={man} alt="" />
-                        </div>
-                        <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
-                          <img src={woman} alt="" />
-                        </div>
+                        {data?.gender?.id === 1 || data?.gender?.id === 3 ? (
+                          <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                            <img src={man} alt="" />
+                          </div>
+                        ) : null}
+
+                        {data?.gender?.id === 2 || data?.gender?.id === 3 ? (
+                          <div className="w-12 h-12 rounded-lg border border-borderColor flex items-center justify-center">
+                            <img src={woman} alt="" />
+                          </div>
+                        ) : null}
                       </section>
                       <section className="h-[36px] ll:h-12 px-1 ls:px-[10px] md:w-[20%] ll:px-5 active:opacity-70 border border-borderColor rounded-lg hidden md:flex items-center justify-center gap-x-1 ll:gap-x-3">
                         <img src={deliveryIcon} alt="" />
@@ -176,8 +190,10 @@ const ReviewStore = () => {
                                 key={item?.id}
                                 className="text-tableTextTitle2 text-[11px] ls:text-[12px] ll:text-[14px] xs:text-base not-italic font-AeonikProRegular ll:font-AeonikProMedium"
                               >
-                                {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {languageDetector?.typeLang === "ru" &&
+                                  item?.name_ru}
+                                {languageDetector?.typeLang === "uz" &&
+                                  item?.name_uz}
                               </span>
                             );
                           })}
@@ -216,12 +232,11 @@ const ReviewStore = () => {
                   </div>
                 );
               })
-            ) : (
-              <div className="w-full  h-[50vh] md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
-                {t("no_reviews")}
-              </div>
-            )
-          }
+          ) : (
+            <div className="w-full  h-[50vh] md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
+              {t("no_reviews")}
+            </div>
+          )}
         </div>
       )}
     </div>
