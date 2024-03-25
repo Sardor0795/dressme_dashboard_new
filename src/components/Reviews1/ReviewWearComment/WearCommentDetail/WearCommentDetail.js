@@ -28,15 +28,16 @@ const WearCommentDetail = ({ sliderData }) => {
     };
   }, [screenSize]);
 
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
-  const slider1 = useRef(null);
-  const slider2 = useRef(null);
 
-  useEffect(() => {
-    setNav1(slider1.current);
-    setNav2(slider2.current);
-  }, []);
+  const [nav1, setNav1] = useState(null);
+  const [nav2, setNav2] = useState(null);
+  let sliderRef1 = useRef(null);
+  let sliderRef2 = useRef(null);
+
+  // useEffect(() => {
+  //   setNav1(sliderRef1);
+  //   setNav2(sliderRef2);
+  // }, []);
 
   const NextArrow = (props) => {
     const { onClick } = props;
@@ -128,7 +129,7 @@ const WearCommentDetail = ({ sliderData }) => {
       top: 0,
     });
   }, []);
-   return (
+  return (
     <div className="w-full h-fit">
       <section
         onClick={() => {
@@ -177,14 +178,12 @@ const WearCommentDetail = ({ sliderData }) => {
         <div className="w-full flex    items-start md:gap-x-[10px]">
           {sliderData?.locationListId?.product?.photos?.length > 1 ?
             <div className="w-full  ">
-              {screenSize?.width > 768 ?
+              {screenSize?.width > 768 &&
                 <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4  ">
                   <Slider
                     className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center md:justify-start justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
-                    asNavFor={nav2}
-                    ref={slider1}
-                    swipeToSlide={true}
-                    focusOnSelect={true}
+                    asNavFor={sliderRef2.current}
+                    ref={sliderRef1}
                     {...settings}
                   >
                     {sliderData?.locationListId?.product?.photos?.map((data) => {
@@ -209,8 +208,8 @@ const WearCommentDetail = ({ sliderData }) => {
                     })}
                   </Slider>
                   <Slider
-                    asNavFor={nav1}
-                    ref={slider2}
+                    asNavFor={sliderRef1.current}
+                    ref={sliderRef2}
                     swipeToSlide={true}
                     focusOnSelect={true}
                     vertical={true}
@@ -233,63 +232,61 @@ const WearCommentDetail = ({ sliderData }) => {
                     })}
                   </Slider>
 
-                </div>
-                :
-                <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4 flex-col     ">
-                  <Slider
-                    className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center   justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
-                    asNavFor={nav2}
-                    ref={slider1}
-                    swipeToSlide={true}
-                    focusOnSelect={true}
-                    {...settings}
-                  >
-                    {sliderData?.locationListId?.product?.photos?.map((data) => {
-                      return (
-                        <article
-                          key={data?.id}
-                          onClick={() => {
-                            setModalOfCarsouel(true)
-                            setCarosuelCurrent(data?.id)
-                          }}
-                          className="flex items-center justify-center h-full"
-                        >
-                          <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
-                            <img
-                              className=" w-[350px] h-[200px] md:h-[402px] object-cover"
-                              src={data?.url_photo}
-                              alt=""
-                            />
-                          </figure>
-                        </article>
-                      );
-                    })}
-                  </Slider>
-                  <Slider
-                    asNavFor={nav1}
-                    ref={slider2}
-                    swipeToSlide={true}
-                    focusOnSelect={true}
-                    vertical={false}
-                    {...settings1}
-                    className="  w-full   mx-auto max-w-[350px] md:w-[120px]  h-[70px] md:h-full md:hidden flex items-center justify-between "
-                  >
-                    {sliderData?.locationListId?.product?.photos?.map((data) => {
-                      return (
-                        <figure
-                          key={data?.id}
-                          className=" h-[70px] md:h-[90px] !w-[80px] md:w-[120px] cursor-pointer bg-btnBgColor rounded-lg mx-1"
-                        >
+                </div>}
+
+              {screenSize?.width <= 768 && <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4 flex-col     ">
+                <Slider
+                  className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center   justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
+                  asNavFor={sliderRef2.current}
+                  ref={sliderRef1}
+                  {...settings}
+                >
+                  {sliderData?.locationListId?.product?.photos?.map((data) => {
+                    return (
+                      <article
+                        key={data?.id}
+                        onClick={() => {
+                          setModalOfCarsouel(true)
+                          setCarosuelCurrent(data?.id)
+                        }}
+                        className="flex items-center justify-center h-full"
+                      >
+                        <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                           <img
-                            className="h-full md:h-[90px] w-full md:w-[120px] object-cover   rounded-lg"
+                            className=" w-[350px] h-[200px] md:h-[402px] object-cover"
                             src={data?.url_photo}
                             alt=""
                           />
                         </figure>
-                      );
-                    })}
-                  </Slider>
-                </div>}
+                      </article>
+                    );
+                  })}
+                </Slider>
+                <Slider
+                  asNavFor={sliderRef1.current}
+                  ref={sliderRef2}
+                  swipeToSlide={true}
+                  focusOnSelect={true}
+                  vertical={false}
+                  {...settings1}
+                  className="  w-full   mx-auto max-w-[350px] md:w-[120px]  h-[70px] md:h-full md:hidden flex items-center justify-between "
+                >
+                  {sliderData?.locationListId?.product?.photos?.map((data) => {
+                    return (
+                      <figure
+                        key={data?.id}
+                        className=" h-[70px] md:h-[90px] !w-[80px] md:w-[120px] cursor-pointer bg-btnBgColor rounded-lg mx-1"
+                      >
+                        <img
+                          className="h-full md:h-[90px] w-full md:w-[120px] object-cover   rounded-lg"
+                          src={data?.url_photo}
+                          alt=""
+                        />
+                      </figure>
+                    );
+                  })}
+                </Slider>
+              </div>}
             </div>
 
             : (
