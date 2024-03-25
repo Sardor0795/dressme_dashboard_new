@@ -52,7 +52,7 @@ export default function ReviewWear() {
   const { isLoading } = useQuery(['seller_product_list_review'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-         setDressInfo({ ...dressInfo, getReviewProduct: data?.data?.products })
+        setDressInfo({ ...dressInfo, getReviewProduct: data?.data?.products })
       }
     },
     onError: (error) => {
@@ -77,17 +77,17 @@ export default function ReviewWear() {
   }, []);
 
   return (
-    <div className="relative ">
+    <div className="relative border border-red-600">
       {isLoading ? (
         <div className="h-full w-full">
           <LoadingForSeller />
         </div>
       ) : (
-        <div className="w-full h-full px-4 md:px-10 py-1">
+        <div className="w-full h-full px-4 md:px-10 py-1 ">
           {
             dressInfo?.getReviewProduct?.length > 0 && state?.isProduct ? (
-              <div className="w-full h-fit md:mt-7">
-                <div className="w-full mb-[10px] hidden md:block">
+              <div className="w-full h-fit  md:mt-7 border border-red-600 ">
+                <div className="  w-full my-3 h-[70px] flex items-center hidden md:block border border-lightBorderColor">
                   <ul className="w-full h-full  flex items-center justify-between ">
                     <li className="w-[20%] pl-5 ">
                       <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
@@ -127,86 +127,89 @@ export default function ReviewWear() {
                   </ul>
                 </div>
                 {/* table product */}
-                <div className="w-full h-full border-lightBorderColor md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll">
-                  {dressInfo?.getReviewProduct?.filter(e => Number(e?.overall_rating) > 0)?.map((data) => {
-                    return (
-                      <ul
-                        key={data?.id}
-                        className="w-full p-2 md:px-0 md:py-5 overflow-hidden border md:border-b border-borderColor flex items-center mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 rounded-xl md:rounded-none md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
-                      >
-                        <li className="w-[80px] h-[75px] md:w-[20%] md:h-fit md:pl-5 flex items-center ">
-                          {data?.photos.length > 1
-                            ? data?.photos?.map((item, index) =>
-                              index === 0 ? (
-                                <figure
-                                  key={index}
-                                  className="w-full h-full md:w-[200px] md:h-[100px] rounded-lg overflow-hidden border border-lightBorderColor"
-                                >
-                                  <img
-                                    className="w-full h-full object-contain"
-                                    src={item.url_photo}
-                                    alt=""
+                <div className="w-full h-full md:py-8 md:bg-lightBgColor md:rounded-xl overflow-auto VerticelScroll  ">
+                  {dressInfo?.getReviewProduct?.filter(e => state?.searchComment ? languageDetector?.typeLang === "uz" ?
+                    e?.name_uz?.toLowerCase()?.includes(state?.searchComment?.toLowerCase()) :
+                    e?.name_ru?.toLowerCase()?.includes(state?.searchComment?.toLowerCase())
+                    :
+                    e)?.map((data) => {
+                      return (
+                        <>
+                          {Number(data?.overall_rating) > 0 && <ul
+                            key={data?.id}
+                            className="w-full hidden   md:flex h-[100px] border border-borderColor flex items-center   gap-x-5 md:gap-x-0 rounded-xl  md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
+                          >
+                            <li className="  md:w-[20%] md:h-fit md:pl-5 flex items-center ">
+                              {data?.photos.length > 1
+                                ? data?.photos?.map((item, index) =>
+                                  index === 0 ? (
+                                    <span className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+                                      <img
+                                        src={item?.url_photo || "nodate"}
+                                        alt={"noImg"}
+                                        className="w-[110px] h-full object-cover"
+                                      />
+                                    </span>
+                                  ) : null
+                                )
+                                : data?.photos?.map((item) => {
+                                  return (
+                                    <figure
+                                      key={item.id}
+                                      className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor">
+
+                                      <img
+                                        className="w-full h-full object-contain"
+                                        src={item?.url_photo}
+                                        alt=""
+                                      />
+                                    </figure>
+                                  );
+                                })}
+                            </li>
+                            <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
+                              <li className="md:w-[25%] h-full flex items-center">
+                                <span className="block md:hidden text-center text-[13px] font-AeonikProMedium mr-[10px]">
+                                  {t("name_product")}
+                                </span>
+                                <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
+                                  {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                  {languageDetector?.typeLang === "uz" && data?.name_uz}
+                                </span>
+                              </li>
+                              <li className="md:w-[25%] h-full flex items-center">
+                                <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
+                                  {t("reviews")}
+                                </span>
+                                <div className="flex items-center">
+                                  <Rate
+                                    disabled
+                                    allowHalf
+                                    defaultValue={data?.overall_rating}
                                   />
-                                </figure>
-                              ) : null
-                            )
-                            : data?.photos?.map((item) => {
-                              return (
-                                <figure
-                                  key={item.id}
-                                  className="w-full h-full md:w-[200px] md:h-[100px] rounded-lg overflow-hidden border border-lightBorderColor"
+                                </div>
+                              </li>
+                              <li className="md:w-[20%] h-full flex items-center ">
+                                <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
+                                  {t("date")}
+                                </span>
+                                <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
+                                  {data?.created_at}
+                                </span>
+                              </li>
+                              <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
+                                <button
+                                  onClick={() => goDetail(data?.id)}
+                                  className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
                                 >
-                                  <img
-                                    className="w-full h-full object-contain"
-                                    src={item?.url_photo}
-                                    alt=""
-                                  />
-                                </figure>
-                              );
-                            })}
-                        </li>
-                        <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
-                          <li className="md:w-[25%] h-full flex items-center">
-                            <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
-                              {t("name_product")}
-                            </span>
-                            <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium">
-                              {languageDetector?.typeLang === "ru" && data?.name_ru}
-                              {languageDetector?.typeLang === "uz" && data?.name_ru}
-                            </span>
-                          </li>
-                          <li className="md:w-[25%] h-full flex items-center">
-                            <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
-                              {t("reviews")}
-                            </span>
-                            <div className="flex items-center">
-                              <Rate
-                                disabled
-                                allowHalf
-                                defaultValue={data?.overall_rating}
-                              />
+                                  {t("more_details")}
+                                </button>
+                              </li>
                             </div>
-                          </li>
-                          <li className="md:w-[20%] h-full flex items-center ">
-                            <span className="block md:hidden text-[13px] font-AeonikProMedium mr-[10px]">
-                              {t("date")}
-                            </span>
-                            <span className="text-textLightColor md:text-tableTextTitle2 text-[11px] md:text-base not-italic font-AeonikProMedium ">
-                              {data?.created_at}
-                            </span>
-                          </li>
-                          <li className="md:w-[20%] h-full flex items-center justify-end pr-1 md:pr-[50px] md:ml-auto">
-                            <button
-                              onClick={() => goDetail(data?.id)}
-                              className="text-textBlueColor border-b border-textBlueColor text-[11px] md:text-base not-italic font-AeonikProMedium ml-auto"
-                            >
-                              {t("more_details")}
-                            </button>
-                          </li>
-                        </div>
-                      </ul>
-                    );
-                  })}
+                          </ul>}
+                        </>
+                      );
+                    })}
                 </div>
               </div>
             ) : (

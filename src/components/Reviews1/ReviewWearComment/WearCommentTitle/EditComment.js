@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
+import { useTranslation } from "react-i18next";
 
 export default function EditComponent({
   item,
@@ -18,6 +19,7 @@ export default function EditComponent({
     getComment: null,
     editComment: false,
   });
+  const { t } = useTranslation("reviews");
 
   // console.log(state?.editComment,'editComment');
 
@@ -74,9 +76,9 @@ export default function EditComponent({
         throw new Error(err || "something wrong");
       });
   };
-
+console.log(item,'item');
   return (
-    <div className="w-full h-fit rounded-[5px] p-[15px] mb-[10px] md:mb-3">
+    <div className="w-full h-fit rounded-[5px] p-[15px] mb-[10px] md:mb-3 border border-lightBorderColor">
       {/* userImg and Date */}
       <div className="w-full md:p-[15px] mb-5 md:mb-0 h-fit flex justify-between">
         <div className="h-10 w-fit flex items-center gap-x-[15px]">
@@ -86,7 +88,7 @@ export default function EditComponent({
             </div>
             <div className="flex md:gap-x-[10px]">
               <p className="text-gray-700 text-[13px] md:text-sm font-AeonikProRegular leading-normal">
-                Оценка покупки
+                {t("purchase_rating")}
               </p>
               <p className="flex items-center gap-x-[2px] ml-[5px] md:ml-0">
                 <span className="text-gray-700 text-[13px] md:text-sm mr-[2px] font-AeonikProRegular leading-normal ">
@@ -116,18 +118,18 @@ export default function EditComponent({
             <div className="relative w-full h-fit flex justify-between px-[15px] py-3 md:p-[25px] bg-ProductReplyBg rounded-lg gap-x-[15px]">
               <div>
                 <p className="text-tableTextTitle2 text-[12px] md:text-base font-AeonikProMedium mb-4">
-                  <span className="mr-1">Ответ</span>
+                  <span className="mr-1">{t("answer")}</span>
                   {titleProduct?.locationListId?.product?.name}
                 </p>
                 <p className="text-gray-700 text-[12px] md:text-base font-AeonikProRegular">
                   <span>{item?.reply}</span>
                 </p>
               </div>
-              <div className="flex items-start mt-[2px]">
-                <span className="text-textLightColor text-[11px] md:text-base font-AeonikProRegular leading-normal">
-                  {item?.replyDate}
+              {/* <div className="flex items-start absolute top-2 right-10 ">
+                <span className="text-textLightColor text-[10px] font-AeonikProRegular leading-normal">
+                  {item?.created_at}
                 </span>
-              </div>
+              </div> */}
               <button
                 onClick={() => {
                   setState({ ...state, editComment: !state.editComment });
@@ -171,7 +173,7 @@ export default function EditComponent({
                   className={`w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
                 >
                   <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                    Отправить
+                    {t("send")}
                   </span>
                 </button>
                 <button
@@ -190,7 +192,7 @@ export default function EditComponent({
               className="w-full md:w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95  active:opacity-70 text-white rounded-lg"
             >
               <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                Ответить
+                {t("answer_two")}
               </span>
             </button>
           )}
@@ -226,7 +228,7 @@ export default function EditComponent({
               className={` w-[132px] h-9 md:py-0 md:h-11 bg-textBlueColor flex items-center justify-center active:scale-95 active:opacity-70 text-white rounded-lg mr-[10px]`}
             >
               <span className="text-[13px] md:text-sm not-italic font-AeonikProMedium">
-                Отправить
+                {t("send")}
               </span>
             </button>
             <button
