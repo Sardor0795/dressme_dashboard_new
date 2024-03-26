@@ -90,9 +90,9 @@ export default function ReviewWear() {
             <div className="w-full h-fit  md:mt-7 ">
               {/* // desktop for */}
               <div className="w-full    ">
-                <div className="  w-full my-3 h-[70px] flex items-center hidden md:block border border-lightBorderColor">
+                <div className="  w-full my-3 h-[70px] flex items-center hidden md:block border border-lightBorderColor px-4 rounded-lg">
                   <ul className="w-full h-full  flex items-center justify-between ">
-                    <li className="w-[20%] pl-5 ">
+                    <li className="w-[20%]   ">
                       <span className="text-lg not-italic font-AeonikProMedium text-tableTextTitle">
                         {t("image")}
                       </span>
@@ -135,57 +135,57 @@ export default function ReviewWear() {
                   </ul>
                 </div>
                 {/* table product */}
-                <div className="w-full h-full gap-y-[5px] md:gap-y-0 md:py-8 md:rounded-xl overflow-auto VerticelScroll  ">
+                <div className="w-full h-full flex flex-col gap-y-[60px] md:gap-y-0 md:py-8 md:rounded-xl overflow-auto VerticelScroll   ">
                   {dressInfo?.getReviewProduct
                     ?.filter((e) =>
                       state?.searchComment
                         ? languageDetector?.typeLang === "uz"
                           ? e?.name_uz
-                              ?.toLowerCase()
-                              ?.includes(state?.searchComment?.toLowerCase())
+                            ?.toLowerCase()
+                            ?.includes(state?.searchComment?.toLowerCase())
                           : e?.name_ru
-                              ?.toLowerCase()
-                              ?.includes(state?.searchComment?.toLowerCase())
+                            ?.toLowerCase()
+                            ?.includes(state?.searchComment?.toLowerCase())
                         : e
                     )
                     ?.map((data, index) => {
-                      return (
-                        <div key={index} className="">
-                          {Number(data?.overall_rating) > 0 && (
+                      if (Number(data?.overall_rating) > 0) {
+                        return (
+                          <div key={index} className="w-full   mb-[60px]">
                             <ul
                               key={data?.id}
-                              className="w-full hidden  mb-[60px] last:mb-0 md:flex h-[100px] border border-borderColor flex items-center   gap-x-5 md:gap-x-0 rounded-xl  md:first:rounded-t-xl md:last:rounded-b-xl bg-lightBgColor"
+                              className="w-full hidden    last:mb-0 md:flex h-[100px] border border-lightBorderColor flex items-center   gap-x-5 md:gap-x-0 rounded-xl  md:first:rounded-t-xl md:last:rounded-b-xl  "
                             >
                               <li className="  md:w-[20%] md:h-fit md:pl-5 flex items-center ">
                                 {data?.photos.length > 1
                                   ? data?.photos?.map((item, index) =>
-                                      index === 0 ? (
-                                        <span
-                                          key={index}
-                                          className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
-                                        >
-                                          <img
-                                            src={item?.url_photo || "nodate"}
-                                            alt={"noImg"}
-                                            className="w-[110px] h-full object-cover"
-                                          />
-                                        </span>
-                                      ) : null
-                                    )
+                                    index === 0 ? (
+                                      <span
+                                        key={index}
+                                        className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
+                                      >
+                                        <img
+                                          src={item?.url_photo || "nodate"}
+                                          alt={"noImg"}
+                                          className="w-[110px] h-full object-cover"
+                                        />
+                                      </span>
+                                    ) : null
+                                  )
                                   : data?.photos?.map((item) => {
-                                      return (
-                                        <figure
-                                          key={item.id}
-                                          className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
-                                        >
-                                          <img
-                                            className="w-full h-full object-contain"
-                                            src={item?.url_photo}
-                                            alt=""
-                                          />
-                                        </figure>
-                                      );
-                                    })}
+                                    return (
+                                      <figure
+                                        key={item.id}
+                                        className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
+                                      >
+                                        <img
+                                          className="w-full h-full object-contain"
+                                          src={item?.url_photo}
+                                          alt=""
+                                        />
+                                      </figure>
+                                    );
+                                  })}
                               </li>
                               <div className="w-[80%] flex flex-col md:flex-row md:items-center ml-auto">
                                 <li className="md:w-[25%] h-full flex items-center">
@@ -229,9 +229,7 @@ export default function ReviewWear() {
                                 </li>
                               </div>
                             </ul>
-                          )}
-                          {/* For Mobile Device */}
-                          {Number(data?.overall_rating) > 0 && (
+                            {/* For Mobile Device */}
                             <div className="relative w-full max-w-[440px] mb-[20px] md:hidden gap-x-5 flex items-center h-[90px] border border-lightBorderColor rounded-lg p-2">
                               <div className="w-[80px] h-[75px]">
                                 <img
@@ -282,9 +280,13 @@ export default function ReviewWear() {
                                 {t("more_details")}
                               </button>
                             </div>
-                          )}
+                          </div>
+                        );
+                      } else {
+                        <div className="w-full h-[50vh]  md:h-[70vh] flex items-center justify-center text-lg md:text-2xl font-medium">
+                          {t("no_reviews")}
                         </div>
-                      );
+                      }
                     })}
                 </div>
               </div>

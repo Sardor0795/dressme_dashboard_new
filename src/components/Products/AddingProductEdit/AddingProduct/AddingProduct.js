@@ -158,12 +158,13 @@ const AddingProduct = () => {
 
 
   const { refetch, isFetching } = useQuery(["products_id_edit"], () => {
+    setSubSection_Id([])
     return request({ url: `/products/${newProductId}`, token: true })
   },
     {
       onSuccess: (res) => {
+        console.log("run refetch");
         // setLoading(false) 
-
         setProductsDataIdEdit(res?.product)
 
         res?.product?.sections?.map(value => {
@@ -362,8 +363,16 @@ const AddingProduct = () => {
   const handleNextPage = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
-
-  const handleChangeSubSection = (e) => {
+  const [attribSubSection, setAttribSubSection] = useState([])
+  const handleChangeSubSection = (e, attribute2) => {
+    setAttribSubSection([])
+    // console.log(attribute2, 'attribute2');
+    attribute2?.map(item => {
+      // console.log(item?.attribute2, 'itemitemitem');
+      // if (attribSubSection?.length === 0) {
+      setAttribSubSection((attribSubSection) => [...attribSubSection, Number(item?.attribute2)])
+      // }
+    })
     if (e?.length < subSection_Id?.length) {
       setSectionsChanged(true)
 
@@ -888,7 +897,9 @@ const AddingProduct = () => {
         });
     }
   };
-
+  console.log(subSection_Id, 'subSection_Id');
+  console.log(sectionsChanged, 'sectionsChanged');
+  console.log(arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections), 'arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections');
   useEffect(() => {
     if (newArray?.length) {
       setState({ ...state, subSectionToggle: true })
@@ -969,7 +980,7 @@ const AddingProduct = () => {
       setState({ ...state, producer_Id: null, onEditInput: true })
     }
   }
-
+  console.log(attribSubSection, 'attribSubSection');
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1841,6 +1852,7 @@ const AddingProduct = () => {
                             </div>
                           }
                         </button>
+                        {/* (attribSubSection[index]?.value == value?.id || !attribSubSection[index]?.attribute2 == value?.section_id)) */}
                         <div className="w-full h-fit hidden md:flex">
                           <Select
                             className={`rounded-lg w-full  ${newArray?.length && state?.isCheckValid && !subSection_Id?.length ? "border border-[#FFB8B8] bg-[#FFF6F6]" : " border-borderColor bg-white"}`}
@@ -1850,7 +1862,7 @@ const AddingProduct = () => {
                             mode="multiple"
                             optionLabelProp="label"
                             value={newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => { return item?.id })}
-                            onChange={handleChangeSubSection}
+                            onChange={(e, attribute2) => handleChangeSubSection(e, attribute2)}
                             onSearch={onSearch}
                             size="large"
                             // allowClear
@@ -1866,6 +1878,7 @@ const AddingProduct = () => {
                                 <Option
                                   key={item.id}
                                   value={item.id}
+                                  attribute2={item?.section_id}
                                   label={languageDetector?.typeLang === "ru" ? item.name_ru : item?.name_uz}
 
                                 >
