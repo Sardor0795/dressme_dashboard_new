@@ -609,11 +609,11 @@ const AddingProduct = () => {
     try {
       const res = await fetch(`${url}/products/${Number(newProductId)}/add-product-color`, {
         method: "POST",
-        "Accept-Language": languageDetector?.typeLang,
-
+        
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          "Accept-Language": languageDetector?.typeLang,
         },
         body: form,
       });
@@ -679,12 +679,11 @@ const AddingProduct = () => {
     return request({
       url: `/products/${Number(newProductId)}/delete-product-color`,
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       token: true,
       body: {
         color_id: deleteColorId
-      }
+       }
     });
   });
 
@@ -792,7 +791,7 @@ const AddingProduct = () => {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
           "Accept-Language": languageDetector?.typeLang,
-
+          
         },
         body: form,
       })
@@ -881,7 +880,7 @@ const AddingProduct = () => {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
           "Accept-Language": languageDetector?.typeLang,
-
+          
         },
         body: form,
       })

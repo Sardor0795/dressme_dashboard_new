@@ -286,11 +286,11 @@ function MarketEdit() {
     cropFile && form.append("logo_photo", cropFile);
     return fetch(`${url}/shops/edit/${id}`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
       },
       body: form,
     })

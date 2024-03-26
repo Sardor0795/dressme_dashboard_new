@@ -98,11 +98,11 @@ export default function LocationClothesCity() {
     });
     return fetch(`${url}/products/massive-delete-products`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
       },
       body: form,
     })

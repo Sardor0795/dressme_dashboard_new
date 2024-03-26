@@ -208,11 +208,11 @@ export default function LocationAddById() {
 
     return fetch(`${url}/shops/locations/store`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
       },
       body: form,
     })

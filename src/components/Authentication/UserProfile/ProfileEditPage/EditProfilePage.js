@@ -184,12 +184,13 @@ function EditProfilePage() {
   const { mutate } = useMutation(() => {
     return fetch(`${url}/delete`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+ 
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+        
       },
     }).then((res) => res.json());
   });
@@ -254,11 +255,11 @@ function EditProfilePage() {
 
       return fetch(`${url}/update-seller-info`, {
         method: "POST",
-        "Accept-Language": languageDetector?.typeLang,
-
+        
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          "Accept-Language": languageDetector?.typeLang,
         },
         body: form,
       })
@@ -332,11 +333,11 @@ function EditProfilePage() {
       form.append("sub_region_id", state?.sellerSubRegionId);
       return fetch(`${url}/update-seller-info`, {
         method: "POST",
-        "Accept-Language": languageDetector?.typeLang,
-
+        
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          "Accept-Language": languageDetector?.typeLang,
         },
         body: form,
       })
@@ -403,11 +404,11 @@ function EditProfilePage() {
   const dataMutateEmail = useMutation(() => {
     return fetch(`${url}/update-seller-email`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "Accept-Language": languageDetector?.typeLang,
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
       },
       body: JSON.stringify({ email: state?.sellerEmail }),
