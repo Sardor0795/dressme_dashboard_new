@@ -539,6 +539,8 @@ const AddingProduct = () => {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: form,
     })

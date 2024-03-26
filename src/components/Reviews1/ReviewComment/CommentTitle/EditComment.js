@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function EditComponent({ item, titleStore, handleRefetch }) {
   const [sendText, setSendText] = useState(false);
@@ -15,6 +16,7 @@ export default function EditComponent({ item, titleStore, handleRefetch }) {
     getComment: null,
     editComment: false,
   });
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const { t } = useTranslation("reviews");
 
@@ -27,6 +29,8 @@ export default function EditComponent({ item, titleStore, handleRefetch }) {
         Accept: "application/json",
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: JSON.stringify({
         reply: state.replyText,
@@ -53,6 +57,8 @@ export default function EditComponent({ item, titleStore, handleRefetch }) {
         Accept: "application/json",
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: JSON.stringify({
         reply: state.replyTextEdit,

@@ -100,6 +100,8 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                 headers: {
                     Accept: "application/json",
                     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                    "Accept-Language": languageDetector?.typeLang,
+
                 },
                 body: form,
             })

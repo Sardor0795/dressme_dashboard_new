@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Slider from "react-slick";
 import { DeleteIcon, DownloadIcon, MenuCloseIcons, StarLabel } from "../../../../../../assets/icons";
@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FiDownload } from "react-icons/fi";
 import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 
 const url = "https://api.dressme.uz/api/seller";
 
@@ -20,6 +21,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
   const { request } = useHttp()
   const { t } = useTranslation("product");
   // name_ru
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [modalId, setModalId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -682,6 +684,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: form,
     })
@@ -784,6 +788,8 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          "Accept-Language": languageDetector?.typeLang,
+
         },
         body: form,
       });

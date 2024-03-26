@@ -145,6 +145,8 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+          "Accept-Language": languageDetector?.typeLang,
+
         },
         body: form,
       });

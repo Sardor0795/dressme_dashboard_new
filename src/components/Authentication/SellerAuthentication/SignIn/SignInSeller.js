@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
 import { ClipLoader } from "react-spinners";
 import "../SignUp/style.css";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function SignInSeller() {
   const [state, setState] = useState({
@@ -16,10 +17,8 @@ export default function SignInSeller() {
     rememberCheck: "",
     errorGroup: "",
     isLoadingSent: false,
-
-
-
   });
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const handleChange = (e) => {
     const { checked } = e.target;
@@ -34,7 +33,9 @@ export default function SignInSeller() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: JSON.stringify({ email: state.email, password: state.password, rememberToken: state?.rememberCheck }),
     }).then((res) => res.json());

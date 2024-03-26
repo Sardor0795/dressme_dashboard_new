@@ -131,6 +131,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                 headers: {
                     Accept: "application/json",
                     Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                    "Accept-Language": languageDetector?.typeLang,
+
                 },
                 body: form,
             })

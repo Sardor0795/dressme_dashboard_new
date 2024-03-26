@@ -14,37 +14,38 @@ const url = "https://api.dressme.uz/api/seller";
 function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, colorListForTest, selectColorID, productsDataIdEdit, onClick }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const { t } = useTranslation("product");
-   
-     const [state, setState] = useState({
-        minHeadGirth:  "",
-        maxHeadGirth:  "",
+    const [languageDetector] = useContext(LanguageDetectorDress);
+
+    const [state, setState] = useState({
+        minHeadGirth: "",
+        maxHeadGirth: "",
         sizeCheck: false,
         // outWear
-        minBreast:  "",
-        maxBreast:  "",
-        minSize:  "",
-        maxSize:  "",
-        minHeight:  "",
-        maxHeight:  "",
-        minHips:  "",
-        maxHips:  "",
-        minWaist:  "",
-        maxWaist:  "",
+        minBreast: "",
+        maxBreast: "",
+        minSize: "",
+        maxSize: "",
+        minHeight: "",
+        maxHeight: "",
+        minHips: "",
+        maxHips: "",
+        minWaist: "",
+        maxWaist: "",
         // shoesWear
-        minFootLength:  "",
-        maxFootLength:  "",
-        one_size:  "",
+        minFootLength: "",
+        maxFootLength: "",
+        one_size: "",
         // Accessuar
-        rowSize:  "",
-        colSize:  "",
+        rowSize: "",
+        colSize: "",
         //Universal
-        quantityNum:  "",
-        ageNum:  "",
-        priceNum:  "",
-        salePercent:  "",
-        salePrice:  "",
-        sizeListCheck:  "",
-        selected:  "",
+        quantityNum: "",
+        ageNum: "",
+        priceNum: "",
+        salePercent: "",
+        salePrice: "",
+        sizeListCheck: "",
+        selected: "",
         isCheckValid: false,
         // --------------------
         maxHeadGirthShow: false,
@@ -64,49 +65,49 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         setState({
             ...state,
             // Accessuary
-            accessorySize:  "",
-            legnthAcc:  "",
-            widthAcc:  "",
-            accessoryLetterSize:  "",
+            accessorySize: "",
+            legnthAcc: "",
+            widthAcc: "",
+            accessoryLetterSize: "",
             // Shoes
-            footWearSize:  "",
-            minFootLength:  "",
-            maxFootLength:  "",
+            footWearSize: "",
+            minFootLength: "",
+            maxFootLength: "",
             // UnderWear
-            minUnderwearWaistGirth:  "",
-            maxUnderwearWaistGirth:  "",
-            minUnderWearSize:  "",
-            maxUnderWearSize:  "",
-            minUnderWearHipGirth:  "",
-            maxUnderWearHipGirth:  "",
-            minHeight:  "",
-            maxHeight:  "",
-            underWearLetterSize:  "",
+            minUnderwearWaistGirth: "",
+            maxUnderwearWaistGirth: "",
+            minUnderWearSize: "",
+            maxUnderWearSize: "",
+            minUnderWearHipGirth: "",
+            maxUnderWearHipGirth: "",
+            minHeight: "",
+            maxHeight: "",
+            underWearLetterSize: "",
             // OutWear
-            minChestGirth:  "",
-            maxChestGirth:  "",
-            minOutWearSize:  "",
-            maxOutWearSize:  "",
-            minOutWearWaistGirth:  "",
-            maxOutWearWaistGirth:  "",
-            minOutWearHipGirth:  "",
-            maxOutWearHipGirth:  "",
-            outWearLetterSize:  "",
+            minChestGirth: "",
+            maxChestGirth: "",
+            minOutWearSize: "",
+            maxOutWearSize: "",
+            minOutWearWaistGirth: "",
+            maxOutWearWaistGirth: "",
+            minOutWearHipGirth: "",
+            maxOutWearHipGirth: "",
+            outWearLetterSize: "",
 
             // HeadWear
-            minHeadGirth:  "",
-            maxHeadGirth:  "",
+            minHeadGirth: "",
+            maxHeadGirth: "",
             sizeCheck: false,
             // All of Category
-            amount:  "",
-            age:  "",
-            price:  "",
-            discountPercent:  "",
-            discountPrice:  "",
+            amount: "",
+            age: "",
+            price: "",
+            discountPercent: "",
+            discountPrice: "",
             // ----
             isCheckValid: false,
             onConcel: false,
-            selected:  "",
+            selected: "",
         })
         // handleCallBack()
     }, [productsDataIdEdit?.sizes])
@@ -169,6 +170,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     headers: {
                         Accept: "application/json",
                         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                        "Accept-Language": languageDetector?.typeLang,
+
                     },
                     body: form,
                 });
@@ -245,6 +248,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -329,6 +334,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -414,6 +421,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -490,6 +499,8 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -745,7 +756,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SShead_circumference")} 
+                                {t("SShead_circumference")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                             </p>
@@ -788,7 +799,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center justify-center text-[14px] xs:text-base text-mobileTextColor  ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSone_Size")}
+                                {t("SSone_Size")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
 
                             </p>
@@ -984,7 +995,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSchest_circumference")} 
+                                {t("SSchest_circumference")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center">
@@ -1062,7 +1073,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t("SSwaist")} 
+                                {t("SSwaist")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center">
@@ -1105,7 +1116,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SShip_circumference")} 
+                                {t("SShip_circumference")}
                             </p>
                             <div className="flex items-center">
                                 <div className="flex flex-col">
@@ -1147,7 +1158,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     <div className="w-full    gap-y-4">
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t('SSletter_Size')}
+                                {t('SSletter_Size')}
                             </p>
                             <div className='w-full '>
 
@@ -1444,7 +1455,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                               {t("SSwaist")} 
+                                {t("SSwaist")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center">
@@ -1525,7 +1536,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSsize_circumference")}
+                                {t("SSsize_circumference")}
 
                             </p>
                             <div className="flex items-center">
@@ -1566,7 +1577,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSheight")}
+                                {t("SSheight")}
                             </p>
                             <div className="flex items-center justify-between gap-x-1">
                                 <div className="flex items-center">
@@ -1611,7 +1622,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
 
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t('SSletter_Size')}
+                                {t('SSletter_Size')}
                             </p>
 
                             <div className='w-full '>
@@ -1927,7 +1938,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
-                            {t("SSfoot_Length")}
+                                {t("SSfoot_Length")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="flex items-center gap-x-1">
@@ -2163,7 +2174,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSlength")}
+                                {t("SSlength")}
                                 <span className="text-sm text-textLightColor ml-[6px]">({t("SSsm")})</span>
                             </p>
                             <div className="w-[60px] flex items-center justify-between">
@@ -2181,7 +2192,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                         </div>
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                            {t("SSwidth")}
+                                {t("SSwidth")}
                             </p>
                             <div className="w-[60px] flex items-center justify-between gap-x-1">
                                 <div className="flex flex-col">
@@ -2200,10 +2211,10 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                     <div className="w-full flex flex-col gap-y-4 ">
                         <div className="w-full flex flex-col">
                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
-                               {t('SSletter_Size')}
+                                {t('SSletter_Size')}
                             </p>
                             <div className='w-full '>
-                                
+
                                 {/* -----------------Mobile--------------------- */}
                                 <div className="w-full flex md:flex-row flex-col md:hidden">
                                     <div className="w-fit md:w-[222px]  md:h-[50px] flex md:block flex-wrap md:grid md:grid-cols-4 gap-1 md:gap-2 ">

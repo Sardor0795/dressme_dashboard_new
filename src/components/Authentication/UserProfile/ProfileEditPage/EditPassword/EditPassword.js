@@ -28,6 +28,8 @@ function EditPassword({ onClick }) {
   const dataMutate = useMutation(() => {
     return fetch(`${url}/change-password`, {
       method: "POST",
+      "Accept-Language": languageDetector?.typeLang,
+
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

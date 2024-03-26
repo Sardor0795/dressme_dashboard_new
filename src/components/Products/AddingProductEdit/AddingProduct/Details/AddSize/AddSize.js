@@ -8,11 +8,13 @@ import { ClipLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 
 function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListForTest, selectColorID, productsDataIdEdit }) {
     const [dressInfo, setDressInfo] = useContext(dressMainData);
     const { t } = useTranslation("product");
+    const [languageDetector] = useContext(LanguageDetectorDress);
 
     const [state, setState] = useState({
         minHeadGirth: "",
@@ -168,6 +170,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     headers: {
                         Accept: "application/json",
                         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                        "Accept-Language": languageDetector?.typeLang,
+
                     },
                     body: form,
                 });
@@ -244,6 +248,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -328,6 +334,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -413,6 +421,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });
@@ -489,6 +499,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                         headers: {
                             Accept: "application/json",
                             Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                            "Accept-Language": languageDetector?.typeLang,
+
                         },
                         body: form,
                     });

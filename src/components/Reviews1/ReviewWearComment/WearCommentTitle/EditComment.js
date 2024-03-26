@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { CloseAnswer, StarOutlineIcon } from "../../../../assets/icons";
 import { useTranslation } from "react-i18next";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function EditComponent({
   item,
@@ -20,6 +21,7 @@ export default function EditComponent({
     editComment: false,
   });
   const { t } = useTranslation("reviews");
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   // console.log(state?.editComment,'editComment');
 
@@ -32,6 +34,8 @@ export default function EditComponent({
         Accept: "application/json",
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: JSON.stringify({
         reply: state.replyText,
@@ -58,6 +62,8 @@ export default function EditComponent({
         Accept: "application/json",
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: JSON.stringify({
         reply: state.replyTextEdit,
