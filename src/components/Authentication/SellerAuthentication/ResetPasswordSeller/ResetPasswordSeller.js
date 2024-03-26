@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useMutation } from "@tanstack/react-query";
 import { message } from 'antd';
@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { SircleNext } from "../../../../assets/icons";
 import { ClipLoader } from "react-spinners";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 
 export default function ResetPasswordSeller() {
@@ -20,6 +21,8 @@ export default function ResetPasswordSeller() {
         btnDisable: false,
         isLoadingSent: false
     })
+    const [languageDetector] = useContext(LanguageDetectorDress);
+
     // ------------Password Confirm----------
     const [confirmError, setConfirmError] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -55,7 +58,9 @@ export default function ResetPasswordSeller() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json; charset=UTF-8",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Accept-Language": languageDetector?.typeLang,
+
             },
             body: JSON.stringify({
                 password: state?.newPassword,

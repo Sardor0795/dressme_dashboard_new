@@ -1,12 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MenuCloseIcons, SircleNext, SuccessIconsForMail, UserMailIcon } from "../../../../assets/icons";
 import { ClipLoader } from "react-spinners";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function ForgotPasswordSeller() {
+    const [languageDetector] = useContext(LanguageDetectorDress);
+
     const navigate = useNavigate()
     const url = "https://api.dressme.uz/api/seller"
     const [state, setState] = useState({
@@ -21,6 +24,7 @@ export default function ForgotPasswordSeller() {
             headers: {
                 "Content-Type": "application/json; charset=UTF-8",
                 "Accept": "application/json",
+                "Accept-Language": languageDetector?.typeLang,
 
             },
             body: JSON.stringify({ email: state?.email })

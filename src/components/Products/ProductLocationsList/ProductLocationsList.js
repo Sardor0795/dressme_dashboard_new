@@ -218,6 +218,8 @@ export default function ProductLocationsList() {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: form,
     })
@@ -268,6 +270,8 @@ export default function ProductLocationsList() {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: form,
     })
@@ -1372,13 +1376,13 @@ export default function ProductLocationsList() {
                                                 }
                                                 className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
                                               >
-                                                <span className="  ll:hidden flex">
+                                                <span className="  xs:hidden flex">
                                                   <AddIconsCircle size={25} />
                                                 </span>
-                                                <span className="hidden ll:flex">
+                                                <span className="hidden xs:flex">
                                                   <AddIconsCircle />
                                                 </span>
-                                                <span className="hidden ll:flex text-addWearColorText  text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                                <span className="hidden xs:flex text-addWearColorText  text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                   {t("PRaddWear")}
                                                 </span>
                                               </button>
@@ -2022,13 +2026,13 @@ export default function ProductLocationsList() {
                                               }
                                               className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
                                             >
-                                              <span className="  ll:hidden flex">
+                                              <span className="  xs:hidden flex">
                                                 <AddIconsCircle size={25} />
                                               </span>
-                                              <span className="hidden ll:flex">
+                                              <span className="hidden xs:flex">
                                                 <AddIconsCircle />
                                               </span>
-                                              <span className="hidden ll:flex text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
+                                              <span className="hidden xs:flex text-addWearColorText text-[13px] md:text-base not-italic font-AeonikProMedium">
                                                 {t("PRaddWear")}
                                               </span>
                                             </button>

@@ -15,9 +15,11 @@ import axios from "axios";
 import { dressMainData } from "../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { dressRegionList } from "../../../../hook/RegionList";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 const { REACT_APP_BASE_URL } = process.env;
 
 const SignUpSeller = () => {
+  const [languageDetector] = useContext(LanguageDetectorDress);
 
   const [naturalPerson, setNaturalPerson] = useState(true);
   const [dressInfo, setDressInfo] = useContext(dressMainData);
@@ -107,6 +109,8 @@ const SignUpSeller = () => {
   const { mutate } = useMutation(() => {
     return fetch(`${REACT_APP_BASE_URL}/register`, {
       method: "POST",
+      "Accept-Language": languageDetector?.typeLang,
+
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
+import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 
 export default function MailVerfySeller() {
   const [timer, setTimer] = useState(false);
+  const [languageDetector] = useContext(LanguageDetectorDress);
+
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [state, setState] = useState({
@@ -48,6 +51,8 @@ export default function MailVerfySeller() {
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: JSON.stringify({
         email: state.email,

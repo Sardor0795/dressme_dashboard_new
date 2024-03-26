@@ -393,6 +393,8 @@ export default function LocationMapCity() {
       form.append("shop_photo_three", state?.pictureBgFile3);
     return fetch(`${url}/shops/locations/edit/${NewId}`, {
       method: "POST",
+      "Accept-Language": languageDetector?.typeLang,
+
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -435,6 +437,8 @@ export default function LocationMapCity() {
       pictureView2 && form.append("image_two", 1);
       return fetch(`${url}/shops/locations/${NewId}/delete-location-photo`, {
         method: "POST",
+        "Accept-Language": languageDetector?.typeLang,
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -473,6 +477,8 @@ export default function LocationMapCity() {
       state?.pictureBgView3 && form.append("image_three", 1);
       return fetch(`${url}/shops/locations/${NewId}/delete-location-photo`, {
         method: "POST",
+        "Accept-Language": languageDetector?.typeLang,
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,

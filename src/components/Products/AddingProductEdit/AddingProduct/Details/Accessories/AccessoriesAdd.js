@@ -114,6 +114,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             headers: {
                 Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+                "Accept-Language": languageDetector?.typeLang,
+
             },
             body: form,
         })

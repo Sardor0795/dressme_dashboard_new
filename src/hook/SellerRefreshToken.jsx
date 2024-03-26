@@ -60,6 +60,7 @@ export default function SellerRefreshContext({ children }) {
             };
             const data = {
                 refresh_token: localStorage.getItem("RefreshUserToken"),
+                
             };
             const response = await axios.post(`${REACT_APP_BASE_URL}/refresh-token`, data, { headers });
             if (response?.status >= 200 && response?.status < 300) {

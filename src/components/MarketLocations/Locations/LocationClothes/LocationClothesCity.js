@@ -98,6 +98,8 @@ export default function LocationClothesCity() {
     });
     return fetch(`${url}/products/massive-delete-products`, {
       method: "POST",
+      "Accept-Language": languageDetector?.typeLang,
+
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -308,13 +310,13 @@ export default function LocationClothesCity() {
             onClick={() => addNewProductId()}
             className="active:scale-95  active:opacity-70 flex items-center gap-x-[4px]"
           >
-            <span className="  ll:hidden flex">
+            <span className="  xs:hidden flex">
               <AddIconsCircle size={25} />
             </span>
-            <span className="hidden ll:flex">
+            <span className="hidden xs:flex">
               <AddIconsCircle />
             </span>
-            <span className="hidden ll:flex text-addWearColorText md:text-base not-italic font-AeonikProMedium">
+            <span className="hidden xs:flex text-addWearColorText md:text-base not-italic font-AeonikProMedium">
               {t("add_cloth")}
             </span>
           </button>
