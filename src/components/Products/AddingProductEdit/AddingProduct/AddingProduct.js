@@ -284,13 +284,13 @@ const AddingProduct = () => {
   const [newArray1, setNewArray1] = useState([])
   const [newArrayCompine, setNewArrayCompine] = useState([]);
   const [newArrayRes, setNewArrayRes] = useState([]);
-   useEffect(() => {
+  useEffect(() => {
     setNewArray1([])
     setNew2([])
     dressInfo?.getProductInfo?.sections?.map(item => {
       item?.sub_sections?.filter(e => subSection_Id?.length > 0 ? subSection_Id?.includes(e?.id) : e)?.map(item => {
         if (section_Id?.includes(Number(item?.section_id))) {
-           if (!newArray1) {
+          if (!newArray1) {
             setNewArray1(newArray1 => [...newArray1, item])
           } else {
             setNewArray1(newArray1 => [...newArray1, item])
@@ -299,7 +299,7 @@ const AddingProduct = () => {
       })
       item?.sub_sections?.filter(e => !attribSubSection?.includes(e?.section_id))?.map(data => {
         if (section_Id?.includes(Number(data?.section_id))) {
-           if (!new2) {
+          if (!new2) {
             setNew2(new2 => [...new2, data])
           } else {
             setNew2(new2 => [...new2, data])
@@ -328,7 +328,7 @@ const AddingProduct = () => {
     setNewArrayRes(data)
   }, [newArrayCompine])
 
- 
+
   // ------------------------------------------------------------------------
 
   function onHanleColorList(e) {
@@ -394,13 +394,9 @@ const AddingProduct = () => {
     setDressInfo({ ...dressInfo, nextPageShowForm: false })
   }
   const handleChangeSubSection = (e, attribute2) => {
-    setAttribSubSection([])
-    // console.log(attribute2, 'attribute2');
+
     attribute2?.map(item => {
-      // console.log(item?.attribute2, 'itemitemitem');
-      // if (attribSubSection?.length === 0) {
       setAttribSubSection((attribSubSection) => [...attribSubSection, (item?.attribute2)])
-      // }
     })
     if (e?.length < subSection_Id?.length) {
       setSectionsChanged(true)
@@ -422,10 +418,13 @@ const AddingProduct = () => {
     }
   }
 
-  const handleChangeSubSectionMobile = (e) => {
+  const handleChangeSubSectionMobile = (e, section) => {
+    if (!attribSubSection?.includes(section)) {
+      setAttribSubSection((attribSubSection) => [...attribSubSection, section])
+    }
+
     setState({ ...state, onEditInput: true })
     setSectionsChanged(true)
-
     if (subSection_Id?.length === 0) {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
@@ -433,12 +432,13 @@ const AddingProduct = () => {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
   }
-  const handleChangeSubSectionDeleteMobile = (e) => {
+  const handleChangeSubSectionDeleteMobile = (e, section) => {
     setSectionsChanged(true)
-
     setState({ ...state, onEditInput: true })
-    if (subSection_Id?.length > 0 && subSection_Id?.includes(e)) {
+
+    if (subSection_Id?.length > 1 && subSection_Id?.includes(e)) {
       setSubSection_Id(subSection_Id?.filter((v) => v !== e))
+      setAttribSubSection(attribSubSection?.filter((v) => v !== section))
     }
   }
 
@@ -926,9 +926,9 @@ const AddingProduct = () => {
         });
     }
   };
-  console.log(subSection_Id, 'subSection_Id');
-  console.log(sectionsChanged, 'sectionsChanged');
-  console.log(arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections), 'arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections');
+  // console.log(subSection_Id, 'subSection_Id');
+  // console.log(sectionsChanged, 'sectionsChanged');
+  // console.log(arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections), 'arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections');
   useEffect(() => {
     if (newArrayRes?.length) {
       setState({ ...state, subSectionToggle: true })
@@ -950,10 +950,7 @@ const AddingProduct = () => {
       setAddSizeDisable(null)
     }
   }, [state?.checkedSizeList?.length, state?.lastElementColorId, addSizeDisable, colorAction, state?.newColorByAddSizes?.price, state?.newColorByAddSizes?.amount])
-  // console.log(colorAction, "111111-colorAction");
-  // console.log(addSizeDisable, "111111-addSizeDisable");
-  // console.log(state?.checkedSizeList?.length, state?.lastElementColorId, "111111-state?.checkedSizeList?.length && state?.lastElementColorId");
-  // console.log(state?.newColorByAddSizes, "111111-state?.newColorByAddSizes?.priceNum && state?.newColorByAddSizes?.quantityNum");
+
   useEffect(() => {
     if (!dressInfo?.locationIdAddProduct) {
       navigate(-1)
@@ -1009,7 +1006,15 @@ const AddingProduct = () => {
       setState({ ...state, producer_Id: null, onEditInput: true })
     }
   }
+  // console.log(newArrayRes, 'newArrayRes');
+  // // attribSubSection
   // console.log(attribSubSection, 'attribSubSection');
+  // const getUniques = Array.from(new Set(attribSubSection.map(item => item)))
+  // console.log(getUniques);
+  useEffect(() => {
+    setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
+
+  }, [subSection_Id])
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1464,14 +1469,15 @@ const AddingProduct = () => {
                           searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
                             e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                         )?.map((item) => {
+                          // console.log(item, 'item');
                           return (
                             <div
-                              onClick={() => handleChangeSubSectionMobile(item?.id)}
+                              onClick={() => handleChangeSubSectionMobile(item?.id, item?.section_id)}
                               key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                               {languageDetector?.typeLang === "ru" && item?.name_ru}
                               {languageDetector?.typeLang === "uz" && item?.name_uz}
                               {subSection_Id?.includes(item?.id) &&
-                                <span onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
+                                <span onClick={() => handleChangeSubSectionDeleteMobile(item?.id, item?.section_id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                             </div>
                           );
                         })}
