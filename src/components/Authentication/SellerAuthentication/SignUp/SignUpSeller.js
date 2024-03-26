@@ -109,11 +109,12 @@ const SignUpSeller = () => {
   const { mutate } = useMutation(() => {
     return fetch(`${REACT_APP_BASE_URL}/register`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
 
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Accept-Language": languageDetector?.typeLang,
+
       },
       body: parseInt(state?.seller_type_id) >= 3 ?
         JSON.stringify({

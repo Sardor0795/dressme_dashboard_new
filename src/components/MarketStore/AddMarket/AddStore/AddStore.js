@@ -183,11 +183,11 @@ function AddStore({ onRefetch }) {
     form.append("delivery_id", state?.deliverCheck);
     return fetch(`${url}/shops/store`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
       },
       body: form,
     })

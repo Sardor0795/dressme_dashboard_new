@@ -28,12 +28,12 @@ function EditPassword({ onClick }) {
   const dataMutate = useMutation(() => {
     return fetch(`${url}/change-password`, {
       method: "POST",
-      "Accept-Language": languageDetector?.typeLang,
-
+      
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+        "Accept-Language": languageDetector?.typeLang,
       },
       body: JSON.stringify({
         current_password: state?.oldPassword,
