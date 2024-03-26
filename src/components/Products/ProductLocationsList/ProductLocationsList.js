@@ -1293,18 +1293,18 @@ export default function ProductLocationsList() {
                             <div className="flex flex-col  gap-y-7">
 
                               {item?.shop_locations
-                                ?.filter((location) =>
+                                ?.filter((e) =>
                                   searchName ? languageDetector?.typeLang === "ru" ?
-                                    location?.products?.some((item) => item?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase())) :
-                                    location?.products?.some((item) => item?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase()))
-                                    : location
+                                    e?.products?.some((item) => item?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase())) :
+                                    e?.products?.some((item) => item?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase()))
+                                    : e
                                 )
                                 ?.map((resData, index) => {
                                   return (
                                     <div key={index} className="w-full      ">
                                       <div className="w-full      ">
                                         <div className="mx-auto font-AeonikProRegular text-[16px] ">
-                                          <section className="flex items-center justify-between  md:mt-2">
+                                          <section className="flex items-center justify-between  md:mt-2  ">
                                             <div className="w-full md:w-fit flex items-center justify-between md:justify-start">
                                               <div className=" cursor-pointer bg-white flex items-center gap-x-2">
                                                 {checkedList?.length ===
@@ -1435,17 +1435,17 @@ export default function ProductLocationsList() {
                                               </div>
                                             </div>
                                           )}
-
                                           {resData?.products?.length > 0 ? (
-                                            <div className="flex flex-col gap-y-[52px] mt-5">
-                                              {resData?.products?.filter((e) => {
-                                                languageDetector?.typeLang === "ru" ?
-                                                  e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
-                                                  e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
-                                              }
+                                            <div className="flex flex-col gap-y-[52px] mt-5  ">
+                                              {resData?.products?.filter((e) =>
+                                                searchName ?
+                                                  languageDetector?.typeLang === "ru" ?
+                                                    e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
+                                                    e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                                                  :
+                                                  e
                                               )
                                                 ?.map((itemValue, index) => {
-                                                  // console.log(itemValue, 'itemValue');
                                                   return (
                                                     <div
                                                       key={index}
@@ -2084,12 +2084,15 @@ export default function ProductLocationsList() {
                                           </div>
                                         )}
                                         {resData?.products?.length > 0 ? (
-                                          <div className="flex flex-col gap-y-[30px] md:gap-y-[52px] mt-5 ">
+                                          <div className="flex flex-col gap-y-[30px] md:gap-y-[52px] mt-5  ">
                                             {resData?.products
                                               ?.filter((e) =>
-                                                languageDetector?.typeLang === "ru" ?
-                                                  e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
-                                                  e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                                                searchName ?
+                                                  languageDetector?.typeLang === "ru" ?
+                                                    e?.name_ru?.toLowerCase()?.includes(searchName?.toLowerCase()) :
+                                                    e?.name_uz?.toLowerCase()?.includes(searchName?.toLowerCase())
+                                                  :
+                                                  e
                                               )
                                               ?.map((itemValue, index) => {
                                                 return (
