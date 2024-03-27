@@ -173,7 +173,7 @@ function MyMarket() {
         </Link>
       </div>
       {shopList ? (
-        <div className="w-full h-fit  flex flex-col gap-y-[30px] pt-3  overflow-hidden">
+        <div className="w-full h-fit  flex flex-col gap-y-[30px] py-3  overflow-hidden  ">
           {shopList?.shops
             ?.filter((item) =>
               item?.name?.toLowerCase()?.includes(searchName?.toLowerCase())

@@ -19,10 +19,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { useTranslation } from "react-i18next";
+import { SellerMainData } from "../../../hook/SellerUserContext";
 export default function MobileHumburgerMenu() {
   const { request } = useHttp();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sellerInformation] = useContext(SellerMainData);
+
   const navigate = useNavigate();
   const showModal = () => {
     setIsModalOpen(true);
@@ -121,6 +124,26 @@ export default function MobileHumburgerMenu() {
       })}
     </section>
   );
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+    };
+  }
+  useEffect(() => {
+    const updateDimension = () => {
+      setIsModalOpen(false);
+
+    };
+
+    window.addEventListener("resize", updateDimension);
+
+    return () => {
+      window.removeEventListener("resize", updateDimension);
+      setIsModalOpen(false);
+
+    };
+  }, [screenSize]);
 
   return (
     <div className="flex md:hidden items-center">
@@ -147,121 +170,174 @@ export default function MobileHumburgerMenu() {
         closeIcon={false}
         footer={null}
       >
-        <div className="w-full flex flex-wrap  gap-y-5  justify-center   ">
-          <NavLink
-            className={
-              "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start   "
-            }
-            style={({ isActive }) => ({
-              background: isActive ? "#f2f2f2" : "#fcfcfc",
-            })}
-            to={"/reviews"}
-            onClick={() => setIsModalOpen(false)}
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start     ">
-                  <NavbarReviewIcon colors={"#007dca"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                    {t("reviews")}
-                  </p>
-                </figure>
-              ) : (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start     ">
-                  <NavbarReviewIcon colors={"#2c2c2c"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                    {t("reviews")}
-                  </p>
-                </figure>
-              )
-            }
-          </NavLink>
-          <NavLink
-            className={
-              "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
-            }
-            style={({ isActive }) => ({
-              background: isActive ? "#f2f2f2" : "#fcfcfc",
-            })}
-            to={"/store"}
-            onClick={() => setIsModalOpen(false)}
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
-                  <NavbarMarketIcon colors={"#007dca"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                    {t("shops")}
-                  </p>
-                </figure>
-              ) : (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
-                  <NavbarMarketIcon colors={"#2c2c2c"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                    {t("shops")}
-                  </p>
-                </figure>
-              )
-            }
-          </NavLink>
+        {sellerInformation?.status === "approved" ?
+          <div className="w-full flex flex-wrap gap-y-5 justify-center ">
+            <NavLink
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-start   "
+              }
+              style={({ isActive }) => ({
+                background: isActive ? "#f2f2f2" : "#fcfcfc",
+              })}
+              to={"/reviews"}
+              onClick={() => setIsModalOpen(false)}
+            >
+              {({ isActive }) =>
+                isActive ? (
+                  <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start     ">
+                    <NavbarReviewIcon colors={"#007dca"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                      {t("reviews")}
+                    </p>
+                  </figure>
+                ) : (
+                  <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start     ">
+                    <NavbarReviewIcon colors={"#2c2c2c"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                      {t("reviews")}
+                    </p>
+                  </figure>
+                )
+              }
+            </NavLink>
+            <NavLink
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
+              }
+              style={({ isActive }) => ({
+                background: isActive ? "#f2f2f2" : "#fcfcfc",
+              })}
+              to={"/store"}
+              onClick={() => setIsModalOpen(false)}
+            >
+              {({ isActive }) =>
+                isActive ? (
+                  <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                    <NavbarMarketIcon colors={"#007dca"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                      {t("shops")}
+                    </p>
+                  </figure>
+                ) : (
+                  <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                    <NavbarMarketIcon colors={"#2c2c2c"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                      {t("shops")}
+                    </p>
+                  </figure>
+                )
+              }
+            </NavLink>
 
-          <NavLink
-            className={
-              "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
-            }
-            style={({ isActive }) => ({
-              background: isActive ? "#f2f2f2" : "#fcfcfc",
-            })}
-            to={"/locations-store"}
-            onClick={() => setIsModalOpen(false)}
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
-                  <LocationIcon colors={"#007dca"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                    {t("locations")}
-                  </p>
-                </figure>
-              ) : (
-                <figure className=" w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
-                  <LocationIcon colors={"#2c2c2c"} />
-                  <p className="text-lg not-italic font-AeonikProMedium leading-5     ">
-                    {t("locations")}
-                  </p>
-                </figure>
-              )
-            }
-          </NavLink>
-          <NavLink
-            className={
-              "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
-            }
-            style={({ isActive }) => ({
-              background: isActive ? "#f2f2f2" : "#fcfcfc",
-            })}
-            to={"/products"}
-            onClick={() => setIsModalOpen(false)}
-          >
-            {({ isActive }) =>
-              isActive ? (
-                <figure className="w-[150px] pl-[2px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
-                  <ClothesIcons colors={"#007dca"} />
-                  <p className="text-lg not-italic ml-[2px] font-AeonikProMedium leading-5   ">
-                    {t("products")}
-                  </p>
-                </figure>
-              ) : (
-                <figure className="w-[150px] pl-[2px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
-                  <ClothesIcons colors={"#2c2c2c"} />
-                  <p className="text-lg not-italic ml-[2px] font-AeonikProMedium leading-5   ">
-                    {t("products")}
-                  </p>
-                </figure>
-              )
-            }
-          </NavLink>
-        </div>
+            <NavLink
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
+              }
+              style={({ isActive }) => ({
+                background: isActive ? "#f2f2f2" : "#fcfcfc",
+              })}
+              to={"/locations-store"}
+              onClick={() => setIsModalOpen(false)}
+            >
+              {({ isActive }) =>
+                isActive ? (
+                  <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                    <LocationIcon colors={"#007dca"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                      {t("locations")}
+                    </p>
+                  </figure>
+                ) : (
+                  <figure className=" w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                    <LocationIcon colors={"#2c2c2c"} />
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5     ">
+                      {t("locations")}
+                    </p>
+                  </figure>
+                )
+              }
+            </NavLink>
+            <NavLink
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] bg-lightBorderColor rounded-lg flex items-center justify-center  "
+              }
+              style={({ isActive }) => ({
+                background: isActive ? "#f2f2f2" : "#fcfcfc",
+              })}
+              to={"/products"}
+              onClick={() => setIsModalOpen(false)}
+            >
+              {({ isActive }) =>
+                isActive ? (
+                  <figure className="w-[150px] pl-[2px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                    <ClothesIcons colors={"#007dca"} />
+                    <p className="text-lg not-italic ml-[2px] font-AeonikProMedium leading-5   ">
+                      {t("products")}
+                    </p>
+                  </figure>
+                ) : (
+                  <figure className="w-[150px] pl-[2px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                    <ClothesIcons colors={"#2c2c2c"} />
+                    <p className="text-lg not-italic ml-[2px] font-AeonikProMedium leading-5   ">
+                      {t("products")}
+                    </p>
+                  </figure>
+                )
+              }
+            </NavLink>
+          </div>
+          :
+          <div className="w-full flex flex-wrap gap-y-5 justify-center select-none ">
+            <div
+              className={
+                "w-full h-[54px] gap-x-[15px] px-[25px] text-borderColor2 rounded-lg flex items-center justify-start   "
+              }
+            >
+              <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start     ">
+                <NavbarReviewIcon colors={"#c5c5c5"} />
+                <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                  {t("reviews")}
+                </p>
+              </figure>
+            </div>
+            <div
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] text-borderColor2 rounded-lg flex items-center justify-center  "
+              }
+            >
+              <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                <NavbarMarketIcon colors={"#c5c5c5"} />
+                <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
+                  {t("shops")}
+                </p>
+              </figure>
+            </div>
+            <div
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] text-borderColor2 rounded-lg flex items-center justify-center  "
+              }
+            >
+              <figure className=" w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                <LocationIcon colors={"#c5c5c5"} />
+                <p className="text-lg not-italic font-AeonikProMedium leading-5     ">
+                  {t("locations")}
+                </p>
+              </figure>
+            </div>
+            <div
+              className={
+                "w-full h-[54px]   gap-x-[15px] px-[25px] text-borderColor2 rounded-lg flex items-center justify-center  "
+              }
+            >
+              <figure className="w-[150px] pl-[2px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
+                <ClothesIcons colors={"#c5c5c5"} />
+                <p className="text-lg not-italic ml-[2px] font-AeonikProMedium leading-5   ">
+                  {t("products")}
+                </p>
+              </figure>
+            </div>
+          </div>
+        }
         <div className=" flex items-center justify-between gap-x-2 border-t border-borderColor w-full mt-2 pt-2">
           <button
             onClick={logOutHandle}

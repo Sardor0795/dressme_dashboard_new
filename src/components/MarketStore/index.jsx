@@ -21,20 +21,20 @@ export default function MarketStore() {
     });
   }, []);
 
-  const fetchData = async (customHeaders) => {
-    try {
-      const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
-        headers: customHeaders,
-      });
-      const status = response.status;
-      const data = response.data;
+  // const fetchData = async (customHeaders) => {
+  //   try {
+  //     const response = await axios.get(`${REACT_APP_BASE_URL}/shops`, {
+  //       headers: customHeaders,
+  //     });
+  //     const status = response.status;
+  //     const data = response.data;
 
-      return { data, status };
-    } catch (error) {
-      const status = error.response ? error.response.status : null;
-      return { error, status };
-    }
-  };
+  //     return { data, status };
+  //   } catch (error) {
+  //     const status = error.response ? error.response.status : null;
+  //     return { error, status };
+  //   }
+  // };
   // const customHeaders = {
   //   "Content-type": "application/json; charset=UTF-8",
   //   Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`, // Add other headers as needed

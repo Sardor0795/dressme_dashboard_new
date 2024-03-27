@@ -117,6 +117,7 @@ function Sidebar() {
       }
     })
   }
+  console.log(sellerInformation, 'sellerInformation');
   return (
     <div className="w-full h-full flex ">
       <ToastContainer
@@ -155,8 +156,8 @@ function Sidebar() {
             </div>
 
             {/* Links */}
-            {dressInfo?.isAuthen ? (
-              <div className="w-full flex flex-wrap gap-y-2">
+            {sellerInformation?.status === "approved" ? (
+              <div className="w-full flex flex-wrap gap-y-2 ">
                 {" "}
                 <NavLink
                   className={
@@ -288,7 +289,7 @@ function Sidebar() {
                 </NavLink>
               </div>
             ) : (
-              <div className="w-full flex flex-wrap gap-y-2">
+              <div className="w-full flex flex-wrap gap-y-2 select-none ">
                 {" "}
                 <p
                   className={

@@ -333,7 +333,7 @@ export default function LocationAddById() {
               {t("choose_region")}
             </span>
             <span
-              className="select-none cursor-pointer"
+              className="select-none cursor-pointer" 
               onClick={() => {
                 setState({ ...state, openStoreList: false });
               }}

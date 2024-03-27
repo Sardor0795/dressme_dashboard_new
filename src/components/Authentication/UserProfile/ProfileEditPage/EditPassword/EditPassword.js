@@ -28,7 +28,7 @@ function EditPassword({ onClick }) {
   const dataMutate = useMutation(() => {
     return fetch(`${url}/change-password`, {
       method: "POST",
-      
+
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -77,7 +77,6 @@ function EditPassword({ onClick }) {
           }
         },
         onError: (err) => {
-          throw new Error(err || "something wrong");
           setState({ ...state, isLoadingSent: false });
           toast.error(`${err}`, {
             position: "top-right",
@@ -89,6 +88,7 @@ function EditPassword({ onClick }) {
             progress: undefined,
             theme: "light",
           });
+          throw new Error(err || "something wrong");
         },
       }
     );
