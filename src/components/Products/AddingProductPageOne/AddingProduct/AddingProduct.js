@@ -657,7 +657,7 @@ const AddingProduct = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (shopLocationProductList[0]?.products?.length >= 1) {
+    if (shopLocationProductList?.length > 0 && shopLocationProductList[0]?.products?.length >= 1) {
       if (!dressInfo?.locationIdAddProduct) {
         navigate(-1);
       }

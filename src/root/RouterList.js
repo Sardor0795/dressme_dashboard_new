@@ -110,7 +110,7 @@ export default function RouterList() {
             <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
           </Route>
           {/* ---------------------<LocationsProduct>------------------------- */}
-          {shopLocationProductList[0]?.products?.length > 0
+          {shopLocationProductList?.length > 0 && shopLocationProductList[0]?.products?.length > 0
             ?
             <Route path="/products" element={
               <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
