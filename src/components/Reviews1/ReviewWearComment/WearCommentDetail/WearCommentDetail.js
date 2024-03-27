@@ -69,6 +69,33 @@ const WearCommentDetail = ({ sliderData }) => {
         </button>
       </main>
     );
+  }
+  const NextArrow11 = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-[-10]  right-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="next">
+          <GrFormNext size={20} />
+        </button>
+      </main>
+    );
+  };
+
+  const PrevArrow11 = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-[-10]  left-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="prev">
+          <GrFormPrevious size={20} />
+        </button>
+      </main>
+    );
   };
   let settings = {
     nextArrow: <NextArrow />,
@@ -78,6 +105,8 @@ const WearCommentDetail = ({ sliderData }) => {
     speed: 500,
   };
   let settings1 = {
+    nextArrow: <NextArrow11 />,
+    prevArrow: <PrevArrow11 />,
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -129,6 +158,8 @@ const WearCommentDetail = ({ sliderData }) => {
     ],
   };
   let settings11 = {
+    nextArrow: <NextArrow11 />,
+    prevArrow: <PrevArrow11 />,
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -345,8 +376,8 @@ const WearCommentDetail = ({ sliderData }) => {
             </div>
 
             : (
-              <div>
-                <div className="w-[350px] md:h-[380px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
+              <div className="w-full">
+                <div className="max-w-[350px] mx-auto h-[200px] md:h-[380px] overflow-hidden flex items-center justify-center border border-searchBgColor rounded-xl">
                   {sliderData?.locationListId?.product?.photos?.map((data) => {
                     return (
                       <article
@@ -355,9 +386,9 @@ const WearCommentDetail = ({ sliderData }) => {
                           setCarosuelCurrent(data?.id)
                         }}
                         key={data?.id}>
-                        <figure className="relative w-full h-[200px] md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+                        <figure className="relative  w-full h-full overflow-hidden bg-btnBgColor rounded-lg flex items-center justify-center">
                           <img
-                            className="h-full md:w-full md:h-fit"
+                            className=" w-[350px] md:h-[380px] h-[200px] object-cover"
                             src={data?.url_photo}
                             alt=""
                           />
