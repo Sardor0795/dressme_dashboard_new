@@ -27,7 +27,7 @@ export default function ProductsPageOne() {
         <div className="w-full flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit flex justify-center md:justify-start">
             <section className="w-full md:w-fit flex justify-start">
-              {shopLocationProductList[0]?.products?.length >= 1 ? (
+              {shopLocationProductList?.length > 0 && shopLocationProductList[0]?.products?.length >= 1 ? (
                 <BackBtn />
               ) : (
                 !dressInfo?.nextPageShowForm && (

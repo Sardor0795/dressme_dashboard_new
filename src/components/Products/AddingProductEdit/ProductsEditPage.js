@@ -27,7 +27,7 @@ export default function ProductEditPage() {
         <div className="flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit  flex justify-center md:justify-start">
             <section className=" w-full md:w-fit  flex justify-center md:justify-start">
-              {shopLocationProductList[0]?.products?.length >= 1 &&
+              {shopLocationProductList?.length > 0 && shopLocationProductList[0]?.products?.length >= 1 &&
                 dressInfo?.nextPageShowForm ? (
                 <>
                   <div className="md:hidden absolute left-[16px]">
