@@ -82,8 +82,7 @@ function EditProfilePage() {
   // -------------------------------------
   const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   // -------------------------------------
-  // ------------------
-  const url = "https://api.dressme.uz/api/seller";
+   const url = "https://api.dressme.uz/api/seller";
 
   useEffect(() => {
     setState({
@@ -111,8 +110,7 @@ function EditProfilePage() {
   }, [sellerInformation]);
 
   // ------------GET METHOD Region-----------------
-
-
+ 
   const fetchDataRegion = async (customHeadersRegion) => {
     try {
       const response = await axios.get(`${url}/regions`, {
@@ -474,7 +472,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
- 
+//  pending
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -671,7 +669,7 @@ function EditProfilePage() {
       </section>
       {
         state?.sellerStatus === "pending" && (
-          <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
+          <div className="max-w-[800px] w-full  text-center flex items-center md:justify-center">
             <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
               {t("soonText")}
             </span>
@@ -691,7 +689,7 @@ function EditProfilePage() {
               {sellerInformation?.status ===
                 "approved" && (
                   <p className="w-[120px] h-fit  flex items-center justify-center   ">
-                    <span className="min-w-[110px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                    <span className="min-w-[110px] text-center text-[#4FB459] bg-bgApproved text-[14px] md:text-base font-AeonikProRegular py-[3px]  rounded-full ">
                       {t("approved")}
                     </span>
                   </p>
@@ -701,7 +699,7 @@ function EditProfilePage() {
                   <p
                      className="w-[120px] h-fit   flex items-center  justify-center  "
                   >
-                    <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                    <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline text-[14px] md:text-base font-AeonikProRegular py-[3px]  rounded-full">
                       {t("declined")}
                     </span>
                   </p>
@@ -709,7 +707,7 @@ function EditProfilePage() {
               {sellerInformation?.status ===
                 "pending" && (
                   <p className="w-[120px] h-fit  flex items-center justify-center   ">
-                    <span className="min-w-[110px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                    <span className="min-w-[110px] text-center text-[#F1B416] bg-bgPending text-[14px] md:text-base font-AeonikProRegular py-[3px]  rounded-full ">
                       {t("pending")}
                     </span>
                   </p>
@@ -717,7 +715,7 @@ function EditProfilePage() {
               {sellerInformation?.status ===
                 "updated" && (
                   <p className="w-[120px] h-fit  flex items-center justify-center     ">
-                    <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                    <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate text-[14px] md:text-base font-AeonikProRegular py-[3px]  rounded-full ">
                       {t("updated")}
                     </span>
                   </p>

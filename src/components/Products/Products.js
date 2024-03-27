@@ -63,8 +63,7 @@ export default function Products() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-
-
+ 
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
       {!isLoading ? <Outlet /> : <LoadingForSeller />}

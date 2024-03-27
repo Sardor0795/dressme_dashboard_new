@@ -52,7 +52,7 @@ function NoLocations() {
                 </p>
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
-                {shopList?.shops?.data?.map((item) => {
+                {shopList?.shops?.map((item) => {
                   return (
                     <button
                       onClick={() => handleShopsOfLocation(item?.id)}

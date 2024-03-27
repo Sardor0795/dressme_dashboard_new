@@ -59,8 +59,9 @@ export default function ProductIsCheck() {
             fetchDataLocations();
         }
     }, []);
-    // console.log(shopList?.shops, 'test-- shopList?.shops');
-    // console.log(shopLocationList, 'test-- shopLocationList');
+    console.log(shopList,'shopList');
+    console.log(shopLocationList,'shopLocationList');
+
     return (
         <div>
             {
@@ -68,7 +69,7 @@ export default function ProductIsCheck() {
 
                     shopList?.shops?.length > 0
                         ?
-                        shopLocationList?.length > 0
+                        shopLocationList?.shop_locations?.length > 0
                             ?
                             <ProductsPageOne />
                             :
