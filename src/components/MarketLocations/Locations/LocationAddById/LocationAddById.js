@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowTopIcons,
-   MenuCloseIcons,
+  MenuCloseIcons,
   Star6Icon,
   StarLabel,
   TelIcon,
@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../hook/useHttp";
- import imageCompression from "browser-image-compression";
+import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { BackBtn } from "../../../backBtn/backBtn";
@@ -27,8 +27,8 @@ export default function LocationAddById() {
   const navigate = useNavigate();
   const { request } = useHttp();
   const { id } = useParams();
-   const shopId = id?.replace(":", "");
-   const [state, setState] = useState({
+  const shopId = id?.replace(":", "");
+  const [state, setState] = useState({
     imgFirst: "",
     imgSecond: "",
     imgThird: "",
@@ -171,17 +171,7 @@ export default function LocationAddById() {
   );
 
   const LocationAddSubmit = () => {
-    const telegramRegex = /^(?:https?:\/\/)?t.me\/\w+$/i;
-    if (!telegramRegex.test(state?.assistantNameFirstTg)) {
-      setState({ ...state, errorMessage: languageDetector?.typeLang === "uz" ? "Iltimos, yaroqli Telegram havolasini kiriting. " : 'Пожалуйста, введите действительную ссылку Telegram.' });
-    } else {
-      setState({ ...state, errorMessage: '' });
-    }
-    if (!telegramRegex.test(state?.assistantNameSecondTg)) {
-      setState({ ...state, errorMessage: languageDetector?.typeLang === "uz" ? "Iltimos, yaroqli Telegram havolasini kiriting. " : 'Пожалуйста, введите действительную ссылку Telegram.'  });
-    } else {
-      setState({ ...state, errorMessage: '' });
-    }
+
     let form = new FormData();
     form.append("address", state?.shopCenterAddress);
     form.append("longitude", state?.shopLongitude);
@@ -208,7 +198,7 @@ export default function LocationAddById() {
 
     return fetch(`${url}/shops/locations/store`, {
       method: "POST",
-      
+
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -333,7 +323,7 @@ export default function LocationAddById() {
               {t("choose_region")}
             </span>
             <span
-              className="select-none cursor-pointer" 
+              className="select-none cursor-pointer"
               onClick={() => {
                 setState({ ...state, openStoreList: false });
               }}
@@ -345,13 +335,18 @@ export default function LocationAddById() {
           <div className="w-full overflow-auto flex flex-col gap-y-4 pt-3 overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
             {state?.getRegionList?.regions ? (
               state?.getRegionList?.regions?.map((data, index) => {
+                console.log(data, 'data');
                 return (
-                  <div key={data?.id} className="w-full  h-fit  ">
+                  <div key={data?.id} className={`w-full  h-fit ${data?.id === 2 ? "" : "opacity-50"} `}>
                     <div
-                      onClick={() => accordionCityList(data?.id)}
+                      onClick={data?.id === 2
+                        ? () => {
+                          accordionCityList(data?.id);
+                        }
+                        : null}
                       className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
                     >
-                      <span className="text-[#303030] text-lg not-italic font-AeonikProRegular">
+                      <span className="text-[#303030] text-base md:text-lg not-italic font-AeonikProRegular">
                         {languageDetector?.typeLang === "ru" && data?.name_ru}
                         {languageDetector?.typeLang === "uz" && data?.name_uz}
                       </span>
@@ -366,7 +361,7 @@ export default function LocationAddById() {
                     </div>
 
                     <div
-                      className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                      className={`w-full grid grid-cols-3 xs:grid-cols-3 duration-[400ms]
                              ${activeIndex == data?.id
                           ? "openAccardion"
                           : "CloseAccardion"
@@ -398,11 +393,11 @@ export default function LocationAddById() {
                                 }}
                                 required
                               />
-                              <span className="text-[#303030]  cursor-pointer text-[15px] not-italic font-AeonikProRegular">
+                              <span className="text-[#303030]  cursor-pointer text-[13px] md:text-[15px] not-italic font-AeonikProRegular">
                                 {languageDetector?.typeLang === "ru" &&
-                                  data?.name_ru}
+                                  item?.name_ru}
                                 {languageDetector?.typeLang === "uz" &&
-                                  data?.name_uz}
+                                  item?.name_uz}
                               </span>
                             </label>
                           </div>
@@ -413,7 +408,7 @@ export default function LocationAddById() {
                 );
               })
             ) : (
-              <p className="w-full h-full flex flex-col items-center justify-center">
+              <p className="w-full h-full text-[14px] md:text-base   flex flex-col items-center justify-center">
                 {t("loading_data")}
               </p>
             )}
@@ -423,7 +418,7 @@ export default function LocationAddById() {
               onClick={() => {
                 setState({ ...state, openStoreList: false });
               }}
-              className="cursor-pointer text-fullBlue text-lg not-italic font-AeonikProMedium"
+              className="cursor-pointer text-fullBlue    text-base md:text-lg not-italic font-AeonikProMedium"
             >
               {t("ready")}
             </span>
@@ -623,7 +618,6 @@ export default function LocationAddById() {
                     {!state?.regionIdShops &&
                       !state?.subRegionIdShops &&
                       `${t("choose_region")}`}
-
                     {state?.getRegionList?.regions
                       ?.filter((e) => e.id == state?.regionIdShops)
                       .map((item) => {
@@ -668,7 +662,7 @@ export default function LocationAddById() {
                 </span>
               </div>
               <div className="flex flex-col items-center h-[38px] md:h-[42px] w-full text-base font-AeonikProMedium">
-                <input 
+                <input
                   type="text"
                   name="fname"
                   placeholder={t("name_admin")}
@@ -914,8 +908,11 @@ export default function LocationAddById() {
                   {t("not_necessary")}
                 </p>}
               </div>
-              {state?.errorMessage && <p className="select-none flex items-center text-[13px] font-AeonikProRegular text-[#D50000]"  >{state?.errorMessage}</p>}
-
+              {state?.errorGroup?.assistant_messenger &&
+                <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                  {state?.errorGroup?.assistant_messenger}
+                </p>
+              }
             </label>
             <label htmlFor="telegramLink2" className=" w-full    ">
               <p className="w-full text-[12px] md:text-base flex items-center mb-1 md:mb-[10px]">
@@ -936,7 +933,11 @@ export default function LocationAddById() {
                   {t("not_necessary")}
                 </p>}
               </div>
-              {state?.errorMessage && <p className="select-none flex items-center text-[13px] font-AeonikProRegular text-[#D50000]" >{state?.errorMessage}</p>}
+              {state?.errorGroup?.second_assistant_messenger &&
+                <p className="text-[#D50000] text-[12px] ll:text-[14px]  w-full ">
+                  {state?.errorGroup?.second_assistant_messenger}
+                </p>
+              }
             </label>
           </div>
         </div>

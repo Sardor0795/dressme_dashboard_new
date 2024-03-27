@@ -27,8 +27,8 @@ export default function ProductEditPage() {
         <div className="flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit  flex justify-center md:justify-start">
             <section className=" w-full md:w-fit  flex justify-center md:justify-start">
-              {shopLocationProductList?.length >= 1 &&
-              dressInfo?.nextPageShowForm ? (
+              {shopLocationProductList[0]?.products?.length >= 1 &&
+                dressInfo?.nextPageShowForm ? (
                 <>
                   <div className="md:hidden absolute left-[16px]">
                     <BackBtn />
@@ -60,9 +60,8 @@ export default function ProductEditPage() {
                 </div>
               )}
               <p
-                className={`text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${
-                  !dressInfo?.nextPageShowForm && ""
-                } `}
+                className={`text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium ${!dressInfo?.nextPageShowForm && ""
+                  } `}
               >
                 {t("PReditProduct")}
               </p>
