@@ -59,7 +59,7 @@ export default function LocationsByIdShow() {
   const addLocationByMarket = () => {
     navigate(`/locations-store/${newId}`);
   };
-console.log(state?.locationListId,'locationListId');
+// console.log(state?.locationListId,'locationListId');
   useEffect(() => {
     window.scrollTo({
       top: 0,

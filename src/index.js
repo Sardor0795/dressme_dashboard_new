@@ -15,6 +15,7 @@ import ShopIsList from "./hook/ShopList";
 import ShopIsLocationList from "./hook/ShopLocationList";
 import ShopIsLocationProductList from "./hook/ShopLocationProductList";
 import GetProductIsList from "./hook/GetProductList";
+import ShopIsLocationProductCheck from "./hook/ShopLocationProductCheck";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ root.render(
               <GetProductIsList>
                 <ShopIsList>
                   <ShopIsLocationProductList>
+                  <ShopIsLocationProductCheck>
                     <SellerRefreshContext>
                       <SellerUserContext>
                         <HelperDataStore>
@@ -37,6 +39,7 @@ root.render(
                         </HelperDataStore>
                       </SellerUserContext>
                     </SellerRefreshContext>
+                  </ShopIsLocationProductCheck>
                   </ShopIsLocationProductList>
                 </ShopIsList>
               </GetProductIsList>

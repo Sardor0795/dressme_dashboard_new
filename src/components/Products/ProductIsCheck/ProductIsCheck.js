@@ -59,8 +59,8 @@ export default function ProductIsCheck() {
             fetchDataLocations();
         }
     }, []);
-    console.log(shopList,'shopList');
-    console.log(shopLocationList,'shopLocationList');
+    // console.log(shopList,'shopList');
+    // console.log(shopLocationList,'shopLocationList');
 
     return (
         <div>
