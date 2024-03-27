@@ -9,8 +9,7 @@ import {
   MapLocationIcon,
   DeleteIcon,
 } from "../../../../assets/icons";
-import { AiOutlineLeft } from "react-icons/ai";
-import { useMutation, useQuery } from "@tanstack/react-query";
+ import { useMutation, useQuery } from "@tanstack/react-query";
 import InputMask from "react-input-mask";
 import { YMaps, Map, ZoomControl, GeolocationControl } from "react-yandex-maps";
 
@@ -25,20 +24,16 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { useHttp } from "../../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../../Loading/LoadingFor";
-import axios from "axios";
-import { dressMainData } from "../../../../hook/ContextTeam";
-import imageCompression from "browser-image-compression";
+  import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { BackBtn } from "../../../backBtn/backBtn";
 import { dressRegionList } from "../../../../hook/RegionList";
 
-const { REACT_APP_BASE_URL } = process.env;
-
+ 
 export default function LocationMapCity() {
   const { request } = useHttp();
-  const [dressInfo, setDressInfo] = useContext(dressMainData);
-  const [regionList, setRegionList] = useContext(dressRegionList)
+   const [regionList, setRegionList] = useContext(dressRegionList)
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);

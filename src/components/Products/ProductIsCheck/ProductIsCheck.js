@@ -46,7 +46,7 @@ export default function ProductIsCheck() {
                     }
                 });
                 if (data?.status >= 200 && data?.status < 300) {
-                    setShopLocationList(data?.data?.locations)
+                    setShopLocationList(data?.data)
                 }
             } catch (error) {
 
@@ -69,7 +69,7 @@ export default function ProductIsCheck() {
 
                     shopList?.shops?.length > 0
                         ?
-                        shopLocationList?.shop_locations?.length > 0
+                        shopLocationList?.locations_exist
                             ?
                             <ProductsPageOne />
                             :

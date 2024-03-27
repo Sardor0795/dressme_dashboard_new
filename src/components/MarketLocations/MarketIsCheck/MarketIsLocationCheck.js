@@ -43,10 +43,10 @@ export default function MarketIsLocationCheck() {
     'Content-type': 'application/json; charset=UTF-8',
     "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
   };
-  const { isLoading } = useQuery(['seller_location_list33'], () => fetchData(customHeaders), {
+  const { isLoading, refetch } = useQuery(['seller_location_list33'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        setShopLocationList(data?.data?.locations)
+        setShopLocationList(data?.data)
       }
     },
     onError: (error) => {
@@ -84,7 +84,7 @@ export default function MarketIsLocationCheck() {
     refetchOnWindowFocus: false,
   });
 
- 
+  console.log(shopLocationList, 'shopLocationList?.shop_locations?.length');
   return (
     <div>
       {isLoading
@@ -92,7 +92,7 @@ export default function MarketIsLocationCheck() {
         <LoadingForSeller />
         :
         shopList?.shops?.length > 0 ? (
-          shopLocationList?.shop_locations?.length > 0 ? (
+          shopLocationList?.locations_exist ? (
             <LocationList />
           ) : (
             <NoLocations />

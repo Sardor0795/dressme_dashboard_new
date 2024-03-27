@@ -46,7 +46,7 @@ function LocationList() {
 
   function onHandleStatus(locationid, shopId) {
     setStatusModal(true);
-    shopLocationList?.map((value1) => {
+    shopLocationList?.locations?.map((value1) => {
       if (value1?.id == shopId) {
         value1?.shop_locations?.map((value2) => {
           if (value2?.id == locationid) {
@@ -209,7 +209,7 @@ function LocationList() {
         </ul>
       </div>
       <div className="  mt-[70px]" >
-        {shopLocationList
+        {shopLocationList?.locations
           ?.filter((e) =>
             e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
           )

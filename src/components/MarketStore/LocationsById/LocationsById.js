@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { GoBackIcons } from "../../../assets/icons";
-import { AiOutlineLeft } from "react-icons/ai";
+
 import LoadingForSeller from "../../Loading/LoadingFor";
 import { useHttp } from "../../../hook/useHttp";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { BackBtn } from "../../backBtn/backBtn";
+import NoLocations from "../../MarketLocations/NoLocations/NoLocations";
 
 export default function LocationsByIdShow() {
   const { request } = useHttp();
@@ -59,7 +59,7 @@ export default function LocationsByIdShow() {
   const addLocationByMarket = () => {
     navigate(`/locations-store/${newId}`);
   };
-
+console.log(state?.locationListId,'locationListId');
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -159,11 +159,11 @@ export default function LocationsByIdShow() {
                   <div key={index}>
                     <ul className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor">
                       <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
-                        {data?.id}
+                        {index+1}
                       </li>
                       <li className="w-[200px] h-[100px] flex items-center mr-[60px] rounded-lg overflow-hidden border">
                         <img
-                          className="w-[100%] h-[100%] object-contain rounded-lg object-top"
+                          className="w-[100%] h-[100%] object-cover rounded-lg object-top"
                           src={data?.url_image_path_one}
                           alt=""
                         />
@@ -197,7 +197,7 @@ export default function LocationsByIdShow() {
                         </li>
                         <li className="md:w-[15%] h-full flex items-center justify-center text-center">
                           <button
-                            onClick={() => goMapWear(data?.shop_id)}
+                            onClick={() => goMapWear(data?.id)}
                             className="text-textBlueColor text-center hover:underline text-[11px] md:text-base not-italic font-AeonikProMedium"
                           >
                             {t("cloth")}
@@ -346,7 +346,8 @@ export default function LocationsByIdShow() {
         </div>
       ) : (
         <div className="w-full h-[100vh]  flex items-center justify-center  ">
-          <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
+          <NoLocations />
+          {/* <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
             <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
               {t("no_location")}
             </p>
@@ -356,7 +357,7 @@ export default function LocationsByIdShow() {
             >
               {t("add_location")}
             </button>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
